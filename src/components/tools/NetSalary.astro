@@ -1,0 +1,174 @@
+---
+interface Props {
+  labels: Record<string, string>;
+}
+
+const { labels } = Astro.props;
+---
+
+<section class="tool-widget card" data-net-salary-tool data-labels={JSON.stringify(labels)}>
+  <div class="form-grid">
+    <label>
+      <span>{labels.grossSalary}</span>
+      <input data-gross type="number" min="0" step="1000" value="50000" />
+    </label>
+    <label>
+      <span>{labels.allowance}</span>
+      <input data-allowance type="number" min="0" step="500" value="0" />
+    </label>
+    <label>
+      <span>{labels.otherDeduction}</span>
+      <input data-other type="number" min="0" step="100" value="0" />
+    </label>
+    <label>
+      <span>{labels.laborRate}</span>
+      <input data-labor-rate type="number" min="0" step="0.01" value="2.4" />
+    </label>
+    <label>
+      <span>{labels.healthRate}</span>
+      <input data-health-rate type="number" min="0" step="0.01" value="1.55" />
+    </label>
+    <label>
+      <span>{labels.pensionRate}</span>
+      <input data-pension-rate type="number" min="0" step="0.1" value="6" />
+    </label>
+    <label>
+      <span>{labels.taxRate}</span>
+      <input data-tax-rate type="number" min="0" step="0.1" value="5" />
+    </label>
+  </div>
+
+  <div class="actions">
+    <button class="btn go" type="button" data-calculate>{labels.calculate}</button>
+    <button class="btn" type="button" data-copy>{labels.copy}</button>
+    <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
+  </div>
+
+  <p class="form-error" data-error role="alert" hidden></p>
+  <p class="note assumption-note">{labels.assumptionNote}</p>
+  <div class="stats-grid finance-stats" aria-live="polite">
+    <div><span>{labels.grossIncome}</span><strong data-income>-</strong></div>
+    <div><span>{labels.totalDeductions}</span><strong data-deductions>-</strong></div>
+    <div><span>{labels.netPay}</span><strong data-net>-</strong></div>
+  </div>
+  <div class="resultbox formula-box">
+    <span class="result-label">{labels.formula}</span>
+  </div>
+  <span class="toast" role="status" aria-live="polite" hidden>{labels.copied}</span>
+</section>
+
+<style>
+  .actions {
+    margin: 16px 0;
+  }
+
+  .assumption-note {
+    padding: 12px;
+    border: 1px solid #ffd8c9;
+    border-radius: 8px;
+    background: #fff7f4;
+    color: #8a3b26;
+    font-weight: 800;
+  }
+
+  .finance-stats {
+    margin-top: 14px;
+  }
+
+  .formula-box {
+    margin-top: 14px;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-net-salary-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const inputs = {
+      gross: root.querySelector('[data-gross]'),
+      allowance: root.querySelector('[data-allowance]'),
+      other: root.querySelector('[data-other]'),
+      laborRate: root.querySelector('[data-labor-rate]'),
+      healthRate: root.querySelector('[data-health-rate]'),
+      pensionRate: root.querySelector('[data-pension-rate]'),
+      taxRate: root.querySelector('[data-tax-rate]'),
+    };
+    const outputs = {
+      income: root.querySelector('[data-income]'),
+      deductions: root.querySelector('[data-deductions]'),
+      net: root.querySelector('[data-net]'),
+    };
+    const error = root.querySelector('[data-error]');
+    const toast = root.querySelector('.toast');
+    let latestText = '';
+
+    function money(value) {
+      return new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(Math.round(value));
+    }
+
+    function readNumber(input) {
+      const value = Number(input.value);
+      return Number.isFinite(value) ? value : NaN;
+    }
+
+    function setError(message) {
+      error.textContent = message;
+      error.hidden = !message;
+    }
+
+    function calculate() {
+      const values = Object.fromEntries(Object.entries(inputs).map(([key, input]) => [key, readNumber(input)]));
+      if (Object.values(values).some((value) => !Number.isFinite(value) || value < 0)) {
+        setError(labels.invalidInput);
+        return;
+      }
+      const totalRate = (values.laborRate + values.healthRate + values.pensionRate + values.taxRate) / 100;
+      const income = values.gross + values.allowance;
+      const deductions = values.gross * totalRate + values.other;
+      const net = income - deductions;
+      outputs.income.textContent = money(income);
+      outputs.deductions.textContent = money(deductions);
+      outputs.net.textContent = money(net);
+      latestText = [
+        `${labels.grossIncome}: ${money(income)}`,
+        `${labels.totalDeductions}: ${money(deductions)}`,
+        `${labels.netPay}: ${money(net)}`,
+        labels.assumptionNote,
+        labels.formula,
+      ].join('\n');
+      setError('');
+    }
+
+    function reset() {
+      inputs.gross.value = '50000';
+      inputs.allowance.value = '0';
+      inputs.other.value = '0';
+      inputs.laborRate.value = '2.4';
+      inputs.healthRate.value = '1.55';
+      inputs.pensionRate.value = '6';
+      inputs.taxRate.value = '5';
+      calculate();
+    }
+
+    function showToast() {
+      toast.hidden = false;
+      window.setTimeout(() => {
+        toast.hidden = true;
+      }, 1500);
+    }
+
+    root.querySelector('[data-calculate]')?.addEventListener('click', calculate);
+    root.querySelector('[data-reset]')?.addEventListener('click', reset);
+    root.querySelector('[data-copy]')?.addEventListener('click', async () => {
+      if (!latestText) calculate();
+      try {
+        await navigator.clipboard.writeText(latestText);
+        showToast();
+      } catch {
+        window.prompt(labels.copy, latestText);
+      }
+    });
+    Object.values(inputs).forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  });
+</script>
+

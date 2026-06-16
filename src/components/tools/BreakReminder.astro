@@ -1,0 +1,230 @@
+---
+interface Props {
+  labels: Record<string, string>;
+}
+
+const { labels } = Astro.props;
+---
+
+<section class="tool-widget card" data-break-reminder-tool data-labels={JSON.stringify(labels)}>
+  <div class="form-grid">
+    <label>
+      <span>{labels.intervalMinutes}</span>
+      <input data-interval type="number" inputmode="numeric" min="1" max="240" step="1" value="50" />
+    </label>
+    <label>
+      <span>{labels.breakMinutes}</span>
+      <input data-break type="number" inputmode="numeric" min="1" max="240" step="1" value="5" />
+    </label>
+    <label class="check inline-toggle">
+      <input data-sound type="checkbox" />
+      <span>{labels.sound}</span>
+    </label>
+  </div>
+
+  <div class="timer-panel break-panel" data-panel>
+    <p class="phase-label" data-status>{labels.ready}</p>
+    <output class="timer-display" data-display>50:00</output>
+    <p class="session-count"><span data-reminders>0</span> {labels.reminders}</p>
+  </div>
+
+  <div class="actions">
+    <button class="btn go" type="button" data-start>{labels.start}</button>
+    <button class="btn" type="button" data-pause disabled>{labels.pause}</button>
+    <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
+  </div>
+  <p class="form-error" data-error role="alert" hidden></p>
+</section>
+
+<style>
+  .inline-toggle {
+    align-self: end;
+    min-height: 48px;
+  }
+
+  .break-panel.alert {
+    animation: break-pulse 0.8s ease-in-out 3;
+  }
+
+  @keyframes break-pulse {
+    0%,
+    100% {
+      background: #f2fbfa;
+    }
+    50% {
+      background: #fff7f4;
+      border-color: var(--accent);
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-break-reminder-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const intervalInput = root.querySelector('[data-interval]');
+    const breakInput = root.querySelector('[data-break]');
+    const soundInput = root.querySelector('[data-sound]');
+    const display = root.querySelector('[data-display]');
+    const status = root.querySelector('[data-status]');
+    const remindersOutput = root.querySelector('[data-reminders]');
+    const panel = root.querySelector('[data-panel]');
+    const startButton = root.querySelector('[data-start]');
+    const pauseButton = root.querySelector('[data-pause]');
+    const error = root.querySelector('[data-error]');
+    const originalTitle = document.title;
+    let phase = 'focus';
+    let running = false;
+    let remainingSeconds = 50 * 60;
+    let endAt = 0;
+    let timerId = null;
+    let reminders = 0;
+
+    function minutesFrom(input) {
+      const value = Number(input.value);
+      return Number.isInteger(value) && value >= 1 && value <= 240 ? value : null;
+    }
+
+    function phaseSeconds(nextPhase = phase) {
+      const minutes = nextPhase === 'break' ? minutesFrom(breakInput) : minutesFrom(intervalInput);
+      return (minutes || 1) * 60;
+    }
+
+    function setError(message) {
+      error.textContent = message;
+      error.hidden = !message;
+    }
+
+    function valid() {
+      const ok = minutesFrom(intervalInput) !== null && minutesFrom(breakInput) !== null;
+      setError(ok ? '' : labels.minutesError);
+      return ok;
+    }
+
+    function format(seconds) {
+      const total = Math.max(0, Math.floor(seconds));
+      const minutes = Math.floor(total / 60).toString().padStart(2, '0');
+      const secs = (total % 60).toString().padStart(2, '0');
+      return `${minutes}:${secs}`;
+    }
+
+    function beep() {
+      if (!soundInput.checked) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const context = new AudioContext();
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+        oscillator.type = 'sine';
+        oscillator.frequency.value = phase === 'break' ? 660 : 880;
+        gain.gain.setValueAtTime(0.001, context.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.18, context.currentTime + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 0.3);
+        oscillator.connect(gain);
+        gain.connect(context.destination);
+        oscillator.start();
+        oscillator.stop(context.currentTime + 0.32);
+      } catch {
+        // Optional audio can fail without affecting reminders.
+      }
+    }
+
+    function clearTimer() {
+      if (timerId !== null) {
+        window.clearInterval(timerId);
+        timerId = null;
+      }
+    }
+
+    function flash() {
+      panel.classList.remove('alert');
+      void panel.offsetWidth;
+      panel.classList.add('alert');
+    }
+
+    function render() {
+      display.textContent = format(remainingSeconds);
+      remindersOutput.textContent = String(reminders);
+      pauseButton.disabled = !running;
+      startButton.disabled = running;
+      if (phase === 'break') status.textContent = labels.breakTime;
+      else status.textContent = running ? labels.focus : labels.ready;
+      startButton.textContent = phase === 'break' || reminders > 0 ? labels.continue : labels.start;
+      if (running) document.title = `${format(remainingSeconds)} ${status.textContent}`;
+    }
+
+    function finishFocus() {
+      reminders += 1;
+      phase = 'break';
+      remainingSeconds = phaseSeconds('break');
+      endAt = Date.now() + remainingSeconds * 1000;
+      status.textContent = labels.timeToMove;
+      beep();
+      flash();
+      render();
+    }
+
+    function finishBreak() {
+      running = false;
+      clearTimer();
+      document.title = originalTitle;
+      phase = 'focus';
+      remainingSeconds = phaseSeconds('focus');
+      status.textContent = labels.breakDone;
+      beep();
+      flash();
+      render();
+    }
+
+    function tick() {
+      remainingSeconds = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
+      if (remainingSeconds <= 0) {
+        if (phase === 'focus') finishFocus();
+        else finishBreak();
+        return;
+      }
+      render();
+    }
+
+    function start() {
+      if (running || !valid()) return;
+      if (remainingSeconds <= 0) remainingSeconds = phaseSeconds(phase);
+      running = true;
+      endAt = Date.now() + remainingSeconds * 1000;
+      clearTimer();
+      timerId = window.setInterval(tick, 250);
+      render();
+    }
+
+    function pause() {
+      if (!running) return;
+      remainingSeconds = Math.max(1, Math.ceil((endAt - Date.now()) / 1000));
+      running = false;
+      clearTimer();
+      document.title = originalTitle;
+      render();
+    }
+
+    function reset() {
+      running = false;
+      phase = 'focus';
+      reminders = 0;
+      clearTimer();
+      document.title = originalTitle;
+      panel.classList.remove('alert');
+      if (valid()) remainingSeconds = phaseSeconds('focus');
+      render();
+    }
+
+    [intervalInput, breakInput].forEach((input) => {
+      input.addEventListener('input', () => {
+        if (!running) reset();
+      });
+    });
+    startButton.addEventListener('click', start);
+    pauseButton.addEventListener('click', pause);
+    root.querySelector('[data-reset]')?.addEventListener('click', reset);
+
+    reset();
+  });
+</script>
+

@@ -1,0 +1,257 @@
+---
+import stressContent from '../../i18n/tools/stress-level-test';
+
+interface Props {
+  labels: Record<string, string>;
+}
+
+const { labels } = Astro.props;
+const widgetData = {
+  zh: stressContent.zh.widget,
+  en: stressContent.en.widget,
+};
+---
+
+<section class="tool-widget card quiz-widget" data-stress-level-tool data-labels={JSON.stringify(labels)} data-widget={JSON.stringify(widgetData)}>
+  <div data-question-panel>
+    <div class="quiz-topline">
+      <span data-question-count></span>
+      <span>{labels.progress}</span>
+    </div>
+    <div class="progress-track" aria-hidden="true"><span data-progress-bar></span></div>
+    <p class="question-text" data-question></p>
+    <div class="quiz-options stress-options">
+      <button class="choice-button" type="button" data-score="0">{labels.never}</button>
+      <button class="choice-button" type="button" data-score="1">{labels.sometimes}</button>
+      <button class="choice-button" type="button" data-score="2">{labels.often}</button>
+      <button class="choice-button" type="button" data-score="3">{labels.almostAlways}</button>
+    </div>
+  </div>
+
+  <div class="resultbox quiz-result stress-result" data-result-panel hidden>
+    <span class="result-label">{labels.resultTitle}</span>
+    <h2 data-title></h2>
+    <p class="score-line"><strong>{labels.scoreLabel}: <span data-score-output></span></strong></p>
+    <p data-description></p>
+    <section class="stress-suggestion">
+      <h3>{labels.suggestion}</h3>
+      <p data-suggestion></p>
+    </section>
+    <p class="stress-disclaimer">{labels.resultDisclaimer}</p>
+    <div class="actions">
+      <button class="btn go" type="button" data-share>{labels.share}</button>
+      <button class="btn" type="button" data-copy>{labels.copyResult}</button>
+      <button class="btn ghost" type="button" data-retake>{labels.retake}</button>
+    </div>
+    <span class="toast" role="status" aria-live="polite" hidden>{labels.copied}</span>
+  </div>
+</section>
+
+<style>
+  .quiz-topline {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--muted);
+    font-weight: 800;
+  }
+
+  .progress-track {
+    height: 10px;
+    margin: 10px 0 22px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e6edf5;
+  }
+
+  .progress-track span {
+    display: block;
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--gradient);
+    transition: width 0.2s ease;
+  }
+
+  .question-text {
+    margin: 0 0 16px;
+    font-size: 1.25rem;
+    font-weight: 900;
+    line-height: 1.35;
+  }
+
+  .stress-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .choice-button {
+    width: 100%;
+    min-height: 56px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    padding: 14px;
+    text-align: center;
+    font-weight: 900;
+    transition:
+      transform 0.16s ease,
+      border-color 0.16s ease,
+      box-shadow 0.16s ease;
+  }
+
+  .choice-button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(15, 143, 140, 0.42);
+    box-shadow: 0 8px 20px rgba(24, 33, 47, 0.08);
+  }
+
+  .stress-result h2 {
+    margin: 4px 0 10px;
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .score-line {
+    margin: 0 0 10px;
+    color: var(--brand);
+  }
+
+  .stress-suggestion h3 {
+    margin: 18px 0 8px;
+    font-size: 1rem;
+  }
+
+  .stress-suggestion p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .stress-disclaimer {
+    padding: 12px;
+    border-left: 4px solid var(--accent);
+    background: #fff7f4;
+    color: #8a3b26;
+    font-weight: 800;
+  }
+
+  @media (max-width: 560px) {
+    .stress-options {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-stress-level-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const allWidgetData = JSON.parse(root.getAttribute('data-widget') || '{}');
+    const locale = document.documentElement.lang.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+    const widget = allWidgetData[locale] || allWidgetData.en;
+    const questions = widget.questions;
+    const results = widget.results;
+    const questionPanel = root.querySelector('[data-question-panel]');
+    const resultPanel = root.querySelector('[data-result-panel]');
+    const questionCount = root.querySelector('[data-question-count]');
+    const progressBar = root.querySelector('[data-progress-bar]');
+    const questionText = root.querySelector('[data-question]');
+    const titleOutput = root.querySelector('[data-title]');
+    const scoreOutput = root.querySelector('[data-score-output]');
+    const descriptionOutput = root.querySelector('[data-description]');
+    const suggestionOutput = root.querySelector('[data-suggestion]');
+    const toast = root.querySelector('.toast');
+    let index = 0;
+    let score = 0;
+    let latestText = '';
+
+    function renderQuestion() {
+      const current = index + 1;
+      questionPanel.hidden = false;
+      resultPanel.hidden = true;
+      questionCount.textContent = labels.questionOf.replace('{current}', String(current)).replace('{total}', String(questions.length));
+      progressBar.style.width = `${Math.round((index / questions.length) * 100)}%`;
+      questionText.textContent = questions[index].statement;
+    }
+
+    function bandFor(total) {
+      if (total <= 7) return 'low';
+      if (total <= 15) return 'moderate';
+      if (total <= 23) return 'high';
+      return 'veryHigh';
+    }
+
+    function showToast() {
+      toast.hidden = false;
+      window.setTimeout(() => {
+        toast.hidden = true;
+      }, 1500);
+    }
+
+    function showResult() {
+      const band = bandFor(score);
+      const result = results[band];
+      questionPanel.hidden = true;
+      resultPanel.hidden = false;
+      progressBar.style.width = '100%';
+      titleOutput.textContent = result.title;
+      scoreOutput.textContent = `${score} / ${questions.length * 3}`;
+      descriptionOutput.textContent = result.description;
+      suggestionOutput.textContent = result.suggestion;
+      latestText = [
+        `${labels.resultTitle}: ${result.title}`,
+        `${labels.scoreLabel}: ${score} / ${questions.length * 3}`,
+        result.description,
+        `${labels.suggestion}: ${result.suggestion}`,
+        labels.resultDisclaimer,
+      ].join('\n');
+    }
+
+    function choose(points) {
+      score += points;
+      index += 1;
+      if (index >= questions.length) showResult();
+      else renderQuestion();
+    }
+
+    async function copyResult() {
+      if (!latestText) return;
+      try {
+        await navigator.clipboard.writeText(latestText);
+        showToast();
+      } catch {
+        window.prompt(labels.copyResult, latestText);
+      }
+    }
+
+    async function shareResult() {
+      if (!latestText) return;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: labels.resultTitle, text: latestText, url: window.location.href });
+          return;
+        } catch {
+          // Use copy fallback.
+        }
+      }
+      await copyResult();
+    }
+
+    function retake() {
+      index = 0;
+      score = 0;
+      latestText = '';
+      renderQuestion();
+    }
+
+    root.querySelectorAll('[data-score]').forEach((button) => {
+      button.addEventListener('click', () => choose(Number(button.getAttribute('data-score'))));
+    });
+    root.querySelector('[data-copy]')?.addEventListener('click', copyResult);
+    root.querySelector('[data-share]')?.addEventListener('click', shareResult);
+    root.querySelector('[data-retake]')?.addEventListener('click', retake);
+
+    renderQuestion();
+  });
+</script>
+

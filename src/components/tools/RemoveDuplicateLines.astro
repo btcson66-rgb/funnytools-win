@@ -1,0 +1,128 @@
+---
+interface Props {
+  labels: Record<string, string>;
+}
+
+const { labels } = Astro.props;
+---
+
+<section class="tool-widget card" data-remove-duplicate-lines-tool data-labels={JSON.stringify(labels)}>
+  <label class="textarea-label">
+    <span>{labels.input}</span>
+    <textarea data-input rows="9" placeholder={labels.placeholder}></textarea>
+  </label>
+  <div class="option-row">
+    <label class="check"><input data-case-insensitive type="checkbox" /><span>{labels.caseInsensitive}</span></label>
+    <label class="check"><input data-trim type="checkbox" checked /><span>{labels.trimLines}</span></label>
+    <label class="check"><input data-sort type="checkbox" /><span>{labels.sortOutput}</span></label>
+  </div>
+  <div class="actions">
+    <button class="btn go" type="button" data-remove>{labels.remove}</button>
+    <button class="btn" type="button" data-copy>{labels.copy}</button>
+    <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
+  </div>
+  <label class="textarea-label output-label">
+    <span>{labels.output}</span>
+    <textarea data-output rows="9" readonly placeholder={labels.emptyResult}></textarea>
+  </label>
+  <div class="stats-grid compact-stats" aria-live="polite">
+    <div><span>{labels.uniqueLines}</span><strong data-unique>0</strong></div>
+    <div><span>{labels.removedLines}</span><strong data-removed>0</strong></div>
+  </div>
+  <span class="toast" role="status" aria-live="polite" hidden>{labels.copied}</span>
+</section>
+
+<style>
+  .output-label textarea {
+    background: #fbfcff;
+  }
+
+  .compact-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .compact-stats strong {
+    font-size: 1.25rem;
+  }
+
+  @media (max-width: 760px) {
+    .compact-stats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-remove-duplicate-lines-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const input = root.querySelector('[data-input]');
+    const output = root.querySelector('[data-output]');
+    const caseInput = root.querySelector('[data-case-insensitive]');
+    const trimInput = root.querySelector('[data-trim]');
+    const sortInput = root.querySelector('[data-sort]');
+    const toast = root.querySelector('.toast');
+    const uniqueCount = root.querySelector('[data-unique]');
+    const removedCount = root.querySelector('[data-removed]');
+
+    function normalize(line) {
+      const value = trimInput.checked ? line.trim() : line;
+      return caseInput.checked ? value.toLocaleLowerCase() : value;
+    }
+
+    function dedupe() {
+      const rawLines = input.value.length ? input.value.split(/\r\n|\r|\n/) : [];
+      const seen = new Set();
+      let result = [];
+      rawLines.forEach((line) => {
+        const value = trimInput.checked ? line.trim() : line;
+        if (value.trim() === '') return;
+        const key = normalize(line);
+        if (seen.has(key)) return;
+        seen.add(key);
+        result.push(value);
+      });
+      if (sortInput.checked) {
+        result = result.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: caseInput.checked ? 'base' : 'variant' }));
+      }
+      output.value = result.join('\n');
+      uniqueCount.textContent = String(result.length);
+      removedCount.textContent = String(Math.max(0, rawLines.filter((line) => line.trim() !== '').length - result.length));
+    }
+
+    function reset() {
+      input.value = '';
+      output.value = '';
+      caseInput.checked = false;
+      trimInput.checked = true;
+      sortInput.checked = false;
+      uniqueCount.textContent = '0';
+      removedCount.textContent = '0';
+      input.focus();
+    }
+
+    function showToast() {
+      toast.hidden = false;
+      window.setTimeout(() => {
+        toast.hidden = true;
+      }, 1500);
+    }
+
+    root.querySelector('[data-remove]')?.addEventListener('click', dedupe);
+    root.querySelector('[data-reset]')?.addEventListener('click', reset);
+    root.querySelector('[data-copy]')?.addEventListener('click', async () => {
+      if (!output.value) dedupe();
+      if (!output.value) return;
+      try {
+        await navigator.clipboard.writeText(output.value);
+        showToast();
+      } catch {
+        window.prompt(labels.copy, output.value);
+      }
+    });
+    [input, caseInput, trimInput, sortInput].forEach((control) => {
+      control.addEventListener('input', dedupe);
+      control.addEventListener('change', dedupe);
+    });
+  });
+</script>
+

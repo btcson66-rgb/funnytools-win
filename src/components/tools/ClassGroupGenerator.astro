@@ -1,0 +1,255 @@
+---
+interface Props {
+  labels: Record<string, string>;
+}
+
+const { labels } = Astro.props;
+---
+
+<section class="tool-widget card" data-class-group-tool data-labels={JSON.stringify(labels)}>
+  <label class="textarea-label">
+    <span>{labels.input}</span>
+    <textarea data-names rows="10" placeholder={labels.placeholder}></textarea>
+  </label>
+  <div class="form-grid group-controls">
+    <label>
+      <span>{labels.mode}</span>
+      <select data-mode>
+        <option value="count">{labels.byGroupCount}</option>
+        <option value="size">{labels.byGroupSize}</option>
+      </select>
+    </label>
+    <label data-count-label>
+      <span>{labels.groupCount}</span>
+      <input data-group-count type="number" inputmode="numeric" value="4" min="1" step="1" />
+    </label>
+    <label data-size-label hidden>
+      <span>{labels.groupSize}</span>
+      <input data-group-size type="number" inputmode="numeric" value="4" min="1" step="1" />
+    </label>
+    <label class="check inline-toggle">
+      <input data-shuffle type="checkbox" checked />
+      <span>{labels.shuffle}</span>
+    </label>
+  </div>
+  <div class="actions">
+    <button class="btn go" type="button" data-generate>{labels.generate}</button>
+    <button class="btn" type="button" data-copy>{labels.copyAll}</button>
+    <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
+  </div>
+  <p class="form-error" data-error role="alert" hidden></p>
+  <p class="note" data-summary>{labels.summary}: 0</p>
+  <div class="resultbox groups-output" data-output aria-live="polite">
+    <p class="empty-state">{labels.emptyResult}</p>
+  </div>
+  <span class="toast" role="status" aria-live="polite" hidden>{labels.copied}</span>
+</section>
+
+<style>
+  select {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    padding: 10px 12px;
+    font: inherit;
+  }
+
+  .group-controls {
+    grid-template-columns: minmax(180px, 1fr) minmax(160px, 1fr) minmax(160px, 1fr);
+    margin-bottom: 16px;
+  }
+
+  .inline-toggle {
+    align-self: end;
+    min-height: 48px;
+  }
+
+  .groups-output {
+    display: grid;
+    gap: 12px;
+  }
+
+  .group-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    padding: 14px;
+  }
+
+  .group-card h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+  }
+
+  .group-card ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .empty-state {
+    margin: 0;
+    color: var(--muted);
+    font-weight: 800;
+  }
+
+  @media (max-width: 760px) {
+    .group-controls {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-class-group-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const namesInput = root.querySelector('[data-names]');
+    const modeInput = root.querySelector('[data-mode]');
+    const countInput = root.querySelector('[data-group-count]');
+    const sizeInput = root.querySelector('[data-group-size]');
+    const countLabel = root.querySelector('[data-count-label]');
+    const sizeLabel = root.querySelector('[data-size-label]');
+    const shuffleInput = root.querySelector('[data-shuffle]');
+    const output = root.querySelector('[data-output]');
+    const error = root.querySelector('[data-error]');
+    const summary = root.querySelector('[data-summary]');
+    const toast = root.querySelector('.toast');
+    let latestText = '';
+
+    function entries() {
+      return namesInput.value
+        .split(/\r\n|\r|\n/)
+        .map((name) => name.trim())
+        .filter(Boolean);
+    }
+
+    function setError(message) {
+      error.textContent = message;
+      error.hidden = !message;
+    }
+
+    function shuffle(items) {
+      const copy = [...items];
+      for (let index = copy.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
+      }
+      return copy;
+    }
+
+    function groupLabel(index) {
+      return labels.groupLabel.replace('{n}', String(index + 1));
+    }
+
+    function render(groups) {
+      output.innerHTML = '';
+      groups.forEach((group, index) => {
+        const card = document.createElement('section');
+        card.className = 'group-card';
+        const title = document.createElement('h3');
+        title.textContent = groupLabel(index);
+        const list = document.createElement('ul');
+        group.forEach((member) => {
+          const item = document.createElement('li');
+          item.textContent = member;
+          list.appendChild(item);
+        });
+        card.append(title, list);
+        output.appendChild(card);
+      });
+    }
+
+    function generateByCount(list, count) {
+      const groups = Array.from({ length: count }, () => []);
+      list.forEach((name, index) => {
+        groups[index % count].push(name);
+      });
+      return groups;
+    }
+
+    function generateBySize(list, size) {
+      const groups = [];
+      for (let index = 0; index < list.length; index += size) {
+        groups.push(list.slice(index, index + size));
+      }
+      return groups;
+    }
+
+    function generate() {
+      const list = entries();
+      if (list.length < 2) {
+        setError(labels.emptyError);
+        return;
+      }
+      const working = shuffleInput.checked ? shuffle(list) : [...list];
+      const mode = modeInput.value;
+      let groups = [];
+      if (mode === 'size') {
+        const size = Number(sizeInput.value);
+        if (!Number.isInteger(size) || size < 1 || size > list.length) {
+          setError(labels.invalidSizeError);
+          return;
+        }
+        groups = generateBySize(working, size);
+      } else {
+        const count = Number(countInput.value);
+        if (!Number.isInteger(count) || count < 1 || count > list.length) {
+          setError(labels.invalidCountError);
+          return;
+        }
+        groups = generateByCount(working, count);
+      }
+      latestText = groups
+        .map((group, index) => `${groupLabel(index)}\n${group.map((member) => `- ${member}`).join('\n')}`)
+        .join('\n\n');
+      summary.textContent = `${labels.summary}: ${groups.length}`;
+      render(groups);
+      setError('');
+    }
+
+    function syncMode() {
+      const bySize = modeInput.value === 'size';
+      countLabel.hidden = bySize;
+      sizeLabel.hidden = !bySize;
+    }
+
+    function reset() {
+      namesInput.value = '';
+      modeInput.value = 'count';
+      countInput.value = '4';
+      sizeInput.value = '4';
+      shuffleInput.checked = true;
+      latestText = '';
+      summary.textContent = `${labels.summary}: 0`;
+      output.innerHTML = `<p class="empty-state">${labels.emptyResult}</p>`;
+      setError('');
+      syncMode();
+      namesInput.focus();
+    }
+
+    function showToast() {
+      toast.hidden = false;
+      window.setTimeout(() => {
+        toast.hidden = true;
+      }, 1500);
+    }
+
+    modeInput.addEventListener('change', syncMode);
+    root.querySelector('[data-generate]')?.addEventListener('click', generate);
+    root.querySelector('[data-reset]')?.addEventListener('click', reset);
+    root.querySelector('[data-copy]')?.addEventListener('click', async () => {
+      if (!latestText) generate();
+      if (!latestText) return;
+      try {
+        await navigator.clipboard.writeText(latestText);
+        showToast();
+      } catch {
+        window.prompt(labels.copyAll, latestText);
+      }
+    });
+    syncMode();
+  });
+</script>
+

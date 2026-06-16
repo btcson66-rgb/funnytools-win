@@ -1,0 +1,248 @@
+---
+interface Props {
+  labels: Record<string, string>;
+}
+
+const { labels } = Astro.props;
+---
+
+<section class="tool-widget card" data-seating-chart-tool data-labels={JSON.stringify(labels)}>
+  <label class="textarea-label">
+    <span>{labels.input}</span>
+    <textarea data-names rows="8" placeholder={labels.placeholder}></textarea>
+  </label>
+  <div class="form-grid seating-controls">
+    <label>
+      <span>{labels.rows}</span>
+      <input data-rows type="number" inputmode="numeric" min="1" max="20" step="1" value="5" />
+    </label>
+    <label>
+      <span>{labels.columns}</span>
+      <input data-columns type="number" inputmode="numeric" min="1" max="20" step="1" value="6" />
+    </label>
+    <label>
+      <span>{labels.fillMode}</span>
+      <select data-fill-mode>
+        <option value="row">{labels.rowMode}</option>
+        <option value="column">{labels.columnMode}</option>
+      </select>
+    </label>
+    <label class="check inline-toggle">
+      <input data-shuffle type="checkbox" checked />
+      <span>{labels.shuffle}</span>
+    </label>
+  </div>
+  <div class="actions">
+    <button class="btn go" type="button" data-generate>{labels.generate}</button>
+    <button class="btn" type="button" data-copy>{labels.copy}</button>
+    <button class="btn" type="button" data-print>{labels.print}</button>
+    <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
+  </div>
+  <p class="form-error" data-error role="alert" hidden></p>
+  <div class="resultbox seating-output" data-output aria-live="polite">
+    <p class="empty-state">{labels.emptyResult}</p>
+  </div>
+  <span class="toast" role="status" aria-live="polite" hidden>{labels.copied}</span>
+</section>
+
+<style>
+  select {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    padding: 10px 12px;
+    font: inherit;
+  }
+
+  .seating-controls {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-bottom: 16px;
+  }
+
+  .inline-toggle {
+    align-self: end;
+    min-height: 48px;
+  }
+
+  .seating-output {
+    overflow-x: auto;
+  }
+
+  .seat-grid {
+    display: grid;
+    gap: 8px;
+    min-width: min(100%, 520px);
+  }
+
+  .seat-cell {
+    min-height: 58px;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .seat-cell span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 800;
+  }
+
+  .seat-cell strong {
+    display: block;
+    margin-top: 2px;
+    line-height: 1.25;
+  }
+
+  .seat-cell.empty strong {
+    color: var(--muted);
+  }
+
+  .empty-state {
+    margin: 0;
+    color: var(--muted);
+    font-weight: 800;
+  }
+
+  @media (max-width: 760px) {
+    .seating-controls {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-seating-chart-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const namesInput = root.querySelector('[data-names]');
+    const rowsInput = root.querySelector('[data-rows]');
+    const columnsInput = root.querySelector('[data-columns]');
+    const fillModeInput = root.querySelector('[data-fill-mode]');
+    const shuffleInput = root.querySelector('[data-shuffle]');
+    const output = root.querySelector('[data-output]');
+    const error = root.querySelector('[data-error]');
+    const toast = root.querySelector('.toast');
+    let latestText = '';
+
+    function names() {
+      return namesInput.value
+        .split(/\r\n|\r|\n/)
+        .map((name) => name.trim())
+        .filter(Boolean);
+    }
+
+    function setError(message) {
+      error.textContent = message;
+      error.hidden = !message;
+    }
+
+    function shuffle(items) {
+      const copy = [...items];
+      for (let index = copy.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
+      }
+      return copy;
+    }
+
+    function readGrid() {
+      const rows = Number(rowsInput.value);
+      const columns = Number(columnsInput.value);
+      if (!Number.isInteger(rows) || !Number.isInteger(columns) || rows < 1 || columns < 1 || rows > 20 || columns > 20) {
+        return null;
+      }
+      return { rows, columns };
+    }
+
+    function seatIndex(row, column, rows, columns) {
+      return fillModeInput.value === 'column' ? column * rows + row : row * columns + column;
+    }
+
+    function render(seats, rows, columns) {
+      output.innerHTML = '';
+      const grid = document.createElement('div');
+      grid.className = 'seat-grid';
+      grid.style.gridTemplateColumns = `repeat(${columns}, minmax(96px, 1fr))`;
+      for (let row = 0; row < rows; row += 1) {
+        for (let column = 0; column < columns; column += 1) {
+          const seatNumber = row * columns + column + 1;
+          const name = seats[seatIndex(row, column, rows, columns)] || '';
+          const cell = document.createElement('div');
+          cell.className = `seat-cell${name ? '' : ' empty'}`;
+          const label = document.createElement('span');
+          label.textContent = `${labels.seatLabel} ${seatNumber}`;
+          const value = document.createElement('strong');
+          value.textContent = name || labels.emptySeat;
+          cell.append(label, value);
+          grid.appendChild(cell);
+        }
+      }
+      output.appendChild(grid);
+    }
+
+    function generate() {
+      const grid = readGrid();
+      if (!grid) {
+        setError(labels.invalidGrid);
+        return;
+      }
+      const list = names();
+      if (!list.length) {
+        setError(labels.emptyListError);
+        return;
+      }
+      if (list.length > grid.rows * grid.columns) {
+        setError(labels.tooManyStudents);
+        return;
+      }
+      const arranged = shuffleInput.checked ? shuffle(list) : list;
+      const seats = Array.from({ length: grid.rows * grid.columns }, (_, index) => arranged[index] || '');
+      latestText = Array.from({ length: grid.rows }, (_, row) =>
+        Array.from({ length: grid.columns }, (_, column) => seats[seatIndex(row, column, grid.rows, grid.columns)] || labels.emptySeat).join('\t'),
+      ).join('\n');
+      render(seats, grid.rows, grid.columns);
+      setError('');
+    }
+
+    function reset() {
+      namesInput.value = '';
+      rowsInput.value = '5';
+      columnsInput.value = '6';
+      fillModeInput.value = 'row';
+      shuffleInput.checked = true;
+      latestText = '';
+      output.innerHTML = `<p class="empty-state">${labels.emptyResult}</p>`;
+      setError('');
+      namesInput.focus();
+    }
+
+    function showToast() {
+      toast.hidden = false;
+      window.setTimeout(() => {
+        toast.hidden = true;
+      }, 1500);
+    }
+
+    root.querySelector('[data-generate]')?.addEventListener('click', generate);
+    root.querySelector('[data-reset]')?.addEventListener('click', reset);
+    root.querySelector('[data-print]')?.addEventListener('click', () => {
+      if (!latestText) generate();
+      window.print();
+    });
+    root.querySelector('[data-copy]')?.addEventListener('click', async () => {
+      if (!latestText) generate();
+      if (!latestText) return;
+      try {
+        await navigator.clipboard.writeText(latestText);
+        showToast();
+      } catch {
+        window.prompt(labels.copy, latestText);
+      }
+    });
+  });
+</script>
+

@@ -1,0 +1,152 @@
+---
+interface Props {
+  labels: Record<string, string>;
+}
+
+const { labels } = Astro.props;
+---
+
+<section class="tool-widget card" data-remove-empty-lines-tool data-labels={JSON.stringify(labels)}>
+  <label class="textarea-label">
+    <span>{labels.input}</span>
+    <textarea data-input rows="9" placeholder={labels.placeholder}></textarea>
+  </label>
+  <div class="form-grid text-controls">
+    <label>
+      <span>{labels.mode}</span>
+      <select data-mode>
+        <option value="remove">{labels.removeAll}</option>
+        <option value="collapse">{labels.collapseMultiple}</option>
+      </select>
+    </label>
+    <label class="check inline-toggle">
+      <input data-trim type="checkbox" />
+      <span>{labels.trimLineEnds}</span>
+    </label>
+  </div>
+  <div class="actions">
+    <button class="btn go" type="button" data-process>{labels.process}</button>
+    <button class="btn" type="button" data-copy>{labels.copy}</button>
+    <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
+  </div>
+  <label class="textarea-label output-label">
+    <span>{labels.output}</span>
+    <textarea data-output rows="9" readonly placeholder={labels.emptyResult}></textarea>
+  </label>
+  <div class="stats-grid compact-stats" aria-live="polite">
+    <div><span>{labels.originalLines}</span><strong data-original>0</strong></div>
+    <div><span>{labels.resultLines}</span><strong data-result>0</strong></div>
+    <div><span>{labels.removedLines}</span><strong data-removed>0</strong></div>
+  </div>
+  <span class="toast" role="status" aria-live="polite" hidden>{labels.copied}</span>
+</section>
+
+<style>
+  select {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    padding: 10px 12px;
+    font: inherit;
+  }
+
+  .text-controls {
+    grid-template-columns: minmax(220px, 1fr) minmax(220px, 1fr);
+    margin-bottom: 16px;
+  }
+
+  .inline-toggle {
+    align-self: end;
+    min-height: 48px;
+  }
+
+  .output-label textarea {
+    background: #fbfcff;
+  }
+
+  .compact-stats strong {
+    font-size: 1.25rem;
+  }
+
+  @media (max-width: 760px) {
+    .text-controls {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-remove-empty-lines-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const input = root.querySelector('[data-input]');
+    const output = root.querySelector('[data-output]');
+    const modeInput = root.querySelector('[data-mode]');
+    const trimInput = root.querySelector('[data-trim]');
+    const toast = root.querySelector('.toast');
+    const stats = {
+      original: root.querySelector('[data-original]'),
+      result: root.querySelector('[data-result]'),
+      removed: root.querySelector('[data-removed]'),
+    };
+
+    function process() {
+      const originalLines = input.value.length ? input.value.split(/\r\n|\r|\n/) : [];
+      const lines = trimInput.checked ? originalLines.map((line) => line.trim()) : originalLines;
+      let resultLines = [];
+      if (modeInput.value === 'collapse') {
+        let previousBlank = false;
+        lines.forEach((line) => {
+          const blank = line.trim() === '';
+          if (blank && previousBlank) return;
+          resultLines.push(blank ? '' : line);
+          previousBlank = blank;
+        });
+      } else {
+        resultLines = lines.filter((line) => line.trim() !== '');
+      }
+      output.value = resultLines.join('\n');
+      stats.original.textContent = String(originalLines.length);
+      stats.result.textContent = String(resultLines.length);
+      stats.removed.textContent = String(Math.max(0, originalLines.length - resultLines.length));
+    }
+
+    function reset() {
+      input.value = '';
+      output.value = '';
+      modeInput.value = 'remove';
+      trimInput.checked = false;
+      stats.original.textContent = '0';
+      stats.result.textContent = '0';
+      stats.removed.textContent = '0';
+      input.focus();
+    }
+
+    function showToast() {
+      toast.hidden = false;
+      window.setTimeout(() => {
+        toast.hidden = true;
+      }, 1500);
+    }
+
+    root.querySelector('[data-process]')?.addEventListener('click', process);
+    root.querySelector('[data-reset]')?.addEventListener('click', reset);
+    root.querySelector('[data-copy]')?.addEventListener('click', async () => {
+      if (!output.value) process();
+      if (!output.value) return;
+      try {
+        await navigator.clipboard.writeText(output.value);
+        showToast();
+      } catch {
+        window.prompt(labels.copy, output.value);
+      }
+    });
+    [input, modeInput, trimInput].forEach((control) => {
+      control.addEventListener('input', process);
+      control.addEventListener('change', process);
+    });
+  });
+</script>
+

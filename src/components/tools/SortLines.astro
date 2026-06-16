@@ -1,0 +1,158 @@
+---
+interface Props {
+  labels: Record<string, string>;
+}
+
+const { labels } = Astro.props;
+---
+
+<section class="tool-widget card" data-sort-lines-tool data-labels={JSON.stringify(labels)}>
+  <label class="textarea-label">
+    <span>{labels.input}</span>
+    <textarea data-input rows="9" placeholder={labels.placeholder}></textarea>
+  </label>
+  <div class="form-grid sort-controls">
+    <label>
+      <span>{labels.sortMode}</span>
+      <select data-mode>
+        <option value="asc">{labels.ascending}</option>
+        <option value="desc">{labels.descending}</option>
+        <option value="numeric">{labels.numeric}</option>
+        <option value="length">{labels.length}</option>
+      </select>
+    </label>
+    <label class="check inline-toggle"><input data-case-insensitive type="checkbox" /><span>{labels.caseInsensitive}</span></label>
+    <label class="check inline-toggle"><input data-dedupe type="checkbox" /><span>{labels.removeDuplicates}</span></label>
+  </div>
+  <div class="actions">
+    <button class="btn go" type="button" data-sort>{labels.sort}</button>
+    <button class="btn" type="button" data-copy>{labels.copy}</button>
+    <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
+  </div>
+  <label class="textarea-label output-label">
+    <span>{labels.output}</span>
+    <textarea data-output rows="9" readonly placeholder={labels.emptyResult}></textarea>
+  </label>
+  <p class="note" aria-live="polite"><span>{labels.lineCount}</span>: <strong data-count>0</strong></p>
+  <span class="toast" role="status" aria-live="polite" hidden>{labels.copied}</span>
+</section>
+
+<style>
+  select {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--ink);
+    padding: 10px 12px;
+    font: inherit;
+  }
+
+  .sort-controls {
+    grid-template-columns: minmax(180px, 1fr) minmax(190px, 1fr) minmax(190px, 1fr);
+    margin-bottom: 16px;
+  }
+
+  .inline-toggle {
+    align-self: end;
+    min-height: 48px;
+  }
+
+  .output-label textarea {
+    background: #fbfcff;
+  }
+
+  @media (max-width: 760px) {
+    .sort-controls {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-sort-lines-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const input = root.querySelector('[data-input]');
+    const output = root.querySelector('[data-output]');
+    const modeInput = root.querySelector('[data-mode]');
+    const caseInput = root.querySelector('[data-case-insensitive]');
+    const dedupeInput = root.querySelector('[data-dedupe]');
+    const countOutput = root.querySelector('[data-count]');
+    const toast = root.querySelector('.toast');
+
+    function lineKey(line) {
+      return caseInput.checked ? line.toLocaleLowerCase() : line;
+    }
+
+    function numberValue(line) {
+      const match = line.trim().match(/^-?\d+(?:\.\d+)?/);
+      return match ? Number(match[0]) : Number.POSITIVE_INFINITY;
+    }
+
+    function sortLines() {
+      let lines = input.value
+        .split(/\r\n|\r|\n/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+      if (dedupeInput.checked) {
+        const seen = new Set();
+        lines = lines.filter((line) => {
+          const key = lineKey(line);
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+      }
+      const mode = modeInput.value;
+      lines.sort((a, b) => {
+        if (mode === 'numeric') {
+          const diff = numberValue(a) - numberValue(b);
+          return diff || lineKey(a).localeCompare(lineKey(b));
+        }
+        if (mode === 'length') {
+          return a.length - b.length || lineKey(a).localeCompare(lineKey(b));
+        }
+        const compared = lineKey(a).localeCompare(lineKey(b), undefined, { sensitivity: caseInput.checked ? 'base' : 'variant' });
+        return mode === 'desc' ? -compared : compared;
+      });
+      output.value = lines.join('\n');
+      countOutput.textContent = String(lines.length);
+    }
+
+    function reset() {
+      input.value = '';
+      output.value = '';
+      modeInput.value = 'asc';
+      caseInput.checked = false;
+      dedupeInput.checked = false;
+      countOutput.textContent = '0';
+      input.focus();
+    }
+
+    function showToast() {
+      toast.hidden = false;
+      window.setTimeout(() => {
+        toast.hidden = true;
+      }, 1500);
+    }
+
+    root.querySelector('[data-sort]')?.addEventListener('click', sortLines);
+    root.querySelector('[data-reset]')?.addEventListener('click', reset);
+    root.querySelector('[data-copy]')?.addEventListener('click', async () => {
+      if (!output.value) sortLines();
+      if (!output.value) return;
+      try {
+        await navigator.clipboard.writeText(output.value);
+        showToast();
+      } catch {
+        window.prompt(labels.copy, output.value);
+      }
+    });
+    [input, modeInput, caseInput, dedupeInput].forEach((control) => {
+      control.addEventListener('input', sortLines);
+      control.addEventListener('change', sortLines);
+    });
+  });
+</script>
+

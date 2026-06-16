@@ -1,6 +1,8 @@
 import type { Locale } from '../config/site';
 import ageCalculatorContent from '../i18n/tools/age-calculator';
 import base64Content from '../i18n/tools/base64';
+import breakReminderContent from '../i18n/tools/break-reminder';
+import businessDaysContent from '../i18n/tools/business-days';
 import caseConverterContent from '../i18n/tools/case-converter';
 import characterCounterContent from '../i18n/tools/character-counter';
 import colorGeneratorContent from '../i18n/tools/color-generator';
@@ -8,15 +10,19 @@ import compoundInterestContent from '../i18n/tools/compound-interest';
 import countdownTimerContent from '../i18n/tools/countdown-timer';
 import dateDifferenceContent from '../i18n/tools/date-difference';
 import diceRollerContent from '../i18n/tools/dice-roller';
+import groupGeneratorContent from '../i18n/tools/group-generator';
 import gpaCalculatorContent from '../i18n/tools/gpa-calculator';
 import gradeAverageContent from '../i18n/tools/grade-average';
 import imageCompressorContent from '../i18n/tools/image-compressor';
 import imageResizerContent from '../i18n/tools/image-resizer';
+import inflationContent from '../i18n/tools/inflation';
 import jpgToPngContent from '../i18n/tools/jpg-to-png';
 import jsonFormatterContent from '../i18n/tools/json-formatter';
 import loveTypeContent from '../i18n/tools/love-type-test';
 import mbtiContent from '../i18n/tools/mbti-test';
 import mortgagePaymentContent from '../i18n/tools/mortgage-payment';
+import netSalaryContent from '../i18n/tools/net-salary';
+import overtimePayContent from '../i18n/tools/overtime-pay';
 import passwordGeneratorContent from '../i18n/tools/password-generator';
 import pomodoroContent from '../i18n/tools/pomodoro-timer';
 import pngToJpgContent from '../i18n/tools/png-to-jpg';
@@ -26,12 +32,18 @@ import randomNameContent from '../i18n/tools/random-name-picker';
 import randomNumberContent from '../i18n/tools/random-number-picker';
 import randomStudentContent from '../i18n/tools/random-student-picker';
 import randomWheelContent from '../i18n/tools/random-wheel';
+import removeDuplicateLinesContent from '../i18n/tools/remove-duplicate-lines';
+import removeEmptyLinesContent from '../i18n/tools/remove-empty-lines';
 import savingsGoalContent from '../i18n/tools/savings-goal';
+import seatingChartContent from '../i18n/tools/seating-chart';
+import sortLinesContent from '../i18n/tools/sort-lines';
 import stopwatchContent from '../i18n/tools/stopwatch';
+import stressLevelContent from '../i18n/tools/stress-level-test';
 import thisOrThatContent from '../i18n/tools/this-or-that';
 import urlEncoderContent from '../i18n/tools/url-encoder';
 import whatToEatContent from '../i18n/tools/what-to-eat';
 import wordCounterContent from '../i18n/tools/word-counter';
+import workPersonalityContent from '../i18n/tools/work-personality-test';
 
 export const contentBySlug = {
   'random-number-picker': randomNumberContent,
@@ -42,10 +54,17 @@ export const contentBySlug = {
   'countdown-timer': countdownTimerContent,
   'date-difference': dateDifferenceContent,
   'age-calculator': ageCalculatorContent,
+  'business-days': businessDaysContent,
+  'break-reminder': breakReminderContent,
   'case-converter': caseConverterContent,
+  'remove-empty-lines': removeEmptyLinesContent,
+  'remove-duplicate-lines': removeDuplicateLinesContent,
+  'sort-lines': sortLinesContent,
   'qr-code-generator': qrCodeContent,
   'mbti-test': mbtiContent,
   'love-type-test': loveTypeContent,
+  'work-personality-test': workPersonalityContent,
+  'stress-level-test': stressLevelContent,
   'password-generator': passwordGeneratorContent,
   'color-generator': colorGeneratorContent,
   'dice-roller': diceRollerContent,
@@ -62,11 +81,16 @@ export const contentBySlug = {
   'compound-interest': compoundInterestContent,
   'savings-goal': savingsGoalContent,
   'mortgage-payment': mortgagePaymentContent,
+  'net-salary': netSalaryContent,
+  'overtime-pay': overtimePayContent,
+  inflation: inflationContent,
   'character-counter': characterCounterContent,
   'image-compressor': imageCompressorContent,
   'image-resizer': imageResizerContent,
   'png-to-jpg': pngToJpgContent,
   'jpg-to-png': jpgToPngContent,
+  'seating-chart': seatingChartContent,
+  'group-generator': groupGeneratorContent,
 } as const;
 
 export type ToolContentSlug = keyof typeof contentBySlug;

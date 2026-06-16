@@ -1,0 +1,205 @@
+---
+interface Props {
+  labels: Record<string, string>;
+}
+
+const { labels } = Astro.props;
+---
+
+<section class="tool-widget card" data-overtime-pay-tool data-labels={JSON.stringify(labels)}>
+  <div class="form-grid">
+    <label>
+      <span>{labels.hourlyRate}</span>
+      <input data-hourly type="number" min="0" step="10" value="200" />
+    </label>
+    <label>
+      <span>{labels.weekdayHours}</span>
+      <input data-weekday-hours type="number" min="0" step="0.5" value="4" />
+    </label>
+    <label>
+      <span>{labels.weekdayMultiplier}</span>
+      <input data-weekday-multiplier type="number" min="0" step="0.01" value="1.34" />
+    </label>
+    <label>
+      <span>{labels.extendedHours}</span>
+      <input data-extended-hours type="number" min="0" step="0.5" value="0" />
+    </label>
+    <label>
+      <span>{labels.extendedMultiplier}</span>
+      <input data-extended-multiplier type="number" min="0" step="0.01" value="1.67" />
+    </label>
+    <label>
+      <span>{labels.restHours}</span>
+      <input data-rest-hours type="number" min="0" step="0.5" value="0" />
+    </label>
+    <label>
+      <span>{labels.restMultiplier}</span>
+      <input data-rest-multiplier type="number" min="0" step="0.01" value="2" />
+    </label>
+    <label>
+      <span>{labels.holidayHours}</span>
+      <input data-holiday-hours type="number" min="0" step="0.5" value="0" />
+    </label>
+    <label>
+      <span>{labels.holidayMultiplier}</span>
+      <input data-holiday-multiplier type="number" min="0" step="0.01" value="2" />
+    </label>
+  </div>
+
+  <div class="actions">
+    <button class="btn go" type="button" data-calculate>{labels.calculate}</button>
+    <button class="btn" type="button" data-copy>{labels.copy}</button>
+    <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
+  </div>
+
+  <p class="form-error" data-error role="alert" hidden></p>
+  <p class="note assumption-note">{labels.assumptionNote}</p>
+  <div class="stats-grid overtime-stats" aria-live="polite">
+    <div><span>{labels.weekdayPay}</span><strong data-weekday-pay>-</strong></div>
+    <div><span>{labels.extendedPay}</span><strong data-extended-pay>-</strong></div>
+    <div><span>{labels.restPay}</span><strong data-rest-pay>-</strong></div>
+    <div><span>{labels.holidayPay}</span><strong data-holiday-pay>-</strong></div>
+    <div class="total-stat"><span>{labels.totalPay}</span><strong data-total-pay>-</strong></div>
+  </div>
+  <div class="resultbox formula-box">
+    <span class="result-label">{labels.formula}</span>
+  </div>
+  <span class="toast" role="status" aria-live="polite" hidden>{labels.copied}</span>
+</section>
+
+<style>
+  .actions {
+    margin: 16px 0;
+  }
+
+  .assumption-note {
+    padding: 12px;
+    border: 1px solid #ffd8c9;
+    border-radius: 8px;
+    background: #fff7f4;
+    color: #8a3b26;
+    font-weight: 800;
+  }
+
+  .overtime-stats {
+    margin-top: 14px;
+  }
+
+  .total-stat {
+    grid-column: span 2;
+  }
+
+  .formula-box {
+    margin-top: 14px;
+  }
+
+  @media (max-width: 760px) {
+    .total-stat {
+      grid-column: auto;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-overtime-pay-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const fields = {
+      hourly: root.querySelector('[data-hourly]'),
+      weekdayHours: root.querySelector('[data-weekday-hours]'),
+      weekdayMultiplier: root.querySelector('[data-weekday-multiplier]'),
+      extendedHours: root.querySelector('[data-extended-hours]'),
+      extendedMultiplier: root.querySelector('[data-extended-multiplier]'),
+      restHours: root.querySelector('[data-rest-hours]'),
+      restMultiplier: root.querySelector('[data-rest-multiplier]'),
+      holidayHours: root.querySelector('[data-holiday-hours]'),
+      holidayMultiplier: root.querySelector('[data-holiday-multiplier]'),
+    };
+    const outputs = {
+      weekday: root.querySelector('[data-weekday-pay]'),
+      extended: root.querySelector('[data-extended-pay]'),
+      rest: root.querySelector('[data-rest-pay]'),
+      holiday: root.querySelector('[data-holiday-pay]'),
+      total: root.querySelector('[data-total-pay]'),
+    };
+    const error = root.querySelector('[data-error]');
+    const toast = root.querySelector('.toast');
+    let latestText = '';
+
+    function money(value) {
+      return new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(Math.round(value));
+    }
+
+    function readNumber(input) {
+      const value = Number(input.value);
+      return Number.isFinite(value) ? value : NaN;
+    }
+
+    function setError(message) {
+      error.textContent = message;
+      error.hidden = !message;
+    }
+
+    function calculate() {
+      const values = Object.fromEntries(Object.entries(fields).map(([key, input]) => [key, readNumber(input)]));
+      if (Object.values(values).some((value) => !Number.isFinite(value) || value < 0)) {
+        setError(labels.invalidInput);
+        return;
+      }
+      const weekday = values.hourly * values.weekdayHours * values.weekdayMultiplier;
+      const extended = values.hourly * values.extendedHours * values.extendedMultiplier;
+      const rest = values.hourly * values.restHours * values.restMultiplier;
+      const holiday = values.hourly * values.holidayHours * values.holidayMultiplier;
+      const total = weekday + extended + rest + holiday;
+      outputs.weekday.textContent = money(weekday);
+      outputs.extended.textContent = money(extended);
+      outputs.rest.textContent = money(rest);
+      outputs.holiday.textContent = money(holiday);
+      outputs.total.textContent = money(total);
+      latestText = [
+        `${labels.weekdayPay}: ${money(weekday)}`,
+        `${labels.extendedPay}: ${money(extended)}`,
+        `${labels.restPay}: ${money(rest)}`,
+        `${labels.holidayPay}: ${money(holiday)}`,
+        `${labels.totalPay}: ${money(total)}`,
+        labels.assumptionNote,
+        labels.formula,
+      ].join('\n');
+      setError('');
+    }
+
+    function reset() {
+      fields.hourly.value = '200';
+      fields.weekdayHours.value = '4';
+      fields.weekdayMultiplier.value = '1.34';
+      fields.extendedHours.value = '0';
+      fields.extendedMultiplier.value = '1.67';
+      fields.restHours.value = '0';
+      fields.restMultiplier.value = '2';
+      fields.holidayHours.value = '0';
+      fields.holidayMultiplier.value = '2';
+      calculate();
+    }
+
+    function showToast() {
+      toast.hidden = false;
+      window.setTimeout(() => {
+        toast.hidden = true;
+      }, 1500);
+    }
+
+    root.querySelector('[data-calculate]')?.addEventListener('click', calculate);
+    root.querySelector('[data-reset]')?.addEventListener('click', reset);
+    root.querySelector('[data-copy]')?.addEventListener('click', async () => {
+      if (!latestText) calculate();
+      try {
+        await navigator.clipboard.writeText(latestText);
+        showToast();
+      } catch {
+        window.prompt(labels.copy, latestText);
+      }
+    });
+    Object.values(fields).forEach((input) => input.addEventListener('input', calculate));
+    calculate();
+  });
+</script>
+
