@@ -20,8 +20,17 @@ const ui = t(lang);
 const title = lang === 'zh' ? '全部免費線上工具' : 'All free online tools';
 const description =
   lang === 'zh'
-    ? '瀏覽免費工具箱的所有工具，包含已上線工具與即將推出的長期規劃。'
-    : 'Browse every Free Tools Hub tool, including live tools and planned additions.';
+    ? '瀏覽免費工具箱的所有免費線上工具，依分類整理，並可用上方搜尋快速找到需要的工具。'
+    : 'Browse every free Free Tools Hub tool, organized by category. Use the search box above to find what you need fast.';
+const groupedCategories = categories.map((category) => ({
+  category,
+  tools: getToolsByCategory(category.id)
+    .filter((tool) => tool.status === 'live')
+    .map((tool) => ({
+      tool,
+      search: `${tool.name[lang]} ${tool.short[lang]}`.toLowerCase(),
+    })),
+}));
 ---
 
 <BaseLayout lang={lang} title={title} description={description} alternateSegments={['tools']}>
@@ -34,19 +43,76 @@ const description =
     />
     <h1>{ui.allTools}</h1>
     <p class="lead">{description}</p>
+    <label class="tools-search">
+      <span>{ui.toolsSearch.label}</span>
+      <input
+        type="search"
+        placeholder={ui.toolsSearch.placeholder}
+        aria-label={ui.toolsSearch.label}
+        autocomplete="off"
+        data-tools-search
+      />
+    </label>
   </section>
 
   <section class="wrap tools-list">
     {
-      categories.map((category) => (
-        <section class="content-section" id={category.id}>
+      groupedCategories.map(({ category, tools }) => (
+        <section class="content-section tool-category-section" id={category.id} data-tool-section>
           <h2>{category.icon} {category.name[lang]}</h2>
           <p>{category.description[lang]}</p>
           <div class="grid">
-            {getToolsByCategory(category.id).map((tool) => <ToolCard lang={lang} tool={tool} />)}
+            {
+              tools.map(({ tool, search }) => (
+                <div class="tool-search-item" data-search={search}>
+                  <ToolCard lang={lang} tool={tool} />
+                </div>
+              ))
+            }
           </div>
         </section>
       ))
     }
+    <p class="empty-state" data-tools-empty aria-live="polite" hidden>{ui.toolsSearch.empty}</p>
   </section>
+
+  <script>
+    const searchInput = document.querySelector('[data-tools-search]');
+    const emptyState = document.querySelector('[data-tools-empty]');
+    const sections = Array.from(document.querySelectorAll('[data-tool-section]'));
+
+    if (searchInput instanceof HTMLInputElement && emptyState instanceof HTMLElement) {
+      const filterTools = () => {
+        const query = searchInput.value.trim().toLowerCase();
+        let visibleTotal = 0;
+
+        sections.forEach((section) => {
+          if (!(section instanceof HTMLElement)) return;
+
+          const items = Array.from(section.querySelectorAll('[data-search]'));
+          let visibleInSection = 0;
+
+          items.forEach((item) => {
+            if (!(item instanceof HTMLElement)) return;
+
+            const searchText = item.getAttribute('data-search') || '';
+            const isVisible = query === '' || searchText.includes(query);
+            item.hidden = !isVisible;
+
+            if (isVisible) {
+              visibleInSection += 1;
+              visibleTotal += 1;
+            }
+          });
+
+          section.hidden = visibleInSection === 0;
+        });
+
+        emptyState.hidden = visibleTotal > 0;
+      };
+
+      searchInput.addEventListener('input', filterTools);
+      filterTools();
+    }
+  </script>
 </BaseLayout>

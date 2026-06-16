@@ -13,12 +13,24 @@ const ui = {
     newest: '最新工具',
     whyUseThisSite: '為什麼使用本站',
     faq: '常見問題',
+    heroStats: {
+      toolsLabel: "免費工具",
+      categoriesLabel: "工具分類",
+      noSignup: "免註冊・免安裝",
+    },
+    toolsSearch: {
+      placeholder: "搜尋工具…",
+      label: "搜尋工具",
+      empty: "找不到符合的工具，換個關鍵字試試。",
+    },
+    toolsCountSuffix: " 個工具",
     footer: {
       about: '關於',
       contact: '聯絡',
       privacy: '隱私權',
       terms: '使用條款',
       disclaimer: '免責聲明',
+      legalNote: "本站工具結果僅供參考，不構成法律、醫療、投資或稅務建議。",
     },
     buttons: {
       reset: '重設',
@@ -98,12 +110,24 @@ const ui = {
     newest: 'Newest',
     whyUseThisSite: 'Why use this site',
     faq: 'FAQ',
+    heroStats: {
+      toolsLabel: "free tools",
+      categoriesLabel: "categories",
+      noSignup: "No sign-up · No install",
+    },
+    toolsSearch: {
+      placeholder: "Search tools…",
+      label: "Search tools",
+      empty: "No tools match your search. Try another keyword.",
+    },
+    toolsCountSuffix: " tools",
     footer: {
       about: 'About',
       contact: 'Contact',
       privacy: 'Privacy',
       terms: 'Terms',
       disclaimer: 'Disclaimer',
+      legalNote: "Tool results are for reference only and are not legal, medical, investment, or tax advice.",
     },
     buttons: {
       reset: 'Reset',

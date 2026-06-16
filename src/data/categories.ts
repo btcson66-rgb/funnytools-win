@@ -49,8 +49,8 @@ export const categories: Category[] = [
     icon: '🖼️',
     name: { zh: '圖片與檔案', en: 'Image & File' },
     description: {
-      zh: '規劃圖片壓縮、轉檔、調整尺寸與 QR Code 等常用檔案工具。',
-      en: 'A planned collection for image compression, conversion, resizing, and practical file tasks.',
+      zh: "提供圖片壓縮、轉檔、調整尺寸與 QR Code 等常用檔案工具，全部在瀏覽器本機處理。",
+      en: "Compress, convert, and resize images, plus QR codes and other handy file tasks — all processed locally in your browser.",
     },
   },
   {

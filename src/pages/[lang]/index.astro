@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { SITE, type Locale } from '../../config/site';
 import { categories } from '../../data/categories';
-import { liveTools } from '../../data/tools';
+import { getToolsByCategory, liveTools } from '../../data/tools';
 import { home, homeFaq } from '../../i18n/pages';
 import { t } from '../../i18n/ui';
 import { categoryUrl, localePath } from '../../lib/url';
@@ -21,6 +21,10 @@ const copy = home[lang];
 const ui = t(lang);
 const featured = liveTools.filter((tool) => tool.featured);
 const newest = liveTools.filter((tool) => tool.isNew);
+const categorySummaries = categories.map((category) => ({
+  category,
+  count: getToolsByCategory(category.id).length,
+}));
 ---
 
 <BaseLayout
@@ -37,6 +41,17 @@ const newest = liveTools.filter((tool) => tool.isNew);
     <div class="hero-actions">
       <a class="btn go" href={localePath(lang, 'tools')}>{copy.primaryCta}</a>
       <a class="btn ghost" href="#categories">{copy.secondaryCta}</a>
+    </div>
+    <div class="hero-stats" aria-label={ui.categories}>
+      <span class="stat-chip">
+        <strong>{liveTools.length}+</strong>
+        <span>{ui.heroStats.toolsLabel}</span>
+      </span>
+      <span class="stat-chip">
+        <strong>{categories.length}</strong>
+        <span>{ui.heroStats.categoriesLabel}</span>
+      </span>
+      <span class="stat-chip text-only">{ui.heroStats.noSignup}</span>
     </div>
   </section>
 
@@ -58,12 +73,13 @@ const newest = liveTools.filter((tool) => tool.isNew);
     <h2>{ui.categories}</h2>
     <div class="grid">
       {
-        categories.map((category) => (
+        categorySummaries.map(({ category, count }) => (
           <a class="tile category-tile" href={categoryUrl(lang, category.id)}>
             <span class="tile-icon" aria-hidden="true">{category.icon}</span>
             <span class="tile-body">
               <strong>{category.name[lang]}</strong>
               <span>{category.description[lang]}</span>
+              <span class="category-count">{count}{ui.toolsCountSuffix}</span>
             </span>
           </a>
         ))

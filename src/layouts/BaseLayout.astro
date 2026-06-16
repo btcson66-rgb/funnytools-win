@@ -50,6 +50,7 @@ const ogImage = defaultOgImage();
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     {jsonLdItems.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
     {
       (SITE.adsenseEnabled || SITE.features.adsense) && (
