@@ -13,21 +13,9 @@ import BaseLayout from './BaseLayout.astro';
 import type { Locale } from '../config/site';
 import type { Category } from '../data/categories';
 import type { ToolMeta } from '../data/tools';
+import type { ToolContent } from '../i18n/tools/_types';
 import { t } from '../i18n/ui';
 import { absoluteUrl, categoryUrl, localePath, toolUrl } from '../lib/url';
-
-interface ToolContent {
-  name: string;
-  short: string;
-  long: string;
-  seoTitle: string;
-  seoDescription: string;
-  instructions: string[];
-  examples: string[];
-  faq: { q: string; a: string }[];
-  disclaimer?: string;
-  privacyNote?: string;
-}
 
 interface Props {
   lang: Locale;
@@ -52,6 +40,7 @@ const breadcrumbItems = [
   lang={lang}
   title={content.seoTitle}
   description={content.seoDescription}
+  keywords={content.keywords}
   type="article"
   alternateSegments={['tools', tool.slug]}
   jsonLd={jsonLd}
@@ -61,10 +50,14 @@ const breadcrumbItems = [
     <header class="tool-header">
       <p class="eyebrow">{category.icon} {category.name[lang]}</p>
       <h1><span aria-hidden="true">{tool.icon}</span> {content.name}</h1>
+      <p class="tool-purpose">{content.short}</p>
       <p class="lead">{content.long}</p>
     </header>
 
-    <slot />
+    <section class="content-section tool-interaction" aria-labelledby="tool-interaction-title">
+      <h2 id="tool-interaction-title">{ui.sections.toolArea}</h2>
+      <slot />
+    </section>
 
     <AdSlot />
     <SponsorBlock lang={lang} />
@@ -83,22 +76,55 @@ const breadcrumbItems = [
       </ul>
     </section>
 
+    {
+      content.caseStudies && content.caseStudies.length > 0 && (
+        <section class="content-section">
+          <h2>{ui.sections.realExamples}</h2>
+          <div class="case-grid">
+            {content.caseStudies.map((item) => (
+              <article class="case-card">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <Faq lang={lang} items={content.faq} />
+    <RelatedTools lang={lang} current={tool} />
+
     <section class="content-section privacy-note">
       <h2>{ui.privacy.heading}</h2>
       {tool.privacyLevel === 'local-only' && <p class="privacy-highlight">{ui.privacy.localOnly}</p>}
       <p>{content.privacyNote ?? ui.privacy.defaultNote}</p>
     </section>
 
-    <AffiliateBlock lang={lang} />
-    <Faq lang={lang} items={content.faq} />
+    <section class="content-section trust-note">
+      <h2>{ui.trust.heading}</h2>
+      <p>{ui.trust.general}</p>
+      {category.id === 'money' && <p>{ui.trust.financial}</p>}
+    </section>
+
+    {content.disclaimer && (
+      <section class="content-section">
+        <h2>{ui.sections.disclaimer}</h2>
+        <p class="disclaimer">{content.disclaimer}</p>
+      </section>
+    )}
+
+    {tool.updated && (
+      <p class="updated">
+        {ui.lastUpdated}: <time datetime={tool.updated}>{tool.updated}</time>
+      </p>
+    )}
+
     <ShareButtons lang={lang} url={currentUrl} title={content.name} />
     {tool.embedPotential !== 'low' && <EmbedCode lang={lang} tool={tool} />}
     <NewsletterSignup lang={lang} />
     <RelatedResources lang={lang} />
+    <AffiliateBlock lang={lang} />
     <AdSlot />
-    <RelatedTools lang={lang} current={tool} />
-
-    {tool.updated && <p class="updated">{ui.lastUpdated}: <time datetime={tool.updated}>{tool.updated}</time></p>}
-    {content.disclaimer && <p class="disclaimer">{content.disclaimer}</p>}
   </article>
 </BaseLayout>

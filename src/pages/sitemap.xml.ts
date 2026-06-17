@@ -1,10 +1,10 @@
 import type { APIRoute } from 'astro';
 import { SITE, type Locale } from '../config/site';
 import { categories } from '../data/categories';
-import { liveTools } from '../data/tools';
+import { getToolsByCategory, liveTools } from '../data/tools';
 import { absoluteUrl, localePath } from '../lib/url';
 
-const legalPages = ['about', 'contact', 'privacy', 'terms', 'disclaimer'];
+const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
 
 function escapeXml(value: string): string {
   return value
@@ -34,10 +34,13 @@ function urlEntry(lang: Locale, segments: string[]): string {
 }
 
 export const GET: APIRoute = () => {
+  const liveCategories = categories.filter((category) =>
+    getToolsByCategory(category.id).some((tool) => tool.status === 'live'),
+  );
   const segmentSets = [
     [] as string[],
     ['tools'],
-    ...categories.map((category) => ['category', category.id]),
+    ...liveCategories.map((category) => ['category', category.id]),
     ...liveTools.map((tool) => ['tools', tool.slug]),
     ...legalPages.map((page) => [page]),
   ];

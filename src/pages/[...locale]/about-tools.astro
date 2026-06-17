@@ -1,0 +1,24 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { SITE, type Locale } from '../../config/site';
+import { pages } from '../../i18n/pages';
+
+export function getStaticPaths() {
+  return SITE.locales.map((lang) => ({
+    params: { locale: lang === SITE.defaultLocale ? undefined : lang },
+    props: { lang },
+  }));
+}
+
+const { lang } = Astro.props as { lang: Locale };
+const page = pages[lang].aboutTools;
+---
+
+<PageLayout
+  lang={lang}
+  pageKey="about-tools"
+  title={page.title}
+  seoTitle={page.seoTitle}
+  description={page.description}
+  body={page.body}
+/>

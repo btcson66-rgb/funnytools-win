@@ -4,7 +4,7 @@ import { liveTools, getEmbeddableTools } from '../../data/tools';
 import { categories } from '../../data/categories';
 
 export function getStaticPaths() {
-  const legalPages = ['about', 'contact', 'privacy', 'terms', 'disclaimer'];
+  const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
   return [
     { params: { path: undefined } },
     { params: { path: 'tools' } },
@@ -26,9 +26,9 @@ const fullUrl = `${SITE.url}${newPath}`;
   <link rel="canonical" href={fullUrl} />
   <meta http-equiv="refresh" content={`0; url=${newPath}`} />
   <meta name="robots" content="noindex, follow" />
-  <title>Redirecting…</title>
+  <title>Redirecting...</title>
 </head>
 <body>
-  <p>Redirecting to <a href={newPath}>{fullUrl}</a>…</p>
+  <p>Redirecting to <a href={newPath}>{fullUrl}</a>.</p>
 </body>
 </html>

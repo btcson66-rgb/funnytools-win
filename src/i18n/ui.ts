@@ -54,6 +54,7 @@ const ui = {
     toolsCountSuffix: " 個工具",
     footer: {
       about: '關於',
+      aboutTools: '工具說明',
       contact: '聯絡',
       privacy: '隱私權',
       terms: '使用條款',
@@ -81,6 +82,11 @@ const ui = {
       heading: '隱私與本機處理',
       localOnly: '🔒 此工具完全在您的瀏覽器本機執行，不會將任何資料上傳到伺服器。',
       defaultNote: '這個工具主要在你的瀏覽器中執行。你輸入的內容不會送到 Free Tools Hub 的伺服器。',
+    },
+    trust: {
+      heading: '信任與使用提醒',
+      general: '本工具主要在你的瀏覽器中執行，輸入內容不會主動上傳到伺服器。請避免輸入高度敏感資料。計算結果僅供參考。',
+      financial: '本工具僅供估算，實際金額仍應以政府公告、公司薪資單、銀行條件或專業意見為準。',
     },
     monetization: {
       affiliateHeading: '推薦資源',
@@ -118,6 +124,9 @@ const ui = {
     sections: {
       howToUse: '如何使用',
       useCases: '適合用途',
+      toolArea: '工具互動區',
+      realExamples: '實際案例',
+      disclaimer: '免責聲明',
     },
     homeWhy: [
       '免費使用，不需要註冊帳號。',
@@ -179,6 +188,7 @@ const ui = {
     toolsCountSuffix: " tools",
     footer: {
       about: 'About',
+      aboutTools: 'How tools work',
       contact: 'Contact',
       privacy: 'Privacy',
       terms: 'Terms',
@@ -206,6 +216,11 @@ const ui = {
       heading: 'Privacy & local processing',
       localOnly: '🔒 This tool runs entirely in your browser. No data is uploaded to any server.',
       defaultNote: 'This tool runs mainly in your browser. The content you enter is not sent to Free Tools Hub servers.',
+    },
+    trust: {
+      heading: 'Trust & usage note',
+      general: 'This tool runs mainly in your browser. Your input is not actively uploaded to a server. Avoid entering highly sensitive data. Results are for reference only.',
+      financial: 'This tool is for estimates only. Actual amounts should be confirmed with official government notices, company payslips, bank terms, or qualified professional advice.',
     },
     monetization: {
       affiliateHeading: 'Recommended resources',
@@ -243,6 +258,9 @@ const ui = {
     sections: {
       howToUse: 'How to use',
       useCases: 'Use cases',
+      toolArea: 'Tool area',
+      realExamples: 'Real examples',
+      disclaimer: 'Disclaimer',
     },
     homeWhy: [
       'Free to use, with no account required.',
