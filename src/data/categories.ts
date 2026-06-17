@@ -63,12 +63,12 @@ export const categories: Category[] = [
     },
   },
   {
-    id: 'fun',
-    icon: '🎭',
-    name: { zh: '趣味測驗', en: 'Personality & Fun' },
+    id: 'draw',
+    icon: '✏️',
+    name: { zh: '製圖工具', en: 'Drawing & CAD' },
     description: {
-      zh: '收集輕量的性格、壓力與趣味測驗，適合朋友與社群互動。',
-      en: 'Lightweight quizzes and playful tests for sharing, reflection, and social moments.',
+      zh: '在瀏覽器本機進行簡易 2D 製圖、手繪與流程圖，無需安裝 CAD 軟體。',
+      en: 'Simple 2D drafting, sketching, and diagrams right in your browser — no CAD software to install.',
     },
   },
   {

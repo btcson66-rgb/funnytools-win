@@ -96,11 +96,14 @@ const { labels } = Astro.props;
           results.push(Math.floor(Math.random() * rangeSize) + min);
         }
       } else {
-        const pool = Array.from({ length: rangeSize }, (_, index) => min + index);
-        for (let index = 0; index < count; index += 1) {
-          const pickedIndex = Math.floor(Math.random() * pool.length);
-          results.push(pool[pickedIndex]);
-          pool.splice(pickedIndex, 1);
+        // Sample distinct values via a Set so a huge range never materializes
+        // a giant array (count <= rangeSize is already guaranteed above).
+        const chosen = new Set();
+        while (chosen.size < count) {
+          chosen.add(Math.floor(Math.random() * rangeSize) + min);
+        }
+        for (const value of chosen) {
+          results.push(value);
         }
       }
 

@@ -95,7 +95,7 @@ const { labels } = Astro.props;
       const amount = Number(amountInput.value);
       const rate = Number(rateInput.value) / 100;
       const years = Number(yearsInput.value);
-      if (![amount, rate, years].every(Number.isFinite) || years < 0) {
+      if (![amount, rate, years].every(Number.isFinite) || years < 0 || rate <= -1) {
         setError(labels.invalidInput);
         return;
       }

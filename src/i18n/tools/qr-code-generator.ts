@@ -62,6 +62,7 @@ export default {
       emptyError: '請輸入要產生 QR Code 的內容。',
       renderError: 'QR Code 產生失敗，請縮短內容或調整設定。',
       copied: '已複製圖片',
+      canvasAlt: 'QR Code 預覽',
     },
   },
   en: {
@@ -112,6 +113,7 @@ export default {
       emptyError: 'Enter content to generate a QR code.',
       renderError: 'Could not generate the QR code. Try shorter content or different settings.',
       copied: 'Image copied',
+      canvasAlt: 'QR code preview',
     },
   },
 } satisfies Record<'zh' | 'en', ToolContent>;

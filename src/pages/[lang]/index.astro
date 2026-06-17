@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ToolCard from '../../components/ToolCard.astro';
 import { SITE, type Locale } from '../../config/site';
 import { categories } from '../../data/categories';
 import { getToolsByCategory, liveTools } from '../../data/tools';
@@ -19,12 +18,19 @@ export function getStaticPaths() {
 const { lang } = Astro.props as { lang: Locale };
 const copy = home[lang];
 const ui = t(lang);
-const featured = liveTools.filter((tool) => tool.featured);
-const newest = liveTools.filter((tool) => tool.isNew);
 const categorySummaries = categories.map((category) => ({
   category,
   count: getToolsByCategory(category.id).length,
 }));
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeFaq[lang].map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
 ---
 
 <BaseLayout
@@ -32,7 +38,7 @@ const categorySummaries = categories.map((category) => ({
   title={copy.seoTitle}
   description={copy.seoDescription}
   alternateSegments={[]}
-  jsonLd={websiteJsonLd(lang)}
+  jsonLd={[websiteJsonLd(lang), faqJsonLd]}
 >
   <section class="hero wrap">
     <p class="eyebrow">{copy.eyebrow}</p>
@@ -52,20 +58,6 @@ const categorySummaries = categories.map((category) => ({
         <span>{ui.heroStats.categoriesLabel}</span>
       </span>
       <span class="stat-chip text-only">{ui.heroStats.noSignup}</span>
-    </div>
-  </section>
-
-  <section class="wrap content-section">
-    <h2>{ui.popularTools}</h2>
-    <div class="grid">
-      {featured.map((tool) => <ToolCard lang={lang} tool={tool} />)}
-    </div>
-  </section>
-
-  <section class="wrap content-section">
-    <h2>{ui.newest}</h2>
-    <div class="grid">
-      {newest.map((tool) => <ToolCard lang={lang} tool={tool} />)}
     </div>
   </section>
 

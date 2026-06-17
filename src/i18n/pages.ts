@@ -9,20 +9,20 @@ export interface InfoPageContent {
 
 export const home = {
   zh: {
-    seoTitle: "免費工具箱｜免費線上工具大全（薪資 / 貸款 / 計時 / 文字 / 測驗）",
-    seoDescription: "45+ 種免費線上工具：薪資加班費試算、貸款與複利、番茄鐘與倒數、字數統計、隨機抽選與趣味測驗。免安裝、免註冊，手機與電腦都能用。",
+    seoTitle: "免費工具箱｜免費線上工具大全（薪資 / 貸款 / 計時 / 文字 / 製圖）",
+    seoDescription: "40+ 種免費線上工具：薪資加班費試算、貸款與複利、番茄鐘與倒數、字數統計、隨機抽選與製圖工具。免安裝、免註冊，手機與電腦都能用。",
     eyebrow: '免安裝的線上小工具',
     title: '免費工具箱',
-    intro: "把薪資、貸款、計時、文字、隨機抽選與趣味測驗等日常工具整理在同一個地方，全部免費、免安裝、免註冊，打開網頁就能用。",
+    intro: "把薪資、貸款、計時、文字、隨機抽選與製圖等日常工具整理在同一個地方，全部免費、免安裝、免註冊，打開網頁就能用。",
     primaryCta: '查看全部工具',
     secondaryCta: '瀏覽分類',
   },
   en: {
-    seoTitle: "Free Tools Hub | 45+ free online tools (salary, loans, timers, text)",
-    seoDescription: "45+ free browser tools: salary & overtime, loan & compound interest, Pomodoro & countdown, word counter, random pickers, and quizzes. No install, no sign-up, works on mobile and desktop.",
+    seoTitle: "Free Tools Hub | 40+ free online tools (salary, loans, timers, text, drawing)",
+    seoDescription: "40+ free browser tools: salary & overtime, loan & compound interest, Pomodoro & countdown, word counter, random pickers, and drawing tools. No install, no sign-up, works on mobile and desktop.",
     eyebrow: 'No-install browser tools',
     title: 'Free Tools Hub',
-    intro: "Everyday tools for salary, loans, timing, text, random picks, and quizzes — all in one place. Free, no install, no sign-up. Just open the page and go.",
+    intro: "Everyday tools for salary, loans, timing, text, random picks, and drawing — all in one place. Free, no install, no sign-up. Just open the page and go.",
     primaryCta: 'View all tools',
     secondaryCta: 'Browse categories',
   },
@@ -40,7 +40,7 @@ export const homeFaq = {
     },
     {
       q: '網站會繼續新增工具嗎？',
-      a: '會。網站會持續新增工具，新上線的工具會標記在首頁的最新區塊中。',
+      a: '會。網站會持續新增工具，新上線的工具會出現在全部工具與對應分類頁中。',
     },
   ],
   en: [
@@ -54,7 +54,7 @@ export const homeFaq = {
     },
     {
       q: 'Will more tools be added?',
-      a: 'Yes. New tools are added over time, and recently released tools appear in the newest section on the home page.',
+      a: 'Yes. New tools are added over time and appear in All tools and their matching category pages.',
     },
   ],
 } satisfies Record<Locale, { q: string; a: string }[]>;
@@ -67,7 +67,7 @@ export const pages = {
       description: '了解免費工具箱的定位、工具原則，以及目前涵蓋的工具分類。',
       body: [
         "免費工具箱（Free Tools Hub）是一個免費、免安裝、免註冊的線上工具網站，把工作、學習、金錢與日常生活常用的小工具整理在乾淨、好讀、手機友善的頁面中。",
-        "目前已上線超過 40 種工具，涵蓋薪資與金錢、工作與時間、隨機工具、文字與寫作、圖片與檔案、趣味測驗、學生與老師等分類，並會持續新增。",
+        "目前已上線超過 40 種工具，涵蓋薪資與金錢、工作與時間、隨機工具、文字與寫作、圖片與檔案、製圖工具、學生與老師等分類，並會持續新增。",
         "大多數工具直接在你的瀏覽器本機執行，不需要建立帳號，也不會把你輸入的內容上傳到伺服器。我們的目標是讓工具好上手、載入快、不打擾。",
         `如果你有工具建議或想回報問題，歡迎來信 ${SITE.email}。`,
       ],
@@ -122,8 +122,7 @@ export const pages = {
         "生效日期：2026 年 6 月 16 日。本站提供的所有結果僅供一般參考，使用前請自行判斷並驗證。",
         "非專業建議：本站不提供法律、醫療、投資、稅務、會計或其他專業建議。",
         "財務 / 薪資 / 貸款類工具：薪資、加班費、貸款、複利、稅務等計算採用你輸入的參數與一般公式，結果為概估，可能因法規調整、實際條件或四捨五入而與官方或金融機構之計算不同；正式金額請以主管機關公告或專業人士意見為準。",
-        "健康類工具：BMI、壓力測驗等僅供自我參考，並非醫療診斷工具，不能取代醫師或專業人員的評估。",
-        "趣味測驗：性格與趣味測驗僅供娛樂與自我探索，不具科學或臨床效力。",
+        "健康類工具：相關結果僅供自我參考，並非醫療診斷工具，不能取代醫師或專業人員的評估。",
         "隨機工具：隨機抽選結果不應用於法律上具拘束力之抽獎、博弈或其他須符合特定法規的用途。",
         "責任歸屬：你依本站工具結果所做的任何決策與後續行動，皆由你自行負責。",
       ],
@@ -136,7 +135,7 @@ export const pages = {
       description: 'Learn what Free Tools Hub is, how it is built, and the tool categories it covers.',
       body: [
         "Free Tools Hub is a free, no-install, no-sign-up website that gathers everyday tools for work, study, money, and daily life into clean, readable, mobile-friendly pages.",
-        "More than 40 tools are live, spanning Money & Salary, Work & Time, Random, Text & Writing, Image & File, Personality & Fun, and Student & Teacher, with more added over time.",
+        "More than 40 tools are live, spanning Money & Salary, Work & Time, Random, Text & Writing, Image & File, Drawing & CAD, and Student & Teacher, with more added over time.",
         "Most tools run locally in your browser, require no account, and do not upload what you enter to a server. The goal is tools that are easy to use, fast to load, and free of clutter.",
         `For tool suggestions or bug reports, email ${SITE.email}.`,
       ],
@@ -191,8 +190,7 @@ export const pages = {
         "Effective date: June 16, 2026. All results from the Site are for general reference only; use your own judgment and verify before relying on them.",
         "Not professional advice: The Site does not provide legal, medical, investment, tax, accounting, or other professional advice.",
         "Financial / salary / loan tools: Salary, overtime, loan, compound-interest, and tax calculations use the parameters you enter and general formulas. Results are estimates and may differ from official or financial-institution figures due to regulatory changes, real conditions, or rounding; rely on official announcements or qualified professionals for binding amounts.",
-        "Health tools: BMI, stress tests, and similar tools are for self-reference only, are not medical diagnostic tools, and do not replace evaluation by a physician or professional.",
-        "Fun quizzes: Personality and fun quizzes are for entertainment and self-reflection only and have no scientific or clinical validity.",
+        "Health tools: Related results are for self-reference only, are not medical diagnostic tools, and do not replace evaluation by a physician or professional.",
         "Random tools: Random results should not be used for legally binding raffles, gambling, or other purposes subject to specific regulations.",
         "Responsibility: Any decisions and follow-up actions you take based on the tools are your own responsibility.",
       ],

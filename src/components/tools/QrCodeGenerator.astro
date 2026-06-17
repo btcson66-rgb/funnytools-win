@@ -32,7 +32,7 @@ const { labels } = Astro.props;
   </div>
   <p class="form-error" data-error role="alert" hidden></p>
   <div class="qr-preview" aria-live="polite">
-    <canvas data-canvas width="256" height="256"></canvas>
+    <canvas data-canvas width="256" height="256" role="img" aria-label={labels.canvasAlt}></canvas>
   </div>
   <div class="actions">
     <button class="btn go" type="button" data-download>{labels.download}</button>

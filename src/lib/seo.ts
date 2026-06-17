@@ -76,5 +76,5 @@ export function webApplicationJsonLd(
 }
 
 export function defaultOgImage(): string {
-  return absoluteUrl(assetPath('assets', 'og-default.png'));
+  return absoluteUrl(assetPath('assets', 'og-default.jpg'));
 }

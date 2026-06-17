@@ -1,0 +1,238 @@
+---
+interface Props {
+  labels: Record<string, string>;
+}
+
+const { labels } = Astro.props;
+---
+
+<section class="tool-widget card sketchpad-tool" data-sketchpad-tool data-labels={JSON.stringify(labels)}>
+  <p class="note">{labels.localNote}</p>
+  <div class="sketch-controls">
+    <label>
+      <span>{labels.color}</span>
+      <input data-color type="color" value="#18212f" />
+    </label>
+    <label>
+      <span>{labels.brushSize}</span>
+      <span class="range-row">
+        <input data-size type="range" min="1" max="48" value="8" />
+        <output data-size-output>8 {labels.pixels}</output>
+      </span>
+    </label>
+    <label class="check">
+      <input data-eraser type="checkbox" />
+      <span>{labels.eraser}</span>
+    </label>
+  </div>
+
+  <div class="sketch-canvas-wrap">
+    <canvas data-canvas width="960" height="560" aria-label={labels.canvasLabel}></canvas>
+  </div>
+
+  <div class="actions">
+    <button class="btn ghost" type="button" data-undo disabled>{labels.undo}</button>
+    <button class="btn" type="button" data-clear>{labels.clear}</button>
+    <button class="btn go" type="button" data-download>{labels.exportPng}</button>
+  </div>
+</section>
+
+<style>
+  .sketch-controls {
+    display: grid;
+    grid-template-columns: minmax(120px, 160px) 1fr auto;
+    gap: 14px;
+    align-items: end;
+    margin-bottom: 16px;
+  }
+
+  .range-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(54px, auto);
+    gap: 10px;
+    align-items: center;
+  }
+
+  input[type="color"] {
+    min-height: 48px;
+    padding: 4px;
+  }
+
+  input[type="range"] {
+    padding: 0;
+  }
+
+  output {
+    color: var(--ink);
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sketch-canvas-wrap {
+    margin: 16px 0;
+    padding: 10px;
+    border: 1px solid #cfe6e3;
+    border-radius: 8px;
+    background: #f2fbfa;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    touch-action: none;
+  }
+
+  @media (max-width: 760px) {
+    .sketch-controls {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-sketchpad-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const canvas = root.querySelector('[data-canvas]');
+    if (!(canvas instanceof HTMLCanvasElement)) return;
+    const context = canvas.getContext('2d');
+    if (!context) return;
+
+    const colorInput = root.querySelector('[data-color]');
+    const sizeInput = root.querySelector('[data-size]');
+    const sizeOutput = root.querySelector('[data-size-output]');
+    const eraserInput = root.querySelector('[data-eraser]');
+    const undoButton = root.querySelector('[data-undo]');
+    let drawing = false;
+    let latestPoint = null;
+    const history = [];
+
+    function fillWhite() {
+      context.save();
+      context.globalCompositeOperation = 'source-over';
+      context.fillStyle = '#ffffff';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.restore();
+    }
+
+    function pushHistory() {
+      history.push(canvas.toDataURL('image/png'));
+      if (history.length > 30) history.shift();
+      undoButton.disabled = history.length <= 1;
+    }
+
+    function restore(dataUrl) {
+      const image = new Image();
+      image.onload = () => {
+        fillWhite();
+        context.drawImage(image, 0, 0);
+      };
+      image.src = dataUrl;
+    }
+
+    function pointFor(event) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: ((event.clientX - rect.left) * canvas.width) / rect.width,
+        y: ((event.clientY - rect.top) * canvas.height) / rect.height,
+      };
+    }
+
+    function brushSize() {
+      return Math.max(1, Number(sizeInput.value) || 1);
+    }
+
+    function strokeStyle() {
+      return eraserInput.checked ? '#ffffff' : colorInput.value;
+    }
+
+    function drawDot(point) {
+      const radius = brushSize() / 2;
+      context.save();
+      context.fillStyle = strokeStyle();
+      context.beginPath();
+      context.arc(point.x, point.y, radius, 0, Math.PI * 2);
+      context.fill();
+      context.restore();
+    }
+
+    function drawLine(from, to) {
+      context.save();
+      context.strokeStyle = strokeStyle();
+      context.lineWidth = brushSize();
+      context.lineCap = 'round';
+      context.lineJoin = 'round';
+      context.beginPath();
+      context.moveTo(from.x, from.y);
+      context.lineTo(to.x, to.y);
+      context.stroke();
+      context.restore();
+    }
+
+    function startDrawing(event) {
+      event.preventDefault();
+      drawing = true;
+      latestPoint = pointFor(event);
+      canvas.setPointerCapture(event.pointerId);
+      drawDot(latestPoint);
+    }
+
+    function continueDrawing(event) {
+      if (!drawing || !latestPoint) return;
+      event.preventDefault();
+      const nextPoint = pointFor(event);
+      drawLine(latestPoint, nextPoint);
+      latestPoint = nextPoint;
+    }
+
+    function stopDrawing(event) {
+      if (!drawing) return;
+      event.preventDefault();
+      drawing = false;
+      latestPoint = null;
+      pushHistory();
+      try {
+        canvas.releasePointerCapture(event.pointerId);
+      } catch {
+        // Pointer capture may already be released by the browser.
+      }
+    }
+
+    function clearCanvas() {
+      if (!window.confirm(labels.confirmClear)) return;
+      fillWhite();
+      pushHistory();
+    }
+
+    function undo() {
+      if (history.length <= 1) return;
+      history.pop();
+      restore(history[history.length - 1]);
+      undoButton.disabled = history.length <= 1;
+    }
+
+    function download() {
+      const anchor = document.createElement('a');
+      anchor.href = canvas.toDataURL('image/png');
+      anchor.download = 'sketchpad.png';
+      anchor.click();
+    }
+
+    sizeInput.addEventListener('input', () => {
+      sizeOutput.textContent = `${sizeInput.value} ${labels.pixels}`;
+    });
+    canvas.addEventListener('pointerdown', startDrawing);
+    canvas.addEventListener('pointermove', continueDrawing);
+    canvas.addEventListener('pointerup', stopDrawing);
+    canvas.addEventListener('pointercancel', stopDrawing);
+    root.querySelector('[data-clear]')?.addEventListener('click', clearCanvas);
+    root.querySelector('[data-download]')?.addEventListener('click', download);
+    undoButton.addEventListener('click', undo);
+
+    fillWhite();
+    pushHistory();
+  });
+</script>

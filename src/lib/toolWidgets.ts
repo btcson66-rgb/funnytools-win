@@ -2,6 +2,7 @@ import AgeCalculator from '../components/tools/AgeCalculator.astro';
 import Base64Tool from '../components/tools/Base64Tool.astro';
 import BreakReminder from '../components/tools/BreakReminder.astro';
 import BusinessDays from '../components/tools/BusinessDays.astro';
+import Cad2dBoard from '../components/tools/Cad2dBoard.astro';
 import CaseConverter from '../components/tools/CaseConverter.astro';
 import CharacterCounter from '../components/tools/CharacterCounter.astro';
 import ClassGroupGenerator from '../components/tools/ClassGroupGenerator.astro';
@@ -12,6 +13,7 @@ import DateDifference from '../components/tools/DateDifference.astro';
 import DeletePdfPages from '../components/tools/DeletePdfPages.astro';
 import DiceRoller from '../components/tools/DiceRoller.astro';
 import ExtractPdfPages from '../components/tools/ExtractPdfPages.astro';
+import FlowchartMaker from '../components/tools/FlowchartMaker.astro';
 import GpaCalculator from '../components/tools/GpaCalculator.astro';
 import GradeAverage from '../components/tools/GradeAverage.astro';
 import ImageCompressor from '../components/tools/ImageCompressor.astro';
@@ -20,9 +22,7 @@ import ImagesToPdf from '../components/tools/ImagesToPdf.astro';
 import InflationCalculator from '../components/tools/InflationCalculator.astro';
 import JpgToPng from '../components/tools/JpgToPng.astro';
 import JsonFormatter from '../components/tools/JsonFormatter.astro';
-import LoveTypeTest from '../components/tools/LoveTypeTest.astro';
 import MergePdf from '../components/tools/MergePdf.astro';
-import MbtiTest from '../components/tools/MbtiTest.astro';
 import MortgagePayment from '../components/tools/MortgagePayment.astro';
 import NetSalary from '../components/tools/NetSalary.astro';
 import OvertimePay from '../components/tools/OvertimePay.astro';
@@ -40,15 +40,14 @@ import RemoveEmptyLines from '../components/tools/RemoveEmptyLines.astro';
 import RotatePdf from '../components/tools/RotatePdf.astro';
 import SavingsGoal from '../components/tools/SavingsGoal.astro';
 import SeatingChart from '../components/tools/SeatingChart.astro';
+import Sketchpad from '../components/tools/Sketchpad.astro';
 import SortLines from '../components/tools/SortLines.astro';
 import SplitPdf from '../components/tools/SplitPdf.astro';
 import Stopwatch from '../components/tools/Stopwatch.astro';
-import StressLevelTest from '../components/tools/StressLevelTest.astro';
 import ThisOrThat from '../components/tools/ThisOrThat.astro';
 import UrlEncoder from '../components/tools/UrlEncoder.astro';
 import WhatToEat from '../components/tools/WhatToEat.astro';
 import WordCounter from '../components/tools/WordCounter.astro';
-import WorkPersonalityTest from '../components/tools/WorkPersonalityTest.astro';
 
 export const widgetBySlug = {
   'random-number-picker': RandomNumberPicker,
@@ -66,10 +65,6 @@ export const widgetBySlug = {
   'remove-duplicate-lines': RemoveDuplicateLines,
   'sort-lines': SortLines,
   'qr-code-generator': QrCodeGenerator,
-  'mbti-test': MbtiTest,
-  'love-type-test': LoveTypeTest,
-  'work-personality-test': WorkPersonalityTest,
-  'stress-level-test': StressLevelTest,
   'password-generator': PasswordGenerator,
   'color-generator': ColorGenerator,
   'dice-roller': DiceRoller,
@@ -100,6 +95,9 @@ export const widgetBySlug = {
   'rotate-pdf': RotatePdf,
   'delete-pdf-pages': DeletePdfPages,
   'extract-pdf-pages': ExtractPdfPages,
+  'cad-2d': Cad2dBoard,
+  sketchpad: Sketchpad,
+  flowchart: FlowchartMaker,
   'seating-chart': SeatingChart,
   'group-generator': ClassGroupGenerator,
 } as const;

@@ -169,6 +169,8 @@ const { labels } = Astro.props;
     });
     root.querySelector('[data-pick]')?.addEventListener('click', pickStudent);
     root.querySelector('[data-reset]')?.addEventListener('click', () => {
+      window.clearInterval(timer);
+      timer = null;
       picked.clear();
       latest = '';
       output.classList.remove('spinning');

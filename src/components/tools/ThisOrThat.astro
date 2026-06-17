@@ -93,6 +93,8 @@ const { labels } = Astro.props;
     }
 
     function reset() {
+      window.clearInterval(timer);
+      timer = null;
       optionA.value = labels.placeholderA;
       optionB.value = labels.placeholderB;
       latest = '';

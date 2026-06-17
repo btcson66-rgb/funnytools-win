@@ -133,6 +133,8 @@ const { labels } = Astro.props;
     }
 
     function reset() {
+      window.clearInterval(shuffleTimer);
+      shuffleTimer = null;
       customInput.value = '';
       categoryGrid.querySelectorAll('[data-category]').forEach((input) => {
         input.checked = true;

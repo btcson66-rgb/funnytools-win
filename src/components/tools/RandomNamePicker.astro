@@ -132,6 +132,8 @@ const { labels } = Astro.props;
     root.querySelector('[data-pick-one]')?.addEventListener('click', () => pick(1));
     root.querySelector('[data-pick-many]')?.addEventListener('click', () => pick(Number(countInput.value)));
     root.querySelector('[data-reset]')?.addEventListener('click', () => {
+      window.clearInterval(spinTimer);
+      spinTimer = null;
       textarea.value = '';
       countInput.value = '2';
       removeInput.checked = true;

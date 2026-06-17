@@ -18,7 +18,7 @@ const year = new Date().getFullYear();
       <strong>{SITE.name[lang]}</strong>
       <span>{SITE.tagline[lang]}</span>
     </p>
-    <nav aria-label="Footer">
+    <nav aria-label={ui.ariaFooterNav}>
       <a href={localePath(lang, 'about')}>{ui.footer.about}</a>
       <a href={localePath(lang, 'contact')}>{ui.footer.contact}</a>
       <a href={localePath(lang, 'privacy')}>{ui.footer.privacy}</a>

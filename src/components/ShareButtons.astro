@@ -17,7 +17,7 @@ const encodedTitle = encodeURIComponent(title);
 <section class="share-row" data-share-buttons>
   <h2>{ui.buttons.share}</h2>
   <div class="share-actions">
-    <button class="btn" type="button" data-copy-url={url}>{ui.share.copyLink}</button>
+    <button class="btn" type="button" data-copy-url={url} data-copy-label={ui.share.copyLink}>{ui.share.copyLink}</button>
     <a class="btn ghost" href={`https://social-plugins.line.me/lineit/share?url=${encodedUrl}`} target="_blank" rel="noopener noreferrer">{ui.share.line}</a>
     <a class="btn ghost" href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`} target="_blank" rel="noopener noreferrer">{ui.share.facebook}</a>
     <a class="btn ghost" href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noopener noreferrer">{ui.share.x}</a>
@@ -40,7 +40,7 @@ const encodedTitle = encodeURIComponent(title);
           toast.hidden = true;
         }, 1600);
       } catch {
-        window.prompt('Copy link', value);
+        window.prompt(button.getAttribute('data-copy-label') || 'Copy link', value);
       }
     });
   });

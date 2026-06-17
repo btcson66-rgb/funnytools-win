@@ -3,8 +3,9 @@ import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import Nav from '../components/Nav.astro';
 import { SITE, type Locale } from '../config/site';
-import { absoluteUrl, localePath } from '../lib/url';
+import { absoluteUrl, assetPath, localePath } from '../lib/url';
 import { buildHreflang, defaultOgImage } from '../lib/seo';
+import { t } from '../i18n/ui';
 
 interface Props {
   lang: Locale;
@@ -29,6 +30,7 @@ const hreflangs = buildHreflang(alternateSegments);
 const jsonLdItems = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
 const ogLocale = lang === 'zh' ? 'zh_TW' : 'en_US';
 const ogImage = defaultOgImage();
+const ui = t(lang);
 ---
 
 <!doctype html>
@@ -36,6 +38,9 @@ const ogImage = defaultOgImage();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={assetPath('favicon.svg')} />
+    <link rel="apple-touch-icon" href={assetPath('favicon.svg')} />
+    <meta name="theme-color" content="#2563eb" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -45,12 +50,16 @@ const ogImage = defaultOgImage();
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={SITE.name[lang]} />
     <meta property="og:site_name" content={SITE.name[lang]} />
     <meta property="og:locale" content={ogLocale} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={SITE.name[lang]} />
     {jsonLdItems.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
     {
       (SITE.adsenseEnabled || SITE.features.adsense) && (
@@ -63,7 +72,7 @@ const ogImage = defaultOgImage();
     }
   </head>
   <body>
-    <a class="skip-link" href="#content">Skip to content</a>
+    <a class="skip-link" href="#content">{ui.skipToContent}</a>
     <Nav lang={lang} segments={alternateSegments} />
     <main id="content" class="site-main">
       <slot />

@@ -30,7 +30,7 @@ const { labels } = Astro.props;
     </label>
     <label>
       <span>{labels.pensionRate}</span>
-      <input data-pension-rate type="number" min="0" step="0.1" value="6" />
+      <input data-pension-rate type="number" min="0" step="0.1" value="0" />
     </label>
     <label>
       <span>{labels.taxRate}</span>
@@ -144,7 +144,7 @@ const { labels } = Astro.props;
       inputs.other.value = '0';
       inputs.laborRate.value = '2.4';
       inputs.healthRate.value = '1.55';
-      inputs.pensionRate.value = '6';
+      inputs.pensionRate.value = '0';
       inputs.taxRate.value = '5';
       calculate();
     }

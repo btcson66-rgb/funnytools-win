@@ -210,7 +210,7 @@ const { labels } = Astro.props;
         if (!match) throw new Error(labels.invalidRange);
         const rawStart = Number(match[1]);
         const rawEnd = match[2] ? Number(match[2]) : rawStart;
-        if (rawStart < 1 || rawEnd < 1 || rawStart > rawEnd) throw new Error(labels.invalidRange);
+        if (rawStart < 1 || rawEnd < 1 || rawStart > rawEnd || rawEnd > total) throw new Error(labels.invalidRange);
         const start = clamp(rawStart, 1, total);
         const end = clamp(rawEnd, 1, total);
         const group = [];

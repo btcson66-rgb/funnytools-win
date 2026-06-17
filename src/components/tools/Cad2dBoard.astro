@@ -1,0 +1,1566 @@
+---
+interface Props {
+  labels: Record<string, string>;
+}
+
+const { labels } = Astro.props;
+---
+
+<section class="tool-widget card cad-tool" data-cad-2d-tool data-labels={JSON.stringify(labels)}>
+  <div class="cad-toolbar" role="toolbar" aria-label={labels.toolbar}>
+    <button class="btn ghost is-active" type="button" data-tool="select">{labels.select}</button>
+    <button class="btn ghost" type="button" data-tool="line">{labels.line}</button>
+    <button class="btn ghost" type="button" data-tool="rectangle">{labels.rectangle}</button>
+    <button class="btn ghost" type="button" data-tool="circle">{labels.circle}</button>
+    <button class="btn ghost" type="button" data-tool="polyline">{labels.polyline}</button>
+    <button class="btn ghost" type="button" data-tool="connect">{labels.connect}</button>
+    <label class="check snap-toggle">
+      <input data-snap type="checkbox" checked />
+      <span>{labels.snapToGrid}</span>
+    </label>
+    <label class="check snap-toggle">
+      <input data-endpoint-snap type="checkbox" checked />
+      <span>{labels.endpointSnap}</span>
+    </label>
+    <label class="check snap-toggle">
+      <input data-ortho type="checkbox" />
+      <span>{labels.ortho}</span>
+    </label>
+  </div>
+
+  <div class="cad-toolbar secondary">
+    <button class="btn ghost" type="button" data-undo disabled>{labels.undo}</button>
+    <button class="btn ghost" type="button" data-redo disabled>{labels.redo}</button>
+    <button class="btn ghost" type="button" data-delete disabled>{labels.deleteSelected}</button>
+    <button class="btn" type="button" data-clear>{labels.clearAll}</button>
+    <button class="btn" type="button" data-finish disabled>{labels.finishPolyline}</button>
+    <button class="btn go" type="button" data-export-png>{labels.exportPng}</button>
+    <button class="btn go" type="button" data-export-svg>{labels.exportSvg}</button>
+  </div>
+
+  <p class="note">{labels.help}</p>
+
+  <div class="cad-canvas-wrap">
+    <canvas data-canvas aria-label={labels.canvasLabel}></canvas>
+    <div class="dynamic-input" data-dynamic-input hidden>
+      <div class="dynamic-fields">
+        <label data-dyn-primary-row>
+          <span data-dyn-primary-label>{labels.dynLength}</span>
+          <span class="dynamic-field">
+            <input data-dyn-length type="number" inputmode="decimal" min="0" step="0.01" aria-label={labels.dynLength} />
+            <span data-dyn-primary-unit>{labels.dynLengthUnit}</span>
+          </span>
+        </label>
+        <label data-dyn-secondary-row>
+          <span data-dyn-secondary-label>{labels.dynAngle}</span>
+          <span class="dynamic-field">
+            <input data-dyn-angle type="number" inputmode="decimal" step="0.01" aria-label={labels.dynAngle} />
+            <span data-dyn-secondary-unit>{labels.dynAngleUnit}</span>
+          </span>
+        </label>
+      </div>
+      <p data-dyn-hint>{labels.dynHint}</p>
+    </div>
+  </div>
+
+  <div class="cad-status" aria-live="polite">
+    <span><strong>{labels.currentTool}</strong>: <output data-tool-status>{labels.select}</output></span>
+    <span><strong>{labels.coordinates}</strong>: <output data-coordinates>0, 0</output></span>
+    <span><strong>{labels.length}</strong>: <output data-length>{labels.noLength}</output></span>
+    <span data-selection>{labels.noSelection}</span>
+  </div>
+</section>
+
+<style>
+  .cad-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .cad-toolbar.secondary {
+    margin-bottom: 14px;
+  }
+
+  .cad-toolbar .is-active {
+    border-color: rgba(15, 143, 140, 0.42);
+    background: #eef8f7;
+    color: #08736f;
+  }
+
+  .snap-toggle {
+    min-height: 44px;
+    padding: 0 4px;
+  }
+
+  .cad-canvas-wrap {
+    position: relative;
+    padding: 10px;
+    border: 1px solid #cfe6e3;
+    border-radius: 8px;
+    background: #f2fbfa;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: clamp(360px, 58vw, 620px);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff;
+    touch-action: none;
+  }
+
+  .cad-status {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-weight: 800;
+  }
+
+  .cad-status span {
+    min-width: 0;
+    padding: 9px 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fbfcff;
+    overflow-wrap: anywhere;
+  }
+
+  .cad-status strong,
+  .cad-status output {
+    color: var(--ink);
+  }
+
+  .dynamic-input {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 3;
+    width: min(280px, calc(100% - 20px));
+    padding: 10px;
+    border: 1px solid rgba(15, 143, 140, 0.28);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: var(--shadow-soft);
+    pointer-events: none;
+  }
+
+  .dynamic-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .dynamic-input[data-mode="circle"] .dynamic-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .dynamic-input label {
+    gap: 4px;
+    font-size: 0.78rem;
+    pointer-events: auto;
+  }
+
+  .dynamic-field {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 5px;
+    align-items: center;
+    color: var(--muted);
+    font-weight: 900;
+  }
+
+  .dynamic-field input {
+    min-height: 34px;
+    border-radius: 8px;
+    padding: 6px 8px;
+    pointer-events: auto;
+  }
+
+  .dynamic-input p {
+    margin: 7px 0 0;
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  @media (max-width: 760px) {
+    canvas {
+      height: 380px;
+    }
+
+    .cad-status {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-cad-2d-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const canvas = root.querySelector('[data-canvas]');
+    if (!(canvas instanceof HTMLCanvasElement)) return;
+    const context = canvas.getContext('2d');
+    if (!context) return;
+
+    const toolButtons = Array.from(root.querySelectorAll('[data-tool]'));
+    const snapInput = root.querySelector('[data-snap]');
+    const endpointSnapInput = root.querySelector('[data-endpoint-snap]');
+    const orthoInput = root.querySelector('[data-ortho]');
+    const undoButton = root.querySelector('[data-undo]');
+    const redoButton = root.querySelector('[data-redo]');
+    const deleteButton = root.querySelector('[data-delete]');
+    const finishButton = root.querySelector('[data-finish]');
+    const toolStatus = root.querySelector('[data-tool-status]');
+    const coordinatesStatus = root.querySelector('[data-coordinates]');
+    const lengthStatus = root.querySelector('[data-length]');
+    const selectionStatus = root.querySelector('[data-selection]');
+    const dynamicInput = root.querySelector('[data-dynamic-input]');
+    const dynamicLengthInput = root.querySelector('[data-dyn-length]');
+    const dynamicAngleInput = root.querySelector('[data-dyn-angle]');
+    const dynamicPrimaryLabel = root.querySelector('[data-dyn-primary-label]');
+    const dynamicPrimaryUnit = root.querySelector('[data-dyn-primary-unit]');
+    const dynamicSecondaryRow = root.querySelector('[data-dyn-secondary-row]');
+    const dynamicSecondaryLabel = root.querySelector('[data-dyn-secondary-label]');
+    const dynamicSecondaryUnit = root.querySelector('[data-dyn-secondary-unit]');
+    const dynamicHint = root.querySelector('[data-dyn-hint]');
+    const gridStep = 20;
+    const strokeColor = '#0f8f8c';
+    const selectedColor = '#f26b4f';
+    const draftColor = '#3e63dd';
+    const shapeLabels = {
+      line: labels.line,
+      rectangle: labels.rectangle,
+      circle: labels.circle,
+      polyline: labels.polyline,
+      connect: labels.connectMode,
+    };
+
+    let tool = 'select';
+    let shapes = [];
+    let connections = [];
+    let selectedId = '';
+    let draft = null;
+    let draftJoinTargets = {};
+    let cursor = { x: 0, y: 0 };
+    let view = { x: -80, y: -60, scale: 1 };
+    let canvasWidth = 900;
+    let canvasHeight = 520;
+    let pixelRatio = 1;
+    let nextId = 1;
+    let history = [{ shapes: [], connections: [] }];
+    let historyIndex = 0;
+    let pointerMode = null;
+    let panStart = null;
+    let moveState = null;
+    let spacePressed = false;
+    let rawCursor = { x: 0, y: 0 };
+    let osnapTarget = null;
+    let connectPendingRef = null;
+    let statusHint = '';
+
+    function cloneShapes(items) {
+      return JSON.parse(JSON.stringify(items));
+    }
+
+    function cloneShape(shape) {
+      return JSON.parse(JSON.stringify(shape));
+    }
+
+    function cloneConnections(items) {
+      return JSON.parse(JSON.stringify(items));
+    }
+
+    function snapshot() {
+      return {
+        shapes: cloneShapes(shapes),
+        connections: cloneConnections(connections),
+      };
+    }
+
+    function restoreSnapshot(nextSnapshot) {
+      shapes = cloneShapes(nextSnapshot.shapes || []);
+      connections = cloneConnections(nextSnapshot.connections || []);
+    }
+
+    function setTool(nextTool) {
+      tool = nextTool;
+      draft = null;
+      draftJoinTargets = {};
+      pointerMode = null;
+      osnapTarget = null;
+      connectPendingRef = null;
+      statusHint = tool === 'connect' ? labels.connectPickFirst : '';
+      hideDynamicInput();
+      toolButtons.forEach((button) => {
+        button.classList.toggle('is-active', button.getAttribute('data-tool') === tool);
+      });
+      updateStatus();
+      render();
+    }
+
+    function pushHistory() {
+      history = history.slice(0, historyIndex + 1);
+      history.push(snapshot());
+      historyIndex = history.length - 1;
+      updateButtons();
+    }
+
+    function restoreHistory() {
+      restoreSnapshot(history[historyIndex] || { shapes: [], connections: [] });
+      selectedId = '';
+      draft = null;
+      draftJoinTargets = {};
+      osnapTarget = null;
+      connectPendingRef = null;
+      statusHint = '';
+      hideDynamicInput();
+      updateButtons();
+      updateStatus();
+      render();
+    }
+
+    function updateButtons() {
+      undoButton.disabled = historyIndex <= 0;
+      redoButton.disabled = historyIndex >= history.length - 1;
+      deleteButton.disabled = !selectedId;
+      finishButton.disabled = !(draft && draft.type === 'polyline' && draft.points.length > 1);
+    }
+
+    function snapPoint(point) {
+      if (!snapInput.checked) return point;
+      return {
+        x: Math.round(point.x / gridStep) * gridStep,
+        y: Math.round(point.y / gridStep) * gridStep,
+      };
+    }
+
+    function refKey(ref) {
+      return `${ref.shapeId}:${ref.key}`;
+    }
+
+    function sameRef(a, b) {
+      return Boolean(a && b && a.shapeId === b.shapeId && a.key === b.key);
+    }
+
+    function uniqueRefs(refs) {
+      const seen = new Set();
+      return refs.filter((ref) => {
+        const key = refKey(ref);
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    }
+
+    function shapeById(shapeId) {
+      return shapes.find((shape) => shape.id === shapeId);
+    }
+
+    function getConnectableRefs(shape) {
+      if (!shape) return [];
+      if (shape.type === 'line') {
+        return [
+          { shapeId: shape.id, key: 'p1' },
+          { shapeId: shape.id, key: 'p2' },
+        ];
+      }
+      if (shape.type === 'polyline') {
+        return shape.points.map((_, index) => ({ shapeId: shape.id, key: `pt:${index}` }));
+      }
+      return [];
+    }
+
+    function getVertex(ref) {
+      const shape = shapeById(ref.shapeId);
+      if (!shape) return null;
+      if (shape.type === 'line') {
+        if (ref.key === 'p1') return shape.p1;
+        if (ref.key === 'p2') return shape.p2;
+      }
+      if (shape.type === 'polyline' && ref.key.startsWith('pt:')) {
+        const index = Number(ref.key.slice(3));
+        return shape.points[index] || null;
+      }
+      return null;
+    }
+
+    function setVertex(ref, x, y) {
+      const shape = shapeById(ref.shapeId);
+      if (!shape) return;
+      if (shape.type === 'line') {
+        if (ref.key === 'p1') shape.p1 = { x, y };
+        if (ref.key === 'p2') shape.p2 = { x, y };
+      } else if (shape.type === 'polyline' && ref.key.startsWith('pt:')) {
+        const index = Number(ref.key.slice(3));
+        if (shape.points[index]) shape.points[index] = { x, y };
+      }
+    }
+
+    function connectionIndexFor(ref) {
+      return connections.findIndex((group) => group.some((item) => sameRef(item, ref)));
+    }
+
+    function refsAreConnected(ref) {
+      return connectionIndexFor(ref) >= 0;
+    }
+
+    function pruneConnections() {
+      connections = connections.map(uniqueRefs).filter((group) => group.length >= 2);
+    }
+
+    function addConnection(refA, refB) {
+      if (!refA || !refB || sameRef(refA, refB)) return;
+      const indexA = connectionIndexFor(refA);
+      const indexB = connectionIndexFor(refB);
+      if (indexA < 0 && indexB < 0) {
+        connections.push(uniqueRefs([refA, refB]));
+      } else if (indexA >= 0 && indexB < 0) {
+        connections[indexA] = uniqueRefs(connections[indexA].concat([refB]));
+      } else if (indexA < 0 && indexB >= 0) {
+        connections[indexB] = uniqueRefs(connections[indexB].concat([refA]));
+      } else if (indexA !== indexB) {
+        const keep = Math.min(indexA, indexB);
+        const remove = Math.max(indexA, indexB);
+        connections[keep] = uniqueRefs(connections[keep].concat(connections[remove]));
+        connections.splice(remove, 1);
+      }
+      pruneConnections();
+    }
+
+    function detachVertex(ref) {
+      connections = connections
+        .map((group) => group.filter((item) => !sameRef(item, ref)))
+        .filter((group) => group.length >= 2);
+    }
+
+    function removeShapeConnections(shapeId) {
+      connections = connections
+        .map((group) => group.filter((ref) => ref.shapeId !== shapeId))
+        .filter((group) => group.length >= 2);
+    }
+
+    function moveVertex(ref, x, y) {
+      setVertex(ref, x, y);
+      const groupIndex = connectionIndexFor(ref);
+      if (groupIndex < 0) return;
+      connections[groupIndex].forEach((item) => {
+        if (!sameRef(item, ref)) setVertex(item, x, y);
+      });
+    }
+
+    function translateWholeShape(shapeId, dx, dy) {
+      const shape = shapeById(shapeId);
+      if (!shape) return;
+      if (shape.type === 'rectangle' || shape.type === 'circle') {
+        const index = shapes.findIndex((item) => item.id === shapeId);
+        if (index >= 0) shapes[index] = translateShape(shape, dx, dy);
+        return;
+      }
+
+      const refsWithPositions = getConnectableRefs(shape)
+        .map((ref) => ({ ref, point: getVertex(ref) }))
+        .filter(({ point }) => Boolean(point))
+        .map(({ ref, point }) => ({ ref, point: { x: point.x, y: point.y } }));
+      refsWithPositions.forEach(({ ref, point }) => {
+        moveVertex(ref, point.x + dx, point.y + dy);
+      });
+    }
+
+    function rawCanvasPoint(event) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: event.clientX - rect.left,
+        y: event.clientY - rect.top,
+      };
+    }
+
+    function screenToWorld(event) {
+      const point = rawCanvasPoint(event);
+      return {
+        x: view.x + point.x / view.scale,
+        y: view.y + point.y / view.scale,
+      };
+    }
+
+    function worldToScreen(point) {
+      return {
+        x: (point.x - view.x) * view.scale,
+        y: (point.y - view.y) * view.scale,
+      };
+    }
+
+    function isInputTarget(target) {
+      return target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement;
+    }
+
+    function isDynamicDraft() {
+      return draft && ['line', 'polyline', 'rectangle', 'circle'].includes(draft.type);
+    }
+
+    function isSegmentDynamicDraft() {
+      return draft && (draft.type === 'line' || draft.type === 'polyline');
+    }
+
+    function dynamicSegmentStart() {
+      if (!isSegmentDynamicDraft()) return null;
+      if (draft.type === 'line') return draft.p1;
+      return draft.points[draft.points.length - 1];
+    }
+
+    function setDynamicText(element, value) {
+      if (element) element.textContent = value || '';
+    }
+
+    function dynamicInputConfig() {
+      if (!draft) return null;
+      if (draft.type === 'rectangle') {
+        return {
+          mode: 'rectangle',
+          primaryLabel: labels.dynWidth,
+          primaryUnit: labels.dynLengthUnit,
+          secondaryLabel: labels.dynHeight,
+          secondaryUnit: labels.dynLengthUnit,
+          hint: labels.dynRectangleHint,
+          showSecondary: true,
+        };
+      }
+      if (draft.type === 'circle') {
+        return {
+          mode: 'circle',
+          primaryLabel: labels.dynRadius,
+          primaryUnit: labels.dynLengthUnit,
+          secondaryLabel: '',
+          secondaryUnit: '',
+          hint: labels.dynCircleHint,
+          showSecondary: false,
+        };
+      }
+      return {
+        mode: draft.type,
+        primaryLabel: labels.dynLength,
+        primaryUnit: labels.dynLengthUnit,
+        secondaryLabel: labels.dynAngle,
+        secondaryUnit: labels.dynAngleUnit,
+        hint: labels.dynHint,
+        showSecondary: true,
+      };
+    }
+
+    function updateDynamicInputLabels() {
+      const config = dynamicInputConfig();
+      if (!config) return;
+      dynamicInput.setAttribute('data-mode', config.mode);
+      setDynamicText(dynamicPrimaryLabel, config.primaryLabel);
+      setDynamicText(dynamicPrimaryUnit, config.primaryUnit);
+      setDynamicText(dynamicSecondaryLabel, config.secondaryLabel);
+      setDynamicText(dynamicSecondaryUnit, config.secondaryUnit);
+      setDynamicText(dynamicHint, config.hint);
+      dynamicLengthInput.setAttribute('aria-label', config.primaryLabel || '');
+      dynamicAngleInput.setAttribute('aria-label', config.secondaryLabel || '');
+      dynamicAngleInput.disabled = !config.showSecondary;
+      dynamicSecondaryRow.hidden = !config.showSecondary;
+    }
+
+    function clearDynamicFields() {
+      dynamicLengthInput.value = '';
+      dynamicAngleInput.value = '';
+    }
+
+    function focusDynamicLength() {
+      window.setTimeout(() => {
+        try {
+          dynamicLengthInput.focus({ preventScroll: true });
+          dynamicLengthInput.select();
+        } catch {
+          dynamicLengthInput.focus();
+        }
+      }, 0);
+    }
+
+    function showDynamicInput() {
+      if (!isDynamicDraft()) return;
+      updateDynamicInputLabels();
+      dynamicInput.hidden = false;
+      focusDynamicLength();
+    }
+
+    function hideDynamicInput() {
+      dynamicInput.hidden = true;
+      clearDynamicFields();
+    }
+
+    function resetDynamicForNextSegment() {
+      if (!isDynamicDraft()) return;
+      clearDynamicFields();
+      updateDynamicInputLabels();
+      dynamicInput.hidden = false;
+      focusDynamicLength();
+    }
+
+    function positiveDynamicValue(input) {
+      const raw = input.value.trim();
+      const value = Number(raw);
+      if (!raw || !Number.isFinite(value) || value <= 0) return null;
+      return value;
+    }
+
+    function normalizedAngle() {
+      const raw = dynamicAngleInput.value.trim();
+      if (!raw) return null;
+      const angle = Number(raw);
+      if (!Number.isFinite(angle)) return null;
+      return ((angle % 360) + 360) % 360;
+    }
+
+    function dynamicEndpoint() {
+      const start = dynamicSegmentStart();
+      const lengthUnits = positiveDynamicValue(dynamicLengthInput);
+      if (!start || lengthUnits === null) return null;
+      const lengthPx = lengthUnits * gridStep;
+      const angleDeg = normalizedAngle();
+      if (angleDeg !== null) {
+        const rad = (angleDeg * Math.PI) / 180;
+        return {
+          x: start.x + lengthPx * Math.cos(rad),
+          y: start.y - lengthPx * Math.sin(rad),
+        };
+      }
+
+      const dx = rawCursor.x - start.x;
+      const dy = rawCursor.y - start.y;
+      const magnitude = Math.hypot(dx, dy);
+      if (!magnitude) return { x: start.x + lengthPx, y: start.y };
+      return {
+        x: start.x + (dx / magnitude) * lengthPx,
+        y: start.y + (dy / magnitude) * lengthPx,
+      };
+    }
+
+    function dynamicRectanglePoint() {
+      if (!draft || draft.type !== 'rectangle') return null;
+      const widthUnits = positiveDynamicValue(dynamicLengthInput);
+      const heightUnits = positiveDynamicValue(dynamicAngleInput);
+      if (widthUnits === null || heightUnits === null) return null;
+      const directionX = rawCursor.x < draft.p1.x ? -1 : 1;
+      const directionY = rawCursor.y < draft.p1.y ? -1 : 1;
+      return {
+        x: draft.p1.x + directionX * widthUnits * gridStep,
+        y: draft.p1.y + directionY * heightUnits * gridStep,
+      };
+    }
+
+    function dynamicCircleRadius() {
+      if (!draft || draft.type !== 'circle') return null;
+      const radiusUnits = positiveDynamicValue(dynamicLengthInput);
+      return radiusUnits === null ? null : radiusUnits * gridStep;
+    }
+
+    function setDraftPreview(point) {
+      if (!isDynamicDraft()) return;
+      if (draft.type === 'line') draft.p2 = point;
+      if (draft.type === 'polyline') draft.preview = point;
+      if (draft.type === 'rectangle') draft.p2 = point;
+      if (draft.type === 'circle') draft.r = distance(draft.center, point);
+    }
+
+    function applyDynamicPreview() {
+      if (!isDynamicDraft()) return false;
+      if (isSegmentDynamicDraft()) {
+        const endpoint = dynamicEndpoint();
+        if (!endpoint) return false;
+        setDraftPreview(endpoint);
+        return true;
+      }
+      if (draft.type === 'rectangle') {
+        const point = dynamicRectanglePoint();
+        if (!point) return false;
+        draft.p2 = point;
+        return true;
+      }
+      if (draft.type === 'circle') {
+        const radius = dynamicCircleRadius();
+        if (radius === null) return false;
+        draft.r = radius;
+        return true;
+      }
+      return false;
+    }
+
+    function distance(a, b) {
+      return Math.hypot(a.x - b.x, a.y - b.y);
+    }
+
+    function findNearestEndpoint(point, options = {}) {
+      const enabled = options.ignoreToggle || endpointSnapInput.checked;
+      if (!enabled) return null;
+      const tolerance = (options.screenTolerance || 10) / view.scale;
+      const excludeShapeId = options.excludeShapeId || '';
+      const excludeRef = options.excludeRef || null;
+      let nearest = null;
+
+      shapes.forEach((shape) => {
+        if (excludeShapeId && shape.id === excludeShapeId) return;
+        getConnectableRefs(shape).forEach((ref) => {
+          if (excludeRef && sameRef(ref, excludeRef)) return;
+          const vertex = getVertex(ref);
+          if (!vertex) return;
+          const nextDistance = distance(point, vertex);
+          if (nextDistance <= tolerance && (!nearest || nextDistance < nearest.distance)) {
+            nearest = { ref, point: { x: vertex.x, y: vertex.y }, distance: nextDistance };
+          }
+        });
+      });
+
+      return nearest;
+    }
+
+    function connectedRefCount(ref) {
+      const groupIndex = connectionIndexFor(ref);
+      return groupIndex >= 0 ? connections[groupIndex].length : 0;
+    }
+
+    function constrainOrtho(start, point) {
+      const dx = point.x - start.x;
+      const dy = point.y - start.y;
+      if (Math.abs(dx) >= Math.abs(dy)) return { x: point.x, y: start.y };
+      return { x: start.x, y: point.y };
+    }
+
+    function drawingPointFromRaw(rawPoint) {
+      const canEndpointSnap = tool === 'line' || tool === 'polyline';
+      const snap = canEndpointSnap ? findNearestEndpoint(rawPoint) : null;
+      if (snap) {
+        osnapTarget = snap;
+        return snap.point;
+      }
+      osnapTarget = null;
+      let point = snapPoint(rawPoint);
+      if (orthoInput.checked && isDynamicDraft()) {
+        const start = dynamicSegmentStart();
+        if (start) point = constrainOrtho(start, point);
+      }
+      return point;
+    }
+
+    function gripRefsForSelected() {
+      return getConnectableRefs(selectedShape());
+    }
+
+    function hitGrip(screenPoint) {
+      const tolerance = 10;
+      for (const ref of gripRefsForSelected()) {
+        const vertex = getVertex(ref);
+        if (!vertex) continue;
+        const screen = worldToScreen(vertex);
+        if (Math.hypot(screenPoint.x - screen.x, screenPoint.y - screen.y) <= tolerance) {
+          return ref;
+        }
+      }
+      return null;
+    }
+
+    function translateShape(shape, dx, dy) {
+      const next = cloneShape(shape);
+      if (next.type === 'line') {
+        next.p1.x += dx;
+        next.p1.y += dy;
+        next.p2.x += dx;
+        next.p2.y += dy;
+      } else if (next.type === 'rectangle') {
+        next.p1.x += dx;
+        next.p1.y += dy;
+        next.p2.x += dx;
+        next.p2.y += dy;
+      } else if (next.type === 'circle') {
+        next.center.x += dx;
+        next.center.y += dy;
+      } else if (next.type === 'polyline') {
+        next.points = next.points.map((point) => ({ x: point.x + dx, y: point.y + dy }));
+      }
+      return next;
+    }
+
+    function selectedShape() {
+      return shapes.find((shape) => shape.id === selectedId);
+    }
+
+    function distanceToSegment(point, start, end) {
+      const dx = end.x - start.x;
+      const dy = end.y - start.y;
+      const lengthSquared = dx * dx + dy * dy;
+      if (!lengthSquared) return distance(point, start);
+      const t = Math.max(0, Math.min(1, ((point.x - start.x) * dx + (point.y - start.y) * dy) / lengthSquared));
+      return distance(point, { x: start.x + dx * t, y: start.y + dy * t });
+    }
+
+    function hitShape(point) {
+      const tolerance = Math.max(6 / view.scale, 4);
+      for (let index = shapes.length - 1; index >= 0; index -= 1) {
+        const shape = shapes[index];
+        if (shape.type === 'line' && distanceToSegment(point, shape.p1, shape.p2) <= tolerance) return shape;
+        if (shape.type === 'rectangle') {
+          const left = Math.min(shape.p1.x, shape.p2.x);
+          const right = Math.max(shape.p1.x, shape.p2.x);
+          const top = Math.min(shape.p1.y, shape.p2.y);
+          const bottom = Math.max(shape.p1.y, shape.p2.y);
+          const inside = point.x >= left && point.x <= right && point.y >= top && point.y <= bottom;
+          const nearEdge =
+            inside &&
+            (Math.min(Math.abs(point.x - left), Math.abs(point.x - right), Math.abs(point.y - top), Math.abs(point.y - bottom)) <= tolerance);
+          if (inside || nearEdge) return shape;
+        }
+        if (shape.type === 'circle') {
+          const delta = Math.abs(distance(point, shape.center) - shape.r);
+          if (delta <= tolerance || distance(point, shape.center) <= shape.r) return shape;
+        }
+        if (shape.type === 'polyline') {
+          for (let pointIndex = 1; pointIndex < shape.points.length; pointIndex += 1) {
+            if (distanceToSegment(point, shape.points[pointIndex - 1], shape.points[pointIndex]) <= tolerance) return shape;
+          }
+        }
+      }
+      return null;
+    }
+
+    function shapeBounds(shape) {
+      if (shape.type === 'line') {
+        return {
+          minX: Math.min(shape.p1.x, shape.p2.x),
+          minY: Math.min(shape.p1.y, shape.p2.y),
+          maxX: Math.max(shape.p1.x, shape.p2.x),
+          maxY: Math.max(shape.p1.y, shape.p2.y),
+        };
+      }
+      if (shape.type === 'rectangle') {
+        return {
+          minX: Math.min(shape.p1.x, shape.p2.x),
+          minY: Math.min(shape.p1.y, shape.p2.y),
+          maxX: Math.max(shape.p1.x, shape.p2.x),
+          maxY: Math.max(shape.p1.y, shape.p2.y),
+        };
+      }
+      if (shape.type === 'circle') {
+        return {
+          minX: shape.center.x - shape.r,
+          minY: shape.center.y - shape.r,
+          maxX: shape.center.x + shape.r,
+          maxY: shape.center.y + shape.r,
+        };
+      }
+      const xs = shape.points.map((point) => point.x);
+      const ys = shape.points.map((point) => point.y);
+      return { minX: Math.min(...xs), minY: Math.min(...ys), maxX: Math.max(...xs), maxY: Math.max(...ys) };
+    }
+
+    function draftLength() {
+      if (!draft) return null;
+      if (draft.type === 'line') return distance(draft.p1, draft.p2);
+      if (draft.type === 'rectangle') return distance(draft.p1, draft.p2);
+      if (draft.type === 'circle') return draft.r;
+      if (draft.type === 'polyline' && draft.points.length) return distance(draft.points[draft.points.length - 1], draft.preview);
+      return null;
+    }
+
+    function formatLength(value) {
+      if (value === null) return labels.noLength;
+      return `${value.toFixed(1)} ${labels.pixels} / ${(value / gridStep).toFixed(2)} ${labels.gridUnits}`;
+    }
+
+    function updateStatus() {
+      toolStatus.textContent = tool === 'select' ? labels.select : shapeLabels[tool];
+      coordinatesStatus.textContent = `${cursor.x.toFixed(0)}, ${cursor.y.toFixed(0)}`;
+      lengthStatus.textContent = formatLength(draftLength());
+      const shape = selectedShape();
+      if (statusHint) {
+        selectionStatus.textContent = osnapTarget ? `${statusHint} · ${labels.endpointSnapped}` : statusHint;
+      } else if (osnapTarget) {
+        selectionStatus.textContent = labels.endpointSnapped;
+      } else if (shape) {
+        const joinedCount = getConnectableRefs(shape).filter((ref) => refsAreConnected(ref)).length;
+        const joinText = joinedCount ? ` · ${labels.joinedPoint}` : '';
+        selectionStatus.textContent = `${labels.selected}: ${shapeLabels[shape.type]}${joinText}`;
+      } else {
+        selectionStatus.textContent = labels.noSelection;
+      }
+      updateButtons();
+    }
+
+    function commitShape(shape, joinTargets = []) {
+      const shapeId = `shape-${nextId}`;
+      shapes.push({ id: shapeId, ...shape });
+      selectedId = shapeId;
+      nextId += 1;
+      joinTargets.forEach(({ key, target }) => {
+        if (target) addConnection({ shapeId, key }, target);
+      });
+      draft = null;
+      draftJoinTargets = {};
+      osnapTarget = null;
+      statusHint = '';
+      hideDynamicInput();
+      pushHistory();
+      updateStatus();
+      render();
+    }
+
+    function handleDrawing(point, snap = null) {
+      if (tool === 'line') {
+        if (!draft) {
+          draft = { type: 'line', p1: point, p2: point };
+          draftJoinTargets = snap ? { p1: snap.ref } : {};
+          rawCursor = point;
+          showDynamicInput();
+        } else if (distance(draft.p1, point) > 0) {
+          const joins = [];
+          if (draftJoinTargets.p1) joins.push({ key: 'p1', target: draftJoinTargets.p1 });
+          if (snap) joins.push({ key: 'p2', target: snap.ref });
+          commitShape({ type: 'line', p1: draft.p1, p2: point }, joins);
+        }
+      } else if (tool === 'rectangle') {
+        if (!draft) {
+          draft = { type: 'rectangle', p1: point, p2: point };
+          rawCursor = point;
+          showDynamicInput();
+        } else if (Math.abs(draft.p1.x - point.x) > 0 && Math.abs(draft.p1.y - point.y) > 0) {
+          commitShape({ type: 'rectangle', p1: draft.p1, p2: point });
+        }
+      } else if (tool === 'circle') {
+        if (!draft) {
+          draft = { type: 'circle', center: point, r: 0 };
+          rawCursor = point;
+          showDynamicInput();
+        } else {
+          const radius = distance(draft.center, point);
+          if (radius > 0) commitShape({ type: 'circle', center: draft.center, r: radius });
+        }
+      } else if (tool === 'polyline') {
+        if (!draft) {
+          draft = { type: 'polyline', points: [point], preview: point };
+          draftJoinTargets = snap ? { 0: snap.ref } : {};
+          rawCursor = point;
+          showDynamicInput();
+        } else {
+          const last = draft.points[draft.points.length - 1];
+          if (distance(last, point) > 0) {
+            draft.points.push(point);
+            if (snap) draftJoinTargets[draft.points.length - 1] = snap.ref;
+            resetDynamicForNextSegment();
+          }
+          draft.preview = point;
+        }
+      }
+      updateStatus();
+      render();
+    }
+
+    function finishPolyline() {
+      if (!draft || draft.type !== 'polyline' || draft.points.length < 2) return;
+      const joins = Object.entries(draftJoinTargets).map(([index, target]) => ({ key: `pt:${index}`, target }));
+      commitShape({ type: 'polyline', points: draft.points.slice() }, joins);
+    }
+
+    function commitDynamicSegment() {
+      if (!isDynamicDraft()) return;
+
+      if (draft.type === 'rectangle') {
+        const point = dynamicRectanglePoint();
+        if (!point) return;
+        commitShape({ type: 'rectangle', p1: draft.p1, p2: point });
+        return;
+      }
+
+      if (draft.type === 'circle') {
+        const radius = dynamicCircleRadius();
+        if (radius === null) return;
+        commitShape({ type: 'circle', center: draft.center, r: radius });
+        return;
+      }
+
+      const endpoint = dynamicEndpoint();
+      if (!endpoint) return;
+
+      if (draft.type === 'line') {
+        const joins = draftJoinTargets.p1 ? [{ key: 'p1', target: draftJoinTargets.p1 }] : [];
+        commitShape({ type: 'line', p1: draft.p1, p2: endpoint }, joins);
+        return;
+      }
+
+      const last = draft.points[draft.points.length - 1];
+      if (distance(last, endpoint) <= 0) return;
+      draft.points.push(endpoint);
+      draft.preview = endpoint;
+      cursor = endpoint;
+      rawCursor = endpoint;
+      resetDynamicForNextSegment();
+      updateStatus();
+      render();
+    }
+
+    function cancelDraft() {
+      if (!draft) return;
+      draft = null;
+      draftJoinTargets = {};
+      osnapTarget = null;
+      statusHint = tool === 'connect' ? labels.connectPickFirst : '';
+      hideDynamicInput();
+      updateStatus();
+      render();
+    }
+
+    function deleteSelected() {
+      if (!selectedId) return;
+      shapes = shapes.filter((shape) => shape.id !== selectedId);
+      removeShapeConnections(selectedId);
+      selectedId = '';
+      pushHistory();
+      updateStatus();
+      render();
+    }
+
+    function clearAll() {
+      if (!shapes.length && !draft) return;
+      if (!window.confirm(labels.confirmClear)) return;
+      shapes = [];
+      connections = [];
+      selectedId = '';
+      draft = null;
+      draftJoinTargets = {};
+      osnapTarget = null;
+      connectPendingRef = null;
+      statusHint = '';
+      hideDynamicInput();
+      pushHistory();
+      updateStatus();
+      render();
+    }
+
+    function undo() {
+      if (historyIndex <= 0) return;
+      historyIndex -= 1;
+      restoreHistory();
+    }
+
+    function redo() {
+      if (historyIndex >= history.length - 1) return;
+      historyIndex += 1;
+      restoreHistory();
+    }
+
+    function drawGrid() {
+      const worldLeft = view.x;
+      const worldTop = view.y;
+      const worldRight = view.x + canvasWidth / view.scale;
+      const worldBottom = view.y + canvasHeight / view.scale;
+      const startX = Math.floor(worldLeft / gridStep) * gridStep;
+      const startY = Math.floor(worldTop / gridStep) * gridStep;
+
+      context.lineWidth = 1;
+      for (let x = startX; x <= worldRight; x += gridStep) {
+        const screen = worldToScreen({ x, y: 0 }).x;
+        context.strokeStyle = Math.round(x / gridStep) % 5 === 0 ? '#dbe3ee' : '#eef2f6';
+        context.beginPath();
+        context.moveTo(screen, 0);
+        context.lineTo(screen, canvasHeight);
+        context.stroke();
+      }
+      for (let y = startY; y <= worldBottom; y += gridStep) {
+        const screen = worldToScreen({ x: 0, y }).y;
+        context.strokeStyle = Math.round(y / gridStep) % 5 === 0 ? '#dbe3ee' : '#eef2f6';
+        context.beginPath();
+        context.moveTo(0, screen);
+        context.lineTo(canvasWidth, screen);
+        context.stroke();
+      }
+    }
+
+    function drawShape(shape, options = {}) {
+      const selected = options.selected;
+      const draftShape = options.draft;
+      context.save();
+      context.strokeStyle = selected ? selectedColor : draftShape ? draftColor : strokeColor;
+      context.lineWidth = selected ? 3 : 2;
+      if (draftShape) context.setLineDash([7, 5]);
+
+      if (shape.type === 'line') {
+        const p1 = worldToScreen(shape.p1);
+        const p2 = worldToScreen(shape.p2);
+        context.beginPath();
+        context.moveTo(p1.x, p1.y);
+        context.lineTo(p2.x, p2.y);
+        context.stroke();
+      } else if (shape.type === 'rectangle') {
+        const p1 = worldToScreen(shape.p1);
+        const p2 = worldToScreen(shape.p2);
+        context.strokeRect(Math.min(p1.x, p2.x), Math.min(p1.y, p2.y), Math.abs(p2.x - p1.x), Math.abs(p2.y - p1.y));
+      } else if (shape.type === 'circle') {
+        const center = worldToScreen(shape.center);
+        context.beginPath();
+        context.arc(center.x, center.y, Math.abs(shape.r * view.scale), 0, Math.PI * 2);
+        context.stroke();
+      } else if (shape.type === 'polyline') {
+        const points = shape.preview ? shape.points.concat([shape.preview]) : shape.points;
+        context.beginPath();
+        points.forEach((point, index) => {
+          const screen = worldToScreen(point);
+          if (index === 0) context.moveTo(screen.x, screen.y);
+          else context.lineTo(screen.x, screen.y);
+        });
+        context.stroke();
+      }
+      context.restore();
+    }
+
+    function drawSquareMarker(point, size, stroke, fill = '') {
+      const screen = worldToScreen(point);
+      const half = size / 2;
+      context.save();
+      context.lineWidth = 2;
+      context.strokeStyle = stroke;
+      if (fill) {
+        context.fillStyle = fill;
+        context.fillRect(screen.x - half, screen.y - half, size, size);
+      }
+      context.strokeRect(screen.x - half, screen.y - half, size, size);
+      context.restore();
+    }
+
+    function drawGrips() {
+      gripRefsForSelected().forEach((ref) => {
+        const vertex = getVertex(ref);
+        if (vertex) drawSquareMarker(vertex, 8, '#1d4ed8', '#60a5fa');
+      });
+    }
+
+    function drawOsnapMarker() {
+      if (!osnapTarget) return;
+      drawSquareMarker(osnapTarget.point, 12, '#f26b4f');
+    }
+
+    function drawJoinedMarkers() {
+      const drawn = new Set();
+      connections.forEach((group) => {
+        group.forEach((ref) => {
+          const key = refKey(ref);
+          if (drawn.has(key)) return;
+          drawn.add(key);
+          const vertex = getVertex(ref);
+          if (!vertex) return;
+          const screen = worldToScreen(vertex);
+          context.save();
+          context.fillStyle = '#f26b4f';
+          context.beginPath();
+          context.arc(screen.x, screen.y, 3, 0, Math.PI * 2);
+          context.fill();
+          context.restore();
+        });
+      });
+    }
+
+    function render() {
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      context.clearRect(0, 0, canvasWidth, canvasHeight);
+      context.fillStyle = '#ffffff';
+      context.fillRect(0, 0, canvasWidth, canvasHeight);
+      drawGrid();
+      shapes.forEach((shape) => drawShape(shape, { selected: shape.id === selectedId }));
+      if (draft) drawShape(draft, { draft: true });
+      drawJoinedMarkers();
+      drawGrips();
+      drawOsnapMarker();
+      if (!shapes.length && !draft) {
+        context.save();
+        context.fillStyle = '#657186';
+        context.font = '800 18px sans-serif';
+        context.textAlign = 'center';
+        context.fillText(labels.emptyCanvas, canvasWidth / 2, canvasHeight / 2);
+        context.restore();
+      }
+    }
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      pixelRatio = Math.max(1, window.devicePixelRatio || 1);
+      canvasWidth = Math.max(320, Math.round(rect.width));
+      canvasHeight = Math.max(320, Math.round(rect.height));
+      canvas.width = Math.round(canvasWidth * pixelRatio);
+      canvas.height = Math.round(canvasHeight * pixelRatio);
+      render();
+    }
+
+    function startPan(event) {
+      pointerMode = 'pan';
+      panStart = { clientX: event.clientX, clientY: event.clientY, viewX: view.x, viewY: view.y };
+      canvas.setPointerCapture(event.pointerId);
+      render();
+      updateStatus();
+    }
+
+    function handleConnectClick(rawPoint) {
+      const snap = findNearestEndpoint(rawPoint, {
+        ignoreToggle: true,
+        excludeShapeId: connectPendingRef?.shapeId || '',
+        screenTolerance: 12,
+      });
+      osnapTarget = snap;
+      if (!snap) {
+        statusHint = connectPendingRef ? labels.connectPickSecond : labels.connectPickFirst;
+        updateStatus();
+        render();
+        return;
+      }
+
+      if (!connectPendingRef) {
+        connectPendingRef = snap.ref;
+        selectedId = snap.ref.shapeId;
+        statusHint = labels.connectPickSecond;
+        updateStatus();
+        render();
+        return;
+      }
+
+      const targetPoint = getVertex(connectPendingRef);
+      if (!targetPoint || sameRef(connectPendingRef, snap.ref)) return;
+      moveVertex(snap.ref, targetPoint.x, targetPoint.y);
+      addConnection(connectPendingRef, snap.ref);
+      selectedId = snap.ref.shapeId;
+      connectPendingRef = null;
+      statusHint = labels.connectJoined;
+      osnapTarget = null;
+      pushHistory();
+      updateStatus();
+      render();
+    }
+
+    function pointerDown(event) {
+      event.preventDefault();
+      const rawPoint = screenToWorld(event);
+      rawCursor = rawPoint;
+      const screenPoint = rawCanvasPoint(event);
+      const point = tool === 'line' || tool === 'polyline' ? drawingPointFromRaw(rawPoint) : snapPoint(rawPoint);
+      cursor = point;
+
+      if (spacePressed) {
+        startPan(event);
+        return;
+      }
+
+      if (tool === 'connect') {
+        handleConnectClick(rawPoint);
+        return;
+      }
+
+      const gripRef = tool === 'select' ? hitGrip(screenPoint) : null;
+      if (gripRef) {
+        selectedId = gripRef.shapeId;
+        if (event.altKey) detachVertex(gripRef);
+        moveState = {
+          kind: 'vertex',
+          ref: gripRef,
+          start: point,
+          original: snapshot(),
+          moved: false,
+          detached: event.altKey,
+          connectionChanged: event.altKey,
+        };
+        pointerMode = 'vertex';
+        canvas.setPointerCapture(event.pointerId);
+        statusHint = event.altKey ? labels.detachHint : labels.gripHint;
+        updateStatus();
+        render();
+        return;
+      }
+
+      if (tool === 'select') {
+        const hit = hitShape(point);
+        if (!hit) {
+          selectedId = '';
+          osnapTarget = null;
+          startPan(event);
+          return;
+        }
+        selectedId = hit.id;
+        moveState = { kind: 'shape', shapeId: hit.id, start: point, original: snapshot(), moved: false };
+        pointerMode = 'move';
+        canvas.setPointerCapture(event.pointerId);
+        statusHint = '';
+        updateStatus();
+        render();
+        return;
+      }
+
+      selectedId = '';
+      handleDrawing(point, osnapTarget);
+    }
+
+    function pointerMove(event) {
+      rawCursor = screenToWorld(event);
+      let point = snapPoint(rawCursor);
+      cursor = point;
+
+      if (pointerMode === 'pan' && panStart) {
+        event.preventDefault();
+        view.x = panStart.viewX - (event.clientX - panStart.clientX) / view.scale;
+        view.y = panStart.viewY - (event.clientY - panStart.clientY) / view.scale;
+        render();
+        updateStatus();
+        return;
+      }
+
+      if (pointerMode === 'move' && moveState?.kind === 'shape') {
+        event.preventDefault();
+        restoreSnapshot(moveState.original);
+        const movedPoint = snapPoint(rawCursor);
+        cursor = movedPoint;
+        const dx = movedPoint.x - moveState.start.x;
+        const dy = movedPoint.y - moveState.start.y;
+        translateWholeShape(moveState.shapeId, dx, dy);
+        moveState.moved = moveState.moved || Math.abs(dx) > 0 || Math.abs(dy) > 0;
+        render();
+        updateStatus();
+        return;
+      }
+
+      if (pointerMode === 'vertex' && moveState?.kind === 'vertex') {
+        event.preventDefault();
+        restoreSnapshot(moveState.original);
+        const snap = moveState.detached
+          ? null
+          : findNearestEndpoint(rawCursor, {
+              excludeShapeId: moveState.ref.shapeId,
+              excludeRef: moveState.ref,
+            });
+        osnapTarget = snap;
+        const movedPoint = snap ? snap.point : snapPoint(rawCursor);
+        cursor = movedPoint;
+        moveVertex(moveState.ref, movedPoint.x, movedPoint.y);
+        moveState.moved =
+          moveState.moved || Math.abs(movedPoint.x - moveState.start.x) > 0 || Math.abs(movedPoint.y - moveState.start.y) > 0;
+        render();
+        updateStatus();
+        return;
+      }
+
+      if (tool === 'connect') {
+        osnapTarget = findNearestEndpoint(rawCursor, {
+          ignoreToggle: true,
+          excludeShapeId: connectPendingRef?.shapeId || '',
+          screenTolerance: 12,
+        });
+        statusHint = connectPendingRef ? labels.connectPickSecond : labels.connectPickFirst;
+        render();
+        updateStatus();
+        return;
+      }
+
+      if (draft) {
+        if (draft.type === 'line' || draft.type === 'polyline') {
+          point = drawingPointFromRaw(rawCursor);
+          cursor = point;
+        } else {
+          osnapTarget = null;
+        }
+        if (isDynamicDraft() && applyDynamicPreview()) {
+          osnapTarget = null;
+          // Dynamic input owns the preview when a valid length is present.
+        } else {
+          if (draft.type === 'line' || draft.type === 'rectangle') draft.p2 = point;
+          if (draft.type === 'circle') draft.r = distance(draft.center, point);
+          if (draft.type === 'polyline') draft.preview = point;
+        }
+        render();
+      }
+      updateStatus();
+    }
+
+    function pointerUp(event) {
+      if (pointerMode === 'vertex' && moveState?.kind === 'vertex') {
+        if (moveState.moved && osnapTarget && !moveState.detached) addConnection(moveState.ref, osnapTarget.ref);
+        if (moveState.moved || moveState.connectionChanged) pushHistory();
+      } else if (pointerMode === 'move' && moveState?.moved) {
+        pushHistory();
+      }
+      pointerMode = null;
+      panStart = null;
+      moveState = null;
+      osnapTarget = null;
+      statusHint = tool === 'connect' ? (connectPendingRef ? labels.connectPickSecond : labels.connectPickFirst) : '';
+      updateStatus();
+      try {
+        canvas.releasePointerCapture(event.pointerId);
+      } catch {
+        // Pointer capture may already be released by the browser.
+      }
+    }
+
+    function handleWheel(event) {
+      event.preventDefault();
+      const before = screenToWorld(event);
+      const nextScale = Math.max(0.35, Math.min(4, view.scale * (event.deltaY < 0 ? 1.12 : 0.88)));
+      const screen = rawCanvasPoint(event);
+      view.scale = nextScale;
+      view.x = before.x - screen.x / view.scale;
+      view.y = before.y - screen.y / view.scale;
+      render();
+    }
+
+    function exportPng() {
+      render();
+      const anchor = document.createElement('a');
+      anchor.href = canvas.toDataURL('image/png');
+      anchor.download = 'cad-2d.png';
+      anchor.click();
+    }
+
+    function svgShape(shape) {
+      const attrs = 'fill="none" stroke="#0f8f8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+      if (shape.type === 'line') {
+        return `<line x1="${shape.p1.x}" y1="${shape.p1.y}" x2="${shape.p2.x}" y2="${shape.p2.y}" ${attrs} />`;
+      }
+      if (shape.type === 'rectangle') {
+        const x = Math.min(shape.p1.x, shape.p2.x);
+        const y = Math.min(shape.p1.y, shape.p2.y);
+        const width = Math.abs(shape.p2.x - shape.p1.x);
+        const height = Math.abs(shape.p2.y - shape.p1.y);
+        return `<rect x="${x}" y="${y}" width="${width}" height="${height}" ${attrs} />`;
+      }
+      if (shape.type === 'circle') {
+        return `<circle cx="${shape.center.x}" cy="${shape.center.y}" r="${shape.r}" ${attrs} />`;
+      }
+      const points = shape.points.map((point) => `${point.x},${point.y}`).join(' ');
+      return `<polyline points="${points}" ${attrs} />`;
+    }
+
+    function exportSvg() {
+      const bounds = shapes.length
+        ? shapes.map(shapeBounds).reduce(
+            (acc, box) => ({
+              minX: Math.min(acc.minX, box.minX),
+              minY: Math.min(acc.minY, box.minY),
+              maxX: Math.max(acc.maxX, box.maxX),
+              maxY: Math.max(acc.maxY, box.maxY),
+            }),
+            { minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity },
+          )
+        : { minX: 0, minY: 0, maxX: 800, maxY: 500 };
+      const padding = 30;
+      const viewBox = [
+        bounds.minX - padding,
+        bounds.minY - padding,
+        Math.max(1, bounds.maxX - bounds.minX + padding * 2),
+        Math.max(1, bounds.maxY - bounds.minY + padding * 2),
+      ].join(' ');
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}">${shapes.map(svgShape).join('')}</svg>`;
+      const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = 'cad-2d.svg';
+      anchor.click();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function refreshDynamicPreview(event) {
+      event?.stopPropagation();
+      if (!isDynamicDraft()) return;
+      if (!applyDynamicPreview()) setDraftPreview(cursor);
+      updateStatus();
+      render();
+    }
+
+    function handleDynamicKeydown(event) {
+      event.stopPropagation();
+      const target = event.currentTarget;
+      const hasSecondaryField = !dynamicAngleInput.disabled && !dynamicSecondaryRow.hidden;
+      if (event.key === 'Tab' && target === dynamicLengthInput && !event.shiftKey && hasSecondaryField) {
+        event.preventDefault();
+        dynamicAngleInput.focus();
+        dynamicAngleInput.select();
+        return;
+      }
+      if (event.key === 'Tab' && target === dynamicAngleInput && event.shiftKey && hasSecondaryField) {
+        event.preventDefault();
+        dynamicLengthInput.focus();
+        dynamicLengthInput.select();
+        return;
+      }
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        const fieldsAreEmpty = !dynamicLengthInput.value.trim() && !dynamicAngleInput.value.trim();
+        const canFinishPolyline = draft && draft.type === 'polyline' && draft.points.length > 1 && fieldsAreEmpty;
+        if (canFinishPolyline) {
+          finishPolyline();
+        } else {
+          commitDynamicSegment();
+        }
+        return;
+      }
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        cancelDraft();
+      }
+    }
+
+    toolButtons.forEach((button) => {
+      button.addEventListener('click', () => setTool(button.getAttribute('data-tool') || 'select'));
+    });
+    dynamicInput.addEventListener('pointerdown', (event) => event.stopPropagation());
+    dynamicInput.addEventListener('click', (event) => event.stopPropagation());
+    dynamicLengthInput.addEventListener('input', refreshDynamicPreview);
+    dynamicAngleInput.addEventListener('input', refreshDynamicPreview);
+    dynamicLengthInput.addEventListener('keydown', handleDynamicKeydown);
+    dynamicAngleInput.addEventListener('keydown', handleDynamicKeydown);
+    snapInput.addEventListener('change', updateStatus);
+    endpointSnapInput.addEventListener('change', () => {
+      osnapTarget = null;
+      updateStatus();
+      render();
+    });
+    orthoInput.addEventListener('change', refreshDynamicPreview);
+    root.querySelector('[data-undo]')?.addEventListener('click', undo);
+    root.querySelector('[data-redo]')?.addEventListener('click', redo);
+    root.querySelector('[data-delete]')?.addEventListener('click', deleteSelected);
+    root.querySelector('[data-clear]')?.addEventListener('click', clearAll);
+    root.querySelector('[data-finish]')?.addEventListener('click', finishPolyline);
+    root.querySelector('[data-export-png]')?.addEventListener('click', exportPng);
+    root.querySelector('[data-export-svg]')?.addEventListener('click', exportSvg);
+    canvas.addEventListener('pointerdown', pointerDown);
+    canvas.addEventListener('pointermove', pointerMove);
+    canvas.addEventListener('pointerup', pointerUp);
+    canvas.addEventListener('pointercancel', pointerUp);
+    canvas.addEventListener('wheel', handleWheel, { passive: false });
+    canvas.addEventListener('dblclick', () => {
+      if (tool === 'polyline') finishPolyline();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (isInputTarget(event.target)) return;
+      if (event.code === 'Space') spacePressed = true;
+      if (event.key === 'Enter') finishPolyline();
+      if (event.key === 'Escape') {
+        if (tool === 'connect' && connectPendingRef) {
+          connectPendingRef = null;
+          osnapTarget = null;
+          statusHint = labels.connectCancelled;
+          updateStatus();
+          render();
+        } else {
+          cancelDraft();
+        }
+      }
+      if (event.key === 'Delete' || event.key === 'Backspace') deleteSelected();
+    });
+    window.addEventListener('keyup', (event) => {
+      if (event.code === 'Space') spacePressed = false;
+    });
+
+    new ResizeObserver(resizeCanvas).observe(canvas);
+    resizeCanvas();
+    updateStatus();
+  });
+</script>
