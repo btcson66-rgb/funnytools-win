@@ -14,6 +14,7 @@ interface Props {
   type?: 'website' | 'article';
   alternateSegments?: string[];
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   type = 'website',
   alternateSegments = [],
   jsonLd = [],
+  noindex = false,
 } = Astro.props;
 
 const canonical = absoluteUrl(localePath(lang, ...alternateSegments));
@@ -43,8 +45,8 @@ const ui = t(lang);
     <meta name="theme-color" content="#2563eb" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    {hreflangs.map((link) => <link rel="alternate" hreflang={link.hreflang} href={link.href} />)}
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
+    {!noindex && hreflangs.map((link) => <link rel="alternate" hreflang={link.hreflang} href={link.href} />)}
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

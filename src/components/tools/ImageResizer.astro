@@ -183,7 +183,10 @@ const { labels } = Astro.props;
       outputs.output.textContent = '-';
     }
 
+    let jobId = 0;
+
     function reset() {
+      jobId += 1;
       state = null;
       fileInput.value = '';
       widthInput.value = '';
@@ -235,6 +238,7 @@ const { labels } = Astro.props;
 
     async function render() {
       if (!state) return;
+      const myJob = jobId;
       const width = Math.round(Number(widthInput.value));
       const height = Math.round(Number(heightInput.value));
       if (!width || !height || width < 1 || height < 1 || width > 8000 || height > 8000) {
@@ -250,6 +254,7 @@ const { labels } = Astro.props;
       context.drawImage(state.image, 0, 0, width, height);
       const type = outputType();
       const blob = await new Promise((resolve) => canvas.toBlob(resolve, type, 0.92));
+      if (myJob !== jobId) return;
       if (!blob) {
         setError(labels.processError);
         return;
@@ -273,6 +278,7 @@ const { labels } = Astro.props;
     async function handleFile() {
       const file = fileInput.files?.[0];
       reset();
+      const myJob = jobId;
       if (!file) return;
       if (!file.type.startsWith('image/')) {
         setError(labels.invalidType);
@@ -284,6 +290,7 @@ const { labels } = Astro.props;
       }
       try {
         const loaded = await readImage(file);
+        if (myJob !== jobId) return;
         const width = loaded.image.naturalWidth;
         const height = loaded.image.naturalHeight;
         if (width * height > maxPixels) {

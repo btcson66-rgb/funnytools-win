@@ -12,7 +12,8 @@ export const SITE = {
     en: 'Free online tools for everyday use. No installation required.',
   },
   adsenseClient: 'ca-pub-7052036786750044',
-  adsenseEnabled: false,
+  // Loads the AdSense verification/auto-ads script site-wide (required for ad review).
+  adsenseEnabled: true,
   features: {
     adsense: false,
     affiliate: false,

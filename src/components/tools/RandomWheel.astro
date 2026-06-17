@@ -144,6 +144,9 @@ const { labels } = Astro.props;
       return 1 - Math.pow(1 - value, 3);
     }
 
+    let spinRaf = null;
+    let spinToken = 0;
+
     function spin() {
       if (spinning) return;
       const options = getOptions();
@@ -172,13 +175,15 @@ const { labels } = Astro.props;
       const duration = 3200;
       const started = performance.now();
       spinning = true;
+      const myToken = ++spinToken;
 
       function frame(now) {
+        if (myToken !== spinToken) return;
         const progress = Math.min(1, (now - started) / duration);
         rotation = start + (target - start) * easeOutCubic(progress);
         draw(options);
         if (progress < 1) {
-          requestAnimationFrame(frame);
+          spinRaf = requestAnimationFrame(frame);
           return;
         }
         rotation %= Math.PI * 2;
@@ -188,7 +193,7 @@ const { labels } = Astro.props;
         spinning = false;
       }
 
-      requestAnimationFrame(frame);
+      spinRaf = requestAnimationFrame(frame);
     }
 
     function showToast() {
@@ -201,6 +206,10 @@ const { labels } = Astro.props;
     text.addEventListener('input', () => draw(getOptions()));
     root.querySelector('[data-spin]')?.addEventListener('click', spin);
     root.querySelector('[data-reset]')?.addEventListener('click', () => {
+      spinToken += 1;
+      if (spinRaf) cancelAnimationFrame(spinRaf);
+      spinRaf = null;
+      spinning = false;
       text.value = labels.placeholder;
       latest = '';
       result.textContent = labels.waiting;

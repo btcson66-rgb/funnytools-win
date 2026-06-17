@@ -79,6 +79,11 @@ const { labels } = Astro.props;
         return;
       }
 
+      if (count > 100000) {
+        setError(labels.countLimit);
+        return;
+      }
+
       if (min > max) {
         setError(labels.rangeError);
         return;

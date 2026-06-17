@@ -8,12 +8,12 @@ const { labels } = Astro.props;
 
 <section class="tool-widget card cad-tool" data-cad-2d-tool data-labels={JSON.stringify(labels)}>
   <div class="cad-toolbar" role="toolbar" aria-label={labels.toolbar}>
-    <button class="btn ghost is-active" type="button" data-tool="select">{labels.select}</button>
-    <button class="btn ghost" type="button" data-tool="line">{labels.line}</button>
-    <button class="btn ghost" type="button" data-tool="rectangle">{labels.rectangle}</button>
-    <button class="btn ghost" type="button" data-tool="circle">{labels.circle}</button>
-    <button class="btn ghost" type="button" data-tool="polyline">{labels.polyline}</button>
-    <button class="btn ghost" type="button" data-tool="connect">{labels.connect}</button>
+    <button class="btn ghost is-active" type="button" data-tool="select" aria-pressed="true">{labels.select}</button>
+    <button class="btn ghost" type="button" data-tool="line" aria-pressed="false">{labels.line}</button>
+    <button class="btn ghost" type="button" data-tool="rectangle" aria-pressed="false">{labels.rectangle}</button>
+    <button class="btn ghost" type="button" data-tool="circle" aria-pressed="false">{labels.circle}</button>
+    <button class="btn ghost" type="button" data-tool="polyline" aria-pressed="false">{labels.polyline}</button>
+    <button class="btn ghost" type="button" data-tool="connect" aria-pressed="false">{labels.connect}</button>
     <label class="check snap-toggle">
       <input data-snap type="checkbox" checked />
       <span>{labels.snapToGrid}</span>
@@ -265,6 +265,7 @@ const { labels } = Astro.props;
     let osnapTarget = null;
     let connectPendingRef = null;
     let statusHint = '';
+    let pointerWithin = false;
 
     function cloneShapes(items) {
       return JSON.parse(JSON.stringify(items));
@@ -300,7 +301,9 @@ const { labels } = Astro.props;
       statusHint = tool === 'connect' ? labels.connectPickFirst : '';
       hideDynamicInput();
       toolButtons.forEach((button) => {
-        button.classList.toggle('is-active', button.getAttribute('data-tool') === tool);
+        const isActive = button.getAttribute('data-tool') === tool;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-pressed', String(isActive));
       });
       updateStatus();
       render();
@@ -1530,6 +1533,8 @@ const { labels } = Astro.props;
     root.querySelector('[data-finish]')?.addEventListener('click', finishPolyline);
     root.querySelector('[data-export-png]')?.addEventListener('click', exportPng);
     root.querySelector('[data-export-svg]')?.addEventListener('click', exportSvg);
+    canvas.addEventListener('pointerenter', () => { pointerWithin = true; });
+    canvas.addEventListener('pointerleave', () => { pointerWithin = false; });
     canvas.addEventListener('pointerdown', pointerDown);
     canvas.addEventListener('pointermove', pointerMove);
     canvas.addEventListener('pointerup', pointerUp);
@@ -1540,7 +1545,11 @@ const { labels } = Astro.props;
     });
     window.addEventListener('keydown', (event) => {
       if (isInputTarget(event.target)) return;
-      if (event.code === 'Space') spacePressed = true;
+      if (!(pointerWithin || root.contains(document.activeElement))) return;
+      if (event.code === 'Space') {
+        spacePressed = true;
+        event.preventDefault();
+      }
       if (event.key === 'Enter') finishPolyline();
       if (event.key === 'Escape') {
         if (tool === 'connect' && connectPendingRef) {
