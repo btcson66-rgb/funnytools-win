@@ -22,6 +22,7 @@ const assetType = tool.assetType ?? 'tool';
         <strong>{tool.name[lang]}</strong>
         <span>{tool.short[lang]}</span>
         <span class="asset-type">{ui.assetTypes[assetType]}</span>
+        {tool.privacyLevel === 'local-only' && <span class="privacy-badge">{ui.privacyBadge}</span>}
       </span>
       {tool.isNew && <span class="badge">{ui.newest}</span>}
     </a>

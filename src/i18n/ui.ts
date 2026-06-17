@@ -11,9 +11,12 @@ const ui = {
     ariaPrimaryNav: '主要導覽',
     ariaFooterNav: '頁尾導覽',
     allTools: '全部工具',
+    toolsPageTitle: '全部免費線上工具',
+    toolsPageDescription: '瀏覽免費工具箱的所有免費線上工具，依分類整理，並可用上方搜尋快速找到需要的工具。',
     categories: '工具分類',
     popularTools: '熱門工具',
     newest: '最新工具',
+    privacyBadge: '🔒 本機處理',
     whyUseThisSite: '為什麼使用本站',
     faq: '常見問題',
     heroStats: {
@@ -54,6 +57,7 @@ const ui = {
     },
     privacy: {
       heading: '隱私與本機處理',
+      localOnly: '🔒 此工具完全在您的瀏覽器本機執行，不會將任何資料上傳到伺服器。',
       defaultNote: '這個工具主要在你的瀏覽器中執行。你輸入的內容不會送到 Free Tools Hub 的伺服器。',
     },
     monetization: {
@@ -110,9 +114,12 @@ const ui = {
     ariaPrimaryNav: 'Primary',
     ariaFooterNav: 'Footer',
     allTools: 'All tools',
+    toolsPageTitle: 'All free online tools',
+    toolsPageDescription: 'Browse every free Free Tools Hub tool, organized by category. Use the search box above to find what you need fast.',
     categories: 'Categories',
     popularTools: 'Popular tools',
     newest: 'Newest',
+    privacyBadge: '🔒 Local only',
     whyUseThisSite: 'Why use this site',
     faq: 'FAQ',
     heroStats: {
@@ -153,6 +160,7 @@ const ui = {
     },
     privacy: {
       heading: 'Privacy & local processing',
+      localOnly: '🔒 This tool runs entirely in your browser. No data is uploaded to any server.',
       defaultNote: 'This tool runs mainly in your browser. The content you enter is not sent to Free Tools Hub servers.',
     },
     monetization: {

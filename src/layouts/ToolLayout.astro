@@ -85,6 +85,7 @@ const breadcrumbItems = [
 
     <section class="content-section privacy-note">
       <h2>{ui.privacy.heading}</h2>
+      {tool.privacyLevel === 'local-only' && <p class="privacy-highlight">{ui.privacy.localOnly}</p>}
       <p>{content.privacyNote ?? ui.privacy.defaultNote}</p>
     </section>
 

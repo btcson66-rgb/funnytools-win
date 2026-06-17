@@ -1,8 +1,9 @@
 ---
+import ToolCard from '../../components/ToolCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../config/site';
 import { categories } from '../../data/categories';
-import { getToolsByCategory, liveTools } from '../../data/tools';
+import { getFeaturedTools, getNewTools, getToolsByCategory, liveTools } from '../../data/tools';
 import { home, homeFaq } from '../../i18n/pages';
 import { t } from '../../i18n/ui';
 import { categoryUrl, localePath } from '../../lib/url';
@@ -18,10 +19,14 @@ export function getStaticPaths() {
 const { lang } = Astro.props as { lang: Locale };
 const copy = home[lang];
 const ui = t(lang);
-const categorySummaries = categories.map((category) => ({
-  category,
-  count: getToolsByCategory(category.id).length,
-}));
+const featured = getFeaturedTools().slice(0, 6);
+const newest = getNewTools().slice(0, 6);
+const categorySummaries = categories
+  .map((category) => ({
+    category,
+    count: getToolsByCategory(category.id).filter((t) => t.status === 'live').length,
+  }))
+  .filter(({ count }) => count > 0);
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -60,6 +65,24 @@ const faqJsonLd = {
       <span class="stat-chip text-only">{ui.heroStats.noSignup}</span>
     </div>
   </section>
+
+  {featured.length > 0 && (
+    <section class="wrap content-section">
+      <h2>{ui.popularTools}</h2>
+      <div class="grid">
+        {featured.map((tool) => <ToolCard lang={lang} tool={tool} />)}
+      </div>
+    </section>
+  )}
+
+  {newest.length > 0 && (
+    <section class="wrap content-section">
+      <h2>{ui.newest}</h2>
+      <div class="grid">
+        {newest.map((tool) => <ToolCard lang={lang} tool={tool} />)}
+      </div>
+    </section>
+  )}
 
   <section id="categories" class="wrap content-section">
     <h2>{ui.categories}</h2>
