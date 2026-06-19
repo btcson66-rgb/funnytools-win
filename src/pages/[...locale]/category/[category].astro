@@ -4,14 +4,14 @@ import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
 import { categories, type Category } from '../../../data/categories';
-import { getToolsByCategory } from '../../../data/tools';
+import { getToolsByCategory, hasLiveTools } from '../../../data/tools';
 import { t } from '../../../i18n/ui';
 import { categoryUrl, localePath } from '../../../lib/url';
-import { breadcrumbJsonLd, collectionPageJsonLd } from '../../../lib/seo';
+import { breadcrumbJsonLd, categorySeoDescription, collectionPageJsonLd } from '../../../lib/seo';
 
 export function getStaticPaths() {
   return SITE.locales.flatMap((lang) =>
-    categories.map((categoryData) => ({
+    categories.filter((categoryData) => hasLiveTools(categoryData.id)).map((categoryData) => ({
       params: { locale: lang === SITE.defaultLocale ? undefined : lang, category: categoryData.id },
       props: { lang, categoryData },
     })),
@@ -21,22 +21,31 @@ export function getStaticPaths() {
 const { lang, categoryData } = Astro.props as { lang: Locale; categoryData: Category };
 const ui = t(lang);
 const categoryTools = getToolsByCategory(categoryData.id);
+const relatedCategories = (categoryData.relatedCategories ?? [])
+  .map((id) => categories.find((category) => category.id === id))
+  .filter((category): category is Category => category != null && category.id !== categoryData.id && hasLiveTools(category.id))
+  .slice(0, 3);
 const title = `${categoryData.icon} ${categoryData.name[lang]}`;
+const zhCategoryName = categoryData.name.zh.replace(/工具$/, '').trim();
+const seoTitle = lang === 'zh'
+  ? `${zhCategoryName}免費工具｜FunnyTools`
+  : `Free ${categoryData.name[lang]} Tools | FunnyTools`;
+const seoDescription = categorySeoDescription(lang, categoryData);
 const breadcrumbItems = [
   { name: ui.breadcrumbHome, href: localePath(lang) },
   { name: ui.allTools, href: localePath(lang, 'tools') },
   { name: categoryData.name[lang], href: categoryUrl(lang, categoryData.id) },
 ];
 const jsonLd = [
-  collectionPageJsonLd(lang, categoryData.name[lang], categoryData.description[lang], categoryUrl(lang, categoryData.id)),
+  collectionPageJsonLd(lang, categoryData.name[lang], seoDescription, categoryUrl(lang, categoryData.id)),
   breadcrumbJsonLd(breadcrumbItems),
 ];
 ---
 
 <BaseLayout
   lang={lang}
-  title={`${categoryData.name[lang]} | ${ui.categories}`}
-  description={categoryData.description[lang]}
+  title={seoTitle}
+  description={seoDescription}
   alternateSegments={['category', categoryData.id]}
   jsonLd={jsonLd}
 >
@@ -57,4 +66,34 @@ const jsonLd = [
       {categoryTools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
     </div>
   </section>
+
+  {categoryData.guide && (
+    <section class="wrap content-section category-guide" aria-labelledby="category-guide-title">
+      <h2 id="category-guide-title">
+        {lang === 'zh' ? `如何使用${categoryData.name[lang]}` : `How to use ${categoryData.name[lang]}`}
+      </h2>
+      {categoryData.guide[lang].overview.map((paragraph) => <p>{paragraph}</p>)}
+      <h3>{lang === 'zh' ? '使用前先確認' : 'Before you start'}</h3>
+      <ul class="check-list">
+        {categoryData.guide[lang].tips.map((tip) => <li>{tip}</li>)}
+      </ul>
+    </section>
+  )}
+
+  {relatedCategories.length > 0 && (
+    <section class="wrap content-section related-categories" aria-labelledby="related-categories-title">
+      <h2 id="related-categories-title">{ui.relatedCategories}</h2>
+      <div class="grid compact">
+        {relatedCategories.map((category) => (
+          <a class="tile category-tile" href={categoryUrl(lang, category.id)}>
+            <span class="tile-icon" aria-hidden="true">{category.icon}</span>
+            <span class="tile-body">
+              <strong>{category.name[lang]}</strong>
+              <span>{category.description[lang]}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
 </BaseLayout>

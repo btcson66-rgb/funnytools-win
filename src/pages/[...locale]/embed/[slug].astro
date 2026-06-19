@@ -35,5 +35,5 @@ const fullToolUrl = absoluteUrl(toolUrl(lang, tool.slug));
   description={content.short}
   fullToolUrl={fullToolUrl}
 >
-  <Widget labels={content.labels} />
+  <Widget labels={content.labels} slug={tool.slug} />
 </EmbedLayout>

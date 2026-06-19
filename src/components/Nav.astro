@@ -3,6 +3,7 @@ import LangSwitch from './LangSwitch.astro';
 import { SITE, type Locale } from '../config/site';
 import { t } from '../i18n/ui';
 import { localePath } from '../lib/url';
+import { categoryUrl } from '../lib/url';
 
 interface Props {
   lang: Locale;
@@ -23,6 +24,7 @@ const ui = t(lang);
       <a href={localePath(lang)}>{ui.nav.home}</a>
       <a href={localePath(lang, 'tools')}>{ui.nav.tools}</a>
       <a href={`${localePath(lang)}#categories`}>{ui.nav.categories}</a>
+      <a href={categoryUrl(lang, 'statistics')}>{lang === 'zh' ? '教育與統計' : 'Education & Statistics'}</a>
     </nav>
     <LangSwitch lang={lang} segments={segments} />
   </div>

@@ -16,6 +16,7 @@ import ExtractPdfPages from '../components/tools/ExtractPdfPages.astro';
 import FlowchartMaker from '../components/tools/FlowchartMaker.astro';
 import GpaCalculator from '../components/tools/GpaCalculator.astro';
 import GradeAverage from '../components/tools/GradeAverage.astro';
+import EducationStatisticsCalculator from '../components/tools/EducationStatisticsCalculator.astro';
 import ImageCompressor from '../components/tools/ImageCompressor.astro';
 import ImageResizer from '../components/tools/ImageResizer.astro';
 import ImagesToPdf from '../components/tools/ImagesToPdf.astro';
@@ -82,6 +83,15 @@ export const widgetBySlug = {
   'json-formatter': JsonFormatter,
   'random-student-picker': RandomStudentPicker,
   'grade-average': GradeAverage,
+  'percentile-rank-calculator': EducationStatisticsCalculator,
+  'z-score-calculator': EducationStatisticsCalculator,
+  't-score-calculator': EducationStatisticsCalculator,
+  'weighted-average-calculator': EducationStatisticsCalculator,
+  'class-rank-percentile-calculator': EducationStatisticsCalculator,
+  'normalized-score-converter': EducationStatisticsCalculator,
+  'teacher-exam-score-converter': EducationStatisticsCalculator,
+  'cronbach-alpha-calculator': EducationStatisticsCalculator,
+  'independent-samples-t-test-calculator': EducationStatisticsCalculator,
   'gpa-calculator': GpaCalculator,
   'random-wheel': RandomWheel,
   'what-to-eat': WhatToEat,

@@ -297,6 +297,10 @@ h2 {
   margin-top: 34px;
 }
 
+.anchor-section {
+  scroll-margin-top: 86px;
+}
+
 .section-head {
   display: grid;
   gap: 6px;
@@ -382,6 +386,62 @@ a.tile:hover {
 .tile-body strong {
   font-size: 1.06rem;
   line-height: 1.25;
+}
+
+.category-tile {
+  min-height: 100%;
+}
+
+.category-tile .tile-body {
+  flex: 1;
+}
+
+.category-tile h3,
+.category-tile p {
+  margin: 0;
+}
+
+.category-tile h3 {
+  font-size: 1.06rem;
+  line-height: 1.25;
+}
+
+.category-tile p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.category-tool-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 3px;
+}
+
+.category-tool-links a {
+  padding: 3px 8px;
+  border: 1px solid #d9e5ef;
+  border-radius: 999px;
+  background: #fbfcff;
+  color: var(--brand-2);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.category-tool-links a:hover {
+  border-color: rgba(62, 99, 221, 0.42);
+  background: #f3f6ff;
+}
+
+.category-cta {
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 5px;
+  color: var(--brand);
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 .tile-body span {
@@ -481,6 +541,27 @@ a.tile:hover {
 
 .tool-interaction {
   scroll-margin-top: 86px;
+}
+
+.formula-panel,
+.report-tip {
+  border-left: 4px solid var(--primary);
+  padding-left: 20px;
+}
+
+.formula-expression {
+  overflow-x: auto;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #f7f8ff;
+}
+
+.formula-expression code {
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
 .tool-widget {
@@ -1017,6 +1098,10 @@ textarea {
   .tile {
     min-height: 118px;
     padding-bottom: 44px;
+  }
+
+  .category-tile {
+    padding-bottom: 18px;
   }
 
   .tool-widget,

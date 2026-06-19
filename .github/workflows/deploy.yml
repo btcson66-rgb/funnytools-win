@@ -1,4 +1,4 @@
-# GitHub Pages source must be set to "GitHub Actions", and the repo name must be `freetool` for the `/freetool/` base to match.
+# GitHub Pages source must be set to "GitHub Actions"; the custom domain is provided by public/CNAME.
 name: Deploy Astro site to Pages
 
 on:

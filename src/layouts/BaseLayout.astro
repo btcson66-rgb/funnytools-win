@@ -40,6 +40,18 @@ const ogLocale = lang === 'zh' ? 'zh_TW' : 'en_US';
 const ogImage = customOgImage ?? defaultOgImage();
 const ogAlt = ogImageAlt ?? SITE.name[lang];
 const ui = t(lang);
+const adsenseEnabled = SITE.adsenseEnabled || SITE.features.adsense;
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline'${adsenseEnabled ? ' https://pagead2.googlesyndication.com https://www.googletagservices.com https://adservice.google.com https://*.adtrafficquality.google' : ''}`,
+  "style-src 'self' 'unsafe-inline'",
+  `img-src 'self' data: blob:${adsenseEnabled ? ' https://pagead2.googlesyndication.com https://*.googleusercontent.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.adtrafficquality.google' : ''}`,
+  `frame-src 'self'${adsenseEnabled ? ' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.adtrafficquality.google https://www.google.com' : ''}`,
+  `connect-src 'self'${adsenseEnabled ? ' https://pagead2.googlesyndication.com https://*.adtrafficquality.google https://googleads.g.doubleclick.net https://csi.gstatic.com' : ''}`,
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join('; ');
 ---
 
 <!doctype html>
@@ -47,7 +59,7 @@ const ui = t(lang);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagservices.com https://adservice.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://pagead2.googlesyndication.com https://*.googleusercontent.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; connect-src 'self' https://pagead2.googlesyndication.com; object-src 'none'; base-uri 'self'" />
+    <meta http-equiv="Content-Security-Policy" content={contentSecurityPolicy} />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="icon" type="image/svg+xml" href={assetPath('favicon.svg')} />
@@ -75,7 +87,7 @@ const ui = t(lang);
     <meta name="twitter:image:alt" content={ogAlt} />
     {jsonLdItems.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
     {
-      (SITE.adsenseEnabled || SITE.features.adsense) && (
+      adsenseEnabled && (
         <script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE.adsenseClient}`}

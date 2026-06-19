@@ -1,0 +1,271 @@
+---
+interface Props {
+  labels: Record<string, string>;
+  slug: string;
+}
+
+const { labels, slug } = Astro.props;
+const simpleFields: Record<string, { key: string; value: string; step?: string }[]> = {
+  'percentile-rank-calculator': [
+    { key: 'below', value: '24', step: '1' }, { key: 'equal', value: '1', step: '1' }, { key: 'total', value: '40', step: '1' },
+  ],
+  'z-score-calculator': [
+    { key: 'score', value: '82' }, { key: 'mean', value: '70' }, { key: 'sd', value: '10' },
+  ],
+  't-score-calculator': [{ key: 'z', value: '1.2' }],
+  'class-rank-percentile-calculator': [
+    { key: 'rank', value: '6', step: '1' }, { key: 'total', value: '40', step: '1' },
+  ],
+  'normalized-score-converter': [
+    { key: 'score', value: '82' }, { key: 'mean', value: '70' }, { key: 'sd', value: '10' },
+    { key: 'targetMean', value: '50' }, { key: 'targetSd', value: '10' },
+  ],
+};
+const fields = simpleFields[slug] ?? [];
+---
+
+<section class="tool-widget card education-stat-tool" data-stat-tool data-slug={slug} data-labels={JSON.stringify(labels)}>
+  {fields.length > 0 && (
+    <div class="form-grid stat-form-grid">
+      {fields.map((field) => (
+        <label>
+          <span>{labels[field.key]}</span>
+          <input data-field={field.key} type="number" inputmode="decimal" step={field.step ?? 'any'} value={field.value} />
+        </label>
+      ))}
+    </div>
+  )}
+
+  {slug === 'weighted-average-calculator' && <div class="stat-rows" data-rows></div>}
+
+  {slug === 'teacher-exam-score-converter' && (
+    <div class="exam-grid">
+      {[
+        ['written', 'writtenWeight', '80', '40'],
+        ['teaching', 'teachingWeight', '85', '40'],
+        ['interview', 'interviewWeight', '82', '20'],
+      ].map(([score, weight, scoreValue, weightValue]) => (
+        <fieldset>
+          <legend>{labels[score]}</legend>
+          <label><span>{labels[score]}</span><input data-field={score} type="number" step="any" value={scoreValue} /></label>
+          <label><span>{labels[weight]}</span><input data-field={weight} type="number" min="0" step="any" value={weightValue} /></label>
+        </fieldset>
+      ))}
+    </div>
+  )}
+
+  {slug === 'cronbach-alpha-calculator' && (
+    <label class="textarea-label">
+      <span>{labels.data}</span>
+      <textarea data-field="data" rows="8">4,3,4,5
+3,3,4,4
+5,4,5,5
+2,3,2,3
+4,4,3,4</textarea>
+    </label>
+  )}
+
+  {slug === 'independent-samples-t-test-calculator' && (
+    <div class="ttest-grid">
+      {['1', '2'].map((group, index) => (
+        <fieldset>
+          <legend>{labels[`group${group}`]}</legend>
+          <label><span>{labels.n}</span><input data-field={`n${group}`} type="number" min="2" step="1" value={index === 0 ? '30' : '32'} /></label>
+          <label><span>{labels.mean}</span><input data-field={`mean${group}`} type="number" step="any" value={index === 0 ? '78.4' : '73.1'} /></label>
+          <label><span>{labels.sd}</span><input data-field={`sd${group}`} type="number" min="0" step="any" value={index === 0 ? '8.2' : '9.5'} /></label>
+        </fieldset>
+      ))}
+    </div>
+  )}
+
+  <div class="actions stat-actions">
+    {slug === 'weighted-average-calculator' && <button class="btn ghost" type="button" data-add>{labels.add}</button>}
+    <button class="btn" type="button" data-calculate>{labels.calculate}</button>
+  </div>
+
+  <p class="form-error" data-error role="alert" hidden></p>
+  <div class="resultbox stat-results" data-results aria-live="polite" hidden></div>
+</section>
+
+<style>
+  .stat-form-grid { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+  .stat-actions { margin-top: 18px; }
+  .stat-rows { display: grid; gap: 10px; }
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+  .exam-grid, .ttest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .ttest-grid { grid-template-columns: repeat(2, 1fr); }
+  fieldset { display: grid; gap: 12px; margin: 0; padding: 16px; border: 1px solid var(--line); border-radius: 14px; }
+  legend { padding: 0 6px; color: var(--ink); font-weight: 900; }
+  .stat-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .stat-result-item { display: grid; gap: 6px; }
+  .stat-result-item span { color: var(--muted); font-size: .9rem; font-weight: 800; }
+  .stat-result-item strong { color: var(--ink); font-size: 1.35rem; font-variant-numeric: tabular-nums; }
+  @media (max-width: 760px) {
+    .stat-row, .exam-grid, .ttest-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-stat-tool]').forEach((root) => {
+    if (!(root instanceof HTMLElement)) return;
+    const slug = root.dataset.slug || '';
+    const labels = JSON.parse(root.dataset.labels || '{}');
+    const error = root.querySelector('[data-error]');
+    const results = root.querySelector('[data-results]');
+    const rows = root.querySelector('[data-rows]');
+
+    const field = (key) => {
+      const input = root.querySelector(`[data-field="${key}"]`);
+      return input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement ? input : null;
+    };
+    const number = (key) => Number(field(key)?.value);
+    const finite = (...values) => values.every(Number.isFinite);
+    const format = (value, digits = 3) => Number(value).toFixed(digits).replace(/\.0+$|(?<=\.\d*[1-9])0+$/g, '');
+    const showError = () => {
+      if (error instanceof HTMLElement) { error.textContent = labels.invalid; error.hidden = false; }
+      if (results instanceof HTMLElement) results.hidden = true;
+    };
+    const show = (items) => {
+      if (!(results instanceof HTMLElement)) return;
+      results.innerHTML = items.map(([label, value]) => `<div class="stat-result-item"><span>${label}</span><strong>${value}</strong></div>`).join('');
+      results.hidden = false;
+      if (error instanceof HTMLElement) error.hidden = true;
+    };
+
+    const addWeightedRow = (value = '', weight = '') => {
+      if (!(rows instanceof HTMLElement)) return;
+      const row = document.createElement('div');
+      row.className = 'stat-row';
+      row.innerHTML = `<label><span>${labels.value}</span><input data-value type="number" step="any" value="${value}"></label><label><span>${labels.weight}</span><input data-weight type="number" min="0" step="any" value="${weight}"></label><button class="btn ghost" type="button" data-remove>${labels.remove}</button>`;
+      row.querySelector('[data-remove]')?.addEventListener('click', () => row.remove());
+      rows.append(row);
+    };
+
+    function logGamma(z) {
+      const coefficients = [676.5203681218851, -1259.1392167224028, 771.3234287776531, -176.6150291621406, 12.507343278686905, -0.13857109526572012, 9.984369578019572e-6, 1.5056327351493116e-7];
+      if (z < 0.5) return Math.log(Math.PI) - Math.log(Math.sin(Math.PI * z)) - logGamma(1 - z);
+      z -= 1;
+      let x = 0.9999999999998099;
+      coefficients.forEach((coefficient, index) => { x += coefficient / (z + index + 1); });
+      const t = z + coefficients.length - 0.5;
+      return 0.5 * Math.log(2 * Math.PI) + (z + 0.5) * Math.log(t) - t + Math.log(x);
+    }
+    function betaFraction(a, b, x) {
+      const maxIterations = 200;
+      const epsilon = 3e-12;
+      const floor = 1e-30;
+      const qab = a + b;
+      const qap = a + 1;
+      const qam = a - 1;
+      let c = 1;
+      let d = 1 - qab * x / qap;
+      if (Math.abs(d) < floor) d = floor;
+      d = 1 / d;
+      let h = d;
+      for (let m = 1; m <= maxIterations; m += 1) {
+        const m2 = 2 * m;
+        let aa = m * (b - m) * x / ((qam + m2) * (a + m2));
+        d = 1 + aa * d; if (Math.abs(d) < floor) d = floor;
+        c = 1 + aa / c; if (Math.abs(c) < floor) c = floor;
+        d = 1 / d; h *= d * c;
+        aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
+        d = 1 + aa * d; if (Math.abs(d) < floor) d = floor;
+        c = 1 + aa / c; if (Math.abs(c) < floor) c = floor;
+        d = 1 / d;
+        const delta = d * c;
+        h *= delta;
+        if (Math.abs(delta - 1) < epsilon) break;
+      }
+      return h;
+    }
+    function regularizedBeta(x, a, b) {
+      if (x <= 0) return 0;
+      if (x >= 1) return 1;
+      const front = Math.exp(logGamma(a + b) - logGamma(a) - logGamma(b) + a * Math.log(x) + b * Math.log(1 - x));
+      return x < (a + 1) / (a + b + 2)
+        ? front * betaFraction(a, b, x) / a
+        : 1 - front * betaFraction(b, a, 1 - x) / b;
+    }
+
+    const calculate = () => {
+      if (slug === 'percentile-rank-calculator') {
+        const below = number('below'), equal = number('equal'), total = number('total');
+        if (!finite(below, equal, total) || ![below, equal, total].every(Number.isInteger) || below < 0 || equal < 1 || total < 1 || below + equal > total) return showError();
+        return show([[labels.result, format(100 * (below + 0.5 * equal) / total, 2)]]);
+      }
+      if (slug === 'z-score-calculator') {
+        const score = number('score'), mean = number('mean'), sd = number('sd');
+        if (!finite(score, mean, sd) || sd <= 0) return showError();
+        return show([[labels.result, format((score - mean) / sd, 3)]]);
+      }
+      if (slug === 't-score-calculator') {
+        const z = number('z');
+        if (!finite(z)) return showError();
+        return show([[labels.result, format(50 + 10 * z, 2)]]);
+      }
+      if (slug === 'class-rank-percentile-calculator') {
+        const rank = number('rank'), total = number('total');
+        if (!finite(rank, total) || !Number.isInteger(rank) || !Number.isInteger(total) || rank < 1 || total < 1 || rank > total) return showError();
+        return show([[labels.result, format(100 * (total - rank + 0.5) / total, 2)], [labels.top, `${format(100 * rank / total, 2)}%`]]);
+      }
+      if (slug === 'normalized-score-converter') {
+        const score = number('score'), mean = number('mean'), sd = number('sd'), targetMean = number('targetMean'), targetSd = number('targetSd');
+        if (!finite(score, mean, sd, targetMean, targetSd) || sd <= 0 || targetSd <= 0) return showError();
+        const z = (score - mean) / sd;
+        return show([[labels.zResult, format(z, 3)], [labels.result, format(targetMean + z * targetSd, 3)]]);
+      }
+      if (slug === 'weighted-average-calculator') {
+        const valid = Array.from(root.querySelectorAll('.stat-row')).map((row) => {
+          const valueInput = row.querySelector('[data-value]');
+          const weightInput = row.querySelector('[data-weight]');
+          return { value: Number(valueInput instanceof HTMLInputElement ? valueInput.value : NaN), weight: Number(weightInput instanceof HTMLInputElement ? weightInput.value : NaN) };
+        }).filter(({ value, weight }) => Number.isFinite(value) && Number.isFinite(weight) && weight > 0);
+        if (!valid.length) return showError();
+        const weightTotal = valid.reduce((sum, row) => sum + row.weight, 0);
+        const weightedSum = valid.reduce((sum, row) => sum + row.value * row.weight, 0);
+        return show([[labels.weightTotal, format(weightTotal, 3)], [labels.weightedSum, format(weightedSum, 3)], [labels.result, format(weightedSum / weightTotal, 3)]]);
+      }
+      if (slug === 'teacher-exam-score-converter') {
+        const scoreKeys = ['written', 'teaching', 'interview'];
+        const values = scoreKeys.map((key) => ({ score: number(key), weight: number(`${key}Weight`) }));
+        if (values.some(({ score, weight }) => !finite(score, weight) || weight < 0) || !values.some(({ weight }) => weight > 0)) return showError();
+        const weightTotal = values.reduce((sum, row) => sum + row.weight, 0);
+        const total = values.reduce((sum, row) => sum + row.score * row.weight, 0) / weightTotal;
+        return show([[labels.weightTotal, format(weightTotal, 2)], [labels.result, format(total, 3)]]);
+      }
+      if (slug === 'cronbach-alpha-calculator') {
+        const raw = field('data')?.value.trim() || '';
+        const matrix = raw.split(/\r?\n/).filter((line) => line.trim()).map((line) => line.trim().split(/[,\t; ]+/).map(Number));
+        const columnCount = matrix[0]?.length || 0;
+        if (matrix.length < 2 || columnCount < 2 || matrix.some((row) => row.length !== columnCount || row.some((value) => !Number.isFinite(value)))) return showError();
+        const variance = (values) => {
+          const mean = values.reduce((sum, value) => sum + value, 0) / values.length;
+          return values.reduce((sum, value) => sum + (value - mean) ** 2, 0) / (values.length - 1);
+        };
+        const itemVarianceSum = Array.from({ length: columnCount }, (_, column) => variance(matrix.map((row) => row[column]))).reduce((a, b) => a + b, 0);
+        const totalVariance = variance(matrix.map((row) => row.reduce((a, b) => a + b, 0)));
+        if (!(totalVariance > 0)) return showError();
+        const alpha = columnCount / (columnCount - 1) * (1 - itemVarianceSum / totalVariance);
+        return show([[labels.respondents, String(matrix.length)], [labels.items, String(columnCount)], [labels.result, format(alpha, 3)]]);
+      }
+      if (slug === 'independent-samples-t-test-calculator') {
+        const n1 = number('n1'), n2 = number('n2'), mean1 = number('mean1'), mean2 = number('mean2'), sd1 = number('sd1'), sd2 = number('sd2');
+        if (!finite(n1, n2, mean1, mean2, sd1, sd2) || !Number.isInteger(n1) || !Number.isInteger(n2) || n1 <= 1 || n2 <= 1 || sd1 <= 0 || sd2 <= 0) return showError();
+        const v1 = sd1 ** 2 / n1, v2 = sd2 ** 2 / n2;
+        const difference = mean1 - mean2;
+        const t = difference / Math.sqrt(v1 + v2);
+        const df = (v1 + v2) ** 2 / (v1 ** 2 / (n1 - 1) + v2 ** 2 / (n2 - 1));
+        const p = regularizedBeta(df / (df + t ** 2), df / 2, 0.5);
+        const pText = p < 0.001 ? '< .001' : format(p, 3).replace(/^0/, '');
+        return show([[labels.difference, format(difference, 3)], [labels.result, format(t, 3)], [labels.df, format(df, 2)], [labels.p, pText]]);
+      }
+    };
+
+    root.querySelector('[data-calculate]')?.addEventListener('click', calculate);
+    root.querySelector('[data-add]')?.addEventListener('click', () => addWeightedRow());
+    if (slug === 'weighted-average-calculator') {
+      addWeightedRow('80', '30'); addWeightedRow('90', '70');
+    }
+    calculate();
+  });
+</script>

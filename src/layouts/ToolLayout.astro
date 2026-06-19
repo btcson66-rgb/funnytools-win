@@ -15,6 +15,7 @@ import type { Category } from '../data/categories';
 import type { ToolMeta } from '../data/tools';
 import type { ToolContent } from '../i18n/tools/_types';
 import { t } from '../i18n/ui';
+import { toolSeoDescription, toolSeoTitle } from '../lib/seo';
 import { absoluteUrl, categoryUrl, localePath, toolUrl } from '../lib/url';
 
 interface Props {
@@ -28,6 +29,8 @@ interface Props {
 const { lang, tool, category, content, jsonLd } = Astro.props;
 const ui = t(lang);
 const currentUrl = absoluteUrl(toolUrl(lang, tool.slug));
+const seoTitle = toolSeoTitle(lang, content);
+const seoDescription = toolSeoDescription(lang, content, tool.privacyLevel === 'local-only');
 const breadcrumbItems = [
   { label: ui.breadcrumbHome, href: localePath(lang) },
   { label: ui.allTools, href: localePath(lang, 'tools') },
@@ -38,8 +41,8 @@ const breadcrumbItems = [
 
 <BaseLayout
   lang={lang}
-  title={content.seoTitle}
-  description={content.seoDescription}
+  title={seoTitle}
+  description={seoDescription}
   keywords={content.keywords}
   type="article"
   alternateSegments={['tools', tool.slug]}
@@ -58,6 +61,28 @@ const breadcrumbItems = [
       <h2 id="tool-interaction-title">{ui.sections.toolArea}</h2>
       <slot />
     </section>
+
+    {content.formula && (
+      <section class="content-section formula-panel">
+        <h2>{lang === 'zh' ? '公式與計算方式' : 'Formula and calculation'}</h2>
+        <p class="formula-expression"><code>{content.formula.expression}</code></p>
+        <p>{content.formula.explanation}</p>
+      </section>
+    )}
+
+    {content.educationApplication && (
+      <section class="content-section">
+        <h2>{lang === 'zh' ? '教育應用說明' : 'Educational applications'}</h2>
+        <p>{content.educationApplication}</p>
+      </section>
+    )}
+
+    {content.reportTip && (
+      <section class="content-section report-tip">
+        <h2>{lang === 'zh' ? 'APA／研究報告描述提示' : 'APA / research reporting tip'}</h2>
+        <p>{content.reportTip}</p>
+      </section>
+    )}
 
     <AdSlot />
     <SponsorBlock lang={lang} />

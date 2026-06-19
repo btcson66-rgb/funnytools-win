@@ -17,6 +17,12 @@ export interface ToolContent {
   caseStudies?: ToolPageCase[];
   faq: { q: string; a: string }[];
   labels: Record<string, string>;
+  formula?: {
+    expression: string;
+    explanation: string;
+  };
+  educationApplication?: string;
+  reportTip?: string;
   disclaimer?: string;
   privacyNote?: string;
 }

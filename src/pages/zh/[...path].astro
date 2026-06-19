@@ -1,6 +1,6 @@
 ---
 import { SITE } from '../../config/site';
-import { liveTools, getEmbeddableTools } from '../../data/tools';
+import { liveTools, getEmbeddableTools, hasLiveTools } from '../../data/tools';
 import { categories } from '../../data/categories';
 
 export function getStaticPaths() {
@@ -9,7 +9,7 @@ export function getStaticPaths() {
     { params: { path: undefined } },
     { params: { path: 'tools' } },
     ...liveTools.map((tool) => ({ params: { path: `tools/${tool.slug}` } })),
-    ...categories.map((c) => ({ params: { path: `category/${c.id}` } })),
+    ...categories.filter((c) => hasLiveTools(c.id)).map((c) => ({ params: { path: `category/${c.id}` } })),
     ...getEmbeddableTools().map((tool) => ({ params: { path: `embed/${tool.slug}` } })),
     ...legalPages.map((p) => ({ params: { path: p } })),
   ];

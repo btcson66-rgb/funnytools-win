@@ -54,7 +54,7 @@ export const tools: ToolMeta[] = [
     icon: '🍅',
     status: 'live',
     privacyLevel: 'local-only',
-    relatedTools: ['countdown-timer', 'break-reminder', 'stopwatch', 'date-difference', 'business-days'],
+    relatedTools: ['business-days', 'date-difference', 'countdown-timer', 'stopwatch'],
     assetType: 'tool',
     searchIntent: 'medium',
     shareIntent: 'medium',
@@ -76,7 +76,7 @@ export const tools: ToolMeta[] = [
     icon: '📝',
     status: 'live',
     privacyLevel: 'local-only',
-    relatedTools: ['character-counter', 'remove-empty-lines', 'remove-duplicate-lines', 'sort-lines', 'case-converter', 'json-formatter'],
+    relatedTools: ['remove-empty-lines', 'case-converter', 'character-counter', 'sort-lines'],
     assetType: 'tool',
     searchIntent: 'high',
     shareIntent: 'medium',
@@ -116,7 +116,7 @@ export const tools: ToolMeta[] = [
     icon: '👥',
     status: 'live',
     privacyLevel: 'local-only',
-    relatedTools: ['random-name-picker', 'random-student-picker', 'group-generator'],
+    relatedTools: ['random-student-picker', 'random-name-picker', 'seating-chart', 'random-number-picker'],
     assetType: 'tool',
     searchIntent: 'medium',
     shareIntent: 'medium',
@@ -544,7 +544,7 @@ export const tools: ToolMeta[] = [
     icon: '🏠',
     status: 'live',
     privacyLevel: 'local-only',
-    relatedTools: ['compound-interest', 'savings-goal', 'inflation'],
+    relatedTools: ['compound-interest', 'savings-goal', 'net-salary', 'inflation', 'overtime-pay', 'business-days'],
     assetType: 'calculator',
     searchIntent: 'high',
     shareIntent: 'low',
@@ -617,7 +617,7 @@ export const tools: ToolMeta[] = [
     icon: '🗜️',
     status: 'live',
     privacyLevel: 'local-only',
-    relatedTools: ['image-resizer', 'png-to-jpg', 'jpg-to-png'],
+    relatedTools: ['image-resizer', 'png-to-jpg', 'jpg-to-png', 'qr-code-generator'],
     assetType: 'tool',
     searchIntent: 'high',
     shareIntent: 'low',
@@ -707,7 +707,7 @@ export const tools: ToolMeta[] = [
     icon: '🧩',
     status: 'live',
     privacyLevel: 'local-only',
-    relatedTools: ['split-pdf', 'images-to-pdf', 'rotate-pdf'],
+    relatedTools: ['split-pdf', 'rotate-pdf', 'images-to-pdf', 'delete-pdf-pages'],
     assetType: 'tool',
     searchIntent: 'high',
     shareIntent: 'low',
@@ -940,11 +940,11 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'grade-average',
-    category: 'study',
+    category: 'statistics',
     icon: '🧮',
     status: 'live',
     privacyLevel: 'local-only',
-    relatedTools: ['gpa-calculator', 'random-student-picker', 'compound-interest'],
+    relatedTools: ['weighted-average-calculator', 'class-rank-percentile-calculator', 'normalized-score-converter', 'gpa-calculator'],
     assetType: 'calculator',
     searchIntent: 'high',
     shareIntent: 'medium',
@@ -953,9 +953,54 @@ export const tools: ToolMeta[] = [
     monetizationTags: ['adsense', 'sponsor'],
     featured: true,
     isNew: true,
-    updated: '2026-06-16',
-    name: { zh: '成績平均計算器', en: 'Grade Average Calculator' },
+    updated: '2026-06-18',
+    name: { zh: '成績平均計算器強化版', en: 'Grade Average Calculator' },
     short: { zh: '計算成績總分、簡單平均與加權平均。', en: 'Calculate simple and weighted averages from grade entries.' },
+  },
+  {
+    slug: 'percentile-rank-calculator', category: 'statistics', icon: 'PR', status: 'live', privacyLevel: 'local-only',
+    relatedTools: ['class-rank-percentile-calculator', 'z-score-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
+    name: { zh: 'PR 百分等級計算器', en: 'Percentile Rank Calculator' }, short: { zh: '依低於與同分人數計算百分等級（PR）。', en: 'Calculate percentile rank from counts below and equal to a score.' },
+  },
+  {
+    slug: 'z-score-calculator', category: 'statistics', icon: 'Z', status: 'live', privacyLevel: 'local-only',
+    relatedTools: ['t-score-calculator', 'normalized-score-converter', 'percentile-rank-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
+    name: { zh: 'Z 分數計算器', en: 'Z Score Calculator' }, short: { zh: '將原始分數轉換為相對於平均數的標準分數。', en: 'Convert a raw score into standard deviations from the mean.' },
+  },
+  {
+    slug: 't-score-calculator', category: 'statistics', icon: 'T', status: 'live', privacyLevel: 'local-only',
+    relatedTools: ['z-score-calculator', 'normalized-score-converter', 'teacher-exam-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
+    name: { zh: 'T 分數計算器', en: 'T Score Calculator' }, short: { zh: '將 Z 分數轉換為平均 50、標準差 10 的 T 分數。', en: 'Convert a z score to a T score with mean 50 and SD 10.' },
+  },
+  {
+    slug: 'weighted-average-calculator', category: 'statistics', icon: 'Σ', status: 'live', privacyLevel: 'local-only',
+    relatedTools: ['grade-average', 'teacher-exam-score-converter', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
+    name: { zh: '加權平均計算器', en: 'Weighted Average Calculator' }, short: { zh: '依各項數值與權重計算加權平均。', en: 'Calculate a weighted mean from values and weights.' },
+  },
+  {
+    slug: 'class-rank-percentile-calculator', category: 'statistics', icon: '🏅', status: 'live', privacyLevel: 'local-only',
+    relatedTools: ['percentile-rank-calculator', 'grade-average', 'teacher-exam-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
+    name: { zh: '排名百分比計算器', en: 'Class Rank Percentile Calculator' }, short: { zh: '依班級名次與總人數估算排名百分等級。', en: 'Estimate class-rank percentile from rank and class size.' },
+  },
+  {
+    slug: 'normalized-score-converter', category: 'statistics', icon: '↔', status: 'live', privacyLevel: 'local-only',
+    relatedTools: ['z-score-calculator', 't-score-calculator', 'percentile-rank-calculator'], assetType: 'calculator', searchIntent: 'medium', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
+    name: { zh: '常態化分數轉換工具', en: 'Normalized Score Converter' }, short: { zh: '將原始分數線性轉換到指定平均數與標準差。', en: 'Linearly convert a raw score to a target mean and standard deviation.' },
+  },
+  {
+    slug: 'teacher-exam-score-converter', category: 'statistics', icon: '📝', status: 'live', privacyLevel: 'local-only',
+    relatedTools: ['weighted-average-calculator', 'normalized-score-converter', 'grade-average'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'high', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
+    name: { zh: '教師甄試成績轉換模擬器', en: 'Teacher Exam Score Converter' }, short: { zh: '依筆試、口試與試教權重模擬加權總成績。', en: 'Simulate a weighted teacher-exam total from written, interview, and teaching scores.' },
+  },
+  {
+    slug: 'cronbach-alpha-calculator', category: 'statistics', icon: 'α', status: 'live', privacyLevel: 'local-only',
+    relatedTools: ['independent-samples-t-test-calculator', 'grade-average', 'z-score-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
+    name: { zh: 'Cronbach’s Alpha 計算器', en: 'Cronbach Alpha Calculator' }, short: { zh: '以受試者 × 題目的原始資料估算量表內部一致性。', en: 'Estimate internal consistency from respondent-by-item data.' },
+  },
+  {
+    slug: 'independent-samples-t-test-calculator', category: 'statistics', icon: 't', status: 'live', privacyLevel: 'local-only',
+    relatedTools: ['cronbach-alpha-calculator', 'z-score-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
+    name: { zh: '獨立樣本 t 檢定簡易計算器', en: 'Independent Samples t-test Calculator' }, short: { zh: '用兩組樣本數、平均數與標準差執行 Welch t 檢定。', en: 'Run a Welch independent-samples t test from summary statistics.' },
   },
   {
     slug: 'gpa-calculator',
@@ -1040,6 +1085,10 @@ export function getToolBySlug(slug: string): ToolMeta | undefined {
 
 export function getToolsByCategory(category: string): ToolMeta[] {
   return tools.filter((tool) => tool.category === category);
+}
+
+export function hasLiveTools(category: string): boolean {
+  return liveTools.some((tool) => tool.category === category);
 }
 
 export function getFeaturedTools(): ToolMeta[] {

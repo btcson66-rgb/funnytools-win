@@ -18,6 +18,10 @@ import flowchartContent from '../i18n/tools/flowchart';
 import groupGeneratorContent from '../i18n/tools/group-generator';
 import gpaCalculatorContent from '../i18n/tools/gpa-calculator';
 import gradeAverageContent from '../i18n/tools/grade-average';
+import {
+  classRankContent, cronbachAlphaContent, independentTTestContent, normalizedScoreContent,
+  percentileRankContent, tScoreContent, teacherExamContent, weightedAverageContent, zScoreContent,
+} from '../i18n/tools/education-statistics';
 import imageCompressorContent from '../i18n/tools/image-compressor';
 import imageResizerContent from '../i18n/tools/image-resizer';
 import imagesToPdfContent from '../i18n/tools/images-to-pdf';
@@ -81,6 +85,15 @@ export const contentBySlug = {
   'json-formatter': jsonFormatterContent,
   'random-student-picker': randomStudentContent,
   'grade-average': gradeAverageContent,
+  'percentile-rank-calculator': percentileRankContent,
+  'z-score-calculator': zScoreContent,
+  't-score-calculator': tScoreContent,
+  'weighted-average-calculator': weightedAverageContent,
+  'class-rank-percentile-calculator': classRankContent,
+  'normalized-score-converter': normalizedScoreContent,
+  'teacher-exam-score-converter': teacherExamContent,
+  'cronbach-alpha-calculator': cronbachAlphaContent,
+  'independent-samples-t-test-calculator': independentTTestContent,
   'gpa-calculator': gpaCalculatorContent,
   'random-wheel': randomWheelContent,
   'what-to-eat': whatToEatContent,

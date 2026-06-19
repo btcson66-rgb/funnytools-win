@@ -6,13 +6,13 @@ export const SITE = {
   basePath: '',
   locales: ['zh', 'en'] as Locale[],
   defaultLocale: 'zh' as Locale,
-  name: { zh: 'FunnyTools 免費工具箱', en: 'FunnyTools Free Tools Hub' },
+  name: { zh: 'FunnyTools 免費線上工具箱', en: 'FunnyTools' },
   tagline: {
     zh: '免費線上工具大全，打開網頁即可使用，免下載 App。',
     en: 'Free online tools for everyday work, study, files, money, and quick decisions.',
   },
   adsenseClient: 'ca-pub-7052036786750044',
-  // Loads the AdSense verification/auto-ads script site-wide (required for ad review).
+  // Keep enabled while the site is under AdSense review. Visible ad slots remain separately gated below.
   adsenseEnabled: true,
   features: {
     adsense: false,

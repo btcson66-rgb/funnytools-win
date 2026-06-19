@@ -11,8 +11,8 @@ const ui = {
     ariaPrimaryNav: '主要導覽',
     ariaFooterNav: '頁尾導覽',
     allTools: '全部工具',
-    toolsPageTitle: '免費線上工具大全｜免費工具箱',
-    toolsPageDescription: '50+ 種免費線上工具：薪資、貸款、計時、文字、隨機、圖片、PDF、製圖。免安裝、免註冊，手機即可使用，瀏覽器本機處理保護隱私。',
+    toolsPageTitle: '所有免費線上工具｜FunnyTools 工具列表',
+    toolsPageDescription: '瀏覽 FunnyTools 所有免費線上工具，包含 PDF、圖片、文字、隨機抽選、計時、薪資金錢、教學與統計工具。免安裝、不需註冊，支援手機與電腦，多數輸入內容會在瀏覽器本機處理。',
     toolsPageH1: '免費線上工具大全',
     toolsPageIntro: '免安裝、免註冊、支援手機與電腦，部分工具完全在瀏覽器本機處理，保護你的資料隱私。',
     toolsHowToUse: {
@@ -45,7 +45,7 @@ const ui = {
     homePrivacyHeading: '隱私與本機處理',
     homePopularLabel: '熱門',
     privacyBadge: '🔒 本機處理',
-    whyUseThisSite: '為什麼使用本站',
+    whyUseThisSite: '為什麼選擇 FunnyTools',
     faq: '常見問題',
     heroStats: {
       toolsLabel: "免費工具",
@@ -82,12 +82,12 @@ const ui = {
       codeLabel: 'Iframe 程式碼',
       copyButton: '複製嵌入碼',
       copied: '已複製',
-      poweredBy: '由 Free Tools Hub 提供',
+      poweredBy: '由 FunnyTools 提供',
     },
     privacy: {
       heading: '隱私與本機處理',
       localOnly: '🔒 此工具完全在您的瀏覽器本機執行，不會將任何資料上傳到伺服器。',
-      defaultNote: '這個工具主要在你的瀏覽器中執行。你輸入的內容不會送到 Free Tools Hub 的伺服器。',
+      defaultNote: '這個工具主要在你的瀏覽器中執行。你輸入的內容不會送到 FunnyTools 的伺服器。',
     },
     trust: {
       heading: '信任與使用提醒',
@@ -119,6 +119,7 @@ const ui = {
     breadcrumbHome: '首頁',
     lastUpdated: '最後更新',
     relatedTools: '相關工具',
+    relatedCategories: '相關分類',
     comingSoon: '即將推出',
     share: {
       copyLink: '複製連結',
@@ -135,10 +136,11 @@ const ui = {
       disclaimer: '免責聲明',
     },
     homeWhy: [
-      '品牌專注在實用工具：把教學、辦公、PDF、圖片、文字、隨機與生活試算集中整理。',
-      '免註冊、免安裝，打開網頁即可使用，降低臨時找工具的時間成本。',
-      '手機、平板與桌機都能操作，適合課堂、會議、文件處理與日常決策。',
-      '優先採用瀏覽器本機處理，並在工具頁標示資料處理方式與使用提醒。',
+      '免費使用：目前上線工具皆可免費開啟與操作。',
+      '不需註冊：沒有會員或登入流程，打開工具頁即可開始。',
+      '多數工具可在瀏覽器本機處理：文字、圖片與 PDF 不必為了操作而傳到本站伺服器。',
+      '手機與電腦都可用：版面會配合螢幕尺寸調整，方便不同裝置操作。',
+      '適合學生、老師、上班族與一般日常使用：依分類與情境快速找到需要的工具。',
     ],
   },
   en: {
@@ -151,8 +153,8 @@ const ui = {
     ariaPrimaryNav: 'Primary',
     ariaFooterNav: 'Footer',
     allTools: 'All tools',
-    toolsPageTitle: 'All Free Online Tools | Free Tools Hub',
-    toolsPageDescription: '50+ free online tools: salary, loans, timers, text, random, images, PDF, drawing. No install, no sign-up, works on mobile, processed locally for privacy.',
+    toolsPageTitle: 'All Free Online Tools | FunnyTools',
+    toolsPageDescription: 'Browse free FunnyTools for PDF, images, text, random picks, timers, money, teaching, and statistics. No install or sign-up; most run locally.',
     toolsPageH1: 'Free Online Tools Collection',
     toolsPageIntro: 'No install, no sign-up, works on mobile and desktop. Many tools process data locally in your browser for privacy.',
     toolsHowToUse: {
@@ -222,12 +224,12 @@ const ui = {
       codeLabel: 'Iframe code',
       copyButton: 'Copy embed code',
       copied: 'Copied',
-      poweredBy: 'Powered by Free Tools Hub',
+      poweredBy: 'Powered by FunnyTools',
     },
     privacy: {
       heading: 'Privacy & local processing',
       localOnly: '🔒 This tool runs entirely in your browser. No data is uploaded to any server.',
-      defaultNote: 'This tool runs mainly in your browser. The content you enter is not sent to Free Tools Hub servers.',
+      defaultNote: 'This tool runs mainly in your browser. The content you enter is not sent to FunnyTools servers.',
     },
     trust: {
       heading: 'Trust & usage note',
@@ -259,6 +261,7 @@ const ui = {
     breadcrumbHome: 'Home',
     lastUpdated: 'Last updated',
     relatedTools: 'Related tools',
+    relatedCategories: 'Related categories',
     comingSoon: 'Coming soon',
     share: {
       copyLink: 'Copy link',

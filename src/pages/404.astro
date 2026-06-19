@@ -1,26 +1,34 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ToolCard from '../components/ToolCard.astro';
+import { getFeaturedTools } from '../data/tools';
 import { localePath } from '../lib/url';
 
 const lang = 'zh';
+const popularTools = getFeaturedTools().slice(0, 6);
 ---
 
 <BaseLayout
   lang={lang}
-  title="找不到頁面 | Page not found"
-  description="找不到你要查看的頁面。This page could not be found."
+  title="找不到這個頁面 | FunnyTools"
+  description="找不到你要查看的頁面，請返回首頁或從所有工具與熱門工具中繼續瀏覽。"
   alternateSegments={[]}
   noindex={true}
 >
   <section class="wrap page-head">
     <p class="eyebrow">404</p>
-    <h1>找不到頁面</h1>
-    <p class="lead">你要查看的頁面可能已移動、刪除，或網址輸入有誤。</p>
-    <p class="lead">Page not found. The link may be outdated, moved, or typed incorrectly.</p>
+    <h1>找不到這個頁面</h1>
+    <p class="lead">你輸入的網址可能有誤，或頁面已經移動。你可以返回首頁，或從工具總覽重新選擇需要的功能。</p>
     <div class="hero-actions">
-      <a class="btn go" href={localePath('zh')}>回到中文首頁</a>
-      <a class="btn" href={localePath('en')}>English home</a>
+      <a class="btn go" href={localePath('zh')}>返回首頁</a>
       <a class="btn ghost" href={localePath('zh', 'tools')}>查看所有工具</a>
+    </div>
+  </section>
+
+  <section class="wrap content-section" aria-labelledby="popular-tools-heading">
+    <h2 id="popular-tools-heading">熱門工具推薦</h2>
+    <div class="grid">
+      {popularTools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
     </div>
   </section>
 </BaseLayout>

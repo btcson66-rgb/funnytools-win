@@ -20,16 +20,18 @@ const { lang } = Astro.props as { lang: Locale };
 const copy = home[lang];
 const ui = t(lang);
 const popularSlugs = [
-  'random-number-picker',
   'merge-pdf',
-  'random-group-generator',
-  'random-name-picker',
-  'word-counter',
+  'split-pdf',
   'image-compressor',
-  'pomodoro-timer',
   'qr-code-generator',
-  'age-calculator',
+  'word-counter',
+  'random-group-generator',
   'mortgage-payment',
+  'compound-interest',
+  'pomodoro-timer',
+  'business-days',
+  'json-formatter',
+  'seating-chart',
 ];
 const isLiveTool = (tool: ToolMeta | undefined): tool is ToolMeta => tool?.status === 'live';
 const popularTools = popularSlugs.map(getToolBySlug).filter(isLiveTool);
@@ -42,9 +44,9 @@ const searchTools = liveTools.map((tool) => ({
 const categorySummaries = categories
   .map((category) => ({
     category,
-    count: getToolsByCategory(category.id).filter((t) => t.status === 'live').length,
+    tools: getToolsByCategory(category.id).filter((t) => t.status === 'live'),
   }))
-  .filter(({ count }) => count > 0);
+  .filter(({ tools }) => tools.length > 0);
 const useCases = homeUseCases[lang].map((item) => ({
   ...item,
   tools: item.tools.map(getToolBySlug).filter(isLiveTool),
@@ -93,11 +95,11 @@ const popularItemListJsonLd = {
     <p class="lead">{copy.intro}</p>
     <div class="hero-actions">
       <a class="btn go" href={localePath(lang, 'tools')}>{copy.primaryCta}</a>
-      <a class="btn ghost" href="#home-search">{copy.secondaryCta}</a>
+      <a class="btn ghost" href="#popular-tools">{copy.secondaryCta}</a>
     </div>
     <div class="hero-stats" aria-label={ui.categories}>
       <span class="stat-chip">
-        <strong>{liveTools.length}+</strong>
+        <strong>{liveTools.length}</strong>
         <span>{ui.heroStats.toolsLabel}</span>
       </span>
       <span class="stat-chip">
@@ -144,7 +146,7 @@ const popularItemListJsonLd = {
   </section>
 
   {popularTools.length > 0 && (
-    <section class="wrap content-section">
+    <section id="popular-tools" class="wrap content-section anchor-section">
       <h2>{ui.popularTools}</h2>
       <div class="grid home-popular-grid">
         {popularTools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
@@ -152,35 +154,11 @@ const popularItemListJsonLd = {
     </section>
   )}
 
-  <section id="categories" class="wrap content-section">
-    <h2>{ui.categories}</h2>
-    <div class="grid">
-      {
-        categorySummaries.map(({ category, count }) => (
-          <a class="tile category-tile" href={categoryUrl(lang, category.id)}>
-            <span class="tile-icon" aria-hidden="true">{category.icon}</span>
-            <span class="tile-body">
-              <strong>{category.name[lang]}</strong>
-              <span>{category.description[lang]}</span>
-              <span class="category-count">{count}{ui.toolsCountSuffix}</span>
-            </span>
-          </a>
-        ))
-      }
-    </div>
-  </section>
-
-  {newest.length > 0 && (
-    <section class="wrap content-section">
-      <h2>{ui.newest}</h2>
-      <div class="grid">
-        {newest.map((tool) => <ToolCard lang={lang} tool={tool} />)}
-      </div>
-    </section>
-  )}
-
   <section class="wrap content-section">
-    <h2>{ui.homeUseCasesHeading}</h2>
+    <div class="section-head">
+      <h2>{ui.homeUseCasesHeading}</h2>
+      <p>{lang === 'zh' ? '從常見任務開始，直接開啟同一情境會用到的工具。' : 'Start with a common task and open the tools typically used for it.'}</p>
+    </div>
     <div class="use-case-grid">
       {
         useCases.map((item) => (
@@ -201,12 +179,51 @@ const popularItemListJsonLd = {
     </div>
   </section>
 
+  <section id="categories" class="wrap content-section">
+    <div class="section-head">
+      <h2>{ui.categories}</h2>
+      <p>{lang === 'zh' ? '依用途瀏覽目前已有工具的分類，並先查看每類常用工具。' : 'Browse active categories and preview commonly used tools in each one.'}</p>
+    </div>
+    <div class="grid category-grid">
+      {
+        categorySummaries.map(({ category, tools }) => (
+          <article class="tile category-tile">
+            <span class="tile-icon" aria-hidden="true">{category.icon}</span>
+            <span class="tile-body">
+              <h3>{category.name[lang]}</h3>
+              <p>{category.description[lang]}</p>
+              <span class="category-count">{tools.length}{ui.toolsCountSuffix}</span>
+              <span class="category-tool-links">
+                {tools.slice(0, 4).map((tool) => <a href={toolUrl(lang, tool.slug)}>{tool.name[lang]}</a>)}
+              </span>
+              <a class="category-cta" href={categoryUrl(lang, category.id)}>
+                {lang === 'zh' ? `前往${category.name[lang]}` : `View ${category.name[lang]}`}
+              </a>
+            </span>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
   <section class="wrap content-section why">
     <h2>{ui.whyUseThisSite}</h2>
     <ul class="check-list">
       {ui.homeWhy.map((item) => <li>{item}</li>)}
     </ul>
   </section>
+
+  {newest.length > 0 && (
+    <section class="wrap content-section">
+      <div class="section-head">
+        <h2>{ui.newest}</h2>
+        <p>{lang === 'zh' ? '查看近期新增或更新的工具，功能與限制會在各工具頁說明。' : 'See recently added or updated tools, with usage notes on each page.'}</p>
+      </div>
+      <div class="grid">
+        {newest.map((tool) => <ToolCard lang={lang} tool={tool} />)}
+      </div>
+    </section>
+  )}
 
   <section class="wrap content-section privacy-panel">
     <h2>{privacy.heading}</h2>
