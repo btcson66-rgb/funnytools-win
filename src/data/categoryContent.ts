@@ -860,14 +860,12 @@ export const categoryContent: Record<string, CategoryContent> = {
         { tip: '要公平點名，用隨機點名工具', toolSlug: 'random-student-picker' },
         { tip: '要安排教室座位，用座位表產生器', toolSlug: 'seating-chart' },
         { tip: '要替活動分組，用課堂分組工具', toolSlug: 'group-generator' },
-        { tip: '要算成績平均，用成績平均計算器', toolSlug: 'grade-average' },
         { tip: '要估算 GPA，用 GPA 計算器', toolSlug: 'gpa-calculator' },
       ],
       en: [
         { tip: 'For fair roll call, use the Random Student Picker', toolSlug: 'random-student-picker' },
         { tip: 'To arrange classroom seating, use the Seating Chart', toolSlug: 'seating-chart' },
         { tip: 'To group students for activities, use the Class Group Generator', toolSlug: 'group-generator' },
-        { tip: 'To average grades, use the Grade Average Calculator', toolSlug: 'grade-average' },
         { tip: 'To estimate GPA, use the GPA Calculator', toolSlug: 'gpa-calculator' },
       ],
     },
@@ -900,10 +898,6 @@ export const categoryContent: Record<string, CategoryContent> = {
       'group-generator': {
         zh: '為課堂活動或專案快速建立隨機分組，依組數或每組人數自動分配，省下手動排組的時間並降低偏心爭議。',
         en: 'Quickly create random groups for class activities by group count or size, saving time and avoiding bias.',
-      },
-      'grade-average': {
-        zh: '輸入各項成績計算總分、簡單平均與加權平均，適合老師結算學期成績或學生自行估算目前的平均表現。',
-        en: 'Enter grades to calculate totals, simple averages, and weighted averages for teachers and students.',
       },
       'gpa-calculator': {
         zh: '依各科學分與字母成績，以 4.3 制估算 GPA，方便申請學校、獎學金或交換計畫前先掌握自己的成績水準。',
