@@ -30,7 +30,8 @@ function truncateText(value: string, maxLength: number, locale: Locale): string 
 
 export function toolSeoTitle(lang: Locale, content: ToolContentForSeo): string {
   const sourceTitle = (content.seoTitle || content.name).replace(/\s+\|\s+/g, '｜');
-  return lang === 'zh' ? `${sourceTitle}｜FunnyTools` : `${sourceTitle} | FunnyTools`;
+  const conciseTitle = truncateText(sourceTitle, lang === 'zh' ? 42 : 52, lang);
+  return lang === 'zh' ? `${conciseTitle}｜FunnyTools` : `${conciseTitle} | FunnyTools`;
 }
 
 export function toolSeoDescription(lang: Locale, content: ToolContentForSeo, localOnly = false): string {

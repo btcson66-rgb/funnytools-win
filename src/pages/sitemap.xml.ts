@@ -5,12 +5,6 @@ import { hasLiveTools, liveTools } from '../data/tools';
 import { absoluteUrl, localePath } from '../lib/url';
 
 const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
-const buildDate = new Intl.DateTimeFormat('en-CA', {
-  timeZone: 'Asia/Taipei',
-  year: 'numeric',
-  month: '2-digit',
-  day: '2-digit',
-}).format(new Date());
 const mainToolSlugs = new Set(
   liveTools
     .filter((tool) => tool.featured)
@@ -20,7 +14,7 @@ const mainToolSlugs = new Set(
 
 interface SitemapPage {
   segments: string[];
-  lastmod: string;
+  lastmod?: string;
   changefreq: 'daily' | 'weekly' | 'monthly' | 'yearly';
   priority: string;
 }
@@ -52,7 +46,7 @@ function urlEntry(lang: Locale, page: SitemapPage): string {
   return [
     '<url>',
     `<loc>${escapeXml(loc)}</loc>`,
-    `<lastmod>${page.lastmod}</lastmod>`,
+    page.lastmod ? `<lastmod>${page.lastmod}</lastmod>` : '',
     `<changefreq>${page.changefreq}</changefreq>`,
     `<priority>${page.priority}</priority>`,
     alternateLinks(page.segments),
@@ -63,23 +57,21 @@ function urlEntry(lang: Locale, page: SitemapPage): string {
 export const GET: APIRoute = () => {
   const liveCategories = categories.filter((category) => hasLiveTools(category.id));
   const pages: SitemapPage[] = [
-    { segments: [], lastmod: buildDate, changefreq: 'daily', priority: '1.0' },
-    { segments: ['tools'], lastmod: buildDate, changefreq: 'weekly', priority: '0.9' },
+    { segments: [], changefreq: 'daily', priority: '1.0' },
+    { segments: ['tools'], changefreq: 'weekly', priority: '0.9' },
     ...liveCategories.map((category) => ({
       segments: ['category', category.id],
-      lastmod: buildDate,
       changefreq: 'weekly' as const,
       priority: '0.7',
     })),
     ...liveTools.map((tool) => ({
       segments: ['tools', tool.slug],
-      lastmod: tool.updated ?? buildDate,
+      lastmod: tool.updated,
       changefreq: 'monthly' as const,
       priority: mainToolSlugs.has(tool.slug) ? '0.8' : '0.6',
     })),
     ...legalPages.map((page) => ({
       segments: [page],
-      lastmod: buildDate,
       changefreq: 'yearly' as const,
       priority: '0.3',
     })),

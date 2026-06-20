@@ -5,7 +5,7 @@ const { labels } = Astro.props;
 <section class="tool-widget card" data-image-format data-labels={JSON.stringify(labels)}>
   <p class="note">{labels.localNote}</p><label><span>{labels.upload}</span><input data-file type="file" accept={labels.accept} /></label>
   <div class="form-grid two-col"><label><span>{labels.quality}</span><input data-quality type="range" min="40" max="100" value="85" /><output data-quality-value>85%</output></label>{labels.outputMime === 'image/jpeg' && <label><span>{labels.background}</span><input data-background type="color" value="#ffffff" /></label>}</div>
-  <p class="form-error" data-error role="alert" hidden></p><div class="preview-grid"><figure><figcaption>{labels.source}</figcaption><img data-source hidden alt="" /></figure><figure><figcaption>{labels.output}</figcaption><img data-output hidden alt="" /></figure></div>
+  <p class="form-error" data-error role="alert" hidden></p><div class="preview-grid"><figure><figcaption>{labels.source}</figcaption><img data-source hidden alt={labels.source} /></figure><figure><figcaption>{labels.output}</figcaption><img data-output hidden alt={labels.output} /></figure></div>
   <div class="stats-grid"><div><span>{labels.originalSize}</span><strong data-original>-</strong></div><div><span>{labels.outputSize}</span><strong data-size>-</strong></div></div>
   <div class="actions"><button class="btn go" type="button" data-download disabled>{labels.download}</button><button class="btn ghost" type="button" data-reset>{labels.reset}</button></div>
 </section>

@@ -37,6 +37,7 @@ if (!existsSync(sitemapPath)) {
   const sitemap = read(sitemapPath);
   const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((item) => new URL(item[1]));
   const titles = new Map();
+  const descriptions = new Map();
 
   for (const url of urls) {
     const relative = url.pathname === '/'
@@ -50,15 +51,41 @@ if (!existsSync(sitemapPath)) {
     }
 
     const html = read(file);
+    const markup = html
+      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<style[\s\S]*?<\/style>/gi, ' ');
     const visible = text(match(html, /<main[^>]*>([\s\S]*?)<\/main>/i));
     const title = text(match(html, /<title[^>]*>([\s\S]*?)<\/title>/i));
     const description = match(html, /<meta\s+name="description"\s+content="([^"]*)"/i);
     const canonical = match(html, /<link\s+rel="canonical"\s+href="([^"]*)"/i);
+    const h1Count = [...markup.matchAll(/<h1[\s>]/gi)].length;
+    const headings = [...markup.matchAll(/<h([1-6])[\s>]/gi)].map((item) => Number(item[1]));
+    const images = [...markup.matchAll(/<img\b[^>]*>/gi)].map((item) => item[0]);
 
     if (!title) errors.push(`缺少 title：${url.pathname}`);
     if (!description) errors.push(`缺少 meta description：${url.pathname}`);
     if (!canonical) errors.push(`缺少 canonical：${url.pathname}`);
-    if (!/<h1[\s>]/i.test(html)) errors.push(`缺少 H1：${url.pathname}`);
+    if (canonical && canonical !== url.href) errors.push(`canonical 不一致：${url.pathname} -> ${canonical}`);
+    if ([...title].length > 65) errors.push(`title 超過 65 字元：${url.pathname} (${[...title].length})`);
+    if ([...description].length < 70) errors.push(`meta description 少於 70 字元：${url.pathname} (${[...description].length})`);
+    if ([...description].length > 165) errors.push(`meta description 超過 165 字元：${url.pathname} (${[...description].length})`);
+    if (h1Count !== 1) errors.push(`H1 數量不是 1：${url.pathname} (${h1Count})`);
+    if (headings.some((level, index) => index > 0 && level > headings[index - 1] + 1)) {
+      errors.push(`標題層級跳級：${url.pathname}`);
+    }
+    if (images.some((image) => !/\salt=(?:"[^"]+"|'[^']+')/i.test(image))) {
+      errors.push(`圖片缺少非空 alt：${url.pathname}`);
+    }
+    for (const required of ['og:title', 'og:description', 'og:url', 'og:image']) {
+      if (!new RegExp(`<meta\\s+property="${required}"\\s+content="[^"]+"`, 'i').test(html)) {
+        errors.push(`缺少 ${required}：${url.pathname}`);
+      }
+    }
+    for (const required of ['twitter:card', 'twitter:title', 'twitter:description', 'twitter:image']) {
+      if (!new RegExp(`<meta\\s+name="${required}"\\s+content="[^"]+"`, 'i').test(html)) {
+        errors.push(`缺少 ${required}：${url.pathname}`);
+      }
+    }
     if (!/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js/.test(html)) {
       errors.push(`缺少 AdSense 審核程式：${url.pathname}`);
     }
@@ -68,6 +95,10 @@ if (!existsSync(sitemapPath)) {
     if (/^\/tools\/[^/]+\/$/.test(url.pathname) && visible.length < 700) {
       errors.push(`工具頁內容少於 700 字元：${url.pathname} (${visible.length})`);
     }
+    if (/^\/en\/tools\/[^/]+\/$/.test(url.pathname)) {
+      const wordCount = visible.match(/[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*/g)?.length ?? 0;
+      if (wordCount < 400) errors.push(`英文工具頁內容少於 400 詞：${url.pathname} (${wordCount})`);
+    }
     if (/^\/(?:en\/)?category\//.test(url.pathname) && visible.length < 500) {
       errors.push(`分類頁內容少於 500 字元：${url.pathname} (${visible.length})`);
     }
@@ -75,10 +106,16 @@ if (!existsSync(sitemapPath)) {
     const duplicates = titles.get(title) ?? [];
     duplicates.push(url.pathname);
     titles.set(title, duplicates);
+    const duplicateDescriptions = descriptions.get(description) ?? [];
+    duplicateDescriptions.push(url.pathname);
+    descriptions.set(description, duplicateDescriptions);
   }
 
   for (const [title, paths] of titles) {
     if (title && paths.length > 1) errors.push(`重複 title「${title}」：${paths.join(', ')}`);
+  }
+  for (const [description, paths] of descriptions) {
+    if (description && paths.length > 1) errors.push(`重複 description「${description}」：${paths.join(', ')}`);
   }
 
   if (urls.length < 100) warnings.push(`Sitemap 只有 ${urls.length} 個 URL，請確認是否誤刪頁面。`);

@@ -39,10 +39,10 @@ export const categoryContent: Record<string, CategoryContent> = {
   money: {
     title: {
       zh: '薪資與金錢免費工具｜薪水、貸款、複利試算 - FunnyTools',
-      en: 'Free Money & Salary Tools | Salary, Loan & Interest Calculators - FunnyTools',
+      en: 'Money & Salary Calculators | Free Tools - FunnyTools',
     },
     metaDescription: {
-      zh: '免費薪資與金錢試算工具：實領薪資、加班費、房貸月付、複利、儲蓄目標與通膨購買力。免註冊、瀏覽器本機計算，結果僅供估算參考。',
+      zh: '免費薪資與金錢試算工具：實領薪資、加班費、房貸月付、複利、儲蓄目標與通膨購買力。免註冊、瀏覽器本機計算，適合先比較方案與規劃預算，結果僅供估算參考。',
       en: 'Free money and salary calculators: take-home pay, overtime, mortgage, compound interest, savings goals, and inflation. No sign-up, local in-browser estimates.',
     },
     h1: { zh: '薪資與金錢免費工具', en: 'Free Money & Salary Tools' },
@@ -144,10 +144,10 @@ export const categoryContent: Record<string, CategoryContent> = {
   time: {
     title: {
       zh: '工作與時間免費工具｜番茄鐘、倒數計時、日期計算 - FunnyTools',
-      en: 'Free Work & Time Tools | Pomodoro, Countdown & Date Calculators - FunnyTools',
+      en: 'Work & Time Tools | Timers & Date Calculators - FunnyTools',
     },
     metaDescription: {
-      zh: '免費工作與時間管理工具：番茄鐘、倒數計時、碼錶、日期差、年齡與工作日計算。免安裝、手機可用，打開網頁立即開始。',
+      zh: '免費工作與時間管理工具：番茄鐘、倒數計時、碼錶、日期差、年齡與工作日計算。免安裝、手機與電腦皆可用，適合專注、排程、期限估算與日常時間規劃。',
       en: 'Free work and time tools: Pomodoro timer, countdown, stopwatch, date difference, age, and business-day calculators. No install, works on mobile.',
     },
     h1: { zh: '工作與時間免費工具', en: 'Free Work & Time Tools' },
@@ -252,10 +252,10 @@ export const categoryContent: Record<string, CategoryContent> = {
   random: {
     title: {
       zh: '隨機與抽籤免費工具｜抽號碼、抽名字、分組、轉盤 - FunnyTools',
-      en: 'Free Random & Picker Tools | Numbers, Names, Groups & Wheel - FunnyTools',
+      en: 'Random Pickers & Generators | Free Tools - FunnyTools',
     },
     metaDescription: {
-      zh: '免費隨機工具：隨機數字、姓名抽籤、隨機分組、骰子、轉盤、密碼與顏色產生器。公平即時、瀏覽器本機處理，適合課堂與活動。',
+      zh: '免費隨機工具：隨機數字、姓名抽籤、隨機分組、骰子、轉盤、密碼與顏色產生器。公平即時、瀏覽器本機處理，適合課堂、團體活動、公平抽選與日常決策使用。',
       en: 'Free random tools: random numbers, name picker, group maker, dice, wheel, password and color generators. Fair, instant, processed locally.',
     },
     h1: { zh: '隨機與抽籤免費工具', en: 'Free Random & Picker Tools' },
@@ -370,10 +370,10 @@ export const categoryContent: Record<string, CategoryContent> = {
   text: {
     title: {
       zh: '文字與寫作免費工具｜字數統計、大小寫、文字清理 - FunnyTools',
-      en: 'Free Text & Writing Tools | Word Count, Case & Text Cleanup - FunnyTools',
+      en: 'Text & Writing Tools | Count, Convert & Clean - FunnyTools',
     },
     metaDescription: {
-      zh: '免費文字與寫作工具：字數統計、字元計數、大小寫轉換、移除空白行與重複行、JSON 與 CSV 轉換。瀏覽器本機處理，文字不外傳。',
+      zh: '免費文字與寫作工具：字數統計、字元計數、大小寫轉換、移除空白行與重複行、JSON 與 CSV 轉換。瀏覽器本機處理，適合寫作、校稿、資料清理與開發工作。',
       en: 'Free text and writing tools: word and character counters, case converter, line cleanup, JSON and CSV converters. Processed locally in your browser.',
     },
     h1: { zh: '文字與寫作免費工具', en: 'Free Text & Writing Tools' },
@@ -494,7 +494,7 @@ export const categoryContent: Record<string, CategoryContent> = {
   image: {
     title: {
       zh: '圖片與檔案免費工具｜圖片壓縮、轉檔、尺寸調整 - FunnyTools',
-      en: 'Free Image & File Tools | Compress, Convert & Resize - FunnyTools',
+      en: 'Image Tools | Compress, Convert & Resize - FunnyTools',
     },
     metaDescription: {
       zh: '免費圖片工具：圖片壓縮、裁切、旋轉翻轉、尺寸調整、PNG／JPG／WebP 轉檔、轉 Base64 與 QR Code。全部在瀏覽器本機處理，圖片不上傳。',
@@ -615,10 +615,10 @@ export const categoryContent: Record<string, CategoryContent> = {
   pdf: {
     title: {
       zh: 'PDF 免費工具｜合併、拆分、旋轉、壓縮 PDF - FunnyTools',
-      en: 'Free PDF Tools | Merge, Split, Rotate & Compress PDF - FunnyTools',
+      en: 'PDF Tools | Merge, Split, Rotate & Compress - FunnyTools',
     },
     metaDescription: {
-      zh: '免費 PDF 工具：合併、拆分、旋轉、刪除與擷取頁面、重新排序、轉圖片與壓縮。瀏覽器本機處理，檔案不上傳，適合機密文件。',
+      zh: '免費 PDF 工具：合併、拆分、旋轉、刪除與擷取頁面、重新排序、轉圖片與壓縮。瀏覽器本機處理，檔案不上傳，適合整理報告、掃描文件與機密資料。',
       en: 'Free PDF tools: merge, split, rotate, delete and extract pages, reorder, convert to image, and compress. Processed locally — nothing uploaded.',
     },
     h1: { zh: 'PDF 免費工具', en: 'Free PDF Tools' },
@@ -727,10 +727,10 @@ export const categoryContent: Record<string, CategoryContent> = {
   draw: {
     title: {
       zh: '製圖與圖表免費工具｜2D CAD、流程圖、長條圖、圓餅圖 - FunnyTools',
-      en: 'Free Drawing & Chart Tools | 2D CAD, Flowchart, Bar & Pie Charts - FunnyTools',
+      en: 'Drawing & Chart Tools | CAD, Flowcharts & Charts - FunnyTools',
     },
     metaDescription: {
-      zh: '免費製圖與圖表工具：2D CAD 製圖板、線上繪圖板、流程圖、長條圖與圓餅圖製作，免安裝即可在瀏覽器繪製並匯出 PNG／SVG。',
+      zh: '免費製圖與圖表工具：2D CAD 製圖板、線上繪圖板、流程圖、長條圖與圓餅圖製作。免安裝即可在瀏覽器繪製並匯出 PNG／SVG，適合草稿與簡報。',
       en: 'Free drawing and chart tools: 2D CAD board, sketchpad, flowchart, bar chart, and pie chart makers. Draw in your browser and export PNG/SVG.',
     },
     h1: { zh: '製圖與圖表免費工具', en: 'Free Drawing & Chart Tools' },
@@ -821,10 +821,10 @@ export const categoryContent: Record<string, CategoryContent> = {
   study: {
     title: {
       zh: '學生與老師免費工具｜點名、分組、座位表、成績計算 - FunnyTools',
-      en: 'Free Tools for Students & Teachers | Roll Call, Groups & Grades - FunnyTools',
+      en: 'Student & Teacher Tools | Groups, Grades & Roll Call - FunnyTools',
     },
     metaDescription: {
-      zh: '免費教學工具：隨機點名、座位表、課堂分組、成績平均與 GPA 計算。瀏覽器本機處理，名單與成績不外傳，課堂即可使用。',
+      zh: '免費教學工具：隨機點名、座位表、課堂分組、成績平均與 GPA 計算。瀏覽器本機處理，名單與成績不外傳，適合老師日常備課、課堂活動與成績整理。',
       en: 'Free classroom tools: random student picker, seating chart, group maker, grade average, and GPA calculator. Processed locally for privacy.',
     },
     h1: { zh: '學生與老師免費工具', en: 'Free Tools for Students & Teachers' },
@@ -909,10 +909,10 @@ export const categoryContent: Record<string, CategoryContent> = {
   statistics: {
     title: {
       zh: '教育與統計免費工具｜標準差、百分比、平均計算 - FunnyTools',
-      en: 'Free Education & Statistics Tools | Standard Deviation, Percentage & Average - FunnyTools',
+      en: 'Education & Statistics Calculators | Free Tools - FunnyTools',
     },
     metaDescription: {
-      zh: '免費統計與教育計算工具：標準差、變異數、平均、中位數與百分比計算。瀏覽器本機運算、免註冊，適合學習、作業與資料分析。',
+      zh: '免費統計與教育計算工具：標準差、變異數、平均、中位數與百分比計算。瀏覽器本機運算、完全免註冊，適合學生自主學習、作業、教學研究與基礎資料分析。',
       en: 'Free statistics and education calculators: standard deviation, variance, mean, median, and percentages. Processed locally, ideal for study and analysis.',
     },
     h1: { zh: '教育與統計免費工具', en: 'Free Education & Statistics Tools' },

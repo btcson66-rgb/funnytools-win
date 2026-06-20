@@ -1,5 +1,6 @@
 import type { Locale } from '../config/site';
 import type { LocalizedToolContent, ToolContent } from '../i18n/tools/_types';
+import { toolContentEnhancements } from '../i18n/tools/content-enhancements';
 import ageCalculatorContent from '../i18n/tools/age-calculator';
 import base64Content from '../i18n/tools/base64';
 import breakReminderContent from '../i18n/tools/break-reminder';
@@ -149,5 +150,11 @@ export const contentBySlug = {
 export type ToolContentSlug = keyof typeof contentBySlug;
 
 export function getToolContent(slug: string, lang: Locale): ToolContent | undefined {
-  return contentBySlug[slug as ToolContentSlug]?.[lang];
+  const content = contentBySlug[slug as ToolContentSlug]?.[lang];
+  if (!content) return undefined;
+
+  return {
+    ...content,
+    ...toolContentEnhancements[slug]?.[lang],
+  };
 }
