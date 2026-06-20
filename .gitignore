@@ -6,3 +6,4 @@ dist
 cloudflare/
 *.token
 .codex-prompt.txt
+api token/
