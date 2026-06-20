@@ -11,8 +11,8 @@ const ui = {
     ariaPrimaryNav: '主要導覽',
     ariaFooterNav: '頁尾導覽',
     allTools: '全部工具',
-    toolsPageTitle: '所有免費線上工具｜FunnyTools 工具列表',
-    toolsPageDescription: '瀏覽 FunnyTools 所有免費線上工具，包含 PDF、圖片、文字、隨機抽選、計時、薪資金錢、教學與統計工具。免安裝、不需註冊，支援手機與電腦，多數輸入內容會在瀏覽器本機處理。',
+    toolsPageTitle: '所有免費線上工具｜FunnyTools 免費線上工具箱',
+    toolsPageDescription: '瀏覽 FunnyTools 免費線上工具箱的所有免費線上工具，包含 PDF、圖片、文字、隨機抽選、計時、薪資金錢、教學與統計工具。免安裝、不需註冊，支援手機與電腦，多數輸入內容會在瀏覽器本機處理。',
     toolsPageH1: '免費線上工具大全',
     toolsPageIntro: '免安裝、免註冊、支援手機與電腦，部分工具完全在瀏覽器本機處理，保護你的資料隱私。',
     toolsHowToUse: {
@@ -45,7 +45,7 @@ const ui = {
     homePrivacyHeading: '隱私與本機處理',
     homePopularLabel: '熱門',
     privacyBadge: '🔒 本機處理',
-    whyUseThisSite: '為什麼選擇 FunnyTools',
+    whyUseThisSite: '為什麼選擇 FunnyTools 免費線上工具箱',
     faq: '常見問題',
     heroStats: {
       toolsLabel: "免費工具",
@@ -82,12 +82,12 @@ const ui = {
       codeLabel: 'Iframe 程式碼',
       copyButton: '複製嵌入碼',
       copied: '已複製',
-      poweredBy: '由 FunnyTools 提供',
+      poweredBy: '由 FunnyTools 免費線上工具箱提供',
     },
     privacy: {
       heading: '隱私與本機處理',
       localOnly: '🔒 此工具完全在您的瀏覽器本機執行，不會將任何資料上傳到伺服器。',
-      defaultNote: '這個工具主要在你的瀏覽器中執行。你輸入的內容不會送到 FunnyTools 的伺服器。',
+      defaultNote: '這個工具主要在你的瀏覽器中執行。你輸入的內容不會送到 FunnyTools 免費線上工具箱的伺服器。',
     },
     trust: {
       heading: '信任與使用提醒',
@@ -138,8 +138,9 @@ const ui = {
     },
     languageSwitch: '切換語言',
     sections: {
+      capabilities: '這個工具可以做什麼',
       howToUse: '如何使用',
-      useCases: '適合用途',
+      useCases: '常見使用情境',
       audience: '適合誰使用',
       toolArea: '工具互動區',
       realExamples: '實際案例',
@@ -291,6 +292,7 @@ const ui = {
     },
     languageSwitch: 'Switch language',
     sections: {
+      capabilities: 'What this tool can do',
       howToUse: 'How to use',
       useCases: 'Use cases',
       audience: 'Who is it for',

@@ -5,6 +5,7 @@ interface ToolContent {
   seoTitle: string;
   seoDescription: string;
   keywords: string[];
+  capabilities?: string[];
   instructions: string[];
   examples: string[];
   audience?: string[];
@@ -21,9 +22,14 @@ export default {
     name: 'PDF 拆分',
     short: '將 PDF 每頁分開，或依自訂頁碼範圍輸出多份 PDF。',
     long: 'PDF 拆分工具適合從報告、合約、教材或掃描檔中取出需要的頁面。你可以把每一頁輸出成獨立 PDF，也能輸入 1-3, 5, 8-10 這類範圍建立分段檔案；處理過程在瀏覽器本機完成，不會把原始 PDF 上傳到本站或第三方伺服器。',
-    seoTitle: 'PDF 拆分 | 免費線上 PDF 分割工具',
-    seoDescription: '免費 PDF 拆分工具，可將 PDF 每頁分開，或依自訂頁碼範圍輸出 PDF。所有處理都在瀏覽器本機完成。',
+    seoTitle: 'PDF 拆分｜免費線上分割頁面與擷取範圍',
+    seoDescription: '免費將 PDF 逐頁拆分，或輸入 1-3、5、8-10 自訂頁碼範圍產生多份 PDF。檔案只在瀏覽器本機處理，不會上傳。',
     keywords: ['PDF 拆分', 'PDF 分割', '拆頁 PDF', 'split PDF', 'PDF page range'],
+    capabilities: [
+      '將一份 PDF 的每一頁拆成獨立檔案，適合逐頁歸檔或分別傳送。',
+      '依自訂頁碼範圍擷取章節、條款或簽名頁，每個範圍產生一份 PDF。',
+      '原始檔留在裝置中，工具只建立新的下載檔，不會覆寫內容。',
+    ],
     instructions: [
       '選取一份 PDF 檔案並讀取總頁數。',
       '選擇每頁拆成獨立檔案，或輸入自訂頁碼範圍。',
@@ -111,7 +117,7 @@ export default {
   en: {
     name: 'Split PDF',
     short: 'Split one PDF into single pages or custom page-range files.',
-    long: 'Split PDF helps you extract only the pages you need from reports, contracts, class material, scanned files, and application packets. Create one PDF per page or enter custom ranges such as 1-3, 5, 8-10 to build separate downloads. Processing runs locally in your browser with pdf-lib, so the original PDF is not uploaded to Free Tools Hub or a third-party server.',
+    long: 'Split PDF helps you extract only the pages you need from reports, contracts, class material, scanned files, and application packets. Create one PDF per page or enter custom ranges such as 1-3, 5, 8-10 to build separate downloads. Processing runs locally in your browser with pdf-lib, so the original PDF is not uploaded to FunnyTools or a third-party server.',
     seoTitle: 'Split PDF | Free online PDF splitter',
     seoDescription: 'Split a PDF into single pages or custom page ranges locally in your browser. Files are never uploaded.',
     keywords: ['split PDF', 'PDF splitter', 'extract PDF ranges', 'PDF page splitter', 'local PDF tool'],

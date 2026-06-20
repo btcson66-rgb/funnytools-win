@@ -5,9 +5,14 @@ export default {
     name: '圖片壓縮',
     short: '在瀏覽器內壓縮 JPG、PNG、WebP 圖片，快速取得較小的下載檔。',
     long: '圖片壓縮工具適合處理社群貼文、頭像、商品圖、截圖與部落格配圖。你可以調整品質、比較壓縮前後大小，並選擇保留格式或輸出 JPEG、WebP。處理過程在瀏覽器內完成，原圖不會上傳到伺服器，也能協助降低頁面載入負擔。',
-    seoTitle: '圖片壓縮 | 免費 JPG PNG WebP 本機壓縮工具',
-    seoDescription: '免費在瀏覽器內壓縮 JPG、PNG、WebP 圖片，可調整品質、比較檔案大小並下載結果，圖片不會上傳。',
+    seoTitle: '圖片壓縮｜免費縮小 JPG、PNG 與 WebP 檔案',
+    seoDescription: '免費壓縮 JPG、PNG、WebP 圖片，可調整品質、切換輸出格式，並比較壓縮前後容量。圖片只在瀏覽器處理，不會上傳。',
     keywords: ['圖片壓縮', 'JPG 壓縮', 'PNG 壓縮', 'WebP 壓縮', 'image compressor'],
+    capabilities: [
+      '壓縮 JPG、PNG 與 WebP，即時比較原始容量、輸出容量與節省比例。',
+      '透過品質滑桿在清晰度與檔案大小之間取得平衡。',
+      '保留原格式，或轉成 JPEG、WebP，方便網站、社群與附件使用。',
+    ],
     instructions: [
       '選擇一張 JPG、PNG 或 WebP 圖片，先確認原始預覽與檔案大小。',
       '調整品質滑桿，並選擇保留原格式、JPEG 或 WebP 輸出。',

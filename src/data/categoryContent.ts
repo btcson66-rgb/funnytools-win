@@ -25,7 +25,7 @@ export interface CategoryContent {
   useCases: Record<Locale, string[]>;
   /** How to choose the right tool (mapped to tools). */
   howToChoose: Record<Locale, HowToChoose[]>;
-  /** Category FAQ (5+). */
+  /** Category FAQ (3-5). */
   faq: Record<Locale, CategoryFaq[]>;
   /** Related category ids (3+). */
   relatedCategories: string[];
@@ -38,7 +38,7 @@ export interface CategoryContent {
 export const categoryContent: Record<string, CategoryContent> = {
   money: {
     title: {
-      zh: '薪資與金錢免費工具｜薪水、貸款、複利試算 - FunnyTools',
+      zh: '薪資與金錢免費工具｜薪水、貸款、複利試算 - FunnyTools 免費線上工具箱',
       en: 'Money & Salary Calculators | Free Tools - FunnyTools',
     },
     metaDescription: {
@@ -98,14 +98,12 @@ export const categoryContent: Record<string, CategoryContent> = {
         { q: '我輸入的金額會被上傳嗎？', a: '不會，所有計算都在你的瀏覽器本機完成，金額不會送到伺服器。' },
         { q: '房貸試算用的是哪種還款方式？', a: '房貸月付試算以本息平均攤還（每月固定金額）估算，實際方案可能不同，請以銀行條件為準。' },
         { q: '複利計算可以用在定期定額投資嗎？', a: '可以，複利計算器支援設定本金與每月投入估算長期累積，但不保證實際報酬。' },
-        { q: '這些工具適用哪個國家或地區？', a: '工具提供通用的數學試算，未內建特定國家的稅制，使用時請依當地規定調整。' },
       ],
       en: [
         { q: 'Are these money and salary tools free?', a: 'Yes, all tools are free with no sign-up or installation.' },
         { q: 'Can I use the results as official figures?', a: "No. All results are estimates and don't reflect individual tax rates or bank terms; rely on official notices or professional advice." },
         { q: 'Is the amount I enter uploaded?', a: 'No. All calculations run locally in your browser and are not sent to any server.' },
         { q: 'Which repayment method does the mortgage tool use?', a: 'It estimates equal monthly principal-and-interest payments; actual plans may differ by bank.' },
-        { q: "Do these tools apply to my country's tax system?", a: 'They offer general math estimates without built-in local tax rules, so adjust for your region.' },
       ],
     },
     relatedCategories: ['time', 'study', 'statistics'],
@@ -143,7 +141,7 @@ export const categoryContent: Record<string, CategoryContent> = {
 
   time: {
     title: {
-      zh: '工作與時間免費工具｜番茄鐘、倒數計時、日期計算 - FunnyTools',
+      zh: '工作與時間免費工具｜番茄鐘、倒數計時、日期計算 - FunnyTools 免費線上工具箱',
       en: 'Work & Time Tools | Timers & Date Calculators - FunnyTools',
     },
     metaDescription: {
@@ -156,6 +154,7 @@ export const categoryContent: Record<string, CategoryContent> = {
         '工作與時間分類集合了番茄鐘、倒數計時、碼錶、日期計算與工作日試算等免費工具，協助你把時間安排得更清楚。不論是想專注完成一項任務、控制會議或簡報的時間，還是要計算兩個日期之間的天數與工作日，都能在這裡找到對應的小工具。',
         '對需要長時間使用電腦的人來說，規律的專注與休息節奏特別重要。番茄鐘與休息提醒可以幫你維持「專注—休息」的循環，減少分心與久坐；倒數計時與碼錶則適合限時練習、運動間歇或量測單一工作花費的時間。',
         '日期差、年齡計算與工作日工具則著重在規劃，常用於估算專案工期、合約天數、活動倒數或請假安排。所有工具都在瀏覽器中即時運作，免註冊也免安裝，打開網頁就能開始使用，手機與電腦都適用。',
+        '這類工具特別適合上班族、自由工作者、學生與需要安排活動的人。你可以在開始工作前設定專注時段，在會議或練習中掌握秒數，也能在排程時先釐清截止日、實際工作天與休假影響，減少靠心算造成的日期誤差。',
       ],
       en: [
         'The Work & Time category collects free tools for timers, dates, and workday planning — a Pomodoro timer, countdown, stopwatch, date difference, age, and business-day calculators. Whether you want to focus, time a meeting, or count days between dates, there is a small tool for it here.',
@@ -251,7 +250,7 @@ export const categoryContent: Record<string, CategoryContent> = {
 
   random: {
     title: {
-      zh: '隨機與抽籤免費工具｜抽號碼、抽名字、分組、轉盤 - FunnyTools',
+      zh: '隨機與抽籤免費工具｜抽號碼、抽名字、分組、轉盤 - FunnyTools 免費線上工具箱',
       en: 'Random Pickers & Generators | Free Tools - FunnyTools',
     },
     metaDescription: {
@@ -264,6 +263,7 @@ export const categoryContent: Record<string, CategoryContent> = {
         '隨機工具分類提供各種公平、即時的抽選與產生器，包括隨機數字、姓名抽籤、分組、骰子、轉盤，以及密碼、顏色與 UUID 產生器。當你需要一個不帶偏心的結果時，這些工具都能在瀏覽器中一鍵完成。',
         '在教學與活動場合，隨機點名、抽籤與分組能讓每個人都有公平的機會，也讓流程更有趣；在日常生活中，二選一決定器與今天吃什麼則專治選擇困難，幫你快速放下猶豫。對開發者而言，密碼與 UUID 產生器則是處理帳號安全與測試資料的好幫手。',
         '這些隨機結果都在你的裝置本機產生，名單與輸入內容不會上傳到伺服器，使用起來安心。所有工具免費、免註冊，介面簡單，無論是課堂、聚會、直播抽獎還是日常決定，都能立刻派上用場。',
+        '老師可以用隨機抽籤與分組安排課堂活動，主辦人可用轉盤或抽名字進行活動抽獎，朋友聚會則能用骰子、隨機數字或二選一快速決定。遇到選擇困難時，先列出可接受的選項再交給工具抽選，也比反覆猶豫更有效率。',
       ],
       en: [
         'The Random category offers fair, instant pickers and generators — random numbers, name draws, grouping, dice, a spinning wheel, plus password, color, and UUID generators. Whenever you need an unbiased result, these tools deliver it in one click.',
@@ -369,7 +369,7 @@ export const categoryContent: Record<string, CategoryContent> = {
 
   text: {
     title: {
-      zh: '文字與寫作免費工具｜字數統計、大小寫、文字清理 - FunnyTools',
+      zh: '文字與寫作免費工具｜字數統計、大小寫、文字清理 - FunnyTools 免費線上工具箱',
       en: 'Text & Writing Tools | Count, Convert & Clean - FunnyTools',
     },
     metaDescription: {
@@ -382,6 +382,7 @@ export const categoryContent: Record<string, CategoryContent> = {
         '文字與寫作分類收錄了字數統計、大小寫轉換、文字清理與格式轉換等免費工具，讓寫作、編輯與資料整理更有效率。無論是要控制社群貼文字數、整理從各處複製來的雜亂文字，還是在不同資料格式之間轉換，都能在這裡快速處理。',
         '寫作者與學生常用字數與字元統計來符合作業或平台的長度限制；需要整理清單與資料的人，則能用移除空白行、移除重複行與行排序快速清理內容。對工程師與處理資料的人來說，JSON 格式化、Base64、URL 編碼與 CSV／JSON 互轉等工具，能省下不少手動處理的時間。',
         '所有工具都在瀏覽器本機執行，你貼上的文字不會送到伺服器，適合處理草稿、內部資料或含個人資訊的內容。介面直覺、結果即時顯示，多數工具還能一鍵複製或下載，方便接續後面的工作。',
+        '這個分類適合學生、編輯、行銷人員、內容創作者與開發者。寫作時可先檢查篇幅與閱讀時間，校稿前清除重複行或多餘空白，整理表格資料時轉換 CSV 與 JSON，發布前再統一大小寫與格式，能減少大量重複的手動修改。',
       ],
       en: [
         'The Text & Writing category includes free tools for counting, cleaning, and converting text so writing, editing, and data work go faster. From staying within character limits to tidying messy pasted text and converting between data formats, you can handle it here.',
@@ -493,7 +494,7 @@ export const categoryContent: Record<string, CategoryContent> = {
 
   image: {
     title: {
-      zh: '圖片與檔案免費工具｜圖片壓縮、轉檔、尺寸調整 - FunnyTools',
+      zh: '圖片與檔案免費工具｜圖片壓縮、轉檔、尺寸調整 - FunnyTools 免費線上工具箱',
       en: 'Image Tools | Compress, Convert & Resize - FunnyTools',
     },
     metaDescription: {
@@ -506,6 +507,7 @@ export const categoryContent: Record<string, CategoryContent> = {
         '圖片與檔案分類提供圖片壓縮、裁切、旋轉翻轉、尺寸調整、格式轉換、轉 Base64 與 QR Code 產生等免費工具，全部在瀏覽器本機處理，圖片不會上傳到任何伺服器。當你需要為網站、社群或表單準備合適的圖片時，這些工具能快速完成常見的處理。',
         '想讓網頁載入更快或符合上傳容量限制，可以用圖片壓縮與 JPG 轉 WebP 來縮小檔案；需要特定尺寸的大頭貼、縮圖或封面時，圖片尺寸調整能維持比例輸出新檔，圖片裁切則能拖曳框出想保留的部分。手機拍歪或掃描方向錯誤時，旋轉翻轉工具可一鍵轉正。',
         'PNG、JPG、WebP 之間的互轉工具能解決不同平台對格式的要求；圖片轉 Base64 方便把小圖示內嵌到 HTML 或 CSS；QR Code 產生器則把網址或文字變成方便掃描的條碼。因為所有處理都在本機完成，即使是含個人資訊或尚未公開的圖片也能安心使用，無需擔心檔案外流。',
+        '這類工具適合網站管理者、設計新手、社群小編、學生與需要提交線上表單的人。常見情境包括縮小上傳檔案、裁成指定比例、修正照片方向、把舊格式轉成平台支援的檔案，或替海報與名片製作 QR Code；輸出後仍建議檢查清晰度與尺寸。',
       ],
       en: [
         'The Image & File category provides free tools for compressing, cropping, rotating, resizing, and converting images, plus image-to-Base64 and QR codes — all processed locally in your browser so images are never uploaded. When you need the right image for a site, social post, or form, these tools handle common tasks quickly.',
@@ -614,7 +616,7 @@ export const categoryContent: Record<string, CategoryContent> = {
 
   pdf: {
     title: {
-      zh: 'PDF 免費工具｜合併、拆分、旋轉、壓縮 PDF - FunnyTools',
+      zh: 'PDF 免費工具｜合併、拆分、旋轉、壓縮 PDF - FunnyTools 免費線上工具箱',
       en: 'PDF Tools | Merge, Split, Rotate & Compress - FunnyTools',
     },
     metaDescription: {
@@ -627,6 +629,7 @@ export const categoryContent: Record<string, CategoryContent> = {
         'PDF 工具分類集合了合併、拆分、旋轉、刪除與擷取頁面、重新排序、轉圖片與壓縮等免費功能，協助你整理日常的文件、報告、合約與教材。所有 PDF 都在瀏覽器本機處理，檔案不會上傳到伺服器，特別適合處理含敏感資訊的文件。',
         '需要把多份檔案整合成一份時可以用 PDF 合併；想分發特定章節或抽出重點頁，則能用拆分、擷取或刪除頁面來精簡內容。掃描方向錯誤或頁序顛倒時，旋轉與重新排序工具能快速修正，讓文件閱讀與列印更順手。',
         '此外，PDF 轉圖片方便把內容貼到簡報或社群，PDF 壓縮則能在寄送 email 或上傳有容量限制的系統前縮小檔案。這些工具免費、免註冊，介面以「上傳—操作—下載」為主，不需要安裝任何桌面軟體就能完成大部分的文件整理工作。',
+        '學生與老師可以合併講義、拆出指定章節或把掃描圖片轉成 PDF；上班族可旋轉掃描頁面、重排合約附件並整理申請資料；行政與求職者則能刪除不必要頁面後再壓縮寄送。處理完成後請下載並逐頁確認順序、方向與內容是否正確。',
       ],
       en: [
         'The PDF category gathers free tools to merge, split, rotate, delete and extract pages, reorder, convert to images, and compress — helping you organize documents, reports, contracts, and teaching materials. All PDFs are processed locally, so files are never uploaded, which is ideal for sensitive documents.',
@@ -726,7 +729,7 @@ export const categoryContent: Record<string, CategoryContent> = {
 
   draw: {
     title: {
-      zh: '製圖與圖表免費工具｜2D CAD、流程圖、長條圖、圓餅圖 - FunnyTools',
+      zh: '製圖與圖表免費工具｜2D CAD、流程圖、長條圖、圓餅圖 - FunnyTools 免費線上工具箱',
       en: 'Drawing & Chart Tools | CAD, Flowcharts & Charts - FunnyTools',
     },
     metaDescription: {
@@ -738,7 +741,7 @@ export const categoryContent: Record<string, CategoryContent> = {
       zh: [
         '製圖工具分類提供簡易的 2D 製圖板、線上繪圖板、流程圖，以及長條圖與圓餅圖製作工具，讓你不必安裝專業 CAD 或繪圖軟體，就能在瀏覽器中畫出基本圖形、示意圖與資料圖表。無論是教學、報告還是隨手記錄想法，都能快速上手。',
         '2D CAD 製圖板適合在網格上畫線段、矩形、圓形與折線，做簡單的平面配置或尺寸示意；線上繪圖板提供畫筆、顏色與橡皮擦，適合自由手繪、註記與塗鴉；流程圖工具能建立節點與箭頭，畫出流程、決策樹或步驟圖；長條圖與圓餅圖製作工具則讓你輸入資料即時產生圖表，方便視覺化數據。',
-        '這些工具都著重在「簡單、即時」，並支援把成果匯出成 PNG 或 SVG，方便貼到文件、簡報或網頁中。所有繪製都在瀏覽器本機完成，免註冊也免安裝。若你需要的是複雜的工程製圖或專業向量編輯，仍建議搭配專門軟體使用。',
+        '這些工具都著重在「簡單、即時」，並支援把成果匯出成 PNG 或 SVG，方便貼到文件、簡報或網頁中。所有繪製都在瀏覽器本機完成，免註冊也免安裝。若你需要的是複雜的工程製圖或專業向量編輯，仍建議搭配專門軟體使用；簡報草圖、課堂圖解、流程溝通與基礎資料視覺化則很適合直接從這裡開始。',
       ],
       en: [
         'The Drawing category offers a simple 2D CAD board, an online sketchpad, a flowchart maker, and bar and pie chart makers, so you can draw basic shapes, diagrams, and data charts in the browser without professional CAD or design software — handy for teaching, reports, or jotting down ideas.',
@@ -820,7 +823,7 @@ export const categoryContent: Record<string, CategoryContent> = {
 
   study: {
     title: {
-      zh: '學生與老師免費工具｜點名、分組、座位表、成績計算 - FunnyTools',
+      zh: '學生與老師免費工具｜點名、分組、座位表、成績計算 - FunnyTools 免費線上工具箱',
       en: 'Student & Teacher Tools | Groups, Grades & Roll Call - FunnyTools',
     },
     metaDescription: {
@@ -833,6 +836,7 @@ export const categoryContent: Record<string, CategoryContent> = {
         '學生與老師分類整理了課堂常用的免費工具，包括隨機點名、座位表、分組、成績平均與 GPA 計算器，協助老師處理日常教學庶務，也讓學生方便管理自己的成績。這些工具操作簡單，打開網頁即可使用，很適合在課堂上即時操作。',
         '上課時，隨機點名與分組工具能讓提問與活動更公平、更有參與感；座位表產生器則方便開學安排或考試座位。需要結算成績時，成績平均與 GPA 計算器能快速算出總分、加權平均與 GPA，省去手動計算的時間與出錯的機會。',
         '所有工具都在瀏覽器本機執行，輸入的學生名單與成績不會上傳到伺服器，能更安心地處理班級資料。免費、免註冊、支援手機與電腦，無論是課堂教學、課後輔導還是學生自學，都能成為實用的小幫手。',
+        '老師可在課前安排座位與分組，課堂中用隨機點名增加互動，課後再用成績平均工具整理評量；學生則能自行試算 GPA 與目前成績，了解不同作業或考試權重的影響。使用名單時仍應刪除學號、電話等不必要的個人資料。',
       ],
       en: [
         'The Students & Teachers category collects free classroom tools — random student picker, seating chart, group maker, grade average, and GPA calculator — to help teachers handle daily tasks and let students manage their grades. They are simple to use and work right in the browser, even live in class.',
@@ -908,7 +912,7 @@ export const categoryContent: Record<string, CategoryContent> = {
 
   statistics: {
     title: {
-      zh: '教育與統計免費工具｜標準差、百分比、平均計算 - FunnyTools',
+      zh: '教育與統計免費工具｜標準差、百分比、平均計算 - FunnyTools 免費線上工具箱',
       en: 'Education & Statistics Calculators | Free Tools - FunnyTools',
     },
     metaDescription: {
@@ -921,6 +925,7 @@ export const categoryContent: Record<string, CategoryContent> = {
         '教育與統計分類提供與計算、數據分析相關的免費工具，包括標準差計算器與百分比計算器，協助學生、老師與需要快速處理數字的人完成常見的統計運算。不必安裝軟體，打開網頁輸入數字就能立即得到結果。',
         '想了解一組數據的離散程度，標準差計算器能一次算出平均、中位數、眾數、全距，以及母體與樣本的變異數與標準差；處理折扣、占比或成長率時，百分比計算器則提供三種常用的百分比運算，輸入後即時顯示答案。',
         '所有運算都在你的瀏覽器本機完成，輸入的數字不會上傳到伺服器，適合處理作業、報告或研究資料。這些工具的結果適合作為學習與分析的輔助參考；若用於正式研究或決策，仍建議搭配完整的統計方法與專業判斷。',
+        '這個分類適合正在學習統計的學生、準備教材的老師，以及需要快速檢查資料分布的研究與行政人員。你可以先用平均、中位數與標準差描述資料，再用百分比、加權平均或分數轉換處理成績與比例問題，並把計算過程當成理解公式的輔助。',
       ],
       en: [
         'The Education & Statistics category offers free tools for calculation and data analysis, including a standard deviation calculator and a percentage calculator, helping students, teachers, and anyone working with numbers complete common statistics quickly. No install needed — open the page, enter numbers, and get results instantly.',

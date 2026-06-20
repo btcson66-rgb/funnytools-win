@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../config/site';
 import { categories } from '../../data/categories';
 import { getNewTools, getToolBySlug, getToolsByCategory, liveTools, type ToolMeta } from '../../data/tools';
-import { home, homeFaq, homePrivacy, homeUseCases } from '../../i18n/pages';
+import { home, homeFaq, homePrivacy, homeSeoIntro, homeUseCases } from '../../i18n/pages';
 import { t } from '../../i18n/ui';
 import { absoluteUrl, categoryUrl, localePath, toolUrl } from '../../lib/url';
 import { organizationJsonLd, websiteJsonLd } from '../../lib/seo';
@@ -18,6 +18,7 @@ export function getStaticPaths() {
 
 const { lang } = Astro.props as { lang: Locale };
 const copy = home[lang];
+const seoIntro = homeSeoIntro[lang];
 const ui = t(lang);
 const popularSlugs = [
   'merge-pdf',
@@ -72,7 +73,7 @@ const webSiteLd = {
 const popularItemListJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: lang === 'zh' ? 'FunnyTools 熱門工具' : 'FunnyTools popular tools',
+  name: lang === 'zh' ? `${SITE.name.zh}熱門工具` : `${SITE.name.en} popular tools`,
   itemListElement: popularTools.map((tool, index) => ({
     '@type': 'ListItem',
     position: index + 1,
@@ -110,6 +111,13 @@ const popularItemListJsonLd = {
     </div>
   </section>
 
+  <section class="wrap content-section" aria-labelledby="home-intro-heading">
+    <div class="section-head">
+      <h2 id="home-intro-heading">{seoIntro.heading}</h2>
+    </div>
+    {seoIntro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+  </section>
+
   <section id="home-search" class="wrap content-section home-search-section">
     <div class="section-head">
       <h2>{ui.homeSearchHeading}</h2>
@@ -142,7 +150,6 @@ const popularItemListJsonLd = {
         ))
       }
     </div>
-    <p class="empty-state" data-home-search-empty aria-live="polite" hidden>{ui.homeSearchEmpty}</p>
   </section>
 
   {popularTools.length > 0 && (
@@ -245,36 +252,5 @@ const popularItemListJsonLd = {
     </dl>
   </section>
 
-  <script>
-    const homeSearchInput = document.querySelector('[data-home-search]');
-    const homeSearchEmpty = document.querySelector('[data-home-search-empty]');
-    const homeSearchItems = Array.from(document.querySelectorAll('[data-home-search-item]'));
-
-    if (homeSearchInput instanceof HTMLInputElement && homeSearchEmpty instanceof HTMLElement) {
-      const filterHomeTools = () => {
-        const query = homeSearchInput.value.trim().toLowerCase();
-        let matched = 0;
-        let shown = 0;
-
-        homeSearchItems.forEach((item) => {
-          if (!(item instanceof HTMLElement)) return;
-
-          const searchText = item.getAttribute('data-search') || '';
-          const isDefault = item.getAttribute('data-default') === 'true';
-          const isMatch = query === '' ? isDefault : searchText.includes(query);
-          const shouldShow = isMatch && shown < 12;
-
-          item.hidden = !shouldShow;
-
-          if (isMatch) matched += 1;
-          if (shouldShow) shown += 1;
-        });
-
-        homeSearchEmpty.hidden = query === '' || matched > 0;
-      };
-
-      homeSearchInput.addEventListener('input', filterHomeTools);
-      filterHomeTools();
-    }
-  </script>
+  <script src="/home-search.js" is:inline></script>
 </BaseLayout>

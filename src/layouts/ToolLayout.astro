@@ -62,6 +62,31 @@ const breadcrumbItems = [
       <slot />
     </section>
 
+    {
+      content.capabilities && content.capabilities.length > 0 && (
+        <section class="content-section">
+          <h2>{ui.sections.capabilities}</h2>
+          <ul class="check-list">
+            {content.capabilities.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      content.contentSections?.map((section) => (
+        <section class="content-section">
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          {section.items && section.items.length > 0 && (
+            <ul class="check-list">
+              {section.items.map((item) => <li>{item}</li>)}
+            </ul>
+          )}
+        </section>
+      ))
+    }
+
     {content.formula && (
       <section class="content-section formula-panel">
         <h2>{lang === 'zh' ? '公式與計算方式' : 'Formula and calculation'}</h2>

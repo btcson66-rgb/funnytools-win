@@ -5,8 +5,12 @@ interface ToolContent {
   seoTitle: string;
   seoDescription: string;
   keywords: string[];
+  capabilities?: string[];
   instructions: string[];
   examples: string[];
+  audience?: string[];
+  caseStudies?: { title: string; description: string }[];
+  notes?: string[];
   faq: { q: string; a: string }[];
   labels: Record<string, string>;
   disclaimer?: string;
@@ -18,9 +22,14 @@ export default {
     name: '今天吃什麼',
     short: '從餐點分類與自訂清單中隨機決定下一餐。',
     long: '今天吃什麼工具內建台灣常見、中式、日式、西式、速食與健康餐等分類，也能加入自己的候選清單。按下決定後會快速洗牌並抽出一個餐點，省下反覆猶豫的時間。',
-    seoTitle: '今天吃什麼 | 免費晚餐午餐隨機決定器',
-    seoDescription: '不知道今天吃什麼？從內建餐點分類或自訂清單中隨機抽出午餐、晚餐或宵夜選項。',
+    seoTitle: '今天吃什麼｜午餐、晚餐隨機選擇與美食決定器',
+    seoDescription: '不知道今天吃什麼？從台灣常見、中式、日式、西式、速食與健康餐分類中隨機選午餐或晚餐，也可加入自訂候選清單。',
     keywords: ['今天吃什麼', '晚餐吃什麼', '午餐選擇', 'food picker', 'what to eat'],
+    capabilities: [
+      '從台灣常見、中式、日式、西式、速食與健康餐等分類隨機抽出一個餐點。',
+      '把附近餐廳、團購選項或冰箱現有食材加入自訂清單再抽選。',
+      '重新抽取不同結果，用一個簡單限制結束午餐、晚餐或宵夜的選擇猶豫。',
+    ],
     instructions: [
       '勾選想納入的餐點分類。',
       '如果有自己的店家或餐點，輸入在自訂清單中，每行一個。',
@@ -32,6 +41,26 @@ export default {
       '把附近餐廳加入自訂清單，讓選擇更貼近生活圈。',
       '朋友聚餐時讓工具公平抽出餐廳方向。',
       '避免每天都花太久思考晚餐。',
+    ],
+    audience: [
+      '每天在午餐、晚餐或宵夜之間難以決定的上班族與學生。',
+      '想讓朋友、家人或同事從共同可接受清單中公平選一家餐廳的人。',
+      '有飲食限制、預算或距離條件，希望先篩選再隨機決定的使用者。',
+    ],
+    caseStudies: [
+      {
+        title: '公司午餐投票前先抽選',
+        description: '同事先列出步行十分鐘內、預算可接受的餐廳，再由工具抽出當天選項，減少在群組來回討論的時間。',
+      },
+      {
+        title: '週末家庭外食決定',
+        description: '家人先排除過敏、不吃與當日沒營業的選項，將其餘餐廳放入自訂清單，以隨機結果作為共同決定。',
+      },
+    ],
+    notes: [
+      '隨機結果不會判斷餐廳是否營業、距離、價格或排隊情況，出發前仍要查詢最新資訊。',
+      '有過敏、宗教、素食或醫療飲食限制時，請先移除不適合的候選選項。',
+      '如果抽到完全不想吃的結果，可把它視為偏好提示，調整清單後再抽一次。',
     ],
     faq: [
       {
@@ -49,6 +78,10 @@ export default {
       {
         q: '結果真的隨機嗎？',
         a: '工具使用瀏覽器的 Math.random 從候選項中選一個，適合日常決策與娛樂用途。',
+      },
+      {
+        q: '有過敏或飲食限制時可以用嗎？',
+        a: '可以，但請先取消不適合的分類，並只把確認可食用的餐點放入自訂清單。工具不會自動辨識食材與過敏原。',
       },
     ],
     labels: {
@@ -107,6 +140,10 @@ export default {
       {
         q: 'Is the choice random?',
         a: 'The tool uses browser Math.random to pick from the current candidate list, which is appropriate for everyday decisions and fun.',
+      },
+      {
+        q: 'Can I use it with allergies or dietary restrictions?',
+        a: 'Yes, but disable unsuitable categories and only add confirmed-safe meals to your custom list. The tool cannot identify ingredients or allergens.',
       },
     ],
     labels: {

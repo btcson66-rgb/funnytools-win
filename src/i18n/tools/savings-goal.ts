@@ -9,6 +9,7 @@ interface ToolContent {
   examples: string[];
   faq: { q: string; a: string }[];
   labels: Record<string, string>;
+  formula?: { expression: string; explanation: string };
   disclaimer?: string;
   privacyNote?: string;
 }
@@ -18,8 +19,8 @@ export default {
     name: '儲蓄目標計算器',
     short: '估算達成目標需要多久，或反推每月該存多少。',
     long: '儲蓄目標計算器提供兩種模式：估算以固定每月存款多久能達成目標，或在指定月數內反推需要的每月存款。可加入簡化年利率作為成長假設。',
-    seoTitle: '儲蓄目標計算器 | 免費 Savings Goal Calculator',
-    seoDescription: '計算達成儲蓄目標需要多久，或反推每月需要存多少，支援目前存款、目標金額與年利率。',
+    seoTitle: '儲蓄目標計算器｜達標時間與每月存款試算',
+    seoDescription: '輸入目標金額、目前存款、每月存款與年利率假設，估算達標時間，或反推指定月數內需要的每月存款。',
     keywords: ['儲蓄目標', '存錢計算', 'savings goal calculator', 'monthly savings'],
     instructions: [
       '選擇要計算「需要多久」或「每月要存多少」。',
@@ -33,7 +34,27 @@ export default {
       '比較不同每月存款金額對達標時間的影響。',
       '把模糊願望轉成更具體的存款節奏。',
     ],
+    formula: {
+      expression: '每月餘額 = 上月餘額 × (1 + 月利率) + 每月存款；月利率 = (1 + 年利率)^(1/12) − 1',
+      explanation: '「需要多久」模式逐月累計至目標；「每月存多少」模式以年金終值公式反推月存款。年利率由使用者輸入並假設全期固定，填 0 可排除利息或投資成長。',
+    },
     faq: [
+      {
+        q: '試算結果準確嗎？',
+        a: '工具會依固定月存款、固定年利率與月底存入的簡化模型運算；收入、支出與利率有變動時，實際達標時間會不同。',
+      },
+      {
+        q: '可以作為正式財務決策依據嗎？',
+        a: '不可以。請把結果當作規劃起點，重大儲蓄、投資或借貸決策仍應查證正式資料並評估自身風險。',
+      },
+      {
+        q: '為什麼實際金額可能不同？',
+        a: '實際結果會受存款日期、利率變動、手續費、稅務、臨時支出、未固定存款與投資波動影響。',
+      },
+      {
+        q: '利率、稅率或費用改變時怎麼辦？',
+        a: '請把年利率更新為目前適用的假設後重新試算；稅費目前不會自動扣除，應另行納入目標或每月存款規劃。',
+      },
       {
         q: '年利率一定要填嗎？',
         a: '不一定。可以填 0，代表不考慮利息或投資成長。',
@@ -71,7 +92,7 @@ export default {
       invalidInput: '請輸入有效且不為負的數值，目標金額需大於 0。',
       copied: '已複製',
     },
-    disclaimer: '此工具僅供估算與規劃參考，實際結果會受利率、費用、稅務、收入與支出變動影響。',
+    disclaimer: '本工具試算結果僅供參考，不構成投資、稅務、法律、貸款或財務建議。實際金額、利率、稅率、費用與還款條件，請以銀行、政府機關、雇主或專業人士提供的正式資料為準。年利率為使用者自行輸入的固定假設。',
   },
   en: {
     name: 'Savings Goal Calculator',
@@ -92,7 +113,27 @@ export default {
       'Compare how different monthly deposits change the timeline.',
       'Turn a broad savings idea into a concrete monthly plan.',
     ],
+    formula: {
+      expression: 'Monthly balance = prior balance × (1 + monthly rate) + monthly deposit; monthly rate = (1 + annual rate)^(1/12) − 1',
+      explanation: 'The time mode compounds month by month; the monthly-deposit mode rearranges the future-value-of-an-annuity formula. The user-entered annual rate is assumed constant, and 0 removes growth from the estimate.',
+    },
     faq: [
+      {
+        q: 'How accurate is the estimate?',
+        a: 'It follows a simplified model with fixed monthly deposits, a fixed annual rate, and month-end deposits. Real timing changes when income, spending, or rates vary.',
+      },
+      {
+        q: 'Can I use it as the basis for a formal financial decision?',
+        a: 'No. Treat it as a planning starting point and verify formal information and personal risk before major savings, investment, or borrowing decisions.',
+      },
+      {
+        q: 'Why can the actual amount differ?',
+        a: 'Deposit timing, changing rates, fees, taxes, irregular contributions, unexpected spending, and market movement can all change the outcome.',
+      },
+      {
+        q: 'What should I do when rates, taxes, or fees change?',
+        a: 'Update the annual-rate assumption and recalculate. Taxes and fees are not deducted automatically, so include them separately in the goal or monthly plan.',
+      },
       {
         q: 'Do I have to enter an annual rate?',
         a: 'No. Enter 0 when you do not want to assume interest or investment growth.',
@@ -130,6 +171,6 @@ export default {
       invalidInput: 'Enter valid non-negative numbers, with target amount greater than 0.',
       copied: 'Copied!',
     },
-    disclaimer: 'Estimate only. Actual results can differ because of rates, fees, taxes, income changes, and spending changes.',
+    disclaimer: 'Results are for reference only and do not constitute investment, tax, legal, lending, or financial advice. Confirm actual amounts, rates, taxes, fees, and repayment terms with banks, government agencies, employers, or qualified professionals. The annual rate is a user-entered fixed assumption.',
   },
 } satisfies Record<'zh' | 'en', ToolContent>;

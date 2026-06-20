@@ -5,9 +5,14 @@ export default {
     name: 'QR Code 產生器',
     short: '把網址、文字、Wi-Fi 資訊或聯絡內容轉成可下載的 QR Code。',
     long: 'QR Code 產生器適合製作活動連結、菜單、問卷、Wi-Fi 說明、聯絡資訊與短文字。輸入內容後可調整容錯等級與尺寸，立即預覽並下載 PNG。QR 內容在瀏覽器內產生，不需要後端服務，適合臨時製作與正式發布前檢查。',
-    seoTitle: 'QR Code 產生器 | 免費線上 QR PNG 製作工具',
-    seoDescription: '免費產生 QR Code，可輸入網址或文字，調整容錯等級與尺寸，預覽後下載 PNG 或複製圖片。',
+    seoTitle: 'QR Code 產生器｜免費製作網址與文字 QR Code',
+    seoDescription: '免費把網址、文字、Wi-Fi 或聯絡資訊製作成 QR Code，可調整容錯等級與尺寸，預覽後下載 PNG 或複製圖片。',
     keywords: ['QR Code 產生器', 'QR 製作', 'QRCode', 'QR Code Generator', '下載 QR Code'],
+    capabilities: [
+      '把網址、短文字、Wi-Fi 說明或聯絡資訊轉成手機可掃描的 QR Code。',
+      '依列印尺寸與使用環境選擇容錯等級，並輸出 128、256 或 512 像素 PNG。',
+      '產生後可先預覽、複製圖片或下載，方便放入海報、菜單、名片與簡報。',
+    ],
     instructions: [
       '輸入要放進 QR Code 的網址、文字、Wi-Fi 說明或聯絡內容。',
       '選擇容錯等級；一般連結可使用 M，需要印刷或小尺寸時可提高到 Q 或 H。',

@@ -8,9 +8,10 @@ import { categoryUrl } from '../lib/url';
 interface Props {
   lang: Locale;
   segments?: string[];
+  showLangSwitch?: boolean;
 }
 
-const { lang, segments = [] } = Astro.props;
+const { lang, segments = [], showLangSwitch = true } = Astro.props;
 const ui = t(lang);
 ---
 
@@ -23,9 +24,10 @@ const ui = t(lang);
     <nav class="nav-links" aria-label={ui.ariaPrimaryNav}>
       <a href={localePath(lang)}>{ui.nav.home}</a>
       <a href={localePath(lang, 'tools')}>{ui.nav.tools}</a>
+      {lang === 'zh' && <a href={localePath(lang, 'blog')}>文章</a>}
       <a href={`${localePath(lang)}#categories`}>{ui.nav.categories}</a>
       <a href={categoryUrl(lang, 'statistics')}>{lang === 'zh' ? '教育與統計' : 'Education & Statistics'}</a>
     </nav>
-    <LangSwitch lang={lang} segments={segments} />
+    {showLangSwitch && <LangSwitch lang={lang} segments={segments} />}
   </div>
 </header>

@@ -5,8 +5,8 @@ export default {
     name: '加班費試算器',
     short: '用時薪、加班時數與倍率估算不同類型的加班費。',
     long: '加班費試算器提供可編輯倍率，讓你用基本時薪、平日加班、延長工時、休息日與假日工時估算加班收入。工具會依照「時薪乘以時數乘以倍率」計算各類別金額與總額，適合做薪資核對前的草稿，但不代表官方法規或公司薪資系統結果。',
-    seoTitle: '加班費試算器 | 可編輯倍率 Overtime Pay Calculator',
-    seoDescription: '輸入時薪、加班時數與可編輯倍率，估算平日、延長工時、休息日與假日加班費。',
+    seoTitle: '加班費試算器｜可編輯時薪、時數與倍率',
+    seoDescription: '輸入基本時薪、各類加班時數與可編輯倍率，估算平日、延長工時、休息日及假日加班費與合計金額。',
     keywords: ['加班費試算器', 'overtime pay calculator', '加班倍率', '時薪計算'],
     instructions: [
       '輸入基本時薪，作為所有加班類別的計算基礎。',
@@ -45,7 +45,27 @@ export default {
       '實際加班費可能還涉及工時區間、補休、休息日定義、國定假日、上限與稅務扣除。',
       '此工具只做算術估算，不提供法律、勞務或薪資申報建議。',
     ],
+    formula: {
+      expression: '加班費總額 = Σ（基本時薪 × 各類加班時數 × 該類倍率）',
+      explanation: '平日、延長工時、休息日與假日倍率都可自行輸入。預設倍率只是示範，不是即時法規資料；請依所在地最新法規、勞動契約、公司制度或薪資單規則調整。',
+    },
     faq: [
+      {
+        q: '試算結果準確嗎？',
+        a: '工具會依輸入的時薪、時數與倍率做算術計算，但不會自動判斷分段工時、補休、假日認定或其他法規條件。',
+      },
+      {
+        q: '可以作為正式財務決策依據嗎？',
+        a: '不可以。正式加班費與薪資爭議請以法規、勞動契約、公司薪資制度、人資或專業人士提供的資料為準。',
+      },
+      {
+        q: '為什麼實際金額可能不同？',
+        a: '差異可能來自時薪換算方式、分段倍率、工時認定、補休、稅務扣除、公司制度與四捨五入。',
+      },
+      {
+        q: '利率、稅率或費用改變時怎麼辦？',
+        a: '本工具主要使用加班倍率；規則或扣除變動時，請依最新正式資料更新倍率，並另外核對稅務與其他扣除。',
+      },
       {
         q: '預設倍率是官方規定嗎？',
         a: '不是。預設值只是方便示範的起點，請依照你所在地的現行規定、契約或公司薪資規則修改。',
@@ -90,7 +110,7 @@ export default {
       invalidInput: '請輸入有效且不為負的數字。',
       copied: '已複製',
     },
-    disclaimer: '此工具只依使用者輸入的倍率做估算，不是官方、法律或薪資申報結果。加班規則會因地區、契約、職務與公司制度不同而改變，請自行確認最新規定。',
+    disclaimer: '本工具試算結果僅供參考，不構成投資、稅務、法律、貸款或財務建議。實際金額、利率、稅率、費用與還款條件，請以銀行、政府機關、雇主或專業人士提供的正式資料為準。加班倍率為使用者可編輯假設，會因地區、契約、職務與公司制度而異。',
     privacyNote: '時薪與工時資料只會在你的瀏覽器中計算，不會上傳到伺服器。',
   },
   en: {
@@ -137,7 +157,27 @@ export default {
       'Real overtime pay can depend on time bands, compensatory leave, rest-day definitions, holiday rules, caps, taxes, and deductions.',
       'This tool is arithmetic support only and does not provide legal, labor, payroll, or tax advice.',
     ],
+    formula: {
+      expression: 'Total overtime pay = Σ (base hourly rate × category hours × category multiplier)',
+      explanation: 'Weekday, extended, rest-day, and holiday multipliers are user-editable. Defaults are examples, not live legal data; replace them with current regulations, contract terms, employer policy, or payslip rules.',
+    },
     faq: [
+      {
+        q: 'How accurate is the estimate?',
+        a: 'The arithmetic follows your hourly rate, hours, and multipliers, but the tool does not determine time bands, compensatory leave, holiday status, or every legal condition.',
+      },
+      {
+        q: 'Can I use it as the basis for a formal financial decision?',
+        a: 'No. Formal overtime pay and payroll disputes should rely on regulations, employment contracts, employer payroll records, or qualified professional advice.',
+      },
+      {
+        q: 'Why can the actual amount differ?',
+        a: 'Differences can come from hourly-rate conversion, tiered multipliers, recognized hours, compensatory leave, tax deductions, employer policy, and rounding.',
+      },
+      {
+        q: 'What should I do when rates, taxes, or fees change?',
+        a: 'This tool mainly uses overtime multipliers. Update them from current formal sources, then review taxes and other deductions separately.',
+      },
       {
         q: 'Are the default multipliers official rules?',
         a: 'No. Defaults are sample assumptions only. Edit them to match current regulations, contracts, or company payroll rules.',
@@ -182,7 +222,7 @@ export default {
       invalidInput: 'Enter valid non-negative numbers.',
       copied: 'Copied',
     },
-    disclaimer: 'This tool only estimates from user-entered multipliers and is not an official, legal, or payroll filing calculation. Overtime rules vary by location, contract, job type, and company policy; verify current rules yourself.',
+    disclaimer: 'Results are for reference only and do not constitute investment, tax, legal, lending, or financial advice. Confirm actual amounts, rates, taxes, fees, and repayment terms with banks, government agencies, employers, or qualified professionals. Overtime multipliers are editable assumptions that vary by location, contract, job type, and employer policy.',
     privacyNote: 'Hourly rate and hour inputs are calculated locally in your browser and are not uploaded.',
   },
 } satisfies Record<'zh' | 'en', ToolContent>;

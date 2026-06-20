@@ -5,9 +5,14 @@ export default {
     name: '複利計算器',
     short: '用本金、每月投入、年化報酬率與年限估算未來金額。',
     long: '複利計算器可用來規劃儲蓄、長期投資或目標基金。輸入初始本金、每月投入、年化報酬率、年限與複利頻率後，工具會估算未來價值、累計投入與利息收益，並用年度圖表呈現成長趨勢。它適合做情境比較，但不代表任何投資保證。',
-    seoTitle: '複利計算器 | 免費估算 Compound Interest',
-    seoDescription: '用本金、每月投入、年化報酬率、年限與複利頻率估算未來價值、累計投入與利息收益。',
+    seoTitle: '複利計算器｜本金、每月投入與未來價值試算',
+    seoDescription: '輸入初始本金、每月投入、年化報酬率、年限與複利頻率，估算未來價值、累計投入與利息收益，並查看年度成長趨勢。',
     keywords: ['複利計算器', 'compound interest calculator', 'future value calculator', '投資試算'],
+    capabilities: [
+      '用初始本金、每月投入、年化報酬率與年限估算未來價值。',
+      '分開顯示累計投入與利息收益，避免把自己投入的金額誤當成報酬。',
+      '切換每月、每季、每年或每日複利，並透過年度圖表比較長期情境。',
+    ],
     instructions: [
       '輸入初始本金，也就是一開始已經準備好的金額。',
       '輸入每月固定投入金額；如果不追加投入，可填 0。',
@@ -45,7 +50,27 @@ export default {
       '報酬率不等於保證收益，實際投資還可能受到稅費、手續費、匯率與通膨影響。',
       '年度圖表用來觀察趨勢，不應被視為投資建議或對未來績效的承諾。',
     ],
+    formula: {
+      expression: '每月餘額 Bₘ = Bₘ₋₁ × (1 + i) + 每月投入；i = (1 + 年化報酬率 ÷ 複利次數)^(複利次數 ÷ 12) − 1',
+      explanation: '工具逐月計算，並假設每月投入在月底加入；年化報酬率、投入金額、年限與複利頻率都由使用者輸入。報酬率是假設值，不是即時產品利率或保證收益。',
+    },
     faq: [
+      {
+        q: '試算結果準確嗎？',
+        a: '工具會依固定報酬率、固定月底投入與所選複利頻率運算；市場波動、實際投入日與產品計息方式不同時，結果會改變。',
+      },
+      {
+        q: '可以作為正式財務決策依據嗎？',
+        a: '不可以。結果只適合比較情境，不應取代投資說明書、銀行資料、稅務資料或專業財務評估。',
+      },
+      {
+        q: '為什麼實際金額可能不同？',
+        a: '費用、稅務、匯率、通膨、市場漲跌、投入時間、利率變動與複利方式都可能造成差異。',
+      },
+      {
+        q: '利率、稅率或費用改變時怎麼辦？',
+        a: '請更新年化報酬率後重新試算，並注意工具不會自動扣除稅金與費用；必要時可用較低報酬率納入成本假設。',
+      },
       {
         q: '這是投資建議嗎？',
         a: '不是。工具只是依照你輸入的假設做數學估算，不保證任何投資報酬。',
@@ -86,7 +111,7 @@ export default {
       invalidInput: '請輸入有效且不為負的數字，年限需大於 0。',
       copied: '已複製',
     },
-    disclaimer: '僅供估算，不構成投資建議。實際結果可能因費用、稅務、匯率、通膨、市場波動與投入時點而不同。',
+    disclaimer: '本工具試算結果僅供參考，不構成投資、稅務、法律、貸款或財務建議。實際金額、利率、稅率、費用與還款條件，請以銀行、政府機關、雇主或專業人士提供的正式資料為準。年化報酬率是使用者輸入的固定假設，不代表保證收益。',
     privacyNote: '本金、投入金額與報酬率只會在你的瀏覽器中計算，不會上傳到伺服器。',
   },
   en: {
@@ -133,7 +158,27 @@ export default {
       'Return rate is an assumption, not a guarantee, and actual outcomes may be affected by taxes, fees, currency movement, and inflation.',
       'The yearly chart is for trend context only and should not be read as investment advice or a promise of future performance.',
     ],
+    formula: {
+      expression: 'Monthly balance Bₘ = Bₘ₋₁ × (1 + i) + monthly contribution; i = (1 + annual rate ÷ compounds)^(compounds ÷ 12) − 1',
+      explanation: 'The tool calculates month by month and assumes contributions arrive at month end. Rate, contribution, years, and compounding are user inputs; the rate is an assumption, not a live product rate or guaranteed return.',
+    },
     faq: [
+      {
+        q: 'How accurate is the estimate?',
+        a: 'It follows a fixed return, fixed month-end contribution, and selected compounding frequency. Market movement, actual deposit dates, and product calculation methods can change the result.',
+      },
+      {
+        q: 'Can I use it as the basis for a formal financial decision?',
+        a: 'No. Use it to compare scenarios, not as a replacement for product documents, bank information, tax records, or professional financial assessment.',
+      },
+      {
+        q: 'Why can the actual amount differ?',
+        a: 'Fees, taxes, exchange rates, inflation, market movement, deposit timing, changing rates, and compounding methods can all affect the outcome.',
+      },
+      {
+        q: 'What should I do when rates, taxes, or fees change?',
+        a: 'Update the annual-rate assumption and recalculate. Taxes and fees are not deducted automatically; a lower net rate can be used to model costs approximately.',
+      },
       {
         q: 'Is this investment advice?',
         a: 'No. It is a mathematical estimate based on your inputs and does not guarantee any investment return.',
@@ -174,7 +219,7 @@ export default {
       invalidInput: 'Enter valid non-negative numbers, with years greater than 0.',
       copied: 'Copied!',
     },
-    disclaimer: 'Estimate only and not investment advice. Actual results can differ because of fees, taxes, exchange rates, inflation, market movement, and contribution timing.',
+    disclaimer: 'Results are for reference only and do not constitute investment, tax, legal, lending, or financial advice. Confirm actual amounts, rates, taxes, fees, and repayment terms with banks, government agencies, employers, or qualified professionals. The annual return is a user-entered fixed assumption and is not guaranteed.',
     privacyNote: 'Principal, contribution, and rate inputs are calculated locally in your browser and are not uploaded.',
   },
 } satisfies Record<'zh' | 'en', ToolContent>;

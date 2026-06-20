@@ -1,0 +1,144 @@
+---
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { blogPosts, type BlogPost } from '../../../data/blogPosts';
+import { SITE } from '../../../config/site';
+import { absoluteUrl, localePath, toolUrl } from '../../../lib/url';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+
+export function getStaticPaths() {
+  return blogPosts.map((post) => ({
+    params: { locale: undefined, slug: post.slug },
+    props: { lang: 'zh', post },
+  }));
+}
+
+const { post } = Astro.props as { post: BlogPost };
+const lang = 'zh' as const;
+const articlePath = localePath(lang, 'blog', post.slug);
+const articleUrl = absoluteUrl(articlePath);
+const blogPath = localePath(lang, 'blog');
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.description,
+  datePublished: post.published,
+  dateModified: post.updated,
+  inLanguage: SITE.hreflang.zh,
+  mainEntityOfPage: articleUrl,
+  url: articleUrl,
+  author: { '@type': 'Organization', name: SITE.name.zh, url: SITE.url },
+  publisher: { '@type': 'Organization', name: SITE.name.zh, url: SITE.url },
+};
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: post.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: '首頁', href: localePath(lang) },
+  { name: '教學文章', href: blogPath },
+  { name: post.title, href: articlePath },
+]);
+---
+
+<BaseLayout
+  lang={lang}
+  title={post.title}
+  description={post.description}
+  type="article"
+  alternateSegments={['blog', post.slug]}
+  hasAlternates={false}
+  jsonLd={[articleLd, faqLd, breadcrumbLd]}
+>
+  <article class="wrap blog-article">
+    <Breadcrumb items={[
+      { label: '首頁', href: localePath(lang) },
+      { label: '教學文章', href: blogPath },
+      { label: post.title },
+    ]} />
+
+    <header class="article-head">
+      <p class="eyebrow">FunnyTools 實用教學</p>
+      <h1>{post.title}</h1>
+      <p class="lead">{post.summary}</p>
+      <p class="article-date">
+        發布：<time datetime={post.published}>{post.published}</time>
+        <span aria-hidden="true">｜</span>
+        最後更新：<time datetime={post.updated}>{post.updated}</time>
+      </p>
+    </header>
+
+    <aside class="tool-callout" aria-labelledby="related-tools-title">
+      <h2 id="related-tools-title">這篇文章會用到的工具</h2>
+      <div class="tool-links">
+        {post.toolLinks.map((tool) => (
+          <a href={toolUrl(lang, tool.slug)}>
+            <strong>{tool.label}</strong>
+            <span>{tool.note}</span>
+          </a>
+        ))}
+      </div>
+    </aside>
+
+    <div class="article-body">
+      {post.sections.map((section) => (
+        <section>
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          {section.subsections?.map((subsection) => (
+            <section class="article-subsection">
+              <h3>{subsection.heading}</h3>
+              {subsection.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            </section>
+          ))}
+        </section>
+      ))}
+    </div>
+
+    <section class="article-faq faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">常見問題 FAQ</h2>
+      <dl>
+        {post.faq.map((item) => (
+          <>
+            <dt>{item.question}</dt>
+            <dd>{item.answer}</dd>
+          </>
+        ))}
+      </dl>
+    </section>
+
+    <nav class="article-bottom" aria-label="文章下一步">
+      <a class="btn" href={blogPath}>← 回文章列表</a>
+      <a class="btn go" href={toolUrl(lang, post.toolLinks[0].slug)}>開啟{post.toolLinks[0].label}</a>
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .blog-article { max-width: 900px; padding-top: 34px; }
+  .article-head { padding-bottom: 12px; }
+  .article-head h1 { max-width: 860px; font-size: clamp(2rem, 6vw, 3.5rem); }
+  .article-date { margin: 18px 0 0; color: var(--muted); font-size: 0.92rem; font-weight: 700; }
+  .tool-callout { margin-top: 26px; padding: 20px; border: 1px solid #cfe6e3; border-radius: 14px; background: #f2fbfa; }
+  .tool-callout h2 { margin-bottom: 12px; }
+  .tool-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .tool-links a { display: grid; gap: 5px; padding: 14px; border: 1px solid rgba(15, 143, 140, 0.2); border-radius: 12px; background: #fff; }
+  .tool-links a:hover { border-color: var(--brand); }
+  .tool-links span { color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+  .article-body { margin-top: 36px; }
+  .article-body > section { margin-top: 38px; }
+  .article-body p, .article-faq dd { color: #384455; font-size: 1.04rem; line-height: 1.9; }
+  .article-subsection { margin-top: 26px; padding-left: 18px; border-left: 3px solid #d9e5ef; }
+  .article-subsection h3 { margin: 0 0 10px; font-size: 1.15rem; }
+  .article-faq { margin-top: 44px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+  .article-faq dt { font-size: 1.02rem; }
+  .article-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin: 28px 0 48px; }
+  @media (max-width: 760px) { .tool-links { grid-template-columns: 1fr; } .article-subsection { padding-left: 13px; } .article-faq { padding: 18px; } }
+</style>

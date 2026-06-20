@@ -5,6 +5,12 @@ export interface ToolPageCase {
   description: string;
 }
 
+export interface ToolPageSection {
+  heading: string;
+  paragraphs: string[];
+  items?: string[];
+}
+
 export interface ToolContent {
   name: string;
   short: string;
@@ -12,6 +18,8 @@ export interface ToolContent {
   seoTitle: string;
   seoDescription: string;
   keywords: string[];
+  capabilities?: string[];
+  contentSections?: ToolPageSection[];
   instructions: string[];
   examples: string[];
   audience?: string[];

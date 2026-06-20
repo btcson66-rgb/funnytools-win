@@ -1,0 +1,86 @@
+---
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { blogPosts } from '../../../data/blogPosts';
+import { SITE } from '../../../config/site';
+import { absoluteUrl, localePath, toolUrl } from '../../../lib/url';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+
+export function getStaticPaths() {
+  return [{ params: { locale: undefined }, props: { lang: 'zh' } }];
+}
+
+const lang = 'zh' as const;
+const title = '實用工具教學與生活指南';
+const description = 'FunnyTools 教學文章區，整理 PDF、圖片、隨機分組、文字處理、生活選擇與試算工具的白話使用指南。';
+const blogUrl = localePath(lang, 'blog');
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: '首頁', href: localePath(lang) },
+  { name: '教學文章', href: blogUrl },
+]);
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  description,
+  url: absoluteUrl(blogUrl),
+  inLanguage: SITE.hreflang.zh,
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: blogPosts.map((post, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: post.title,
+      url: absoluteUrl(localePath(lang, 'blog', post.slug)),
+    })),
+  },
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={title}
+  description={description}
+  alternateSegments={['blog']}
+  hasAlternates={false}
+  jsonLd={[collectionLd, breadcrumbLd]}
+>
+  <section class="wrap page-head blog-head">
+    <Breadcrumb items={[{ label: '首頁', href: localePath(lang) }, { label: '教學文章' }]} />
+    <p class="eyebrow">FunnyTools 使用指南</p>
+    <h1>實用工具教學與生活指南</h1>
+    <p class="lead">從問題出發，了解工具怎麼用、何時適合用，以及操作前後容易忽略的細節。</p>
+  </section>
+
+  <section class="wrap content-section" aria-labelledby="latest-guides">
+    <h2 id="latest-guides">最新文章</h2>
+    <div class="blog-grid">
+      {blogPosts.map((post) => (
+        <article class="blog-card">
+          <p class="blog-date"><time datetime={post.updated}>最後更新：{post.updated}</time></p>
+          <h3><a href={localePath(lang, 'blog', post.slug)}>{post.title}</a></h3>
+          <p>{post.summary}</p>
+          <div class="blog-tools" aria-label="文章對應工具">
+            {post.toolLinks.map((tool) => <a href={toolUrl(lang, tool.slug)}>{tool.label}</a>)}
+          </div>
+          <a class="blog-read" href={localePath(lang, 'blog', post.slug)} aria-label={`閱讀：${post.title}`}>閱讀完整文章 →</a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-head { padding-bottom: 8px; }
+  .blog-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .blog-card { display: grid; align-content: start; gap: 12px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); box-shadow: var(--shadow-soft); }
+  .blog-card h3, .blog-card p { margin: 0; }
+  .blog-card h3 { font-size: 1.25rem; line-height: 1.4; }
+  .blog-card h3 a:hover, .blog-read:hover { color: var(--brand); }
+  .blog-card > p:not(.blog-date) { color: var(--muted); line-height: 1.75; }
+  .blog-date { color: var(--muted); font-size: 0.88rem; font-weight: 700; }
+  .blog-tools { display: flex; flex-wrap: wrap; gap: 8px; }
+  .blog-tools a { padding: 5px 9px; border: 1px solid #d9e5ef; border-radius: 999px; background: #fbfcff; color: var(--brand-2); font-size: 0.84rem; font-weight: 800; }
+  .blog-read { justify-self: start; margin-top: 4px; color: var(--ink); font-weight: 900; }
+  @media (max-width: 760px) { .blog-grid { grid-template-columns: 1fr; } .blog-card { padding: 18px; } }
+</style>

@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { SITE, type Locale } from '../config/site';
 import { categories } from '../data/categories';
 import { hasLiveTools, liveTools } from '../data/tools';
+import { blogPosts } from '../data/blogPosts';
 import { absoluteUrl, localePath } from '../lib/url';
 
 const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
@@ -54,6 +55,18 @@ function urlEntry(lang: Locale, page: SitemapPage): string {
   ].join('');
 }
 
+function zhOnlyUrlEntry(page: SitemapPage): string {
+  const loc = absoluteUrl(localePath('zh', ...page.segments));
+  return [
+    '<url>',
+    `<loc>${escapeXml(loc)}</loc>`,
+    page.lastmod ? `<lastmod>${page.lastmod}</lastmod>` : '',
+    `<changefreq>${page.changefreq}</changefreq>`,
+    `<priority>${page.priority}</priority>`,
+    '</url>',
+  ].join('');
+}
+
 export const GET: APIRoute = () => {
   const liveCategories = categories.filter((category) => hasLiveTools(category.id));
   const pages: SitemapPage[] = [
@@ -81,7 +94,18 @@ export const GET: APIRoute = () => {
     .flatMap((lang) => pages.map((page) => urlEntry(lang, page)))
     .join('');
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${entries}</urlset>`;
+  const blogPages: SitemapPage[] = [
+    { segments: ['blog'], lastmod: blogPosts[0]?.updated, changefreq: 'weekly', priority: '0.7' },
+    ...blogPosts.map((post) => ({
+      segments: ['blog', post.slug],
+      lastmod: post.updated,
+      changefreq: 'monthly' as const,
+      priority: '0.6',
+    })),
+  ];
+  const blogEntries = blogPages.map(zhOnlyUrlEntry).join('');
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${entries}${blogEntries}</urlset>`;
 
   return new Response(xml, {
     headers: {

@@ -31,13 +31,13 @@ function truncateText(value: string, maxLength: number, locale: Locale): string 
 export function toolSeoTitle(lang: Locale, content: ToolContentForSeo): string {
   const sourceTitle = (content.seoTitle || content.name).replace(/\s+\|\s+/g, '｜');
   const conciseTitle = truncateText(sourceTitle, lang === 'zh' ? 42 : 52, lang);
-  return lang === 'zh' ? `${conciseTitle}｜FunnyTools` : `${conciseTitle} | FunnyTools`;
+  return lang === 'zh' ? `${conciseTitle}｜${SITE.name.zh}` : `${conciseTitle} | ${SITE.name.en}`;
 }
 
 export function toolSeoDescription(lang: Locale, content: ToolContentForSeo, localOnly = false): string {
   if (lang === 'zh') {
     const usage = localOnly
-      ? '本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 伺服器。'
+      ? `本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 ${SITE.name.zh} 伺服器。`
       : '本工具可免費使用且不需註冊；若操作需要網路傳輸，頁面會清楚說明資料處理方式與使用限制。';
     const purpose = endSentence(truncateText(content.seoDescription || content.short, 150 - [...usage].length - 1, lang));
     return `${purpose} ${usage}`;
@@ -81,8 +81,8 @@ export function websiteJsonLd(lang: Locale) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'FunnyTools',
-    alternateName: SITE.name.zh,
+    name: SITE.name[lang],
+    alternateName: 'FunnyTools',
     url: absoluteUrl(localePath(lang)),
     description: lang === 'zh'
       ? '免費線上工具箱，提供 PDF、圖片、文字、金錢、時間與教學工具。'
@@ -95,8 +95,8 @@ export function organizationJsonLd(lang: Locale) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'FunnyTools',
-    alternateName: SITE.name.zh,
+    name: SITE.name[lang],
+    alternateName: 'FunnyTools',
     url: absoluteUrl('/'),
     logo: absoluteUrl(assetPath('favicon.svg')),
     image: defaultOgImage(),
@@ -158,7 +158,7 @@ export function webApplicationJsonLd(
     url: absoluteUrl(toolUrl(lang, tool.slug)),
     description: toolSeoDescription(lang, content, tool.privacyLevel === 'local-only'),
     applicationCategory,
-    operatingSystem: 'All',
+    operatingSystem: 'Web',
     browserRequirements: 'Requires a modern web browser with JavaScript enabled.',
     inLanguage: SITE.hreflang[lang],
     keywords: content.keywords.join(', '),
@@ -166,6 +166,11 @@ export function webApplicationJsonLd(
       '@type': 'Offer',
       price: 0,
       priceCurrency: 'TWD',
+    },
+    provider: {
+      '@type': 'Organization',
+      name: SITE.name[lang],
+      url: absoluteUrl(localePath(lang)),
     },
   };
 }

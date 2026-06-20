@@ -9,6 +9,7 @@ interface ToolContent {
   examples: string[];
   faq: { q: string; a: string }[];
   labels: Record<string, string>;
+  formula?: { expression: string; explanation: string };
   disclaimer?: string;
   privacyNote?: string;
 }
@@ -32,7 +33,27 @@ export default {
       '比較不同扣繳或自提比例對實領薪資的影響。',
       '用公司提供的最新費率重算薪資情境。',
     ],
+    formula: {
+      expression: '實領薪資 = 月薪 + 固定津貼 − 月薪 ×（勞保率 + 健保率 + 勞退自提率 + 扣繳稅率）− 其他固定扣除',
+      explanation: '所有費率與固定扣除都由使用者輸入；頁面上的預設值只是示範假設，不是即時官方費率。請依最新政府公告、公司薪資單或人資資料自行調整。',
+    },
     faq: [
+      {
+        q: '試算結果準確嗎？',
+        a: '結果會依輸入值與簡化公式正確運算，但不會自動套用個人級距、眷屬、補充保費、免稅項目或公司制度，因此只能作為估算。',
+      },
+      {
+        q: '可以作為正式財務決策依據嗎？',
+        a: '不可以。正式薪資、報稅或財務決策請以政府公告、公司薪資單、人資資料或專業人士意見為準。',
+      },
+      {
+        q: '為什麼實際金額可能不同？',
+        a: '實際金額可能受到投保級距、扣繳方式、津貼性質、個人稅務狀況、公司制度與四捨五入影響。',
+      },
+      {
+        q: '利率、稅率或費用改變時怎麼辦？',
+        a: '請查閱最新官方或公司資料，並在欄位中更新各項費率與固定扣除後重新試算。',
+      },
       {
         q: '預設費率是官方最新法規嗎？',
         a: '不是。預設值只是方便試算的假設，所有費率都可以修改，請依最新法規或薪資單確認。',
@@ -65,7 +86,7 @@ export default {
       invalidInput: '請輸入有效且不小於 0 的數字。',
       copied: '已複製',
     },
-    disclaimer: '此工具不是官方薪資、稅務或法律計算器。所有保險、稅務、退休與扣繳費率都只是可編輯假設，請以最新法規、公司薪資單或專業意見為準。',
+    disclaimer: '本工具試算結果僅供參考，不構成投資、稅務、法律、貸款或財務建議。實際金額、利率、稅率、費用與還款條件，請以銀行、政府機關、雇主或專業人士提供的正式資料為準。所有保險、稅務、退休與扣繳費率都是可編輯假設。',
     privacyNote: '薪資與費率只在你的瀏覽器中計算，不會上傳。',
   },
   en: {
@@ -86,7 +107,27 @@ export default {
       'Compare how different withholding or pension assumptions affect take-home pay.',
       'Recalculate a salary scenario using rates supplied by payroll or official sources.',
     ],
+    formula: {
+      expression: 'Net pay = salary + fixed allowance − salary × (labor + health + pension + withholding rates) − other fixed deductions',
+      explanation: 'Every rate and fixed deduction is user-entered. Default values are examples, not live official rates; replace them with current government, employer, or payroll figures.',
+    },
     faq: [
+      {
+        q: 'How accurate is the estimate?',
+        a: 'The arithmetic follows the displayed inputs and simplified formula, but it does not automatically model personal brackets, dependents, special premiums, exemptions, or employer-specific rules.',
+      },
+      {
+        q: 'Can I use it as the basis for a formal financial decision?',
+        a: 'No. Use official government notices, employer payroll records, or qualified professional advice for payroll, tax, or financial decisions.',
+      },
+      {
+        q: 'Why can the actual amount differ?',
+        a: 'Actual pay can vary because of insurance brackets, withholding methods, allowance treatment, personal tax circumstances, employer policy, and rounding.',
+      },
+      {
+        q: 'What should I do when rates, taxes, or fees change?',
+        a: 'Check current official or employer information, update the editable rates and deductions, and run the estimate again.',
+      },
       {
         q: 'Are the default rates official current regulations?',
         a: 'No. Defaults are only convenient assumptions. Every rate is editable, and you should verify current rules or your payslip.',
@@ -119,7 +160,7 @@ export default {
       invalidInput: 'Enter valid non-negative numbers.',
       copied: 'Copied',
     },
-    disclaimer: 'This is not an official payroll, tax, or legal calculator. Insurance, tax, pension, and withholding rates are editable assumptions only; verify against current regulations, your payslip, or a qualified professional.',
+    disclaimer: 'Results are for reference only and do not constitute investment, tax, legal, lending, or financial advice. Confirm actual amounts, rates, taxes, fees, and repayment terms with banks, government agencies, employers, or qualified professionals. Insurance, tax, pension, and withholding rates are editable assumptions.',
     privacyNote: 'Salary and rate inputs are calculated locally in your browser and are not uploaded.',
   },
 } satisfies Record<'zh' | 'en', ToolContent>;

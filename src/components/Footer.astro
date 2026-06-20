@@ -21,6 +21,7 @@ const year = new Date().getFullYear();
     <nav aria-label={ui.ariaFooterNav}>
       <a href={localePath(lang, 'about')}>{ui.footer.about}</a>
       <a href={localePath(lang, 'about-tools')}>{ui.footer.aboutTools}</a>
+      {lang === 'zh' && <a href={localePath(lang, 'blog')}>教學文章</a>}
       <a href={localePath(lang, 'contact')}>{ui.footer.contact}</a>
       <a href={localePath(lang, 'privacy')}>{ui.footer.privacy}</a>
       <a href={localePath(lang, 'terms')}>{ui.footer.terms}</a>

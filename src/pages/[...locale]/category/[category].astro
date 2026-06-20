@@ -33,8 +33,8 @@ const h1 = content ? content.h1[lang] : `${categoryData.icon} ${categoryData.nam
 const pageTitle = content
   ? content.title[lang]
   : lang === 'zh'
-    ? `${categoryData.name.zh.replace(/工具$/, '').trim()}免費工具｜FunnyTools`
-    : `Free ${categoryData.name[lang]} Tools | FunnyTools`;
+    ? `${categoryData.name.zh.replace(/工具$/, '').trim()}免費工具｜${SITE.name.zh}`
+    : `Free ${categoryData.name[lang]} Tools | ${SITE.name.en}`;
 const pageDescription = content ? content.metaDescription[lang] : categoryData.description[lang];
 const introParagraphs = content ? content.intro[lang] : [categoryData.description[lang]];
 const useCases = content ? content.useCases[lang] : [];

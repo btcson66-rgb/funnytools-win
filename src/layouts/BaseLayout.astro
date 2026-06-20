@@ -18,6 +18,7 @@ interface Props {
   alternateSegments?: string[];
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
+  hasAlternates?: boolean;
 }
 
 const {
@@ -31,6 +32,7 @@ const {
   alternateSegments = [],
   jsonLd = [],
   noindex = false,
+  hasAlternates = true,
 } = Astro.props;
 
 const canonical = absoluteUrl(localePath(lang, ...alternateSegments));
@@ -39,6 +41,10 @@ const jsonLdItems = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
 const ogLocale = lang === 'zh' ? 'zh_TW' : 'en_US';
 const ogImage = customOgImage ?? defaultOgImage();
 const ogAlt = ogImageAlt ?? SITE.name[lang];
+const brandedTitle = lang === 'zh' && !title.includes(SITE.name.zh) ? `${title}｜${SITE.name.zh}` : title;
+const brandedDescription = lang === 'zh' && !description.includes(SITE.name.zh)
+  ? `${SITE.name.zh}：${description}`
+  : description;
 const ui = t(lang);
 const adsenseEnabled = SITE.adsenseEnabled || SITE.features.adsense;
 const contentSecurityPolicy = [
@@ -65,14 +71,14 @@ const contentSecurityPolicy = [
     <link rel="icon" type="image/svg+xml" href={assetPath('favicon.svg')} />
     <link rel="apple-touch-icon" sizes="180x180" href={assetPath('apple-touch-icon.png')} />
     <meta name="theme-color" content="#2563eb" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{brandedTitle}</title>
+    <meta name="description" content={brandedDescription} />
     {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
     {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
-    {!noindex && hreflangs.map((link) => <link rel="alternate" hreflang={link.hreflang} href={link.href} />)}
+    {!noindex && hasAlternates && hreflangs.map((link) => <link rel="alternate" hreflang={link.hreflang} href={link.href} />)}
     <meta property="og:type" content={type} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={brandedTitle} />
+    <meta property="og:description" content={brandedDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
@@ -81,8 +87,8 @@ const contentSecurityPolicy = [
     <meta property="og:site_name" content={SITE.name[lang]} />
     <meta property="og:locale" content={ogLocale} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={brandedTitle} />
+    <meta name="twitter:description" content={brandedDescription} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content={ogAlt} />
     {jsonLdItems.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
@@ -98,7 +104,7 @@ const contentSecurityPolicy = [
   </head>
   <body>
     <a class="skip-link" href="#content">{ui.skipToContent}</a>
-    <Nav lang={lang} segments={alternateSegments} />
+    <Nav lang={lang} segments={alternateSegments} showLangSwitch={hasAlternates} />
     <main id="content" class="site-main">
       <slot />
     </main>

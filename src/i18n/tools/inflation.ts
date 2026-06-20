@@ -9,6 +9,7 @@ interface ToolContent {
   examples: string[];
   faq: { q: string; a: string }[];
   labels: Record<string, string>;
+  formula?: { expression: string; explanation: string };
   disclaimer?: string;
   privacyNote?: string;
 }
@@ -32,7 +33,27 @@ export default {
       '查看固定預算在未來通膨後的購買力。',
       '把過去價格換算成接近現在或未來的等值金額。',
     ],
+    formula: {
+      expression: '未來成本 = 金額 × (1 + 年通膨率)^年數；未來購買力／過去等值 = 金額 ÷ (1 + 年通膨率)^年數',
+      explanation: '年通膨率由使用者自行輸入，工具假設整段期間維持固定，不會自動讀取主計機關 CPI 或特定商品價格。負值代表通縮假設。',
+    },
     faq: [
+      {
+        q: '試算結果準確嗎？',
+        a: '公式會依輸入值計算，但固定通膨率只是簡化假設；不同商品、地區與年份的實際漲幅不會完全相同。',
+      },
+      {
+        q: '可以作為正式財務決策依據嗎？',
+        a: '不可以。結果適合做情境比較，正式預算、投資或退休規劃應搭配官方統計、實際報價與專業評估。',
+      },
+      {
+        q: '為什麼實際金額可能不同？',
+        a: '整體 CPI 不等於個別商品價格，匯率、供需、稅費、地區與消費組合也會造成差異。',
+      },
+      {
+        q: '利率、稅率或費用改變時怎麼辦？',
+        a: '請依最新官方統計或你的情境更新年通膨率後重新試算；若期間變化很大，可分成數段使用不同假設。',
+      },
       {
         q: '年通膨率可以是負數嗎？',
         a: '可以。負值代表通縮假設，公式仍會照輸入值計算。',
@@ -63,7 +84,7 @@ export default {
       invalidInput: '請輸入有效數字，年數不可小於 0。',
       copied: '已複製',
     },
-    disclaimer: '此工具使用固定年通膨率做簡化估算，不代表官方物價指數、投資建議或財務保證。',
+    disclaimer: '本工具試算結果僅供參考，不構成投資、稅務、法律、貸款或財務建議。實際金額、利率、稅率、費用與還款條件，請以銀行、政府機關、雇主或專業人士提供的正式資料為準。工具使用使用者輸入的固定年通膨率，不代表官方物價指數。',
     privacyNote: '金額與通膨率只在你的瀏覽器中計算，不會上傳。',
   },
   en: {
@@ -84,7 +105,27 @@ export default {
       'Check the future purchasing power of a fixed budget.',
       'Convert a past price into an approximate equivalent under a fixed inflation assumption.',
     ],
+    formula: {
+      expression: 'Future cost = amount × (1 + annual inflation rate)^years; buying power / past equivalent = amount ÷ (1 + annual inflation rate)^years',
+      explanation: 'The annual inflation rate is user-entered and assumed constant. The tool does not fetch official CPI or product prices; a negative rate represents a deflation assumption.',
+    },
     faq: [
+      {
+        q: 'How accurate is the estimate?',
+        a: 'The formula follows the inputs, but a constant inflation rate is a simplification. Actual changes vary by product, region, and year.',
+      },
+      {
+        q: 'Can I use it as the basis for a formal financial decision?',
+        a: 'No. Use it for scenario comparison, and combine official statistics, actual prices, and professional assessment for budgeting, investing, or retirement decisions.',
+      },
+      {
+        q: 'Why can the actual amount differ?',
+        a: 'Headline CPI is not the same as an individual product price; exchange rates, supply, demand, taxes, fees, location, and personal spending mix also matter.',
+      },
+      {
+        q: 'What should I do when rates, taxes, or fees change?',
+        a: 'Update the annual inflation assumption using current official data or your scenario. For large changes over time, calculate separate periods with different assumptions.',
+      },
       {
         q: 'Can the annual inflation rate be negative?',
         a: 'Yes. A negative value represents a deflation assumption, and the same formula is applied.',
@@ -115,7 +156,7 @@ export default {
       invalidInput: 'Enter valid numbers; years cannot be below 0.',
       copied: 'Copied',
     },
-    disclaimer: 'This tool uses a simplified fixed annual inflation rate and is not official CPI data, investment advice, or a financial guarantee.',
+    disclaimer: 'Results are for reference only and do not constitute investment, tax, legal, lending, or financial advice. Confirm actual amounts, rates, taxes, fees, and repayment terms with banks, government agencies, employers, or qualified professionals. The tool uses a user-entered fixed inflation rate and does not represent official CPI.',
     privacyNote: 'Amount and inflation inputs are calculated locally in your browser and are not uploaded.',
   },
 } satisfies Record<'zh' | 'en', ToolContent>;
