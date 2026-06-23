@@ -1,15 +1,21 @@
 ---
-import Breadcrumb from '../components/Breadcrumb.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { absoluteUrl, assetPath, localePath } from '../lib/url';
-import { breadcrumbJsonLd, webPageJsonLd } from '../lib/seo';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../config/site';
+import { absoluteUrl, assetPath, localePath } from '../../lib/url';
+import { breadcrumbJsonLd, webPageJsonLd } from '../../lib/seo';
 
-const title = '支持 FunnyTools 持續提供免費工具';
-const seoTitle = '支持 FunnyTools｜免費工具網站營運支持';
-const description = 'FunnyTools 提供免費線上工具，無需安裝也不需註冊。你可以透過分享網站、回報問題、建議新工具，或使用推薦資源連結，支持本站持續營運與更新。';
-const supportUrl = localePath('zh', 'support');
-const homeUrl = absoluteUrl(localePath('zh'));
-const shareText = 'FunnyTools 提供免費、免安裝的實用線上工具，推薦給你！';
+export function getStaticPaths() {
+  return [{ params: { locale: 'en' }, props: { lang: 'en' } }];
+}
+
+const lang = 'en' as const;
+const title = 'Support FunnyTools';
+const seoTitle = 'Support FunnyTools with sharing, feedback, and recommended resources';
+const description = 'FunnyTools offers free online tools with no installation or registration. You can support the site by sharing it, sending feedback, or using recommended affiliate resource links.';
+const supportUrl = localePath(lang, 'support');
+const homeUrl = absoluteUrl(localePath(lang));
+const shareText = 'Free online tools for everyday work, study, files, money, and quick decisions.';
 const encodedHomeUrl = encodeURIComponent(homeUrl);
 const encodedSharePost = encodeURIComponent(`${shareText} ${homeUrl}`);
 const socialShareLinks = [
@@ -17,11 +23,6 @@ const socialShareLinks = [
     name: 'Facebook',
     shortLabel: 'f',
     href: `https://www.facebook.com/sharer/sharer.php?u=${encodedHomeUrl}`,
-  },
-  {
-    name: 'LINE',
-    shortLabel: 'LINE',
-    href: `https://social-plugins.line.me/lineit/share?url=${encodedHomeUrl}`,
   },
   {
     name: 'X',
@@ -35,17 +36,17 @@ const socialShareLinks = [
   },
 ];
 const breadcrumbItems = [
-  { name: '首頁', href: localePath('zh') },
-  { name: '支持本站', href: supportUrl },
+  { name: 'Home', href: localePath(lang) },
+  { name: 'Support', href: supportUrl },
 ];
 const jsonLd = [
-  webPageJsonLd('zh', title, description, supportUrl),
+  webPageJsonLd(lang, title, description, supportUrl),
   breadcrumbJsonLd(breadcrumbItems),
 ];
 ---
 
 <BaseLayout
-  lang="zh"
+  lang={lang}
   title={seoTitle}
   description={description}
   alternateSegments={['support']}
@@ -56,36 +57,38 @@ const jsonLd = [
     <section class="support-hero">
       <Breadcrumb
         items={[
-          { label: '首頁', href: localePath('zh') },
-          { label: '支持本站' },
+          { label: 'Home', href: localePath(lang) },
+          { label: 'Support' },
         ]}
       />
-      <p class="eyebrow">支持本站</p>
+      <p class="eyebrow">Support</p>
       <h1>{title}</h1>
       <p class="lead">
-        FunnyTools 希望持續提供簡單、免費、好用的線上工具。如果本站曾經幫你節省時間，你可以透過分享網站、回報錯誤、建議新工具，或使用我們整理的實用資源連結支持本站。
+        FunnyTools is kept free for everyday browser-based tasks. If the tools save you time,
+        you can help by sharing the site, reporting problems, suggesting new tools, or using the
+        recommended resource links below.
       </p>
     </section>
 
     <section class="content-section" aria-labelledby="support-methods-heading">
       <div class="section-head">
-        <h2 id="support-methods-heading">你可以這樣支持 FunnyTools</h2>
-        <p>每一種方式都能幫助本站維持免費工具與內容更新。</p>
+        <h2 id="support-methods-heading">Ways to support FunnyTools</h2>
+        <p>Choose the option that is useful to you. Sharing and feedback are just as helpful as affiliate links.</p>
       </div>
       <div class="support-methods">
         <article class="support-method-card">
-          <span class="support-icon" aria-hidden="true">↗</span>
-          <h3>分享本站</h3>
-          <p>把 FunnyTools 分享給需要線上工具的朋友，可以幫助本站被更多人看見。</p>
-          <div class="share-actions" aria-label="分享 FunnyTools">
+          <span class="support-icon" aria-hidden="true">S</span>
+          <h3>Share FunnyTools</h3>
+          <p>Send the site to a friend, classmate, teammate, or community when a small browser tool could help them finish a task faster.</p>
+          <div class="share-actions" aria-label="Share FunnyTools">
             {socialShareLinks.map((platform) => (
               <a
                 class={`share-button share-${platform.name.toLowerCase()}`}
                 href={platform.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`分享到 ${platform.name}`}
-                title={`分享到 ${platform.name}`}
+                aria-label={`Share on ${platform.name}`}
+                title={`Share on ${platform.name}`}
               >
                 <span aria-hidden="true">{platform.shortLabel}</span>
                 <span>{platform.name}</span>
@@ -93,29 +96,29 @@ const jsonLd = [
             ))}
           </div>
           <button class="btn ghost copy-home-link" type="button" data-copy-home-link data-copy-url={homeUrl}>
-            <span aria-hidden="true">⧉</span>
-            <span data-copy-label>複製首頁連結</span>
+            <span aria-hidden="true">Link</span>
+            <span data-copy-label>Copy site link</span>
           </button>
           <p class="copy-status" data-copy-status role="status" aria-live="polite"></p>
         </article>
         <article class="support-method-card">
-          <span class="support-icon" aria-hidden="true">✉</span>
-          <h3>回報錯誤或建議新工具</h3>
-          <p>如果你發現工具無法正常使用，或希望新增某個實用工具，歡迎透過聯絡頁告訴我們。</p>
-          <a class="inline-link" href={localePath('zh', 'contact')}>前往聯絡頁</a>
+          <span class="support-icon" aria-hidden="true">F</span>
+          <h3>Send feedback</h3>
+          <p>Tell us about broken pages, unclear wording, missing tool options, or small workflows that should be easier.</p>
+          <a class="inline-link" href={localePath(lang, 'contact')}>Go to the contact page</a>
         </article>
         <article class="support-method-card">
-          <span class="support-icon" aria-hidden="true">◇</span>
-          <h3>使用推薦資源連結</h3>
-          <p>部分資源連結可能包含分潤，購買價格不會增加，但可以支持本站維持營運。</p>
+          <span class="support-icon" aria-hidden="true">A</span>
+          <h3>Use recommended resource links</h3>
+          <p>When you already plan to shop, using an affiliate link may support ongoing maintenance without changing your price.</p>
           <div class="support-card-actions">
-            <a class="inline-link" href="#resources">查看實用資源</a>
+            <a class="inline-link" href="#resources">View recommended resources</a>
             <a
               class="btn support-home-link"
-              href="https://coupa.ng/cnx9Rk"
+              href="https://www.amazon.com/?&linkCode=ll2&tag=funnytools-20&linkId=778ecc16814fbbf7f0d053c434db85a8&language=en_US&ref_=as_li_ss_tl"
               target="_blank"
               rel="sponsored nofollow noopener"
-            >前往酷澎自行選購</a>
+            >Open Amazon</a>
           </div>
         </article>
       </div>
@@ -124,33 +127,34 @@ const jsonLd = [
     <section id="resources" class="content-section anchor-section" aria-labelledby="resources-heading">
       <div class="section-head resource-heading">
         <div>
-          <h2 id="resources-heading">實用資源</h2>
-          <p>依照檔案整理、工作效率、旅行、列印與拍攝等常見需求整理。</p>
+          <h2 id="resources-heading">Recommended resources</h2>
+          <p>These links are optional. Use them only when they fit what you already need.</p>
         </div>
         <button class="btn ghost refresh-products" type="button" data-refresh-products disabled>
-          <span aria-hidden="true">↻</span>
-          換一批
+          <span aria-hidden="true">Refresh</span>
         </button>
       </div>
 
-      <aside class="affiliate-disclosure" aria-label="分潤連結透明說明">
-        <strong>透明說明</strong>
+      <aside class="affiliate-disclosure" aria-label="Affiliate link disclosure">
+        <strong>Affiliate disclosure</strong>
         <p>
-          本頁部分資源連結可能包含蝦皮、酷澎或其他平台的分潤連結。你透過這些連結購買商品時，購買價格不會因此增加，但本站可能會獲得少量回饋，用來維持網站營運與開發新工具。請依照自己的需求比較與選擇，本站不會因分潤而保證商品價格、庫存或適用性。
+          Some recommended resource links may be affiliate links. FunnyTools may receive a commission
+          if you purchase after clicking, with no extra cost added by FunnyTools. Recommendations are
+          kept separate from tool results and do not affect how the tools work.
         </p>
       </aside>
 
-      <p class="resource-note">每次會隨機顯示部分資源，你可以按「換一批」查看其他整理項目。</p>
-      <p class="resource-status" data-resource-status role="status" aria-live="polite">正在整理資源…</p>
-      <div class="support-product-grid" data-support-products aria-busy="true"></div>
+      <p class="resource-note">For English visitors, this section currently shows Amazon resources only.</p>
+      <p class="resource-status" data-resource-status role="status" aria-live="polite">Loading recommended resources...</p>
+      <div class="support-product-grid" data-support-products data-support-products-platforms="amazon" aria-busy="true"></div>
       <noscript>
-        <p class="empty-state">請啟用 JavaScript 以載入與切換實用資源。</p>
+        <p class="empty-state">Enable JavaScript to view recommended resources.</p>
       </noscript>
     </section>
 
     <section class="content-section support-reminder" aria-labelledby="choose-heading">
-      <h2 id="choose-heading">選擇前請先確認需求</h2>
-      <p>商品資訊、庫存與適用性以平台頁面為準。建議先確認裝置規格、連接介面與實際用途，再決定是否需要購買。</p>
+      <h2 id="choose-heading">Choose only what makes sense for you</h2>
+      <p>FunnyTools remains free to use. Sharing the site or sending a useful bug report is already meaningful support.</p>
     </section>
   </div>
 
@@ -184,14 +188,14 @@ const jsonLd = [
           throw new Error('Copy failed');
         }
 
-        if (copyLabel) copyLabel.textContent = '已複製首頁連結';
-        if (copyStatus) copyStatus.textContent = 'FunnyTools 首頁連結已複製。';
+        if (copyLabel) copyLabel.textContent = 'Copied';
+        if (copyStatus) copyStatus.textContent = 'FunnyTools link copied.';
         window.setTimeout(() => {
-          if (copyLabel) copyLabel.textContent = '複製首頁連結';
+          if (copyLabel) copyLabel.textContent = 'Copy site link';
           if (copyStatus) copyStatus.textContent = '';
         }, 2400);
       } catch {
-        if (copyStatus) copyStatus.textContent = `無法自動複製，請手動複製：${homeUrl}`;
+        if (copyStatus) copyStatus.textContent = `Could not copy automatically: ${homeUrl}`;
       }
     });
   </script>
@@ -277,48 +281,22 @@ const jsonLd = [
     font-size: 0.86rem;
     font-weight: 800;
     text-decoration: none;
-    transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
   }
 
-  .share-button:hover {
-    border-color: var(--brand);
-    box-shadow: 0 7px 18px rgba(31, 47, 70, 0.1);
-    transform: translateY(-1px);
-  }
-
-  .share-button:focus-visible,
-  .copy-home-link:focus-visible {
-    outline: 3px solid rgba(62, 99, 221, 0.28);
-    outline-offset: 2px;
+  .share-button > span:first-child,
+  .support-icon {
+    display: inline-grid;
+    place-items: center;
+    font-weight: 900;
   }
 
   .share-button > span:first-child {
-    display: inline-grid;
     width: 24px;
     height: 24px;
-    place-items: center;
     border-radius: 7px;
     background: var(--soft);
     color: var(--brand-2);
     font-size: 0.76rem;
-    font-weight: 900;
-  }
-
-  .share-facebook > span:first-child {
-    background: #e9f0ff;
-    color: #1877f2;
-  }
-
-  .share-line > span:first-child {
-    background: #e8fbe9;
-    color: #06a943;
-    font-size: 0.55rem;
-  }
-
-  .share-x > span:first-child,
-  .share-threads > span:first-child {
-    background: #eef0f3;
-    color: #111;
   }
 
   .copy-home-link {
@@ -355,15 +333,12 @@ const jsonLd = [
   }
 
   .support-icon {
-    display: inline-grid;
     width: 42px;
     height: 42px;
-    place-items: center;
     border-radius: 13px;
     background: var(--soft);
     color: var(--brand);
-    font-size: 1.25rem;
-    font-weight: 900;
+    font-size: 1rem;
   }
 
   .resource-heading {
@@ -376,11 +351,6 @@ const jsonLd = [
   .resource-heading h2,
   .resource-heading p {
     margin: 0;
-  }
-
-  .refresh-products {
-    flex: 0 0 auto;
-    gap: 7px;
   }
 
   .affiliate-disclosure {
@@ -441,23 +411,6 @@ const jsonLd = [
     border-radius: 14px;
     background: linear-gradient(135deg, rgba(15, 143, 140, 0.13), rgba(62, 99, 221, 0.11));
     font-size: 1.35rem;
-  }
-
-  :global(.support-product-media) {
-    display: grid;
-    width: 100%;
-    aspect-ratio: 1;
-    place-items: center;
-    overflow: hidden;
-    border: 1px solid #e3e9f1;
-    border-radius: 12px;
-    background: #fff;
-  }
-
-  :global(.support-product-media img) {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
   }
 
   :global(.support-product-platform) {
@@ -542,21 +495,9 @@ const jsonLd = [
       grid-template-columns: 1fr;
     }
 
-    .support-method-card {
-      min-height: 0;
-    }
-
-    .support-method-card .inline-link {
-      margin-top: 4px;
-    }
-
     .resource-heading {
       align-items: stretch;
       flex-direction: column;
-    }
-
-    .refresh-products {
-      align-self: flex-start;
     }
   }
 

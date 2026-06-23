@@ -23,7 +23,7 @@ const ui = t(lang);
       {lang === 'zh' && <a href={localePath(lang, 'blog')}>部落格</a>}
       <a href={`${localePath(lang)}#categories`}>{ui.nav.categories}</a>
       <a href={categoryUrl(lang, 'statistics')}>{lang === 'zh' ? '教育與統計' : 'Education & Statistics'}</a>
-      {lang === 'zh' && <a href={localePath(lang, 'support')}>支持我們</a>}
+      <a href={localePath(lang, 'support')}>{lang === 'zh' ? '支持我們' : 'Support'}</a>
     </nav>
     {showLangSwitch && <LangSwitch lang={lang} segments={segments} />}
     <button class="theme-toggle" type="button" aria-label={lang === 'zh' ? '切換深色模式' : 'Toggle dark mode'} data-theme-toggle>
@@ -46,7 +46,7 @@ const ui = t(lang);
       {lang === 'zh' && <a href={localePath(lang, 'blog')}>部落格</a>}
       <a href={`${localePath(lang)}#categories`}>{ui.nav.categories}</a>
       <a href={categoryUrl(lang, 'statistics')}>{lang === 'zh' ? '教育與統計' : 'Education & Statistics'}</a>
-      {lang === 'zh' && <a href={localePath(lang, 'support')}>支持我們</a>}
+      <a href={localePath(lang, 'support')}>{lang === 'zh' ? '支持我們' : 'Support'}</a>
     </nav>
   </div>
 </header>

@@ -5,6 +5,23 @@
   if (!(grid instanceof HTMLElement) || !(refreshButton instanceof HTMLButtonElement)) return;
 
   const batchSize = 8;
+  const isEnglish = document.documentElement.lang.toLowerCase().startsWith('en');
+  const platformFilter = (grid.dataset.supportProductsPlatforms || '')
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
+  const labels = isEnglish
+    ? {
+      fallbackImageAlt: 'Recommended resource image',
+      fallbackIcon: 'Resource',
+      fallbackTitle: 'Recommended resource',
+      cta: 'Open resource',
+      ctaLabel: (title) => `Open recommended resource: ${title || 'Recommended resource'}`,
+      status: (shown, total) => `Showing ${shown} recommended resource${shown === 1 ? '' : 's'} from ${total} available.`,
+      empty: 'No recommended resources are available right now.',
+      error: 'Recommended resources could not be loaded. Please try again later.',
+    }
+    : null;
   const icons = {
     'file-photo': '▣',
     productivity: '⌘',
@@ -133,6 +150,10 @@
       link.rel = 'sponsored nofollow noopener';
       link.textContent = '前往查看';
       link.setAttribute('aria-label', `前往酷澎查看：${product.title || '實用資源'}`);
+      if (labels) {
+        link.textContent = labels.cta;
+        link.setAttribute('aria-label', labels.ctaLabel(product.title));
+      }
       link.dataset.affiliateItemId = product.id;
       link.dataset.affiliatePlatform = product.platform || 'other';
       article.append(link);
@@ -140,12 +161,11 @@
 
     return article;
   }
-
   function render() {
     const batch = selectBatch();
     grid.replaceChildren(...batch.map(createCard));
     grid.setAttribute('aria-busy', 'false');
-    if (status) status.textContent = `目前顯示 ${batch.length} 項資源，共整理 ${products.length} 項。`;
+    if (status) status.textContent = labels?.status(batch.length, products.length) || `目前顯示 ${batch.length} 項資源，共整理 ${products.length} 項。`;
   }
 
   refreshButton.addEventListener('click', render);
@@ -168,17 +188,18 @@
     .then((data) => {
       products = Array.isArray(data)
         ? data.filter((item) => item && item.status === 'active' && typeof item.id === 'string')
+          .filter((item) => !platformFilter.length || platformFilter.includes(item.platform))
         : [];
       refreshButton.disabled = products.length <= batchSize;
       if (!products.length) {
         grid.setAttribute('aria-busy', 'false');
-        if (status) status.textContent = '目前沒有可顯示的資源。';
+        if (status) status.textContent = labels?.empty || '目前沒有可顯示的資源。';
         return;
       }
       render();
     })
     .catch(() => {
       grid.setAttribute('aria-busy', 'false');
-      if (status) status.textContent = '資源暫時無法載入，請稍後再試。';
+      if (status) status.textContent = labels?.error || '資源暫時無法載入，請稍後再試。';
     });
 })();

@@ -72,6 +72,7 @@ export const GET: APIRoute = () => {
   const pages: SitemapPage[] = [
     { segments: [], changefreq: 'daily', priority: '1.0' },
     { segments: ['tools'], changefreq: 'weekly', priority: '0.9' },
+    { segments: ['support'], changefreq: 'monthly', priority: '0.3' },
     ...liveCategories.map((category) => ({
       segments: ['category', category.id],
       changefreq: 'weekly' as const,
@@ -95,7 +96,6 @@ export const GET: APIRoute = () => {
     .join('');
 
   const zhOnlyPages: SitemapPage[] = [
-    { segments: ['support'], changefreq: 'monthly', priority: '0.3' },
     { segments: ['blog'], lastmod: allBlogPosts[0]?.updated, changefreq: 'weekly', priority: '0.7' },
     ...allBlogPosts.map((post) => ({
       segments: ['blog', post.slug],
