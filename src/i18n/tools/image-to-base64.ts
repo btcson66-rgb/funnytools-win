@@ -24,7 +24,7 @@ export default {
       { q: 'Base64 會讓檔案變大嗎？', a: '會，Base64 編碼後的字串通常比原圖大約 33%，建議只用於小圖示。' },
       { q: '圖片會被上傳嗎？', a: '不會，所有轉換都在你的瀏覽器本機完成。' },
       { q: '為什麼限制檔案大小？', a: '大圖轉成的字串會非常長、佔用大量記憶體，因此限制在約 5MB 內以維持順暢。' },
-      { q: '可以直接用在 <img> 嗎？', a: '可以，把資料 URI 放到 img 的 src 即可顯示圖片。' },
+      { q: '可以直接用在 HTML 圖片標籤並加上 alt 文字嗎？', a: '可以，把資料 URI 放到圖片標籤的 src，並加上描述性的 alt 文字即可顯示圖片。' },
       { q: '支援哪些格式？', a: '支援常見的 JPG、PNG、WebP、GIF、SVG 等圖片格式。' },
     ],
     labels: {
@@ -67,7 +67,7 @@ export default {
       { q: 'Does Base64 make the file bigger?', a: 'Yes, the encoded string is usually about 33% larger than the original, so use it for small icons.' },
       { q: 'Is my image uploaded?', a: 'No, all conversion happens locally in your browser.' },
       { q: 'Why is there a size limit?', a: 'Large images produce very long strings and use a lot of memory, so a ~5MB limit keeps it responsive.' },
-      { q: 'Can I use it directly in an <img>?', a: 'Yes, put the data URI in the img src to display the image.' },
+      { q: 'Can I use it directly in an HTML image tag with alt text?', a: 'Yes, put the data URI in the image tag src and add descriptive alt text to display the image.' },
       { q: 'Which formats are supported?', a: 'Common formats like JPG, PNG, WebP, GIF, and SVG are supported.' },
     ],
     labels: {
