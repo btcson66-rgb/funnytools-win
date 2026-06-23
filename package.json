@@ -13,8 +13,10 @@
     "audit:lang-switch": "node scripts/lang-switch-audit.mjs",
     "audit:ui-dark": "node scripts/ui-dark-audit.mjs",
     "seo:audit": "node scripts/seo-system-audit.mjs",
+    "seo:check": "node scripts/seo-crawlability-check.mjs",
     "report:analytics": "node scripts/analytics-report.mjs",
-    "preflight": "npm run build && npm run audit:lang-switch && npm run audit:adsense && npm run audit:analytics && npm run audit:security"
+    "traffic-report": "node scripts/traffic-report/index.mjs",
+    "preflight": "npm run build && npm run seo:check && npm run audit:lang-switch && npm run audit:adsense && npm run audit:analytics && npm run audit:security"
   },
   "dependencies": {
     "astro": "^6.4.7",

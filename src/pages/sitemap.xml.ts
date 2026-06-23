@@ -7,6 +7,7 @@ import { isPostAvailableInLocale } from '../data/blogPosts';
 import { absoluteUrl, localePath } from '../lib/url';
 
 const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
+const buildDate = new Date().toISOString().slice(0, 10);
 const mainToolSlugs = new Set(
   liveTools
     .filter((tool) => tool.featured)
@@ -46,26 +47,26 @@ function urlEntry(lang: Locale, page: SitemapPage): string {
   const loc = absoluteUrl(localePath(lang, ...page.segments));
 
   return [
-    '<url>',
-    `<loc>${escapeXml(loc)}</loc>`,
-    page.lastmod ? `<lastmod>${page.lastmod}</lastmod>` : '',
-    `<changefreq>${page.changefreq}</changefreq>`,
-    `<priority>${page.priority}</priority>`,
-    alternateLinks(page.segments),
-    '</url>',
-  ].join('');
+    '  <url>',
+    `    <loc>${escapeXml(loc)}</loc>`,
+    `    <lastmod>${page.lastmod ?? buildDate}</lastmod>`,
+    `    <changefreq>${page.changefreq}</changefreq>`,
+    `    <priority>${page.priority}</priority>`,
+    `    ${alternateLinks(page.segments)}`,
+    '  </url>',
+  ].join('\n');
 }
 
 function zhOnlyUrlEntry(page: SitemapPage): string {
   const loc = absoluteUrl(localePath('zh', ...page.segments));
   return [
-    '<url>',
-    `<loc>${escapeXml(loc)}</loc>`,
-    page.lastmod ? `<lastmod>${page.lastmod}</lastmod>` : '',
-    `<changefreq>${page.changefreq}</changefreq>`,
-    `<priority>${page.priority}</priority>`,
-    '</url>',
-  ].join('');
+    '  <url>',
+    `    <loc>${escapeXml(loc)}</loc>`,
+    `    <lastmod>${page.lastmod ?? buildDate}</lastmod>`,
+    `    <changefreq>${page.changefreq}</changefreq>`,
+    `    <priority>${page.priority}</priority>`,
+    '  </url>',
+  ].join('\n');
 }
 
 export const GET: APIRoute = () => {
@@ -94,7 +95,7 @@ export const GET: APIRoute = () => {
 
   const entries = SITE.locales
     .flatMap((lang) => pages.map((page) => urlEntry(lang, page)))
-    .join('');
+    .join('\n');
 
   const zhOnlyPages: SitemapPage[] = [
     ...allBlogPosts.filter((post) => !isPostAvailableInLocale(post, 'en')).map((post) => ({
@@ -104,7 +105,6 @@ export const GET: APIRoute = () => {
       priority: '0.6',
     })),
   ];
-  const blogEntries = zhOnlyPages.map(zhOnlyUrlEntry).join('');
   const bilingualBlogPages: SitemapPage[] = [
     { segments: ['blog'], lastmod: allBlogPosts[0]?.updated, changefreq: 'weekly', priority: '0.7' },
     ...allBlogPosts.filter((post) => isPostAvailableInLocale(post, 'en')).map((post) => ({
@@ -116,9 +116,18 @@ export const GET: APIRoute = () => {
   ];
   const bilingualBlogEntries = SITE.locales
     .flatMap((lang) => bilingualBlogPages.map((page) => urlEntry(lang, page)))
-    .join('');
+    .join('\n');
+  const blogEntries = zhOnlyPages.map(zhOnlyUrlEntry).join('\n');
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${entries}${bilingualBlogEntries}${blogEntries}</urlset>`;
+  const xml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    entries,
+    blogEntries,
+    bilingualBlogEntries,
+    '</urlset>',
+    '',
+  ].join('\n');
 
   return new Response(xml, {
     headers: {
