@@ -1,0 +1,42 @@
+---
+import type { Locale } from '../config/site';
+import CategoryIcon from './CategoryIcon.astro';
+import type { ToolMeta } from '../data/tools';
+import { t } from '../i18n/ui';
+import { toolUrl } from '../lib/url';
+
+interface Props {
+  lang: Locale;
+  tool: ToolMeta;
+}
+
+const { lang, tool } = Astro.props;
+const ui = t(lang);
+const assetType = tool.assetType ?? 'tool';
+---
+
+{
+  tool.status === 'live' ? (
+    <a class="tile tool-tile tool-card" href={toolUrl(lang, tool.slug)} data-category={tool.category}>
+      <span class="tile-icon tool-card__icon"><CategoryIcon category={tool.category} /></span>
+      <span class="tile-body tool-card__body">
+        <strong class="tool-card__title">{tool.name[lang]}</strong>
+        <span class="tool-card__desc">{tool.short[lang]}</span>
+        <span class="asset-type">{ui.assetTypes[assetType]}</span>
+        {tool.privacyLevel === 'local-only' && <span class="privacy-badge badge badge--privacy">{ui.privacyBadge}</span>}
+        <span class="tool-card__cta">{ui.toolCardCta}</span>
+      </span>
+      {tool.isNew && <span class="badge">{ui.newest}</span>}
+    </a>
+  ) : (
+    <article class="tile tool-tile tool-card planned" aria-disabled="true" data-category={tool.category}>
+      <span class="tile-icon tool-card__icon"><CategoryIcon category={tool.category} /></span>
+      <span class="tile-body tool-card__body">
+        <strong class="tool-card__title">{tool.name[lang]}</strong>
+        <span class="tool-card__desc">{tool.short[lang]}</span>
+        <span class="asset-type">{ui.assetTypes[assetType]}</span>
+      </span>
+      <span class="badge muted">{ui.comingSoon}</span>
+    </article>
+  )
+}
