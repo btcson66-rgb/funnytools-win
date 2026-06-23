@@ -3,6 +3,7 @@ import { SITE, type Locale } from '../config/site';
 import { categories } from '../data/categories';
 import { hasLiveTools, liveTools } from '../data/tools';
 import { allBlogPosts } from '../data/allBlogPosts';
+import { isPostAvailableInLocale } from '../data/blogPosts';
 import { absoluteUrl, localePath } from '../lib/url';
 
 const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
@@ -96,8 +97,7 @@ export const GET: APIRoute = () => {
     .join('');
 
   const zhOnlyPages: SitemapPage[] = [
-    { segments: ['blog'], lastmod: allBlogPosts[0]?.updated, changefreq: 'weekly', priority: '0.7' },
-    ...allBlogPosts.map((post) => ({
+    ...allBlogPosts.filter((post) => !isPostAvailableInLocale(post, 'en')).map((post) => ({
       segments: ['blog', post.slug],
       lastmod: post.updated,
       changefreq: 'monthly' as const,
@@ -105,8 +105,20 @@ export const GET: APIRoute = () => {
     })),
   ];
   const blogEntries = zhOnlyPages.map(zhOnlyUrlEntry).join('');
+  const bilingualBlogPages: SitemapPage[] = [
+    { segments: ['blog'], lastmod: allBlogPosts[0]?.updated, changefreq: 'weekly', priority: '0.7' },
+    ...allBlogPosts.filter((post) => isPostAvailableInLocale(post, 'en')).map((post) => ({
+      segments: ['blog', post.slug],
+      lastmod: post.updated,
+      changefreq: 'monthly' as const,
+      priority: '0.6',
+    })),
+  ];
+  const bilingualBlogEntries = SITE.locales
+    .flatMap((lang) => bilingualBlogPages.map((page) => urlEntry(lang, page)))
+    .join('');
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${entries}${blogEntries}</urlset>`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${entries}${bilingualBlogEntries}${blogEntries}</urlset>`;
 
   return new Response(xml, {
     headers: {

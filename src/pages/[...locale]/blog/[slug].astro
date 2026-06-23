@@ -2,26 +2,48 @@
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { allBlogPosts } from '../../../data/allBlogPosts';
-import type { BlogPost } from '../../../data/blogPosts';
-import { SITE } from '../../../config/site';
+import {
+  isPostAvailableInLocale,
+  viewBlogPost,
+  type BlogPost,
+  type BlogPostView,
+} from '../../../data/blogPosts';
+import { SITE, type Locale } from '../../../config/site';
 import { absoluteUrl, categoryUrl, localePath, toolUrl } from '../../../lib/url';
 import { breadcrumbJsonLd } from '../../../lib/seo';
+import { t } from '../../../i18n/ui';
 
 export function getStaticPaths() {
-  return allBlogPosts.map((post) => ({
-    params: { locale: undefined, slug: post.slug },
-    props: { lang: 'zh', post },
-  }));
+  return allBlogPosts.flatMap((post) => {
+    const paths = [
+      {
+        params: { locale: undefined, slug: post.slug },
+        props: { lang: 'zh' as const, post },
+      },
+    ];
+
+    if (isPostAvailableInLocale(post, 'en')) {
+      paths.push({
+        params: { locale: 'en', slug: post.slug },
+        props: { lang: 'en' as const, post },
+      });
+    }
+
+    return paths;
+  });
 }
 
-const { post } = Astro.props as { post: BlogPost };
-const lang = 'zh' as const;
+const { lang, post: sourcePost } = Astro.props as { lang: Locale; post: BlogPost };
+const ui = t(lang);
+const post = viewBlogPost(sourcePost, lang);
 const articlePath = localePath(lang, 'blog', post.slug);
 const articleUrl = absoluteUrl(articlePath);
 const blogPath = localePath(lang, 'blog');
-const relatedPosts = (post.relatedArticleSlugs ?? [])
+const relatedPosts: BlogPostView[] = (post.relatedArticleSlugs ?? [])
   .map((slug) => allBlogPosts.find((candidate) => candidate.slug === slug))
-  .filter((candidate): candidate is BlogPost => candidate != null);
+  .filter((candidate): candidate is BlogPost => candidate != null && isPostAvailableInLocale(candidate, lang))
+  .map((candidate) => viewBlogPost(candidate, lang));
+const hasAlternates = sourcePost.locales.includes('zh') && sourcePost.locales.includes('en');
 
 const articleLd = {
   '@context': 'https://schema.org',
@@ -30,11 +52,11 @@ const articleLd = {
   description: post.description,
   datePublished: post.published,
   dateModified: post.updated,
-  inLanguage: SITE.hreflang.zh,
+  inLanguage: SITE.hreflang[lang],
   mainEntityOfPage: articleUrl,
   url: articleUrl,
-  author: { '@type': 'Organization', name: SITE.name.zh, url: SITE.url },
-  publisher: { '@type': 'Organization', name: SITE.name.zh, url: SITE.url },
+  author: { '@type': 'Organization', name: SITE.name[lang], url: SITE.url },
+  publisher: { '@type': 'Organization', name: SITE.name[lang], url: SITE.url },
 };
 const faqLd = {
   '@context': 'https://schema.org',
@@ -46,8 +68,8 @@ const faqLd = {
   })),
 };
 const breadcrumbLd = breadcrumbJsonLd([
-  { name: '首頁', href: localePath(lang) },
-  { name: '教學文章', href: blogPath },
+  { name: ui.breadcrumbHome, href: localePath(lang) },
+  { name: ui.blog.breadcrumbLabel, href: blogPath },
   { name: post.title, href: articlePath },
 ]);
 ---
@@ -58,32 +80,32 @@ const breadcrumbLd = breadcrumbJsonLd([
   description={post.description}
   type="article"
   alternateSegments={['blog', post.slug]}
-  hasAlternates={false}
+  hasAlternates={hasAlternates}
   jsonLd={[articleLd, faqLd, breadcrumbLd]}
 >
   <article class="wrap blog-article">
     <Breadcrumb items={[
-      { label: '首頁', href: localePath(lang) },
-      { label: '教學文章', href: blogPath },
+      { label: ui.breadcrumbHome, href: localePath(lang) },
+      { label: ui.blog.breadcrumbLabel, href: blogPath },
       { label: post.title },
     ]} />
 
     <header class="article-head">
-      <p class="eyebrow">FunnyTools 實用教學</p>
+      <p class="eyebrow">{ui.blog.eyebrowArticle}</p>
       <h1>{post.title}</h1>
       <p class="lead">{post.summary}</p>
       <p class="article-date">
-        發布：<time datetime={post.published}>{post.published}</time>
-        <span aria-hidden="true">｜</span>
-        最後更新：<time datetime={post.updated}>{post.updated}</time>
+        {ui.blog.publishedPrefix}<time datetime={post.published}>{post.published}</time>
+        <span aria-hidden="true">{ui.blog.dateSeparator}</span>
+        {ui.blog.updatedPrefix}<time datetime={post.updated}>{post.updated}</time>
       </p>
     </header>
 
     <aside class="tool-callout" aria-labelledby="related-tools-title">
-      <h2 id="related-tools-title">這篇文章會用到的工具</h2>
+      <h2 id="related-tools-title">{ui.blog.relatedToolsHeading}</h2>
       {post.categorySlug && (
         <p class="article-category-link">
-          分類：<a href={categoryUrl(lang, post.categorySlug)}>{post.categoryLabel ?? post.categorySlug}</a>
+          {ui.blog.categoryPrefix}<a href={categoryUrl(lang, post.categorySlug)}>{post.categoryLabel ?? post.categorySlug}</a>
         </p>
       )}
       <div class="tool-links">
@@ -112,7 +134,7 @@ const breadcrumbLd = breadcrumbJsonLd([
     </div>
 
     <section class="article-faq faq" aria-labelledby="faq-title">
-      <h2 id="faq-title">常見問題 FAQ</h2>
+      <h2 id="faq-title">{ui.blog.faqHeading}</h2>
       <dl>
         {post.faq.map((item) => (
           <>
@@ -125,7 +147,7 @@ const breadcrumbLd = breadcrumbJsonLd([
 
     {relatedPosts.length > 0 && (
       <section class="article-related content-section" aria-labelledby="related-articles-title">
-        <h2 id="related-articles-title">相關教學文章</h2>
+        <h2 id="related-articles-title">{ui.blog.relatedArticlesHeading}</h2>
         <div class="related-article-list">
           {relatedPosts.map((related) => (
             <a href={localePath(lang, 'blog', related.slug)}>
@@ -137,9 +159,9 @@ const breadcrumbLd = breadcrumbJsonLd([
       </section>
     )}
 
-    <nav class="article-bottom" aria-label="文章下一步">
-      <a class="btn" href={blogPath}>← 回文章列表</a>
-      <a class="btn go" href={toolUrl(lang, post.toolLinks[0].slug)}>開啟{post.toolLinks[0].label}</a>
+    <nav class="article-bottom" aria-label={ui.blog.bottomNavLabel}>
+      <a class="btn" href={blogPath}>{ui.blog.backToBlog}</a>
+      <a class="btn go" href={toolUrl(lang, post.toolLinks[0].slug)}>{ui.blog.openToolPrefix}{post.toolLinks[0].label}</a>
     </nav>
   </article>
 </BaseLayout>

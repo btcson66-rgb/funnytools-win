@@ -1,6 +1,6 @@
 # SEO Audit Report
 
-Generated: 2026-06-23T06:17:05.271Z
+Generated: 2026-06-23T11:11:26.767Z
 
 ## Critical
 
@@ -13,7 +13,7 @@ Generated: 2026-06-23T06:17:05.271Z
 
 ## Suggestion
 
-- Scanned 558 HTML page(s); 290 page(s) treated as SEO-eligible, including 152 tool page(s).
+- Scanned 570 HTML page(s); 302 page(s) treated as SEO-eligible, including 152 tool page(s).
 - 152/152 tool page(s) have visible FAQ detected.
 - 152/152 tool page(s) have WebApplication or SoftwareApplication schema.
-- Markdown/source documentation files discovered: 243.
+- Markdown/source documentation files discovered: 33.

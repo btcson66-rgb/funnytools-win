@@ -2,21 +2,30 @@
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { allBlogPosts } from '../../../data/allBlogPosts';
-import { SITE } from '../../../config/site';
+import { isPostAvailableInLocale, viewBlogPost } from '../../../data/blogPosts';
+import { SITE, type Locale } from '../../../config/site';
 import { absoluteUrl, localePath, toolUrl } from '../../../lib/url';
 import { breadcrumbJsonLd } from '../../../lib/seo';
+import { t } from '../../../i18n/ui';
 
 export function getStaticPaths() {
-  return [{ params: { locale: undefined }, props: { lang: 'zh' } }];
+  return [
+    { params: { locale: undefined }, props: { lang: 'zh' } },
+    { params: { locale: 'en' }, props: { lang: 'en' } },
+  ];
 }
 
-const lang = 'zh' as const;
-const title = '實用工具教學與生活指南';
-const description = 'FunnyTools 教學文章區，整理 PDF、圖片、隨機分組、文字處理、生活選擇與試算工具的白話使用指南，幫助你更快上手各項功能與操作細節。';
+const { lang } = Astro.props as { lang: Locale };
+const ui = t(lang);
+const title = ui.blog.indexTitle;
+const description = ui.blog.indexDescription;
 const blogUrl = localePath(lang, 'blog');
+const visiblePosts = allBlogPosts
+  .filter((post) => isPostAvailableInLocale(post, lang))
+  .map((post) => viewBlogPost(post, lang));
 const breadcrumbLd = breadcrumbJsonLd([
-  { name: '首頁', href: localePath(lang) },
-  { name: '教學文章', href: blogUrl },
+  { name: ui.breadcrumbHome, href: localePath(lang) },
+  { name: ui.blog.breadcrumbLabel, href: blogUrl },
 ]);
 const collectionLd = {
   '@context': 'https://schema.org',
@@ -24,10 +33,10 @@ const collectionLd = {
   name: title,
   description,
   url: absoluteUrl(blogUrl),
-  inLanguage: SITE.hreflang.zh,
+  inLanguage: SITE.hreflang[lang],
   mainEntity: {
     '@type': 'ItemList',
-    itemListElement: allBlogPosts.map((post, index) => ({
+    itemListElement: visiblePosts.map((post, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: post.title,
@@ -42,28 +51,28 @@ const collectionLd = {
   title={title}
   description={description}
   alternateSegments={['blog']}
-  hasAlternates={false}
+  hasAlternates={true}
   jsonLd={[collectionLd, breadcrumbLd]}
 >
   <section class="wrap page-head blog-head">
-    <Breadcrumb items={[{ label: '首頁', href: localePath(lang) }, { label: '教學文章' }]} />
-    <p class="eyebrow">FunnyTools 使用指南</p>
-    <h1>實用工具教學與生活指南</h1>
-    <p class="lead">從問題出發，了解工具怎麼用、何時適合用，以及操作前後容易忽略的細節。</p>
+    <Breadcrumb items={[{ label: ui.breadcrumbHome, href: localePath(lang) }, { label: ui.blog.breadcrumbLabel }]} />
+    <p class="eyebrow">{ui.blog.eyebrowIndex}</p>
+    <h1>{title}</h1>
+    <p class="lead">{ui.blog.indexLead}</p>
   </section>
 
   <section class="wrap content-section" aria-labelledby="latest-guides">
-    <h2 id="latest-guides">最新文章</h2>
+    <h2 id="latest-guides">{ui.blog.latestGuides}</h2>
     <div class="blog-grid">
-      {allBlogPosts.map((post) => (
+      {visiblePosts.map((post) => (
         <article class="blog-card">
-          <p class="blog-date"><time datetime={post.updated}>最後更新：{post.updated}</time></p>
+          <p class="blog-date"><time datetime={post.updated}>{ui.blog.updatedPrefix}{post.updated}</time></p>
           <h3><a href={localePath(lang, 'blog', post.slug)}>{post.title}</a></h3>
           <p>{post.summary}</p>
-          <div class="blog-tools" aria-label="文章對應工具">
+          <div class="blog-tools" aria-label={ui.blog.toolLinksLabel}>
             {post.toolLinks.map((tool) => <a href={toolUrl(lang, tool.slug)}>{tool.label}</a>)}
           </div>
-          <a class="blog-read" href={localePath(lang, 'blog', post.slug)} aria-label={`閱讀：${post.title}`}>閱讀完整文章 →</a>
+          <a class="blog-read" href={localePath(lang, 'blog', post.slug)} aria-label={`${ui.blog.readArticleAria}${post.title}`}>{ui.blog.readArticle}</a>
         </article>
       ))}
     </div>

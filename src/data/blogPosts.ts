@@ -1,21 +1,91 @@
+import type { Locale } from '../config/site';
+
+export type LocalizedText = Record<Locale, string>;
+
 export interface BlogToolLink {
+  slug: string;
+  label: LocalizedText;
+  note: LocalizedText;
+}
+
+export interface BlogSubsection {
+  heading: LocalizedText;
+  paragraphs: LocalizedText[];
+}
+
+export interface BlogSection {
+  heading: LocalizedText;
+  paragraphs: LocalizedText[];
+  subsections?: BlogSubsection[];
+}
+
+export interface BlogPost {
+  slug: string;
+  locales: Locale[];
+  title: LocalizedText;
+  description: LocalizedText;
+  summary: LocalizedText;
+  published: string;
+  updated: string;
+  categorySlug?: string;
+  categoryLabel?: LocalizedText;
+  relatedArticleSlugs?: string[];
+  toolLinks: BlogToolLink[];
+  sections: BlogSection[];
+  faq: { question: LocalizedText; answer: LocalizedText }[];
+}
+
+export interface BlogToolLinkView {
   slug: string;
   label: string;
   note: string;
 }
 
-export interface BlogSubsection {
+export interface BlogSubsectionView {
   heading: string;
   paragraphs: string[];
 }
 
-export interface BlogSection {
+export interface BlogSectionView {
   heading: string;
   paragraphs: string[];
-  subsections?: BlogSubsection[];
+  subsections?: BlogSubsectionView[];
 }
 
-export interface BlogPost {
+export interface BlogPostView {
+  slug: string;
+  locales: Locale[];
+  title: string;
+  description: string;
+  summary: string;
+  published: string;
+  updated: string;
+  categorySlug?: string;
+  categoryLabel?: string;
+  relatedArticleSlugs?: string[];
+  toolLinks: BlogToolLinkView[];
+  sections: BlogSectionView[];
+  faq: { question: string; answer: string }[];
+}
+
+export interface RawBlogToolLink {
+  slug: string;
+  label: string;
+  note: string;
+}
+
+export interface RawBlogSubsection {
+  heading: string;
+  paragraphs: string[];
+}
+
+export interface RawBlogSection {
+  heading: string;
+  paragraphs: string[];
+  subsections?: RawBlogSubsection[];
+}
+
+export interface RawBlogPost {
   slug: string;
   title: string;
   description: string;
@@ -25,12 +95,312 @@ export interface BlogPost {
   categorySlug?: string;
   categoryLabel?: string;
   relatedArticleSlugs?: string[];
-  toolLinks: BlogToolLink[];
-  sections: BlogSection[];
+  toolLinks: RawBlogToolLink[];
+  sections: RawBlogSection[];
   faq: { question: string; answer: string }[];
 }
 
-export const blogPosts: BlogPost[] = [
+type EnglishBlogSectionContent = {
+  heading: string;
+  paragraphs: string[];
+  subsections?: { heading: string; paragraphs: string[] }[];
+};
+
+type EnglishBlogPostContent = {
+  title: string;
+  description: string;
+  summary: string;
+  categoryLabel?: string;
+  toolLinks: Omit<RawBlogToolLink, 'slug'>[];
+  sections: EnglishBlogSectionContent[];
+  faq: { question: string; answer: string }[];
+};
+
+const bilingualPillarSlugs = new Set([
+  'teacher-exam-score-guide',
+  't-score-pr-guide',
+  'classroom-random-tools-guide',
+  'pdf-workflow-guide',
+  'image-format-workflow-guide',
+]);
+
+function text(zh: string, en?: string): LocalizedText {
+  return { zh, en: en ?? zh };
+}
+
+function localizeRawPost(post: RawBlogPost): BlogPost {
+  const en = englishPillarContent[post.slug];
+  const locales: Locale[] = bilingualPillarSlugs.has(post.slug) && en ? ['zh', 'en'] : ['zh'];
+
+  return {
+    ...post,
+    locales,
+    title: text(post.title, en?.title),
+    description: text(post.description, en?.description),
+    summary: text(post.summary, en?.summary),
+    categoryLabel: post.categoryLabel ? text(post.categoryLabel, en?.categoryLabel) : undefined,
+    toolLinks: post.toolLinks.map((tool, index) => ({
+      slug: tool.slug,
+      label: text(tool.label, en?.toolLinks[index]?.label),
+      note: text(tool.note, en?.toolLinks[index]?.note),
+    })),
+    sections: post.sections.map((section, index) => ({
+      heading: text(section.heading, en?.sections[index]?.heading),
+      paragraphs: section.paragraphs.map((paragraph, paragraphIndex) =>
+        text(paragraph, en?.sections[index]?.paragraphs[paragraphIndex]),
+      ),
+      subsections: section.subsections?.map((subsection, subsectionIndex) => ({
+        heading: text(subsection.heading, en?.sections[index]?.subsections?.[subsectionIndex]?.heading),
+        paragraphs: subsection.paragraphs.map((paragraph, paragraphIndex) =>
+          text(paragraph, en?.sections[index]?.subsections?.[subsectionIndex]?.paragraphs[paragraphIndex]),
+        ),
+      })),
+    })),
+    faq: post.faq.map((item, index) => ({
+      question: text(item.question, en?.faq[index]?.question),
+      answer: text(item.answer, en?.faq[index]?.answer),
+    })),
+  };
+}
+
+export function localizeZhPost(post: RawBlogPost): BlogPost {
+  return localizeRawPost(post);
+}
+
+export function viewBlogPost(post: BlogPost, lang: Locale): BlogPostView {
+  return {
+    ...post,
+    title: post.title[lang],
+    description: post.description[lang],
+    summary: post.summary[lang],
+    categoryLabel: post.categoryLabel?.[lang],
+    toolLinks: post.toolLinks.map((tool) => ({
+      slug: tool.slug,
+      label: tool.label[lang],
+      note: tool.note[lang],
+    })),
+    sections: post.sections.map((section) => ({
+      heading: section.heading[lang],
+      paragraphs: section.paragraphs.map((paragraph) => paragraph[lang]),
+      subsections: section.subsections?.map((subsection) => ({
+        heading: subsection.heading[lang],
+        paragraphs: subsection.paragraphs.map((paragraph) => paragraph[lang]),
+      })),
+    })),
+    faq: post.faq.map((item) => ({
+      question: item.question[lang],
+      answer: item.answer[lang],
+    })),
+  };
+}
+
+export function isPostAvailableInLocale(post: BlogPost, lang: Locale): boolean {
+  return post.locales.includes(lang);
+}
+
+const rawBlogPosts: RawBlogPost[] = [
+  {
+    slug: 'teacher-exam-score-guide',
+    title: '教師甄試成績怎麼估：筆試、口試、試教加權與 T 分數整理',
+    description: '用範例整理教師甄試成績加權、T 分數、Z 分數與 PR 百分等級的試算方式，說明筆試、口試、試教權重常見檢查點，並提醒以正式簡章與公告為準。',
+    summary: '從加權總分、標準化分數到 PR 判讀，整理教師甄試考生常見的成績試算流程。',
+    published: '2026-06-23',
+    updated: '2026-06-23',
+    categorySlug: 'statistics',
+    categoryLabel: '教育統計工具',
+    relatedArticleSlugs: ['t-score-pr-guide', 'classroom-random-tools-guide'],
+    toolLinks: [
+      { slug: 'teacher-exam-score-converter', label: '教師甄試成績轉換模擬器', note: '試算筆試、口試與試教加權總分' },
+      { slug: 'weighted-average-calculator', label: '加權平均計算器', note: '檢查權重與總分公式' },
+      { slug: 't-score-calculator', label: 'T 分數計算器', note: '將 Z 分數轉成 T 分數量尺' },
+      { slug: 'z-score-calculator', label: 'Z 分數計算器', note: '依平均與標準差取得標準分數' },
+      { slug: 'percentile-rank-calculator', label: 'PR 百分等級計算器', note: '整理相對位置的描述方式' },
+    ],
+    sections: [
+      {
+        heading: '先分清楚：原始分數、加權總分與標準化分數',
+        paragraphs: [
+          '教師甄試的成績整理通常會同時遇到三種概念：原始分數是單一項目的得分，加權總分是把筆試、口試、試教等項目依比例合成後的結果，標準化分數則是把分數放到同一參照群體中比較。這三者不能混用，否則同一組數字可能被解讀成完全不同的結果。',
+          '使用線上工具時，建議先用簡章中的範例或自己手算的小範例測試。確認權重加總、四捨五入方式、分數上限與是否有最低門檻後，再把正式資料輸入。本文所有情境都是說明範例，不代表任何年度、縣市或學校的正式規則。',
+        ],
+      },
+      {
+        heading: '建議試算流程',
+        paragraphs: [
+          '第一步，用加權平均或教師甄試成績轉換工具確認各項配分。例如筆試 70%、口試 15%、試教 15%，就要確認輸入的是 70/15/15 還是 0.7/0.15/0.15，整份表格必須一致。第二步，如果公告使用 Z 分數或 T 分數，先確認平均數與標準差的參照群體，再做轉換。',
+          '第三步，把結果轉回容易檢查的文字說明。像是「此範例的加權總分為 82.35」或「z = 1.2，換算 T 分數為 62」。如果需要描述相對位置，再搭配 PR 百分等級，但不要把 PR 當成答對百分比。',
+        ],
+      },
+      {
+        heading: '常見錯誤',
+        paragraphs: [
+          '最常見的錯誤是把加權平均和標準化分數混在一起。例如原始分數先加權，再轉換，和各項先轉換再加權，結果可能不同；正式使用時必須以公告規則為準。另一個錯誤是沒有記錄參照群體，導致平均數、標準差、PR 的來源不清楚。',
+          '最後，線上工具可以幫助快速檢查，但不應取代正式簡章、榜單、複查流程或人工核對。尤其牽涉錄取、備取、同分比序或門檻時，請保留原始資料與手算紀錄。',
+        ],
+      },
+    ],
+    faq: [
+      { question: '教師甄試成績可以直接用加權平均算嗎？', answer: '只有在簡章規則確實是原始分數乘權重後加總時才可以。若有標準化、門檻或同分比序，需依正式公告處理。' },
+      { question: 'T 分數和 Z 分數差在哪？', answer: 'Z 分數以平均 0、標準差 1 表示相對位置；T 分數常用平均 50、標準差 10，閱讀上較直覺。' },
+      { question: 'PR 百分等級是百分比嗎？', answer: '不是答對百分比，而是描述相對於參照群體的位置。' },
+      { question: '可以用這些結果申訴或複查嗎？', answer: '工具結果只能做個人檢查，正式複查仍要依主辦單位規定與原始成績資料。' },
+      { question: '要先算 T 分數還是加權總分？', answer: '要看簡章規定。不同順序會得到不同結果，不能自行替換。' },
+    ],
+  },
+  {
+    slug: 't-score-pr-guide',
+    title: 'T 分數、Z 分數、PR 怎麼看：教育統計快速指南',
+    description: '以班級成績與考試情境說明 T 分數、Z 分數、百分等級與排名百分比的差異，整理公式、判讀方式、參照群體、常見誤解與使用限制，幫助老師和考生避免把分數解讀過度簡化。',
+    summary: '整理標準分數與百分等級的基本判讀，協助老師、學生與研究生快速檢查成績資料。',
+    published: '2026-06-23',
+    updated: '2026-06-23',
+    categorySlug: 'statistics',
+    categoryLabel: '教育統計工具',
+    relatedArticleSlugs: ['teacher-exam-score-guide'],
+    toolLinks: [
+      { slug: 'z-score-calculator', label: 'Z 分數計算器', note: '原始分數轉標準分數' },
+      { slug: 't-score-calculator', label: 'T 分數計算器', note: 'Z 分數轉 T 分數' },
+      { slug: 'percentile-rank-calculator', label: 'PR 百分等級計算器', note: '估算相對百分等級' },
+      { slug: 'class-rank-percentile-calculator', label: '排名百分比計算器', note: '名次轉換相對位置' },
+      { slug: 'standard-deviation', label: '標準差計算器', note: '先取得平均與標準差' },
+    ],
+    sections: [
+      {
+        heading: 'Z 分數：距離平均幾個標準差',
+        paragraphs: [
+          'Z 分數用標準差作為單位，描述一個原始分數距離平均數有多遠。z = 0 代表等於平均，z = 1 代表高於平均一個標準差，z = -1 則代表低於平均一個標準差。它適合比較不同量尺的分數，但前提是平均數與標準差來自同一個參照群體。',
+        ],
+      },
+      {
+        heading: 'T 分數：把 Z 分數改成較好閱讀的量尺',
+        paragraphs: [
+          'T 分數常見公式是 T = 50 + 10z。它不改變分數相對位置，只是把平均改成 50、標準差改成 10，避免大量小數與負數。教育測驗或甄試範例中，T 分數常比 Z 分數更容易放進報告表格。',
+        ],
+      },
+      {
+        heading: 'PR 與排名百分比：都要看參照群體',
+        paragraphs: [
+          'PR 百分等級描述的是相對位置，不是答對百分比。排名百分比則通常從名次與總人數估算。兩者都會受到群體大小、同分處理與計算方法影響，因此在正式用途上要說明參照群體與公式。',
+        ],
+      },
+    ],
+    faq: [
+      { question: 'T 分數越高一定越好嗎？', answer: '在同一參照群體與同一指標下通常代表相對較高，但仍要看測驗目的與正式規則。' },
+      { question: 'Z 分數可以直接變成 PR 嗎？', answer: '只有在特定分布假設下才可近似轉換；本工具群以明確輸入資料或名次估算為主。' },
+      { question: '排名百分比和 PR 一樣嗎？', answer: '概念接近但計算方式可能不同，尤其遇到同分或不同名次定義時。' },
+      { question: '班級人數很少時適合算 PR 嗎？', answer: '可以做參考，但小樣本的百分等級間距很粗，解讀要保守。' },
+      { question: '正式報告要寫哪些資訊？', answer: '至少註明平均數、標準差、樣本數、參照群體與使用公式。' },
+    ],
+  },
+  {
+    slug: 'classroom-random-tools-guide',
+    title: '老師課堂隨機工具整理：抽籤、分組、座位表怎麼搭配',
+    description: '整理老師課堂常用的隨機點名、活動分組、座位安排與公平抽籤流程，說明名單清理、課中使用情境、特殊需求調整與工具搭配方式，讓班級活動更順暢也更容易說明。',
+    summary: '把隨機點名、分組、座位表與名單抽籤串成一個可重複使用的課堂流程。',
+    published: '2026-06-23',
+    updated: '2026-06-23',
+    categorySlug: 'study',
+    categoryLabel: '老師課堂工具',
+    relatedArticleSlugs: ['teacher-exam-score-guide'],
+    toolLinks: [
+      { slug: 'random-student-picker', label: '隨機點名工具', note: '抽學生並避免重複' },
+      { slug: 'random-group-generator', label: '隨機分組工具', note: '快速產生活動小組' },
+      { slug: 'group-generator', label: '課堂分組工具', note: '依組數或每組人數分組' },
+      { slug: 'seating-chart', label: '座位表產生器', note: '整理教室座位安排' },
+      { slug: 'random-name-picker', label: '隨機姓名抽選器', note: '處理抽籤與活動名單' },
+    ],
+    sections: [
+      {
+        heading: '課前：先整理乾淨名單',
+        paragraphs: [
+          '課堂隨機工具的品質取決於名單是否乾淨。建議一行一位學生，先移除空白列、重複姓名與備註欄位。若班上有同名學生，可以加入座號或組別，以免抽選或分組時混淆。',
+        ],
+      },
+      {
+        heading: '課中：抽點、分組與計時分開處理',
+        paragraphs: [
+          '隨機點名適合提升參與度，但若要做小組活動，應改用分組工具，避免每次手動抽籤。活動開始後，可以搭配倒數計時器控制討論時間；若成果發表需要公平順序，再使用隨機姓名抽選器。',
+        ],
+      },
+      {
+        heading: '課後：座位與分組要保留調整彈性',
+        paragraphs: [
+          '座位表與分組結果都是初稿。老師仍可能因視力、聽力、特殊需求、請假、設備位置或班級經營考量做調整。工具負責節省時間，最後安排仍應由老師判斷。',
+        ],
+      },
+    ],
+    faq: [
+      { question: '隨機分組一定公平嗎？', answer: '隨機能降低人為偏好，但不會自動滿足能力、性別、座位或特殊需求限制。' },
+      { question: '學生名單會上傳嗎？', answer: '這些工具主要在瀏覽器本機處理，仍建議避免投影完整個資。' },
+      { question: '座位表可以列印嗎？', answer: '座位表工具提供可複製與列印的結果，列印前請先檢查欄列與姓名。' },
+      { question: '同名學生怎麼辦？', answer: '建議加入座號、組別或其他班級內可辨識但不過度揭露個資的標記。' },
+      { question: '可以避免同組重複嗎？', answer: '目前工具適合單次快速分組；若要長期追蹤同組歷史，建議另外保留紀錄。' },
+    ],
+  },
+  {
+    slug: 'pdf-workflow-guide',
+    title: 'PDF 工具怎麼選：合併、拆分、壓縮、頁面整理一次看',
+    description: '比較常見 PDF 任務的處理順序，協助辦公室、學生與教師判斷何時該合併、拆分、壓縮、刪除頁面或重新排序，並提醒交件前的頁碼、檔名與隱私檢查。',
+    summary: '從交件、掃描、報告到附件整理，選對 PDF 工具可以少做很多重複工。',
+    published: '2026-06-23',
+    updated: '2026-06-23',
+    categorySlug: 'pdf',
+    categoryLabel: 'PDF 工具',
+    toolLinks: [
+      { slug: 'merge-pdf', label: 'PDF 合併', note: '多份 PDF 合成一份' },
+      { slug: 'split-pdf', label: 'PDF 拆分', note: '拆成單頁或指定範圍' },
+      { slug: 'pdf-compressor', label: 'PDF 壓縮工具', note: '嘗試縮小 PDF 檔案' },
+      { slug: 'pdf-page-reorder', label: 'PDF 頁面重新排序', note: '拖曳調整頁面順序' },
+      { slug: 'extract-pdf-pages', label: '擷取 PDF 頁面', note: '只保留指定頁面' },
+      { slug: 'delete-pdf-pages', label: '刪除 PDF 頁面', note: '移除空白或錯誤頁' },
+      { slug: 'pdf-to-image', label: 'PDF 轉圖片', note: '每頁輸出成圖片' },
+      { slug: 'images-to-pdf', label: '圖片轉 PDF', note: '照片或掃描圖合成 PDF' },
+    ],
+    sections: [
+      { heading: '先決定任務類型', paragraphs: ['若你手上是多份文件要交成一份，先用 PDF 合併；若是一份太長的 PDF 要拆出章節，用 PDF 拆分或擷取頁面；若只是有空白頁或錯頁，使用刪除頁面或重新排序會更直接。'] },
+      { heading: '建議順序：整理頁面，再壓縮', paragraphs: ['多數情境下，先處理頁面順序、刪除不需要內容、確認頁數，再嘗試壓縮。這樣可以避免先壓縮後又重新輸出，造成重複處理與檔案混亂。壓縮結果不一定會變小，特別是已經最佳化或圖片很多的 PDF。'] },
+      { heading: '掃描與照片文件', paragraphs: ['如果資料來源是手機照片，通常先裁切、調整方向與壓縮圖片，再轉成 PDF。若已經是掃描 PDF，則先確認頁面是否歪斜、空白或重複，再用頁面工具整理。正式交件前，務必重新開啟輸出檔。'] },
+    ],
+    faq: [
+      { question: 'PDF 壓縮一定會變小嗎？', answer: '不一定。若原始檔已最佳化或主要容量來自圖片，壓縮效果可能有限。' },
+      { question: '合併 PDF 前要先排序嗎？', answer: '建議先確認檔案順序，也可合併後再用頁面重新排序檢查。' },
+      { question: '刪除頁面和擷取頁面差在哪？', answer: '刪除頁面是移除指定頁；擷取頁面是只保留指定頁。兩者方向相反。' },
+      { question: '檔案會上傳嗎？', answer: 'FunnyTools 的 PDF 工具設計為瀏覽器本機處理，檔案不會主動上傳到伺服器。' },
+      { question: '簽章 PDF 可以處理嗎？', answer: '處理後可能影響簽章或表單狀態，正式文件請保留原檔並審慎檢查。' },
+    ],
+  },
+  {
+    slug: 'image-format-workflow-guide',
+    title: '圖片格式怎麼選：JPG、PNG、WebP、壓縮與 QR Code 實用整理',
+    description: '說明圖片壓縮、尺寸調整、裁切與格式轉換的選擇方式，搭配社群、報告、網站圖片與 QR Code 的實際使用情境，整理 JPG、PNG、WebP 常見取捨。',
+    summary: '整理 JPG、PNG、WebP 的差異，以及壓縮、縮放、裁切、轉檔與 QR Code 的實用順序。',
+    published: '2026-06-23',
+    updated: '2026-06-23',
+    categorySlug: 'image',
+    categoryLabel: '圖片工具',
+    toolLinks: [
+      { slug: 'image-compressor', label: '圖片壓縮', note: '縮小 JPG、PNG、WebP' },
+      { slug: 'image-resizer', label: '圖片尺寸調整', note: '改寬高與比例' },
+      { slug: 'image-crop', label: '圖片裁切工具', note: '裁剪大頭貼與縮圖' },
+      { slug: 'png-to-jpg', label: 'PNG 轉 JPG', note: '透明背景套底色' },
+      { slug: 'jpg-to-png', label: 'JPG 轉 PNG', note: '輸出 PNG 格式' },
+      { slug: 'jpg-to-webp', label: 'JPG 轉 WebP', note: '網站圖片優化' },
+      { slug: 'webp-to-jpg', label: 'WebP 轉 JPG', note: '轉成相容格式' },
+      { slug: 'qr-code-generator', label: 'QR Code 產生器', note: '網址、文字與 Wi-Fi QR Code' },
+    ],
+    sections: [
+      { heading: '格式選擇表', paragraphs: ['照片通常適合 JPG 或 WebP；需要透明背景、線條或截圖時，PNG 較可靠；網站圖片若目標瀏覽器支援，WebP 通常能減少容量。若平台只接受 JPG，就需要把 PNG 或 WebP 轉成相容格式。'] },
+      { heading: '建議處理順序', paragraphs: ['先裁切到正確構圖，再調整尺寸，最後壓縮與轉檔。若先壓縮再裁切，可能要重複輸出；若先轉成有損格式再多次修改，畫質會逐步下降。'] },
+      { heading: 'QR Code 與圖片品質', paragraphs: ['QR Code 需要足夠對比與清楚邊界。若放在海報、講義或社群圖，先確認尺寸與容錯等級，再下載 PNG。若要搭配品牌顏色，請實際掃描測試，不要只看螢幕預覽。'] },
+    ],
+    faq: [
+      { question: 'JPG 轉 PNG 會變清楚嗎？', answer: '不會。它只改變格式，不能還原 JPG 壓縮造成的畫質損失。' },
+      { question: 'PNG 轉 JPG 透明背景會怎樣？', answer: 'JPG 不支援透明，透明區域會套用你選擇的背景色。' },
+      { question: 'WebP 適合所有平台嗎？', answer: '現代瀏覽器支援良好，但部分上傳系統或舊軟體仍可能只接受 JPG/PNG。' },
+      { question: '圖片壓縮應該先縮尺寸嗎？', answer: '通常是。若圖片實際只顯示 1200px，就不需要保留 4000px 的原始寬度。' },
+      { question: 'QR Code 可以壓縮嗎？', answer: '可以，但不要壓到邊緣模糊或對比不足，輸出後一定要實際掃描。' },
+    ],
+  },
   {
     slug: 'pdf-merge-guide',
     title: 'PDF 合併怎麼做？不用安裝軟體的線上方法',
@@ -1144,6 +1514,220 @@ export const blogPosts: BlogPost[] = [
     ],
   },
 ];
+
+const englishPillarContent: Record<string, EnglishBlogPostContent> = {
+  'teacher-exam-score-guide': {
+    title: 'Teacher Exam Score Guide',
+    description: 'Read teacher exam scores with weighted totals, Z scores, T scores, and percentile rank. Taiwan-style weights are examples, not official rules.',
+    summary: 'Learn how to move from raw exam scores to weighted totals, standard scores, T scores, and percentile rank, with clear examples for teacher exams and classroom reporting.',
+    categoryLabel: 'Statistics tools',
+    toolLinks: [
+      { label: 'Teacher exam score converter', note: 'Combine written, oral, trial teaching, and other weighted items as examples.' },
+      { label: 'Weighted average calculator', note: 'Check any score mix where each item has a different weight.' },
+      { label: 'T score calculator', note: 'Convert a Z score into a T score scale for easier comparison.' },
+      { label: 'Z score calculator', note: 'See how far a score is from the group average.' },
+      { label: 'Percentile rank calculator', note: 'Estimate what share of the group is below a score.' },
+    ],
+    sections: [
+      {
+        heading: 'Why one raw score is not enough',
+        paragraphs: [
+          'Teacher exams and teacher-selection workflows often combine several parts: written tests, interviews, teaching demonstrations, portfolios, or local screening items. A raw score from one part is useful, but it does not tell the full story until you know the weight, the group average, and the spread of scores. This guide uses Taiwan-style teacher exam scenarios as examples only. Always follow the official notice for the actual exam, district, or school.',
+          'Use the score tools as a checking layer: calculate the weighted total first, then compare the result with standard-score measures such as Z score, T score, and percentile rank. This keeps the workflow transparent and makes it easier to explain a score to students, parents, or colleagues without treating an estimate as an official result.',
+        ],
+      },
+      {
+        heading: 'A practical calculation flow',
+        paragraphs: [
+          'Start with the official weight table. For example, a written score might count 70%, an interview 15%, and a teaching demo 15%. Enter those values in the weighted average calculator or teacher exam score converter, then check whether every percentage is entered as the correct decimal or percent. A 70/15/15 example means 0.70, 0.15, and 0.15, not three equal parts.',
+          'After the weighted total is clear, use the Z score calculator when you know the group mean and standard deviation. A Z score can then be converted to a T score with the common example formula T = 50 + 10z. Use percentile rank when the question is comparative: for example, roughly what percentage of candidates scored below this result. These conversions are examples for interpretation, not a replacement for official ranking rules.',
+        ],
+      },
+      {
+        heading: 'Common mistakes',
+        paragraphs: [
+          'The most common mistake is mixing official score rules with personal spreadsheet habits. Do not round too early, do not reuse last year weights without checking, and do not compare a raw written-test score with another person’s weighted total. Keep the raw item scores, weight table, weighted total, and comparison metric in separate rows so every step can be reviewed.',
+          'Another mistake is treating PR or T score as a certificate of admission. These values describe position within a known group or assumed distribution. They are helpful for reading a score, but final decisions may include tie-breakers, thresholds, documentation checks, or local rules that are outside the calculator.',
+        ],
+      },
+    ],
+    faq: [
+      { question: 'Can I use this for an official teacher exam result?', answer: 'Use it for checking and explanation only. Official results must follow the notice published by the exam organizer, school, or authority.' },
+      { question: 'What is the difference between Z score and T score?', answer: 'A Z score shows distance from the mean in standard-deviation units. A T score is a friendlier scale often shown with mean 50 and standard deviation 10.' },
+      { question: 'Does PR mean my exact rank?', answer: 'No. Percentile rank estimates the share of scores below a value. Exact rank depends on the actual candidate list and tie rules.' },
+      { question: 'Should I round every step?', answer: 'Avoid early rounding. Keep full precision through the calculation, then round only the final value according to the official rule or report format.' },
+      { question: 'What if the weight table changes?', answer: 'Rebuild the calculation from the official current table. Do not reuse an older spreadsheet unless every weight and item name has been checked.' },
+    ],
+  },
+  't-score-pr-guide': {
+    title: 'T Score, Z Score, and PR Guide',
+    description: 'Understand Z scores, T scores, percentile rank, class percentile, and standard deviation with practical examples for exams, classroom analysis, and score reports.',
+    summary: 'A clear guide to standard-score vocabulary: what Z score, T score, and PR mean, when to use each one, and how to avoid over-reading a score report.',
+    categoryLabel: 'Statistics tools',
+    toolLinks: [
+      { label: 'Z score calculator', note: 'Convert a raw value into distance from the mean.' },
+      { label: 'T score calculator', note: 'Convert Z score into a 50/10 score scale.' },
+      { label: 'Percentile rank calculator', note: 'Estimate the percentage of values below a score.' },
+      { label: 'Class rank percentile calculator', note: 'Turn a rank and class size into a percentile-style reading.' },
+      { label: 'Standard deviation calculator', note: 'Measure how spread out a score group is.' },
+    ],
+    sections: [
+      {
+        heading: 'Z score: the basic standard score',
+        paragraphs: [
+          'A Z score tells you how far a value is from the average, measured in standard deviations. A Z score of 0 is exactly at the mean. A Z score of 1 is one standard deviation above the mean, and -1 is one standard deviation below it. This makes scores from different tests easier to compare when the groups have different averages or spreads.',
+        ],
+      },
+      {
+        heading: 'T score: the same idea on an easier scale',
+        paragraphs: [
+          'A T score is often calculated as T = 50 + 10z. It keeps the comparison meaning of the Z score but avoids many negative values and decimals. For example, z = 1 becomes T = 60, and z = -0.5 becomes T = 45. This is why T scores are common in test reports and selection workflows: they are easier to read while still being based on the group distribution.',
+        ],
+      },
+      {
+        heading: 'PR and percentile: position in the group',
+        paragraphs: [
+          'Percentile rank answers a different question: approximately what share of the group scored below this score? A PR of 80 means the score is above about 80% of the comparison group, not that the person got 80% correct. It is useful for explaining relative position, but it depends heavily on the actual group and method used to calculate it.',
+        ],
+      },
+    ],
+    faq: [
+      { question: 'Is a T score always out of 100?', answer: 'No. A T score is a standard-score scale, commonly centered at 50 with standard deviation 10. It is not a percentage.' },
+      { question: 'Can I convert any Z score to PR?', answer: 'Only if the distribution assumption is appropriate or you have the actual group data. Otherwise it is an estimate.' },
+      { question: 'Is class percentile the same as PR?', answer: 'They are related, but class percentile often starts from rank and class size, while PR usually comes from score distribution.' },
+      { question: 'Why does standard deviation matter?', answer: 'It tells you how spread out the group is. The same raw-score gap can mean very different things in a tight group versus a widely spread group.' },
+      { question: 'Which score should I report?', answer: 'Report the metric required by the school, exam notice, or project. If there is no rule, explain both raw score and the comparison metric clearly.' },
+    ],
+  },
+  'classroom-random-tools-guide': {
+    title: 'Teacher Classroom Tools Guide',
+    description: 'A teacher-focused guide to using random student pickers, group generators, seating charts, and name pickers for fairer classroom routines and faster lesson flow.',
+    summary: 'Use classroom random tools to pick students, build groups, arrange seats, and run quick activities while keeping the process visible and fair.',
+    categoryLabel: 'Study tools',
+    toolLinks: [
+      { label: 'Random student picker', note: 'Pick a student from a class list for questions or activities.' },
+      { label: 'Random group generator', note: 'Split students into random teams quickly.' },
+      { label: 'Group generator', note: 'Create groups from a pasted name list.' },
+      { label: 'Seating chart', note: 'Plan and adjust classroom seating layouts.' },
+      { label: 'Random name picker', note: 'Use a simple picker for names, topics, or classroom turns.' },
+    ],
+    sections: [
+      {
+        heading: 'Random does not mean careless',
+        paragraphs: [
+          'In class, random tools are most useful when students can see that the process is consistent. A visible random picker can reduce arguments about favoritism, while a group generator can save time during activities. The teacher still sets the rule: who is included, whether absentees stay in the list, and whether certain combinations should be avoided for learning or safety reasons.',
+        ],
+      },
+      {
+        heading: 'Picking students, groups, and classroom turns',
+        paragraphs: [
+          'Use a random student picker for quick questions, presentation order, reading turns, or review games. For group work, paste the class list into a random group generator and decide the group size before you start. If the class needs balanced groups, make the first random pass, then adjust only the clearly necessary cases and explain the rule briefly.',
+        ],
+      },
+      {
+        heading: 'Seating and activity planning',
+        paragraphs: [
+          'A seating chart is useful when you want to separate distractions, support students who need help, or rotate seats regularly. Random seating can be a starting point, but teachers should keep professional judgment for accessibility, behavior, vision, hearing, and classroom management. For short activities, combine a seating chart with a random picker so students know both the place and the turn order.',
+        ],
+      },
+    ],
+    faq: [
+      { question: 'Should groups be fully random?', answer: 'Not always. Random grouping is fast and transparent, but teachers may need to adjust for learning goals, support needs, or classroom safety.' },
+      { question: 'How do I avoid repeated picks?', answer: 'Keep a visible list or remove the selected name after each turn if the activity requires everyone to be picked once.' },
+      { question: 'Can a seating chart be random?', answer: 'Yes, but treat random seating as a draft. Adjust for accessibility, behavior, and practical classroom needs.' },
+      { question: 'What should I do with absent students?', answer: 'Decide before starting. Either remove absent names from the list or keep them only if the activity plan still needs their slot.' },
+      { question: 'Can students use these tools too?', answer: 'Yes. For group projects or club activities, a shared random picker can make turn-taking feel more transparent.' },
+    ],
+  },
+  'pdf-workflow-guide': {
+    title: 'PDF Tools Workflow Guide',
+    description: 'A practical PDF workflow guide for merging, splitting, compressing, reordering, extracting pages, deleting pages, and converting PDFs or images.',
+    summary: 'Choose the right PDF tool for common file tasks: combine documents, split chapters, reduce file size, reorder pages, extract pages, delete pages, or convert images.',
+    categoryLabel: 'PDF tools',
+    toolLinks: [
+      { label: 'Merge PDF', note: 'Combine several PDF files into one document.' },
+      { label: 'Split PDF', note: 'Separate a PDF by page range or section.' },
+      { label: 'PDF compressor', note: 'Reduce file size for upload or sharing.' },
+      { label: 'PDF page reorder', note: 'Move pages into the correct order.' },
+      { label: 'Extract PDF pages', note: 'Save selected pages as a new file.' },
+      { label: 'Delete PDF pages', note: 'Remove unwanted pages before sending.' },
+      { label: 'PDF to image', note: 'Export PDF pages as images.' },
+      { label: 'Images to PDF', note: 'Combine images into a single PDF.' },
+    ],
+    sections: [
+      {
+        heading: 'Start with the file goal',
+        paragraphs: [
+          'Before choosing a PDF tool, decide what the final file must do. If several documents need to become one application packet, use Merge PDF. If only selected pages are needed, use Split PDF or Extract PDF pages. If the page order is wrong after scanning, reorder the pages first, then compress the final file only after the structure is correct.',
+        ],
+      },
+      {
+        heading: 'Split, reorder, and clean before compressing',
+        paragraphs: [
+          'Compression is often the last step. First remove blank pages, delete duplicates, extract only the pages you need, and put the document in the right order. Compressing too early can make later checks harder and may reduce image clarity more than necessary. Keep the original file until the final upload is accepted.',
+        ],
+      },
+      {
+        heading: 'Conversion and privacy checks',
+        paragraphs: [
+          'Use PDF to image when a page needs to be previewed, inserted into a slide, or shared as a picture. Use Images to PDF when photos, scanned pages, or screenshots should be sent as one document. For sensitive files, check the tool page privacy note and avoid uploading personal documents to services you do not trust.',
+        ],
+      },
+    ],
+    faq: [
+      { question: 'Should I compress a PDF before or after merging?', answer: 'Usually after. Merge, reorder, delete, and extract first, then compress the final file.' },
+      { question: 'Will merging PDF files change page quality?', answer: 'Merging itself usually keeps the pages as they are. Quality loss is more likely during compression or image conversion.' },
+      { question: 'Is delete pages the same as extract pages?', answer: 'No. Delete pages removes unwanted pages from the document, while extract pages saves selected pages into a new file.' },
+      { question: 'Are PDF tools safe for private files?', answer: 'Check each tool page. Prefer local browser processing for sensitive documents, and avoid entering or uploading highly confidential files.' },
+      { question: 'Can I turn photos into a PDF?', answer: 'Yes. Use Images to PDF to combine screenshots, photos, or scanned pages into one PDF file.' },
+    ],
+  },
+  'image-format-workflow-guide': {
+    title: 'Image Tools Workflow Guide',
+    description: 'A practical guide to image compression, resizing, cropping, JPG/PNG/WebP conversion, and QR code output for websites, social posts, documents, and classrooms.',
+    summary: 'Learn when to compress, resize, crop, or convert images, and how to choose between JPG, PNG, WebP, and QR code output for everyday work.',
+    categoryLabel: 'Image tools',
+    toolLinks: [
+      { label: 'Image compressor', note: 'Reduce JPG, PNG, or WebP file size.' },
+      { label: 'Image resizer', note: 'Set practical dimensions for upload or display.' },
+      { label: 'Image crop tool', note: 'Crop the important area before export.' },
+      { label: 'PNG to JPG', note: 'Convert transparent or large PNG files when needed.' },
+      { label: 'JPG to PNG', note: 'Create PNG output for workflows that require it.' },
+      { label: 'JPG to WebP', note: 'Make smaller web-friendly images.' },
+      { label: 'WebP to JPG', note: 'Convert WebP for apps that need JPG.' },
+      { label: 'QR code generator', note: 'Create QR codes for links, text, or Wi-Fi details.' },
+    ],
+    sections: [
+      {
+        heading: 'Choose the format by use case',
+        paragraphs: [
+          'JPG is usually best for photos because it keeps file size low with acceptable visual quality. PNG is useful for sharp graphics, screenshots, logos, and transparency. WebP often gives smaller web images, but you may still need JPG or PNG when a platform, school system, or document workflow does not accept WebP.',
+        ],
+      },
+      {
+        heading: 'Compress, resize, crop, then convert',
+        paragraphs: [
+          'A clean image workflow starts with the visual area. Crop away unused space, resize to the dimensions the platform needs, and then compress the result. Conversion should match the destination: JPG for most photos, PNG for transparency or crisp UI images, and WebP for websites where browser support is acceptable.',
+        ],
+      },
+      {
+        heading: 'QR code output and scan quality',
+        paragraphs: [
+          'QR codes need strong contrast and enough quiet space around the pattern. Avoid heavy compression, blur, or low-resolution resizing that makes the modules unclear. For posters and handouts, export a clear PNG when possible, test scan it on more than one phone, and keep the linked URL short enough to avoid an overly dense code.',
+        ],
+      },
+    ],
+    faq: [
+      { question: 'Does converting JPG to PNG improve quality?', answer: 'No. It may prevent further JPG compression, but it cannot restore detail already lost in the JPG file.' },
+      { question: 'Why does PNG sometimes become larger than JPG?', answer: 'PNG is lossless and keeps transparency, which is useful for graphics but often larger for photos.' },
+      { question: 'Is WebP always the best image format?', answer: 'No. WebP is efficient for many web images, but JPG or PNG may be better for compatibility, editing, or print workflows.' },
+      { question: 'Should I resize before compressing?', answer: 'Usually yes. Reducing an oversized image to the needed dimensions often saves more space than compression alone.' },
+      { question: 'Can I compress a QR code?', answer: 'Be careful. Heavy compression or blur can make a QR code hard to scan. Keep contrast high and test the result.' },
+    ],
+  },
+};
+
+export const blogPosts: BlogPost[] = rawBlogPosts.map(localizeRawPost);
 
 export function getBlogPost(slug: string): BlogPost | undefined {
   return blogPosts.find((post) => post.slug === slug);

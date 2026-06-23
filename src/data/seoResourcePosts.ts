@@ -1,5 +1,5 @@
 import keywordData from '../../seo-system/keywords/tools-keywords.json';
-import type { BlogPost } from './blogPosts';
+import { localizeZhPost, type BlogPost, type RawBlogPost } from './blogPosts';
 import { tools as siteTools } from './tools';
 
 interface KeywordTool {
@@ -99,7 +99,7 @@ function mistakeItems(tool: KeywordTool): string[] {
   ];
 }
 
-function buildPost(tool: KeywordTool, idea: string, index: number): BlogPost {
+function buildPost(tool: KeywordTool, idea: string, index: number): RawBlogPost {
   const slug = articleSlug(tool, index);
   const primaryRelated = tool.related_tools.slice(0, 4);
   const relatedArticleSlugs = tool.article_ideas
@@ -173,6 +173,6 @@ function buildPost(tool: KeywordTool, idea: string, index: number): BlogPost {
   };
 }
 
-export const seoResourcePosts: BlogPost[] = tools().flatMap((tool) =>
-  tool.article_ideas.map((idea, index) => buildPost(tool, idea, index)),
-);
+export const seoResourcePosts: BlogPost[] = tools()
+  .flatMap((tool) => tool.article_ideas.map((idea, index) => buildPost(tool, idea, index)))
+  .map(localizeZhPost);

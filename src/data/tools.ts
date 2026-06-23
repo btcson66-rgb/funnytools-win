@@ -783,7 +783,7 @@ export const tools: ToolMeta[] = [
     icon: '🗑️',
     status: 'live',
     privacyLevel: 'local-only',
-    relatedTools: ['extract-pdf-pages', 'split-pdf', 'rotate-pdf'],
+    relatedTools: ['extract-pdf-pages', 'split-pdf', 'pdf-page-reorder', 'merge-pdf', 'pdf-compressor'],
     assetType: 'tool',
     searchIntent: 'high',
     shareIntent: 'low',
@@ -802,7 +802,7 @@ export const tools: ToolMeta[] = [
     icon: '📄',
     status: 'live',
     privacyLevel: 'local-only',
-    relatedTools: ['delete-pdf-pages', 'split-pdf', 'merge-pdf'],
+    relatedTools: ['delete-pdf-pages', 'split-pdf', 'merge-pdf', 'pdf-page-reorder', 'pdf-to-image'],
     assetType: 'tool',
     searchIntent: 'high',
     shareIntent: 'low',
@@ -989,7 +989,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'teacher-exam-score-converter', category: 'statistics', icon: '📝', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['weighted-average-calculator', 'normalized-score-converter', 'grade-average'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'high', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
+    relatedTools: ['weighted-average-calculator', 't-score-calculator', 'z-score-calculator', 'percentile-rank-calculator', 'normalized-score-converter', 'grade-average'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'high', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
     name: { zh: '教師甄試成績轉換模擬器', en: 'Teacher Exam Score Converter' }, short: { zh: '依筆試、口試與試教權重模擬加權總成績。', en: 'Simulate a weighted teacher-exam total from written, interview, and teaching scores.' },
   },
   {
@@ -1058,12 +1058,12 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'pdf-page-reorder', category: 'pdf', icon: '↕️', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['merge-pdf', 'delete-pdf-pages', 'rotate-pdf'], assetType: 'tool', searchIntent: 'high', shareIntent: 'low', embedPotential: 'low', maintenanceRisk: 'low', monetizationTags: ['adsense', 'affiliate'], isNew: true, updated: '2026-06-18',
+    relatedTools: ['merge-pdf', 'delete-pdf-pages', 'extract-pdf-pages', 'split-pdf', 'pdf-compressor'], assetType: 'tool', searchIntent: 'high', shareIntent: 'low', embedPotential: 'low', maintenanceRisk: 'low', monetizationTags: ['adsense', 'affiliate'], isNew: true, updated: '2026-06-18',
     name: { zh: 'PDF 頁面重新排序', en: 'PDF Page Reorder' }, short: { zh: '在瀏覽器內重新排列 PDF 頁面。', en: 'Rearrange PDF pages locally in your browser.' },
   },
   {
     slug: 'pdf-to-image', category: 'pdf', icon: '🖼️', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['extract-pdf-pages', 'images-to-pdf', 'pdf-page-reorder'], assetType: 'tool', searchIntent: 'high', shareIntent: 'low', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense', 'affiliate'], isNew: true, updated: '2026-06-18',
+    relatedTools: ['extract-pdf-pages', 'images-to-pdf', 'pdf-page-reorder', 'split-pdf', 'image-compressor'], assetType: 'tool', searchIntent: 'high', shareIntent: 'low', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense', 'affiliate'], isNew: true, updated: '2026-06-18',
     name: { zh: 'PDF 轉圖片', en: 'PDF to Image Converter' }, short: { zh: '將 PDF 頁面轉成 PNG 或 JPG。', en: 'Convert PDF pages into PNG or JPG images.' },
   },
   {
@@ -1073,7 +1073,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'standard-deviation', category: 'statistics', icon: 'σ', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['percentage-calculator', 'grade-average', 'gpa-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'low', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-19',
+    relatedTools: ['z-score-calculator', 't-score-calculator', 'grade-average', 'percentile-rank-calculator', 'cronbach-alpha-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'low', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-19',
     name: { zh: '標準差計算器', en: 'Standard Deviation Calculator' },
     short: { zh: '輸入一組數字，計算平均、中位數、變異數與標準差。', en: 'Compute mean, median, variance, and standard deviation from a set of numbers.' },
   },
@@ -1085,7 +1085,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'image-crop', category: 'image', icon: '✂️', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['image-resizer', 'image-rotate-flip', 'image-compressor'], assetType: 'tool', searchIntent: 'high', shareIntent: 'low', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense', 'affiliate'], featured: true, isNew: true, updated: '2026-06-19',
+    relatedTools: ['image-resizer', 'image-compressor', 'png-to-jpg', 'jpg-to-webp', 'qr-code-generator'], assetType: 'tool', searchIntent: 'high', shareIntent: 'low', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense', 'affiliate'], featured: true, isNew: true, updated: '2026-06-19',
     name: { zh: '圖片裁切工具', en: 'Image Cropper' },
     short: { zh: '上傳圖片，拖曳選取範圍即可裁切並下載。', en: 'Upload an image, drag to select an area, and crop to download.' },
   },
