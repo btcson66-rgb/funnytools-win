@@ -77,6 +77,15 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
           analyticsWindow.dataLayer.push({ event: eventName, ...payload });
         };
 
+        const sendCustomToolEvent = (eventName, params = {}) => {
+          analyticsWindow.__ft_track?.(eventName, {
+            tool_id: toolSlug,
+            tool_name: toolName,
+            category: toolCategory,
+            ...params,
+          });
+        };
+
         sendAnalyticsEvent('tool_view');
 
         const interactionRoot = document.querySelector('.tool-interaction');
@@ -106,6 +115,7 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
             if (started) return;
             started = true;
             sendAnalyticsEvent('tool_started', { control_type: controlType });
+            sendCustomToolEvent('tool_use_start', { control_type: controlType });
           };
 
           interactionRoot.addEventListener('change', (event) => {
@@ -125,8 +135,10 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
 
             if (actionName.includes('copy')) {
               sendAnalyticsEvent('result_action', { result_action: 'copy' });
+              sendCustomToolEvent('copy_result', { result_action: 'copy' });
             } else if (actionName.includes('download') || actionName.includes('export') || target.hasAttribute('download')) {
               sendAnalyticsEvent('file_download', { download_action: actionName });
+              sendCustomToolEvent('result_download', { download_action: actionName });
             } else if (target.matches('.btn.go')) {
               sendAnalyticsEvent('tool_action', { action_name: actionName });
             }
@@ -147,6 +159,7 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
               if (started && result && isVisible(result) && result.textContent?.trim() && now - lastCompletionAt > 750) {
                 lastCompletionAt = now;
                 sendAnalyticsEvent('tool_completed');
+                sendCustomToolEvent('tool_use_success');
               }
             }
           });
