@@ -87,6 +87,7 @@ const jsonLd = [
                 href={platform.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-support-source={`share_${platform.name.toLowerCase()}`}
                 aria-label={`Share on ${platform.name}`}
                 title={`Share on ${platform.name}`}
               >
@@ -95,7 +96,7 @@ const jsonLd = [
               </a>
             ))}
           </div>
-          <button class="btn ghost copy-home-link" type="button" data-copy-home-link data-copy-url={homeUrl}>
+          <button class="btn ghost copy-home-link" type="button" data-copy-home-link data-copy-url={homeUrl} data-support-source="copy_site_link">
             <span aria-hidden="true">Link</span>
             <span data-copy-label>Copy site link</span>
           </button>
@@ -105,19 +106,20 @@ const jsonLd = [
           <span class="support-icon" aria-hidden="true">F</span>
           <h3>Send feedback</h3>
           <p>Tell us about broken pages, unclear wording, missing tool options, or small workflows that should be easier.</p>
-          <a class="inline-link" href={localePath(lang, 'contact')}>Go to the contact page</a>
+          <a class="inline-link" href={localePath(lang, 'contact')} data-support-source="feedback_contact">Go to the contact page</a>
         </article>
         <article class="support-method-card">
           <span class="support-icon" aria-hidden="true">A</span>
           <h3>Use recommended resource links</h3>
           <p>When you already plan to shop, using an affiliate link may support ongoing maintenance without changing your price.</p>
           <div class="support-card-actions">
-            <a class="inline-link" href="#resources">View recommended resources</a>
+            <a class="inline-link" href="#resources" data-support-source="view_resources">View recommended resources</a>
             <a
               class="btn support-home-link"
               href="https://www.amazon.com/?&linkCode=ll2&tag=funnytools-20&linkId=778ecc16814fbbf7f0d053c434db85a8&language=en_US&ref_=as_li_ss_tl"
               target="_blank"
               rel="sponsored nofollow noopener"
+              data-support-source="affiliate_amazon"
             >Open Amazon</a>
           </div>
         </article>
@@ -186,6 +188,9 @@ const jsonLd = [
     copyButton?.addEventListener('click', async () => {
       const homeUrl = copyButton.getAttribute('data-copy-url');
       if (!homeUrl) return;
+      window.__ft_track?.('support_click', {
+        source: copyButton.getAttribute('data-support-source') || 'copy_site_link'
+      });
 
       try {
         if (navigator.clipboard && window.isSecureContext) {
@@ -203,6 +208,17 @@ const jsonLd = [
       } catch {
         if (copyStatus) copyStatus.textContent = `Could not copy automatically: ${homeUrl}`;
       }
+    });
+
+    document.querySelectorAll('[data-support-source]').forEach((link) => {
+      if (link === copyButton) return;
+      link.addEventListener('click', () => {
+        const source = link.getAttribute('data-support-source') || 'support_page';
+        window.__ft_track?.('support_click', { source });
+        if (source.startsWith('share_')) {
+          window.__ft_track?.('share_click', { method: source.replace(/^share_/, '') });
+        }
+      });
     });
   </script>
 </BaseLayout>
