@@ -203,7 +203,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'teacher-exam-score-guide',
     title: '教師甄試成績怎麼估：筆試、口試、試教加權與 T 分數整理',
     description: '用範例整理教師甄試成績加權、T 分數、Z 分數與 PR 百分等級的試算方式，說明筆試、口試、試教權重常見檢查點，並提醒以正式簡章與公告為準。',
-    summary: '從加權總分、標準化分數到 PR 判讀，整理教師甄試考生常見的成績試算流程。',
+    summary: '教師甄試成績怎麼換算？先看加權、T 分數與 PR 的關係。',
     published: '2026-06-23',
     updated: '2026-06-23',
     categorySlug: 'statistics',
@@ -251,7 +251,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 't-score-pr-guide',
     title: 'T 分數、Z 分數、PR 怎麼看：教育統計快速指南',
     description: '以班級成績與考試情境說明 T 分數、Z 分數、百分等級與排名百分比的差異，整理公式、判讀方式、參照群體、常見誤解與使用限制，幫助老師和考生避免把分數解讀過度簡化。',
-    summary: '整理標準分數與百分等級的基本判讀，協助老師、學生與研究生快速檢查成績資料。',
+    summary: '拿到原始分數後，這篇幫你判斷該轉 Z、T 還是 PR。',
     published: '2026-06-23',
     updated: '2026-06-23',
     categorySlug: 'statistics',
@@ -296,7 +296,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'classroom-random-tools-guide',
     title: '老師課堂隨機工具整理：抽籤、分組、座位表怎麼搭配',
     description: '整理老師課堂常用的隨機點名、活動分組、座位安排與公平抽籤流程，說明名單清理、課中使用情境、特殊需求調整與工具搭配方式，讓班級活動更順暢也更容易說明。',
-    summary: '把隨機點名、分組、座位表與名單抽籤串成一個可重複使用的課堂流程。',
+    summary: '點名怕只抽到同一批人？建立可重複又能微調的抽選流程。',
     published: '2026-06-23',
     updated: '2026-06-23',
     categorySlug: 'study',
@@ -341,7 +341,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'pdf-workflow-guide',
     title: 'PDF 工具怎麼選：合併、拆分、壓縮、頁面整理一次看',
     description: '比較常見 PDF 任務的處理順序，協助辦公室、學生與教師判斷何時該合併、拆分、壓縮、刪除頁面或重新排序，並提醒交件前的頁碼、檔名與隱私檢查。',
-    summary: '從交件、掃描、報告到附件整理，選對 PDF 工具可以少做很多重複工。',
+    summary: '報告附件散成多份 PDF 時，先排序再合併會少出錯。',
     published: '2026-06-23',
     updated: '2026-06-23',
     categorySlug: 'pdf',
@@ -373,7 +373,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'image-format-workflow-guide',
     title: '圖片格式怎麼選：JPG、PNG、WebP、壓縮與 QR Code 實用整理',
     description: '說明圖片壓縮、尺寸調整、裁切與格式轉換的選擇方式，搭配社群、報告、網站圖片與 QR Code 的實際使用情境，整理 JPG、PNG、WebP 常見取捨。',
-    summary: '整理 JPG、PNG、WebP 的差異，以及壓縮、縮放、裁切、轉檔與 QR Code 的實用順序。',
+    summary: '網頁圖片要快又清楚，先比較 WebP、JPG 與 PNG 的取捨。',
     published: '2026-06-23',
     updated: '2026-06-23',
     categorySlug: 'image',
@@ -405,7 +405,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'pdf-merge-guide',
     title: 'PDF 合併怎麼做？不用安裝軟體的線上方法',
     description: '教你使用瀏覽器合併多份 PDF，從排序、預覽到下載一次說明，也整理檔案隱私、頁面方向與合併失敗的注意事項，適合報告、附件與掃描檔案整理使用。',
-    summary: '把分散的報告、附件或掃描檔整理成一份 PDF，並在送出前完成排序與檢查。',
+    summary: '交件前要合併 PDF？從檔名、頁序到預覽一次檢查。',
     published: '2026-06-20',
     updated: '2026-06-20',
     toolLinks: [
@@ -461,7 +461,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'images-to-pdf-guide',
     title: '如何把多張圖片轉成 PDF？',
     description: '完整說明多張 JPG、PNG 圖片轉成一份 PDF 的步驟，包含排序、方向、留白、畫質與檔案大小的實用檢查，適合整理收據、報告與作品集案例。',
-    summary: '將作業照片、收據或掃描圖片依序整理成方便分享與列印的 PDF。',
+    summary: '掃描照片變 PDF 前，頁面方向與邊界比按合併更重要。',
     published: '2026-06-20',
     updated: '2026-06-20',
     toolLinks: [
@@ -517,7 +517,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'random-grouping-classroom',
     title: '老師如何用隨機分組工具安排課堂活動？',
     description: '提供教師使用隨機分組工具的完整課堂流程，包含名單準備、組數設定、公平性、特殊需求調整、角色分工與活動後輪替方式，讓分組作業更省時且更公平合理。',
-    summary: '用可說明、可重複的流程快速分組，同時保留教師對課堂需求的必要調整。',
+    summary: '分組結果不公平怎麼辦？先設定規則，再保留人工調整空間。',
     published: '2026-06-20',
     updated: '2026-06-20',
     toolLinks: [
@@ -573,7 +573,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'what-to-eat-decision-methods',
     title: '不知道今天吃什麼？選擇困難時可以用的 5 種方法',
     description: '整理五種解決今天吃什麼的方法：縮小範圍、排除法、隨機輪盤、二選一與建立常用清單，幫你在單人或多人用餐時更快做出決定，省去反覆猶豫的寶貴時間。',
-    summary: '先把選項縮小，再用簡單規則做決定，避免把時間耗在無限比較。',
+    summary: '晚餐選不出來時，用排除法加隨機挑選縮短糾結時間。',
     published: '2026-06-20',
     updated: '2026-06-20',
     toolLinks: [
@@ -627,7 +627,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'compound-interest-explained',
     title: '複利是什麼？用簡單例子看懂本金、利率與時間',
     description: '用白話例子說明複利、本金、利率與期數的關係，並提醒試算結果與實際金融產品可能存在費用、稅務及計息差異，幫助理解長期儲蓄與投資的複利累積效果。',
-    summary: '了解利息加入本金後如何影響下一期計算，並正確閱讀複利試算結果。',
+    summary: '複利不是只看利率，投入頻率與時間長度才是差異關鍵。',
     published: '2026-06-20',
     updated: '2026-06-20',
     toolLinks: [
@@ -682,7 +682,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'mortgage-payment-explained',
     title: '房貸月付金怎麼算？本息平均攤還白話解釋',
     description: '白話說明房貸本息平均攤還、每月本金與利息如何變化，以及使用房貸試算時應留意的利率、期數、寬限期與額外費用，協助評估每月實際還款的總負擔金額。',
-    summary: '看懂本息平均攤還的月付金結構，並知道試算與銀行核貸結果的差距來源。',
+    summary: '房貸月付金為什麼變動？用本金、年限、利率拆開看。',
     published: '2026-06-20',
     updated: '2026-06-20',
     toolLinks: [
@@ -737,7 +737,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'qr-code-guide',
     title: 'QR Code 是什麼？如何製作自己的 QR Code？',
     description: '說明 QR Code 的用途、建立網址與文字 QR Code 的步驟，以及尺寸、對比、容錯、隱私與印刷前測試注意事項，避免掃描失敗或內容過期。',
-    summary: '把網址或文字製作成可掃描的 QR Code，並在分享或印刷前完成實機測試。',
+    summary: 'QR Code 印出前，別忘了測試距離、尺寸與錯誤修正等級。',
     published: '2026-06-20',
     updated: '2026-06-20',
     toolLinks: [
@@ -792,7 +792,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'word-counter-use-cases',
     title: '字數統計工具可以用在哪些情境？',
     description: '整理字數統計、字元數、段落數與閱讀時間的差異，說明學生寫作、內容編輯、社群經營與線上表單填寫時的實際用法與注意事項，協助掌握篇幅與字數限制。',
-    summary: '不只看總字數，也用字元、段落與閱讀時間檢查內容是否符合使用情境。',
+    summary: '投稿前先檢查字數、字元與段落，避免平台送出才被退。',
     published: '2026-06-20',
     updated: '2026-06-20',
     toolLinks: [
@@ -848,7 +848,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'image-compression-quality-guide',
     title: '圖片壓縮會影響畫質嗎？上傳前該注意什麼？',
     description: '說明圖片壓縮為何可能影響畫質，如何依照片、截圖與文字圖選擇設定，並整理尺寸、格式、隱私及壓縮後檢查方式，幫助縮小檔案大小又能維持清晰度品質。',
-    summary: '用實際顯示尺寸與用途決定壓縮程度，避免只追求最小檔案而犧牲可讀性。',
+    summary: '壓縮圖片別只看 KB，放大後是否仍清楚才是重點。',
     published: '2026-06-20',
     updated: '2026-06-20',
     toolLinks: [
@@ -904,7 +904,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'pdf-split-guide',
     title: 'PDF 拆分是什麼？如何只保留需要的頁面？',
     description: '教你將 PDF 拆成指定頁面或範圍，說明頁碼確認、成品預覽、敏感內容檢查、重新合併與拆分後的檔案整理方式，方便分享單一頁面或特定章節的內容。',
-    summary: '從完整 PDF 取出需要的頁面，減少不必要內容並讓分享範圍更清楚。',
+    summary: '只要寄第 3 到 5 頁？拆 PDF 前先確認頁碼與範圍。',
     published: '2026-06-20',
     updated: '2026-06-20',
     toolLinks: [
@@ -960,7 +960,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'mobile-pdf-merge',
     title: '手機怎麼合併 PDF？免安裝 App 的操作方法',
     description: '用手機瀏覽器直接合併多份 PDF，不需要下載 App，從選檔、排序到下載完整說明，並整理常見失敗原因、檔案隱私、頁面順序與上傳前檢查重點，也提供對應工具與實用檢查清單。',
-    summary: '在手機上用瀏覽器把多份 PDF 合成一個檔案，不必安裝額外 App。',
+    summary: '手機也能合併 PDF，但大檔案要先確認記憶體與下載位置。',
     published: '2026-06-23',
     updated: '2026-06-23',
     toolLinks: [
@@ -1009,7 +1009,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'pdf-too-large',
     title: 'PDF 太大不能上傳怎麼辦？實用縮小方法整理',
     description: '整理 PDF 檔案過大的常見原因與解決方法，包含壓縮、移除不必要頁面、降低掃描解析度、重新輸出與上傳前檢查，適合 Email 或表單送件使用，也補充相關工具與常見錯誤。',
-    summary: '檔案超過上傳限制時，用壓縮、拆分或重新掃描等方法把 PDF 縮小到可接受的大小。',
+    summary: 'PDF 太大時，先判斷該壓縮、拆頁，還是重新掃描。',
     published: '2026-06-23',
     updated: '2026-06-23',
     toolLinks: [
@@ -1060,7 +1060,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'compress-large-images',
     title: '圖片太大怎麼壓縮？品質與大小的平衡指南',
     description: '說明圖片壓縮的原理、操作步驟與品質控制方法，幫助你在不明顯降低畫質的情況下縮小圖片檔案，並整理上傳、寄信與網頁使用前的檢查方式、工具選擇和實際範例。',
-    summary: '用線上工具把過大的圖片縮小到適合上傳、寄信或放在網頁上的大小，同時控制品質損失。',
+    summary: '圖片超過 5MB 無法上傳？從尺寸、品質與格式三步處理。',
     published: '2026-06-23',
     updated: '2026-06-23',
     toolLinks: [
@@ -1109,7 +1109,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'png-to-jpg-quality',
     title: 'PNG 轉 JPG 會失真嗎？格式轉換前該知道的事',
     description: '解釋 PNG 和 JPG 的差異、轉換時可能的品質變化、透明背景的處理方式與檔案大小取捨，幫助你判斷什麼時候該轉、什麼時候不該轉，並附轉檔前後檢查重點。',
-    summary: '了解 PNG 轉 JPG 的品質影響與適用情境，避免轉錯格式造成畫質下降或透明背景消失。',
+    summary: 'PNG 轉 JPG 最常忽略透明背景，轉檔前先選對用途。',
     published: '2026-06-23',
     updated: '2026-06-23',
     toolLinks: [
@@ -1151,7 +1151,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'free-qr-code-guide',
     title: '如何免費製作 QR Code？從產生到列印的完整流程',
     description: '完整說明免費製作 QR Code 的方法，包含網址、文字、Wi-Fi 等類型的製作步驟，以及尺寸、對比、掃描測試、列印與分享前的注意事項，也整理常見錯誤。',
-    summary: '用免費線上工具製作網址、文字或 Wi-Fi QR Code，並確認掃得到、印得清。',
+    summary: '活動海報放 QR Code 時，短網址與留白會影響掃描成功率。',
     published: '2026-06-23',
     updated: '2026-06-23',
     toolLinks: [
@@ -1201,7 +1201,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'threads-word-count',
     title: 'Threads 文案字數怎麼算？掌握字數限制的實用方法',
     description: '說明 Threads 的字數限制規則、中英文字數計算差異，以及如何用字數統計工具在發文前確認長度、換行與標點，避免內容被截斷或重寫，並附文案檢查流程。',
-    summary: '了解 Threads 的字數限制，用字數統計工具在發文前確認文案長度。',
+    summary: 'Threads 文案超字怎麼修？先抓核心句，再刪重複修飾。',
     published: '2026-06-23',
     updated: '2026-06-23',
     toolLinks: [
@@ -1241,7 +1241,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'teacher-random-grouping',
     title: '老師如何快速隨機分組？省時公平的課堂分組方法',
     description: '從教學角度說明課堂隨機分組的流程、工具選擇、公平性考量、名單清理與分組後的調整策略，幫助老師節省課堂時間並降低爭議，也整理課堂使用檢查清單。',
-    summary: '用線上工具在課堂上快速完成隨機分組，並依教學需求微調結果。',
+    summary: '課堂臨時分組時，名單格式整理好會比反覆重抽更重要。',
     published: '2026-06-23',
     updated: '2026-06-23',
     toolLinks: [
@@ -1291,7 +1291,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'seating-chart-guide',
     title: '班級座位表怎麼快速產生？老師與活動主辦的實用方法',
     description: '說明快速建立班級或活動座位表的方法，包含輸入名單、調整排列、保留特殊需求與匯出結果的流程，適合老師、班導師與活動主辦人，也附常見錯誤提醒和檢查清單。',
-    summary: '用線上工具快速產生座位表，省去手動畫表格的時間。',
+    summary: '座位表不是排滿格子而已，還要考慮視線、互動與調整成本。',
     published: '2026-06-23',
     updated: '2026-06-23',
     toolLinks: [
@@ -1332,7 +1332,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'mortgage-calculation-guide',
     title: '房貸月付金怎麼算？公式原理與線上試算教學',
     description: '從公式原理出發，說明房貸月付金的計算方法、本金與利息的拆解、影響月付金的關鍵因素，以及如何用線上工具快速試算不同利率與年限方案，並提醒估算限制。',
-    summary: '理解房貸月付金的計算邏輯，用線上工具比較不同貸款條件下的每月還款金額。',
+    summary: '買房前先估月付金，再把管理費、保險與緩衝金列進去。',
     published: '2026-06-23',
     updated: '2026-06-23',
     toolLinks: [
@@ -1382,7 +1382,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'compound-interest-reading-guide',
     title: '複利計算器怎麼看？搞懂每個數字的意思',
     description: '教你看懂複利計算器的輸出結果，包含本金、利息、總額、年化報酬率的意義，以及常見的計算誤區、費用假設與長期試算注意事項，並提醒結果不是投資保證。',
-    summary: '學會閱讀複利計算器的每一個數字，理解你的儲蓄或投資在時間推移下的變化。',
+    summary: '想存到目標金額？用複利表看每月投入是否真的足夠。',
     published: '2026-06-23',
     updated: '2026-06-23',
     toolLinks: [
@@ -1424,7 +1424,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'image-format-comparison',
     title: '圖片格式差異：JPG、PNG、WebP 怎麼選？',
     description: '比較 JPG、PNG、WebP 三種常見圖片格式的特點、適用場景、透明背景、檔案大小和品質差異，幫助你在不同情境下選擇正確格式，並連到相關轉檔工具。',
-    summary: '了解 JPG、PNG、WebP 各自的優缺點，根據用途選擇最適合的圖片格式。',
+    summary: '圖片格式選錯會讓檔案變大；先看透明、照片或網頁用途。',
     published: '2026-06-23',
     updated: '2026-06-23',
     toolLinks: [
@@ -1467,7 +1467,7 @@ const rawBlogPosts: RawBlogPost[] = [
     slug: 'pomodoro-focus-guide',
     title: '線上番茄鐘怎麼用？提升專注力的免費工具教學',
     description: '說明番茄鐘工作法的原理、線上工具的操作步驟、時間設定建議，以及在讀書、遠端工作與專案整理等情境下如何調整節奏，並附常見使用錯誤與休息安排建議。',
-    summary: '學會用免費線上番茄鐘建立專注與休息的節奏，提升工作和學習效率。',
+    summary: '番茄鐘不是硬撐 25 分鐘，而是替專注和休息安排節奏。',
     published: '2026-06-23',
     updated: '2026-06-23',
     toolLinks: [

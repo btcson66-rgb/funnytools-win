@@ -45,12 +45,6 @@ export default {
         ]
       },
       {
-        heading: "隱私與本機處理",
-        paragraphs: [
-          "自訂分鐘設定會儲存在此瀏覽器的 localStorage，不會上傳到 FreeTools 伺服器。目前倒數狀態不會跨重新整理保存；關閉或重新整理頁面會結束當前計時。"
-        ]
-      },
-      {
         heading: "番茄鐘使用建議",
         paragraphs: [
           "番茄鐘是時間管理輔助，重點是建立穩定節奏，而不是硬性規則。"
@@ -178,12 +172,6 @@ export default {
           "2. Press Start to begin the countdown and update the tab title.",
           "3. Use Pause when needed; Reset restores the current phase to full length.",
           "4. After four completed work sessions, take the scheduled long break."
-        ]
-      },
-      {
-        heading: "Privacy and local processing",
-        paragraphs: [
-          "Custom minute settings are stored only in this browser using localStorage. They are not uploaded to FreeTools. The active countdown state is not preserved across refreshes."
         ]
       },
       {

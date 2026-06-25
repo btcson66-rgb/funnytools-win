@@ -50,12 +50,6 @@ export default {
         ]
       },
       {
-        heading: "隱私與本機處理",
-        paragraphs: [
-          "圖片會在你的瀏覽器中處理，不會上傳到 FreeTools 或第三方伺服器。大型圖片會使用較多記憶體；若瀏覽器變慢，建議先縮小圖片尺寸或分批處理。"
-        ]
-      },
-      {
         heading: "圖片壓縮建議",
         paragraphs: [
           "壓縮品質要兼顧檔案大小與可讀性，尤其是含文字的截圖。"
@@ -186,12 +180,6 @@ export default {
           "2. Adjust the quality slider and choose Keep, JPEG, or WebP output.",
           "3. Compare original size, compressed size, and saved percentage.",
           "4. Download the new image or clear the file to start again."
-        ]
-      },
-      {
-        heading: "Privacy and local processing",
-        paragraphs: [
-          "Images are processed locally in your browser. They are not uploaded to FreeTools or a third-party server. Very large images can use significant memory, so process them one at a time."
         ]
       },
       {

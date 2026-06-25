@@ -69,13 +69,6 @@ export default {
         ]
       },
       {
-        heading: "隱私與本機處理",
-        paragraphs: [
-          "PDF 會在你的瀏覽器中讀取與分割，不會上傳到 FreeTools 或第三方伺服器。",
-          "大型 PDF 或一次輸出太多檔案時，處理速度會受你的裝置記憶體與瀏覽器效能影響。"
-        ]
-      },
-      {
         heading: "分割 PDF 的實用建議",
         paragraphs: [
           "輸入頁碼前先確認總頁數，可減少範圍錯誤。"
@@ -211,13 +204,6 @@ export default {
           "2. Select one PDF per page or custom page ranges.",
           "3. For custom output, enter ranges like 1-3, 5, 8-10.",
           "4. Run Split PDF and download each generated file."
-        ]
-      },
-      {
-        heading: "Privacy and local processing",
-        paragraphs: [
-          "The PDF is read and split in your browser. It is not uploaded to FreeTools or a third-party server.",
-          "Large files and many generated outputs can be limited by browser memory, so custom ranges are often more stable than exporting every page at once."
         ]
       },
       {

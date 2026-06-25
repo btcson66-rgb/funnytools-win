@@ -45,12 +45,6 @@ export default {
         ]
       },
       {
-        heading: "隱私與本機處理",
-        paragraphs: [
-          "名單與座位表都在你的瀏覽器中產生，不會上傳到 FreeTools 或第三方伺服器。工具不會替你保存座位表；需要保留時請複製、匯出或列印。"
-        ]
-      },
-      {
         heading: "座位安排建議",
         paragraphs: [
           "座位表是規劃輔助，實際使用時仍應考量學生需求與場地限制。"
@@ -186,12 +180,6 @@ export default {
           "2. Set rows and columns; total seats must fit the list.",
           "3. Choose shuffle and row or column fill mode.",
           "4. Generate the chart, then copy, export CSV, or print it."
-        ]
-      },
-      {
-        heading: "Privacy and local processing",
-        paragraphs: [
-          "Names and seating charts are generated locally in your browser. They are not uploaded to FreeTools or a third-party server. The tool does not store charts, so copy, export, or print anything you need to keep."
         ]
       },
       {

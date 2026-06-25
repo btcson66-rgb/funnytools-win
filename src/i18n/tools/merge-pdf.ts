@@ -70,13 +70,6 @@ export default {
         ]
       },
       {
-        heading: "隱私與本機處理",
-        paragraphs: [
-          "PDF 會在你的瀏覽器內以 JavaScript 和 pdf-lib 讀取與合併，不會上傳到 FreeTools 或第三方伺服器。",
-          "因為處理發生在本機裝置，大型 PDF 或頁數很多的檔案可能會受瀏覽器記憶體與裝置效能影響。"
-        ]
-      },
-      {
         heading: "合併 PDF 的實用建議",
         paragraphs: [
           "合併前先確認檔名與順序，可以避免輸出後還要重新整理。"
@@ -209,13 +202,6 @@ export default {
           "2. Load page counts and use Move up or Move down to set the order.",
           "3. Select Merge PDF to create one combined file.",
           "4. Download the merged PDF or reset the list for another batch."
-        ]
-      },
-      {
-        heading: "Privacy and local processing",
-        paragraphs: [
-          "PDF files are read and merged inside your browser using JavaScript and pdf-lib. They are not uploaded to FreeTools or a third-party server.",
-          "Because processing is local, very large PDFs can depend on your device memory and browser performance."
         ]
       },
       {

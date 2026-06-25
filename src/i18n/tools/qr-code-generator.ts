@@ -50,12 +50,6 @@ export default {
         ]
       },
       {
-        heading: "隱私與本機處理",
-        paragraphs: [
-          "QR Code 會在你的瀏覽器內產生，輸入的文字或網址不會傳送到 FreeTools 伺服器。若加入中心 Logo，Logo 圖片也只在本機合成，不會上傳。"
-        ]
-      },
-      {
         heading: "QR Code 製作建議",
         paragraphs: [
           "QR Code 必須容易掃描，尤其是要印刷或貼在公共場所時。"
@@ -184,12 +178,6 @@ export default {
           "2. Choose error correction; M works for most links, while Q or H helps for print or logos.",
           "3. Select the QR image size and review the preview.",
           "4. Download the PNG or copy the image if your browser supports it."
-        ]
-      },
-      {
-        heading: "Privacy and local processing",
-        paragraphs: [
-          "The QR code is generated inside your browser. Your text or URL is not sent to FreeTools or a backend QR service. Optional center logos are composited locally and are not uploaded."
         ]
       },
       {

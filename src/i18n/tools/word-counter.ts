@@ -50,12 +50,6 @@ export default {
         ]
       },
       {
-        heading: "隱私與本機處理",
-        paragraphs: [
-          "文字只會在你的瀏覽器中分析，不會上傳到 FreeTools 伺服器，也不會被儲存。重新整理或關閉頁面後，輸入內容不會由工具保留。"
-        ]
-      },
-      {
         heading: "字數統計建議",
         paragraphs: [
           "不同平台的字數規則可能不同，正式提交前仍應以對方規範為準。"
@@ -184,12 +178,6 @@ export default {
           "2. Review live counts for words, characters, lines, paragraphs, sentences, and reading time.",
           "3. Use Copy stats when you need to share the summary.",
           "4. Use Clear to reset the text and all metrics."
-        ]
-      },
-      {
-        heading: "Privacy and local processing",
-        paragraphs: [
-          "Text is analyzed entirely in your browser. It is not uploaded to FreeTools and is not stored on a server. If you refresh or close the page, the tool does not keep your pasted content."
         ]
       },
       {

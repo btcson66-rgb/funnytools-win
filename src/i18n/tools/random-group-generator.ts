@@ -50,12 +50,6 @@ export default {
         ]
       },
       {
-        heading: "隱私與本機處理",
-        paragraphs: [
-          "名單與分組結果都在你的瀏覽器中處理，不會上傳到 FreeTools 或第三方伺服器。關閉或重新整理頁面後，工具不會保存分組名單。"
-        ]
-      },
-      {
         heading: "隨機分組建議",
         paragraphs: [
           "隨機分組能提高效率，但仍可依實際需求做最後調整。"
@@ -182,12 +176,6 @@ export default {
           "2. Enter the number of groups to create.",
           "3. Press Generate Groups to shuffle and distribute people evenly.",
           "4. Copy all groups as text or export a CSV for spreadsheets."
-        ]
-      },
-      {
-        heading: "Privacy and local processing",
-        paragraphs: [
-          "Names and generated groups are processed in your browser. They are not uploaded to FreeTools or a third-party server. The tool does not save the list after you leave or refresh the page."
         ]
       },
       {
