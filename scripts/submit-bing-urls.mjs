@@ -68,14 +68,22 @@ const quotaValue = Number(
   process.env.BING_URL_LIMIT ??
   100,
 );
-const limit = Number.isFinite(quotaValue) && quotaValue > 0 ? Math.min(quotaValue, 500) : 100;
+const quotaUnavailable = report.quota?.ErrorCode || report.quota?.Message;
+const limit = quotaUnavailable
+  ? 0
+  : Number.isFinite(quotaValue)
+    ? Math.max(0, Math.min(quotaValue, 500))
+    : 100;
 const urls = candidateUrls.slice(0, limit);
 for (const url of candidateUrls.slice(limit)) {
   report.skipped.push({ url, reason: 'over-bing-quota-limit' });
 }
 
 if (!urls.length) {
-  report.skipped.push({ url: '*', reason: 'no-new-modified-priority-or-added-urls' });
+  report.skipped.push({
+    url: '*',
+    reason: limit === 0 ? 'bing-daily-quota-unavailable-or-exhausted' : 'no-new-modified-priority-or-added-urls',
+  });
 } else {
   try {
     const endpoint = new URL('https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch');
@@ -91,8 +99,17 @@ if (!urls.length) {
       report.success = urls;
       writeJson(statePath, currentState(sitemapEntries));
     } else {
-      report.failed = urls.map((url) => ({ url, status: response.status, body: text.slice(0, 500) }));
-      process.exitCode = 1;
+      const quotaExceeded = text.includes('exceeded your daily url submission quota');
+      if (quotaExceeded) {
+        report.skipped.push(...urls.map((url) => ({
+          url,
+          reason: 'bing-daily-quota-exceeded',
+          status: response.status,
+        })));
+      } else {
+        report.failed = urls.map((url) => ({ url, status: response.status, body: text.slice(0, 500) }));
+        process.exitCode = 1;
+      }
     }
   } catch (error) {
     report.attempted = urls.length;
