@@ -20,6 +20,7 @@ reports/indexable-url-report.json
 reports/indexable-url-report.md
 reports/indexnow-submission-report.json
 reports/sitemap-generation-report.json
+reports/seo-indexing-state.json
 reports/weekly-indexing-report.md
 data/traffic/
 logs/traffic-report/
