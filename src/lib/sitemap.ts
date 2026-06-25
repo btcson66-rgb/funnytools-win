@@ -3,6 +3,8 @@ import { categories } from '../data/categories';
 import { hasLiveTools, liveTools } from '../data/tools';
 import { allBlogPosts } from '../data/allBlogPosts';
 import { isPostAvailableInLocale } from '../data/blogPosts';
+import { seoGuides } from '../data/seoGuides';
+import { workflows } from '../data/workflows';
 import { absoluteUrl, localePath } from './url';
 
 const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
@@ -122,6 +124,32 @@ function blogPages(): SitemapPage[] {
   ];
 }
 
+export function guidePages(): SitemapPage[] {
+  return [
+    { segments: ['guides'], lastmod: seoGuides[0]?.updatedAt, changefreq: 'weekly', priority: '0.7', alternates: true },
+    ...seoGuides.map((guide) => ({
+      segments: ['guides', guide.slug],
+      lastmod: guide.updatedAt,
+      changefreq: 'monthly' as const,
+      priority: guide.priority <= 2 ? '0.7' : '0.6',
+      alternates: guide.locales.includes('en'),
+    })),
+  ];
+}
+
+export function workflowPages(): SitemapPage[] {
+  return [
+    { segments: ['workflows'], lastmod: workflows[0]?.updatedAt, changefreq: 'weekly', priority: '0.7', alternates: true },
+    ...workflows.map((workflow) => ({
+      segments: ['workflows', workflow.slug],
+      lastmod: workflow.updatedAt,
+      changefreq: 'monthly' as const,
+      priority: '0.6',
+      alternates: workflow.locales.includes('en'),
+    })),
+  ];
+}
+
 export function defaultPageEntries(): SitemapEntry[] {
   return basePages().map((page) => ({ lang: 'zh', page }));
 }
@@ -138,12 +166,18 @@ export function defaultBlogEntries(): SitemapEntry[] {
   return blogPages().map((page) => ({ lang: 'zh', page }));
 }
 
+export function defaultGuideEntries(): SitemapEntry[] {
+  return [...guidePages(), ...workflowPages()].map((page) => ({ lang: 'zh', page }));
+}
+
 export function englishEntries(): SitemapEntry[] {
   return [
     ...basePages(),
     ...categoryPages(),
     ...toolPages(),
     ...blogPages().filter((page) => page.segments.length === 1 || isPostAvailableInLocale(allBlogPosts.find((post) => post.slug === page.segments[1])!, 'en')),
+    ...guidePages().filter((page) => page.segments.length === 1 || seoGuides.find((guide) => guide.slug === page.segments[1])?.locales.includes('en')),
+    ...workflowPages().filter((page) => page.segments.length === 1 || workflows.find((workflow) => workflow.slug === page.segments[1])?.locales.includes('en')),
   ].map((page) => ({ lang: 'en' as const, page }));
 }
 
@@ -153,6 +187,7 @@ export function allSitemapEntries(): SitemapEntry[] {
     ...defaultToolEntries(),
     ...defaultCategoryEntries(),
     ...defaultBlogEntries(),
+    ...defaultGuideEntries(),
     ...englishEntries(),
   ];
 }

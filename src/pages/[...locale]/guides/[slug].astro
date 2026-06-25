@@ -1,0 +1,288 @@
+---
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import Faq from '../../../components/Faq.astro';
+import ToolCard from '../../../components/ToolCard.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE, type Locale } from '../../../config/site';
+import { getToolBySlug, type ToolMeta } from '../../../data/tools';
+import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide, type SeoGuide, type SeoGuideView } from '../../../data/seoGuides';
+import { workflows, isWorkflowAvailableInLocale, viewWorkflow } from '../../../data/workflows';
+import { absoluteUrl, localePath, toolUrl } from '../../../lib/url';
+import { breadcrumbJsonLd, webPageJsonLd } from '../../../lib/seo';
+import { t } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return seoGuides.flatMap((guide) => {
+    const paths = [
+      {
+        params: { locale: undefined, slug: guide.slug },
+        props: { lang: 'zh' as const, guide },
+      },
+    ];
+
+    if (isSeoGuideAvailableInLocale(guide, 'en')) {
+      paths.push({
+        params: { locale: 'en', slug: guide.slug },
+        props: { lang: 'en' as const, guide },
+      });
+    }
+
+    return paths;
+  });
+}
+
+const { lang, guide: sourceGuide } = Astro.props as { lang: Locale; guide: SeoGuide };
+const ui = t(lang);
+const guide = viewSeoGuide(sourceGuide, lang);
+const copy = {
+  zh: {
+    breadcrumb: '指南',
+    eyebrow: '教育統計指南',
+    problem: '要解決的問題',
+    audience: '適合誰使用',
+    concept: '公式與概念',
+    steps: '操作步驟',
+    example: '實際範例',
+    mistakes: '常見錯誤',
+    tools: '推薦工具',
+    relatedGuides: '相關指南',
+    relatedWorkflows: '相關工作流程',
+    cta: '下一步',
+    back: '回到指南列表',
+    openTool: '開啟工具',
+    favorite: '加入常用工具',
+    hub: '教育統計工具中心',
+    updated: '更新日期',
+  },
+  en: {
+    breadcrumb: 'Guides',
+    eyebrow: 'Education statistics guide',
+    problem: 'Problem',
+    audience: 'Who should use this',
+    concept: 'Formula and concept',
+    steps: 'Step by step',
+    example: 'Worked example',
+    mistakes: 'Common mistakes',
+    tools: 'Recommended tools',
+    relatedGuides: 'Related guides',
+    relatedWorkflows: 'Related workflows',
+    cta: 'Next step',
+    back: 'Back to guides',
+    openTool: 'Open tool',
+    favorite: 'Add to favorites',
+    hub: 'Education & Statistics hub',
+    updated: 'Updated',
+  },
+}[lang];
+
+const guidesPath = localePath(lang, 'guides');
+const guidePath = localePath(lang, 'guides', guide.slug);
+const guideUrl = absoluteUrl(guidePath);
+const liveTool = (slug: string): ToolMeta | undefined => {
+  const tool = getToolBySlug(slug);
+  return tool?.status === 'live' ? tool : undefined;
+};
+const relatedTools = guide.relatedToolIds.map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool));
+const relatedGuides: SeoGuideView[] = guide.relatedGuideIds
+  .map((slug) => seoGuides.find((candidate) => candidate.slug === slug))
+  .filter((candidate): candidate is SeoGuide => candidate != null && isSeoGuideAvailableInLocale(candidate, lang))
+  .map((candidate) => viewSeoGuide(candidate, lang));
+const relatedWorkflowViews = guide.relatedWorkflowIds
+  .map((slug) => workflows.find((candidate) => candidate.slug === slug))
+  .filter((candidate) => candidate != null && isWorkflowAvailableInLocale(candidate, lang))
+  .map((candidate) => viewWorkflow(candidate, lang));
+const hasAlternates = sourceGuide.locales.includes('zh') && sourceGuide.locales.includes('en');
+const faqItems = guide.faq.map((item) => ({ q: item.question, a: item.answer }));
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: guide.h1,
+  description: guide.metaDescription,
+  dateModified: guide.updatedAt,
+  inLanguage: SITE.hreflang[lang],
+  mainEntityOfPage: guideUrl,
+  url: guideUrl,
+  author: { '@type': 'Organization', name: SITE.name[lang], url: SITE.url },
+  publisher: { '@type': 'Organization', name: SITE.name[lang], url: SITE.url },
+};
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: guide.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: ui.breadcrumbHome, href: localePath(lang) },
+  { name: copy.breadcrumb, href: guidesPath },
+  { name: guide.title, href: guidePath },
+]);
+const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guidePath);
+---
+
+<BaseLayout
+  lang={lang}
+  title={guide.metaTitle}
+  description={guide.metaDescription}
+  keywords={guide.targetKeywords}
+  type="article"
+  alternateSegments={['guides', guide.slug]}
+  hasAlternates={hasAlternates}
+  jsonLd={[pageLd, articleLd, faqLd, breadcrumbLd]}
+>
+  <article class="wrap guide-article">
+    <Breadcrumb items={[
+      { label: ui.breadcrumbHome, href: localePath(lang) },
+      { label: copy.breadcrumb, href: guidesPath },
+      { label: guide.title },
+    ]} />
+
+    <header class="guide-hero">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h1>{guide.h1}</h1>
+      <p class="lead">{guide.summary}</p>
+      <p class="guide-date">{copy.updated}: <time datetime={guide.updatedAt}>{guide.updatedAt}</time></p>
+    </header>
+
+    <section class="guide-block" aria-labelledby="problem-title">
+      <h2 id="problem-title">{copy.problem}</h2>
+      <p>{guide.problem}</p>
+    </section>
+
+    <section class="guide-block" aria-labelledby="audience-title">
+      <h2 id="audience-title">{copy.audience}</h2>
+      <p>{guide.whoShouldUse}</p>
+    </section>
+
+    <section class="guide-block" aria-labelledby="concept-title">
+      <h2 id="concept-title">{copy.concept}</h2>
+      {guide.formula && <p class="formula">{guide.formula}</p>}
+      {guide.explanation.map((paragraph) => <p>{paragraph}</p>)}
+    </section>
+
+    <section class="guide-block" aria-labelledby="steps-title">
+      <h2 id="steps-title">{copy.steps}</h2>
+      <ol class="step-list">
+        {guide.steps.map((step) => <li>{step}</li>)}
+      </ol>
+    </section>
+
+    <section class="guide-block" aria-labelledby="example-title">
+      <h2 id="example-title">{copy.example}</h2>
+      <p>{guide.example}</p>
+    </section>
+
+    <section class="guide-block" aria-labelledby="mistakes-title">
+      <h2 id="mistakes-title">{copy.mistakes}</h2>
+      <ul class="mistake-list">
+        {guide.commonMistakes.map((mistake) => <li>{mistake}</li>)}
+      </ul>
+    </section>
+
+    {relatedTools.length > 0 && (
+      <section class="guide-block tool-section" aria-labelledby="tools-title">
+        <h2 id="tools-title">{copy.tools}</h2>
+        <div class="grid">
+          {relatedTools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
+        </div>
+        <div class="tool-actions">
+          {relatedTools.map((tool) => (
+            <div class="tool-action">
+              <a class="btn go" href={toolUrl(lang, tool.slug)}>{copy.openTool}: {tool.name[lang]}</a>
+              <button class="btn favorite-guide-tool" type="button" data-guide-favorite={tool.slug}>{copy.favorite}</button>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {relatedGuides.length > 0 && (
+      <section class="guide-block" aria-labelledby="related-guides-title">
+        <h2 id="related-guides-title">{copy.relatedGuides}</h2>
+        <div class="related-list">
+          {relatedGuides.map((related) => (
+            <a href={localePath(lang, 'guides', related.slug)}>
+              <strong>{related.title}</strong>
+              <span>{related.summary}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <Faq lang={lang} items={faqItems} emitJsonLd={false} />
+
+    <section class="guide-block cta-section" aria-labelledby="cta-title">
+      <h2 id="cta-title">{copy.cta}</h2>
+      <p>{guide.cta}</p>
+      <nav class="guide-bottom">
+        <a class="btn" href={guidesPath}>{copy.back}</a>
+        <a class="btn" href={localePath(lang, 'education-statistics')}>{copy.hub}</a>
+        {relatedTools[0] && <a class="btn go" href={toolUrl(lang, relatedTools[0].slug)}>{copy.openTool}: {relatedTools[0].name[lang]}</a>}
+      </nav>
+    </section>
+
+    {relatedWorkflowViews.length > 0 && (
+      <section class="guide-block" aria-labelledby="related-workflows-title">
+        <h2 id="related-workflows-title">{copy.relatedWorkflows}</h2>
+        <div class="related-list">
+          {relatedWorkflowViews.map((workflow) => (
+            <a href={localePath(lang, 'workflows', workflow.slug)}>
+              <strong>{workflow.title}</strong>
+              <span>{workflow.purpose}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+
+  <script>
+    import { isFavoriteTool, toggleFavoriteTool } from '../../../lib/userTools.client';
+
+    document.querySelectorAll('[data-guide-favorite]').forEach((button) => {
+      if (!(button instanceof HTMLButtonElement)) return;
+      const slug = button.dataset.guideFavorite || '';
+      if (!slug) return;
+      const original = button.textContent || 'Add to favorites';
+      const setState = (active) => {
+        button.classList.toggle('is-favorite', active);
+        button.setAttribute('aria-pressed', String(active));
+        button.textContent = active ? `${original} ✓` : original;
+      };
+      setState(isFavoriteTool(slug));
+      button.addEventListener('click', () => {
+        setState(toggleFavoriteTool(slug));
+        document.dispatchEvent(new CustomEvent('freetools:favorites-changed'));
+      });
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .guide-article { max-width: 960px; padding-top: 34px; }
+  .guide-hero { padding-bottom: 8px; }
+  .guide-hero h1 { max-width: 900px; font-size: clamp(2rem, 6vw, 3.45rem); }
+  .guide-date { margin: 16px 0 0; color: var(--muted); font-size: 0.92rem; font-weight: 800; }
+  .guide-block { margin-top: 36px; }
+  .guide-block p, .guide-block li { color: #384455; font-size: 1.03rem; line-height: 1.85; }
+  .formula { padding: 14px 16px; border: 1px solid #cfe6e3; border-radius: 10px; background: #f2fbfa; color: var(--ink); font-weight: 900; }
+  .step-list, .mistake-list { display: grid; gap: 10px; padding-left: 22px; }
+  .tool-section .grid { margin-top: 14px; }
+  .tool-actions { display: grid; gap: 10px; margin-top: 16px; }
+  .tool-action { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+  .favorite-guide-tool.is-favorite { border-color: var(--brand); color: var(--brand-2); }
+  .related-list { display: grid; gap: 10px; }
+  .related-list a { display: grid; gap: 5px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+  .related-list a:hover strong { color: var(--brand); }
+  .related-list span { color: var(--muted); line-height: 1.65; }
+  .cta-section { padding: 20px; border: 1px solid #cfe6e3; border-radius: 12px; background: #f2fbfa; }
+  .guide-bottom { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  @media (max-width: 760px) {
+    .guide-block { margin-top: 30px; }
+    .tool-action { align-items: stretch; }
+    .tool-action .btn { width: 100%; justify-content: center; }
+  }
+</style>

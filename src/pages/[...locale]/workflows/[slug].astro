@@ -1,0 +1,194 @@
+---
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import Faq from '../../../components/Faq.astro';
+import ToolCard from '../../../components/ToolCard.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE, type Locale } from '../../../config/site';
+import { getToolBySlug, type ToolMeta } from '../../../data/tools';
+import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide, type SeoGuide, type SeoGuideView } from '../../../data/seoGuides';
+import { workflows, isWorkflowAvailableInLocale, viewWorkflow, type Workflow } from '../../../data/workflows';
+import { absoluteUrl, localePath, toolUrl } from '../../../lib/url';
+import { breadcrumbJsonLd, webPageJsonLd } from '../../../lib/seo';
+import { t } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return workflows.flatMap((workflow) => {
+    const paths = [
+      {
+        params: { locale: undefined, slug: workflow.slug },
+        props: { lang: 'zh' as const, workflow },
+      },
+    ];
+
+    if (isWorkflowAvailableInLocale(workflow, 'en')) {
+      paths.push({
+        params: { locale: 'en', slug: workflow.slug },
+        props: { lang: 'en' as const, workflow },
+      });
+    }
+
+    return paths;
+  });
+}
+
+const { lang, workflow: sourceWorkflow } = Astro.props as { lang: Locale; workflow: Workflow };
+const ui = t(lang);
+const workflow = viewWorkflow(sourceWorkflow, lang);
+const copy = {
+  zh: {
+    breadcrumb: '工作流程',
+    eyebrow: '教育統計流程',
+    purpose: '流程目的',
+    steps: '流程步驟',
+    tools: '推薦工具',
+    relatedGuides: '相關指南',
+    hub: '回到教育統計工具中心',
+    back: '回到工作流程',
+    openTool: '開啟工具',
+    updated: '更新日期',
+  },
+  en: {
+    breadcrumb: 'Workflows',
+    eyebrow: 'Education statistics workflow',
+    purpose: 'Purpose',
+    steps: 'Workflow steps',
+    tools: 'Recommended tools',
+    relatedGuides: 'Related guides',
+    hub: 'Back to Education & Statistics hub',
+    back: 'Back to workflows',
+    openTool: 'Open tool',
+    updated: 'Updated',
+  },
+}[lang];
+
+const workflowIndexPath = localePath(lang, 'workflows');
+const workflowPath = localePath(lang, 'workflows', workflow.slug);
+const liveTool = (slug: string): ToolMeta | undefined => {
+  const tool = getToolBySlug(slug);
+  return tool?.status === 'live' ? tool : undefined;
+};
+const recommendedTools = workflow.recommendedToolIds.map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool));
+const relatedGuides: SeoGuideView[] = workflow.relatedGuideIds
+  .map((slug) => seoGuides.find((candidate) => candidate.slug === slug))
+  .filter((candidate): candidate is SeoGuide => candidate != null && isSeoGuideAvailableInLocale(candidate, lang))
+  .map((candidate) => viewSeoGuide(candidate, lang));
+const faqItems = workflow.faq.map((item) => ({ q: item.question, a: item.answer }));
+const hasAlternates = sourceWorkflow.locales.includes('zh') && sourceWorkflow.locales.includes('en');
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: workflow.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: ui.breadcrumbHome, href: localePath(lang) },
+  { name: copy.breadcrumb, href: workflowIndexPath },
+  { name: workflow.title, href: workflowPath },
+]);
+const pageLd = webPageJsonLd(lang, workflow.metaTitle, workflow.metaDescription, workflowPath);
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: workflow.h1,
+  description: workflow.metaDescription,
+  dateModified: workflow.updatedAt,
+  inLanguage: SITE.hreflang[lang],
+  mainEntityOfPage: absoluteUrl(workflowPath),
+  url: absoluteUrl(workflowPath),
+  author: { '@type': 'Organization', name: SITE.name[lang], url: SITE.url },
+  publisher: { '@type': 'Organization', name: SITE.name[lang], url: SITE.url },
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={workflow.metaTitle}
+  description={workflow.metaDescription}
+  type="article"
+  alternateSegments={['workflows', workflow.slug]}
+  hasAlternates={hasAlternates}
+  jsonLd={[pageLd, articleLd, faqLd, breadcrumbLd]}
+>
+  <article class="wrap workflow-article">
+    <Breadcrumb items={[
+      { label: ui.breadcrumbHome, href: localePath(lang) },
+      { label: copy.breadcrumb, href: workflowIndexPath },
+      { label: workflow.title },
+    ]} />
+
+    <header class="workflow-hero">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h1>{workflow.h1}</h1>
+      <p class="lead">{workflow.purpose}</p>
+      <p class="workflow-date">{copy.updated}: <time datetime={workflow.updatedAt}>{workflow.updatedAt}</time></p>
+    </header>
+
+    <section class="workflow-block" aria-labelledby="purpose-title">
+      <h2 id="purpose-title">{copy.purpose}</h2>
+      <p>{workflow.purpose}</p>
+    </section>
+
+    <section class="workflow-block" aria-labelledby="steps-title">
+      <h2 id="steps-title">{copy.steps}</h2>
+      <ol class="workflow-steps">
+        {workflow.steps.map((step) => <li>{step}</li>)}
+      </ol>
+    </section>
+
+    {recommendedTools.length > 0 && (
+      <section class="workflow-block" aria-labelledby="tools-title">
+        <h2 id="tools-title">{copy.tools}</h2>
+        <div class="grid">
+          {recommendedTools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
+        </div>
+        <div class="tool-links">
+          {recommendedTools.map((tool) => <a class="btn go" href={toolUrl(lang, tool.slug)}>{copy.openTool}: {tool.name[lang]}</a>)}
+        </div>
+      </section>
+    )}
+
+    {relatedGuides.length > 0 && (
+      <section class="workflow-block" aria-labelledby="related-guides-title">
+        <h2 id="related-guides-title">{copy.relatedGuides}</h2>
+        <div class="related-list">
+          {relatedGuides.map((guide) => (
+            <a href={localePath(lang, 'guides', guide.slug)}>
+              <strong>{guide.title}</strong>
+              <span>{guide.summary}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <nav class="workflow-bottom">
+      <a class="btn" href={workflowIndexPath}>{copy.back}</a>
+      <a class="btn go" href={localePath(lang, 'education-statistics')}>{copy.hub}</a>
+    </nav>
+
+    <Faq lang={lang} items={faqItems} emitJsonLd={false} />
+  </article>
+</BaseLayout>
+
+<style>
+  .workflow-article { max-width: 960px; padding-top: 34px; }
+  .workflow-hero { padding-bottom: 8px; }
+  .workflow-hero h1 { max-width: 900px; font-size: clamp(2rem, 6vw, 3.45rem); }
+  .workflow-date { margin: 16px 0 0; color: var(--muted); font-size: 0.92rem; font-weight: 800; }
+  .workflow-block { margin-top: 36px; }
+  .workflow-block p, .workflow-block li { color: #384455; font-size: 1.03rem; line-height: 1.85; }
+  .workflow-steps { display: grid; gap: 12px; padding-left: 22px; }
+  .tool-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .related-list { display: grid; gap: 10px; }
+  .related-list a { display: grid; gap: 5px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+  .related-list a:hover strong { color: var(--brand); }
+  .related-list span { color: var(--muted); line-height: 1.65; }
+  .workflow-bottom { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; padding: 18px; border: 1px solid #cfe6e3; border-radius: 12px; background: #f2fbfa; }
+  @media (max-width: 760px) {
+    .workflow-block { margin-top: 30px; }
+    .tool-links .btn, .workflow-bottom .btn { width: 100%; justify-content: center; }
+  }
+</style>

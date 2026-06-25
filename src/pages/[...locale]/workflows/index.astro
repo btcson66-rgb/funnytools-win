@@ -1,0 +1,134 @@
+---
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE, type Locale } from '../../../config/site';
+import { workflows, isWorkflowAvailableInLocale, viewWorkflow } from '../../../data/workflows';
+import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide } from '../../../data/seoGuides';
+import { absoluteUrl, localePath } from '../../../lib/url';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+import { t } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: undefined }, props: { lang: 'zh' } },
+    { params: { locale: 'en' }, props: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.props as { lang: Locale };
+const ui = t(lang);
+const copy = {
+  zh: {
+    title: '教育統計工作流程',
+    description: 'FreeTools 教育統計與教師甄試工作流程，串接 SPSS、APA 7、標準差、T/Z/PR 與加權成績工具。',
+    lead: '把單一工具串成可重複的半自動流程：研究報告從 SPSS 到 APA 7，教師甄試從原始分數到 T/Z/PR。',
+    breadcrumb: '工作流程',
+    eyebrow: 'Education statistics workflows',
+    all: '流程清單',
+    guides: '指南庫',
+    hub: '教育統計工具中心',
+    open: '開啟流程',
+    relatedGuides: '相關指南',
+    updated: '更新 ',
+  },
+  en: {
+    title: 'Education Statistics Workflows',
+    description: 'FreeTools workflows for education statistics and teacher exams, connecting SPSS, APA 7, standard deviation, T/Z/PR, and weighted scores.',
+    lead: 'Reusable semi-automatic workflows: from SPSS output to APA 7 reporting, and from teacher exam raw scores to T/Z/PR interpretation.',
+    breadcrumb: 'Workflows',
+    eyebrow: 'Education statistics workflows',
+    all: 'Workflow list',
+    guides: 'Guide library',
+    hub: 'Education & Statistics hub',
+    open: 'Open workflow',
+    relatedGuides: 'Related guides',
+    updated: 'Updated ',
+  },
+}[lang];
+
+const workflowViews = workflows
+  .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
+  .map((workflow) => viewWorkflow(workflow, lang));
+const workflowPath = localePath(lang, 'workflows');
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: ui.breadcrumbHome, href: localePath(lang) },
+  { name: copy.breadcrumb, href: workflowPath },
+]);
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: copy.title,
+  description: copy.description,
+  url: absoluteUrl(workflowPath),
+  inLanguage: SITE.hreflang[lang],
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: workflowViews.map((workflow, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: workflow.title,
+      url: absoluteUrl(localePath(lang, 'workflows', workflow.slug)),
+    })),
+  },
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={copy.title}
+  description={copy.description}
+  alternateSegments={['workflows']}
+  hasAlternates={true}
+  jsonLd={[collectionLd, breadcrumbLd]}
+>
+  <section class="wrap page-head workflow-head">
+    <Breadcrumb items={[{ label: ui.breadcrumbHome, href: localePath(lang) }, { label: copy.breadcrumb }]} />
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h1>{copy.title}</h1>
+    <p class="lead">{copy.lead}</p>
+    <div class="index-actions">
+      <a class="btn go" href={localePath(lang, 'guides')}>{copy.guides}</a>
+      <a class="btn" href={localePath(lang, 'education-statistics')}>{copy.hub}</a>
+    </div>
+  </section>
+
+  <section class="wrap content-section" aria-labelledby="workflow-list-title">
+    <h2 id="workflow-list-title">{copy.all}</h2>
+    <div class="workflow-grid">
+      {workflowViews.map((workflow) => {
+        const relatedGuides = workflow.relatedGuideIds
+          .map((slug) => seoGuides.find((guide) => guide.slug === slug))
+          .filter((guide) => guide != null && isSeoGuideAvailableInLocale(guide, lang))
+          .map((guide) => viewSeoGuide(guide, lang));
+
+        return (
+          <article class="workflow-card">
+            <p class="workflow-date"><time datetime={workflow.updatedAt}>{copy.updated}{workflow.updatedAt}</time></p>
+            <h3><a href={localePath(lang, 'workflows', workflow.slug)}>{workflow.title}</a></h3>
+            <p>{workflow.purpose}</p>
+            <div class="mini-links" aria-label={copy.relatedGuides}>
+              {relatedGuides.slice(0, 3).map((guide) => <a href={localePath(lang, 'guides', guide.slug)}>{guide.title}</a>)}
+            </div>
+            <a class="workflow-read" href={localePath(lang, 'workflows', workflow.slug)}>{copy.open}</a>
+          </article>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .workflow-head { padding-bottom: 8px; }
+  .index-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .workflow-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .workflow-card { display: grid; align-content: start; gap: 12px; padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); box-shadow: var(--shadow-soft); }
+  .workflow-card h3, .workflow-card p { margin: 0; }
+  .workflow-card h3 { font-size: 1.25rem; line-height: 1.4; }
+  .workflow-card h3 a:hover, .workflow-read:hover { color: var(--brand); }
+  .workflow-card > p:not(.workflow-date) { color: var(--muted); line-height: 1.75; }
+  .workflow-date { color: var(--muted); font-size: 0.86rem; font-weight: 800; }
+  .mini-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .mini-links a { padding: 5px 9px; border: 1px solid #d9e5ef; border-radius: 999px; background: #fbfcff; color: var(--brand-2); font-size: 0.84rem; font-weight: 800; }
+  .workflow-read { justify-self: start; color: var(--ink); font-weight: 900; }
+  @media (max-width: 760px) { .workflow-grid { grid-template-columns: 1fr; } .workflow-card { padding: 18px; } }
+</style>

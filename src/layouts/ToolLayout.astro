@@ -15,6 +15,8 @@ import type { Locale } from '../config/site';
 import type { Category } from '../data/categories';
 import type { ToolMeta } from '../data/tools';
 import type { ToolContent } from '../i18n/tools/_types';
+import { getGuidesForTool } from '../data/seoGuides';
+import { getWorkflowsForTool } from '../data/workflows';
 import { t } from '../i18n/ui';
 import { toolSeoDescription, toolSeoTitle } from '../lib/seo';
 import { absoluteUrl, categoryUrl, localePath, toolUrl } from '../lib/url';
@@ -38,6 +40,10 @@ const breadcrumbItems = [
   { label: category.name[lang], href: categoryUrl(lang, category.id) },
   { label: content.name },
 ];
+const relatedGuides = getGuidesForTool(tool.slug, lang).slice(0, 4);
+const relatedGuidesHeading = lang === 'zh' ? '延伸閱讀：使用教學' : 'Related guides';
+const relatedWorkflows = getWorkflowsForTool(tool.slug, lang).slice(0, 2);
+const relatedWorkflowsHeading = lang === 'zh' ? '相關工具包' : 'Related toolkits';
 ---
 
 <BaseLayout
@@ -188,6 +194,38 @@ const breadcrumbItems = [
     <Faq lang={lang} items={content.faq} />
     <RelatedTools lang={lang} current={tool} />
 
+    {
+      relatedGuides.length > 0 && (
+        <section class="content-section related-guides" aria-labelledby="related-guides-title">
+          <h2 id="related-guides-title">{relatedGuidesHeading}</h2>
+          <div class="related-guide-list">
+            {relatedGuides.map((guide) => (
+              <a href={localePath(lang, 'guides', guide.slug)}>
+                <strong>{guide.title}</strong>
+                <span>{guide.summary}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      relatedWorkflows.length > 0 && (
+        <section class="content-section related-guides" aria-labelledby="related-workflows-title">
+          <h2 id="related-workflows-title">{relatedWorkflowsHeading}</h2>
+          <div class="related-guide-list">
+            {relatedWorkflows.map((workflow) => (
+              <a href={localePath(lang, 'workflows', workflow.slug)}>
+                <strong>{workflow.title}</strong>
+                <span>{workflow.purpose}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
     <section class="content-section privacy-note">
       <h2>{ui.privacy.heading}</h2>
       {tool.privacyLevel === 'local-only' && <p class="privacy-highlight">{ui.privacy.localOnly}</p>}
@@ -255,3 +293,11 @@ const breadcrumbItems = [
     document.addEventListener('freetools:rendered-tools', initializeFavoriteToggles);
   </script>
 </BaseLayout>
+
+<style>
+  .related-guide-list { display: grid; gap: 10px; }
+  .related-guide-list a { display: grid; gap: 5px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+  .related-guide-list a:hover { border-color: var(--brand); }
+  .related-guide-list strong { color: var(--ink); }
+  .related-guide-list span { color: var(--muted); line-height: 1.6; }
+</style>

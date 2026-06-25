@@ -70,6 +70,7 @@ const groups = new Map([
   ['tools', []],
   ['categories', []],
   ['blog', []],
+  ['guides', []],
   ['en', []],
 ]);
 const excluded = [];

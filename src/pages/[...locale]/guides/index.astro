@@ -1,0 +1,159 @@
+---
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE, type Locale } from '../../../config/site';
+import { seoGuides, viewSeoGuide, isSeoGuideAvailableInLocale, type SeoGuideView } from '../../../data/seoGuides';
+import { workflows, viewWorkflow, isWorkflowAvailableInLocale } from '../../../data/workflows';
+import { absoluteUrl, localePath } from '../../../lib/url';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+import { t } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: undefined }, props: { lang: 'zh' } },
+    { params: { locale: 'en' }, props: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.props as { lang: Locale };
+const ui = t(lang);
+const copy = {
+  zh: {
+    title: '教育統計與教師甄試指南',
+    description: 'FreeTools 教育統計指南，整理 T 分數、Z 分數、PR、教師甄試加權、SPSS Levene、t 檢定與 ANOVA APA 7 報告。',
+    lead: '以教育統計與教師甄試為核心的 SEO 指南庫，連接現有計算器、SPSS 解讀器與 APA 7 報告工具。',
+    breadcrumb: '指南',
+    eyebrow: 'Education statistics guides',
+    latest: '指南主題',
+    workflows: '相關工作流程',
+    read: '閱讀指南',
+    workflowIndex: '查看工作流程',
+    hub: '教育統計工具中心',
+    updated: '更新 ',
+  },
+  en: {
+    title: 'Education Statistics and Teacher Exam Guides',
+    description: 'FreeTools education statistics guides for T scores, Z scores, PR, teacher exam weighting, SPSS Levene, t tests, and ANOVA APA 7 reporting.',
+    lead: 'A focused guide library for education statistics and teacher exam content, connected to existing calculators, SPSS interpretation, and APA 7 tools.',
+    breadcrumb: 'Guides',
+    eyebrow: 'Education statistics guides',
+    latest: 'Guide topics',
+    workflows: 'Related workflows',
+    read: 'Read guide',
+    workflowIndex: 'View workflows',
+    hub: 'Education & Statistics hub',
+    updated: 'Updated ',
+  },
+}[lang];
+
+const guideViews = seoGuides
+  .filter((guide) => isSeoGuideAvailableInLocale(guide, lang))
+  .map((guide) => viewSeoGuide(guide, lang))
+  .sort((a, b) => a.priority - b.priority || a.title.localeCompare(b.title));
+const groupedGuides = [...guideViews.reduce((groups, guide) => {
+  const items = groups.get(guide.category) ?? [];
+  groups.set(guide.category, [...items, guide]);
+  return groups;
+}, new Map<string, SeoGuideView[]>())];
+const workflowViews = workflows
+  .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
+  .map((workflow) => viewWorkflow(workflow, lang));
+const guidesPath = localePath(lang, 'guides');
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: ui.breadcrumbHome, href: localePath(lang) },
+  { name: copy.breadcrumb, href: guidesPath },
+]);
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: copy.title,
+  description: copy.description,
+  url: absoluteUrl(guidesPath),
+  inLanguage: SITE.hreflang[lang],
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: guideViews.map((guide, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: guide.title,
+      url: absoluteUrl(localePath(lang, 'guides', guide.slug)),
+    })),
+  },
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={copy.title}
+  description={copy.description}
+  alternateSegments={['guides']}
+  hasAlternates={true}
+  jsonLd={[collectionLd, breadcrumbLd]}
+>
+  <section class="wrap page-head guide-head">
+    <Breadcrumb items={[{ label: ui.breadcrumbHome, href: localePath(lang) }, { label: copy.breadcrumb }]} />
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h1>{copy.title}</h1>
+    <p class="lead">{copy.lead}</p>
+    <div class="index-actions">
+      <a class="btn go" href={localePath(lang, 'education-statistics')}>{copy.hub}</a>
+      <a class="btn" href={localePath(lang, 'workflows')}>{copy.workflowIndex}</a>
+    </div>
+  </section>
+
+  <section class="wrap content-section" aria-labelledby="guide-list-title">
+    <h2 id="guide-list-title">{copy.latest}</h2>
+    <div class="category-groups">
+      {groupedGuides.map(([category, items]) => (
+        <section class="guide-group" aria-labelledby={`guide-group-${category}`}>
+          <h3 id={`guide-group-${category}`}>{category}</h3>
+          <div class="guide-grid">
+            {items.map((guide) => (
+              <article class="guide-card">
+                <p class="guide-date"><time datetime={guide.updatedAt}>{copy.updated}{guide.updatedAt}</time></p>
+                <h4><a href={localePath(lang, 'guides', guide.slug)}>{guide.title}</a></h4>
+                <p>{guide.summary}</p>
+                <a class="guide-read" href={localePath(lang, 'guides', guide.slug)}>{copy.read}</a>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap content-section" aria-labelledby="workflow-list-title">
+    <h2 id="workflow-list-title">{copy.workflows}</h2>
+    <div class="workflow-strip">
+      {workflowViews.map((workflow) => (
+        <a href={localePath(lang, 'workflows', workflow.slug)}>
+          <strong>{workflow.title}</strong>
+          <span>{workflow.purpose}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .guide-head { padding-bottom: 8px; }
+  .index-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .category-groups { display: grid; gap: 24px; }
+  .guide-group { display: grid; gap: 12px; }
+  .guide-group h3 { margin: 0; font-size: 1.25rem; }
+  .guide-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .guide-card { display: grid; align-content: start; gap: 11px; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); box-shadow: var(--shadow-soft); }
+  .guide-card h4, .guide-card p { margin: 0; }
+  .guide-card h4 { font-size: 1.16rem; line-height: 1.4; }
+  .guide-card h4 a:hover, .guide-read:hover { color: var(--brand); }
+  .guide-card > p:not(.guide-date) { color: var(--muted); line-height: 1.75; }
+  .guide-date { color: var(--muted); font-size: 0.86rem; font-weight: 800; }
+  .guide-read { justify-self: start; color: var(--ink); font-weight: 900; }
+  .workflow-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .workflow-strip a { display: grid; gap: 6px; padding: 16px; border: 1px solid #cfe6e3; border-radius: 12px; background: #f2fbfa; }
+  .workflow-strip span { color: var(--muted); line-height: 1.65; }
+  @media (max-width: 760px) {
+    .guide-grid, .workflow-strip { grid-template-columns: 1fr; }
+    .guide-card { padding: 18px; }
+  }
+</style>

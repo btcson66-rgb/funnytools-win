@@ -5,6 +5,8 @@ import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
 import { getToolBySlug, type ToolMeta } from '../../../data/tools';
+import { seoGuides, viewSeoGuide, isSeoGuideAvailableInLocale } from '../../../data/seoGuides';
+import { workflows, viewWorkflow, isWorkflowAvailableInLocale } from '../../../data/workflows';
 import { t } from '../../../i18n/ui';
 import { localePath } from '../../../lib/url';
 import { breadcrumbJsonLd, collectionPageJsonLd } from '../../../lib/seo';
@@ -152,6 +154,33 @@ const groups = groupCopy.map((group, index) => ({
   tools: groupSlugs[index].map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool)),
 }));
 
+const resourceCopy = {
+  zh: {
+    title: '教育統計指南與工作流程',
+    body: '從 T 分數、Z 分數、PR、教師甄試加權到 SPSS 與 APA 7 報告，這些指南把工具串成可檢查的學習與研究流程。',
+    guides: '重點指南',
+    workflows: '工作流程',
+    viewAllGuides: '查看全部指南',
+    viewAllWorkflows: '查看全部流程',
+  },
+  en: {
+    title: 'Education Statistics Guides and Workflows',
+    body: 'From T scores, Z scores, PR, and teacher exam weighting to SPSS and APA 7 reporting, these guides connect the tools into checkable workflows.',
+    guides: 'Featured guides',
+    workflows: 'Workflows',
+    viewAllGuides: 'View all guides',
+    viewAllWorkflows: 'View all workflows',
+  },
+}[lang];
+const featuredGuides = seoGuides
+  .filter((guide) => isSeoGuideAvailableInLocale(guide, lang))
+  .sort((a, b) => a.priority - b.priority)
+  .slice(0, 6)
+  .map((guide) => viewSeoGuide(guide, lang));
+const featuredWorkflows = workflows
+  .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
+  .map((workflow) => viewWorkflow(workflow, lang));
+
 const faqItems = {
   zh: [
     {
@@ -241,7 +270,52 @@ const jsonLd = [
     </section>
   ))}
 
+  <section class="wrap content-section" aria-labelledby="education-resources-title">
+    <div class="section-head">
+      <h2 id="education-resources-title">{resourceCopy.title}</h2>
+      <p>{resourceCopy.body}</p>
+    </div>
+    <div class="resource-columns">
+      <section class="resource-panel" aria-labelledby="education-guides-title">
+        <h3 id="education-guides-title">{resourceCopy.guides}</h3>
+        <div class="resource-list">
+          {featuredGuides.map((guide) => (
+            <a href={localePath(lang, 'guides', guide.slug)}>
+              <strong>{guide.title}</strong>
+              <span>{guide.summary}</span>
+            </a>
+          ))}
+        </div>
+        <a class="btn" href={localePath(lang, 'guides')}>{resourceCopy.viewAllGuides}</a>
+      </section>
+      <section class="resource-panel" aria-labelledby="education-workflows-title">
+        <h3 id="education-workflows-title">{resourceCopy.workflows}</h3>
+        <div class="resource-list">
+          {featuredWorkflows.map((workflow) => (
+            <a href={localePath(lang, 'workflows', workflow.slug)}>
+              <strong>{workflow.title}</strong>
+              <span>{workflow.purpose}</span>
+            </a>
+          ))}
+        </div>
+        <a class="btn" href={localePath(lang, 'workflows')}>{resourceCopy.viewAllWorkflows}</a>
+      </section>
+    </div>
+  </section>
+
   <div class="wrap">
     <Faq lang={lang} items={faqItems} emitJsonLd={false} />
   </div>
 </BaseLayout>
+
+<style>
+  .resource-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .resource-panel { display: grid; align-content: start; gap: 14px; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); box-shadow: var(--shadow-soft); }
+  .resource-panel h3 { margin: 0; font-size: 1.18rem; }
+  .resource-list { display: grid; gap: 10px; }
+  .resource-list a { display: grid; gap: 5px; padding: 12px; border: 1px solid #d9e5ef; border-radius: 10px; background: #fbfcff; }
+  .resource-list a:hover strong { color: var(--brand); }
+  .resource-list span { color: var(--muted); line-height: 1.6; }
+  .resource-panel .btn { justify-self: start; }
+  @media (max-width: 760px) { .resource-columns { grid-template-columns: 1fr; } .resource-panel { padding: 18px; } }
+</style>

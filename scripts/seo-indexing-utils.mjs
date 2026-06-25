@@ -190,6 +190,7 @@ export function classifyUrl(url) {
   if (/^\/tools\/[^/]+\/$/.test(normalized)) return 'tools';
   if (/^\/category\/[^/]+\/$/.test(normalized)) return 'categories';
   if (normalized === '/blog/' || /^\/blog\/[^/]+\/$/.test(normalized)) return 'blog';
+  if (normalized === '/guides/' || /^\/guides\/[^/]+\/$/.test(normalized) || normalized === '/workflows/' || /^\/workflows\/[^/]+\/$/.test(normalized)) return 'guides';
   return 'pages';
 }
 
@@ -199,6 +200,7 @@ export function sitemapFileForType(type) {
     tools: 'sitemap-tools.xml',
     categories: 'sitemap-categories.xml',
     blog: 'sitemap-blog.xml',
+    guides: 'sitemap-guides.xml',
     en: 'sitemap-en.xml',
   }[type];
 }
@@ -228,7 +230,7 @@ export function readSitemapEntries(baseDir = publicDir) {
   const children = sitemapIndexChildren(indexPath);
   const files = children.length
     ? children.map((loc) => join(baseDir, new URL(loc).pathname.replace(/^\/+/, '')))
-    : ['sitemap-pages.xml', 'sitemap-tools.xml', 'sitemap-categories.xml', 'sitemap-blog.xml', 'sitemap-en.xml'].map((name) => join(baseDir, name));
+    : ['sitemap-pages.xml', 'sitemap-tools.xml', 'sitemap-categories.xml', 'sitemap-blog.xml', 'sitemap-guides.xml', 'sitemap-en.xml'].map((name) => join(baseDir, name));
   return files.flatMap((file) => parseSitemapFile(file).map((entry) => ({
     ...entry,
     sitemap: relative(baseDir, file).replaceAll('\\', '/'),
@@ -284,6 +286,22 @@ export function sourceCandidatesForRoute(route) {
       'src/data/allBlogPosts.ts',
       'src/pages/[...locale]/blog/index.astro',
       'src/pages/[...locale]/blog/[slug].astro',
+    ];
+  }
+  if (parts[0] === 'guides') {
+    return [
+      'src/data/seoGuides.ts',
+      'src/data/workflows.ts',
+      'src/pages/[...locale]/guides/index.astro',
+      'src/pages/[...locale]/guides/[slug].astro',
+    ];
+  }
+  if (parts[0] === 'workflows') {
+    return [
+      'src/data/workflows.ts',
+      'src/data/seoGuides.ts',
+      'src/pages/[...locale]/workflows/index.astro',
+      'src/pages/[...locale]/workflows/[slug].astro',
     ];
   }
   if (parts[0] === 'education-statistics') {

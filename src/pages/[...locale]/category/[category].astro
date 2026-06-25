@@ -6,6 +6,8 @@ import { SITE, type Locale } from '../../../config/site';
 import { categories, getCategoryById, type Category } from '../../../data/categories';
 import { getCategoryContent, type CategoryContent } from '../../../data/categoryContent';
 import { getToolsByCategory } from '../../../data/tools';
+import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide } from '../../../data/seoGuides';
+import { workflows, isWorkflowAvailableInLocale, viewWorkflow } from '../../../data/workflows';
 import { t } from '../../../i18n/ui';
 import { categoryUrl, localePath, toolUrl } from '../../../lib/url';
 import { breadcrumbJsonLd, collectionPageJsonLd } from '../../../lib/seo';
@@ -43,6 +45,49 @@ const howToChoose = content ? content.howToChoose[lang] : [];
 const faqItems = content ? content.faq[lang] : [];
 const disclaimer = content?.disclaimer?.[lang];
 const educationStatisticsHubLabel = lang === 'zh' ? '教育與統計工具中心' : 'Education & Statistics Tools Center';
+const classroomCategoryLabel = { zh: '課堂教學', en: 'Classroom teaching' } satisfies Record<Locale, string>;
+const classroomCategoryPages = ['random', 'study'];
+
+// Surface the data-driven education-statistics guides and workflow toolkits on the statistics category page.
+const statisticsGuideSources = categoryData.id === 'statistics'
+  ? seoGuides
+      .filter((guide) => isSeoGuideAvailableInLocale(guide, lang))
+      .filter((guide) => guide.priority < 10 && guide.category[lang] !== classroomCategoryLabel[lang])
+      .sort((a, b) => a.priority - b.priority)
+      .slice(0, 6)
+  : [];
+const statisticsGuideIds = new Set(statisticsGuideSources.map((guide) => guide.slug));
+const statisticsGuides = categoryData.id === 'statistics'
+  ? statisticsGuideSources.map((guide) => viewSeoGuide(guide, lang))
+  : [];
+const statisticsWorkflows = categoryData.id === 'statistics'
+  ? workflows
+      .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
+      .filter((workflow) => workflow.relatedGuideIds.some((guideId) => statisticsGuideIds.has(guideId)))
+      .map((workflow) => viewWorkflow(workflow, lang))
+  : [];
+const classroomGuideSources = classroomCategoryPages.includes(categoryData.id)
+  ? seoGuides
+      .filter((guide) => isSeoGuideAvailableInLocale(guide, lang))
+      .filter((guide) => guide.category[lang] === classroomCategoryLabel[lang])
+      .sort((a, b) => a.priority - b.priority)
+      .slice(0, 5)
+  : [];
+const classroomGuideIds = new Set(classroomGuideSources.map((guide) => guide.slug));
+const classroomGuides = classroomGuideSources.map((guide) => viewSeoGuide(guide, lang));
+const classroomWorkflows = classroomCategoryPages.includes(categoryData.id)
+  ? workflows
+      .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
+      .filter((workflow) => workflow.relatedGuideIds.some((guideId) => classroomGuideIds.has(guideId)))
+      .slice(0, 1)
+      .map((workflow) => viewWorkflow(workflow, lang))
+  : [];
+const guidesSectionCopy = lang === 'zh'
+  ? { guides: '教學指南', workflows: '工具包流程' }
+  : { guides: 'Guides', workflows: 'Workflow toolkits' };
+const classroomSectionCopy = lang === 'zh'
+  ? { guides: '課堂教學指南', workflows: '課堂工具包' }
+  : { guides: 'Classroom teaching guides', workflows: 'Classroom toolkits' };
 
 const blurbFor = (slug: string): string =>
   content?.toolBlurbs[slug]?.[lang] ?? categoryTools.find((tool) => tool.slug === slug)?.short[lang] ?? '';
@@ -104,6 +149,68 @@ if (faqItems.length > 0) {
           <a class="inline-link" href={localePath(lang, 'education-statistics')}>{educationStatisticsHubLabel}</a>
           {lang === 'zh' ? '。' : '.'}
         </p>
+      )}
+    </section>
+  )}
+
+  {(statisticsGuides.length > 0 || statisticsWorkflows.length > 0) && (
+    <section class="wrap content-section statistics-guides">
+      {statisticsGuides.length > 0 && (
+        <>
+          <h2>{guidesSectionCopy.guides}</h2>
+          <div class="related-guide-list">
+            {statisticsGuides.map((guide) => (
+              <a href={localePath(lang, 'guides', guide.slug)}>
+                <strong>{guide.title}</strong>
+                <span>{guide.summary}</span>
+              </a>
+            ))}
+          </div>
+        </>
+      )}
+      {statisticsWorkflows.length > 0 && (
+        <>
+          <h2>{guidesSectionCopy.workflows}</h2>
+          <div class="related-guide-list">
+            {statisticsWorkflows.map((workflow) => (
+              <a href={localePath(lang, 'workflows', workflow.slug)}>
+                <strong>{workflow.title}</strong>
+                <span>{workflow.purpose}</span>
+              </a>
+            ))}
+          </div>
+        </>
+      )}
+    </section>
+  )}
+
+  {(classroomGuides.length > 0 || classroomWorkflows.length > 0) && (
+    <section class="wrap content-section statistics-guides">
+      {classroomGuides.length > 0 && (
+        <>
+          <h2>{classroomSectionCopy.guides}</h2>
+          <div class="related-guide-list">
+            {classroomGuides.map((guide) => (
+              <a href={localePath(lang, 'guides', guide.slug)}>
+                <strong>{guide.title}</strong>
+                <span>{guide.summary}</span>
+              </a>
+            ))}
+          </div>
+        </>
+      )}
+      {classroomWorkflows.length > 0 && (
+        <>
+          <h2>{classroomSectionCopy.workflows}</h2>
+          <div class="related-guide-list">
+            {classroomWorkflows.map((workflow) => (
+              <a href={localePath(lang, 'workflows', workflow.slug)}>
+                <strong>{workflow.title}</strong>
+                <span>{workflow.purpose}</span>
+              </a>
+            ))}
+          </div>
+        </>
       )}
     </section>
   )}
@@ -200,3 +307,13 @@ if (faqItems.length > 0) {
     </section>
   )}
 </BaseLayout>
+
+<style>
+  .statistics-guides h2 { margin-top: 8px; }
+  .statistics-guides h2 ~ h2 { margin-top: 28px; }
+  .related-guide-list { display: grid; gap: 10px; }
+  .related-guide-list a { display: grid; gap: 5px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+  .related-guide-list a:hover { border-color: var(--brand); }
+  .related-guide-list strong { color: var(--ink); }
+  .related-guide-list span { color: var(--muted); line-height: 1.6; }
+</style>
