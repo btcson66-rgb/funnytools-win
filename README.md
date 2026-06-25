@@ -1,3 +1,31 @@
+# FreeTools — Free Online Browser Tools
+
+FreeTools is a free online toolbox for everyday tasks.
+
+Website: https://funnytools.win/
+
+FreeTools provides free browser-based tools for PDF files, images, text, QR codes, random selection, time management, money calculators, teacher tools, and education/statistics calculators.
+
+## Popular FreeTools Pages
+
+- Merge PDF: https://funnytools.win/tools/merge-pdf/
+- Image Compressor: https://funnytools.win/tools/image-compressor/
+- QR Code Generator: https://funnytools.win/tools/qr-code-generator/
+- Word Counter: https://funnytools.win/tools/word-counter/
+- Random Group Generator: https://funnytools.win/tools/random-group-generator/
+- Pomodoro Timer: https://funnytools.win/tools/pomodoro-timer/
+- Business Days Calculator: https://funnytools.win/tools/business-days/
+- Mortgage Payment Calculator: https://funnytools.win/tools/mortgage-payment/
+
+## Brand Note
+
+FreeTools is available at https://funnytools.win/.  
+The domain name is funnytools.win, but the product brand is FreeTools.
+
+---
+
+
+
 # FreeTools
 
 FreeTools (https://funnytools.win) is a bilingual Astro static site for small browser-based utilities. It is data-driven and runs without a backend.
@@ -77,3 +105,5 @@ Activating affiliate, sponsor, related-resources, or newsletter is a flag flip p
 - `guide`: explanatory or instructional asset.
 
 The current v2 pass wires the metadata only. It does not add new template, database, game, or guide content.
+
+
