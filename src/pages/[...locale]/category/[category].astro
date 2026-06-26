@@ -3,6 +3,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import CategoryIcon from '../../../components/CategoryIcon.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
+import { audiences, isAudienceAvailableInLocale, viewAudience } from '../../../data/audiences';
 import { categories, getCategoryById, type Category } from '../../../data/categories';
 import { getCategoryContent, type CategoryContent } from '../../../data/categoryContent';
 import { getToolsByCategory } from '../../../data/tools';
@@ -88,6 +89,18 @@ const guidesSectionCopy = lang === 'zh'
 const classroomSectionCopy = lang === 'zh'
   ? { guides: '課堂教學指南', workflows: '課堂工具包' }
   : { guides: 'Classroom teaching guides', workflows: 'Classroom toolkits' };
+const categoryToolSlugs = new Set(categoryTools.map((tool) => tool.slug));
+const relatedAudienceViews = audiences
+  .filter((audience) => isAudienceAvailableInLocale(audience, lang))
+  .filter((audience) => audience.relatedCategoryIds.includes(categoryData.id))
+  .map((audience) => viewAudience(audience, lang));
+const relatedWorkflowViews = workflows
+  .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
+  .filter((workflow) => workflow.recommendedToolIds.some((toolSlug) => categoryToolSlugs.has(toolSlug)))
+  .map((workflow) => viewWorkflow(workflow, lang));
+const categoryRelatedCopy = lang === 'zh'
+  ? { audiences: '依使用情境延伸', workflows: '相關工作流' }
+  : { audiences: 'Related audience toolkits', workflows: 'Related workflows' };
 
 const blurbFor = (slug: string): string =>
   content?.toolBlurbs[slug]?.[lang] ?? categoryTools.find((tool) => tool.slug === slug)?.short[lang] ?? '';
@@ -285,6 +298,37 @@ if (faqItems.length > 0) {
           ))
         }
       </dl>
+    </section>
+  )}
+
+  {(relatedAudienceViews.length > 0 || relatedWorkflowViews.length > 0) && (
+    <section class="wrap content-section statistics-guides">
+      {relatedAudienceViews.length > 0 && (
+        <>
+          <h2>{categoryRelatedCopy.audiences}</h2>
+          <div class="related-guide-list">
+            {relatedAudienceViews.map((audience) => (
+              <a href={localePath(lang, 'for', audience.slug)}>
+                <strong>{audience.title}</strong>
+                <span>{audience.metaDescription}</span>
+              </a>
+            ))}
+          </div>
+        </>
+      )}
+      {relatedWorkflowViews.length > 0 && (
+        <>
+          <h2>{categoryRelatedCopy.workflows}</h2>
+          <div class="related-guide-list">
+            {relatedWorkflowViews.map((workflow) => (
+              <a href={localePath(lang, 'workflows', workflow.slug)}>
+                <strong>{workflow.title}</strong>
+                <span>{workflow.purpose}</span>
+              </a>
+            ))}
+          </div>
+        </>
+      )}
     </section>
   )}
 

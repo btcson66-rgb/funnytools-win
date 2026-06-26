@@ -242,6 +242,62 @@ const workflowToolkits = workflows
     };
   })
   .filter((workflow) => workflow.tools.length > 0);
+const taskEntryCopy = {
+  zh: {
+    heading: '我想要...',
+    intro: '從任務開始，直接進到最常用的工具組。',
+    aria: '常見任務入口',
+    audienceLabel: '依身份找工具',
+  },
+  en: {
+    heading: 'I want to...',
+    intro: 'Start from the task and jump to the right FreeTools page.',
+    aria: 'Common task entry points',
+    audienceLabel: 'Find tools by role',
+  },
+}[lang];
+const taskEntries = {
+  zh: [
+    { label: '處理 PDF', href: categoryUrl(lang, 'pdf'), destination: 'category:pdf' },
+    { label: '壓縮圖片', href: toolUrl(lang, 'image-compressor'), destination: 'tool:image-compressor' },
+    { label: '找教室工具', href: localePath(lang, 'for', 'teachers'), destination: 'audience:teachers' },
+    { label: '準備學生報告', href: localePath(lang, 'for', 'students'), destination: 'audience:students' },
+    { label: '整理文字內容', href: categoryUrl(lang, 'text'), destination: 'category:text' },
+    { label: '隨機抽籤或分組', href: toolUrl(lang, 'random-group-generator'), destination: 'tool:random-group-generator' },
+    { label: '計算日期', href: toolUrl(lang, 'date-difference'), destination: 'tool:date-difference' },
+    { label: '產生 QR Code', href: toolUrl(lang, 'qr-code-generator'), destination: 'tool:qr-code-generator' },
+    { label: '找日常小工具', href: categoryUrl(lang, 'random'), destination: 'category:random' },
+  ],
+  en: [
+    { label: 'I want to work with PDFs', href: categoryUrl(lang, 'pdf'), destination: 'category:pdf' },
+    { label: 'I want to compress images', href: toolUrl(lang, 'image-compressor'), destination: 'tool:image-compressor' },
+    { label: 'I need classroom tools', href: localePath(lang, 'for', 'teachers'), destination: 'audience:teachers' },
+    { label: 'I need report tools', href: localePath(lang, 'for', 'students'), destination: 'audience:students' },
+    { label: 'I want to clean up text', href: categoryUrl(lang, 'text'), destination: 'category:text' },
+    { label: 'I want to pick or group randomly', href: toolUrl(lang, 'random-group-generator'), destination: 'tool:random-group-generator' },
+    { label: 'I want to calculate dates', href: toolUrl(lang, 'date-difference'), destination: 'tool:date-difference' },
+    { label: 'I want to create a QR code', href: toolUrl(lang, 'qr-code-generator'), destination: 'tool:qr-code-generator' },
+    { label: 'I want everyday tools', href: categoryUrl(lang, 'random'), destination: 'category:random' },
+  ],
+}[lang];
+const audienceTaskEntries = {
+  zh: [
+    { label: '教師工具', href: localePath(lang, 'for', 'teachers'), destination: 'audience:teachers' },
+    { label: '學生報告工具', href: localePath(lang, 'for', 'students'), destination: 'audience:students' },
+    { label: '上班族文件工具', href: localePath(lang, 'for', 'office-workers'), destination: 'audience:office-workers' },
+    { label: '創作者工具', href: localePath(lang, 'for', 'creators'), destination: 'audience:creators' },
+    { label: '設計師工具', href: localePath(lang, 'for', 'designers'), destination: 'audience:designers' },
+    { label: '開發者工具', href: localePath(lang, 'for', 'developers'), destination: 'audience:developers' },
+  ],
+  en: [
+    { label: 'Teacher tools', href: localePath(lang, 'for', 'teachers'), destination: 'audience:teachers' },
+    { label: 'Student report tools', href: localePath(lang, 'for', 'students'), destination: 'audience:students' },
+    { label: 'Office worker tools', href: localePath(lang, 'for', 'office-workers'), destination: 'audience:office-workers' },
+    { label: 'Creator tools', href: localePath(lang, 'for', 'creators'), destination: 'audience:creators' },
+    { label: 'Designer tools', href: localePath(lang, 'for', 'designers'), destination: 'audience:designers' },
+    { label: 'Developer tools', href: localePath(lang, 'for', 'developers'), destination: 'audience:developers' },
+  ],
+}[lang];
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -301,6 +357,28 @@ const popularItemListJsonLd = {
         <span>{ui.heroStats.categoriesLabel}</span>
       </span>
       <span class="stat-chip text-only">{ui.heroStats.noSignup}</span>
+    </div>
+  </section>
+
+  <section class="wrap content-section task-entry-section" aria-labelledby="task-entry-title">
+    <div class="section-head">
+      <h2 id="task-entry-title">{taskEntryCopy.heading}</h2>
+      <p>{taskEntryCopy.intro}</p>
+    </div>
+    <nav class="task-entry-grid" aria-label={taskEntryCopy.aria}>
+      {taskEntries.map((entry) => (
+        <a class="task-entry-card" href={entry.href} data-task-entry data-task-label={entry.label} data-task-destination={entry.destination}>
+          <span>{entry.label}</span>
+        </a>
+      ))}
+    </nav>
+    <div class="task-entry-audience">
+      <span>{taskEntryCopy.audienceLabel}</span>
+      <div class="task-entry-audience__links">
+        {audienceTaskEntries.map((entry) => (
+          <a href={entry.href} data-task-entry data-task-label={entry.label} data-task-destination={entry.destination}>{entry.label}</a>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -556,6 +634,16 @@ const popularItemListJsonLd = {
 
   </div>
 
+  <script is:inline>
+    document.querySelectorAll('[data-task-entry]').forEach((link) => {
+      link.addEventListener('click', () => {
+        window.__ft_track?.('task_entry_click', {
+          label: link.getAttribute('data-task-label') || '',
+          destination: link.getAttribute('data-task-destination') || ''
+        });
+      });
+    });
+  </script>
   <script src="/home-search.js" is:inline></script>
   <script>
     import { getFavoriteTools, getRecentlyUsedTools } from '../../lib/userTools.client';

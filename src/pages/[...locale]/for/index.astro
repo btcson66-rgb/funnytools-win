@@ -1,0 +1,106 @@
+---
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE, type Locale } from '../../../config/site';
+import { audiences, isAudienceAvailableInLocale, viewAudience } from '../../../data/audiences';
+import { absoluteUrl, localePath } from '../../../lib/url';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+import { t } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: undefined }, props: { lang: 'zh' } },
+    { params: { locale: 'en' }, props: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.props as { lang: Locale };
+const ui = t(lang);
+const copy = {
+  zh: {
+    title: '依使用情境找 FreeTools 工具',
+    description: '依教師、學生、上班族、創作者、設計師與開發者情境整理 FreeTools 免費工具，快速找到 PDF、圖片、文字、隨機、日期與資料轉換工具。',
+    eyebrow: 'For every workflow',
+    h1: '依使用情境找工具',
+    lead: '從你的身份與任務開始，不必先猜工具名稱。每個頁面都整理常見痛點、推薦工具、簡單流程與延伸分類。',
+    breadcrumb: '使用情境',
+    open: '查看工具組',
+  },
+  en: {
+    title: 'Find FreeTools by Audience',
+    description: 'Browse FreeTools by audience: teachers, students, office workers, creators, designers, and developers, with practical tool sets and workflows.',
+    eyebrow: 'For every workflow',
+    h1: 'Find Tools by Audience',
+    lead: 'Start from who you are and what you need to finish. Each page groups common pain points, recommended tools, quick workflows, and related categories.',
+    breadcrumb: 'For',
+    open: 'Open toolkit',
+  },
+}[lang];
+const audienceViews = audiences
+  .filter((audience) => isAudienceAvailableInLocale(audience, lang))
+  .map((audience) => viewAudience(audience, lang));
+const forPath = localePath(lang, 'for');
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: ui.breadcrumbHome, href: localePath(lang) },
+  { name: copy.breadcrumb, href: forPath },
+]);
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: copy.title,
+  description: copy.description,
+  url: absoluteUrl(forPath),
+  inLanguage: SITE.hreflang[lang],
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: audienceViews.map((audience, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: audience.title,
+      url: absoluteUrl(localePath(lang, 'for', audience.slug)),
+    })),
+  },
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={copy.title}
+  description={copy.description}
+  alternateSegments={['for']}
+  hasAlternates={true}
+  jsonLd={[collectionLd, breadcrumbLd]}
+>
+  <section class="wrap page-head audience-head">
+    <Breadcrumb items={[{ label: ui.breadcrumbHome, href: localePath(lang) }, { label: copy.breadcrumb }]} />
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h1>{copy.h1}</h1>
+    <p class="lead">{copy.lead}</p>
+  </section>
+
+  <section class="wrap content-section" aria-labelledby="audience-list-title">
+    <h2 id="audience-list-title">{copy.breadcrumb}</h2>
+    <div class="audience-grid">
+      {audienceViews.map((audience) => (
+        <article class="audience-card">
+          <h3><a href={localePath(lang, 'for', audience.slug)}>{audience.title}</a></h3>
+          <p>{audience.intro}</p>
+          <a class="audience-card__cta" href={localePath(lang, 'for', audience.slug)}>{copy.open}</a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .audience-head { padding-bottom: 8px; }
+  .audience-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .audience-card { display: grid; gap: 12px; align-content: start; padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); box-shadow: var(--shadow-soft); }
+  .audience-card h3, .audience-card p { margin: 0; }
+  .audience-card h3 { font-size: 1.18rem; line-height: 1.4; }
+  .audience-card h3 a:hover, .audience-card__cta:hover { color: var(--brand); }
+  .audience-card p { color: var(--muted); line-height: 1.75; }
+  .audience-card__cta { justify-self: start; color: var(--ink); font-weight: 900; }
+  @media (max-width: 960px) { .audience-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .audience-grid { grid-template-columns: 1fr; } .audience-card { padding: 18px; } }
+</style>

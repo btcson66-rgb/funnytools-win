@@ -1,0 +1,209 @@
+---
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import Faq from '../../../components/Faq.astro';
+import ToolCard from '../../../components/ToolCard.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SITE, type Locale } from '../../../config/site';
+import { audiences, isAudienceAvailableInLocale, viewAudience, type Audience } from '../../../data/audiences';
+import { categories, getCategoryById } from '../../../data/categories';
+import { getToolBySlug, type ToolMeta } from '../../../data/tools';
+import { getWorkflow, isWorkflowAvailableInLocale, viewWorkflow } from '../../../data/workflows';
+import { absoluteUrl, categoryUrl, localePath, toolUrl } from '../../../lib/url';
+import { breadcrumbJsonLd, webPageJsonLd } from '../../../lib/seo';
+import { t } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return audiences.flatMap((audience) => {
+    const paths = [
+      {
+        params: { locale: undefined, audience: audience.slug },
+        props: { lang: 'zh' as const, audience },
+      },
+    ];
+
+    if (isAudienceAvailableInLocale(audience, 'en')) {
+      paths.push({
+        params: { locale: 'en', audience: audience.slug },
+        props: { lang: 'en' as const, audience },
+      });
+    }
+
+    return paths;
+  });
+}
+
+const { lang, audience: sourceAudience } = Astro.props as { lang: Locale; audience: Audience };
+const ui = t(lang);
+const audience = viewAudience(sourceAudience, lang);
+const copy = {
+  zh: {
+    breadcrumb: '使用情境',
+    eyebrow: 'FreeTools for your work',
+    painPoints: '常見需求',
+    tools: '推薦工具',
+    workflow: '建議流程',
+    categories: '相關分類',
+    workflows: '相關工作流',
+    openTool: '開啟工具',
+    back: '回到使用情境',
+  },
+  en: {
+    breadcrumb: 'For',
+    eyebrow: 'FreeTools for your work',
+    painPoints: 'Common needs',
+    tools: 'Recommended tools',
+    workflow: 'Suggested workflow',
+    categories: 'Related categories',
+    workflows: 'Related workflows',
+    openTool: 'Open tool',
+    back: 'Back to audiences',
+  },
+}[lang];
+const audienceIndexPath = localePath(lang, 'for');
+const audiencePath = localePath(lang, 'for', audience.slug);
+const liveTool = (slug: string): ToolMeta | undefined => {
+  const tool = getToolBySlug(slug);
+  return tool?.status === 'live' ? tool : undefined;
+};
+const recommendedTools = audience.recommendedToolIds.map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool));
+const relatedCategories = audience.relatedCategoryIds
+  .map(getCategoryById)
+  .filter((category): category is (typeof categories)[number] => Boolean(category));
+const relatedWorkflows = audience.relatedWorkflowIds
+  .map(getWorkflow)
+  .filter((workflow) => workflow != null && isWorkflowAvailableInLocale(workflow, lang))
+  .map((workflow) => viewWorkflow(workflow, lang));
+const faqItems = audience.faq.map((item) => ({ q: item.question, a: item.answer }));
+const hasAlternates = sourceAudience.locales.includes('zh') && sourceAudience.locales.includes('en');
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: audience.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: ui.breadcrumbHome, href: localePath(lang) },
+  { name: copy.breadcrumb, href: audienceIndexPath },
+  { name: audience.title, href: audiencePath },
+]);
+const pageLd = webPageJsonLd(lang, audience.metaTitle, audience.metaDescription, audiencePath);
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: audience.h1,
+  description: audience.metaDescription,
+  url: absoluteUrl(audiencePath),
+  inLanguage: SITE.hreflang[lang],
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: recommendedTools.map((tool, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: tool.name[lang],
+      url: absoluteUrl(toolUrl(lang, tool.slug)),
+    })),
+  },
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={audience.metaTitle}
+  description={audience.metaDescription}
+  alternateSegments={['for', audience.slug]}
+  hasAlternates={hasAlternates}
+  jsonLd={[pageLd, collectionLd, faqLd, breadcrumbLd]}
+>
+  <article class="wrap audience-article">
+    <Breadcrumb items={[
+      { label: ui.breadcrumbHome, href: localePath(lang) },
+      { label: copy.breadcrumb, href: audienceIndexPath },
+      { label: audience.title },
+    ]} />
+
+    <header class="audience-hero">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h1>{audience.h1}</h1>
+      <p class="lead">{audience.intro}</p>
+    </header>
+
+    <section class="audience-block" aria-labelledby="audience-pain-title">
+      <h2 id="audience-pain-title">{copy.painPoints}</h2>
+      <ul class="check-list">
+        {audience.painPoints.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    {recommendedTools.length > 0 && (
+      <section class="audience-block" aria-labelledby="audience-tools-title">
+        <h2 id="audience-tools-title">{copy.tools}</h2>
+        <div class="grid">
+          {recommendedTools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
+        </div>
+      </section>
+    )}
+
+    <section class="audience-block" aria-labelledby="audience-workflow-title">
+      <h2 id="audience-workflow-title">{copy.workflow}</h2>
+      <ol class="audience-steps">
+        {audience.workflowSuggestions.map((step) => <li>{step}</li>)}
+      </ol>
+    </section>
+
+    {relatedCategories.length > 0 && (
+      <section class="audience-block" aria-labelledby="audience-categories-title">
+        <h2 id="audience-categories-title">{copy.categories}</h2>
+        <div class="related-list">
+          {relatedCategories.map((category) => (
+            <a href={categoryUrl(lang, category.id)}>
+              <strong>{category.name[lang]}</strong>
+              <span>{category.description[lang]}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {relatedWorkflows.length > 0 && (
+      <section class="audience-block" aria-labelledby="audience-workflows-title">
+        <h2 id="audience-workflows-title">{copy.workflows}</h2>
+        <div class="related-list">
+          {relatedWorkflows.map((workflow) => (
+            <a href={localePath(lang, 'workflows', workflow.slug)}>
+              <strong>{workflow.title}</strong>
+              <span>{workflow.purpose}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <Faq lang={lang} items={faqItems} emitJsonLd={false} />
+
+    <nav class="audience-bottom">
+      <a class="btn" href={audienceIndexPath}>{copy.back}</a>
+    </nav>
+  </article>
+</BaseLayout>
+
+<style>
+  .audience-article { max-width: 980px; padding-top: 34px; }
+  .audience-hero { padding-bottom: 8px; }
+  .audience-hero h1 { max-width: 920px; font-size: clamp(2rem, 6vw, 3.35rem); }
+  .audience-block { margin-top: 36px; }
+  .audience-block p, .audience-block li { color: #384455; font-size: 1.03rem; line-height: 1.85; }
+  .audience-steps { display: grid; gap: 12px; padding-left: 22px; }
+  .tool-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .related-list { display: grid; gap: 10px; }
+  .related-list a { display: grid; gap: 5px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+  .related-list a:hover strong { color: var(--brand); }
+  .related-list span { color: var(--muted); line-height: 1.65; }
+  .audience-bottom { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; padding: 18px; border: 1px solid #cfe6e3; border-radius: 12px; background: #f2fbfa; }
+  @media (max-width: 760px) {
+    .audience-block { margin-top: 30px; }
+    .tool-links .btn, .audience-bottom .btn { width: 100%; justify-content: center; }
+  }
+</style>

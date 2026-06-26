@@ -2,6 +2,7 @@ import { SITE, type Locale } from '../config/site';
 import { categories } from '../data/categories';
 import { hasLiveTools, liveTools } from '../data/tools';
 import { allBlogPosts } from '../data/allBlogPosts';
+import { audiences } from '../data/audiences';
 import { isPostAvailableInLocale } from '../data/blogPosts';
 import { seoGuides } from '../data/seoGuides';
 import { workflows } from '../data/workflows';
@@ -151,6 +152,18 @@ export function workflowPages(): SitemapPage[] {
   ];
 }
 
+export function audiencePages(): SitemapPage[] {
+  return [
+    { segments: ['for'], changefreq: 'weekly', priority: '0.7', alternates: true },
+    ...audiences.map((audience) => ({
+      segments: ['for', audience.slug],
+      changefreq: 'monthly' as const,
+      priority: '0.6',
+      alternates: audience.locales.includes('en'),
+    })),
+  ];
+}
+
 export function defaultPageEntries(): SitemapEntry[] {
   return basePages().map((page) => ({ lang: 'zh', page }));
 }
@@ -168,7 +181,7 @@ export function defaultBlogEntries(): SitemapEntry[] {
 }
 
 export function defaultGuideEntries(): SitemapEntry[] {
-  return [...guidePages(), ...workflowPages()].map((page) => ({ lang: 'zh', page }));
+  return [...guidePages(), ...workflowPages(), ...audiencePages()].map((page) => ({ lang: 'zh', page }));
 }
 
 export function englishEntries(): SitemapEntry[] {
@@ -179,6 +192,7 @@ export function englishEntries(): SitemapEntry[] {
     ...blogPages().filter((page) => page.segments.length === 1 || isPostAvailableInLocale(allBlogPosts.find((post) => post.slug === page.segments[1])!, 'en')),
     ...guidePages().filter((page) => page.segments.length === 1 || seoGuides.find((guide) => guide.slug === page.segments[1])?.locales.includes('en')),
     ...workflowPages().filter((page) => page.segments.length === 1 || workflows.find((workflow) => workflow.slug === page.segments[1])?.locales.includes('en')),
+    ...audiencePages().filter((page) => page.segments.length === 1 || audiences.find((audience) => audience.slug === page.segments[1])?.locales.includes('en')),
   ].map((page) => ({ lang: 'en' as const, page }));
 }
 

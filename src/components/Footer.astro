@@ -21,6 +21,11 @@ const footerBrand = lang === 'zh' ? `${SITE.name.zh} by FunnyTools.win` : SITE.n
     </div>
     <nav class="footer-links" aria-label={ui.ariaFooterNav}>
       <div>
+        <span>{lang === 'zh' ? '工具入口' : 'Tool hubs'}</span>
+        <a href={localePath(lang, 'for')}>{lang === 'zh' ? '依使用情境找工具' : 'For your work'}</a>
+        <a href={localePath(lang, 'workflows')}>{lang === 'zh' ? '工作流工具組' : 'Workflows'}</a>
+      </div>
+      <div>
         <span>{lang === 'zh' ? '頁面' : 'Policies'}</span>
         <a href={localePath(lang, 'privacy')}>{ui.footer.privacy}</a>
         <a href={localePath(lang, 'terms')}>{ui.footer.terms}</a>
