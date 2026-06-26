@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "audit:adsense": "node scripts/adsense-preflight.mjs",
     "audit:analytics": "node scripts/analytics-preflight.mjs",
+    "audit:pwa": "node scripts/pwa-preflight.mjs",
     "audit:security": "node scripts/security-preflight.mjs",
     "audit:lang-switch": "node scripts/lang-switch-audit.mjs",
     "audit:ui-dark": "node scripts/ui-dark-audit.mjs",
@@ -23,7 +24,7 @@
     "seo:all": "npm run seo:sitemap && npm run seo:validate && npm run seo:indexnow && npm run seo:bing && npm run seo:gsc-sitemaps",
     "report:analytics": "node scripts/analytics-report.mjs",
     "traffic-report": "node scripts/traffic-report/index.mjs",
-    "preflight": "npm run build && npm run seo:check && npm run audit:lang-switch && npm run audit:adsense && npm run audit:analytics && npm run audit:security"
+    "preflight": "npm run build && npm run seo:check && npm run audit:lang-switch && npm run audit:adsense && npm run audit:analytics && npm run audit:pwa && npm run audit:security"
   },
   "dependencies": {
     "astro": "^6.4.7",

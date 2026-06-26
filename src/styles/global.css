@@ -1406,6 +1406,10 @@ input:focus, textarea:focus, select:focus { border-color: var(--color-primary-60
 [data-theme="dark"] .result,
 [data-theme="dark"] .result-box { background: var(--color-surface); color: var(--color-slate-700); }
 
+[data-offline="true"] .ad-slot {
+  display: none;
+}
+
 @media (max-width: 1023px) {
   .nav-inner { width: min(calc(100% - 48px), 960px); }
   .nav-links { gap: 16px; }

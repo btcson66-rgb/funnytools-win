@@ -2,6 +2,14 @@
   let installEvent = null;
   const dismissedKey = 'freetools-install-dismissed';
 
+  function syncOnlineState() {
+    document.documentElement.dataset.offline = navigator.onLine ? 'false' : 'true';
+  }
+
+  syncOnlineState();
+  window.addEventListener('online', syncOnlineState);
+  window.addEventListener('offline', syncOnlineState);
+
   if (!('serviceWorker' in navigator)) return;
 
   window.addEventListener('load', () => {
