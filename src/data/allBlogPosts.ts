@@ -1,10 +1,11 @@
 import { blogPosts, type BlogPost } from './blogPosts';
+import { importedEducationBlogPosts } from './importedEducationBlogPosts';
 import { importedSeoBlogPosts } from './importedSeoBlogPosts';
 import { seoResourcePosts } from './seoResourcePosts';
 
 const postMap = new Map<string, BlogPost>();
 
-for (const post of [...seoResourcePosts, ...blogPosts, ...importedSeoBlogPosts]) {
+for (const post of [...importedEducationBlogPosts, ...seoResourcePosts, ...blogPosts, ...importedSeoBlogPosts]) {
   postMap.set(post.slug, post);
 }
 

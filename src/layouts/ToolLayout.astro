@@ -12,6 +12,7 @@ import RelatedTools from '../components/RelatedTools.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import SponsorBlock from '../components/SponsorBlock.astro';
 import BaseLayout from './BaseLayout.astro';
+import { getEducationArticlesForTool } from '../data/importedEducationBlogPosts';
 import type { Locale } from '../config/site';
 import type { Category } from '../data/categories';
 import type { ToolMeta } from '../data/tools';
@@ -45,6 +46,7 @@ const relatedGuides = getGuidesForTool(tool.slug, lang).slice(0, 4);
 const relatedGuidesHeading = lang === 'zh' ? '延伸閱讀：使用教學' : 'Related guides';
 const relatedWorkflows = getWorkflowsForTool(tool.slug, lang).slice(0, 2);
 const relatedWorkflowsHeading = lang === 'zh' ? '相關工具包' : 'Related toolkits';
+const educationArticles = lang === 'zh' ? getEducationArticlesForTool(tool.slug).slice(0, 4) : [];
 ---
 
 <BaseLayout
@@ -208,6 +210,22 @@ const relatedWorkflowsHeading = lang === 'zh' ? '相關工具包' : 'Related too
               <a href={localePath(lang, 'guides', guide.slug)}>
                 <strong>{guide.title}</strong>
                 <span>{guide.summary}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    {
+      educationArticles.length > 0 && (
+        <section class="content-section related-guides" aria-labelledby="related-education-articles-title">
+          <h2 id="related-education-articles-title">相關教學文章</h2>
+          <div class="related-guide-list">
+            {educationArticles.map((article) => (
+              <a href={localePath('zh', 'blog', article.slug)}>
+                <strong>{article.title.zh}</strong>
+                <span>{article.summary.zh}</span>
               </a>
             ))}
           </div>

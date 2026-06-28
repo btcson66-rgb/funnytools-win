@@ -3,6 +3,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { importedEducationBlogPosts } from '../../../data/importedEducationBlogPosts';
 import { SITE, type Locale } from '../../../config/site';
 import { getToolBySlug, type ToolMeta } from '../../../data/tools';
 import { seoGuides, viewSeoGuide, isSeoGuideAvailableInLocale } from '../../../data/seoGuides';
@@ -187,6 +188,8 @@ const featuredGuides = seoGuides
 const featuredWorkflows = workflows
   .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
   .map((workflow) => viewWorkflow(workflow, lang));
+const educationArticles = lang === 'zh' ? importedEducationBlogPosts.slice(0, 12) : [];
+const educationArticleCategories = [...new Set(educationArticles.map((post) => post.categoryLabel?.zh).filter(Boolean))];
 
 const faqItems = {
   zh: [
@@ -315,6 +318,27 @@ const jsonLd = [
     </div>
   </section>
 
+  {educationArticles.length > 0 && (
+    <section class="wrap content-section" aria-labelledby="education-articles-title">
+      <div class="section-head">
+        <h2 id="education-articles-title">教育統計教學文章</h2>
+        <p>整理成績平均、T 分數、Z 分數、PR、教師甄試、SPSS 與 APA 報告等常見查詢，搭配站內工具快速試算與交叉檢查。</p>
+        <div class="education-topic-list" aria-label="文章主題">
+          {educationArticleCategories.map((category) => <span>{category}</span>)}
+        </div>
+      </div>
+      <div class="education-article-grid">
+        {educationArticles.map((post) => (
+          <a href={localePath('zh', 'blog', post.slug)}>
+            <strong>{post.title.zh}</strong>
+            <span>{post.summary.zh}</span>
+          </a>
+        ))}
+      </div>
+      <a class="btn" href={localePath('zh', 'blog')}>查看全部教學文章</a>
+    </section>
+  )}
+
   <div class="wrap">
     <Faq lang={lang} items={faqItems} emitJsonLd={false} />
   </div>
@@ -330,5 +354,12 @@ const jsonLd = [
   .resource-list a:hover strong { color: var(--brand); }
   .resource-list span { color: var(--muted); line-height: 1.6; }
   .resource-panel .btn { justify-self: start; }
+  .education-topic-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .education-topic-list span { padding: 5px 9px; border: 1px solid #d9e5ef; border-radius: 999px; background: #fbfcff; color: var(--brand-2); font-size: 0.84rem; font-weight: 800; }
+  .education-article-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .education-article-grid a { display: grid; gap: 6px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+  .education-article-grid a:hover { border-color: var(--brand); }
+  .education-article-grid span { color: var(--muted); line-height: 1.6; }
   @media (max-width: 760px) { .resource-columns { grid-template-columns: 1fr; } .resource-panel { padding: 18px; } }
+  @media (max-width: 760px) { .education-article-grid { grid-template-columns: 1fr; } }
 </style>
