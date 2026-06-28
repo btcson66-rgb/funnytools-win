@@ -10,20 +10,20 @@ const expectedRobots = [
   'User-agent: *',
   'Allow: /',
   '',
-  'User-agent: Bingbot',
-  'Allow: /',
-  '',
-  'User-agent: Googlebot',
-  'Allow: /',
-  '',
-  'User-agent: OAI-SearchBot',
-  'Allow: /',
-  '',
-  'User-agent: GPTBot',
-  'Allow: /',
-  '',
   'Sitemap: https://funnytools.win/sitemap.xml',
 ].join('\n');
+const expectedChildSitemaps = [
+  'https://funnytools.win/sitemap-pages.xml',
+  'https://funnytools.win/sitemap-tools.xml',
+  'https://funnytools.win/sitemap-blog.xml',
+  'https://funnytools.win/sitemap-en.xml',
+];
+const disallowedUrlPatterns = [
+  { pattern: /http:\/\//i, label: 'http://' },
+  { pattern: /github\.io/i, label: 'github.io' },
+  { pattern: /localhost/i, label: 'localhost' },
+  { pattern: /example\.com/i, label: 'example.com' },
+];
 
 const failures = [];
 const warnings = [];
@@ -100,6 +100,13 @@ function sitemapPathFromUrl(loc) {
   return fullPath;
 }
 
+function validateProductionLoc(loc, context) {
+  if (!loc.startsWith(`${siteOrigin}/`)) fail(`${context} must start with ${siteOrigin}/: ${loc}.`);
+  for (const { pattern, label } of disallowedUrlPatterns) {
+    if (pattern.test(loc)) fail(`${context} must not contain ${label}: ${loc}.`);
+  }
+}
+
 function validateRobots() {
   if (!existsSync(robotsPath)) {
     fail('dist/robots.txt is missing. Run npm.cmd run build before seo:check.');
@@ -121,18 +128,24 @@ function validateSitemap() {
   }
 
   const sitemapIndex = readFileSync(sitemapPath, 'utf8');
+  if (/<html\b/i.test(sitemapIndex)) fail('sitemap.xml appears to be HTML instead of XML.');
   if (!sitemapIndex.startsWith('<?xml version="1.0" encoding="UTF-8"?>')) fail('sitemap.xml must start with the XML declaration.');
   if (!/<sitemapindex\s+[^>]*xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"/.test(sitemapIndex)) fail('sitemap.xml missing sitemapindex namespace.');
   if (!sitemapIndex.trim().endsWith('</sitemapindex>')) fail('sitemap.xml must end with </sitemapindex>.');
 
   const childBlocks = [...sitemapIndex.matchAll(/<sitemap>([\s\S]*?)<\/sitemap>/g)].map((match) => match[1]);
   if (!childBlocks.length) fail('sitemap.xml contains no child sitemap entries.');
+  const childLocs = childBlocks.flatMap((block) => parseTag(block, 'loc'));
+  if (JSON.stringify(childLocs) !== JSON.stringify(expectedChildSitemaps)) {
+    fail(`sitemap.xml must reference exactly these child sitemaps in order: ${expectedChildSitemaps.join(', ')}.`);
+  }
   const childPaths = childBlocks.flatMap((block, index) => {
     const loc = parseTag(block, 'loc');
     const lastmod = parseTag(block, 'lastmod');
     if (loc.length !== 1) fail(`sitemap index entry ${index + 1} must contain exactly one <loc>.`);
     if (lastmod.length !== 1) fail(`sitemap index entry ${index + 1} must contain exactly one <lastmod>.`);
     if (lastmod[0] && !/^\d{4}-\d{2}-\d{2}$/.test(lastmod[0])) fail(`sitemap index entry ${index + 1} has invalid lastmod: ${lastmod[0]}.`);
+    if (loc[0]) validateProductionLoc(loc[0], `sitemap index entry ${index + 1}`);
     return loc[0] ? [sitemapPathFromUrl(loc[0])] : [];
   }).filter(Boolean);
 
@@ -144,6 +157,7 @@ function validateSitemap() {
   for (const childPath of childPaths) {
     const sitemap = readFileSync(childPath, 'utf8');
     const childName = relative(distDir, childPath).replaceAll('\\', '/');
+    if (/<html\b/i.test(sitemap)) fail(`${childName} appears to be HTML instead of XML.`);
     if (!sitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?>')) fail(`${childName} must start with the XML declaration.`);
     if (!/<urlset\s+[^>]*xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"/.test(sitemap)) fail(`${childName} missing urlset sitemap namespace.`);
     if (!sitemap.trim().endsWith('</urlset>')) fail(`${childName} must end with </urlset>.`);
@@ -186,6 +200,7 @@ function validateSitemap() {
     }
 
     locs.push(loc[0]);
+    validateProductionLoc(loc[0], `sitemap entry ${entryNumber}`);
     if (parsed.protocol !== 'https:') fail(`${loc[0]} must use HTTPS.`);
     if (parsed.hostname !== 'funnytools.win') fail(`${loc[0]} must use funnytools.win.`);
     if (parsed.search || parsed.hash) fail(`${loc[0]} must not include query strings or fragments.`);

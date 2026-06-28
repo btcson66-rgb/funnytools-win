@@ -1,16 +1,4 @@
 User-agent: *
 Allow: /
 
-User-agent: Bingbot
-Allow: /
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: GPTBot
-Allow: /
-
 Sitemap: https://funnytools.win/sitemap.xml

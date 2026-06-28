@@ -1,8 +1,6 @@
-# NOTE: Production hosting is Cloudflare Pages (funnytools.win is a Cloudflare-managed
-# domain); Cloudflare Pages builds/deploys directly from this repo and is the live site.
-# This workflow is a secondary/legacy deploy target to GitHub Pages, kept for backup
-# purposes only. GitHub Pages source must be set to "GitHub Actions"; the custom domain
-# is provided by public/CNAME.
+# NOTE: funnytools.win is currently proxied by Cloudflare, but the origin response
+# path uses GitHub Pages/Fastly. Keep this GitHub Pages workflow deployable and
+# verify public sitemap/robots output against the custom domain after release.
 name: Deploy Astro site to Pages
 
 on:

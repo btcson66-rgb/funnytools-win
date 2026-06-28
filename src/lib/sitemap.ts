@@ -165,7 +165,13 @@ export function audiencePages(): SitemapPage[] {
 }
 
 export function defaultPageEntries(): SitemapEntry[] {
-  return basePages().map((page) => ({ lang: 'zh', page }));
+  return [
+    ...basePages(),
+    ...categoryPages(),
+    ...guidePages(),
+    ...workflowPages(),
+    ...audiencePages(),
+  ].map((page) => ({ lang: 'zh', page }));
 }
 
 export function defaultToolEntries(): SitemapEntry[] {
@@ -200,9 +206,7 @@ export function allSitemapEntries(): SitemapEntry[] {
   return [
     ...defaultPageEntries(),
     ...defaultToolEntries(),
-    ...defaultCategoryEntries(),
     ...defaultBlogEntries(),
-    ...defaultGuideEntries(),
     ...englishEntries(),
   ];
 }
