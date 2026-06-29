@@ -282,8 +282,8 @@ export function sourceCandidatesForRoute(route) {
   }
   if (parts[0] === 'blog') {
     return [
-      'src/data/blogPosts.ts',
-      'src/data/seoResourcePosts.ts',
+      'src/data/usefulBlogPosts.ts',
+      'src/data/blogRedirects.ts',
       'src/data/allBlogPosts.ts',
       'src/pages/[...locale]/blog/index.astro',
       'src/pages/[...locale]/blog/[slug].astro',

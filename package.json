@@ -13,6 +13,7 @@
     "audit:security": "node scripts/security-preflight.mjs",
     "audit:lang-switch": "node scripts/lang-switch-audit.mjs",
     "audit:ui-dark": "node scripts/ui-dark-audit.mjs",
+    "content:audit": "node scripts/content-quality-audit.mjs",
     "seo:audit": "node scripts/seo-system-audit.mjs",
     "seo:check": "node scripts/seo-crawlability-check.mjs",
     "seo:sitemap": "node scripts/generate-sitemaps.mjs",

@@ -3,7 +3,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { importedEducationBlogPosts } from '../../../data/importedEducationBlogPosts';
+import { usefulBlogPosts } from '../../../data/usefulBlogPosts';
 import { SITE, type Locale } from '../../../config/site';
 import { getToolBySlug, type ToolMeta } from '../../../data/tools';
 import { seoGuides, viewSeoGuide, isSeoGuideAvailableInLocale } from '../../../data/seoGuides';
@@ -188,7 +188,9 @@ const featuredGuides = seoGuides
 const featuredWorkflows = workflows
   .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
   .map((workflow) => viewWorkflow(workflow, lang));
-const educationArticles = lang === 'zh' ? importedEducationBlogPosts : [];
+const educationArticles = lang === 'zh'
+  ? usefulBlogPosts.filter((post) => ['statistics', 'study'].includes(post.categorySlug ?? '')).slice(0, 24)
+  : [];
 const educationArticleCategories = [...new Set(educationArticles.map((post) => post.categoryLabel?.zh).filter(Boolean))];
 const educationArticleGroupCopy = [
   {

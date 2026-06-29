@@ -201,13 +201,13 @@ const pdfImageTools = [
   'qr-code-generator',
 ].map(getToolBySlug).filter(isLiveTool);
 const teacherExamArticleLinks = [
-  { slug: 'teacher-exam-score-guide', label: 'Teacher exam score guide' },
-  { slug: 't-score-pr-guide', label: 'T score, Z score, and PR guide' },
+  { slug: 'teacher-exam-weighted-score-guide', label: 'Teacher exam score guide' },
+  { slug: 't-score-complete-guide', label: 'T score, Z score, and PR guide' },
   { slug: 'classroom-random-tools-guide', label: 'Teacher classroom tools guide' },
 ];
 const pdfImageArticleLinks = [
-  { slug: 'pdf-workflow-guide', label: 'PDF workflow guide' },
-  { slug: 'image-format-workflow-guide', label: 'Image compression and conversion guide' },
+  { slug: 'pdf-merge-split-compress-workflow', label: 'PDF workflow guide' },
+  { slug: 'image-compress-resize-format-guide', label: 'Image compression and conversion guide' },
 ];
 const toolkitCopy = {
   zh: {
@@ -559,7 +559,7 @@ const popularItemListJsonLd = {
     {lang === 'en' && (
       <div class="use-case-tools priority-tool-row">
         {teacherExamArticleLinks.map((article) => (
-          <a href={localePath(lang, 'blog', article.slug)}>
+          <a href={localePath('zh', 'blog', article.slug)}>
             <span aria-hidden="true">Guide</span>
             {article.label}
           </a>
@@ -584,7 +584,7 @@ const popularItemListJsonLd = {
     {lang === 'en' && (
       <div class="use-case-tools priority-tool-row">
         {pdfImageArticleLinks.map((article) => (
-          <a href={localePath(lang, 'blog', article.slug)}>
+          <a href={localePath('zh', 'blog', article.slug)}>
             <span aria-hidden="true">Guide</span>
             {article.label}
           </a>

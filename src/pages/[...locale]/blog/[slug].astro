@@ -2,6 +2,7 @@
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { allBlogPosts } from '../../../data/allBlogPosts';
+import { blogRedirects } from '../../../data/blogRedirects';
 import {
   isPostAvailableInLocale,
   viewBlogPost,
@@ -14,7 +15,7 @@ import { breadcrumbJsonLd } from '../../../lib/seo';
 import { t } from '../../../i18n/ui';
 
 export function getStaticPaths() {
-  return allBlogPosts.flatMap((post) => {
+  const articlePaths = allBlogPosts.flatMap((post) => {
     const paths = [
       {
         params: { locale: undefined, slug: post.slug },
@@ -31,11 +32,24 @@ export function getStaticPaths() {
 
     return paths;
   });
+
+  const redirectPaths = blogRedirects.map((redirect) => ({
+    params: { locale: undefined, slug: redirect.slug },
+    props: { lang: 'zh' as const, redirectTo: redirect.redirectTo },
+  }));
+
+  return [...articlePaths, ...redirectPaths];
 }
 
-const { lang, post: sourcePost } = Astro.props as { lang: Locale; post: BlogPost };
+const { lang, post: sourcePost, redirectTo } = Astro.props as { lang: Locale; post?: BlogPost; redirectTo?: string };
+
+if (!redirectTo && !sourcePost) {
+  throw new Error(`Missing blog post for ${Astro.params.slug}`);
+}
+
 const ui = t(lang);
-const post = viewBlogPost(sourcePost, lang);
+const target = redirectTo ?? '';
+const post = viewBlogPost(sourcePost ?? allBlogPosts[0], lang);
 const articlePath = localePath(lang, 'blog', post.slug);
 const articleUrl = absoluteUrl(articlePath);
 const blogPath = localePath(lang, 'blog');
@@ -43,7 +57,7 @@ const relatedPosts: BlogPostView[] = (post.relatedArticleSlugs ?? [])
   .map((slug) => allBlogPosts.find((candidate) => candidate.slug === slug))
   .filter((candidate): candidate is BlogPost => candidate != null && isPostAvailableInLocale(candidate, lang))
   .map((candidate) => viewBlogPost(candidate, lang));
-const hasAlternates = sourcePost.locales.includes('zh') && sourcePost.locales.includes('en');
+const hasAlternates = Boolean(sourcePost?.locales.includes('zh') && sourcePost.locales.includes('en'));
 
 const articleLd = {
   '@context': 'https://schema.org',
@@ -74,122 +88,137 @@ const breadcrumbLd = breadcrumbJsonLd([
 ]);
 ---
 
-<BaseLayout
-  lang={lang}
-  title={post.title}
-  description={post.description}
-  type="article"
-  alternateSegments={['blog', post.slug]}
-  hasAlternates={hasAlternates}
-  jsonLd={[articleLd, faqLd, breadcrumbLd]}
->
-  <article class="wrap blog-article">
-    <Breadcrumb items={[
-      { label: ui.breadcrumbHome, href: localePath(lang) },
-      { label: ui.blog.breadcrumbLabel, href: blogPath },
-      { label: post.title },
-    ]} />
+{redirectTo ? (
+  <html lang="zh-Hant">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="robots" content="noindex, follow" />
+      <meta http-equiv="refresh" content={`0; url=${target}`} />
+      <link rel="canonical" href={target} />
+      <title>Article moved</title>
+    </head>
+    <body>
+      <p><a href={target}>Article moved. Continue to the new article.</a></p>
+    </body>
+  </html>
+) : (
+  <BaseLayout
+    lang={lang}
+    title={post.title}
+    description={post.description}
+    type="article"
+    alternateSegments={['blog', post.slug]}
+    hasAlternates={hasAlternates}
+    jsonLd={[articleLd, faqLd, breadcrumbLd]}
+  >
+    <article class="wrap blog-article">
+      <Breadcrumb items={[
+        { label: ui.breadcrumbHome, href: localePath(lang) },
+        { label: ui.blog.breadcrumbLabel, href: blogPath },
+        { label: post.title },
+      ]} />
 
-    <header class="article-head">
-      <p class="eyebrow">{ui.blog.eyebrowArticle}</p>
-      <h1>{post.title}</h1>
-      <p class="lead">{post.summary}</p>
-      <p class="article-date">
-        {ui.blog.publishedPrefix}<time datetime={post.published}>{post.published}</time>
-        <span aria-hidden="true">{ui.blog.dateSeparator}</span>
-        {ui.blog.updatedPrefix}<time datetime={post.updated}>{post.updated}</time>
-      </p>
-    </header>
-
-    <aside class="tool-callout" aria-labelledby="related-tools-title">
-      <h2 id="related-tools-title">{ui.blog.relatedToolsHeading}</h2>
-      {post.categorySlug && (
-        <p class="article-category-link">
-          {ui.blog.categoryPrefix}<a href={categoryUrl(lang, post.categorySlug)}>{post.categoryLabel ?? post.categorySlug}</a>
+      <header class="article-head">
+        <p class="eyebrow">{ui.blog.eyebrowArticle}</p>
+        <h1>{post.title}</h1>
+        <p class="lead">{post.summary}</p>
+        <p class="article-date">
+          {ui.blog.publishedPrefix}<time datetime={post.published}>{post.published}</time>
+          <span aria-hidden="true">{ui.blog.dateSeparator}</span>
+          {ui.blog.updatedPrefix}<time datetime={post.updated}>{post.updated}</time>
         </p>
-      )}
-      <div class="tool-links">
-        {post.toolLinks.map((tool) => (
-          <a href={toolUrl(lang, tool.slug)} data-article-cta="tool" data-article-id={post.slug}>
-            <strong>{tool.label}</strong>
-            <span>{tool.note}</span>
-          </a>
-        ))}
-      </div>
-    </aside>
+      </header>
 
-    <div class="article-body">
-      {post.contentHtml ? (
-        <div class="markdown-body" set:html={post.contentHtml} />
-      ) : (
-        post.sections.map((section) => (
-          <section>
-            <h2>{section.heading}</h2>
-            {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-            {section.subsections?.map((subsection) => (
-              <section class="article-subsection">
-                <h3>{subsection.heading}</h3>
-                {subsection.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-              </section>
-            ))}
-          </section>
-        ))
-      )}
-    </div>
-
-    <section class="article-faq faq" aria-labelledby="faq-title">
-      <h2 id="faq-title">{ui.blog.faqHeading}</h2>
-      <dl>
-        {post.faq.map((item) => (
-          <>
-            <dt>{item.question}</dt>
-            <dd>{item.answer}</dd>
-          </>
-        ))}
-      </dl>
-    </section>
-
-    {relatedPosts.length > 0 && (
-      <section class="article-related content-section" aria-labelledby="related-articles-title">
-        <h2 id="related-articles-title">{ui.blog.relatedArticlesHeading}</h2>
-        <div class="related-article-list">
-          {relatedPosts.map((related) => (
-            <a href={localePath(lang, 'blog', related.slug)}>
-              <strong>{related.title}</strong>
-              <span>{related.summary}</span>
+      <aside class="tool-callout" aria-labelledby="related-tools-title">
+        <h2 id="related-tools-title">{ui.blog.relatedToolsHeading}</h2>
+        {post.categorySlug && (
+          <p class="article-category-link">
+            {ui.blog.categoryPrefix}<a href={categoryUrl(lang, post.categorySlug)}>{post.categoryLabel ?? post.categorySlug}</a>
+          </p>
+        )}
+        <div class="tool-links">
+          {post.toolLinks.map((tool) => (
+            <a href={toolUrl(lang, tool.slug)} data-article-cta="tool" data-article-id={post.slug}>
+              <strong>{tool.label}</strong>
+              <span>{tool.note}</span>
             </a>
           ))}
         </div>
+      </aside>
+
+      <div class="article-body">
+        {post.contentHtml ? (
+          <div class="markdown-body" set:html={post.contentHtml} />
+        ) : (
+          post.sections.map((section) => (
+            <section>
+              <h2>{section.heading}</h2>
+              {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              {section.subsections?.map((subsection) => (
+                <section class="article-subsection">
+                  <h3>{subsection.heading}</h3>
+                  {subsection.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+                </section>
+              ))}
+            </section>
+          ))
+        )}
+      </div>
+
+      <section class="article-faq faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">{ui.blog.faqHeading}</h2>
+        <dl>
+          {post.faq.map((item) => (
+            <>
+              <dt>{item.question}</dt>
+              <dd>{item.answer}</dd>
+            </>
+          ))}
+        </dl>
       </section>
-    )}
 
-    <nav class="article-bottom" aria-label={ui.blog.bottomNavLabel}>
-      <a class="btn" href={blogPath} data-hub-link="blog">{ui.blog.backToBlog}</a>
-      <a class="btn go" href={toolUrl(lang, post.toolLinks[0].slug)} data-article-cta="primary_tool" data-article-id={post.slug}>{ui.blog.openToolPrefix}{post.toolLinks[0].label}</a>
-    </nav>
-  </article>
+      {relatedPosts.length > 0 && (
+        <section class="article-related content-section" aria-labelledby="related-articles-title">
+          <h2 id="related-articles-title">{ui.blog.relatedArticlesHeading}</h2>
+          <div class="related-article-list">
+            {relatedPosts.map((related) => (
+              <a href={localePath(lang, 'blog', related.slug)}>
+                <strong>{related.title}</strong>
+                <span>{related.summary}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
-  <script>
-    document.querySelectorAll('[data-article-cta]').forEach((link) => {
-      link.addEventListener('click', () => {
-        if (!(link instanceof HTMLElement)) return;
-        window.__ft_track?.('article_cta_click', {
-          article_id: link.dataset.articleId || '',
-          target_type: link.dataset.articleCta || 'link',
+      <nav class="article-bottom" aria-label={ui.blog.bottomNavLabel}>
+        <a class="btn" href={blogPath} data-hub-link="blog">{ui.blog.backToBlog}</a>
+        <a class="btn go" href={toolUrl(lang, post.toolLinks[0].slug)} data-article-cta="primary_tool" data-article-id={post.slug}>{ui.blog.openToolPrefix}{post.toolLinks[0].label}</a>
+      </nav>
+    </article>
+
+    <script>
+      document.querySelectorAll('[data-article-cta]').forEach((link) => {
+        link.addEventListener('click', () => {
+          if (!(link instanceof HTMLElement)) return;
+          window.__ft_track?.('article_cta_click', {
+            article_id: link.dataset.articleId || '',
+            target_type: link.dataset.articleCta || 'link',
+          });
         });
       });
-    });
 
-    document.querySelectorAll('[data-hub-link]').forEach((link) => {
-      link.addEventListener('click', () => {
-        if (!(link instanceof HTMLElement)) return;
-        window.__ft_track?.('hub_click', {
-          hub_id: link.dataset.hubLink || 'hub',
+      document.querySelectorAll('[data-hub-link]').forEach((link) => {
+        link.addEventListener('click', () => {
+          if (!(link instanceof HTMLElement)) return;
+          window.__ft_track?.('hub_click', {
+            hub_id: link.dataset.hubLink || 'hub',
+          });
         });
       });
-    });
-  </script>
-</BaseLayout>
+    </script>
+  </BaseLayout>
+)}
 
 <style>
   .blog-article { max-width: 900px; padding-top: 34px; }
