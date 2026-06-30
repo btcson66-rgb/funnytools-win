@@ -3620,7 +3620,7 @@ export const usefulBlogPosts: BlogPost[] = usefulArticleSources.map((post) => ({
   toolLinks: [...new Set(post.toolSlugs.map(liveToolSlug).filter((slug): slug is string => Boolean(slug)))].map((slug) => ({
     slug,
     label: { zh: toolLabel(slug), en: toolLabel(slug) },
-    note: { zh: '??????????????????', en: 'Open the related tool for this workflow.' },
+    note: { zh: '開啟這個流程會用到的相關工具。', en: 'Open the related tool for this workflow.' },
   })),
   sections: [],
   contentHtml: { zh: marked.parse(post.contentMarkdown) as string, en: marked.parse(post.contentMarkdown) as string },
