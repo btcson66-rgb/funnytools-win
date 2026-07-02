@@ -49,7 +49,15 @@ if (!redirectTo && !sourcePost) {
 
 const ui = t(lang);
 const target = redirectTo ?? '';
-const post = viewBlogPost(sourcePost ?? allBlogPosts[0], lang);
+
+// sourcePost is only absent for redirect-stub paths (see getStaticPaths above).
+// Fall back to an empty post so `post` stays non-optional; it is never rendered
+// because the template only reads `post` inside the `!redirectTo` branch.
+const emptyPost: BlogPostView = {
+  slug: '', locales: [], title: '', description: '', summary: '',
+  published: '', updated: '', toolLinks: [], sections: [], faq: [],
+};
+const post: BlogPostView = sourcePost ? viewBlogPost(sourcePost, lang) : emptyPost;
 const articlePath = localePath(lang, 'blog', post.slug);
 const articleUrl = absoluteUrl(articlePath);
 const blogPath = localePath(lang, 'blog');
