@@ -1,4 +1,32 @@
+# FreeTools (funnytools.win) — all crawlers welcome.
 User-agent: *
 Allow: /
+
+# AI / answer-engine crawlers are explicitly welcome.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Machine-readable site guide for LLMs: https://funnytools.win/llms.txt
 
 Sitemap: https://funnytools.win/sitemap.xml

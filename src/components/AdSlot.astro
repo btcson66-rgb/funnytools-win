@@ -18,3 +18,25 @@ const enabled = SITE.features.adsense;
     </div>
   )
 }
+
+<style>
+  /* Reserve vertical space so responsive ads don't push content down (CLS). */
+  .ad-slot {
+    min-height: 120px;
+    display: grid;
+    align-items: center;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--line) 25%, transparent);
+  }
+
+  .ad-slot :global(.adsbygoogle) {
+    display: block;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .ad-slot {
+      min-height: 280px;
+    }
+  }
+</style>

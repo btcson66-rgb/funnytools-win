@@ -6,12 +6,8 @@ const distDir = join(root, 'dist');
 const robotsPath = join(distDir, 'robots.txt');
 const sitemapPath = join(distDir, 'sitemap.xml');
 const siteOrigin = 'https://funnytools.win';
-const expectedRobots = [
-  'User-agent: *',
-  'Allow: /',
-  '',
-  'Sitemap: https://funnytools.win/sitemap.xml',
-].join('\n');
+// The built robots.txt must match the source of truth in public/.
+const expectedRobots = readFileSync(join(root, 'public', 'robots.txt'), 'utf8');
 const expectedChildSitemaps = [
   'https://funnytools.win/sitemap-tools.xml',
   'https://funnytools.win/sitemap-guides.xml',
@@ -117,7 +113,7 @@ function validateRobots() {
   }
 
   const robots = normalizeNewlines(readFileSync(robotsPath, 'utf8'));
-  if (robots !== expectedRobots) fail('dist/robots.txt does not match the expected crawl-allowing content.');
+  if (robots !== normalizeNewlines(expectedRobots)) fail('dist/robots.txt does not match the expected crawl-allowing content.');
   if (!/^User-agent:\s*\*$/im.test(robots)) fail('robots.txt missing User-agent: *.');
   if (!/^Allow:\s*\/$/im.test(robots)) fail('robots.txt missing Allow: /.');
   if (/^Disallow:\s*\/\s*$/im.test(robots)) fail('robots.txt blocks all crawling with Disallow: /.');

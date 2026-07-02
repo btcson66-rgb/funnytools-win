@@ -86,7 +86,6 @@ const contentSecurityPolicy = [
     </script>
     <title>{brandedTitle}</title>
     <meta name="description" content={brandedDescription} />
-    {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
     {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
     {!noindex && robots && <meta name="robots" content={robots} />}
     {!noindex && hasAlternates && hreflangs.map((link) => <link rel="alternate" hreflang={link.hreflang} href={link.href} />)}
@@ -114,6 +113,22 @@ const contentSecurityPolicy = [
           <script is:inline define:vars={{ measurementId: SITE.ga4MeasurementId }}>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
+            // Consent Mode v2: default denied in EEA/UK/CH until a certified CMP
+            // (AdSense Privacy & messaging) collects consent; granted elsewhere.
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              analytics_storage: 'denied',
+              wait_for_update: 500,
+              region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IS','IE','IT','LV','LI','LT','LU','MT','NL','NO','PL','PT','RO','SK','SI','ES','SE','GB','CH'],
+            });
+            gtag('consent', 'default', {
+              ad_storage: 'granted',
+              ad_user_data: 'granted',
+              ad_personalization: 'granted',
+              analytics_storage: 'granted',
+            });
             gtag('js', new Date());
             gtag('config', measurementId);
           </script>
@@ -181,5 +196,27 @@ const contentSecurityPolicy = [
     </main>
     <Footer lang={lang} />
     <script src={assetPath('install-prompt.js')} defer></script>
+    <script is:inline>
+      // Lightweight speculative prefetch: warm the HTTP cache for same-origin
+      // pages when the user hovers or touches a link.
+      (() => {
+        if (navigator.connection && (navigator.connection.saveData || /2g/.test(navigator.connection.effectiveType || ''))) return;
+        const seen = new Set();
+        const prefetch = (event) => {
+          const link = event.target instanceof Element ? event.target.closest('a[href]') : null;
+          if (!link || link.origin !== location.origin || link.target === '_blank' || link.hasAttribute('download')) return;
+          const url = link.href.split('#')[0];
+          if (!url || seen.has(url) || url === location.href.split('#')[0]) return;
+          seen.add(url);
+          const hint = document.createElement('link');
+          hint.rel = 'prefetch';
+          hint.href = url;
+          hint.as = 'document';
+          document.head.append(hint);
+        };
+        document.addEventListener('mouseover', prefetch, { passive: true });
+        document.addEventListener('touchstart', prefetch, { passive: true });
+      })();
+    </script>
   </body>
 </html>

@@ -41,6 +41,16 @@ if (homeSearchInput instanceof HTMLInputElement && homeSearchResults instanceof 
     }
   };
 
+  // Enter jumps to the full tools page with the query applied.
+  homeSearchInput.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter') return;
+    event.preventDefault();
+    const query = homeSearchInput.value.trim();
+    if (query === '') return;
+    const toolsPath = document.documentElement.lang === 'en' ? '/en/tools/' : '/tools/';
+    window.location.href = `${toolsPath}?q=${encodeURIComponent(query)}`;
+  });
+
   homeSearchInput.addEventListener('input', filterHomeTools);
   filterHomeTools();
 }

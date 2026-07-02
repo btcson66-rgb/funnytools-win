@@ -225,12 +225,12 @@ const breadcrumbLd = breadcrumbJsonLd([
   .article-head { padding-bottom: 12px; }
   .article-head h1 { max-width: 860px; font-size: clamp(2rem, 6vw, 3.5rem); }
   .article-date { margin: 18px 0 0; color: var(--muted); font-size: 0.92rem; font-weight: 700; }
-  .tool-callout { margin-top: 26px; padding: 20px; border: 1px solid #cfe6e3; border-radius: 14px; background: #f2fbfa; }
+  .tool-callout { margin-top: 26px; padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--soft); }
   .tool-callout h2 { margin-bottom: 12px; }
   .tool-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
   .article-category-link { margin: 0 0 12px; color: var(--muted); font-weight: 800; }
   .article-category-link a { color: var(--brand-2); }
-  .tool-links a { display: grid; gap: 5px; padding: 14px; border: 1px solid rgba(15, 143, 140, 0.2); border-radius: 12px; background: #fff; }
+  .tool-links a { display: grid; gap: 5px; padding: 14px; border: 1px solid rgba(15, 143, 140, 0.2); border-radius: 12px; background: var(--card); }
   .tool-links a:hover { border-color: var(--brand); }
   .tool-links span { color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
   .article-body { margin-top: 36px; }
@@ -241,7 +241,7 @@ const breadcrumbLd = breadcrumbJsonLd([
   .markdown-body :global(ul), .markdown-body :global(ol) { padding-left: 1.4rem; }
   .markdown-body :global(table) { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; }
   .markdown-body :global(th), .markdown-body :global(td) { padding: 10px 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
-  .markdown-body :global(th) { background: #f2fbfa; color: var(--ink); }
+  .markdown-body :global(th) { background: var(--soft); color: var(--ink); }
   .markdown-body :global(pre) { overflow-x: auto; padding: 14px; border-radius: 10px; background: #101827; color: #f7fbff; }
   .markdown-body :global(code) { font-size: 0.95em; }
   .article-subsection { margin-top: 26px; padding-left: 18px; border-left: 3px solid #d9e5ef; }
@@ -249,7 +249,7 @@ const breadcrumbLd = breadcrumbJsonLd([
   .article-faq { margin-top: 44px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
   .article-faq dt { font-size: 1.02rem; }
   .related-article-list { display: grid; gap: 10px; }
-  .related-article-list a { display: grid; gap: 5px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+  .related-article-list a { display: grid; gap: 5px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
   .related-article-list span { color: var(--muted); line-height: 1.6; }
   .article-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin: 28px 0 48px; }
   @media (max-width: 760px) { .tool-links { grid-template-columns: 1fr; } .article-subsection { padding-left: 13px; } .article-faq { padding: 18px; } }

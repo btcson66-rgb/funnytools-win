@@ -9,7 +9,18 @@ import { workflows } from '../data/workflows';
 import { absoluteUrl, localePath } from './url';
 
 const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
-const buildDate = new Date().toISOString().slice(0, 10);
+// Fallback lastmod: the newest real content date on the site. Using the build
+// date here would stamp every build as "modified today", which teaches
+// crawlers to ignore lastmod entirely.
+const latestContentDate = [
+  ...liveTools.map((tool) => tool.updated),
+  ...allBlogPosts.map((post) => post.updated),
+  ...seoGuides.map((guide) => guide.updatedAt),
+  ...workflows.map((workflow) => workflow.updatedAt),
+]
+  .filter((value): value is string => Boolean(value))
+  .sort()
+  .at(-1) ?? new Date().toISOString().slice(0, 10);
 const mainToolSlugs = new Set(
   liveTools
     .filter((tool) => tool.featured)
@@ -40,7 +51,7 @@ export function escapeXml(value: string): string {
 }
 
 export function sitemapLastmod(page?: SitemapPage): string {
-  return page?.lastmod ?? buildDate;
+  return page?.lastmod ?? latestContentDate;
 }
 
 function alternateLinks(segments: string[]): string {
