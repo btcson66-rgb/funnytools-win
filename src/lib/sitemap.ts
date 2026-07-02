@@ -125,11 +125,9 @@ function toolPages(): SitemapPage[] {
 }
 
 function blogPages(): SitemapPage[] {
-  // Individual articles are noindexed pending a content-quality rewrite
-  // (see src/data/usefulBlogPosts.ts), so only the /blog hub is listed here.
-  return [
-    { segments: ['blog'], lastmod: allBlogPosts[0]?.updated, changefreq: 'weekly', priority: '0.7', alternates: true },
-  ];
+  // The /blog hub and every article are noindexed pending a content-quality
+  // rewrite (see src/data/usefulBlogPosts.ts), so nothing is listed here.
+  return [];
 }
 
 function guideArticlePages(): SitemapPage[] {

@@ -1,10 +1,8 @@
 ---
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { allBlogPosts } from '../../../data/allBlogPosts';
-import { isPostAvailableInLocale, viewBlogPost } from '../../../data/blogPosts';
-import { SITE, type Locale } from '../../../config/site';
-import { absoluteUrl, localePath, toolUrl } from '../../../lib/url';
+import type { Locale } from '../../../config/site';
+import { localePath } from '../../../lib/url';
 import { breadcrumbJsonLd } from '../../../lib/seo';
 import { t } from '../../../i18n/ui';
 
@@ -20,30 +18,10 @@ const ui = t(lang);
 const title = ui.blog.indexTitle;
 const description = ui.blog.indexDescription;
 const blogUrl = localePath(lang, 'blog');
-const visiblePosts = allBlogPosts
-  .filter((post) => isPostAvailableInLocale(post, lang))
-  .map((post) => viewBlogPost(post, lang));
 const breadcrumbLd = breadcrumbJsonLd([
   { name: ui.breadcrumbHome, href: localePath(lang) },
   { name: ui.blog.breadcrumbLabel, href: blogUrl },
 ]);
-const collectionLd = {
-  '@context': 'https://schema.org',
-  '@type': 'CollectionPage',
-  name: title,
-  description,
-  url: absoluteUrl(blogUrl),
-  inLanguage: SITE.hreflang[lang],
-  mainEntity: {
-    '@type': 'ItemList',
-    itemListElement: visiblePosts.map((post, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: post.title,
-      url: absoluteUrl(localePath(lang, 'blog', post.slug)),
-    })),
-  },
-};
 ---
 
 <BaseLayout
@@ -52,44 +30,18 @@ const collectionLd = {
   description={description}
   alternateSegments={['blog']}
   hasAlternates={true}
-  jsonLd={[collectionLd, breadcrumbLd]}
+  jsonLd={[breadcrumbLd]}
+  noindex={true}
 >
   <section class="wrap page-head blog-head">
     <Breadcrumb items={[{ label: ui.breadcrumbHome, href: localePath(lang) }, { label: ui.blog.breadcrumbLabel }]} />
     <p class="eyebrow">{ui.blog.eyebrowIndex}</p>
     <h1>{title}</h1>
     <p class="lead">{ui.blog.indexLead}</p>
-  </section>
-
-  <section class="wrap content-section" aria-labelledby="latest-guides">
-    <h2 id="latest-guides">{ui.blog.latestGuides}</h2>
-    <div class="blog-grid">
-      {visiblePosts.map((post) => (
-        <article class="blog-card">
-          <p class="blog-date"><time datetime={post.updated}>{ui.blog.updatedPrefix}{post.updated}</time></p>
-          <h3><a href={localePath(lang, 'blog', post.slug)}>{post.title}</a></h3>
-          <p>{post.summary}</p>
-          <div class="blog-tools" aria-label={ui.blog.toolLinksLabel}>
-            {post.toolLinks.map((tool) => <a href={toolUrl(lang, tool.slug)}>{tool.label}</a>)}
-          </div>
-          <a class="blog-read" href={localePath(lang, 'blog', post.slug)} aria-label={`${ui.blog.readArticleAria}${post.title}`}>{ui.blog.readArticle}</a>
-        </article>
-      ))}
-    </div>
+    <a class="btn go" href={localePath(lang, 'guides')}>{ui.blog.guidesCta}</a>
   </section>
 </BaseLayout>
 
 <style>
-  .blog-head { padding-bottom: 8px; }
-  .blog-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-  .blog-card { display: grid; align-content: start; gap: 12px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); box-shadow: var(--shadow-soft); }
-  .blog-card h3, .blog-card p { margin: 0; }
-  .blog-card h3 { font-size: 1.25rem; line-height: 1.4; }
-  .blog-card h3 a:hover, .blog-read:hover { color: var(--brand); }
-  .blog-card > p:not(.blog-date) { color: var(--muted); line-height: 1.75; }
-  .blog-date { color: var(--muted); font-size: 0.88rem; font-weight: 700; }
-  .blog-tools { display: flex; flex-wrap: wrap; gap: 8px; }
-  .blog-tools a { padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--brand-2); font-size: 0.84rem; font-weight: 800; }
-  .blog-read { justify-self: start; margin-top: 4px; color: var(--ink); font-weight: 900; }
-  @media (max-width: 760px) { .blog-grid { grid-template-columns: 1fr; } .blog-card { padding: 18px; } }
+  .blog-head { padding-bottom: 8px; display: grid; gap: 14px; justify-items: start; }
 </style>
