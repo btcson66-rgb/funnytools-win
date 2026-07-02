@@ -325,6 +325,10 @@ export const blogRedirects: BlogRedirect[] = [
     "redirectTo": "/tools/compound-interest/"
   },
   {
+    "slug": "compound-interest-explained",
+    "redirectTo": "/tools/compound-interest/"
+  },
+  {
     "slug": "countdown-timer-classroom-guide",
     "redirectTo": "/guides/classroom-timer-guide/"
   },
@@ -381,6 +385,10 @@ export const blogRedirects: BlogRedirect[] = [
     "redirectTo": "/tools/image-compressor/"
   },
   {
+    "slug": "image-compression-quality-guide",
+    "redirectTo": "/tools/image-compressor/"
+  },
+  {
     "slug": "image-for-homework-guide",
     "redirectTo": "/tools/image-crop/"
   },
@@ -394,6 +402,10 @@ export const blogRedirects: BlogRedirect[] = [
   },
   {
     "slug": "images-to-pdf-document-guide",
+    "redirectTo": "/tools/images-to-pdf/"
+  },
+  {
+    "slug": "images-to-pdf-guide",
     "redirectTo": "/tools/images-to-pdf/"
   },
   {
@@ -430,6 +442,10 @@ export const blogRedirects: BlogRedirect[] = [
   },
   {
     "slug": "mortgage-calculation-guide",
+    "redirectTo": "/tools/mortgage-payment/"
+  },
+  {
+    "slug": "mortgage-payment-explained",
     "redirectTo": "/tools/mortgage-payment/"
   },
   {
@@ -473,6 +489,10 @@ export const blogRedirects: BlogRedirect[] = [
     "redirectTo": "/tools/split-pdf/"
   },
   {
+    "slug": "pdf-split-guide",
+    "redirectTo": "/tools/split-pdf/"
+  },
+  {
     "slug": "pdf-too-large-upload-guide",
     "redirectTo": "/tools/pdf-compressor/"
   },
@@ -510,6 +530,10 @@ export const blogRedirects: BlogRedirect[] = [
   },
   {
     "slug": "random-grouping-classroom-guide",
+    "redirectTo": "/guides/fair-student-grouping-guide/"
+  },
+  {
+    "slug": "random-grouping-classroom",
     "redirectTo": "/guides/fair-student-grouping-guide/"
   },
   {
@@ -649,7 +673,15 @@ export const blogRedirects: BlogRedirect[] = [
     "redirectTo": "/tools/what-to-eat/"
   },
   {
+    "slug": "what-to-eat-decision-methods",
+    "redirectTo": "/tools/what-to-eat/"
+  },
+  {
     "slug": "word-count-social-media-guide",
+    "redirectTo": "/tools/word-counter/"
+  },
+  {
+    "slug": "word-counter-use-cases",
     "redirectTo": "/tools/word-counter/"
   },
   {

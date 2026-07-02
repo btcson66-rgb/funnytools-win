@@ -36,8 +36,8 @@ export const home = {
     secondaryCta: '熱門工具',
   },
   en: {
-    seoTitle: "FreeTools - Free PDF, Image, Text and QR Code Tools",
-    seoDescription: "FreeTools is a free online toolbox with browser-based tools for PDF, images, text, QR codes, random picks, time, money, teachers and more. No signup required.",
+    seoTitle: "Free Online Tools - PDF, Image, Text & QR | FreeTools",
+    seoDescription: "Free online tools for PDF, images, text, QR codes, random picks, and calculators. No signup; browser-first workflows for everyday tasks.",
     eyebrow: 'Free, fast, no install',
     title: 'FreeTools - Free Online Tools for Everyday Tasks',
     intro: "FreeTools gathers practical tools for work, teaching, PDFs, images, writing, random picks, and everyday calculations. Open a page and use it on mobile or desktop.",
