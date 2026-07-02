@@ -9,7 +9,18 @@ import { workflows } from '../data/workflows';
 import { absoluteUrl, localePath } from './url';
 
 const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
-const buildDate = new Date().toISOString().slice(0, 10);
+// Fallback lastmod: the newest real content date on the site. Using the build
+// date here would stamp every build as "modified today", which teaches
+// crawlers to ignore lastmod entirely.
+const latestContentDate = [
+  ...liveTools.map((tool) => tool.updated),
+  ...allBlogPosts.map((post) => post.updated),
+  ...seoGuides.map((guide) => guide.updatedAt),
+  ...workflows.map((workflow) => workflow.updatedAt),
+]
+  .filter((value): value is string => Boolean(value))
+  .sort()
+  .at(-1) ?? new Date().toISOString().slice(0, 10);
 const mainToolSlugs = new Set(
   liveTools
     .filter((tool) => tool.featured)
@@ -40,7 +51,7 @@ export function escapeXml(value: string): string {
 }
 
 export function sitemapLastmod(page?: SitemapPage): string {
-  return page?.lastmod ?? buildDate;
+  return page?.lastmod ?? latestContentDate;
 }
 
 function alternateLinks(segments: string[]): string {
@@ -114,16 +125,9 @@ function toolPages(): SitemapPage[] {
 }
 
 function blogPages(): SitemapPage[] {
-  return [
-    { segments: ['blog'], lastmod: allBlogPosts[0]?.updated, changefreq: 'weekly', priority: '0.7', alternates: true },
-    ...allBlogPosts.map((post) => ({
-      segments: ['blog', post.slug],
-      lastmod: post.updated,
-      changefreq: 'monthly' as const,
-      priority: '0.6',
-      alternates: isPostAvailableInLocale(post, 'en'),
-    })),
-  ];
+  // The /blog hub and every article are noindexed pending a content-quality
+  // rewrite (see src/data/usefulBlogPosts.ts), so nothing is listed here.
+  return [];
 }
 
 function guideArticlePages(): SitemapPage[] {
@@ -210,51 +214,6 @@ export function defaultWorkflowEntries(): SitemapEntry[] {
   return workflowPages().map((page) => ({ lang: 'zh', page }));
 }
 
-export function defaultExampleEntries(): SitemapEntry[] {
-  return allBlogPosts
-    .filter((post) => post.categorySlug === 'example')
-    .map((post) => ({
-      lang: 'zh' as const,
-      page: {
-        segments: ['blog', post.slug],
-        lastmod: post.updated,
-        changefreq: 'monthly' as const,
-        priority: '0.5',
-        alternates: isPostAvailableInLocale(post, 'en'),
-      },
-    }));
-}
-
-export function defaultTemplateEntries(): SitemapEntry[] {
-  return allBlogPosts
-    .filter((post) => post.categorySlug === 'template')
-    .map((post) => ({
-      lang: 'zh' as const,
-      page: {
-        segments: ['blog', post.slug],
-        lastmod: post.updated,
-        changefreq: 'monthly' as const,
-        priority: '0.5',
-        alternates: isPostAvailableInLocale(post, 'en'),
-      },
-    }));
-}
-
-export function defaultFaqEntries(): SitemapEntry[] {
-  return allBlogPosts
-    .filter((post) => post.categoryLabel?.zh.includes('FAQ') || post.categorySlug === 'faq')
-    .map((post) => ({
-      lang: 'zh' as const,
-      page: {
-        segments: ['blog', post.slug],
-        lastmod: post.updated,
-        changefreq: 'monthly' as const,
-        priority: '0.5',
-        alternates: isPostAvailableInLocale(post, 'en'),
-      },
-    }));
-}
-
 export function englishEntries(): SitemapEntry[] {
   return [
     ...basePages(),
@@ -265,19 +224,5 @@ export function englishEntries(): SitemapEntry[] {
     ...workflowPages().filter((page) => page.segments.length === 1 || workflows.find((workflow) => workflow.slug === page.segments[1])?.locales.includes('en')),
     ...audiencePages().filter((page) => page.segments.length === 1 || audiences.find((audience) => audience.slug === page.segments[1])?.locales.includes('en')),
   ].map((page) => ({ lang: 'en' as const, page }));
-}
-
-export function allSitemapEntries(): SitemapEntry[] {
-  return [
-    ...defaultPageEntries(),
-    ...defaultToolEntries(),
-    ...defaultBlogEntries(),
-    ...defaultGuideEntries(),
-    ...defaultWorkflowEntries(),
-    ...defaultExampleEntries(),
-    ...defaultTemplateEntries(),
-    ...defaultFaqEntries(),
-    ...englishEntries(),
-  ];
 }
 

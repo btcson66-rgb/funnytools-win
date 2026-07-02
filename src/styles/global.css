@@ -18,8 +18,10 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -28,7 +30,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
   line-height: 1.6;
 }
@@ -351,10 +353,34 @@ h2 {
     box-shadow 0.16s ease;
 }
 
-a.tile:hover {
+a.tile:hover,
+.tile-linked:hover {
   transform: translateY(-3px);
   border-color: rgba(15, 143, 140, 0.42);
   box-shadow: 0 22px 46px rgba(24, 33, 47, 0.13);
+}
+
+/* Stretched link: the title anchor covers the whole card so the card stays
+   fully clickable without nesting the favorite button inside the link. */
+.tile-linked {
+  cursor: pointer;
+}
+
+.tool-card__link {
+  color: inherit;
+}
+
+.tool-card__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.tool-card__link:focus-visible::after {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 10px;
 }
 
 .tile.planned {
@@ -1195,6 +1221,7 @@ textarea {
   --brand: var(--color-primary-600);
   --brand-2: var(--color-primary-700);
   --soft: var(--color-primary-50);
+  --soft-accent: #fff3ec;
   --shadow: var(--shadow-md);
   --shadow-soft: var(--shadow-xs);
   --gradient: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-700));
@@ -1205,6 +1232,7 @@ textarea {
   --color-surface: #1e293b;
   --color-bg: #0f172a;
   --color-bg-subtle: #111c2e;
+  --soft-accent: rgba(242, 107, 79, 0.14);
   --color-slate-50: #0f172a;
   --color-slate-100: #1e293b;
   --color-slate-200: #334155;
@@ -2099,7 +2127,7 @@ input:focus, textarea:focus, select:focus { border-color: var(--color-primary-60
   padding: 0;
   border: 1px solid var(--color-slate-200);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
+  background: color-mix(in srgb, var(--card) 92%, transparent);
   color: var(--color-slate-400);
   cursor: pointer;
   font: inherit;

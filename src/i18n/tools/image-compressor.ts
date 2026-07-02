@@ -5,8 +5,8 @@ export default {
     name: '圖片壓縮',
     short: '在瀏覽器內壓縮 JPG、PNG、WebP 圖片，快速取得較小的下載檔。',
     long: '圖片壓縮工具適合處理社群貼文、頭像、商品圖、截圖與部落格配圖。你可以調整品質、比較壓縮前後大小，並選擇保留格式或輸出 JPEG、WebP。處理過程在瀏覽器內完成，原圖不會上傳到伺服器，也能協助降低頁面載入負擔。',
-    seoTitle: "圖片壓縮工具｜免費壓縮 JPG、PNG、WebP 圖片",
-    seoDescription: '免費壓縮 JPG、PNG、WebP 圖片，可調整品質、切換輸出格式，並比較壓縮前後容量。圖片只在瀏覽器處理，不會上傳。',
+    seoTitle: "圖片壓縮工具｜免費線上壓縮，不上傳更安心",
+    seoDescription: '免費線上壓縮 JPG、PNG、WebP 圖片，即時比較壓縮前後容量與畫質，全程在瀏覽器本機處理，不上傳、不外流。',
     keywords: [
       "圖片壓縮",
       "壓縮 JPG",
@@ -143,8 +143,8 @@ export default {
     name: 'Image Compressor',
     short: 'Reduce JPG, PNG, and WebP file size locally in the browser.',
     long: 'Image Compressor is built for social posts, avatars, product images, screenshots, and blog graphics that need a smaller file before publishing or sharing. Adjust quality, compare the before-and-after size, and choose whether to keep the format or export JPEG or WebP. Processing happens in your browser, so the original image is not uploaded.',
-    seoTitle: "Image Compressor Online Free | Compress JPG, PNG and WebP Locally",
-    seoDescription: 'Compress JPG, PNG, and WebP images locally in your browser with quality and format controls. Files are never uploaded.',
+    seoTitle: "Free Image Compressor Online | Shrink JPG, PNG & WebP Fast",
+    seoDescription: 'Compress JPG, PNG, and WebP images free online. Adjust quality, compare before/after size, and keep files private — nothing is uploaded.',
     keywords: [
       "image compressor",
       "compress JPG",

@@ -68,10 +68,7 @@ const previousLastmods = new Map(
 const groups = new Map([
   ['tools', []],
   ['guides', []],
-  ['examples', []],
-  ['templates', []],
   ['workflows', []],
-  ['faq', []],
   ['en', []],
 ]);
 const excluded = [];

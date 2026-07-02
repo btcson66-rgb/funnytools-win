@@ -1,4 +1,5 @@
-const CACHE_VERSION = 'freetools-static-v5.0.6';
+const CACHE_VERSION = 'freetools-static-v5.1.0';
+const MAX_CACHE_ENTRIES = 120;
 const APP_SHELL = [
   '/',
   '/favicon.svg',
@@ -40,6 +41,15 @@ function isGoogleAdOrAnalyticsRequest(url) {
   return BYPASS_HOST_RE.test(url.hostname) || BYPASS_PATH_RE.test(url.pathname);
 }
 
+// Hashed asset filenames change on every deploy; trim oldest entries so the
+// cache doesn't grow without bound.
+async function trimCache(cacheName, maxEntries) {
+  const cache = await caches.open(cacheName);
+  const keys = await cache.keys();
+  if (keys.length <= maxEntries) return;
+  await Promise.all(keys.slice(0, keys.length - maxEntries).map((key) => cache.delete(key)));
+}
+
 self.addEventListener('fetch', (event) => {
   if (!shouldHandle(event.request)) return;
 
@@ -53,7 +63,9 @@ self.addEventListener('fetch', (event) => {
       const network = fetch(request).then((response) => {
         if (response && response.ok && isCacheableAsset) {
           const copy = response.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
+          caches.open(CACHE_VERSION)
+            .then((cache) => cache.put(request, copy))
+            .then(() => trimCache(CACHE_VERSION, MAX_CACHE_ENTRIES));
         }
         return response;
       });

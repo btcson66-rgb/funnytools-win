@@ -98,9 +98,9 @@ const { labels } = Astro.props;
   .cad-canvas-wrap {
     position: relative;
     padding: 10px;
-    border: 1px solid #cfe6e3;
+    border: 1px solid var(--line);
     border-radius: 8px;
-    background: #f2fbfa;
+    background: var(--soft);
   }
 
   canvas {
@@ -128,7 +128,7 @@ const { labels } = Astro.props;
     padding: 9px 10px;
     border: 1px solid var(--line);
     border-radius: 8px;
-    background: #fbfcff;
+    background: var(--card);
     overflow-wrap: anywhere;
   }
 

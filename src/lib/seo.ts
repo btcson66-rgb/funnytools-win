@@ -188,6 +188,7 @@ export function webApplicationJsonLd(
     inLanguage: SITE.hreflang[lang],
     keywords: content.keywords.join(', '),
     softwareVersion: pkg.version,
+    ...(tool.updated ? { dateModified: tool.updated } : {}),
     offers: {
       '@type': 'Offer',
       price: '0',

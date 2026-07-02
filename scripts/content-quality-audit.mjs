@@ -278,7 +278,7 @@ const report = {
 };
 
 const failures = [];
-if (report.blogArticleCount !== 100) failures.push(`expected 100 useful posts, got ${report.blogArticleCount}`);
+if (report.blogArticleCount !== 0) failures.push(`expected 0 useful posts (blog retired pending rewrite), got ${report.blogArticleCount}`);
 if (report.missingPages.length) failures.push(`missing rendered article pages: ${report.missingPages.slice(0, 10).join(', ')}`);
 if (report.duplicateTitles.length) failures.push(`duplicate titles: ${report.duplicateTitles.length}`);
 if (report.duplicateDescriptions.length) failures.push(`duplicate descriptions: ${report.duplicateDescriptions.length}`);

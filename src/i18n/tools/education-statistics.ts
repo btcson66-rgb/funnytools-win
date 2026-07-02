@@ -141,7 +141,7 @@ export const normalizedScoreContent = content(
 export const teacherExamContent = content(
   {
     name: '教師甄試成績轉換模擬器', short: '依筆試、口試與試教權重模擬加權總成績。', long: '輸入筆試、口試與試教成績及各自權重，模擬加權總分。各縣市、學校與年度規則可能不同，請以正式簡章為準。',
-    seoTitle: '教師甄試成績轉換模擬器｜筆試試教口試加權', seoDescription: '自訂筆試、口試、試教成績與權重，模擬教師甄試加權總成績。', keywords: ['教師甄試成績', '教甄分數計算', '教師甄試加權'],
+    seoTitle: '教甄成績計算器｜免費試算筆試口試試教加權分數', seoDescription: '免費教師甄試成績計算器，輸入筆試、口試、試教分數與權重，立即算出加權總成績與名次參考。', keywords: ['教師甄試成績', '教甄分數計算', '教師甄試加權'],
     instructions: ['輸入筆試、口試與試教分數。', '依當年度正式簡章填入各項權重。', '確認權重總和後計算模擬總成績。'], examples: ['比較不同複試表現對總成績的影響。', '依簡章權重設定準備目標。', '進行情境模擬，不作為正式錄取判定。'],
     formula: { expression: '總成績 = Σ(各項成績 × 各項權重) / Σ權重', explanation: '本工具使用一般加權平均。若簡章另有門檻、倍率、原始分數轉換、加分或四捨五入規則，必須另外套用。' }, educationApplication: '可用於備考情境分析，例如估算筆試固定時試教提升 5 分對總成績的影響。正式結果仍須依主辦單位簡章、最低門檻及同分比序規則。', reportTip: '若用於備考紀錄，可寫成：「依筆試 40%、試教 40%、口試 20% 模擬，加權總成績為 82.4。」這不是正式 APA 統計結果，應註明為情境估算。',
     faq: [{ q: '權重一定要照預設值嗎？', a: '不用。請依你報考年度與主辦單位的正式簡章修改。' }, { q: '有處理加分或最低門檻嗎？', a: '沒有。本工具只做一般加權平均，特殊規則需另行判斷。' }, { q: '可以拿來預測錄取嗎？', a: '不建議。缺額、競爭者分布、門檻與比序都會影響結果。' }],
@@ -149,7 +149,7 @@ export const teacherExamContent = content(
   },
   {
     name: 'Teacher Exam Score Converter', short: 'Simulate a weighted teacher-exam total from written, interview, and teaching scores.', long: 'Enter component scores and weights to simulate a weighted teacher-recruitment exam result. Official rules vary by authority and year; always follow the current announcement.',
-    seoTitle: 'Teacher Exam Score Converter | Weighted Score Tool', seoDescription: 'Simulate a weighted total from written, interview, and teaching-demonstration scores.', keywords: ['teacher exam score converter', 'teacher recruitment score', 'weighted exam score'],
+    seoTitle: 'Free Teacher Exam Score Calculator | Weighted Total', seoDescription: 'Calculate your weighted teacher exam total for free. Enter written, interview, and teaching-demo scores and weights instantly.', keywords: ['teacher exam score converter', 'teacher recruitment score', 'weighted exam score'],
     instructions: ['Enter the written, interview, and teaching scores.', 'Set weights from the official current rules.', 'Check the weight total and calculate the simulation.'], examples: ['Compare how component scores affect the total.', 'Set preparation targets from announced weights.', 'Run scenarios without treating them as admission predictions.'],
     formula: { expression: 'Total = Σ(component score × component weight) / Σweights', explanation: 'This is a general weighted mean. Apply official cutoffs, multipliers, score transformations, bonus points, and rounding separately.' }, educationApplication: 'Useful for scenario analysis, such as estimating how a five-point teaching-demonstration increase affects the total. Official outcomes depend on current rules, thresholds, and tie-breaking.', reportTip: 'For a preparation record: “Using weights of 40% written, 40% teaching, and 20% interview, the simulated total was 82.4.” Label it as a scenario estimate, not an APA inferential result.',
     faq: [{ q: 'Must I use the default weights?', a: 'No. Replace them with the official weights for your authority and year.' }, { q: 'Does this include bonus points or cutoffs?', a: 'No. It performs only a general weighted average.' }, { q: 'Can it predict selection?', a: 'No. Vacancies, competitor scores, cutoffs, and tie-breaking also matter.' }],

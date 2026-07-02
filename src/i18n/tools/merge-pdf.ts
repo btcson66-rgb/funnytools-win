@@ -23,8 +23,8 @@ export default {
     name: 'PDF 合併',
     short: '選取多個 PDF、調整順序，並在瀏覽器本機合併成一份檔案。',
     long: 'PDF 合併工具適合把合約附件、掃描章節、課堂講義或申請資料整理成一份檔案。你可以在瀏覽器內選取多個 PDF、查看頁數、調整順序，再下載新的合併檔；處理過程使用本機 JavaScript 與 pdf-lib，檔案不會上傳到本站或第三方伺服器。',
-    seoTitle: "合併 PDF 線上工具｜免費將多個 PDF 整合成一份檔案",
-    seoDescription: '免費 PDF 合併工具，將多個 PDF 合成一份；免安裝，直接在瀏覽器本機處理，文件不需上傳伺服器。',
+    seoTitle: "PDF 合併工具｜免費線上合併，排序後一鍵下載",
+    seoDescription: '免費線上合併多個 PDF，自由調整順序、預覽頁數，全程在瀏覽器本機處理，不需安裝也不用上傳。',
     keywords: [
       "合併 PDF",
       "PDF 合併",

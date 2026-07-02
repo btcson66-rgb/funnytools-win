@@ -122,10 +122,8 @@ const searchAliases: Record<string, string[]> = {
 const searchTools = liveTools.map((tool) => {
   const category = categories.find((item) => item.id === tool.category);
   const content = getToolContent(tool.slug, lang);
-  const useCaseText = homeUseCases[lang]
-    .filter((item) => item.tools.includes(tool.slug))
-    .map((item) => `${item.title} ${item.description}`)
-    .join(' ');
+  // Keep the search corpus compact (name/short/keywords/aliases); long
+  // instructions and examples added ~100KB of hidden HTML with little recall.
   return {
     tool,
     search: [
@@ -136,11 +134,7 @@ const searchTools = liveTools.map((tool) => {
       tool.slug,
       category?.name[lang],
       category?.name.en,
-      category?.description[lang],
       content?.keywords?.join(' '),
-      content?.instructions?.join(' '),
-      content?.examples?.join(' '),
-      useCaseText,
       searchAliases[tool.slug]?.join(' '),
     ].filter(Boolean).join(' ').toLowerCase(),
     isDefault: popularSlugs.includes(tool.slug),
@@ -201,13 +195,13 @@ const pdfImageTools = [
   'qr-code-generator',
 ].map(getToolBySlug).filter(isLiveTool);
 const teacherExamArticleLinks = [
-  { slug: 'teacher-exam-weighted-score-guide', label: 'Teacher exam score guide' },
-  { slug: 't-score-complete-guide', label: 'T score, Z score, and PR guide' },
-  { slug: 'classroom-random-tools-guide', label: 'Teacher classroom tools guide' },
+  { segment: 'guides', slug: 'teacher-exam-weighted-score-guide', label: 'Teacher exam score guide' },
+  { segment: 'guides', slug: 't-score-calculator-guide', label: 'T score, Z score, and PR guide' },
+  { segment: 'guides', slug: 'classroom-random-picker-guide', label: 'Teacher classroom tools guide' },
 ];
 const pdfImageArticleLinks = [
-  { slug: 'pdf-merge-split-compress-workflow', label: 'PDF workflow guide' },
-  { slug: 'image-compress-resize-format-guide', label: 'Image compression and conversion guide' },
+  { segment: 'workflows', slug: 'office-document-toolkit', label: 'PDF workflow guide' },
+  { segment: 'tools', slug: 'image-compressor', label: 'Image compression tool' },
 ];
 const toolkitCopy = {
   zh: {
@@ -434,6 +428,7 @@ const popularItemListJsonLd = {
   <section
     class="wrap content-section personalized-tools-section"
     aria-labelledby="favorite-tools-title"
+    hidden
     data-personalized-tools
     data-empty-text={ui.favoriteToolsEmpty}
     data-browse-label={ui.favoriteToolsBrowse}
@@ -454,7 +449,7 @@ const popularItemListJsonLd = {
     </div>
   </section>
 
-  <section class="wrap content-section personalized-tools-section" aria-labelledby="recent-tools-title" data-recent-section>
+  <section class="wrap content-section personalized-tools-section" aria-labelledby="recent-tools-title" hidden data-recent-section>
     <div class="section-head">
       <h2 id="recent-tools-title">{ui.recentToolsHeading}</h2>
     </div>
@@ -559,7 +554,7 @@ const popularItemListJsonLd = {
     {lang === 'en' && (
       <div class="use-case-tools priority-tool-row">
         {teacherExamArticleLinks.map((article) => (
-          <a href={localePath('zh', 'blog', article.slug)}>
+          <a href={localePath('en', article.segment, article.slug)}>
             <span aria-hidden="true">Guide</span>
             {article.label}
           </a>
@@ -584,7 +579,7 @@ const popularItemListJsonLd = {
     {lang === 'en' && (
       <div class="use-case-tools priority-tool-row">
         {pdfImageArticleLinks.map((article) => (
-          <a href={localePath('zh', 'blog', article.slug)}>
+          <a href={localePath('en', article.segment, article.slug)}>
             <span aria-hidden="true">Guide</span>
             {article.label}
           </a>
@@ -661,85 +656,6 @@ const popularItemListJsonLd = {
       }
     })();
     const toolMap = new Map(allTools.map((tool) => [tool.slug, tool]));
-    const fallbackRecentTools = allTools.filter((tool) => tool.isFeatured).slice(0, 6);
-
-    function textFromData(name, fallback) {
-      return personalizedRoot instanceof HTMLElement ? personalizedRoot.dataset[name] || fallback : fallback;
-    }
-
-    function createToolCard(tool, options = {}) {
-      const isCompact = options.compact === true;
-      const trackingSource = options.source || 'personalized_tools';
-      const card = document.createElement('a');
-      card.className = isCompact ? 'tile tool-tile tool-card tool-card--compact' : 'tile tool-tile tool-card';
-      card.href = tool.url;
-      card.dataset.category = tool.category;
-      card.dataset.toolId = tool.slug;
-      card.dataset.toolName = tool.name;
-      card.dataset.toolCategory = tool.category;
-
-      const favorite = document.createElement('button');
-      favorite.className = 'favorite-toggle';
-      favorite.type = 'button';
-      favorite.setAttribute('aria-label', textFromData('favoriteAdd', 'Add to favorites'));
-      favorite.setAttribute('aria-pressed', 'false');
-      favorite.dataset.favoriteToggle = '';
-      favorite.dataset.favSlug = tool.slug;
-      favorite.dataset.labelAdd = textFromData('favoriteAdd', 'Add to favorites');
-      favorite.dataset.labelRemove = textFromData('favoriteRemove', 'Remove from favorites');
-      const favoriteIcon = document.createElement('span');
-      favoriteIcon.setAttribute('aria-hidden', 'true');
-      favoriteIcon.textContent = '☆';
-      favorite.append(favoriteIcon);
-
-      const icon = document.createElement('span');
-      icon.className = 'tile-icon tool-card__icon';
-      icon.setAttribute('aria-hidden', 'true');
-      icon.textContent = tool.icon;
-
-      const body = document.createElement('span');
-      body.className = 'tile-body tool-card__body';
-      const title = document.createElement('strong');
-      title.className = 'tool-card__title';
-      title.textContent = tool.name;
-      const desc = document.createElement('span');
-      desc.className = 'tool-card__desc';
-      desc.textContent = tool.short;
-      const assetType = document.createElement('span');
-      assetType.className = 'asset-type';
-      assetType.textContent = tool.assetType;
-      body.append(title, desc, assetType);
-      if (tool.isLocalOnly) {
-        const privacy = document.createElement('span');
-        privacy.className = 'privacy-badge badge badge--privacy';
-        privacy.textContent = textFromData('privacyBadge', 'Local only');
-        body.append(privacy);
-      }
-      if (!isCompact) {
-        const cta = document.createElement('span');
-        cta.className = 'tool-card__cta';
-        cta.textContent = textFromData('toolCta', 'Use Now');
-        body.append(cta);
-      }
-      card.append(favorite, icon, body);
-      if (tool.isNew) {
-        const badge = document.createElement('span');
-        badge.className = 'badge';
-        badge.textContent = textFromData('newest', 'Newest');
-        card.append(badge);
-      }
-      card.addEventListener('click', function() {
-        if (window.__ft_track) {
-          window.__ft_track('tool_card_click', {
-            tool_id: tool.slug,
-            tool_name: tool.name,
-            category: tool.category,
-            source: trackingSource
-          });
-        }
-      });
-      return card;
-    }
 
     function createToolChip(tool, options = {}) {
       const chip = document.createElement('a');
@@ -776,28 +692,30 @@ const popularItemListJsonLd = {
 
     function renderToolList(container, tools, options = {}) {
       if (!(container instanceof HTMLElement)) return;
-      if (options.variant === 'chips') {
-        renderToolChips(container, tools, options);
-      } else {
-        container.replaceChildren(...tools.map((tool) => createToolCard(tool, options)));
-      }
+      renderToolChips(container, tools, options);
       document.dispatchEvent(new CustomEvent('freetools:rendered-tools'));
     }
 
     function renderFavorites() {
       const favoriteTools = getFavoriteTools().map((slug) => toolMap.get(slug)).filter(Boolean);
-      renderToolList(favoriteContainer, favoriteTools, { variant: 'chips', source: 'favorite_tools' });
+      renderToolList(favoriteContainer, favoriteTools, { source: 'favorite_tools' });
+      // First-time visitors have no favorites; hide the whole section instead
+      // of showing an empty shell.
+      if (personalizedRoot instanceof HTMLElement) {
+        personalizedRoot.hidden = favoriteTools.length === 0;
+      }
       if (favoriteEmpty instanceof HTMLElement) {
-        favoriteEmpty.hidden = favoriteTools.length > 0;
+        favoriteEmpty.hidden = true;
       }
     }
 
     function renderRecent() {
       const recentTools = getRecentlyUsedTools().map((slug) => toolMap.get(slug)).filter(Boolean);
-      renderToolList(recentContainer, recentTools.length > 0 ? recentTools : fallbackRecentTools, {
-        variant: 'chips',
-        source: recentTools.length > 0 ? 'recent_tools' : 'recent_tools_fallback'
-      });
+      renderToolList(recentContainer, recentTools, { source: 'recent_tools' });
+      const recentSection = document.querySelector('[data-recent-section]');
+      if (recentSection instanceof HTMLElement) {
+        recentSection.hidden = recentTools.length === 0;
+      }
     }
 
     renderFavorites();

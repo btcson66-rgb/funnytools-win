@@ -1,6 +1,6 @@
 {
-  "blogArticleCount": 100,
-  "indexableBlogUrlCount": 101,
+  "blogArticleCount": 0,
+  "indexableBlogUrlCount": 0,
   "duplicateTitles": [],
   "duplicateDescriptions": [],
   "missingPages": [],
@@ -8,7 +8,7 @@
   "lowWordCountPages": [],
   "farmPatternHits": [],
   "repeatedPhraseWarnings": [],
-  "redirectCount": 64,
+  "redirectCount": 164,
   "invalidRedirectPages": [],
   "oldRedirectUrlsInSitemap": []
 }
