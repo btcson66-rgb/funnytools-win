@@ -64,19 +64,61 @@ export const zScoreContent = content(
 
 export const tScoreContent = content(
   {
-    name: 'T 分數計算器', short: '將 Z 分數轉換為平均 50、標準差 10 的 T 分數。', long: '輸入 Z 分數即可轉換為常用的 T 分數量尺。T 分數通常以 50 為平均數、10 為標準差，便於避免負值與小數型標準分數。',
+    name: 'T 分數計算器', short: '將 Z 分數轉換為平均 50、標準差 10 的 T 分數。', long: '輸入 Z 分數即可轉換為常用的 T 分數量尺。T 分數通常以 50 為平均數、10 為標準差，方便學生、老師或教甄備考者用同一參照群體比較相對位置。',
     seoTitle: 'T 分數計算器｜Z 分數轉 T 分數', seoDescription: '使用 T = 50 + 10z 將 Z 分數轉為 T 分數，附公式、教育應用與報告提示。', keywords: ['T分數', 'Z分數轉換', '標準分數'],
-    instructions: ['先取得或輸入 Z 分數。', '按下轉換。', '以平均 50、標準差 10 的量尺解讀結果。'], examples: ['轉換心理與教育測驗的標準分數。', '以較直觀的正數量尺呈現相對表現。', '在使用相同常模時比較不同測驗結果。'],
+    contentSections: [
+      {
+        heading: 'T 分數是什麼',
+        paragraphs: [
+          'T 分數是一種由 Z 分數線性轉換而來的標準分數，常見設定是平均數 50、標準差 10。它保留「高於或低於平均多少個標準差」的資訊，但用較容易閱讀的數字呈現。',
+          '公式是 T = 50 + 10 × z；z = 0 會得到 T = 50，z = 1 會得到 T = 60，z = -1 會得到 T = 40。',
+          '在台灣，學生與老師常會在心理與教育測驗、班級成績分析、教師甄試或標準分數報表中看到 T 分數。實際採用的常模、方向與換算規則仍要以測驗手冊、學校規定或正式簡章為準。',
+        ],
+        items: [
+          '範例：某次測驗原始分數 82 分，參照群體平均數 70、標準差 10，先算 z = (82 − 70) / 10 = 1.2。',
+          '再代入 T = 50 + 10 × 1.2，得到 T = 62，表示比該參照群體平均高 1.2 個標準差。',
+        ],
+      },
+    ],
+    instructions: ['確認你手上的數值是 Z 分數；若只有原始分數，先用平均數與標準差算出 Z 分數。', '把 Z 分數輸入欄位，按下「轉換為 T 分數」。', '用平均 50、標準差 10 的量尺解讀結果；50 約為參照群體平均。', '正式報告或考試資料請再核對常模來源與轉換規則。'], examples: ['轉換心理與教育測驗的標準分數。', '以較直觀的正數量尺呈現相對表現。', '在使用相同常模時比較不同測驗結果。'],
     formula: { expression: 'T = 50 + 10z', explanation: '此線性轉換使 z = 0 對應 T = 50，每增加 1 個標準差，T 分數增加 10。' }, educationApplication: 'T 分數常用於心理與教育測驗，但必須確認測驗手冊採用的 T 分數定義與常模。有些領域使用不同方向或不同轉換規則。', reportTip: '可寫成：「依平均數 50、標準差 10 的 T 分數量尺轉換後，個案得分為 T = 62.0。」並交代原始 z 值或常模來源。',
-    faq: [{ q: 'T 分數 50 代表什麼？', a: '在此量尺下代表剛好位於參照群體平均數。' }, { q: 'T 分數會出現負數嗎？', a: '理論上極端負 z 值可能造成負 T 分數，但一般資料中較少見。' }, { q: '所有 T 分數都用 50 和 10 嗎？', a: '這是常見定義，但仍應以特定測驗手冊的轉換方式為準。' }],
+    faq: [
+      { q: 'T 分數是什麼？', a: 'T 分數是由 Z 分數轉換而來的標準分數，常見量尺平均數為 50、標準差為 10。它用來描述某個分數在參照群體中的相對位置，而不是原始得分。' },
+      { q: 'T 分數 50 代表什麼？', a: '在 T = 50 + 10z 的量尺下，T 分數 50 代表 z = 0，也就是剛好等於參照群體平均數。高於 50 通常表示高於平均，低於 50 通常表示低於平均。' },
+      { q: 'T 分數越高越好嗎？', a: '不一定，要看測驗或指標定義。有些測驗高分代表能力或表現較高，但也有量表高分代表症狀、風險或需求較高，解讀時要看測驗說明。' },
+      { q: 'T 分數是滿分 100 或百分比嗎？', a: '不是。T 分數是標準分數量尺，不是百分制成績，也不是答對百分比。T 分數可能高於 100 或低於 0，只是一般常見資料不一定會出現這麼極端的值。' },
+      { q: '沒有 Z 分數可以算 T 分數嗎？', a: '若只有原始分數，必須先知道同一參照群體的平均數與標準差，先算 z = (X − M) / SD。沒有平均數、標準差或常模來源時，無法正確換算 T 分數。' },
+      { q: 'T 分數和 PR 百分等級可以直接換算嗎？', a: '一般不能直接換算，因為 PR 需要知道分數在參照群體中的累積位置。若假設常態分配且常模相同，可以用統計表或軟體估算近似 PR，但正式報告仍應使用原始常模或官方轉換表。' },
+    ],
     labels: { z: 'Z 分數', calculate: '轉換為 T 分數', result: 'T 分數', invalid: '請輸入有效的 Z 分數。' }, disclaimer: disclaimer.zh, privacyNote: privacy.zh,
   },
   {
-    name: 'T Score Calculator', short: 'Convert a z score to a T score with mean 50 and SD 10.', long: 'Enter a z score to convert it to the commonly used T-score scale, centered at 50 with a standard deviation of 10.',
+    name: 'T Score Calculator', short: 'Convert a z score to a T score with mean 50 and SD 10.', long: 'Enter a z score to convert it to the commonly used T-score scale, centered at 50 with a standard deviation of 10. The scale helps students, teachers, and exam candidates read relative standing within the same reference group.',
     seoTitle: 'T Score Calculator | Convert Z Score to T Score', seoDescription: 'Convert a z score with T = 50 + 10z and review education and reporting guidance.', keywords: ['T score calculator', 'z to T score', 'standard score'],
-    instructions: ['Enter a known z score.', 'Run the conversion.', 'Interpret the result on a mean-50, SD-10 scale.'], examples: ['Convert psychological or educational standard scores.', 'Present relative standing on a mostly positive scale.', 'Compare tests that use the same norming basis.'],
+    contentSections: [
+      {
+        heading: 'What a T score means',
+        paragraphs: [
+          'A T score is a standard score created by linearly transforming a z score. The common scale uses a mean of 50 and a standard deviation of 10, so it keeps the relative-position meaning of z while using easier numbers.',
+          'The formula is T = 50 + 10 × z. A z score of 0 becomes T = 50, z = 1 becomes T = 60, and z = -1 becomes T = 40.',
+          'Students and teachers may see T scores in educational tests, psychology reports, standardized score tables, and teacher-exam preparation. Always confirm the relevant norm group, direction, and conversion rule from the test manual or official notice.',
+        ],
+        items: [
+          'Example: if a raw score is 82, the reference mean is 70, and the standard deviation is 10, then z = (82 − 70) / 10 = 1.2.',
+          'Using T = 50 + 10 × 1.2 gives T = 62, meaning the score is 1.2 standard deviations above that reference-group mean.',
+        ],
+      },
+    ],
+    instructions: ['Confirm that the value you have is a z score, or calculate z first from a raw score, mean, and standard deviation.', 'Enter the z score and run the conversion.', 'Read the result on a mean-50, SD-10 scale; 50 is the reference-group mean.', 'For formal reporting, recheck the norm source and conversion rule.'], examples: ['Convert psychological or educational standard scores.', 'Present relative standing on a mostly positive scale.', 'Compare tests that use the same norming basis.'],
     formula: { expression: 'T = 50 + 10z', explanation: 'This linear transformation maps z = 0 to T = 50; each standard deviation changes T by 10.' }, educationApplication: 'T scores are common in psychological and educational testing. Confirm the test manual’s definition and norms because some fields use different directions or conversions.', reportTip: 'Example: “On the T-score scale (M = 50, SD = 10), the score was T = 62.0.” State the original z score or norm source.',
-    faq: [{ q: 'What does T = 50 mean?', a: 'It is the reference-group mean on this scale.' }, { q: 'Can a T score be negative?', a: 'An extremely negative z score can produce one, though this is uncommon in typical data.' }, { q: 'Do all T scores use 50 and 10?', a: 'It is the common definition, but always check the relevant test manual.' }],
+    faq: [
+      { q: 'What is a T score?', a: 'A T score is a standard score converted from a z score, commonly using a mean of 50 and a standard deviation of 10. It describes relative position within a reference group, not the raw score itself.' },
+      { q: 'What does T = 50 mean?', a: 'With T = 50 + 10z, T = 50 means z = 0. The score is exactly at the reference-group mean on that scale.' },
+      { q: 'Is a higher T score always better?', a: 'Not always. In some tests a higher T score means higher performance, while in other scales it can mean higher symptoms, risk, or need, so the test definition matters.' },
+      { q: 'Is a T score a percentage or a score out of 100?', a: 'No. A T score is a standard-score scale, not percent correct or a 0 to 100 grade. It can theoretically go above 100 or below 0 for extreme z scores.' },
+      { q: 'Can I calculate T without a z score?', a: 'If you only have a raw score, you first need the matching reference mean and standard deviation to calculate z = (X − M) / SD. Without the mean, SD, or norm source, the T score cannot be calculated correctly.' },
+      { q: 'Can T score and percentile rank be converted directly?', a: 'Usually not directly, because percentile rank depends on the cumulative position in a reference distribution. Under a normal-distribution assumption with the same norm group, an approximate percentile can be estimated, but formal reports should use the official norm table.' },
+    ],
     labels: { z: 'Z score', calculate: 'Convert to T score', result: 'T score', invalid: 'Enter a valid z score.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
   },
 );

@@ -315,6 +315,10 @@ interface PrioritySpec {
   enMistakes: string[];
   relatedZh: string;
   relatedEn: string;
+  zhContentSections?: NonNullable<ToolContent['contentSections']>;
+  enContentSections?: NonNullable<ToolContent['contentSections']>;
+  zhFaq?: ToolContent['faq'];
+  enFaq?: ToolContent['faq'];
 }
 
 function priorityEnhancement(spec: PrioritySpec): Record<Locale, Enhancement> {
@@ -323,7 +327,7 @@ function priorityEnhancement(spec: PrioritySpec): Record<Locale, Enhancement> {
       seoTitle: spec.zhSeoTitle,
       seoDescription: spec.zhSeoDescription,
       keywords: spec.zhKeywords,
-      contentSections: [
+      contentSections: spec.zhContentSections ?? [
         {
           heading: `${spec.zhName}適合誰使用`,
           paragraphs: [
@@ -356,7 +360,7 @@ function priorityEnhancement(spec: PrioritySpec): Record<Locale, Enhancement> {
         description,
       })),
       notes: spec.zhMistakes,
-      faq: [
+      faq: spec.zhFaq ?? [
         { q: `${spec.zhName}可以免費使用嗎？`, a: '可以。FreeTools 的工具可直接在瀏覽器使用，不需要註冊。' },
         { q: '資料會上傳到伺服器嗎？', a: '這個工具採瀏覽器本機處理；輸入內容與檔案不會主動上傳到 FreeTools 伺服器。' },
         { q: '結果可以當作正式規則嗎？', a: '不建議。這裡提供的是試算、整理與檢查輔助，正式用途仍要依簡章、學校、機關或平台公告為準。' },
@@ -368,7 +372,7 @@ function priorityEnhancement(spec: PrioritySpec): Record<Locale, Enhancement> {
       seoTitle: spec.enSeoTitle,
       seoDescription: spec.enSeoDescription,
       keywords: spec.enKeywords,
-      contentSections: [
+      contentSections: spec.enContentSections ?? [
         {
           heading: `Who should use ${spec.enName}`,
           paragraphs: [
@@ -401,7 +405,7 @@ function priorityEnhancement(spec: PrioritySpec): Record<Locale, Enhancement> {
         description,
       })),
       notes: spec.enMistakes,
-      faq: [
+      faq: spec.enFaq ?? [
         { q: `Is ${spec.enName} free to use?`, a: 'Yes. You can use the tool directly in the browser with no registration.' },
         { q: 'Is my data uploaded?', a: 'No. This tool runs locally in your browser and does not actively upload inputs or files to FreeTools servers.' },
         { q: 'Can I treat the result as official?', a: 'No. Use it as a calculation, cleanup, or checking aid and confirm formal requirements with official sources.' },
@@ -462,6 +466,50 @@ const prioritySpecs: PrioritySpec[] = [
     enMistakes: ['Do not read a T score as percent correct.', 'Use a z-score calculator first if the raw score is not standardized.', 'Interpret extreme scores with sample size and distribution shape.'],
     relatedZh: '可先用 Z 分數計算器取得 z，再搭配 PR 百分等級與教師甄試成績轉換模擬器整理完整流程。',
     relatedEn: 'Start with the Z Score Calculator, then use Percentile Rank and Teacher Exam Score tools for a fuller workflow.',
+    zhContentSections: [
+      {
+        heading: 'T 分數是什麼',
+        paragraphs: [
+          'T 分數是一種由 Z 分數線性轉換而來的標準分數，常見設定是平均數 50、標準差 10。它保留「高於或低於平均多少個標準差」的資訊，但用較容易閱讀的數字呈現。',
+          '公式是 T = 50 + 10 × z；z = 0 會得到 T = 50，z = 1 會得到 T = 60，z = -1 會得到 T = 40。',
+          '在台灣，學生與老師常會在心理與教育測驗、班級成績分析、教師甄試或標準分數報表中看到 T 分數。實際採用的常模、方向與換算規則仍要以測驗手冊、學校規定或正式簡章為準。',
+        ],
+        items: [
+          '範例：某次測驗原始分數 82 分，參照群體平均數 70、標準差 10，先算 z = (82 − 70) / 10 = 1.2。',
+          '再代入 T = 50 + 10 × 1.2，得到 T = 62，表示比該參照群體平均高 1.2 個標準差。',
+        ],
+      },
+    ],
+    enContentSections: [
+      {
+        heading: 'What a T score means',
+        paragraphs: [
+          'A T score is a standard score created by linearly transforming a z score. The common scale uses a mean of 50 and a standard deviation of 10, so it keeps the relative-position meaning of z while using easier numbers.',
+          'The formula is T = 50 + 10 × z. A z score of 0 becomes T = 50, z = 1 becomes T = 60, and z = -1 becomes T = 40.',
+          'Students and teachers may see T scores in educational tests, psychology reports, standardized score tables, and teacher-exam preparation. Always confirm the relevant norm group, direction, and conversion rule from the test manual or official notice.',
+        ],
+        items: [
+          'Example: if a raw score is 82, the reference mean is 70, and the standard deviation is 10, then z = (82 − 70) / 10 = 1.2.',
+          'Using T = 50 + 10 × 1.2 gives T = 62, meaning the score is 1.2 standard deviations above that reference-group mean.',
+        ],
+      },
+    ],
+    zhFaq: [
+      { q: 'T 分數是什麼？', a: 'T 分數是由 Z 分數轉換而來的標準分數，常見量尺平均數為 50、標準差為 10。它用來描述某個分數在參照群體中的相對位置，而不是原始得分。' },
+      { q: 'T 分數 50 代表什麼？', a: '在 T = 50 + 10z 的量尺下，T 分數 50 代表 z = 0，也就是剛好等於參照群體平均數。高於 50 通常表示高於平均，低於 50 通常表示低於平均。' },
+      { q: 'T 分數越高越好嗎？', a: '不一定，要看測驗或指標定義。有些測驗高分代表能力或表現較高，但也有量表高分代表症狀、風險或需求較高，解讀時要看測驗說明。' },
+      { q: 'T 分數是滿分 100 或百分比嗎？', a: '不是。T 分數是標準分數量尺，不是百分制成績，也不是答對百分比。T 分數可能高於 100 或低於 0，只是一般常見資料不一定會出現這麼極端的值。' },
+      { q: '沒有 Z 分數可以算 T 分數嗎？', a: '若只有原始分數，必須先知道同一參照群體的平均數與標準差，先算 z = (X − M) / SD。沒有平均數、標準差或常模來源時，無法正確換算 T 分數。' },
+      { q: 'T 分數和 PR 百分等級可以直接換算嗎？', a: '一般不能直接換算，因為 PR 需要知道分數在參照群體中的累積位置。若假設常態分配且常模相同，可以用統計表或軟體估算近似 PR，但正式報告仍應使用原始常模或官方轉換表。' },
+    ],
+    enFaq: [
+      { q: 'What is a T score?', a: 'A T score is a standard score converted from a z score, commonly using a mean of 50 and a standard deviation of 10. It describes relative position within a reference group, not the raw score itself.' },
+      { q: 'What does T = 50 mean?', a: 'With T = 50 + 10z, T = 50 means z = 0. The score is exactly at the reference-group mean on that scale.' },
+      { q: 'Is a higher T score always better?', a: 'Not always. In some tests a higher T score means higher performance, while in other scales it can mean higher symptoms, risk, or need, so the test definition matters.' },
+      { q: 'Is a T score a percentage or a score out of 100?', a: 'No. A T score is a standard-score scale, not percent correct or a 0 to 100 grade. It can theoretically go above 100 or below 0 for extreme z scores.' },
+      { q: 'Can I calculate T without a z score?', a: 'If you only have a raw score, you first need the matching reference mean and standard deviation to calculate z = (X − M) / SD. Without the mean, SD, or norm source, the T score cannot be calculated correctly.' },
+      { q: 'Can T score and percentile rank be converted directly?', a: 'Usually not directly, because percentile rank depends on the cumulative position in a reference distribution. Under a normal-distribution assumption with the same norm group, an approximate percentile can be estimated, but formal reports should use the official norm table.' },
+    ],
   },
   {
     slug: 'z-score-calculator',

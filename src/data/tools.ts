@@ -944,7 +944,7 @@ export const tools: ToolMeta[] = [
     icon: '🧮',
     status: 'live',
     privacyLevel: 'local-only',
-    relatedTools: ['weighted-average-calculator', 'class-rank-percentile-calculator', 'normalized-score-converter', 'gpa-calculator'],
+    relatedTools: ['weighted-average-calculator', 't-score-calculator', 'class-rank-percentile-calculator', 'normalized-score-converter', 'gpa-calculator'],
     assetType: 'calculator',
     searchIntent: 'high',
     shareIntent: 'medium',
@@ -974,7 +974,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'weighted-average-calculator', category: 'statistics', icon: 'Σ', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['grade-average', 'teacher-exam-score-converter', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
+    relatedTools: ['grade-average', 't-score-calculator', 'teacher-exam-score-converter', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
     name: { zh: '加權平均計算器', en: 'Weighted Average Calculator' }, short: { zh: '依各項數值與權重計算加權平均。', en: 'Calculate a weighted mean from values and weights.' },
   },
   {
