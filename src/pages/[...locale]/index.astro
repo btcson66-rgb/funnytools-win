@@ -195,13 +195,13 @@ const pdfImageTools = [
   'qr-code-generator',
 ].map(getToolBySlug).filter(isLiveTool);
 const teacherExamArticleLinks = [
-  { slug: 'teacher-exam-weighted-score-guide', label: 'Teacher exam score guide (Chinese)' },
-  { slug: 't-score-complete-guide', label: 'T score, Z score, and PR guide (Chinese)' },
-  { slug: 'classroom-random-tools-guide', label: 'Teacher classroom tools guide (Chinese)' },
+  { segment: 'guides', slug: 'teacher-exam-weighted-score-guide', label: 'Teacher exam score guide' },
+  { segment: 'guides', slug: 't-score-calculator-guide', label: 'T score, Z score, and PR guide' },
+  { segment: 'guides', slug: 'classroom-random-picker-guide', label: 'Teacher classroom tools guide' },
 ];
 const pdfImageArticleLinks = [
-  { slug: 'pdf-merge-split-compress-workflow', label: 'PDF workflow guide (Chinese)' },
-  { slug: 'image-compress-resize-format-guide', label: 'Image compression and conversion guide (Chinese)' },
+  { segment: 'workflows', slug: 'office-document-toolkit', label: 'PDF workflow guide' },
+  { segment: 'tools', slug: 'image-compressor', label: 'Image compression tool' },
 ];
 const toolkitCopy = {
   zh: {
@@ -554,7 +554,7 @@ const popularItemListJsonLd = {
     {lang === 'en' && (
       <div class="use-case-tools priority-tool-row">
         {teacherExamArticleLinks.map((article) => (
-          <a href={localePath('zh', 'blog', article.slug)}>
+          <a href={localePath('en', article.segment, article.slug)}>
             <span aria-hidden="true">Guide</span>
             {article.label}
           </a>
@@ -579,7 +579,7 @@ const popularItemListJsonLd = {
     {lang === 'en' && (
       <div class="use-case-tools priority-tool-row">
         {pdfImageArticleLinks.map((article) => (
-          <a href={localePath('zh', 'blog', article.slug)}>
+          <a href={localePath('en', article.segment, article.slug)}>
             <span aria-hidden="true">Guide</span>
             {article.label}
           </a>

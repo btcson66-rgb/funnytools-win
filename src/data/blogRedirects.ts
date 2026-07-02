@@ -6,235 +6,235 @@ export interface BlogRedirect {
 export const blogRedirects: BlogRedirect[] = [
   {
     "slug": "after-midterm-final-score-needed",
-    "redirectTo": "/blog/semester-grade-calculator-guide/"
+    "redirectTo": "/tools/grade-average/"
   },
   {
     "slug": "calculate-t-score-from-z-score",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "can-pr-and-t-score-convert",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "can-z-score-be-greater-than-3",
-    "redirectTo": "/blog/z-score-standardization-guide/"
+    "redirectTo": "/guides/z-score-calculator-guide/"
   },
   {
     "slug": "can-z-score-compare-different-exams",
-    "redirectTo": "/blog/z-score-standardization-guide/"
+    "redirectTo": "/guides/z-score-calculator-guide/"
   },
   {
     "slug": "class-rank-to-percentile-rank",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "compress-large-images",
-    "redirectTo": "/blog/image-compress-resize-format-guide/"
+    "redirectTo": "/tools/image-compressor/"
   },
   {
     "slug": "current-score-58-final-exam-save-plan",
-    "redirectTo": "/blog/semester-grade-calculator-guide/"
+    "redirectTo": "/tools/grade-average/"
   },
   {
     "slug": "failing-grade-calculator-final-needed",
-    "redirectTo": "/blog/semester-grade-calculator-guide/"
+    "redirectTo": "/tools/grade-average/"
   },
   {
     "slug": "free-qr-code-guide",
-    "redirectTo": "/blog/qr-code-best-practices/"
+    "redirectTo": "/tools/qr-code-generator/"
   },
   {
     "slug": "mobile-pdf-merge",
-    "redirectTo": "/blog/pdf-merge-split-compress-workflow/"
+    "redirectTo": "/workflows/office-document-toolkit/"
   },
   {
     "slug": "pdf-merge-guide",
-    "redirectTo": "/blog/pdf-merge-split-compress-workflow/"
+    "redirectTo": "/workflows/office-document-toolkit/"
   },
   {
     "slug": "pdf-too-large",
-    "redirectTo": "/blog/pdf-too-large-upload-guide/"
+    "redirectTo": "/tools/pdf-compressor/"
   },
   {
     "slug": "percentile-rank-formula-with-ties",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "percentile-rank-vs-rank-percentage",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "percentile-rank-with-many-ties",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-84-meaning-example",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-common-error-as-correct-rate",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-percentile",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-percentile-10",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-percentile-2",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-percentile-3",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-percentile-4",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-percentile-5",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-percentile-6",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-percentile-7",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-percentile-8",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-percentile-9",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "pr-percentile-rank-guide",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "qr-code-generator-guide",
-    "redirectTo": "/blog/qr-code-best-practices/"
+    "redirectTo": "/tools/qr-code-generator/"
   },
   {
     "slug": "qr-code-guide",
-    "redirectTo": "/blog/qr-code-best-practices/"
+    "redirectTo": "/tools/qr-code-generator/"
   },
   {
     "slug": "random-group-classroom-guide",
-    "redirectTo": "/blog/random-grouping-classroom-guide/"
+    "redirectTo": "/guides/fair-student-grouping-guide/"
   },
   {
     "slug": "raw-score-to-z-score-class-example",
-    "redirectTo": "/blog/z-score-standardization-guide/"
+    "redirectTo": "/guides/z-score-calculator-guide/"
   },
   {
     "slug": "t-score-40-50-60-70-meaning",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-and-percentile-rank",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-calculator-guide",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-common-errors-norm-direction",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-high-does-not-guarantee-admission",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-in-psychological-educational-tests",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-is-not-percentage",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-pr-guide",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-teacher-exam",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-teacher-exam-10",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-teacher-exam-2",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-teacher-exam-3",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-teacher-exam-4",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-teacher-exam-5",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-teacher-exam-6",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-teacher-exam-7",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-teacher-exam-8",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-teacher-exam-9",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "t-score-vs-z-score",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "teacher-exam-score-calculation-written-demo-interview",
-    "redirectTo": "/blog/teacher-exam-weighted-score-guide/"
+    "redirectTo": "/guides/teacher-exam-weighted-score-guide/"
   },
   {
     "slug": "teacher-exam-weight-written-teaching-interview",
-    "redirectTo": "/blog/teacher-exam-weighted-score-guide/"
+    "redirectTo": "/guides/teacher-exam-weighted-score-guide/"
   },
   {
     "slug": "teacher-random-grouping",
-    "redirectTo": "/blog/random-grouping-classroom-guide/"
+    "redirectTo": "/guides/fair-student-grouping-guide/"
   },
   {
     "slug": "what-is-percentile-rank-not-percentage",
-    "redirectTo": "/blog/percentile-rank-guide/"
+    "redirectTo": "/guides/percentile-rank-guide/"
   },
   {
     "slug": "what-is-t-score-mean-50-sd-10",
-    "redirectTo": "/blog/t-score-complete-guide/"
+    "redirectTo": "/guides/t-score-calculator-guide/"
   },
   {
     "slug": "what-is-z-score-standard-deviation",
-    "redirectTo": "/blog/z-score-standardization-guide/"
+    "redirectTo": "/guides/z-score-calculator-guide/"
   },
   {
     "slug": "sitemap-checklist-guide",
@@ -258,27 +258,27 @@ export const blogRedirects: BlogRedirect[] = [
   },
   {
     "slug": "z-score-0-1-minus-1-meaning",
-    "redirectTo": "/blog/z-score-standardization-guide/"
+    "redirectTo": "/guides/z-score-calculator-guide/"
   },
   {
     "slug": "z-score-and-standard-deviation-relationship",
-    "redirectTo": "/blog/z-score-standardization-guide/"
+    "redirectTo": "/guides/z-score-calculator-guide/"
   },
   {
     "slug": "z-score-formula-example-calculator",
-    "redirectTo": "/blog/z-score-standardization-guide/"
+    "redirectTo": "/guides/z-score-calculator-guide/"
   },
   {
     "slug": "z-score-in-research-outlier-standardization",
-    "redirectTo": "/blog/z-score-standardization-guide/"
+    "redirectTo": "/guides/z-score-calculator-guide/"
   },
   {
     "slug": "z-score-t-score-standard-score-guide",
-    "redirectTo": "/blog/z-score-standardization-guide/"
+    "redirectTo": "/guides/z-score-calculator-guide/"
   },
   {
     "slug": "z-score-to-t-score-formula-errors",
-    "redirectTo": "/blog/z-score-standardization-guide/"
+    "redirectTo": "/guides/z-score-calculator-guide/"
   },
   {
     "slug": "ad-block-safe-layout-guide",

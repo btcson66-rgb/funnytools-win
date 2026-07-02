@@ -3,7 +3,6 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { usefulBlogPosts } from '../../../data/usefulBlogPosts';
 import { SITE, type Locale } from '../../../config/site';
 import { getToolBySlug, type ToolMeta } from '../../../data/tools';
 import { seoGuides, viewSeoGuide, isSeoGuideAvailableInLocale } from '../../../data/seoGuides';
@@ -188,64 +187,6 @@ const featuredGuides = seoGuides
 const featuredWorkflows = workflows
   .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
   .map((workflow) => viewWorkflow(workflow, lang));
-const educationArticles = lang === 'zh'
-  ? usefulBlogPosts.filter((post) => ['statistics', 'study'].includes(post.categorySlug ?? '')).slice(0, 24)
-  : [];
-const educationArticleCategories = [...new Set(educationArticles.map((post) => post.categoryLabel?.zh).filter(Boolean))];
-const educationArticleGroupCopy = [
-  {
-    id: 'grade-average-articles',
-    title: '成績平均與學期成績',
-    body: '成績平均、加權平均、學期成績、期中期末與補救分數試算。',
-  },
-  {
-    id: 't-score-articles',
-    title: 'T 分數',
-    body: 'T 分數意義、換算、常模分數與教師甄試標準化解讀。',
-  },
-  {
-    id: 'z-score-articles',
-    title: 'Z 分數',
-    body: 'Z 分數公式、標準差距離、跨測驗比較與離群值判斷。',
-  },
-  {
-    id: 'pr-articles',
-    title: 'PR 百分等級',
-    body: '百分等級、班級排名百分比、同分處理與常見誤解。',
-  },
-  {
-    id: 'teacher-exam-articles',
-    title: '教師甄試',
-    body: '筆試、試教、口試加權，成績規則、備取順位與申訴前檢查。',
-  },
-  {
-    id: 'classroom-articles',
-    title: '班級成績分析',
-    body: '班級平均、標準差、成績分布、補救教學名單與家長會報告。',
-  },
-  {
-    id: 'apa-spss-articles',
-    title: 'APA / SPSS 統計報告',
-    body: 'APA 7 報告句、SPSS 表格解讀、p 值、效果量與統計結果整理。',
-  },
-];
-const educationArticleGroupId = (post: (typeof educationArticles)[number]) => {
-  const text = `${post.slug} ${post.title.zh} ${post.categoryLabel?.zh ?? ''}`;
-  if (/apa|spss|anova|levene|p-value|effect-size|cohens|eta|correlation|descriptive|statistics-report|統計報告|報告|效果量|相關|變異數分析|同質性|p 值/i.test(text)) return 'apa-spss-articles';
-  if (/teacher-exam|教師甄試|教師考試|試教|口試|備取|簡章|錄取|申訴/.test(text)) return 'teacher-exam-articles';
-  if (/t-score|T 分數|T分數/.test(text)) return 't-score-articles';
-  if (/z-score|Z 分數|Z分數|離群|標準化/.test(text)) return 'z-score-articles';
-  if (/percentile|pr-|PR|百分等級|排名/.test(text)) return 'pr-articles';
-  if (/classroom|班級|老師成績|補救|家長會|標準差|分布/.test(text)) return 'classroom-articles';
-  return 'grade-average-articles';
-};
-const educationArticleGroups = educationArticleGroupCopy
-  .map((group) => ({
-    ...group,
-    articles: educationArticles.filter((post) => educationArticleGroupId(post) === group.id),
-  }))
-  .filter((group) => group.articles.length > 0);
-
 const faqItems = {
   zh: [
     {
@@ -372,38 +313,6 @@ const jsonLd = [
       </section>
     </div>
   </section>
-
-  {educationArticles.length > 0 && (
-    <section class="wrap content-section" aria-labelledby="education-articles-title">
-      <div class="section-head">
-        <h2 id="education-articles-title">教育統計教學文章</h2>
-        <p>整理成績平均、T 分數、Z 分數、PR、教師甄試、SPSS 與 APA 報告等常見查詢，搭配站內工具快速試算與交叉檢查。</p>
-        <div class="education-topic-list" aria-label="文章主題">
-          {educationArticleCategories.map((category) => <span>{category}</span>)}
-        </div>
-      </div>
-      <div class="education-article-sections">
-        {educationArticleGroups.map((group) => (
-          <section class="education-article-group" aria-labelledby={group.id}>
-            <div class="education-article-group-head">
-              <h3 id={group.id}>{group.title}</h3>
-              <p>{group.body}</p>
-              <span>{group.articles.length} 篇</span>
-            </div>
-            <div class="education-article-grid">
-              {group.articles.map((post) => (
-                <a href={localePath('zh', 'blog', post.slug)}>
-                  <strong>{post.title.zh}</strong>
-                  <span>{post.summary.zh}</span>
-                </a>
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
-      <a class="btn" href={localePath('zh', 'blog')}>查看全部教學文章</a>
-    </section>
-  )}
 
   <div class="wrap">
     <Faq lang={lang} items={faqItems} emitJsonLd={false} />
