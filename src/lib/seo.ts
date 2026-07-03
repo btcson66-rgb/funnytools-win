@@ -151,6 +151,21 @@ export function collectionPageJsonLd(lang: Locale, name: string, description: st
   };
 }
 
+export function howToJsonLd(lang: Locale, name: string, steps: string[], path: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: lang === 'zh' ? `如何使用${name}` : `How to use ${name}`,
+    step: steps.map((text, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      text,
+    })),
+    url: absoluteUrl(path),
+    inLanguage: SITE.hreflang[lang],
+  };
+}
+
 export function webApplicationJsonLd(
   lang: Locale,
   tool: ToolMeta,
