@@ -4,12 +4,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { absoluteUrl, assetPath, localePath, localeUrlPair } from '../lib/url';
 import { breadcrumbJsonLd, webPageJsonLd } from '../lib/seo';
 
-const title = '支持 FreeTools 持續提供免費工具';
-const seoTitle = '支持 FreeTools｜免費工具網站營運支持';
-const description = 'FreeTools 提供免費線上工具，無需安裝也不需註冊。你可以透過分享網站、回報問題、建議新工具，或使用推薦資源連結，支持本站持續營運與更新。';
+const title = '支持 FunnyTools 持續提供免費工具';
+const seoTitle = '支持 FunnyTools｜免費工具網站營運支持';
+const description = 'FunnyTools 提供免費線上工具，無需安裝也不需註冊。你可以透過分享網站、回報問題、建議新工具，或使用推薦資源連結，支持本站持續營運與更新。';
 const supportUrl = localePath('zh', 'support');
 const homeUrl = absoluteUrl(localePath('zh'));
-const shareText = 'FreeTools 提供免費、免安裝的實用線上工具，推薦給你！';
+const shareText = 'FunnyTools 提供免費、免安裝的實用線上工具，推薦給你！';
 const encodedHomeUrl = encodeURIComponent(homeUrl);
 const encodedSharePost = encodeURIComponent(`${shareText} ${homeUrl}`);
 const socialShareLinks = [
@@ -64,21 +64,21 @@ const jsonLd = [
       <p class="eyebrow">支持本站</p>
       <h1>{title}</h1>
       <p class="lead">
-        FreeTools 希望持續提供簡單、免費、好用的線上工具。如果本站曾經幫你節省時間，你可以透過分享網站、回報錯誤、建議新工具，或使用我們整理的實用資源連結支持本站。
+        FunnyTools 希望持續提供簡單、免費、好用的線上工具。如果本站曾經幫你節省時間，你可以透過分享網站、回報錯誤、建議新工具，或使用我們整理的實用資源連結支持本站。
       </p>
     </section>
 
     <section class="content-section" aria-labelledby="support-methods-heading">
       <div class="section-head">
-        <h2 id="support-methods-heading">你可以這樣支持 FreeTools</h2>
+        <h2 id="support-methods-heading">你可以這樣支持 FunnyTools</h2>
         <p>每一種方式都能幫助本站維持免費工具與內容更新。</p>
       </div>
       <div class="support-methods">
         <article class="support-method-card">
           <span class="support-icon" aria-hidden="true">↗</span>
           <h3>分享本站</h3>
-          <p>把 FreeTools 分享給需要線上工具的朋友，可以幫助本站被更多人看見。</p>
-          <div class="share-actions" aria-label="分享 FreeTools">
+          <p>把 FunnyTools 分享給需要線上工具的朋友，可以幫助本站被更多人看見。</p>
+          <div class="share-actions" aria-label="分享 FunnyTools">
             {socialShareLinks.map((platform) => (
               <a
                 class={`share-button share-${platform.name.toLowerCase()}`}
@@ -191,7 +191,7 @@ const jsonLd = [
         }
 
         if (copyLabel) copyLabel.textContent = '已複製首頁連結';
-        if (copyStatus) copyStatus.textContent = 'FreeTools 首頁連結已複製。';
+        if (copyStatus) copyStatus.textContent = 'FunnyTools 首頁連結已複製。';
         window.setTimeout(() => {
           if (copyLabel) copyLabel.textContent = '複製首頁連結';
           if (copyStatus) copyStatus.textContent = '';

@@ -1,4 +1,4 @@
-// GA4 custom event helper for FreeTools
+// GA4 custom event helper for FunnyTools
 // All events use gtag() which is already loaded in BaseLayout.astro
 // ChatGPT referrals should be tagged with utm_source=chatgpt.com; GA4 captures UTM params automatically.
 

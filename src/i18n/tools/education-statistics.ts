@@ -6,8 +6,8 @@ const disclaimer = {
 };
 
 const privacy = {
-  zh: '所有輸入與計算都在你的瀏覽器內完成，不會上傳到 FreeTools 免費線上工具箱。',
-  en: 'All input and calculations stay in your browser and are not uploaded to FreeTools.',
+  zh: '所有輸入與計算都在你的瀏覽器內完成，不會上傳到 FunnyTools 免費線上工具箱。',
+  en: 'All input and calculations stay in your browser and are not uploaded to FunnyTools.',
 };
 
 function content(zh: ToolContent, en: ToolContent): LocalizedToolContent {

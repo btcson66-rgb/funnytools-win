@@ -90,7 +90,7 @@ export default {
       duplicateError: '不允許重複時，數量不能超過範圍內可用的整數個數。',
       countLimit: '單次抽取數量上限為 100000，請輸入較小的數量。',
     },
-    privacyNote: '此工具在瀏覽器本機產生亂數與結果。你輸入的最小值、最大值、抽取數量與結果不會傳送到 FreeTools 免費線上工具箱伺服器。',
+    privacyNote: '此工具在瀏覽器本機產生亂數與結果。你輸入的最小值、最大值、抽取數量與結果不會傳送到 FunnyTools 免費線上工具箱伺服器。',
     disclaimer: '此工具使用瀏覽器亂數能力，適合一般用途，不適合作為高安全性、密碼學、法規稽核或需公證的抽選系統。',
   },
   en: {
@@ -167,7 +167,7 @@ export default {
       duplicateError: 'When duplicates are disabled, quantity cannot exceed the number of available integers.',
       countLimit: 'The maximum quantity per draw is 100000. Enter a smaller quantity.',
     },
-    privacyNote: 'This tool generates the random values locally in your browser. Your range, quantity, and results are not sent to FreeTools servers.',
+    privacyNote: 'This tool generates the random values locally in your browser. Your range, quantity, and results are not sent to FunnyTools servers.',
     disclaimer: 'This tool uses the browser random number capability. It is intended for general use, not high-security, cryptographic, audited, or notarized selection systems.',
   },
 } satisfies LocalizedToolContent;

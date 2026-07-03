@@ -10,7 +10,7 @@ import { absoluteUrl, localePath, toolUrl } from '../lib/url';
 // answer engines (https://llmstxt.org/).
 export const GET: APIRoute = () => {
   const lines: string[] = [
-    `# ${SITE.name.zh} (FreeTools by funnytools.win)`,
+    `# ${SITE.name.zh} (FunnyTools by funnytools.win)`,
     '',
     `> ${SITE.tagline.zh}`,
     `> ${SITE.tagline.en}`,

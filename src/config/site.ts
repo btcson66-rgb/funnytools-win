@@ -6,7 +6,7 @@ export const SITE = {
   basePath: '',
   locales: ['zh', 'en'] as Locale[],
   defaultLocale: 'zh' as Locale,
-  name: { zh: 'FreeTools 免費線上工具箱', en: 'FreeTools by FunnyTools.win' },
+  name: { zh: 'FunnyTools 免費線上工具箱', en: 'FunnyTools' },
   tagline: {
     zh: '免費、免註冊、可在瀏覽器本機處理的 PDF、圖片、文字、QR Code、隨機、時間、金錢、教學與統計工具。',
     en: 'Free online toolbox with browser-based tools for PDF, images, text, QR codes, random picks, time, money, teachers and more.',

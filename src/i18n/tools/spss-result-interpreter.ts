@@ -68,7 +68,7 @@ export default {
       significant: '達顯著',
       notSignificant: '未達顯著',
     },
-    privacyNote: '所有輸入與解讀都只在瀏覽器中處理，不會上傳到 FreeTools。',
+    privacyNote: '所有輸入與解讀都只在瀏覽器中處理，不會上傳到 FunnyTools。',
     disclaimer: disclaimer.zh,
   },
   en: {
@@ -133,7 +133,7 @@ export default {
       significant: 'significant',
       notSignificant: 'not significant',
     },
-    privacyNote: 'All inputs and interpretations stay in your browser and are not uploaded to FreeTools.',
+    privacyNote: 'All inputs and interpretations stay in your browser and are not uploaded to FunnyTools.',
     disclaimer: disclaimer.en,
   },
 } satisfies LocalizedToolContent;

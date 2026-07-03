@@ -37,8 +37,8 @@
 
     const isZh = document.documentElement.lang.toLowerCase().startsWith('zh');
     prompt.querySelector('[data-install-copy]').textContent = isZh
-      ? '可將 FreeTools 加到桌面，之後更快開啟常用工具。'
-      : 'Install FreeTools for faster access to common tools.';
+      ? '可將 FunnyTools 加到桌面，之後更快開啟常用工具。'
+      : 'Install FunnyTools for faster access to common tools.';
     prompt.querySelector('[data-install-action]').textContent = isZh ? '安裝' : 'Install';
 
     prompt.querySelector('[data-install-dismiss]').addEventListener('click', () => {

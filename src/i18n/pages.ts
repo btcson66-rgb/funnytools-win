@@ -27,20 +27,20 @@ export type InfoPageKey = 'about' | 'contact' | 'privacy' | 'terms' | 'disclaime
 
 export const home = {
   zh: {
-    seoTitle: "FreeTools 免費線上工具箱｜PDF、圖片、文字、QR Code、隨機與計算工具",
-    seoDescription: "FreeTools 是一個免費線上工具箱，提供 PDF、圖片、文字、QR Code、隨機、時間、金錢、教學與統計工具。免安裝、免註冊，手機與電腦都能使用。",
+    seoTitle: "FunnyTools 免費線上工具箱｜PDF、圖片、文字、QR Code、隨機與計算工具",
+    seoDescription: "FunnyTools 是一個免費線上工具箱，提供 PDF、圖片、文字、QR Code、隨機、時間、金錢、教學與統計工具。免安裝、免註冊，手機與電腦都能使用。",
     eyebrow: '免費、快速、免安裝',
-    title: 'FreeTools 免費線上工具箱',
+    title: 'FunnyTools 免費線上工具箱',
     intro: "免安裝、免註冊，快速使用 PDF、圖片、文字、金錢、時間與教學工具。",
     primaryCta: '查看所有工具',
     secondaryCta: '熱門工具',
   },
   en: {
-    seoTitle: "Free Online Tools - PDF, Image, Text & QR | FreeTools",
+    seoTitle: "Free Online Tools - PDF, Image, Text & QR | FunnyTools",
     seoDescription: "Free online tools for PDF, images, text, QR codes, random picks, and calculators. No signup; browser-first workflows for everyday tasks.",
     eyebrow: 'Free, fast, no install',
-    title: 'FreeTools - Free Online Tools for Everyday Tasks',
-    intro: "FreeTools gathers practical tools for work, teaching, PDFs, images, writing, random picks, and everyday calculations. Open a page and use it on mobile or desktop.",
+    title: 'FunnyTools - Free Online Tools for Everyday Tasks',
+    intro: "FunnyTools gathers practical tools for work, teaching, PDFs, images, writing, random picks, and everyday calculations. Open a page and use it on mobile or desktop.",
     primaryCta: 'View all tools',
     secondaryCta: 'Search tools',
   },
@@ -50,14 +50,14 @@ export const homeSeoIntro = {
   zh: {
     heading: '日常工作與學習需要的免費工具箱',
     paragraphs: [
-      'FreeTools 是一個整理日常實用功能的免費線上工具箱，讓你不必為了一次簡單任務下載軟體或安裝 App。無論是合併與拆分 PDF、壓縮或轉換圖片、統計文字字數、整理文字格式、抽選名單、安排分組、計算日期時間，或試算薪資與貸款，都可以從首頁的搜尋、熱門工具與分類快速找到合適功能。網站保留清楚的操作流程，適合臨時需要處理文件的上班族、準備教材與課堂活動的老師、整理報告與作業的學生，以及處理圖片和文字內容的創作者使用。',
-      '站內工具免安裝、免註冊，多數功能可直接在手機或電腦的瀏覽器中執行。現有分類涵蓋 PDF 工具、圖片工具、文字工具、隨機工具、時間工具、金錢工具與教學工具；你可以依任務分類瀏覽，也能輸入關鍵字搜尋。對於可在本機完成的操作，資料通常留在目前的瀏覽器分頁中處理；實際處理方式與使用限制會在各工具頁說明。FreeTools 的重點是縮短尋找與切換工具的時間，讓工作、學習、備課與內容製作中的小任務更快完成。',
+      'FunnyTools 是一個整理日常實用功能的免費線上工具箱，讓你不必為了一次簡單任務下載軟體或安裝 App。無論是合併與拆分 PDF、壓縮或轉換圖片、統計文字字數、整理文字格式、抽選名單、安排分組、計算日期時間，或試算薪資與貸款，都可以從首頁的搜尋、熱門工具與分類快速找到合適功能。網站保留清楚的操作流程，適合臨時需要處理文件的上班族、準備教材與課堂活動的老師、整理報告與作業的學生，以及處理圖片和文字內容的創作者使用。',
+      '站內工具免安裝、免註冊，多數功能可直接在手機或電腦的瀏覽器中執行。現有分類涵蓋 PDF 工具、圖片工具、文字工具、隨機工具、時間工具、金錢工具與教學工具；你可以依任務分類瀏覽，也能輸入關鍵字搜尋。對於可在本機完成的操作，資料通常留在目前的瀏覽器分頁中處理；實際處理方式與使用限制會在各工具頁說明。FunnyTools 的重點是縮短尋找與切換工具的時間，讓工作、學習、備課與內容製作中的小任務更快完成。',
     ],
   },
   en: {
     heading: 'Free tools for everyday work and study',
     paragraphs: [
-      'FreeTools is a free online toolbox for common document, image, writing, classroom, time, and calculation tasks. Use search, popular tools, or categories to find a practical option without installing an app or creating an account.',
+      'FunnyTools is a free online toolbox for common document, image, writing, classroom, time, and calculation tasks. Use search, popular tools, or categories to find a practical option without installing an app or creating an account.',
       'Most tools work directly in a mobile or desktop browser. The collection includes PDF, image, text, random, time, money, and teaching tools for students, teachers, office workers, and creators. Each tool page explains its workflow and any relevant data-handling limits.',
     ],
   },
@@ -113,12 +113,12 @@ export const homeUseCases = {
 export const homePrivacy = {
   zh: {
     heading: '隱私與本機處理說明',
-    text: 'FreeTools 免費線上工具箱優先提供可在瀏覽器本機執行的工具。文字、名單、數字、圖片與 PDF 通常不需要上傳到本站伺服器；若未來有工具需要網路服務，會在工具頁明確標示。',
+    text: 'FunnyTools 免費線上工具箱優先提供可在瀏覽器本機執行的工具。文字、名單、數字、圖片與 PDF 通常不需要上傳到本站伺服器；若未來有工具需要網路服務，會在工具頁明確標示。',
     linkText: '查看完整隱私權政策',
   },
   en: {
     heading: 'Privacy & local processing',
-    text: 'FreeTools prioritizes tools that run in your browser. Text, lists, numbers, images, and PDFs usually do not need to be uploaded to our server. Any future tool that requires a network service will say so clearly.',
+    text: 'FunnyTools prioritizes tools that run in your browser. Text, lists, numbers, images, and PDFs usually do not need to be uploaded to our server. Any future tool that requires a network service will say so clearly.',
     linkText: 'Read the privacy policy',
   },
 } satisfies Record<Locale, { heading: string; text: string; linkText: string }>;
@@ -127,19 +127,19 @@ export const homeFaq = {
   zh: [
     {
       q: '這些工具可以免費使用嗎？',
-      a: '可以。目前 FreeTools 站內工具皆可免費使用，不需要付費訂閱；個別工具的用途與限制會在各工具頁說明。',
+      a: '可以。目前 FunnyTools 站內工具皆可免費使用，不需要付費訂閱；個別工具的用途與限制會在各工具頁說明。',
     },
     {
       q: '免費線上工具需要安裝嗎？',
       a: '不需要。使用手機或電腦的瀏覽器開啟工具頁即可操作，也不必註冊帳號或登入。',
     },
     {
-      q: 'FreeTools 可以在手機使用嗎？',
+      q: 'FunnyTools 可以在手機使用嗎？',
       a: '可以。首頁、分類頁與工具頁均支援手機與電腦瀏覽器；較大的 PDF 或圖片檔案，處理速度仍會受到裝置效能與記憶體影響。',
     },
     {
       q: 'PDF 工具會上傳檔案嗎？',
-      a: '目前多數 PDF 工具會直接在瀏覽器本機讀取與處理檔案，不會上傳到 FreeTools 伺服器保存。請以各工具頁的隱私說明為準，並避免處理高度敏感資料。',
+      a: '目前多數 PDF 工具會直接在瀏覽器本機讀取與處理檔案，不會上傳到 FunnyTools 伺服器保存。請以各工具頁的隱私說明為準，並避免處理高度敏感資料。',
     },
     {
       q: '有哪些適合老師或學生的工具？',
@@ -160,7 +160,7 @@ export const homeFaq = {
   ],
   en: [
     {
-      q: 'Is FreeTools free?',
+      q: 'Is FunnyTools free?',
       a: 'Yes. The tools currently available on the site are free to use without an account or app download.',
     },
     {
@@ -169,7 +169,7 @@ export const homeFaq = {
     },
     {
       q: 'Are uploaded files saved?',
-      a: 'Most PDF and image tools read and process files locally, so they are not saved on FreeTools servers. Check each tool page and avoid highly sensitive files.',
+      a: 'Most PDF and image tools read and process files locally, so they are not saved on FunnyTools servers. Check each tool page and avoid highly sensitive files.',
     },
     {
       q: 'Can I use it on a phone?',
@@ -189,26 +189,26 @@ export const homeFaq = {
 export const pages = {
   zh: {
     about: {
-      title: '關於 FreeTools 免費線上工具箱',
-      seoTitle: '關於我們｜免費線上工具箱簡介 - FreeTools',
-      description: '了解 FreeTools 免費線上工具箱的網站定位、工具原則、資料處理方式與目前涵蓋的工具分類。本站工具可免費使用且不需註冊，並優先採用瀏覽器本機處理，協助你安全完成日常工作、學習與檔案任務。',
+      title: '關於 FunnyTools 免費線上工具箱',
+      seoTitle: '關於我們｜免費線上工具箱簡介 - FunnyTools',
+      description: '了解 FunnyTools 免費線上工具箱的網站定位、工具原則、資料處理方式與目前涵蓋的工具分類。本站工具可免費使用且不需註冊，並優先採用瀏覽器本機處理，協助你安全完成日常工作、學習與檔案任務。',
       body: [
-        "FreeTools 免費線上工具箱是一個免費、免安裝、免註冊的線上工具網站，把工作、學習、金錢與日常生活常用的小工具整理在乾淨、好讀、手機友善的頁面中。",
+        "FunnyTools 免費線上工具箱是一個免費、免安裝、免註冊的線上工具網站，把工作、學習、金錢與日常生活常用的小工具整理在乾淨、好讀、手機友善的頁面中。",
         `本站目前提供 ${liveToolCount} 種免費工具，涵蓋薪資與金錢、工作與時間、隨機工具、文字與寫作、圖片與檔案、PDF、製圖工具、學生與老師等分類，並會持續新增與維護。`,
         "我們優先設計可以在瀏覽器本機執行的工具，減少不必要的資料傳輸。文字、名單、數字、圖片或 PDF 等內容，除非工具頁另有明確說明，通常只在你目前的瀏覽器分頁中處理。",
         "每個工具頁會說明用途、基本操作、常見情境、資料處理方式與已知限制。涉及估算的工具也會提醒你以原始紀錄、官方規則或專業意見交叉確認重要結果。",
         "網站內容與工具行為會一起維護。更新重點包括修正功能錯誤、補充操作說明、揭露瀏覽器或檔案限制，以及提供可供核對結果的實際範例，而不是把任何計算結果描述成必然正確。",
-        "FreeTools 不要求建立帳號，也不會在計算結果中提供付費置入。廣告或第三方服務如有啟用，會與工具輸出清楚區隔，並在隱私權政策中揭露。",
+        "FunnyTools 不要求建立帳號，也不會在計算結果中提供付費置入。廣告或第三方服務如有啟用，會與工具輸出清楚區隔，並在隱私權政策中揭露。",
         "本站工具以日常便利、學習與初步估算為目的。涉及薪資、稅務、貸款、投資、醫療、法律或其他專業判斷時，結果僅供參考，正式決策仍應查證官方資料或諮詢專業人士。",
         `如果你有工具建議、錯誤回報、內容修正或網站合作問題，歡迎來信 ${SITE.email}。`,
       ],
     },
     contact: {
       title: '聯絡我們',
-      seoTitle: '聯絡我們｜問題回報與工具建議 - FreeTools',
-      description: '提供 FreeTools 免費線上工具箱的聯絡方式與回饋管道。你可以回報工具錯誤、提出新工具建議或反映網站內容問題；來信時若附上頁面網址、操作步驟、裝置與瀏覽器資訊，將更容易確認問題。',
+      seoTitle: '聯絡我們｜問題回報與工具建議 - FunnyTools',
+      description: '提供 FunnyTools 免費線上工具箱的聯絡方式與回饋管道。你可以回報工具錯誤、提出新工具建議或反映網站內容問題；來信時若附上頁面網址、操作步驟、裝置與瀏覽器資訊，將更容易確認問題。',
       body: [
-        `如果你想回報錯誤、提出工具建議、詢問網站內容，或有其他與 FreeTools 免費線上工具箱相關的問題，請寄信到 ${SITE.email}。`,
+        `如果你想回報錯誤、提出工具建議、詢問網站內容，或有其他與 FunnyTools 免費線上工具箱相關的問題，請寄信到 ${SITE.email}。`,
         '回報工具錯誤時，建議附上工具頁網址、你輸入的大致條件、預期結果、實際看到的結果、使用裝置與瀏覽器版本。這些資訊能幫助我們更快重現問題。',
         '如果你想建議新工具，請簡單說明工具用途、希望輸入哪些資料、需要輸出哪些結果，以及你會在什麼情境下使用它。',
         '若要提出內容修正，請附上頁面網址、需要修正的確切句子或結果；如問題涉及標準、公式或現行規定，也請提供可信的參考來源，方便我們比對公開內容與實際工具行為。',
@@ -219,10 +219,10 @@ export const pages = {
     },
     privacy: {
       title: '隱私權政策',
-      seoTitle: '隱私權政策｜資料處理與 Cookie 說明 - FreeTools',
-      description: '說明 FreeTools 免費線上工具箱如何處理使用者輸入、瀏覽器本機計算、localStorage、第三方連結與未來可能使用的廣告 Cookie，並整理資料安全提醒、使用者權利及聯絡方式。',
+      seoTitle: '隱私權政策｜資料處理與 Cookie 說明 - FunnyTools',
+      description: '說明 FunnyTools 免費線上工具箱如何處理使用者輸入、瀏覽器本機計算、localStorage、第三方連結與未來可能使用的廣告 Cookie，並整理資料安全提醒、使用者權利及聯絡方式。',
       body: [
-        "生效日期：2026 年 6 月 20 日。本隱私權政策說明 FreeTools 免費線上工具箱（funnytools.win，以下稱「本站」）如何處理你的資料。",
+        "生效日期：2026 年 6 月 20 日。本隱私權政策說明 FunnyTools 免費線上工具箱（funnytools.win，以下稱「本站」）如何處理你的資料。",
         "本站是靜態網站，所有工具預設在你的瀏覽器本機執行。你在工具中輸入的文字、數字、名單與設定不會傳送到本站伺服器，本站也不會儲存這些內容、不要求註冊，也不建立會員帳號。",
         "本機處理範圍：文字處理、隨機抽選、計時、薪資與貸款估算、圖片處理、PDF 整理與製圖等工具，設計上以瀏覽器本機計算為主。若未來新增需要網路服務的工具，會在工具頁明確標示。",
         "本機儲存：部分工具會使用瀏覽器的 localStorage 儲存你的偏好設定（例如番茄鐘的時間長度），這些資料只留在你的裝置上，你可以隨時透過清除瀏覽器資料移除。",
@@ -237,10 +237,10 @@ export const pages = {
     },
     terms: {
       title: '使用條款',
-      seoTitle: '使用條款｜服務範圍與責任限制 - FreeTools',
-      description: '閱讀 FreeTools 免費線上工具箱的使用條款與基本使用規則，包含服務範圍、使用者責任、可接受使用方式、智慧財產權、第三方服務與責任限制，使用網站前請先確認相關內容。',
+      seoTitle: '使用條款｜服務範圍與責任限制 - FunnyTools',
+      description: '閱讀 FunnyTools 免費線上工具箱的使用條款與基本使用規則，包含服務範圍、使用者責任、可接受使用方式、智慧財產權、第三方服務與責任限制，使用網站前請先確認相關內容。',
       body: [
-        "生效日期：2026 年 6 月 16 日。使用 FreeTools 免費線上工具箱（funnytools.win）即表示你同意本使用條款。",
+        "生效日期：2026 年 6 月 16 日。使用 FunnyTools 免費線上工具箱（funnytools.win）即表示你同意本使用條款。",
         "服務說明：本站提供免費、免安裝的線上小工具，僅供一般資訊與日常便利之用。",
         "使用者責任：你應自行確認輸入資料是否正確，並自行判斷結果是否適合你的情境。請勿在本站工具中輸入高度敏感個資、密碼、金融帳號、機密文件或未經授權處理的第三方資料。",
         "「依現狀」提供：本站工具與內容均以「現狀」與「現有」基礎提供，不附任何明示或默示之擔保，包括但不限於適售性、特定用途之適用性與不侵權。我們不保證工具結果完全準確、不中斷或無錯誤。",
@@ -255,8 +255,8 @@ export const pages = {
     },
     disclaimer: {
       title: '免責聲明',
-      seoTitle: '免責聲明｜工具結果僅供參考 - FreeTools',
-      description: '了解 FreeTools 免費線上工具箱的結果限制與使用者責任。薪資、貸款、統計、隨機及其他工具僅供一般參考，不構成法律、醫療、投資、稅務或會計建議，正式決策請查證官方資料。',
+      seoTitle: '免責聲明｜工具結果僅供參考 - FunnyTools',
+      description: '了解 FunnyTools 免費線上工具箱的結果限制與使用者責任。薪資、貸款、統計、隨機及其他工具僅供一般參考，不構成法律、醫療、投資、稅務或會計建議，正式決策請查證官方資料。',
       body: [
         "生效日期：2026 年 6 月 20 日。本站提供的所有結果僅供一般參考，使用前請自行判斷並驗證。",
         "非專業建議：本站不提供法律、醫療、投資、稅務、會計或其他專業建議。",
@@ -272,10 +272,10 @@ export const pages = {
     },
     aboutTools: {
       title: '本站工具如何運作',
-      seoTitle: '本站工具如何運作｜瀏覽器本機處理說明 - FreeTools',
-      description: '了解 FreeTools 免費線上工具箱如何在瀏覽器本機處理文字、圖片、PDF 與計算資料，以及本機儲存、檔案大小、結果限制、錯誤回報與新工具建議方式，使用前可先確認各項限制。',
+      seoTitle: '本站工具如何運作｜瀏覽器本機處理說明 - FunnyTools',
+      description: '了解 FunnyTools 免費線上工具箱如何在瀏覽器本機處理文字、圖片、PDF 與計算資料，以及本機儲存、檔案大小、結果限制、錯誤回報與新工具建議方式，使用前可先確認各項限制。',
       body: [
-        "FreeTools 免費線上工具箱的多數工具是直接在瀏覽器中執行的靜態網頁工具。你打開工具頁後，輸入欄位、按鈕、計算公式與結果顯示通常都在目前瀏覽器分頁內完成。",
+        "FunnyTools 免費線上工具箱的多數工具是直接在瀏覽器中執行的靜態網頁工具。你打開工具頁後，輸入欄位、按鈕、計算公式與結果顯示通常都在目前瀏覽器分頁內完成。",
         "本機處理工具包含文字統計、大小寫轉換、刪除空白行、隨機抽選、計時器、薪資與貸款估算、圖片壓縮與轉檔、PDF 合併拆分、草圖與流程圖等。這些工具的輸入資料不會主動上傳到本站伺服器。",
         "圖片與 PDF 類工具會在瀏覽器本機讀取檔案並產生下載結果。處理大型檔案時，速度會受到你的裝置效能、瀏覽器限制與檔案大小影響。",
         "部分工具可能使用 localStorage 儲存偏好設定，例如計時器長度或介面選項。這類資料保存在你的瀏覽器中，可透過清除瀏覽器資料移除。",
@@ -288,41 +288,41 @@ export const pages = {
   },
   en: {
     about: {
-      title: 'About FreeTools',
-      seoTitle: 'About Us | Free Online Toolbox - FreeTools',
-      description: 'Learn what FreeTools is, how its free browser tools work, how local processing protects inputs, and what practical categories the site covers.',
+      title: 'About FunnyTools',
+      seoTitle: 'About Us | Free Online Toolbox - FunnyTools',
+      description: 'Learn what FunnyTools is, how its free browser tools work, how local processing protects inputs, and what practical categories the site covers.',
       body: [
-        "FreeTools is a free, no-install, no-sign-up website that gathers everyday tools for work, study, money, and daily life into clean, readable, mobile-friendly pages.",
+        "FunnyTools is a free, no-install, no-sign-up website that gathers everyday tools for work, study, money, and daily life into clean, readable, mobile-friendly pages.",
         `The site currently offers ${liveToolCount} free tools across Money & Salary, Work & Time, Random, Text & Writing, Image & File, PDF, Drawing & CAD, and Student & Teacher, with more added over time.`,
         "The site prioritizes tools that can run locally in your browser, reducing unnecessary data transfer. Unless a tool page clearly says otherwise, text, lists, numbers, images, and PDFs are processed in your current browser session.",
         "Each tool page explains its purpose, basic steps, common use cases, privacy model, and known limitations. Tools that perform estimates also include reminders to compare important results with source records, official rules, or professional advice.",
         "Content and tool behavior are maintained together in the same published project. Updates focus on correcting broken behavior, clarifying instructions, documenting browser or file limits, and adding practical examples that help users verify the output instead of treating a result as automatically authoritative.",
-        "FreeTools does not require user accounts and does not offer paid placement inside calculation results. Advertising or third-party services, when enabled, are kept separate from the tool output and are disclosed in the Privacy Policy.",
+        "FunnyTools does not require user accounts and does not offer paid placement inside calculation results. Advertising or third-party services, when enabled, are kept separate from the tool output and are disclosed in the Privacy Policy.",
         "Tool results are meant for everyday convenience, learning, and preliminary estimates. For salary, tax, loans, investments, medical, legal, or other professional matters, verify with official sources or qualified professionals.",
         `For tool suggestions, bug reports, content corrections, or site-related questions, email ${SITE.email}.`,
       ],
     },
     contact: {
       title: 'Contact',
-      seoTitle: 'Contact Us | Bug Reports & Tool Suggestions - FreeTools',
-      description: 'Contact FreeTools to report a tool error, suggest a practical new browser tool, request a content correction, or ask a site-related question.',
+      seoTitle: 'Contact Us | Bug Reports & Tool Suggestions - FunnyTools',
+      description: 'Contact FunnyTools to report a tool error, suggest a practical new browser tool, request a content correction, or ask a site-related question.',
       body: [
         `For bug reports, tool suggestions, content questions, or site-related questions, email ${SITE.email}.`,
         'When reporting an issue, include the tool page URL, approximate input conditions, expected result, actual result, device, and browser version. This helps us reproduce and check the issue faster.',
         'When suggesting a new tool, briefly explain what problem it should solve, what inputs it should accept, what result it should produce, and when you would use it.',
         'For a content correction, include the page URL, the exact sentence or result that appears incorrect, and a reliable source when the issue depends on a standard, formula, or current rule. Corrections are evaluated against the published tool behavior and supporting sources.',
         'Do not email passwords, identity documents, financial statements, private student records, medical records, or files containing confidential information. Most technical issues can be reproduced with a small fictional example instead.',
-        'Messages are reviewed for site maintenance, but a reply time is not guaranteed. FreeTools cannot provide individual case review, certify a calculation, recover browser data, or act as an intermediary with an employer, school, bank, government agency, or third-party service.',
+        'Messages are reviewed for site maintenance, but a reply time is not guaranteed. FunnyTools cannot provide individual case review, certify a calculation, recover browser data, or act as an intermediary with an employer, school, bank, government agency, or third-party service.',
         'The site does not provide live support, personal financial planning, legal, medical, or tax advice. For matters affecting formal rights or obligations, contact an official source, employer, bank, or qualified professional.',
       ],
     },
     privacy: {
       title: 'Privacy Policy',
-      seoTitle: 'Privacy Policy | Data Handling & Cookies - FreeTools',
-      description: 'How FreeTools handles browser processing, user input, local storage, third-party links, account-free access, and future advertising cookies.',
+      seoTitle: 'Privacy Policy | Data Handling & Cookies - FunnyTools',
+      description: 'How FunnyTools handles browser processing, user input, local storage, third-party links, account-free access, and future advertising cookies.',
       body: [
-        "Effective date: June 20, 2026. This Privacy Policy explains how FreeTools (funnytools.win, the \"Site\") handles your data.",
-        "The Site is static, and all tools run locally in your browser by default. The text, numbers, lists, and settings you enter are not sent to a FreeTools server, are not stored by us, and no account or registration is required.",
+        "Effective date: June 20, 2026. This Privacy Policy explains how FunnyTools (funnytools.win, the \"Site\") handles your data.",
+        "The Site is static, and all tools run locally in your browser by default. The text, numbers, lists, and settings you enter are not sent to a FunnyTools server, are not stored by us, and no account or registration is required.",
         "Local-processing scope: Text tools, random pickers, timers, salary and loan estimates, image tools, PDF tools, and drawing tools are designed around browser-side processing. If a future tool requires a network service, that tool page will say so clearly.",
         "Local storage: Some tools use your browser's localStorage to remember preferences (such as Pomodoro lengths). That data stays on your device and can be removed any time by clearing your browser data.",
         `Cookies and advertising: ${adsenseDisclosure.en} Google and its partners may use cookies, local storage, IP addresses, and device information for security checks, traffic-quality assessment, third-party ad serving, and measurement. Google may provide personalized or non-personalized ads according to your settings. You can manage personalized advertising at Google Ads Settings (adssettings.google.com) and block or clear cookies in your browser. Where prior consent is legally required, the Site will provide the required consent choices before enabling the relevant advertising features.`,
@@ -336,10 +336,10 @@ export const pages = {
     },
     terms: {
       title: 'Terms of Use',
-      seoTitle: 'Terms of Use | Service Scope & Limits - FreeTools',
-      description: 'FreeTools terms covering service scope, user responsibility, acceptable use, intellectual property, third-party services, and liability limits.',
+      seoTitle: 'Terms of Use | Service Scope & Limits - FunnyTools',
+      description: 'FunnyTools terms covering service scope, user responsibility, acceptable use, intellectual property, third-party services, and liability limits.',
       body: [
-        "Effective date: June 16, 2026. By using FreeTools (funnytools.win), you agree to these Terms of Use.",
+        "Effective date: June 16, 2026. By using FunnyTools (funnytools.win), you agree to these Terms of Use.",
         "Service: The Site offers free, no-install online tools for general information and everyday convenience only.",
         "User responsibility: You are responsible for checking whether your inputs are correct and whether results fit your situation. Do not enter highly sensitive personal data, passwords, financial account numbers, confidential documents, or third-party data you are not authorized to process.",
         "\"As is\": The tools and content are provided on an \"as is\" and \"as available\" basis, without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that results are fully accurate, uninterrupted, or error-free.",
@@ -354,8 +354,8 @@ export const pages = {
     },
     disclaimer: {
       title: 'Disclaimer',
-      seoTitle: 'Disclaimer | Results Are Reference Only - FreeTools',
-      description: 'Limits of FreeTools results, user responsibility, and why calculator, random, financial, legal, and health outputs are reference only.',
+      seoTitle: 'Disclaimer | Results Are Reference Only - FunnyTools',
+      description: 'Limits of FunnyTools results, user responsibility, and why calculator, random, financial, legal, and health outputs are reference only.',
       body: [
         "Effective date: June 20, 2026. All results from the Site are for general reference only; use your own judgment and verify before relying on them.",
         "Not professional advice: The Site does not provide legal, medical, investment, tax, accounting, or other professional advice.",
@@ -371,11 +371,11 @@ export const pages = {
     },
     aboutTools: {
       title: 'How Our Tools Work',
-      seoTitle: 'How Our Tools Work | Local Browser Processing - FreeTools',
-      description: 'How FreeTools processes text, images, PDFs, and calculations locally in the browser, plus storage, result limits, bug reports, and suggestions.',
+      seoTitle: 'How Our Tools Work | Local Browser Processing - FunnyTools',
+      description: 'How FunnyTools processes text, images, PDFs, and calculations locally in the browser, plus storage, result limits, bug reports, and suggestions.',
       body: [
-        "Most FreeTools tools are static browser tools. After you open a tool page, form inputs, buttons, formulas, and result displays usually run inside your current browser tab.",
-        "Local-processing tools include word counters, case converters, text cleanup tools, random pickers, timers, salary and loan calculators, image compression and conversion, PDF merge and split tools, sketching, and flowchart tools. These inputs are not actively uploaded to FreeTools servers.",
+        "Most FunnyTools tools are static browser tools. After you open a tool page, form inputs, buttons, formulas, and result displays usually run inside your current browser tab.",
+        "Local-processing tools include word counters, case converters, text cleanup tools, random pickers, timers, salary and loan calculators, image compression and conversion, PDF merge and split tools, sketching, and flowchart tools. These inputs are not actively uploaded to FunnyTools servers.",
         "Image and PDF tools read files in your browser and generate downloadable results locally. Large files may be slower depending on your device, browser limits, and file size.",
         "Some tools may use localStorage for preferences such as timer lengths or interface options. That data is stored in your browser and can be removed by clearing browser data.",
         "Calculation results have limits. Salary, overtime, loans, compound interest, inflation, business days, GPA, and grade average tools usually rely on simplified formulas or the values you enter. They do not cover every law, company policy, bank condition, school rule, or rounding difference.",

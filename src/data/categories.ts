@@ -98,14 +98,14 @@ export const categories: Category[] = [
       zh: {
         overview: [
           '圖片工具適合處理網站上傳、社群分享及一般文件需要的檔案。壓縮會在畫質與容量間取捨，尺寸調整會改變像素數，格式轉換則可能影響透明背景、動畫或色彩表現。',
-          '檔案主要由瀏覽器本機讀取及輸出，不會主動上傳到 FreeTools 免費線上工具箱伺服器。處理大量或高解析度圖片時會占用裝置記憶體，手機上建議分批操作並在下載後檢查成品。',
+          '檔案主要由瀏覽器本機讀取及輸出，不會主動上傳到 FunnyTools 免費線上工具箱伺服器。處理大量或高解析度圖片時會占用裝置記憶體，手機上建議分批操作並在下載後檢查成品。',
         ],
         tips: ['需要透明背景時優先保留 PNG 或 WebP。', '照片通常適合 JPEG 或 WebP，文字截圖需注意壓縮模糊。', 'QR Code 產生後先用另一台裝置實際掃描。'],
       },
       en: {
         overview: [
           'Image tools support common website uploads, social sharing, and document preparation. Compression trades quality for file size, resizing changes pixel dimensions, and format conversion can affect transparency, animation, or color rendering.',
-          'Files are read and exported locally in the browser rather than uploaded to FreeTools servers. Large batches and high-resolution images can use substantial memory, so process them in smaller groups on mobile and inspect every downloaded result.',
+          'Files are read and exported locally in the browser rather than uploaded to FunnyTools servers. Large batches and high-resolution images can use substantial memory, so process them in smaller groups on mobile and inspect every downloaded result.',
         ],
         tips: ['Keep PNG or WebP when transparency is required.', 'JPEG or WebP usually suits photos; check text screenshots for blur.', 'Scan a generated QR code with another device before publishing it.'],
       },

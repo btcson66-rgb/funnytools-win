@@ -54,7 +54,7 @@ export const toolContentEnhancements: Record<string, Record<Locale, Enhancement>
           heading: '公平抽選與使用限制',
           paragraphs: [
             '抽選使用瀏覽器中的隨機排序邏輯，適合課堂、活動與日常決策。它不是公證抽獎系統，也不是密碼學等級的隨機產生器；若抽獎涉及法規、獎項爭議、金流或正式合約，仍應依活動規範保留名單來源、抽選紀錄與人工覆核。',
-            '名單與結果在目前瀏覽器頁面中處理，不會由這個工具送到 FreeTools 伺服器。重新整理或關閉頁面後，文字框內容會消失；需要留存結果時，請先複製到你自己的文件或紀錄系統。',
+            '名單與結果在目前瀏覽器頁面中處理，不會由這個工具送到 FunnyTools 伺服器。重新整理或關閉頁面後，文字框內容會消失；需要留存結果時，請先複製到你自己的文件或紀錄系統。',
           ],
         },
       ],
@@ -98,7 +98,7 @@ export const toolContentEnhancements: Record<string, Record<Locale, Enhancement>
       faq: [
         {
           q: '姓名抽籤名單會上傳嗎？',
-          a: '不會。這個工具的名單解析、隨機抽選與移除都在目前瀏覽器頁面中執行，不會把名單送到 FreeTools 伺服器。',
+          a: '不會。這個工具的名單解析、隨機抽選與移除都在目前瀏覽器頁面中執行，不會把名單送到 FunnyTools 伺服器。',
         },
         {
           q: '可以一次抽出多位嗎？',
@@ -464,8 +464,8 @@ function priorityEnhancement(spec: PrioritySpec): Record<Locale, Enhancement> {
       })),
       notes: spec.zhMistakes,
       faq: spec.zhFaq ?? [
-        { q: `${spec.zhName}可以免費使用嗎？`, a: '可以。FreeTools 的工具可直接在瀏覽器使用，不需要註冊。' },
-        { q: '資料會上傳到伺服器嗎？', a: '這個工具採瀏覽器本機處理；輸入內容與檔案不會主動上傳到 FreeTools 伺服器。' },
+        { q: `${spec.zhName}可以免費使用嗎？`, a: '可以。FunnyTools 的工具可直接在瀏覽器使用，不需要註冊。' },
+        { q: '資料會上傳到伺服器嗎？', a: '這個工具採瀏覽器本機處理；輸入內容與檔案不會主動上傳到 FunnyTools 伺服器。' },
         { q: '結果可以當作正式規則嗎？', a: '不建議。這裡提供的是試算、整理與檢查輔助，正式用途仍要依簡章、學校、機關或平台公告為準。' },
         { q: '輸入後結果看起來不合理怎麼辦？', a: '先檢查單位、權重、頁碼範圍、樣本數、格式與空白字元，再用小範例驗算一次。' },
         { q: '還可以搭配哪些工具？', a: spec.relatedZh },
@@ -510,7 +510,7 @@ function priorityEnhancement(spec: PrioritySpec): Record<Locale, Enhancement> {
       notes: spec.enMistakes,
       faq: spec.enFaq ?? [
         { q: `Is ${spec.enName} free to use?`, a: 'Yes. You can use the tool directly in the browser with no registration.' },
-        { q: 'Is my data uploaded?', a: 'No. This tool runs locally in your browser and does not actively upload inputs or files to FreeTools servers.' },
+        { q: 'Is my data uploaded?', a: 'No. This tool runs locally in your browser and does not actively upload inputs or files to FunnyTools servers.' },
         { q: 'Can I treat the result as official?', a: 'No. Use it as a calculation, cleanup, or checking aid and confirm formal requirements with official sources.' },
         { q: 'What should I check when the result looks wrong?', a: 'Review units, weights, page ranges, sample size, source format, whitespace, and output settings, then test again with a small known example.' },
         { q: 'Which related tools should I use next?', a: spec.relatedEn },

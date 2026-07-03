@@ -24,10 +24,10 @@ const { lang } = Astro.props as { lang: Locale };
 const ui = t(lang);
 const homeCopy = {
   zh: {
-    seoTitle: 'FreeTools 免費線上工具箱｜PDF、圖片、文字、QR Code 與教育統計工具',
-    seoDescription: 'FreeTools 提供免費、免註冊、可在瀏覽器本機處理的 PDF、圖片、文字、QR Code、隨機、時間、金錢、教學與統計工具，適合日常工作、學習、備課與報告整理。',
+    seoTitle: 'FunnyTools 免費線上工具箱｜PDF、圖片、文字、QR Code 與教育統計工具',
+    seoDescription: 'FunnyTools 提供免費、免註冊、可在瀏覽器本機處理的 PDF、圖片、文字、QR Code、隨機、時間、金錢、教學與統計工具，適合日常工作、學習、備課與報告整理。',
     eyebrow: '免費、免註冊、重視本機處理',
-    title: 'FreeTools 免費線上工具箱',
+    title: 'FunnyTools 免費線上工具箱',
     intro: '從 PDF、圖片壓縮、QR Code、文字整理，到教師甄試與教育統計工具，多數任務可直接在瀏覽器完成；不必安裝 App，也不需要建立帳號。',
     primaryCta: '瀏覽所有工具',
     secondaryCta: '查看熱門工具',
@@ -58,10 +58,10 @@ const homeCopy = {
 }[lang];
 const seoIntro = {
   zh: {
-    heading: '為什麼 FreeTools 適合日常工作與學習',
+    heading: '為什麼 FunnyTools 適合日常工作與學習',
     paragraphs: [
-      'FreeTools 把一次性但常見的小任務集中在同一個網站：合併 PDF、壓縮圖片、整理文字、產生 QR Code、抽籤分組、計算日期與金錢，或處理教育統計與教師甄試分數。首頁先提供搜尋與常用工具，讓你用任務名稱就能快速進入功能。',
-      '本站以繁體中文使用者為優先，工具頁會標示資料處理方式與使用限制。可在瀏覽器本機完成的文字、圖片、PDF 與計算任務，通常不需要上傳到 FreeTools 伺服器；需要正式用途的成績、財務或研究結果，仍應依官方規則與原始資料再次確認。',
+      'FunnyTools 把一次性但常見的小任務集中在同一個網站：合併 PDF、壓縮圖片、整理文字、產生 QR Code、抽籤分組、計算日期與金錢，或處理教育統計與教師甄試分數。首頁先提供搜尋與常用工具，讓你用任務名稱就能快速進入功能。',
+      '本站以繁體中文使用者為優先，工具頁會標示資料處理方式與使用限制。可在瀏覽器本機完成的文字、圖片、PDF 與計算任務，通常不需要上傳到 FunnyTools 伺服器；需要正式用途的成績、財務或研究結果，仍應依官方規則與原始資料再次確認。',
     ],
   },
   en: homeSeoIntro.en,
@@ -69,15 +69,15 @@ const seoIntro = {
 const privacy = {
   zh: {
     heading: '隱私與本機處理',
-    text: 'FreeTools 優先提供可直接在瀏覽器執行的工具。文字、名單、數字、圖片與 PDF 通常在目前裝置中讀取與處理，不需要上傳到本站伺服器；各工具頁會補充必要限制。',
+    text: 'FunnyTools 優先提供可直接在瀏覽器執行的工具。文字、名單、數字、圖片與 PDF 通常在目前裝置中讀取與處理，不需要上傳到本站伺服器；各工具頁會補充必要限制。',
     linkText: '閱讀隱私權政策',
   },
   en: homePrivacy.en,
 }[lang];
 const faqItems = {
   zh: [
-    { q: 'FreeTools 需要註冊或付費嗎？', a: '不需要。現有工具可免費開啟使用，沒有登入、會員或付費訂閱流程。' },
-    { q: 'PDF 與圖片會上傳到伺服器嗎？', a: '多數 PDF、圖片與文字工具會在瀏覽器本機讀取與處理，不會主動上傳到 FreeTools 伺服器。請仍避免處理高度敏感檔案，並以各工具頁說明為準。' },
+    { q: 'FunnyTools 需要註冊或付費嗎？', a: '不需要。現有工具可免費開啟使用，沒有登入、會員或付費訂閱流程。' },
+    { q: 'PDF 與圖片會上傳到伺服器嗎？', a: '多數 PDF、圖片與文字工具會在瀏覽器本機讀取與處理，不會主動上傳到 FunnyTools 伺服器。請仍避免處理高度敏感檔案，並以各工具頁說明為準。' },
     { q: '可以用用途來搜尋工具嗎？', a: '可以。首頁搜尋會比對工具名稱、分類、關鍵字、使用情境與中英文 alias，例如合併 PDF、壓縮圖片、T 分數、PR、隨機分組。' },
     { q: '教育統計工具能作為正式結果嗎？', a: '工具可用於教學、作業、研究報告草稿與自我檢查，但正式考試、研究與行政文件仍需依官方規則、原始資料與專業判斷確認。' },
   ],
@@ -245,7 +245,7 @@ const taskEntryCopy = {
   },
   en: {
     heading: 'I want to...',
-    intro: 'Start from the task and jump to the right FreeTools page.',
+    intro: 'Start from the task and jump to the right FunnyTools page.',
     aria: 'Common task entry points',
     audienceLabel: 'Find tools by role',
   },

@@ -258,7 +258,7 @@ export default {
       sessions: 'sessions',
       minutesError: 'Minutes must be whole numbers from 1 to 180.',
     },
-    privacyNote: 'Your custom Pomodoro minute settings are stored only in this browser using localStorage. FreeTools does not receive your timer settings, session count, or usage history.',
+    privacyNote: 'Your custom Pomodoro minute settings are stored only in this browser using localStorage. FunnyTools does not receive your timer settings, session count, or usage history.',
     disclaimer: 'This tool is a general time-management aid. It is not medical, mental-health, or workplace performance advice. For sleep, anxiety, or health concerns, consult a qualified professional.',
   },
 } satisfies LocalizedToolContent;

@@ -4,7 +4,7 @@
     "status": "active",
     "category": "productivity",
     "title": "Amazon Recommended Resources",
-    "description": "Use this Amazon affiliate link when shopping for items you already need and support FreeTools maintenance.",
+    "description": "Use this Amazon affiliate link when shopping for items you already need and support FunnyTools maintenance.",
     "platform": "amazon",
     "linkType": "resource",
     "affiliateUrl": "https://www.amazon.com/?&linkCode=ll2&tag=funnytools-20&linkId=778ecc16814fbbf7f0d053c434db85a8&language=en_US&ref_=as_li_ss_tl",
@@ -12,7 +12,7 @@
     "imageUrl": "",
     "tags": [
       "Amazon",
-      "Support FreeTools",
+      "Support FunnyTools",
       "Recommended"
     ],
     "priority": 1

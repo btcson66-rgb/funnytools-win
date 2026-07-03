@@ -55,8 +55,8 @@ export const audiences: Audience[] = [
     metaDescription: text('整理教師上課常用的免費工具，包含隨機抽學生、分組、座位表、倒數計時、QR Code 與成績計算，適合課堂活動、討論與評量前快速使用，免安裝、免註冊，打開瀏覽器即可操作。', 'A practical teacher toolkit for random student picks, group generators, seating charts, timers, QR codes, word counts, and grade calculations.'),
     h1: text('教師常用工具：把課堂抽籤、分組、計時與成績整理在一起', 'Teacher Tools for Classroom Picking, Grouping, Timing, and Grades'),
     intro: text(
-      '教師在課堂中常要快速處理名單、抽籤、分組、計時、座位安排與成績檢查。如果每次都重新找工具，活動節奏很容易被打斷。這一頁把適合課堂現場使用的 FreeTools 工具集中整理，讓你可以先貼上學生名單，再依照情境選擇抽學生、分組、座位表、倒數計時、QR Code 或成績平均。工具主要在瀏覽器中操作，適合投影、備課、活動分配與課後整理。',
-      'Teachers often need to handle names, random picks, groups, seating, timers, handout links, and score checks without interrupting the class. This page groups the FreeTools utilities that fit those classroom moments: paste a student list, pick a speaker, create groups, arrange seats, run a countdown, make a QR code, or check grade averages. Use it for lessons, presentations, reviews, and activity planning.'
+      '教師在課堂中常要快速處理名單、抽籤、分組、計時、座位安排與成績檢查。如果每次都重新找工具，活動節奏很容易被打斷。這一頁把適合課堂現場使用的 FunnyTools 工具集中整理，讓你可以先貼上學生名單，再依照情境選擇抽學生、分組、座位表、倒數計時、QR Code 或成績平均。工具主要在瀏覽器中操作，適合投影、備課、活動分配與課後整理。',
+      'Teachers often need to handle names, random picks, groups, seating, timers, handout links, and score checks without interrupting the class. This page groups the FunnyTools utilities that fit those classroom moments: paste a student list, pick a speaker, create groups, arrange seats, run a countdown, make a QR code, or check grade averages. Use it for lessons, presentations, reviews, and activity planning.'
     ),
     painPoints: [
       text('上課時需要公平抽人或抽組，不能花太多時間設定。', 'Pick students or groups fairly without slowing down the lesson.'),
@@ -87,8 +87,8 @@ export const audiences: Audience[] = [
     metaDescription: text('整理學生做報告、交作業與準備簡報時常用的免費工具，包含字數統計、圖片壓縮、PDF 合併拆分、GPA、APA 7 與 QR Code，免安裝、免註冊，手機或電腦打開瀏覽器就能用。', 'A student report toolkit for word counts, character counts, image compression, PDF merge and split, GPA, APA 7 reports, and QR codes.'),
     h1: text('學生報告工具：從草稿、圖片到 PDF 繳交前檢查', 'Student Report Tools for Drafts, Images, PDFs, and Submission Checks'),
     intro: text(
-      '學生做報告時常遇到字數限制、圖片太大、PDF 需要合併拆分、引用格式要整理，或需要把連結轉成 QR Code。這一頁把交作業前最常用的 FreeTools 工具集中在一起，讓你可以先檢查字數與大小，再處理圖片、PDF、APA 7 報告或 GPA 試算。工具適合在手機或電腦上快速使用，但正式繳交前仍要依老師或系所規定再次確認格式。',
-      'Student reports often involve word limits, oversized images, merged PDFs, citation drafts, QR codes, and last-minute file checks. This page collects FreeTools utilities for those moments: count words, compress images, merge or split PDFs, prepare APA 7 report text, calculate GPA, and clean up text before submitting. Always compare the final file against your teacher or department requirements.'
+      '學生做報告時常遇到字數限制、圖片太大、PDF 需要合併拆分、引用格式要整理，或需要把連結轉成 QR Code。這一頁把交作業前最常用的 FunnyTools 工具集中在一起，讓你可以先檢查字數與大小，再處理圖片、PDF、APA 7 報告或 GPA 試算。工具適合在手機或電腦上快速使用，但正式繳交前仍要依老師或系所規定再次確認格式。',
+      'Student reports often involve word limits, oversized images, merged PDFs, citation drafts, QR codes, and last-minute file checks. This page collects FunnyTools utilities for those moments: count words, compress images, merge or split PDFs, prepare APA 7 report text, calculate GPA, and clean up text before submitting. Always compare the final file against your teacher or department requirements.'
     ),
     painPoints: [
       text('報告有字數或字元限制，需要快速檢查。', 'Reports have word or character limits that need quick checking.'),
@@ -119,8 +119,8 @@ export const audiences: Audience[] = [
     metaDescription: text('整理辦公室常用的免費文件工具，包含 PDF 合併拆分壓縮、圖片壓縮、工作天與日期計算、QR Code、薪資加班費與 JSON 格式化，適合臨時文件、行程與資料整理。', 'Office tools for PDF merge, split, and compression, image compression, business days, date math, QR codes, salary and overtime estimates, and JSON formatting.'),
     h1: text('上班族文件工具：處理 PDF、圖片、日期與日常辦公試算', 'Office Worker Tools for PDFs, Images, Dates, and Daily Checks'),
     intro: text(
-      '辦公室工作常被臨時文件任務打斷：PDF 要合併拆分、圖片太大、日期與工作天要試算、QR Code 要貼到公告，或薪資與加班費需要先估算。這一頁把日常辦公常用的 FreeTools 工具整理成一個入口，讓你可以快速處理文件、行程與資料格式。工具適合用於內部草稿、行政整理與交付前檢查；正式薪資、合約或法務決策仍應以公司制度與專業意見為準。',
-      'Office work is often interrupted by small file and scheduling tasks: merge a PDF, split pages, compress a file, calculate business days, make a QR code, estimate salary or overtime, or format JSON from another system. This page groups the FreeTools utilities that help with those daily checks. Use them for drafts, internal admin, and pre-delivery review; formal payroll, legal, or contract decisions still need official sources.'
+      '辦公室工作常被臨時文件任務打斷：PDF 要合併拆分、圖片太大、日期與工作天要試算、QR Code 要貼到公告，或薪資與加班費需要先估算。這一頁把日常辦公常用的 FunnyTools 工具整理成一個入口，讓你可以快速處理文件、行程與資料格式。工具適合用於內部草稿、行政整理與交付前檢查；正式薪資、合約或法務決策仍應以公司制度與專業意見為準。',
+      'Office work is often interrupted by small file and scheduling tasks: merge a PDF, split pages, compress a file, calculate business days, make a QR code, estimate salary or overtime, or format JSON from another system. This page groups the FunnyTools utilities that help with those daily checks. Use them for drafts, internal admin, and pre-delivery review; formal payroll, legal, or contract decisions still need official sources.'
     ),
     painPoints: [
       text('臨時要整理 PDF、圖片或 QR Code，時間很碎。', 'PDF, image, and QR code tasks often arrive with little time.'),
@@ -151,8 +151,8 @@ export const audiences: Audience[] = [
     metaDescription: text('整理社群創作者常用的免費工具，包含字元統計、圖片壓縮與尺寸調整、QR Code、大小寫轉換、顏色產生與隨機輪盤，適合發文、短影音與活動宣傳前快速整理素材。', 'Creator utilities for character counts, word counts, image compression, resizing, QR codes, case conversion, color generation, and random wheels.'),
     h1: text('創作者工具：處理貼文長度、圖片大小、QR Code 與靈感選擇', 'Creator Tools for Post Length, Images, QR Codes, and Quick Decisions'),
     intro: text(
-      '創作者常在發布前處理很多小事：標題要改大小寫、貼文要符合字數限制、圖片要壓縮或調整尺寸、活動連結要變成 QR Code，甚至內容主題要用輪盤快速決定。這一頁把適合社群、短影音、部落格與活動宣傳的 FreeTools 工具集中整理，讓你在發文前快速檢查格式與素材。工具不會替你承諾成效，但可以減少重複整理的時間。',
-      'Creators do many small checks before publishing: post length, title casing, image size, QR links, colors, and quick choices between content ideas. This page collects the FreeTools utilities that fit social posts, short videos, blog drafts, event promotion, and visual prep. They do not promise reach or performance; they simply reduce repetitive formatting work before you publish.'
+      '創作者常在發布前處理很多小事：標題要改大小寫、貼文要符合字數限制、圖片要壓縮或調整尺寸、活動連結要變成 QR Code，甚至內容主題要用輪盤快速決定。這一頁把適合社群、短影音、部落格與活動宣傳的 FunnyTools 工具集中整理，讓你在發文前快速檢查格式與素材。工具不會替你承諾成效，但可以減少重複整理的時間。',
+      'Creators do many small checks before publishing: post length, title casing, image size, QR links, colors, and quick choices between content ideas. This page collects the FunnyTools utilities that fit social posts, short videos, blog drafts, event promotion, and visual prep. They do not promise reach or performance; they simply reduce repetitive formatting work before you publish.'
     ),
     painPoints: [
       text('貼文、標題、簡介與平台限制需要快速檢查。', 'Posts, titles, bios, and platform limits need fast checks.'),
@@ -183,8 +183,8 @@ export const audiences: Audience[] = [
     metaDescription: text('整理設計師與視覺工作者常用的免費工具，包含圖片壓縮、尺寸調整、裁切旋轉、PNG/JPG/WebP 轉檔、顏色產生、QR Code 與草圖，適合交付前的輕量圖片調整。', 'Designer utilities for image compression, resizing, crop, rotate, PNG/JPG/WebP conversion, color generation, QR codes, and sketching.'),
     h1: text('設計師工具：快速處理圖片尺寸、格式、顏色與 QR Code', 'Designer Tools for Image Size, Formats, Color, and QR Codes'),
     intro: text(
-      '設計交付前常需要快速處理非核心但很花時間的細節：圖片要壓縮、裁切、旋轉、轉成 JPG 或 WebP，色碼要臨時挑選，活動或作品集連結要做成 QR Code。這一頁把適合設計師、行銷視覺與內容製作的 FreeTools 工具集中整理，讓你在不開大型軟體的情況下完成輕量調整。正式印刷、品牌規範或工程圖仍需要專業軟體與人工檢查。',
-      'Design delivery often includes small but time-consuming tasks: compress an image, resize it, crop or rotate it, convert PNG/JPG/WebP, pick a color, create a QR code, or sketch a quick idea. This page groups lightweight FreeTools utilities for designers, marketers, and visual content teams. They are useful for quick browser edits, while print, brand systems, and production files still need professional review.'
+      '設計交付前常需要快速處理非核心但很花時間的細節：圖片要壓縮、裁切、旋轉、轉成 JPG 或 WebP，色碼要臨時挑選，活動或作品集連結要做成 QR Code。這一頁把適合設計師、行銷視覺與內容製作的 FunnyTools 工具集中整理，讓你在不開大型軟體的情況下完成輕量調整。正式印刷、品牌規範或工程圖仍需要專業軟體與人工檢查。',
+      'Design delivery often includes small but time-consuming tasks: compress an image, resize it, crop or rotate it, convert PNG/JPG/WebP, pick a color, create a QR code, or sketch a quick idea. This page groups lightweight FunnyTools utilities for designers, marketers, and visual content teams. They are useful for quick browser edits, while print, brand systems, and production files still need professional review.'
     ),
     painPoints: [
       text('交付前圖片大小、格式與尺寸常需要臨時調整。', 'Image size, format, and dimensions often need last-minute adjustment.'),
@@ -215,8 +215,8 @@ export const audiences: Audience[] = [
     metaDescription: text('整理開發者常用的免費瀏覽器工具，包含 JSON 格式化、Base64、URL 編碼、UUID、Timestamp、CSV JSON 轉換、Markdown 預覽與密碼產生。', 'Developer utilities for JSON formatting, Base64, URL encoding, UUIDs, timestamps, CSV and JSON conversion, Markdown preview, QR codes, and password generation.'),
     h1: text('開發者工具：快速處理 JSON、編碼、UUID、Timestamp 與 Markdown', 'Developer Tools for JSON, Encoding, UUIDs, Timestamps, and Markdown'),
     intro: text(
-      '開發與除錯時常需要快速處理小片段資料：JSON 要格式化、字串要 Base64 或 URL 編碼、Timestamp 要轉換、UUID 要產生、CSV 與 JSON 要互轉，或 Markdown 要先預覽。這一頁整理 FreeTools 中適合開發者的輕量工具，方便在瀏覽器中完成資料檢查與格式轉換。工具適合處理範例、測試資料與非敏感內容；正式密鑰、個資與公司機密請遵守團隊資安流程。',
-      'Development and debugging often involve small data tasks: format JSON, encode a URL, decode Base64, generate a UUID, convert timestamps, move between CSV and JSON, preview Markdown, or create a QR code for testing. This page collects lightweight FreeTools utilities for those checks. Use them for examples, test data, and non-sensitive content; secrets, personal data, and confidential company data need approved security workflows.'
+      '開發與除錯時常需要快速處理小片段資料：JSON 要格式化、字串要 Base64 或 URL 編碼、Timestamp 要轉換、UUID 要產生、CSV 與 JSON 要互轉，或 Markdown 要先預覽。這一頁整理 FunnyTools 中適合開發者的輕量工具，方便在瀏覽器中完成資料檢查與格式轉換。工具適合處理範例、測試資料與非敏感內容；正式密鑰、個資與公司機密請遵守團隊資安流程。',
+      'Development and debugging often involve small data tasks: format JSON, encode a URL, decode Base64, generate a UUID, convert timestamps, move between CSV and JSON, preview Markdown, or create a QR code for testing. This page collects lightweight FunnyTools utilities for those checks. Use them for examples, test data, and non-sensitive content; secrets, personal data, and confidential company data need approved security workflows.'
     ),
     painPoints: [
       text('小型資料轉換不值得切換到大型 IDE 或線上服務。', 'Small data conversions should not require a heavy IDE or service.'),

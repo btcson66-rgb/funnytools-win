@@ -164,7 +164,7 @@ export default {
   en: {
     name: 'Split PDF',
     short: 'Split one PDF into single pages or custom page-range files.',
-    long: 'Split PDF helps you extract only the pages you need from reports, contracts, class material, scanned files, and application packets. Create one PDF per page or enter custom ranges such as 1-3, 5, 8-10 to build separate downloads. Processing runs locally in your browser with pdf-lib, so the original PDF is not uploaded to FreeTools or a third-party server.',
+    long: 'Split PDF helps you extract only the pages you need from reports, contracts, class material, scanned files, and application packets. Create one PDF per page or enter custom ranges such as 1-3, 5, 8-10 to build separate downloads. Processing runs locally in your browser with pdf-lib, so the original PDF is not uploaded to FunnyTools or a third-party server.',
     seoTitle: "Split PDF Online Free | Extract Pages and Custom Ranges",
     seoDescription: 'Split a PDF into single pages or custom page ranges locally in your browser. Files are never uploaded.',
     keywords: [

@@ -1,4 +1,4 @@
-# FreeTools (funnytools.win) — all crawlers welcome.
+# FunnyTools (funnytools.win) — all crawlers welcome.
 User-agent: *
 Allow: /
 

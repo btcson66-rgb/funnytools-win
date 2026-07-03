@@ -10,9 +10,9 @@ export function getStaticPaths() {
 }
 
 const lang = 'en' as const;
-const title = 'Support FreeTools';
-const seoTitle = 'Support FreeTools with sharing and feedback';
-const description = 'Support FreeTools by sharing free browser tools, sending useful feedback, or using optional resource links when they fit your needs.';
+const title = 'Support FunnyTools';
+const seoTitle = 'Support FunnyTools with sharing and feedback';
+const description = 'Support FunnyTools by sharing free browser tools, sending useful feedback, or using optional resource links when they fit your needs.';
 const supportUrl = localePath(lang, 'support');
 const homeUrl = absoluteUrl(localePath(lang));
 const shareText = 'Free online tools for everyday work, study, files, money, and quick decisions.';
@@ -65,7 +65,7 @@ const jsonLd = [
       <p class="eyebrow">Support</p>
       <h1>{title}</h1>
       <p class="lead">
-        FreeTools is kept free for everyday browser-based tasks. If the tools save you time,
+        FunnyTools is kept free for everyday browser-based tasks. If the tools save you time,
         you can help by sharing the site, reporting problems, suggesting new tools, or using the
         recommended resource links below.
       </p>
@@ -73,15 +73,15 @@ const jsonLd = [
 
     <section class="content-section" aria-labelledby="support-methods-heading">
       <div class="section-head">
-        <h2 id="support-methods-heading">Ways to support FreeTools</h2>
+        <h2 id="support-methods-heading">Ways to support FunnyTools</h2>
         <p>Choose the option that is useful to you. Sharing and feedback are just as helpful as affiliate links.</p>
       </div>
       <div class="support-methods">
         <article class="support-method-card">
           <span class="support-icon" aria-hidden="true">S</span>
-          <h3>Share FreeTools</h3>
+          <h3>Share FunnyTools</h3>
           <p>Send the site to a friend, classmate, teammate, or community when a small browser tool could help them finish a task faster.</p>
-          <div class="share-actions" aria-label="Share FreeTools">
+          <div class="share-actions" aria-label="Share FunnyTools">
             {socialShareLinks.map((platform) => (
               <a
                 class={`share-button share-${platform.name.toLowerCase()}`}
@@ -141,8 +141,8 @@ const jsonLd = [
       <aside class="affiliate-disclosure" aria-label="Affiliate link disclosure">
         <strong>Affiliate disclosure</strong>
         <p>
-          Some recommended resource links may be affiliate links. FreeTools may receive a commission
-          if you purchase after clicking, with no extra cost added by FreeTools. Recommendations are
+          Some recommended resource links may be affiliate links. FunnyTools may receive a commission
+          if you purchase after clicking, with no extra cost added by FunnyTools. Recommendations are
           kept separate from tool results and do not affect how the tools work.
         </p>
       </aside>
@@ -163,7 +163,7 @@ const jsonLd = [
 
     <section class="content-section support-reminder" aria-labelledby="choose-heading">
       <h2 id="choose-heading">Choose only what makes sense for you</h2>
-      <p>FreeTools remains free to use. Sharing the site or sending a useful bug report is already meaningful support.</p>
+      <p>FunnyTools remains free to use. Sharing the site or sending a useful bug report is already meaningful support.</p>
     </section>
   </div>
 
@@ -201,7 +201,7 @@ const jsonLd = [
         }
 
         if (copyLabel) copyLabel.textContent = 'Copied';
-        if (copyStatus) copyStatus.textContent = 'FreeTools link copied.';
+        if (copyStatus) copyStatus.textContent = 'FunnyTools link copied.';
         window.setTimeout(() => {
           if (copyLabel) copyLabel.textContent = 'Copy site link';
           if (copyStatus) copyStatus.textContent = '';
