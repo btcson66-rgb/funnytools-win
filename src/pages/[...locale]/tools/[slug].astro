@@ -4,7 +4,7 @@ import { SITE, type Locale } from '../../../config/site';
 import { getCategoryById } from '../../../data/categories';
 import { liveTools, type ToolMeta } from '../../../data/tools';
 import { t } from '../../../i18n/ui';
-import { breadcrumbJsonLd, webApplicationJsonLd } from '../../../lib/seo';
+import { breadcrumbJsonLd, howToJsonLd, webApplicationJsonLd } from '../../../lib/seo';
 import { getToolContent } from '../../../lib/toolContent';
 import { getToolWidget } from '../../../lib/toolWidgets';
 import { categoryUrl, localePath, toolUrl } from '../../../lib/url';
@@ -42,6 +42,7 @@ const breadcrumbItems = [
 const jsonLd = [
   webApplicationJsonLd(lang, tool, content, category),
   breadcrumbJsonLd(breadcrumbItems),
+  ...(content.instructions.length > 0 ? [howToJsonLd(lang, content.name, content.instructions, toolUrl(lang, tool.slug))] : []),
 ];
 const ga4Enabled = !!SITE.ga4MeasurementId;
 ---
