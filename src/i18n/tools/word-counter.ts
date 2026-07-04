@@ -17,51 +17,91 @@ export default {
       "中英文字數"
     ],
     capabilities: [
-      '輸入或貼上文字後，即時更新字數、字元、行、段落與句子數量。',
-      '分開顯示含空白與不含空白字元，方便核對平台或投稿限制。',
-      '依中英文內容估算閱讀時間，並可一鍵複製完整文字。',
+      "即時計算字數、字元、行數、段落、句數與預估閱讀時間。",
     ],
     contentSections: [
       {
-        heading: "字數統計工具可以做什麼",
+        heading: "字數統計工具適合解決的工作",
         paragraphs: [
-          "字數統計工具會即時計算文字的字數、含空白字元、不含空白字元、行數、段落數、句數與預估閱讀時間。它支援英文與中日韓文字混合內容，適合草稿、作業、履歷、社群貼文、腳本與雙語文案。"
-        ]
+          "字數統計工具適合在文字送出前做最後檢查，例如部落格草稿、社群貼文、作業、申請文件、影片腳本、電子報、Meta description 或雙語內容。你貼上文字後，工具會即時更新統計結果，讓你知道內容是否接近平台、投稿或內部審稿規範。",
+          "CJK 字元逐字計算，英文與數字以詞彙 token 估算。這比只用空白切字更貼近實際寫作場景，尤其適合中英文混合、含數字、網址、emoji 或全形標點的內容。",
+        ],
       },
       {
-        heading: "什麼時候適合使用字數統計",
+        heading: "建議使用流程",
         paragraphs: [
-          "當平台、作業或出版規範有字數或字元限制時，先檢查統計數字可以避免送出後才發現超標。"
+          "寫作者可以先在慣用編輯器完成草稿，再貼到工具中檢查長度。如果平台有上限，請確認對方要求的是字、詞、字元、位元組還是不含空白字元，因為不同規範可能差很多。",
+          "複製統計摘要到 Excel、Google Sheets、Notion 或 SEO 內容檢查表。",
         ],
         items: [
-          "檢查社群貼文、廣告文案或簡訊長度",
-          "估算文章、演講稿、影片腳本的閱讀時間",
-          "確認作業、申請書、履歷摘要是否符合限制",
-          "整理長文時檢查段落與句子數量"
-        ]
-      },
-      {
-        heading: "字數統計使用步驟",
-        paragraphs: [
-          "1. 將文章、貼文、作業、履歷或腳本貼到輸入框。",
-          "2. 查看即時更新的字數、字元數、行數、段落數、句數與閱讀時間。",
-          "3. 需要分享時按下複製統計。",
-          "4. 若要重新開始，按下清除重設所有數據。"
-        ]
-      },
-      {
-        heading: "字數統計建議",
-        paragraphs: [
-          "不同平台的字數規則可能不同，正式提交前仍應以對方規範為準。"
+          "先確認規範要求的是字數、字元、位元組還是不含空白字元",
+          "社群平台、廣告後台與 CMS 可能使用不同計算方式",
+          "複製統計摘要比截圖更適合放進審稿表",
+          "發布前仍要在實際平台預覽排版與截斷情況",
         ],
-        items: [
-          "有字元限制時同時查看含空白與不含空白數字",
-          "中英文混合內容不要只依賴單一指標",
-          "長文可用段落數與句數檢查可讀性",
-          "閱讀時間只是估算，需依受眾與內容難度調整"
-        ]
-      }
+      },
+      {
+        heading: "限制與需要人工判斷的部分",
+        paragraphs: [
+          "統計只能告訴你長度，不能判斷內容是否清楚、有說服力或符合品牌語氣。不同平台對 emoji、連結、全形符號、換行與空白的計算方式也可能不同。",
+          "正式發布前，仍應在目標平台、廣告後台、CMS 或文件版面中再次預覽。若內容要進資料庫、API 或匯入檔，請搭配欄位限制與實際系統驗證。",
+        ],
+      },
     ],
+    examples: [
+      "檢查文章草稿是否接近指定字數。",
+      "估算電子報、社群貼文或影片腳本長度。",
+      "比較多個文案版本，挑出最適合平台限制的一版。",
+      "複製統計摘要到 SEO 內容檢查表或審稿表。",
+    ],
+    audience: [
+      "部落客、編輯、文案、學生與研究者。",
+      "需要追蹤文字長度與平台限制的 SEO、行銷與內容團隊。",
+      "撰寫中英文混合內容、雙語作業或短文案的人。",
+    ],
+    caseStudies: [
+      {
+        title: "SEO 草稿檢查",
+        description: "編輯把文章貼入工具，確認長度與摘要，再把統計結果貼到內容排程表。",
+      },
+      {
+        title: "作業或投稿核對",
+        description: "作者在繳交前確認長度，避免把標點、換行或空白誤認為有效內容。",
+      },
+      {
+        title: "短文案修剪",
+        description: "行銷人員比較多個版本的統計結果，挑出最適合發布平台的一版。",
+      },
+    ],
+    notes: [
+      "CJK 字元逐字計算，英文與數字以詞彙 token 估算。",
+      "統計結果是輔助判斷，不能取代實際平台預覽。",
+      "工具不會保存文字；需要紀錄請複製統計摘要。",
+    ],
+    faq: [
+      {
+        q: "文字會被上傳或保存嗎？",
+        a: "不會。統計在瀏覽器內完成，FunnyTools 不會保存你貼上的文字。",
+      },
+      {
+        q: "統計結果可以匯出嗎？",
+        a: "工具提供複製統計摘要，你可以貼到 Excel、Google Sheets、交稿表或內容管理文件。",
+      },
+      {
+        q: "平台限制一定準確嗎？",
+        a: "不一定。這些統計適合做發布前檢查，正式上線仍要以目標平台實際預覽為準。",
+      },
+      {
+        q: "中英文混合內容可以用嗎？",
+        a: "可以。工具會針對 CJK 字元、英文、數字與空白提供較完整的統計參考。",
+      },
+      {
+        q: "可以用來檢查 SEO 摘要嗎？",
+        a: "可以做長度參考，但搜尋結果顯示仍可能受查詢、裝置與搜尋引擎改寫影響。",
+      },
+    ],
+
+
     instructions: [
       '把文章、貼文、作業、履歷或腳本貼到輸入框。',
       '查看即時更新的字數、字元、行數、段落、句數與閱讀時間。',
@@ -69,55 +109,11 @@ export default {
       '要重新檢查另一段文字時，按下清除即可重設所有數值。',
       '若內容包含中英文混合文字，可同時參考字數與字元數，避免只看單一指標。',
     ],
-    examples: [
-      '檢查社群貼文、廣告文案或簡訊是否接近平台限制。',
-      '估算文章、講稿、電子報或影片腳本的閱讀時間。',
-      '確認作業、申請文件、履歷摘要或投稿內容是否符合字數要求。',
-      '整理中英文混合內容時，同時查看 CJK 字元與英文單字的統計。',
-      '編輯文章時快速掌握段落數與句數，判斷結構是否過長。',
-    ],
-    audience: [
-      '需要控制作業、自傳、論文摘要或申請題字數的學生與求職者。',
-      '要核對社群貼文、廣告文案、電子報或影片腳本長度的編輯與行銷人員。',
-      '處理中英文混合內容，需同時參考字數、字元與閱讀時間的作者。',
-    ],
-    caseStudies: [
-      {
-        title: '社群文案檢查',
-        description: '行銷人員貼上貼文草稿，確認字元數沒有超過平台限制，再複製統計結果交給同事審稿。',
-      },
-      {
-        title: '文章閱讀時間',
-        description: '部落格作者在發布前估算閱讀時間，決定是否拆成小標題或分成兩篇文章。',
-      },
-      {
-        title: '作業與申請文件',
-        description: '學生或求職者確認自傳、讀書計畫與短答題的字數，避免低於或超過規定範圍。',
-      },
-    ],
-    notes: [
-      '不同學校、出版社與平台對「字數」的定義可能不同，有正式規範時請以該單位規則為準。',
-      '閱讀時間是依一般速度估算，專業術語、數據表格與讀者熟悉度都會影響實際所需時間。',
-      '文字在瀏覽器本機分析，但處理尚未公開的機密內容時，仍應遵守組織的資安規範。',
-    ],
-    faq: [
-      {
-        q: "中文、日文或韓文字數怎麼計算？",
-        a: "CJK 表意文字會逐字計算，英文單字與數字則以詞彙 token 計算，工具會合併顯示總字數。"
-      },
-      {
-        q: "閱讀時間如何估算？",
-        a: "工具約以英文每分鐘 200 字、中日韓文字每分鐘 300 字元估算，並進位到整分鐘。"
-      },
-      {
-        q: "我的文字會上傳嗎？",
-        a: "不會。所有統計都在瀏覽器內即時完成，網站不會接收或儲存你的文字。"
-      },
-      {
-        q: "行數和段落數有什麼不同？",
-        a: "行數依換行符號計算；段落數則是以空白行分隔的非空文字區塊。"
-      }
-    ],
+
+
+
+
+
     labels: {
       input: '輸入文字',
       placeholder: '在這裡貼上或輸入文字...',
@@ -152,47 +148,91 @@ export default {
       "text counter",
       "sentence counter"
     ],
+    capabilities: [
+      "Count words, characters, lines, paragraphs, sentences, and estimated reading time in real time.",
+    ],
     contentSections: [
       {
-        heading: "What Word Counter does",
+        heading: "What Word Counter is useful for",
         paragraphs: [
-          "Word Counter instantly reports words, characters with spaces, characters without spaces, lines, paragraphs, sentences, and estimated reading time. It is designed for English and mixed CJK content, including Chinese, Japanese, and Korean text."
-        ]
+          "Word Counter is useful before publishing, submitting, or handing off blog drafts, social captions, assignments, application essays, newsletters, video scripts, meta descriptions, and bilingual text. Paste the text and the page updates immediately, giving you a practical length check before the copy reaches a platform, editor, CMS, ad account, or review sheet.",
+          "CJK characters are counted individually, while English and numbers are counted using word-like tokens. This is more useful than a simple space split when drafts combine headings, numbers, URLs, emoji, punctuation, and multiple languages.",
+        ],
       },
       {
-        heading: "When to use Word Counter",
+        heading: "Recommended workflow",
         paragraphs: [
-          "Use it whenever a platform, assignment, editor, or form has word or character limits."
+          "Write in your normal editor first, then paste the draft here for a length check. If the destination has a strict rule, confirm whether it means words, visible characters, bytes, characters without spaces, or a platform-specific calculation.",
+          "copy the statistics summary into Excel, Google Sheets, Notion, or an SEO content checklist. Teams can store that summary in an editorial calendar, review sheet, submission checklist, or SEO QA document instead of relying on screenshots or manual notes.",
         ],
         items: [
-          "Checking social posts, ad copy, or SMS drafts against limits",
-          "Estimating reading time for articles, speeches, and video scripts",
-          "Reviewing assignments, applications, and resume summaries",
-          "Watching paragraph and sentence counts while editing readability"
-        ]
-      },
-      {
-        heading: "Step-by-step usage guide",
-        paragraphs: [
-          "1. Paste or type your text into the input area.",
-          "2. Review live counts for words, characters, lines, paragraphs, sentences, and reading time.",
-          "3. Use Copy stats when you need to share the summary.",
-          "4. Use Clear to reset the text and all metrics."
-        ]
-      },
-      {
-        heading: "Tips and best practices",
-        paragraphs: [
-          "Different platforms count text differently, so treat the result as a practical editing guide."
+          "Confirm whether the rule is based on words, characters, bytes, or characters without spaces",
+          "Use copied statistics for review sheets instead of screenshots",
+          "Preview final formatting in the destination platform",
+          "Check database and API limits in the real system when the text will be imported",
         ],
-        items: [
-          "Check both character counts when a limit may include spaces",
-          "For mixed-language content, compare words and characters",
-          "Use paragraph and sentence counts to improve readability",
-          "Follow the official counter for final submission rules"
-        ]
-      }
+      },
+      {
+        heading: "Limits and human checks",
+        paragraphs: [
+          "Counting text does not prove that the writing is clear, persuasive, original, or ready to publish. Platforms may count emoji, links, full-width punctuation, line breaks, and pasted formatting differently.",
+          "Before publishing ads, snippets, social posts, app text, or CMS pages, preview the final version in the target system. For database, API, or import workflows, compare the numbers with the real field limits and validation rules.",
+        ],
+      },
     ],
+    examples: [
+      "Check whether a draft is close to a required length.",
+      "Estimate length for a newsletter, social post, or video script.",
+      "Compare several copy versions before choosing one for a platform.",
+      "Copy the statistics summary into an SEO or editorial checklist.",
+    ],
+    audience: [
+      "Bloggers, editors, copywriters, students, researchers, and translators.",
+      "SEO, marketing, and content teams that track text length and platform limits.",
+      "Writers working with bilingual text, short copy, or mixed-language drafts.",
+    ],
+    caseStudies: [
+      {
+        title: "SEO draft review",
+        description: "An editor checks length and copies the statistics into the content calendar before publication.",
+      },
+      {
+        title: "Submission check",
+        description: "A writer verifies length before handing in a draft with a strict requirement.",
+      },
+      {
+        title: "Copy trimming",
+        description: "A marketer compares several versions and chooses the one that fits the destination platform.",
+      },
+    ],
+    notes: [
+      "CJK characters are counted individually, while English and numbers are counted using word-like tokens.",
+      "Counts are a planning aid and do not replace a real platform preview.",
+      "The site does not save your text; copy the statistics summary if you need a record.",
+    ],
+    faq: [
+      {
+        q: "Is my text uploaded?",
+        a: "No. Counting runs in your browser, and the site does not store the text you paste.",
+      },
+      {
+        q: "Can I export the statistics?",
+        a: "Use the copy statistics action, then paste the summary into a spreadsheet, checklist, or editorial note.",
+      },
+      {
+        q: "Are platform limits guaranteed?",
+        a: "No. Use the numbers as a preflight check, then confirm in the destination platform.",
+      },
+      {
+        q: "Does it work with mixed languages?",
+        a: "Yes. The tool gives useful counts for CJK text, English, numbers, whitespace, and symbols.",
+      },
+      {
+        q: "Can I use it for SEO snippets?",
+        a: "Yes, as a length reference. Search result display can still change by query, device, and rewriting.",
+      },
+    ],
+
     instructions: [
       'Paste or type your article, post, assignment, resume, or script into the textarea.',
       'Review the live stats for words, characters, lines, paragraphs, sentences, and reading time.',
@@ -200,45 +240,9 @@ export default {
       'Use Clear when you want to remove the text and reset every metric.',
       'For mixed English and CJK content, compare both word count and character count instead of relying on one metric.',
     ],
-    examples: [
-      'Check whether a social post, ad, or SMS draft is close to a platform limit.',
-      'Estimate reading time for blog posts, speeches, newsletters, or video scripts.',
-      'Review word count for assignments, applications, resume summaries, or submissions.',
-      'Measure mixed English and Chinese content without switching tools.',
-      'Scan paragraph and sentence counts while editing long drafts for readability.',
-    ],
-    caseStudies: [
-      {
-        title: 'Social copy review',
-        description: 'A marketer pastes a post draft, checks the character count against platform limits, then copies the stats for review.',
-      },
-      {
-        title: 'Article reading time',
-        description: 'A blogger estimates reading time before publishing and decides whether the draft should be split into sections or separate posts.',
-      },
-      {
-        title: 'Application writing',
-        description: 'A student or job seeker checks essays, personal statements, and short answers before submitting them to a form with limits.',
-      },
-    ],
-    faq: [
-      {
-        q: "How are Chinese, Japanese, or Korean words counted?",
-        a: "CJK ideographs are counted one character at a time, while Latin words and numbers are counted as word tokens."
-      },
-      {
-        q: "How is reading time estimated?",
-        a: "The estimate uses about 200 English words per minute and about 300 CJK characters per minute, then rounds up to whole minutes."
-      },
-      {
-        q: "Does my text get uploaded?",
-        a: "No. Counting happens live in your browser, and the site does not receive or store the text."
-      },
-      {
-        q: "What is the difference between lines and paragraphs?",
-        a: "Lines follow newline characters. Paragraphs are non-empty text blocks separated by blank lines."
-      }
-    ],
+
+
+
     labels: {
       input: 'Input text',
       placeholder: 'Paste or type text here...',

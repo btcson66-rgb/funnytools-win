@@ -17,105 +17,94 @@ export default {
       "課堂分組"
     ],
     capabilities: [
-      '將一行一名的學生、參加者或團隊名單即時洗牌。',
-      '按指定小組數輪流分配，讓各組人數差距盡量不超過一人。',
-      '一鍵複製所有分組結果，可直接貼到簡報、群組或課堂公告。',
+      "將一行一名的清單洗牌，平均分配成指定數量的小組。",
     ],
     contentSections: [
       {
-        heading: "隨機分組工具可以做什麼",
+        heading: "隨機分組工具適合解決的工作",
         paragraphs: [
-          "隨機分組工具可將名單打亂並平均分配到指定數量的小組，適合課堂討論、工作坊、活動破冰、遊戲隊伍與簡報分組。輸入一行一個名字，設定組數後即可產生可複製或匯出的分組結果。"
-        ]
+          "適合在你需要快速建立臨時小組，但不想花時間手動拖拉名單時使用。老師可以用它安排討論、實驗、閱讀分享或報告小組；工作坊主持人可以把簽到名單分成練習隊伍；社團與活動也能用它建立遊戲分隊或破冰小組。",
+          "工具會先把名單洗牌，再輪流分配到各組，讓人數盡量平均。它不會自動判斷能力、性別、座位、朋友關係或出席限制，所以正式發布前仍應由老師或主持人快速檢查，必要時手動交換少數成員。",
+        ],
       },
       {
-        heading: "什麼時候適合使用隨機分組",
+        heading: "建議使用流程",
         paragraphs: [
-          "當你需要快速建立臨時小組，而且不想用試算表或手動抽籤時，這個工具很適合。"
+          "最穩定的做法是先在 Excel 或 Google Sheets 清理名單：刪除缺席者、合併重複姓名，並替同名者加上座號或代碼。接著貼到工具中，每一行放一位成員，輸入要建立的小組數，再產生結果。",
+          "分組完成後，你可以複製全部結果貼到聊天室、簡報或課堂公告，也可以匯出 CSV，讓「組別」與「成員」成為兩欄資料。CSV 特別適合需要後續點名、評分、列印座位表或彙整分組作業的情境。",
         ],
         items: [
-          "課堂討論、實驗或合作學習分組",
-          "工作坊、讀書會或社團活動分組",
-          "遊戲夜、競賽或破冰活動分隊",
-          "簡報、專案或練習任務的初步分配"
-        ]
-      },
-      {
-        heading: "隨機分組使用步驟",
-        paragraphs: [
-          "1. 將參與者名單貼到輸入框，一行一個名字。",
-          "2. 輸入要建立的小組數量。",
-          "3. 按下產生分組，工具會隨機打亂並平均分配。",
-          "4. 複製全部結果，或匯出 CSV 供試算表使用。"
-        ]
-      },
-      {
-        heading: "隨機分組建議",
-        paragraphs: [
-          "隨機分組能提高效率，但仍可依實際需求做最後調整。"
+          "小組數必須介於 1 和名單人數之間",
+          "CSV 可直接用 Excel、Google Sheets 或 LibreOffice 開啟",
+          "同名者請加上座號、班級或簡短代碼",
+          "有特殊限制時，先產生初稿，再人工微調",
         ],
-        items: [
-          "有同名者時加入座號、代號或班級避免混淆",
-          "若有特殊配對限制，產生後再手動調整",
-          "組數不要超過人數，避免空組",
-          "複製結果前先確認每組人數是否符合活動需求"
-        ]
-      }
+      },
+      {
+        heading: "限制與需要人工判斷的部分",
+        paragraphs: [
+          "隨機分組的好處是快速、透明，也能減少主持人的主觀偏好。不過「隨機」不一定等於「最適合」。如果課程需要能力平衡、語言搭配、實驗安全、座位安排或避免特定組合，應把工具產生的結果視為初稿，而不是最終答案。",
+          "分享前先檢查每組人數、缺席者、重複姓名與特殊需求。若要列印，可以把 CSV 匯入試算表後調整欄寬；若要投影，複製文字版本通常更快。",
+        ],
+      },
+    ],
+    examples: [
+      "將 28 位學生分成 7 組進行實驗課。",
+      "工作坊把簽到名單分成 5 個討論小隊。",
+      "社團活動用 CSV 匯出分組，交給關主列印點名。",
+      "助教先隨機分組，再依缺席與能力需求微調。",
+    ],
+    audience: [
+      "需要快速安排討論組、實驗組或報告組的老師與助教。",
+      "工作坊、社團、營隊與活動主持人。",
+      "想把分組結果匯入試算表後續追蹤的人。",
+    ],
+    caseStudies: [
+      {
+        title: "實驗課分組",
+        description: "老師將 28 位學生分成 7 組，匯出 CSV 後貼到課堂試算表，下一步再加上器材與桌號。",
+      },
+      {
+        title: "工作坊破冰",
+        description: "主持人用簽到名單建立 5 個臨時小隊，複製文字版本貼到投影片，讓參與者立即找到隊友。",
+      },
+      {
+        title: "報告小組初稿",
+        description: "助教先用隨機分組產生公平初稿，再根據缺席、同組限制與能力平衡手動調整。",
+      },
+    ],
+    notes: [
+      "工具平均分配人數，但不會自動處理能力、座位或人際限制。",
+      "名單含個資時，建議只輸入必要稱呼或代碼。",
+      "CSV 匯出方便後續在 Excel 或 Google Sheets 中列印與追蹤。",
+    ],
+    faq: [
+      {
+        q: "分組怎麼保持平均？",
+        a: "工具會先洗牌名單，再輪流放入各組，因此各組人數會盡量接近。",
+      },
+      {
+        q: "可以指定兩個人一定同組或不同組嗎？",
+        a: "目前不支援限制條件。建議先產生分組初稿，再由老師或主持人手動調整。",
+      },
+      {
+        q: "可以匯出到 Excel 嗎？",
+        a: "可以匯出 CSV。CSV 可用 Excel、Google Sheets 或其他試算表開啟。",
+      },
+      {
+        q: "小組數可以比人數多嗎？",
+        a: "不行。小組數必須至少 1，且不能超過名單中的有效人數，避免產生空組。",
+      },
+      {
+        q: "名單會被保存嗎？",
+        a: "不會。分組在瀏覽器內完成，關閉或重新整理頁面後，工具不會保存名單。",
+      },
     ],
     instructions: [
       '將所有名字貼到文字框中，每一行一個名字。',
       '輸入需要的小組數，例如 2、3 或 6 組。',
       '按「產生分組」，工具會洗牌後平均分配成各組。',
       '使用「複製全部」把分組結果貼到訊息、簡報或工作表中。',
-    ],
-    examples: [
-      '課堂討論前把學生平均分成數組。',
-      '工作坊破冰活動快速建立臨時小隊。',
-      '線上遊戲或桌遊前隨機分隊。',
-      '將報告主題或任務成員分配到各組。',
-    ],
-    audience: [
-      '需要在短時間內完成討論分組、實驗分組或活動分隊的老師。',
-      '帶領工作坊、讀書會或社團活動，想減少人工分組時間的主持人。',
-      '需要把參與者分成多個小隊進行遊戲、競賽或破冰的活動工作者。',
-      '想用文字結果快速公告小組名單，而不需要製作複雜表格的人。',
-    ],
-    caseStudies: [
-      {
-        title: '課堂討論前快速分組',
-        description: '老師在投影畫面上貼入全班名單，設定 6 組後產生結果，再把文字複製到班級公告，學生可以立刻找到自己的討論小組。',
-      },
-      {
-        title: '工作坊破冰活動',
-        description: '主持人把報到名單貼進工具，依活動需求分成數個小隊，避免現場逐一安排座位與隊伍造成等待。',
-      },
-      {
-        title: '報告任務分配',
-        description: '課程助教先用工具產生初步小組，再依特殊需求手動微調，保留隨機分配的便利，也兼顧實際課務安排。',
-      },
-    ],
-    notes: [
-      '隨機結果適合做為教學輔助，不代表課堂公平性的唯一依據；老師仍可依學生需求調整。',
-      '工具可把分組結果複製到剪貼簿，也可匯出 CSV（含組別與成員）方便用試算表整理；目前沒有 Excel 或圖片檔案匯出。',
-      '同名學生建議加上座號、班級或代碼，避免複製結果後難以辨識。',
-    ],
-    faq: [
-      {
-        q: "分組如何保持平均？",
-        a: "工具會先將名單洗牌，再用輪流發牌方式分配到各組，讓組員數盡量接近。"
-      },
-      {
-        q: "可以指定兩個人同組或不同組嗎？",
-        a: "目前不支援限制條件；若有特殊需求，建議先產生結果後手動調整。"
-      },
-      {
-        q: "可以建立比人數更多的組嗎？",
-        a: "不可以。組數必須介於 1 到名單人數之間，避免產生空組。"
-      },
-      {
-        q: "名單會被儲存嗎？",
-        a: "不會。名單與分組結果只在瀏覽器內處理，離開或重新整理後不會由工具保存。"
-      }
     ],
     labels: {
       input: '名單',
@@ -150,101 +139,95 @@ export default {
       "random team splitter",
       "balanced groups"
     ],
+    capabilities: [
+      "Shuffle a one-name-per-line list into a chosen number of balanced groups.",
+    ],
     contentSections: [
       {
-        heading: "What Random Group Generator does",
+        heading: "What Random Group Generator is useful for",
         paragraphs: [
-          "Random Group Generator shuffles a list of names and splits them into balanced groups. It is useful for classroom discussions, workshops, icebreakers, games, presentation teams, and temporary project groups."
-        ]
+          "Use it when you need temporary teams quickly and do not want to build the grouping by hand. It works well for classroom discussions, lab groups, reading circles, presentation teams, workshop exercises, game teams, club activities, and icebreakers.",
+          "The tool shuffles the list first, then distributes names across groups so the sizes stay close. It does not know ability levels, seating constraints, attendance issues, friendships, safety rules, or pairing restrictions. Treat the output as a fair first draft and make small manual changes when human context matters.",
+        ],
       },
       {
-        heading: "When to use Random Group Generator",
+        heading: "Recommended workflow",
         paragraphs: [
-          "Use it when you need temporary teams quickly and do not want to build a spreadsheet or draw names manually."
+          "For clean results, start in Excel or Google Sheets. Remove absent people, fix duplicates, and add seat numbers or short codes when names repeat. Then paste the final list into the generator, choose the number of groups, and generate the split.",
+          "After groups are created, copy the text into a slide or chat message, or export CSV when you need a structured file with group and member columns. CSV export is useful for attendance, grading, room assignment, equipment checkout, printed handouts, or project tracking.",
         ],
         items: [
-          "Creating classroom discussion, lab, or activity groups",
-          "Splitting workshop, reading group, or club participants",
-          "Making teams for games, contests, or icebreakers",
-          "Assigning presentation or practice groups"
-        ]
-      },
-      {
-        heading: "Step-by-step usage guide",
-        paragraphs: [
-          "1. Paste participant names into the text box, one per line.",
-          "2. Enter the number of groups to create.",
-          "3. Press Generate Groups to shuffle and distribute people evenly.",
-          "4. Copy all groups as text or export a CSV for spreadsheets."
-        ]
-      },
-      {
-        heading: "Tips and best practices",
-        paragraphs: [
-          "Random grouping is fast, but final judgment still matters for real people."
+          "Keep one participant per line before generating groups",
+          "Use CSV export when the result needs spreadsheet tracking",
+          "Add short identifiers for duplicate names",
+          "Review special constraints before sharing the final groups",
         ],
-        items: [
-          "Add seat numbers or codes when duplicate names exist",
-          "Manually adjust the result for special pairing constraints",
-          "Keep group count at or below the number of names",
-          "Review group sizes before sharing the copied result"
-        ]
-      }
+      },
+      {
+        heading: "Limits and human checks",
+        paragraphs: [
+          "Random grouping reduces visible bias and speeds up setup, but random does not always mean pedagogically or operationally ideal. A random split can still put all experienced students together, separate required partners, or create a group that does not match room logistics.",
+          "Before publishing groups, check the number of people in each group, missing participants, duplicate names, and any special needs. For printed lists, export CSV and adjust formatting in a spreadsheet. For live announcements, copy the grouped text and paste it where students or participants already watch.",
+        ],
+      },
+    ],
+    examples: [
+      "Split 28 students into seven lab groups.",
+      "Create five discussion teams from a workshop check-in list.",
+      "Export CSV so staff can print group rosters for activity stations.",
+      "Generate a fair first draft, then manually adjust for absences or constraints.",
+    ],
+    audience: [
+      "Teachers and teaching assistants creating discussion, lab, or presentation groups.",
+      "Workshop hosts, camp staff, club leaders, and event organizers.",
+      "Anyone who needs grouped results in a spreadsheet for later tracking.",
+    ],
+    caseStudies: [
+      {
+        title: "Lab group setup",
+        description: "A teacher splits 28 students into seven groups, exports CSV, and adds bench numbers in the class spreadsheet.",
+      },
+      {
+        title: "Workshop icebreaker",
+        description: "A facilitator creates five temporary teams from the check-in list and copies the result into the opening slide.",
+      },
+      {
+        title: "Presentation planning",
+        description: "A teaching assistant generates a fair draft, then adjusts a few students based on absences and project constraints.",
+      },
+    ],
+    notes: [
+      "Group sizes are balanced, but skill, seating, and relationship constraints are not automatic.",
+      "Use nicknames or IDs when projecting sensitive participant lists.",
+      "CSV export is best for Excel, Google Sheets, printing, and follow-up records.",
+    ],
+    faq: [
+      {
+        q: "How are the groups balanced?",
+        a: "The list is shuffled, then names are dealt into groups in a way that keeps group sizes as even as possible.",
+      },
+      {
+        q: "Can I force two people together or apart?",
+        a: "Not in this version. Generate the groups first, then adjust the draft manually when constraints matter.",
+      },
+      {
+        q: "Can I export the groups to Excel?",
+        a: "Yes. Export the result as CSV, then open it in Excel, Google Sheets, or another spreadsheet app.",
+      },
+      {
+        q: "Can there be more groups than names?",
+        a: "No. The group count must be at least 1 and no greater than the number of valid names.",
+      },
+      {
+        q: "Is the list saved?",
+        a: "No. Names and groups are processed in your browser and are not stored by the site.",
+      },
     ],
     instructions: [
       'Paste every participant name into the textarea, one per line.',
       'Enter the number of groups you want to create.',
       'Press Generate Groups to shuffle and distribute people as evenly as possible.',
       'Copy all groups as plain text for chat, slides, worksheets, or notes.',
-    ],
-    examples: [
-      'Split students into discussion groups for a classroom activity.',
-      'Create workshop teams for a short exercise.',
-      'Randomize teams before a game night or online match.',
-      'Distribute project members across presentation groups.',
-    ],
-    audience: [
-      'Teachers who need quick discussion groups, lab groups, or activity teams.',
-      'Workshop hosts, reading group leaders, and club organizers reducing manual sorting time.',
-      'Event staff who need several temporary teams for games, contests, or icebreakers.',
-      'People who want a copyable text list without building a spreadsheet first.',
-    ],
-    caseStudies: [
-      {
-        title: 'Discussion groups before class',
-        description: 'A teacher pastes the class list, creates six groups, and copies the result into the class announcement so students can find their group immediately.',
-      },
-      {
-        title: 'Workshop icebreaker teams',
-        description: 'A facilitator uses the check-in list to create small teams on the spot, reducing waiting time before the first exercise starts.',
-      },
-      {
-        title: 'Presentation task planning',
-        description: 'A teaching assistant creates an initial grouping, then manually adjusts a few special cases while keeping the speed of random assignment.',
-      },
-    ],
-    notes: [
-      'Random grouping is a teaching aid, not the only measure of fairness; adjust results when student needs require it.',
-      'The tool copies plain-text results to the clipboard and can export a CSV (group and member); it does not export Excel or image files.',
-      'Add seat numbers, class names, or codes when duplicate names could make the copied result unclear.',
-    ],
-    faq: [
-      {
-        q: "How are the groups balanced?",
-        a: "The list is shuffled first, then names are dealt into groups round-robin so group sizes stay as even as possible."
-      },
-      {
-        q: "Can I force two people to be together or apart?",
-        a: "Not in this simple version. Generate the groups first, then adjust manually when constraints matter."
-      },
-      {
-        q: "Can there be more groups than names?",
-        a: "No. The group count must be between 1 and the number of names so empty groups are not created."
-      },
-      {
-        q: "Is the list saved?",
-        a: "No. Names and groups are processed in your browser and are not stored after you leave or refresh the page."
-      }
     ],
     labels: {
       input: 'Names',

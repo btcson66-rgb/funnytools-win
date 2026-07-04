@@ -17,106 +17,97 @@ export default {
       "本機圖片壓縮"
     ],
     capabilities: [
-      '壓縮 JPG、PNG 與 WebP，即時比較原始容量、輸出容量與節省比例。',
-      '透過品質滑桿在清晰度與檔案大小之間取得平衡。',
-      '保留原格式，或轉成 JPEG、WebP，方便網站、社群與附件使用。',
+      "在瀏覽器內壓縮 JPG、PNG、WebP，並比較原始與輸出檔案大小。",
     ],
     contentSections: [
       {
-        heading: "圖片壓縮工具可以做什麼",
+        heading: "圖片壓縮工具適合解決的工作",
         paragraphs: [
-          "圖片壓縮工具可在瀏覽器中縮小 JPG、PNG 與 WebP 檔案，適合網站圖片、商品照、社群素材、截圖與文件圖片。你可以調整品質、選擇輸出格式，並比較壓縮前後的檔案大小。"
-        ]
+          "適合處理網站配圖、商品照、社群素材、截圖、履歷附件與表單上傳限制。大型圖片會增加頁面載入時間，也可能超過平台上傳上限；透過調整品質與輸出格式，你可以在可接受畫質下取得更小的檔案。",
+          "照片類圖片通常適合輸出 JPEG 或 WebP；需要透明背景的圖片則要小心，因為轉成 JPEG 會失去透明度。建議先以中等品質測試，再放大預覽文字邊緣、臉部、商品細節與陰影。",
+        ],
       },
       {
-        heading: "什麼時候適合壓縮圖片",
+        heading: "建議使用流程",
         paragraphs: [
-          "當圖片太大而影響上傳、寄送或網頁載入速度時，可以先壓縮再使用。"
+          "照片類圖片通常適合輸出 JPEG 或 WebP；需要透明背景的圖片則要小心，因為轉成 JPEG 會失去透明度。建議先以中等品質測試，再放大預覽文字邊緣、臉部、商品細節與陰影。",
+          "下載後不要直接覆蓋原圖，先用新檔名保存；如果要放進 CMS、電商後台或簡報，請再檢查實際顯示尺寸。",
         ],
         items: [
-          "上傳商品照、部落格圖片或作品集圖片前縮小檔案",
-          "整理社群封面、頭像與貼文素材",
-          "壓縮說明文件或客服截圖",
-          "將圖片轉成 WebP 以降低網頁體積"
-        ]
-      },
-      {
-        heading: "圖片壓縮使用步驟",
-        paragraphs: [
-          "1. 選擇 JPG、PNG 或 WebP 圖片。",
-          "2. 調整品質滑桿並選擇保留格式、JPEG 或 WebP。",
-          "3. 比較原始大小、壓縮後大小與節省比例。",
-          "4. 下載新圖片，或清除後處理下一張。"
-        ]
-      },
-      {
-        heading: "圖片壓縮建議",
-        paragraphs: [
-          "壓縮品質要兼顧檔案大小與可讀性，尤其是含文字的截圖。"
+          "照片通常可降低品質取得明顯容量改善",
+          "含文字、線條或截圖的圖片壓太低會出現模糊與雜訊",
+          "需要透明背景時，不要隨意輸出成 JPEG",
+          "下載後保留原圖，避免之後無法重新調整",
         ],
-        items: [
-          "照片通常適合 JPEG 或 WebP",
-          "需要透明背景時不要轉成 JPEG",
-          "避免重複壓縮同一張已壓縮圖片",
-          "下載後放大檢查文字、邊緣與細節是否清楚"
-        ]
-      }
+      },
+      {
+        heading: "限制與需要人工判斷的部分",
+        paragraphs: [
+          "壓縮不能修復模糊、曝光錯誤或過小的原始圖片；它只能在現有像素基礎上重新編碼。若圖片尺寸遠大於網站實際顯示寬度，先調整尺寸再壓縮通常更有效。",
+        ],
+      },
     ],
+    examples: [
+      "把部落格封面壓到較小容量後再上傳 CMS。",
+      "壓縮商品圖，降低電商頁面載入負擔。",
+      "將截圖或證明文件壓縮到表單附件限制內。",
+      "下載 WebP 版本作為網站圖片，再保留原始檔備份。",
+    ],
+    audience: [
+      "需要快速處理圖片壓縮工作的人。",
+    ],
+    caseStudies: [
+      {
+        title: "???????",
+        description: "??? 3 MB ?????????? JPEG?????? CMS????????????????????",
+      },
+      {
+        title: "??????",
+        description: "?????? WebP ???????????????????????????????????",
+      },
+      {
+        title: "??????",
+        description: "?????????????????????????????????????????",
+      },
+    ],
+    notes: [
+      "壓縮不能修復模糊、曝光錯誤或過小的原始圖片；它只能在現有像素基礎上重新編碼。若圖片尺寸遠大於網站實際顯示寬度，先調整尺寸再壓縮通常更有效。",
+    ],
+    faq: [
+      {
+        q: "圖片會上傳到伺服器嗎？",
+        a: "不會。壓縮在你的瀏覽器內完成，原圖與輸出圖不會傳到 FunnyTools。",
+      },
+      {
+        q: "JPEG、WebP 要怎麼選？",
+        a: "網站圖片通常可考慮 WebP；需要舊系統相容或文件附件時，JPEG 可能更穩定。",
+      },
+      {
+        q: "壓縮後圖片變糊怎麼辦？",
+        a: "提高品質設定，或先確認原圖是否已經過小、模糊或含有細小文字。",
+      },
+      {
+        q: "可以保留透明背景嗎？",
+        a: "如果透明背景很重要，請避免輸出 JPEG；JPEG 不支援透明度。",
+      },
+      {
+        q: "壓縮後可以直接用在網站嗎？",
+        a: "可以下載使用，但建議在實際頁面檢查尺寸、清晰度、檔名、alt text 與載入表現。",
+      },
+    ],
+
+
     instructions: [
       '選擇一張 JPG、PNG 或 WebP 圖片，先確認原始預覽與檔案大小。',
       '調整品質滑桿，並選擇保留原格式、JPEG 或 WebP 輸出。',
       '比較原始大小、壓縮後大小與節省比例，確認畫質仍可接受。',
       '下載新的圖片檔，或清除目前圖片後處理下一張。',
     ],
-    examples: [
-      '把商品圖壓小後再上架，讓頁面載入速度更穩定。',
-      '縮小社群貼文、頭像或封面圖，方便上傳到平台。',
-      '壓縮截圖與教學圖片，降低寄信或分享時的附件大小。',
-      '在本機比較 JPEG 與 WebP 的檔案大小，再決定發布格式。',
-    ],
-    audience: [
-      '需要快速準備商品圖、活動圖或社群素材的站長與行銷人員。',
-      '想把截圖、照片或簡報圖片壓小後再寄出的辦公室使用者。',
-      '希望圖片留在本機處理、不想上傳到外部服務的人。',
-      '正在優化網頁速度、部落格配圖或作品集圖片的創作者。',
-    ],
-    caseStudies: [
-      {
-        title: '商品圖上架前壓縮',
-        description: '小型商店先把多張商品照片壓縮成較小檔案，再放進商品頁，讓手機使用者開頁更快，也減少圖片過大造成的跳出率。',
-      },
-      {
-        title: '社群封面快速輸出',
-        description: '行銷人員把活動主視覺轉成 WebP，確認畫質仍清楚後下載，讓社群排程與網站橫幅可以共用同一張輕量圖片。',
-      },
-      {
-        title: '截圖教學整理',
-        description: '客服團隊把操作截圖壓縮後放進說明文件，降低文件總容量，同時保留足夠清楚的按鈕與文字細節。',
-      },
-    ],
-    notes: [
-      'JPEG 與 WebP 屬於有損壓縮，品質調太低可能出現模糊、色塊或細節消失。',
-      '透明 PNG 轉成 JPEG 會失去透明背景；需要透明效果時請保留 PNG 或改用 WebP。',
-      '檔案非常大或像素過高時會消耗較多瀏覽器記憶體，建議分批處理。',
-    ],
-    faq: [
-      {
-        q: "圖片會上傳到伺服器嗎？",
-        a: "不會。圖片在瀏覽器內處理，FunnyTools 不會接收、儲存或上傳你的圖片。"
-      },
-      {
-        q: "為什麼 PNG 有時候不會變小？",
-        a: "PNG 常用於透明或無失真圖像，品質滑桿不一定能大幅降低大小；若可接受失真，可嘗試 JPEG 或 WebP。"
-      },
-      {
-        q: "壓縮會覆蓋原始圖片嗎？",
-        a: "不會。工具會建立新的下載檔，原始圖片仍保留在你的裝置上。"
-      },
-      {
-        q: "WebP 適合所有平台嗎？",
-        a: "現代瀏覽器大多支援 WebP，但部分舊系統或上傳平台可能不支援，發布前請確認目標平台。"
-      }
-    ],
+
+
+
+
+
     labels: {
       upload: '選擇圖片',
       quality: '品質',
@@ -154,102 +145,98 @@ export default {
       "reduce image size",
       "local image compression"
     ],
+    capabilities: [
+      "Compress JPG, PNG, and WebP images locally in the browser and compare size savings.",
+    ],
     contentSections: [
       {
-        heading: "What Image Compressor does",
+        heading: "What Image Compressor is useful for",
         paragraphs: [
-          "Image Compressor reduces JPG, PNG, and WebP file size in your browser. It is useful for website images, product photos, social graphics, screenshots, blog illustrations, and document images."
-        ]
+          "Use it when pictures are too large for a website, form upload, email attachment, slide deck, product page, or social workflow. Oversized files slow page loads and can fail upload limits, so the goal is to reduce size while keeping the image acceptable.",
+          "Photo-like images usually compress well as JPEG or WebP. Screenshots, text-heavy graphics, logos, and line art need more careful checking because aggressive compression can blur edges or create artifacts.",
+        ],
       },
       {
-        heading: "When to use Image Compressor",
+        heading: "Recommended workflow",
         paragraphs: [
-          "Use it when an image is too large for upload, email, publishing, or fast page loading."
+          "Photo-like images usually compress well as JPEG or WebP. Screenshots, text-heavy graphics, logos, and line art need more careful checking because aggressive compression can blur edges or create artifacts.",
+          "Download with a new file name instead of overwriting the source. If the image will appear in a CMS, ecommerce page, or presentation, check the real display size after uploading or inserting it.",
         ],
         items: [
-          "Preparing product photos or blog images for a website",
-          "Making social covers, avatars, and post graphics smaller",
-          "Compressing screenshots for help docs or team chat",
-          "Trying WebP output for lighter web assets"
-        ]
-      },
-      {
-        heading: "Step-by-step usage guide",
-        paragraphs: [
-          "1. Choose a JPG, PNG, or WebP image.",
-          "2. Adjust the quality slider and choose Keep, JPEG, or WebP output.",
-          "3. Compare original size, compressed size, and saved percentage.",
-          "4. Download the new image or clear the file to start again."
-        ]
-      },
-      {
-        heading: "Tips and best practices",
-        paragraphs: [
-          "Choose settings based on how the image will be used."
+          "Use WebP for modern website delivery when supported",
+          "Use JPEG when compatibility is more important than transparency",
+          "Inspect text and fine edges before accepting a low-quality output",
+          "Keep the original file so you can recompress later",
         ],
-        items: [
-          "Photos usually compress well as JPEG or WebP",
-          "Do not convert transparent images to JPEG if transparency matters",
-          "Avoid repeatedly compressing an already-compressed file",
-          "Zoom in after download to check text, edges, and important detail"
-        ]
-      }
+      },
+      {
+        heading: "Limits and human checks",
+        paragraphs: [
+          "Compression cannot repair a blurry, badly exposed, or too-small original. If the source image is much larger than the size displayed on your site, resize it first, then compress.",
+          "Compression cannot repair a blurry, badly exposed, or too-small original. If the source image is much larger than the size displayed on your site, resize it first, then compress. After using the tool, move the result into the next workflow step: download it, copy it, paste it into Excel or Google Sheets, add it to a document, or test it in the real publishing environment.",
+        ],
+      },
     ],
+    examples: [
+      "Reduce a blog cover before uploading it to a CMS.",
+      "Compress product photos to improve ecommerce page loading.",
+      "Shrink screenshots or proof documents to fit a form upload limit.",
+      "Download a WebP version for a website while keeping the source file.",
+    ],
+    audience: [
+      "People who need a quick image compressor workflow in the browser.",
+    ],
+    caseStudies: [
+      {
+        title: "Blog cover optimization",
+        description: "An editor compresses a 3 MB article cover, downloads a smaller JPEG, and checks the mobile article page before publishing.",
+      },
+      {
+        title: "Product photo workflow",
+        description: "An ecommerce operator tests WebP output for product photos, keeps the original files, and verifies that edges, texture, and color still look acceptable on the product page.",
+      },
+      {
+        title: "Upload limit fix",
+        description: "An applicant compresses a screenshot or proof document until it fits the form limit, then reopens the downloaded file to confirm the text remains readable.",
+      },
+    ],
+    notes: [
+      "Compression cannot repair a blurry, badly exposed, or too-small original. If the source image is much larger than the size displayed on your site, resize it first, then compress.",
+    ],
+    faq: [
+      {
+        q: "Are my images uploaded?",
+        a: "No. Compression runs in your browser, and the original image is not sent to FunnyTools.",
+      },
+      {
+        q: "Should I choose JPEG or WebP?",
+        a: "Use WebP for modern website delivery when supported. Use JPEG when compatibility with forms, documents, or older systems matters.",
+      },
+      {
+        q: "Why does the image look blurry after compression?",
+        a: "The quality setting may be too low, or the source image may already be small or text-heavy. Increase quality and inspect the result.",
+      },
+      {
+        q: "Can transparency be preserved?",
+        a: "Avoid JPEG when transparency matters because JPEG does not support transparent pixels.",
+      },
+      {
+        q: "Can I use the output directly on my site?",
+        a: "Yes, but test it in the real page and check display size, sharpness, alt text, and loading performance.",
+      },
+    ],
+
     instructions: [
       'Choose a JPG, PNG, or WebP image and review the input preview.',
       'Adjust the quality slider and choose Keep, JPEG, or WebP output.',
       'Compare original size, compressed size, and the saved percentage.',
       'Download the new image or clear the file to start again.',
     ],
-    examples: [
-      'Shrink product images before uploading them to a store page.',
-      'Prepare smaller avatars, covers, and social media graphics.',
-      'Compress screenshots for help docs, email, or team chat.',
-      'Compare JPEG and WebP output sizes before publishing.',
-    ],
-    audience: [
-      'Site owners and marketers preparing product photos, banners, or campaign graphics.',
-      'Office users who need smaller screenshots, photos, or report images for sharing.',
-      'Creators who want local image processing instead of uploading private files.',
-      'Bloggers, designers, and portfolio owners improving page weight and load speed.',
-    ],
-    caseStudies: [
-      {
-        title: 'Product page image cleanup',
-        description: 'A small shop compresses product photos before publishing them, improving mobile load time while keeping enough visual detail for customers to inspect the item.',
-      },
-      {
-        title: 'Social cover export',
-        description: 'A marketer converts a campaign image to WebP, checks that the text still looks sharp, and downloads a lighter version for both the site banner and scheduled social post.',
-      },
-      {
-        title: 'Screenshot documentation',
-        description: 'A support team compresses step-by-step screenshots before adding them to a help article, reducing document size while keeping buttons and labels readable.',
-      },
-    ],
-    notes: [
-      'JPEG and WebP are lossy formats, so very low quality settings can introduce blur, blockiness, or lost detail.',
-      'Converting transparent PNG files to JPEG removes transparency; keep PNG or use WebP if transparency matters.',
-      'Very large images can use significant browser memory, so process oversized files in smaller batches.',
-    ],
-    faq: [
-      {
-        q: "Are my images uploaded?",
-        a: "No. Files stay on your device and are processed locally in your browser."
-      },
-      {
-        q: "Why does a PNG sometimes stay large?",
-        a: "PNG is often lossless or transparent, so quality changes may not reduce it much. JPEG or WebP may be smaller when transparency is not needed."
-      },
-      {
-        q: "Does compression overwrite my original file?",
-        a: "No. The tool creates a separate downloadable file and does not modify your original image."
-      },
-      {
-        q: "Is WebP safe to use everywhere?",
-        a: "Most modern browsers support WebP, but some older systems and upload platforms may not. Check the target platform before publishing."
-      }
-    ],
+
+
+
+
+
     labels: {
       upload: 'Choose image',
       quality: 'Quality',

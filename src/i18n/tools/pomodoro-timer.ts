@@ -16,47 +16,86 @@ export default {
       "讀書計時器",
       "生產力工具"
     ],
+    capabilities: [
+      "提供專注、短休息與長休息循環，可自訂每段分鐘數。",
+    ],
     contentSections: [
       {
-        heading: "番茄鐘計時器可以做什麼",
+        heading: "番茄鐘計時器適合解決的工作",
         paragraphs: [
-          "番茄鐘計時器可把工作分成清楚的專注時段、短休息與長休息。預設為 25 分鐘專注、5 分鐘短休息、15 分鐘長休息，但你可以依自己的節奏調整。"
-        ]
+          "適合把容易拖延的大任務拆成可開始的時間段。預設 25 分鐘專注、5 分鐘短休息、15 分鐘長休息，但你可以依工作內容調整。寫作、讀書、程式練習、行政整理、語言學習與家務，都可以用固定節奏降低分心。",
+          "開始前先寫下本段只做一件事，例如改完第一段文案、整理 20 筆資料或讀完第 3 節。深度寫作或研究可以用 40 到 50 分鐘專注；回信、整理檔案或練習題則可能 15 到 20 分鐘就足夠。",
+        ],
       },
       {
-        heading: "什麼時候適合使用番茄鐘",
+        heading: "建議使用流程",
         paragraphs: [
-          "當你想降低分心、把大型任務拆成可執行的時間段時，番茄鐘能提供簡單節奏。"
+          "開始前先寫下本段只做一件事，例如改完第一段文案、整理 20 筆資料或讀完第 3 節。深度寫作或研究可以用 40 到 50 分鐘專注；回信、整理檔案或練習題則可能 15 到 20 分鐘就足夠。",
+          "完成多段專注後安排長休息，是為了避免一直硬撐。工具會累計完成段落，你可以用這個數字回顧今天完成了幾個可衡量的工作段，而不是只看坐在桌前多久。",
         ],
         items: [
-          "寫作、設計、程式或研究時安排專注時段",
-          "讀書或備考時按章節分配時間",
-          "批次處理 Email、報表與行政工作",
-          "用休息提醒自己伸展、喝水或離開螢幕"
-        ]
-      },
-      {
-        heading: "番茄鐘使用步驟",
-        paragraphs: [
-          "1. 確認專注、短休息與長休息分鐘數。",
-          "2. 按下開始，計時器會開始倒數並更新分頁標題。",
-          "3. 需要暫停時按下暫停；重設會回到目前階段的完整時間。",
-          "4. 完成四個專注時段後，依提示進入長休息。"
-        ]
-      },
-      {
-        heading: "番茄鐘使用建議",
-        paragraphs: [
-          "番茄鐘是時間管理輔助，重點是建立穩定節奏，而不是硬性規則。"
+          "開始前先定義本段要完成的具體輸出",
+          "休息時離開工作視窗，避免滑同一個螢幕",
+          "太常中斷時，先把專注時間調短",
+          "用完成段落數記錄節奏，不要只追求越多越好",
         ],
-        items: [
-          "任務困難時可縮短專注時間",
-          "休息時離開工作畫面",
-          "把 Email 與雜務集中到固定時段處理",
-          "若 25 分鐘不適合你，可調整成 15、30 或 45 分鐘"
-        ]
-      }
+      },
+      {
+        heading: "限制與需要人工判斷的部分",
+        paragraphs: [
+          "番茄鐘只能提供節奏，不能保證效率。若任務本身不清楚、工具一直跳通知、或你同時開太多聊天視窗，計時器也很難幫忙。使用前先關閉不必要分頁，準備好文件、資料與水，會比單純按開始更有效。",
+        ],
+      },
     ],
+    examples: [
+      "用 25 分鐘寫完文章第一版，再用短休息離開螢幕。",
+      "讀書時每段只處理一節內容，完成後記下段落數。",
+      "行政工作用較短專注段清掉信件、發票或表格。",
+      "把完成段落數記到習慣追蹤表，觀察一週節奏。",
+    ],
+    audience: [
+      "需要快速處理番茄鐘計時器工作的人。",
+    ],
+    caseStudies: [
+      {
+        title: "????",
+        description: "???????????????????????????????????",
+      },
+      {
+        title: "????",
+        description: "??? 25 ???????????????????????????",
+      },
+      {
+        title: "????",
+        description: "???? 15 ????????????????????????????",
+      },
+    ],
+    notes: [
+      "番茄鐘只能提供節奏，不能保證效率。若任務本身不清楚、工具一直跳通知、或你同時開太多聊天視窗，計時器也很難幫忙。使用前先關閉不必要分頁，準備好文件、資料與水，會比單純按開始更有效。",
+    ],
+    faq: [
+      {
+        q: "一定要用 25 分鐘嗎？",
+        a: "不用。25 分鐘只是常見起點，你可以依任務難度、注意力狀態與工作環境調整。",
+      },
+      {
+        q: "什麼時候要長休息？",
+        a: "通常完成數個專注段落後安排長休息，讓注意力恢復，而不是一直硬撐。",
+      },
+      {
+        q: "關閉頁面後會保存進度嗎？",
+        a: "這個工具主要用於當前頁面的計時，不應當作長期紀錄資料庫；需要紀錄請另外寫到表格或日誌。",
+      },
+      {
+        q: "適合所有工作嗎？",
+        a: "不一定。需要長時間不中斷的會議、照護、客服或即時工作，可能不適合硬切成番茄鐘。",
+      },
+      {
+        q: "如何讓番茄鐘更有效？",
+        a: "每段開始前只設定一個清楚輸出，並在休息時離開工作畫面，下一段會更容易重新專注。",
+      },
+    ],
+
     instructions: [
       '確認專注、短休息與長休息的分鐘數；預設值可直接用於標準番茄鐘流程。',
       '按下開始後進入目前階段，瀏覽器分頁標題會同步顯示剩餘時間。',
@@ -64,56 +103,11 @@ export default {
       '每完成 4 個專注階段後，系統會自動安排長休息。',
       '你調整過的分鐘數會保存在同一個瀏覽器中，下次開啟可繼續使用。',
     ],
-    examples: [
-      '寫文章、企劃或程式時，把大型任務拆成 25 分鐘專注段落。',
-      '讀書或準備考試時，用短休息降低疲勞並維持節奏。',
-      '批次處理 Email、報表或行政事項，避免一直切換任務。',
-      '練習語言、樂器或技能時，用固定時間追蹤練習量。',
-      '長時間用電腦工作時，用休息階段提醒自己伸展、喝水或離開螢幕。',
-    ],
-    audience: [
-      '需要把大型任務拆成可管理段落的自由工作者、寫手與設計師。',
-      '準備考試或長時間讀書，想維持穩定節奏並避免疲勞的學生。',
-      '經常被 Email、訊息打斷，想用固定區段專心處理批次工作的上班族。',
-      '練習語言、樂器或程式，想用計時追蹤練習量的自學者。',
-    ],
-    notes: [
-      '番茄鐘是一般時間管理技巧，效果因人而異；若你有注意力或焦慮相關困擾，請諮詢專業人士。',
-      '計時器在瀏覽器分頁中運作，關閉或重整頁面後倒數狀態會結束，但自訂分鐘數會保留。',
-      '長時間使用電腦時，建議在休息階段離開螢幕、伸展或補充水分。',
-    ],
-    caseStudies: [
-      {
-        title: '寫作衝刺',
-        description: '作者設定 25 分鐘專心撰寫初稿，5 分鐘整理筆記與休息，連續 4 輪後用長休息重新規劃下一段。',
-      },
-      {
-        title: '考前複習',
-        description: '學生把章節拆成多個番茄鐘，每輪只處理一個小主題，休息時間不碰新內容，降低認知負擔。',
-      },
-      {
-        title: '行政批次處理',
-        description: '工作者用 15 或 20 分鐘專注段快速清掉郵件、請款或表單，避免零碎工作佔滿整天。',
-      },
-    ],
-    faq: [
-      {
-        q: "番茄鐘一定要 25 分鐘嗎？",
-        a: "不一定。25 分鐘是常見預設值，你可以依任務難度、精神狀態與行程調整專注與休息時間。"
-      },
-      {
-        q: "番茄鐘設定會被保存嗎？",
-        a: "會。專注、短休息與長休息分鐘數會儲存在此瀏覽器的 localStorage，但目前倒數狀態不會跨重新整理保存。"
-      },
-      {
-        q: "計時器會自動切換階段嗎？",
-        a: "會。工具會在專注與休息間切換，並在每四個專注時段後安排長休息。"
-      },
-      {
-        q: "關閉頁面後計時會繼續嗎？",
-        a: "不會。計時器在開啟的瀏覽器頁面中執行，關閉或重新整理會結束目前倒數。"
-      }
-    ],
+
+
+
+
+
     labels: {
       workMinutes: '專注分鐘',
       breakMinutes: '短休息分鐘',
@@ -146,47 +140,87 @@ export default {
       "productivity timer",
       "break timer"
     ],
+    capabilities: [
+      "Run focus, short break, and long break cycles with adjustable minute values.",
+    ],
     contentSections: [
       {
-        heading: "What Pomodoro Timer does",
+        heading: "What Pomodoro Timer is useful for",
         paragraphs: [
-          "Pomodoro Timer divides work into focused sessions, short breaks, and long breaks. It starts with the classic 25-minute work session, 5-minute short break, and 15-minute long break, but every duration can be customized."
-        ]
+          "Use it to turn a vague, easy-to-delay task into a short work block you can start now. Writing, studying, coding practice, filing, language learning, design cleanup, and household admin can all benefit from a visible rhythm.",
+          "Before pressing start, define one concrete output for the next session: revise one section, process 20 rows, solve five practice problems, outline one slide, or clear one inbox folder. Adjust session length to the task instead of treating 25 minutes as a rule.",
+        ],
       },
       {
-        heading: "When to use Pomodoro Timer",
+        heading: "Recommended workflow",
         paragraphs: [
-          "Use it when you want to reduce distraction and turn a large task into manageable time blocks."
+          "Before pressing start, define one concrete output for the next session: revise one section, process 20 rows, solve five practice problems, outline one slide, or clear one inbox folder. Adjust session length to the task instead of treating 25 minutes as a rule.",
+          "Completed session count can be a useful lightweight record of how much focused work happened today. If you want long-term tracking, write the task name, completed sessions, and a short note in your own spreadsheet, note app, or paper journal.",
         ],
         items: [
-          "Writing, designing, coding, or researching in focused sessions",
-          "Studying chapters or exam topics one block at a time",
-          "Batching email, reports, and admin work",
-          "Using breaks to stretch, hydrate, or step away from the screen"
-        ]
-      },
-      {
-        heading: "Step-by-step usage guide",
-        paragraphs: [
-          "1. Review work, short break, and long break minutes.",
-          "2. Press Start to begin the countdown and update the tab title.",
-          "3. Use Pause when needed; Reset restores the current phase to full length.",
-          "4. After four completed work sessions, take the scheduled long break."
-        ]
-      },
-      {
-        heading: "Tips and best practices",
-        paragraphs: [
-          "Pomodoro is a time-management aid, not a rule you have to follow exactly."
+          "Define one clear output before starting each focus block",
+          "Shorten sessions if you are repeatedly interrupted",
+          "Use breaks away from the same work screen",
+          "Record completed sessions in your own habit tracker if needed",
         ],
-        items: [
-          "Shorten work sessions when a task is difficult or your energy is low",
-          "Use breaks away from the work screen when possible",
-          "Batch messages and admin tasks into planned sessions",
-          "Try 15, 30, or 45 minute sessions if 25 minutes does not fit your work"
-        ]
-      }
+      },
+      {
+        heading: "Limits and human checks",
+        paragraphs: [
+          "A timer can provide structure, but it cannot fix unclear priorities, noisy tools, or an unrealistic workload. If a session fails, check the environment: chat windows, missing source material, vague scope, or a block length that does not match the work.",
+          "A timer can provide structure, but it cannot fix unclear priorities, noisy tools, or an unrealistic workload. If a session fails, check the environment: chat windows, missing source material, vague scope, or a block length that does not match the work. After using the tool, move the result into the next workflow step: download it, copy it, paste it into Excel or Google Sheets, add it to a document, or test it in the real publishing environment.",
+        ],
+      },
     ],
+    examples: [
+      "Draft the first version of an article in one focus block.",
+      "Study one textbook section, then take a real screen break.",
+      "Use shorter sessions for email, invoices, or spreadsheet cleanup.",
+      "Record completed focus blocks in a weekly habit tracker.",
+    ],
+    audience: [
+      "People who need a quick pomodoro timer workflow in the browser.",
+    ],
+    caseStudies: [
+      {
+        title: "Writing sprint",
+        description: "An editor splits work into outline, draft, and revision sessions, writing the session goal before each start.",
+      },
+      {
+        title: "Exam study",
+        description: "A student studies one section per focus block, takes a break, then logs completed sessions in a spreadsheet.",
+      },
+      {
+        title: "Admin cleanup",
+        description: "A worker uses 15-minute blocks for email, invoices, and forms so small tasks do not swallow the whole morning.",
+      },
+    ],
+    notes: [
+      "A timer can provide structure, but it cannot fix unclear priorities, noisy tools, or an unrealistic workload. If a session fails, check the environment: chat windows, missing source material, vague scope, or a block length that does not match the work.",
+    ],
+    faq: [
+      {
+        q: "Do I have to use 25 minutes?",
+        a: "No. 25 minutes is a common starting point. Adjust focus and break lengths to fit the task and your attention span.",
+      },
+      {
+        q: "When should I take a long break?",
+        a: "A long break is useful after several completed focus sessions so you can recover instead of pushing through fatigue.",
+      },
+      {
+        q: "Is progress saved after closing the page?",
+        a: "Treat this as a live timer, not a long-term database. Record progress in your own tracker if it matters.",
+      },
+      {
+        q: "Does Pomodoro work for every job?",
+        a: "No. Meetings, care work, live support, and other interrupt-driven tasks may not fit strict focus blocks.",
+      },
+      {
+        q: "How can I make it more effective?",
+        a: "Start each session with one concrete output and use breaks away from the same screen.",
+      },
+    ],
+
     instructions: [
       'Review the work, short break, and long break lengths. The defaults are ready for a standard Pomodoro flow.',
       'Press Start to begin. The browser tab title updates with the remaining time while the timer is running.',
@@ -194,56 +228,11 @@ export default {
       'After four completed work sessions, the timer automatically schedules a long break.',
       'Custom minute settings are saved in the same browser for future visits.',
     ],
-    examples: [
-      'Draft articles, plans, or code by breaking a large task into 25-minute focus blocks.',
-      'Study one chapter or topic at a time while using short breaks to reduce fatigue.',
-      'Batch email, reports, and admin work into deliberate sessions instead of constant task switching.',
-      'Track language, music, or skill practice with repeatable timed sessions.',
-      'Use breaks as reminders to stretch, hydrate, or step away from the screen during long computer work.',
-    ],
-    audience: [
-      'Freelancers, writers, and designers who need to break large tasks into manageable blocks.',
-      'Students preparing for exams or studying for long periods who want a steady pace without burnout.',
-      'Office workers frequently interrupted by email and messages who want dedicated batch-processing time.',
-      'Self-learners practicing languages, instruments, or coding who want timed sessions to track progress.',
-    ],
-    notes: [
-      'The Pomodoro Technique is a general time-management method; results vary by person. Consult a professional for attention or anxiety concerns.',
-      'The timer runs inside the browser tab. Closing or refreshing the page ends the countdown, but custom minute settings are preserved.',
-      'During long computer sessions, use break phases to step away from the screen, stretch, and hydrate.',
-    ],
-    caseStudies: [
-      {
-        title: 'Writing sprint',
-        description: 'A writer uses 25 minutes for a rough draft, 5 minutes for notes and recovery, then a long break after four rounds to plan the next section.',
-      },
-      {
-        title: 'Exam review',
-        description: 'A student splits chapters into focused blocks, covers one topic per session, and keeps breaks separate from new material.',
-      },
-      {
-        title: 'Admin batching',
-        description: 'A worker sets 15 or 20 minute sessions to clear email, invoices, and forms before returning to deeper work.',
-      },
-    ],
-    faq: [
-      {
-        q: "Does a Pomodoro session have to be 25 minutes?",
-        a: "No. 25 minutes is a common default, but you can adjust work and break lengths to match your task and energy."
-      },
-      {
-        q: "Are my Pomodoro settings saved?",
-        a: "Yes. Work, short break, and long break lengths are saved in localStorage for this browser. The active countdown is not saved across refreshes."
-      },
-      {
-        q: "Does the timer switch phases automatically?",
-        a: "Yes. It moves between work and break phases and uses a long break after every four completed work sessions."
-      },
-      {
-        q: "Will the timer continue after I close the page?",
-        a: "No. The timer runs inside the open browser page. Closing or refreshing the page ends the current countdown."
-      }
-    ],
+
+
+
+
+
     labels: {
       workMinutes: 'Work minutes',
       breakMinutes: 'Break minutes',
