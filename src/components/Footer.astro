@@ -22,11 +22,19 @@ const footerBrand = lang === 'zh' ? `${SITE.name.zh} by FunnyTools.win` : SITE.n
     <nav class="footer-links" aria-label={ui.ariaFooterNav}>
       <div>
         <span>{lang === 'zh' ? '工具入口' : 'Tool hubs'}</span>
+        <a href={localePath(lang, 'tools')}>{ui.nav.tools}</a>
+        <a href={localePath(lang, 'guides')}>{lang === 'zh' ? '使用教學' : 'Guides'}</a>
         <a href={localePath(lang, 'for')}>{lang === 'zh' ? '依使用情境找工具' : 'For your work'}</a>
         <a href={localePath(lang, 'workflows')}>{lang === 'zh' ? '工作流工具組' : 'Workflows'}</a>
       </div>
       <div>
-        <span>{lang === 'zh' ? '頁面' : 'Policies'}</span>
+        <span>{lang === 'zh' ? '關於本站' : 'About'}</span>
+        <a href={localePath(lang, 'about')}>{ui.footer.about}</a>
+        <a href={localePath(lang, 'about-tools')}>{ui.footer.aboutTools}</a>
+        <a href={localePath(lang, 'contact')}>{ui.footer.contact}</a>
+      </div>
+      <div>
+        <span>{lang === 'zh' ? '政策' : 'Policies'}</span>
         <a href={localePath(lang, 'privacy')}>{ui.footer.privacy}</a>
         <a href={localePath(lang, 'terms')}>{ui.footer.terms}</a>
         <a href={localePath(lang, 'disclaimer')}>{ui.footer.disclaimer}</a>
