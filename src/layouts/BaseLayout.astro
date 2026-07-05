@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import Nav from '../components/Nav.astro';
 import { SITE, type Locale } from '../config/site';
+import indexingConfig from '../config/indexing.json';
 import { absoluteUrl, assetPath, localePath } from '../lib/url';
 import { defaultOgImage } from '../lib/seo';
 import { t } from '../i18n/ui';
@@ -56,6 +57,9 @@ const ogAlt = ogImageAlt ?? SITE.name[lang];
 const brandedTitle = title.includes('FunnyTools') ? title : `${title} - FunnyTools`;
 const brandedDescription = description;
 const ui = t(lang);
+const enNoindex = indexingConfig.EN_NOINDEX === true && lang === 'en';
+const shouldNoindex = noindex || enNoindex;
+const robotsContent = enNoindex ? 'noindex, follow' : (robots ?? 'noindex, follow');
 const envAdsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? import.meta.env.PUBLIC_ADSENSE_ID;
 const adsenseClient = envAdsenseClient ?? SITE.adsenseClient;
 const adsenseEnabled = Boolean(adsenseClient) && (SITE.adsenseEnabled || SITE.features.adsense);
@@ -99,9 +103,9 @@ const contentSecurityPolicy = [
     </script>
     <title>{brandedTitle}</title>
     <meta name="description" content={brandedDescription} />
-    {noindex ? <meta name="robots" content={robots ?? 'noindex, follow'} /> : <link rel="canonical" href={canonical} />}
-    {!noindex && robots && <meta name="robots" content={robots} />}
-    {!noindex && altLang && hreflangs.map((link) => <link rel="alternate" hreflang={link.hreflang} href={link.href} />)}
+    {shouldNoindex ? <meta name="robots" content={robotsContent} /> : <link rel="canonical" href={canonical} />}
+    {!shouldNoindex && robots && <meta name="robots" content={robots} />}
+    {!shouldNoindex && altLang && hreflangs.map((link) => <link rel="alternate" hreflang={link.hreflang} href={link.href} />)}
     <meta property="og:type" content={type} />
     <meta property="og:title" content={brandedTitle} />
     <meta property="og:description" content={brandedDescription} />

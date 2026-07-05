@@ -1,4 +1,5 @@
 import { SITE, type Locale } from '../config/site';
+import indexingConfig from '../config/indexing.json';
 import { categories } from '../data/categories';
 import { hasLiveTools, liveTools } from '../data/tools';
 import { allBlogPosts } from '../data/allBlogPosts';
@@ -215,6 +216,8 @@ export function defaultWorkflowEntries(): SitemapEntry[] {
 }
 
 export function englishEntries(): SitemapEntry[] {
+  if (indexingConfig.EN_NOINDEX) return [];
+
   return [
     ...basePages(),
     ...categoryPages(),

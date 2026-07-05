@@ -23,6 +23,15 @@ export const currentStatePath = join(reportsDir, 'current-sitemap-state.json');
 export const changedUrlsPath = join(reportsDir, 'changed-urls.json');
 export const priorityUrlsPath = join(scriptsDir, 'bing-priority-urls.txt');
 export const gscPriorityUrlsPath = join(scriptsDir, 'gsc-priority-urls.txt');
+export const indexingConfigPath = join(rootDir, 'src', 'config', 'indexing.json');
+export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
+export const enNoindex = indexingConfig.EN_NOINDEX === true;
+export const expectedSitemapFiles = [
+  'sitemap-tools.xml',
+  'sitemap-guides.xml',
+  'sitemap-workflows.xml',
+  ...(!enNoindex ? ['sitemap-en.xml'] : []),
+];
 
 export function ensureDir(dir) {
   mkdirSync(dir, { recursive: true });
@@ -227,7 +236,7 @@ export function readSitemapEntries(baseDir = publicDir) {
   const children = sitemapIndexChildren(indexPath);
   const files = children.length
     ? children.map((loc) => join(baseDir, new URL(loc).pathname.replace(/^\/+/, '')))
-    : ['sitemap-tools.xml', 'sitemap-guides.xml', 'sitemap-workflows.xml', 'sitemap-en.xml'].map((name) => join(baseDir, name));
+    : expectedSitemapFiles.map((name) => join(baseDir, name));
   return files.flatMap((file) => parseSitemapFile(file).map((entry) => ({
     ...entry,
     sitemap: relative(baseDir, file).replaceAll('\\', '/'),

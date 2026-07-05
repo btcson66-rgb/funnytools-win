@@ -12,6 +12,16 @@ export function getStaticPaths() {
 
 const { lang } = Astro.props as { lang: Locale };
 const page = pages[lang].contact;
+const githubIssuesUrl = 'https://github.com/btcson66-rgb/funnytools-win/issues';
+const extraLinks = [
+  {
+    href: githubIssuesUrl,
+    label: lang === 'zh' ? 'GitHub Issues 問題回報' : 'GitHub Issues',
+    note: lang === 'zh'
+      ? '也可以在公開 issue 中回報可重現的工具錯誤或提出工具建議；請勿貼上私人或機密資料。'
+      : 'You can also report reproducible tool bugs or tool suggestions in a public issue. Do not include private or confidential data.',
+  },
+];
 ---
 
-<PageLayout lang={lang} pageKey="contact" title={page.title} seoTitle={page.seoTitle} description={page.description} body={page.body} />
+<PageLayout lang={lang} pageKey="contact" title={page.title} seoTitle={page.seoTitle} description={page.description} body={page.body} extraLinks={extraLinks} />

@@ -8,6 +8,7 @@ import {
   currentStatePath,
   diffEntries,
   distDir,
+  enNoindex,
   ensureDefaultPriorityFiles,
   ensureDir,
   isIndexablePage,
@@ -96,7 +97,9 @@ for (const [type, entries] of groups) {
   const entriesWithSitemap = entries.map((entry) => ({ ...entry, sitemap: file }));
   allEntries.push(...entriesWithSitemap);
   const latest = entries.map((entry) => entry.lastmod).filter(Boolean).sort().at(-1) ?? '';
-  children.push({ file, lastmod: latest });
+  if (!(type === 'en' && enNoindex)) {
+    children.push({ file, lastmod: latest });
+  }
   writeText(join(publicDir, file), urlSetXml(entries));
   writeText(join(distDir, file), urlSetXml(entries));
 }

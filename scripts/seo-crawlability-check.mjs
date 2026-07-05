@@ -6,13 +6,16 @@ const distDir = join(root, 'dist');
 const robotsPath = join(distDir, 'robots.txt');
 const sitemapPath = join(distDir, 'sitemap.xml');
 const siteOrigin = 'https://funnytools.win';
+const indexingConfigPath = join(root, 'src', 'config', 'indexing.json');
+const indexingConfig = JSON.parse(readFileSync(indexingConfigPath, 'utf8'));
+const enNoindex = indexingConfig.EN_NOINDEX === true;
 // The built robots.txt must match the source of truth in public/.
 const expectedRobots = readFileSync(join(root, 'public', 'robots.txt'), 'utf8');
 const expectedChildSitemaps = [
   'https://funnytools.win/sitemap-tools.xml',
   'https://funnytools.win/sitemap-guides.xml',
   'https://funnytools.win/sitemap-workflows.xml',
-  'https://funnytools.win/sitemap-en.xml',
+  ...(!enNoindex ? ['https://funnytools.win/sitemap-en.xml'] : []),
 ];
 const disallowedUrlPatterns = [
   { pattern: /http:\/\//i, label: 'http://' },
@@ -147,6 +150,21 @@ function validateSitemap() {
 
   const htmlFiles = walk(distDir, (file) => file.endsWith('.html'));
   const routeToFile = new Map(htmlFiles.map((file) => [routeFromHtml(file), file]));
+  if (enNoindex) {
+    const enHtmlFiles = htmlFiles.filter((file) => routeFromHtml(file).startsWith('/en/'));
+    if (!enHtmlFiles.length) fail('EN_NOINDEX is enabled but no /en/ HTML routes were found.');
+    for (const file of enHtmlFiles) {
+      const route = routeFromHtml(file);
+      const html = readFileSync(file, 'utf8');
+      const robots = [...html.matchAll(/<meta\b[^>]*>/gi)]
+        .map((match) => match[0])
+        .find((tag) => attr(tag, 'name').toLowerCase() === 'robots');
+      const robotsContent = robots ? attr(robots, 'content') : '';
+      if (!/\bnoindex\b/i.test(robotsContent) || !/\bfollow\b/i.test(robotsContent)) {
+        fail(`${route} must emit <meta name="robots" content="noindex, follow"> while EN_NOINDEX is enabled.`);
+      }
+    }
+  }
   const locs = [];
   const urlBlocks = [];
 

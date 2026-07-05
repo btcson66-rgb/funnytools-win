@@ -6,6 +6,12 @@ import { t } from '../i18n/ui';
 import { localePath, localeUrlPair } from '../lib/url';
 import { breadcrumbJsonLd, webPageJsonLd } from '../lib/seo';
 
+interface PageLink {
+  href: string;
+  label: string;
+  note?: string;
+}
+
 interface Props {
   lang: Locale;
   title: string;
@@ -13,9 +19,10 @@ interface Props {
   description: string;
   pageKey: string;
   body: string[];
+  extraLinks?: PageLink[];
 }
 
-const { lang, title, seoTitle, description, pageKey, body } = Astro.props;
+const { lang, title, seoTitle, description, pageKey, body, extraLinks = [] } = Astro.props;
 const ui = t(lang);
 const breadcrumbItems = [
   { name: ui.breadcrumbHome, href: localePath(lang) },
@@ -39,5 +46,42 @@ const jsonLd = [
   </section>
   <section class="wrap prose-page">
     {body.map((paragraph) => <p>{paragraph}</p>)}
+    {extraLinks.length > 0 && (
+      <div class="page-link-list">
+        {extraLinks.map((link) => (
+          <a href={link.href} rel="noopener">
+            <strong>{link.label}</strong>
+            {link.note && <span>{link.note}</span>}
+          </a>
+        ))}
+      </div>
+    )}
   </section>
 </BaseLayout>
+
+<style>
+  .page-link-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .page-link-list a {
+    display: grid;
+    gap: 6px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--card);
+  }
+
+  .page-link-list a:hover {
+    border-color: var(--brand);
+  }
+
+  .page-link-list span {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+</style>
