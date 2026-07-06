@@ -1,0 +1,66 @@
+{
+  "timezone": "Asia/Taipei",
+  "healthCheck": {
+    "timeoutMs": 15000,
+    "slowResponseMs": 4000,
+    "retryAttempts": 3,
+    "retryBackoffMs": 1000,
+    "userAgent": "FableCompany-HealthCheck/2.0 (+https://funnytools.win)"
+  },
+  "reporting": {
+    "vaultDir": "D:/Fable company/Company Vault",
+    "dataDir": "D:/Fable company/data",
+    "notifyDiscord": false
+  },
+  "sites": [
+    {
+      "id": "funnytools",
+      "name": "FunnyTools",
+      "baseUrl": "https://funnytools.win",
+      "localRepo": "D:/funnytools",
+      "primaryPath": "/",
+      "sitemapPath": "/sitemap.xml",
+      "samplePageCount": 6,
+      "sampleUrls": [
+        "/"
+      ],
+      "expectations": {
+        "expectAdsense": true,
+        "expectAdsTxt": true,
+        "expectAnalytics": true
+      }
+    },
+    {
+      "id": "roomfeng",
+      "name": "RoomFeng",
+      "baseUrl": "https://roomfeng.win",
+      "primaryPath": "/",
+      "sitemapPath": "/sitemap-index.xml",
+      "samplePageCount": 6,
+      "sampleUrls": [
+        "/"
+      ],
+      "expectations": {
+        "expectAdsense": false,
+        "expectAdsTxt": true,
+        "expectAnalytics": true
+      }
+    },
+    {
+      "id": "worthcalc",
+      "name": "WorthCalc",
+      "baseUrl": "https://worthcalc.win",
+      "primaryPath": "/en/",
+      "sitemapPath": "/sitemap-index.xml",
+      "samplePageCount": 6,
+      "sampleUrls": [
+        "/en/"
+      ],
+      "expectations": {
+        "expectAdsense": false,
+        "expectAdsTxt": false,
+        "expectAnalytics": true
+      }
+    }
+  ]
+}
