@@ -319,6 +319,8 @@ interface PrioritySpec {
   enMistakes: string[];
   relatedZh: string;
   relatedEn: string;
+  zhQuickAnswer?: string;
+  enQuickAnswer?: string;
   zhContentSections?: NonNullable<ToolContent['contentSections']>;
   enContentSections?: NonNullable<ToolContent['contentSections']>;
   zhFaq?: ToolContent['faq'];
@@ -326,39 +328,75 @@ interface PrioritySpec {
 }
 
 function priorityEnhancement(spec: PrioritySpec): Record<Locale, Enhancement> {
+  const zhContentSections = [
+    ...(spec.zhQuickAnswer ? [{ heading: '速答', paragraphs: [spec.zhQuickAnswer] }] : []),
+    ...(spec.zhContentSections ?? [
+      {
+        heading: `${spec.zhName}適合誰使用`,
+        paragraphs: [
+          spec.zhWho,
+          `這一頁的重點不是取代正式簡章、學校規定或專業軟體，而是把「先試算、再檢查、最後依正式資料確認」的流程整理清楚。使用 ${spec.zhName} 時，建議先用一組小資料測試欄位、單位與權重是否符合你的情境，再把完整資料放入工具中。`,
+        ],
+      },
+      {
+        heading: '計算方法、判讀與限制',
+        paragraphs: [
+          spec.zhMethod,
+          '結果應搭配資料來源、樣本大小、頁面範圍、輸出格式或操作規則一起判讀；如果用於甄試、申請、正式報告、交件或公開文件，請把工具結果視為草稿檢查與溝通輔助，最後仍以原始資料、正式公告與人工複核為準。',
+        ],
+        items: spec.zhMistakes,
+      },
+      {
+        heading: '實際使用情境',
+        paragraphs: [
+          '以下情境是為了說明工具使用方式的範例，不代表任何機關、學校或平台的正式規則。你可以把它們當成檢查流程：先確認輸入資料，再看結果是否符合預期，最後決定是否要搭配其他工具處理。',
+        ],
+        items: spec.zhExamples,
+      },
+      {
+        heading: '建議搭配的相關工具',
+        paragraphs: [spec.relatedZh],
+      },
+    ]),
+  ];
+  const enContentSections = [
+    ...(spec.enQuickAnswer ? [{ heading: 'Quick answer', paragraphs: [spec.enQuickAnswer] }] : []),
+    ...(spec.enContentSections ?? [
+      {
+        heading: `Who should use ${spec.enName}`,
+        paragraphs: [
+          spec.enWho,
+          `This page is designed for quick checking and preparation, not for replacing official rules, institutional requirements, or professional software. When using ${spec.enName}, test a small sample first so units, weights, page ranges, and output settings match your real task before processing the full dataset or document.`,
+        ],
+      },
+      {
+        heading: 'Method, interpretation, and limits',
+        paragraphs: [
+          spec.enMethod,
+          'Read the result together with the source data, sample size, page range, output format, or workflow rule. For applications, exams, reports, submissions, or public documents, treat the output as a draft check and verify it against the original source and official instructions.',
+        ],
+        items: spec.enMistakes,
+      },
+      {
+        heading: 'Practical examples',
+        paragraphs: [
+          'These examples illustrate workflow ideas only. They are not official policy for any school, agency, exam board, or platform.',
+        ],
+        items: spec.enExamples,
+      },
+      {
+        heading: 'Related workflow',
+        paragraphs: [spec.relatedEn],
+      },
+    ]),
+  ];
+
   return {
     zh: {
       seoTitle: spec.zhSeoTitle,
       seoDescription: spec.zhSeoDescription,
       keywords: spec.zhKeywords,
-      contentSections: spec.zhContentSections ?? [
-        {
-          heading: `${spec.zhName}適合誰使用`,
-          paragraphs: [
-            spec.zhWho,
-            `這一頁的重點不是取代正式簡章、學校規定或專業軟體，而是把「先試算、再檢查、最後依正式資料確認」的流程整理清楚。使用 ${spec.zhName} 時，建議先用一組小資料測試欄位、單位與權重是否符合你的情境，再把完整資料放入工具中。`,
-          ],
-        },
-        {
-          heading: '計算方法、判讀與限制',
-          paragraphs: [
-            spec.zhMethod,
-            '結果應搭配資料來源、樣本大小、頁面範圍、輸出格式或操作規則一起判讀；如果用於甄試、申請、正式報告、交件或公開文件，請把工具結果視為草稿檢查與溝通輔助，最後仍以原始資料、正式公告與人工複核為準。',
-          ],
-          items: spec.zhMistakes,
-        },
-        {
-          heading: '實際使用情境',
-          paragraphs: [
-            '以下情境是為了說明工具使用方式的範例，不代表任何機關、學校或平台的正式規則。你可以把它們當成檢查流程：先確認輸入資料，再看結果是否符合預期，最後決定是否要搭配其他工具處理。',
-          ],
-          items: spec.zhExamples,
-        },
-        {
-          heading: '建議搭配的相關工具',
-          paragraphs: [spec.relatedZh],
-        },
-      ],
+      contentSections: zhContentSections,
       caseStudies: spec.zhExamples.map((description, index) => ({
         title: `範例 ${index + 1}`,
         description,
@@ -376,34 +414,7 @@ function priorityEnhancement(spec: PrioritySpec): Record<Locale, Enhancement> {
       seoTitle: spec.enSeoTitle,
       seoDescription: spec.enSeoDescription,
       keywords: spec.enKeywords,
-      contentSections: spec.enContentSections ?? [
-        {
-          heading: `Who should use ${spec.enName}`,
-          paragraphs: [
-            spec.enWho,
-            `This page is designed for quick checking and preparation, not for replacing official rules, institutional requirements, or professional software. When using ${spec.enName}, test a small sample first so units, weights, page ranges, and output settings match your real task before processing the full dataset or document.`,
-          ],
-        },
-        {
-          heading: 'Method, interpretation, and limits',
-          paragraphs: [
-            spec.enMethod,
-            'Read the result together with the source data, sample size, page range, output format, or workflow rule. For applications, exams, reports, submissions, or public documents, treat the output as a draft check and verify it against the original source and official instructions.',
-          ],
-          items: spec.enMistakes,
-        },
-        {
-          heading: 'Practical examples',
-          paragraphs: [
-            'These examples illustrate workflow ideas only. They are not official policy for any school, agency, exam board, or platform.',
-          ],
-          items: spec.enExamples,
-        },
-        {
-          heading: 'Related workflow',
-          paragraphs: [spec.relatedEn],
-        },
-      ],
+      contentSections: enContentSections,
       caseStudies: spec.enExamples.map((description, index) => ({
         title: `Example ${index + 1}`,
         description,
@@ -470,6 +481,8 @@ const prioritySpecs: PrioritySpec[] = [
     enMistakes: ['Do not read a T score as percent correct.', 'Use a z-score calculator first if the raw score is not standardized.', 'Interpret extreme scores with sample size and distribution shape.'],
     relatedZh: '可先用 Z 分數計算器取得 z，再搭配 PR 百分等級與教師甄試成績轉換模擬器整理完整流程。',
     relatedEn: 'Start with the Z Score Calculator, then use Percentile Rank and Teacher Exam Score tools for a fuller workflow.',
+    zhQuickAnswer: 'T 分數 = 50 + 10 × Z 分數；例如 z = 1.2 會得到 T = 62，平均 50、標準差 10，台灣會考、教育測驗與心理測驗常用這種標準分數量尺。',
+    enQuickAnswer: 'T score = 50 + 10 × z; for example, z = 1.2 becomes T = 62 on a scale with mean 50 and standard deviation 10, which is commonly used for educational and psychological test interpretation.',
     zhContentSections: [
       {
         heading: 'T 分數是什麼',
@@ -535,6 +548,8 @@ const prioritySpecs: PrioritySpec[] = [
     enMistakes: ['Standard deviation cannot be zero.', 'Mean and SD must come from the same reference group.', 'A z score is not a rank or percentile by itself.'],
     relatedZh: '可接著使用 T 分數計算器轉換量尺，或用 PR 百分等級計算器描述相對位置。',
     relatedEn: 'Use the T Score Calculator for a mean-50 scale or Percentile Rank for relative standing.',
+    zhQuickAnswer: 'Z 分數 = (原始分數 − 平均數) / 標準差；例如班級平均 70、標準差 10、個人 82 分，z = 1.2，表示高於平均 1.2 個標準差。',
+    enQuickAnswer: 'Z score = (raw score − mean) / standard deviation; for example, with mean 70, SD 10, and score 82, z = 1.2, meaning the score is 1.2 standard deviations above the mean.',
   },
   {
     slug: 'weighted-average-calculator',

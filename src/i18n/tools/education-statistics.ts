@@ -146,6 +146,14 @@ export const classRankContent = content(
   {
     name: '排名百分比計算器', short: '依班級名次與總人數估算排名百分等級。', long: '輸入名次（第 1 名為最佳）與班級總人數，以名次區間中點估算百分等級，並顯示大約位於前百分之多少。',
     seoTitle: '班級排名百分比計算器｜名次轉 PR', seoDescription: '依班級名次和總人數估算百分等級與前百分比，附公式與教育應用說明。', keywords: ['排名百分比', '班級名次', 'class rank percentile'],
+    contentSections: [
+      {
+        heading: '速答：班級名次怎麼換成百分等級',
+        paragraphs: [
+          '排名百分比可用 PR = 100 × (N − r + 0.5) / N 估算；例如 40 人班第 6 名，PR = 86.3，約位於前 15%，表示這個名次高於班內多數參照群體。',
+        ],
+      },
+    ],
     instructions: ['輸入班級名次，第 1 名代表最高。', '輸入班級或參照群體總人數。', '計算百分等級與前百分比。'], examples: ['將班級名次轉為較容易跨班理解的相對位置。', '初步說明升學資料中的班排比例。', '追蹤同一參照群體內的相對變化。'],
     formula: { expression: 'PR = 100 × (N − r + 0.5) / N', explanation: 'r 為名次（1 最佳），N 為總人數；0.5 是將單一名次放在其百分區間中點的修正。前百分比則以 100 × r / N 粗估。' }, educationApplication: '排名百分比會受班級規模與群體組成影響。申請或正式認證若有指定算法，應以該單位規則為準，尤其要確認同名次的處理方式。', reportTip: '可寫成：「該生在 40 人班級中排名第 6，依中點法估算 PR = 86.3。」並註明這是班內相對位置。',
     faq: [{ q: '第 1 名為什麼不是 PR 100？', a: '中點法將每個名次放在所代表區間的中點，因此有限群體的最高名次會略低於 100。' }, { q: '同名次怎麼處理？', a: '本簡易工具未納入同名次人數；正式用途請依學校或申請單位規則。' }, { q: '前 10% 和 PR 90 一樣嗎？', a: '概念接近但算法與四捨五入可能不同，正式門檻應以規定為準。' }],
@@ -154,6 +162,14 @@ export const classRankContent = content(
   {
     name: 'Class Rank Percentile Calculator', short: 'Estimate class-rank percentile from rank and class size.', long: 'Enter rank (1 is best) and class size to estimate percentile rank using a rank-interval midpoint, plus a rough top-percent figure.',
     seoTitle: 'Class Rank Calculator | Rank to Percentile', seoDescription: 'Convert class rank and class size to an estimated percentile rank and top percentage.', keywords: ['class rank percentile calculator', 'rank percentage', 'education statistics'],
+    contentSections: [
+      {
+        heading: 'Quick answer: convert class rank to percentile',
+        paragraphs: [
+          'Class-rank percentile can be estimated with PR = 100 × (N − r + 0.5) / N; for example, rank 6 in a class of 40 gives PR = 86.3 and an approximate top 15% position.',
+        ],
+      },
+    ],
     instructions: ['Enter the rank, with 1 as the highest.', 'Enter the class or reference-group size.', 'Calculate percentile rank and top percentage.'], examples: ['Express class rank as a relative position.', 'Interpret rank information in application records.', 'Track relative change within the same cohort.'],
     formula: { expression: 'PR = 100 × (N − r + 0.5) / N', explanation: 'r is rank (1 is best), N is group size, and 0.5 places each rank at the midpoint of its percentile interval. Top percent is approximated by 100 × r / N.' }, educationApplication: 'Class-rank percentages depend on cohort size and composition. For admissions or certification, follow the official method, especially its treatment of tied ranks.', reportTip: 'Example: “The student ranked 6th in a class of 40, corresponding to an estimated PR = 86.3 using the midpoint method.”',
     faq: [{ q: 'Why is first place not PR 100?', a: 'The midpoint method locates each rank at the center of its interval, so the top rank in a finite group falls just below 100.' }, { q: 'How are tied ranks handled?', a: 'This simple tool does not model ties. Follow the school or receiving organization’s rule for formal use.' }, { q: 'Is top 10% exactly the same as PR 90?', a: 'They are related, but formulas and rounding can differ. Use the stated official threshold.' }],

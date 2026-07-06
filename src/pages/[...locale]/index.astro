@@ -66,6 +66,18 @@ const seoIntro = {
   },
   en: homeSeoIntro.en,
 }[lang];
+const aboutIntroLink = {
+  zh: {
+    prefix: '想了解本站維護方式、工具原則與資料處理界線，可閱讀 ',
+    label: '關於 FunnyTools 免費線上工具箱',
+    suffix: '。',
+  },
+  en: {
+    prefix: 'To understand how the site is maintained, how tools are selected, and how inputs are handled, read ',
+    label: 'About FunnyTools',
+    suffix: '.',
+  },
+}[lang];
 const privacy = {
   zh: {
     heading: '隱私與本機處理',
@@ -511,6 +523,7 @@ const popularItemListJsonLd = {
       <h2 id="home-intro-heading">{seoIntro.heading}</h2>
     </div>
     {seoIntro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    <p>{aboutIntroLink.prefix}<a class="inline-link" href={localePath(lang, 'about')}>{aboutIntroLink.label}</a>{aboutIntroLink.suffix}</p>
   </section>
 
   <section class="wrap content-section use-case-section">

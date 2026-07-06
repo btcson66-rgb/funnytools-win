@@ -8,6 +8,14 @@ export default {
     seoTitle: '成績平均計算器｜免費快速算總分與加權平均',
     seoDescription: '免費成績平均計算器，輸入多筆分數與權重，立即算出總分、簡單平均與加權平均，老師學生皆適用。',
     keywords: ['成績平均', '加權平均', '平均計算器', 'grade average'],
+    contentSections: [
+      {
+        heading: '速答：成績平均怎麼算',
+        paragraphs: [
+          '成績平均 = 總分 ÷ 有效項目數；例如 5 次測驗總分 421，簡單平均就是 84.2 分。若作業 30%、期中 30%、期末 40%，則用 Σ(wᵢxᵢ) / Σwᵢ 計算加權平均，結果會更貼近課程配分。',
+        ],
+      },
+    ],
     instructions: [
       '輸入每次作業、測驗或考試的分數。',
       '若某些項目需要較高比重，可在權重欄輸入數字。',
@@ -98,6 +106,14 @@ export default {
     seoTitle: 'Grade Average Calculator | Simple & Weighted Grades',
     seoDescription: 'Calculate grade totals, simple averages, and weighted averages from scores and optional weights.',
     keywords: ['grade average calculator', 'weighted average', 'score average', 'average calculator'],
+    contentSections: [
+      {
+        heading: 'Quick answer: how to calculate grade average',
+        paragraphs: [
+          'Grade average = total score ÷ valid item count; for example, five assessments totaling 421 points give a simple average of 84.2. For 30% homework, 30% midterm, and 40% final, use Σ(wᵢxᵢ) / Σwᵢ to calculate the weighted average.',
+        ],
+      },
+    ],
     instructions: [
       'Enter one score per row.',
       'Add a weight when some scores should count more than others.',
