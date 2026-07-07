@@ -103,8 +103,8 @@ const contentSecurityPolicy = [
     </script>
     <title>{brandedTitle}</title>
     <meta name="description" content={brandedDescription} />
-    {shouldNoindex ? <meta name="robots" content={robotsContent} /> : <link rel="canonical" href={canonical} />}
-    {!shouldNoindex && robots && <meta name="robots" content={robots} />}
+    <link rel="canonical" href={canonical} />
+    {shouldNoindex ? <meta name="robots" content={robotsContent} /> : robots && <meta name="robots" content={robots} />}
     {!shouldNoindex && altLang && hreflangs.map((link) => <link rel="alternate" hreflang={link.hreflang} href={link.href} />)}
     <meta property="og:type" content={type} />
     <meta property="og:title" content={brandedTitle} />
