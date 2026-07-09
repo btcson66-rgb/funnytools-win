@@ -55,14 +55,19 @@ if (!existsSync(dist)) {
     mustInclude('install prompt', installPrompt, 'dataset.offline');
   }
 
+  // 樣式可能是外部 CSS 檔或（inlineStylesheets: 'always' 後）內嵌於頁面 <style>，
+  // 兩處合併檢查：離線廣告隱藏規則必須存在於任一輸出
   const cssPath = join(dist, '_astro');
-  if (existsSync(cssPath)) {
-    const css = readdirSync(cssPath)
+  const externalCss = existsSync(cssPath)
+    ? readdirSync(cssPath)
       .filter((name) => name.endsWith('.css'))
       .map((name) => read(join(cssPath, name)))
-      .join('\n');
-    mustMatch('built css', css, /\[data-offline=(?:"true"|'true'|true)\]\s*\.ad-slot/);
-  }
+      .join('\n')
+    : '';
+  const homeInlineCss = existsSync(join(dist, 'index.html'))
+    ? [...read(join(dist, 'index.html')).matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join('\n')
+    : '';
+  mustMatch('built css', `${externalCss}\n${homeInlineCss}`, /\[data-offline=(?:"true"|'true'|true)\]\s*\.ad-slot/);
 
   const homePath = join(dist, 'index.html');
   if (existsSync(homePath)) {
