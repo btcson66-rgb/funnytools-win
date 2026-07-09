@@ -13,13 +13,25 @@ const enabled = SITE.features.newsletter;
 
 {
   enabled && (
-    <section class="content-section reserved-block">
+    <section class="content-section reserved-block" data-newsletter-signup>
       <h2>{ui.monetization.newsletterHeading}</h2>
       <p>{ui.monetization.newsletterText}</p>
-      <form class="newsletter-form" aria-disabled="true">
-        <input type="email" placeholder={ui.monetization.emailPlaceholder} disabled />
-        <button class="btn" type="button" disabled>{ui.monetization.subscribe}</button>
+      <form
+        class="newsletter-form"
+        method="post"
+        action={SITE.newsletterEndpoint}
+        data-labels={JSON.stringify({
+          success: ui.monetization.newsletterSuccess,
+          error: ui.monetization.newsletterError,
+          invalid: ui.monetization.newsletterInvalid,
+        })}
+        novalidate
+      >
+        <input type="email" name="email" required autocomplete="email" placeholder={ui.monetization.emailPlaceholder} />
+        <input class="newsletter-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button class="btn" type="submit">{ui.monetization.subscribe}</button>
       </form>
+      <p class="newsletter-status" role="status" aria-live="polite" hidden />
     </section>
   )
 }
@@ -43,9 +55,87 @@ const enabled = SITE.features.newsletter;
     gap: 10px;
   }
 
+  .newsletter-form input[type='email'] {
+    min-height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--soft);
+    color: var(--ink);
+    padding: 8px 12px;
+    font: inherit;
+  }
+
+  .newsletter-honeypot {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .newsletter-status {
+    margin: 10px 0 0 !important;
+    color: var(--ink) !important;
+  }
+
   @media (max-width: 560px) {
     .newsletter-form {
       grid-template-columns: 1fr;
     }
   }
 </style>
+
+<script>
+  import { trackNewsletterSignup } from '../lib/analytics';
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  document.querySelectorAll('[data-newsletter-signup]').forEach((root) => {
+    const form = root.querySelector('form');
+    const status = root.querySelector('.newsletter-status');
+    if (!(form instanceof HTMLFormElement) || !(status instanceof HTMLElement)) return;
+
+    const labels = JSON.parse(form.getAttribute('data-labels') || '{}');
+    const emailInput = form.querySelector('input[type=email]');
+    const honeypot = form.querySelector('input[name=website]');
+    const submitButton = form.querySelector('button[type=submit]');
+
+    function setStatus(text, busy = false) {
+      status.textContent = text;
+      status.hidden = !text;
+      if (submitButton instanceof HTMLButtonElement) submitButton.disabled = busy;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (honeypot instanceof HTMLInputElement && honeypot.value.trim()) return;
+
+      const email = emailInput instanceof HTMLInputElement ? emailInput.value.trim().toLowerCase() : '';
+      if (!emailPattern.test(email)) {
+        setStatus(labels.invalid || '');
+        return;
+      }
+
+      setStatus('…', true);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email, site: 'funnytools', website: '' }),
+        });
+        const payload = await response.json();
+
+        if (payload && payload.ok) {
+          setStatus(labels.success || '');
+          trackNewsletterSignup('tool_page', true);
+          form.reset();
+        } else {
+          setStatus(labels.error || '');
+          trackNewsletterSignup('tool_page', false);
+        }
+      } catch {
+        setStatus(labels.error || '');
+        trackNewsletterSignup('tool_page', false);
+      }
+    });
+  });
+</script>

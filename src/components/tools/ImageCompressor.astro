@@ -122,6 +122,8 @@ const { labels } = Astro.props;
 </style>
 
 <script>
+  import { requestGatedDownload } from '../../lib/downloadGate.client';
+
   document.querySelectorAll('[data-image-compressor-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
     const fileInput = root.querySelector('[data-file]');
@@ -143,6 +145,7 @@ const { labels } = Astro.props;
     const maxPixels = 40_000_000;
     let state = null;
     let outputUrl = '';
+    let outputBlob = null;
     let renderTimer = null;
 
     function setError(message) {
@@ -162,6 +165,7 @@ const { labels } = Astro.props;
     function revokeOutput() {
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       outputUrl = '';
+      outputBlob = null;
     }
 
     function clearOutput() {
@@ -231,6 +235,7 @@ const { labels } = Astro.props;
         return;
       }
       outputUrl = URL.createObjectURL(blob);
+      outputBlob = blob;
       outputPreview.src = outputUrl;
       outputPreview.hidden = false;
       outputEmpty.hidden = true;
@@ -283,12 +288,23 @@ const { labels } = Astro.props;
     qualityInput.addEventListener('input', scheduleRender);
     formatInput.addEventListener('change', scheduleRender);
     root.querySelector('[data-reset]')?.addEventListener('click', reset);
-    downloadButton.addEventListener('click', () => {
+    function localDownload() {
       if (!outputUrl) return;
       const anchor = document.createElement('a');
       anchor.href = outputUrl;
       anchor.download = downloadButton.dataset.filename || 'compressed-image';
       anchor.click();
+    }
+
+    downloadButton.addEventListener('click', () => {
+      if (!outputUrl) return;
+      requestGatedDownload({
+        tool: 'image-compressor',
+        anchor: root.querySelector('.actions'),
+        getFile: () =>
+          outputBlob ? { blob: outputBlob, filename: downloadButton.dataset.filename || 'compressed-image' } : null,
+        fallback: localDownload,
+      });
     });
     window.addEventListener('beforeunload', revokeOutput);
   });

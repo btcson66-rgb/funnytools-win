@@ -12,7 +12,7 @@ import RelatedTools from '../components/RelatedTools.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import SponsorBlock from '../components/SponsorBlock.astro';
 import BaseLayout from './BaseLayout.astro';
-import type { Locale } from '../config/site';
+import { SITE, type Locale } from '../config/site';
 import type { Category } from '../data/categories';
 import type { ToolMeta } from '../data/tools';
 import type { ToolContent } from '../i18n/tools/_types';
@@ -45,6 +45,9 @@ const relatedGuides = getGuidesForTool(tool.slug, lang).slice(0, 4);
 const relatedGuidesHeading = lang === 'zh' ? '延伸閱讀：使用教學' : 'Related guides';
 const relatedWorkflows = getWorkflowsForTool(tool.slug, lang).slice(0, 2);
 const relatedWorkflowsHeading = lang === 'zh' ? '相關工具包' : 'Related toolkits';
+const downloadGateConfig = SITE.features.downloadGate
+  ? JSON.stringify({ lang, labels: ui.downloadGate })
+  : null;
 ---
 
 <BaseLayout
@@ -58,6 +61,9 @@ const relatedWorkflowsHeading = lang === 'zh' ? '相關工具包' : 'Related too
   jsonLd={jsonLd}
 >
   <article class="wrap tool-page" data-category={category.id} data-tool-slug={tool.slug}>
+    {downloadGateConfig && (
+      <script is:inline type="application/json" data-download-gate-config set:html={downloadGateConfig} />
+    )}
     <Breadcrumb items={breadcrumbItems} />
     <header class="tool-header tool-header-card">
       <div class="tool-header-card__top">

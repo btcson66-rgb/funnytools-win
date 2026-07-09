@@ -21,8 +21,12 @@ export const SITE = {
     affiliate: false,
     sponsor: false,
     relatedResources: false,
-    newsletter: false,
+    newsletter: true,
+    downloadGate: true,
   },
+  // Shared Cloudflare Pages Functions (deployed with roomfeng.win) used by all three sites.
+  newsletterEndpoint: 'https://roomfeng.win/api/newsletter',
+  downloadGateEndpoint: 'https://roomfeng.win/api/download-gate',
   email: 'btcson66@gmail.com',
   htmlLang: { zh: 'zh-Hant', en: 'en' } as Record<Locale, string>,
   hreflang: { zh: 'zh-TW', en: 'en' } as Record<Locale, string>,

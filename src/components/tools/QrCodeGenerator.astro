@@ -111,6 +111,8 @@ const { labels } = Astro.props;
 </style>
 
 <script>
+  import { requestGatedDownload } from '../../lib/downloadGate.client';
+
   document.querySelectorAll('[data-qr-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
     const textInput = root.querySelector('[data-text]');
@@ -182,11 +184,23 @@ const { labels } = Astro.props;
       renderTimer = window.setTimeout(renderQr, 300);
     }
 
-    function download() {
+    function localDownload() {
       const anchor = document.createElement('a');
       anchor.href = canvas.toDataURL('image/png');
       anchor.download = 'qr-code.png';
       anchor.click();
+    }
+
+    function download() {
+      requestGatedDownload({
+        tool: 'qr-code-generator',
+        anchor: root.querySelector('.actions'),
+        getFile: () =>
+          new Promise((resolve) => {
+            canvas.toBlob((blob) => resolve(blob ? { blob, filename: 'qr-code.png' } : null), 'image/png');
+          }),
+        fallback: localDownload,
+      });
     }
 
     async function copyImage() {

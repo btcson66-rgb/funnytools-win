@@ -67,4 +67,16 @@ export function trackHubClick(hubId: string, sourcePath?: string) {
   track('hub_click', { hub_id: hubId, source_path: sourcePath || window.location.pathname });
 }
 
+export function trackDownloadGate(
+  eventName: 'gate_view' | 'gate_submit' | 'gate_email_sent' | 'gate_fallback_local',
+  toolId: string,
+  reason?: string,
+) {
+  track(eventName, { tool_id: toolId, reason });
+}
+
+export function trackNewsletterSignup(source: string, success: boolean) {
+  track('newsletter_signup', { source, success });
+}
+
 export {};

@@ -96,6 +96,8 @@ const { labels } = Astro.props;
 </style>
 
 <script>
+  import { requestGatedDownload } from '../../lib/downloadGate.client';
+
   document.querySelectorAll('[data-merge-pdf-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
     const fileInput = root.querySelector('[data-file]');
@@ -262,8 +264,16 @@ const { labels } = Astro.props;
         }
         const bytes = await merged.save();
         const baseName = safeBaseName(items[0].file.name);
-        downloadPdf(bytes, `${baseName}-merged.pdf`);
-        setStatus(labels.downloaded);
+        const filename = `${baseName}-merged.pdf`;
+        requestGatedDownload({
+          tool: 'merge-pdf',
+          anchor: root.querySelector('.actions'),
+          getFile: () => ({ blob: new Blob([bytes], { type: 'application/pdf' }), filename }),
+          fallback: () => {
+            downloadPdf(bytes, filename);
+            setStatus(labels.downloaded);
+          },
+        });
       } catch {
         setError(labels.mergeError);
       } finally {
