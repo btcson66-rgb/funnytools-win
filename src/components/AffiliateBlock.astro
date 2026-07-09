@@ -1,35 +1,95 @@
 ---
 import { SITE, type Locale } from '../config/site';
-import { t } from '../i18n/ui';
+import { getAffiliateProducts } from '../data/affiliateProducts';
 
 interface Props {
   lang: Locale;
+  toolSlug?: string;
 }
 
-const { lang } = Astro.props;
-const ui = t(lang);
-const enabled = SITE.features.affiliate;
+const { lang, toolSlug = '' } = Astro.props;
+const products = toolSlug ? getAffiliateProducts(toolSlug) : [];
+const enabled = SITE.features.affiliate && lang === 'zh' && products.length > 0;
 ---
 
 {
   enabled && (
-    <section class="content-section reserved-block">
-      <h2>{ui.monetization.affiliateHeading}</h2>
-      <p>{ui.monetization.affiliateText}</p>
+    <section class="content-section affiliate-block" aria-label="相關好物推薦">
+      <h2>相關好物推薦</h2>
+      <div class="affiliate-grid">
+        {products.map((product) => (
+          <a
+            class="affiliate-card"
+            href={product.url}
+            rel="sponsored nofollow noopener"
+            target="_blank"
+          >
+            <strong>{product.name}</strong>
+            <span class="affiliate-note">{product.note}</span>
+            <span class="affiliate-meta">
+              {product.price}｜{product.shop}
+            </span>
+            <span class="affiliate-cta">前往蝦皮查看 →</span>
+          </a>
+        ))}
+      </div>
+      <p class="affiliate-disclosure">
+        本區塊含蝦皮聯盟行銷連結，透過連結購買我們可能獲得分潤，不影響您的價格。
+      </p>
     </section>
   )
 }
 
 <style>
-  .reserved-block {
+  .affiliate-block {
     padding: 18px;
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 10px;
     background: var(--card);
   }
 
-  .reserved-block p {
-    margin: 0;
+  .affiliate-grid {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .affiliate-card {
+    display: grid;
+    gap: 4px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--card);
+    text-decoration: none;
+  }
+
+  .affiliate-card:hover {
+    border-color: var(--brand);
+  }
+
+  .affiliate-card strong {
+    color: var(--ink);
+  }
+
+  .affiliate-note {
     color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .affiliate-meta {
+    color: var(--muted);
+    font-size: 0.92em;
+  }
+
+  .affiliate-cta {
+    color: var(--brand);
+    font-weight: 600;
+  }
+
+  .affiliate-disclosure {
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 0.85em;
   }
 </style>

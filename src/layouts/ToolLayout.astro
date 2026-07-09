@@ -260,7 +260,7 @@ const relatedWorkflowsHeading = lang === 'zh' ? '相關工具包' : 'Related too
     {tool.embedPotential !== 'low' && <EmbedCode lang={lang} tool={tool} />}
     <NewsletterSignup lang={lang} />
     <RelatedResources lang={lang} />
-    <AffiliateBlock lang={lang} />
+    <AffiliateBlock lang={lang} toolSlug={tool.slug} />
     <AdSlot />
   </article>
 
