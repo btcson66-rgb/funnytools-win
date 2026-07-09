@@ -3,6 +3,7 @@ import { SITE, type Locale } from '../config/site';
 import { t } from '../i18n/ui';
 import { localePath } from '../lib/url';
 import pkg from '../../package.json';
+import siteStats from '../data/site-stats.json';
 
 interface Props { lang: Locale; }
 
@@ -11,6 +12,18 @@ const ui = t(lang);
 const year = new Date().getFullYear();
 const version = pkg.version;
 const footerBrand = lang === 'zh' ? `${SITE.name.zh} by FunnyTools.win` : SITE.name.en;
+
+// 累積數據為 GA4 真實快照（release 時由 scripts/site-stats.mjs 刷新）；
+// 低於門檻不顯示，避免小數字造成反效果。
+const STATS_MIN_PAGEVIEWS = 1000;
+const stats = (siteStats as { sites?: Record<string, { pageviews: number; users: number }> }).sites?.['funnytools.win'];
+const showStats = Boolean(stats && stats.pageviews >= STATS_MIN_PAGEVIEWS);
+const fmt = (n: number) => n.toLocaleString('en-US');
+const statsLine = stats
+  ? (lang === 'zh'
+    ? `累積瀏覽 ${fmt(stats.pageviews)} 次 · 累積使用者 ${fmt(stats.users)} 位`
+    : `${fmt(stats.pageviews)} total views · ${fmt(stats.users)} users and counting`)
+  : '';
 ---
 
 <footer class="site-footer">
@@ -42,6 +55,7 @@ const footerBrand = lang === 'zh' ? `${SITE.name.zh} by FunnyTools.win` : SITE.n
     </nav>
   </div>
   <div class="footer-bottom">
+    {showStats && <p class="fineprint site-stats" data-nosnippet>{statsLine}</p>}
     <p class="fineprint">&copy; {year} {footerBrand} · v{version}</p>
     <p>{ui.footer.legalNote}</p>
   </div>

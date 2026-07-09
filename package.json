@@ -1,6 +1,6 @@
 {
   "name": "funnytools",
-  "version": "5.10.0",
+  "version": "5.11.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -27,7 +27,8 @@
     "traffic-report": "node scripts/traffic-report/index.mjs",
     "daily-health": "node health-check.mjs",
     "preflight": "npm run build && npm run seo:check && npm run audit:lang-switch && npm run audit:adsense && npm run audit:analytics && npm run audit:pwa && npm run audit:security",
-    "release": "node scripts/release.mjs"
+    "stats:site": "node scripts/site-stats.mjs",
+    "release": "node scripts/site-stats.mjs && node scripts/release.mjs"
   },
   "dependencies": {
     "astro": "^6.4.7",
