@@ -299,10 +299,11 @@ h2 {
   margin-top: 34px;
 }
 
-/* 首頁長頁面：離屏區塊跳過 style/layout/paint（行動端主執行緒 Style & Layout
+/* 長頁面離屏區塊跳過 style/layout/paint（行動端主執行緒 Style & Layout
    為最大成本）。content-visibility:auto 只影響離屏內容，接近視窗即恢復渲染，
-   SEO（內容仍在 DOM）與錨點捲動不受影響。 */
-.home-page > .content-section,
+   SEO（內容仍在 DOM）與錨點捲動不受影響。工具互動區（.tool-widget /
+   .tool-interaction）刻意不套用，避免影響上方互動元件。 */
+.content-section,
 .home-page > .design-category-section {
   content-visibility: auto;
   contain-intrinsic-size: auto 600px;
