@@ -337,16 +337,50 @@ export function lastmodForPage(page, previousLastmod = '') {
   return statSync(page.file).mtime.toISOString().slice(0, 10);
 }
 
-export function urlSetXml(entries) {
-  const rows = entries.map((entry) => [
-    '  <url>',
-    `    <loc>${escapeXml(entry.loc)}</loc>`,
-    `    <lastmod>${escapeXml(entry.lastmod)}</lastmod>`,
-    '  </url>',
-  ].join('\n')).join('\n');
+// zh URLs live at the root, en URLs under /en/. Returns the counterpart URL
+// in the other locale, or null when the shape does not match.
+function alternateLocaleUrl(loc) {
+  const enPrefix = `${siteOrigin}/en/`;
+  if (loc.startsWith(enPrefix) || loc === `${siteOrigin}/en/`) {
+    return `${siteOrigin}/${loc.slice(enPrefix.length)}`;
+  }
+  if (loc.startsWith(`${siteOrigin}/`)) {
+    return `${enPrefix}${loc.slice(siteOrigin.length + 1)}`;
+  }
+  return null;
+}
+
+export function urlSetXml(entries, allIndexableUrls = null) {
+  // Only emit hreflang alternates when the counterpart page really exists in
+  // the deployed set, so zh-only or en-only pages stay alternate-free.
+  const hasAlternates = allIndexableUrls instanceof Set;
+  const rows = entries.map((entry) => {
+    const lines = [
+      '  <url>',
+      `    <loc>${escapeXml(entry.loc)}</loc>`,
+      `    <lastmod>${escapeXml(entry.lastmod)}</lastmod>`,
+    ];
+    if (hasAlternates) {
+      const counterpart = alternateLocaleUrl(entry.loc);
+      if (counterpart && allIndexableUrls.has(counterpart)) {
+        const isEn = entry.loc.startsWith(`${siteOrigin}/en/`);
+        const enUrl = isEn ? entry.loc : counterpart;
+        const zhUrl = isEn ? counterpart : entry.loc;
+        lines.push(
+          `    <xhtml:link rel="alternate" hreflang="zh-TW" href="${escapeXml(zhUrl)}" />`,
+          `    <xhtml:link rel="alternate" hreflang="en" href="${escapeXml(enUrl)}" />`,
+          // x-default → en: global searchers outside zh-TW get the English page.
+          `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(enUrl)}" />`,
+        );
+      }
+    }
+    lines.push('  </url>');
+    return lines.join('\n');
+  }).join('\n');
+  const xmlnsXhtml = hasAlternates ? ' xmlns:xhtml="http://www.w3.org/1999/xhtml"' : '';
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"${xmlnsXhtml}>`,
     rows,
     '</urlset>',
     '',

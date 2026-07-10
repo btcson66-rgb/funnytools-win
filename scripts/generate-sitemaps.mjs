@@ -91,6 +91,9 @@ for (const page of builtPages()) {
 
 const children = [];
 const allEntries = [];
+// All indexable URLs across every group, so urlSetXml can emit hreflang
+// alternates only for pages whose locale counterpart really exists.
+const allIndexableUrls = new Set([...groups.values()].flat().map((entry) => entry.loc));
 for (const [type, entries] of groups) {
   entries.sort((a, b) => a.loc.localeCompare(b.loc));
   const file = sitemapFileForType(type);
@@ -100,8 +103,9 @@ for (const [type, entries] of groups) {
   if (!(type === 'en' && enNoindex)) {
     children.push({ file, lastmod: latest });
   }
-  writeText(join(publicDir, file), urlSetXml(entries));
-  writeText(join(distDir, file), urlSetXml(entries));
+  const xml = urlSetXml(entries, allIndexableUrls);
+  writeText(join(publicDir, file), xml);
+  writeText(join(distDir, file), xml);
 }
 
 const indexXml = sitemapIndexXml(children);
