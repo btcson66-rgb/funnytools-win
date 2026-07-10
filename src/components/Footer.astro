@@ -52,6 +52,11 @@ const statsLine = stats
         <a href={localePath(lang, 'terms')}>{ui.footer.terms}</a>
         <a href={localePath(lang, 'disclaimer')}>{ui.footer.disclaimer}</a>
       </div>
+      <div>
+        <span>{lang === 'zh' ? '姊妹站' : 'Our other sites'}</span>
+        <a href={lang === 'zh' ? 'https://worthcalc.win/zh/' : 'https://worthcalc.win/en/'} rel="noopener">{lang === 'zh' ? 'WorthCalc 值不值得計算機' : 'WorthCalc — is it worth it?'}</a>
+        <a href={lang === 'zh' ? 'https://roomfeng.win/zh/' : 'https://roomfeng.win/en/'} rel="noopener">{lang === 'zh' ? 'RoomFeng 房間風水規劃' : 'RoomFeng room planner'}</a>
+      </div>
     </nav>
   </div>
   <div class="footer-bottom">
