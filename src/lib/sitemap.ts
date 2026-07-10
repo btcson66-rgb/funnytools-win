@@ -62,7 +62,8 @@ function alternateLinks(segments: string[]): string {
       return `<xhtml:link rel="alternate" hreflang="${SITE.hreflang[locale]}" href="${escapeXml(href)}" />`;
     })
     .join('');
-  const xDefault = absoluteUrl(localePath(SITE.defaultLocale, ...segments));
+  // x-default → en: global searchers outside zh-TW should get the English page.
+  const xDefault = absoluteUrl(localePath('en', ...segments));
 
   return `${localeLinks}<xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(xDefault)}" />`;
 }

@@ -61,6 +61,9 @@ export function altLinks(segments: string[] = []) {
 
   return {
     links,
-    xDefault: localePath(SITE.defaultLocale, ...segments),
+    // x-default serves searchers whose language matches no hreflang entry.
+    // Only zh-TW and en exist, so every other locale (US/EU/global) should
+    // land on the English version, not the zh-TW root.
+    xDefault: localePath('en', ...segments),
   };
 }

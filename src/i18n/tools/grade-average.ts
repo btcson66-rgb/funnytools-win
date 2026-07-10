@@ -104,13 +104,26 @@ export default {
     short: 'Calculate simple and weighted averages from grade entries.',
     long: 'Grade Average Calculator accepts multiple homework, quiz, exam, or activity scores with optional weights. It ignores blank or invalid rows and immediately shows valid item count, score sum, simple average, and weighted average. Use it to organize classroom records, estimate term performance, or explain how score categories affect a result.',
     seoTitle: 'Grade Average Calculator | Simple & Weighted Grades',
-    seoDescription: 'Calculate grade totals, simple averages, and weighted averages from scores and optional weights.',
-    keywords: ['grade average calculator', 'weighted average', 'score average', 'average calculator'],
+    seoDescription: 'Calculate your average grade from scores and optional weights.',
+    keywords: ['grade average calculator', 'how to calculate average grade', 'calculate my grade average', 'weighted average', 'score average', 'average calculator'],
     contentSections: [
       {
         heading: 'Quick answer: how to calculate grade average',
         paragraphs: [
           'Grade average = total score ÷ valid item count; for example, five assessments totaling 421 points give a simple average of 84.2. For 30% homework, 30% midterm, and 40% final, use Σ(wᵢxᵢ) / Σwᵢ to calculate the weighted average.',
+        ],
+      },
+      {
+        heading: 'How to calculate your average grade step by step',
+        paragraphs: [
+          'To calculate your average grade by hand: add up every score you have received, then divide by the number of scores. Example: quiz scores of 78, 85, 92, 81, and 85 add up to 421; divide by 5 and your average grade is 84.2.',
+          'If your course weights categories differently — say homework 30%, midterm 30%, final exam 40% — multiply each category score by its weight, add the results, and divide by the total weight. Example: homework 90, midterm 80, final 85 gives (90×30 + 80×30 + 85×40) ÷ 100 = 85. This calculator does both versions automatically as you type.',
+        ],
+        items: [
+          'Simple average: add all scores, divide by how many there are',
+          'Weighted average: multiply each score by its weight, then divide by total weight',
+          'Blank or invalid rows are ignored, so partial score lists still work',
+          'Enter weights as percentages (30, 30, 40) or ratios (1, 1, 2) — both give the same result',
         ],
       },
     ],

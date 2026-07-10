@@ -47,7 +47,9 @@ const hreflangs = altLang
   ? [
       { hreflang: SITE.hreflang.zh, href: absoluteUrl(altLang.zh) },
       { hreflang: SITE.hreflang.en, href: absoluteUrl(altLang.en) },
-      { hreflang: 'x-default', href: absoluteUrl(altLang.zh) },
+      // x-default serves searchers matching no hreflang entry (zh-TW/en),
+      // so global/US/EU users should land on the English version.
+      { hreflang: 'x-default', href: absoluteUrl(altLang.en) },
     ]
   : [];
 const jsonLdItems = Array.isArray(jsonLd) ? jsonLd : [jsonLd];

@@ -98,9 +98,24 @@ export default {
     name: 'Savings Goal Calculator',
     short: 'Estimate how long a goal takes or the monthly savings required.',
     long: 'Savings Goal Calculator has two modes: estimate how long a fixed monthly deposit takes to reach a target, or calculate the monthly deposit needed within a chosen number of months. A simple annual rate can be included as a growth assumption.',
-    seoTitle: 'Savings Goal Calculator | Monthly Savings Planner',
-    seoDescription: 'Calculate how long a savings goal takes or the monthly deposit required using target amount, current savings, monthly deposit, months, and annual rate.',
-    keywords: ['savings goal calculator', 'monthly savings', 'goal planner', 'how long to save'],
+    seoTitle: 'Savings Goal Calculator | How Much to Save Monthly',
+    seoDescription: 'See how much to save per month to reach your savings goal.',
+    keywords: ['savings goal calculator', 'how much to save per month calculator', 'money saving goal calculator', 'monthly savings', 'how long to save'],
+    contentSections: [
+      {
+        heading: 'How much should I save per month?',
+        paragraphs: [
+          'The quick version: monthly savings = (target amount − current savings) ÷ months remaining. Saving $6,000 in 12 months with $1,200 already set aside means (6000 − 1200) ÷ 12 = $400 per month.',
+          'If your savings earn interest, you can save slightly less each month because growth covers part of the gap. Switch this calculator to "How much per month?" mode, enter your target, current savings, timeframe, and an annual rate, and it solves the exact monthly deposit for you.',
+        ],
+        items: [
+          'No interest? Just divide the remaining amount by the number of months',
+          'With interest, the calculator uses the future-value-of-an-annuity formula for an exact figure',
+          'Enter 0 as the annual rate for a conservative, growth-free plan',
+          'Compare a few timeframes to find a monthly amount that fits your budget',
+        ],
+      },
+    ],
     instructions: [
       'Choose How long or How much per month mode.',
       'Enter target amount, current savings, and annual rate assumption.',

@@ -116,11 +116,26 @@ export default {
   },
   en: {
     name: '2D CAD Drawing Board',
-    short: 'Draft 2D drawings online — lines, rectangles, circles, and polylines with PNG/SVG export.',
-    long: '2D CAD Drawing Board gives you a lightweight grid drafting canvas in the browser. Draw lines, rectangles, circles, and polylines; move selected shapes; snap to grid; pan and zoom; undo and redo; then export PNG or SVG.',
-    seoTitle: 'Free 2D Drawing Online | CAD Grid Drafting Tool',
-    seoDescription: 'Free online 2D drawing tool with grid snap.',
-    keywords: ['2D CAD drawing board', 'online drafting tool', 'grid drawing', 'SVG export', 'canvas CAD'],
+    short: 'Draw 2D CAD drawings online free — lines, rectangles, circles, and polylines with PNG/SVG export.',
+    long: '2D CAD Drawing Board is a free online 2D CAD drawing tool that runs in your browser — no download, no signup. Draw lines, rectangles, circles, and polylines with dimensions on a grid drafting canvas; type exact lengths and angles, snap to grid, pan and zoom, undo and redo, then export PNG or SVG.',
+    seoTitle: '2D CAD Drawing Online — Free Drafting Tool',
+    seoDescription: 'Draw 2D CAD drawings online free, with grid snap and exact dimensions.',
+    keywords: ['2d cad online', '2d drawing online', 'online 2d cad drawing', 'free 2d cad', 'online drafting tool', '2d drawing with dimensions', 'SVG export'],
+    contentSections: [
+      {
+        heading: 'Free online 2D CAD drawing — no download needed',
+        paragraphs: [
+          'Most CAD software needs a download, a license, or an account before you can draw a single line. This drawing board opens instantly in the browser and is meant for the quick jobs: a room layout, a part sketch, a garden bed, a workshop plan, or a diagram for a document.',
+          'You can draw 2D drawings with dimensions by typing exact lengths, angles, widths, heights, and radii in grid units, so simple dimensioned sketches stay accurate without a full CAD workflow.',
+        ],
+        items: [
+          'Runs in any modern browser on desktop or tablet — nothing to install',
+          'Free with no account, no watermark, and no export limit',
+          'Type exact dimensions for lines, rectangles, and circles in grid units',
+          'Export SVG to continue in Inkscape, Illustrator, or a full CAD package',
+        ],
+      },
+    ],
     instructions: [
       'Choose Line, Rectangle, Circle, or Polyline, then click on the canvas to place geometry.',
       'Keep Snap to grid enabled when you want points aligned to the visible drafting grid.',

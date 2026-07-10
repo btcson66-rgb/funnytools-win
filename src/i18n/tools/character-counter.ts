@@ -197,7 +197,7 @@ export default {
     long: 'Character Counter is useful for social posts, SMS copy, push notifications, meta titles, meta descriptions, profile bios, database fields, ad text, and editing drafts. As you type, it reports characters with spaces, characters without spaces, UTF-8 bytes, words, and lines, while tracking common Twitter/X, SMS, and search snippet limits.',
     seoTitle: 'Character Counter | Characters, Words & UTF-8 Bytes',
     seoDescription: 'Count characters with spaces, without spaces, UTF-8 bytes, words, and lines while checking Twitter/X, SMS, and meta description limits.',
-    keywords: ['character counter', 'byte counter', 'Twitter character count', 'SMS counter', 'meta description length', 'GSM-7', 'UCS-2', 'varchar length'],
+    keywords: ['character counter', 'online character checker', 'byte counter', 'bytes counter', 'Twitter character count', 'SMS counter', 'meta description length', 'GSM-7', 'UCS-2', 'varchar length'],
     capabilities: [
       "Count characters with spaces, characters without spaces, UTF-8 bytes, words, and lines in real time.",
       "Use common reference limits such as Twitter/X 280, SMS 160, and meta description 160 before publishing.",

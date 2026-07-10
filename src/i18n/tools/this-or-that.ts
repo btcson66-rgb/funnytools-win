@@ -67,11 +67,11 @@ export default {
   },
   en: {
     name: 'This or That Picker',
-    short: 'Make a quick 50/50 choice between two options.',
-    long: 'This or That Picker helps when two options feel close. Enter Option A and Option B, press Decide, watch the brief alternating animation, and get one result with a 50/50 chance.',
-    seoTitle: 'This or That Picker | Free 50/50 decision tool',
-    seoDescription: 'Enter two options and randomly choose A or B with a quick suspense animation, re-decide support, and copy result.',
-    keywords: ['this or that', 'choice picker', 'random decision', 'A or B'],
+    short: 'A 50/50 decider: make a quick random choice between two options.',
+    long: 'This or That Picker is a 50/50 decider and random decision maker for when two options feel equally good. Enter Option A and Option B, press Decide, watch the brief alternating animation, and get one fair result with a true 50/50 chance — like a coin flip, but with your actual choices on screen.',
+    seoTitle: 'This or That Picker | Free 50/50 Decider',
+    seoDescription: '50/50 decider: enter two options, get one random fair pick.',
+    keywords: ['50/50 decider', '50 50 decision maker', '50/50 chooser', 'this or that generator', 'random decision maker', 'A or B picker'],
     instructions: [
       'Enter Option A and Option B.',
       'Press Decide and watch the brief alternating animation.',
@@ -88,6 +88,10 @@ export default {
       {
         q: 'Is it really 50/50?',
         a: 'Yes. Each decision uses a browser random number to choose between A and B.',
+      },
+      {
+        q: 'How is this different from flipping a coin?',
+        a: 'The odds are the same — a fair 50/50. The difference is that you see your actual options on screen instead of remembering which side means what, you can re-decide instantly, and you can copy the result to share it.',
       },
       {
         q: 'Can I fill only one option?',
