@@ -1,4 +1,4 @@
-import { execFileSync } from 'node:child_process';
+import { execFileSync, execSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -33,6 +33,7 @@ function writeJson(file, value) {
 function parseArgs(argv) {
   let bump = '';
   let message = '';
+  let skipPreflight = false;
 
   for (let index = 2; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -50,12 +51,16 @@ function parseArgs(argv) {
       message = arg.slice('--message='.length);
       continue;
     }
+    if (arg === '--skip-preflight') {
+      skipPreflight = true;
+      continue;
+    }
     fail(`Unknown release argument: ${arg}`);
   }
 
   if (!bump) fail('Missing version bump flag. Use --patch, --minor, or --major.');
   if (!message.trim()) fail('Missing release message. Use --message "..."');
-  return { bump, message: message.trim() };
+  return { bump, message: message.trim(), skipPreflight };
 }
 
 function bumpVersion(version, bump) {
@@ -90,7 +95,7 @@ function updatePackageLock(nextVersion) {
   return true;
 }
 
-const { bump, message } = parseArgs(process.argv);
+const { bump, message, skipPreflight } = parseArgs(process.argv);
 
 const packagePath = join(root, 'package.json');
 if (!existsSync(packagePath)) fail('package.json not found. Run release from the repo root.');
@@ -101,6 +106,19 @@ if (branch !== 'main') fail(`Release must run on main. Current branch: ${branch 
 const divergence = git(['rev-list', '--left-right', '--count', 'origin/main...HEAD']).split(/\s+/).map(Number);
 if (divergence[0] !== 0 || divergence[1] !== 0) {
   fail(`main must match origin/main before release. origin/main...HEAD = ${divergence.join(' ')}`);
+}
+
+// Preflight is enforced here so it cannot be bypassed by calling `npm run release` directly.
+// --skip-preflight is an emergency escape hatch for when preflight itself is broken.
+if (skipPreflight) {
+  console.warn('WARNING: --skip-preflight given. Releasing WITHOUT preflight verification.');
+} else {
+  console.log('Running preflight before release (npm run preflight)...');
+  try {
+    execSync('npm run preflight', { cwd: root, stdio: 'inherit' });
+  } catch {
+    fail('Preflight failed. Fix the issues above, or use --skip-preflight only if preflight itself is broken.');
+  }
 }
 
 const pkg = readJson(packagePath);
