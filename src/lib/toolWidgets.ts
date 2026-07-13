@@ -1,5 +1,6 @@
 import AgeCalculator from '../components/tools/AgeCalculator.astro';
 import Base64Tool from '../components/tools/Base64Tool.astro';
+import BarcodeGenerator from '../components/tools/BarcodeGenerator.astro';
 import BreakReminder from '../components/tools/BreakReminder.astro';
 import BusinessDays from '../components/tools/BusinessDays.astro';
 import Cad2dBoard from '../components/tools/Cad2dBoard.astro';
@@ -87,6 +88,7 @@ export const widgetBySlug = {
   'dice-roller': DiceRoller,
   stopwatch: Stopwatch,
   base64: Base64Tool,
+  'barcode-generator': BarcodeGenerator,
   'url-encoder': UrlEncoder,
   'json-formatter': JsonFormatter,
   'random-student-picker': RandomStudentPicker,

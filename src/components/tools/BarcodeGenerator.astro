@@ -1,0 +1,214 @@
+---
+interface Props {
+  labels: Record<string, string>;
+}
+
+const { labels } = Astro.props;
+---
+
+<section class="tool-widget card barcode-tool" data-barcode-tool data-labels={JSON.stringify(labels)}>
+  <p class="note">{labels.localNote}</p>
+
+  <div class="barcode-fields">
+    <label>
+      <span>{labels.inputLabel}</span>
+      <input data-value type="text" value="FUNNYTOOLS-2026" placeholder={labels.placeholder} autocomplete="off" />
+    </label>
+    <label>
+      <span>{labels.formatLabel}</span>
+      <select data-format>
+        <option value="CODE128">Code 128</option>
+        <option value="EAN13">EAN-13</option>
+        <option value="UPC">UPC-A</option>
+        <option value="CODE39">Code 39</option>
+      </select>
+    </label>
+  </div>
+
+  <p class="format-hint" data-hint>{labels.hintCode128}</p>
+  <p class="form-error" data-error role="alert" aria-live="assertive" hidden></p>
+
+  <div class="barcode-preview" data-result aria-live="polite">
+    <svg data-preview role="img" aria-label={labels.previewAlt}></svg>
+  </div>
+
+  <div class="actions">
+    <button class="btn go" type="button" data-download-png disabled>{labels.downloadPng}</button>
+    <button class="btn" type="button" data-download-svg disabled>{labels.downloadSvg}</button>
+    <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
+  </div>
+  <canvas data-canvas hidden></canvas>
+</section>
+
+<style>
+  .barcode-tool { display: grid; gap: 16px; }
+  .barcode-fields { display: grid; grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr); gap: 14px; }
+  .format-hint { margin: -4px 0 0; color: var(--muted); font-size: 0.92rem; }
+  .barcode-preview {
+    display: grid;
+    min-height: 190px;
+    padding: 20px;
+    place-items: center;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+  }
+  .barcode-preview svg { display: block; max-width: 100%; height: auto; }
+  @media (max-width: 680px) {
+    .barcode-fields { grid-template-columns: 1fr; }
+    .actions .btn { width: 100%; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('[data-barcode-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const valueInput = root.querySelector('[data-value]');
+    const formatSelect = root.querySelector('[data-format]');
+    const preview = root.querySelector('[data-preview]');
+    const canvas = root.querySelector('[data-canvas]');
+    const hint = root.querySelector('[data-hint]');
+    const error = root.querySelector('[data-error]');
+    const pngButton = root.querySelector('[data-download-png]');
+    const svgButton = root.querySelector('[data-download-svg]');
+    let jsBarcodePromise = null;
+    let renderTimer = 0;
+    let normalizedValue = '';
+
+    function loadJsBarcode() {
+      if (!jsBarcodePromise) {
+        jsBarcodePromise = import('jsbarcode').then((module) => module.default);
+      }
+      return jsBarcodePromise;
+    }
+
+    function checksum(digits) {
+      const sum = digits
+        .split('')
+        .reduce((total, digit, index) => {
+          const distanceFromRight = digits.length - 1 - index;
+          return total + Number(digit) * (distanceFromRight % 2 === 0 ? 3 : 1);
+        }, 0);
+      return String((10 - (sum % 10)) % 10);
+    }
+
+    function validate(value, format) {
+      const trimmed = value.trim();
+      if (!trimmed) throw new Error(labels.emptyError);
+
+      if (format === 'EAN13') {
+        if (!/^\d{12,13}$/.test(trimmed)) throw new Error(labels.eanLengthError);
+        const body = trimmed.slice(0, 12);
+        const check = checksum(body);
+        if (trimmed.length === 13 && trimmed[12] !== check) {
+          throw new Error(labels.checksumError.replace('{digit}', check));
+        }
+        return body + check;
+      }
+
+      if (format === 'UPC') {
+        if (!/^\d{11,12}$/.test(trimmed)) throw new Error(labels.upcLengthError);
+        const body = trimmed.slice(0, 11);
+        const check = checksum(body);
+        if (trimmed.length === 12 && trimmed[11] !== check) {
+          throw new Error(labels.checksumError.replace('{digit}', check));
+        }
+        return body + check;
+      }
+
+      if (format === 'CODE39') {
+        const upper = trimmed.toUpperCase();
+        if (!/^[0-9A-Z .$/+%\-]+$/.test(upper)) throw new Error(labels.code39Error);
+        return upper;
+      }
+
+      return trimmed;
+    }
+
+    function setDownloadState(enabled) {
+      pngButton.disabled = !enabled;
+      svgButton.disabled = !enabled;
+    }
+
+    async function render() {
+      const format = formatSelect.value;
+      hint.textContent = labels[`hint${format === 'UPC' ? 'Upc' : format[0] + format.slice(1).toLowerCase()}`] || '';
+      try {
+        normalizedValue = validate(valueInput.value, format);
+        const JsBarcode = await loadJsBarcode();
+        JsBarcode(preview, normalizedValue, {
+          format,
+          lineColor: '#111827',
+          background: '#ffffff',
+          width: 2,
+          height: 100,
+          margin: 14,
+          displayValue: true,
+          fontOptions: 'bold',
+        });
+        error.hidden = true;
+        error.textContent = '';
+        setDownloadState(true);
+      } catch (caught) {
+        preview.replaceChildren();
+        error.textContent = caught instanceof Error ? caught.message : labels.renderError;
+        error.hidden = false;
+        normalizedValue = '';
+        setDownloadState(false);
+      }
+    }
+
+    function scheduleRender() {
+      window.clearTimeout(renderTimer);
+      renderTimer = window.setTimeout(render, 180);
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      link.click();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    pngButton.addEventListener('click', async () => {
+      if (!normalizedValue) return;
+      try {
+        const JsBarcode = await loadJsBarcode();
+        JsBarcode(canvas, normalizedValue, {
+          format: formatSelect.value,
+          lineColor: '#111827',
+          background: '#ffffff',
+          width: 3,
+          height: 150,
+          margin: 20,
+          displayValue: true,
+          fontOptions: 'bold',
+        });
+        canvas.toBlob((blob) => {
+          if (blob) downloadBlob(blob, `barcode-${formatSelect.value.toLowerCase()}.png`);
+        }, 'image/png');
+      } catch {
+        error.textContent = labels.renderError;
+        error.hidden = false;
+      }
+    });
+
+    svgButton.addEventListener('click', () => {
+      if (!normalizedValue) return;
+      const source = new XMLSerializer().serializeToString(preview);
+      downloadBlob(new Blob([source], { type: 'image/svg+xml;charset=utf-8' }), `barcode-${formatSelect.value.toLowerCase()}.svg`);
+    });
+
+    root.querySelector('[data-reset]')?.addEventListener('click', () => {
+      valueInput.value = 'FUNNYTOOLS-2026';
+      formatSelect.value = 'CODE128';
+      render();
+    });
+    valueInput.addEventListener('input', scheduleRender);
+    formatSelect.addEventListener('change', render);
+    render();
+  });
+</script>

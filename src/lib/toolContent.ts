@@ -3,6 +3,7 @@ import type { LocalizedToolContent, ToolContent } from '../i18n/tools/_types';
 import { toolContentEnhancements } from '../i18n/tools/content-enhancements';
 import ageCalculatorContent from '../i18n/tools/age-calculator';
 import base64Content from '../i18n/tools/base64';
+import barcodeGeneratorContent from '../i18n/tools/barcode-generator';
 import breakReminderContent from '../i18n/tools/break-reminder';
 import businessDaysContent from '../i18n/tools/business-days';
 import cad2dContent from '../i18n/tools/cad-2d';
@@ -91,6 +92,7 @@ export const contentBySlug = {
   'dice-roller': diceRollerContent,
   stopwatch: stopwatchContent,
   base64: base64Content,
+  'barcode-generator': barcodeGeneratorContent,
   'url-encoder': urlEncoderContent,
   'json-formatter': jsonFormatterContent,
   'random-student-picker': randomStudentContent,

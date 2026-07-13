@@ -79,6 +79,22 @@ export default {
           "大型文件建議先取出需要的範圍，不要一次拆成所有單頁",
           "密碼保護、限制編輯或損壞的 PDF 可能無法處理"
         ]
+      },
+      {
+        heading: "拆分掃描件、合約與報告的實際做法",
+        paragraphs: [
+          "答案是：先依文件的閱讀單位決定每個輸出範圍，再輸入頁碼，不要一開始就把大型掃描檔全部拆成單頁。以掃描件為例，可以先載入總頁數，對照紙本或原檔目錄，將每張收據、每份表單或每個月份整理成 1-2, 3-5, 6-6 這類範圍。每個逗號分隔的項目會各自輸出一份 PDF，方便後續重新命名與歸檔。",
+          "抽取合約頁面時，先確認頁碼是 PDF 檢視器顯示的實際頁序，而不是文件印刷在頁尾的章節頁碼。若只要提供封面、特定條款與簽名頁，可分別輸入對應範圍；輸出後仍應逐頁核對當事人、附件編號與簽署欄，避免因插頁或空白頁導致選錯。需要把多個範圍重新組成同一份文件時，可下載後使用 PDF 合併工具依想要的順序整合。",
+          "整理報告或教材時，自訂範圍比逐頁拆分更適合保留章節脈絡。例如摘要為 1-3 頁、第一章為 4-18 頁，就把它們設成不同範圍；只有在逐張上傳、逐頁批註或每頁都要獨立命名時，才選擇每頁拆分。這樣可以減少下載檔案數量，也比較不容易在瀏覽器中同時建立大量物件。"
+        ]
+      },
+      {
+        heading: "檔案大小、頁數與加密 PDF 限制",
+        paragraphs: [
+          "限制是：本工具沒有把檔案上傳到伺服器，因此可處理大小取決於裝置記憶體、瀏覽器與 PDF 結構，而不是網路速度。為了維持穩定，建議一般裝置一次處理約 40 MB 以下、300 頁以內的 PDF；這是操作建議而非硬性上傳上限。高解析度掃描、內嵌大量圖片或字型的檔案，即使頁數不多，也可能比純文字 PDF 使用更多記憶體。",
+          "密碼保護、限制修改、憑證加密或檔案結構損壞的 PDF 不支援。請先在有權限的原始軟體中解除保護並另存新檔，再回來拆分；本工具不會嘗試破解密碼或移除權限。含互動表單、數位簽章、附件、特殊圖層或複雜書籤的 PDF 在重新建立時也可能無法完整保留，重要法律或送審文件務必比對輸出結果。",
+          "手機可以使用，但大型 PDF 容易因記憶體不足而讓分頁重新載入。手機上建議只擷取少數範圍，並在產生後立即下載；若要將數百頁全部拆成單頁，改用記憶體較充足的桌機瀏覽器會更可靠。無論使用哪種裝置，原始檔都不會被覆寫，重設或關閉分頁後，尚未下載的暫存結果就無法取回。"
+        ]
       }
     ],
     instructions: [
@@ -115,7 +131,8 @@ export default {
     ],
     notes: [
       '頁碼從 1 開始，範圍可用逗號分隔；輸入前建議先確認工具讀到的總頁數。',
-      '受密碼保護、限制修改或損壞的 PDF 可能無法拆分。',
+      '建議一次處理約 40 MB 以下、300 頁以內的 PDF；這不是上傳上限，而是一般瀏覽器的穩定性建議。',
+      '受密碼保護、限制修改、憑證加密或損壞的 PDF 不支援，也不會嘗試破解保護。',
       '若 PDF 很大或頁數很多，拆成多個範圍比一次輸出每一頁更容易維持瀏覽器穩定。',
     ],
     faq: [
@@ -134,6 +151,10 @@ export default {
       {
         q: "分割會修改原始 PDF 嗎？",
         a: "不會。工具只會建立新的下載檔，原始 PDF 不會被覆蓋或修改。"
+      },
+      {
+        q: "加密 PDF 或大型 PDF 可以拆分嗎？",
+        a: "加密、受密碼保護或限制修改的 PDF 不支援。大型檔案受瀏覽器記憶體限制，建議控制在約 40 MB、300 頁以內，並優先輸出少數自訂範圍。"
       }
     ],
     labels: {
@@ -217,6 +238,22 @@ export default {
           "Use fewer custom ranges for very large documents",
           "Use an unlocked, undamaged PDF for the best result"
         ]
+      },
+      {
+        heading: "Practical workflows for scans, contracts, and reports",
+        paragraphs: [
+          "The direct answer is to decide what each output file should represent before entering page ranges. Do not automatically turn a large scan into hundreds of single-page files when each receipt, form, case, or month spans several pages. Load the total page count, compare it with the source document, and enter groups such as 1-2, 3-5, 6-6. Every comma-separated group becomes a separate PDF that you can rename and archive after downloading.",
+          "When extracting contract material, use the physical page order shown by the PDF viewer rather than a chapter number printed in a footer. A cover sheet, clause section, exhibit, and signature page may have different printed numbering or inserted blank pages. Download the result and verify names, exhibit labels, initials, and signature fields before sharing it. If selected ranges need to become one document in a new order, download them and use Merge PDF to assemble the final packet.",
+          "For reports and course material, chapter ranges usually preserve context better than one-page output. A report might use pages 1-3 for the executive summary, 4-18 for the analysis, and 19-24 for appendices. Create those as separate range files. Choose one PDF per page only for workflows that genuinely require individual uploads, page-level annotations, or a separate filename for every scanned item. Fewer output files also reduce memory use and make the download list easier to review."
+        ]
+      },
+      {
+        heading: "File size, page count, and encrypted PDF limits",
+        paragraphs: [
+          "The main limit is browser memory. Because the PDF is not uploaded, there is no server upload quota; performance depends on your device, browser, and the internal structure of the document. For a stable general workflow, keep a single file around 40 MB or less and under roughly 300 pages. This is a practical recommendation rather than a hard upload limit. A high-resolution scan with large images and embedded fonts can consume much more memory than a text-based PDF of the same page count.",
+          "Password-protected, certificate-encrypted, edit-restricted, or damaged PDFs are not supported. If you own the document and have permission, unlock it in the original application and save an unprotected copy before splitting. This tool does not crack passwords or bypass document permissions. Interactive forms, digital signatures, embedded attachments, layers, bookmarks, and other advanced PDF features may not survive exactly when pages are copied into a new file, so compare important legal or submission documents with the original.",
+          "Phones can run the tool, but mobile browsers have tighter memory limits and may reload the tab during a large job. On a phone, extract a few custom ranges and download them immediately. Use a desktop browser with more available memory when splitting hundreds of pages into individual files. The original PDF is never overwritten, and generated object URLs are temporary; any result that has not been downloaded disappears when you reset or close the page."
+        ]
       }
     ],
     instructions: [
@@ -253,7 +290,8 @@ export default {
     ],
     notes: [
       'Page numbers start at 1, and ranges can be comma-separated; check the loaded page count before entering ranges.',
-      'Password-protected, edit-restricted, or damaged PDFs may not split correctly.',
+      'For general stability, keep one PDF around 40 MB or less and under roughly 300 pages; this is a browser-memory recommendation, not an upload quota.',
+      'Password-protected, certificate-encrypted, edit-restricted, or damaged PDFs are not supported.',
       'For very large PDFs, creating a few custom ranges is usually more stable than exporting every page at once.',
     ],
     faq: [
@@ -272,6 +310,10 @@ export default {
       {
         q: "Does splitting change the original PDF?",
         a: "No. The tool creates new downloadable PDFs and leaves the original file unchanged."
+      },
+      {
+        q: "Can I split an encrypted or very large PDF?",
+        a: "Encrypted, password-protected, or edit-restricted PDFs are not supported. Large files depend on browser memory; for general stability, stay around 40 MB and 300 pages or use a few custom ranges."
       }
     ],
     labels: {

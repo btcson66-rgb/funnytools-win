@@ -302,6 +302,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/bar-chart-maker/" />
   </url>
   <url>
+    <loc>https://funnytools.win/en/tools/barcode-generator/</loc>
+    <lastmod>2026-07-07</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/barcode-generator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/barcode-generator/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/barcode-generator/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/en/tools/base64/</loc>
     <lastmod>2026-07-07</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/base64/" />
