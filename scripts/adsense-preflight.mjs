@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -38,6 +38,14 @@ const sitemapUrls = (xml) => {
       return [];
     }
     return locsFromXml(read(childPath)).map((item) => new URL(item));
+  });
+};
+const htmlFilesUnder = (directory) => {
+  if (!existsSync(directory)) return [];
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) return htmlFilesUnder(path);
+    return entry.isFile() && entry.name.endsWith('.html') ? [path] : [];
   });
 };
 
@@ -162,6 +170,18 @@ if (!existsSync(sitemapPath)) {
 
   if (urls.length < 100) warnings.push(`Sitemap 只有 ${urls.length} 個 URL，請確認是否誤刪頁面。`);
   console.log(`已檢查 sitemap：${urls.length} 個可索引 URL`);
+}
+
+// Sitemap audits only see indexable URLs. Review every built noindex page too,
+// including 404.html and retired routes, because those pages must not request ads.
+for (const file of htmlFilesUnder(dist)) {
+  const html = read(file);
+  const isNoindex = /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)
+    || /<meta\b[^>]*content=["'][^"']*noindex[^"']*["'][^>]*name=["']robots["']/i.test(html);
+  const loadsAdsense = /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js|\badsbygoogle\b|data-ad-slot=/i.test(html);
+  if (isNoindex && loadsAdsense) {
+    errors.push(`noindex 頁仍載入 AdSense：${file.slice(dist.length).replaceAll('\\', '/')}`);
+  }
 }
 
 const privacyPath = join(dist, 'privacy', 'index.html');

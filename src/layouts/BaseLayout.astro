@@ -64,7 +64,9 @@ const shouldNoindex = noindex || enNoindex;
 const robotsContent = enNoindex ? 'noindex, follow' : (robots ?? 'noindex, follow');
 const envAdsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? import.meta.env.PUBLIC_ADSENSE_ID;
 const adsenseClient = envAdsenseClient ?? SITE.adsenseClient;
-const adsenseEnabled = Boolean(adsenseClient) && (SITE.adsenseEnabled || SITE.features.adsense);
+// Google ads must never load on noindex/error/retired pages. Keeping the gate
+// here makes every current and future noindex route safe by default.
+const adsenseEnabled = !shouldNoindex && Boolean(adsenseClient) && (SITE.adsenseEnabled || SITE.features.adsense);
 const hasAlternates = explicitHasAlternates ?? Boolean(altLang);
 const ga4Enabled = !!SITE.ga4MeasurementId;
 // newsletter + download-gate both post to the shared Pages Functions on roomfeng.win
