@@ -42,6 +42,8 @@ const copy = {
     painPoints: '常見需求',
     tools: '推薦工具',
     workflow: '建議流程',
+    scenarios: '課堂實作流程',
+    verification: '完成前檢查',
     categories: '相關分類',
     workflows: '相關工作流',
     openTool: '開啟工具',
@@ -53,6 +55,8 @@ const copy = {
     painPoints: 'Common needs',
     tools: 'Recommended tools',
     workflow: 'Suggested workflow',
+    scenarios: 'Classroom-ready workflows',
+    verification: 'Verification before use',
     categories: 'Related categories',
     workflows: 'Related workflows',
     openTool: 'Open tool',
@@ -154,6 +158,24 @@ const collectionLd = {
       </ol>
     </section>
 
+    {audience.scenarios && audience.scenarios.length > 0 && (
+      <section class="audience-block" aria-labelledby="audience-scenarios-title">
+        <h2 id="audience-scenarios-title">{copy.scenarios}</h2>
+        <div class="scenario-list">
+          {audience.scenarios.map((scenario) => (
+            <section class="scenario-card">
+              <h3>{scenario.title}</h3>
+              <p>{scenario.summary}</p>
+              <ol>
+                {scenario.steps.map((step) => <li>{step}</li>)}
+              </ol>
+              <p class="verification"><strong>{copy.verification}：</strong>{scenario.verification}</p>
+            </section>
+          ))}
+        </div>
+      </section>
+    )}
+
     {relatedCategories.length > 0 && (
       <section class="audience-block" aria-labelledby="audience-categories-title">
         <h2 id="audience-categories-title">{copy.categories}</h2>
@@ -197,6 +219,11 @@ const collectionLd = {
   .audience-block { margin-top: 36px; }
   .audience-block p, .audience-block li { color: #384455; font-size: 1.03rem; line-height: 1.85; }
   .audience-steps { display: grid; gap: 12px; padding-left: 22px; }
+  .scenario-list { display: grid; gap: 18px; }
+  .scenario-card { padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  .scenario-card h3 { margin-top: 0; }
+  .scenario-card ol { display: grid; gap: 9px; padding-left: 22px; }
+  .scenario-card .verification { margin: 18px 0 0; padding: 12px 14px; border-left: 4px solid var(--brand); background: var(--soft); }
   .tool-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
   .related-list { display: grid; gap: 10px; }
   .related-list a { display: grid; gap: 5px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }

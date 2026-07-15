@@ -7,6 +7,13 @@ export interface AudienceFaq {
   answer: LocalizedText;
 }
 
+export interface AudienceScenario {
+  title: LocalizedText;
+  summary: LocalizedText;
+  steps: LocalizedText[];
+  verification: LocalizedText;
+}
+
 export interface Audience {
   id: string;
   slug: string;
@@ -19,6 +26,7 @@ export interface Audience {
   painPoints: LocalizedText[];
   recommendedToolIds: string[];
   workflowSuggestions: LocalizedText[];
+  scenarios?: AudienceScenario[];
   relatedCategoryIds: string[];
   relatedWorkflowIds: string[];
   faq: AudienceFaq[];
@@ -36,6 +44,12 @@ export interface AudienceView {
   painPoints: string[];
   recommendedToolIds: string[];
   workflowSuggestions: string[];
+  scenarios?: {
+    title: string;
+    summary: string;
+    steps: string[];
+    verification: string;
+  }[];
   relatedCategoryIds: string[];
   relatedWorkflowIds: string[];
   faq: { question: string; answer: string }[];
@@ -68,6 +82,50 @@ export const audiences: Audience[] = [
       text('先整理今天實際出席的學生名單，移除不需要參與活動的名字。', 'Start with the students who are actually participating today.'),
       text('用隨機分組或抽籤工具產生活動安排，再由教師做最後調整。', 'Use grouping or picker tools for the first result, then apply teacher judgment.'),
       text('用倒數計時控制討論與發表時間，最後複製結果到投影片或班級平台。', 'Run a countdown for discussion or presentation time, then copy results to slides or the class platform.'),
+    ],
+    scenarios: [
+      {
+        title: text('流程一：分組後立即開始計時', 'Workflow 1: Make groups, then start the timer'),
+        summary: text(
+          '適合小組討論、實驗輪站或短講。先把「今天實際出席」和「本活動要參加」分開判斷，避免把缺席或暫不參加的學生混進結果。',
+          'Use this for group discussions, lab rotations, or short presentations. Separate today’s attendance from participation in this activity before generating groups.'
+        ),
+        steps: [
+          text('用名字、座號或中性代號建立最小必要名單；不要輸入學號、電話、健康或輔導紀錄。', 'Create the smallest useful list with first names, class numbers, or neutral labels; do not enter student IDs, phone numbers, health data, or support records.'),
+          text('先用分組工具產生初稿，再檢查缺席、無障礙需求、語言支持、互動安全與器材數量。', 'Generate a first draft, then check absences, accessibility, language support, group safety, and available equipment.'),
+          text('只做必要調整，向全班簡短說明調整依據，避免把隨機結果誤當成不可更動的決定。', 'Make only necessary adjustments and briefly explain the practical rule; random output is not an unchangeable decision.'),
+          text('投影最終分組，啟動倒數計時，活動結束後清除共享電腦或投影畫面上的名單。', 'Project the final groups, start the countdown, and clear the list from shared or projected screens after the activity.'),
+        ],
+        verification: text('課前驗證：使用 6 個假名跑一次，確認人數分配、投影字級、計時音效與重設按鈕都符合教室情境。', 'Before class: test with six fake names and verify group sizes, projected text size, timer sound, and reset behavior.'),
+      },
+      {
+        title: text('流程二：把講義連結做成 QR Code', 'Workflow 2: Turn a handout link into a QR code'),
+        summary: text(
+          'QR Code 只負責把學生帶到連結，無法替你確認分享權限、檔案版本或登入限制。發出去之前，要用學生會遇到的條件測試。',
+          'A QR code only sends students to a link; it does not verify sharing permissions, file version, or sign-in requirements. Test the same path students will use.'
+        ),
+        steps: [
+          text('先打開最終版講義連結，確認沒有教師答案、內部備註或不該公開的雲端資料夾。', 'Open the final handout link and confirm it contains no answer key, private notes, or unintended cloud-folder access.'),
+          text('產生 QR Code 後，用另一支手機或瀏覽器無痕視窗掃描，測試未登入帳號時是否能開啟。', 'After generating the code, scan it with another phone or a private browser window and test it while signed out.'),
+          text('把短網址或可讀連結放在 QR Code 旁邊，為鏡頭故障、網路中斷或無手機的學生保留替代入口。', 'Place a readable link beside the code so students have a fallback for camera, network, or device problems.'),
+          text('投影前放大並保持足夠留白；若列印，先印一張實際距離測試，不以螢幕預覽代替。', 'Enlarge it with enough white space before projecting; for print, test one physical copy at the real scanning distance.'),
+        ],
+        verification: text('發布條件：未登入裝置可開啟正確版本、QR Code 和文字連結目的地一致，而且沒有多餘存取權限。', 'Publish only when a signed-out device opens the correct version, the QR and text links match, and access is no broader than needed.'),
+      },
+      {
+        title: text('流程三：合併或拆分學生版 PDF', 'Workflow 3: Merge or split a student PDF'),
+        summary: text(
+          '適合把說明、學習單與評分規準整理成一份檔案，或從教師版抽出學生需要的頁面。原始檔先保留，輸出檔要逐頁重開檢查。',
+          'Use this to combine instructions, worksheets, and rubrics, or to extract only the pages students need. Keep the originals and reopen the output page by page.'
+        ),
+        steps: [
+          text('複製一份工作檔，依學生閱讀順序排列說明、學習單、資料頁與繳交規則。', 'Work from copies and order instructions, worksheet pages, reference material, and submission rules as students will read them.'),
+          text('若從教師版拆頁，逐頁確認答案、評語、個資和批改紀錄沒有留在學生版。', 'When splitting a teacher copy, check every page for answers, comments, personal data, or grading notes.'),
+          text('下載後重新開啟檔案，抽查首頁、末頁、頁面方向、圖表清晰度與可選取文字。', 'Reopen the download and check the first and last pages, orientation, chart clarity, and selectable text.'),
+          text('用學校平台允許的檔名與大小上傳；正式發送前，保留可回復的原始版本。', 'Upload with the filename and size allowed by the school platform, and keep a recoverable original before distribution.'),
+        ],
+        verification: text('交付條件：頁序正確、沒有教師答案或個資、手機可讀、檔案大小符合平台限制，且原始檔未被覆寫。', 'Delivery check: page order is correct, teacher answers and personal data are absent, mobile reading works, file size is accepted, and originals remain unchanged.'),
+      },
     ],
     relatedCategoryIds: ['study', 'random', 'time', 'statistics'],
     relatedWorkflowIds: ['teacher-classroom-random-toolkit', 'teacher-exam-score-toolkit'],
@@ -250,6 +308,12 @@ export function viewAudience(audience: Audience, lang: Locale): AudienceView {
     intro: audience.intro[lang],
     painPoints: audience.painPoints.map((item) => item[lang]),
     workflowSuggestions: audience.workflowSuggestions.map((item) => item[lang]),
+    scenarios: audience.scenarios?.map((scenario) => ({
+      title: scenario.title[lang],
+      summary: scenario.summary[lang],
+      steps: scenario.steps.map((step) => step[lang]),
+      verification: scenario.verification[lang],
+    })),
     faq: audience.faq.map((item) => ({ question: item.question[lang], answer: item.answer[lang] })),
   };
 }
