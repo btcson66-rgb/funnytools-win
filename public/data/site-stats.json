@@ -1,20 +1,20 @@
 {
-  "generated": "2026-07-16",
+  "generated": "2026-07-17",
   "sites": {
     "funnytools.win": {
-      "pageviews": 7061,
-      "users": 2688,
-      "asOf": "2026-07-16"
+      "pageviews": 7067,
+      "users": 2691,
+      "asOf": "2026-07-17"
     },
     "roomfeng.win": {
       "pageviews": 114,
       "users": 84,
-      "asOf": "2026-07-16"
+      "asOf": "2026-07-17"
     },
     "worthcalc.win": {
-      "pageviews": 141,
-      "users": 112,
-      "asOf": "2026-07-16"
+      "pageviews": 147,
+      "users": 115,
+      "asOf": "2026-07-17"
     }
   }
 }
