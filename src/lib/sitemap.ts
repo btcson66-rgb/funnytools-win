@@ -98,6 +98,7 @@ function basePages(): SitemapPage[] {
     { segments: ['tools'], changefreq: 'weekly', priority: '0.9', alternates: true },
     { segments: ['education-statistics'], changefreq: 'weekly', priority: '0.8', alternates: true },
     { segments: ['support'], changefreq: 'monthly', priority: '0.3', alternates: true },
+    { segments: ['shop'], changefreq: 'weekly', priority: '0.5', alternates: true },
     ...legalPages.map((page) => ({
       segments: [page],
       changefreq: 'yearly' as const,
