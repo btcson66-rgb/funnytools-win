@@ -16,13 +16,34 @@ export interface ShopProduct {
 
 const UTM = 'utm_source=funnytools&utm_medium=shop&utm_campaign=shop_page';
 
-export function withUtm(url: string): string {
-  return `${url}${url.includes('?') ? '&' : '?'}${UTM}`;
+export function withUtm(url: string, content?: string): string {
+  const contentParam = content ? `&utm_content=${encodeURIComponent(content)}` : '';
+  return `${url}${url.includes('?') ? '&' : '?'}${UTM}${contentParam}`;
 }
 
 export const STOREFRONTS = {
   gumroad: 'https://btcsonlab.gumroad.com/',
   payhipNote: 'https://payhip.com/',
+};
+
+export const entitleKit: ShopProduct = {
+  id: 'entitlekit',
+  emoji: '🔐',
+  price: 'US$39',
+  name: {
+    zh: 'EntitleKit — Gumroad 與 Payhip 軟體授權自動化 Starter Kit',
+    en: 'EntitleKit — Gumroad & Payhip License Automation Starter Kit',
+  },
+  blurb: {
+    zh: '給販售 Chrome Extension、桌面工具與小型 SaaS 的獨立開發者：把 Gumroad／Payhip 付款、續訂、退款、取消與到期事件接成可驗證的使用權，並支援裝置、席位與功能限制。這是可下載、自行部署的原始碼套件，不是代管 SaaS。',
+    en: 'For indie developers selling Chrome extensions, desktop tools, or small SaaS products: turn Gumroad and Payhip purchase, renewal, refund, cancellation, and expiration events into verifiable access with device, seat, and feature limits. Downloadable self-hosted source code, not hosted SaaS.',
+  },
+  meta: {
+    zh: 'Next.js 16 · Supabase · Webhooks · REST API · TypeScript SDK',
+    en: 'Next.js 16 · Supabase · webhooks · REST API · TypeScript SDK',
+  },
+  gumroad: 'https://btcsonlab.gumroad.com/l/entitlekit-gumroad-payhip-license-automation',
+  payhip: 'https://payhip.com/b/3AfqG',
 };
 
 export const learningProducts: ShopProduct[] = [

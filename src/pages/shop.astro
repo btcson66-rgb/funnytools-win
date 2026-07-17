@@ -5,6 +5,7 @@ import { localePath, localeUrlPair } from '../lib/url';
 import { breadcrumbJsonLd, collectionPageJsonLd } from '../lib/seo';
 import {
   chemistryLine,
+  entitleKit,
   learningProducts,
   physicsBundle,
   physicsSingles,
@@ -50,6 +51,41 @@ const jsonLd = [
         Btcson Lab 是 FunnyTools 團隊自製的教材品牌：可列印的閱讀、數學、日常慣例教材，
         以及在家就能做的物理、化學動手實驗任務包。全部是 PDF／離線檔案，購買後立即下載。
       </p>
+    </section>
+
+    <section class="content-section" aria-labelledby="developer-heading">
+      <div class="section-head">
+        <p class="shop-kicker">SELF-HOSTED SOURCE KIT</p>
+        <h2 id="developer-heading">獨立開發者工具</h2>
+        <p>透過 Gumroad 或 Payhip 販售軟體？把付款事件接成可驗證、可撤銷的使用權。</p>
+      </div>
+      <div class="shop-grid shop-grid-featured">
+        <article class="shop-card shop-card-featured">
+          <span class="shop-icon" aria-hidden="true">{entitleKit.emoji}</span>
+          <h3>{entitleKit.name[lang]}</h3>
+          <p class="shop-meta">{entitleKit.meta[lang]}</p>
+          <p>{entitleKit.blurb[lang]}</p>
+          <p class="shop-price">{entitleKit.price}</p>
+          <div class="shop-actions">
+            <a
+              class="btn"
+              href={withUtm(entitleKit.gumroad!, 'entitlekit_card_gumroad')}
+              target="_blank"
+              rel="noopener"
+              data-shop-product={entitleKit.id}
+              data-shop-platform="gumroad"
+            >在 Gumroad 查看</a>
+            <a
+              class="btn ghost"
+              href={withUtm(entitleKit.payhip!, 'entitlekit_card_payhip')}
+              target="_blank"
+              rel="noopener"
+              data-shop-product={entitleKit.id}
+              data-shop-platform="payhip"
+            >在 Payhip 查看</a>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="content-section" aria-labelledby="learning-heading">
@@ -152,7 +188,7 @@ const jsonLd = [
     <section class="content-section shop-disclosure" aria-labelledby="disclosure-heading">
       <h2 id="disclosure-heading">關於這些商品</h2>
       <p>
-        本頁商品均為 FunnyTools 營運團隊（Btcson Lab）自行設計製作的數位教材，非第三方分潤商品。
+        本頁商品均為 FunnyTools 營運團隊（Btcson Lab）自行設計製作的數位教材或軟體原始碼工具，非第三方分潤商品。
         交易與檔案下載在 Gumroad 或 Payhip 平台完成，付款與退款政策以平台頁面為準。
         購買前請先確認商品頁的內容說明與適用年齡。
       </p>
@@ -199,6 +235,27 @@ const jsonLd = [
 
   .shop-grid-wide {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shop-grid-featured {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .shop-card-featured {
+    border-color: rgba(15, 143, 140, 0.35);
+    background: linear-gradient(135deg, rgba(15, 143, 140, 0.09), rgba(62, 99, 221, 0.05)), var(--card);
+  }
+
+  .shop-card-featured h3 {
+    font-size: 1.25rem;
+  }
+
+  .shop-kicker {
+    margin: 0 0 6px;
+    color: var(--brand-2);
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
   }
 
   .shop-card {

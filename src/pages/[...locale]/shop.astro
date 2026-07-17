@@ -5,6 +5,7 @@ import { localePath, localeUrlPair } from '../../lib/url';
 import { breadcrumbJsonLd, collectionPageJsonLd } from '../../lib/seo';
 import {
   chemistryLine,
+  entitleKit,
   learningProducts,
   physicsBundle,
   physicsSingles,
@@ -55,6 +56,41 @@ const jsonLd = [
         math, and daily-routine kits, plus hands-on physics and chemistry mission packs you can
         run at home. Everything is a PDF or offline file — download instantly after purchase.
       </p>
+    </section>
+
+    <section class="content-section" aria-labelledby="developer-heading">
+      <div class="section-head">
+        <p class="shop-kicker">SELF-HOSTED SOURCE KIT</p>
+        <h2 id="developer-heading">Tools for indie software sellers</h2>
+        <p>Selling software through Gumroad or Payhip? Connect checkout events to access you can verify and revoke.</p>
+      </div>
+      <div class="shop-grid shop-grid-featured">
+        <article class="shop-card shop-card-featured">
+          <span class="shop-icon" aria-hidden="true">{entitleKit.emoji}</span>
+          <h3>{entitleKit.name[lang]}</h3>
+          <p class="shop-meta">{entitleKit.meta[lang]}</p>
+          <p>{entitleKit.blurb[lang]}</p>
+          <p class="shop-price">{entitleKit.price}</p>
+          <div class="shop-actions">
+            <a
+              class="btn"
+              href={withUtm(entitleKit.gumroad!, 'entitlekit_card_gumroad')}
+              target="_blank"
+              rel="noopener"
+              data-shop-product={entitleKit.id}
+              data-shop-platform="gumroad"
+            >View on Gumroad</a>
+            <a
+              class="btn ghost"
+              href={withUtm(entitleKit.payhip!, 'entitlekit_card_payhip')}
+              target="_blank"
+              rel="noopener"
+              data-shop-product={entitleKit.id}
+              data-shop-platform="payhip"
+            >View on Payhip</a>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="content-section" aria-labelledby="learning-heading">
@@ -158,7 +194,7 @@ const jsonLd = [
       <h2 id="disclosure-heading">About these products</h2>
       <p>
         Every product on this page is designed and produced by the FunnyTools team (Btcson Lab) —
-        these are our own materials, not third-party affiliate offers. Checkout and file delivery
+        our own learning materials or software source-code tools, not third-party affiliate offers. Checkout and file delivery
         happen on Gumroad or Payhip; payment and refund policies follow the platform pages.
         Please review the product description and age range before buying.
       </p>
@@ -205,6 +241,27 @@ const jsonLd = [
 
   .shop-grid-wide {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shop-grid-featured {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .shop-card-featured {
+    border-color: rgba(15, 143, 140, 0.35);
+    background: linear-gradient(135deg, rgba(15, 143, 140, 0.09), rgba(62, 99, 221, 0.05)), var(--card);
+  }
+
+  .shop-card-featured h3 {
+    font-size: 1.25rem;
+  }
+
+  .shop-kicker {
+    margin: 0 0 6px;
+    color: var(--brand-2);
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
   }
 
   .shop-card {
