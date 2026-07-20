@@ -5,8 +5,8 @@ export default {
     name: '條碼產生器',
     short: '輸入文字或商品編號，即時產生 Code 128、EAN-13、UPC-A 或 Code 39 條碼。',
     long: '條碼產生器可把文字或數字轉成適合標籤、庫存、商品測試與內部管理的條碼，並下載 PNG 或 SVG。選擇 EAN-13 或 UPC-A 時，工具會驗證檢查碼；輸入 12 位 EAN 或 11 位 UPC 資料碼時也會自動補上正確檢查碼。所有內容只在瀏覽器本機處理，不會傳送到 FunnyTools 或第三方伺服器。',
-    seoTitle: '條碼產生器｜Code 128、EAN-13、UPC-A、Code 39 免費下載',
-    seoDescription: '免費線上條碼產生器，支援 Code 128、EAN-13、UPC-A、Code 39，即時預覽並下載 PNG、SVG，自動驗證商品條碼檢查碼。',
+    seoTitle: '條碼產生器｜免費製作 Code 128、EAN-13 與 UPC-A',
+    seoDescription: '條碼產生器免費製作 Code 128、EAN-13、UPC-A 與 Code 39。即時驗證檢查碼，並下載 PNG 或 SVG。',
     keywords: ['條碼產生器', 'Barcode Generator', 'Code 128', 'EAN-13', 'UPC-A', 'Code 39', '商品條碼', '條碼 PNG', '條碼 SVG'],
     capabilities: [
       '支援 Code 128、EAN-13、UPC-A 與 Code 39 四種常用一維條碼。',
@@ -35,6 +35,27 @@ export default {
           'EAN-13 固定為 13 位數，常見於全球零售商品；UPC-A 固定為 12 位數，主要常見於北美市場。兩者最後一位都是檢查碼，用前面的資料碼依固定權重計算。你可以輸入 12 位 EAN-13 資料碼或 11 位 UPC-A 資料碼，工具會補上最後一位；若輸入完整 13 位或 12 位編號，工具會重新計算並在不一致時直接顯示錯誤。',
           '檢查碼只能發現常見的輸入錯誤，不能證明產品名稱、價格、公司或庫存資料正確。掃描後顯示什麼內容，取決於收銀、倉儲或資料庫系統如何對應該編號。製作包裝前應使用通路提供的測試流程，並以實際掃描器檢查列印成品。',
         ],
+      },
+      {
+        heading: '電商賣家如何使用 EAN-13 與 UPC-A',
+        paragraphs: [
+          '商品上架前，先依銷售地區與平台規則確認編號類型：EAN-13 常用於歐洲、亞洲與多數國際零售通路，UPC-A 則常見於美國與加拿大市場。亞馬遜、市集或零售商可能會比對你填寫的 GTIN 與品牌、商品資料；本工具只負責產生圖形與驗證數字結構，不會取得或登錄可上架的編號。',
+          '檢查碼是最後一位：EAN-13 以前 12 位、UPC-A 以前 11 位加權計算，用來發現常見的輸入錯誤。若平台拒絕一組能通過檢查碼的數字，應回頭查核編號來源、品牌擁有權與平台類別規則，不要反覆更改最後一位。',
+          '列印時建議使用 SVG、黑條配白底，保留左右靜區且不要拉伸。一般 EAN-13／UPC-A 的標稱寬度約為 37.3 mm（含左右靜區），含人眼可讀數字的標稱高度約為 25.9 mm；但通路可能允許不同放大率或要求額外文字區。以包裝的最終尺寸輸出後，必須用實際紙材、印表機與收貨端掃描器試掃。',
+        ],
+      },
+      {
+        heading: '條碼與 QR Code 有什麼不同？',
+        paragraphs: [
+          '一維條碼用一排粗細線條編碼，通常只容納較短的商品號碼或內部 ID；QR Code 是二維方格，可容納更多文字、網址或 Wi-Fi 資訊，並具有容錯能力。傳統條碼常由零售雷射或影像式掃描器讀取，QR Code 則很適合一般手機相機。',
+          '若掃描結果只需要對應 POS、庫存或物流系統中的一組編號，使用 Code 128、EAN-13 或 UPC-A；若要讓顧客用手機開啟商品頁、說明書、表單或聯絡資訊，使用 QR Code。兩者可同時放在包裝上，但應各自保留留白並分別試掃。',
+        ],
+        link: {
+          prefix: '需要編碼網址或較長文字時，請使用',
+          label: 'QR Code 產生器',
+          href: '/tools/qr-code-generator/',
+          suffix: '。',
+        },
       },
       {
         heading: 'Code 39：相容傳統設備的簡單格式',
@@ -95,6 +116,8 @@ export default {
     faq: [
       { q: 'EAN-13 或 UPC-A 的檢查碼怎麼處理？', a: '直接答案：輸入 12 位 EAN-13 或 11 位 UPC-A 資料碼時，工具會自動計算最後一位；輸入完整編號時則會驗證，不一致就顯示正確檢查碼提示。' },
       { q: '通過檢查碼就代表商品編號可以使用嗎？', a: '不是。檢查碼只驗證數字結構，無法確認編號是否已由 GS1 或通路核發，也不會驗證商品、公司或價格資料。' },
+      { q: '電商上架該用 EAN-13 還是 UPC-A？', a: '依銷售地區與平台規則決定。EAN-13 常用於多數國際市場，UPC-A 常用於美國與加拿大；上架前仍要確認 GTIN 來源、品牌資料與平台的當前規範。' },
+      { q: 'EAN-13 或 UPC-A 建議列印多大？', a: '標稱寬度約為 37.3 mm（含左右靜區），含人眼可讀數字的標稱高度約為 25.9 mm。實際可用尺寸受放大率、通路與印刷規範限制；請保留靜區、不變形，並在最終包裝上試掃。' },
       { q: 'PNG 和 SVG 應該下載哪一個？', a: '一般文件與簡報可用 PNG；需要在排版軟體縮放或交付印刷時優先用 SVG，並保留正確比例與左右空白區。' },
       { q: '為什麼畫面看得到，印出來卻掃不到？', a: '最常見原因是尺寸太小、對比不足、空白區被裁切、圖片被拉伸、印表機暈墨或材質反光。請用最終標籤和實際掃描器測試。' },
       { q: '輸入的商品編號會上傳嗎？', a: '不會。JsBarcode 在目前瀏覽器分頁產生 SVG 與 PNG，FunnyTools 不會接收或儲存你輸入的內容。' },
@@ -120,8 +143,8 @@ export default {
     name: 'Barcode Generator',
     short: 'Create Code 128, EAN-13, UPC-A, or Code 39 barcodes with live validation and PNG or SVG downloads.',
     long: 'Barcode Generator turns text and product numbers into downloadable one-dimensional barcodes for labels, inventory, packaging drafts, and system tests. It validates EAN-13 and UPC-A check digits and can calculate the final digit from a 12-digit EAN or 11-digit UPC payload. Rendering happens locally in your browser with JsBarcode, so FunnyTools does not receive the values you enter.',
-    seoTitle: 'Free Barcode Generator | Code 128, EAN-13, UPC-A and Code 39',
-    seoDescription: 'Generate Code 128, EAN-13, UPC-A, and Code 39 barcodes with live preview, check digit validation, and PNG or SVG downloads.',
+    seoTitle: 'Barcode Generator Free | Code 128 & EAN-13',
+    seoDescription: 'Create Code 128, EAN-13, UPC-A, and Code 39 barcodes free online. Validate check digits and download PNG or SVG.',
     keywords: ['barcode generator', 'Code 128 generator', 'EAN-13 generator', 'UPC-A barcode', 'Code 39 generator', 'barcode PNG', 'barcode SVG', 'check digit validator'],
     capabilities: [
       'Generate Code 128, EAN-13, UPC-A, and Code 39 barcodes from text or numbers.',
@@ -151,6 +174,27 @@ export default {
           'Enter a 12-digit EAN payload or an 11-digit UPC payload and this tool appends the calculated check digit. If you enter all 13 EAN digits or all 12 UPC digits, the tool recalculates the final digit and displays an error when it does not match. When an error appears, verify the source product record instead of changing the last digit merely to make the value pass. The source data may contain a transposed or missing digit elsewhere.',
           'The name, price, company, and stock status shown after a retail scan come from the receiving point-of-sale or inventory database. They are not embedded in the bars. You therefore need both a correctly assigned identifier and a correct database record. Use the retailer or logistics provider’s certification procedure for final production artwork.',
         ],
+      },
+      {
+        heading: 'EAN-13 and UPC-A workflows for ecommerce sellers',
+        paragraphs: [
+          'Before listing a product, confirm the identifier type required for the sales region and marketplace. EAN-13 is common across Europe, Asia, and many international retail channels, while UPC-A is especially common in the United States and Canada. Amazon, marketplaces, and retailers may compare the submitted GTIN with brand and product records. This tool creates the graphic and checks the number structure; it does not obtain or register an identifier that a marketplace will accept.',
+          'The check digit is the final digit, calculated from the first 12 EAN digits or first 11 UPC digits. It catches many data-entry errors but does not validate identifier ownership. If a marketplace rejects a number with valid check-digit arithmetic, inspect its source, brand association, category rules, and exemption status instead of repeatedly changing the last digit.',
+          'For print, use SVG where possible, keep dark bars on a white background, preserve the quiet zones, and never stretch the artwork. At nominal size, EAN-13 and UPC-A are about 37.3 mm wide including quiet zones and 25.9 mm high including the human-readable digits. A retailer may permit different magnifications or require an additional text area. Export at final package size and scan the proof using the real stock, printer, and receiving equipment.',
+        ],
+      },
+      {
+        heading: 'Barcode vs QR code: which should you use?',
+        paragraphs: [
+          'A one-dimensional barcode stores data across a row of bars and usually carries a short product number or internal ID. A QR code is a two-dimensional grid that can hold more text, URLs, Wi-Fi details, or contact data and includes error correction. Traditional barcodes are routinely read by retail laser or imaging scanners, while QR codes are designed to work well with ordinary phone cameras.',
+          'Use Code 128, EAN-13, or UPC-A when a scan should look up one identifier in a point-of-sale, inventory, or logistics system. Use a QR code when customers should open a product page, manual, form, or contact record on a phone. Packaging can contain both, but each code needs its own clear space and final-size scan test.',
+        ],
+        link: {
+          prefix: 'To encode a URL or longer text, use the ',
+          label: 'QR Code Generator',
+          href: '/en/tools/qr-code-generator/',
+          suffix: '.',
+        },
       },
       {
         heading: 'Code 39 for simple legacy and industrial workflows',
@@ -218,6 +262,8 @@ export default {
     faq: [
       { q: 'How are EAN-13 and UPC-A check digits handled?', a: 'Enter 12 EAN digits or 11 UPC digits and the tool calculates the final digit. Enter a complete 13- or 12-digit number and it validates the existing final digit, showing the expected digit when there is a mismatch.' },
       { q: 'Does a valid check digit mean I can use the product number?', a: 'No. It only confirms the arithmetic structure. It does not establish GS1 registration, company ownership, retailer acceptance, or a correct product database record.' },
+      { q: 'Should an ecommerce listing use EAN-13 or UPC-A?', a: 'Follow the marketplace and target region. EAN-13 is common in international markets, while UPC-A is common in the United States and Canada. Before listing, confirm the GTIN source, brand record, and current marketplace rules.' },
+      { q: 'What print size should I use for EAN-13 or UPC-A?', a: 'At nominal size, the symbol is about 37.3 mm wide including quiet zones and 25.9 mm high including the human-readable digits. Allowed magnification depends on the retailer and print specification, so preserve quiet zones and proportions and scan-test the final package.' },
       { q: 'Should I download PNG or SVG?', a: 'PNG works well in documents and quick mockups. SVG is preferable for scalable layout and print work, provided you preserve its proportions and quiet zones.' },
       { q: 'Why does a printed barcode fail when the preview looks correct?', a: 'Common causes include a label that is too small, cropped quiet zones, distorted proportions, low contrast, ink spread, reflective material, curved packaging, or incompatible scanner settings.' },
       { q: 'Is my barcode value uploaded?', a: 'No. JsBarcode renders the graphic in your browser. FunnyTools does not receive or store the text or product number you enter.' },

@@ -822,6 +822,8 @@ interface PrecheckSpec {
   enMistakes: string[];
   zhLimitations: string[];
   enLimitations: string[];
+  zhAdditionalSections?: NonNullable<ToolContent['contentSections']>;
+  enAdditionalSections?: NonNullable<ToolContent['contentSections']>;
   zhFaq: ToolContent['faq'];
   enFaq: ToolContent['faq'];
 }
@@ -842,6 +844,7 @@ function precheckEnhancement(spec: PrecheckSpec): Record<Locale, Enhancement> {
           paragraphs: [`${spec.zhName} 是瀏覽器內的輔助工具，適合快速整理、檢查或產生初稿。重要輸出仍應保留原始資料並做人工確認。`],
           items: spec.zhLimitations,
         },
+        ...(spec.zhAdditionalSections ?? []),
       ],
       caseStudies: spec.zhExamples.map((description, index) => ({
         title: `實例 ${index + 1}`,
@@ -864,6 +867,7 @@ function precheckEnhancement(spec: PrecheckSpec): Record<Locale, Enhancement> {
           paragraphs: [`${spec.enName} is a browser-based helper for quick preparation, cleanup, or checking. Keep the original material and review important output before using it in a formal workflow.`],
           items: spec.enLimitations,
         },
+        ...(spec.enAdditionalSections ?? []),
       ],
       caseStudies: spec.enExamples.map((description, index) => ({
         title: `Example ${index + 1}`,
@@ -1455,6 +1459,30 @@ const adsensePrecheckSpecs: PrecheckSpec[] = [
     enMistakes: ['Do not print before testing with a phone.', 'Do not put very long text into a tiny QR code.', 'Do not link to unpublished or expiring URLs.'],
     zhLimitations: ['工具不會代管或縮短網址。', '掃描成功取決於尺寸、對比、紙張與鏡頭。', 'QR Code 內容一旦印出就不會自動更新。'],
     enLimitations: ['The tool does not host or shorten URLs.', 'Scan success depends on size, contrast, paper, and camera quality.', 'Printed QR code content does not update automatically.'],
+    zhAdditionalSections: [
+      {
+        heading: 'QR Code 與一維條碼的選擇',
+        paragraphs: [],
+        link: {
+          prefix: '若零售、庫存或物流系統只需要短商品編號或內部 ID，請使用',
+          label: '條碼產生器',
+          href: '/tools/barcode-generator/',
+          suffix: '。',
+        },
+      },
+    ],
+    enAdditionalSections: [
+      {
+        heading: 'Choosing a QR code or one-dimensional barcode',
+        paragraphs: [],
+        link: {
+          prefix: 'For a short product number or internal ID used by retail, inventory, or logistics systems, use the ',
+          label: 'Barcode Generator',
+          href: '/en/tools/barcode-generator/',
+          suffix: '.',
+        },
+      },
+    ],
     zhFaq: [
       { q: 'QR Code 會上傳到伺服器嗎？', a: '不會，產生過程在瀏覽器內完成。' },
       { q: '可以放 Wi-Fi 資訊嗎？', a: '可以，但請確認現場分享這些資訊是安全且允許的。' },
