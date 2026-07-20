@@ -2,7 +2,7 @@
 
 - Useful posts: 0
 - Sitemap blog URLs: 0
-- Redirect stubs: 164
+- Redirect stubs: 172
 - Duplicate titles: 0
 - Duplicate descriptions: 0
 - Farm-pattern hits: 0

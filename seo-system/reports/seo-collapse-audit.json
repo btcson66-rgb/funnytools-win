@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-07-20T21:50:00.142Z",
+  "mode": "local",
+  "local": {
+    "buildPages": 718,
+    "indexablePages": 264,
+    "sitemapUrls": 264,
+    "internalHttpLinks": 0,
+    "orphanIndexable": [],
+    "corePaths": [
+      "/",
+      "/tools/t-score-calculator/",
+      "/tools/grade-average/",
+      "/tools/teacher-exam-score-converter/",
+      "/tools/random-name-picker/",
+      "/tools/z-score-calculator/",
+      "/tools/merge-pdf/",
+      "/tools/image-compressor/",
+      "/en/tools/this-or-that/",
+      "/guides/t-score-calculator-guide/",
+      "/blog/image-compression-quality-guide/",
+      "/category/statistics/",
+      "/support/"
+    ]
+  },
+  "live": null,
+  "failures": [],
+  "warnings": []
+}

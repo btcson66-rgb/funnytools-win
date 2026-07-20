@@ -26,6 +26,8 @@ function normalizeSites(rawConfig) {
       sitemapPath: site.sitemapPath ?? '/sitemap.xml',
       samplePageCount: Number(site.samplePageCount ?? site.sitemapSampleCount ?? rawConfig.healthCheck?.sitemapSampleCount ?? 6),
       sampleUrls: site.sampleUrls ?? ['/'],
+      monitorHttpsRedirect: Boolean(site.monitorHttpsRedirect),
+      sitemapDropAlertPercent: Number(site.sitemapDropAlertPercent ?? 10),
       expectations: {
         expectAdsense: Boolean(site.expectations?.expectAdsense ?? site.expectAdsense),
         expectAdsTxt: Boolean(site.expectations?.expectAdsTxt ?? site.expectAdsTxt),
@@ -172,6 +174,35 @@ async function fetchText(url, label) {
     await sleep(backoffMs(attempt));
   }
   throw new Error('unreachable fetch retry state');
+}
+
+async function checkRedirectChain(site) {
+  const canonical = new URL(site.baseUrl);
+  const startUrl = new URL(canonical.href);
+  startUrl.protocol = 'http:';
+  const hops = [];
+  let current = startUrl.href;
+  try {
+    for (let index = 0; index < 5; index += 1) {
+      const response = await fetch(current, {
+        redirect: 'manual',
+        signal: AbortSignal.timeout(Number(hc.timeoutMs ?? 15000)),
+        headers: requestHeaders(),
+      });
+      const location = response.headers.get('location');
+      hops.push({ url: current, status: response.status, location });
+      if (!location || ![301, 302, 303, 307, 308].includes(response.status)) break;
+      current = new URL(location, current).href;
+    }
+  } catch (error) {
+    addIssue(site, 'warning', 'https-redirect-network', `${site.name} 無法驗證 HTTP → HTTPS：${error.message}`);
+    return { startUrl: startUrl.href, hops, error: error.message };
+  }
+  const final = hops.at(-1);
+  if (hops.length !== 2 || hops[0]?.status !== 301 || final?.url !== canonical.href || final?.status !== 200) {
+    addIssue(site, 'critical', 'https-redirect-invalid', `${site.name} HTTP 首頁不是單次 301 到同路徑 HTTPS（hops=${hops.length - 1}，final=${final?.url ?? 'none'}，status=${final?.status ?? 0}）`);
+  }
+  return { startUrl: startUrl.href, hops, finalUrl: final?.url, finalStatus: final?.status };
 }
 
 function parseHead(html) {
@@ -524,6 +555,7 @@ async function checkSite(site) {
   };
 
   live.home = await checkHome(site);
+  if (site.monitorHttpsRedirect) live.httpsRedirect = await checkRedirectChain(site);
   live.primary = await checkPrimaryPage(site, live.home);
   if (live.primary.status === 200) {
     if (site.expectations.expectAdsense && !live.primary.hasAdsense) {
@@ -577,6 +609,23 @@ function diffWithPrevious(snapshot, dataDir) {
   if (!existsSync(previousPath)) return { hasPrevious: false };
   try {
     const previous = JSON.parse(readFileSync(previousPath, 'utf8'));
+    for (const site of snapshot.sites) {
+      const prior = previous.sites?.find((item) => item.id === site.id);
+      const priorCount = Number(prior?.sitemap?.urlCount ?? 0);
+      const currentCount = Number(site.sitemap?.urlCount ?? 0);
+      const threshold = Number(sites.find((item) => item.id === site.id)?.sitemapDropAlertPercent ?? 10);
+      if (priorCount > 0 && currentCount < priorCount * (1 - threshold / 100)) {
+        const drop = ((priorCount - currentCount) / priorCount * 100).toFixed(1);
+        addIssue(sites.find((item) => item.id === site.id), 'critical', 'sitemap-count-collapse', `${site.name} sitemap URL 數由 ${priorCount} 降至 ${currentCount}（-${drop}%），超過 ${threshold}% 警戒值`);
+      }
+      const priorSamples = new Map((prior?.samples ?? []).map((sample) => [sample.url, sample]));
+      for (const sample of site.samples ?? []) {
+        const old = priorSamples.get(sample.url);
+        if (old?.canonical && sample.canonical && old.canonical !== sample.canonical) {
+          addIssue(sites.find((item) => item.id === site.id), 'critical', 'core-canonical-changed', `${site.name} 核心頁 canonical 改變：${sample.url}（${old.canonical} → ${sample.canonical}）`);
+        }
+      }
+    }
     const prevCodes = new Set((previous.issues ?? []).map((issue) => `${issue.code}:${issue.message}`));
     const currentCodes = new Set(snapshot.issues.map((issue) => `${issue.code}:${issue.message}`));
     return {
@@ -739,6 +788,7 @@ async function main() {
   };
   const dataDir = config.reporting?.dataDir ?? join(rootDir, 'reports', 'data');
   const diff = diffWithPrevious(snapshot, dataDir);
+  for (const site of siteResults) site.status = siteStatus(site.id);
   const summary = writeReports(snapshot, diff);
 
   console.log(`[health-check] status=${summary.status} critical=${summary.critical} warning=${summary.warning} info=${summary.info}`);

@@ -22,8 +22,16 @@
       "sitemapPath": "/sitemap.xml",
       "samplePageCount": 6,
       "sampleUrls": [
-        "/"
+        "/",
+        "/tools/t-score-calculator/",
+        "/tools/grade-average/",
+        "/tools/teacher-exam-score-converter/",
+        "/tools/random-name-picker/",
+        "/tools/z-score-calculator/",
+        "/support/"
       ],
+      "monitorHttpsRedirect": true,
+      "sitemapDropAlertPercent": 10,
       "expectations": {
         "expectAdsense": true,
         "expectAdsTxt": true,

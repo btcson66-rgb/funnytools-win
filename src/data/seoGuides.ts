@@ -2842,8 +2842,8 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
   },
   'merge-pdf-private-guide': {
     title: 'Merge PDFs Without Uploading Them Anywhere',
-    metaTitle: 'How to Merge PDF Files Without Uploading: Private, In-Browser Method',
-    metaDescription: 'Contracts and transcripts should never sit on a stranger\'s server. Learn how in-browser PDF merging works, how to verify nothing gets uploaded, and the four mistakes that ruin merged files.',
+    metaTitle: 'Merge PDFs Privately Without Uploading Files',
+    metaDescription: 'Merge contracts, transcripts, and other PDFs in your browser. Verify that files stay local, arrange pages safely, and avoid four common output mistakes.',
     h1: 'How to merge PDF files without uploading them',
     category: 'Files & PDF',
     searchIntent: 'You need to combine several PDFs into one, but the documents are sensitive and you do not want them on an unknown server.',
@@ -2880,8 +2880,8 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
   },
   'a4-vs-us-letter-printing-guide': {
     title: 'A4 vs US Letter: Print Worksheets Without Cutoffs',
-    metaTitle: 'A4 vs US Letter: Why Printables Get Cut Off and How to Fix It',
-    metaDescription: 'A4 is 210×297 mm; Letter is 215.9×279.4 mm — wider but shorter. Master that 6 mm / 18 mm difference and downloaded worksheets will stop losing their edges on your printer.',
+    metaTitle: 'A4 vs US Letter: Stop Printables Getting Cut Off',
+    metaDescription: 'Compare A4 and US Letter sizes, choose the right print scaling, and prevent worksheets, forms, and templates from being cropped or shrunk.',
     h1: 'A4 vs US Letter: what actually differs, and how to print across them',
     category: 'Printing & Documents',
     searchIntent: 'A downloaded worksheet or form is in the other paper size and prints with cut-off edges or shrunken layout; you want the right settings.',
@@ -2919,8 +2919,8 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
   },
   'word-count-essay-limits-guide': {
     title: 'Word Count Rules for Exams and Applications',
-    metaTitle: 'Word Count Rules: IELTS, TOEFL, and Common App Limits Explained',
-    metaDescription: 'IELTS penalizes under 150 words, Common App hard-stops at 650, and hyphenated words count as one. Here is how each system actually counts — and how to write to the limit safely.',
+    metaTitle: 'Essay Word Limits: IELTS, TOEFL & Common App',
+    metaDescription: 'Learn how IELTS, TOEFL, and Common App count words, hyphens, contractions, and characters so your essay stays inside each required limit.',
     h1: 'How word counts actually work in exams and applications',
     category: 'Writing & Exams',
     searchIntent: 'You are writing for an exam or application and need to know how words are counted and what happens if you go over or under.',
@@ -2957,8 +2957,8 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
   },
   'image-compression-email-guide': {
     title: 'Compress Images for Email Without Losing Readability',
-    metaTitle: 'Compress Images for Email: Resize First, Then Compress — Text Stays Sharp',
-    metaDescription: 'Gmail caps at 25 MB and corporate mail is often 10 MB. The right order is resize then compress: 1600 px long edge at 80% JPEG quality fits ten photos in one email with readable text.',
+    metaTitle: 'Compress Images for Email Without Blurry Text',
+    metaDescription: 'Resize images before compressing them so email attachments stay small and readable. Use practical pixel and JPEG quality settings for photos and text.',
     h1: 'Fit images into any email limit and keep the text readable',
     category: 'Image Tools',
     searchIntent: 'Photos or screenshots are too large to send, or arrived unreadably blurry after compression; you want a method that does both right.',

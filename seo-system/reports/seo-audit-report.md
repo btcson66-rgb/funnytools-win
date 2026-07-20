@@ -1,6 +1,6 @@
 # SEO Audit Report
 
-Generated: 2026-06-30T03:34:17.928Z
+Generated: 2026-07-20T21:44:45.670Z
 
 ## Critical
 
@@ -8,11 +8,11 @@ Generated: 2026-06-30T03:34:17.928Z
 
 ## Warning
 
-- /en/blog/: low visible text count (125). Check for thin content or redirect stubs.
+- None
 
 ## Suggestion
 
-- Scanned 694 HTML page(s); 354 page(s) treated as SEO-eligible, including 156 tool page(s).
-- 156/156 tool page(s) have visible FAQ detected.
-- 156/156 tool page(s) have WebApplication or SoftwareApplication schema.
-- Markdown/source documentation files discovered: 260.
+- Scanned 718 HTML page(s); 264 page(s) treated as SEO-eligible, including 158 tool page(s).
+- 158/158 tool page(s) have visible FAQ detected.
+- 158/158 tool page(s) have WebApplication or SoftwareApplication schema.
+- Markdown/source documentation files discovered: 264.
