@@ -2996,8 +2996,8 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
   },
   'bar-chart-school-report-guide': {
     title: 'Make a Clean, Readable Bar Chart for Reports',
-    metaTitle: 'How to Make a Clean Bar Chart: Sorting, Axes, and Color in Two Minutes',
-    metaDescription: 'Bar charts lose marks for rainbow palettes, 3D effects, and axes that do not start at zero — not for the data. Five thirty-second rules that make any chart presentation-ready.',
+    metaTitle: 'Clean Bar Chart in 2 Minutes: Sort, Label, Color',
+    metaDescription: 'Bar charts lose marks for rainbow palettes, 3D effects, and axes that skip zero — not the data. Five rules that make any chart presentation-ready.',
     h1: 'A clean bar chart in two minutes',
     category: 'Charts & Presentations',
     searchIntent: 'You need a bar chart for a report or slide deck and want it to look clear and professional without design skills.',
