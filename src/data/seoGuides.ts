@@ -3034,8 +3034,8 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
   },
   'qr-code-classroom-guide': {
     title: 'QR Codes in the Classroom: 12 Uses + Safety Rules',
-    metaTitle: 'Classroom QR Codes: 12 Practical Uses, a Print-Size Formula, and Safety Checks',
-    metaDescription: 'From learning stations to self-checking answer keys, QR codes erase "type this URL" time. Twelve field-tested uses, the scan-distance size formula, and a safety checklist for parent-facing codes.',
+    metaTitle: 'Classroom QR Codes: 12 Uses and Safety Checklist',
+    metaDescription: 'Twelve field-tested QR code uses for classrooms, the scan-distance sizing formula, and a safety checklist for parent-facing codes.',
     h1: 'Turn QR codes into classroom tools: 12 uses and the safety rules',
     category: 'Classroom Tools',
     searchIntent: 'A teacher wants concrete ways to use QR codes on worksheets, walls, and handouts, plus printing and safety guidance.',
