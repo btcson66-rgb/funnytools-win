@@ -3072,8 +3072,8 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
   },
   'percentage-shortcuts-guide': {
     title: 'Percentage Shortcuts: Discounts, Tips, Weighted Grades',
-    metaTitle: 'Percentage Shortcuts That Actually Work: Stacked Discounts, Reverse Prices, Points vs Percent',
-    metaDescription: '20% off then 10% off is 28% off, not 30%. Up 20% then down 20% is a 4% loss. The percentage mistakes everyone makes, with mental-math shortcuts and a one-rule fix: think in multipliers.',
+    metaTitle: 'Percentage Shortcuts: Discounts, Tips & Grades',
+    metaDescription: '20% off then 10% off is 28% off, not 30%. Up 20% then down 20% loses 4%. Common percentage mistakes with mental-math shortcuts and one fix: think in multipliers.',
     h1: 'Stop miscalculating percentages: shortcuts for real life',
     category: 'Everyday Math',
     searchIntent: 'You want to compute discounts, tips, or weighted grades quickly, or you keep confusing percent with percentage points.',
