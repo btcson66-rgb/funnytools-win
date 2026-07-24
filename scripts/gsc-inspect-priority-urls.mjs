@@ -3,6 +3,7 @@ import {
   filterSubmitCandidates,
   googleAccessToken,
   gscPriorityUrlsPath,
+  missingGscCredentialVars,
   priorityUrlsPath,
   readPriorityUrls,
   reportsDir,
@@ -10,6 +11,10 @@ import {
   writeJson,
   writeText,
 } from './seo-indexing-utils.mjs';
+
+// 2026-07-25 CEO 審查（gsc-secrets 稽核修正）：舊版遇到「Missing GSC」錯誤時故意
+// 不設 process.exitCode，讓憑證缺失的 weekly-inspection run 看起來是綠的。這是
+// 紅線第 6 條要禁止的靜默跳過——已改成缺憑證一律 exitCode=1。
 
 const priorityUrls = readPriorityUrls(gscPriorityUrlsPath, priorityUrlsPath);
 const { submitted: urls, skipped } = filterSubmitCandidates(priorityUrls);
@@ -62,7 +67,11 @@ try {
     }
   }
 } catch (error) {
-  report.errors.push({ url: '*', message: error.message });
+  const isMissingCredentials = /Missing GSC/.test(error.message);
+  const message = isMissingCredentials
+    ? `${error.message} Missing: ${missingGscCredentialVars().join(', ')}. Set these as GitHub Actions repo secrets (see Company Vault/10_Web_Department/2026-07-25-gsc-secrets-handoff.md).`
+    : error.message;
+  report.errors.push({ url: '*', message });
 }
 
 const md = [
@@ -109,6 +118,6 @@ console.log(JSON.stringify({
   errors: report.errors.length,
 }, null, 2));
 
-if (report.errors.length && !report.errors.every((item) => /Missing GSC/.test(item.message))) {
+if (report.errors.length) {
   process.exitCode = 1;
 }

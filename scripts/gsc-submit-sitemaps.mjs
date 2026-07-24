@@ -2,6 +2,7 @@ import { join } from 'node:path';
 import {
   fetchJson,
   googleAccessToken,
+  missingGscCredentialVars,
   reportsDir,
   sitemapIndexUrl,
   siteUrl,
@@ -10,11 +11,17 @@ import {
 } from './seo-indexing-utils.mjs';
 
 // 2026-07-25 SEO 稽核（CEO 派工）：GSC Sitemaps API 顯示三站 sitemap 長期
-// lastDownloaded=NEVER / isPending=true；每次 push main 都重送等於每天重置
-// Google 的下載時間線，違反 `04_Knowledge/GSC Sitemap 無法擷取診斷.md` 第 7 點
-// 「pending 時不要反覆重送」。改為：先 GET 目前狀態，距上次 lastSubmitted
-// 未滿 COOLDOWN_DAYS 天就略過（並在 log 寫明原因與下次可送時間），
-// 未曾提交過或已超過冷卻期才真的 PUT 重送。IndexNow / Bing 提交不受影響。
+// lastDownloaded=NEVER / isPending=true。原本以為原因是「每次 push main 都重送、
+// 重置 Google 的下載時間線」，加了 7 天冷卻（下方 COOLDOWN_DAYS）。CEO 審查後
+// 用 `gh secret list` 查明真正原因：funnytools repo 根本沒有設定
+// GSC_SERVICE_ACCOUNT_JSON / GSC_CLIENT_EMAIL / GSC_PRIVATE_KEY 這三個 secret，
+// 這支腳本從 CI 建立以來就從未真的執行過 PUT——之前遇到缺憑證會落到下面 catch，
+// 舊版把這個情況標成 status:'skipped' 且不設 process.exitCode，等於「腳本壞掉但
+// workflow 照樣 success」，違反 CLAUDE.md 紅線第 6 條（壞掉要通知，不得靜默跳過）。
+// 現在缺憑證會是 status:'failed' + exitCode 1，log 會列出缺哪幾個環境變數。
+// 7 天冷卻本身無害（避免真的有憑證後又被同一問題誤導重送），照舊保留，但它
+// 不是這題的根本解方；根本解方是老闆補上 GSC secrets（交接見
+// Company Vault/10_Web_Department/2026-07-25-gsc-secrets-handoff.md）。
 const COOLDOWN_DAYS = 7;
 const COOLDOWN_MS = COOLDOWN_DAYS * 24 * 60 * 60 * 1000;
 
@@ -62,9 +69,12 @@ try {
     if (!response.ok) process.exitCode = 1;
   }
 } catch (error) {
-  report.status = /Missing GSC/.test(error.message) ? 'skipped' : 'failed';
-  report.message = error.message;
-  if (report.status === 'failed') process.exitCode = 1;
+  const isMissingCredentials = /Missing GSC/.test(error.message);
+  report.status = 'failed';
+  report.message = isMissingCredentials
+    ? `${error.message} Missing: ${missingGscCredentialVars().join(', ')}. Set these as GitHub Actions repo secrets (see Company Vault/10_Web_Department/2026-07-25-gsc-secrets-handoff.md) — this is a real outage, not an optional step.`
+    : error.message;
+  process.exitCode = 1;
 }
 
 writeJson(join(reportsDir, 'gsc-sitemap-submit-report.json'), report);

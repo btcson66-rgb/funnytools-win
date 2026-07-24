@@ -39,11 +39,15 @@ const report = {
 };
 
 if (!apiKey) {
+  // 2026-07-25 CEO 審查（gsc-secrets 稽核修正）：同 gsc-submit-sitemaps.mjs 的問題——
+  // 缺金鑰不該假裝成功退出，紅線第 6 條要求響亮失敗。
   report.skipped.push({ url: '*', reason: 'missing-BING_API_KEY' });
+  report.error = 'Missing environment variable/secret: BING_API_KEY. Set it as a GitHub Actions repo secret.';
   writeJson(join(reportsDir, 'bing-submission-report.json'), report);
-  writeText(join(reportsDir, 'bing-submission-report.md'), '# Bing Submission Report\n\nSkipped: missing `BING_API_KEY`.\n');
+  writeText(join(reportsDir, 'bing-submission-report.md'), '# Bing Submission Report\n\nFAILED: missing `BING_API_KEY` environment variable/secret.\n');
+  console.error(report.error);
   console.log(JSON.stringify(report, null, 2));
-  process.exit(0);
+  process.exit(1);
 }
 
 async function getQuota() {

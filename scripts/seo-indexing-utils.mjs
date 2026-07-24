@@ -505,10 +505,37 @@ export function getServiceAccountCredentials() {
   return null;
 }
 
+// 2026-07-25 CEO 審查（gsc-secrets 稽核修正）：紅線第 6 條要求「腳本壞掉要通知，不得
+// 靜默跳過」。缺憑證時必須明確列出缺哪幾個環境變數，讓呼叫端可以據此判斷是否要
+// exitCode=1（而不是猜一句籠統訊息）。
+export function missingGscCredentialVars() {
+  if (process.env.GSC_SERVICE_ACCOUNT_JSON) {
+    try {
+      const parsed = JSON.parse(process.env.GSC_SERVICE_ACCOUNT_JSON);
+      const missingFields = [
+        !parsed?.client_email && 'client_email',
+        !parsed?.private_key && 'private_key',
+      ].filter(Boolean);
+      return missingFields.length
+        ? [`GSC_SERVICE_ACCOUNT_JSON is set but missing JSON field(s): ${missingFields.join(', ')}`]
+        : [];
+    } catch {
+      return ['GSC_SERVICE_ACCOUNT_JSON is set but is not valid JSON'];
+    }
+  }
+  const missing = [
+    !process.env.GSC_CLIENT_EMAIL && 'GSC_CLIENT_EMAIL',
+    !process.env.GSC_PRIVATE_KEY && 'GSC_PRIVATE_KEY',
+  ].filter(Boolean);
+  if (missing.length === 2) return ['GSC_SERVICE_ACCOUNT_JSON (or GSC_CLIENT_EMAIL + GSC_PRIVATE_KEY)'];
+  return missing;
+}
+
 export async function googleAccessToken(scope = 'https://www.googleapis.com/auth/webmasters') {
   const credentials = getServiceAccountCredentials();
   if (!credentials?.client_email || !credentials?.private_key) {
-    throw new Error('Missing GSC service account credentials.');
+    const missing = missingGscCredentialVars();
+    throw new Error(`Missing GSC service account credentials. Set the following environment variable(s)/secret(s): ${missing.join(', ')}.`);
   }
   const now = Math.floor(Date.now() / 1000);
   const header = base64Url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));

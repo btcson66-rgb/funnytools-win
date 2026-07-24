@@ -36,10 +36,14 @@ const report = {
 };
 
 if (!key) {
+  // 2026-07-25 CEO 審查（gsc-secrets 稽核修正）：缺金鑰不是「正常沒事做」，是設定
+  // 缺口，紅線第 6 條要求响亮失敗，不得靜默 exit(0) 假裝成功。
   report.skipped.push({ url: '*', reason: 'missing-INDEXNOW_KEY' });
+  report.error = 'Missing environment variable/secret: INDEXNOW_KEY. Set it as a GitHub Actions repo secret.';
   writeJson(join(reportsDir, 'indexnow-submission-report.json'), report);
+  console.error(report.error);
   console.log(JSON.stringify(report, null, 2));
-  process.exit(0);
+  process.exit(1);
 }
 
 const keyFile = `${key}.txt`;
