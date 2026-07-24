@@ -242,13 +242,13 @@ const rawWorkflows: RawWorkflow[] = [
     purpose: '這個流程協助上班族快速處理日常文件任務：整理 PDF、壓縮圖片或檔案、試算日期與工作天、產生 QR Code，並檢查 JSON 資料格式。',
     steps: [
       '先確認文件用途、頁面順序與是否需要拆出附件或附錄。',
-      '使用 PDF 合併、拆分或壓縮工具整理交付版本，並保留原始檔。',
+      '使用 PDF 合併、拆分、旋轉或壓縮工具整理交付版本，並保留原始檔。',
       '壓縮圖片或截圖後，檢查文字、表格與簽名是否仍清楚。',
       '用日期差與工作天工具估算截止日，記錄是否排除週末或特定假日。',
       '需要公告連結、表單或現場掃描時，產生 QR Code 並實際掃描測試。',
       '遇到系統輸出的 JSON 時，先格式化檢查欄位，再回到來源系統確認內容。',
     ],
-    recommendedToolIds: ['merge-pdf', 'split-pdf', 'pdf-compressor', 'image-compressor', 'business-days', 'date-difference', 'qr-code-generator', 'json-formatter'],
+    recommendedToolIds: ['merge-pdf', 'split-pdf', 'rotate-pdf', 'pdf-compressor', 'image-compressor', 'business-days', 'date-difference', 'qr-code-generator', 'json-formatter'],
     relatedGuideIds: [],
     faq: [
       { question: '可以用這些工具處理公司敏感文件嗎？', answer: '工具以瀏覽器處理為主，但仍應遵守公司資安規範。高度敏感或受管制文件請使用公司核准流程。' },
@@ -403,7 +403,7 @@ const englishWorkflowContent: Record<string, EnglishWorkflowContent> = {
     purpose: 'This workflow helps office workers handle everyday document tasks: organize PDFs, compress files, estimate dates and business days, create QR codes, and inspect JSON data.',
     steps: [
       'Confirm the document purpose, page order, and whether attachments or appendices need separate files.',
-      'Use PDF merge, split, or compression tools to prepare a delivery copy while keeping originals.',
+      'Use PDF merge, split, rotate, or compression tools to prepare a delivery copy while keeping originals.',
       'Compress images or screenshots, then check that text, tables, and signatures remain readable.',
       'Estimate deadlines with date difference and business-day tools, noting weekends and holidays.',
       'Create a QR code for announcements, forms, or event links, then scan it before publishing.',

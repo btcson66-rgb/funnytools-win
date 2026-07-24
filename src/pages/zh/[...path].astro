@@ -18,7 +18,23 @@ export function getStaticPaths() {
 const { path } = Astro.params;
 const newPath = path ? `/${path}/` : '/';
 const fullUrl = `${SITE.url}${newPath}`;
+// The target /embed/* pages are themselves intentionally noindex (embeds are
+// not meant to rank on their own — see CLAUDE.md red line on noindex
+// classification). Keep noindex on their legacy /zh/embed/* stub too, or the
+// SEO-collapse-audit orphan-indexable check would flag a canonical pointing
+// at a page that is deliberately excluded from the sitemap. Every other
+// /zh/* stub (tools, categories, legal pages, home) targets a real indexable
+// page, so those drop noindex to let signals consolidate onto the new URL.
+const targetIsNoindex = path?.startsWith('embed/') ?? false;
 ---
+<!--
+  2026-07-25 SEO 稽核（CEO 派工）：拿掉大部分 /zh/* stub 的 noindex，只留 canonical +
+  meta refresh，讓 Google 能把舊網址的訊號合併到新網址（noindex 頁不會走 index
+  pipeline，canonical 提示形同失效）。/zh/embed/* 例外：目標本身就是刻意 noindex
+  的內嵌頁，維持 noindex 才不會被 SEO collapse audit 判定為「指到未收錄頁」。
+  等 Cloudflare 端把 /zh/* 建成真 301 Bulk Redirect 上線後，這整批 stub 頁面
+  （本檔＋ dist/zh/**）就可以整批移除，不再需要這層 Astro fallback。
+-->
 <!doctype html>
 <html lang="zh-Hant">
 <head>
@@ -26,7 +42,7 @@ const fullUrl = `${SITE.url}${newPath}`;
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="canonical" href={fullUrl} />
   <meta http-equiv="refresh" content={`0; url=${newPath}`} />
-  <meta name="robots" content="noindex, follow" />
+  {targetIsNoindex && <meta name="robots" content="noindex, follow" />}
   <title>Redirecting...</title>
 </head>
 <body>

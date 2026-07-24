@@ -65,7 +65,7 @@ export const zScoreContent = content(
 export const tScoreContent = content(
   {
     name: 'T 分數計算器', short: '將 Z 分數轉換為平均 50、標準差 10 的 T 分數。', long: '輸入 Z 分數即可轉換為常用的 T 分數量尺。T 分數通常以 50 為平均數、10 為標準差，方便學生、老師或教甄備考者用同一參照群體比較相對位置。',
-    seoTitle: 'T 分數計算器｜Z 分數轉 T 分數', seoDescription: '使用 T = 50 + 10z 將 Z 分數轉為 T 分數，附公式、教育應用與報告提示。', keywords: ['T分數', 'Z分數轉換', '標準分數'],
+    seoTitle: 'T分數換算器｜Z分數轉T分數公式與範例', seoDescription: 'T分數換算器：輸入Z分數，用 T = 50 + 10z 立即算出T分數，附公式、換算範例與教師甄試應用提示。', keywords: ['T分數', 'T分數換算器', 'Z分數轉換', '標準分數'],
     contentSections: [
       {
         heading: 'T 分數是什麼',
