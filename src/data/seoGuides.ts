@@ -3110,8 +3110,8 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
   },
   'photos-to-pdf-phone-guide': {
     title: 'Photos to PDF on Your Phone — No App Needed',
-    metaTitle: 'Turn Phone Photos into a PDF Without an App: Shooting, Ordering, Compressing',
-    metaDescription: 'Homework, receipts, and contracts shot on your phone can become one PDF right in the browser — no scanner app, no upload, no watermark. The quality is decided when you shoot, not when you convert.',
+    metaTitle: 'Phone Photos to PDF — No App Required',
+    metaDescription: 'Combine phone photos into one PDF right in the browser — no scanner app, no upload. Quality depends on how you shoot, not how you convert.',
     h1: 'Combine phone photos into one PDF, right in the browser',
     category: 'Files & PDF',
     searchIntent: 'You need to submit or archive multiple phone photos (homework, documents, receipts) as a single PDF without installing an app.',
