@@ -1,0 +1,23 @@
+---
+import ThisOrThat from '../../../components/tools/ThisOrThat.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishThisOrThat,
+  spanishThisOrThatReview,
+} from '../../../i18n/expansion/es-tools-17';
+---
+
+<ExpansionToolLayout
+  routeKey="this-or-that"
+  canonicalPath="/es/herramientas/decidir-entre-dos-opciones/"
+  content={spanishThisOrThat}
+  categoryLabel="Sorteos y decisiones"
+  review={spanishThisOrThatReview}
+  relatedTool={{
+    name: 'Generador de grupos aleatorios',
+    description: 'Baraja una lista completa y distribúyela en varios grupos de tamaño parecido.',
+    href: '/es/herramientas/generador-grupos-aleatorios/',
+  }}
+>
+  <ThisOrThat labels={spanishThisOrThat.labels} />
+</ExpansionToolLayout>

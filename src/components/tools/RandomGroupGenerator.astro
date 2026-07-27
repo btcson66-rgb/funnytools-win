@@ -77,7 +77,8 @@ const { labels } = Astro.props;
     let latestGroups = [];
 
     function csvCell(value) {
-      const text = String(value ?? '');
+      const raw = String(value ?? '');
+      const text = /^[\s]*[=+\-@]/.test(raw) ? `'${raw}` : raw;
       return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
     }
 
@@ -104,10 +105,22 @@ const { labels } = Astro.props;
       error.hidden = !message;
     }
 
+    function randomIndex(max) {
+      if (!window.crypto?.getRandomValues) {
+        throw new Error(labels.cryptoError || 'Secure random generation is not available in this browser.');
+      }
+      const limit = Math.floor(0x100000000 / max) * max;
+      const value = new Uint32Array(1);
+      do {
+        window.crypto.getRandomValues(value);
+      } while (value[0] >= limit);
+      return value[0] % max;
+    }
+
     function shuffle(items) {
       const copy = [...items];
       for (let index = copy.length - 1; index > 0; index -= 1) {
-        const swapIndex = Math.floor(Math.random() * (index + 1));
+        const swapIndex = randomIndex(index + 1);
         [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
       }
       return copy;
@@ -147,16 +160,23 @@ const { labels } = Astro.props;
         return;
       }
 
-      const groups = Array.from({ length: groupCount }, () => []);
-      shuffle(names).forEach((name, index) => {
-        groups[index % groupCount].push(name);
-      });
-      latestGroups = groups;
-      latestText = groups
-        .map((group, index) => `${groupLabel(index)}\n${group.map((member) => `- ${member}`).join('\n')}`)
-        .join('\n\n');
-      render(groups);
-      setError('');
+      try {
+        const groups = Array.from({ length: groupCount }, () => []);
+        shuffle(names).forEach((name, index) => {
+          groups[index % groupCount].push(name);
+        });
+        latestGroups = groups;
+        latestText = groups
+          .map((group, index) => `${groupLabel(index)}\n${group.map((member) => `- ${member}`).join('\n')}`)
+          .join('\n\n');
+        render(groups);
+        setError('');
+      } catch (generationError) {
+        latestText = '';
+        latestGroups = [];
+        output.innerHTML = `<p class="empty-state">${labels.emptyResult}</p>`;
+        setError(generationError instanceof Error ? generationError.message : labels.cryptoError);
+      }
     }
 
     root.querySelector('[data-generate]')?.addEventListener('click', generate);
@@ -178,7 +198,7 @@ const { labels } = Astro.props;
       latestGroups.forEach((group, index) => {
         group.forEach((member) => rows.push([groupLabel(index), member]));
       });
-      downloadCsv('groups.csv', rows);
+      downloadCsv(labels.csvFileName || 'groups.csv', rows);
     });
     root.querySelector('[data-copy]')?.addEventListener('click', async () => {
       if (!latestText) return;

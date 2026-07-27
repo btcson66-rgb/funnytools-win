@@ -1,0 +1,23 @@
+---
+import RandomGroupGenerator from '../../../components/tools/RandomGroupGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishRandomGroupGenerator,
+  spanishRandomGroupGeneratorReview,
+} from '../../../i18n/expansion/es-tools-17';
+---
+
+<ExpansionToolLayout
+  routeKey="random-group-generator"
+  canonicalPath="/es/herramientas/generador-grupos-aleatorios/"
+  content={spanishRandomGroupGenerator}
+  categoryLabel="Sorteos y decisiones"
+  review={spanishRandomGroupGeneratorReview}
+  relatedTool={{
+    name: 'Tirar dados online',
+    description: 'Genera caras d4, d6, d8, d10, d12 o d20 cuando la actividad utiliza números.',
+    href: '/es/herramientas/tirar-dados-online/',
+  }}
+>
+  <RandomGroupGenerator labels={spanishRandomGroupGenerator.labels} />
+</ExpansionToolLayout>

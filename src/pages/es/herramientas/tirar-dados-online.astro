@@ -1,0 +1,23 @@
+---
+import DiceRoller from '../../../components/tools/DiceRoller.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishDiceRoller,
+  spanishDiceRollerReview,
+} from '../../../i18n/expansion/es-tools-17';
+---
+
+<ExpansionToolLayout
+  routeKey="dice-roller"
+  canonicalPath="/es/herramientas/tirar-dados-online/"
+  content={spanishDiceRoller}
+  categoryLabel="Sorteos y decisiones"
+  review={spanishDiceRollerReview}
+  relatedTool={{
+    name: 'Decidir entre dos opciones',
+    description: 'Etiqueta las dos caras de una decisión cuando ambas alternativas ya son aceptables.',
+    href: '/es/herramientas/decidir-entre-dos-opciones/',
+  }}
+>
+  <DiceRoller labels={spanishDiceRoller.labels} />
+</ExpansionToolLayout>

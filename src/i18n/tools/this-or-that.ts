@@ -63,6 +63,7 @@ export default {
       waiting: '輸入兩個選項後開始',
       error: '請填入兩個選項。',
       copied: '已複製',
+      cryptoError: '此瀏覽器無法提供安全亂數來源，因此沒有做出選擇。',
     },
   },
   en: {
@@ -118,6 +119,7 @@ export default {
       waiting: 'Enter two options to start',
       error: 'Fill in both options.',
       copied: 'Copied!',
+      cryptoError: 'This browser cannot provide a secure random source, so no choice was made.',
     },
   },
 } satisfies Record<'zh' | 'en', ToolContent>;

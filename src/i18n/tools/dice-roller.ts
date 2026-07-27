@@ -105,6 +105,7 @@ export default {
       rolling: '擲骰中...',
       countError: '骰子數量必須是 1 到 20 的整數。',
       copied: '已複製',
+      cryptoError: '此瀏覽器無法提供安全亂數來源，因此沒有產生擲骰結果。',
     },
   },
   en: {
@@ -212,6 +213,7 @@ export default {
       rolling: 'Rolling...',
       countError: 'Dice count must be an integer from 1 to 20.',
       copied: 'Copied!',
+      cryptoError: 'This browser cannot provide a secure random source, so no dice result was generated.',
     },
   },
 } satisfies Record<'zh' | 'en', ToolContent>;

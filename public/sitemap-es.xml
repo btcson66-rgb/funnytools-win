@@ -201,6 +201,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pie-chart-maker/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/decidir-entre-dos-opciones/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/this-or-that/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/this-or-that/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/decidir-entre-dos-opciones/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/this-or-that/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/dividir-pdf/</loc>
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/split-pdf/" />
@@ -289,6 +297,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/password-generator/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/generador-grupos-aleatorios/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/random-group-generator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-group-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-grupos-aleatorios/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/random-group-generator/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/generador-numeros-aleatorios/</loc>
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/random-number-picker/" />
@@ -367,6 +383,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-name-picker/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/sorteo-nombres-aleatorio/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/random-name-picker/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/tirar-dados-online/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/dice-roller/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/dice-roller/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/tirar-dados-online/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/dice-roller/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/unir-pdf/</loc>

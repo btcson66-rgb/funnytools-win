@@ -98,8 +98,20 @@ const { labels } = Astro.props;
       error.hidden = !message;
     }
 
+    function randomIndex(max) {
+      if (!window.crypto?.getRandomValues) {
+        throw new Error(labels.cryptoError || 'Secure random generation is not available in this browser.');
+      }
+      const limit = Math.floor(0x100000000 / max) * max;
+      const value = new Uint32Array(1);
+      do {
+        window.crypto.getRandomValues(value);
+      } while (value[0] >= limit);
+      return value[0] % max;
+    }
+
     function rollOne(sides) {
-      return Math.floor(Math.random() * sides) + 1;
+      return randomIndex(sides) + 1;
     }
 
     function renderDice(results) {
@@ -125,21 +137,37 @@ const { labels } = Astro.props;
       const sides = Number(sidesInput.value);
       const count = Number(countInput.value);
       if (!Number.isInteger(count) || count < 1 || count > 20) {
+        latest = '';
+        output.classList.remove('rolling');
+        output.textContent = labels.placeholder;
+        diceList.innerHTML = '';
         setError(labels.countError);
         return;
       }
       window.clearInterval(timer);
+      let finalResults;
+      try {
+        finalResults = Array.from({ length: count }, () => rollOne(sides));
+      } catch (generationError) {
+        latest = '';
+        output.classList.remove('rolling');
+        output.textContent = labels.placeholder;
+        diceList.innerHTML = '';
+        setError(generationError instanceof Error ? generationError.message : labels.cryptoError);
+        return;
+      }
+      setError('');
       let cycles = 0;
       output.classList.add('rolling');
       output.textContent = labels.rolling;
       timer = window.setInterval(() => {
         cycles += 1;
-        const preview = Array.from({ length: count }, () => rollOne(sides));
+        const preview = Array.from({ length: count }, (_, index) => ((cycles + index) % sides) + 1);
         renderDice(preview);
         if (cycles >= 10) {
           window.clearInterval(timer);
           timer = null;
-          finish(preview, sides);
+          finish(finalResults, sides);
         }
       }, 50);
     }
