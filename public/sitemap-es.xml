@@ -65,6 +65,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pdf-compressor/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/contador-caracteres/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/character-counter/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/character-counter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/contador-caracteres/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/character-counter/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/contador-palabras/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/word-counter/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/word-counter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/contador-palabras/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/word-counter/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/convertir-imagen-base64/</loc>
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-to-base64/" />
@@ -127,6 +143,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/bar-chart-maker/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-grafico-barras/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/bar-chart-maker/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/crear-grafico-circular/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pie-chart-maker/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/pie-chart-maker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-grafico-circular/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pie-chart-maker/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/dividir-pdf/</loc>

@@ -1,0 +1,23 @@
+---
+import CharacterCounter from '../../../components/tools/CharacterCounter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishCharacterCounter,
+  spanishCharacterCounterReview,
+} from '../../../i18n/expansion/es-tools-10';
+---
+
+<ExpansionToolLayout
+  routeKey="character-counter"
+  canonicalPath="/es/herramientas/contador-caracteres/"
+  content={spanishCharacterCounter}
+  categoryLabel="Texto y escritura"
+  review={spanishCharacterCounterReview}
+  relatedTool={{
+    name: 'Contador de palabras',
+    description: 'Cuenta también frases, párrafos y tiempo estimado de lectura para textos más largos.',
+    href: '/es/herramientas/contador-palabras/',
+  }}
+>
+  <CharacterCounter labels={spanishCharacterCounter.labels} />
+</ExpansionToolLayout>

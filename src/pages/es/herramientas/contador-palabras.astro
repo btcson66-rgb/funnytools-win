@@ -1,0 +1,23 @@
+---
+import WordCounter from '../../../components/tools/WordCounter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishWordCounter,
+  spanishWordCounterReview,
+} from '../../../i18n/expansion/es-tools-10';
+---
+
+<ExpansionToolLayout
+  routeKey="word-counter"
+  canonicalPath="/es/herramientas/contador-palabras/"
+  content={spanishWordCounter}
+  categoryLabel="Texto y escritura"
+  review={spanishWordCounterReview}
+  relatedTool={{
+    name: 'Contador de caracteres',
+    description: 'Revisa bytes UTF-8 y referencias de plataforma cuando un límite no se expresa en palabras.',
+    href: '/es/herramientas/contador-caracteres/',
+  }}
+>
+  <WordCounter labels={spanishWordCounter.labels} />
+</ExpansionToolLayout>

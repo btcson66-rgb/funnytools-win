@@ -269,6 +269,10 @@ const { labels } = Astro.props;
         note.textContent = labels.emptyHint;
         return;
       }
+      if (chartType === 'pie' && !data.some((item) => item.value > 0)) {
+        note.textContent = labels.emptyHint;
+        return;
+      }
       note.textContent = '';
       if (chartType === 'pie') renderPie(data, topOffset || 20);
       else renderBar(data, topOffset);

@@ -1,0 +1,23 @@
+---
+import ChartMaker from '../../../components/tools/ChartMaker.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishPieChartMaker,
+  spanishPieChartMakerReview,
+} from '../../../i18n/expansion/es-tools-10';
+---
+
+<ExpansionToolLayout
+  routeKey="pie-chart-maker"
+  canonicalPath="/es/herramientas/crear-grafico-circular/"
+  content={spanishPieChartMaker}
+  categoryLabel="Gráficos y datos"
+  review={spanishPieChartMakerReview}
+  relatedTool={{
+    name: 'Crear gráfico de barras',
+    description: 'Compara categorías sobre una escala común cuando un círculo no permite distinguir bien las diferencias.',
+    href: '/es/herramientas/crear-grafico-barras/',
+  }}
+>
+  <ChartMaker labels={spanishPieChartMaker.labels} />
+</ExpansionToolLayout>

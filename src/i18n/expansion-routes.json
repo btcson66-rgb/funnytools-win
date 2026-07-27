@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-09",
+  "activeBatch": "es-10",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -271,6 +271,36 @@
         "zh": "/tools/bar-chart-maker/",
         "en": "/en/tools/bar-chart-maker/",
         "es": "/es/herramientas/crear-grafico-barras/"
+      }
+    },
+    {
+      "key": "pie-chart-maker",
+      "type": "tool",
+      "batch": "es-10",
+      "paths": {
+        "zh": "/tools/pie-chart-maker/",
+        "en": "/en/tools/pie-chart-maker/",
+        "es": "/es/herramientas/crear-grafico-circular/"
+      }
+    },
+    {
+      "key": "word-counter",
+      "type": "tool",
+      "batch": "es-10",
+      "paths": {
+        "zh": "/tools/word-counter/",
+        "en": "/en/tools/word-counter/",
+        "es": "/es/herramientas/contador-palabras/"
+      }
+    },
+    {
+      "key": "character-counter",
+      "type": "tool",
+      "batch": "es-10",
+      "paths": {
+        "zh": "/tools/character-counter/",
+        "en": "/en/tools/character-counter/",
+        "es": "/es/herramientas/contador-caracteres/"
       }
     }
   ]
