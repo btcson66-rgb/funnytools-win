@@ -259,6 +259,30 @@ const tools = [
     search: 'base64 codificar decodificar texto utf-8 encoder decoder tildes ñ emoji',
     privacy: 'La conversión se ejecuta en la memoria de esta pestaña.',
   },
+  {
+    name: 'Codificar y decodificar URL',
+    href: '/es/herramientas/codificar-decodificar-url/',
+    category: 'Desarrollo web',
+    description: 'Codifica componentes con percent-encoding UTF-8 o recupera texto desde secuencias %HH válidas.',
+    search: 'codificar url decodificar percent encoding encodeuricomponent decodeuricomponent componente uri %20 signo más',
+    privacy: 'El componente se transforma en la memoria de esta pestaña.',
+  },
+  {
+    name: 'Convertir timestamp Unix',
+    href: '/es/herramientas/convertir-timestamp-unix/',
+    category: 'Fecha y hora',
+    description: 'Convierte segundos o milisegundos a hora local, UTC, ISO 8601 y ambas unidades Unix.',
+    search: 'convertir timestamp unix epoch fecha hora segundos milisegundos utc iso zona local',
+    privacy: 'La marca temporal se convierte en esta pestaña.',
+  },
+  {
+    name: 'Generador de UUID v4',
+    href: '/es/herramientas/generador-uuid-v4/',
+    category: 'Desarrollo y pruebas',
+    description: 'Genera hasta 100 UUID v4 con crypto.randomUUID, en formato canónico o sin guiones.',
+    search: 'generador uuid v4 guid crear identificador aleatorio lote crypto random uuid',
+    privacy: 'Los identificadores se generan en este navegador.',
+  },
 ];
 
 const faq = [
@@ -368,7 +392,7 @@ const breadcrumbJsonLd = {
         <span>Buscar por tarea o resultado</span>
         <input
           type="search"
-          placeholder="Ejemplo: rotar PDF, borrar páginas o Base64"
+          placeholder="Ejemplo: rotar PDF, timestamp o UUID"
           autocomplete="off"
           aria-describedby="search-help"
           data-es-tools-search
@@ -380,7 +404,7 @@ const breadcrumbJsonLd = {
     <section class="wrap content-section answer-panel" aria-labelledby="directorio-respuesta">
       <p class="eyebrow">Respuesta directa</p>
       <h2 id="directorio-respuesta">¿Qué herramientas están disponibles ahora?</h2>
-      <p>La colección española incluye treinta y dos herramientas terminadas: calcular promedios, porcentajes y desviación estándar; contar y transformar texto; limpiar, deduplicar y ordenar líneas; formatear JSON y convertir Base64 UTF-8; crear gráficos de barras o sectores; unir, dividir, rotar, eliminar, extraer, ordenar, comprimir, convertir PDF a imágenes o crear PDF desde imágenes; comprimir, redimensionar, recortar, rotar o voltear imágenes; convertir entre PNG, JPG y WebP; codificar una imagen como Base64 y crear códigos QR estáticos. Todas procesan la entrada en el navegador y explican cómo revisar la salida antes de descargarla o utilizarla. Son páginas completas, no accesos provisionales ni traducciones automáticas.</p>
+      <p>La colección española incluye treinta y cinco herramientas terminadas: calcular promedios, porcentajes y desviación estándar; contar y transformar texto; limpiar, deduplicar y ordenar líneas; formatear JSON; convertir Base64 UTF-8 y componentes URL; leer timestamps Unix; generar UUID v4; crear gráficos de barras o sectores; unir, dividir, rotar, eliminar, extraer, ordenar, comprimir, convertir PDF a imágenes o crear PDF desde imágenes; comprimir, redimensionar, recortar, rotar o voltear imágenes; convertir entre PNG, JPG y WebP; codificar una imagen como Base64 y crear códigos QR estáticos. Todas procesan la entrada en el navegador y explican cómo revisar la salida antes de descargarla o utilizarla. Son páginas completas, no accesos provisionales ni traducciones automáticas.</p>
       <p>El directorio crecerá por lotes pequeños. Una nueva tarjeta solo aparece cuando la interfaz, la intención de búsqueda, los ejemplos, las preguntas frecuentes, los límites, la revisión móvil y los metadatos están terminados. Así se evita mostrar decenas de enlaces que conducen a páginas repetidas, vacías o difíciles de comprobar.</p>
     </section>
 
@@ -400,7 +424,7 @@ const breadcrumbJsonLd = {
           </article>
         ))}
       </div>
-      <p class="empty-state" data-es-tools-empty hidden>No hay una herramienta española publicada que coincida con esa búsqueda. Prueba con «promedio», «girar», «Base64», «WebP», «QR» o «PDF».</p>
+      <p class="empty-state" data-es-tools-empty hidden>No hay una herramienta española publicada que coincida con esa búsqueda. Prueba con «promedio», «timestamp», «UUID», «Base64», «WebP», «QR» o «PDF».</p>
     </section>
 
     <section class="wrap content-section" aria-labelledby="elegir-herramienta">

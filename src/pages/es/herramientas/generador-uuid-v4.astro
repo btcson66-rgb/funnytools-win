@@ -1,0 +1,20 @@
+---
+import UuidGenerator from '../../../components/tools/UuidGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishUuidGenerator, spanishUuidGeneratorReview } from '../../../i18n/expansion/es-tools-13';
+---
+
+<ExpansionToolLayout
+  routeKey="uuid-generator"
+  canonicalPath="/es/herramientas/generador-uuid-v4/"
+  content={spanishUuidGenerator}
+  categoryLabel="Desarrollo y pruebas"
+  review={spanishUuidGeneratorReview}
+  relatedTool={{
+    name: 'Formatear y validar JSON',
+    description: 'Comprueba un payload de prueba que contenga UUID sin confundir sintaxis JSON con validez del identificador.',
+    href: '/es/herramientas/formatear-validar-json/',
+  }}
+>
+  <UuidGenerator labels={spanishUuidGenerator.labels} />
+</ExpansionToolLayout>

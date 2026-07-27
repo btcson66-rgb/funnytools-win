@@ -23,11 +23,12 @@ const { labels } = Astro.props;
   // @ts-nocheck -- DOM nodes are guaranteed by this component template.
   document.querySelectorAll('[data-timestamp-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const locale = labels.locale || undefined;
     const input = root.querySelector('[data-input]'); const unit = root.querySelector('[data-unit]');
     const error = root.querySelector('[data-error]'); const results = root.querySelector('[data-results]');
     function show(date) {
       const ms = date.getTime();
-      root.querySelector('[data-local]').textContent = date.toLocaleString();
+      root.querySelector('[data-local]').textContent = date.toLocaleString(locale);
       root.querySelector('[data-utc]').textContent = date.toUTCString();
       root.querySelector('[data-iso]').textContent = date.toISOString();
       root.querySelector('[data-seconds]').textContent = String(Math.floor(ms / 1000));

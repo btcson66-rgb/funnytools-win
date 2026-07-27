@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-12",
+  "activeBatch": "es-13",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -361,6 +361,36 @@
         "zh": "/tools/base64/",
         "en": "/en/tools/base64/",
         "es": "/es/herramientas/codificar-decodificar-base64/"
+      }
+    },
+    {
+      "key": "url-encoder",
+      "type": "tool",
+      "batch": "es-13",
+      "paths": {
+        "zh": "/tools/url-encoder/",
+        "en": "/en/tools/url-encoder/",
+        "es": "/es/herramientas/codificar-decodificar-url/"
+      }
+    },
+    {
+      "key": "timestamp-converter",
+      "type": "tool",
+      "batch": "es-13",
+      "paths": {
+        "zh": "/tools/timestamp-converter/",
+        "en": "/en/tools/timestamp-converter/",
+        "es": "/es/herramientas/convertir-timestamp-unix/"
+      }
+    },
+    {
+      "key": "uuid-generator",
+      "type": "tool",
+      "batch": "es-13",
+      "paths": {
+        "zh": "/tools/uuid-generator/",
+        "en": "/en/tools/uuid-generator/",
+        "es": "/es/herramientas/generador-uuid-v4/"
       }
     }
   ]

@@ -1,0 +1,20 @@
+---
+import UrlEncoder from '../../../components/tools/UrlEncoder.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishUrlEncoder, spanishUrlEncoderReview } from '../../../i18n/expansion/es-tools-13';
+---
+
+<ExpansionToolLayout
+  routeKey="url-encoder"
+  canonicalPath="/es/herramientas/codificar-decodificar-url/"
+  content={spanishUrlEncoder}
+  categoryLabel="Desarrollo web"
+  review={spanishUrlEncoderReview}
+  relatedTool={{
+    name: 'Codificar y decodificar Base64',
+    description: 'Convierte texto UTF-8 a Base64 cuando el destino exige esa representación, no percent-encoding.',
+    href: '/es/herramientas/codificar-decodificar-base64/',
+  }}
+>
+  <UrlEncoder labels={spanishUrlEncoder.labels} />
+</ExpansionToolLayout>

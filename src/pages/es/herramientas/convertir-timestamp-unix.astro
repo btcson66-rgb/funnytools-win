@@ -1,0 +1,20 @@
+---
+import TimestampConverter from '../../../components/tools/TimestampConverter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishTimestampConverter, spanishTimestampConverterReview } from '../../../i18n/expansion/es-tools-13';
+---
+
+<ExpansionToolLayout
+  routeKey="timestamp-converter"
+  canonicalPath="/es/herramientas/convertir-timestamp-unix/"
+  content={spanishTimestampConverter}
+  categoryLabel="Fecha y hora"
+  review={spanishTimestampConverterReview}
+  relatedTool={{
+    name: 'Formatear y validar JSON',
+    description: 'Revisa la sintaxis de un payload antes de interpretar su campo timestamp y confirma la unidad en el contrato.',
+    href: '/es/herramientas/formatear-validar-json/',
+  }}
+>
+  <TimestampConverter labels={spanishTimestampConverter.labels} />
+</ExpansionToolLayout>

@@ -3,15 +3,35 @@ interface Props { labels: Record<string, string>; }
 const { labels } = Astro.props;
 ---
 <section class="tool-widget card" data-uuid-tool data-labels={JSON.stringify(labels)}>
-  <div class="form-grid two-col"><label><span>{labels.count}</span><input data-count type="number" min="1" max="100" value="5" /></label><label><span>{labels.format}</span><select data-format><option value="lower">{labels.lower}</option><option value="upper">{labels.upper}</option><option value="nohyphen">{labels.noHyphen}</option></select></label></div>
+  <div class="form-grid two-col"><label><span>{labels.count}</span><input data-count type="number" min="1" max="100" step="1" value="5" /></label><label><span>{labels.format}</span><select data-format><option value="lower">{labels.lower}</option><option value="upper">{labels.upper}</option><option value="nohyphen">{labels.noHyphen}</option></select></label></div>
   <div class="actions"><button class="btn go" type="button" data-generate>{labels.generate}</button><button class="btn ghost" type="button" data-copy>{labels.copy}</button><button class="btn ghost" type="button" data-download>{labels.download}</button></div>
   <p class="form-error" data-error role="alert" hidden></p><textarea data-output rows="8" readonly aria-label={labels.output}></textarea>
 </section>
 <script>
   // @ts-nocheck -- DOM nodes are guaranteed by this component template.
   document.querySelectorAll('[data-uuid-tool]').forEach((root) => {
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
     const output = root.querySelector('[data-output]');
-    function generate() { const count = Math.min(100, Math.max(1, Number(root.querySelector('[data-count]').value) || 1)); const format = root.querySelector('[data-format]').value; output.value = Array.from({length: count}, () => { let id = crypto.randomUUID(); if (format === 'upper') id = id.toUpperCase(); if (format === 'nohyphen') id = id.replaceAll('-', ''); return id; }).join('\n'); }
+    const error = root.querySelector('[data-error]');
+    function generate() {
+      const countInput = root.querySelector('[data-count]');
+      const count = Math.min(100, Math.max(1, Math.trunc(Number(countInput.value)) || 1));
+      const format = root.querySelector('[data-format]').value;
+      countInput.value = String(count);
+      try {
+        output.value = Array.from({length: count}, () => {
+          let id = crypto.randomUUID();
+          if (format === 'upper') id = id.toUpperCase();
+          if (format === 'nohyphen') id = id.replaceAll('-', '');
+          return id;
+        }).join('\n');
+        error.hidden = true;
+      } catch {
+        output.value = '';
+        error.textContent = labels.unsupported || 'UUID generation is unavailable in this browser.';
+        error.hidden = false;
+      }
+    }
     root.querySelector('[data-generate]')?.addEventListener('click', generate);
     root.querySelector('[data-copy]')?.addEventListener('click', () => output.value && navigator.clipboard.writeText(output.value));
     root.querySelector('[data-download]')?.addEventListener('click', () => { if (!output.value) return; const url = URL.createObjectURL(new Blob([output.value + '\n'], {type:'text/plain'})); const a=document.createElement('a'); a.href=url; a.download='uuids.txt'; a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000); });

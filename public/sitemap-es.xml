@@ -57,6 +57,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/base64/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/codificar-decodificar-url/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/url-encoder/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/url-encoder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/codificar-decodificar-url/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/url-encoder/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/comprimir-imagenes/</loc>
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-compressor/" />
@@ -145,6 +153,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/png-to-jpg/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/convertir-timestamp-unix/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/timestamp-converter/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/timestamp-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-timestamp-unix/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/timestamp-converter/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/convertir-webp-a-jpg/</loc>
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/webp-to-jpg/" />
@@ -223,6 +239,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/qr-code-generator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-codigo-qr/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/qr-code-generator/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/generador-uuid-v4/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/uuid-generator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/uuid-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-uuid-v4/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/uuid-generator/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/ordenar-lineas-texto/</loc>

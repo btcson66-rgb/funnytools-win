@@ -49,8 +49,13 @@ const { labels } = Astro.props;
     }
 
     root.querySelector('[data-encode]')?.addEventListener('click', () => {
-      output.value = encodeURIComponent(input.value);
-      setError('');
+      try {
+        output.value = encodeURIComponent(input.value);
+        setError('');
+      } catch {
+        output.value = '';
+        setError(labels.invalidText || labels.invalidUrl);
+      }
     });
     root.querySelector('[data-decode]')?.addEventListener('click', () => {
       try {
