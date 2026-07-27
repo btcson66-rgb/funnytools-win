@@ -33,6 +33,30 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/grade-average/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/comprimir-imagenes/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-compressor/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/image-compressor/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/comprimir-imagenes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/image-compressor/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/dividir-pdf/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/split-pdf/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/split-pdf/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/dividir-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/split-pdf/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/generador-codigo-qr/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/qr-code-generator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/qr-code-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-codigo-qr/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/qr-code-generator/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/unir-pdf/</loc>
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/merge-pdf/" />

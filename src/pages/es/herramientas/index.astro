@@ -19,6 +19,30 @@ const tools = [
     search: 'unir pdf combinar pdf juntar documentos fusionar archivos anexos',
     privacy: 'Los PDF se leen y combinan en este navegador.',
   },
+  {
+    name: 'Comprimir imágenes online',
+    href: '/es/herramientas/comprimir-imagenes/',
+    category: 'Imágenes',
+    description: 'Reduce el peso de JPG, PNG o WebP, compara el resultado y descarga una copia sin subir la imagen.',
+    search: 'comprimir imágenes reducir tamaño peso foto jpg jpeg png webp calidad',
+    privacy: 'La imagen se vuelve a codificar en este navegador.',
+  },
+  {
+    name: 'Generador de código QR gratis',
+    href: '/es/herramientas/generador-codigo-qr/',
+    category: 'Códigos y enlaces',
+    description: 'Crea un QR estático para una URL o texto, añade un logotipo opcional y descarga el PNG.',
+    search: 'generador código qr crear qr url enlace texto png logo',
+    privacy: 'El código se genera en esta pestaña.',
+  },
+  {
+    name: 'Dividir PDF y separar páginas',
+    href: '/es/herramientas/dividir-pdf/',
+    category: 'PDF y documentos',
+    description: 'Crea un PDF por página o separa rangos como 1-3, 5 y 8-10 sin subir el documento.',
+    search: 'dividir pdf separar páginas extraer cortar rangos documentos',
+    privacy: 'El PDF se divide en la memoria del navegador.',
+  },
 ];
 
 const faq = [
@@ -36,7 +60,7 @@ const faq = [
   },
   {
     q: '¿Los datos se envían a FunnyTools?',
-    a: 'Las herramientas españolas actuales procesan notas y PDF en el navegador. La página de privacidad distingue ese contenido de las conexiones técnicas de analítica, seguridad y publicidad.',
+    a: 'Las herramientas españolas actuales procesan números, imágenes, textos para QR y PDF en el navegador. La página de privacidad distingue ese contenido de las conexiones técnicas de analítica, seguridad y publicidad.',
   },
   {
     q: '¿Los resultados son oficiales?',
@@ -128,7 +152,7 @@ const breadcrumbJsonLd = {
         <span>Buscar por tarea o resultado</span>
         <input
           type="search"
-          placeholder="Ejemplo: promedio de notas o unir PDF"
+          placeholder="Ejemplo: comprimir imagen, crear QR o dividir PDF"
           autocomplete="off"
           aria-describedby="search-help"
           data-es-tools-search
@@ -140,7 +164,7 @@ const breadcrumbJsonLd = {
     <section class="wrap content-section answer-panel" aria-labelledby="directorio-respuesta">
       <p class="eyebrow">Respuesta directa</p>
       <h2 id="directorio-respuesta">¿Qué herramientas están disponibles ahora?</h2>
-      <p>La colección española incluye una calculadora de promedio de notas y una herramienta para unir PDF. La primera resuelve medias simples y ponderadas en cualquier escala numérica; la segunda combina documentos en el orden elegido sin subirlos a FunnyTools. Son páginas completas, no accesos provisionales ni traducciones automáticas.</p>
+      <p>La colección española incluye cinco herramientas terminadas: calcular promedios de notas, unir PDF, comprimir imágenes, crear códigos QR estáticos y dividir PDF por páginas o rangos. Todas procesan la entrada en el navegador y explican cómo revisar la salida antes de descargarla o utilizarla. Son páginas completas, no accesos provisionales ni traducciones automáticas.</p>
       <p>El directorio crecerá por lotes pequeños. Una nueva tarjeta solo aparece cuando la interfaz, la intención de búsqueda, los ejemplos, las preguntas frecuentes, los límites, la revisión móvil y los metadatos están terminados. Así se evita mostrar decenas de enlaces que conducen a páginas repetidas, vacías o difíciles de comprobar.</p>
     </section>
 
@@ -160,12 +184,12 @@ const breadcrumbJsonLd = {
           </article>
         ))}
       </div>
-      <p class="empty-state" data-es-tools-empty hidden>No hay una herramienta española publicada que coincida con esa búsqueda. Prueba con «promedio», «notas», «PDF» o «documentos».</p>
+      <p class="empty-state" data-es-tools-empty hidden>No hay una herramienta española publicada que coincida con esa búsqueda. Prueba con «promedio», «imagen», «QR», «PDF» o «páginas».</p>
     </section>
 
     <section class="wrap content-section" aria-labelledby="elegir-herramienta">
       <h2 id="elegir-herramienta">Cómo elegir la herramienta correcta</h2>
-      <p>Describe primero la salida que necesitas. «Quiero conocer la media de cuatro notas» requiere una calculadora; «quiero entregar solicitud y anexos como un solo archivo» requiere unir PDF. Una búsqueda genérica como «editar documento» puede llevarte a una función distinta: comprimir, dividir, extraer páginas, convertir o combinar no son la misma operación.</p>
+      <p>Describe primero la salida que necesitas. «Quiero conocer la media de cuatro notas» requiere una calculadora; «quiero entregar solicitud y anexos como un solo archivo» requiere unir PDF; «quiero cada capítulo por separado» requiere dividirlo. Reducir el peso de una foto no cambia necesariamente sus dimensiones, y crear un QR estático no ofrece redirecciones editables ni estadísticas. Una búsqueda genérica como «editar archivo» puede llevarte a una función distinta.</p>
       <ol class="step-list">
         <li><strong>Identifica la entrada.</strong> Decide si trabajarás con números, texto, imágenes, documentos o una lista.</li>
         <li><strong>Define la transformación.</strong> Escribe en una frase qué debe cambiar y qué debe permanecer intacto.</li>
@@ -177,7 +201,7 @@ const breadcrumbJsonLd = {
 
     <section class="wrap content-section" aria-labelledby="privacidad-directorio">
       <h2 id="privacidad-directorio">Privacidad: procesamiento local no significa sin conexiones</h2>
-      <p>Las herramientas actuales aplican procesamiento local a su entrada dentro del navegador. Las notas no se incorporan a un evento analítico y los PDF no se envían a un servidor de FunnyTools para combinarlos. Eso reduce la exposición del contenido y evita crear una cuenta o una biblioteca de archivos.</p>
+      <p>Las herramientas actuales aplican procesamiento local a su entrada dentro del navegador. Las notas no se incorporan a un evento analítico; las imágenes se vuelven a codificar en el dispositivo; las URL y textos para QR no se envían a FunnyTools; y los PDF no salen de la pestaña para unirse o dividirse. Eso reduce la exposición del contenido y evita crear una cuenta o una biblioteca de archivos.</p>
       <p>La página web, sin embargo, necesita entregarse por Internet y puede conectar con Cloudflare, Google Analytics o infraestructura de AdSense. Esos servicios pueden tratar señales técnicas de navegación. La <a href="/es/privacidad/">política de privacidad en español</a> explica la diferencia, los controles disponibles, el almacenamiento local, el correo voluntario y los terceros.</p>
       <p>Para información sensible, utiliza un dispositivo confiable, revisa extensiones, conserva los originales y comienza con datos ficticios. El tratamiento local es una característica técnica útil, no una autorización para procesar información ajena ni una garantía absoluta frente a todo el entorno del dispositivo.</p>
     </section>
@@ -186,11 +210,12 @@ const breadcrumbJsonLd = {
       <h2 id="comprobar-resultados">Cómo comprobar un cálculo o un archivo</h2>
       <p>En una calculadora, prueba una operación que puedas repetir a mano. Para una media simple, 6, 8 y 10 deben producir 8. Si añades pesos, verifica que el divisor sea la suma de los pesos y que todas las notas utilicen la misma escala. Después compara la regla con la normativa real si el resultado afecta a un expediente.</p>
       <p>En una herramienta de archivos, crea una copia de trabajo. Combina dos PDF pequeños con una página cada uno, abre la descarga y comprueba que contiene dos páginas en el orden esperado. En el documento real, revisa la suma total, las transiciones, la orientación, el tamaño y cualquier firma o formulario. Una descarga completa no demuestra por sí sola que el portal vaya a aceptarla.</p>
+      <p>Para una imagen, compara el peso y revisa texto, transparencia y detalles al 100 %; un porcentaje negativo significa que la copia pesa más. Para un QR, escanea el PNG descargado con más de un dispositivo y prueba el soporte final. Para un PDF dividido, confirma la primera y última página de cada rango y no presupongas que una firma digital se conserva.</p>
     </section>
 
     <section class="wrap content-section" aria-labelledby="idioma-regiones">
       <h2 id="idioma-regiones">Español internacional sin ocultar diferencias regionales</h2>
-      <p>Las personas pueden buscar «nota media», «promedio de notas», «promedio de calificaciones», «unir PDF», «juntar documentos» o «fusionar archivos». El directorio reconoce expresiones habituales de España y América Latina para ayudar a encontrar la tarea, pero no presupone que todos los países compartan escalas, leyes, monedas o procedimientos.</p>
+      <p>Las personas pueden buscar «nota media» o «promedio de notas», «unir» o «juntar PDF», «comprimir una imagen» o «reducir el peso de una foto», y «dividir», «separar» o «extraer páginas». El directorio reconoce expresiones habituales de España y América Latina para ayudar a encontrar la tarea, pero no presupone que todos los países compartan escalas, leyes, monedas o procedimientos.</p>
       <p>Cuando una herramienta dependa de reglas territoriales, su página deberá indicar el país o región, la fuente y la fecha de verificación. Si solo existe una fórmula general, se presentará como estimación y se explicará qué datos faltan. Cambiar palabras no basta para crear una versión local útil.</p>
     </section>
 

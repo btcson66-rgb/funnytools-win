@@ -1,0 +1,23 @@
+---
+import ImageCompressor from '../../../components/tools/ImageCompressor.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishImageCompressor,
+  spanishImageCompressorReview,
+} from '../../../i18n/expansion/es-tools-03';
+---
+
+<ExpansionToolLayout
+  routeKey="image-compressor"
+  canonicalPath="/es/herramientas/comprimir-imagenes/"
+  content={spanishImageCompressor}
+  categoryLabel="Herramienta de imagen"
+  review={spanishImageCompressorReview}
+  relatedTool={{
+    name: 'Generador de código QR gratis',
+    description: 'Crea un QR estático para una URL o texto y descárgalo como PNG.',
+    href: '/es/herramientas/generador-codigo-qr/',
+  }}
+>
+  <ImageCompressor labels={spanishImageCompressor.labels} />
+</ExpansionToolLayout>

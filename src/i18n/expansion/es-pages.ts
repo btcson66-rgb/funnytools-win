@@ -56,7 +56,9 @@ export const spanishPrivacy: SpanishInfoPage = {
       items: [
         'La calculadora de promedio utiliza las notas y pesos solo para producir el resultado visible.',
         'La herramienta para unir PDF abre los documentos en memoria y genera una descarga nueva.',
-        'Recargar o cerrar la pestaña elimina la lista de trabajo de estas dos herramientas.',
+        'El compresor de imágenes vuelve a codificar los píxeles y el generador QR dibuja el texto o la URL dentro de un lienzo local.',
+        'La herramienta para dividir PDF copia las páginas indicadas en archivos temporales dentro del navegador.',
+        'Recargar o cerrar la pestaña elimina la lista de trabajo y los resultados temporales de estas herramientas.',
         'Los archivos originales permanecen en tu dispositivo y debes conservarlos hasta verificar la salida.',
       ],
     },

@@ -2,13 +2,16 @@ import type { ToolContent } from '../tools/_types';
 
 export const spanishHome = {
   seoTitle: 'Herramientas online gratis y privadas | FunnyTools en español',
-  seoDescription: 'Herramientas online gratuitas, sin registro y con tratamiento local en el navegador. Calcula tu promedio de notas o une PDF con instrucciones verificables.',
+  seoDescription: 'Herramientas online gratuitas y sin registro para notas, imágenes, códigos QR y PDF, con tratamiento local e instrucciones verificables.',
   keywords: [
     'herramientas online gratis',
     'herramientas sin registro',
     'utilidades en el navegador',
     'calculadora de promedio de notas',
     'unir PDF online gratis',
+    'comprimir imágenes online',
+    'generador de código QR gratis',
+    'dividir PDF online',
   ],
   hero: {
     eyebrow: 'Herramientas útiles, explicadas y comprobables',

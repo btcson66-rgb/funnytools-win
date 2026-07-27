@@ -1,0 +1,23 @@
+---
+import SplitPdf from '../../../components/tools/SplitPdf.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishSplitPdf,
+  spanishSplitPdfReview,
+} from '../../../i18n/expansion/es-tools-03';
+---
+
+<ExpansionToolLayout
+  routeKey="split-pdf"
+  canonicalPath="/es/herramientas/dividir-pdf/"
+  content={spanishSplitPdf}
+  categoryLabel="Herramienta PDF"
+  review={spanishSplitPdfReview}
+  relatedTool={{
+    name: 'Unir PDF online gratis',
+    description: 'Combina varios PDF en el orden elegido sin subir los documentos.',
+    href: '/es/herramientas/unir-pdf/',
+  }}
+>
+  <SplitPdf labels={spanishSplitPdf.labels} />
+</ExpansionToolLayout>
