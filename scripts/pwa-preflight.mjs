@@ -30,6 +30,7 @@ if (!existsSync(dist)) {
 
   if (existsSync(swPath)) {
     const sw = read(swPath);
+    mustInclude('service worker', sw, "CACHE_VERSION = 'freetools-static-v20260727-content-review'");
     mustInclude('service worker', sw, 'isGoogleAdOrAnalyticsRequest');
     mustInclude('service worker', sw, 'googlesyndication');
     mustInclude('service worker', sw, 'doubleclick');
