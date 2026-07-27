@@ -1,0 +1,23 @@
+---
+import ImageRotateFlip from '../../../components/tools/ImageRotateFlip.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishImageRotateFlip,
+  spanishImageRotateFlipReview,
+} from '../../../i18n/expansion/es-tools-06';
+---
+
+<ExpansionToolLayout
+  routeKey="image-rotate-flip"
+  canonicalPath="/es/herramientas/rotar-voltear-imagen/"
+  content={spanishImageRotateFlip}
+  categoryLabel="Editor de imagen"
+  review={spanishImageRotateFlipReview}
+  relatedTool={{
+    name: 'Recortar imagen online',
+    description: 'Elimina después los bordes que ya no necesitas sin cambiar la orientación.',
+    href: '/es/herramientas/recortar-imagen/',
+  }}
+>
+  <ImageRotateFlip labels={spanishImageRotateFlip.labels} />
+</ExpansionToolLayout>

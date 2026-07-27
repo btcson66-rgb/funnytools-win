@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-05",
+  "activeBatch": "es-06",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -151,6 +151,36 @@
         "zh": "/tools/webp-to-jpg/",
         "en": "/en/tools/webp-to-jpg/",
         "es": "/es/herramientas/convertir-webp-a-jpg/"
+      }
+    },
+    {
+      "key": "image-rotate-flip",
+      "type": "tool",
+      "batch": "es-06",
+      "paths": {
+        "zh": "/tools/image-rotate-flip/",
+        "en": "/en/tools/image-rotate-flip/",
+        "es": "/es/herramientas/rotar-voltear-imagen/"
+      }
+    },
+    {
+      "key": "image-to-base64",
+      "type": "tool",
+      "batch": "es-06",
+      "paths": {
+        "zh": "/tools/image-to-base64/",
+        "en": "/en/tools/image-to-base64/",
+        "es": "/es/herramientas/convertir-imagen-base64/"
+      }
+    },
+    {
+      "key": "images-to-pdf",
+      "type": "tool",
+      "batch": "es-06",
+      "paths": {
+        "zh": "/tools/images-to-pdf/",
+        "en": "/en/tools/images-to-pdf/",
+        "es": "/es/herramientas/convertir-imagenes-a-pdf/"
       }
     }
   ]

@@ -1,0 +1,23 @@
+---
+import ImagesToPdf from '../../../components/tools/ImagesToPdf.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishImagesToPdf,
+  spanishImagesToPdfReview,
+} from '../../../i18n/expansion/es-tools-06';
+---
+
+<ExpansionToolLayout
+  routeKey="images-to-pdf"
+  canonicalPath="/es/herramientas/convertir-imagenes-a-pdf/"
+  content={spanishImagesToPdf}
+  categoryLabel="Herramienta PDF"
+  review={spanishImagesToPdfReview}
+  relatedTool={{
+    name: 'Unir PDF online gratis',
+    description: 'Combina después el PDF creado con otros documentos en el orden que necesites.',
+    href: '/es/herramientas/unir-pdf/',
+  }}
+>
+  <ImagesToPdf labels={spanishImagesToPdf.labels} />
+</ExpansionToolLayout>

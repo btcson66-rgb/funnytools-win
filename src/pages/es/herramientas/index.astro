@@ -91,6 +91,30 @@ const tools = [
     search: 'convertir webp a jpg jpeg transparencia fondo color compatibilidad',
     privacy: 'La copia JPG se codifica en la memoria del navegador.',
   },
+  {
+    name: 'Rotar y voltear una imagen',
+    href: '/es/herramientas/rotar-voltear-imagen/',
+    category: 'Imágenes',
+    description: 'Gira una foto en pasos de 90 grados o refléjala en horizontal o vertical.',
+    search: 'rotar imagen girar foto voltear espejo horizontal vertical 90 180 orientación',
+    privacy: 'La transformación y la descarga se realizan en este navegador.',
+  },
+  {
+    name: 'Convertir imagen a Base64',
+    href: '/es/herramientas/convertir-imagen-base64/',
+    category: 'Desarrollo web',
+    description: 'Crea una URL de datos Base64 y copia la cadena completa o una declaración CSS.',
+    search: 'convertir imagen base64 data uri url de datos html css codificar desarrollo',
+    privacy: 'FileReader codifica la imagen en esta pestaña.',
+  },
+  {
+    name: 'Convertir imágenes a PDF',
+    href: '/es/herramientas/convertir-imagenes-a-pdf/',
+    category: 'PDF y documentos',
+    description: 'Ordena varias imágenes JPG o PNG y crea un PDF A4, Carta o ajustado.',
+    search: 'convertir imágenes a pdf jpg png fotos documento ordenar a4 carta',
+    privacy: 'Las imágenes y el PDF permanecen en este navegador.',
+  },
 ];
 
 const faq = [
@@ -200,7 +224,7 @@ const breadcrumbJsonLd = {
         <span>Buscar por tarea o resultado</span>
         <input
           type="search"
-          placeholder="Ejemplo: recortar imagen, convertir WebP o dividir PDF"
+          placeholder="Ejemplo: girar foto, Base64 o imágenes a PDF"
           autocomplete="off"
           aria-describedby="search-help"
           data-es-tools-search
@@ -212,7 +236,7 @@ const breadcrumbJsonLd = {
     <section class="wrap content-section answer-panel" aria-labelledby="directorio-respuesta">
       <p class="eyebrow">Respuesta directa</p>
       <h2 id="directorio-respuesta">¿Qué herramientas están disponibles ahora?</h2>
-      <p>La colección española incluye once herramientas terminadas: calcular promedios de notas, unir y dividir PDF, comprimir, redimensionar o recortar imágenes, convertir entre PNG, JPG y WebP, y crear códigos QR estáticos. Todas procesan la entrada en el navegador y explican cómo revisar la salida antes de descargarla o utilizarla. Son páginas completas, no accesos provisionales ni traducciones automáticas.</p>
+      <p>La colección española incluye catorce herramientas terminadas: calcular promedios de notas, unir, dividir o crear PDF desde imágenes, comprimir, redimensionar, recortar, rotar o voltear imágenes, convertir entre PNG, JPG y WebP, codificar una imagen como Base64 y crear códigos QR estáticos. Todas procesan la entrada en el navegador y explican cómo revisar la salida antes de descargarla o utilizarla. Son páginas completas, no accesos provisionales ni traducciones automáticas.</p>
       <p>El directorio crecerá por lotes pequeños. Una nueva tarjeta solo aparece cuando la interfaz, la intención de búsqueda, los ejemplos, las preguntas frecuentes, los límites, la revisión móvil y los metadatos están terminados. Así se evita mostrar decenas de enlaces que conducen a páginas repetidas, vacías o difíciles de comprobar.</p>
     </section>
 
@@ -232,12 +256,12 @@ const breadcrumbJsonLd = {
           </article>
         ))}
       </div>
-      <p class="empty-state" data-es-tools-empty hidden>No hay una herramienta española publicada que coincida con esa búsqueda. Prueba con «promedio», «recortar», «WebP», «JPG», «QR» o «PDF».</p>
+      <p class="empty-state" data-es-tools-empty hidden>No hay una herramienta española publicada que coincida con esa búsqueda. Prueba con «promedio», «girar», «Base64», «WebP», «QR» o «PDF».</p>
     </section>
 
     <section class="wrap content-section" aria-labelledby="elegir-herramienta">
       <h2 id="elegir-herramienta">Cómo elegir la herramienta correcta</h2>
-      <p>Describe primero la salida que necesitas. «Quiero conocer la media de cuatro notas» requiere una calculadora; «quiero entregar solicitud y anexos como un solo archivo» requiere unir PDF; «quiero cada capítulo por separado» requiere dividirlo. Comprimir una foto no cambia necesariamente sus dimensiones; redimensionar no recorta; recortar elimina lo que queda fuera de la selección; convertir JPG a WebP cambia el formato, no el encuadre; convertir WebP a JPG aplana la transparencia sobre un color; y crear un QR estático no ofrece redirecciones editables ni estadísticas. Una búsqueda genérica como «editar archivo» puede llevarte a una función distinta.</p>
+      <p>Describe primero la salida que necesitas. «Quiero conocer la media de cuatro notas» requiere una calculadora; «quiero entregar solicitud y anexos como un solo archivo» requiere unir PDF; «quiero convertir fotos en páginas» requiere imágenes a PDF. Comprimir una foto no cambia necesariamente sus dimensiones; redimensionar no recorta; rotar no endereza ángulos libres; Base64 codifica pero no comprime ni cifra; convertir JPG a WebP cambia el formato, no el encuadre; convertir WebP a JPG aplana la transparencia sobre un color; y crear un QR estático no ofrece redirecciones editables ni estadísticas. Una búsqueda genérica como «editar archivo» puede llevarte a una función distinta.</p>
       <ol class="step-list">
         <li><strong>Identifica la entrada.</strong> Decide si trabajarás con números, texto, imágenes, documentos o una lista.</li>
         <li><strong>Define la transformación.</strong> Escribe en una frase qué debe cambiar y qué debe permanecer intacto.</li>
@@ -249,7 +273,7 @@ const breadcrumbJsonLd = {
 
     <section class="wrap content-section" aria-labelledby="privacidad-directorio">
       <h2 id="privacidad-directorio">Privacidad: procesamiento local no significa sin conexiones</h2>
-      <p>Las herramientas actuales aplican procesamiento local a su entrada dentro del navegador. Las notas no se incorporan a un evento analítico; las imágenes se vuelven a codificar en el dispositivo; las URL y textos para QR no se envían a FunnyTools; y los PDF no salen de la pestaña para unirse o dividirse. Eso reduce la exposición del contenido y evita crear una cuenta o una biblioteca de archivos.</p>
+      <p>Las herramientas actuales aplican procesamiento local a su entrada dentro del navegador. Las notas no se incorporan a un evento analítico; las imágenes se leen, transforman, codifican o incorporan al PDF en el dispositivo; las URL y textos para QR no se envían a FunnyTools; y los PDF no salen de la pestaña para unirse o dividirse. Eso reduce la exposición del contenido y evita crear una cuenta o una biblioteca de archivos.</p>
       <p>La página web, sin embargo, necesita entregarse por Internet y puede conectar con Cloudflare, Google Analytics o infraestructura de AdSense. Esos servicios pueden tratar señales técnicas de navegación. La <a href="/es/privacidad/">política de privacidad en español</a> explica la diferencia, los controles disponibles, el almacenamiento local, el correo voluntario y los terceros.</p>
       <p>Para información sensible, utiliza un dispositivo confiable, revisa extensiones, conserva los originales y comienza con datos ficticios. El tratamiento local es una característica técnica útil, no una autorización para procesar información ajena ni una garantía absoluta frente a todo el entorno del dispositivo.</p>
     </section>
@@ -258,7 +282,7 @@ const breadcrumbJsonLd = {
       <h2 id="comprobar-resultados">Cómo comprobar un cálculo o un archivo</h2>
       <p>En una calculadora, prueba una operación que puedas repetir a mano. Para una media simple, 6, 8 y 10 deben producir 8. Si añades pesos, verifica que el divisor sea la suma de los pesos y que todas las notas utilicen la misma escala. Después compara la regla con la normativa real si el resultado afecta a un expediente.</p>
       <p>En una herramienta de archivos, crea una copia de trabajo. Combina dos PDF pequeños con una página cada uno, abre la descarga y comprueba que contiene dos páginas en el orden esperado. En el documento real, revisa la suma total, las transiciones, la orientación, el tamaño y cualquier firma o formulario. Una descarga completa no demuestra por sí sola que el portal vaya a aceptarla.</p>
-      <p>Para una imagen, compara el peso, confirma ancho y alto y revisa texto, transparencia y detalles al 100 %; un porcentaje negativo significa que la copia pesa más. En un recorte, comprueba que la descarga tenga los píxeles anunciados y que no falte contenido junto a los bordes. Al convertir PNG o WebP a JPG, confirma el color que reemplaza la transparencia; al pasar JPG a PNG, no esperes un fondo transparente; al crear WebP, abre el resultado en el sistema de destino. Para un QR, escanea el PNG descargado con más de un dispositivo. Para un PDF dividido, confirma la primera y última página de cada rango y no presupongas que una firma digital se conserva.</p>
+      <p>Para una imagen, compara el peso, confirma ancho y alto y revisa texto, transparencia y detalles al 100 %; un porcentaje negativo significa que la copia pesa más. En un giro, comprueba orientación y letras; en un recorte, revisa los cuatro bordes; al convertir PNG o WebP a JPG, confirma el fondo. Una URL Base64 debe probarse en el HTML, CSS o API real y no debe tratarse como cifrado. En un PDF creado desde fotos, recorre todas las páginas y recuerda que no hay OCR. Para un QR, escanea el PNG descargado con más de un dispositivo. Para un PDF dividido, confirma la primera y última página de cada rango y no presupongas que una firma digital se conserva.</p>
     </section>
 
     <section class="wrap content-section" aria-labelledby="idioma-regiones">

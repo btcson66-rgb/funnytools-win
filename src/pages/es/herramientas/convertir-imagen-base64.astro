@@ -1,0 +1,23 @@
+---
+import ImageToBase64 from '../../../components/tools/ImageToBase64.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishImageToBase64,
+  spanishImageToBase64Review,
+} from '../../../i18n/expansion/es-tools-06';
+---
+
+<ExpansionToolLayout
+  routeKey="image-to-base64"
+  canonicalPath="/es/herramientas/convertir-imagen-base64/"
+  content={spanishImageToBase64}
+  categoryLabel="Herramienta para desarrollo web"
+  review={spanishImageToBase64Review}
+  relatedTool={{
+    name: 'Comprimir imágenes online',
+    description: 'Reduce primero una copia cuando la URL de datos resultaría demasiado larga.',
+    href: '/es/herramientas/comprimir-imagenes/',
+  }}
+>
+  <ImageToBase64 labels={spanishImageToBase64.labels} />
+</ExpansionToolLayout>
