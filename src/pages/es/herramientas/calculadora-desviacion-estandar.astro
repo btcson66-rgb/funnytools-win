@@ -1,0 +1,23 @@
+---
+import StandardDeviation from '../../../components/tools/StandardDeviation.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishStandardDeviation,
+  spanishStandardDeviationReview,
+} from '../../../i18n/expansion/es-tools-09';
+---
+
+<ExpansionToolLayout
+  routeKey="standard-deviation"
+  canonicalPath="/es/herramientas/calculadora-desviacion-estandar/"
+  content={spanishStandardDeviation}
+  categoryLabel="Estadística descriptiva"
+  review={spanishStandardDeviationReview}
+  relatedTool={{
+    name: 'Calculadora de porcentajes',
+    description: 'Calcula proporciones y variaciones después de revisar la serie estadística.',
+    href: '/es/herramientas/calculadora-porcentajes/',
+  }}
+>
+  <StandardDeviation labels={spanishStandardDeviation.labels} />
+</ExpansionToolLayout>

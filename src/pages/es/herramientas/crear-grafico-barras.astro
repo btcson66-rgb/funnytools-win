@@ -1,0 +1,23 @@
+---
+import ChartMaker from '../../../components/tools/ChartMaker.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishBarChartMaker,
+  spanishBarChartMakerReview,
+} from '../../../i18n/expansion/es-tools-09';
+---
+
+<ExpansionToolLayout
+  routeKey="bar-chart-maker"
+  canonicalPath="/es/herramientas/crear-grafico-barras/"
+  content={spanishBarChartMaker}
+  categoryLabel="Gráficos y datos"
+  review={spanishBarChartMakerReview}
+  relatedTool={{
+    name: 'Calculadora de desviación estándar',
+    description: 'Resume media y dispersión antes de decidir cómo representar una serie.',
+    href: '/es/herramientas/calculadora-desviacion-estandar/',
+  }}
+>
+  <ChartMaker labels={spanishBarChartMaker.labels} />
+</ExpansionToolLayout>

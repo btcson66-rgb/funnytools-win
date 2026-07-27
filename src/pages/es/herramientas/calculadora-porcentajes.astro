@@ -1,0 +1,23 @@
+---
+import PercentageCalculator from '../../../components/tools/PercentageCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishPercentageCalculator,
+  spanishPercentageCalculatorReview,
+} from '../../../i18n/expansion/es-tools-09';
+---
+
+<ExpansionToolLayout
+  routeKey="percentage-calculator"
+  canonicalPath="/es/herramientas/calculadora-porcentajes/"
+  content={spanishPercentageCalculator}
+  categoryLabel="Cálculo cotidiano"
+  review={spanishPercentageCalculatorReview}
+  relatedTool={{
+    name: 'Calculadora de desviación estándar',
+    description: 'Describe la dispersión cuando el problema utiliza una serie de valores, no solo dos cifras.',
+    href: '/es/herramientas/calculadora-desviacion-estandar/',
+  }}
+>
+  <PercentageCalculator labels={spanishPercentageCalculator.labels} />
+</ExpansionToolLayout>

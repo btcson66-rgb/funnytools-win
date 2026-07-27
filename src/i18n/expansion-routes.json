@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-08",
+  "activeBatch": "es-09",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -241,6 +241,36 @@
         "zh": "/tools/pdf-compressor/",
         "en": "/en/tools/pdf-compressor/",
         "es": "/es/herramientas/comprimir-pdf/"
+      }
+    },
+    {
+      "key": "standard-deviation",
+      "type": "tool",
+      "batch": "es-09",
+      "paths": {
+        "zh": "/tools/standard-deviation/",
+        "en": "/en/tools/standard-deviation/",
+        "es": "/es/herramientas/calculadora-desviacion-estandar/"
+      }
+    },
+    {
+      "key": "percentage-calculator",
+      "type": "tool",
+      "batch": "es-09",
+      "paths": {
+        "zh": "/tools/percentage-calculator/",
+        "en": "/en/tools/percentage-calculator/",
+        "es": "/es/herramientas/calculadora-porcentajes/"
+      }
+    },
+    {
+      "key": "bar-chart-maker",
+      "type": "tool",
+      "batch": "es-09",
+      "paths": {
+        "zh": "/tools/bar-chart-maker/",
+        "en": "/en/tools/bar-chart-maker/",
+        "es": "/es/herramientas/crear-grafico-barras/"
       }
     }
   ]
