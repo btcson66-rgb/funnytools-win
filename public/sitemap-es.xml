@@ -49,6 +49,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/grade-average/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/codificar-decodificar-base64/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/base64/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/base64/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/codificar-decodificar-base64/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/base64/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/comprimir-imagenes/</loc>
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-compressor/" />
@@ -201,12 +209,28 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/extract-pdf-pages/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/formatear-validar-json/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/json-formatter/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/json-formatter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/formatear-validar-json/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/json-formatter/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/generador-codigo-qr/</loc>
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/qr-code-generator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/qr-code-generator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-codigo-qr/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/qr-code-generator/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/ordenar-lineas-texto/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/sort-lines/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/sort-lines/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/ordenar-lineas-texto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/sort-lines/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/ordenar-paginas-pdf/</loc>

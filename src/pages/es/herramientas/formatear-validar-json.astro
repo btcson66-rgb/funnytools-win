@@ -1,0 +1,20 @@
+---
+import JsonFormatter from '../../../components/tools/JsonFormatter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishJsonFormatter, spanishJsonFormatterReview } from '../../../i18n/expansion/es-tools-12';
+---
+
+<ExpansionToolLayout
+  routeKey="json-formatter"
+  canonicalPath="/es/herramientas/formatear-validar-json/"
+  content={spanishJsonFormatter}
+  categoryLabel="Desarrollo web"
+  review={spanishJsonFormatterReview}
+  relatedTool={{
+    name: 'Codificar y decodificar Base64',
+    description: 'Convierte pequeños ejemplos JSON a Base64 UTF-8 después de retirar cualquier secreto.',
+    href: '/es/herramientas/codificar-decodificar-base64/',
+  }}
+>
+  <JsonFormatter labels={spanishJsonFormatter.labels} />
+</ExpansionToolLayout>

@@ -178,6 +178,24 @@ const tools = [
     description: 'Conserva la primera aparición, controla caja y espacios y ordena con reglas españolas.',
     intent: 'Quitar repetidos',
   },
+  {
+    name: 'Ordenar líneas de texto',
+    href: '/es/herramientas/ordenar-lineas-texto/',
+    description: 'Clasifica una lista A–Z, Z–A, por número inicial o longitud con reglas españolas.',
+    intent: 'Ordenar una lista',
+  },
+  {
+    name: 'Formatear y validar JSON',
+    href: '/es/herramientas/formatear-validar-json/',
+    description: 'Aplica sangría, minifica o comprueba sintaxis y límites del parser del navegador.',
+    intent: 'Revisar JSON',
+  },
+  {
+    name: 'Codificar y decodificar Base64',
+    href: '/es/herramientas/codificar-decodificar-base64/',
+    description: 'Convierte texto con tildes, ñ y emoji entre UTF-8 y Base64 estándar.',
+    intent: 'Convertir Base64',
+  },
 ];
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -283,12 +301,12 @@ const itemListJsonLd = {
       <h2 id="seo-local">Una versión española pensada para España y América Latina</h2>
       <p>El vocabulario cambia entre regiones. En España es habitual buscar «nota media», mientras que en México, Colombia, Chile, Ecuador, Perú, Argentina y otros países aparecen con frecuencia «promedio de notas», «promedio de calificaciones» o «sacar el promedio». Una página útil debe reconocer esas variantes sin fingir que todos los sistemas académicos funcionan igual.</p>
       <p>FunnyTools utiliza español internacional comprensible y explica las diferencias cuando afectan al resultado. No asigna por defecto una escala, una nota mínima de aprobación, un sistema de admisión ni una moneda. Cuando una futura herramienta dependa de reglas locales, la página deberá indicar el territorio, la fuente oficial y la fecha de verificación. Si no existe información suficiente, no se publicará como una respuesta definitiva.</p>
-      <p>La dirección de cada versión también se adapta al idioma. Las páginas españolas viven bajo <code>/es/</code> y utilizan expresiones descriptivas como <code>contador-palabras</code>, <code>convertir-mayusculas-minusculas</code> o <code>eliminar-lineas-duplicadas</code>. Cada una incluye canonical propio y enlaces hreflang recíprocos hacia las versiones realmente disponibles; no se generan alternates para páginas que todavía no tienen una edición española completa.</p>
+      <p>La dirección de cada versión también se adapta al idioma. Las páginas españolas viven bajo <code>/es/</code> y utilizan expresiones descriptivas como <code>convertir-mayusculas-minusculas</code>, <code>ordenar-lineas-texto</code> o <code>formatear-validar-json</code>. Cada una incluye canonical propio y enlaces hreflang recíprocos hacia las versiones realmente disponibles; no se generan alternates para páginas que todavía no tienen una edición española completa.</p>
     </section>
 
     <section id="privacidad" class="wrap content-section privacy-note" aria-labelledby="privacidad-titulo">
       <h2 id="privacidad-titulo">Privacidad y tratamiento local en el navegador</h2>
-      <p>Las veintinueve herramientas disponibles ejecutan el cálculo, el dibujo o la transformación en tu navegador. Las notas, listas, series estadísticas, porcentajes, textos, datos de gráficos, imágenes, URL, textos para QR y documentos PDF no se envían a un servidor de FunnyTools para producir el resultado. Tampoco necesitas crear una cuenta. La pestaña utiliza los recursos del dispositivo y pierde la lista de trabajo al recargar o cerrar la página.</p>
+      <p>Las treinta y dos herramientas disponibles ejecutan el cálculo, el dibujo o la transformación en tu navegador. Las notas, listas, JSON, cadenas Base64, series estadísticas, porcentajes, textos, datos de gráficos, imágenes, URL, textos para QR y documentos PDF no se envían a un servidor de FunnyTools para producir el resultado. Tampoco necesitas crear una cuenta. La pestaña utiliza los recursos del dispositivo y pierde la lista de trabajo al recargar o cerrar la página.</p>
       <p>«Local» no significa que cualquier dato sea apropiado. Utiliza un equipo de confianza, mantén el navegador actualizado y evita trabajar con la única copia de un documento. En entornos escolares, laborales o administrativos, respeta las políticas de protección de datos de la organización. Para una prueba inicial, sustituye nombres y cifras reales por ejemplos ficticios.</p>
       <p>El sitio utiliza analítica y puede cargar infraestructura publicitaria en páginas indexables según la configuración general y el consentimiento aplicable. Eso es independiente del contenido introducido en el widget: las herramientas actuales no incorporan tus notas ni el contenido del PDF a los eventos analíticos.</p>
       <p><a class="inline-link" href="/es/privacidad/">Lee la política de privacidad completa</a> para conocer las conexiones técnicas, cookies, almacenamiento local, correo voluntario y opciones de control.</p>

@@ -1,0 +1,20 @@
+---
+import SortLines from '../../../components/tools/SortLines.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishSortLines, spanishSortLinesReview } from '../../../i18n/expansion/es-tools-12';
+---
+
+<ExpansionToolLayout
+  routeKey="sort-lines"
+  canonicalPath="/es/herramientas/ordenar-lineas-texto/"
+  content={spanishSortLines}
+  categoryLabel="Texto y escritura"
+  review={spanishSortLinesReview}
+  relatedTool={{
+    name: 'Eliminar líneas duplicadas',
+    description: 'Audita coincidencias y conserva la primera aparición antes de decidir un nuevo orden.',
+    href: '/es/herramientas/eliminar-lineas-duplicadas/',
+  }}
+>
+  <SortLines labels={spanishSortLines.labels} />
+</ExpansionToolLayout>

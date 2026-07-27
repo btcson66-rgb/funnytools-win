@@ -54,7 +54,7 @@ const { labels } = Astro.props;
       const line = before.split(/\r\n|\r|\n/).length;
       const lastBreak = Math.max(before.lastIndexOf('\n'), before.lastIndexOf('\r'));
       const column = position - lastBreak;
-      return ` (line ${line}, column ${column})`;
+      return ` (${labels.line || 'line'} ${line}, ${labels.column || 'column'} ${column})`;
     }
 
     function setError(message) {

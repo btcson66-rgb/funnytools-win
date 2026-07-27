@@ -73,6 +73,7 @@ const { labels } = Astro.props;
 <script>
   document.querySelectorAll('[data-sort-lines-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const locale = labels.locale || undefined;
     const input = root.querySelector('[data-input]');
     const output = root.querySelector('[data-output]');
     const modeInput = root.querySelector('[data-mode]');
@@ -82,12 +83,17 @@ const { labels } = Astro.props;
     const toast = root.querySelector('.toast');
 
     function lineKey(line) {
-      return caseInput.checked ? line.toLocaleLowerCase() : line;
+      return caseInput.checked ? line.toLocaleLowerCase(locale) : line;
     }
 
     function numberValue(line) {
-      const match = line.trim().match(/^-?\d+(?:\.\d+)?/);
-      return match ? Number(match[0]) : Number.POSITIVE_INFINITY;
+      const pattern = labels.decimalSeparator === ','
+        ? /^-?(?:\d+(?:[.,]\d+)?|[.,]\d+)/
+        : /^-?\d+(?:\.\d+)?/;
+      const match = line.trim().match(pattern);
+      if (!match) return Number.POSITIVE_INFINITY;
+      const normalized = labels.decimalSeparator === ',' ? match[0].replace(',', '.') : match[0];
+      return Number(normalized);
     }
 
     function sortLines() {
@@ -108,12 +114,12 @@ const { labels } = Astro.props;
       lines.sort((a, b) => {
         if (mode === 'numeric') {
           const diff = numberValue(a) - numberValue(b);
-          return diff || lineKey(a).localeCompare(lineKey(b));
+          return diff || lineKey(a).localeCompare(lineKey(b), locale);
         }
         if (mode === 'length') {
-          return a.length - b.length || lineKey(a).localeCompare(lineKey(b));
+          return a.length - b.length || lineKey(a).localeCompare(lineKey(b), locale);
         }
-        const compared = lineKey(a).localeCompare(lineKey(b), undefined, { sensitivity: caseInput.checked ? 'base' : 'variant' });
+        const compared = lineKey(a).localeCompare(lineKey(b), locale, { sensitivity: caseInput.checked ? 'base' : 'variant' });
         return mode === 'desc' ? -compared : compared;
       });
       output.value = lines.join('\n');

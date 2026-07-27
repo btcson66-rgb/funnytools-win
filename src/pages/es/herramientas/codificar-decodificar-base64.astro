@@ -1,0 +1,20 @@
+---
+import Base64Tool from '../../../components/tools/Base64Tool.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishBase64, spanishBase64Review } from '../../../i18n/expansion/es-tools-12';
+---
+
+<ExpansionToolLayout
+  routeKey="base64"
+  canonicalPath="/es/herramientas/codificar-decodificar-base64/"
+  content={spanishBase64}
+  categoryLabel="Desarrollo web"
+  review={spanishBase64Review}
+  relatedTool={{
+    name: 'Formatear y validar JSON',
+    description: 'Comprueba la sintaxis del texto JSON recuperado antes de usarlo en una integración.',
+    href: '/es/herramientas/formatear-validar-json/',
+  }}
+>
+  <Base64Tool labels={spanishBase64.labels} />
+</ExpansionToolLayout>

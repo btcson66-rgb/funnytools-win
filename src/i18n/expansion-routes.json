@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-11",
+  "activeBatch": "es-12",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -331,6 +331,36 @@
         "zh": "/tools/remove-duplicate-lines/",
         "en": "/en/tools/remove-duplicate-lines/",
         "es": "/es/herramientas/eliminar-lineas-duplicadas/"
+      }
+    },
+    {
+      "key": "sort-lines",
+      "type": "tool",
+      "batch": "es-12",
+      "paths": {
+        "zh": "/tools/sort-lines/",
+        "en": "/en/tools/sort-lines/",
+        "es": "/es/herramientas/ordenar-lineas-texto/"
+      }
+    },
+    {
+      "key": "json-formatter",
+      "type": "tool",
+      "batch": "es-12",
+      "paths": {
+        "zh": "/tools/json-formatter/",
+        "en": "/en/tools/json-formatter/",
+        "es": "/es/herramientas/formatear-validar-json/"
+      }
+    },
+    {
+      "key": "base64",
+      "type": "tool",
+      "batch": "es-12",
+      "paths": {
+        "zh": "/tools/base64/",
+        "en": "/en/tools/base64/",
+        "es": "/es/herramientas/codificar-decodificar-base64/"
       }
     }
   ]
