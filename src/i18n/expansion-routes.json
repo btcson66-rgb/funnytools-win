@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-15",
+  "activeBatch": "es-16",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -451,6 +451,36 @@
         "zh": "/tools/color-generator/",
         "en": "/en/tools/color-generator/",
         "es": "/es/herramientas/generador-colores-hex-rgb-hsl/"
+      }
+    },
+    {
+      "key": "random-number-picker",
+      "type": "tool",
+      "batch": "es-16",
+      "paths": {
+        "zh": "/tools/random-number-picker/",
+        "en": "/en/tools/random-number-picker/",
+        "es": "/es/herramientas/generador-numeros-aleatorios/"
+      }
+    },
+    {
+      "key": "random-name-picker",
+      "type": "tool",
+      "batch": "es-16",
+      "paths": {
+        "zh": "/tools/random-name-picker/",
+        "en": "/en/tools/random-name-picker/",
+        "es": "/es/herramientas/sorteo-nombres-aleatorio/"
+      }
+    },
+    {
+      "key": "random-wheel",
+      "type": "tool",
+      "batch": "es-16",
+      "paths": {
+        "zh": "/tools/random-wheel/",
+        "en": "/en/tools/random-wheel/",
+        "es": "/es/herramientas/ruleta-aleatoria/"
       }
     }
   ]

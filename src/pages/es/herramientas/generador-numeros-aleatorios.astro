@@ -1,0 +1,23 @@
+---
+import RandomNumberPicker from '../../../components/tools/RandomNumberPicker.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishRandomNumberPicker,
+  spanishRandomNumberPickerReview,
+} from '../../../i18n/expansion/es-tools-16';
+---
+
+<ExpansionToolLayout
+  routeKey="random-number-picker"
+  canonicalPath="/es/herramientas/generador-numeros-aleatorios/"
+  content={spanishRandomNumberPicker}
+  categoryLabel="Sorteos y decisiones"
+  review={spanishRandomNumberPickerReview}
+  relatedTool={{
+    name: 'Sorteo de nombres aleatorio',
+    description: 'Pega una lista cuando las opciones no son números consecutivos y retira los resultados si lo necesitas.',
+    href: '/es/herramientas/sorteo-nombres-aleatorio/',
+  }}
+>
+  <RandomNumberPicker labels={spanishRandomNumberPicker.labels} />
+</ExpansionToolLayout>

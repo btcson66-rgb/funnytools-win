@@ -1,0 +1,23 @@
+---
+import RandomNamePicker from '../../../components/tools/RandomNamePicker.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishRandomNamePicker,
+  spanishRandomNamePickerReview,
+} from '../../../i18n/expansion/es-tools-16';
+---
+
+<ExpansionToolLayout
+  routeKey="random-name-picker"
+  canonicalPath="/es/herramientas/sorteo-nombres-aleatorio/"
+  content={spanishRandomNamePicker}
+  categoryLabel="Sorteos y decisiones"
+  review={spanishRandomNamePickerReview}
+  relatedTool={{
+    name: 'Ruleta aleatoria',
+    description: 'Muestra las opciones en un círculo cuando quieres una elección visual para un grupo pequeño.',
+    href: '/es/herramientas/ruleta-aleatoria/',
+  }}
+>
+  <RandomNamePicker labels={spanishRandomNamePicker.labels} />
+</ExpansionToolLayout>

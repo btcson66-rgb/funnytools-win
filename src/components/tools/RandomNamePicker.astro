@@ -71,10 +71,22 @@ const { labels } = Astro.props;
       error.hidden = !message;
     }
 
+    function randomIndex(max) {
+      if (!window.crypto?.getRandomValues) {
+        throw new Error(labels.cryptoError || 'Secure random generation is not available in this browser.');
+      }
+      const value = new Uint32Array(1);
+      const limit = Math.floor(0x100000000 / max) * max;
+      do {
+        window.crypto.getRandomValues(value);
+      } while (value[0] >= limit);
+      return value[0] % max;
+    }
+
     function shuffle(items) {
       const copy = [...items];
       for (let index = copy.length - 1; index > 0; index -= 1) {
-        const swapIndex = Math.floor(Math.random() * (index + 1));
+        const swapIndex = randomIndex(index + 1);
         [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
       }
       return copy;
@@ -96,7 +108,7 @@ const { labels } = Astro.props;
       window.clearInterval(spinTimer);
       spinTimer = window.setInterval(() => {
         cycles += 1;
-        output.textContent = pool[Math.floor(Math.random() * pool.length)] || labels.spinning;
+        output.textContent = pool[randomIndex(pool.length)] || labels.spinning;
         if (cycles >= 8) {
           window.clearInterval(spinTimer);
           spinTimer = null;
@@ -108,25 +120,33 @@ const { labels } = Astro.props;
     }
 
     function pick(count) {
-      const pool = entries();
-      if (!pool.length) {
-        setError(labels.emptyListError);
-        return;
+      try {
+        const pool = entries();
+        if (!pool.length) {
+          setError(labels.emptyListError);
+          return;
+        }
+        if (!Number.isInteger(count) || count < 1) {
+          setError(labels.invalidCountError);
+          return;
+        }
+        if (count > pool.length) {
+          setError(labels.tooManyError);
+          return;
+        }
+        setError('');
+        latestResult = '';
+        const picked = shuffle(pool).slice(0, count);
+        if (removeInput.checked) {
+          removePicked(pool, picked);
+        }
+        animateThenShow(pool, picked);
+      } catch (caught) {
+        latestResult = '';
+        output.classList.remove('spinning');
+        output.textContent = labels.emptyResult;
+        setError(caught instanceof Error ? caught.message : String(caught));
       }
-      if (!Number.isInteger(count) || count < 1) {
-        setError(labels.invalidCountError);
-        return;
-      }
-      if (count > pool.length) {
-        setError(labels.tooManyError);
-        return;
-      }
-      setError('');
-      const picked = shuffle(pool).slice(0, count);
-      if (removeInput.checked) {
-        removePicked(pool, picked);
-      }
-      animateThenShow(pool, picked);
     }
 
     root.querySelector('[data-pick-one]')?.addEventListener('click', () => pick(1));
@@ -157,4 +177,3 @@ const { labels } = Astro.props;
     });
   });
 </script>
-

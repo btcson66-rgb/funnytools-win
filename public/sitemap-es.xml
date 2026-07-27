@@ -289,6 +289,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/password-generator/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/generador-numeros-aleatorios/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/random-number-picker/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-number-picker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-numeros-aleatorios/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/random-number-picker/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/generador-uuid-v4/</loc>
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/uuid-generator/" />
@@ -343,6 +351,22 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/image-rotate-flip/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/rotar-voltear-imagen/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/image-rotate-flip/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/ruleta-aleatoria/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/random-wheel/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-wheel/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/ruleta-aleatoria/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/random-wheel/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/sorteo-nombres-aleatorio/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/random-name-picker/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-name-picker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/sorteo-nombres-aleatorio/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/random-name-picker/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/unir-pdf/</loc>

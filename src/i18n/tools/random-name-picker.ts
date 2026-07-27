@@ -120,6 +120,7 @@ export default {
       copy: '複製結果',
       copied: '已複製',
       spinning: '抽選中...',
+      cryptoError: '此瀏覽器無法提供安全亂數來源，因此沒有進行抽選。',
     },
   },
   en: {
@@ -241,6 +242,7 @@ export default {
       copy: 'Copy result',
       copied: 'Copied',
       spinning: 'Picking...',
+      cryptoError: 'This browser cannot provide a secure random source, so no pick was made.',
     },
   },
 } satisfies Record<'zh' | 'en', ToolContent>;

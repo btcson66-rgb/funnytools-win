@@ -1,0 +1,23 @@
+---
+import RandomWheel from '../../../components/tools/RandomWheel.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishRandomWheel,
+  spanishRandomWheelReview,
+} from '../../../i18n/expansion/es-tools-16';
+---
+
+<ExpansionToolLayout
+  routeKey="random-wheel"
+  canonicalPath="/es/herramientas/ruleta-aleatoria/"
+  content={spanishRandomWheel}
+  categoryLabel="Sorteos y decisiones"
+  review={spanishRandomWheelReview}
+  relatedTool={{
+    name: 'Generador de números aleatorios',
+    description: 'Elige enteros de un intervalo cuando tus candidatos ya tienen un identificador numérico.',
+    href: '/es/herramientas/generador-numeros-aleatorios/',
+  }}
+>
+  <RandomWheel labels={spanishRandomWheel.labels} />
+</ExpansionToolLayout>

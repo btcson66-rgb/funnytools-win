@@ -65,60 +65,96 @@ const { labels } = Astro.props;
 
     function integerValue(input) {
       const value = Number(input.value);
-      return Number.isInteger(value) ? value : null;
+      return Number.isSafeInteger(value) ? value : null;
+    }
+
+    function randomIndex(max) {
+      if (!window.crypto?.getRandomValues) {
+        throw new Error(labels.cryptoError || 'Secure random generation is not available in this browser.');
+      }
+      const values = new Uint32Array(2);
+      const integerSpace = 0x20000000000000;
+      const limit = Math.floor(integerSpace / max) * max;
+      let value;
+      do {
+        window.crypto.getRandomValues(values);
+        value = (values[0] & 0x001fffff) * 0x100000000 + values[1];
+      } while (value >= limit);
+      return value % max;
+    }
+
+    function shuffle(items) {
+      for (let index = items.length - 1; index > 0; index -= 1) {
+        const swap = randomIndex(index + 1);
+        [items[index], items[swap]] = [items[swap], items[index]];
+      }
+      return items;
+    }
+
+    function reject(message) {
+      latestResult = '';
+      output.textContent = labels.placeholder;
+      setError(message);
     }
 
     function generate() {
-      const min = integerValue(minInput);
-      const max = integerValue(maxInput);
-      const count = integerValue(countInput);
-      const allowDuplicates = duplicatesInput.checked;
+      try {
+        const min = integerValue(minInput);
+        const max = integerValue(maxInput);
+        const count = integerValue(countInput);
+        const allowDuplicates = duplicatesInput.checked;
 
-      if (min === null || max === null || count === null || count < 1) {
-        setError(labels.integerError);
-        return;
-      }
-
-      if (count > 100000) {
-        setError(labels.countLimit);
-        return;
-      }
-
-      if (min > max) {
-        setError(labels.rangeError);
-        return;
-      }
-
-      const rangeSize = max - min + 1;
-      if (!allowDuplicates && count > rangeSize) {
-        setError(labels.duplicateError);
-        return;
-      }
-
-      const results = [];
-      if (allowDuplicates) {
-        for (let index = 0; index < count; index += 1) {
-          results.push(Math.floor(Math.random() * rangeSize) + min);
+        if (min === null || max === null || count === null || count < 1) {
+          reject(labels.integerError);
+          return;
         }
-      } else {
-        // Sample distinct values via a Set so a huge range never materializes
-        // a giant array (count <= rangeSize is already guaranteed above).
-        const chosen = new Set();
-        while (chosen.size < count) {
-          chosen.add(Math.floor(Math.random() * rangeSize) + min);
-        }
-        for (const value of chosen) {
-          results.push(value);
-        }
-      }
 
-      if (sortInput.checked) {
-        results.sort((a, b) => a - b);
-      }
+        if (count > 100000) {
+          reject(labels.countLimit);
+          return;
+        }
 
-      latestResult = results.join(', ');
-      output.textContent = latestResult;
-      setError('');
+        if (min > max) {
+          reject(labels.rangeError);
+          return;
+        }
+
+        const rangeSize = max - min + 1;
+        if (!Number.isSafeInteger(rangeSize) || rangeSize < 1) {
+          reject(labels.safeRangeError || labels.integerError);
+          return;
+        }
+        if (!allowDuplicates && count > rangeSize) {
+          reject(labels.duplicateError);
+          return;
+        }
+
+        const results = [];
+        if (allowDuplicates) {
+          for (let index = 0; index < count; index += 1) {
+            results.push(randomIndex(rangeSize) + min);
+          }
+        } else {
+          // Floyd's algorithm selects a uniform subset in O(count), even when
+          // the integer range is much larger than the requested sample.
+          const offsets = new Set();
+          for (let candidate = rangeSize - count; candidate < rangeSize; candidate += 1) {
+            const selected = randomIndex(candidate + 1);
+            offsets.add(offsets.has(selected) ? candidate : selected);
+          }
+          results.push(...shuffle([...offsets]).map((offset) => offset + min));
+        }
+
+        if (sortInput.checked) {
+          results.sort((a, b) => a - b);
+        }
+
+        latestResult = results.join(', ');
+        output.textContent = latestResult;
+        setError('');
+      } catch (caught) {
+        reject(caught instanceof Error ? caught.message : String(caught));
+      }
     }
 
     root.querySelector('[data-generate]')?.addEventListener('click', generate);

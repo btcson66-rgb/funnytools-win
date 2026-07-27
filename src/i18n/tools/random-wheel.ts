@@ -111,6 +111,7 @@ export default {
       emptyError: '請至少輸入一個選項。',
       copied: '已複製',
       oneOption: '只有一個選項，結果就是它。',
+      cryptoError: '此瀏覽器無法提供安全亂數來源，因此轉盤沒有選出結果。',
     },
   },
   en: {
@@ -223,6 +224,7 @@ export default {
       emptyError: 'Enter at least one option.',
       copied: 'Copied!',
       oneOption: 'Only one option is available, so it wins.',
+      cryptoError: 'This browser cannot provide a secure random source, so the wheel did not select a result.',
     },
   },
 } satisfies Record<'zh' | 'en', ToolContent>;
