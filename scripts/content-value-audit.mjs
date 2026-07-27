@@ -7,7 +7,7 @@ const PUBLIC = path.join(ROOT, 'public');
 
 const sitemapFiles = fs
   .readdirSync(PUBLIC)
-  .filter((name) => /^sitemap-(?:tools|guides|workflows|pages|en)\.xml$/.test(name));
+  .filter((name) => /^sitemap-(?:tools|guides|workflows|pages|en|es)\.xml$/.test(name));
 const sitemapXml = sitemapFiles
   .map((name) => fs.readFileSync(path.join(PUBLIC, name), 'utf8'))
   .join('\n');
@@ -15,7 +15,7 @@ const urls = [...new Set([...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m
 
 function routeType(url) {
   const pathname = new URL(url).pathname;
-  if (/\/tools\/[^/]+\/$/.test(pathname)) return 'tool';
+  if (/\/(?:tools|herramientas)\/[^/]+\/$/.test(pathname)) return 'tool';
   if (/\/guides\/[^/]+\/$/.test(pathname)) return 'guide';
   if (/\/workflows\/[^/]+\/$/.test(pathname)) return 'workflow';
   if (/\/category\/[^/]+\/$/.test(pathname)) return 'category';
@@ -56,12 +56,13 @@ function plainText(html) {
 
 function tokenCount(text, lang) {
   if (lang === 'zh') return [...text].filter((char) => /\p{Script=Han}/u.test(char)).length;
-  return (text.match(/[A-Za-z0-9][A-Za-z0-9’'/-]*/g) ?? []).length;
+  return (text.match(/[\p{L}\p{N}][\p{L}\p{N}’'/-]*/gu) ?? []).length;
 }
 
 const minimums = {
   zh: { tool: 1200, guide: 1200, workflow: 1200, category: 1500, audience: 1200, other: 220 },
   en: { tool: 780, guide: 850, workflow: 700, category: 780, audience: 700, other: 220 },
+  es: { tool: 950, guide: 900, workflow: 800, category: 850, audience: 800, other: 800 },
 };
 const reviewedTypes = new Set(['tool', 'guide', 'workflow', 'category', 'audience']);
 const failures = [];
@@ -76,7 +77,7 @@ for (const url of urls) {
 
   const html = fs.readFileSync(file, 'utf8');
   const pathname = new URL(url).pathname;
-  const lang = pathname.startsWith('/en/') ? 'en' : 'zh';
+  const lang = pathname.startsWith('/es/') ? 'es' : pathname.startsWith('/en/') ? 'en' : 'zh';
   const type = routeType(url);
   const mainMatch = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);
   const mainText = plainText(mainMatch?.[1] ?? html);
@@ -151,7 +152,7 @@ const summary = {
   builtPagesAudited: pages.length,
   contextualReviews: pages.filter((page) => reviewedTypes.has(page.type)).length,
   byLocaleAndType: Object.fromEntries(
-    ['zh', 'en'].flatMap((lang) =>
+    ['zh', 'en', 'es'].flatMap((lang) =>
       ['tool', 'guide', 'workflow', 'category', 'audience', 'other'].map((type) => {
         const group = pages.filter((page) => page.lang === lang && page.type === type);
         return [

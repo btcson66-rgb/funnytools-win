@@ -1,0 +1,46 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import LocalizedFooter from '../components/expansion/LocalizedFooter.astro';
+import LocalizedNav from '../components/expansion/LocalizedNav.astro';
+
+interface Props {
+  currentKey: string;
+  canonicalPath: string;
+  title: string;
+  description: string;
+  keywords?: string[];
+  type?: 'website' | 'article';
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  ogImageAlt?: string;
+}
+
+const {
+  currentKey,
+  canonicalPath,
+  title,
+  description,
+  keywords = [],
+  type = 'website',
+  jsonLd = [],
+  ogImageAlt = 'FunnyTools en español',
+} = Astro.props;
+---
+
+<BaseLayout
+  lang="en"
+  title={title}
+  description={description}
+  keywords={keywords}
+  type={type}
+  jsonLd={jsonLd}
+  canonicalPath={canonicalPath}
+  htmlLanguage="es"
+  ogLocaleOverride="es_ES"
+  ogImageAlt={ogImageAlt}
+  skipToContentLabel="Saltar al contenido"
+  hasAlternates={true}
+>
+  <LocalizedNav slot="nav" currentKey={currentKey} />
+  <slot />
+  <LocalizedFooter slot="footer" />
+</BaseLayout>

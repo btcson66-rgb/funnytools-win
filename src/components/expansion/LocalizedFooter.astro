@@ -1,0 +1,42 @@
+---
+import pkg from '../../../package.json';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <strong>FunnyTools en español</strong>
+      <p>Herramientas gratuitas que funcionan en el navegador, sin registro y con explicaciones que permiten comprobar el resultado.</p>
+    </div>
+    <nav class="footer-links" aria-label="Navegación del pie de página">
+      <div>
+        <span>Herramientas disponibles</span>
+        <a href="/es/herramientas/calculadora-promedio-notas/">Calculadora de promedio de notas</a>
+        <a href="/es/herramientas/unir-pdf/">Unir PDF en el navegador</a>
+      </div>
+      <div>
+        <span>Cómo trabajamos</span>
+        <a href="/es/#como-elegir">Cómo elegir una herramienta</a>
+        <a href="/es/#privacidad">Privacidad y tratamiento local</a>
+        <a href="mailto:btcson66@gmail.com">Contacto</a>
+      </div>
+      <div>
+        <span>Políticas generales</span>
+        <a href="/en/privacy/" hreflang="en">Privacidad general (en inglés)</a>
+        <a href="/en/terms/" hreflang="en">Condiciones generales (en inglés)</a>
+        <a href="/en/disclaimer/" hreflang="en">Aviso legal general (en inglés)</a>
+      </div>
+      <div>
+        <span>Otros idiomas</span>
+        <a href="/" hreflang="zh-TW" lang="zh-Hant">繁體中文</a>
+        <a href="/en/" hreflang="en" lang="en">English</a>
+      </div>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <p class="fineprint">&copy; {year} FunnyTools · v{pkg.version}</p>
+    <p>Los resultados sirven como apoyo y deben verificarse con la norma, el documento o la fuente oficial correspondiente.</p>
+  </div>
+</footer>

@@ -16,6 +16,7 @@ const expectedChildSitemaps = [
   'https://funnytools.win/sitemap-guides.xml',
   'https://funnytools.win/sitemap-workflows.xml',
   ...(!enNoindex ? ['https://funnytools.win/sitemap-en.xml'] : []),
+  'https://funnytools.win/sitemap-es.xml',
 ];
 const disallowedUrlPatterns = [
   { pattern: /http:\/\//i, label: 'http://' },

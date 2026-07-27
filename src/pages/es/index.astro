@@ -1,0 +1,197 @@
+---
+import ExpansionLayout from '../../layouts/ExpansionLayout.astro';
+import { spanishHome } from '../../i18n/expansion/es';
+import { expansionRoutesReviewedAt } from '../../i18n/expansionRoutes';
+
+const tools = [
+  {
+    name: 'Calculadora de promedio de notas',
+    href: '/es/herramientas/calculadora-promedio-notas/',
+    description: 'Media simple y ponderada para notas, calificaciones, créditos o porcentajes, con cualquier escala numérica.',
+    intent: 'Calcular promedio',
+  },
+  {
+    name: 'Unir PDF online gratis',
+    href: '/es/herramientas/unir-pdf/',
+    description: 'Combina varios PDF en el orden elegido dentro del navegador, sin subir los documentos a FunnyTools.',
+    intent: 'Combinar documentos',
+  },
+];
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: spanishHome.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'FunnyTools en español',
+  alternateName: 'FunnyTools',
+  url: 'https://funnytools.win/es/',
+  description: spanishHome.seoDescription,
+  inLanguage: 'es',
+  dateModified: expansionRoutesReviewedAt,
+};
+const itemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Herramientas disponibles en español',
+  itemListElement: tools.map((tool, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: tool.name,
+    url: `https://funnytools.win${tool.href}`,
+  })),
+};
+---
+
+<ExpansionLayout
+  currentKey="home"
+  canonicalPath="/es/"
+  title={spanishHome.seoTitle}
+  description={spanishHome.seoDescription}
+  keywords={[...spanishHome.keywords]}
+  jsonLd={[websiteJsonLd, faqJsonLd, itemListJsonLd]}
+>
+  <article
+    class="home-page"
+    data-native-locale="es"
+    data-editorial-mode="native-search-intent"
+  >
+    <section class="hero wrap">
+      <p class="eyebrow">{spanishHome.hero.eyebrow}</p>
+      <h1>{spanishHome.hero.title}</h1>
+      <p class="lead">{spanishHome.hero.intro}</p>
+      <ul class="hero-value-list">
+        <li>Gratis y sin registro</li>
+        <li>Interfaz y explicaciones escritas para búsquedas en español</li>
+        <li>Tratamiento local en las herramientas publicadas</li>
+        <li>Fórmulas, límites y comprobaciones visibles</li>
+      </ul>
+      <div class="hero-actions">
+        <a class="btn go" href="#herramientas">Ver herramientas en español</a>
+        <a class="btn ghost" href="#como-elegir">Cómo elegir bien</a>
+      </div>
+    </section>
+
+    <section class="wrap content-section answer-panel" aria-labelledby="respuesta-directa">
+      <p class="eyebrow">Respuesta directa</p>
+      <h2 id="respuesta-directa">¿Qué es FunnyTools en español?</h2>
+      <p>FunnyTools es una colección de herramientas online gratuitas para resolver tareas breves —calcular, ordenar, combinar o preparar información— sin instalar una aplicación. La versión española no copia de forma automática los textos de otro idioma: cada página se plantea desde la consulta que una persona realmente escribiría, como «calcular nota media», «sacar promedio de notas» o «unir varios PDF en uno».</p>
+      <p>El objetivo no es ofrecer un botón aislado. Una herramienta resulta útil cuando explica qué dato espera, qué fórmula o transformación aplica, qué casos no puede resolver y cómo verificar el resultado. Por eso las páginas incluyen ejemplos, preguntas frecuentes, límites de uso y una lista de comprobación. La respuesta rápida aparece primero; la explicación detallada queda disponible para quien necesita documentar o revisar el trabajo.</p>
+    </section>
+
+    <section id="herramientas" class="wrap content-section" aria-labelledby="herramientas-titulo">
+      <div class="section-head">
+        <p class="eyebrow">Primera colección revisada</p>
+        <h2 id="herramientas-titulo">Herramientas disponibles en español</h2>
+        <p>Estas páginas tienen interfaz, metadatos, ejemplos y ayuda completamente redactados en español. No enlazamos una supuesta versión española hasta que la función y el contenido están terminados.</p>
+      </div>
+      <div class="tool-grid">
+        {tools.map((tool) => (
+          <article class="tool-card">
+            <span class="badge">{tool.intent}</span>
+            <h3><a href={tool.href}>{tool.name}</a></h3>
+            <p>{tool.description}</p>
+            <a class="btn go" href={tool.href}>Abrir herramienta</a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="como-elegir" class="wrap content-section" aria-labelledby="elegir-titulo">
+      <h2 id="elegir-titulo">Cómo elegir una herramienta online sin perder tiempo</h2>
+      <p>Empieza por definir el resultado que necesitas, no por el nombre del primer botón que aparezca en una búsqueda. «Quiero calcular mi nota media con tres exámenes que valen lo mismo» es una necesidad distinta de «quiero estimar un promedio con créditos diferentes». De la misma manera, «quiero enviar varios anexos como un solo PDF» es distinto de «quiero reducir el tamaño del archivo» o «quiero extraer algunas páginas».</p>
+      <ol class="step-list">
+        <li><strong>Define la entrada.</strong> Anota la escala, unidad, formato, periodo o número de archivos. Si hay datos sensibles, utiliza primero una muestra ficticia.</li>
+        <li><strong>Define la salida.</strong> Decide si necesitas un valor aproximado, una copia descargable, un archivo para un portal o una explicación que otra persona pueda reproducir.</li>
+        <li><strong>Lee los límites.</strong> Una calculadora no conoce todas las normas educativas; un combinador PDF no puede garantizar que una firma digital conserve su validez.</li>
+        <li><strong>Haz una prueba predecible.</strong> Utiliza números pequeños o documentos no confidenciales cuyo resultado puedas comprobar sin depender de la herramienta.</li>
+        <li><strong>Valida en el destino.</strong> Abre, importa, imprime o carga el resultado donde realmente vaya a utilizarse.</li>
+      </ol>
+      <p>Este método también protege frente a páginas que prometen demasiado. Un resultado instantáneo no es necesariamente correcto para tu institución, país, contrato o sistema de entrega. La herramienta debe ahorrar operaciones repetitivas; la responsabilidad de aplicar la regla adecuada y aceptar el resultado sigue siendo humana.</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="seo-local">
+      <h2 id="seo-local">Una versión española pensada para España y América Latina</h2>
+      <p>El vocabulario cambia entre regiones. En España es habitual buscar «nota media», mientras que en México, Colombia, Chile, Ecuador, Perú, Argentina y otros países aparecen con frecuencia «promedio de notas», «promedio de calificaciones» o «sacar el promedio». Una página útil debe reconocer esas variantes sin fingir que todos los sistemas académicos funcionan igual.</p>
+      <p>FunnyTools utiliza español internacional comprensible y explica las diferencias cuando afectan al resultado. No asigna por defecto una escala, una nota mínima de aprobación, un sistema de admisión ni una moneda. Cuando una futura herramienta dependa de reglas locales, la página deberá indicar el territorio, la fuente oficial y la fecha de verificación. Si no existe información suficiente, no se publicará como una respuesta definitiva.</p>
+      <p>La dirección de cada versión también se adapta al idioma. Las páginas españolas viven bajo <code>/es/</code> y utilizan expresiones descriptivas como <code>calculadora-promedio-notas</code> o <code>unir-pdf</code>. Cada una incluye canonical propio y enlaces hreflang recíprocos hacia las versiones realmente disponibles; no se generan alternates para páginas que todavía no tienen una edición española completa.</p>
+    </section>
+
+    <section id="privacidad" class="wrap content-section privacy-note" aria-labelledby="privacidad-titulo">
+      <h2 id="privacidad-titulo">Privacidad y tratamiento local en el navegador</h2>
+      <p>Las dos herramientas disponibles en esta primera colección ejecutan el cálculo o la transformación en tu navegador. Las notas, pesos y documentos PDF no se envían a un servidor de FunnyTools. Tampoco necesitas crear una cuenta. La pestaña utiliza los recursos del dispositivo y pierde la lista de trabajo al recargar o cerrar la página.</p>
+      <p>«Local» no significa que cualquier dato sea apropiado. Utiliza un equipo de confianza, mantén el navegador actualizado y evita trabajar con la única copia de un documento. En entornos escolares, laborales o administrativos, respeta las políticas de protección de datos de la organización. Para una prueba inicial, sustituye nombres y cifras reales por ejemplos ficticios.</p>
+      <p>El sitio utiliza analítica y puede cargar infraestructura publicitaria en páginas indexables según la configuración general y el consentimiento aplicable. Eso es independiente del contenido introducido en el widget: las herramientas actuales no incorporan tus notas ni el contenido del PDF a los eventos analíticos.</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="calidad-titulo">
+      <h2 id="calidad-titulo">Qué exigimos antes de publicar una nueva versión</h2>
+      <div class="case-grid">
+        <article class="case-card">
+          <h3>Lenguaje natural</h3>
+          <p>La interfaz, los ejemplos y las preguntas deben sonar como una explicación escrita originalmente en español, sin frases calcadas ni restos de inglés.</p>
+        </article>
+        <article class="case-card">
+          <h3>Respuesta verificable</h3>
+          <p>La página debe mostrar fórmula, proceso o criterio, además de una prueba sencilla que permita detectar un error.</p>
+        </article>
+        <article class="case-card">
+          <h3>SEO técnico completo</h3>
+          <p>Se comprueban idioma HTML, título, descripción, canonical, hreflang, sitemap, datos estructurados, enlaces y ausencia de noindex.</p>
+        </article>
+        <article class="case-card">
+          <h3>Experiencia real</h3>
+          <p>La función debe utilizarse en escritorio y móvil, sin enlaces a versiones inexistentes ni textos que prometan una característica no disponible.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="faq-titulo">
+      <h2 id="faq-titulo">Preguntas frecuentes</h2>
+      <div class="faq-list">
+        {spanishHome.faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap content-section trust-note" aria-labelledby="limites-titulo">
+      <h2 id="limites-titulo">Límites y uso responsable</h2>
+      <p>FunnyTools no sustituye una calificación oficial, una plataforma institucional, un profesional ni la revisión de un documento. Los cálculos pueden ayudar a comprobar una operación; los PDF pueden facilitar una entrega. La decisión final debe basarse en la norma y el sistema que realmente correspondan.</p>
+      <p>Si detectas una expresión poco natural, un caso regional no explicado o un resultado que no puedas reproducir, escribe a <a href="mailto:btcson66@gmail.com">btcson66@gmail.com</a> e incluye la dirección de la página, el navegador y un ejemplo sin datos personales.</p>
+    </section>
+
+    <p class="wrap updated">
+      Última revisión editorial: <time datetime={expansionRoutesReviewedAt}>{expansionRoutesReviewedAt}</time>
+    </p>
+  </article>
+</ExpansionLayout>
+
+<style>
+  .answer-panel {
+    border-left: 4px solid var(--brand);
+  }
+
+  .tool-card {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--card);
+  }
+
+  .tool-card .btn {
+    justify-self: start;
+  }
+</style>

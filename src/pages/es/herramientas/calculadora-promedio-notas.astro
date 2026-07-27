@@ -1,0 +1,23 @@
+---
+import GradeAverage from '../../../components/tools/GradeAverage.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishGradeAverage,
+  spanishGradeReview,
+} from '../../../i18n/expansion/es';
+---
+
+<ExpansionToolLayout
+  routeKey="grade-average"
+  canonicalPath="/es/herramientas/calculadora-promedio-notas/"
+  content={spanishGradeAverage}
+  categoryLabel="Calculadora educativa"
+  review={spanishGradeReview}
+  relatedTool={{
+    name: 'Unir PDF online gratis',
+    description: 'Combina apuntes, justificantes o anexos en el navegador sin subirlos.',
+    href: '/es/herramientas/unir-pdf/',
+  }}
+>
+  <GradeAverage labels={spanishGradeAverage.labels} />
+</ExpansionToolLayout>

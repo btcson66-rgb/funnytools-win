@@ -8,6 +8,7 @@ const childSitemaps = [
   { path: '/sitemap-guides.xml' },
   { path: '/sitemap-workflows.xml' },
   ...(!indexingConfig.EN_NOINDEX ? [{ path: '/sitemap-en.xml' }] : []),
+  { path: '/sitemap-es.xml' },
 ];
 
 export const GET: APIRoute = () => {

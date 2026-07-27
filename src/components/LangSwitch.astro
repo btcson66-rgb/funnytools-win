@@ -2,6 +2,7 @@
 import { type Locale } from '../config/site';
 import { t } from '../i18n/ui';
 import { localePath } from '../lib/url';
+import { expansionRouteByPath } from '../i18n/expansionRoutes';
 
 interface Props {
   lang: Locale;
@@ -12,8 +13,25 @@ const { lang, segments = [] } = Astro.props;
 const ui = t(lang);
 const otherLang: Locale = lang === 'zh' ? 'en' : 'zh';
 const label = otherLang === 'zh' ? '繁中' : 'English';
+const expansionRoute = expansionRouteByPath(Astro.url.pathname);
+const spanishPath = expansionRoute?.paths.es;
 ---
 
-<a class="lang-switch" href={localePath(otherLang, ...segments)} aria-label={ui.languageSwitch} data-language-switch data-target-lang={otherLang}>
-  {label}
-</a>
+<span class="language-switches">
+  <a class="lang-switch" href={localePath(otherLang, ...segments)} aria-label={ui.languageSwitch} data-language-switch data-target-lang={otherLang}>
+    {label}
+  </a>
+  {spanishPath && (
+    <a class="lang-switch" href={spanishPath} aria-label={ui.languageSwitch} data-language-switch data-target-lang="es">
+      Español
+    </a>
+  )}
+</span>
+
+<style>
+  .language-switches {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+</style>

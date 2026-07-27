@@ -26,11 +26,16 @@ export const gscPriorityUrlsPath = join(scriptsDir, 'gsc-priority-urls.txt');
 export const indexingConfigPath = join(rootDir, 'src', 'config', 'indexing.json');
 export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
 export const enNoindex = indexingConfig.EN_NOINDEX === true;
+export const expansionRouteRegistry = readJson(
+  join(rootDir, 'src', 'i18n', 'expansion-routes.json'),
+  { routes: [] },
+) ?? { routes: [] };
 export const expectedSitemapFiles = [
   'sitemap-tools.xml',
   'sitemap-guides.xml',
   'sitemap-workflows.xml',
   ...(!enNoindex ? ['sitemap-en.xml'] : []),
+  'sitemap-es.xml',
 ];
 
 export function ensureDir(dir) {
@@ -195,6 +200,7 @@ export function isIndexablePage(page) {
 export function classifyUrl(url) {
   const pathname = urlPath(url);
   const normalized = pathname.replace(/^\/en\//, '/');
+  if (pathname.startsWith('/es/')) return 'es';
   if (pathname.startsWith('/en/')) return 'en';
   if (/^\/tools\/[^/]+\/$/.test(normalized)) return 'tools';
   if (normalized === '/guides/' || /^\/guides\/[^/]+\/$/.test(normalized)) return 'guides';
@@ -208,6 +214,7 @@ export function sitemapFileForType(type) {
     guides: 'sitemap-guides.xml',
     workflows: 'sitemap-workflows.xml',
     en: 'sitemap-en.xml',
+    es: 'sitemap-es.xml',
   }[type];
 }
 
@@ -268,6 +275,16 @@ function gitDateForPath(path) {
 }
 
 export function sourceCandidatesForRoute(route) {
+  if (route.startsWith('/es/')) {
+    return [
+      'src/i18n/expansion-routes.json',
+      'src/i18n/expansion/es.ts',
+      'src/i18n/expansionRoutes.ts',
+      'src/layouts/ExpansionLayout.astro',
+      'src/layouts/ExpansionToolLayout.astro',
+      `src/pages${route === '/es/' ? '/es/index.astro' : route.replace(/\/$/, '.astro')}`,
+    ];
+  }
   const clean = route.replace(/^\/en\//, '/');
   const parts = clean.split('/').filter(Boolean);
   if (parts[0] === 'tools' && parts[1]) {
@@ -363,17 +380,47 @@ export function lastmodForPage(page, previousLastmod = '') {
   return statSync(page.file).mtime.toISOString().slice(0, 10);
 }
 
-// zh URLs live at the root, en URLs under /en/. Returns the counterpart URL
-// in the other locale, or null when the shape does not match.
-function alternateLocaleUrl(loc) {
+function registryAlternates(loc) {
+  const pathname = new URL(loc).pathname;
+  const route = expansionRouteRegistry.routes?.find((item) =>
+    Object.values(item.paths ?? {}).includes(pathname),
+  );
+  if (!route) return [];
+  const hreflang = { zh: 'zh-TW', en: 'en', es: 'es', fr: 'fr', de: 'de' };
+  const links = Object.entries(route.paths ?? {})
+    .filter(([, path]) => Boolean(path))
+    .map(([locale, path]) => ({
+      hreflang: hreflang[locale],
+      href: `${siteOrigin}${path}`,
+    }));
+  if (route.paths?.en) {
+    links.push({ hreflang: 'x-default', href: `${siteOrigin}${route.paths.en}` });
+  }
+  return links;
+}
+
+// Legacy zh URLs live at the root and en URLs under /en/. Expansion routes
+// use the explicit registry because native-language slugs do not mirror EN.
+function alternateLocaleLinks(loc) {
+  const registered = registryAlternates(loc);
+  if (registered.length) return registered;
   const enPrefix = `${siteOrigin}/en/`;
   if (loc.startsWith(enPrefix) || loc === `${siteOrigin}/en/`) {
-    return `${siteOrigin}/${loc.slice(enPrefix.length)}`;
+    return [
+      { hreflang: 'zh-TW', href: `${siteOrigin}/${loc.slice(enPrefix.length)}` },
+      { hreflang: 'en', href: loc },
+      { hreflang: 'x-default', href: loc },
+    ];
   }
   if (loc.startsWith(`${siteOrigin}/`)) {
-    return `${enPrefix}${loc.slice(siteOrigin.length + 1)}`;
+    const enUrl = `${enPrefix}${loc.slice(siteOrigin.length + 1)}`;
+    return [
+      { hreflang: 'zh-TW', href: loc },
+      { hreflang: 'en', href: enUrl },
+      { hreflang: 'x-default', href: enUrl },
+    ];
   }
-  return null;
+  return [];
 }
 
 export function urlSetXml(entries, allIndexableUrls = null) {
@@ -387,17 +434,13 @@ export function urlSetXml(entries, allIndexableUrls = null) {
       `    <lastmod>${escapeXml(entry.lastmod)}</lastmod>`,
     ];
     if (hasAlternates) {
-      const counterpart = alternateLocaleUrl(entry.loc);
-      if (counterpart && allIndexableUrls.has(counterpart)) {
-        const isEn = entry.loc.startsWith(`${siteOrigin}/en/`);
-        const enUrl = isEn ? entry.loc : counterpart;
-        const zhUrl = isEn ? counterpart : entry.loc;
-        lines.push(
-          `    <xhtml:link rel="alternate" hreflang="zh-TW" href="${escapeXml(zhUrl)}" />`,
-          `    <xhtml:link rel="alternate" hreflang="en" href="${escapeXml(enUrl)}" />`,
-          // x-default → en: global searchers outside zh-TW get the English page.
-          `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(enUrl)}" />`,
-        );
+      const alternates = alternateLocaleLinks(entry.loc)
+        .filter((link) => link.hreflang === 'x-default' || allIndexableUrls.has(link.href));
+      const realAlternates = alternates.filter((link) => link.hreflang !== 'x-default');
+      if (realAlternates.length >= 2) {
+        lines.push(...alternates.map((link) =>
+          `    <xhtml:link rel="alternate" hreflang="${link.hreflang}" href="${escapeXml(link.href)}" />`,
+        ));
       }
     }
     lines.push('  </url>');

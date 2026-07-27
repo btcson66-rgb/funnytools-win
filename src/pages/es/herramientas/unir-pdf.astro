@@ -1,0 +1,23 @@
+---
+import MergePdf from '../../../components/tools/MergePdf.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishMergePdf,
+  spanishMergeReview,
+} from '../../../i18n/expansion/es';
+---
+
+<ExpansionToolLayout
+  routeKey="merge-pdf"
+  canonicalPath="/es/herramientas/unir-pdf/"
+  content={spanishMergePdf}
+  categoryLabel="Herramienta PDF"
+  review={spanishMergeReview}
+  relatedTool={{
+    name: 'Calculadora de promedio de notas',
+    description: 'Calcula una media simple o ponderada con cualquier escala numérica.',
+    href: '/es/herramientas/calculadora-promedio-notas/',
+  }}
+>
+  <MergePdf labels={spanishMergePdf.labels} />
+</ExpansionToolLayout>

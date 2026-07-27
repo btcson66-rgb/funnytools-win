@@ -71,6 +71,7 @@ const groups = new Map([
   ['guides', []],
   ['workflows', []],
   ['en', []],
+  ['es', []],
 ]);
 const excluded = [];
 
