@@ -31,6 +31,7 @@ const { labels } = Astro.props;
     <button class="btn go" type="button" data-generate>{labels.generate}</button>
     <button class="btn" type="button" data-palette>{labels.palette}</button>
   </div>
+  {labels.contrastLabel && <p class="note" data-contrast aria-live="polite"></p>}
   <p class="note">{labels.spaceHint}</p>
   <div class="palette" aria-live="polite">
     <h3>{labels.paletteTitle}</h3>
@@ -129,6 +130,7 @@ const { labels } = Astro.props;
       hsl: root.querySelector('[data-hsl]'),
     };
     const paletteGrid = root.querySelector('[data-palette-grid]');
+    const contrast = root.querySelector('[data-contrast]');
     const toast = root.querySelector('.toast');
     let current = { hex: '', rgb: '', hsl: '' };
 
@@ -173,12 +175,28 @@ const { labels } = Astro.props;
       };
     }
 
+    function relativeLuminance(hex) {
+      const channels = hex.match(/[0-9A-F]{2}/g)?.map((value) => parseInt(value, 16)) || [0, 0, 0];
+      const channel = (value) => {
+        const normalized = value / 255;
+        return normalized <= 0.04045 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+      };
+      return 0.2126 * channel(channels[0]) + 0.7152 * channel(channels[1]) + 0.0722 * channel(channels[2]);
+    }
+
     function renderColor(color) {
       current = color;
       swatch.style.background = color.hex;
       outputs.hex.textContent = color.hex;
       outputs.rgb.textContent = color.rgb;
       outputs.hsl.textContent = color.hsl;
+      if (contrast) {
+        const luminance = relativeLuminance(color.hex);
+        const blackRatio = (luminance + 0.05) / 0.05;
+        const whiteRatio = 1.05 / (luminance + 0.05);
+        const best = blackRatio >= whiteRatio ? labels.black : labels.white;
+        contrast.textContent = `${labels.contrastLabel}: ${labels.black} ${blackRatio.toFixed(2)}:1 · ${labels.white} ${whiteRatio.toFixed(2)}:1 · ${labels.bestText}: ${best}`;
+      }
     }
 
     function renderPalette() {
@@ -188,13 +206,8 @@ const { labels } = Astro.props;
         chip.type = 'button';
         chip.className = 'palette-chip';
         chip.style.background = color.hex;
-        const channels = color.hex.match(/[0-9A-F]{2}/g)?.map((value) => parseInt(value, 16)) || [0, 0, 0];
-        const channel = (value) => {
-          const normalized = value / 255;
-          return normalized <= 0.03928 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
-        };
-        const luminance = 0.2126 * channel(channels[0]) + 0.7152 * channel(channels[1]) + 0.0722 * channel(channels[2]);
-        const useDarkText = (luminance + 0.05) / 0.058 > 1.05 / (luminance + 0.05);
+        const luminance = relativeLuminance(color.hex);
+        const useDarkText = (luminance + 0.05) / 0.05 >= 1.05 / (luminance + 0.05);
         chip.style.color = useDarkText ? '#0f172a' : '#ffffff';
         chip.style.textShadow = useDarkText ? 'none' : '0 1px 2px rgba(0, 0, 0, 0.38)';
         chip.textContent = color.hex;

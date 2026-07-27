@@ -1,0 +1,23 @@
+---
+import PasswordGenerator from '../../../components/tools/PasswordGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishPasswordGenerator,
+  spanishPasswordGeneratorReview,
+} from '../../../i18n/expansion/es-tools-15';
+---
+
+<ExpansionToolLayout
+  routeKey="password-generator"
+  canonicalPath="/es/herramientas/generador-contrasenas-seguras/"
+  content={spanishPasswordGenerator}
+  categoryLabel="Seguridad y cuentas"
+  review={spanishPasswordGeneratorReview}
+  relatedTool={{
+    name: 'Generador de UUID v4',
+    description: 'Crea identificadores aleatorios para datos y pruebas; un UUID no debe utilizarse como contraseña.',
+    href: '/es/herramientas/generador-uuid-v4/',
+  }}
+>
+  <PasswordGenerator labels={spanishPasswordGenerator.labels} />
+</ExpansionToolLayout>

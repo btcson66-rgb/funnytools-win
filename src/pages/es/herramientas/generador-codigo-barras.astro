@@ -1,0 +1,23 @@
+---
+import BarcodeGenerator from '../../../components/tools/BarcodeGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishBarcodeGenerator,
+  spanishBarcodeGeneratorReview,
+} from '../../../i18n/expansion/es-tools-15';
+---
+
+<ExpansionToolLayout
+  routeKey="barcode-generator"
+  canonicalPath="/es/herramientas/generador-codigo-barras/"
+  content={spanishBarcodeGenerator}
+  categoryLabel="Comercio y operaciones"
+  review={spanishBarcodeGeneratorReview}
+  relatedTool={{
+    name: 'Generador de código QR',
+    description: 'Crea un QR cuando necesitas codificar una URL o un texto más largo para teléfonos.',
+    href: '/es/herramientas/generador-codigo-qr/',
+  }}
+>
+  <BarcodeGenerator labels={spanishBarcodeGenerator.labels} />
+</ExpansionToolLayout>

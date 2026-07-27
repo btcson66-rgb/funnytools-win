@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-14",
+  "activeBatch": "es-15",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -421,6 +421,36 @@
         "zh": "/tools/markdown-previewer/",
         "en": "/en/tools/markdown-previewer/",
         "es": "/es/herramientas/editor-markdown-online/"
+      }
+    },
+    {
+      "key": "password-generator",
+      "type": "tool",
+      "batch": "es-15",
+      "paths": {
+        "zh": "/tools/password-generator/",
+        "en": "/en/tools/password-generator/",
+        "es": "/es/herramientas/generador-contrasenas-seguras/"
+      }
+    },
+    {
+      "key": "barcode-generator",
+      "type": "tool",
+      "batch": "es-15",
+      "paths": {
+        "zh": "/tools/barcode-generator/",
+        "en": "/en/tools/barcode-generator/",
+        "es": "/es/herramientas/generador-codigo-barras/"
+      }
+    },
+    {
+      "key": "color-generator",
+      "type": "tool",
+      "batch": "es-15",
+      "paths": {
+        "zh": "/tools/color-generator/",
+        "en": "/en/tools/color-generator/",
+        "es": "/es/herramientas/generador-colores-hex-rgb-hsl/"
       }
     }
   ]
