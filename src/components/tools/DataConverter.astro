@@ -4,15 +4,122 @@ const { labels } = Astro.props;
 ---
 <section class="tool-widget card" data-data-converter data-labels={JSON.stringify(labels)}>
   <label class="textarea-label"><span>{labels.input}</span><textarea data-input rows="11" placeholder={labels.placeholder}></textarea></label>
+  {labels.delimiterLabel && (
+    <div class="form-grid two-col">
+      <label>
+        <span>{labels.delimiterLabel}</span>
+        <select data-delimiter>
+          <option value="">{labels.delimiterAuto}</option>
+          <option value=",">{labels.delimiterComma}</option>
+          <option value=";">{labels.delimiterSemicolon}</option>
+          <option value="\t">{labels.delimiterTab}</option>
+          <option value="|">{labels.delimiterPipe}</option>
+        </select>
+      </label>
+      <div class="converter-options">
+        {labels.dynamicTypingLabel && <label><input data-dynamic-typing type="checkbox" /> <span>{labels.dynamicTypingLabel}</span></label>}
+        {labels.escapeFormulaeLabel && <label><input data-escape-formulae type="checkbox" checked /> <span>{labels.escapeFormulaeLabel}</span></label>}
+        {labels.bomLabel && <label><input data-bom type="checkbox" checked /> <span>{labels.bomLabel}</span></label>}
+      </div>
+    </div>
+  )}
   <div class="actions"><button class="btn go" type="button" data-convert>{labels.convert}</button><button class="btn ghost" type="button" data-copy>{labels.copy}</button><button class="btn ghost" type="button" data-download>{labels.download}</button><button class="btn ghost" type="button" data-clear>{labels.clear}</button></div>
-  <p class="form-error" data-error role="alert" hidden></p><label class="textarea-label"><span>{labels.output}</span><textarea data-output rows="11" readonly></textarea></label>
+  <p class="form-error" data-error role="alert" hidden></p>
+  <p class="converter-summary" data-summary aria-live="polite" hidden></p>
+  <label class="textarea-label"><span>{labels.output}</span><textarea data-output rows="11" readonly></textarea></label>
 </section>
+<style>
+  .converter-options { display: grid; align-content: end; gap: 8px; padding: 4px 0; }
+  .converter-options label { display: flex; align-items: flex-start; gap: 8px; font-weight: 650; }
+  .converter-options input { margin-top: 3px; }
+  .converter-summary { margin: 8px 0; color: var(--muted); font-weight: 650; }
+</style>
 <script>
   // @ts-nocheck -- DOM nodes are guaranteed by this component template.
   document.querySelectorAll('[data-data-converter]').forEach((root) => {
-    const labels = JSON.parse(root.getAttribute('data-labels') || '{}'); const input=root.querySelector('[data-input]'); const output=root.querySelector('[data-output]'); const error=root.querySelector('[data-error]');
-    async function convert() { try { const Papa=(await import('papaparse')).default; if (labels.mode === 'csv-to-json') { const result=Papa.parse(input.value,{header:true,skipEmptyLines:true,dynamicTyping:true}); if(result.errors.length) throw new Error(result.errors[0].message); output.value=JSON.stringify(result.data,null,2); } else { const parsed=JSON.parse(input.value); if(!Array.isArray(parsed)) throw new Error(labels.arrayRequired); output.value=Papa.unparse(parsed); } error.hidden=true; } catch(caught) { error.textContent=caught instanceof Error?caught.message:String(caught); error.hidden=false; output.value=''; } }
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const input = root.querySelector('[data-input]');
+    const output = root.querySelector('[data-output]');
+    const error = root.querySelector('[data-error]');
+    const summary = root.querySelector('[data-summary]');
+    const delimiterControl = root.querySelector('[data-delimiter]');
+    const selectedDelimiter = () => delimiterControl?.value === '\\t' ? '\t' : (delimiterControl?.value || '');
+    const showError = (message) => {
+      error.textContent = message;
+      error.hidden = false;
+      summary.hidden = true;
+      output.value = '';
+    };
+    const showSummary = (rows, columns, delimiter) => {
+      if (!labels.summaryRows) return;
+      const delimiterName = delimiter === '\t'
+        ? labels.delimiterTab
+        : delimiter === ';'
+          ? labels.delimiterSemicolon
+          : delimiter === '|'
+            ? labels.delimiterPipe
+            : labels.delimiterComma;
+      summary.textContent = `${labels.summaryRows}: ${rows} · ${labels.summaryColumns}: ${columns} · ${labels.summaryDelimiter}: ${delimiterName}`;
+      summary.hidden = false;
+    };
+    async function convert() {
+      if (!input.value.trim()) {
+        showError(labels.emptyInput || 'Paste source data before converting.');
+        return;
+      }
+      try {
+        const Papa = (await import('papaparse')).default;
+        if (labels.mode === 'csv-to-json') {
+          const dynamicTypingControl = root.querySelector('[data-dynamic-typing]');
+          const result = Papa.parse(input.value, {
+            delimiter: selectedDelimiter(),
+            header: true,
+            skipEmptyLines: true,
+            dynamicTyping: dynamicTypingControl ? dynamicTypingControl.checked : true,
+          });
+          if (result.errors.length) {
+            const first = result.errors[0];
+            const row = Number.isInteger(first.row) ? ` (${labels.row || 'row'} ${first.row + 1})` : '';
+            throw new Error(`${labels.csvInvalid || first.message}${row}`);
+          }
+          output.value = JSON.stringify(result.data, null, 2);
+          showSummary(result.data.length, result.meta.fields?.length || 0, result.meta.delimiter);
+        } else {
+          let parsed;
+          try {
+            parsed = JSON.parse(input.value);
+          } catch {
+            throw new Error(labels.invalidJson || 'The input is not valid JSON.');
+          }
+          if (!Array.isArray(parsed) || (labels.flatObjectsOnly && parsed.some((row) => !row || typeof row !== 'object' || Array.isArray(row)))) {
+            throw new Error(labels.arrayRequired);
+          }
+          if (labels.flatObjectsOnly && parsed.some((row) => Object.values(row).some((value) => value && typeof value === 'object'))) {
+            throw new Error(labels.nestedNotSupported);
+          }
+          const columns = [...new Set(parsed.flatMap((row) => Object.keys(row)))];
+          if (!columns.length) throw new Error(labels.emptyArray || labels.arrayRequired);
+          output.value = Papa.unparse(parsed, {
+            delimiter: selectedDelimiter() || ',',
+            columns,
+            escapeFormulae: root.querySelector('[data-escape-formulae]')?.checked || false,
+          });
+          showSummary(parsed.length, columns.length, selectedDelimiter() || ',');
+        }
+        error.hidden = true;
+      } catch (caught) {
+        showError(caught instanceof Error ? caught.message : String(caught));
+      }
+    }
     root.querySelector('[data-convert]')?.addEventListener('click', convert); root.querySelector('[data-copy]')?.addEventListener('click',()=>output.value&&navigator.clipboard.writeText(output.value));
-    root.querySelector('[data-clear]')?.addEventListener('click',()=>{input.value='';output.value='';error.hidden=true;}); root.querySelector('[data-download]')?.addEventListener('click',()=>{if(!output.value)return;const ext=labels.mode==='csv-to-json'?'json':'csv';const url=URL.createObjectURL(new Blob([output.value],{type:ext==='json'?'application/json':'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=`converted.${ext}`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+    root.querySelector('[data-clear]')?.addEventListener('click',()=>{input.value='';output.value='';error.hidden=true;summary.hidden=true;input.focus();});
+    root.querySelector('[data-download]')?.addEventListener('click',()=>{
+      if(!output.value)return;
+      const ext=labels.mode==='csv-to-json'?'json':'csv';
+      const addBom = ext === 'csv' && root.querySelector('[data-bom]')?.checked;
+      const body = addBom ? `\uFEFF${output.value}` : output.value;
+      const url=URL.createObjectURL(new Blob([body],{type:ext==='json'?'application/json;charset=utf-8':'text/csv;charset=utf-8'}));
+      const a=document.createElement('a');a.href=url;a.download=labels.fileName || `converted.${ext}`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+    });
   });
 </script>

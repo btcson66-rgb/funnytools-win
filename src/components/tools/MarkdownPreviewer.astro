@@ -3,13 +3,58 @@ interface Props { labels: Record<string, string>; }
 const { labels } = Astro.props;
 ---
 <section class="tool-widget card" data-markdown-tool data-labels={JSON.stringify(labels)}>
-  <div class="markdown-grid"><label><span>{labels.input}</span><textarea data-input rows="18" spellcheck="false">## Markdown Preview
+  <div class="markdown-grid"><label><span>{labels.input}</span><textarea data-input rows="18" spellcheck="false">{labels.starter || `## Markdown Preview
 
-Type **Markdown** here.</textarea></label><div><span class="field-title">{labels.preview}</span><article class="preview" data-preview></article></div></div>
+Type **Markdown** here.`}</textarea></label><div><span class="field-title">{labels.preview}</span><article class="preview" data-preview></article></div></div>
   <div class="actions"><button class="btn ghost" type="button" data-copy>{labels.copyHtml}</button><button class="btn ghost" type="button" data-download>{labels.download}</button></div>
+  <p class="form-error" data-error role="alert" hidden></p>
 </section>
 <style>.markdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.markdown-grid textarea{width:100%;min-height:360px}.field-title{display:block;margin-bottom:8px;font-weight:800}.preview{min-height:360px;padding:14px;border:1px solid var(--line);border-radius:8px;background:var(--card);overflow-wrap:anywhere}.preview :global(pre){overflow:auto;padding:12px;background:var(--bg)}.preview :global(img){max-width:100%}@media(max-width:760px){.markdown-grid{grid-template-columns:1fr}}</style>
 <script>
   // @ts-nocheck -- DOM nodes are guaranteed by this component template.
-  document.querySelectorAll('[data-markdown-tool]').forEach(async(root)=>{const input=root.querySelector('[data-input]');const preview=root.querySelector('[data-preview]');const [{marked},{default:DOMPurify}]=await Promise.all([import('marked'),import('dompurify')]);function render(){preview.innerHTML=DOMPurify.sanitize(marked.parse(input.value,{async:false}));}input.addEventListener('input',render);root.querySelector('[data-copy]')?.addEventListener('click',()=>navigator.clipboard.writeText(preview.innerHTML));root.querySelector('[data-download]')?.addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([preview.innerHTML],{type:'text/html'}));const a=document.createElement('a');a.href=url;a.download='markdown-preview.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});render();});
+  document.querySelectorAll('[data-markdown-tool]').forEach(async(root)=>{
+    const labels=JSON.parse(root.getAttribute('data-labels') || '{}');
+    const input=root.querySelector('[data-input]');
+    const preview=root.querySelector('[data-preview]');
+    const error=root.querySelector('[data-error]');
+    try {
+      const [{marked},{default:DOMPurify}]=await Promise.all([import('marked'),import('dompurify')]);
+      function render(){
+        try {
+          preview.innerHTML=DOMPurify.sanitize(marked.parse(input.value,{async:false}));
+          error.hidden=true;
+        } catch {
+          preview.replaceChildren();
+          error.textContent=labels.renderError || 'The preview could not be rendered.';
+          error.hidden=false;
+        }
+      }
+      input.addEventListener('input',render);
+      preview.addEventListener('click',(event)=>{
+        if(event.target.closest('a')) event.preventDefault();
+      });
+      root.querySelector('[data-copy]')?.addEventListener('click',()=>navigator.clipboard.writeText(preview.innerHTML));
+      root.querySelector('[data-download]')?.addEventListener('click',()=>{
+        const title=labels.documentTitle || 'Markdown preview';
+        const documentHtml=`<!doctype html>
+<html lang="${labels.documentLanguage || 'en'}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title.replace(/[<>&"']/g,'')}</title>
+<style>body{max-width:840px;margin:40px auto;padding:0 20px;font:16px/1.65 system-ui,sans-serif;color:#172033}pre{overflow:auto;padding:16px;background:#f3f5f8;border-radius:8px}code{font-family:ui-monospace,monospace}img{max-width:100%}table{border-collapse:collapse}th,td{border:1px solid #ccd3dd;padding:8px;text-align:left}blockquote{border-left:4px solid #9aa7b8;margin-left:0;padding-left:16px;color:#4b5563}</style>
+</head>
+<body>
+${preview.innerHTML}
+</body>
+</html>`;
+        const url=URL.createObjectURL(new Blob([documentHtml],{type:'text/html;charset=utf-8'}));
+        const a=document.createElement('a');a.href=url;a.download=labels.fileName || 'markdown-preview.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+      });
+      render();
+    } catch {
+      error.textContent=labels.loadError || 'The preview libraries could not be loaded.';
+      error.hidden=false;
+    }
+  });
 </script>

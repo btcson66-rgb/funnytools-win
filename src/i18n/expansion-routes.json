@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-13",
+  "activeBatch": "es-14",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -391,6 +391,36 @@
         "zh": "/tools/uuid-generator/",
         "en": "/en/tools/uuid-generator/",
         "es": "/es/herramientas/generador-uuid-v4/"
+      }
+    },
+    {
+      "key": "csv-to-json",
+      "type": "tool",
+      "batch": "es-14",
+      "paths": {
+        "zh": "/tools/csv-to-json/",
+        "en": "/en/tools/csv-to-json/",
+        "es": "/es/herramientas/convertir-csv-a-json/"
+      }
+    },
+    {
+      "key": "json-to-csv",
+      "type": "tool",
+      "batch": "es-14",
+      "paths": {
+        "zh": "/tools/json-to-csv/",
+        "en": "/en/tools/json-to-csv/",
+        "es": "/es/herramientas/convertir-json-a-csv/"
+      }
+    },
+    {
+      "key": "markdown-previewer",
+      "type": "tool",
+      "batch": "es-14",
+      "paths": {
+        "zh": "/tools/markdown-previewer/",
+        "en": "/en/tools/markdown-previewer/",
+        "es": "/es/herramientas/editor-markdown-online/"
       }
     }
   ]

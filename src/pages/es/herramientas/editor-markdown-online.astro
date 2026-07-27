@@ -1,0 +1,20 @@
+---
+import MarkdownPreviewer from '../../../components/tools/MarkdownPreviewer.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishMarkdownPreviewer, spanishMarkdownPreviewerReview } from '../../../i18n/expansion/es-tools-14';
+---
+
+<ExpansionToolLayout
+  routeKey="markdown-previewer"
+  canonicalPath="/es/herramientas/editor-markdown-online/"
+  content={spanishMarkdownPreviewer}
+  categoryLabel="Escritura y desarrollo"
+  review={spanishMarkdownPreviewerReview}
+  relatedTool={{
+    name: 'Formatear y validar JSON',
+    description: 'Comprueba JSON cuando tu documentación incluye ejemplos de configuración o respuestas de API.',
+    href: '/es/herramientas/formatear-validar-json/',
+  }}
+>
+  <MarkdownPreviewer labels={spanishMarkdownPreviewer.labels} />
+</ExpansionToolLayout>

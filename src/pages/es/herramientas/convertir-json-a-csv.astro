@@ -1,0 +1,20 @@
+---
+import DataConverter from '../../../components/tools/DataConverter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishJsonToCsv, spanishJsonToCsvReview } from '../../../i18n/expansion/es-tools-14';
+---
+
+<ExpansionToolLayout
+  routeKey="json-to-csv"
+  canonicalPath="/es/herramientas/convertir-json-a-csv/"
+  content={spanishJsonToCsv}
+  categoryLabel="Datos y desarrollo"
+  review={spanishJsonToCsvReview}
+  relatedTool={{
+    name: 'Convertir CSV a JSON',
+    description: 'Convierte una tabla con encabezados en un array de objetos y controla la inferencia de tipos.',
+    href: '/es/herramientas/convertir-csv-a-json/',
+  }}
+>
+  <DataConverter labels={spanishJsonToCsv.labels} />
+</ExpansionToolLayout>
