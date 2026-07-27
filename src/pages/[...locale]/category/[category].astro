@@ -1,6 +1,7 @@
 ---
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import CategoryIcon from '../../../components/CategoryIcon.astro';
+import ContentValueReview from '../../../components/ContentValueReview.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
 import { audiences, isAudienceAvailableInLocale, viewAudience } from '../../../data/audiences';
@@ -12,6 +13,7 @@ import { workflows, isWorkflowAvailableInLocale, viewWorkflow } from '../../../d
 import { t } from '../../../i18n/ui';
 import { categoryUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/url';
 import { breadcrumbJsonLd, collectionPageJsonLd } from '../../../lib/seo';
+import { buildCategoryValueReview } from '../../../lib/contentValue';
 
 export function getStaticPaths() {
   // Only generate pages for categories that actually have live tools,
@@ -104,6 +106,11 @@ const categoryRelatedCopy = lang === 'zh'
 
 const blurbFor = (slug: string): string =>
   content?.toolBlurbs[slug]?.[lang] ?? categoryTools.find((tool) => tool.slug === slug)?.short[lang] ?? '';
+const valueReview = buildCategoryValueReview(
+  lang,
+  categoryData.name[lang],
+  categoryTools.slice(0, 3).map((tool) => ({ name: tool.name[lang], summary: blurbFor(tool.slug) })),
+);
 
 const relatedCategories = (content?.relatedCategories ?? [])
   .map((id) => getCategoryById(id))
@@ -246,6 +253,10 @@ if (faqItems.length > 0) {
       </ul>
     </section>
   )}
+
+  <div class="wrap">
+    <ContentValueReview {...valueReview} />
+  </div>
 
   <section class="wrap content-section">
     <h2>{ui.category.recommendedHeading}</h2>

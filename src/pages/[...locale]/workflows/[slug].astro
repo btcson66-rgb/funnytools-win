@@ -1,5 +1,6 @@
 ---
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import ContentValueReview from '../../../components/ContentValueReview.astro';
 import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
@@ -10,6 +11,7 @@ import { workflows, isWorkflowAvailableInLocale, viewWorkflow, type Workflow } f
 import { absoluteUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/url';
 import { breadcrumbJsonLd, webPageJsonLd } from '../../../lib/seo';
 import { t } from '../../../i18n/ui';
+import { buildWorkflowValueReview, CONTENT_REVIEWED_AT } from '../../../lib/contentValue';
 
 export function getStaticPaths() {
   return workflows.flatMap((workflow) => {
@@ -68,6 +70,8 @@ const liveTool = (slug: string): ToolMeta | undefined => {
   return tool?.status === 'live' ? tool : undefined;
 };
 const recommendedTools = workflow.recommendedToolIds.map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool));
+const valueReview = buildWorkflowValueReview(lang, workflow, recommendedTools.map((tool) => tool.name[lang]));
+const effectiveUpdatedAt = CONTENT_REVIEWED_AT;
 const relatedGuides: SeoGuideView[] = workflow.relatedGuideIds
   .map((slug) => seoGuides.find((candidate) => candidate.slug === slug))
   .filter((candidate): candidate is SeoGuide => candidate != null && isSeoGuideAvailableInLocale(candidate, lang))
@@ -94,7 +98,7 @@ const articleLd = {
   '@type': 'Article',
   headline: workflow.h1,
   description: workflow.metaDescription,
-  dateModified: workflow.updatedAt,
+  dateModified: effectiveUpdatedAt,
   inLanguage: SITE.hreflang[lang],
   mainEntityOfPage: absoluteUrl(workflowPath),
   url: absoluteUrl(workflowPath),
@@ -124,7 +128,7 @@ const articleLd = {
       <p class="eyebrow">{copy.eyebrow}</p>
       <h1>{workflow.h1}</h1>
       <p class="lead">{workflow.purpose}</p>
-      <p class="workflow-date">{copy.updated}: <time datetime={workflow.updatedAt}>{workflow.updatedAt}</time></p>
+      <p class="workflow-date">{copy.updated}: <time datetime={effectiveUpdatedAt}>{effectiveUpdatedAt}</time></p>
     </header>
 
     <section class="workflow-block" aria-labelledby="purpose-title">
@@ -138,6 +142,8 @@ const articleLd = {
         {workflow.steps.map((step) => <li>{step}</li>)}
       </ol>
     </section>
+
+    <ContentValueReview {...valueReview} />
 
     {recommendedTools.length > 0 && (
       <section class="workflow-block" aria-labelledby="tools-title">

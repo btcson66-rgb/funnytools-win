@@ -1,0 +1,124 @@
+---
+interface ReviewPanel {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  heading: string;
+  intro: string;
+  panels: ReviewPanel[];
+  checklistHeading: string;
+  checklist: string[];
+  reviewedLabel: string;
+  reviewedAt: string;
+}
+
+const {
+  heading,
+  intro,
+  panels,
+  checklistHeading,
+  checklist,
+  reviewedLabel,
+  reviewedAt,
+} = Astro.props;
+---
+
+<section class="content-value-review" data-content-value-review>
+  <div class="content-value-review__header">
+    <div>
+      <p class="eyebrow">{reviewedLabel}: <time datetime={reviewedAt}>{reviewedAt}</time></p>
+      <h2>{heading}</h2>
+    </div>
+    <span class="content-value-review__badge" aria-label={reviewedLabel}>✓</span>
+  </div>
+  <p>{intro}</p>
+  <div class="content-value-review__grid">
+    {panels.map((panel) => (
+      <article>
+        <h3>{panel.title}</h3>
+        <p>{panel.text}</p>
+      </article>
+    ))}
+  </div>
+  <h3 class="content-value-review__check-title">{checklistHeading}</h3>
+  <ul class="check-list">
+    {checklist.map((item) => <li>{item}</li>)}
+  </ul>
+</section>
+
+<style>
+  .content-value-review {
+    margin-top: 36px;
+    padding: clamp(20px, 4vw, 30px);
+    border: 1px solid color-mix(in srgb, var(--brand) 34%, var(--line));
+    border-radius: 16px;
+    background:
+      linear-gradient(145deg, color-mix(in srgb, var(--brand) 7%, var(--card)), var(--card) 55%);
+  }
+
+  .content-value-review__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .content-value-review__header h2 {
+    margin-top: 4px;
+  }
+
+  .content-value-review__badge {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    background: var(--brand);
+    font-weight: 900;
+  }
+
+  .content-value-review > p,
+  .content-value-review article p,
+  .content-value-review li {
+    color: #384455;
+    line-height: 1.8;
+  }
+
+  .content-value-review__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .content-value-review__grid article {
+    padding: 17px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--card);
+  }
+
+  .content-value-review__grid h3 {
+    margin: 0 0 8px;
+    font-size: 1.02rem;
+  }
+
+  .content-value-review__grid p {
+    margin: 0;
+  }
+
+  .content-value-review__check-title {
+    margin: 24px 0 10px;
+    font-size: 1.08rem;
+  }
+
+  @media (max-width: 760px) {
+    .content-value-review__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

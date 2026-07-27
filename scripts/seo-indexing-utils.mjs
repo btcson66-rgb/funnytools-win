@@ -275,6 +275,9 @@ export function sourceCandidatesForRoute(route) {
       'src/data/tools.ts',
       `src/i18n/tools/${parts[1]}.ts`,
       'src/i18n/tools/content-enhancements.ts',
+      'src/lib/contentValue.ts',
+      'src/components/ContentValueReview.astro',
+      'src/layouts/ToolLayout.astro',
       'src/pages/[...locale]/tools/[slug].astro',
     ];
   }
@@ -282,6 +285,8 @@ export function sourceCandidatesForRoute(route) {
     return [
       'src/data/categories.ts',
       'src/data/categoryContent.ts',
+      'src/lib/contentValue.ts',
+      'src/components/ContentValueReview.astro',
       'src/pages/[...locale]/category/[category].astro',
     ];
   }
@@ -298,6 +303,8 @@ export function sourceCandidatesForRoute(route) {
     return [
       'src/data/seoGuides.ts',
       'src/data/workflows.ts',
+      'src/lib/contentValue.ts',
+      'src/components/ContentValueReview.astro',
       'src/pages/[...locale]/guides/index.astro',
       'src/pages/[...locale]/guides/[slug].astro',
     ];
@@ -306,8 +313,18 @@ export function sourceCandidatesForRoute(route) {
     return [
       'src/data/workflows.ts',
       'src/data/seoGuides.ts',
+      'src/lib/contentValue.ts',
+      'src/components/ContentValueReview.astro',
       'src/pages/[...locale]/workflows/index.astro',
       'src/pages/[...locale]/workflows/[slug].astro',
+    ];
+  }
+  if (parts[0] === 'for' && parts[1]) {
+    return [
+      'src/data/audiences.ts',
+      'src/lib/contentValue.ts',
+      'src/components/ContentValueReview.astro',
+      'src/pages/[...locale]/for/[audience].astro',
     ];
   }
   if (parts[0] === 'education-statistics') {
@@ -327,13 +344,22 @@ export function sourceCandidatesForRoute(route) {
 }
 
 export function lastmodForPage(page, previousLastmod = '') {
-  const dates = sourceCandidatesForRoute(page.route)
+  const sourceDates = sourceCandidatesForRoute(page.route)
     .filter((candidate) => existsSync(join(rootDir, candidate)))
     .map(gitDateForPath)
-    .filter(Boolean)
-    .sort();
+    .filter(Boolean);
+  const html = readText(page.file);
+  const contentDates = [
+    ...[...html.matchAll(/["']dateModified["']\s*:\s*["'](\d{4}-\d{2}-\d{2})["']/g)]
+      .map((match) => match[1]),
+    html.match(/data-content-value-review[\s\S]*?<time\b[^>]*datetime=["'](\d{4}-\d{2}-\d{2})["']/i)?.[1] ?? '',
+  ].filter(Boolean);
+  const dates = [
+    ...sourceDates,
+    ...contentDates,
+    ...(/^\d{4}-\d{2}-\d{2}$/.test(previousLastmod) ? [previousLastmod] : []),
+  ].sort();
   if (dates.length) return dates.at(-1);
-  if (/^\d{4}-\d{2}-\d{2}$/.test(previousLastmod)) return previousLastmod;
   return statSync(page.file).mtime.toISOString().slice(0, 10);
 }
 

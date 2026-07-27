@@ -1,6 +1,6 @@
 {
   "name": "funnytools",
-  "version": "5.28.3",
+  "version": "5.29.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,6 +11,7 @@
     "audit:analytics": "node scripts/analytics-preflight.mjs",
     "audit:pwa": "node scripts/pwa-preflight.mjs",
     "audit:security": "node scripts/security-preflight.mjs",
+    "audit:content-value": "node scripts/content-value-audit.mjs",
     "audit:lang-switch": "node scripts/lang-switch-audit.mjs",
     "audit:ui-dark": "node scripts/ui-dark-audit.mjs",
     "content:audit": "node scripts/content-quality-audit.mjs",
@@ -28,7 +29,7 @@
     "report:analytics": "node scripts/analytics-report.mjs",
     "traffic-report": "node scripts/traffic-report/index.mjs",
     "daily-health": "node health-check.mjs",
-    "preflight": "npm run build && npm run seo:sitemap && npm run seo:check && npm run audit:seo-collapse && npm run audit:lang-switch && npm run audit:adsense && npm run audit:analytics && npm run audit:pwa && npm run audit:security",
+    "preflight": "npm run build && npm run seo:sitemap && npm run seo:check && npm run audit:seo-collapse && npm run audit:lang-switch && npm run audit:adsense && npm run audit:content-value && npm run audit:analytics && npm run audit:pwa && npm run audit:security",
     "stats:site": "node scripts/site-stats.mjs",
     "release": "node scripts/site-stats.mjs && node scripts/release.mjs"
   },

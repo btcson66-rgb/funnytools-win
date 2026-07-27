@@ -1,5 +1,6 @@
 ---
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import ContentValueReview from '../../../components/ContentValueReview.astro';
 import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
@@ -11,6 +12,7 @@ import { getWorkflow, isWorkflowAvailableInLocale, viewWorkflow } from '../../..
 import { absoluteUrl, categoryUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/url';
 import { breadcrumbJsonLd, webPageJsonLd } from '../../../lib/seo';
 import { t } from '../../../i18n/ui';
+import { buildAudienceValueReview } from '../../../lib/contentValue';
 
 export function getStaticPaths() {
   return audiences.flatMap((audience) => {
@@ -70,6 +72,7 @@ const liveTool = (slug: string): ToolMeta | undefined => {
   return tool?.status === 'live' ? tool : undefined;
 };
 const recommendedTools = audience.recommendedToolIds.map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool));
+const valueReview = buildAudienceValueReview(lang, audience, recommendedTools.map((tool) => tool.name[lang]));
 const relatedCategories = audience.relatedCategoryIds
   .map(getCategoryById)
   .filter((category): category is (typeof categories)[number] => Boolean(category));
@@ -157,6 +160,8 @@ const collectionLd = {
         {audience.workflowSuggestions.map((step) => <li>{step}</li>)}
       </ol>
     </section>
+
+    <ContentValueReview {...valueReview} />
 
     {audience.scenarios && audience.scenarios.length > 0 && (
       <section class="audience-block" aria-labelledby="audience-scenarios-title">

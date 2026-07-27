@@ -164,12 +164,17 @@ function completeZhMetaDescription(description: string): string {
 }
 
 function localizeRawGuide(guide: RawSeoGuide): SeoGuide {
-  const en = englishGuideContent[guide.slug];
+  const translated = englishGuideContent[guide.slug];
+  const en: EnglishSeoGuideContent = translated ?? guide;
   const zhMetaDescription = guideSeoOverrides[guide.slug]?.zhMetaDescription ?? guide.metaDescription;
 
   return {
     ...guide,
-    locales: ['zh', 'en'],
+    // A scheduled Chinese article must never break the whole build merely
+    // because its English editorial pass is not finished yet. Keep the
+    // original article publishable in Chinese, and only expose an English
+    // route/hreflang once a real translation exists.
+    locales: translated ? ['zh', 'en'] : ['zh'],
     title: text(guide.title, en.title),
     metaTitle: text(guide.metaTitle, guideSeoOverrides[guide.slug]?.enMetaTitle ?? en.metaTitle),
     metaDescription: text(completeZhMetaDescription(zhMetaDescription), en.metaDescription),

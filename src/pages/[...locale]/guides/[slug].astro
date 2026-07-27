@@ -1,5 +1,6 @@
 ---
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import ContentValueReview from '../../../components/ContentValueReview.astro';
 import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
@@ -10,6 +11,7 @@ import { workflows, isWorkflowAvailableInLocale, viewWorkflow } from '../../../d
 import { absoluteUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/url';
 import { breadcrumbJsonLd, webPageJsonLd } from '../../../lib/seo';
 import { t } from '../../../i18n/ui';
+import { buildGuideValueReview, CONTENT_REVIEWED_AT } from '../../../lib/contentValue';
 
 export function getStaticPaths() {
   return seoGuides.flatMap((guide) => {
@@ -93,12 +95,14 @@ const relatedWorkflowViews = guide.relatedWorkflowIds
   .map((candidate) => viewWorkflow(candidate, lang));
 const hasAlternates = sourceGuide.locales.includes('zh') && sourceGuide.locales.includes('en');
 const faqItems = guide.faq.map((item) => ({ q: item.question, a: item.answer }));
+const valueReview = buildGuideValueReview(lang, guide);
+const effectiveUpdatedAt = CONTENT_REVIEWED_AT;
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: guide.h1,
   description: guide.metaDescription,
-  dateModified: guide.updatedAt,
+  dateModified: effectiveUpdatedAt,
   inLanguage: SITE.hreflang[lang],
   mainEntityOfPage: guideUrl,
   url: guideUrl,
@@ -144,7 +148,7 @@ const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guide
       <p class="eyebrow">{copy.eyebrow}</p>
       <h1>{guide.h1}</h1>
       <p class="lead">{guide.summary}</p>
-      <p class="guide-date">{copy.updated}: <time datetime={guide.updatedAt}>{guide.updatedAt}</time></p>
+      <p class="guide-date">{copy.updated}: <time datetime={effectiveUpdatedAt}>{effectiveUpdatedAt}</time></p>
     </header>
 
     <section class="guide-block" aria-labelledby="problem-title">
@@ -181,6 +185,8 @@ const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guide
         {guide.commonMistakes.map((mistake) => <li>{mistake}</li>)}
       </ul>
     </section>
+
+    <ContentValueReview {...valueReview} />
 
     {relatedTools.length > 0 && (
       <section class="guide-block tool-section" aria-labelledby="tools-title">
