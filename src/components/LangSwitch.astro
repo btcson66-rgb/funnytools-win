@@ -11,7 +11,7 @@ interface Props {
 const { lang, segments = [] } = Astro.props;
 const ui = t(lang);
 const otherLang: Locale = lang === 'zh' ? 'en' : 'zh';
-const label = otherLang === 'zh' ? '繁中' : 'English beta';
+const label = otherLang === 'zh' ? '繁中' : 'English';
 ---
 
 <a class="lang-switch" href={localePath(otherLang, ...segments)} aria-label={ui.languageSwitch} data-language-switch data-target-lang={otherLang}>

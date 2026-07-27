@@ -53,6 +53,10 @@ if (!existsSync(dist)) {
     const installPrompt = read(installPromptPath);
     mustInclude('install prompt', installPrompt, "navigator.serviceWorker.register('/sw.js')");
     mustInclude('install prompt', installPrompt, 'dataset.offline');
+    mustInclude('install prompt', installPrompt, 'freetools-visit-count');
+    mustInclude('install prompt', installPrompt, 'sessionStorage');
+    mustInclude('install prompt', installPrompt, "document.querySelector('.tool-interaction')");
+    mustInclude('install prompt', installPrompt, 'if (!installEvent || !isPromptEligible()) return');
   }
 
   // 樣式可能是外部 CSS 檔或（inlineStylesheets: 'always' 後）內嵌於頁面 <style>，
@@ -85,4 +89,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('PWA audit passed: manifest install scope, SW ad/analytics bypass, network-first navigations, offline ad hiding, and GA4/AdSense tags verified.');
+console.log('PWA audit passed: manifest install scope, deferred install prompt, SW ad/analytics bypass, network-first navigations, offline ad hiding, and GA4/AdSense tags verified.');
