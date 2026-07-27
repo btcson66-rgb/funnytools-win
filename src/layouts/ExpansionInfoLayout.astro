@@ -1,0 +1,175 @@
+---
+import ExpansionLayout from './ExpansionLayout.astro';
+import type { SpanishInfoPage } from '../i18n/expansion/es-pages';
+import { expansionRoutesReviewedAt } from '../i18n/expansionRoutes';
+
+interface Props {
+  currentKey: string;
+  canonicalPath: string;
+  content: SpanishInfoPage;
+}
+
+const { currentKey, canonicalPath, content } = Astro.props;
+const absoluteUrl = `https://funnytools.win${canonicalPath}`;
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: content.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+const webPageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: content.title,
+  description: content.seoDescription,
+  url: absoluteUrl,
+  inLanguage: 'es',
+  dateModified: expansionRoutesReviewedAt,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'FunnyTools',
+    url: 'https://funnytools.win/es/',
+  },
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'FunnyTools en español',
+      item: 'https://funnytools.win/es/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: content.title,
+      item: absoluteUrl,
+    },
+  ],
+};
+---
+
+<ExpansionLayout
+  currentKey={currentKey}
+  canonicalPath={canonicalPath}
+  title={content.seoTitle}
+  description={content.seoDescription}
+  keywords={content.keywords}
+  type="article"
+  jsonLd={[webPageJsonLd, faqJsonLd, breadcrumbJsonLd]}
+>
+  <article
+    class="info-page"
+    data-native-locale="es"
+    data-editorial-mode="native-search-intent"
+  >
+    <section class="wrap page-head">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="/es/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{content.title}</span>
+      </nav>
+      <p class="eyebrow">{content.eyebrow}</p>
+      <h1>{content.title}</h1>
+      <p class="lead">{content.intro}</p>
+    </section>
+
+    <section class="wrap content-section answer-panel" aria-labelledby={`${currentKey}-respuesta`}>
+      <p class="eyebrow">Respuesta directa</p>
+      <h2 id={`${currentKey}-respuesta`}>Lo esencial en menos de un minuto</h2>
+      {content.directAnswer.map((paragraph) => <p>{paragraph}</p>)}
+    </section>
+
+    {content.sections.map((section, index) => (
+      <section class="wrap content-section" aria-labelledby={`${currentKey}-seccion-${index}`}>
+        <h2 id={`${currentKey}-seccion-${index}`}>{section.heading}</h2>
+        {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        {section.items && (
+          <ul class="check-list">
+            {section.items.map((item) => <li>{item}</li>)}
+          </ul>
+        )}
+      </section>
+    ))}
+
+    <section
+      class="wrap content-section review-block"
+      data-content-value-review
+      data-review-key={currentKey}
+      data-reviewed-at={expansionRoutesReviewedAt}
+      aria-labelledby={`${currentKey}-revision`}
+    >
+      <p class="eyebrow">Revisión editorial y de funcionamiento</p>
+      <h2 id={`${currentKey}-revision`}>{content.review.heading}</h2>
+      <p>{content.review.intro}</p>
+      <div class="case-grid">
+        {content.review.checks.map((check) => (
+          <article class="case-card">
+            <h3>{check.title}</h3>
+            <p>{check.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby={`${currentKey}-faq`}>
+      <h2 id={`${currentKey}-faq`}>Preguntas frecuentes</h2>
+      <div class="faq-list">
+        {content.faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    {content.sources && (
+      <section class="wrap content-section" aria-labelledby={`${currentKey}-fuentes`}>
+        <h2 id={`${currentKey}-fuentes`}>Fuentes y controles externos</h2>
+        <p>Las fuentes ayudan a comprobar las prácticas de terceros y las obligaciones de información. La descripción del funcionamiento de FunnyTools se basa en la implementación publicada del sitio.</p>
+        <div class="source-list">
+          {content.sources.map((source) => (
+            <a href={source.href} rel="noopener noreferrer">
+              <strong>{source.label}</strong>
+              <span>{source.note}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <p class="wrap updated">
+      Última revisión editorial: <time datetime={expansionRoutesReviewedAt}>{expansionRoutesReviewedAt}</time>
+    </p>
+  </article>
+</ExpansionLayout>
+
+<style>
+  .answer-panel {
+    border-left: 4px solid var(--brand);
+  }
+
+  .source-list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .source-list a {
+    display: grid;
+    gap: 6px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--card);
+  }
+
+  .source-list span {
+    color: var(--muted);
+  }
+</style>

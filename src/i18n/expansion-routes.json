@@ -1,9 +1,12 @@
 {
   "reviewedAt": "2026-07-27",
+  "activeBatch": "es-02",
+  "maxBatchSize": 3,
   "routes": [
     {
       "key": "home",
       "type": "home",
+      "batch": "es-01",
       "paths": {
         "zh": "/",
         "en": "/en/",
@@ -13,6 +16,7 @@
     {
       "key": "grade-average",
       "type": "tool",
+      "batch": "es-01",
       "paths": {
         "zh": "/tools/grade-average/",
         "en": "/en/tools/grade-average/",
@@ -22,10 +26,41 @@
     {
       "key": "merge-pdf",
       "type": "tool",
+      "batch": "es-01",
       "paths": {
         "zh": "/tools/merge-pdf/",
         "en": "/en/tools/merge-pdf/",
         "es": "/es/herramientas/unir-pdf/"
+      }
+    },
+    {
+      "key": "tools-index",
+      "type": "page",
+      "batch": "es-02",
+      "paths": {
+        "zh": "/tools/",
+        "en": "/en/tools/",
+        "es": "/es/herramientas/"
+      }
+    },
+    {
+      "key": "privacy",
+      "type": "page",
+      "batch": "es-02",
+      "paths": {
+        "zh": "/privacy/",
+        "en": "/en/privacy/",
+        "es": "/es/privacidad/"
+      }
+    },
+    {
+      "key": "about-tools",
+      "type": "page",
+      "batch": "es-02",
+      "paths": {
+        "zh": "/about-tools/",
+        "en": "/en/about-tools/",
+        "es": "/es/como-funcionan-las-herramientas/"
       }
     }
   ]

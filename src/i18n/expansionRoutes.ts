@@ -6,6 +6,7 @@ export type RouteLocale = 'zh' | 'en' | ExpansionLocale;
 interface ExpansionRoute {
   key: string;
   type: 'home' | 'tool' | 'page';
+  batch: string;
   paths: Partial<Record<RouteLocale, string>>;
 }
 

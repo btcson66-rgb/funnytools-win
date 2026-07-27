@@ -66,8 +66,12 @@ function jsonLdTypes(html) {
 }
 
 const spanishRoutes = registry.routes.filter((route) => route.paths?.es);
-if (spanishRoutes.length !== 3) {
-  fail(`Spanish publication batch must contain exactly 3 routes; found ${spanishRoutes.length}.`);
+const activeBatchRoutes = registry.routes.filter((route) => route.batch === registry.activeBatch);
+if (activeBatchRoutes.length !== registry.maxBatchSize) {
+  fail(`Active publication batch ${registry.activeBatch} must contain exactly ${registry.maxBatchSize} routes; found ${activeBatchRoutes.length}.`);
+}
+if (activeBatchRoutes.some((route) => !route.paths?.es)) {
+  fail(`Active publication batch ${registry.activeBatch} contains a route without a Spanish path.`);
 }
 
 for (const route of spanishRoutes) {
@@ -89,11 +93,15 @@ for (const route of spanishRoutes) {
   const robotsNoindex = /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html);
   const types = jsonLdTypes(html);
   const expectedMinimum = route.type === 'tool' ? 950 : 800;
-  const requiredTerms = route.key === 'grade-average'
-    ? ['promedio de notas', 'nota media', 'media ponderada']
-    : route.key === 'merge-pdf'
-      ? ['unir pdf', 'navegador', 'archivos']
-      : ['herramientas', 'sin registro', 'navegador'];
+  const requiredTermsByKey = {
+    home: ['herramientas', 'sin registro', 'navegador'],
+    'grade-average': ['promedio de notas', 'nota media', 'media ponderada'],
+    'merge-pdf': ['unir pdf', 'navegador', 'archivos'],
+    'tools-index': ['herramientas online', 'sin registro', 'procesamiento local'],
+    privacy: ['política de privacidad', 'cookies', 'google analytics'],
+    'about-tools': ['procesamiento local', 'navegador', 'comprobar'],
+  };
+  const requiredTerms = requiredTermsByKey[route.key] ?? ['herramientas', 'navegador', 'comprobar'];
 
   if (!/<html\b[^>]*lang=["']es["']/i.test(html)) fail(`${pathname}: html lang must be es.`);
   if (canonical !== `${siteOrigin}${pathname}`) fail(`${pathname}: canonical mismatch (${canonical || 'missing'}).`);
@@ -109,6 +117,10 @@ for (const route of spanishRoutes) {
     fail(`${pathname}: tool page must include WebApplication and HowTo JSON-LD.`);
   }
   if (route.type === 'home' && !types.has('WebSite')) fail(`${pathname}: homepage missing WebSite JSON-LD.`);
+  if (route.key === 'tools-index' && !types.has('CollectionPage')) fail(`${pathname}: tools index missing CollectionPage JSON-LD.`);
+  if (route.type === 'page' && route.key !== 'tools-index' && !types.has('WebPage')) {
+    fail(`${pathname}: information page missing WebPage JSON-LD.`);
+  }
   if (/(?:How to use|What this tool can do|Use cases|Last updated|Privacy & local processing|Add row|Move up|Move down)/i.test(text)) {
     fail(`${pathname}: English UI or template leakage detected.`);
   }
@@ -168,6 +180,8 @@ const summary = {
   status: failures.length ? 'FAIL' : 'PASS',
   editorialMode: 'native-search-intent',
   reviewedAt: registry.reviewedAt,
+  activeBatch: registry.activeBatch,
+  activeBatchRoutes: activeBatchRoutes.map((route) => route.paths.es),
   spanishRoutes: pages,
   blockedUntilReviewed: ['fr', 'de'],
   failures,

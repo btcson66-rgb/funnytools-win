@@ -1,0 +1,332 @@
+---
+import ExpansionLayout from '../../../layouts/ExpansionLayout.astro';
+import { expansionRoutesReviewedAt } from '../../../i18n/expansionRoutes';
+
+const tools = [
+  {
+    name: 'Calculadora de promedio de notas',
+    href: '/es/herramientas/calculadora-promedio-notas/',
+    category: 'Cálculo y estudio',
+    description: 'Obtén la media simple y ponderada de notas, calificaciones, créditos o porcentajes sin imponer una escala educativa.',
+    search: 'promedio notas nota media calificaciones media ponderada estudio créditos examen',
+    privacy: 'Los números se calculan en esta pestaña.',
+  },
+  {
+    name: 'Unir PDF online gratis',
+    href: '/es/herramientas/unir-pdf/',
+    category: 'PDF y documentos',
+    description: 'Combina varios PDF en el orden elegido y descarga una copia nueva sin subir los documentos a FunnyTools.',
+    search: 'unir pdf combinar pdf juntar documentos fusionar archivos anexos',
+    privacy: 'Los PDF se leen y combinan en este navegador.',
+  },
+];
+
+const faq = [
+  {
+    q: '¿Las herramientas de FunnyTools son gratuitas?',
+    a: 'Sí. Las versiones españolas publicadas pueden utilizarse sin pago, cuenta, registro ni instalación.',
+  },
+  {
+    q: '¿Por qué el directorio español tiene menos herramientas?',
+    a: 'Cada página se redacta y prueba en español antes de publicarse. No creamos rutas automáticas para herramientas que todavía no tienen interfaz, ejemplos, límites y revisión editorial completos.',
+  },
+  {
+    q: '¿Puedo utilizar las herramientas desde el móvil?',
+    a: 'Sí. La interfaz se prueba en pantallas pequeñas, aunque un PDF grande puede necesitar más memoria de la disponible en un teléfono.',
+  },
+  {
+    q: '¿Los datos se envían a FunnyTools?',
+    a: 'Las herramientas españolas actuales procesan notas y PDF en el navegador. La página de privacidad distingue ese contenido de las conexiones técnicas de analítica, seguridad y publicidad.',
+  },
+  {
+    q: '¿Los resultados son oficiales?',
+    a: 'No por sí solos. Debes comprobar fórmulas, normas, archivos y requisitos con la institución o el sistema de destino.',
+  },
+  {
+    q: '¿Cómo solicito una nueva herramienta?',
+    a: 'Escribe a btcson66@gmail.com explicando el problema, la entrada, la salida y una prueba que permita verificar el resultado. No envíes datos confidenciales.',
+  },
+];
+
+const collectionJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Herramientas online gratis en español',
+  description: 'Directorio de herramientas gratuitas, sin registro y revisadas en español para cálculos, PDF y tareas cotidianas.',
+  url: 'https://funnytools.win/es/herramientas/',
+  inLanguage: 'es',
+  dateModified: expansionRoutesReviewedAt,
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: tools.map((tool, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: tool.name,
+      url: `https://funnytools.win${tool.href}`,
+    })),
+  },
+};
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'FunnyTools en español',
+      item: 'https://funnytools.win/es/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Herramientas',
+      item: 'https://funnytools.win/es/herramientas/',
+    },
+  ],
+};
+---
+
+<ExpansionLayout
+  currentKey="tools-index"
+  canonicalPath="/es/herramientas/"
+  title="Herramientas online gratis y privadas | FunnyTools"
+  description="Explora herramientas online gratuitas, sin registro y revisadas en español. Filtra por tarea y conoce privacidad, límites y comprobaciones."
+  keywords={[
+    'herramientas online gratis',
+    'herramientas sin registro',
+    'utilidades web en español',
+    'herramientas en el navegador',
+    'herramientas PDF gratis',
+    'calculadoras online',
+  ]}
+  jsonLd={[collectionJsonLd, faqJsonLd, breadcrumbJsonLd]}
+>
+  <article
+    class="tools-directory"
+    data-native-locale="es"
+    data-editorial-mode="native-search-intent"
+  >
+    <section class="wrap page-head">
+      <nav class="breadcrumb" aria-label="Migas de pan">
+        <a href="/es/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Herramientas</span>
+      </nav>
+      <p class="eyebrow">Directorio revisado, sin páginas vacías</p>
+      <h1>Herramientas online gratis en español</h1>
+      <p class="lead">Encuentra una utilidad por la tarea que necesitas resolver. Todas las páginas de este directorio funcionan sin registro, explican qué ocurre con los datos y muestran cómo comprobar el resultado antes de utilizarlo.</p>
+      <label class="tools-search">
+        <span>Buscar por tarea o resultado</span>
+        <input
+          type="search"
+          placeholder="Ejemplo: promedio de notas o unir PDF"
+          autocomplete="off"
+          aria-describedby="search-help"
+          data-es-tools-search
+        />
+      </label>
+      <p id="search-help" class="muted">El filtro se ejecuta en esta pestaña. La frase escrita no se envía a Analytics.</p>
+    </section>
+
+    <section class="wrap content-section answer-panel" aria-labelledby="directorio-respuesta">
+      <p class="eyebrow">Respuesta directa</p>
+      <h2 id="directorio-respuesta">¿Qué herramientas están disponibles ahora?</h2>
+      <p>La colección española incluye una calculadora de promedio de notas y una herramienta para unir PDF. La primera resuelve medias simples y ponderadas en cualquier escala numérica; la segunda combina documentos en el orden elegido sin subirlos a FunnyTools. Son páginas completas, no accesos provisionales ni traducciones automáticas.</p>
+      <p>El directorio crecerá por lotes pequeños. Una nueva tarjeta solo aparece cuando la interfaz, la intención de búsqueda, los ejemplos, las preguntas frecuentes, los límites, la revisión móvil y los metadatos están terminados. Así se evita mostrar decenas de enlaces que conducen a páginas repetidas, vacías o difíciles de comprobar.</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="lista-herramientas">
+      <h2 id="lista-herramientas">Abrir una herramienta</h2>
+      <p class="directory-status" aria-live="polite" data-es-tools-status>
+        {tools.length} herramientas revisadas disponibles.
+      </p>
+      <div class="tool-grid" data-es-tools-grid>
+        {tools.map((tool) => (
+          <article class="tool-card" data-es-tool-card data-search={tool.search}>
+            <span class="badge">{tool.category}</span>
+            <h3><a href={tool.href}>{tool.name}</a></h3>
+            <p>{tool.description}</p>
+            <p class="privacy-line">🔒 {tool.privacy}</p>
+            <a class="btn go" href={tool.href}>Abrir herramienta</a>
+          </article>
+        ))}
+      </div>
+      <p class="empty-state" data-es-tools-empty hidden>No hay una herramienta española publicada que coincida con esa búsqueda. Prueba con «promedio», «notas», «PDF» o «documentos».</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="elegir-herramienta">
+      <h2 id="elegir-herramienta">Cómo elegir la herramienta correcta</h2>
+      <p>Describe primero la salida que necesitas. «Quiero conocer la media de cuatro notas» requiere una calculadora; «quiero entregar solicitud y anexos como un solo archivo» requiere unir PDF. Una búsqueda genérica como «editar documento» puede llevarte a una función distinta: comprimir, dividir, extraer páginas, convertir o combinar no son la misma operación.</p>
+      <ol class="step-list">
+        <li><strong>Identifica la entrada.</strong> Decide si trabajarás con números, texto, imágenes, documentos o una lista.</li>
+        <li><strong>Define la transformación.</strong> Escribe en una frase qué debe cambiar y qué debe permanecer intacto.</li>
+        <li><strong>Comprueba el formato de salida.</strong> Una cifra, un CSV y un PDF nuevo sirven para destinos diferentes.</li>
+        <li><strong>Lee los límites.</strong> Revisa escalas, pesos, memoria, cifrado, firmas y requisitos institucionales.</li>
+        <li><strong>Haz una prueba pequeña.</strong> Utiliza un ejemplo cuyo resultado puedas calcular o revisar sin ayuda.</li>
+      </ol>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="privacidad-directorio">
+      <h2 id="privacidad-directorio">Privacidad: procesamiento local no significa sin conexiones</h2>
+      <p>Las herramientas actuales aplican procesamiento local a su entrada dentro del navegador. Las notas no se incorporan a un evento analítico y los PDF no se envían a un servidor de FunnyTools para combinarlos. Eso reduce la exposición del contenido y evita crear una cuenta o una biblioteca de archivos.</p>
+      <p>La página web, sin embargo, necesita entregarse por Internet y puede conectar con Cloudflare, Google Analytics o infraestructura de AdSense. Esos servicios pueden tratar señales técnicas de navegación. La <a href="/es/privacidad/">política de privacidad en español</a> explica la diferencia, los controles disponibles, el almacenamiento local, el correo voluntario y los terceros.</p>
+      <p>Para información sensible, utiliza un dispositivo confiable, revisa extensiones, conserva los originales y comienza con datos ficticios. El tratamiento local es una característica técnica útil, no una autorización para procesar información ajena ni una garantía absoluta frente a todo el entorno del dispositivo.</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="comprobar-resultados">
+      <h2 id="comprobar-resultados">Cómo comprobar un cálculo o un archivo</h2>
+      <p>En una calculadora, prueba una operación que puedas repetir a mano. Para una media simple, 6, 8 y 10 deben producir 8. Si añades pesos, verifica que el divisor sea la suma de los pesos y que todas las notas utilicen la misma escala. Después compara la regla con la normativa real si el resultado afecta a un expediente.</p>
+      <p>En una herramienta de archivos, crea una copia de trabajo. Combina dos PDF pequeños con una página cada uno, abre la descarga y comprueba que contiene dos páginas en el orden esperado. En el documento real, revisa la suma total, las transiciones, la orientación, el tamaño y cualquier firma o formulario. Una descarga completa no demuestra por sí sola que el portal vaya a aceptarla.</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="idioma-regiones">
+      <h2 id="idioma-regiones">Español internacional sin ocultar diferencias regionales</h2>
+      <p>Las personas pueden buscar «nota media», «promedio de notas», «promedio de calificaciones», «unir PDF», «juntar documentos» o «fusionar archivos». El directorio reconoce expresiones habituales de España y América Latina para ayudar a encontrar la tarea, pero no presupone que todos los países compartan escalas, leyes, monedas o procedimientos.</p>
+      <p>Cuando una herramienta dependa de reglas territoriales, su página deberá indicar el país o región, la fuente y la fecha de verificación. Si solo existe una fórmula general, se presentará como estimación y se explicará qué datos faltan. Cambiar palabras no basta para crear una versión local útil.</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="criterio-publicacion">
+      <h2 id="criterio-publicacion">Por qué no publicamos todas las versiones de una vez</h2>
+      <p>Una colección grande puede parecer más completa, pero una página sin explicación, con interfaz parcialmente traducida o enlaces de idioma incorrectos aporta poco valor. FunnyTools publica como máximo tres páginas nuevas por lote y exige contenido específico, una respuesta directa, ejemplos, límites, FAQ, datos estructurados, canonical, hreflang, sitemap y verificación en móvil.</p>
+      <p>El orden de publicación prioriza tareas claras que pueden resolverse y comprobarse dentro del navegador. Después se amplían categorías y guías relacionadas. Las versiones francesa y alemana no se abrirán hasta que la colección española esté completa y validada; tampoco se utilizarán páginas españolas como plantillas para sustituir palabras.</p>
+    </section>
+
+    <section
+      class="wrap content-section review-block"
+      data-content-value-review
+      data-review-key="tools-index"
+      data-reviewed-at={expansionRoutesReviewedAt}
+      aria-labelledby="revision-directorio"
+    >
+      <p class="eyebrow">Revisión editorial y funcional</p>
+      <h2 id="revision-directorio">Qué debe demostrar cada tarjeta del directorio</h2>
+      <p>Una tarjeta no es una promesa futura. Antes de aparecer aquí, la ruta debe existir, ser indexable, ofrecer una función utilizable y explicar una prueba que una persona pueda repetir.</p>
+      <div class="case-grid">
+        <article class="case-card">
+          <h3>Coincidencia de intención</h3>
+          <p>El nombre, la descripción y la página deben resolver la misma tarea, sin atraer una consulta que la función no cubre.</p>
+        </article>
+        <article class="case-card">
+          <h3>Resultado comprobable</h3>
+          <p>La página incluye un caso pequeño con salida conocida y advierte qué norma, formato o condición debe revisarse.</p>
+        </article>
+        <article class="case-card">
+          <h3>Ruta terminada</h3>
+          <p>Canonical, idioma, hreflang, sitemap, enlaces, móvil y navegación se validan después del despliegue público.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="faq-directorio">
+      <h2 id="faq-directorio">Preguntas frecuentes</h2>
+      <div class="faq-list">
+        {faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap content-section trust-note" aria-labelledby="entender-herramientas">
+      <h2 id="entender-herramientas">Entender el método antes de utilizar el resultado</h2>
+      <p>Consulta <a href="/es/como-funcionan-las-herramientas/">cómo funcionan nuestras herramientas</a> para conocer el procesamiento en el navegador, la revisión de fórmulas y archivos, la telemetría permitida y la forma correcta de informar de un fallo.</p>
+    </section>
+
+    <p class="wrap updated">
+      Última revisión editorial: <time datetime={expansionRoutesReviewedAt}>{expansionRoutesReviewedAt}</time>
+    </p>
+  </article>
+</ExpansionLayout>
+
+<script is:inline>
+  (() => {
+    const input = document.querySelector('[data-es-tools-search]');
+    const cards = Array.from(document.querySelectorAll('[data-es-tool-card]'));
+    const empty = document.querySelector('[data-es-tools-empty]');
+    const status = document.querySelector('[data-es-tools-status]');
+    if (!(input instanceof HTMLInputElement) || !(empty instanceof HTMLElement) || !(status instanceof HTMLElement)) return;
+
+    const normalize = (value) => value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLocaleLowerCase('es')
+      .trim();
+
+    input.addEventListener('input', () => {
+      const query = normalize(input.value);
+      let visible = 0;
+      cards.forEach((card) => {
+        if (!(card instanceof HTMLElement)) return;
+        const haystack = normalize(`${card.dataset.search || ''} ${card.textContent || ''}`);
+        const matches = query === '' || haystack.includes(query);
+        card.hidden = !matches;
+        if (matches) visible += 1;
+      });
+      empty.hidden = visible > 0;
+      status.textContent = query === ''
+        ? `${visible} herramientas revisadas disponibles.`
+        : `${visible} resultados para el filtro actual.`;
+    });
+  })();
+</script>
+
+<style>
+  .answer-panel {
+    border-left: 4px solid var(--brand);
+  }
+
+  .tools-search {
+    display: grid;
+    gap: 8px;
+    max-width: 720px;
+    margin-top: 24px;
+    font-weight: 700;
+  }
+
+  .tools-search input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--card);
+    color: var(--text);
+    font: inherit;
+  }
+
+  .directory-status,
+  .muted,
+  .privacy-line {
+    color: var(--muted);
+  }
+
+  .tool-card {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--card);
+  }
+
+  .tool-card .btn {
+    justify-self: start;
+  }
+
+  .empty-state {
+    padding: 18px;
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+  }
+</style>
