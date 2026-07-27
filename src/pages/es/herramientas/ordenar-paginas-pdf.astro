@@ -1,0 +1,23 @@
+---
+import PdfPageReorder from '../../../components/tools/PdfPageReorder.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishPdfPageReorder,
+  spanishPdfPageReorderReview,
+} from '../../../i18n/expansion/es-tools-08';
+---
+
+<ExpansionToolLayout
+  routeKey="pdf-page-reorder"
+  canonicalPath="/es/herramientas/ordenar-paginas-pdf/"
+  content={spanishPdfPageReorder}
+  categoryLabel="Herramienta PDF"
+  review={spanishPdfPageReorderReview}
+  relatedTool={{
+    name: 'Comprimir un PDF',
+    description: 'Intenta reducir la estructura después de aprobar el orden final.',
+    href: '/es/herramientas/comprimir-pdf/',
+  }}
+>
+  <PdfPageReorder labels={spanishPdfPageReorder.labels} />
+</ExpansionToolLayout>

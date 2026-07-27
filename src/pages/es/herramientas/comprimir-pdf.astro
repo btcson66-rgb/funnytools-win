@@ -1,0 +1,23 @@
+---
+import PdfCompressor from '../../../components/tools/PdfCompressor.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishPdfCompressor,
+  spanishPdfCompressorReview,
+} from '../../../i18n/expansion/es-tools-08';
+---
+
+<ExpansionToolLayout
+  routeKey="pdf-compressor"
+  canonicalPath="/es/herramientas/comprimir-pdf/"
+  content={spanishPdfCompressor}
+  categoryLabel="Herramienta PDF"
+  review={spanishPdfCompressorReview}
+  relatedTool={{
+    name: 'Ordenar páginas de un PDF',
+    description: 'Corrige primero la secuencia para comprimir únicamente la versión final.',
+    href: '/es/herramientas/ordenar-paginas-pdf/',
+  }}
+>
+  <PdfCompressor labels={spanishPdfCompressor.labels} />
+</ExpansionToolLayout>

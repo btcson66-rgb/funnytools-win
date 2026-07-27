@@ -1,0 +1,23 @@
+---
+import PdfToImage from '../../../components/tools/PdfToImage.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishPdfToImage,
+  spanishPdfToImageReview,
+} from '../../../i18n/expansion/es-tools-08';
+---
+
+<ExpansionToolLayout
+  routeKey="pdf-to-image"
+  canonicalPath="/es/herramientas/convertir-pdf-a-imagen/"
+  content={spanishPdfToImage}
+  categoryLabel="Herramienta PDF e imagen"
+  review={spanishPdfToImageReview}
+  relatedTool={{
+    name: 'Extraer páginas de un PDF',
+    description: 'Crea primero un PDF corto si solo necesitas convertir una selección.',
+    href: '/es/herramientas/extraer-paginas-pdf/',
+  }}
+>
+  <PdfToImage labels={spanishPdfToImage.labels} />
+</ExpansionToolLayout>

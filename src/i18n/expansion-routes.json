@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-07",
+  "activeBatch": "es-08",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -211,6 +211,36 @@
         "zh": "/tools/extract-pdf-pages/",
         "en": "/en/tools/extract-pdf-pages/",
         "es": "/es/herramientas/extraer-paginas-pdf/"
+      }
+    },
+    {
+      "key": "pdf-page-reorder",
+      "type": "tool",
+      "batch": "es-08",
+      "paths": {
+        "zh": "/tools/pdf-page-reorder/",
+        "en": "/en/tools/pdf-page-reorder/",
+        "es": "/es/herramientas/ordenar-paginas-pdf/"
+      }
+    },
+    {
+      "key": "pdf-to-image",
+      "type": "tool",
+      "batch": "es-08",
+      "paths": {
+        "zh": "/tools/pdf-to-image/",
+        "en": "/en/tools/pdf-to-image/",
+        "es": "/es/herramientas/convertir-pdf-a-imagen/"
+      }
+    },
+    {
+      "key": "pdf-compressor",
+      "type": "tool",
+      "batch": "es-08",
+      "paths": {
+        "zh": "/tools/pdf-compressor/",
+        "en": "/en/tools/pdf-compressor/",
+        "es": "/es/herramientas/comprimir-pdf/"
       }
     }
   ]
