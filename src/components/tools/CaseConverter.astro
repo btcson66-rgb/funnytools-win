@@ -64,6 +64,7 @@ const { labels } = Astro.props;
 <script>
   document.querySelectorAll('[data-case-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const locale = labels.locale || '';
     const input = root.querySelector('[data-input]');
     const output = root.querySelector('[data-output]');
     const toast = root.querySelector('.toast');
@@ -76,30 +77,74 @@ const { labels } = Astro.props;
       return text.replace(/[a-z]/g, (char) => String.fromCharCode(char.charCodeAt(0) - 32));
     }
 
-    function capitalizeAscii(word) {
-      return asciiUpper(word.slice(0, 1)) + asciiLower(word.slice(1));
+    function lower(text) {
+      return locale ? text.toLocaleLowerCase(locale) : asciiLower(text);
+    }
+
+    function upper(text) {
+      return locale ? text.toLocaleUpperCase(locale) : asciiUpper(text);
+    }
+
+    function capitalizeWord(word) {
+      const characters = Array.from(lower(word));
+      if (!characters.length) return '';
+      return upper(characters[0]) + characters.slice(1).join('');
     }
 
     function titleCase(text) {
-      return asciiLower(text).replace(/[A-Za-z]+/g, (word) => capitalizeAscii(word));
+      if (!locale) {
+        return asciiLower(text).replace(/[A-Za-z]+/g, (word) => capitalizeWord(word));
+      }
+      return lower(text).replace(/\p{L}[\p{L}\p{M}]*/gu, (word) => capitalizeWord(word));
     }
 
     function sentenceCase(text) {
-      const lowered = asciiLower(text);
+      const lowered = lower(text);
+      if (!locale) {
+        return lowered.replace(/(^|[.!?]\s+)([a-z])/g, (_match, prefix, char) => prefix + asciiUpper(char));
+      }
       let shouldCapitalize = true;
-      return lowered.replace(/[A-Za-z]/g, (char, offset) => {
-        if (shouldCapitalize) {
+      let result = '';
+      for (const char of lowered) {
+        if (shouldCapitalize && /\p{L}/u.test(char)) {
+          result += upper(char);
           shouldCapitalize = false;
-          return asciiUpper(char);
+          continue;
         }
-        const between = lowered.slice(offset, offset + 2);
-        if (/[.!?]\s*$/.test(between)) shouldCapitalize = true;
-        return char;
-      }).replace(/([.!?]\s+)([a-z])/g, (_match, prefix, char) => prefix + asciiUpper(char));
+        result += char;
+        if (/[.!?]/u.test(char)) shouldCapitalize = true;
+      }
+      return result;
     }
 
     function tokens(text) {
-      return text.match(/[A-Za-z0-9]+|[\u3400-\u9fff\uf900-\ufaff]+/g) || [];
+      if (!locale) {
+        return text.match(/[A-Za-z0-9]+|[\u3400-\u9fff\uf900-\ufaff]+/g) || [];
+      }
+      const parts = [];
+      let current = '';
+      let currentType = '';
+      for (const char of text) {
+        const type = /[\u3400-\u9fff\uf900-\ufaff]/u.test(char)
+          ? 'cjk'
+          : /[\p{L}\p{N}\p{M}]/u.test(char)
+            ? 'word'
+            : 'separator';
+        if (type === 'separator') {
+          if (current) parts.push(current);
+          current = '';
+          currentType = '';
+          continue;
+        }
+        if (current && type !== currentType) {
+          parts.push(current);
+          current = '';
+        }
+        current += char;
+        currentType = type;
+      }
+      if (current) parts.push(current);
+      return parts;
     }
 
     function camelCase(text) {
@@ -107,8 +152,8 @@ const { labels } = Astro.props;
       return parts
         .map((part, index) => {
           if (/^[\u3400-\u9fff\uf900-\ufaff]+$/.test(part)) return part;
-          const lower = asciiLower(part);
-          return index === 0 ? lower : capitalizeAscii(lower);
+          const lowered = lower(part);
+          return index === 0 ? lowered : capitalizeWord(lowered);
         })
         .join('');
     }
@@ -118,14 +163,15 @@ const { labels } = Astro.props;
       return parts
         .map((part) => {
           if (/^[\u3400-\u9fff\uf900-\ufaff]+$/.test(part)) return part;
-          return upper ? asciiUpper(part) : asciiLower(part);
+          return upper ? upperText(part) : lower(part);
         })
         .join(separator);
     }
 
+    const upperText = upper;
     const converters = {
-      uppercase: asciiUpper,
-      lowercase: asciiLower,
+      uppercase: upper,
+      lowercase: lower,
       titleCase,
       sentenceCase,
       camelCase,

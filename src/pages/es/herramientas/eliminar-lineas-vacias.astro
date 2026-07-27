@@ -1,0 +1,23 @@
+---
+import RemoveEmptyLines from '../../../components/tools/RemoveEmptyLines.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishRemoveEmptyLines,
+  spanishRemoveEmptyLinesReview,
+} from '../../../i18n/expansion/es-tools-11';
+---
+
+<ExpansionToolLayout
+  routeKey="remove-empty-lines"
+  canonicalPath="/es/herramientas/eliminar-lineas-vacias/"
+  content={spanishRemoveEmptyLines}
+  categoryLabel="Texto y escritura"
+  review={spanishRemoveEmptyLinesReview}
+  relatedTool={{
+    name: 'Eliminar líneas duplicadas',
+    description: 'Conserva una sola aparición de cada elemento cuando la lista ya no contiene huecos.',
+    href: '/es/herramientas/eliminar-lineas-duplicadas/',
+  }}
+>
+  <RemoveEmptyLines labels={spanishRemoveEmptyLines.labels} />
+</ExpansionToolLayout>

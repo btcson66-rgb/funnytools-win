@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-10",
+  "activeBatch": "es-11",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -301,6 +301,36 @@
         "zh": "/tools/character-counter/",
         "en": "/en/tools/character-counter/",
         "es": "/es/herramientas/contador-caracteres/"
+      }
+    },
+    {
+      "key": "case-converter",
+      "type": "tool",
+      "batch": "es-11",
+      "paths": {
+        "zh": "/tools/case-converter/",
+        "en": "/en/tools/case-converter/",
+        "es": "/es/herramientas/convertir-mayusculas-minusculas/"
+      }
+    },
+    {
+      "key": "remove-empty-lines",
+      "type": "tool",
+      "batch": "es-11",
+      "paths": {
+        "zh": "/tools/remove-empty-lines/",
+        "en": "/en/tools/remove-empty-lines/",
+        "es": "/es/herramientas/eliminar-lineas-vacias/"
+      }
+    },
+    {
+      "key": "remove-duplicate-lines",
+      "type": "tool",
+      "batch": "es-11",
+      "paths": {
+        "zh": "/tools/remove-duplicate-lines/",
+        "en": "/en/tools/remove-duplicate-lines/",
+        "es": "/es/herramientas/eliminar-lineas-duplicadas/"
       }
     }
   ]

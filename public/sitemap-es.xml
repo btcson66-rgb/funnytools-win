@@ -113,6 +113,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/jpg-to-webp/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/convertir-mayusculas-minusculas/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/case-converter/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/case-converter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-mayusculas-minusculas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/case-converter/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/convertir-pdf-a-imagen/</loc>
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pdf-to-image/" />
@@ -159,6 +167,22 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/split-pdf/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/dividir-pdf/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/split-pdf/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/eliminar-lineas-duplicadas/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/remove-duplicate-lines/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/remove-duplicate-lines/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/eliminar-lineas-duplicadas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/remove-duplicate-lines/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/eliminar-lineas-vacias/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/remove-empty-lines/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/remove-empty-lines/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/eliminar-lineas-vacias/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/remove-empty-lines/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/eliminar-paginas-pdf/</loc>

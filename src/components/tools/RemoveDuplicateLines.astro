@@ -55,6 +55,7 @@ const { labels } = Astro.props;
 <script>
   document.querySelectorAll('[data-remove-duplicate-lines-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const locale = labels.locale || undefined;
     const input = root.querySelector('[data-input]');
     const output = root.querySelector('[data-output]');
     const caseInput = root.querySelector('[data-case-insensitive]');
@@ -66,7 +67,7 @@ const { labels } = Astro.props;
 
     function normalize(line) {
       const value = trimInput.checked ? line.trim() : line;
-      return caseInput.checked ? value.toLocaleLowerCase() : value;
+      return caseInput.checked ? value.toLocaleLowerCase(locale) : value;
     }
 
     function dedupe() {
@@ -82,7 +83,7 @@ const { labels } = Astro.props;
         result.push(value);
       });
       if (sortInput.checked) {
-        result = result.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: caseInput.checked ? 'base' : 'variant' }));
+        result = result.sort((a, b) => a.localeCompare(b, locale, { sensitivity: caseInput.checked ? 'base' : 'variant' }));
       }
       output.value = result.join('\n');
       uniqueCount.textContent = String(result.length);

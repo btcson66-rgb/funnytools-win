@@ -1,0 +1,23 @@
+---
+import CaseConverter from '../../../components/tools/CaseConverter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishCaseConverter,
+  spanishCaseConverterReview,
+} from '../../../i18n/expansion/es-tools-11';
+---
+
+<ExpansionToolLayout
+  routeKey="case-converter"
+  canonicalPath="/es/herramientas/convertir-mayusculas-minusculas/"
+  content={spanishCaseConverter}
+  categoryLabel="Texto y escritura"
+  review={spanishCaseConverterReview}
+  relatedTool={{
+    name: 'Eliminar líneas duplicadas',
+    description: 'Limpia una lista después de normalizar su caja y conserva la primera aparición.',
+    href: '/es/herramientas/eliminar-lineas-duplicadas/',
+  }}
+>
+  <CaseConverter labels={spanishCaseConverter.labels} />
+</ExpansionToolLayout>

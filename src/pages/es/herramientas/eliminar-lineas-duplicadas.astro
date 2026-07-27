@@ -1,0 +1,23 @@
+---
+import RemoveDuplicateLines from '../../../components/tools/RemoveDuplicateLines.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishRemoveDuplicateLines,
+  spanishRemoveDuplicateLinesReview,
+} from '../../../i18n/expansion/es-tools-11';
+---
+
+<ExpansionToolLayout
+  routeKey="remove-duplicate-lines"
+  canonicalPath="/es/herramientas/eliminar-lineas-duplicadas/"
+  content={spanishRemoveDuplicateLines}
+  categoryLabel="Texto y escritura"
+  review={spanishRemoveDuplicateLinesReview}
+  relatedTool={{
+    name: 'Convertir mayúsculas y minúsculas',
+    description: 'Normaliza la caja antes de comparar cuando la diferencia entre mayúsculas no sea significativa.',
+    href: '/es/herramientas/convertir-mayusculas-minusculas/',
+  }}
+>
+  <RemoveDuplicateLines labels={spanishRemoveDuplicateLines.labels} />
+</ExpansionToolLayout>
