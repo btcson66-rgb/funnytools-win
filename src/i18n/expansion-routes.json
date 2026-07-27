@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-04",
+  "activeBatch": "es-05",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -121,6 +121,36 @@
         "zh": "/tools/jpg-to-png/",
         "en": "/en/tools/jpg-to-png/",
         "es": "/es/herramientas/convertir-jpg-a-png/"
+      }
+    },
+    {
+      "key": "image-crop",
+      "type": "tool",
+      "batch": "es-05",
+      "paths": {
+        "zh": "/tools/image-crop/",
+        "en": "/en/tools/image-crop/",
+        "es": "/es/herramientas/recortar-imagen/"
+      }
+    },
+    {
+      "key": "jpg-to-webp",
+      "type": "tool",
+      "batch": "es-05",
+      "paths": {
+        "zh": "/tools/jpg-to-webp/",
+        "en": "/en/tools/jpg-to-webp/",
+        "es": "/es/herramientas/convertir-jpg-a-webp/"
+      }
+    },
+    {
+      "key": "webp-to-jpg",
+      "type": "tool",
+      "batch": "es-05",
+      "paths": {
+        "zh": "/tools/webp-to-jpg/",
+        "en": "/en/tools/webp-to-jpg/",
+        "es": "/es/herramientas/convertir-webp-a-jpg/"
       }
     }
   ]

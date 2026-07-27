@@ -1,0 +1,23 @@
+---
+import ImageFormatConverter from '../../../components/tools/ImageFormatConverter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishWebpToJpg,
+  spanishWebpToJpgReview,
+} from '../../../i18n/expansion/es-tools-05';
+---
+
+<ExpansionToolLayout
+  routeKey="webp-to-jpg"
+  canonicalPath="/es/herramientas/convertir-webp-a-jpg/"
+  content={spanishWebpToJpg}
+  categoryLabel="Conversor de imagen"
+  review={spanishWebpToJpgReview}
+  relatedTool={{
+    name: 'Convertir JPG a WebP',
+    description: 'Crea una copia WebP cuando el destino es una página compatible.',
+    href: '/es/herramientas/convertir-jpg-a-webp/',
+  }}
+>
+  <ImageFormatConverter labels={spanishWebpToJpg.labels} />
+</ExpansionToolLayout>

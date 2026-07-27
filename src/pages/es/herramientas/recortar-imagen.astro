@@ -1,0 +1,23 @@
+---
+import ImageCrop from '../../../components/tools/ImageCrop.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishImageCropper,
+  spanishImageCropperReview,
+} from '../../../i18n/expansion/es-tools-05';
+---
+
+<ExpansionToolLayout
+  routeKey="image-crop"
+  canonicalPath="/es/herramientas/recortar-imagen/"
+  content={spanishImageCropper}
+  categoryLabel="Herramienta de imagen"
+  review={spanishImageCropperReview}
+  relatedTool={{
+    name: 'Redimensionar imagen online',
+    description: 'Ajusta después el ancho y el alto exactos sin cambiar el encuadre.',
+    href: '/es/herramientas/redimensionar-imagen/',
+  }}
+>
+  <ImageCrop labels={spanishImageCropper.labels} />
+</ExpansionToolLayout>
