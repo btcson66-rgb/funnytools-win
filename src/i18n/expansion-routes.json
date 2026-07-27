@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-03",
+  "activeBatch": "es-04",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -91,6 +91,36 @@
         "zh": "/tools/split-pdf/",
         "en": "/en/tools/split-pdf/",
         "es": "/es/herramientas/dividir-pdf/"
+      }
+    },
+    {
+      "key": "image-resizer",
+      "type": "tool",
+      "batch": "es-04",
+      "paths": {
+        "zh": "/tools/image-resizer/",
+        "en": "/en/tools/image-resizer/",
+        "es": "/es/herramientas/redimensionar-imagen/"
+      }
+    },
+    {
+      "key": "png-to-jpg",
+      "type": "tool",
+      "batch": "es-04",
+      "paths": {
+        "zh": "/tools/png-to-jpg/",
+        "en": "/en/tools/png-to-jpg/",
+        "es": "/es/herramientas/convertir-png-a-jpg/"
+      }
+    },
+    {
+      "key": "jpg-to-png",
+      "type": "tool",
+      "batch": "es-04",
+      "paths": {
+        "zh": "/tools/jpg-to-png/",
+        "en": "/en/tools/jpg-to-png/",
+        "es": "/es/herramientas/convertir-jpg-a-png/"
       }
     }
   ]

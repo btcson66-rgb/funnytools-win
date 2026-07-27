@@ -34,6 +34,24 @@ const tools = [
     description: 'Extrae cada página o crea archivos por rangos sin subir el documento a FunnyTools.',
     intent: 'Separar PDF',
   },
+  {
+    name: 'Redimensionar imagen online',
+    href: '/es/herramientas/redimensionar-imagen/',
+    description: 'Cambia el ancho y el alto por píxeles, conserva la proporción y descarga una copia nueva.',
+    intent: 'Cambiar dimensiones',
+  },
+  {
+    name: 'Convertir PNG a JPG',
+    href: '/es/herramientas/convertir-png-a-jpg/',
+    description: 'Elige el color que sustituye la transparencia, ajusta la calidad y crea un archivo JPG.',
+    intent: 'Crear JPG',
+  },
+  {
+    name: 'Convertir JPG a PNG',
+    href: '/es/herramientas/convertir-jpg-a-png/',
+    description: 'Crea una copia PNG sin prometer transparencia ni recuperar la calidad que el JPG ya perdió.',
+    intent: 'Crear PNG',
+  },
 ];
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -144,7 +162,7 @@ const itemListJsonLd = {
 
     <section id="privacidad" class="wrap content-section privacy-note" aria-labelledby="privacidad-titulo">
       <h2 id="privacidad-titulo">Privacidad y tratamiento local en el navegador</h2>
-      <p>Las cinco herramientas disponibles ejecutan el cálculo o la transformación en tu navegador. Las notas, imágenes, URL, textos para QR y documentos PDF no se envían a un servidor de FunnyTools para producir el resultado. Tampoco necesitas crear una cuenta. La pestaña utiliza los recursos del dispositivo y pierde la lista de trabajo al recargar o cerrar la página.</p>
+      <p>Las ocho herramientas disponibles ejecutan el cálculo o la transformación en tu navegador. Las notas, imágenes, URL, textos para QR y documentos PDF no se envían a un servidor de FunnyTools para producir el resultado. Tampoco necesitas crear una cuenta. La pestaña utiliza los recursos del dispositivo y pierde la lista de trabajo al recargar o cerrar la página.</p>
       <p>«Local» no significa que cualquier dato sea apropiado. Utiliza un equipo de confianza, mantén el navegador actualizado y evita trabajar con la única copia de un documento. En entornos escolares, laborales o administrativos, respeta las políticas de protección de datos de la organización. Para una prueba inicial, sustituye nombres y cifras reales por ejemplos ficticios.</p>
       <p>El sitio utiliza analítica y puede cargar infraestructura publicitaria en páginas indexables según la configuración general y el consentimiento aplicable. Eso es independiente del contenido introducido en el widget: las herramientas actuales no incorporan tus notas ni el contenido del PDF a los eventos analíticos.</p>
       <p><a class="inline-link" href="/es/privacidad/">Lee la política de privacidad completa</a> para conocer las conexiones técnicas, cookies, almacenamiento local, correo voluntario y opciones de control.</p>

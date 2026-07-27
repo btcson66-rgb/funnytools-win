@@ -1,0 +1,23 @@
+---
+import PngToJpg from '../../../components/tools/PngToJpg.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishPngToJpg,
+  spanishPngToJpgReview,
+} from '../../../i18n/expansion/es-tools-04';
+---
+
+<ExpansionToolLayout
+  routeKey="png-to-jpg"
+  canonicalPath="/es/herramientas/convertir-png-a-jpg/"
+  content={spanishPngToJpg}
+  categoryLabel="Conversor de imagen"
+  review={spanishPngToJpgReview}
+  relatedTool={{
+    name: 'Redimensionar imagen online',
+    description: 'Cambia el ancho y el alto cuando el destino también limita los píxeles.',
+    href: '/es/herramientas/redimensionar-imagen/',
+  }}
+>
+  <PngToJpg labels={spanishPngToJpg.labels} />
+</ExpansionToolLayout>

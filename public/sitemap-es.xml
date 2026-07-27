@@ -41,6 +41,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/image-compressor/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/convertir-jpg-a-png/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/jpg-to-png/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/jpg-to-png/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-jpg-a-png/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/jpg-to-png/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/convertir-png-a-jpg/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/png-to-jpg/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/png-to-jpg/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-png-a-jpg/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/png-to-jpg/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/dividir-pdf/</loc>
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/split-pdf/" />
@@ -55,6 +71,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/qr-code-generator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-codigo-qr/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/qr-code-generator/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/redimensionar-imagen/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-resizer/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/image-resizer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/redimensionar-imagen/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/image-resizer/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/unir-pdf/</loc>

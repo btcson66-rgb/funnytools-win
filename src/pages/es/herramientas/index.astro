@@ -43,6 +43,30 @@ const tools = [
     search: 'dividir pdf separar páginas extraer cortar rangos documentos',
     privacy: 'El PDF se divide en la memoria del navegador.',
   },
+  {
+    name: 'Redimensionar imagen online',
+    href: '/es/herramientas/redimensionar-imagen/',
+    category: 'Imágenes',
+    description: 'Cambia el ancho y el alto en píxeles, conserva la proporción y comprueba las nuevas dimensiones.',
+    search: 'redimensionar imagen cambiar tamaño foto ajustar ancho alto píxeles proporción',
+    privacy: 'La imagen cambia de dimensiones en este navegador.',
+  },
+  {
+    name: 'Convertir PNG a JPG',
+    href: '/es/herramientas/convertir-png-a-jpg/',
+    category: 'Imágenes',
+    description: 'Sustituye la transparencia por el color elegido, ajusta la calidad y descarga una copia JPG.',
+    search: 'convertir png a jpg pasar png jpeg fondo blanco transparencia calidad',
+    privacy: 'El JPG se crea en la memoria del navegador.',
+  },
+  {
+    name: 'Convertir JPG a PNG',
+    href: '/es/herramientas/convertir-jpg-a-png/',
+    category: 'Imágenes',
+    description: 'Crea un PNG con las mismas dimensiones, sin afirmar que recupera calidad o elimina el fondo.',
+    search: 'convertir jpg a png pasar jpeg png transparencia calidad formato imagen',
+    privacy: 'El PNG se crea en la memoria del navegador.',
+  },
 ];
 
 const faq = [
@@ -164,7 +188,7 @@ const breadcrumbJsonLd = {
     <section class="wrap content-section answer-panel" aria-labelledby="directorio-respuesta">
       <p class="eyebrow">Respuesta directa</p>
       <h2 id="directorio-respuesta">¿Qué herramientas están disponibles ahora?</h2>
-      <p>La colección española incluye cinco herramientas terminadas: calcular promedios de notas, unir PDF, comprimir imágenes, crear códigos QR estáticos y dividir PDF por páginas o rangos. Todas procesan la entrada en el navegador y explican cómo revisar la salida antes de descargarla o utilizarla. Son páginas completas, no accesos provisionales ni traducciones automáticas.</p>
+      <p>La colección española incluye ocho herramientas terminadas: calcular promedios de notas, unir y dividir PDF, comprimir o redimensionar imágenes, convertir entre PNG y JPG, y crear códigos QR estáticos. Todas procesan la entrada en el navegador y explican cómo revisar la salida antes de descargarla o utilizarla. Son páginas completas, no accesos provisionales ni traducciones automáticas.</p>
       <p>El directorio crecerá por lotes pequeños. Una nueva tarjeta solo aparece cuando la interfaz, la intención de búsqueda, los ejemplos, las preguntas frecuentes, los límites, la revisión móvil y los metadatos están terminados. Así se evita mostrar decenas de enlaces que conducen a páginas repetidas, vacías o difíciles de comprobar.</p>
     </section>
 
@@ -184,12 +208,12 @@ const breadcrumbJsonLd = {
           </article>
         ))}
       </div>
-      <p class="empty-state" data-es-tools-empty hidden>No hay una herramienta española publicada que coincida con esa búsqueda. Prueba con «promedio», «imagen», «QR», «PDF» o «páginas».</p>
+      <p class="empty-state" data-es-tools-empty hidden>No hay una herramienta española publicada que coincida con esa búsqueda. Prueba con «promedio», «imagen», «PNG», «JPG», «QR» o «PDF».</p>
     </section>
 
     <section class="wrap content-section" aria-labelledby="elegir-herramienta">
       <h2 id="elegir-herramienta">Cómo elegir la herramienta correcta</h2>
-      <p>Describe primero la salida que necesitas. «Quiero conocer la media de cuatro notas» requiere una calculadora; «quiero entregar solicitud y anexos como un solo archivo» requiere unir PDF; «quiero cada capítulo por separado» requiere dividirlo. Reducir el peso de una foto no cambia necesariamente sus dimensiones, y crear un QR estático no ofrece redirecciones editables ni estadísticas. Una búsqueda genérica como «editar archivo» puede llevarte a una función distinta.</p>
+      <p>Describe primero la salida que necesitas. «Quiero conocer la media de cuatro notas» requiere una calculadora; «quiero entregar solicitud y anexos como un solo archivo» requiere unir PDF; «quiero cada capítulo por separado» requiere dividirlo. Comprimir una foto no cambia necesariamente sus dimensiones; redimensionar no recorta; convertir JPG a PNG no elimina el fondo; y crear un QR estático no ofrece redirecciones editables ni estadísticas. Una búsqueda genérica como «editar archivo» puede llevarte a una función distinta.</p>
       <ol class="step-list">
         <li><strong>Identifica la entrada.</strong> Decide si trabajarás con números, texto, imágenes, documentos o una lista.</li>
         <li><strong>Define la transformación.</strong> Escribe en una frase qué debe cambiar y qué debe permanecer intacto.</li>
@@ -210,12 +234,12 @@ const breadcrumbJsonLd = {
       <h2 id="comprobar-resultados">Cómo comprobar un cálculo o un archivo</h2>
       <p>En una calculadora, prueba una operación que puedas repetir a mano. Para una media simple, 6, 8 y 10 deben producir 8. Si añades pesos, verifica que el divisor sea la suma de los pesos y que todas las notas utilicen la misma escala. Después compara la regla con la normativa real si el resultado afecta a un expediente.</p>
       <p>En una herramienta de archivos, crea una copia de trabajo. Combina dos PDF pequeños con una página cada uno, abre la descarga y comprueba que contiene dos páginas en el orden esperado. En el documento real, revisa la suma total, las transiciones, la orientación, el tamaño y cualquier firma o formulario. Una descarga completa no demuestra por sí sola que el portal vaya a aceptarla.</p>
-      <p>Para una imagen, compara el peso y revisa texto, transparencia y detalles al 100 %; un porcentaje negativo significa que la copia pesa más. Para un QR, escanea el PNG descargado con más de un dispositivo y prueba el soporte final. Para un PDF dividido, confirma la primera y última página de cada rango y no presupongas que una firma digital se conserva.</p>
+      <p>Para una imagen, compara el peso, confirma ancho y alto y revisa texto, transparencia y detalles al 100 %; un porcentaje negativo significa que la copia pesa más. Al convertir PNG a JPG, confirma el color que reemplaza la transparencia; al pasar JPG a PNG, no esperes un fondo transparente. Para un QR, escanea el PNG descargado con más de un dispositivo. Para un PDF dividido, confirma la primera y última página de cada rango y no presupongas que una firma digital se conserva.</p>
     </section>
 
     <section class="wrap content-section" aria-labelledby="idioma-regiones">
       <h2 id="idioma-regiones">Español internacional sin ocultar diferencias regionales</h2>
-      <p>Las personas pueden buscar «nota media» o «promedio de notas», «unir» o «juntar PDF», «comprimir una imagen» o «reducir el peso de una foto», y «dividir», «separar» o «extraer páginas». El directorio reconoce expresiones habituales de España y América Latina para ayudar a encontrar la tarea, pero no presupone que todos los países compartan escalas, leyes, monedas o procedimientos.</p>
+      <p>Las personas pueden buscar «nota media» o «promedio de notas», «unir» o «juntar PDF», «comprimir una imagen» o «reducir el peso de una foto», «redimensionar» o «cambiar tamaño», y «convertir» o «pasar PNG a JPG». El directorio reconoce expresiones habituales de España y América Latina para ayudar a encontrar la tarea, pero no presupone que todos los países compartan escalas, leyes, monedas o procedimientos.</p>
       <p>Cuando una herramienta dependa de reglas territoriales, su página deberá indicar el país o región, la fuente y la fecha de verificación. Si solo existe una fórmula general, se presentará como estimación y se explicará qué datos faltan. Cambiar palabras no basta para crear una versión local útil.</p>
     </section>
 

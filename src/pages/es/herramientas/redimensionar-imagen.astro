@@ -1,0 +1,23 @@
+---
+import ImageResizer from '../../../components/tools/ImageResizer.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishImageResizer,
+  spanishImageResizerReview,
+} from '../../../i18n/expansion/es-tools-04';
+---
+
+<ExpansionToolLayout
+  routeKey="image-resizer"
+  canonicalPath="/es/herramientas/redimensionar-imagen/"
+  content={spanishImageResizer}
+  categoryLabel="Herramienta de imagen"
+  review={spanishImageResizerReview}
+  relatedTool={{
+    name: 'Comprimir imágenes online',
+    description: 'Reduce el peso después de ajustar las dimensiones y compara el resultado.',
+    href: '/es/herramientas/comprimir-imagenes/',
+  }}
+>
+  <ImageResizer labels={spanishImageResizer.labels} />
+</ExpansionToolLayout>

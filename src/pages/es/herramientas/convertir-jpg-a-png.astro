@@ -1,0 +1,23 @@
+---
+import JpgToPng from '../../../components/tools/JpgToPng.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishJpgToPng,
+  spanishJpgToPngReview,
+} from '../../../i18n/expansion/es-tools-04';
+---
+
+<ExpansionToolLayout
+  routeKey="jpg-to-png"
+  canonicalPath="/es/herramientas/convertir-jpg-a-png/"
+  content={spanishJpgToPng}
+  categoryLabel="Conversor de imagen"
+  review={spanishJpgToPngReview}
+  relatedTool={{
+    name: 'Convertir PNG a JPG',
+    description: 'Crea un JPEG y decide qué color sustituye las zonas transparentes.',
+    href: '/es/herramientas/convertir-png-a-jpg/',
+  }}
+>
+  <JpgToPng labels={spanishJpgToPng.labels} />
+</ExpansionToolLayout>
