@@ -1,0 +1,23 @@
+---
+import RotatePdf from '../../../components/tools/RotatePdf.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishRotatePdf,
+  spanishRotatePdfReview,
+} from '../../../i18n/expansion/es-tools-07';
+---
+
+<ExpansionToolLayout
+  routeKey="rotate-pdf"
+  canonicalPath="/es/herramientas/rotar-pdf/"
+  content={spanishRotatePdf}
+  categoryLabel="Herramienta PDF"
+  review={spanishRotatePdfReview}
+  relatedTool={{
+    name: 'Eliminar páginas de un PDF',
+    description: 'Quita después las hojas que ya no deben formar parte del documento.',
+    href: '/es/herramientas/eliminar-paginas-pdf/',
+  }}
+>
+  <RotatePdf labels={spanishRotatePdf.labels} />
+</ExpansionToolLayout>

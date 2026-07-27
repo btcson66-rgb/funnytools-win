@@ -88,6 +88,24 @@ const tools = [
     description: 'Ordena archivos JPG o PNG y crea un PDF con páginas A4, Carta o ajustadas.',
     intent: 'Crear PDF',
   },
+  {
+    name: 'Rotar páginas de un PDF',
+    href: '/es/herramientas/rotar-pdf/',
+    description: 'Gira todo el documento o páginas concretas 90, 180 o 270 grados y guarda el cambio.',
+    intent: 'Corregir PDF',
+  },
+  {
+    name: 'Eliminar páginas de un PDF',
+    href: '/es/herramientas/eliminar-paginas-pdf/',
+    description: 'Quita hojas y rangos innecesarios y descarga una copia con las páginas restantes.',
+    intent: 'Quitar páginas',
+  },
+  {
+    name: 'Extraer páginas de un PDF',
+    href: '/es/herramientas/extraer-paginas-pdf/',
+    description: 'Conserva solo las páginas elegidas en el orden escrito y crea un PDF nuevo.',
+    intent: 'Guardar selección',
+  },
 ];
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -193,12 +211,12 @@ const itemListJsonLd = {
       <h2 id="seo-local">Una versión española pensada para España y América Latina</h2>
       <p>El vocabulario cambia entre regiones. En España es habitual buscar «nota media», mientras que en México, Colombia, Chile, Ecuador, Perú, Argentina y otros países aparecen con frecuencia «promedio de notas», «promedio de calificaciones» o «sacar el promedio». Una página útil debe reconocer esas variantes sin fingir que todos los sistemas académicos funcionan igual.</p>
       <p>FunnyTools utiliza español internacional comprensible y explica las diferencias cuando afectan al resultado. No asigna por defecto una escala, una nota mínima de aprobación, un sistema de admisión ni una moneda. Cuando una futura herramienta dependa de reglas locales, la página deberá indicar el territorio, la fuente oficial y la fecha de verificación. Si no existe información suficiente, no se publicará como una respuesta definitiva.</p>
-      <p>La dirección de cada versión también se adapta al idioma. Las páginas españolas viven bajo <code>/es/</code> y utilizan expresiones descriptivas como <code>rotar-voltear-imagen</code>, <code>convertir-imagen-base64</code> o <code>convertir-imagenes-a-pdf</code>. Cada una incluye canonical propio y enlaces hreflang recíprocos hacia las versiones realmente disponibles; no se generan alternates para páginas que todavía no tienen una edición española completa.</p>
+      <p>La dirección de cada versión también se adapta al idioma. Las páginas españolas viven bajo <code>/es/</code> y utilizan expresiones descriptivas como <code>rotar-pdf</code>, <code>eliminar-paginas-pdf</code> o <code>extraer-paginas-pdf</code>. Cada una incluye canonical propio y enlaces hreflang recíprocos hacia las versiones realmente disponibles; no se generan alternates para páginas que todavía no tienen una edición española completa.</p>
     </section>
 
     <section id="privacidad" class="wrap content-section privacy-note" aria-labelledby="privacidad-titulo">
       <h2 id="privacidad-titulo">Privacidad y tratamiento local en el navegador</h2>
-      <p>Las catorce herramientas disponibles ejecutan el cálculo o la transformación en tu navegador. Las notas, imágenes, URL, textos para QR y documentos PDF no se envían a un servidor de FunnyTools para producir el resultado. Tampoco necesitas crear una cuenta. La pestaña utiliza los recursos del dispositivo y pierde la lista de trabajo al recargar o cerrar la página.</p>
+      <p>Las diecisiete herramientas disponibles ejecutan el cálculo o la transformación en tu navegador. Las notas, imágenes, URL, textos para QR y documentos PDF no se envían a un servidor de FunnyTools para producir el resultado. Tampoco necesitas crear una cuenta. La pestaña utiliza los recursos del dispositivo y pierde la lista de trabajo al recargar o cerrar la página.</p>
       <p>«Local» no significa que cualquier dato sea apropiado. Utiliza un equipo de confianza, mantén el navegador actualizado y evita trabajar con la única copia de un documento. En entornos escolares, laborales o administrativos, respeta las políticas de protección de datos de la organización. Para una prueba inicial, sustituye nombres y cifras reales por ejemplos ficticios.</p>
       <p>El sitio utiliza analítica y puede cargar infraestructura publicitaria en páginas indexables según la configuración general y el consentimiento aplicable. Eso es independiente del contenido introducido en el widget: las herramientas actuales no incorporan tus notas ni el contenido del PDF a los eventos analíticos.</p>
       <p><a class="inline-link" href="/es/privacidad/">Lee la política de privacidad completa</a> para conocer las conexiones técnicas, cookies, almacenamiento local, correo voluntario y opciones de control.</p>

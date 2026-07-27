@@ -1,0 +1,23 @@
+---
+import ExtractPdfPages from '../../../components/tools/ExtractPdfPages.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishExtractPdfPages,
+  spanishExtractPdfPagesReview,
+} from '../../../i18n/expansion/es-tools-07';
+---
+
+<ExpansionToolLayout
+  routeKey="extract-pdf-pages"
+  canonicalPath="/es/herramientas/extraer-paginas-pdf/"
+  content={spanishExtractPdfPages}
+  categoryLabel="Herramienta PDF"
+  review={spanishExtractPdfPagesReview}
+  relatedTool={{
+    name: 'Eliminar páginas de un PDF',
+    description: 'Conserva todo el documento salvo unas pocas hojas señaladas.',
+    href: '/es/herramientas/eliminar-paginas-pdf/',
+  }}
+>
+  <ExtractPdfPages labels={spanishExtractPdfPages.labels} />
+</ExpansionToolLayout>

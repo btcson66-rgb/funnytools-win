@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-06",
+  "activeBatch": "es-07",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -181,6 +181,36 @@
         "zh": "/tools/images-to-pdf/",
         "en": "/en/tools/images-to-pdf/",
         "es": "/es/herramientas/convertir-imagenes-a-pdf/"
+      }
+    },
+    {
+      "key": "rotate-pdf",
+      "type": "tool",
+      "batch": "es-07",
+      "paths": {
+        "zh": "/tools/rotate-pdf/",
+        "en": "/en/tools/rotate-pdf/",
+        "es": "/es/herramientas/rotar-pdf/"
+      }
+    },
+    {
+      "key": "delete-pdf-pages",
+      "type": "tool",
+      "batch": "es-07",
+      "paths": {
+        "zh": "/tools/delete-pdf-pages/",
+        "en": "/en/tools/delete-pdf-pages/",
+        "es": "/es/herramientas/eliminar-paginas-pdf/"
+      }
+    },
+    {
+      "key": "extract-pdf-pages",
+      "type": "tool",
+      "batch": "es-07",
+      "paths": {
+        "zh": "/tools/extract-pdf-pages/",
+        "en": "/en/tools/extract-pdf-pages/",
+        "es": "/es/herramientas/extraer-paginas-pdf/"
       }
     }
   ]
