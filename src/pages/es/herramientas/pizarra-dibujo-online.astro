@@ -1,0 +1,23 @@
+---
+import Sketchpad from '../../../components/tools/Sketchpad.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishSketchpad,
+  spanishSketchpadReview,
+} from '../../../i18n/expansion/es-tools-23';
+---
+
+<ExpansionToolLayout
+  routeKey="sketchpad"
+  canonicalPath="/es/herramientas/pizarra-dibujo-online/"
+  content={spanishSketchpad}
+  categoryLabel="Dibujo y comunicación visual"
+  review={spanishSketchpadReview}
+  relatedTool={{
+    name: 'Creador de diagramas de flujo',
+    description: 'Organiza procesos y decisiones con nodos editables y flechas.',
+    href: '/es/herramientas/crear-diagrama-flujo/',
+  }}
+>
+  <Sketchpad labels={spanishSketchpad.labels} />
+</ExpansionToolLayout>

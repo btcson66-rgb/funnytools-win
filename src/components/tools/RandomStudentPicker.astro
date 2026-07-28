@@ -82,6 +82,7 @@ const { labels } = Astro.props;
     const toast = root.querySelector('.toast');
     const historyWrap = root.querySelector('[data-history-wrap]');
     const historyList = root.querySelector('[data-history]');
+    const pickButton = root.querySelector('[data-pick]');
     const picked = new Set();
     const history = [];
     let latest = '';
@@ -89,7 +90,8 @@ const { labels } = Astro.props;
 
     function csvCell(value) {
       const text = String(value ?? '');
-      return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+      const protectedText = /^[=+\-@\t\r\n＝＋－＠]/.test(text) ? `\t${text}` : text;
+      return `"${protectedText.replace(/"/g, '""')}"`;
     }
 
     function downloadCsv(filename, rows) {
@@ -118,6 +120,28 @@ const { labels } = Astro.props;
         .split(/\r\n|\r|\n/)
         .map((item) => item.trim())
         .filter(Boolean);
+    }
+
+    function duplicateNames(names) {
+      const seen = new Set();
+      return names.filter((name) => {
+        if (seen.has(name)) return true;
+        seen.add(name);
+        return false;
+      });
+    }
+
+    function secureIndex(length) {
+      if (!Number.isInteger(length) || length < 1 || !globalThis.crypto?.getRandomValues) {
+        throw new Error(labels.secureRandomError);
+      }
+      const range = 0x100000000;
+      const limit = range - (range % length);
+      const values = new Uint32Array(1);
+      do {
+        globalThis.crypto.getRandomValues(values);
+      } while (values[0] >= limit);
+      return values[0] % length;
     }
 
     function setError(message) {
@@ -154,14 +178,20 @@ const { labels } = Astro.props;
     function animate(pool, selected) {
       output.classList.add('spinning');
       output.textContent = labels.spinning;
+      pickButton.disabled = true;
       let cycles = 0;
       window.clearInterval(timer);
       timer = window.setInterval(() => {
         cycles += 1;
-        output.textContent = pool[Math.floor(Math.random() * pool.length)] || labels.spinning;
+        try {
+          output.textContent = pool[secureIndex(pool.length)] || labels.spinning;
+        } catch {
+          output.textContent = labels.spinning;
+        }
         if (cycles >= 10) {
           window.clearInterval(timer);
           timer = null;
+          pickButton.disabled = false;
           output.classList.remove('spinning');
           output.textContent = selected;
           latest = selected;
@@ -177,9 +207,19 @@ const { labels } = Astro.props;
         setError(labels.emptyListError);
         return;
       }
+      if (duplicateNames(names).length) {
+        setError(labels.duplicateListError);
+        return;
+      }
       const beforeRemaining = noRepeat.checked ? names.filter((name) => !picked.has(name)).length : names.length;
       const pool = remainingPool();
-      const selected = pool[Math.floor(Math.random() * pool.length)];
+      let selected;
+      try {
+        selected = pool[secureIndex(pool.length)];
+      } catch {
+        setError(labels.secureRandomError);
+        return;
+      }
       if (noRepeat.checked) picked.add(selected);
       if (beforeRemaining === 0 && noRepeat.checked) {
         setError(labels.exhausted);
@@ -209,6 +249,7 @@ const { labels } = Astro.props;
     root.querySelector('[data-reset]')?.addEventListener('click', () => {
       window.clearInterval(timer);
       timer = null;
+      pickButton.disabled = false;
       picked.clear();
       history.length = 0;
       renderHistory();
@@ -235,9 +276,21 @@ const { labels } = Astro.props;
       if (!history.length) return;
       const rows = [[labels.csvOrder, labels.csvName]];
       history.forEach((name, index) => rows.push([index + 1, name]));
-      downloadCsv('roll-call.csv', rows);
+      downloadCsv(labels.csvFilename || 'roll-call.csv', rows);
     });
-    textarea.addEventListener('input', updateRemaining);
+    textarea.addEventListener('input', () => {
+      window.clearInterval(timer);
+      timer = null;
+      pickButton.disabled = false;
+      picked.clear();
+      history.length = 0;
+      renderHistory();
+      latest = '';
+      output.classList.remove('spinning');
+      output.textContent = labels.emptyResult;
+      setError('');
+      updateRemaining();
+    });
     noRepeat.addEventListener('change', updateRemaining);
 
     updateRemaining();

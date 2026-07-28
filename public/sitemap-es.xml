@@ -265,6 +265,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/webp-to-jpg/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/crear-diagrama-flujo/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/flowchart/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/flowchart/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-diagrama-flujo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/flowchart/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/crear-grafico-barras/</loc>
     <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/bar-chart-maker/" />
@@ -425,6 +433,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pdf-page-reorder/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/pizarra-dibujo-online/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/sketchpad/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/sketchpad/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/pizarra-dibujo-online/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/sketchpad/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/que-comer-hoy/</loc>
     <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/what-to-eat/" />
@@ -479,6 +495,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-wheel/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/ruleta-aleatoria/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/random-wheel/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/selector-aleatorio-alumnos/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/random-student-picker/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-student-picker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/selector-aleatorio-alumnos/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/random-student-picker/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/sorteo-nombres-aleatorio/</loc>

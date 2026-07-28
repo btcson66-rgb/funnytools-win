@@ -1,0 +1,23 @@
+---
+import FlowchartMaker from '../../../components/tools/FlowchartMaker.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishFlowchart,
+  spanishFlowchartReview,
+} from '../../../i18n/expansion/es-tools-23';
+---
+
+<ExpansionToolLayout
+  routeKey="flowchart"
+  canonicalPath="/es/herramientas/crear-diagrama-flujo/"
+  content={spanishFlowchart}
+  categoryLabel="Diagramas y procesos"
+  review={spanishFlowchartReview}
+  relatedTool={{
+    name: 'Pizarra para dibujar online',
+    description: 'Haz un boceto libre con color, grosor, goma y descarga PNG.',
+    href: '/es/herramientas/pizarra-dibujo-online/',
+  }}
+>
+  <FlowchartMaker labels={spanishFlowchart.labels} />
+</ExpansionToolLayout>

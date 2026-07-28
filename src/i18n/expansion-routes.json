@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-22",
+  "activeBatch": "es-23",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -661,6 +661,36 @@
         "zh": "/tools/cad-2d/",
         "en": "/en/tools/cad-2d/",
         "es": "/es/herramientas/cad-2d-online/"
+      }
+    },
+    {
+      "key": "sketchpad",
+      "type": "tool",
+      "batch": "es-23",
+      "paths": {
+        "zh": "/tools/sketchpad/",
+        "en": "/en/tools/sketchpad/",
+        "es": "/es/herramientas/pizarra-dibujo-online/"
+      }
+    },
+    {
+      "key": "flowchart",
+      "type": "tool",
+      "batch": "es-23",
+      "paths": {
+        "zh": "/tools/flowchart/",
+        "en": "/en/tools/flowchart/",
+        "es": "/es/herramientas/crear-diagrama-flujo/"
+      }
+    },
+    {
+      "key": "random-student-picker",
+      "type": "tool",
+      "batch": "es-23",
+      "paths": {
+        "zh": "/tools/random-student-picker/",
+        "en": "/en/tools/random-student-picker/",
+        "es": "/es/herramientas/selector-aleatorio-alumnos/"
       }
     }
   ]

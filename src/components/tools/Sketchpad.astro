@@ -217,7 +217,7 @@ const { labels } = Astro.props;
     function download() {
       const anchor = document.createElement('a');
       anchor.href = canvas.toDataURL('image/png');
-      anchor.download = 'sketchpad.png';
+      anchor.download = labels.downloadFilename || 'sketchpad.png';
       anchor.click();
     }
 

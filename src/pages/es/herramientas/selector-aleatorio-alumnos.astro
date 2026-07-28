@@ -1,0 +1,23 @@
+---
+import RandomStudentPicker from '../../../components/tools/RandomStudentPicker.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishRandomStudentPicker,
+  spanishRandomStudentPickerReview,
+} from '../../../i18n/expansion/es-tools-23';
+---
+
+<ExpansionToolLayout
+  routeKey="random-student-picker"
+  canonicalPath="/es/herramientas/selector-aleatorio-alumnos/"
+  content={spanishRandomStudentPicker}
+  categoryLabel="Aula y participación"
+  review={spanishRandomStudentPickerReview}
+  relatedTool={{
+    name: 'Temporizador Pomodoro',
+    description: 'Organiza una tarea en bloques de concentración y pausas.',
+    href: '/es/herramientas/temporizador-pomodoro/',
+  }}
+>
+  <RandomStudentPicker labels={spanishRandomStudentPicker.labels} />
+</ExpansionToolLayout>

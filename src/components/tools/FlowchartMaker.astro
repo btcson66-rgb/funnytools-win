@@ -10,6 +10,7 @@ const { labels } = Astro.props;
   <div class="flow-toolbar" role="toolbar" aria-label={labels.toolbar}>
     <button class="btn ghost is-active" type="button" data-mode="select">{labels.selectMove}</button>
     <button class="btn ghost" type="button" data-mode="connect">{labels.connect}</button>
+    <button class="btn ghost" type="button" data-edit disabled>{labels.editSelected}</button>
     <button class="btn" type="button" data-add="process">{labels.addProcess}</button>
     <button class="btn" type="button" data-add="decision">{labels.addDecision}</button>
     <button class="btn ghost" type="button" data-delete>{labels.deleteSelected}</button>
@@ -80,6 +81,7 @@ const { labels } = Astro.props;
 
     const status = root.querySelector('[data-status]');
     const modeButtons = Array.from(root.querySelectorAll('[data-mode]'));
+    const editButton = root.querySelector('[data-edit]');
     const nodes = [];
     const edges = [];
     const colors = {
@@ -187,6 +189,7 @@ const { labels } = Astro.props;
     function selectNode(node) {
       selectedNodeId = node?.id || '';
       selectedEdgeId = '';
+      editButton.disabled = !selectedNodeId;
       setStatus(selectedNodeId ? labels.selectedNode : labels.nothingSelected);
       render();
     }
@@ -194,17 +197,22 @@ const { labels } = Astro.props;
     function selectEdge(edge) {
       selectedEdgeId = edge?.id || '';
       selectedNodeId = '';
+      editButton.disabled = true;
       setStatus(selectedEdgeId ? labels.selectedEdge : labels.nothingSelected);
       render();
     }
 
     function addNode(type) {
-      const offset = nodes.length * 26;
+      if (nodes.length >= 20) {
+        setStatus(labels.maxNodes);
+        return;
+      }
+      const slot = nodes.length;
       nodes.push({
         id: `node-${nextId}`,
         type,
-        x: 230 + (offset % 360),
-        y: 160 + (offset % 260),
+        x: 110 + (slot % 5) * 195,
+        y: 85 + (Math.floor(slot / 5) % 4) * 150,
         w: type === 'decision' ? 170 : 190,
         h: type === 'decision' ? 110 : 86,
         text: type === 'decision' ? labels.decisionText : labels.processText,
@@ -221,6 +229,7 @@ const { labels } = Astro.props;
           if (edges[index].from === selectedNodeId || edges[index].to === selectedNodeId) edges.splice(index, 1);
         }
         selectedNodeId = '';
+        editButton.disabled = true;
       } else if (selectedEdgeId) {
         const edgeIndex = edges.findIndex((edge) => edge.id === selectedEdgeId);
         if (edgeIndex >= 0) edges.splice(edgeIndex, 1);
@@ -236,6 +245,7 @@ const { labels } = Astro.props;
       edges.splice(0, edges.length);
       selectedNodeId = '';
       selectedEdgeId = '';
+      editButton.disabled = true;
       connectSourceId = '';
       setStatus(labels.nothingSelected);
       render();
@@ -363,13 +373,22 @@ const { labels } = Astro.props;
           return;
         }
         if (connectSourceId !== node.id) {
-          edges.push({ id: `edge-${nextId}`, from: connectSourceId, to: node.id });
-          nextId += 1;
-          selectedNodeId = '';
-          selectedEdgeId = edges[edges.length - 1].id;
+          const existing = edges.find((edge) => edge.from === connectSourceId && edge.to === node.id);
+          if (existing) {
+            selectedNodeId = '';
+            editButton.disabled = true;
+            selectedEdgeId = existing.id;
+            setStatus(labels.connectionExists);
+          } else {
+            edges.push({ id: `edge-${nextId}`, from: connectSourceId, to: node.id });
+            nextId += 1;
+            selectedNodeId = '';
+            editButton.disabled = true;
+            selectedEdgeId = edges[edges.length - 1].id;
+            setStatus(labels.selectedEdge);
+          }
         }
         connectSourceId = '';
-        setStatus(labels.selectedEdge);
         render();
         return;
       }
@@ -411,8 +430,7 @@ const { labels } = Astro.props;
       }
     }
 
-    function editNode(event) {
-      const node = hitNode(canvasPoint(event));
+    function promptNode(node) {
       if (!node) return;
       const value = window.prompt(labels.editPrompt, node.text);
       if (value === null) return;
@@ -420,11 +438,15 @@ const { labels } = Astro.props;
       selectNode(node);
     }
 
+    function editNode(event) {
+      promptNode(hitNode(canvasPoint(event)));
+    }
+
     function download() {
       render(true);
       const anchor = document.createElement('a');
       anchor.href = canvas.toDataURL('image/png');
-      anchor.download = 'flowchart.png';
+      anchor.download = labels.downloadFilename || 'flowchart.png';
       anchor.click();
       render(false);
     }
@@ -434,6 +456,7 @@ const { labels } = Astro.props;
     });
     root.querySelector('[data-add="process"]')?.addEventListener('click', () => addNode('process'));
     root.querySelector('[data-add="decision"]')?.addEventListener('click', () => addNode('decision'));
+    editButton.addEventListener('click', () => promptNode(findNode(selectedNodeId)));
     root.querySelector('[data-delete]')?.addEventListener('click', deleteSelected);
     root.querySelector('[data-clear]')?.addEventListener('click', clearAll);
     root.querySelector('[data-download]')?.addEventListener('click', download);
@@ -449,6 +472,7 @@ const { labels } = Astro.props;
     nextId += 1;
     selectedNodeId = '';
     selectedEdgeId = '';
+    editButton.disabled = true;
     setStatus(labels.nothingSelected);
     render();
   });

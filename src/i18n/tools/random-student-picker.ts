@@ -89,6 +89,9 @@ export default {
       exhausted: '已全部抽完，下一次會重新開始。',
       spinning: '抽選中...',
       copied: '已複製',
+      duplicateListError: '名單有完全相同的項目，請加入座號或暱稱後再抽選。',
+      secureRandomError: '此瀏覽器無法提供安全的隨機數，請改用較新的瀏覽器。',
+      csvFilename: 'roll-call.csv',
     },
   },
   en: {
@@ -179,6 +182,9 @@ export default {
       exhausted: 'Everyone has been picked. The next pick starts a new round.',
       spinning: 'Picking...',
       copied: 'Copied!',
+      duplicateListError: 'The list contains identical entries. Add a seat number or nickname before picking.',
+      secureRandomError: 'This browser cannot provide a secure random value. Please use a current browser.',
+      csvFilename: 'roll-call.csv',
     },
   },
 } satisfies Record<'zh' | 'en', ToolContent>;
