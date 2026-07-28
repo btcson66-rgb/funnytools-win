@@ -115,7 +115,8 @@ const { labels } = Astro.props;
     let latestSummary = '';
 
     function money(value) {
-      return new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(Math.round(value));
+      const locale = document.documentElement.lang || undefined;
+      return new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(Math.round(value));
     }
 
     function setError(message) {
@@ -126,6 +127,14 @@ const { labels } = Astro.props;
     function readNumber(input) {
       const value = Number(input.value);
       return Number.isFinite(value) ? value : NaN;
+    }
+
+    function clearResult() {
+      outputs.future.textContent = '-';
+      outputs.contributed.textContent = '-';
+      outputs.interest.textContent = '-';
+      chart.innerHTML = '';
+      latestSummary = '';
     }
 
     function drawChart(yearly) {
@@ -163,9 +172,20 @@ const { labels } = Astro.props;
       const principal = readNumber(inputs.principal);
       const monthly = readNumber(inputs.monthly);
       const rate = readNumber(inputs.rate) / 100;
-      const years = Math.round(readNumber(inputs.years));
+      const years = readNumber(inputs.years);
       const compounds = Number(inputs.compounding.value);
-      if ([principal, monthly, rate, years].some((value) => !Number.isFinite(value) || value < 0) || years < 1) {
+      if (
+        [principal, monthly, rate, years, compounds].some((value) => !Number.isFinite(value))
+        || principal < 0
+        || monthly < 0
+        || rate < 0
+        || rate > 1
+        || !Number.isInteger(years)
+        || years < 1
+        || years > 100
+        || ![1, 4, 12, 365].includes(compounds)
+      ) {
+        clearResult();
         setError(labels.invalidInput);
         return;
       }
@@ -181,6 +201,11 @@ const { labels } = Astro.props;
       }
       const contributed = principal + monthly * years * 12;
       const interest = balance - contributed;
+      if (![balance, contributed, interest].every(Number.isFinite)) {
+        clearResult();
+        setError(labels.invalidInput);
+        return;
+      }
       outputs.future.textContent = money(balance);
       outputs.contributed.textContent = money(contributed);
       outputs.interest.textContent = money(interest);

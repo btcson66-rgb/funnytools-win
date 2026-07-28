@@ -1,0 +1,23 @@
+---
+import MortgagePayment from '../../../components/tools/MortgagePayment.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishMortgagePayment,
+  spanishMortgagePaymentReview,
+} from '../../../i18n/expansion/es-tools-21';
+---
+
+<ExpansionToolLayout
+  routeKey="mortgage-payment"
+  canonicalPath="/es/herramientas/calculadora-hipoteca/"
+  content={spanishMortgagePayment}
+  categoryLabel="Dinero y vivienda"
+  review={spanishMortgagePaymentReview}
+  relatedTool={{
+    name: 'Calculadora de interés compuesto',
+    description: 'Compara capital, aportaciones, tasa y plazo en un escenario de crecimiento.',
+    href: '/es/herramientas/calculadora-interes-compuesto/',
+  }}
+>
+  <MortgagePayment labels={spanishMortgagePayment.labels} />
+</ExpansionToolLayout>

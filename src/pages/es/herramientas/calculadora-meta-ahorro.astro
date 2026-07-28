@@ -1,0 +1,23 @@
+---
+import SavingsGoal from '../../../components/tools/SavingsGoal.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishSavingsGoal,
+  spanishSavingsGoalReview,
+} from '../../../i18n/expansion/es-tools-21';
+---
+
+<ExpansionToolLayout
+  routeKey="savings-goal"
+  canonicalPath="/es/herramientas/calculadora-meta-ahorro/"
+  content={spanishSavingsGoal}
+  categoryLabel="Dinero y ahorro"
+  review={spanishSavingsGoalReview}
+  relatedTool={{
+    name: 'Calculadora de interés compuesto',
+    description: 'Proyecta capital inicial y aportaciones con distintas frecuencias.',
+    href: '/es/herramientas/calculadora-interes-compuesto/',
+  }}
+>
+  <SavingsGoal labels={spanishSavingsGoal.labels} />
+</ExpansionToolLayout>

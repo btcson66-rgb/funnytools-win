@@ -79,7 +79,8 @@ const { labels } = Astro.props;
     let latestSummary = '';
 
     function money(value) {
-      return new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(Math.ceil(value));
+      const locale = document.documentElement.lang || undefined;
+      return new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(Math.ceil(value));
     }
 
     function setError(message) {
@@ -97,12 +98,20 @@ const { labels } = Astro.props;
       return annual === 0 ? 0 : Math.pow(1 + annual, 1 / 12) - 1;
     }
 
+    function clearResult() {
+      resultLabel.textContent = mode === 'time' ? labels.timeResult : labels.monthlyResult;
+      result.textContent = '-';
+      latestSummary = '';
+    }
+
     function formatMonths(totalMonths) {
       const years = Math.floor(totalMonths / 12);
       const months = totalMonths % 12;
-      if (years && months) return `${years} ${labels.years} ${months} ${labels.months}`;
-      if (years) return `${years} ${labels.years}`;
-      return `${months} ${labels.months}`;
+      const yearLabel = years === 1 ? (labels.yearSingular || labels.years) : labels.years;
+      const monthLabel = months === 1 ? (labels.monthSingular || labels.months) : labels.months;
+      if (years && months) return `${years} ${yearLabel} ${months} ${monthLabel}`;
+      if (years) return `${years} ${yearLabel}`;
+      return `${months} ${monthLabel}`;
     }
 
     function setMode(nextMode) {
@@ -120,8 +129,18 @@ const { labels } = Astro.props;
     function calculate() {
       const target = readNumber(inputs.target);
       const current = readNumber(inputs.current);
+      const annualRate = readNumber(inputs.rate);
       const rate = monthlyRate();
-      if (!Number.isFinite(target) || !Number.isFinite(current) || target <= 0 || current < 0 || rate < 0) {
+      if (
+        !Number.isFinite(target)
+        || !Number.isFinite(current)
+        || !Number.isFinite(annualRate)
+        || target <= 0
+        || current < 0
+        || annualRate < 0
+        || annualRate > 100
+      ) {
+        clearResult();
         setError(labels.invalidInput);
         return;
       }
@@ -136,12 +155,13 @@ const { labels } = Astro.props;
       if (mode === 'time') {
         const monthly = readNumber(inputs.monthly);
         if (!Number.isFinite(monthly) || monthly < 0) {
+          clearResult();
           setError(labels.invalidInput);
           return;
         }
         let balance = current;
         let month = 0;
-        while (balance < target && month <= 1200) {
+        while (balance < target && month < 1200) {
           balance = balance * (1 + rate) + monthly;
           month += 1;
           if (monthly === 0 && rate === 0) break;
@@ -155,8 +175,9 @@ const { labels } = Astro.props;
           latestSummary = `${labels.timeResult}: ${formatMonths(month)}`;
         }
       } else {
-        const months = Math.round(readNumber(inputs.months));
-        if (!Number.isFinite(months) || months < 1) {
+        const months = readNumber(inputs.months);
+        if (!Number.isInteger(months) || months < 1 || months > 1200) {
+          clearResult();
           setError(labels.invalidInput);
           return;
         }
@@ -167,6 +188,11 @@ const { labels } = Astro.props;
           required = (target - current * Math.pow(1 + rate, months)) * rate / (Math.pow(1 + rate, months) - 1);
         }
         required = Math.max(0, required);
+        if (!Number.isFinite(required)) {
+          clearResult();
+          setError(labels.invalidInput);
+          return;
+        }
         resultLabel.textContent = labels.monthlyResult;
         result.textContent = money(required);
         latestSummary = `${labels.monthlyResult}: ${money(required)}`;

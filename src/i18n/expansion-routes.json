@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-20",
+  "activeBatch": "es-21",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -601,6 +601,36 @@
         "zh": "/tools/overtime-pay/",
         "en": "/en/tools/overtime-pay/",
         "es": "/es/herramientas/calculadora-horas-extra/"
+      }
+    },
+    {
+      "key": "mortgage-payment",
+      "type": "tool",
+      "batch": "es-21",
+      "paths": {
+        "zh": "/tools/mortgage-payment/",
+        "en": "/en/tools/mortgage-payment/",
+        "es": "/es/herramientas/calculadora-hipoteca/"
+      }
+    },
+    {
+      "key": "compound-interest",
+      "type": "tool",
+      "batch": "es-21",
+      "paths": {
+        "zh": "/tools/compound-interest/",
+        "en": "/en/tools/compound-interest/",
+        "es": "/es/herramientas/calculadora-interes-compuesto/"
+      }
+    },
+    {
+      "key": "savings-goal",
+      "type": "tool",
+      "batch": "es-21",
+      "paths": {
+        "zh": "/tools/savings-goal/",
+        "en": "/en/tools/savings-goal/",
+        "es": "/es/herramientas/calculadora-meta-ahorro/"
       }
     }
   ]

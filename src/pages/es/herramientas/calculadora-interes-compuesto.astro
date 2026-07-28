@@ -1,0 +1,23 @@
+---
+import CompoundInterest from '../../../components/tools/CompoundInterest.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishCompoundInterest,
+  spanishCompoundInterestReview,
+} from '../../../i18n/expansion/es-tools-21';
+---
+
+<ExpansionToolLayout
+  routeKey="compound-interest"
+  canonicalPath="/es/herramientas/calculadora-interes-compuesto/"
+  content={spanishCompoundInterest}
+  categoryLabel="Dinero y ahorro"
+  review={spanishCompoundInterestReview}
+  relatedTool={{
+    name: 'Calculadora de meta de ahorro',
+    description: 'Calcula tiempo o aportación mensual para llegar a una cantidad concreta.',
+    href: '/es/herramientas/calculadora-meta-ahorro/',
+  }}
+>
+  <CompoundInterest labels={spanishCompoundInterest.labels} />
+</ExpansionToolLayout>

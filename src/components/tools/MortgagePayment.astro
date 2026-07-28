@@ -58,7 +58,8 @@ const { labels } = Astro.props;
     let latestSummary = '';
 
     function money(value) {
-      return new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(Math.round(value));
+      const locale = document.documentElement.lang || undefined;
+      return new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(Math.round(value));
     }
 
     function setError(message) {
@@ -66,20 +67,41 @@ const { labels } = Astro.props;
       error.hidden = !message;
     }
 
+    function clearResult() {
+      outputs.monthly.textContent = '-';
+      outputs.total.textContent = '-';
+      outputs.interest.textContent = '-';
+      latestSummary = '';
+    }
+
     function calculate() {
       const loan = Number(loanInput.value);
       const annualRate = Number(rateInput.value) / 100;
       const years = Number(yearsInput.value);
-      if (![loan, annualRate, years].every(Number.isFinite) || loan <= 0 || annualRate < 0 || years <= 0) {
+      if (
+        ![loan, annualRate, years].every(Number.isFinite)
+        || loan <= 0
+        || annualRate < 0
+        || annualRate > 1
+        || !Number.isInteger(years)
+        || years < 1
+        || years > 100
+      ) {
+        clearResult();
         setError(labels.invalidInput);
         return;
       }
       const months = years * 12;
       const monthlyRate = annualRate / 12;
       const monthlyPayment =
-        monthlyRate === 0 ? loan / months : loan * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+        monthlyRate === 0 ? loan / months : loan * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months));
       const total = monthlyPayment * months;
       const interest = total - loan;
+      if (![monthlyPayment, total, interest].every(Number.isFinite)) {
+        clearResult();
+        setError(labels.invalidInput);
+        return;
+      }
       outputs.monthly.textContent = money(monthlyPayment);
       outputs.total.textContent = money(total);
       outputs.interest.textContent = money(interest);

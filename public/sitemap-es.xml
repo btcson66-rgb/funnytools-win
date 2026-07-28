@@ -49,12 +49,36 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/business-days/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/calculadora-hipoteca/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/mortgage-payment/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/mortgage-payment/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-hipoteca/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/mortgage-payment/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/calculadora-horas-extra/</loc>
     <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/overtime-pay/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/overtime-pay/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-horas-extra/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/overtime-pay/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/calculadora-interes-compuesto/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/compound-interest/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/compound-interest/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-interes-compuesto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/compound-interest/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/calculadora-meta-ahorro/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/savings-goal/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/savings-goal/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-meta-ahorro/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/savings-goal/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/calculadora-porcentajes/</loc>
