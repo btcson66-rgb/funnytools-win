@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-17",
+  "activeBatch": "es-18",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -511,6 +511,36 @@
         "zh": "/tools/this-or-that/",
         "en": "/en/tools/this-or-that/",
         "es": "/es/herramientas/decidir-entre-dos-opciones/"
+      }
+    },
+    {
+      "key": "what-to-eat",
+      "type": "tool",
+      "batch": "es-18",
+      "paths": {
+        "zh": "/tools/what-to-eat/",
+        "en": "/en/tools/what-to-eat/",
+        "es": "/es/herramientas/que-comer-hoy/"
+      }
+    },
+    {
+      "key": "countdown-timer",
+      "type": "tool",
+      "batch": "es-18",
+      "paths": {
+        "zh": "/tools/countdown-timer/",
+        "en": "/en/tools/countdown-timer/",
+        "es": "/es/herramientas/temporizador-online/"
+      }
+    },
+    {
+      "key": "stopwatch",
+      "type": "tool",
+      "batch": "es-18",
+      "paths": {
+        "zh": "/tools/stopwatch/",
+        "en": "/en/tools/stopwatch/",
+        "es": "/es/herramientas/cronometro-online/"
       }
     }
   ]

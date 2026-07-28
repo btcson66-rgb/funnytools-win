@@ -1,0 +1,23 @@
+---
+import CountdownTimer from '../../../components/tools/CountdownTimer.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishCountdownTimer,
+  spanishCountdownTimerReview,
+} from '../../../i18n/expansion/es-tools-18';
+---
+
+<ExpansionToolLayout
+  routeKey="countdown-timer"
+  canonicalPath="/es/herramientas/temporizador-online/"
+  content={spanishCountdownTimer}
+  categoryLabel="Tiempo y fechas"
+  review={spanishCountdownTimerReview}
+  relatedTool={{
+    name: 'Cronómetro online',
+    description: 'Mide tiempo transcurrido y guarda vueltas con parcial y total.',
+    href: '/es/herramientas/cronometro-online/',
+  }}
+>
+  <CountdownTimer labels={spanishCountdownTimer.labels} />
+</ExpansionToolLayout>

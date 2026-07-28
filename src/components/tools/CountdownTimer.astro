@@ -102,6 +102,8 @@ const { labels } = Astro.props;
     let remainingSeconds = 5 * 60;
     let endAt = 0;
     let timerId = null;
+    let audioContext: AudioContext | null = null;
+    const originalTitle = document.title;
 
     function numberFrom(input) {
       const number = Number(input.value);
@@ -161,27 +163,50 @@ const { labels } = Astro.props;
     }
 
     function render(seconds = remainingSeconds) {
-      display.textContent = format(seconds);
+      const formatted = format(seconds);
+      display.textContent = formatted;
       units.textContent = unitText(seconds);
       startButton.disabled = running;
       pauseButton.disabled = !running;
+      if (running) {
+        document.title = (labels.tabTitle || '{time}').replace('{time}', formatted);
+      }
+    }
+
+    function restoreTitle() {
+      document.title = originalTitle;
+    }
+
+    function primeAudio() {
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        if (!audioContext) audioContext = new AudioContextClass();
+        if (audioContext.state === 'suspended') {
+          void audioContext.resume().catch(() => {});
+        }
+      } catch {
+        audioContext = null;
+      }
     }
 
     function beep() {
       try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const context = new AudioContext();
-        const oscillator = context.createOscillator();
-        const gain = context.createGain();
+        if (!audioContext) return;
+        if (audioContext.state === 'suspended') {
+          void audioContext.resume().catch(() => {});
+        }
+        const oscillator = audioContext.createOscillator();
+        const gain = audioContext.createGain();
         oscillator.type = 'sine';
         oscillator.frequency.value = 880;
-        gain.gain.setValueAtTime(0.001, context.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.25, context.currentTime + 0.02);
-        gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 0.35);
+        gain.gain.setValueAtTime(0.001, audioContext.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.25, audioContext.currentTime + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.35);
         oscillator.connect(gain);
-        gain.connect(context.destination);
+        gain.connect(audioContext.destination);
         oscillator.start();
-        oscillator.stop(context.currentTime + 0.38);
+        oscillator.stop(audioContext.currentTime + 0.38);
       } catch {
         // Audio is optional.
       }
@@ -204,6 +229,7 @@ const { labels } = Astro.props;
       panelDisplay.classList.add('flash');
       beep();
       render(0);
+      restoreTitle();
     }
 
     function tick() {
@@ -244,6 +270,7 @@ const { labels } = Astro.props;
       panelDisplay.classList.remove('flash');
       running = true;
       endAt = Date.now() + remainingSeconds * 1000;
+      primeAudio();
       clearTimer();
       timerId = window.setInterval(tick, 250);
       render();
@@ -255,6 +282,7 @@ const { labels } = Astro.props;
       running = false;
       clearTimer();
       render();
+      restoreTitle();
     }
 
     function reset() {
@@ -265,6 +293,7 @@ const { labels } = Astro.props;
       remainingSeconds = mode === 'target' ? targetSeconds() : durationSeconds();
       setError('');
       render(remainingSeconds);
+      restoreTitle();
     }
 
     function switchMode(nextMode) {
@@ -303,6 +332,13 @@ const { labels } = Astro.props;
     startButton.addEventListener('click', start);
     pauseButton.addEventListener('click', pause);
     root.querySelector('[data-reset]')?.addEventListener('click', reset);
+    window.addEventListener('pagehide', () => {
+      restoreTitle();
+      if (audioContext) {
+        void audioContext.close().catch(() => {});
+        audioContext = null;
+      }
+    });
 
     setDefaultTarget();
     reset();

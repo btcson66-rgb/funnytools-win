@@ -110,23 +110,46 @@ const { labels } = Astro.props;
       return [...builtIns, ...customItems()];
     }
 
+    function secureRandomIndex(length) {
+      if (!window.crypto?.getRandomValues) {
+        throw new Error('secure-random-unavailable');
+      }
+      const range = 0x100000000;
+      const limit = range - (range % length);
+      const values = new Uint32Array(1);
+      do {
+        window.crypto.getRandomValues(values);
+      } while (values[0] >= limit);
+      return values[0] % length;
+    }
+
     function decide() {
       const items = candidates();
       window.clearInterval(shuffleTimer);
+      shuffleTimer = null;
+      latest = '';
       if (!items.length) {
-        latest = '';
         result.textContent = labels.waiting;
         setError(labels.emptyError);
+        return;
+      }
+      let finalIndex;
+      try {
+        finalIndex = secureRandomIndex(items.length);
+      } catch {
+        result.textContent = labels.waiting;
+        setError(labels.cryptoError);
         return;
       }
       setError('');
       let ticks = 0;
       shuffleTimer = window.setInterval(() => {
-        result.textContent = items[Math.floor(Math.random() * items.length)];
+        result.textContent = items[(finalIndex + ticks + 1) % items.length];
         ticks += 1;
         if (ticks >= 12) {
           window.clearInterval(shuffleTimer);
-          latest = items[Math.floor(Math.random() * items.length)];
+          shuffleTimer = null;
+          latest = items[finalIndex];
           result.textContent = latest;
         }
       }, 70);

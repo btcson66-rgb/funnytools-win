@@ -77,7 +77,7 @@ export default {
       },
       {
         q: '結果真的隨機嗎？',
-        a: '工具使用瀏覽器的 Math.random 從候選項中選一個，適合日常決策與娛樂用途。',
+        a: '工具使用 crypto.getRandomValues 搭配拒絕取樣，從目前候選位置中等機率選出一個。重複項目仍會占用多個位置。',
       },
       {
         q: '有過敏或飲食限制時可以用嗎？',
@@ -94,6 +94,7 @@ export default {
       result: '今天吃',
       waiting: '先選分類或輸入餐點',
       emptyError: '請至少勾選一個分類或輸入一個自訂餐點。',
+      cryptoError: '這個瀏覽器無法提供安全隨機功能，請改用最新版瀏覽器後再試。',
       copied: '已複製',
       categoriesJson: JSON.stringify([
         { id: 'taiwan', label: '台灣常見', items: ['滷肉飯', '牛肉麵', '雞肉飯', '水餃', '炒飯', '鍋貼', '鹽酥雞', '便當'] },
@@ -139,7 +140,7 @@ export default {
       },
       {
         q: 'Is the choice random?',
-        a: 'The tool uses browser Math.random to pick from the current candidate list, which is appropriate for everyday decisions and fun.',
+        a: 'Yes. The tool uses crypto.getRandomValues with rejection sampling to select an equally likely position from the current candidate list. Repeated entries still occupy multiple positions.',
       },
       {
         q: 'Can I use it with allergies or dietary restrictions?',
@@ -156,6 +157,7 @@ export default {
       result: 'Eat this',
       waiting: 'Select categories or add items',
       emptyError: 'Select at least one category or enter one custom item.',
+      cryptoError: 'Secure randomness is unavailable in this browser. Try again in an up-to-date browser.',
       copied: 'Copied!',
       categoriesJson: JSON.stringify([
         { id: 'chinese', label: 'Chinese', items: ['Beef noodle soup', 'Fried rice', 'Dumplings', 'Mapo tofu rice', 'BBQ pork rice', 'Hot pot', 'Congee', 'Scallion pancakes'] },

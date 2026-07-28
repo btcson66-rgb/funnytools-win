@@ -1,0 +1,23 @@
+---
+import WhatToEat from '../../../components/tools/WhatToEat.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishWhatToEat,
+  spanishWhatToEatReview,
+} from '../../../i18n/expansion/es-tools-18';
+---
+
+<ExpansionToolLayout
+  routeKey="what-to-eat"
+  canonicalPath="/es/herramientas/que-comer-hoy/"
+  content={spanishWhatToEat}
+  categoryLabel="Sorteos y decisiones"
+  review={spanishWhatToEatReview}
+  relatedTool={{
+    name: 'Temporizador online',
+    description: 'Cuenta una duración o el tiempo que falta hasta una fecha y hora futuras.',
+    href: '/es/herramientas/temporizador-online/',
+  }}
+>
+  <WhatToEat labels={spanishWhatToEat.labels} />
+</ExpansionToolLayout>

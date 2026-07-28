@@ -1,0 +1,23 @@
+---
+import Stopwatch from '../../../components/tools/Stopwatch.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishStopwatch,
+  spanishStopwatchReview,
+} from '../../../i18n/expansion/es-tools-18';
+---
+
+<ExpansionToolLayout
+  routeKey="stopwatch"
+  canonicalPath="/es/herramientas/cronometro-online/"
+  content={spanishStopwatch}
+  categoryLabel="Tiempo y fechas"
+  review={spanishStopwatchReview}
+  relatedTool={{
+    name: 'Qué comer hoy',
+    description: 'Desempata entre categorías y una lista personalizada de comidas.',
+    href: '/es/herramientas/que-comer-hoy/',
+  }}
+>
+  <Stopwatch labels={spanishStopwatch.labels} />
+</ExpansionToolLayout>

@@ -69,6 +69,7 @@ export default {
       durationError: '請輸入大於 0 的時長。',
       targetError: '請選擇未來的目標時間。',
       ready: '準備開始',
+      tabTitle: '{time} · 倒數計時器',
     },
   },
   en: {
@@ -126,6 +127,7 @@ export default {
       durationError: 'Enter a duration greater than zero.',
       targetError: 'Choose a future target time.',
       ready: 'Ready',
+      tabTitle: '{time} · Countdown Timer',
     },
   },
 } satisfies Record<'zh' | 'en', ToolContent>;
