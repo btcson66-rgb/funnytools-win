@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-33",
+  "activeBatch": "es-34",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -991,6 +991,36 @@
         "zh": "/guides/bar-chart-school-report-guide/",
         "en": "/en/guides/bar-chart-school-report-guide/",
         "es": "/es/guias/grafico-barras-trabajo-escolar/"
+      }
+    },
+    {
+      "key": "qr-code-classroom-guide",
+      "type": "guide",
+      "batch": "es-34",
+      "paths": {
+        "zh": "/guides/qr-code-classroom-guide/",
+        "en": "/en/guides/qr-code-classroom-guide/",
+        "es": "/es/guias/codigos-qr-en-el-aula/"
+      }
+    },
+    {
+      "key": "photos-to-pdf-phone-guide",
+      "type": "guide",
+      "batch": "es-34",
+      "paths": {
+        "zh": "/guides/photos-to-pdf-phone-guide/",
+        "en": "/en/guides/photos-to-pdf-phone-guide/",
+        "es": "/es/guias/fotos-a-pdf-desde-movil/"
+      }
+    },
+    {
+      "key": "a4-vs-us-letter-printing-guide",
+      "type": "guide",
+      "batch": "es-34",
+      "paths": {
+        "zh": "/guides/a4-vs-us-letter-printing-guide/",
+        "en": "/en/guides/a4-vs-us-letter-printing-guide/",
+        "es": "/es/guias/a4-o-letter-para-imprimir/"
       }
     }
   ]
