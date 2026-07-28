@@ -255,7 +255,11 @@ const { labels } = Astro.props;
       setError('');
       setWarning(
         invalidCount > 0
-          ? (labels.holidayWarning || '').replace('{count}', String(invalidCount))
+          ? (
+            invalidCount === 1
+              ? (labels.holidayWarningSingular || labels.holidayWarning || '')
+              : (labels.holidayWarning || '')
+          ).replace('{count}', String(invalidCount))
           : '',
       );
     }

@@ -615,6 +615,7 @@ export const spanishBusinessDays: ToolContent = {
     businessDays: 'Días laborables',
     countedRange: 'Intervalo contado',
     invalidDate: 'Introduce fechas inicial y final válidas.',
+    holidayWarningSingular: 'Se ignoró {count} línea con una fecha no válida o inexistente.',
     holidayWarning: 'Se ignoraron {count} líneas con fechas no válidas o inexistentes.',
     days: 'días',
     daySingular: 'día',
