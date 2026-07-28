@@ -1,0 +1,12 @@
+---
+import ExpansionInfoLayout from '../../../layouts/ExpansionInfoLayout.astro';
+import { spanishRandomCategory } from '../../../i18n/expansion/es-categories-37';
+---
+
+<ExpansionInfoLayout
+  currentKey="category-random"
+  canonicalPath="/es/categorias/azar/"
+  content={spanishRandomCategory}
+  pageType="CollectionPage"
+  breadcrumbParent={{ name: 'Todas las herramientas', path: '/es/herramientas/' }}
+/>

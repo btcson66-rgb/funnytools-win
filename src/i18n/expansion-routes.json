@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-36",
+  "activeBatch": "es-37",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1081,6 +1081,36 @@
         "zh": "/category/text/",
         "en": "/en/category/text/",
         "es": "/es/categorias/texto/"
+      }
+    },
+    {
+      "key": "category-statistics",
+      "type": "category",
+      "batch": "es-37",
+      "paths": {
+        "zh": "/category/statistics/",
+        "en": "/en/category/statistics/",
+        "es": "/es/categorias/estadistica/"
+      }
+    },
+    {
+      "key": "category-study",
+      "type": "category",
+      "batch": "es-37",
+      "paths": {
+        "zh": "/category/study/",
+        "en": "/en/category/study/",
+        "es": "/es/categorias/estudio/"
+      }
+    },
+    {
+      "key": "category-random",
+      "type": "category",
+      "batch": "es-37",
+      "paths": {
+        "zh": "/category/random/",
+        "en": "/en/category/random/",
+        "es": "/es/categorias/azar/"
       }
     }
   ]

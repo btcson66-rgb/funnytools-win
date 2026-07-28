@@ -1,0 +1,12 @@
+---
+import ExpansionInfoLayout from '../../../layouts/ExpansionInfoLayout.astro';
+import { spanishStatisticsCategory } from '../../../i18n/expansion/es-categories-37';
+---
+
+<ExpansionInfoLayout
+  currentKey="category-statistics"
+  canonicalPath="/es/categorias/estadistica/"
+  content={spanishStatisticsCategory}
+  pageType="CollectionPage"
+  breadcrumbParent={{ name: 'Todas las herramientas', path: '/es/herramientas/' }}
+/>
