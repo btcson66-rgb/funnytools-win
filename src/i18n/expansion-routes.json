@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-34",
+  "activeBatch": "es-35",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1021,6 +1021,36 @@
         "zh": "/guides/a4-vs-us-letter-printing-guide/",
         "en": "/en/guides/a4-vs-us-letter-printing-guide/",
         "es": "/es/guias/a4-o-letter-para-imprimir/"
+      }
+    },
+    {
+      "key": "merge-pdf-private-guide",
+      "type": "guide",
+      "batch": "es-35",
+      "paths": {
+        "zh": "/guides/merge-pdf-private-guide/",
+        "en": "/en/guides/merge-pdf-private-guide/",
+        "es": "/es/guias/unir-pdf-sin-subir-archivos/"
+      }
+    },
+    {
+      "key": "image-compression-email-guide",
+      "type": "guide",
+      "batch": "es-35",
+      "paths": {
+        "zh": "/guides/image-compression-email-guide/",
+        "en": "/en/guides/image-compression-email-guide/",
+        "es": "/es/guias/comprimir-fotos-para-email/"
+      }
+    },
+    {
+      "key": "word-count-essay-limits-guide",
+      "type": "guide",
+      "batch": "es-35",
+      "paths": {
+        "zh": "/guides/word-count-essay-limits-guide/",
+        "en": "/en/guides/word-count-essay-limits-guide/",
+        "es": "/es/guias/limite-palabras-ensayos-examenes/"
       }
     }
   ]
