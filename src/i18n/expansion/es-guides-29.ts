@@ -397,6 +397,12 @@ export const spanishAnovaApaGuide: SpanishInfoPage = {
         'Un diseño A × B produce al menos efecto principal de A, efecto principal de B e interacción A × B. Informa cada uno como una prueba distinta. Ejemplo: «La interacción entre método y nivel educativo fue significativa, F(1, 56) = 5.12, p = .027, ηp² = .08». Después describe cómo cambia el efecto de método entre niveles, usando medias de celda, intervalos y efectos simples.',
         'Cuando la interacción es relevante, una frase como «el método A fue mejor» puede ser falsa si solo mejora en un nivel y empeora en otro. Los efectos principales promedian sobre el otro factor y pueden ocultar ese patrón. Si la interacción no es significativa, no concluyas que las líneas son idénticas; considera precisión y potencia antes de simplificar.',
       ],
+      link: {
+        prefix: 'Descompón medias, gráficos y contrastes con la ',
+        label: 'guía de interacción en ANOVA de dos factores',
+        href: '/es/guias/interaccion-anova-dos-factores/',
+        suffix: '.',
+      },
     },
     {
       heading: 'Efectos simples y comparaciones dentro de niveles',

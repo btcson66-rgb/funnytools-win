@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-29",
+  "activeBatch": "es-30",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -871,6 +871,36 @@
         "zh": "/guides/anova-apa-format-guide/",
         "en": "/en/guides/anova-apa-format-guide/",
         "es": "/es/guias/anova-formato-apa-7/"
+      }
+    },
+    {
+      "key": "two-way-anova-interaction-guide",
+      "type": "guide",
+      "batch": "es-30",
+      "paths": {
+        "zh": "/guides/two-way-anova-interaction-guide/",
+        "en": "/en/guides/two-way-anova-interaction-guide/",
+        "es": "/es/guias/interaccion-anova-dos-factores/"
+      }
+    },
+    {
+      "key": "z-score-calculator-guide",
+      "type": "guide",
+      "batch": "es-30",
+      "paths": {
+        "zh": "/guides/z-score-calculator-guide/",
+        "en": "/en/guides/z-score-calculator-guide/",
+        "es": "/es/guias/puntuacion-z-interpretacion/"
+      }
+    },
+    {
+      "key": "t-score-calculator-guide",
+      "type": "guide",
+      "batch": "es-30",
+      "paths": {
+        "zh": "/guides/t-score-calculator-guide/",
+        "en": "/en/guides/t-score-calculator-guide/",
+        "es": "/es/guias/puntuacion-t-interpretacion/"
       }
     }
   ]
