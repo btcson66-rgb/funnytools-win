@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-30",
+  "activeBatch": "es-31",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -901,6 +901,36 @@
         "zh": "/guides/t-score-calculator-guide/",
         "en": "/en/guides/t-score-calculator-guide/",
         "es": "/es/guias/puntuacion-t-interpretacion/"
+      }
+    },
+    {
+      "key": "percentile-rank-guide",
+      "type": "guide",
+      "batch": "es-31",
+      "paths": {
+        "zh": "/guides/percentile-rank-guide/",
+        "en": "/en/guides/percentile-rank-guide/",
+        "es": "/es/guias/rango-percentil-interpretacion/"
+      }
+    },
+    {
+      "key": "teacher-exam-weighted-score-guide",
+      "type": "guide",
+      "batch": "es-31",
+      "paths": {
+        "zh": "/guides/teacher-exam-weighted-score-guide/",
+        "en": "/en/guides/teacher-exam-weighted-score-guide/",
+        "es": "/es/guias/calcular-nota-oposicion-docente/"
+      }
+    },
+    {
+      "key": "percentage-shortcuts-guide",
+      "type": "guide",
+      "batch": "es-31",
+      "paths": {
+        "zh": "/guides/percentage-shortcuts-guide/",
+        "en": "/en/guides/percentage-shortcuts-guide/",
+        "es": "/es/guias/calcular-porcentajes-rapido/"
       }
     }
   ]

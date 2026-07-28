@@ -33,6 +33,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/anova-apa-format-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/guias/calcular-nota-oposicion-docente/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/teacher-exam-weighted-score-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/teacher-exam-weighted-score-guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/calcular-nota-oposicion-docente/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/teacher-exam-weighted-score-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/guias/calcular-porcentajes-rapido/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/percentage-shortcuts-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/percentage-shortcuts-guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/calcular-porcentajes-rapido/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/percentage-shortcuts-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/guias/interaccion-anova-dos-factores/</loc>
     <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/two-way-anova-interaction-guide/" />
@@ -71,6 +87,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/z-score-calculator-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/puntuacion-z-interpretacion/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/z-score-calculator-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/guias/rango-percentil-interpretacion/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/percentile-rank-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/percentile-rank-guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/rango-percentil-interpretacion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/percentile-rank-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/</loc>

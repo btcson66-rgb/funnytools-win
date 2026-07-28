@@ -200,6 +200,12 @@ export const spanishZScoreGuide: SpanishInfoPage = {
         'Bajo una distribución normal, z = 0 corresponde al percentil 50; z ≈ 1 al 84; z ≈ 1.645 al 95; z ≈ 1.96 al 97.5. La conversión utiliza el área acumulada de la normal estándar. Es una propiedad del modelo, no una definición universal de Z.',
         'Si la distribución está sesgada, tiene muchos empates o límites fuertes, usa rangos percentiles empíricos o las normas publicadas. Un z = 2 en una distribución de ingresos no implica automáticamente percentil 97.7. Tampoco confundas percentil 84 con «84% de respuestas correctas»: son escalas diferentes.',
       ],
+      link: {
+        prefix: 'Para calcular posiciones observadas y tratar empates, consulta la ',
+        label: 'guía de rango percentil',
+        href: '/es/guias/rango-percentil-interpretacion/',
+        suffix: '.',
+      },
     },
     {
       heading: 'Regla 68–95–99.7 y valores extremos',
