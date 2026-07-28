@@ -33,6 +33,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/cad-2d/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/calculadora-alfa-cronbach/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/cronbach-alpha-calculator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/cronbach-alpha-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-alfa-cronbach/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/cronbach-alpha-calculator/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/calculadora-de-edad/</loc>
     <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/age-calculator/" />
@@ -167,6 +175,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/net-salary/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-sueldo-neto/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/net-salary/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/calculadora-t-muestras-independientes/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/independent-samples-t-test-calculator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/independent-samples-t-test-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-t-muestras-independientes/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/independent-samples-t-test-calculator/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/calcular-diferencia-entre-fechas/</loc>
@@ -471,6 +487,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-group-generator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-grupos-aleatorios/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/random-group-generator/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/generador-informe-apa-7/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/apa-7-report-generator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/apa-7-report-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-informe-apa-7/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/apa-7-report-generator/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/generador-numeros-aleatorios/</loc>

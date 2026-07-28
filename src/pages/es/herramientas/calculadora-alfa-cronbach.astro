@@ -1,0 +1,20 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishCronbachAlpha, spanishCronbachAlphaReview } from '../../../i18n/expansion/es-tools-27';
+---
+
+<ExpansionToolLayout
+  routeKey="cronbach-alpha-calculator"
+  canonicalPath="/es/herramientas/calculadora-alfa-cronbach/"
+  content={spanishCronbachAlpha}
+  categoryLabel="Psicometría y fiabilidad"
+  review={spanishCronbachAlphaReview}
+  relatedTool={{
+    name: 'Generador de resultados APA 7',
+    description: 'Prepara una frase verificable después de calcular y revisar el coeficiente.',
+    href: '/es/herramientas/generador-informe-apa-7/',
+  }}
+>
+  <EducationStatisticsCalculator labels={spanishCronbachAlpha.labels} slug="cronbach-alpha-calculator" />
+</ExpansionToolLayout>

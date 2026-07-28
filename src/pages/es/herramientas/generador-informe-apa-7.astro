@@ -1,0 +1,20 @@
+---
+import Apa7ReportGenerator from '../../../components/tools/Apa7ReportGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishApa7Report, spanishApa7ReportReview } from '../../../i18n/expansion/es-tools-27';
+---
+
+<ExpansionToolLayout
+  routeKey="apa-7-report-generator"
+  canonicalPath="/es/herramientas/generador-informe-apa-7/"
+  content={spanishApa7Report}
+  categoryLabel="Investigación y redacción"
+  review={spanishApa7ReportReview}
+  relatedTool={{
+    name: 'Prueba t de muestras independientes',
+    description: 'Calcula Welch, intervalo y g antes de preparar la frase.',
+    href: '/es/herramientas/calculadora-t-muestras-independientes/',
+  }}
+>
+  <Apa7ReportGenerator labels={spanishApa7Report.labels} slug="apa-7-report-generator" />
+</ExpansionToolLayout>

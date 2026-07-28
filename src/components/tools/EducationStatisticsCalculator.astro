@@ -305,7 +305,14 @@ const fields = simpleFields[slug] ?? [];
       }
       if (slug === 'cronbach-alpha-calculator') {
         const raw = field('data')?.value.trim() || '';
-        const matrix = raw.split(/\r?\n/).filter((line) => line.trim()).map((line) => line.trim().split(/[,\t; ]+/).map(Number));
+        const parseRow = (line) => {
+          const trimmed = line.trim();
+          if (trimmed.includes(';')) return trimmed.split(';').map((cell) => Number(cell.trim().replace(',', '.')));
+          if (trimmed.includes('\t')) return trimmed.split('\t').map((cell) => Number(cell.trim().replace(',', '.')));
+          if (/\s/.test(trimmed)) return trimmed.split(/\s+/).map((cell) => Number(cell.replace(',', '.')));
+          return trimmed.split(',').map((cell) => Number(cell.trim()));
+        };
+        const matrix = raw.split(/\r?\n/).filter((line) => line.trim()).map(parseRow);
         const columnCount = matrix[0]?.length || 0;
         if (matrix.length < 2 || columnCount < 2 || matrix.some((row) => row.length !== columnCount || row.some((value) => !Number.isFinite(value)))) return showError();
         const variance = (values) => {
@@ -313,21 +320,45 @@ const fields = simpleFields[slug] ?? [];
           return values.reduce((sum, value) => sum + (value - mean) ** 2, 0) / (values.length - 1);
         };
         const itemVarianceSum = Array.from({ length: columnCount }, (_, column) => variance(matrix.map((row) => row[column]))).reduce((a, b) => a + b, 0);
-        const totalVariance = variance(matrix.map((row) => row.reduce((a, b) => a + b, 0)));
+        const totals = matrix.map((row) => row.reduce((a, b) => a + b, 0));
+        const totalVariance = variance(totals);
         if (!(totalVariance > 0)) return showError();
         const alpha = columnCount / (columnCount - 1) * (1 - itemVarianceSum / totalVariance);
-        return show([[labels.respondents, String(matrix.length)], [labels.items, String(columnCount)], [labels.result, format(alpha, 3)]]);
+        const items = [[labels.respondents, String(matrix.length)], [labels.items, String(columnCount)], [labels.result, format(alpha, 3)]];
+        if (labels.totalMean) items.push([labels.totalMean, format(totals.reduce((sum, value) => sum + value, 0) / totals.length, 3)]);
+        if (labels.totalSd) items.push([labels.totalSd, format(Math.sqrt(totalVariance), 3)]);
+        return show(items);
       }
       if (slug === 'independent-samples-t-test-calculator') {
         const n1 = number('n1'), n2 = number('n2'), mean1 = number('mean1'), mean2 = number('mean2'), sd1 = number('sd1'), sd2 = number('sd2');
         if (!finite(n1, n2, mean1, mean2, sd1, sd2) || !Number.isInteger(n1) || !Number.isInteger(n2) || n1 <= 1 || n2 <= 1 || sd1 <= 0 || sd2 <= 0) return showError();
         const v1 = sd1 ** 2 / n1, v2 = sd2 ** 2 / n2;
         const difference = mean1 - mean2;
-        const t = difference / Math.sqrt(v1 + v2);
+        const standardError = Math.sqrt(v1 + v2);
+        const t = difference / standardError;
         const df = (v1 + v2) ** 2 / (v1 ** 2 / (n1 - 1) + v2 ** 2 / (n2 - 1));
         const p = regularizedBeta(df / (df + t ** 2), df / 2, 0.5);
         const pText = p < 0.001 ? '< .001' : format(p, 3).replace(/^0/, '');
-        return show([[labels.difference, format(difference, 3)], [labels.result, format(t, 3)], [labels.df, format(df, 2)], [labels.p, pText]]);
+        const criticalT = (() => {
+          let lower = 0;
+          let upper = 20;
+          for (let iteration = 0; iteration < 80; iteration += 1) {
+            const middle = (lower + upper) / 2;
+            const twoTailedP = regularizedBeta(df / (df + middle ** 2), df / 2, 0.5);
+            if (twoTailedP > 0.05) lower = middle;
+            else upper = middle;
+          }
+          return (lower + upper) / 2;
+        })();
+        const pooledDf = n1 + n2 - 2;
+        const pooledSd = Math.sqrt(((n1 - 1) * sd1 ** 2 + (n2 - 1) * sd2 ** 2) / pooledDf);
+        const hedgesCorrection = 1 - 3 / (4 * pooledDf - 1);
+        const hedgesG = pooledSd > 0 ? difference / pooledSd * hedgesCorrection : Number.NaN;
+        const items = [[labels.difference, format(difference, 3)], [labels.result, format(t, 3)], [labels.df, format(df, 2)], [labels.p, pText]];
+        if (labels.standardError) items.push([labels.standardError, format(standardError, 3)]);
+        if (labels.confidenceInterval) items.push([labels.confidenceInterval, `[${format(difference - criticalT * standardError, 3)}, ${format(difference + criticalT * standardError, 3)}]`]);
+        if (labels.hedgesG && Number.isFinite(hedgesG)) items.push([labels.hedgesG, format(hedgesG, 3)]);
+        return show(items);
       }
     };
 

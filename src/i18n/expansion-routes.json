@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-26",
+  "activeBatch": "es-27",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -781,6 +781,36 @@
         "zh": "/tools/teacher-exam-score-converter/",
         "en": "/en/tools/teacher-exam-score-converter/",
         "es": "/es/herramientas/calculadora-nota-oposicion-docente/"
+      }
+    },
+    {
+      "key": "cronbach-alpha-calculator",
+      "type": "tool",
+      "batch": "es-27",
+      "paths": {
+        "zh": "/tools/cronbach-alpha-calculator/",
+        "en": "/en/tools/cronbach-alpha-calculator/",
+        "es": "/es/herramientas/calculadora-alfa-cronbach/"
+      }
+    },
+    {
+      "key": "independent-samples-t-test-calculator",
+      "type": "tool",
+      "batch": "es-27",
+      "paths": {
+        "zh": "/tools/independent-samples-t-test-calculator/",
+        "en": "/en/tools/independent-samples-t-test-calculator/",
+        "es": "/es/herramientas/calculadora-t-muestras-independientes/"
+      }
+    },
+    {
+      "key": "apa-7-report-generator",
+      "type": "tool",
+      "batch": "es-27",
+      "paths": {
+        "zh": "/tools/apa-7-report-generator/",
+        "en": "/en/tools/apa-7-report-generator/",
+        "es": "/es/herramientas/generador-informe-apa-7/"
       }
     }
   ]

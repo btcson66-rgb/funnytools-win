@@ -1,0 +1,20 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishIndependentSamplesT, spanishIndependentSamplesTReview } from '../../../i18n/expansion/es-tools-27';
+---
+
+<ExpansionToolLayout
+  routeKey="independent-samples-t-test-calculator"
+  canonicalPath="/es/herramientas/calculadora-t-muestras-independientes/"
+  content={spanishIndependentSamplesT}
+  categoryLabel="Estadística inferencial"
+  review={spanishIndependentSamplesTReview}
+  relatedTool={{
+    name: 'Generador de resultados APA 7',
+    description: 'Convierte el resultado verificado en un borrador de frase estadística.',
+    href: '/es/herramientas/generador-informe-apa-7/',
+  }}
+>
+  <EducationStatisticsCalculator labels={spanishIndependentSamplesT.labels} slug="independent-samples-t-test-calculator" />
+</ExpansionToolLayout>

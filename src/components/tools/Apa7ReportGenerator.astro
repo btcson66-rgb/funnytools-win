@@ -21,7 +21,7 @@ const { labels, slug } = Astro.props;
         <option value="regression">{labels.regression}</option>
       </select>
     </label>
-    <label><span>{labels.variable}</span><input data-field="variable" type="text" value="test score" /></label>
+    <label><span>{labels.variable}</span><input data-field="variable" type="text" value={labels.defaultVariable || 'test score'} /></label>
     <label data-show="t"><span>{labels.t}</span><input data-field="t" type="number" step="any" value="2.45" /></label>
     <label data-show="df"><span>{labels.df}</span><input data-field="df" type="number" step="1" value="28" /></label>
     <label data-show="p"><span>{labels.p}</span><input data-field="p" type="number" step="any" min="0" max="1" value="0.021" /></label>
@@ -35,8 +35,8 @@ const { labels, slug } = Astro.props;
     <label data-show="r"><span>{labels.r}</span><input data-field="r" type="number" step="any" value="0.42" /></label>
     <label data-show="r2"><span>{labels.r2}</span><input data-field="r2" type="number" step="any" value="0.18" /></label>
     <label data-show="beta"><span>{labels.beta}</span><input data-field="beta" type="number" step="any" value="0.37" /></label>
-    <label data-show="groups"><span>{labels.groupA}</span><input data-field="groupA" type="text" value="Group A" /></label>
-    <label data-show="groups"><span>{labels.groupB}</span><input data-field="groupB" type="text" value="Group B" /></label>
+    <label data-show="groups"><span>{labels.groupA}</span><input data-field="groupA" type="text" value={labels.defaultGroupA || 'Group A'} /></label>
+    <label data-show="groups"><span>{labels.groupB}</span><input data-field="groupB" type="text" value={labels.defaultGroupB || 'Group B'} /></label>
     <label data-show="groups"><span>{labels.meanA}</span><input data-field="meanA" type="number" step="any" value="78.4" /></label>
     <label data-show="groups"><span>{labels.meanB}</span><input data-field="meanB" type="number" step="any" value="73.1" /></label>
     <label data-show="groups"><span>{labels.sdA}</span><input data-field="sdA" type="number" step="any" value="8.2" /></label>
@@ -65,7 +65,8 @@ const { labels, slug } = Astro.props;
   document.querySelectorAll('[data-apa-report]').forEach((root) => {
     if (!(root instanceof HTMLElement)) return;
     const labels = JSON.parse(root.dataset.labels || '{}');
-    const lang = document.documentElement.lang === 'en' ? 'en' : 'zh';
+    const documentLanguage = document.documentElement.lang;
+    const lang = documentLanguage === 'es' ? 'es' : documentLanguage === 'en' ? 'en' : 'zh';
     const error = root.querySelector('[data-error]');
     const output = root.querySelector('[data-output]');
     const toast = root.querySelector('.toast');
@@ -76,14 +77,16 @@ const { labels, slug } = Astro.props;
       const element = input(key);
       return element instanceof HTMLInputElement || element instanceof HTMLSelectElement ? element.value.trim() : '';
     };
-    const num = (key) => Number(value(key));
+    const num = (key) => value(key) === '' ? Number.NaN : Number(value(key));
     const has = (key) => value(key) !== '' && Number.isFinite(num(key));
     const validP = (p) => Number.isFinite(p) && p >= 0 && p <= 1;
     const esc = (text) => String(text).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
     const fmt = (number, digits = 2) => Number(number).toFixed(digits);
     const fmtBounded = (number, digits = 2) => fmt(number, digits).replace(/^-0\./, '-.').replace(/^0\./, '.');
+    const fmtDf = (number) => Number.isInteger(number) ? String(number) : fmt(number, 2);
     const fmtP = (p) => p < 0.001 ? 'p < .001' : `p = ${Number(p).toFixed(3).replace(/^0\./, '.')}`;
     const sig = (p) => p < 0.05;
+    const optionalRange = (key, minimum, maximum) => !has(key) || (num(key) >= minimum && num(key) <= maximum);
 
     const fieldsByType = {
       independentT: ['t', 'df', 'p', 'd', 'groups'],
@@ -110,6 +113,13 @@ const { labels, slug } = Astro.props;
         error.hidden = false;
       }
       if (output instanceof HTMLElement) output.hidden = true;
+      latest = '';
+    }
+
+    function invalidate() {
+      if (output instanceof HTMLElement) output.hidden = true;
+      if (error instanceof HTMLElement) error.hidden = true;
+      latest = '';
     }
 
     function render(sentence, explanation) {
@@ -122,64 +132,97 @@ const { labels, slug } = Astro.props;
 
     function generate() {
       const type = value('testType');
-      const variable = value('variable') || (lang === 'en' ? 'the outcome' : '結果變項');
+      const variable = value('variable') || (lang === 'es' ? 'la variable analizada' : lang === 'en' ? 'the outcome' : '結果變項');
       const p = num('p');
       if (!validP(p)) return setError();
       const decision = sig(p) ? labels.significant : labels.notSignificant;
+      const decisionFeminine = lang === 'es'
+        ? (sig(p) ? (labels.significantFeminine || 'estadísticamente significativa') : (labels.notSignificantFeminine || 'no estadísticamente significativa'))
+        : decision;
       let sentence = '';
       let explanation = '';
 
       if (type === 'independentT' || type === 'pairedT') {
         const t = num('t'), df = num('df');
-        if (!Number.isFinite(t) || !Number.isFinite(df)) return setError();
+        if (!Number.isFinite(t) || !Number.isFinite(df) || df <= 0) return setError();
         const dText = has('d') ? `, d = ${fmt(num('d'), 2)}` : '';
-        const testName = type === 'pairedT' ? (lang === 'en' ? 'paired-samples t test' : '相依樣本 t 檢定') : (lang === 'en' ? 'independent-samples t test' : '獨立樣本 t 檢定');
+        const testName = type === 'pairedT'
+          ? (lang === 'es' ? 'prueba t para muestras relacionadas' : lang === 'en' ? 'paired-samples t test' : '相依樣本 t 檢定')
+          : (lang === 'es' ? 'prueba t de muestras independientes' : lang === 'en' ? 'independent-samples t test' : '獨立樣本 t 檢定');
         sentence = lang === 'en'
-          ? `An ${testName} showed a ${decision} result for ${variable}, t(${Math.round(df)}) = ${fmt(t)}, ${fmtP(p)}${dText}.`
-          : `${testName}顯示「${variable}」的結果${decision}，t(${Math.round(df)}) = ${fmt(t)}，${fmtP(p)}${dText}。`;
+          ? `${type === 'pairedT' ? 'A' : 'An'} ${testName} showed a ${decision} result for ${variable}, t(${fmtDf(df)}) = ${fmt(t)}, ${fmtP(p)}${dText}.`
+          : lang === 'es'
+            ? `Una ${testName} mostró un resultado ${decision} para ${variable}, t(${fmtDf(df)}) = ${fmt(t)}, ${fmtP(p)}${dText}.`
+            : `${testName}顯示「${variable}」的結果${decision}，t(${fmtDf(df)}) = ${fmt(t)}，${fmtP(p)}${dText}。`;
         if (type === 'independentT' && has('meanA') && has('meanB') && value('groupA') && value('groupB')) {
           const groupText = lang === 'en'
             ? `${value('groupA')} (M = ${fmt(num('meanA'))}${has('sdA') ? `, SD = ${fmt(num('sdA'))}` : ''}) and ${value('groupB')} (M = ${fmt(num('meanB'))}${has('sdB') ? `, SD = ${fmt(num('sdB'))}` : ''})`
-            : `${value('groupA')}（M = ${fmt(num('meanA'))}${has('sdA') ? `，SD = ${fmt(num('sdA'))}` : ''}）與${value('groupB')}（M = ${fmt(num('meanB'))}${has('sdB') ? `，SD = ${fmt(num('sdB'))}` : ''}）`;
+            : lang === 'es'
+              ? `${value('groupA')} (M = ${fmt(num('meanA'))}${has('sdA') ? `, DE = ${fmt(num('sdA'))}` : ''}) y ${value('groupB')} (M = ${fmt(num('meanB'))}${has('sdB') ? `, DE = ${fmt(num('sdB'))}` : ''})`
+              : `${value('groupA')}（M = ${fmt(num('meanA'))}${has('sdA') ? `，SD = ${fmt(num('sdA'))}` : ''}）與${value('groupB')}（M = ${fmt(num('meanB'))}${has('sdB') ? `，SD = ${fmt(num('sdB'))}` : ''}）`;
           sentence = sentence.replace(variable, `${variable}: ${groupText}`);
         }
         explanation = lang === 'en'
           ? `The entered p value indicates the difference is ${decision}. The t statistic compares the observed mean difference with its sampling uncertainty.`
-          : `依輸入的 p 值判斷，差異${decision}。t 值表示平均差相對於抽樣不確定性的大小。`;
+          : lang === 'es'
+            ? `El valor p introducido indica que la diferencia es ${decisionFeminine}. El estadístico t compara la diferencia observada con su incertidumbre de muestreo; no informa por sí solo del tamaño ni de la importancia del efecto.`
+            : `依輸入的 p 值判斷，差異${decision}。t 值表示平均差相對於抽樣不確定性的大小。`;
       } else if (type === 'oneWayAnova' || type === 'twoWayAnova') {
         const f = num('f'), df1 = num('df1'), df2 = num('df2');
-        if (!Number.isFinite(f) || !Number.isFinite(df1) || !Number.isFinite(df2)) return setError();
+        if (!Number.isFinite(f) || !Number.isFinite(df1) || !Number.isFinite(df2) || f < 0 || df1 <= 0 || df2 <= 0 || !optionalRange('eta', 0, 1)) return setError();
         const etaText = has('eta') ? `, η² = ${fmtBounded(num('eta'))}` : '';
         const name = type === 'oneWayAnova' ? 'one-way ANOVA' : 'two-way ANOVA';
         sentence = lang === 'en'
-          ? `A ${name} showed a ${decision} effect for ${variable}, F(${Math.round(df1)}, ${Math.round(df2)}) = ${fmt(f)}, ${fmtP(p)}${etaText}.`
-          : `${type === 'oneWayAnova' ? '單因子 ANOVA' : '二因子 ANOVA'}顯示「${variable}」效果${decision}，F(${Math.round(df1)}, ${Math.round(df2)}) = ${fmt(f)}，${fmtP(p)}${etaText}。`;
+          ? `A ${name} showed a ${decision} effect for ${variable}, F(${fmtDf(df1)}, ${fmtDf(df2)}) = ${fmt(f)}, ${fmtP(p)}${etaText}.`
+          : lang === 'es'
+            ? `Un ${type === 'oneWayAnova' ? 'ANOVA de un factor' : 'ANOVA factorial'} mostró un efecto ${decision} para ${variable}, F(${fmtDf(df1)}, ${fmtDf(df2)}) = ${fmt(f)}, ${fmtP(p)}${etaText}.`
+            : `${type === 'oneWayAnova' ? '單因子 ANOVA' : '二因子 ANOVA'}顯示「${variable}」效果${decision}，F(${fmtDf(df1)}, ${fmtDf(df2)}) = ${fmt(f)}，${fmtP(p)}${etaText}。`;
         explanation = lang === 'en'
           ? `The F test evaluates whether explained variation is large relative to unexplained variation. This result is ${decision}.`
-          : `F 檢定用來比較可解釋變異與誤差變異的比例；此結果${decision}。`;
+          : lang === 'es'
+            ? `El estadístico F compara variación explicada y variación residual. El resultado es ${decision}; para saber qué grupos difieren hacen falta los contrastes o comparaciones correspondientes.`
+            : `F 檢定用來比較可解釋變異與誤差變異的比例；此結果${decision}。`;
       } else if (type === 'chiSquare') {
         const chi = num('chi'), df = num('df');
-        if (!Number.isFinite(chi) || !Number.isFinite(df)) return setError();
+        if (!Number.isFinite(chi) || !Number.isFinite(df) || chi < 0 || df <= 0 || !optionalRange('v', 0, 1)) return setError();
         const vText = has('v') ? `, V = ${fmtBounded(num('v'))}` : '';
         sentence = lang === 'en'
-          ? `A chi-square test showed a ${decision} association for ${variable}, χ²(${Math.round(df)}) = ${fmt(chi)}, ${fmtP(p)}${vText}.`
-          : `卡方檢定顯示「${variable}」的關聯${decision}，χ²(${Math.round(df)}) = ${fmt(chi)}，${fmtP(p)}${vText}。`;
-        explanation = lang === 'en' ? `The chi-square test checks whether observed counts differ from expected counts; the association is ${decision}.` : `卡方檢定檢查觀察次數是否偏離期望次數；此關聯${decision}。`;
+          ? `A chi-square test showed a ${decision} association for ${variable}, χ²(${fmtDf(df)}) = ${fmt(chi)}, ${fmtP(p)}${vText}.`
+          : lang === 'es'
+            ? `Una prueba χ² mostró una asociación ${decisionFeminine} para ${variable}, χ²(${fmtDf(df)}) = ${fmt(chi)}, ${fmtP(p)}${vText}.`
+            : `卡方檢定顯示「${variable}」的關聯${decision}，χ²(${fmtDf(df)}) = ${fmt(chi)}，${fmtP(p)}${vText}。`;
+        explanation = lang === 'en'
+          ? `The chi-square test checks whether observed counts differ from expected counts; the association is ${decision}.`
+          : lang === 'es'
+            ? `La prueba χ² contrasta si las frecuencias observadas se apartan de las esperadas. La asociación es ${decisionFeminine}, pero su magnitud debe valorarse con V y con la tabla de frecuencias.`
+            : `卡方檢定檢查觀察次數是否偏離期望次數；此關聯${decision}。`;
       } else if (type === 'pearson') {
         const r = num('r');
-        if (!Number.isFinite(r)) return setError();
+        if (!Number.isFinite(r) || r < -1 || r > 1) return setError();
         sentence = lang === 'en'
           ? `Pearson correlation showed a ${decision} association with ${variable}, r = ${fmtBounded(r)}, ${fmtP(p)}.`
-          : `Pearson 相關顯示與「${variable}」的關聯${decision}，r = ${fmtBounded(r)}，${fmtP(p)}。`;
-        explanation = lang === 'en' ? `The r value describes direction and strength of a linear relationship; the p value indicates it is ${decision}.` : `r 值描述線性關係的方向與強度；p 值顯示此關係${decision}。`;
+          : lang === 'es'
+            ? `La correlación de Pearson mostró una relación ${decisionFeminine} con ${variable}, r = ${fmtBounded(r)}, ${fmtP(p)}.`
+            : `Pearson 相關顯示與「${variable}」的關聯${decision}，r = ${fmtBounded(r)}，${fmtP(p)}。`;
+        explanation = lang === 'en'
+          ? `The r value describes direction and strength of a linear relationship; the p value indicates it is ${decision}.`
+          : lang === 'es'
+            ? `El coeficiente r describe dirección y fuerza de una relación lineal; el valor p indica que es ${decisionFeminine}. Correlación no implica causalidad.`
+            : `r 值描述線性關係的方向與強度；p 值顯示此關係${decision}。`;
       } else {
         const r2 = num('r2'), f = num('f'), df1 = num('df1'), df2 = num('df2');
-        if (!Number.isFinite(r2) || !Number.isFinite(f) || !Number.isFinite(df1) || !Number.isFinite(df2)) return setError();
+        if (!Number.isFinite(r2) || !Number.isFinite(f) || !Number.isFinite(df1) || !Number.isFinite(df2) || r2 < 0 || r2 > 1 || f < 0 || df1 <= 0 || df2 <= 0) return setError();
         const betaText = has('beta') ? `, β = ${fmtBounded(num('beta'))}` : '';
         sentence = lang === 'en'
-          ? `The simple regression model was ${decision}, R² = ${fmtBounded(r2)}, F(${Math.round(df1)}, ${Math.round(df2)}) = ${fmt(f)}, ${fmtP(p)}${betaText}.`
-          : `簡單迴歸模型${decision}，R² = ${fmtBounded(r2)}，F(${Math.round(df1)}, ${Math.round(df2)}) = ${fmt(f)}，${fmtP(p)}${betaText}。`;
-        explanation = lang === 'en' ? `R squared is the proportion of outcome variance explained by the predictor; this model is ${decision}.` : `R² 表示預測變項可解釋結果變異的比例；此模型${decision}。`;
+          ? `The simple regression model was ${decision}, R² = ${fmtBounded(r2)}, F(${fmtDf(df1)}, ${fmtDf(df2)}) = ${fmt(f)}, ${fmtP(p)}${betaText}.`
+          : lang === 'es'
+            ? `El modelo de regresión lineal simple fue ${decision}, R² = ${fmtBounded(r2)}, F(${fmtDf(df1)}, ${fmtDf(df2)}) = ${fmt(f)}, ${fmtP(p)}${betaText}.`
+            : `簡單迴歸模型${decision}，R² = ${fmtBounded(r2)}，F(${fmtDf(df1)}, ${fmtDf(df2)}) = ${fmt(f)}，${fmtP(p)}${betaText}。`;
+        explanation = lang === 'en'
+          ? `R squared is the proportion of outcome variance explained by the predictor; this model is ${decision}.`
+          : lang === 'es'
+            ? `R² es la proporción de varianza del resultado explicada por el modelo en esta muestra. El modelo es ${decision}; la frase no prueba causalidad ni valida sus supuestos.`
+            : `R² 表示預測變項可解釋結果變異的比例；此模型${decision}。`;
       }
       render(sentence, explanation);
     }
@@ -192,7 +235,19 @@ const { labels, slug } = Astro.props;
     }
 
     function example() {
-      const values = { variable: 'test score', t: '2.45', df: '28', p: '0.021', d: '0.89', groupA: 'Group A', groupB: 'Group B', meanA: '78.4', meanB: '73.1', sdA: '8.2', sdB: '9.5' };
+      const values = {
+        variable: labels.defaultVariable || 'test score',
+        t: '2.45',
+        df: '28',
+        p: '0.021',
+        d: '0.89',
+        groupA: labels.defaultGroupA || 'Group A',
+        groupB: labels.defaultGroupB || 'Group B',
+        meanA: '78.4',
+        meanB: '73.1',
+        sdA: '8.2',
+        sdB: '9.5',
+      };
       Object.entries(values).forEach(([key, item]) => {
         const element = input(key);
         if (element instanceof HTMLInputElement) element.value = item;
@@ -200,6 +255,7 @@ const { labels, slug } = Astro.props;
       generate();
     }
 
+    root.addEventListener('input', invalidate);
     input('testType')?.addEventListener('change', () => { updateVisible(); generate(); });
     root.querySelector('[data-generate]')?.addEventListener('click', generate);
     root.querySelector('[data-reset]')?.addEventListener('click', reset);
