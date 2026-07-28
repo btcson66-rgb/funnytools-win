@@ -146,6 +146,13 @@ const breadcrumbJsonLd = {
             {section.items.map((item) => <li>{item}</li>)}
           </ul>
         )}
+        {section.link && (
+          <p class="section-link">
+            {section.link.prefix}
+            <a href={section.link.href}>{section.link.label}</a>
+            {section.link.suffix ?? ''}
+          </p>
+        )}
       </section>
     ))}
 
@@ -196,6 +203,20 @@ const breadcrumbJsonLd = {
         <h2>Límites y comprobaciones importantes</h2>
         <ul class="note-list">
           {content.notes.map((item) => <li>{item}</li>)}
+        </ul>
+      </section>
+    )}
+
+    {content.sources && content.sources.length > 0 && (
+      <section class="content-section">
+        <h2>Fuentes y documentación para comprobar</h2>
+        <ul class="source-list">
+          {content.sources.map((source) => (
+            <li>
+              <a href={source.href} rel="noopener noreferrer">{source.label}</a>
+              <span>{source.note}</span>
+            </li>
+          ))}
         </ul>
       </section>
     )}
@@ -258,6 +279,27 @@ const breadcrumbJsonLd = {
   }
 
   .related-guides span {
+    color: var(--muted);
+  }
+
+  .source-list {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .source-list li {
+    padding-left: 4px;
+  }
+
+  .source-list a {
+    font-weight: 850;
+  }
+
+  .source-list span {
+    display: block;
+    margin-top: 3px;
     color: var(--muted);
   }
 </style>

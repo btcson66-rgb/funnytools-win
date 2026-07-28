@@ -1,0 +1,23 @@
+---
+import Cad2dBoard from '../../../components/tools/Cad2dBoard.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishCad2d,
+  spanishCad2dReview,
+} from '../../../i18n/expansion/es-tools-22';
+---
+
+<ExpansionToolLayout
+  routeKey="cad-2d"
+  canonicalPath="/es/herramientas/cad-2d-online/"
+  content={spanishCad2d}
+  categoryLabel="Diseño y dibujo técnico"
+  review={spanishCad2dReview}
+  relatedTool={{
+    name: 'Generador de colores',
+    description: 'Crea colores HEX, RGB y HSL y comprueba contraste para elementos gráficos.',
+    href: '/es/herramientas/generador-colores-hex-rgb-hsl/',
+  }}
+>
+  <Cad2dBoard labels={spanishCad2d.labels} />
+</ExpansionToolLayout>

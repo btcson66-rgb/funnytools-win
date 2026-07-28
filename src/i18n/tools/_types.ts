@@ -17,6 +17,12 @@ export interface ToolPageSection {
   };
 }
 
+export interface ToolPageSource {
+  label: string;
+  href: string;
+  note: string;
+}
+
 export interface ToolContent {
   name: string;
   short: string;
@@ -39,6 +45,7 @@ export interface ToolContent {
   };
   educationApplication?: string;
   reportTip?: string;
+  sources?: ToolPageSource[];
   disclaimer?: string;
   privacyNote?: string;
 }

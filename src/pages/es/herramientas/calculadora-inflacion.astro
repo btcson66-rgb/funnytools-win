@@ -1,0 +1,23 @@
+---
+import InflationCalculator from '../../../components/tools/InflationCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishInflationCalculator,
+  spanishInflationCalculatorReview,
+} from '../../../i18n/expansion/es-tools-22';
+---
+
+<ExpansionToolLayout
+  routeKey="inflation"
+  canonicalPath="/es/herramientas/calculadora-inflacion/"
+  content={spanishInflationCalculator}
+  categoryLabel="Dinero y poder adquisitivo"
+  review={spanishInflationCalculatorReview}
+  relatedTool={{
+    name: 'Calculadora de meta de ahorro',
+    description: 'Convierte una cantidad objetivo y un plazo en una aportación mensual orientativa.',
+    href: '/es/herramientas/calculadora-meta-ahorro/',
+  }}
+>
+  <InflationCalculator labels={spanishInflationCalculator.labels} />
+</ExpansionToolLayout>

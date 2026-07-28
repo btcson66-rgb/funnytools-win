@@ -53,6 +53,7 @@ const { labels } = Astro.props;
     let endAt = 0;
     let timerId = null;
     let running = false;
+    const originalTitle = document.title;
 
     function validMinutes(value) {
       const number = Number(value);
@@ -119,6 +120,9 @@ const { labels } = Astro.props;
       completedOutput.textContent = String(completed);
       startButton.disabled = running;
       pauseButton.disabled = !running;
+      document.title = running
+        ? `${format(remainingSeconds)} · ${labels[phase]} · ${labels.titleSuffix || originalTitle}`
+        : originalTitle;
     }
 
     function beep() {
@@ -181,9 +185,10 @@ const { labels } = Astro.props;
 
     function pause() {
       if (!running) return;
-      remainingSeconds = Math.max(1, Math.ceil((endAt - Date.now()) / 1000));
+      remainingSeconds = Math.max(0, Math.ceil((endAt - Date.now()) / 1000));
       running = false;
       clearTimer();
+      if (remainingSeconds === 0) switchPhase();
       render();
     }
 
@@ -205,6 +210,12 @@ const { labels } = Astro.props;
     startButton.addEventListener('click', start);
     pauseButton.addEventListener('click', pause);
     root.querySelector('[data-reset]')?.addEventListener('click', reset);
+    document.addEventListener('visibilitychange', () => {
+      if (running) tick();
+    });
+    window.addEventListener('pagehide', () => {
+      if (document.title !== originalTitle) document.title = originalTitle;
+    });
 
     loadSettings();
     render();

@@ -1,6 +1,6 @@
 {
-  "reviewedAt": "2026-07-27",
-  "activeBatch": "es-21",
+  "reviewedAt": "2026-07-28",
+  "activeBatch": "es-22",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -631,6 +631,36 @@
         "zh": "/tools/savings-goal/",
         "en": "/en/tools/savings-goal/",
         "es": "/es/herramientas/calculadora-meta-ahorro/"
+      }
+    },
+    {
+      "key": "pomodoro-timer",
+      "type": "tool",
+      "batch": "es-22",
+      "paths": {
+        "zh": "/tools/pomodoro-timer/",
+        "en": "/en/tools/pomodoro-timer/",
+        "es": "/es/herramientas/temporizador-pomodoro/"
+      }
+    },
+    {
+      "key": "inflation",
+      "type": "tool",
+      "batch": "es-22",
+      "paths": {
+        "zh": "/tools/inflation/",
+        "en": "/en/tools/inflation/",
+        "es": "/es/herramientas/calculadora-inflacion/"
+      }
+    },
+    {
+      "key": "cad-2d",
+      "type": "tool",
+      "batch": "es-22",
+      "paths": {
+        "zh": "/tools/cad-2d/",
+        "en": "/en/tools/cad-2d/",
+        "es": "/es/herramientas/cad-2d-online/"
       }
     }
   ]

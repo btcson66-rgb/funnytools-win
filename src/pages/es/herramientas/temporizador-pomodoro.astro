@@ -1,0 +1,23 @@
+---
+import PomodoroTimer from '../../../components/tools/PomodoroTimer.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishPomodoroTimer,
+  spanishPomodoroTimerReview,
+} from '../../../i18n/expansion/es-tools-22';
+---
+
+<ExpansionToolLayout
+  routeKey="pomodoro-timer"
+  canonicalPath="/es/herramientas/temporizador-pomodoro/"
+  content={spanishPomodoroTimer}
+  categoryLabel="Tiempo y concentración"
+  review={spanishPomodoroTimerReview}
+  relatedTool={{
+    name: 'Recordatorio de descansos',
+    description: 'Programa avisos periódicos para levantarte, mirar lejos o cambiar de postura.',
+    href: '/es/herramientas/recordatorio-descansos/',
+  }}
+>
+  <PomodoroTimer labels={spanishPomodoroTimer.labels} />
+</ExpansionToolLayout>

@@ -1437,7 +1437,7 @@ const { labels } = Astro.props;
       render();
       const anchor = document.createElement('a');
       anchor.href = canvas.toDataURL('image/png');
-      anchor.download = 'cad-2d.png';
+      anchor.download = labels.exportPngFilename || 'cad-2d.png';
       anchor.click();
     }
 
@@ -1483,7 +1483,7 @@ const { labels } = Astro.props;
       const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
       const anchor = document.createElement('a');
       anchor.href = url;
-      anchor.download = 'cad-2d.svg';
+      anchor.download = labels.exportSvgFilename || 'cad-2d.svg';
       anchor.click();
       window.setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
