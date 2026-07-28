@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-32",
+  "activeBatch": "es-33",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -961,6 +961,36 @@
         "zh": "/guides/classroom-timer-guide/",
         "en": "/en/guides/classroom-timer-guide/",
         "es": "/es/guias/temporizador-clase/"
+      }
+    },
+    {
+      "key": "fair-student-grouping-guide",
+      "type": "guide",
+      "batch": "es-33",
+      "paths": {
+        "zh": "/guides/fair-student-grouping-guide/",
+        "en": "/en/guides/fair-student-grouping-guide/",
+        "es": "/es/guias/agrupamientos-equitativos-aula/"
+      }
+    },
+    {
+      "key": "classroom-lottery-tool-guide",
+      "type": "guide",
+      "batch": "es-33",
+      "paths": {
+        "zh": "/guides/classroom-lottery-tool-guide/",
+        "en": "/en/guides/classroom-lottery-tool-guide/",
+        "es": "/es/guias/ruleta-sorteos-clase/"
+      }
+    },
+    {
+      "key": "bar-chart-school-report-guide",
+      "type": "guide",
+      "batch": "es-33",
+      "paths": {
+        "zh": "/guides/bar-chart-school-report-guide/",
+        "en": "/en/guides/bar-chart-school-report-guide/",
+        "es": "/es/guias/grafico-barras-trabajo-escolar/"
       }
     }
   ]
