@@ -1,0 +1,20 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishTeacherSelectionScore, spanishTeacherSelectionScoreReview } from '../../../i18n/expansion/es-tools-26';
+---
+
+<ExpansionToolLayout
+  routeKey="teacher-exam-score-converter"
+  canonicalPath="/es/herramientas/calculadora-nota-oposicion-docente/"
+  content={spanishTeacherSelectionScore}
+  categoryLabel="Educación y oposiciones"
+  review={spanishTeacherSelectionScoreReview}
+  relatedTool={{
+    name: 'Calculadora de media ponderada',
+    description: 'Combina cualquier cantidad de valores y pesos en una media genérica.',
+    href: '/es/herramientas/calculadora-media-ponderada/',
+  }}
+>
+  <EducationStatisticsCalculator labels={spanishTeacherSelectionScore.labels} slug="teacher-exam-score-converter" />
+</ExpansionToolLayout>

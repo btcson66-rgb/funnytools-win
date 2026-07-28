@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-25",
+  "activeBatch": "es-26",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -751,6 +751,36 @@
         "zh": "/tools/weighted-average-calculator/",
         "en": "/en/tools/weighted-average-calculator/",
         "es": "/es/herramientas/calculadora-media-ponderada/"
+      }
+    },
+    {
+      "key": "class-rank-percentile-calculator",
+      "type": "tool",
+      "batch": "es-26",
+      "paths": {
+        "zh": "/tools/class-rank-percentile-calculator/",
+        "en": "/en/tools/class-rank-percentile-calculator/",
+        "es": "/es/herramientas/calculadora-percentil-ranking-clase/"
+      }
+    },
+    {
+      "key": "normalized-score-converter",
+      "type": "tool",
+      "batch": "es-26",
+      "paths": {
+        "zh": "/tools/normalized-score-converter/",
+        "en": "/en/tools/normalized-score-converter/",
+        "es": "/es/herramientas/conversor-puntuaciones-estandarizadas/"
+      }
+    },
+    {
+      "key": "teacher-exam-score-converter",
+      "type": "tool",
+      "batch": "es-26",
+      "paths": {
+        "zh": "/tools/teacher-exam-score-converter/",
+        "en": "/en/tools/teacher-exam-score-converter/",
+        "es": "/es/herramientas/calculadora-nota-oposicion-docente/"
       }
     }
   ]

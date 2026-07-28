@@ -1,0 +1,20 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishClassRankPercentile, spanishClassRankPercentileReview } from '../../../i18n/expansion/es-tools-26';
+---
+
+<ExpansionToolLayout
+  routeKey="class-rank-percentile-calculator"
+  canonicalPath="/es/herramientas/calculadora-percentil-ranking-clase/"
+  content={spanishClassRankPercentile}
+  categoryLabel="Estadística educativa"
+  review={spanishClassRankPercentileReview}
+  relatedTool={{
+    name: 'Calculadora de rango percentil',
+    description: 'Usa conteos inferiores e iguales cuando existen puntuaciones empatadas.',
+    href: '/es/herramientas/calculadora-rango-percentil/',
+  }}
+>
+  <EducationStatisticsCalculator labels={spanishClassRankPercentile.labels} slug="class-rank-percentile-calculator" />
+</ExpansionToolLayout>

@@ -1,0 +1,20 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishNormalizedScore, spanishNormalizedScoreReview } from '../../../i18n/expansion/es-tools-26';
+---
+
+<ExpansionToolLayout
+  routeKey="normalized-score-converter"
+  canonicalPath="/es/herramientas/conversor-puntuaciones-estandarizadas/"
+  content={spanishNormalizedScore}
+  categoryLabel="Estadística educativa"
+  review={spanishNormalizedScoreReview}
+  relatedTool={{
+    name: 'Calculadora de puntuación Z',
+    description: 'Calcula e interpreta primero la posición en desviaciones estándar.',
+    href: '/es/herramientas/calculadora-puntuacion-z/',
+  }}
+>
+  <EducationStatisticsCalculator labels={spanishNormalizedScore.labels} slug="normalized-score-converter" />
+</ExpansionToolLayout>

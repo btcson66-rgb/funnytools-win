@@ -126,12 +126,16 @@ const fields = simpleFields[slug] ?? [];
       const input = root.querySelector(`[data-field="${key}"]`);
       return input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement ? input : null;
     };
-    const number = (key) => Number(field(key)?.value);
+    const number = (key) => {
+      const raw = field(key)?.value.trim() ?? '';
+      return raw === '' ? Number.NaN : Number(raw);
+    };
     const finite = (...values) => values.every(Number.isFinite);
     const format = (value, digits = 3) => Number(value).toFixed(digits).replace(/\.0+$|(?<=\.\d*[1-9])0+$/g, '');
     const showError = () => {
       if (error instanceof HTMLElement) { error.textContent = labels.invalid; error.hidden = false; }
       if (results instanceof HTMLElement) results.hidden = true;
+      if (warning instanceof HTMLElement) warning.hidden = true;
       latestText = '';
     };
     const invalidate = () => {
@@ -252,13 +256,20 @@ const fields = simpleFields[slug] ?? [];
       if (slug === 'class-rank-percentile-calculator') {
         const rank = number('rank'), total = number('total');
         if (!finite(rank, total) || !Number.isInteger(rank) || !Number.isInteger(total) || rank < 1 || total < 1 || rank > total) return showError();
-        return show([[labels.result, format(100 * (total - rank + 0.5) / total, 2)], [labels.top, `${format(100 * rank / total, 2)}%`]]);
+        const items = [[labels.result, format(100 * (total - rank + 0.5) / total, 2)], [labels.top, `${format(100 * rank / total, 2)}%`]];
+        if (labels.peopleAhead) items.push([labels.peopleAhead, String(rank - 1)]);
+        if (labels.peopleBehind) items.push([labels.peopleBehind, String(total - rank)]);
+        return show(items);
       }
       if (slug === 'normalized-score-converter') {
         const score = number('score'), mean = number('mean'), sd = number('sd'), targetMean = number('targetMean'), targetSd = number('targetSd');
         if (!finite(score, mean, sd, targetMean, targetSd) || sd <= 0 || targetSd <= 0) return showError();
         const z = (score - mean) / sd;
-        return show([[labels.zResult, format(z, 3)], [labels.result, format(targetMean + z * targetSd, 3)]]);
+        const items = [[labels.zResult, format(z, 3)], [labels.result, format(targetMean + z * targetSd, 3)]];
+        if (labels.originalOffset) items.push([labels.originalOffset, format(score - mean, 3)]);
+        if (labels.targetOffset) items.push([labels.targetOffset, format(z * targetSd, 3)]);
+        if (labels.scaleFactor) items.push([labels.scaleFactor, format(targetSd / sd, 4)]);
+        return show(items);
       }
       if (slug === 'weighted-average-calculator') {
         const parsed = Array.from(root.querySelectorAll('.stat-row')).map((row) => {
