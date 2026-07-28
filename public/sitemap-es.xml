@@ -17,6 +17,22 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/category/random/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/categorias/dibujo/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/category/draw/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/category/draw/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/categorias/dibujo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/category/draw/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/categorias/dinero/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/category/money/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/category/money/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/categorias/dinero/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/category/money/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/categorias/estadistica/</loc>
     <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/category/statistics/" />
@@ -55,6 +71,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/category/text/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/categorias/texto/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/category/text/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/categorias/tiempo/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/category/time/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/category/time/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/categorias/tiempo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/category/time/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/como-funcionan-las-herramientas/</loc>

@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-37",
+  "activeBatch": "es-38",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1111,6 +1111,36 @@
         "zh": "/category/random/",
         "en": "/en/category/random/",
         "es": "/es/categorias/azar/"
+      }
+    },
+    {
+      "key": "category-money",
+      "type": "category",
+      "batch": "es-38",
+      "paths": {
+        "zh": "/category/money/",
+        "en": "/en/category/money/",
+        "es": "/es/categorias/dinero/"
+      }
+    },
+    {
+      "key": "category-time",
+      "type": "category",
+      "batch": "es-38",
+      "paths": {
+        "zh": "/category/time/",
+        "en": "/en/category/time/",
+        "es": "/es/categorias/tiempo/"
+      }
+    },
+    {
+      "key": "category-draw",
+      "type": "category",
+      "batch": "es-38",
+      "paths": {
+        "zh": "/category/draw/",
+        "en": "/en/category/draw/",
+        "es": "/es/categorias/dibujo/"
       }
     }
   ]
