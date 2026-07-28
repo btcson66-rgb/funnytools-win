@@ -89,6 +89,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/compound-interest/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/calculadora-media-ponderada/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/weighted-average-calculator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/weighted-average-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-media-ponderada/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/weighted-average-calculator/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/calculadora-meta-ahorro/</loc>
     <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/savings-goal/" />
@@ -111,6 +119,22 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/grade-average/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-promedio-notas/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/grade-average/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/calculadora-puntuacion-t/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/t-score-calculator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/t-score-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-puntuacion-t/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/t-score-calculator/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/calculadora-puntuacion-z/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/z-score-calculator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/z-score-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-puntuacion-z/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/z-score-calculator/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/calculadora-rango-percentil/</loc>

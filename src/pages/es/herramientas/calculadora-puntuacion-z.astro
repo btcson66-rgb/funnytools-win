@@ -1,0 +1,23 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishZScore,
+  spanishZScoreReview,
+} from '../../../i18n/expansion/es-tools-25';
+---
+
+<ExpansionToolLayout
+  routeKey="z-score-calculator"
+  canonicalPath="/es/herramientas/calculadora-puntuacion-z/"
+  content={spanishZScore}
+  categoryLabel="Estadística educativa"
+  review={spanishZScoreReview}
+  relatedTool={{
+    name: 'Calculadora de rango percentil',
+    description: 'Calcula una posición porcentual mediante conteos y rango medio para empates.',
+    href: '/es/herramientas/calculadora-rango-percentil/',
+  }}
+>
+  <EducationStatisticsCalculator labels={spanishZScore.labels} slug="z-score-calculator" />
+</ExpansionToolLayout>

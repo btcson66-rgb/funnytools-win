@@ -132,6 +132,16 @@ const fields = simpleFields[slug] ?? [];
     const showError = () => {
       if (error instanceof HTMLElement) { error.textContent = labels.invalid; error.hidden = false; }
       if (results instanceof HTMLElement) results.hidden = true;
+      latestText = '';
+    };
+    const invalidate = () => {
+      if (results instanceof HTMLElement) {
+        results.hidden = true;
+        results.innerHTML = '';
+      }
+      if (error instanceof HTMLElement) error.hidden = true;
+      if (warning instanceof HTMLElement) warning.hidden = true;
+      latestText = '';
     };
     const show = (items) => {
       if (!(results instanceof HTMLElement)) return;
@@ -153,7 +163,10 @@ const fields = simpleFields[slug] ?? [];
       const row = document.createElement('div');
       row.className = 'stat-row';
       row.innerHTML = `<label><span>${labels.value}</span><input data-value type="number" step="any" value="${value}"></label><label><span>${labels.weight}</span><input data-weight type="number" min="0" step="any" value="${weight}"></label><button class="btn ghost" type="button" data-remove>${labels.remove}</button>`;
-      row.querySelector('[data-remove]')?.addEventListener('click', () => row.remove());
+      row.querySelector('[data-remove]')?.addEventListener('click', () => {
+        row.remove();
+        invalidate();
+      });
       rows.append(row);
     };
 
@@ -216,12 +229,25 @@ const fields = simpleFields[slug] ?? [];
       if (slug === 'z-score-calculator') {
         const score = number('score'), mean = number('mean'), sd = number('sd');
         if (!finite(score, mean, sd) || sd <= 0) return showError();
-        return show([[labels.result, format((score - mean) / sd, 3)]]);
+        const z = (score - mean) / sd;
+        const items = [[labels.result, format(z, 3)]];
+        if (labels.distanceFromMean) items.push([labels.distanceFromMean, `${format(Math.abs(z), 3)} ${labels.sdUnit || ''}`.trim()]);
+        if (labels.relativePosition) {
+          const position = z > 0 ? labels.aboveMean : z < 0 ? labels.belowMean : labels.atMean;
+          if (position) items.push([labels.relativePosition, position]);
+        }
+        return show(items);
       }
       if (slug === 't-score-calculator') {
         const z = number('z');
         if (!finite(z)) return showError();
-        return show([[labels.result, format(50 + 10 * z, 2)]]);
+        const items = [[labels.result, format(50 + 10 * z, 2)]];
+        if (labels.zEquivalent) items.push([labels.zEquivalent, format(z, 3)]);
+        if (labels.relativePosition) {
+          const position = z > 0 ? labels.aboveMean : z < 0 ? labels.belowMean : labels.atMean;
+          if (position) items.push([labels.relativePosition, position]);
+        }
+        return show(items);
       }
       if (slug === 'class-rank-percentile-calculator') {
         const rank = number('rank'), total = number('total');
@@ -235,11 +261,19 @@ const fields = simpleFields[slug] ?? [];
         return show([[labels.zResult, format(z, 3)], [labels.result, format(targetMean + z * targetSd, 3)]]);
       }
       if (slug === 'weighted-average-calculator') {
-        const valid = Array.from(root.querySelectorAll('.stat-row')).map((row) => {
+        const parsed = Array.from(root.querySelectorAll('.stat-row')).map((row) => {
           const valueInput = row.querySelector('[data-value]');
           const weightInput = row.querySelector('[data-weight]');
-          return { value: Number(valueInput instanceof HTMLInputElement ? valueInput.value : NaN), weight: Number(weightInput instanceof HTMLInputElement ? weightInput.value : NaN) };
-        }).filter(({ value, weight }) => Number.isFinite(value) && Number.isFinite(weight) && weight > 0);
+          const valueRaw = valueInput instanceof HTMLInputElement ? valueInput.value.trim() : '';
+          const weightRaw = weightInput instanceof HTMLInputElement ? weightInput.value.trim() : '';
+          if (!valueRaw && !weightRaw) return null;
+          if (!valueRaw || !weightRaw) return { invalid: true, value: NaN, weight: NaN };
+          const value = Number(valueRaw);
+          const weight = Number(weightRaw);
+          return { invalid: !Number.isFinite(value) || !Number.isFinite(weight) || weight <= 0, value, weight };
+        });
+        if (parsed.some((row) => row?.invalid)) return showError();
+        const valid = parsed.filter((row) => row !== null);
         if (!valid.length) return showError();
         const weightTotal = valid.reduce((sum, row) => sum + row.weight, 0);
         const weightedSum = valid.reduce((sum, row) => sum + row.value * row.weight, 0);
@@ -287,7 +321,11 @@ const fields = simpleFields[slug] ?? [];
     };
 
     root.querySelector('[data-calculate]')?.addEventListener('click', calculate);
-    root.querySelector('[data-add]')?.addEventListener('click', () => addWeightedRow());
+    root.addEventListener('input', invalidate);
+    root.querySelector('[data-add]')?.addEventListener('click', () => {
+      addWeightedRow();
+      invalidate();
+    });
     root.querySelector('[data-preset]')?.addEventListener('click', () => {
       const presets = { writtenWeight: '40', teachingWeight: '30', interviewWeight: '30' };
       Object.entries(presets).forEach(([key, value]) => {

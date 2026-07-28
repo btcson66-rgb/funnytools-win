@@ -182,7 +182,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/tools/group-generator/</loc>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/group-generator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/group-generator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-grupos-clase/" />
@@ -484,7 +484,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/tools/seating-chart/</loc>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/seating-chart/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/seating-chart/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-plano-asientos-aula/" />
@@ -542,6 +542,7 @@
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/t-score-calculator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/t-score-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-puntuacion-t/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/t-score-calculator/" />
   </url>
   <url>
@@ -596,6 +597,7 @@
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/weighted-average-calculator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/weighted-average-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-media-ponderada/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/weighted-average-calculator/" />
   </url>
   <url>
@@ -619,6 +621,7 @@
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/z-score-calculator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/z-score-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-puntuacion-z/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/z-score-calculator/" />
   </url>
 </urlset>

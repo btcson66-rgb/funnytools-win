@@ -1,0 +1,23 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishTScore,
+  spanishTScoreReview,
+} from '../../../i18n/expansion/es-tools-25';
+---
+
+<ExpansionToolLayout
+  routeKey="t-score-calculator"
+  canonicalPath="/es/herramientas/calculadora-puntuacion-t/"
+  content={spanishTScore}
+  categoryLabel="Estadística educativa"
+  review={spanishTScoreReview}
+  relatedTool={{
+    name: 'Calculadora de puntuación Z',
+    description: 'Estandariza primero una puntuación directa con su media y desviación estándar.',
+    href: '/es/herramientas/calculadora-puntuacion-z/',
+  }}
+>
+  <EducationStatisticsCalculator labels={spanishTScore.labels} slug="t-score-calculator" />
+</ExpansionToolLayout>

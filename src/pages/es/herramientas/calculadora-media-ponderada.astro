@@ -1,0 +1,23 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishWeightedAverage,
+  spanishWeightedAverageReview,
+} from '../../../i18n/expansion/es-tools-25';
+---
+
+<ExpansionToolLayout
+  routeKey="weighted-average-calculator"
+  canonicalPath="/es/herramientas/calculadora-media-ponderada/"
+  content={spanishWeightedAverage}
+  categoryLabel="Educación y cálculo"
+  review={spanishWeightedAverageReview}
+  relatedTool={{
+    name: 'Calculadora de promedio',
+    description: 'Calcula media, mediana, mínimo y máximo cuando todos los valores pesan lo mismo.',
+    href: '/es/herramientas/calculadora-promedio-notas/',
+  }}
+>
+  <EducationStatisticsCalculator labels={spanishWeightedAverage.labels} slug="weighted-average-calculator" />
+</ExpansionToolLayout>

@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-24",
+  "activeBatch": "es-25",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -721,6 +721,36 @@
         "zh": "/tools/percentile-rank-calculator/",
         "en": "/en/tools/percentile-rank-calculator/",
         "es": "/es/herramientas/calculadora-rango-percentil/"
+      }
+    },
+    {
+      "key": "z-score-calculator",
+      "type": "tool",
+      "batch": "es-25",
+      "paths": {
+        "zh": "/tools/z-score-calculator/",
+        "en": "/en/tools/z-score-calculator/",
+        "es": "/es/herramientas/calculadora-puntuacion-z/"
+      }
+    },
+    {
+      "key": "t-score-calculator",
+      "type": "tool",
+      "batch": "es-25",
+      "paths": {
+        "zh": "/tools/t-score-calculator/",
+        "en": "/en/tools/t-score-calculator/",
+        "es": "/es/herramientas/calculadora-puntuacion-t/"
+      }
+    },
+    {
+      "key": "weighted-average-calculator",
+      "type": "tool",
+      "batch": "es-25",
+      "paths": {
+        "zh": "/tools/weighted-average-calculator/",
+        "en": "/en/tools/weighted-average-calculator/",
+        "es": "/es/herramientas/calculadora-media-ponderada/"
       }
     }
   ]

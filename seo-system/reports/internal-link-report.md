@@ -1,6 +1,6 @@
 # Internal Link Report
 
-Generated: 2026-07-28T09:59:19.077Z
+Generated: 2026-07-28T10:43:31.202Z
 
 ## Critical
 
@@ -14,4 +14,4 @@ Generated: 2026-07-28T09:59:19.077Z
 ## Suggestion
 
 - Over-repeated same-page links: /en/: /en/tools/image-compressor/ linked 9 times.
-- Inbound link map covers 348 route(s).
+- Inbound link map covers 351 route(s).
