@@ -2,6 +2,12 @@ export interface SpanishInfoSection {
   heading: string;
   paragraphs: string[];
   items?: string[];
+  link?: {
+    prefix: string;
+    label: string;
+    href: string;
+    suffix: string;
+  };
 }
 
 export interface SpanishInfoPage {

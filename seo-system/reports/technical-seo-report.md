@@ -1,6 +1,6 @@
 # Technical SEO Report
 
-Generated: 2026-07-28T11:54:29.687Z
+Generated: 2026-07-28T12:12:04.834Z
 
 ## Critical
 
@@ -12,5 +12,5 @@ Generated: 2026-07-28T11:54:29.687Z
 
 ## Suggestion
 
-- Sitemap contains 360 URL(s).
-- Canonical present on 360/360 SEO-eligible page(s).
+- Sitemap contains 363 URL(s).
+- Canonical present on 363/363 SEO-eligible page(s).

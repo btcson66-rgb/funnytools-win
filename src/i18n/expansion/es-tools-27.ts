@@ -385,6 +385,12 @@ export const spanishApa7Report: ToolContent = {
         'r: coeficiente, p, N y naturaleza de la relación.',
         'Regresión: R², F, gl, p, coeficientes e intervalos.',
       ],
+      link: {
+        prefix: 'Consulta la ',
+        label: 'guía completa de prueba t en formato APA 7',
+        href: '/es/guias/prueba-t-formato-apa-7/',
+        suffix: ' para adaptar la frase a Student, Welch, pares o una muestra.',
+      },
     },
     {
       heading: 'Cómo escribir el valor p y los decimales',
@@ -406,6 +412,12 @@ export const spanishApa7Report: ToolContent = {
         'Un ANOVA significativo no identifica por sí solo qué grupos difieren; hacen falta contrastes o comparaciones post hoc. Una correlación no demuestra causalidad y r describe asociación lineal, no cualquier relación. Una regresión significativa no confirma que el modelo sea correcto, que no haya confusión ni que una predicción funcione fuera de muestra. χ² puede ser sensible al tamaño muestral y requiere revisar frecuencias esperadas y la tabla que originó el resultado.',
         'La explicación de FunnyTools recuerda estos límites, pero no ve residuos, gráficos, datos perdidos ni decisiones analíticas. Tampoco conoce si el análisis fue exploratorio, si se eliminó un valor extremo después de ver p o si se probaron muchos modelos. No uses el generador para rellenar cifras aproximadas. Cada número debe copiarse desde una salida conservada, y el manuscrito debe permitir reconstruir qué variable, muestra, contraste y versión del modelo produjo la frase.',
       ],
+      link: {
+        prefix: 'Para separar F global, interacción, efectos y comparaciones, abre la ',
+        label: 'guía de ANOVA en formato APA 7',
+        href: '/es/guias/anova-formato-apa-7/',
+        suffix: '.',
+      },
     },
     {
       heading: 'Flujo de revisión antes de entregar',

@@ -94,6 +94,13 @@ const breadcrumbJsonLd = {
             {section.items.map((item) => <li>{item}</li>)}
           </ul>
         )}
+        {section.link && (
+          <p class="section-link">
+            {section.link.prefix}
+            <a href={section.link.href}>{section.link.label}</a>
+            {section.link.suffix}
+          </p>
+        )}
       </section>
     ))}
 
@@ -171,5 +178,16 @@ const breadcrumbJsonLd = {
 
   .source-list span {
     color: var(--muted);
+  }
+
+  .section-link {
+    padding: 14px 16px;
+    border-left: 4px solid var(--brand);
+    border-radius: 0 10px 10px 0;
+    background: color-mix(in srgb, var(--brand) 8%, var(--card));
+  }
+
+  .section-link a {
+    font-weight: 700;
   }
 </style>

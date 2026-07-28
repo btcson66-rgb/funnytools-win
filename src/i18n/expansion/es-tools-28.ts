@@ -48,10 +48,10 @@ export const spanishSpssInterpreter: ToolContent = {
         'Mira también tamaños muestrales, desviaciones, diagramas y valores atípicos. Si las varianzas o los tamaños de grupo son diferentes, Welch suele ser una opción más defendible que cambiar de fila después de observar los datos. La calculadora t de FunnyTools usa Welch directamente y proporciona intervalo y g de Hedges; este interpretador, en cambio, reproduce el flujo de lectura de una tabla SPSS que ya existe. Documenta cuál estrategia estaba definida antes de mirar el resultado.',
       ],
       link: {
-        prefix: 'Si aún no has calculado la comparación, usa la ',
-        label: 'calculadora t de Welch en español',
-        href: '/es/herramientas/calculadora-t-muestras-independientes/',
-        suffix: ' y conserva sus supuestos y entradas.',
+        prefix: 'Para una explicación dedicada de la salida clásica, consulta la ',
+        label: 'guía de la prueba de Levene en SPSS',
+        href: '/es/guias/prueba-levene-spss/',
+        suffix: '.',
       },
     },
     {
@@ -516,6 +516,12 @@ export const spanishGraduateStatisticsWorkflow: SpanishInfoPage = {
         'Dos grupos independientes no son lo mismo que dos medidas de las mismas personas. Para medias independientes, Welch suele proteger frente a varianzas distintas y tamaños desiguales. Para más grupos, ANOVA prueba una diferencia global y necesita seguimiento. Para diseños factoriales, la interacción cambia la prioridad de lectura. Correlación y regresión responden a otras preguntas.',
         'Define qué quieres estimar: diferencia de medias, asociación, proporción o efecto ajustado. No elijas una prueba únicamente por una secuencia de tests de supuestos. Considera independencia, forma de la distribución, atípicos, escala de medida y mecanismo de muestreo. Si el diseño es jerárquico o repetido, un modelo simple puede subestimar la incertidumbre.',
       ],
+      link: {
+        prefix: 'Si el diseño compara tres o más medias, revisa la ',
+        label: 'guía de ANOVA en formato APA 7',
+        href: '/es/guias/anova-formato-apa-7/',
+        suffix: ' antes de redactar el resultado global y sus comparaciones.',
+      },
     },
     {
       heading: '7. Ejecuta y guarda una salida reproducible',
@@ -523,6 +529,12 @@ export const spanishGraduateStatisticsWorkflow: SpanishInfoPage = {
         'Guarda sintaxis, versión de SPSS, opciones, filtros, ponderaciones, tratamiento de faltantes y semilla si existe aleatoriedad. Nombra los archivos con fecha o versión. Una captura aislada no permite saber qué datos ni opciones produjeron la tabla. Exporta una salida legible, pero conserva también el proyecto o comando.',
         'En una t independiente, no mezcles Levene con la significación bilateral. En ANOVA, extrae el efecto correcto y sus gl. En un factorial, separa interacción y efectos principales. El interpretador SPSS de FunnyTools organiza estos valores y bloquea errores básicos, pero debes cotejar el resultado con la tabla.',
       ],
+      link: {
+        prefix: 'Comprueba la regla de filas en la ',
+        label: 'guía de Levene para SPSS',
+        href: '/es/guias/prueba-levene-spss/',
+        suffix: '.',
+      },
     },
     {
       heading: '8. Informa estimación, intervalo y efecto',
@@ -537,6 +549,12 @@ export const spanishGraduateStatisticsWorkflow: SpanishInfoPage = {
         'Una frase debe mantener símbolo, gl, estadístico y p del mismo análisis. Los p muy pequeños se informan como p < .001, no p = .000. Los gl de Welch pueden ser decimales. Añade nombres de variables, dirección, descriptivos y efecto; evita «demostró» cuando el diseño solo permite asociación.',
         'El generador APA 7 en español crea frases para t, ANOVA, χ², Pearson y regresión desde valores ya calculados. Úsalo para reducir errores de transcripción, no para escoger el análisis. Después revisa cursivas, tablas, figuras y requisitos de la revista o universidad.',
       ],
+      link: {
+        prefix: 'Para t de Student, Welch, pareada o de una muestra, sigue la ',
+        label: 'guía de prueba t en APA 7',
+        href: '/es/guias/prueba-t-formato-apa-7/',
+        suffix: '.',
+      },
     },
     {
       heading: '10. Comprueba sensibilidad y afirmaciones',

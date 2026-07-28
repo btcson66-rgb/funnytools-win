@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-28",
+  "activeBatch": "es-29",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -841,6 +841,36 @@
         "zh": "/workflows/graduate-statistics-report-toolkit/",
         "en": "/en/workflows/graduate-statistics-report-toolkit/",
         "es": "/es/flujos/informe-estadistico-investigacion/"
+      }
+    },
+    {
+      "key": "spss-levene-test-guide",
+      "type": "guide",
+      "batch": "es-29",
+      "paths": {
+        "zh": "/guides/spss-levene-test-guide/",
+        "en": "/en/guides/spss-levene-test-guide/",
+        "es": "/es/guias/prueba-levene-spss/"
+      }
+    },
+    {
+      "key": "t-test-apa-format-guide",
+      "type": "guide",
+      "batch": "es-29",
+      "paths": {
+        "zh": "/guides/t-test-apa-format-guide/",
+        "en": "/en/guides/t-test-apa-format-guide/",
+        "es": "/es/guias/prueba-t-formato-apa-7/"
+      }
+    },
+    {
+      "key": "anova-apa-format-guide",
+      "type": "guide",
+      "batch": "es-29",
+      "paths": {
+        "zh": "/guides/anova-apa-format-guide/",
+        "en": "/en/guides/anova-apa-format-guide/",
+        "es": "/es/guias/anova-formato-apa-7/"
       }
     }
   ]
