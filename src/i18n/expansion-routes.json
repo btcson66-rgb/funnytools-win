@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-18",
+  "activeBatch": "es-19",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -541,6 +541,36 @@
         "zh": "/tools/stopwatch/",
         "en": "/en/tools/stopwatch/",
         "es": "/es/herramientas/cronometro-online/"
+      }
+    },
+    {
+      "key": "date-difference",
+      "type": "tool",
+      "batch": "es-19",
+      "paths": {
+        "zh": "/tools/date-difference/",
+        "en": "/en/tools/date-difference/",
+        "es": "/es/herramientas/calcular-diferencia-entre-fechas/"
+      }
+    },
+    {
+      "key": "age-calculator",
+      "type": "tool",
+      "batch": "es-19",
+      "paths": {
+        "zh": "/tools/age-calculator/",
+        "en": "/en/tools/age-calculator/",
+        "es": "/es/herramientas/calculadora-de-edad/"
+      }
+    },
+    {
+      "key": "business-days",
+      "type": "tool",
+      "batch": "es-19",
+      "paths": {
+        "zh": "/tools/business-days/",
+        "en": "/en/tools/business-days/",
+        "es": "/es/herramientas/calculadora-dias-laborables/"
       }
     }
   ]

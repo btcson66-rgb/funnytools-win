@@ -70,32 +70,71 @@ const { labels } = Astro.props;
     };
     let latestText = '';
 
-    function localDate(value) {
-      if (!value) return null;
-      const [year, month, day] = value.split('-').map(Number);
-      if (!year || !month || !day) return null;
-      return new Date(year, month - 1, day);
+    const DAY_MS = 86400000;
+
+    function utcDate(year, monthIndex, day) {
+      const date = new Date(0);
+      date.setUTCHours(0, 0, 0, 0);
+      date.setUTCFullYear(year, monthIndex, day);
+      return date;
+    }
+
+    function dateOnly(value) {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || '');
+      if (!match) return null;
+      const year = Number(match[1]);
+      const month = Number(match[2]);
+      const day = Number(match[3]);
+      const date = utcDate(year, month - 1, day);
+      if (
+        date.getUTCFullYear() !== year
+        || date.getUTCMonth() !== month - 1
+        || date.getUTCDate() !== day
+      ) return null;
+      return date;
     }
 
     function dateString(date) {
-      const offset = date.getTimezoneOffset() * 60000;
-      return new Date(date.getTime() - offset).toISOString().slice(0, 10);
+      return date.toISOString().slice(0, 10);
+    }
+
+    function todayString() {
+      const today = new Date();
+      return [
+        String(today.getFullYear()).padStart(4, '0'),
+        String(today.getMonth() + 1).padStart(2, '0'),
+        String(today.getDate()).padStart(2, '0'),
+      ].join('-');
     }
 
     function addDays(date, days) {
       const copy = new Date(date);
-      copy.setDate(copy.getDate() + days);
+      copy.setUTCDate(copy.getUTCDate() + days);
       return copy;
     }
 
     function addMonths(date, months) {
-      const copy = new Date(date);
-      const day = copy.getDate();
-      copy.setDate(1);
-      copy.setMonth(copy.getMonth() + months);
-      const lastDay = new Date(copy.getFullYear(), copy.getMonth() + 1, 0).getDate();
-      copy.setDate(Math.min(day, lastDay));
-      return copy;
+      const targetIndex = date.getUTCFullYear() * 12 + date.getUTCMonth() + months;
+      const targetYear = Math.floor(targetIndex / 12);
+      const targetMonth = ((targetIndex % 12) + 12) % 12;
+      const lastDay = utcDate(targetYear, targetMonth + 1, 0).getUTCDate();
+      return utcDate(targetYear, targetMonth, Math.min(date.getUTCDate(), lastDay));
+    }
+
+    function dayDifference(start, end) {
+      return Math.round((end.getTime() - start.getTime()) / DAY_MS);
+    }
+
+    function unit(value, singularKey, pluralKey) {
+      const label = value === 1 ? labels[singularKey] : labels[pluralKey];
+      return `${value} ${label || labels[pluralKey]}`;
+    }
+
+    function decimal(value) {
+      return new Intl.NumberFormat(
+        document.documentElement.lang || 'en',
+        { minimumFractionDigits: 1, maximumFractionDigits: 1 },
+      ).format(value);
     }
 
     function setError(message) {
@@ -103,27 +142,39 @@ const { labels } = Astro.props;
       error.hidden = !message;
     }
 
+    function clearResults() {
+      Object.values(outputs).forEach((output) => {
+        output.textContent = '0';
+      });
+      latestText = '';
+    }
+
     function calendarBreakdown(start, endExclusive) {
-      let cursor = new Date(start);
-      let years = 0;
-      let months = 0;
-      while (addMonths(cursor, 12) <= endExclusive) {
-        cursor = addMonths(cursor, 12);
-        years += 1;
+      let totalMonths = Math.max(
+        0,
+        (endExclusive.getUTCFullYear() - start.getUTCFullYear()) * 12
+          + endExclusive.getUTCMonth()
+          - start.getUTCMonth(),
+      );
+      while (totalMonths > 0 && addMonths(start, totalMonths) > endExclusive) {
+        totalMonths -= 1;
       }
-      while (addMonths(cursor, 1) <= endExclusive) {
-        cursor = addMonths(cursor, 1);
-        months += 1;
+      while (addMonths(start, totalMonths + 1) <= endExclusive) {
+        totalMonths += 1;
       }
-      const days = Math.round((endExclusive - cursor) / 86400000);
-      return { years, months, days };
+      const cursor = addMonths(start, totalMonths);
+      return {
+        years: Math.floor(totalMonths / 12),
+        months: totalMonths % 12,
+        days: dayDifference(cursor, endExclusive),
+      };
     }
 
     function weekdayWeekendCounts(start, totalDays) {
       let weekdays = 0;
       let weekends = 0;
       for (let index = 0; index < totalDays; index += 1) {
-        const day = addDays(start, index).getDay();
+        const day = addDays(start, index).getUTCDay();
         if (day === 0 || day === 6) weekends += 1;
         else weekdays += 1;
       }
@@ -131,9 +182,10 @@ const { labels } = Astro.props;
     }
 
     function calculate() {
-      const rawStart = localDate(startInput.value);
-      const rawEnd = localDate(endInput.value);
+      const rawStart = dateOnly(startInput.value);
+      const rawEnd = dateOnly(endInput.value);
       if (!rawStart || !rawEnd) {
+        clearResults();
         setError(labels.invalidDate);
         return;
       }
@@ -143,26 +195,27 @@ const { labels } = Astro.props;
 
       const includeEnd = includeEndInput.checked;
       const endExclusive = includeEnd ? addDays(end, 1) : end;
-      const totalDays = Math.max(0, Math.round((endExclusive - start) / 86400000));
+      const totalDays = Math.max(0, dayDifference(start, endExclusive));
       const wholeWeeks = Math.floor(totalDays / 7);
       const remainingDays = totalDays % 7;
       const approxMonths = totalDays / 30.4375;
       const breakdown = calendarBreakdown(start, endExclusive);
       const counts = weekdayWeekendCounts(start, totalDays);
+      const approximateMonths = decimal(approxMonths);
 
-      outputs.total.textContent = `${totalDays} ${labels.days}`;
-      outputs.weeks.textContent = `${wholeWeeks} ${labels.weeks} ${remainingDays} ${labels.days}`;
-      outputs.months.textContent = `${labels.approximate} ${approxMonths.toFixed(1)} ${labels.months}`;
-      outputs.breakdown.textContent = `${breakdown.years} ${labels.years} ${breakdown.months} ${labels.months} ${breakdown.days} ${labels.days}`;
-      outputs.weekdays.textContent = `${counts.weekdays} ${labels.days}`;
-      outputs.weekends.textContent = `${counts.weekends} ${labels.days}`;
+      outputs.total.textContent = unit(totalDays, 'daySingular', 'dayPlural');
+      outputs.weeks.textContent = `${unit(wholeWeeks, 'weekSingular', 'weekPlural')} ${unit(remainingDays, 'daySingular', 'dayPlural')}`;
+      outputs.months.textContent = `${labels.approximate} ${approximateMonths} ${labels.monthPlural || labels.months}`;
+      outputs.breakdown.textContent = `${unit(breakdown.years, 'yearSingular', 'yearPlural')} ${unit(breakdown.months, 'monthSingular', 'monthPlural')} ${unit(breakdown.days, 'daySingular', 'dayPlural')}`;
+      outputs.weekdays.textContent = unit(counts.weekdays, 'daySingular', 'dayPlural');
+      outputs.weekends.textContent = unit(counts.weekends, 'daySingular', 'dayPlural');
       latestText = [
         `${labels.startDate}: ${startInput.value}`,
         `${labels.endDate}: ${endInput.value}`,
-        `${labels.totalDays}: ${totalDays} ${labels.days}`,
-        `${labels.weeks}: ${wholeWeeks} ${labels.weeks} ${remainingDays} ${labels.days}`,
-        `${labels.months}: ${labels.approximate} ${approxMonths.toFixed(1)} ${labels.months}`,
-        `${labels.breakdown}: ${breakdown.years} ${labels.years} ${breakdown.months} ${labels.months} ${breakdown.days} ${labels.days}`,
+        `${labels.totalDays}: ${unit(totalDays, 'daySingular', 'dayPlural')}`,
+        `${labels.weeks}: ${unit(wholeWeeks, 'weekSingular', 'weekPlural')} ${unit(remainingDays, 'daySingular', 'dayPlural')}`,
+        `${labels.months}: ${labels.approximate} ${approximateMonths} ${labels.monthPlural || labels.months}`,
+        `${labels.breakdown}: ${unit(breakdown.years, 'yearSingular', 'yearPlural')} ${unit(breakdown.months, 'monthSingular', 'monthPlural')} ${unit(breakdown.days, 'daySingular', 'dayPlural')}`,
         `${labels.weekdays}: ${counts.weekdays}`,
         `${labels.weekends}: ${counts.weekends}`,
       ].join('\n');
@@ -184,10 +237,9 @@ const { labels } = Astro.props;
       }
     });
 
-    const today = new Date();
+    const today = dateOnly(todayString());
     startInput.value = dateString(today);
     endInput.value = dateString(addDays(today, 30));
     calculate();
   });
 </script>
-

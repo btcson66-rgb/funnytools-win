@@ -1,0 +1,23 @@
+---
+import BusinessDays from '../../../components/tools/BusinessDays.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishBusinessDays,
+  spanishBusinessDaysReview,
+} from '../../../i18n/expansion/es-tools-19';
+---
+
+<ExpansionToolLayout
+  routeKey="business-days"
+  canonicalPath="/es/herramientas/calculadora-dias-laborables/"
+  content={spanishBusinessDays}
+  categoryLabel="Tiempo y fechas"
+  review={spanishBusinessDaysReview}
+  relatedTool={{
+    name: 'Calcular diferencia entre fechas',
+    description: 'Compara un intervalo en días, semanas, meses y desglose de calendario.',
+    href: '/es/herramientas/calcular-diferencia-entre-fechas/',
+  }}
+>
+  <BusinessDays labels={spanishBusinessDays.labels} />
+</ExpansionToolLayout>

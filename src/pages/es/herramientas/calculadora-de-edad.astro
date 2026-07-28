@@ -1,0 +1,23 @@
+---
+import AgeCalculator from '../../../components/tools/AgeCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishAgeCalculator,
+  spanishAgeCalculatorReview,
+} from '../../../i18n/expansion/es-tools-19';
+---
+
+<ExpansionToolLayout
+  routeKey="age-calculator"
+  canonicalPath="/es/herramientas/calculadora-de-edad/"
+  content={spanishAgeCalculator}
+  categoryLabel="Tiempo y fechas"
+  review={spanishAgeCalculatorReview}
+  relatedTool={{
+    name: 'Calculadora de días laborables',
+    description: 'Cuenta lunes a viernes y resta una lista de festivos personalizados.',
+    href: '/es/herramientas/calculadora-dias-laborables/',
+  }}
+>
+  <AgeCalculator labels={spanishAgeCalculator.labels} />
+</ExpansionToolLayout>

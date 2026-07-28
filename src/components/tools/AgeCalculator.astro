@@ -67,32 +67,58 @@ const { labels } = Astro.props;
     };
     let latestText = '';
 
-    function localDate(value) {
-      if (!value) return null;
-      const [year, month, day] = value.split('-').map(Number);
-      if (!year || !month || !day) return null;
-      return new Date(year, month - 1, day);
+    const DAY_MS = 86400000;
+
+    function utcDate(year, monthIndex, day) {
+      const date = new Date(0);
+      date.setUTCHours(0, 0, 0, 0);
+      date.setUTCFullYear(year, monthIndex, day);
+      return date;
+    }
+
+    function dateOnly(value) {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || '');
+      if (!match) return null;
+      const year = Number(match[1]);
+      const month = Number(match[2]);
+      const day = Number(match[3]);
+      const date = utcDate(year, month - 1, day);
+      if (
+        date.getUTCFullYear() !== year
+        || date.getUTCMonth() !== month - 1
+        || date.getUTCDate() !== day
+      ) return null;
+      return date;
     }
 
     function dateString(date) {
-      const offset = date.getTimezoneOffset() * 60000;
-      return new Date(date.getTime() - offset).toISOString().slice(0, 10);
+      return date.toISOString().slice(0, 10);
     }
 
-    function addYears(date, years) {
-      const copy = new Date(date);
-      copy.setFullYear(copy.getFullYear() + years);
-      return copy;
+    function todayString() {
+      const today = new Date();
+      return [
+        String(today.getFullYear()).padStart(4, '0'),
+        String(today.getMonth() + 1).padStart(2, '0'),
+        String(today.getDate()).padStart(2, '0'),
+      ].join('-');
     }
 
     function addMonths(date, months) {
-      const copy = new Date(date);
-      const day = copy.getDate();
-      copy.setDate(1);
-      copy.setMonth(copy.getMonth() + months);
-      const lastDay = new Date(copy.getFullYear(), copy.getMonth() + 1, 0).getDate();
-      copy.setDate(Math.min(day, lastDay));
-      return copy;
+      const targetIndex = date.getUTCFullYear() * 12 + date.getUTCMonth() + months;
+      const targetYear = Math.floor(targetIndex / 12);
+      const targetMonth = ((targetIndex % 12) + 12) % 12;
+      const lastDay = utcDate(targetYear, targetMonth + 1, 0).getUTCDate();
+      return utcDate(targetYear, targetMonth, Math.min(date.getUTCDate(), lastDay));
+    }
+
+    function dayDifference(start, end) {
+      return Math.round((end.getTime() - start.getTime()) / DAY_MS);
+    }
+
+    function unit(value, singularKey, pluralKey) {
+      const label = value === 1 ? labels[singularKey] : labels[pluralKey];
+      return `${formatNumber(value)} ${label || labels[pluralKey]}`;
     }
 
     function setError(message) {
@@ -100,55 +126,76 @@ const { labels } = Astro.props;
       error.hidden = !message;
     }
 
+    function clearResults() {
+      Object.values(outputs).forEach((output) => {
+        output.textContent = '--';
+      });
+      latestText = '';
+    }
+
     function formatNumber(number) {
       return new Intl.NumberFormat(document.documentElement.lang || 'en').format(number);
     }
 
     function calendarAge(birthday, asOf) {
-      let years = 0;
-      let months = 0;
-      let cursor = new Date(birthday);
-      while (addYears(cursor, 1) <= asOf) {
-        cursor = addYears(cursor, 1);
-        years += 1;
+      let totalMonths = Math.max(
+        0,
+        (asOf.getUTCFullYear() - birthday.getUTCFullYear()) * 12
+          + asOf.getUTCMonth()
+          - birthday.getUTCMonth(),
+      );
+      while (totalMonths > 0 && addMonths(birthday, totalMonths) > asOf) {
+        totalMonths -= 1;
       }
-      while (addMonths(cursor, 1) <= asOf) {
-        cursor = addMonths(cursor, 1);
-        months += 1;
+      while (addMonths(birthday, totalMonths + 1) <= asOf) {
+        totalMonths += 1;
       }
-      const days = Math.floor((asOf - cursor) / 86400000);
-      return { years, months, days };
+      const cursor = addMonths(birthday, totalMonths);
+      return {
+        years: Math.floor(totalMonths / 12),
+        months: totalMonths % 12,
+        days: dayDifference(cursor, asOf),
+      };
     }
 
     function nextBirthdayDays(birthday, asOf) {
-      let next = new Date(asOf.getFullYear(), birthday.getMonth(), birthday.getDate());
-      if (next < asOf) next = new Date(asOf.getFullYear() + 1, birthday.getMonth(), birthday.getDate());
-      return Math.ceil((next - asOf) / 86400000);
+      function birthdayInYear(year) {
+        const lastDay = utcDate(year, birthday.getUTCMonth() + 1, 0).getUTCDate();
+        return utcDate(year, birthday.getUTCMonth(), Math.min(birthday.getUTCDate(), lastDay));
+      }
+      let next = birthdayInYear(asOf.getUTCFullYear());
+      if (next < asOf) next = birthdayInYear(asOf.getUTCFullYear() + 1);
+      return dayDifference(asOf, next);
     }
 
     function calculate() {
-      const birthday = localDate(birthdayInput.value);
-      const asOf = localDate(asOfInput.value);
+      const birthday = dateOnly(birthdayInput.value);
+      const asOf = dateOnly(asOfInput.value);
       if (!birthday) {
+        clearResults();
         setError(labels.birthdayError);
         return;
       }
       if (!asOf || birthday > asOf) {
+        clearResults();
         setError(labels.futureError);
         return;
       }
 
       const age = calendarAge(birthday, asOf);
-      const daysLived = Math.floor((asOf - birthday) / 86400000);
+      const daysLived = dayDifference(birthday, asOf);
       const hoursLived = daysLived * 24;
       const heartbeats = daysLived * 1440 * 70;
       const nextDays = nextBirthdayDays(birthday, asOf);
-      const weekday = new Intl.DateTimeFormat(document.documentElement.lang || 'en', { weekday: 'long' }).format(birthday);
+      const weekday = new Intl.DateTimeFormat(
+        document.documentElement.lang || 'en',
+        { weekday: 'long', timeZone: 'UTC' },
+      ).format(birthday);
 
-      outputs.age.textContent = `${age.years} ${labels.years} ${age.months} ${labels.months} ${age.days} ${labels.days}`;
-      outputs.daysLived.textContent = `${formatNumber(daysLived)} ${labels.days}`;
+      outputs.age.textContent = `${unit(age.years, 'yearSingular', 'years')} ${unit(age.months, 'monthSingular', 'months')} ${unit(age.days, 'daySingular', 'days')}`;
+      outputs.daysLived.textContent = unit(daysLived, 'daySingular', 'days');
       outputs.hours.textContent = `${labels.approximate} ${formatNumber(hoursLived)} ${labels.hours}`;
-      outputs.next.textContent = `${nextDays} ${labels.days}`;
+      outputs.next.textContent = unit(nextDays, 'daySingular', 'days');
       outputs.weekday.textContent = weekday;
       outputs.heartbeats.textContent = `${labels.approximate} ${formatNumber(heartbeats)}`;
       latestText = [
@@ -166,7 +213,7 @@ const { labels } = Astro.props;
 
     root.querySelector('[data-calculate]')?.addEventListener('click', calculate);
     root.querySelector('[data-today]')?.addEventListener('click', () => {
-      asOfInput.value = dateString(new Date());
+      asOfInput.value = todayString();
       calculate();
     });
     root.querySelector('[data-copy]')?.addEventListener('click', async () => {
@@ -183,7 +230,6 @@ const { labels } = Astro.props;
       }
     });
 
-    asOfInput.value = dateString(new Date());
+    asOfInput.value = todayString();
   });
 </script>
-

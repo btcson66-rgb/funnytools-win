@@ -1,0 +1,23 @@
+---
+import DateDifference from '../../../components/tools/DateDifference.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishDateDifference,
+  spanishDateDifferenceReview,
+} from '../../../i18n/expansion/es-tools-19';
+---
+
+<ExpansionToolLayout
+  routeKey="date-difference"
+  canonicalPath="/es/herramientas/calcular-diferencia-entre-fechas/"
+  content={spanishDateDifference}
+  categoryLabel="Tiempo y fechas"
+  review={spanishDateDifferenceReview}
+  relatedTool={{
+    name: 'Calculadora de edad',
+    description: 'Calcula años, meses y días desde un nacimiento hasta una fecha concreta.',
+    href: '/es/herramientas/calculadora-de-edad/',
+  }}
+>
+  <DateDifference labels={spanishDateDifference.labels} />
+</ExpansionToolLayout>

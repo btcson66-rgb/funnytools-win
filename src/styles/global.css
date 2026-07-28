@@ -2057,6 +2057,12 @@ input:focus, textarea:focus, select:focus { border-color: var(--color-primary-60
   color: #9a3412;
 }
 
+[data-theme="dark"] .tool-chip--guide {
+  border-color: #9a3412;
+  background: #431407;
+  color: #fed7aa;
+}
+
 .workflow-toolkit-cta,
 .workflow-toolkit-all {
   justify-self: start;
@@ -2409,7 +2415,20 @@ input:focus, textarea:focus, select:focus { border-color: var(--color-primary-60
   box-shadow: none;
 }
 
+[data-theme="dark"] .tool-links a.btn.go {
+  border-color: var(--color-primary-600) !important;
+  background: var(--color-primary-600) !important;
+  color: #042f2e !important;
+}
+
 [data-theme="dark"] .support-hero {
+  border-color: var(--color-slate-200) !important;
+  background:
+    linear-gradient(135deg, rgba(13, 148, 136, 0.13), rgba(79, 70, 229, 0.08) 62%, rgba(234, 88, 12, 0.07)),
+    var(--color-surface) !important;
+}
+
+[data-theme="dark"] .shop-hero {
   border-color: var(--color-slate-200) !important;
   background:
     linear-gradient(135deg, rgba(13, 148, 136, 0.13), rgba(79, 70, 229, 0.08) 62%, rgba(234, 88, 12, 0.07)),

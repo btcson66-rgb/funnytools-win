@@ -46,6 +46,7 @@ const { labels } = Astro.props;
     <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
   </div>
   <p class="form-error" data-error role="alert" hidden></p>
+  <p class="note" data-warning role="status" aria-live="polite" hidden></p>
   <div class="stats-grid business-stats" aria-live="polite">
     <div><span>{labels.businessDays}</span><strong data-business>0</strong></div>
     <div><span>{labels.totalCalendarDays}</span><strong data-total>0</strong></div>
@@ -100,6 +101,7 @@ const { labels } = Astro.props;
     const holidaysInput = root.querySelector('[data-holidays]');
     const presetInput = root.querySelector('[data-holiday-preset]');
     const error = root.querySelector('[data-error]');
+    const warning = root.querySelector('[data-warning]');
 
     // 台灣 2026（民國115年）國定假日與補假之平日（不含一般週末）。
     // 來源：行政院人事行政總處核定之 115 年政府行政機關辦公日曆表。
@@ -129,21 +131,46 @@ const { labels } = Astro.props;
     };
     let latestText = '';
 
-    function localDate(value) {
-      if (!value) return null;
-      const [year, month, day] = value.split('-').map(Number);
-      if (!year || !month || !day) return null;
-      return new Date(year, month - 1, day);
+    const DAY_MS = 86400000;
+
+    function utcDate(year, monthIndex, day) {
+      const date = new Date(0);
+      date.setUTCHours(0, 0, 0, 0);
+      date.setUTCFullYear(year, monthIndex, day);
+      return date;
+    }
+
+    function dateOnly(value) {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || '');
+      if (!match) return null;
+      const year = Number(match[1]);
+      const month = Number(match[2]);
+      const day = Number(match[3]);
+      const date = utcDate(year, month - 1, day);
+      if (
+        date.getUTCFullYear() !== year
+        || date.getUTCMonth() !== month - 1
+        || date.getUTCDate() !== day
+      ) return null;
+      return date;
     }
 
     function dateString(date) {
-      const offset = date.getTimezoneOffset() * 60000;
-      return new Date(date.getTime() - offset).toISOString().slice(0, 10);
+      return date.toISOString().slice(0, 10);
+    }
+
+    function todayString() {
+      const today = new Date();
+      return [
+        String(today.getFullYear()).padStart(4, '0'),
+        String(today.getMonth() + 1).padStart(2, '0'),
+        String(today.getDate()).padStart(2, '0'),
+      ].join('-');
     }
 
     function addDays(date, days) {
       const next = new Date(date);
-      next.setDate(next.getDate() + days);
+      next.setUTCDate(next.getUTCDate() + days);
       return next;
     }
 
@@ -152,28 +179,53 @@ const { labels } = Astro.props;
       error.hidden = !message;
     }
 
-    function holidaySet() {
-      return new Set(
-        holidaysInput.value
-          .split(/\r\n|\r|\n/)
-          .map((line) => line.trim())
-          .filter((line) => /^\d{4}-\d{2}-\d{2}$/.test(line)),
-      );
+    function setWarning(message) {
+      warning.textContent = message;
+      warning.hidden = !message;
+    }
+
+    function clearResults() {
+      outputs.business.textContent = '0';
+      outputs.total.textContent = '0';
+      outputs.weekends.textContent = '0';
+      outputs.holidays.textContent = '0';
+      outputs.range.textContent = '-';
+      latestText = '';
+    }
+
+    function holidayValues(value) {
+      const dates = new Set();
+      let invalidCount = 0;
+      value
+        .split(/\r\n|\r|\n/)
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .forEach((line) => {
+          if (!dateOnly(line)) invalidCount += 1;
+          else dates.add(line);
+        });
+      return { dates, invalidCount };
+    }
+
+    function daysText(value) {
+      return `${value} ${value === 1 ? (labels.daySingular || labels.days) : labels.days}`;
     }
 
     function calculate() {
-      const rawStart = localDate(startInput.value);
-      const rawEnd = localDate(endInput.value);
+      const rawStart = dateOnly(startInput.value);
+      const rawEnd = dateOnly(endInput.value);
       if (!rawStart || !rawEnd) {
+        clearResults();
         setError(labels.invalidDate);
+        setWarning('');
         return;
       }
       let start = rawStart;
       let end = rawEnd;
       if (start > end) [start, end] = [end, start];
       const endExclusive = includeEndInput.checked ? addDays(end, 1) : end;
-      const totalDays = Math.max(0, Math.round((endExclusive - start) / 86400000));
-      const holidays = holidaySet();
+      const totalDays = Math.max(0, Math.round((endExclusive.getTime() - start.getTime()) / DAY_MS));
+      const { dates: holidays, invalidCount } = holidayValues(holidaysInput.value);
       const skipWeekends = skipWeekendsInput.checked;
       let weekendDays = 0;
       let holidayDays = 0;
@@ -181,30 +233,35 @@ const { labels } = Astro.props;
 
       for (let index = 0; index < totalDays; index += 1) {
         const current = addDays(start, index);
-        const isWeekend = current.getDay() === 0 || current.getDay() === 6;
+        const isWeekend = current.getUTCDay() === 0 || current.getUTCDay() === 6;
         const isHoliday = holidays.has(dateString(current));
         if (isWeekend) weekendDays += 1;
         if (isHoliday && !(skipWeekends && isWeekend)) holidayDays += 1;
         if (!(skipWeekends && isWeekend) && !isHoliday) businessDays += 1;
       }
 
-      outputs.business.textContent = `${businessDays} ${labels.days}`;
-      outputs.total.textContent = `${totalDays} ${labels.days}`;
-      outputs.weekends.textContent = `${weekendDays} ${labels.days}`;
-      outputs.holidays.textContent = `${holidayDays} ${labels.days}`;
+      outputs.business.textContent = daysText(businessDays);
+      outputs.total.textContent = daysText(totalDays);
+      outputs.weekends.textContent = daysText(weekendDays);
+      outputs.holidays.textContent = daysText(holidayDays);
       outputs.range.textContent = `${dateString(start)} - ${dateString(end)}`;
       latestText = [
         `${labels.countedRange}: ${dateString(start)} - ${dateString(end)}`,
-        `${labels.businessDays}: ${businessDays} ${labels.days}`,
-        `${labels.totalCalendarDays}: ${totalDays} ${labels.days}`,
-        `${labels.weekendDays}: ${weekendDays} ${labels.days}`,
-        `${labels.holidayDays}: ${holidayDays} ${labels.days}`,
+        `${labels.businessDays}: ${daysText(businessDays)}`,
+        `${labels.totalCalendarDays}: ${daysText(totalDays)}`,
+        `${labels.weekendDays}: ${daysText(weekendDays)}`,
+        `${labels.holidayDays}: ${daysText(holidayDays)}`,
       ].join('\n');
       setError('');
+      setWarning(
+        invalidCount > 0
+          ? (labels.holidayWarning || '').replace('{count}', String(invalidCount))
+          : '',
+      );
     }
 
     function reset() {
-      const today = new Date();
+      const today = dateOnly(todayString());
       startInput.value = dateString(today);
       endInput.value = dateString(addDays(today, 14));
       includeEndInput.checked = true;
@@ -237,10 +294,7 @@ const { labels } = Astro.props;
     presetInput?.addEventListener('change', () => {
       const preset = holidayPresets[presetInput.value];
       if (!preset) return;
-      const existing = holidaysInput.value
-        .split(/\r\n|\r|\n/)
-        .map((line) => line.trim())
-        .filter((line) => /^\d{4}-\d{2}-\d{2}$/.test(line));
+      const existing = Array.from(holidayValues(holidaysInput.value).dates);
       const merged = Array.from(new Set([...existing, ...preset])).sort();
       holidaysInput.value = merged.join('\n');
       presetInput.value = '';

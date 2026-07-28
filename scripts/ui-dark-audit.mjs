@@ -1,9 +1,12 @@
 import { spawn } from 'node:child_process';
-import { mkdtemp, rm, readFile } from 'node:fs/promises';
+import { mkdtemp, rm, readFile, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-const origin = (process.argv[2] || 'http://127.0.0.1:4321').replace(/\/$/, '');
+const origin = (
+  process.argv.slice(2).find((arg) => !arg.startsWith('--'))
+  || 'http://127.0.0.1:4321'
+).replace(/\/$/, '');
 const interactionMode = process.argv.includes('--interactions');
 const viewportWidth = Number(process.argv.find((arg) => arg.startsWith('--width='))?.split('=')[1] || 1440);
 const viewportHeight = viewportWidth < 600 ? 844 : viewportWidth < 1024 ? 1024 : 1100;
@@ -27,7 +30,7 @@ async function findChrome() {
 function extractRoutes(xml) {
   const routes = [...xml.matchAll(/<loc>https?:\/\/[^/]+([^<]*)<\/loc>/g)]
     .map((match) => match[1] || '/')
-    .filter((route) => !route.startsWith('/embed/'));
+    .filter((route) => !route.startsWith('/embed/') && !route.endsWith('.xml'));
   return [...new Set(['/', '/en/', '/support/', '/404.html', ...routes])];
 }
 
@@ -82,6 +85,23 @@ function createCdp(wsUrl) {
   };
 }
 
+async function evaluateAudit(cdp, route, attempts = 3) {
+  let detail = 'no result value';
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
+    const response = await cdp.send('Runtime.evaluate', {
+      expression: auditExpression,
+      returnByValue: true,
+    });
+    if (response.result?.value) return response.result.value;
+    detail = response.exceptionDetails?.text
+      || response.result?.description
+      || response.result?.type
+      || detail;
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
+  throw new Error(`${route}: UI audit expression failed (${detail}).`);
+}
+
 const auditExpression = String.raw`(() => {
   const parseColor = (value) => {
     const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
@@ -115,7 +135,10 @@ const auditExpression = String.raw`(() => {
   };
   const all = [...document.querySelectorAll('body *')].filter(visible);
   const whiteSurfaces = all.filter((element) => {
-    if (/^(IMG|PICTURE|VIDEO|CANVAS|SVG|PATH|OPTION)$/.test(element.tagName) || element.matches('[class*="canvas-wrap"]')) return false;
+    if (
+      /^(IMG|PICTURE|VIDEO|CANVAS|SVG|PATH|OPTION)$/.test(element.tagName)
+      || element.matches('[class*="canvas-wrap"], .barcode-preview')
+    ) return false;
     const rect = element.getBoundingClientRect();
     if (rect.width * rect.height < 500) return false;
     const color = parseColor(getComputedStyle(element).backgroundColor);
@@ -161,16 +184,20 @@ try {
     source: `try { localStorage.setItem('theme', 'dark'); } catch {} document.documentElement.dataset.theme = 'dark';`,
   });
 
-  const sitemap = await readFile(new URL('../dist/sitemap.xml', import.meta.url), 'utf8');
-  const routes = extractRoutes(sitemap);
+  const distDirectory = new URL('../dist/', import.meta.url);
+  const sitemapFiles = (await readdir(distDirectory))
+    .filter((name) => /^sitemap(?:-[a-z]+)?\.xml$/.test(name) && name !== 'sitemap.xml');
+  const sitemapDocuments = await Promise.all(
+    sitemapFiles.map((name) => readFile(new URL(name, distDirectory), 'utf8')),
+  );
+  const routes = [...new Set(sitemapDocuments.flatMap(extractRoutes))];
   const failures = [];
   for (const route of routes) {
     const loaded = cdp.once('Page.loadEventFired');
     await cdp.send('Page.navigate', { url: `${origin}${route}` });
     await loaded;
     await new Promise((resolve) => setTimeout(resolve, 35));
-    const result = await cdp.send('Runtime.evaluate', { expression: auditExpression, returnByValue: true });
-    const findings = result.result.value;
+    const findings = await evaluateAudit(cdp, route);
     if (interactionMode) {
       await cdp.send('Runtime.evaluate', {
         expression: `(async () => {
@@ -189,8 +216,7 @@ try {
         awaitPromise: true,
         returnByValue: true,
       });
-      const afterResult = await cdp.send('Runtime.evaluate', { expression: auditExpression, returnByValue: true });
-      const after = afterResult.result.value;
+      const after = await evaluateAudit(cdp, route);
       findings.whiteSurfaces = [...new Set([...findings.whiteSurfaces, ...after.whiteSurfaces])];
       findings.lowContrastControls = [...new Set([...findings.lowContrastControls, ...after.lowContrastControls])];
       findings.smallControls = [...new Set([...findings.smallControls, ...after.smallControls])];
