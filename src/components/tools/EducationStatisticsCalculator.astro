@@ -207,7 +207,11 @@ const fields = simpleFields[slug] ?? [];
       if (slug === 'percentile-rank-calculator') {
         const below = number('below'), equal = number('equal'), total = number('total');
         if (!finite(below, equal, total) || ![below, equal, total].every(Number.isInteger) || below < 0 || equal < 1 || total < 1 || below + equal > total) return showError();
-        return show([[labels.result, format(100 * (below + 0.5 * equal) / total, 2)]]);
+        const items = [[labels.result, format(100 * (below + 0.5 * equal) / total, 2)]];
+        if (labels.belowPercent) items.push([labels.belowPercent, `${format(100 * below / total, 2)}%`]);
+        if (labels.tiedPercent) items.push([labels.tiedPercent, `${format(100 * equal / total, 2)}%`]);
+        if (labels.abovePercent) items.push([labels.abovePercent, `${format(100 * (total - below - equal) / total, 2)}%`]);
+        return show(items);
       }
       if (slug === 'z-score-calculator') {
         const score = number('score'), mean = number('mean'), sd = number('sd');

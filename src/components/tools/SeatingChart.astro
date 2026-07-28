@@ -132,7 +132,8 @@ const { labels } = Astro.props;
 
     function csvCell(value) {
       const text = String(value ?? '');
-      return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+      const protectedText = /^[=+\-@\t\r\n\uFF1D\uFF0B\uFF0D\uFF20]/.test(text) ? `\t${text}` : text;
+      return `"${protectedText.replace(/"/g, '""')}"`;
     }
 
     function downloadCsv(filename, rows) {
@@ -153,15 +154,38 @@ const { labels } = Astro.props;
         .filter(Boolean);
     }
 
+    function duplicateNames(items) {
+      const seen = new Set();
+      return items.filter((name) => {
+        const key = name.normalize('NFKC').toLocaleLowerCase();
+        if (seen.has(key)) return true;
+        seen.add(key);
+        return false;
+      });
+    }
+
     function setError(message) {
       error.textContent = message;
       error.hidden = !message;
     }
 
+    function secureIndex(length) {
+      if (!Number.isInteger(length) || length < 1 || !globalThis.crypto?.getRandomValues) {
+        throw new Error(labels.cryptoError);
+      }
+      const range = 0x100000000;
+      const limit = range - (range % length);
+      const values = new Uint32Array(1);
+      do {
+        globalThis.crypto.getRandomValues(values);
+      } while (values[0] >= limit);
+      return values[0] % length;
+    }
+
     function shuffle(items) {
       const copy = [...items];
       for (let index = copy.length - 1; index > 0; index -= 1) {
-        const swapIndex = Math.floor(Math.random() * (index + 1));
+        const swapIndex = secureIndex(index + 1);
         [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
       }
       return copy;
@@ -213,17 +237,34 @@ const { labels } = Astro.props;
         setError(labels.emptyListError);
         return;
       }
+      if (duplicateNames(list).length) {
+        setError(labels.duplicateListError);
+        return;
+      }
       if (list.length > grid.rows * grid.columns) {
         setError(labels.tooManyStudents);
         return;
       }
-      const arranged = shuffleInput.checked ? shuffle(list) : list;
+      let arranged;
+      try {
+        arranged = shuffleInput.checked ? shuffle(list) : list;
+      } catch {
+        setError(labels.cryptoError);
+        return;
+      }
       const seats = Array.from({ length: grid.rows * grid.columns }, (_, index) => arranged[index] || '');
       latestGrid = { seats, rows: grid.rows, columns: grid.columns };
       latestText = Array.from({ length: grid.rows }, (_, row) =>
         Array.from({ length: grid.columns }, (_, column) => seats[seatIndex(row, column, grid.rows, grid.columns)] || labels.emptySeat).join('\t'),
       ).join('\n');
       render(seats, grid.rows, grid.columns);
+      setError('');
+    }
+
+    function invalidate() {
+      latestText = '';
+      latestGrid = null;
+      output.innerHTML = `<p class="empty-state">${labels.emptyResult}</p>`;
       setError('');
     }
 
@@ -251,7 +292,7 @@ const { labels } = Astro.props;
     root.querySelector('[data-reset]')?.addEventListener('click', reset);
     root.querySelector('[data-print]')?.addEventListener('click', () => {
       if (!latestText) generate();
-      window.print();
+      if (latestText) window.print();
     });
     root.querySelector('[data-export]')?.addEventListener('click', () => {
       if (!latestGrid) generate();
@@ -265,7 +306,7 @@ const { labels } = Astro.props;
           csvRows.push([row + 1, column + 1, seatNumber, name]);
         }
       }
-      downloadCsv('seating-chart.csv', csvRows);
+      downloadCsv(labels.csvFilename || 'seating-chart.csv', csvRows);
     });
     root.querySelector('[data-copy]')?.addEventListener('click', async () => {
       if (!latestText) generate();
@@ -277,6 +318,11 @@ const { labels } = Astro.props;
         window.prompt(labels.copy, latestText);
       }
     });
+    namesInput.addEventListener('input', invalidate);
+    rowsInput.addEventListener('input', invalidate);
+    columnsInput.addEventListener('input', invalidate);
+    fillModeInput.addEventListener('change', invalidate);
+    shuffleInput.addEventListener('change', invalidate);
   });
 </script>
 

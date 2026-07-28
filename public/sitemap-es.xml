@@ -113,6 +113,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/grade-average/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/herramientas/calculadora-rango-percentil/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/percentile-rank-calculator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/percentile-rank-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-rango-percentil/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/percentile-rank-calculator/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/calculadora-sueldo-neto/</loc>
     <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/net-salary/" />
@@ -287,6 +295,22 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/pie-chart-maker/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-grafico-circular/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pie-chart-maker/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/crear-grupos-clase/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/group-generator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/group-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-grupos-clase/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/group-generator/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/crear-plano-asientos-aula/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/seating-chart/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/seating-chart/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-plano-asientos-aula/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/seating-chart/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/cronometro-online/</loc>

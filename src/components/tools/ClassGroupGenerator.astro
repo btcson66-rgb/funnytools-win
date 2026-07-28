@@ -35,6 +35,7 @@ const { labels } = Astro.props;
   <div class="actions">
     <button class="btn go" type="button" data-generate>{labels.generate}</button>
     <button class="btn" type="button" data-copy>{labels.copyAll}</button>
+    <button class="btn" type="button" data-export>{labels.exportCsv}</button>
     <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
   </div>
   <p class="form-error" data-error role="alert" hidden></p>
@@ -117,6 +118,24 @@ const { labels } = Astro.props;
     const summary = root.querySelector('[data-summary]');
     const toast = root.querySelector('.toast');
     let latestText = '';
+    let latestGroups = [];
+
+    function csvCell(value) {
+      const text = String(value ?? '');
+      const protectedText = /^[=+\-@\t\r\n\uFF1D\uFF0B\uFF0D\uFF20]/.test(text) ? `\t${text}` : text;
+      return `"${protectedText.replace(/"/g, '""')}"`;
+    }
+
+    function downloadCsv(filename, csvRows) {
+      const csv = csvRows.map((row) => row.map(csvCell).join(',')).join('\r\n');
+      const blob = new Blob([String.fromCharCode(0xfeff) + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = filename;
+      anchor.click();
+      URL.revokeObjectURL(url);
+    }
 
     function entries() {
       return namesInput.value
@@ -125,15 +144,38 @@ const { labels } = Astro.props;
         .filter(Boolean);
     }
 
+    function duplicateNames(items) {
+      const seen = new Set();
+      return items.filter((name) => {
+        const key = name.normalize('NFKC').toLocaleLowerCase();
+        if (seen.has(key)) return true;
+        seen.add(key);
+        return false;
+      });
+    }
+
     function setError(message) {
       error.textContent = message;
       error.hidden = !message;
     }
 
+    function secureIndex(length) {
+      if (!Number.isInteger(length) || length < 1 || !globalThis.crypto?.getRandomValues) {
+        throw new Error(labels.cryptoError);
+      }
+      const range = 0x100000000;
+      const limit = range - (range % length);
+      const values = new Uint32Array(1);
+      do {
+        globalThis.crypto.getRandomValues(values);
+      } while (values[0] >= limit);
+      return values[0] % length;
+    }
+
     function shuffle(items) {
       const copy = [...items];
       for (let index = copy.length - 1; index > 0; index -= 1) {
-        const swapIndex = Math.floor(Math.random() * (index + 1));
+        const swapIndex = secureIndex(index + 1);
         [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
       }
       return copy;
@@ -183,29 +225,47 @@ const { labels } = Astro.props;
         setError(labels.emptyError);
         return;
       }
-      const working = shuffleInput.checked ? shuffle(list) : [...list];
+      if (duplicateNames(list).length) {
+        setError(labels.duplicateListError);
+        return;
+      }
       const mode = modeInput.value;
       let groups = [];
-      if (mode === 'size') {
-        const size = Number(sizeInput.value);
-        if (!Number.isInteger(size) || size < 1 || size > list.length) {
-          setError(labels.invalidSizeError);
-          return;
+      try {
+        const working = shuffleInput.checked ? shuffle(list) : [...list];
+        if (mode === 'size') {
+          const size = Number(sizeInput.value);
+          if (!Number.isInteger(size) || size < 1 || size > list.length) {
+            setError(labels.invalidSizeError);
+            return;
+          }
+          groups = generateBySize(working, size);
+        } else {
+          const count = Number(countInput.value);
+          if (!Number.isInteger(count) || count < 1 || count > list.length) {
+            setError(labels.invalidCountError);
+            return;
+          }
+          groups = generateByCount(working, count);
         }
-        groups = generateBySize(working, size);
-      } else {
-        const count = Number(countInput.value);
-        if (!Number.isInteger(count) || count < 1 || count > list.length) {
-          setError(labels.invalidCountError);
-          return;
-        }
-        groups = generateByCount(working, count);
+      } catch {
+        setError(labels.cryptoError);
+        return;
       }
+      latestGroups = groups;
       latestText = groups
         .map((group, index) => `${groupLabel(index)}\n${group.map((member) => `- ${member}`).join('\n')}`)
         .join('\n\n');
       summary.textContent = `${labels.summary}: ${groups.length}`;
       render(groups);
+      setError('');
+    }
+
+    function invalidate() {
+      latestText = '';
+      latestGroups = [];
+      summary.textContent = `${labels.summary}: 0`;
+      output.innerHTML = `<p class="empty-state">${labels.emptyResult}</p>`;
       setError('');
     }
 
@@ -222,6 +282,7 @@ const { labels } = Astro.props;
       sizeInput.value = '4';
       shuffleInput.checked = true;
       latestText = '';
+      latestGroups = [];
       summary.textContent = `${labels.summary}: 0`;
       output.innerHTML = `<p class="empty-state">${labels.emptyResult}</p>`;
       setError('');
@@ -249,6 +310,20 @@ const { labels } = Astro.props;
         window.prompt(labels.copyAll, latestText);
       }
     });
+    root.querySelector('[data-export]')?.addEventListener('click', () => {
+      if (!latestGroups.length) generate();
+      if (!latestGroups.length) return;
+      const csvRows = [[labels.csvGroup, labels.csvMember]];
+      latestGroups.forEach((group, index) => {
+        group.forEach((member) => csvRows.push([groupLabel(index), member]));
+      });
+      downloadCsv(labels.csvFilename || 'class-groups.csv', csvRows);
+    });
+    namesInput.addEventListener('input', invalidate);
+    countInput.addEventListener('input', invalidate);
+    sizeInput.addEventListener('input', invalidate);
+    shuffleInput.addEventListener('change', invalidate);
+    modeInput.addEventListener('change', invalidate);
     syncMode();
   });
 </script>

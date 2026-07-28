@@ -1,0 +1,23 @@
+---
+import ClassGroupGenerator from '../../../components/tools/ClassGroupGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishClassGroupGenerator,
+  spanishClassGroupGeneratorReview,
+} from '../../../i18n/expansion/es-tools-24';
+---
+
+<ExpansionToolLayout
+  routeKey="group-generator"
+  canonicalPath="/es/herramientas/crear-grupos-clase/"
+  content={spanishClassGroupGenerator}
+  categoryLabel="Aula y aprendizaje cooperativo"
+  review={spanishClassGroupGeneratorReview}
+  relatedTool={{
+    name: 'Crear plano de asientos del aula',
+    description: 'Convierte una lista en una cuadrícula por filas y columnas.',
+    href: '/es/herramientas/crear-plano-asientos-aula/',
+  }}
+>
+  <ClassGroupGenerator labels={spanishClassGroupGenerator.labels} />
+</ExpansionToolLayout>

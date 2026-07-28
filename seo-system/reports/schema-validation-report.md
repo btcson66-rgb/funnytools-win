@@ -1,6 +1,6 @@
 # Schema Validation Report
 
-Generated: 2026-07-20T21:44:45.685Z
+Generated: 2026-07-28T09:59:19.083Z
 
 ## Critical
 
@@ -12,4 +12,4 @@ Generated: 2026-07-20T21:44:45.685Z
 
 ## Suggestion
 
-- Parsed 992 JSON-LD block(s).
+- Parsed 1324 JSON-LD block(s).

@@ -1,0 +1,23 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishPercentileRank,
+  spanishPercentileRankReview,
+} from '../../../i18n/expansion/es-tools-24';
+---
+
+<ExpansionToolLayout
+  routeKey="percentile-rank-calculator"
+  canonicalPath="/es/herramientas/calculadora-rango-percentil/"
+  content={spanishPercentileRank}
+  categoryLabel="Estadística educativa"
+  review={spanishPercentileRankReview}
+  relatedTool={{
+    name: 'Calculadora de desviación estándar',
+    description: 'Calcula medidas de centro y dispersión para una serie numérica.',
+    href: '/es/herramientas/calculadora-desviacion-estandar/',
+  }}
+>
+  <EducationStatisticsCalculator labels={spanishPercentileRank.labels} slug="percentile-rank-calculator" />
+</ExpansionToolLayout>

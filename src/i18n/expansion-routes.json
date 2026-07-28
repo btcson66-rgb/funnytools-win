@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-23",
+  "activeBatch": "es-24",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -691,6 +691,36 @@
         "zh": "/tools/random-student-picker/",
         "en": "/en/tools/random-student-picker/",
         "es": "/es/herramientas/selector-aleatorio-alumnos/"
+      }
+    },
+    {
+      "key": "seating-chart",
+      "type": "tool",
+      "batch": "es-24",
+      "paths": {
+        "zh": "/tools/seating-chart/",
+        "en": "/en/tools/seating-chart/",
+        "es": "/es/herramientas/crear-plano-asientos-aula/"
+      }
+    },
+    {
+      "key": "group-generator",
+      "type": "tool",
+      "batch": "es-24",
+      "paths": {
+        "zh": "/tools/group-generator/",
+        "en": "/en/tools/group-generator/",
+        "es": "/es/herramientas/crear-grupos-clase/"
+      }
+    },
+    {
+      "key": "percentile-rank-calculator",
+      "type": "tool",
+      "batch": "es-24",
+      "paths": {
+        "zh": "/tools/percentile-rank-calculator/",
+        "en": "/en/tools/percentile-rank-calculator/",
+        "es": "/es/herramientas/calculadora-rango-percentil/"
       }
     }
   ]

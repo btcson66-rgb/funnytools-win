@@ -159,7 +159,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/tools/flowchart/</loc>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/flowchart/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/flowchart/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-diagrama-flujo/" />
@@ -185,6 +185,7 @@
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/group-generator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/group-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-grupos-clase/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/group-generator/" />
   </url>
   <url>
@@ -374,6 +375,7 @@
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/percentile-rank-calculator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/percentile-rank-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-rango-percentil/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/percentile-rank-calculator/" />
   </url>
   <url>
@@ -434,7 +436,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/tools/random-student-picker/</loc>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/random-student-picker/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-student-picker/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/selector-aleatorio-alumnos/" />
@@ -485,11 +487,12 @@
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/seating-chart/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/seating-chart/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-plano-asientos-aula/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/seating-chart/" />
   </url>
   <url>
     <loc>https://funnytools.win/tools/sketchpad/</loc>
-    <lastmod>2026-07-27</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/sketchpad/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/sketchpad/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/pizarra-dibujo-online/" />

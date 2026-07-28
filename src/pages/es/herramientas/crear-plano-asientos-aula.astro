@@ -1,0 +1,23 @@
+---
+import SeatingChart from '../../../components/tools/SeatingChart.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishSeatingChart,
+  spanishSeatingChartReview,
+} from '../../../i18n/expansion/es-tools-24';
+---
+
+<ExpansionToolLayout
+  routeKey="seating-chart"
+  canonicalPath="/es/herramientas/crear-plano-asientos-aula/"
+  content={spanishSeatingChart}
+  categoryLabel="Aula y organización"
+  review={spanishSeatingChartReview}
+  relatedTool={{
+    name: 'Creador de grupos para clase',
+    description: 'Divide una lista por número de equipos o por personas en cada grupo.',
+    href: '/es/herramientas/crear-grupos-clase/',
+  }}
+>
+  <SeatingChart labels={spanishSeatingChart.labels} />
+</ExpansionToolLayout>
