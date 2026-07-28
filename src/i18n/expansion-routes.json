@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-27",
+  "activeBatch": "es-28",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -811,6 +811,36 @@
         "zh": "/tools/apa-7-report-generator/",
         "en": "/en/tools/apa-7-report-generator/",
         "es": "/es/herramientas/generador-informe-apa-7/"
+      }
+    },
+    {
+      "key": "spss-result-interpreter",
+      "type": "tool",
+      "batch": "es-28",
+      "paths": {
+        "zh": "/tools/spss-result-interpreter/",
+        "en": "/en/tools/spss-result-interpreter/",
+        "es": "/es/herramientas/interpretar-resultados-spss/"
+      }
+    },
+    {
+      "key": "gpa-calculator",
+      "type": "tool",
+      "batch": "es-28",
+      "paths": {
+        "zh": "/tools/gpa-calculator/",
+        "en": "/en/tools/gpa-calculator/",
+        "es": "/es/herramientas/calculadora-gpa/"
+      }
+    },
+    {
+      "key": "graduate-statistics-report-toolkit",
+      "type": "workflow",
+      "batch": "es-28",
+      "paths": {
+        "zh": "/workflows/graduate-statistics-report-toolkit/",
+        "en": "/en/workflows/graduate-statistics-report-toolkit/",
+        "es": "/es/flujos/informe-estadistico-investigacion/"
       }
     }
   ]

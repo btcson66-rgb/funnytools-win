@@ -1,0 +1,20 @@
+---
+import SpssResultInterpreter from '../../../components/tools/SpssResultInterpreter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishSpssInterpreter, spanishSpssReview } from '../../../i18n/expansion/es-tools-28';
+---
+
+<ExpansionToolLayout
+  routeKey="spss-result-interpreter"
+  canonicalPath="/es/herramientas/interpretar-resultados-spss/"
+  content={spanishSpssInterpreter}
+  categoryLabel="Investigación y estadística"
+  review={spanishSpssReview}
+  relatedTool={{
+    name: 'Generador de resultados APA 7',
+    description: 'Convierte valores ya comprobados en un borrador de frase estadística.',
+    href: '/es/herramientas/generador-informe-apa-7/',
+  }}
+>
+  <SpssResultInterpreter labels={spanishSpssInterpreter.labels} slug="spss-result-interpreter" />
+</ExpansionToolLayout>

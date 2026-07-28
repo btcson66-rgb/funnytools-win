@@ -7,6 +7,13 @@ const { labels } = Astro.props;
 ---
 
 <section class="tool-widget card" data-gpa-tool data-labels={JSON.stringify(labels)}>
+  <label class="scale-select">
+    <span>{labels.scale ?? 'GPA scale'}</span>
+    <select data-scale>
+      <option value="4.3">{labels.scale43 ?? '4.3 scale'}</option>
+      <option value="4.0">{labels.scale40 ?? '4.0 scale'}</option>
+    </select>
+  </label>
   <div class="gpa-rows" data-rows></div>
   <div class="actions">
     <button class="btn" type="button" data-add>{labels.addRow}</button>
@@ -14,6 +21,7 @@ const { labels } = Astro.props;
   </div>
   <div class="stats-grid gpa-stats" aria-live="polite">
     <div><span>{labels.totalCredits}</span><strong data-credits>0.00</strong></div>
+    <div><span>{labels.qualityPoints ?? 'Quality points'}</span><strong data-quality-points>0.00</strong></div>
     <div><span>{labels.gpa}</span><strong data-gpa>--</strong></div>
   </div>
   <p class="note" data-note>{labels.scaleNote}</p>
@@ -25,6 +33,13 @@ const { labels } = Astro.props;
     display: grid;
     gap: 10px;
     margin-bottom: 14px;
+  }
+
+  .scale-select {
+    display: grid;
+    gap: 6px;
+    max-width: 320px;
+    margin-bottom: 16px;
   }
 
   .gpa-row {
@@ -39,7 +54,7 @@ const { labels } = Astro.props;
   }
 
   .gpa-stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     margin-top: 18px;
   }
 
@@ -67,10 +82,11 @@ const { labels } = Astro.props;
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
     const rows = root.querySelector('[data-rows]');
     const creditsOutput = root.querySelector('[data-credits]');
+    const qualityPointsOutput = root.querySelector('[data-quality-points]');
     const gpaOutput = root.querySelector('[data-gpa]');
     const note = root.querySelector('[data-note]');
     const toast = root.querySelector('.toast');
-    const gradePoints = {
+    const gradePoints43 = {
       'A+': 4.3,
       A: 4.0,
       'A-': 3.7,
@@ -83,10 +99,26 @@ const { labels } = Astro.props;
       D: 1.0,
       F: 0,
     };
+    const gradePoints40 = { ...gradePoints43, 'A+': 4.0 };
     let latest = '';
 
+    function selectedScale() {
+      const element = root.querySelector('[data-scale]');
+      return element instanceof HTMLSelectElement && element.value === '4.0' ? '4.0' : '4.3';
+    }
+
+    function gradePoints() {
+      return selectedScale() === '4.0' ? gradePoints40 : gradePoints43;
+    }
+
+    function scaleNote() {
+      return selectedScale() === '4.0'
+        ? (labels.scaleNote40 ?? labels.scaleNote)
+        : (labels.scaleNote43 ?? labels.scaleNote);
+    }
+
     function gradeOptions(selected = 'A') {
-      return Object.keys(gradePoints)
+      return Object.keys(gradePoints43)
         .map((grade) => `<option value="${grade}"${grade === selected ? ' selected' : ''}>${grade}</option>`)
         .join('');
     }
@@ -122,19 +154,28 @@ const { labels } = Astro.props;
     function calculate() {
       let totalCredits = 0;
       let totalPoints = 0;
+      let invalidRows = false;
+      const points = gradePoints();
       Array.from(rows.querySelectorAll('.gpa-row')).forEach((row) => {
-        const credits = Number(row.querySelector('[data-credits-input]').value);
+        const rawCredits = row.querySelector('[data-credits-input]').value.trim();
+        const credits = rawCredits === '' ? Number.NaN : Number(rawCredits);
         const grade = row.querySelector('[data-grade]').value;
-        if (!Number.isFinite(credits) || credits <= 0 || !(grade in gradePoints)) return;
+        if (!Number.isFinite(credits) || credits <= 0 || !(grade in points)) {
+          if (rawCredits !== '') invalidRows = true;
+          return;
+        }
         totalCredits += credits;
-        totalPoints += credits * gradePoints[grade];
+        totalPoints += credits * points[grade];
       });
       const gpa = totalCredits > 0 ? totalPoints / totalCredits : null;
       creditsOutput.textContent = totalCredits.toFixed(2);
+      qualityPointsOutput.textContent = totalPoints.toFixed(2);
       gpaOutput.textContent = gpa === null ? '--' : gpa.toFixed(2);
-      note.textContent = totalCredits > 0 ? labels.scaleNote : labels.noValidRows;
+      note.textContent = totalCredits > 0
+        ? `${scaleNote()}${invalidRows ? ` ${labels.ignoredInvalidRows ?? ''}` : ''}`.trim()
+        : labels.noValidRows;
       latest = totalCredits > 0
-        ? `${labels.totalCredits}: ${totalCredits.toFixed(2)}\n${labels.gpa}: ${gpa.toFixed(2)}\n${labels.scaleNote}`
+        ? `${labels.scale ?? 'GPA scale'}: ${selectedScale()}\n${labels.totalCredits}: ${totalCredits.toFixed(2)}\n${labels.qualityPoints ?? 'Quality points'}: ${totalPoints.toFixed(2)}\n${labels.gpa}: ${gpa.toFixed(2)}\n${scaleNote()}`
         : '';
     }
 
@@ -142,6 +183,7 @@ const { labels } = Astro.props;
       createRow();
       calculate();
     });
+    root.querySelector('[data-scale]')?.addEventListener('change', calculate);
     root.querySelector('[data-copy]')?.addEventListener('click', async () => {
       if (!latest) return;
       try {

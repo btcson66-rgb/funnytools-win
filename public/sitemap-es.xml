@@ -17,6 +17,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/about-tools/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/flujos/informe-estadistico-investigacion/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/graduate-statistics-report-toolkit/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/graduate-statistics-report-toolkit/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/informe-estadistico-investigacion/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/workflows/graduate-statistics-report-toolkit/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/herramientas/</loc>
     <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/" />
@@ -63,6 +71,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/business-days/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-dias-laborables/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/business-days/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/calculadora-gpa/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/gpa-calculator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/gpa-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-gpa/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/gpa-calculator/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/calculadora-hipoteca/</loc>
@@ -511,6 +527,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/uuid-generator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-uuid-v4/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/uuid-generator/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/herramientas/interpretar-resultados-spss/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/spss-result-interpreter/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/spss-result-interpreter/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/interpretar-resultados-spss/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/spss-result-interpreter/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/herramientas/ordenar-lineas-texto/</loc>

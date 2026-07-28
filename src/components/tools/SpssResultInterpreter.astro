@@ -39,8 +39,8 @@ const { labels, slug } = Astro.props;
 
   <div class="two-way-fields" data-panel="twoway" hidden>
     <div class="form-grid">
-      <label><span>{labels.factorA}</span><input data-field="factorA" type="text" value="teaching method" /></label>
-      <label><span>{labels.factorB}</span><input data-field="factorB" type="text" value="grade level" /></label>
+      <label><span>{labels.factorA}</span><input data-field="factorA" type="text" value={labels.defaultFactorA ?? 'teaching method'} /></label>
+      <label><span>{labels.factorB}</span><input data-field="factorB" type="text" value={labels.defaultFactorB ?? 'grade level'} /></label>
     </div>
     {['interaction', 'mainA', 'mainB'].map((section) => (
       <fieldset>
@@ -80,7 +80,8 @@ const { labels, slug } = Astro.props;
   document.querySelectorAll('[data-spss-helper]').forEach((root) => {
     if (!(root instanceof HTMLElement)) return;
     const labels = JSON.parse(root.dataset.labels || '{}');
-    const lang = document.documentElement.lang === 'en' ? 'en' : 'zh';
+    const documentLang = document.documentElement.lang;
+    const lang = documentLang === 'es' ? 'es' : documentLang === 'en' ? 'en' : 'zh';
     const error = root.querySelector('[data-error]');
     const output = root.querySelector('[data-output]');
     const toast = root.querySelector('.toast');
@@ -91,10 +92,14 @@ const { labels, slug } = Astro.props;
       const element = field(key);
       return element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement || element instanceof HTMLSelectElement ? element.value.trim() : '';
     };
-    const num = (key) => Number(text(key));
+    const num = (key) => {
+      const value = text(key);
+      return value === '' ? Number.NaN : Number(value);
+    };
     const validP = (p) => Number.isFinite(p) && p >= 0 && p <= 1;
     const esc = (value) => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
     const fmt = (value, digits = 2) => Number(value).toFixed(digits);
+    const fmtDf = (value) => Number(value).toFixed(2).replace(/\.?0+$/, '');
     const fmtBounded = (value) => fmt(value).replace(/^0\./, '.').replace(/^-0\./, '-.');
     const fmtP = (p) => p < 0.001 ? 'p < .001' : `p = ${Number(p).toFixed(3).replace(/^0\./, '.')}`;
     const sig = (p) => p < 0.05;
@@ -116,6 +121,7 @@ const { labels, slug } = Astro.props;
         error.hidden = false;
       }
       if (output instanceof HTMLElement) output.hidden = true;
+      latest = '';
     }
 
     function render(parts) {
@@ -128,40 +134,63 @@ const { labels, slug } = Astro.props;
 
     function interpretTTest() {
       const leveneP = num('leveneP'), t = num('t'), df = num('df'), p = num('sig2');
-      if (!validP(leveneP) || !validP(p) || !Number.isFinite(t) || !Number.isFinite(df)) return showError();
+      if (!validP(leveneP) || !validP(p) || !Number.isFinite(t) || !Number.isFinite(df) || df <= 0) return showError();
       const row = leveneP >= 0.05 ? 'Equal variances assumed' : 'Equal variances not assumed';
       const decision = sig(p) ? labels.significant : labels.notSignificant;
-      const meanDiffText = Number.isFinite(num('meanDiff')) ? (lang === 'en' ? ` The mean difference was ${fmt(num('meanDiff'))}.` : `平均差為 ${fmt(num('meanDiff'))}。`) : '';
+      const meanDiffText = Number.isFinite(num('meanDiff'))
+        ? (lang === 'es' ? ` La diferencia de medias fue ${fmt(num('meanDiff'))}.` : lang === 'en' ? ` The mean difference was ${fmt(num('meanDiff'))}.` : `平均差為 ${fmt(num('meanDiff'))}。`)
+        : '';
       const means = Number.isFinite(num('groupA')) && Number.isFinite(num('groupB'))
-        ? (lang === 'en' ? ` Group means were ${fmt(num('groupA'))} and ${fmt(num('groupB'))}.` : `兩組平均數分別為 ${fmt(num('groupA'))} 與 ${fmt(num('groupB'))}。`)
+        ? (lang === 'es' ? ` Las medias introducidas fueron ${fmt(num('groupA'))} y ${fmt(num('groupB'))}.` : lang === 'en' ? ` Group means were ${fmt(num('groupA'))} and ${fmt(num('groupB'))}.` : `兩組平均數分別為 ${fmt(num('groupA'))} 與 ${fmt(num('groupB'))}。`)
         : '';
       render([
-        { title: labels.rowGuide, body: lang === 'en' ? `Because Levene's ${fmtP(leveneP)}, read the "${row}" row.` : `因 Levene ${fmtP(leveneP)}，請讀取 SPSS 的「${row}」列。` },
-        { title: labels.apaSentence, body: lang === 'en' ? `An independent-samples t test was ${decision}, t(${fmt(df, 0)}) = ${fmt(t)}, ${fmtP(p)}.${meanDiffText}` : `獨立樣本 t 檢定結果${decision}，t(${fmt(df, 0)}) = ${fmt(t)}，${fmtP(p)}。${meanDiffText}` },
-        { title: labels.explanation, body: lang === 'en' ? `The result is ${decision}. Use this row for the t, df, and Sig.(2-tailed) values.${means}` : `此結果${decision}。報告 t、df 與 Sig.(2-tailed) 時請使用該列數值。${means}` },
+        {
+          title: labels.rowGuide,
+          body: lang === 'es'
+            ? `Como Levene da ${fmtP(leveneP)}, lee la fila «${row}». Conservamos el rótulo original de SPSS para que puedas localizarla sin ambigüedad.`
+            : lang === 'en' ? `Because Levene's ${fmtP(leveneP)}, read the "${row}" row.` : `因 Levene ${fmtP(leveneP)}，請讀取 SPSS 的「${row}」列。`,
+        },
+        {
+          title: labels.apaSentence,
+          body: lang === 'es'
+            ? `La prueba t de muestras independientes produjo un resultado ${decision}, t(${fmtDf(df)}) = ${fmt(t)}, ${fmtP(p)}.${meanDiffText}`
+            : lang === 'en' ? `An independent-samples t test was ${decision}, t(${fmtDf(df)}) = ${fmt(t)}, ${fmtP(p)}.${meanDiffText}` : `獨立樣本 t 檢定結果${decision}，t(${fmtDf(df)}) = ${fmt(t)}，${fmtP(p)}。${meanDiffText}`,
+        },
+        {
+          title: labels.explanation,
+          body: lang === 'es'
+            ? `El resultado es ${decision}. Toma t, gl y Sig. (bilateral) de la misma fila seleccionada; no mezcles valores de las dos filas.${means}`
+            : lang === 'en' ? `The result is ${decision}. Use this row for the t, df, and Sig.(2-tailed) values.${means}` : `此結果${decision}。報告 t、df 與 Sig.(2-tailed) 時請使用該列數值。${means}`,
+        },
       ]);
     }
 
     function interpretAnova() {
       const f = num('anovaF'), df1 = num('dfBetween'), df2 = num('dfWithin'), p = num('anovaP');
-      if (!Number.isFinite(f) || !Number.isFinite(df1) || !Number.isFinite(df2) || !validP(p)) return showError();
+      const eta = num('eta');
+      if (!Number.isFinite(f) || f < 0 || !Number.isFinite(df1) || df1 <= 0 || !Number.isFinite(df2) || df2 <= 0 || !validP(p) || (Number.isFinite(eta) && (eta < 0 || eta > 1))) return showError();
       const decision = sig(p) ? labels.significant : labels.notSignificant;
-      const etaText = Number.isFinite(num('eta')) ? `, η² = ${fmtBounded(num('eta'))}` : '';
+      const etaText = Number.isFinite(eta) ? `, η² = ${fmtBounded(eta)}` : '';
       const postHoc = text('postHoc');
       const followUp = sig(p)
-        ? (lang === 'en' ? 'Because the omnibus test is significant, check post hoc tests or planned contrasts to identify where groups differ.' : '整體檢定達顯著，請接著查看事後比較或預先規劃對比，確認哪些組別不同。')
-        : (lang === 'en' ? 'Because the omnibus test is not significant, post hoc comparisons are usually not interpreted as primary evidence.' : '整體檢定未達顯著時，通常不把事後比較作為主要證據解讀。');
+        ? (lang === 'es' ? 'Como la prueba ómnibus es significativa, revisa comparaciones post hoc o contrastes planificados para localizar las diferencias.' : lang === 'en' ? 'Because the omnibus test is significant, check post hoc tests or planned contrasts to identify where groups differ.' : '整體檢定達顯著，請接著查看事後比較或預先規劃對比，確認哪些組別不同。')
+        : (lang === 'es' ? 'Como la prueba ómnibus no es significativa, las comparaciones post hoc no suelen interpretarse como evidencia principal.' : lang === 'en' ? 'Because the omnibus test is not significant, post hoc comparisons are usually not interpreted as primary evidence.' : '整體檢定未達顯著時，通常不把事後比較作為主要證據解讀。');
       render([
-        { title: labels.apaSentence, body: lang === 'en' ? `A one-way ANOVA was ${decision}, F(${fmt(df1, 0)}, ${fmt(df2, 0)}) = ${fmt(f)}, ${fmtP(p)}${etaText}.` : `單因子 ANOVA 結果${decision}，F(${fmt(df1, 0)}, ${fmt(df2, 0)}) = ${fmt(f)}，${fmtP(p)}${etaText}。` },
-        { title: labels.explanation, body: `${followUp}${postHoc ? (lang === 'en' ? ` Post hoc note: ${postHoc}` : `事後比較摘要：${postHoc}`) : ''}` },
+        {
+          title: labels.apaSentence,
+          body: lang === 'es'
+            ? `El ANOVA de un factor produjo un resultado ${decision}, F(${fmtDf(df1)}, ${fmtDf(df2)}) = ${fmt(f)}, ${fmtP(p)}${etaText}.`
+            : lang === 'en' ? `A one-way ANOVA was ${decision}, F(${fmtDf(df1)}, ${fmtDf(df2)}) = ${fmt(f)}, ${fmtP(p)}${etaText}.` : `單因子 ANOVA 結果${decision}，F(${fmtDf(df1)}, ${fmtDf(df2)}) = ${fmt(f)}，${fmtP(p)}${etaText}。`,
+        },
+        { title: labels.explanation, body: `${followUp}${postHoc ? (lang === 'es' ? ` Resumen post hoc introducido: ${postHoc}` : lang === 'en' ? ` Post hoc note: ${postHoc}` : `事後比較摘要：${postHoc}`) : ''}` },
       ]);
     }
 
     function effectLine(prefix, key) {
       const f = num(`${key}F`), df1 = num(`${key}Df1`), df2 = num(`${key}Df2`), p = num(`${key}P`);
-      if (!Number.isFinite(f) || !Number.isFinite(df1) || !Number.isFinite(df2) || !validP(p)) return null;
+      if (!Number.isFinite(f) || f < 0 || !Number.isFinite(df1) || df1 <= 0 || !Number.isFinite(df2) || df2 <= 0 || !validP(p)) return null;
       const decision = sig(p) ? labels.significant : labels.notSignificant;
-      return { decision, p, text: `${prefix}: F(${fmt(df1, 0)}, ${fmt(df2, 0)}) = ${fmt(f)}, ${fmtP(p)} (${decision})` };
+      return { decision, p, text: `${prefix}: F(${fmtDf(df1)}, ${fmtDf(df2)}) = ${fmt(f)}, ${fmtP(p)} (${decision})` };
     }
 
     function interpretTwoWay() {
@@ -170,8 +199,8 @@ const { labels, slug } = Astro.props;
       const mainB = effectLine(labels.mainB, 'mainB');
       if (!interaction || !mainA || !mainB) return showError();
       const guide = sig(interaction.p)
-        ? (lang === 'en' ? `The interaction is significant, so interpret simple main effects before making broad claims about ${text('factorA') || 'Factor A'} or ${text('factorB') || 'Factor B'}.` : `交互作用達顯著，應優先解讀單純主要效果，再謹慎討論「${text('factorA') || '因素 A'}」或「${text('factorB') || '因素 B'}」的整體主要效果。`)
-        : (lang === 'en' ? `The interaction is not significant, so the main effects can usually be interpreted more directly if they match the research design.` : `交互作用未達顯著時，通常可依研究設計較直接解讀主要效果。`);
+        ? (lang === 'es' ? `La interacción es significativa: interpreta efectos simples antes de formular afirmaciones generales sobre ${text('factorA') || 'el factor A'} o ${text('factorB') || 'el factor B'}.` : lang === 'en' ? `The interaction is significant, so interpret simple main effects before making broad claims about ${text('factorA') || 'Factor A'} or ${text('factorB') || 'Factor B'}.` : `交互作用達顯著，應優先解讀單純主要效果，再謹慎討論「${text('factorA') || '因素 A'}」或「${text('factorB') || '因素 B'}」的整體主要效果。`)
+        : (lang === 'es' ? 'La interacción no es significativa; los efectos principales pueden interpretarse de forma más directa si esa lectura encaja con el diseño.' : lang === 'en' ? `The interaction is not significant, so the main effects can usually be interpreted more directly if they match the research design.` : `交互作用未達顯著時，通常可依研究設計較直接解讀主要效果。`);
       render([
         { title: labels.apaSentence, body: [interaction.text, mainA.text, mainB.text].join('; ') + '.' },
         { title: labels.explanation, body: guide },
@@ -184,6 +213,12 @@ const { labels, slug } = Astro.props;
       return interpretTwoWay();
     }
 
+    function invalidate() {
+      latest = '';
+      if (output instanceof HTMLElement) output.hidden = true;
+      if (error instanceof HTMLElement) error.hidden = true;
+    }
+
     function reset() {
       root.querySelectorAll('input, textarea').forEach((element) => { element.value = ''; });
       if (output instanceof HTMLElement) output.hidden = true;
@@ -192,6 +227,9 @@ const { labels, slug } = Astro.props;
     }
 
     field('section')?.addEventListener('change', () => { updateVisible(); interpret(); });
+    root.querySelectorAll('input, textarea').forEach((element) => {
+      element.addEventListener('input', invalidate);
+    });
     root.querySelector('[data-interpret]')?.addEventListener('click', interpret);
     root.querySelector('[data-reset]')?.addEventListener('click', reset);
     root.querySelector('[data-copy]')?.addEventListener('click', async () => {

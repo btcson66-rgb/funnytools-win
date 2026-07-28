@@ -1,0 +1,20 @@
+---
+import GpaCalculator from '../../../components/tools/GpaCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { spanishGpaCalculator, spanishGpaReview } from '../../../i18n/expansion/es-tools-28';
+---
+
+<ExpansionToolLayout
+  routeKey="gpa-calculator"
+  canonicalPath="/es/herramientas/calculadora-gpa/"
+  content={spanishGpaCalculator}
+  categoryLabel="Estudios y calificaciones"
+  review={spanishGpaReview}
+  relatedTool={{
+    name: 'Calculadora de promedio de notas',
+    description: 'Calcula una media numérica simple o ponderada sin convertir a letras GPA.',
+    href: '/es/herramientas/calculadora-promedio-notas/',
+  }}
+>
+  <GpaCalculator labels={spanishGpaCalculator.labels} />
+</ExpansionToolLayout>
