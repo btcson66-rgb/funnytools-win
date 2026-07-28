@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-31",
+  "activeBatch": "es-32",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -931,6 +931,36 @@
         "zh": "/guides/percentage-shortcuts-guide/",
         "en": "/en/guides/percentage-shortcuts-guide/",
         "es": "/es/guias/calcular-porcentajes-rapido/"
+      }
+    },
+    {
+      "key": "classroom-random-group-guide",
+      "type": "guide",
+      "batch": "es-32",
+      "paths": {
+        "zh": "/guides/classroom-random-group-guide/",
+        "en": "/en/guides/classroom-random-group-guide/",
+        "es": "/es/guias/grupos-aleatorios-clase/"
+      }
+    },
+    {
+      "key": "classroom-random-picker-guide",
+      "type": "guide",
+      "batch": "es-32",
+      "paths": {
+        "zh": "/guides/classroom-random-picker-guide/",
+        "en": "/en/guides/classroom-random-picker-guide/",
+        "es": "/es/guias/selector-aleatorio-alumnos/"
+      }
+    },
+    {
+      "key": "classroom-timer-guide",
+      "type": "guide",
+      "batch": "es-32",
+      "paths": {
+        "zh": "/guides/classroom-timer-guide/",
+        "en": "/en/guides/classroom-timer-guide/",
+        "es": "/es/guias/temporizador-clase/"
       }
     }
   ]
