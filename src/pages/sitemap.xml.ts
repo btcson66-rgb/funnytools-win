@@ -4,6 +4,7 @@ import { absoluteUrl } from '../lib/url';
 import { escapeXml, sitemapLastmod } from '../lib/sitemap';
 
 const childSitemaps = [
+  { path: '/sitemap-pages.xml' },
   { path: '/sitemap-tools.xml' },
   { path: '/sitemap-guides.xml' },
   { path: '/sitemap-workflows.xml' },
