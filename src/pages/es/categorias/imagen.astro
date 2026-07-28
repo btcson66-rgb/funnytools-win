@@ -1,0 +1,12 @@
+---
+import ExpansionInfoLayout from '../../../layouts/ExpansionInfoLayout.astro';
+import { spanishImageCategory } from '../../../i18n/expansion/es-categories-36';
+---
+
+<ExpansionInfoLayout
+  currentKey="category-image"
+  canonicalPath="/es/categorias/imagen/"
+  content={spanishImageCategory}
+  pageType="CollectionPage"
+  breadcrumbParent={{ name: 'Todas las herramientas', path: '/es/herramientas/' }}
+/>

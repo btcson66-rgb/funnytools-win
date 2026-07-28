@@ -1,0 +1,12 @@
+---
+import ExpansionInfoLayout from '../../../layouts/ExpansionInfoLayout.astro';
+import { spanishPdfCategory } from '../../../i18n/expansion/es-categories-36';
+---
+
+<ExpansionInfoLayout
+  currentKey="category-pdf"
+  canonicalPath="/es/categorias/pdf/"
+  content={spanishPdfCategory}
+  pageType="CollectionPage"
+  breadcrumbParent={{ name: 'Todas las herramientas', path: '/es/herramientas/' }}
+/>

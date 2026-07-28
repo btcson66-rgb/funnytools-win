@@ -1,0 +1,12 @@
+---
+import ExpansionInfoLayout from '../../../layouts/ExpansionInfoLayout.astro';
+import { spanishTextCategory } from '../../../i18n/expansion/es-categories-36';
+---
+
+<ExpansionInfoLayout
+  currentKey="category-text"
+  canonicalPath="/es/categorias/texto/"
+  content={spanishTextCategory}
+  pageType="CollectionPage"
+  breadcrumbParent={{ name: 'Todas las herramientas', path: '/es/herramientas/' }}
+/>

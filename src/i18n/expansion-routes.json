@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-35",
+  "activeBatch": "es-36",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1051,6 +1051,36 @@
         "zh": "/guides/word-count-essay-limits-guide/",
         "en": "/en/guides/word-count-essay-limits-guide/",
         "es": "/es/guias/limite-palabras-ensayos-examenes/"
+      }
+    },
+    {
+      "key": "category-pdf",
+      "type": "category",
+      "batch": "es-36",
+      "paths": {
+        "zh": "/category/pdf/",
+        "en": "/en/category/pdf/",
+        "es": "/es/categorias/pdf/"
+      }
+    },
+    {
+      "key": "category-image",
+      "type": "category",
+      "batch": "es-36",
+      "paths": {
+        "zh": "/category/image/",
+        "en": "/en/category/image/",
+        "es": "/es/categorias/imagen/"
+      }
+    },
+    {
+      "key": "category-text",
+      "type": "category",
+      "batch": "es-36",
+      "paths": {
+        "zh": "/category/text/",
+        "en": "/en/category/text/",
+        "es": "/es/categorias/texto/"
       }
     }
   ]
