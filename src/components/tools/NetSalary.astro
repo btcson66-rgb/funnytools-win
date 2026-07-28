@@ -22,19 +22,19 @@ const { labels } = Astro.props;
     </label>
     <label>
       <span>{labels.laborRate}</span>
-      <input data-labor-rate type="number" min="0" step="0.01" value="2.4" />
+      <input data-labor-rate type="number" min="0" max="100" step="0.01" value="2.4" />
     </label>
     <label>
       <span>{labels.healthRate}</span>
-      <input data-health-rate type="number" min="0" step="0.01" value="1.55" />
+      <input data-health-rate type="number" min="0" max="100" step="0.01" value="1.55" />
     </label>
     <label>
       <span>{labels.pensionRate}</span>
-      <input data-pension-rate type="number" min="0" step="0.1" value="0" />
+      <input data-pension-rate type="number" min="0" max="100" step="0.1" value="0" />
     </label>
     <label>
       <span>{labels.taxRate}</span>
-      <input data-tax-rate type="number" min="0" step="0.1" value="5" />
+      <input data-tax-rate type="number" min="0" max="100" step="0.1" value="5" />
     </label>
   </div>
 
@@ -102,7 +102,7 @@ const { labels } = Astro.props;
     let latestText = '';
 
     function money(value) {
-      return new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(Math.round(value));
+      return new Intl.NumberFormat(document.documentElement.lang || undefined, { maximumFractionDigits: 0 }).format(Math.round(value));
     }
 
     function readNumber(input) {
@@ -117,7 +117,14 @@ const { labels } = Astro.props;
 
     function calculate() {
       const values = Object.fromEntries(Object.entries(inputs).map(([key, input]) => [key, readNumber(input)]));
-      if (Object.values(values).some((value) => !Number.isFinite(value) || value < 0)) {
+      const rateKeys = ['laborRate', 'healthRate', 'pensionRate', 'taxRate'];
+      const invalid = Object.values(values).some((value) => !Number.isFinite(value) || value < 0)
+        || rateKeys.some((key) => values[key] > 100);
+      if (invalid) {
+        Object.values(outputs).forEach((output) => {
+          output.textContent = '-';
+        });
+        latestText = '';
         setError(labels.invalidInput);
         return;
       }

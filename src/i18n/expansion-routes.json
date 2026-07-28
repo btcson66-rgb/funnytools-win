@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-27",
-  "activeBatch": "es-19",
+  "activeBatch": "es-20",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -571,6 +571,36 @@
         "zh": "/tools/business-days/",
         "en": "/en/tools/business-days/",
         "es": "/es/herramientas/calculadora-dias-laborables/"
+      }
+    },
+    {
+      "key": "break-reminder",
+      "type": "tool",
+      "batch": "es-20",
+      "paths": {
+        "zh": "/tools/break-reminder/",
+        "en": "/en/tools/break-reminder/",
+        "es": "/es/herramientas/recordatorio-descansos/"
+      }
+    },
+    {
+      "key": "net-salary",
+      "type": "tool",
+      "batch": "es-20",
+      "paths": {
+        "zh": "/tools/net-salary/",
+        "en": "/en/tools/net-salary/",
+        "es": "/es/herramientas/calculadora-sueldo-neto/"
+      }
+    },
+    {
+      "key": "overtime-pay",
+      "type": "tool",
+      "batch": "es-20",
+      "paths": {
+        "zh": "/tools/overtime-pay/",
+        "en": "/en/tools/overtime-pay/",
+        "es": "/es/herramientas/calculadora-horas-extra/"
       }
     }
   ]

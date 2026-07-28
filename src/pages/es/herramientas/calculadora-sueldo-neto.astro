@@ -1,0 +1,23 @@
+---
+import NetSalary from '../../../components/tools/NetSalary.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishNetSalary,
+  spanishNetSalaryReview,
+} from '../../../i18n/expansion/es-tools-20';
+---
+
+<ExpansionToolLayout
+  routeKey="net-salary"
+  canonicalPath="/es/herramientas/calculadora-sueldo-neto/"
+  content={spanishNetSalary}
+  categoryLabel="Dinero y trabajo"
+  review={spanishNetSalaryReview}
+  relatedTool={{
+    name: 'Calculadora de horas extra',
+    description: 'Estima bloques de horas con una tarifa y multiplicadores editables.',
+    href: '/es/herramientas/calculadora-horas-extra/',
+  }}
+>
+  <NetSalary labels={spanishNetSalary.labels} />
+</ExpansionToolLayout>

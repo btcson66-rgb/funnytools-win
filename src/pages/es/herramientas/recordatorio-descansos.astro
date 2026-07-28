@@ -1,0 +1,23 @@
+---
+import BreakReminder from '../../../components/tools/BreakReminder.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishBreakReminder,
+  spanishBreakReminderReview,
+} from '../../../i18n/expansion/es-tools-20';
+---
+
+<ExpansionToolLayout
+  routeKey="break-reminder"
+  canonicalPath="/es/herramientas/recordatorio-descansos/"
+  content={spanishBreakReminder}
+  categoryLabel="Tiempo y bienestar digital"
+  review={spanishBreakReminderReview}
+  relatedTool={{
+    name: 'Temporizador online',
+    description: 'Configura una cuenta atrás por duración o hasta una fecha y hora.',
+    href: '/es/herramientas/temporizador-online/',
+  }}
+>
+  <BreakReminder labels={spanishBreakReminder.labels} />
+</ExpansionToolLayout>

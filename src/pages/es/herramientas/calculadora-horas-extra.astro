@@ -1,0 +1,23 @@
+---
+import OvertimePay from '../../../components/tools/OvertimePay.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  spanishOvertimePay,
+  spanishOvertimePayReview,
+} from '../../../i18n/expansion/es-tools-20';
+---
+
+<ExpansionToolLayout
+  routeKey="overtime-pay"
+  canonicalPath="/es/herramientas/calculadora-horas-extra/"
+  content={spanishOvertimePay}
+  categoryLabel="Dinero y trabajo"
+  review={spanishOvertimePayReview}
+  relatedTool={{
+    name: 'Calculadora de sueldo neto',
+    description: 'Prueba un salario bruto con porcentajes y deducciones editables.',
+    href: '/es/herramientas/calculadora-sueldo-neto/',
+  }}
+>
+  <OvertimePay labels={spanishOvertimePay.labels} />
+</ExpansionToolLayout>
