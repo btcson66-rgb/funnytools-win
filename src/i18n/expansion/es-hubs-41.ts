@@ -308,7 +308,7 @@ export const spanishWorkflowIndex: SpanishInfoPage = {
   seoDescription: 'Flujos de trabajo en español para combinar calculadoras, guías y herramientas de navegador con controles de datos, privacidad y entrega.',
   keywords: ['flujos de trabajo herramientas online', 'proceso informe estadístico', 'flujo de trabajo docente', 'comprobar documentos PDF', 'herramientas sin registro'],
   eyebrow: 'Una secuencia completa vale más que un botón aislado',
-  intro: 'Los flujos de trabajo conectan varias decisiones: preparar la entrada, ejecutar la herramienta adecuada, revisar la salida y llevarla al destino. Este índice ofrece una ruta completa ya publicada y mapas prácticos para tareas frecuentes mientras se amplía la colección.',
+  intro: 'Los flujos de trabajo conectan varias decisiones: preparar la entrada, ejecutar la herramienta adecuada, revisar la salida y llevarla al destino. Este índice reúne rutas completas para estadística, aula, documentos, contenido y decisiones cotidianas, además de mapas prácticos que ayudan a ordenar tareas frecuentes.',
   directAnswer: [
     'Un buen flujo define el resultado final antes de abrir una herramienta. Después ordena entradas, controles y entregables. En estadística, parte de la pregunta y termina con una tabla o párrafo reproducible. En el aula, protege datos, prueba la dinámica y prepara una alternativa. En documentos, conserva originales, transforma copias y abre el archivo final.',
     'FunnyTools no automatiza decisiones profesionales ni oculta pasos críticos. Cada herramienta puede ahorrar una operación, pero tú debes comprobar la regla, el contexto y la entrega. Las rutas siguientes enlazan únicamente páginas disponibles; no prometen funciones futuras ni presentan un ejemplo como norma universal.',
@@ -380,6 +380,18 @@ export const spanishWorkflowIndex: SpanishInfoPage = {
       ],
     },
     {
+      heading: 'Flujo para decisiones cotidianas de bajo riesgo',
+      paragraphs: [
+        'Antes de usar una ruleta o un sorteo, elimina opciones inseguras, inviables o inaceptables. Define si la selección se repite, si una opción se retira y qué ocurre cuando el resultado deja de estar disponible. El azar rompe un empate; no decide qué alternativas deberían existir.',
+        'La ruta combina selector de comida, dos opciones, ruleta, nombres, dados y temporizador. Está limitada a actividades reversibles y cotidianas. Salud, seguridad, finanzas, asuntos legales, empleo o evaluación requieren evidencia y responsabilidad, no una selección aleatoria.',
+      ],
+      links: [
+        { label: 'Cómo tomar una decisión cotidiana', href: '/es/flujos/decisiones-cotidianas/', description: 'Filtros, reglas, ruleta, sorteo, dados, tiempo y comprobación del resultado.' },
+        { label: 'Decidir entre dos opciones', href: '/es/herramientas/decidir-entre-dos-opciones/', description: 'Desempate 50/50 cuando ambas alternativas ya son aceptables.' },
+        { label: 'Ruleta aleatoria', href: '/es/herramientas/ruleta-aleatoria/', description: 'Selección visible entre tres o más opciones revisadas.' },
+      ],
+    },
+    {
       heading: 'Mapa de trabajo para datos de texto y CSV',
       paragraphs: [
         'Guarda una copia original, identifica codificación, delimitador, cabecera, separador decimal y filas irregulares. Prueba con pocas filas antes de convertir todo el archivo. Si una celda empieza con =, +, - o @, considera el riesgo de fórmula al abrirla en una hoja de cálculo.',
@@ -415,7 +427,7 @@ export const spanishWorkflowIndex: SpanishInfoPage = {
   ],
   faq: [
     { q: '¿Qué diferencia hay entre una herramienta y un flujo de trabajo?', a: 'La herramienta ejecuta una operación. El flujo incluye preparación, decisión, comprobación y entrega, y puede combinar varias herramientas.' },
-    { q: '¿Todos los mapas de esta página son flujos publicados completos?', a: 'No. El informe estadístico tiene una página completa; los demás son mapas operativos con enlaces reales que se ampliarán sin prometer rutas inexistentes.' },
+    { q: '¿Todos los mapas de esta página son flujos publicados completos?', a: 'Las rutas enlazadas como flujo tienen una página completa; otros bloques son mapas operativos con enlaces reales. La página distingue ambos formatos sin prometer rutas inexistentes.' },
     { q: '¿Por qué debo conservar el original?', a: 'Una transformación puede perder metadatos, páginas, firmas, formato o precisión. El original permite repetir y comparar.' },
     { q: '¿Puedo usar datos reales del alumnado?', a: 'Minimiza y seudonimiza. Sigue la política del centro y evita nombres o diagnósticos cuando un código o ejemplo ficticio sea suficiente.' },
     { q: '¿Cómo compruebo un cálculo?', a: 'Usa un caso pequeño conocido, revisa fórmula y unidades, conserva valores sin redondear y compara con la fuente o software exigido.' },

@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-30",
-  "activeBatch": "es-46",
+  "activeBatch": "es-47",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1378,6 +1378,16 @@
       "paths": {
         "zh": "/guides/file-size-units-guide/",
         "es": "/es/guias/kb-mb-gb-tb-conversion/"
+      }
+    },
+    {
+      "key": "daily-decision-toolkit",
+      "type": "workflow",
+      "batch": "es-47",
+      "paths": {
+        "zh": "/workflows/daily-decision-toolkit/",
+        "en": "/en/workflows/daily-decision-toolkit/",
+        "es": "/es/flujos/decisiones-cotidianas/"
       }
     }
   ]

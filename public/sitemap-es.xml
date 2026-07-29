@@ -161,6 +161,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/workflows/creator-social-toolkit/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/flujos/decisiones-cotidianas/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/daily-decision-toolkit/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/daily-decision-toolkit/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/decisiones-cotidianas/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/workflows/daily-decision-toolkit/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/flujos/documentos-oficina/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/office-document-toolkit/" />

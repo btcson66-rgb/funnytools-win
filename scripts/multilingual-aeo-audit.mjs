@@ -199,6 +199,7 @@ for (const route of spanishRoutes) {
     'multiplication-fact-fluency-guide': ['fluidez', 'tablas de multiplicar', 'precisión'],
     'password-strength-basics-guide': ['contraseña', 'gestor de contraseñas', 'autenticación'],
     'file-size-units-guide': ['kb', 'mib', 'bytes'],
+    'daily-decision-toolkit': ['cómo tomar una decisión', 'ruleta', 'bajo riesgo'],
   };
   const requiredTerms = requiredTermsByKey[route.key] ?? ['herramientas', 'navegador', 'comprobar'];
 
