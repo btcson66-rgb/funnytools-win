@@ -1,0 +1,24 @@
+---
+import ThisOrThat from '../../../components/tools/ThisOrThat.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchThisOrThat,
+  frenchThisOrThatReview,
+} from '../../../i18n/expansion/fr-tools-17';
+---
+
+<ExpansionToolLayout
+  routeKey="this-or-that"
+  canonicalPath="/fr/outils/choisir-entre-deux-options/"
+  content={frenchThisOrThat}
+  categoryLabel="Hasard et tirages"
+  review={frenchThisOrThatReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Roue aléatoire',
+    description: 'Ajoutez trois options ou davantage lorsque le choix ne se limite plus à A ou B.',
+    href: '/fr/outils/roue-aleatoire/',
+  }}
+>
+  <ThisOrThat labels={frenchThisOrThat.labels} />
+</ExpansionToolLayout>

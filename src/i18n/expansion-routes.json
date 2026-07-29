@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-16",
+  "activeLocaleBatch": "fr-17",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -681,30 +681,42 @@
       "key": "random-group-generator",
       "type": "tool",
       "batch": "es-17",
+      "localeBatches": {
+        "fr": "fr-17"
+      },
       "paths": {
         "zh": "/tools/random-group-generator/",
         "en": "/en/tools/random-group-generator/",
-        "es": "/es/herramientas/generador-grupos-aleatorios/"
+        "es": "/es/herramientas/generador-grupos-aleatorios/",
+        "fr": "/fr/outils/generateur-groupes-aleatoires/"
       }
     },
     {
       "key": "dice-roller",
       "type": "tool",
       "batch": "es-17",
+      "localeBatches": {
+        "fr": "fr-17"
+      },
       "paths": {
         "zh": "/tools/dice-roller/",
         "en": "/en/tools/dice-roller/",
-        "es": "/es/herramientas/tirar-dados-online/"
+        "es": "/es/herramientas/tirar-dados-online/",
+        "fr": "/fr/outils/lancer-des-en-ligne/"
       }
     },
     {
       "key": "this-or-that",
       "type": "tool",
       "batch": "es-17",
+      "localeBatches": {
+        "fr": "fr-17"
+      },
       "paths": {
         "zh": "/tools/this-or-that/",
         "en": "/en/tools/this-or-that/",
-        "es": "/es/herramientas/decidir-entre-dos-opciones/"
+        "es": "/es/herramientas/decidir-entre-dos-opciones/",
+        "fr": "/fr/outils/choisir-entre-deux-options/"
       }
     },
     {

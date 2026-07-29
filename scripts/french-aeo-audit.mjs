@@ -126,6 +126,9 @@ const requiredTermsByKey = {
   'random-number-picker': ['générateur de nombres aléatoires', 'sans répétition', 'crypto.getrandomvalues', 'intervalle'],
   'random-name-picker': ['tirage au sort de noms', 'une entrée par ligne', 'retirer après le tirage', 'minimisation'],
   'random-wheel': ['roue aléatoire', 'roue de la chance', 'secteur', 'animation'],
+  'random-group-generator': ['générateur de groupes aléatoires', 'effectifs', 'fisher–yates', 'groupes de besoins'],
+  'dice-roller': ['lancer de dés en ligne', 'dé virtuel', 'd20', 'probabilité'],
+  'this-or-that': ['choisir entre deux options', '50/50', 'pile ou face', 'consentement'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

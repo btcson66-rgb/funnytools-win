@@ -1,0 +1,24 @@
+---
+import DiceRoller from '../../../components/tools/DiceRoller.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchDiceRoller,
+  frenchDiceRollerReview,
+} from '../../../i18n/expansion/fr-tools-17';
+---
+
+<ExpansionToolLayout
+  routeKey="dice-roller"
+  canonicalPath="/fr/outils/lancer-des-en-ligne/"
+  content={frenchDiceRoller}
+  categoryLabel="Hasard et tirages"
+  review={frenchDiceRollerReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Générateur de nombres aléatoires',
+    description: 'Tirez des entiers dans n’importe quel intervalle lorsque les faces standard ne correspondent pas au besoin.',
+    href: '/fr/outils/generateur-nombres-aleatoires/',
+  }}
+>
+  <DiceRoller labels={frenchDiceRoller.labels} />
+</ExpansionToolLayout>

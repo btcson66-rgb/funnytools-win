@@ -1,0 +1,24 @@
+---
+import RandomGroupGenerator from '../../../components/tools/RandomGroupGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchRandomGroupGenerator,
+  frenchRandomGroupGeneratorReview,
+} from '../../../i18n/expansion/fr-tools-17';
+---
+
+<ExpansionToolLayout
+  routeKey="random-group-generator"
+  canonicalPath="/fr/outils/generateur-groupes-aleatoires/"
+  content={frenchRandomGroupGenerator}
+  categoryLabel="Hasard et tirages"
+  review={frenchRandomGroupGeneratorReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Tirage au sort de noms',
+    description: 'Sélectionnez une ou plusieurs entrées lorsque vous ne souhaitez pas former des équipes complètes.',
+    href: '/fr/outils/tirage-au-sort-noms/',
+  }}
+>
+  <RandomGroupGenerator labels={frenchRandomGroupGenerator.labels} />
+</ExpansionToolLayout>
