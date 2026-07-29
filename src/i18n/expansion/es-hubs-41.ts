@@ -203,6 +203,7 @@ export const spanishGuideIndex: SpanishInfoPage = {
         { label: 'Crear grupos aleatorios en clase', href: '/es/guias/grupos-aleatorios-clase/', description: 'Tamaño de grupos, sobrantes, repetición y verificación.' },
         { label: 'Selector aleatorio de alumnos', href: '/es/guias/selector-aleatorio-alumnos/', description: 'Participación, modo sin repetir y alternativas de privacidad.' },
         { label: 'Temporizador para el aula', href: '/es/guias/temporizador-clase/', description: 'Bloques visibles, avisos, pausas y plan alternativo.' },
+        { label: 'Fluidez con las tablas de multiplicar', href: '/es/guias/fluidez-tablas-multiplicar/', description: 'Comprensión, estrategias, práctica espaciada y precisión antes de velocidad.' },
         { label: 'Agrupamientos equitativos', href: '/es/guias/agrupamientos-equitativos-aula/', description: 'Cuándo el azar no basta y qué criterios revisar después.' },
         { label: 'Ruleta y sorteos para clase', href: '/es/guias/ruleta-sorteos-clase/', description: 'Probabilidad, entradas duplicadas y comunicación del resultado.' },
       ],
@@ -238,6 +239,18 @@ export const spanishGuideIndex: SpanishInfoPage = {
         { label: 'A4 o US Letter para imprimir', href: '/es/guias/a4-o-letter-para-imprimir/', description: 'Tamaño de papel, márgenes, escalado y requisitos del destino.' },
         { label: 'Unir PDF sin subir archivos', href: '/es/guias/unir-pdf-sin-subir-archivos/', description: 'Privacidad local, orden, memoria, firmas y revisión del archivo final.' },
         { label: 'Comprimir fotos para email', href: '/es/guias/comprimir-fotos-para-email/', description: 'Dimensiones, peso, calidad y comprobación del mensaje recibido.' },
+        { label: 'KB, MB, GB y TB sin confusiones', href: '/es/guias/kb-mb-gb-tb-conversion/', description: 'Bits, bytes, decimal, binario, límites de archivo y tiempo de transferencia.' },
+      ],
+    },
+    {
+      heading: 'Contraseñas, autenticación y límites de una herramienta local',
+      paragraphs: [
+        'Una contraseña fuerte no depende solo de añadir símbolos: necesita longitud, unicidad, generación impredecible y almacenamiento en un gestor fiable. La autenticación multifactor y las claves de acceso añaden protección, pero la recuperación de la cuenta también debe quedar bajo control.',
+        'Un generador local ayuda a crear una cadena, no evalúa filtraciones ni configura la cuenta. La guía separa generación, almacenamiento, cambio por incidente y prácticas que pueden empeorar la seguridad, como reutilizar o enviar credenciales por canales inseguros.',
+      ],
+      links: [
+        { label: 'Cómo crear una contraseña segura', href: '/es/guias/contrasena-segura-fuerte/', description: 'Longitud, frases de paso, gestores, MFA, passkeys y respuesta ante filtraciones.' },
+        { label: 'Generador de contraseñas seguras', href: '/es/herramientas/generador-contrasenas-seguras/', description: 'Genera localmente una opción aleatoria que después debes guardar de forma segura.' },
       ],
     },
     {

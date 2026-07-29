@@ -255,6 +255,8 @@
   <url>
     <loc>https://funnytools.win/guides/file-size-units-guide/</loc>
     <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/file-size-units-guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/kb-mb-gb-tb-conversion/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/image-compression-email-guide/</loc>
@@ -275,10 +277,14 @@
   <url>
     <loc>https://funnytools.win/guides/multiplication-fact-fluency-guide/</loc>
     <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/multiplication-fact-fluency-guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/fluidez-tablas-multiplicar/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/password-strength-basics-guide/</loc>
     <lastmod>2026-07-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/password-strength-basics-guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/contrasena-segura-fuerte/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/percentage-shortcuts-guide/</loc>

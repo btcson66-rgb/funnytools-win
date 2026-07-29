@@ -12,6 +12,7 @@ import { absoluteUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/ur
 import { breadcrumbJsonLd, webPageJsonLd } from '../../../lib/seo';
 import { t } from '../../../i18n/ui';
 import { buildGuideValueReview, CONTENT_REVIEWED_AT } from '../../../lib/contentValue';
+import { expansionRouteByPath } from '../../../i18n/expansionRoutes';
 
 export function getStaticPaths() {
   return seoGuides.flatMap((guide) => {
@@ -93,7 +94,8 @@ const relatedWorkflowViews = guide.relatedWorkflowIds
   .map((slug) => workflows.find((candidate) => candidate.slug === slug))
   .filter((candidate) => candidate != null && isWorkflowAvailableInLocale(candidate, lang))
   .map((candidate) => viewWorkflow(candidate, lang));
-const hasAlternates = sourceGuide.locales.includes('zh') && sourceGuide.locales.includes('en');
+const hasSourceAlternates = sourceGuide.locales.includes('zh') && sourceGuide.locales.includes('en');
+const hasAlternates = hasSourceAlternates || Boolean(expansionRouteByPath(guidePath));
 const faqItems = guide.faq.map((item) => ({ q: item.question, a: item.answer }));
 const valueReview = buildGuideValueReview(lang, guide);
 const effectiveUpdatedAt = CONTENT_REVIEWED_AT;
@@ -133,7 +135,7 @@ const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guide
   keywords={guide.targetKeywords}
   type="article"
   alternateSegments={['guides', guide.slug]}
-  altLang={hasAlternates ? localeUrlPair('guides', guide.slug) : undefined}
+  altLang={hasSourceAlternates ? localeUrlPair('guides', guide.slug) : undefined}
   hasAlternates={hasAlternates}
   jsonLd={[pageLd, articleLd, faqLd, breadcrumbLd]}
 >

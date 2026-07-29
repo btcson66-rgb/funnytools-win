@@ -11,21 +11,35 @@ interface Props {
 
 const { lang, segments = [] } = Astro.props;
 const ui = t(lang);
-const otherLang: Locale = lang === 'zh' ? 'en' : 'zh';
-const label = otherLang === 'zh' ? '繁中' : 'English';
 const expansionRoute = expansionRouteByPath(Astro.url.pathname);
-const spanishPath = expansionRoute?.paths.es;
+const otherLang: Locale = lang === 'zh' ? 'en' : 'zh';
+const languageLinks = expansionRoute
+  ? [
+      { code: 'zh', label: '繁中', path: expansionRoute.paths.zh },
+      { code: 'en', label: 'English', path: expansionRoute.paths.en },
+      { code: 'es', label: 'Español', path: expansionRoute.paths.es },
+    ].filter((item) => item.path && item.code !== lang)
+  : [{
+      code: otherLang,
+      label: otherLang === 'zh' ? '繁中' : 'English',
+      path: localePath(otherLang, ...segments),
+    }];
 ---
 
 <span class="language-switches">
-  <a class="lang-switch" href={localePath(otherLang, ...segments)} aria-label={ui.languageSwitch} data-language-switch data-target-lang={otherLang}>
-    {label}
-  </a>
-  {spanishPath && (
-    <a class="lang-switch" href={spanishPath} aria-label={ui.languageSwitch} data-language-switch data-target-lang="es">
-      Español
+  {languageLinks.map((item) => (
+    <a
+      class="lang-switch"
+      href={item.path}
+      hreflang={item.code === 'zh' ? 'zh-TW' : item.code}
+      lang={item.code === 'zh' ? 'zh-Hant' : item.code}
+      aria-label={ui.languageSwitch}
+      data-language-switch
+      data-target-lang={item.code}
+    >
+      {item.label}
     </a>
-  )}
+  ))}
 </span>
 
 <style>

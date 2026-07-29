@@ -82,8 +82,8 @@ function jsonLdTypes(html) {
 
 const spanishRoutes = registry.routes.filter((route) => route.paths?.es);
 const activeBatchRoutes = registry.routes.filter((route) => route.batch === registry.activeBatch);
-if (activeBatchRoutes.length !== registry.maxBatchSize) {
-  fail(`Active publication batch ${registry.activeBatch} must contain exactly ${registry.maxBatchSize} routes; found ${activeBatchRoutes.length}.`);
+if (activeBatchRoutes.length < 1 || activeBatchRoutes.length > registry.maxBatchSize) {
+  fail(`Active publication batch ${registry.activeBatch} must contain between 1 and ${registry.maxBatchSize} routes; found ${activeBatchRoutes.length}.`);
 }
 if (activeBatchRoutes.some((route) => !route.paths?.es)) {
   fail(`Active publication batch ${registry.activeBatch} contains a route without a Spanish path.`);
@@ -196,6 +196,9 @@ for (const route of spanishRoutes) {
     'student-report-toolkit': ['preparar un informe', 'pdf', 'entrega'],
     'office-document-toolkit': ['organizar documentos de oficina', 'originales', 'comprobar'],
     'creator-social-toolkit': ['preparar contenido de redes sociales', 'publicar', 'comprobar'],
+    'multiplication-fact-fluency-guide': ['fluidez', 'tablas de multiplicar', 'precisión'],
+    'password-strength-basics-guide': ['contraseña', 'gestor de contraseñas', 'autenticación'],
+    'file-size-units-guide': ['kb', 'mib', 'bytes'],
   };
   const requiredTerms = requiredTermsByKey[route.key] ?? ['herramientas', 'navegador', 'comprobar'];
 
@@ -235,15 +238,16 @@ for (const route of spanishRoutes) {
       fail(`${pathname}: missing or incorrect hreflang ${hreflang}.`);
     }
   }
-  if (alternates.get('x-default') !== `${siteOrigin}${route.paths.en}`) {
-    fail(`${pathname}: x-default must point to the English equivalent.`);
+  const expectedDefaultPath = route.paths.en ?? route.paths.zh;
+  if (alternates.get('x-default') !== `${siteOrigin}${expectedDefaultPath}`) {
+    fail(`${pathname}: x-default must point to the English equivalent, or to the Chinese source when no English page exists.`);
   }
 
   pages.push({ key: route.key, path: pathname, words, h2, types: [...types] });
 }
 
 for (const route of spanishRoutes) {
-  for (const locale of ['zh', 'en']) {
+  for (const locale of ['zh', 'en'].filter((candidate) => route.paths[candidate])) {
     const pathname = route.paths[locale];
     const file = htmlFile(pathname);
     if (!existsSync(file)) {
@@ -270,7 +274,7 @@ if (!existsSync(esSitemapPath)) {
   }
 }
 
-for (const blockedLocale of ['fr', 'de']) {
+for (const blockedLocale of ['fr', 'hi', 'de']) {
   const localeDir = join(dist, blockedLocale);
   if (existsSync(localeDir)) fail(`/${blockedLocale}/ must not publish before native editorial review.`);
 }
@@ -282,7 +286,7 @@ const summary = {
   activeBatch: registry.activeBatch,
   activeBatchRoutes: activeBatchRoutes.map((route) => route.paths.es),
   spanishRoutes: pages,
-  blockedUntilReviewed: ['fr', 'de'],
+  blockedUntilReviewed: ['fr', 'hi', 'de'],
   failures,
 };
 

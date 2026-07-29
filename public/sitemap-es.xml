@@ -249,6 +249,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-compression-email-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/guias/contrasena-segura-fuerte/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/password-strength-basics-guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/contrasena-segura-fuerte/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/guias/fluidez-tablas-multiplicar/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/multiplication-fact-fluency-guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/fluidez-tablas-multiplicar/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/guias/fotos-a-pdf-desde-movil/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/photos-to-pdf-phone-guide/" />
@@ -279,6 +291,12 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/two-way-anova-interaction-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/interaccion-anova-dos-factores/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/two-way-anova-interaction-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/guias/kb-mb-gb-tb-conversion/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/file-size-units-guide/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/kb-mb-gb-tb-conversion/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/guias/limite-palabras-ensayos-examenes/</loc>

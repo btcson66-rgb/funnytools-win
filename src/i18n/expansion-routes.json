@@ -1,6 +1,6 @@
 {
-  "reviewedAt": "2026-07-29",
-  "activeBatch": "es-45",
+  "reviewedAt": "2026-07-30",
+  "activeBatch": "es-46",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1351,6 +1351,33 @@
         "zh": "/workflows/creator-social-toolkit/",
         "en": "/en/workflows/creator-social-toolkit/",
         "es": "/es/flujos/contenido-redes-sociales/"
+      }
+    },
+    {
+      "key": "multiplication-fact-fluency-guide",
+      "type": "guide",
+      "batch": "es-46",
+      "paths": {
+        "zh": "/guides/multiplication-fact-fluency-guide/",
+        "es": "/es/guias/fluidez-tablas-multiplicar/"
+      }
+    },
+    {
+      "key": "password-strength-basics-guide",
+      "type": "guide",
+      "batch": "es-46",
+      "paths": {
+        "zh": "/guides/password-strength-basics-guide/",
+        "es": "/es/guias/contrasena-segura-fuerte/"
+      }
+    },
+    {
+      "key": "file-size-units-guide",
+      "type": "guide",
+      "batch": "es-46",
+      "paths": {
+        "zh": "/guides/file-size-units-guide/",
+        "es": "/es/guias/kb-mb-gb-tb-conversion/"
       }
     }
   ]

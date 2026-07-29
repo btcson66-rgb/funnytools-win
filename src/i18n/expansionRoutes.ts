@@ -1,11 +1,11 @@
 import routeRegistry from './expansion-routes.json';
 
-export type ExpansionLocale = 'es' | 'fr' | 'de';
+export type ExpansionLocale = 'es' | 'fr' | 'de' | 'hi';
 export type RouteLocale = 'zh' | 'en' | ExpansionLocale;
 
 interface ExpansionRoute {
   key: string;
-  type: 'home' | 'tool' | 'page';
+  type: 'home' | 'tool' | 'page' | 'guide' | 'workflow' | 'category';
   batch: string;
   paths: Partial<Record<RouteLocale, string>>;
 }
@@ -17,6 +17,7 @@ const hreflangByLocale: Record<RouteLocale, string> = {
   es: 'es',
   fr: 'fr',
   de: 'de',
+  hi: 'hi',
 };
 
 function normalizePath(pathname: string): string {
@@ -50,10 +51,10 @@ export function routeAlternates(pathname: string) {
       hreflang: hreflangByLocale[locale],
       href: path,
     }));
-  const englishPath = route.paths.en;
+  const defaultPath = route.paths.en ?? route.paths.zh;
 
-  return englishPath
-    ? [...links, { hreflang: 'x-default', href: englishPath }]
+  return defaultPath
+    ? [...links, { hreflang: 'x-default', href: defaultPath }]
     : links;
 }
 
