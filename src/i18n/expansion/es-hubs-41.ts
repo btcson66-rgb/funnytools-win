@@ -320,6 +320,7 @@ export const spanishWorkflowIndex: SpanishInfoPage = {
         'Entrega una tabla con datos de referencia, resultado sin redondear, resultado presentado y fuente del baremo. Si existe una tabla oficial, registra cualquier diferencia y utiliza el valor oficial.',
       ],
       links: [
+        { label: 'Flujo para calcular nota de oposición docente', href: '/es/flujos/calcular-nota-oposicion-docente/', description: 'Convocatoria, pruebas, méritos, pesos, T, Z, PR y comparación oficial.' },
         { label: 'Centro de estadística educativa', href: '/es/estadisticas-educativas/', description: 'Explica cómo elegir la medida y conservar la trazabilidad.' },
         { label: 'Guía de puntuación Z', href: '/es/guias/puntuacion-z-interpretacion/', description: 'Primera etapa para situar una puntuación respecto a su grupo.' },
         { label: 'Guía de rango percentil', href: '/es/guias/rango-percentil-interpretacion/', description: 'Control de interpretación, empates y grupo de referencia.' },
@@ -332,6 +333,7 @@ export const spanishWorkflowIndex: SpanishInfoPage = {
         'Durante la actividad, explica la regla y permite una alternativa accesible. Después no conserves listas personales en un equipo compartido. Registra solo la información pedagógica que realmente necesitas.',
       ],
       links: [
+        { label: 'Flujo de grupos y selección aleatoria en el aula', href: '/es/flujos/actividades-aleatorias-aula/', description: 'Lista mínima, grupos, turnos, ruleta, tiempo y revisión docente.' },
         { label: 'Selector aleatorio de alumnos', href: '/es/herramientas/selector-aleatorio-alumnos/', description: 'Turnos con modo sin repetir y control de entradas.' },
         { label: 'Generador de grupos aleatorios', href: '/es/herramientas/generador-grupos-aleatorios/', description: 'Distribuye listas y permite revisar tamaños y sobrantes.' },
         { label: 'Temporizador Pomodoro', href: '/es/herramientas/temporizador-pomodoro/', description: 'Estructura bloques de trabajo cuando el contexto lo permite.' },

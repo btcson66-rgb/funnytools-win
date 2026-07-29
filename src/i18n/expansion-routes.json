@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-29",
-  "activeBatch": "es-43",
+  "activeBatch": "es-44",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1291,6 +1291,36 @@
         "zh": "/for/designers/",
         "en": "/en/for/designers/",
         "es": "/es/para/disenadores/"
+      }
+    },
+    {
+      "key": "audience-developers",
+      "type": "page",
+      "batch": "es-44",
+      "paths": {
+        "zh": "/for/developers/",
+        "en": "/en/for/developers/",
+        "es": "/es/para/desarrolladores/"
+      }
+    },
+    {
+      "key": "teacher-exam-score-toolkit",
+      "type": "page",
+      "batch": "es-44",
+      "paths": {
+        "zh": "/workflows/teacher-exam-score-toolkit/",
+        "en": "/en/workflows/teacher-exam-score-toolkit/",
+        "es": "/es/flujos/calcular-nota-oposicion-docente/"
+      }
+    },
+    {
+      "key": "teacher-classroom-random-toolkit",
+      "type": "page",
+      "batch": "es-44",
+      "paths": {
+        "zh": "/workflows/teacher-classroom-random-toolkit/",
+        "en": "/en/workflows/teacher-classroom-random-toolkit/",
+        "es": "/es/flujos/actividades-aleatorias-aula/"
       }
     }
   ]

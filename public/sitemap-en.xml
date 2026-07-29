@@ -149,6 +149,7 @@
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/for/developers/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/for/developers/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/para/desarrolladores/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/for/developers/" />
   </url>
   <url>
@@ -1072,6 +1073,7 @@
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/teacher-classroom-random-toolkit/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/teacher-classroom-random-toolkit/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/actividades-aleatorias-aula/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/workflows/teacher-classroom-random-toolkit/" />
   </url>
   <url>
@@ -1079,6 +1081,7 @@
     <lastmod>2026-07-27</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/teacher-exam-score-toolkit/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/teacher-exam-score-toolkit/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/calcular-nota-oposicion-docente/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/workflows/teacher-exam-score-toolkit/" />
   </url>
 </urlset>

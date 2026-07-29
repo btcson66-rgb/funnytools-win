@@ -21,6 +21,7 @@ const specializedInformationPageTypes = {
   'audience-office-workers': 'CollectionPage',
   'audience-creators': 'CollectionPage',
   'audience-designers': 'CollectionPage',
+  'audience-developers': 'CollectionPage',
 };
 
 function fail(message) {
@@ -189,6 +190,9 @@ for (const route of spanishRoutes) {
     'audience-office-workers': ['herramientas de oficina online', 'documentos', 'comprobar'],
     'audience-creators': ['herramientas para creadores de contenido', 'publicar', 'comprobar'],
     'audience-designers': ['herramientas para diseñadores', 'formato', 'comprobar'],
+    'audience-developers': ['herramientas para desarrolladores online', 'json', 'comprobar'],
+    'teacher-exam-score-toolkit': ['calcular una nota de oposición docente', 'ponderaciones', 'oficial'],
+    'teacher-classroom-random-toolkit': ['grupos aleatorios en clase', 'alumnos', 'revisar'],
   };
   const requiredTerms = requiredTermsByKey[route.key] ?? ['herramientas', 'navegador', 'comprobar'];
 

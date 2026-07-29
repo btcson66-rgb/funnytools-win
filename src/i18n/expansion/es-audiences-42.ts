@@ -96,6 +96,7 @@ export const spanishAudienceIndex: SpanishInfoPage = {
         'Formatear demuestra que una estructura puede leerse; no demuestra que el esquema, las unidades o las reglas de negocio sean correctos.',
       ],
       links: [
+        { label: 'Herramientas para desarrolladores', href: '/es/para/desarrolladores/', description: 'JSON, codificación, timestamps y datos de prueba sin exponer secretos.' },
         { label: 'Formatear y validar JSON', href: '/es/herramientas/formatear-validar-json/', description: 'Revisa sintaxis sin ejecutar el contenido.' },
         { label: 'CSV a JSON', href: '/es/herramientas/convertir-csv-a-json/', description: 'Controla delimitador, cabecera, vacíos y tipos.' },
         { label: 'Generador UUID v4', href: '/es/herramientas/generador-uuid-v4/', description: 'Crea identificadores de prueba, no secretos.' },
@@ -177,6 +178,7 @@ export const spanishTeachersAudience: SpanishInfoPage = {
         'No presentes la salida aleatoria como neutral en todas sus consecuencias. Para aprendizaje cooperativo, la distribución de roles y recursos puede importar más que el sorteo.',
       ],
       links: [
+        { label: 'Flujo de grupos y selección en el aula', href: '/es/flujos/actividades-aleatorias-aula/', description: 'De la lista mínima a grupos, turnos, tiempo y revisión.' },
         { label: 'Generador de grupos aleatorios', href: '/es/herramientas/generador-grupos-aleatorios/', description: 'Distribuye una lista y permite comprobar tamaños.' },
         { label: 'Crear grupos para clase', href: '/es/herramientas/crear-grupos-clase/', description: 'Alternativa orientada a grupos de aula.' },
         { label: 'Guía de agrupamientos equitativos', href: '/es/guias/agrupamientos-equitativos-aula/', description: 'Cuándo revisar y cuándo no usar el azar.' },
@@ -221,6 +223,7 @@ export const spanishTeachersAudience: SpanishInfoPage = {
         'Una estimación no es el acta. Compara con el sistema del centro y comunica si el cálculo omite una regla.',
       ],
       links: [
+        { label: 'Flujo para calcular nota de oposición', href: '/es/flujos/calcular-nota-oposicion-docente/', description: 'Convocatoria, escalas, pesos, méritos y contraste oficial.' },
         { label: 'Promedio de notas', href: '/es/herramientas/calculadora-promedio-notas/', description: 'Media simple o ponderada con pasos visibles.' },
         { label: 'Media ponderada', href: '/es/herramientas/calculadora-media-ponderada/', description: 'Pesos editables y control de escalas.' },
         { label: 'Centro de estadística educativa', href: '/es/estadisticas-educativas/', description: 'Z, T, percentiles, SPSS y APA 7.' },
