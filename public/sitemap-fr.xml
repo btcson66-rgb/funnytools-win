@@ -127,6 +127,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/percentage-calculator/" />
   </url>
   <url>
+    <loc>https://funnytools.win/fr/outils/calculateur-rang-percentile/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/percentile-rank-calculator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/percentile-rank-calculator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-rango-percentil/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/calculateur-rang-percentile/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/percentile-rank-calculator/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/fr/outils/calculateur-salaire-net/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/net-salary/" />
@@ -451,6 +460,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/random-group-generator/" />
   </url>
   <url>
+    <loc>https://funnytools.win/fr/outils/generateur-groupes-classe/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/group-generator/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/group-generator/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-grupos-clase/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/generateur-groupes-classe/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/group-generator/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/fr/outils/generateur-mot-de-passe-securise/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/password-generator/" />
@@ -503,6 +521,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/temporizador-pomodoro/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/minuteur-pomodoro/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pomodoro-timer/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/plan-de-classe-en-ligne/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/seating-chart/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/seating-chart/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-plano-asientos-aula/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/plan-de-classe-en-ligne/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/seating-chart/" />
   </url>
   <url>
     <loc>https://funnytools.win/fr/outils/quoi-manger-ce-soir/</loc>

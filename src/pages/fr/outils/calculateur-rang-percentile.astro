@@ -1,0 +1,24 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchPercentileRank,
+  frenchPercentileRankReview,
+} from '../../../i18n/expansion/fr-tools-24';
+---
+
+<ExpansionToolLayout
+  routeKey="percentile-rank-calculator"
+  canonicalPath="/fr/outils/calculateur-rang-percentile/"
+  locale="fr"
+  content={frenchPercentileRank}
+  categoryLabel="Statistiques et éducation"
+  review={frenchPercentileRankReview}
+  relatedTool={{
+    name: 'Calculateur d’écart-type',
+    description: 'Calculez moyenne, variance et écart-type pour une population ou un échantillon.',
+    href: '/fr/outils/calculateur-ecart-type/',
+  }}
+>
+  <EducationStatisticsCalculator labels={frenchPercentileRank.labels} slug="percentile-rank-calculator" />
+</ExpansionToolLayout>

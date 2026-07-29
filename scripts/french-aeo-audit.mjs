@@ -147,6 +147,9 @@ const requiredTermsByKey = {
   sketchpad: ['tableau blanc en ligne', 'dessiner en ligne', 'png', 'pointer events'],
   flowchart: ['créer un diagramme de flux', 'losange de décision', 'flèche', 'processus'],
   'random-student-picker': ['tirage au sort d’un élève', 'sans répétition', 'crypto.getrandomvalues', 'données personnelles'],
+  'seating-chart': ['créer un plan de classe', 'placement élèves', 'accessibilité', 'minimisation'],
+  'group-generator': ['générateur de groupes', 'nombre de groupes', 'groupes de besoins', 'crypto.getrandomvalues'],
+  'percentile-rank-calculator': ['rang percentile', 'centile', 'ex æquo', 'groupe de référence'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

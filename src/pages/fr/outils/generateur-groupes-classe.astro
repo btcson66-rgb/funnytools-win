@@ -1,0 +1,24 @@
+---
+import ClassGroupGenerator from '../../../components/tools/ClassGroupGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchClassGroupGenerator,
+  frenchClassGroupGeneratorReview,
+} from '../../../i18n/expansion/fr-tools-24';
+---
+
+<ExpansionToolLayout
+  routeKey="group-generator"
+  canonicalPath="/fr/outils/generateur-groupes-classe/"
+  locale="fr"
+  content={frenchClassGroupGenerator}
+  categoryLabel="Classe et coopération"
+  review={frenchClassGroupGeneratorReview}
+  relatedTool={{
+    name: 'Créer un plan de classe',
+    description: 'Placez une liste dans une grille de rangées et de colonnes.',
+    href: '/fr/outils/plan-de-classe-en-ligne/',
+  }}
+>
+  <ClassGroupGenerator labels={frenchClassGroupGenerator.labels} />
+</ExpansionToolLayout>

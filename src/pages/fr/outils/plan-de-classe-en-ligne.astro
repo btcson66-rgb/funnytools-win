@@ -1,0 +1,24 @@
+---
+import SeatingChart from '../../../components/tools/SeatingChart.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchSeatingChart,
+  frenchSeatingChartReview,
+} from '../../../i18n/expansion/fr-tools-24';
+---
+
+<ExpansionToolLayout
+  routeKey="seating-chart"
+  canonicalPath="/fr/outils/plan-de-classe-en-ligne/"
+  locale="fr"
+  content={frenchSeatingChart}
+  categoryLabel="Classe et organisation"
+  review={frenchSeatingChartReview}
+  relatedTool={{
+    name: 'Générateur de groupes pour la classe',
+    description: 'Répartissez une liste par nombre d’équipes ou par effectif maximal.',
+    href: '/fr/outils/generateur-groupes-classe/',
+  }}
+>
+  <SeatingChart labels={frenchSeatingChart.labels} />
+</ExpansionToolLayout>

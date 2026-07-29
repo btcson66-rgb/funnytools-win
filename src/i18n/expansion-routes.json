@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-23",
+  "activeLocaleBatch": "fr-24",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -975,30 +975,42 @@
       "key": "seating-chart",
       "type": "tool",
       "batch": "es-24",
+      "localeBatches": {
+        "fr": "fr-24"
+      },
       "paths": {
         "zh": "/tools/seating-chart/",
         "en": "/en/tools/seating-chart/",
-        "es": "/es/herramientas/crear-plano-asientos-aula/"
+        "es": "/es/herramientas/crear-plano-asientos-aula/",
+        "fr": "/fr/outils/plan-de-classe-en-ligne/"
       }
     },
     {
       "key": "group-generator",
       "type": "tool",
       "batch": "es-24",
+      "localeBatches": {
+        "fr": "fr-24"
+      },
       "paths": {
         "zh": "/tools/group-generator/",
         "en": "/en/tools/group-generator/",
-        "es": "/es/herramientas/crear-grupos-clase/"
+        "es": "/es/herramientas/crear-grupos-clase/",
+        "fr": "/fr/outils/generateur-groupes-classe/"
       }
     },
     {
       "key": "percentile-rank-calculator",
       "type": "tool",
       "batch": "es-24",
+      "localeBatches": {
+        "fr": "fr-24"
+      },
       "paths": {
         "zh": "/tools/percentile-rank-calculator/",
         "en": "/en/tools/percentile-rank-calculator/",
-        "es": "/es/herramientas/calculadora-rango-percentil/"
+        "es": "/es/herramientas/calculadora-rango-percentil/",
+        "fr": "/fr/outils/calculateur-rang-percentile/"
       }
     },
     {
