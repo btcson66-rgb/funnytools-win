@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-15",
+  "activeLocaleBatch": "fr-16",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -639,30 +639,42 @@
       "key": "random-number-picker",
       "type": "tool",
       "batch": "es-16",
+      "localeBatches": {
+        "fr": "fr-16"
+      },
       "paths": {
         "zh": "/tools/random-number-picker/",
         "en": "/en/tools/random-number-picker/",
-        "es": "/es/herramientas/generador-numeros-aleatorios/"
+        "es": "/es/herramientas/generador-numeros-aleatorios/",
+        "fr": "/fr/outils/generateur-nombres-aleatoires/"
       }
     },
     {
       "key": "random-name-picker",
       "type": "tool",
       "batch": "es-16",
+      "localeBatches": {
+        "fr": "fr-16"
+      },
       "paths": {
         "zh": "/tools/random-name-picker/",
         "en": "/en/tools/random-name-picker/",
-        "es": "/es/herramientas/sorteo-nombres-aleatorio/"
+        "es": "/es/herramientas/sorteo-nombres-aleatorio/",
+        "fr": "/fr/outils/tirage-au-sort-noms/"
       }
     },
     {
       "key": "random-wheel",
       "type": "tool",
       "batch": "es-16",
+      "localeBatches": {
+        "fr": "fr-16"
+      },
       "paths": {
         "zh": "/tools/random-wheel/",
         "en": "/en/tools/random-wheel/",
-        "es": "/es/herramientas/ruleta-aleatoria/"
+        "es": "/es/herramientas/ruleta-aleatoria/",
+        "fr": "/fr/outils/roue-aleatoire/"
       }
     },
     {

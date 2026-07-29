@@ -123,6 +123,9 @@ const requiredTermsByKey = {
   'password-generator': ['générateur de mot de passe sécurisé', 'crypto.getrandomvalues', 'gestionnaire', 'mfa'],
   'barcode-generator': ['générateur de code-barres', 'ean-13', 'clé de contrôle', 'gs1'],
   'color-generator': ['générateur de couleur', 'hex', 'contraste', 'wcag'],
+  'random-number-picker': ['générateur de nombres aléatoires', 'sans répétition', 'crypto.getrandomvalues', 'intervalle'],
+  'random-name-picker': ['tirage au sort de noms', 'une entrée par ligne', 'retirer après le tirage', 'minimisation'],
+  'random-wheel': ['roue aléatoire', 'roue de la chance', 'secteur', 'animation'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

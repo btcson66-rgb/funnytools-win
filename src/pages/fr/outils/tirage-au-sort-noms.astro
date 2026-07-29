@@ -1,0 +1,24 @@
+---
+import RandomNamePicker from '../../../components/tools/RandomNamePicker.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchRandomNamePicker,
+  frenchRandomNamePickerReview,
+} from '../../../i18n/expansion/fr-tools-16';
+---
+
+<ExpansionToolLayout
+  routeKey="random-name-picker"
+  canonicalPath="/fr/outils/tirage-au-sort-noms/"
+  content={frenchRandomNamePicker}
+  categoryLabel="Hasard et tirages"
+  review={frenchRandomNamePickerReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Roue aléatoire',
+    description: 'Affichez les options sous forme de secteurs lorsque la sélection doit être visible devant un groupe.',
+    href: '/fr/outils/roue-aleatoire/',
+  }}
+>
+  <RandomNamePicker labels={frenchRandomNamePicker.labels} />
+</ExpansionToolLayout>

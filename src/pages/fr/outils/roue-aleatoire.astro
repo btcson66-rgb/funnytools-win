@@ -1,0 +1,24 @@
+---
+import RandomWheel from '../../../components/tools/RandomWheel.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchRandomWheel,
+  frenchRandomWheelReview,
+} from '../../../i18n/expansion/fr-tools-16';
+---
+
+<ExpansionToolLayout
+  routeKey="random-wheel"
+  canonicalPath="/fr/outils/roue-aleatoire/"
+  content={frenchRandomWheel}
+  categoryLabel="Hasard et tirages"
+  review={frenchRandomWheelReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Générateur de nombres aléatoires',
+    description: 'Choisissez des entiers dans un intervalle avec ou sans répétition et conservez leur ordre.',
+    href: '/fr/outils/generateur-nombres-aleatoires/',
+  }}
+>
+  <RandomWheel labels={frenchRandomWheel.labels} />
+</ExpansionToolLayout>

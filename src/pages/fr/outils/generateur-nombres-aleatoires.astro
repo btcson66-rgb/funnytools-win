@@ -1,0 +1,24 @@
+---
+import RandomNumberPicker from '../../../components/tools/RandomNumberPicker.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchRandomNumberPicker,
+  frenchRandomNumberPickerReview,
+} from '../../../i18n/expansion/fr-tools-16';
+---
+
+<ExpansionToolLayout
+  routeKey="random-number-picker"
+  canonicalPath="/fr/outils/generateur-nombres-aleatoires/"
+  content={frenchRandomNumberPicker}
+  categoryLabel="Hasard et tirages"
+  review={frenchRandomNumberPickerReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Tirage au sort de noms',
+    description: 'Tirez directement des prénoms, équipes ou tâches lorsque les candidats ne portent pas de numéro continu.',
+    href: '/fr/outils/tirage-au-sort-noms/',
+  }}
+>
+  <RandomNumberPicker labels={frenchRandomNumberPicker.labels} />
+</ExpansionToolLayout>

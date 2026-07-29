@@ -334,6 +334,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/password-generator/" />
   </url>
   <url>
+    <loc>https://funnytools.win/fr/outils/generateur-nombres-aleatoires/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/random-number-picker/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-number-picker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-numeros-aleatorios/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/generateur-nombres-aleatoires/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/random-number-picker/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/fr/outils/generateur-uuid-v4/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/uuid-generator/" />
@@ -370,6 +379,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pdf-page-reorder/" />
   </url>
   <url>
+    <loc>https://funnytools.win/fr/outils/roue-aleatoire/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/random-wheel/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-wheel/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/ruleta-aleatoria/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/roue-aleatoire/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/random-wheel/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/fr/outils/supprimer-lignes-doublons/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/remove-duplicate-lines/" />
@@ -395,6 +413,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/eliminar-paginas-pdf/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/supprimer-pages-pdf/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/delete-pdf-pages/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/tirage-au-sort-noms/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/random-name-picker/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-name-picker/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/sorteo-nombres-aleatorio/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/tirage-au-sort-noms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/random-name-picker/" />
   </url>
   <url>
     <loc>https://funnytools.win/fr/outils/trier-lignes-texte/</loc>
