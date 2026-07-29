@@ -275,7 +275,7 @@ if (!existsSync(esSitemapPath)) {
   }
 }
 
-for (const blockedLocale of ['fr', 'hi', 'de']) {
+for (const blockedLocale of ['hi', 'de']) {
   const localeDir = join(dist, blockedLocale);
   if (existsSync(localeDir)) fail(`/${blockedLocale}/ must not publish before native editorial review.`);
 }
@@ -287,7 +287,7 @@ const summary = {
   activeBatch: registry.activeBatch,
   activeBatchRoutes: activeBatchRoutes.map((route) => route.paths.es),
   spanishRoutes: pages,
-  blockedUntilReviewed: ['fr', 'hi', 'de'],
+  blockedUntilReviewed: ['hi', 'de'],
   failures,
 };
 

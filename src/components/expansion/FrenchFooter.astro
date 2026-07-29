@@ -1,0 +1,35 @@
+---
+import pkg from '../../../package.json';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <strong>FunnyTools en français</strong>
+      <p>Des outils gratuits dans le navigateur, sans inscription, accompagnés d’explications, de limites et de méthodes de vérification.</p>
+    </div>
+    <nav class="footer-links" aria-label="Navigation du pied de page">
+      <div>
+        <span>Outils disponibles</span>
+        <a href="/fr/outils/calcul-moyenne-notes/">Calculer une moyenne de notes</a>
+        <a href="/fr/outils/fusionner-pdf/">Fusionner plusieurs PDF</a>
+      </div>
+      <div>
+        <span>Autres langues</span>
+        <a href="/" hreflang="zh-TW" lang="zh-Hant">繁體中文</a>
+        <a href="/en/" hreflang="en" lang="en">English</a>
+        <a href="/es/" hreflang="es" lang="es">Español</a>
+      </div>
+      <div>
+        <span>À retenir</span>
+        <a href="mailto:btcson66@gmail.com">Signaler un problème</a>
+        <p>Conservez les fichiers d’origine et vérifiez tout résultat important auprès de la source compétente.</p>
+      </div>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <p class="fineprint">&copy; {year} FunnyTools · v{pkg.version}</p>
+    <p>Les résultats sont des aides pratiques, pas des décisions officielles ou professionnelles.</p>
+  </div>
+</footer>

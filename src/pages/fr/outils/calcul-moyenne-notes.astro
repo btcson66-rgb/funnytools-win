@@ -1,0 +1,24 @@
+---
+import GradeAverage from '../../../components/tools/GradeAverage.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchGradeAverage,
+  frenchGradeReview,
+} from '../../../i18n/expansion/fr';
+---
+
+<ExpansionToolLayout
+  routeKey="grade-average"
+  canonicalPath="/fr/outils/calcul-moyenne-notes/"
+  content={frenchGradeAverage}
+  categoryLabel="Calculatrice scolaire"
+  review={frenchGradeReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Fusionner plusieurs PDF',
+    description: 'Assemblez des pièces ou des supports dans le navigateur sans les envoyer à FunnyTools.',
+    href: '/fr/outils/fusionner-pdf/',
+  }}
+>
+  <GradeAverage labels={frenchGradeAverage.labels} />
+</ExpansionToolLayout>

@@ -14,7 +14,7 @@ const hreflangByLocale: Record<string, string> = {
 
 export const GET: APIRoute = () => {
   const rows = routeRegistry.routes
-    .filter((route) => route.paths.es)
+    .filter((route) => route.paths.fr)
     .map((route) => {
       const alternates = Object.entries(route.paths)
         .filter(([, path]) => Boolean(path))
@@ -28,7 +28,7 @@ export const GET: APIRoute = () => {
 
       return [
         '  <url>',
-        `    <loc>${escapeXml(absoluteUrl(route.paths.es))}</loc>`,
+        `    <loc>${escapeXml(absoluteUrl(route.paths.fr))}</loc>`,
         `    <lastmod>${routeRegistry.reviewedAt}</lastmod>`,
         '    <changefreq>monthly</changefreq>',
         `    <priority>${route.type === 'home' ? '0.8' : '0.7'}</priority>`,

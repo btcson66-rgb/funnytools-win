@@ -1,0 +1,24 @@
+---
+import MergePdf from '../../../components/tools/MergePdf.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchMergePdf,
+  frenchMergeReview,
+} from '../../../i18n/expansion/fr';
+---
+
+<ExpansionToolLayout
+  routeKey="merge-pdf"
+  canonicalPath="/fr/outils/fusionner-pdf/"
+  content={frenchMergePdf}
+  categoryLabel="Outil PDF"
+  review={frenchMergeReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Calculer une moyenne de notes',
+    description: 'Calculez une moyenne simple ou pondérée avec des coefficients.',
+    href: '/fr/outils/calcul-moyenne-notes/',
+  }}
+>
+  <MergePdf labels={frenchMergePdf.labels} />
+</ExpansionToolLayout>

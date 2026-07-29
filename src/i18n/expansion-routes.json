@@ -1,36 +1,50 @@
 {
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
+  "activeLocale": "fr",
+  "activeLocaleBatch": "fr-01",
   "maxBatchSize": 3,
   "routes": [
     {
       "key": "home",
       "type": "home",
       "batch": "es-01",
+      "localeBatches": {
+        "fr": "fr-01"
+      },
       "paths": {
         "zh": "/",
         "en": "/en/",
-        "es": "/es/"
+        "es": "/es/",
+        "fr": "/fr/"
       }
     },
     {
       "key": "grade-average",
       "type": "tool",
       "batch": "es-01",
+      "localeBatches": {
+        "fr": "fr-01"
+      },
       "paths": {
         "zh": "/tools/grade-average/",
         "en": "/en/tools/grade-average/",
-        "es": "/es/herramientas/calculadora-promedio-notas/"
+        "es": "/es/herramientas/calculadora-promedio-notas/",
+        "fr": "/fr/outils/calcul-moyenne-notes/"
       }
     },
     {
       "key": "merge-pdf",
       "type": "tool",
       "batch": "es-01",
+      "localeBatches": {
+        "fr": "fr-01"
+      },
       "paths": {
         "zh": "/tools/merge-pdf/",
         "en": "/en/tools/merge-pdf/",
-        "es": "/es/herramientas/unir-pdf/"
+        "es": "/es/herramientas/unir-pdf/",
+        "fr": "/fr/outils/fusionner-pdf/"
       }
     },
     {

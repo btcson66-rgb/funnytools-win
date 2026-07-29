@@ -2,6 +2,8 @@
 import BaseLayout from './BaseLayout.astro';
 import LocalizedFooter from '../components/expansion/LocalizedFooter.astro';
 import LocalizedNav from '../components/expansion/LocalizedNav.astro';
+import FrenchFooter from '../components/expansion/FrenchFooter.astro';
+import FrenchNav from '../components/expansion/FrenchNav.astro';
 
 interface Props {
   currentKey: string;
@@ -12,6 +14,7 @@ interface Props {
   type?: 'website' | 'article';
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   ogImageAlt?: string;
+  locale?: 'es' | 'fr';
 }
 
 const {
@@ -23,7 +26,20 @@ const {
   type = 'website',
   jsonLd = [],
   ogImageAlt = 'FunnyTools en español',
+  locale = 'es',
 } = Astro.props;
+const localeMeta = {
+  es: {
+    htmlLanguage: 'es',
+    ogLocale: 'es_ES',
+    skipLabel: 'Saltar al contenido',
+  },
+  fr: {
+    htmlLanguage: 'fr',
+    ogLocale: 'fr_FR',
+    skipLabel: 'Aller au contenu',
+  },
+}[locale];
 ---
 
 <BaseLayout
@@ -34,13 +50,17 @@ const {
   type={type}
   jsonLd={jsonLd}
   canonicalPath={canonicalPath}
-  htmlLanguage="es"
-  ogLocaleOverride="es_ES"
+  htmlLanguage={localeMeta.htmlLanguage}
+  ogLocaleOverride={localeMeta.ogLocale}
   ogImageAlt={ogImageAlt}
-  skipToContentLabel="Saltar al contenido"
+  skipToContentLabel={localeMeta.skipLabel}
   hasAlternates={true}
 >
-  <LocalizedNav slot="nav" currentKey={currentKey} />
+  {locale === 'fr'
+    ? <FrenchNav slot="nav" currentKey={currentKey} />
+    : <LocalizedNav slot="nav" currentKey={currentKey} />}
   <slot />
-  <LocalizedFooter slot="footer" />
+  {locale === 'fr'
+    ? <FrenchFooter slot="footer" />
+    : <LocalizedFooter slot="footer" />}
 </BaseLayout>

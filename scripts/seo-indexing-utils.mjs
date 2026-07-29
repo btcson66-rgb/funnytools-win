@@ -36,6 +36,7 @@ export const expectedSitemapFiles = [
   'sitemap-workflows.xml',
   ...(!enNoindex ? ['sitemap-en.xml'] : []),
   'sitemap-es.xml',
+  'sitemap-fr.xml',
 ];
 
 export function ensureDir(dir) {
@@ -201,6 +202,7 @@ export function classifyUrl(url) {
   const pathname = urlPath(url);
   const normalized = pathname.replace(/^\/en\//, '/');
   if (pathname.startsWith('/es/')) return 'es';
+  if (pathname.startsWith('/fr/')) return 'fr';
   if (pathname.startsWith('/en/')) return 'en';
   if (/^\/tools\/[^/]+\/$/.test(normalized)) return 'tools';
   if (normalized === '/guides/' || /^\/guides\/[^/]+\/$/.test(normalized)) return 'guides';
@@ -215,6 +217,7 @@ export function sitemapFileForType(type) {
     workflows: 'sitemap-workflows.xml',
     en: 'sitemap-en.xml',
     es: 'sitemap-es.xml',
+    fr: 'sitemap-fr.xml',
   }[type];
 }
 
@@ -386,7 +389,7 @@ function registryAlternates(loc) {
     Object.values(item.paths ?? {}).includes(pathname),
   );
   if (!route) return [];
-  const hreflang = { zh: 'zh-TW', en: 'en', es: 'es', fr: 'fr', de: 'de' };
+  const hreflang = { zh: 'zh-TW', en: 'en', es: 'es', fr: 'fr', de: 'de', hi: 'hi' };
   const links = Object.entries(route.paths ?? {})
     .filter(([, path]) => Boolean(path))
     .map(([locale, path]) => ({

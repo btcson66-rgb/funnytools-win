@@ -165,7 +165,9 @@ const { labels } = Astro.props;
         name.textContent = item.file.name;
         const meta = document.createElement('div');
         meta.className = 'pdf-meta';
-        meta.textContent = item.pages ? `${item.pages} ${labels.pages}` : labels.loadingPages;
+        meta.textContent = item.pages
+          ? `${item.pages} ${item.pages === 1 ? (labels.page ?? labels.pages) : labels.pages}`
+          : labels.loadingPages;
         body.append(name, meta);
 
         const controls = document.createElement('div');
