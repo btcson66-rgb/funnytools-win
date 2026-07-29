@@ -1,0 +1,21 @@
+---
+import StandardDeviation from '../../../components/tools/StandardDeviation.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchStandardDeviation, frenchStandardDeviationReview } from '../../../i18n/expansion/fr-tools-09';
+---
+
+<ExpansionToolLayout
+  routeKey="standard-deviation"
+  canonicalPath="/fr/outils/calculateur-ecart-type/"
+  content={frenchStandardDeviation}
+  categoryLabel="Statistiques descriptives"
+  review={frenchStandardDeviationReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Calculateur de pourcentage',
+    description: 'Calculez ensuite une proportion ou une variation entre deux valeurs.',
+    href: '/fr/outils/calculateur-pourcentage/',
+  }}
+>
+  <StandardDeviation labels={frenchStandardDeviation.labels} />
+</ExpansionToolLayout>

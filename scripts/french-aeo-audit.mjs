@@ -102,6 +102,9 @@ const requiredTermsByKey = {
   'pdf-page-reorder': ['réorganiser les pages', 'ordre', 'monter', 'descendre'],
   'pdf-to-image': ['convertir un pdf en jpg', 'png', 'échelle', 'pixels'],
   'pdf-compressor': ['compresser un pdf', 'réduire', 'structure', 'pourcentage'],
+  'standard-deviation': ['calculateur d’écart-type', 'variance', 'population', 'échantillon'],
+  'percentage-calculator': ['calculateur de pourcentage', 'variation', 'hausse', 'points de pourcentage'],
+  'bar-chart-maker': ['créer un graphique en barres', 'catégorie', 'axe', 'png'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

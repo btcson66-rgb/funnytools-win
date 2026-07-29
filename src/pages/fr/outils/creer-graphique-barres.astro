@@ -1,0 +1,21 @@
+---
+import ChartMaker from '../../../components/tools/ChartMaker.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchBarChartMaker, frenchBarChartMakerReview } from '../../../i18n/expansion/fr-tools-09';
+---
+
+<ExpansionToolLayout
+  routeKey="bar-chart-maker"
+  canonicalPath="/fr/outils/creer-graphique-barres/"
+  content={frenchBarChartMaker}
+  categoryLabel="Graphiques et données"
+  review={frenchBarChartMakerReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Calculateur d’écart-type',
+    description: 'Résumez moyenne et dispersion avant de représenter une série.',
+    href: '/fr/outils/calculateur-ecart-type/',
+  }}
+>
+  <ChartMaker labels={frenchBarChartMaker.labels} />
+</ExpansionToolLayout>

@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-08",
+  "activeLocaleBatch": "fr-09",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -345,30 +345,42 @@
       "key": "standard-deviation",
       "type": "tool",
       "batch": "es-09",
+      "localeBatches": {
+        "fr": "fr-09"
+      },
       "paths": {
         "zh": "/tools/standard-deviation/",
         "en": "/en/tools/standard-deviation/",
-        "es": "/es/herramientas/calculadora-desviacion-estandar/"
+        "es": "/es/herramientas/calculadora-desviacion-estandar/",
+        "fr": "/fr/outils/calculateur-ecart-type/"
       }
     },
     {
       "key": "percentage-calculator",
       "type": "tool",
       "batch": "es-09",
+      "localeBatches": {
+        "fr": "fr-09"
+      },
       "paths": {
         "zh": "/tools/percentage-calculator/",
         "en": "/en/tools/percentage-calculator/",
-        "es": "/es/herramientas/calculadora-porcentajes/"
+        "es": "/es/herramientas/calculadora-porcentajes/",
+        "fr": "/fr/outils/calculateur-pourcentage/"
       }
     },
     {
       "key": "bar-chart-maker",
       "type": "tool",
       "batch": "es-09",
+      "localeBatches": {
+        "fr": "fr-09"
+      },
       "paths": {
         "zh": "/tools/bar-chart-maker/",
         "en": "/en/tools/bar-chart-maker/",
-        "es": "/es/herramientas/crear-grafico-barras/"
+        "es": "/es/herramientas/crear-grafico-barras/",
+        "fr": "/fr/outils/creer-graphique-barres/"
       }
     },
     {

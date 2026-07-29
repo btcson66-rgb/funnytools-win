@@ -163,23 +163,47 @@ const tools = [
     search: 'compresser réduire taille poids pdf mo optimiser structure pourcentage',
     privacy: 'Le PDF est réenregistré localement dans ce navigateur.',
   },
+  {
+    name: 'Calculateur d’écart-type et de variance',
+    href: '/fr/outils/calculateur-ecart-type/',
+    category: 'Statistiques',
+    description: 'Calculez moyenne, médiane, variance et écart-type pour population et échantillon.',
+    search: 'calculateur écart type variance moyenne médiane population échantillon statistique',
+    privacy: 'La série est analysée dans cet onglet.',
+  },
+  {
+    name: 'Calculateur de pourcentage',
+    href: '/fr/outils/calculateur-pourcentage/',
+    category: 'Calculs du quotidien',
+    description: 'Calculez une part, le pourcentage d’un total et une hausse ou baisse relative.',
+    search: 'calculateur pourcentage part total variation hausse baisse remise proportion',
+    privacy: 'Les opérations sont réalisées dans cet onglet.',
+  },
+  {
+    name: 'Créer un graphique en barres',
+    href: '/fr/outils/creer-graphique-barres/',
+    category: 'Graphiques et données',
+    description: 'Saisissez catégories et valeurs non négatives, puis téléchargez un PNG de 900 × 560 pixels.',
+    search: 'créer graphique barres colonnes diagramme bâtons catégories valeurs png',
+    privacy: 'La table et le canevas restent dans ce navigateur.',
+  },
 ];
 
 const faq = [
   {
     q: 'Quels outils en ligne gratuits sont disponibles en français ?',
-    a: 'La collection française propose vingt outils : calcul de moyenne, fusion, division, rotation, suppression, extraction, réorganisation, conversion et compression PDF, images vers PDF, QR code, compression, redimensionnement, recadrage, rotation d’image, Base64 et conversions PNG, JPG et WebP. Chaque page comprend une fonction utilisable, des exemples, des limites et une méthode de vérification.',
+    a: 'La collection française propose vingt-trois outils : calculs de moyenne, écart-type et pourcentage, graphique en barres, fusion, division, rotation, suppression, extraction, réorganisation, conversion et compression PDF, images vers PDF, QR code, compression, redimensionnement, recadrage, rotation d’image, Base64 et conversions PNG, JPG et WebP. Chaque page comprend une fonction utilisable, des exemples, des limites et une méthode de vérification.',
   },
   {
     q: 'Faut-il créer un compte ou installer un logiciel ?',
-    a: 'Non. Les vingt outils s’ouvrent dans le navigateur, sans inscription ni installation. Une connexion est nécessaire pour charger le site.',
+    a: 'Non. Les vingt-trois outils s’ouvrent dans le navigateur, sans inscription ni installation. Une connexion est nécessaire pour charger le site.',
   },
   {
     q: 'Les données sont-elles envoyées à FunnyTools ?',
     a: 'Les notes et les PDF sont traités dans le navigateur pour produire le résultat. La page peut toutefois contacter des services techniques, analytiques ou publicitaires, comme l’explique la politique de confidentialité.',
   },
   {
-    q: 'Pourquoi le répertoire français ne contient-il que vingt outils ?',
+    q: 'Pourquoi le répertoire français ne contient-il que vingt-trois outils ?',
     a: 'Une route française n’est ajoutée qu’après rédaction native, test mobile, vérification de la fonction, contrôle des liens de langue et publication réelle. Les prochaines pages arrivent par lots de trois au maximum.',
   },
   {
@@ -294,7 +318,7 @@ const breadcrumbJsonLd = {
     <section class="wrap content-section answer-panel" aria-labelledby="fr-reponse-directe">
       <p class="eyebrow">Réponse directe</p>
       <h2 id="fr-reponse-directe">Quels outils sont disponibles maintenant ?</h2>
-      <p>La collection française comprend vingt outils finalisés. Le calculateur traite les moyennes ; les outils PDF assemblent, séparent, pivotent, suppriment, extraient, réorganisent, convertissent en images ou tentent une optimisation structurelle, et créent aussi des documents depuis des images ; les outils d’image compressent, redimensionnent, recadrent, pivotent ou convertissent PNG, JPG et WebP ; Base64 prépare une Data URI et le générateur crée un QR code statique. Les fonctions s’exécutent dans le navigateur, sans compte, et leurs pages expliquent la méthode, les limites et les contrôles.</p>
+      <p>La collection française comprend vingt-trois outils finalisés. Les calculateurs traitent moyenne, écart-type, variance et pourcentages, tandis que le graphique en barres transforme une petite table en PNG ; les outils PDF assemblent, séparent, pivotent, suppriment, extraient, réorganisent, convertissent en images ou tentent une optimisation structurelle, et créent aussi des documents depuis des images ; les outils d’image compressent, redimensionnent, recadrent, pivotent ou convertissent PNG, JPG et WebP ; Base64 prépare une Data URI et le générateur crée un QR code statique. Les fonctions s’exécutent dans le navigateur, sans compte, et leurs pages expliquent la méthode, les limites et les contrôles.</p>
       <p>Le nombre limité de cartes est volontaire. Une page n’apparaît ici qu’après rédaction française originale, test de l’interface, contrôle sur mobile, vérification du canonical, des variantes hreflang, du sitemap et des données structurées. Le répertoire n’utilise ni faux lien, ni page « bientôt disponible », ni traduction automatique pour donner une impression artificielle de volume.</p>
     </section>
 
@@ -314,7 +338,7 @@ const breadcrumbJsonLd = {
           </article>
         ))}
       </div>
-      <p class="empty-state" data-fr-tools-empty hidden>Aucun outil français publié ne correspond à cette recherche. Essayez « moyenne », « PDF », « compresser », « réorganiser », « image », « QR », « PNG » ou « JPG ».</p>
+      <p class="empty-state" data-fr-tools-empty hidden>Aucun outil français publié ne correspond à cette recherche. Essayez « moyenne », « écart-type », « pourcentage », « graphique », « PDF », « image », « QR » ou « PNG ».</p>
     </section>
 
     <section class="wrap content-section" aria-labelledby="fr-choisir-outil">

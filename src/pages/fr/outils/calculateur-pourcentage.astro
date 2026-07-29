@@ -1,0 +1,21 @@
+---
+import PercentageCalculator from '../../../components/tools/PercentageCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchPercentageCalculator, frenchPercentageCalculatorReview } from '../../../i18n/expansion/fr-tools-09';
+---
+
+<ExpansionToolLayout
+  routeKey="percentage-calculator"
+  canonicalPath="/fr/outils/calculateur-pourcentage/"
+  content={frenchPercentageCalculator}
+  categoryLabel="Calculs du quotidien"
+  review={frenchPercentageCalculatorReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Calculateur d’écart-type',
+    description: 'Décrivez une série complète lorsque le problème dépasse deux nombres.',
+    href: '/fr/outils/calculateur-ecart-type/',
+  }}
+>
+  <PercentageCalculator labels={frenchPercentageCalculator.labels} />
+</ExpansionToolLayout>
