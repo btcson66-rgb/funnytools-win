@@ -1,0 +1,21 @@
+---
+import SortLines from '../../../components/tools/SortLines.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchSortLines, frenchSortLinesReview } from '../../../i18n/expansion/fr-tools-12';
+---
+
+<ExpansionToolLayout
+  routeKey="sort-lines"
+  canonicalPath="/fr/outils/trier-lignes-texte/"
+  content={frenchSortLines}
+  categoryLabel="Texte et rédaction"
+  review={frenchSortLinesReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Supprimer les lignes en double',
+    description: 'Contrôlez les occurrences et gardez la première graphie avant de choisir un nouvel ordre.',
+    href: '/fr/outils/supprimer-lignes-doublons/',
+  }}
+>
+  <SortLines labels={frenchSortLines.labels} />
+</ExpansionToolLayout>

@@ -1,0 +1,21 @@
+---
+import Base64Tool from '../../../components/tools/Base64Tool.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchBase64, frenchBase64Review } from '../../../i18n/expansion/fr-tools-12';
+---
+
+<ExpansionToolLayout
+  routeKey="base64"
+  canonicalPath="/fr/outils/encoder-decoder-base64/"
+  content={frenchBase64}
+  categoryLabel="Développement web"
+  review={frenchBase64Review}
+  locale="fr"
+  relatedTool={{
+    name: 'Formater et valider du JSON',
+    description: 'Vérifiez la syntaxe d’un texte JSON récupéré avant de l’utiliser dans une intégration.',
+    href: '/fr/outils/formater-valider-json/',
+  }}
+>
+  <Base64Tool labels={frenchBase64.labels} />
+</ExpansionToolLayout>

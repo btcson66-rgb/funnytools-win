@@ -39,6 +39,7 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/base64/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/base64/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/codificar-decodificar-base64/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/encoder-decoder-base64/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/base64/" />
   </url>
   <url>
@@ -292,6 +293,7 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/json-formatter/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/json-formatter/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/formatear-validar-json/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/formater-valider-json/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/json-formatter/" />
   </url>
   <url>
@@ -535,6 +537,7 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/sort-lines/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/sort-lines/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/ordenar-lineas-texto/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/trier-lignes-texte/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/sort-lines/" />
   </url>
   <url>

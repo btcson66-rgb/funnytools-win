@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-11",
+  "activeLocaleBatch": "fr-12",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -471,30 +471,42 @@
       "key": "sort-lines",
       "type": "tool",
       "batch": "es-12",
+      "localeBatches": {
+        "fr": "fr-12"
+      },
       "paths": {
         "zh": "/tools/sort-lines/",
         "en": "/en/tools/sort-lines/",
-        "es": "/es/herramientas/ordenar-lineas-texto/"
+        "es": "/es/herramientas/ordenar-lineas-texto/",
+        "fr": "/fr/outils/trier-lignes-texte/"
       }
     },
     {
       "key": "json-formatter",
       "type": "tool",
       "batch": "es-12",
+      "localeBatches": {
+        "fr": "fr-12"
+      },
       "paths": {
         "zh": "/tools/json-formatter/",
         "en": "/en/tools/json-formatter/",
-        "es": "/es/herramientas/formatear-validar-json/"
+        "es": "/es/herramientas/formatear-validar-json/",
+        "fr": "/fr/outils/formater-valider-json/"
       }
     },
     {
       "key": "base64",
       "type": "tool",
       "batch": "es-12",
+      "localeBatches": {
+        "fr": "fr-12"
+      },
       "paths": {
         "zh": "/tools/base64/",
         "en": "/en/tools/base64/",
-        "es": "/es/herramientas/codificar-decodificar-base64/"
+        "es": "/es/herramientas/codificar-decodificar-base64/",
+        "fr": "/fr/outils/encoder-decoder-base64/"
       }
     },
     {

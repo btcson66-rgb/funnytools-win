@@ -111,6 +111,9 @@ const requiredTermsByKey = {
   'case-converter': ['convertir majuscules', 'minuscules', 'camelcase', 'snake_case'],
   'remove-empty-lines': ['supprimer les lignes vides', 'espaces', 'trim', 'lf'],
   'remove-duplicate-lines': ['supprimer les lignes en double', 'première occurrence', 'casse', 'tri'],
+  'sort-lines': ['trier des lignes', 'ordre alphabétique', 'nombre initial', 'longueur'],
+  'json-formatter': ['formater', 'valider', 'json', 'clés en double'],
+  base64: ['encoder', 'décoder', 'base64', 'utf-8'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

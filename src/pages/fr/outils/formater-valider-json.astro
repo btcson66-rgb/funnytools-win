@@ -1,0 +1,21 @@
+---
+import JsonFormatter from '../../../components/tools/JsonFormatter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchJsonFormatter, frenchJsonFormatterReview } from '../../../i18n/expansion/fr-tools-12';
+---
+
+<ExpansionToolLayout
+  routeKey="json-formatter"
+  canonicalPath="/fr/outils/formater-valider-json/"
+  content={frenchJsonFormatter}
+  categoryLabel="Développement web"
+  review={frenchJsonFormatterReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Encoder et décoder du Base64',
+    description: 'Convertissez un petit exemple JSON en Base64 UTF-8 après avoir retiré tous les secrets.',
+    href: '/fr/outils/encoder-decoder-base64/',
+  }}
+>
+  <JsonFormatter labels={frenchJsonFormatter.labels} />
+</ExpansionToolLayout>
