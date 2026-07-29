@@ -79,6 +79,7 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/character-counter/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/character-counter/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/contador-caracteres/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/compteur-caracteres/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/character-counter/" />
   </url>
   <url>
@@ -407,6 +408,7 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pie-chart-maker/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/pie-chart-maker/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-grafico-circular/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/creer-diagramme-circulaire/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pie-chart-maker/" />
   </url>
   <url>
@@ -645,6 +647,7 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/word-counter/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/word-counter/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/contador-palabras/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/compteur-mots/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/word-counter/" />
   </url>
   <url>

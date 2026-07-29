@@ -1,0 +1,21 @@
+---
+import ChartMaker from '../../../components/tools/ChartMaker.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchPieChartMaker, frenchPieChartMakerReview } from '../../../i18n/expansion/fr-tools-10';
+---
+
+<ExpansionToolLayout
+  routeKey="pie-chart-maker"
+  canonicalPath="/fr/outils/creer-diagramme-circulaire/"
+  content={frenchPieChartMaker}
+  categoryLabel="Graphiques et données"
+  review={frenchPieChartMakerReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Créer un graphique en barres',
+    description: 'Comparez précisément des catégories sur un axe commun.',
+    href: '/fr/outils/creer-graphique-barres/',
+  }}
+>
+  <ChartMaker labels={frenchPieChartMaker.labels} />
+</ExpansionToolLayout>

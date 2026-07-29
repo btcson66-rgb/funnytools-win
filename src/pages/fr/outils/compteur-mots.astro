@@ -1,0 +1,21 @@
+---
+import WordCounter from '../../../components/tools/WordCounter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchWordCounter, frenchWordCounterReview } from '../../../i18n/expansion/fr-tools-10';
+---
+
+<ExpansionToolLayout
+  routeKey="word-counter"
+  canonicalPath="/fr/outils/compteur-mots/"
+  content={frenchWordCounter}
+  categoryLabel="Texte et rédaction"
+  review={frenchWordCounterReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Compteur de caractères',
+    description: 'Mesurez aussi les octets UTF-8 et les repères de plateformes.',
+    href: '/fr/outils/compteur-caracteres/',
+  }}
+>
+  <WordCounter labels={frenchWordCounter.labels} />
+</ExpansionToolLayout>

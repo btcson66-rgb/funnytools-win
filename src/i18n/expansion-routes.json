@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-09",
+  "activeLocaleBatch": "fr-10",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -387,30 +387,42 @@
       "key": "pie-chart-maker",
       "type": "tool",
       "batch": "es-10",
+      "localeBatches": {
+        "fr": "fr-10"
+      },
       "paths": {
         "zh": "/tools/pie-chart-maker/",
         "en": "/en/tools/pie-chart-maker/",
-        "es": "/es/herramientas/crear-grafico-circular/"
+        "es": "/es/herramientas/crear-grafico-circular/",
+        "fr": "/fr/outils/creer-diagramme-circulaire/"
       }
     },
     {
       "key": "word-counter",
       "type": "tool",
       "batch": "es-10",
+      "localeBatches": {
+        "fr": "fr-10"
+      },
       "paths": {
         "zh": "/tools/word-counter/",
         "en": "/en/tools/word-counter/",
-        "es": "/es/herramientas/contador-palabras/"
+        "es": "/es/herramientas/contador-palabras/",
+        "fr": "/fr/outils/compteur-mots/"
       }
     },
     {
       "key": "character-counter",
       "type": "tool",
       "batch": "es-10",
+      "localeBatches": {
+        "fr": "fr-10"
+      },
       "paths": {
         "zh": "/tools/character-counter/",
         "en": "/en/tools/character-counter/",
-        "es": "/es/herramientas/contador-caracteres/"
+        "es": "/es/herramientas/contador-caracteres/",
+        "fr": "/fr/outils/compteur-caracteres/"
       }
     },
     {

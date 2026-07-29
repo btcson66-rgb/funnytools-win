@@ -1,0 +1,21 @@
+---
+import CharacterCounter from '../../../components/tools/CharacterCounter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchCharacterCounter, frenchCharacterCounterReview } from '../../../i18n/expansion/fr-tools-10';
+---
+
+<ExpansionToolLayout
+  routeKey="character-counter"
+  canonicalPath="/fr/outils/compteur-caracteres/"
+  content={frenchCharacterCounter}
+  categoryLabel="Texte et rédaction"
+  review={frenchCharacterCounterReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Compteur de mots',
+    description: 'Comptez aussi phrases, paragraphes et temps de lecture.',
+    href: '/fr/outils/compteur-mots/',
+  }}
+>
+  <CharacterCounter labels={frenchCharacterCounter.labels} />
+</ExpansionToolLayout>

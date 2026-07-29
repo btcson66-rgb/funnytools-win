@@ -105,6 +105,9 @@ const requiredTermsByKey = {
   'standard-deviation': ['calculateur d’écart-type', 'variance', 'population', 'échantillon'],
   'percentage-calculator': ['calculateur de pourcentage', 'variation', 'hausse', 'points de pourcentage'],
   'bar-chart-maker': ['créer un graphique en barres', 'catégorie', 'axe', 'png'],
+  'pie-chart-maker': ['diagramme circulaire', 'secteurs', 'pourcentage', 'dénominateur'],
+  'word-counter': ['compteur de mots', 'caractères', 'paragraphes', 'temps de lecture'],
+  'character-counter': ['compteur de caractères', 'octets utf-8', 'sms', 'méta-description'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',
