@@ -1,0 +1,21 @@
+---
+import SplitPdf from '../../../components/tools/SplitPdf.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchSplitPdf, frenchSplitPdfReview } from '../../../i18n/expansion/fr-tools-03';
+---
+
+<ExpansionToolLayout
+  routeKey="split-pdf"
+  canonicalPath="/fr/outils/diviser-pdf/"
+  content={frenchSplitPdf}
+  categoryLabel="Outil PDF"
+  review={frenchSplitPdfReview}
+  relatedTool={{
+    name: 'Fusionner plusieurs PDF',
+    description: 'Assemblez plusieurs documents dans l’ordre choisi sans les envoyer à FunnyTools.',
+    href: '/fr/outils/fusionner-pdf/',
+  }}
+  locale="fr"
+>
+  <SplitPdf labels={frenchSplitPdf.labels} />
+</ExpansionToolLayout>

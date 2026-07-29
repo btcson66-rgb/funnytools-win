@@ -19,23 +19,47 @@ const tools = [
     search: 'fusionner pdf assembler regrouper combiner joindre documents pages ordre fichier',
     privacy: 'Les documents sont lus et assemblés dans ce navigateur.',
   },
+  {
+    name: 'Compresser une image en ligne',
+    href: '/fr/outils/compresser-image/',
+    category: 'Images',
+    description: 'Réduisez le poids d’un JPG, PNG ou WebP, comparez la qualité et téléchargez une nouvelle copie.',
+    search: 'compresser image réduire poids photo jpg jpeg png webp qualité fichier',
+    privacy: 'L’image est réencodée dans ce navigateur.',
+  },
+  {
+    name: 'Générateur de code QR gratuit',
+    href: '/fr/outils/generateur-code-qr/',
+    category: 'Liens et communication',
+    description: 'Créez un QR code statique pour une URL ou un texte, ajoutez un logo facultatif et téléchargez le PNG.',
+    search: 'générateur qr code créer faire lien url texte png logo correction',
+    privacy: 'Le motif est généré dans cet onglet.',
+  },
+  {
+    name: 'Diviser un PDF et séparer ses pages',
+    href: '/fr/outils/diviser-pdf/',
+    category: 'PDF et documents',
+    description: 'Créez un PDF par page ou séparez des plages comme 1-3, 5 et 8-10 sans téléverser le document.',
+    search: 'diviser pdf séparer pages extraire découper plages document',
+    privacy: 'Les pages sont copiées dans la mémoire du navigateur.',
+  },
 ];
 
 const faq = [
   {
     q: 'Quels outils en ligne gratuits sont disponibles en français ?',
-    a: 'La collection française propose actuellement un calculateur de moyenne de notes et un outil pour fusionner plusieurs PDF. Chaque page comprend une fonction utilisable, des exemples, des limites et une méthode de vérification.',
+    a: 'La collection française propose cinq outils : moyenne de notes, fusion PDF, compression d’image, génération de QR code et division PDF. Chaque page comprend une fonction utilisable, des exemples, des limites et une méthode de vérification.',
   },
   {
     q: 'Faut-il créer un compte ou installer un logiciel ?',
-    a: 'Non. Les deux outils s’ouvrent dans le navigateur, sans inscription ni installation. Une connexion est nécessaire pour charger le site.',
+    a: 'Non. Les cinq outils s’ouvrent dans le navigateur, sans inscription ni installation. Une connexion est nécessaire pour charger le site.',
   },
   {
     q: 'Les données sont-elles envoyées à FunnyTools ?',
     a: 'Les notes et les PDF sont traités dans le navigateur pour produire le résultat. La page peut toutefois contacter des services techniques, analytiques ou publicitaires, comme l’explique la politique de confidentialité.',
   },
   {
-    q: 'Pourquoi le répertoire français ne contient-il que deux outils ?',
+    q: 'Pourquoi le répertoire français ne contient-il que cinq outils ?',
     a: 'Une route française n’est ajoutée qu’après rédaction native, test mobile, vérification de la fonction, contrôle des liens de langue et publication réelle. Les prochaines pages arrivent par lots de trois au maximum.',
   },
   {
@@ -150,7 +174,7 @@ const breadcrumbJsonLd = {
     <section class="wrap content-section answer-panel" aria-labelledby="fr-reponse-directe">
       <p class="eyebrow">Réponse directe</p>
       <h2 id="fr-reponse-directe">Quels outils sont disponibles maintenant ?</h2>
-      <p>La collection française comprend deux outils finalisés. Le calculateur de moyenne traite des notes simples ou pondérées, avec des coefficients et plusieurs barèmes. L’outil de fusion PDF assemble plusieurs documents dans l’ordre choisi et crée une nouvelle copie. Les deux fonctions s’exécutent dans le navigateur, sans compte, et leurs pages expliquent la méthode, les limites et les contrôles à effectuer.</p>
+      <p>La collection française comprend cinq outils finalisés. Le calculateur traite les moyennes simples ou pondérées ; les outils PDF assemblent plusieurs documents ou séparent des pages et des plages ; le compresseur réencode JPG, PNG et WebP ; le générateur crée un QR code statique pour une URL ou un texte. Les cinq fonctions s’exécutent dans le navigateur, sans compte, et leurs pages expliquent la méthode, les limites et les contrôles à effectuer.</p>
       <p>Le nombre limité de cartes est volontaire. Une page n’apparaît ici qu’après rédaction française originale, test de l’interface, contrôle sur mobile, vérification du canonical, des variantes hreflang, du sitemap et des données structurées. Le répertoire n’utilise ni faux lien, ni page « bientôt disponible », ni traduction automatique pour donner une impression artificielle de volume.</p>
     </section>
 
@@ -170,7 +194,7 @@ const breadcrumbJsonLd = {
           </article>
         ))}
       </div>
-      <p class="empty-state" data-fr-tools-empty hidden>Aucun outil français publié ne correspond à cette recherche. Essayez « moyenne », « coefficient », « PDF », « fusionner » ou « document ».</p>
+      <p class="empty-state" data-fr-tools-empty hidden>Aucun outil français publié ne correspond à cette recherche. Essayez « moyenne », « PDF », « image », « QR », « compresser » ou « diviser ».</p>
     </section>
 
     <section class="wrap content-section" aria-labelledby="fr-choisir-outil">
@@ -213,7 +237,7 @@ const breadcrumbJsonLd = {
 
     <section class="wrap content-section" aria-labelledby="fr-redaction-native">
       <h2 id="fr-redaction-native">Une rédaction française, pas un remplacement de mots</h2>
-      <p>Une personne peut chercher « calcul moyenne notes », « moyenne avec coefficient », « moyenne sur 20 », « assembler des PDF », « regrouper des documents » ou « fusionner PDF gratuitement ». Le contenu rapproche ces formulations quand elles décrivent la même tâche et explique leurs différences lorsqu’elles peuvent orienter vers une mauvaise fonction.</p>
+      <p>Une personne peut chercher « calcul moyenne notes », « moyenne avec coefficient », « fusionner PDF gratuitement », « diviser un PDF », « compresser une image », « réduire le poids d’une photo », « créer un QR code » ou « faire un QR code pour un lien ». Le contenu rapproche ces formulations quand elles décrivent la même tâche et explique leurs différences lorsqu’elles peuvent orienter vers une mauvaise fonction.</p>
       <p>Le français est utilisé dans de nombreux systèmes scolaires et administratifs. FunnyTools ne suppose pas qu’un barème, une règle d’arrondi ou une obligation juridique soit identique en France, en Belgique, en Suisse, au Canada ou ailleurs. Lorsqu’une source locale est indispensable, la page indique la limite et renvoie la décision à l’organisme compétent.</p>
     </section>
 

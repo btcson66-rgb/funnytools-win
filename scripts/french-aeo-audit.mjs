@@ -84,6 +84,9 @@ const requiredTermsByKey = {
   'tools-index': ['outils en ligne gratuits', 'sans inscription', 'traitement local', 'vérifier'],
   privacy: ['politique de confidentialité', 'données personnelles', 'cookies', 'consentement'],
   'about-tools': ['fonctionnent les outils', 'traitement dans le navigateur', 'vérifier', 'limites'],
+  'image-compressor': ['compresser une image', 'réduire le poids', 'jpeg', 'webp'],
+  'qr-code-generator': ['générateur de code qr', 'qr code statique', 'correction', 'png'],
+  'split-pdf': ['diviser un pdf', 'extraire les pages', 'plages', 'sans envoyer'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

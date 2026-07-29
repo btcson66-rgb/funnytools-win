@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-02",
+  "activeLocaleBatch": "fr-03",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -93,30 +93,42 @@
       "key": "image-compressor",
       "type": "tool",
       "batch": "es-03",
+      "localeBatches": {
+        "fr": "fr-03"
+      },
       "paths": {
         "zh": "/tools/image-compressor/",
         "en": "/en/tools/image-compressor/",
-        "es": "/es/herramientas/comprimir-imagenes/"
+        "es": "/es/herramientas/comprimir-imagenes/",
+        "fr": "/fr/outils/compresser-image/"
       }
     },
     {
       "key": "qr-code-generator",
       "type": "tool",
       "batch": "es-03",
+      "localeBatches": {
+        "fr": "fr-03"
+      },
       "paths": {
         "zh": "/tools/qr-code-generator/",
         "en": "/en/tools/qr-code-generator/",
-        "es": "/es/herramientas/generador-codigo-qr/"
+        "es": "/es/herramientas/generador-codigo-qr/",
+        "fr": "/fr/outils/generateur-code-qr/"
       }
     },
     {
       "key": "split-pdf",
       "type": "tool",
       "batch": "es-03",
+      "localeBatches": {
+        "fr": "fr-03"
+      },
       "paths": {
         "zh": "/tools/split-pdf/",
         "en": "/en/tools/split-pdf/",
-        "es": "/es/herramientas/dividir-pdf/"
+        "es": "/es/herramientas/dividir-pdf/",
+        "fr": "/fr/outils/diviser-pdf/"
       }
     },
     {

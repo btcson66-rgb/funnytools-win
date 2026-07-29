@@ -1,0 +1,21 @@
+---
+import QrCodeGenerator from '../../../components/tools/QrCodeGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchQrCodeGenerator, frenchQrCodeGeneratorReview } from '../../../i18n/expansion/fr-tools-03';
+---
+
+<ExpansionToolLayout
+  routeKey="qr-code-generator"
+  canonicalPath="/fr/outils/generateur-code-qr/"
+  content={frenchQrCodeGenerator}
+  categoryLabel="Outil de création d’image"
+  review={frenchQrCodeGeneratorReview}
+  relatedTool={{
+    name: 'Compresser une image en ligne',
+    description: 'Réduisez le poids d’un JPG, PNG ou WebP et comparez la copie avant téléchargement.',
+    href: '/fr/outils/compresser-image/',
+  }}
+  locale="fr"
+>
+  <QrCodeGenerator labels={frenchQrCodeGenerator.labels} />
+</ExpansionToolLayout>

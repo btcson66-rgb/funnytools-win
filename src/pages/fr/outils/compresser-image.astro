@@ -1,0 +1,21 @@
+---
+import ImageCompressor from '../../../components/tools/ImageCompressor.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchImageCompressor, frenchImageCompressorReview } from '../../../i18n/expansion/fr-tools-03';
+---
+
+<ExpansionToolLayout
+  routeKey="image-compressor"
+  canonicalPath="/fr/outils/compresser-image/"
+  content={frenchImageCompressor}
+  categoryLabel="Outil de traitement d’image"
+  review={frenchImageCompressorReview}
+  relatedTool={{
+    name: 'Générateur de code QR gratuit',
+    description: 'Créez un QR statique pour une URL ou un texte et téléchargez-le en PNG.',
+    href: '/fr/outils/generateur-code-qr/',
+  }}
+  locale="fr"
+>
+  <ImageCompressor labels={frenchImageCompressor.labels} />
+</ExpansionToolLayout>

@@ -16,6 +16,24 @@ const tools = [
     description: 'Assemblez des documents dans l’ordre voulu, localement dans le navigateur.',
     intent: 'Documents PDF',
   },
+  {
+    name: 'Compresser une image',
+    href: '/fr/outils/compresser-image/',
+    description: 'Réduisez le poids d’un JPG, PNG ou WebP et comparez la qualité avant téléchargement.',
+    intent: 'Images et photos',
+  },
+  {
+    name: 'Créer un QR code',
+    href: '/fr/outils/generateur-code-qr/',
+    description: 'Générez un QR statique pour une URL ou un texte, avec taille et correction réglables.',
+    intent: 'Liens et communication',
+  },
+  {
+    name: 'Diviser un PDF',
+    href: '/fr/outils/diviser-pdf/',
+    description: 'Créez un fichier par page ou séparez des plages précises sans téléversement.',
+    intent: 'Documents PDF',
+  },
 ];
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -63,7 +81,7 @@ const itemListJsonLd = {
     <section class="hero wrap">
       <p class="eyebrow">Outils en ligne en français</p>
       <h1>Des outils gratuits qui expliquent aussi comment vérifier le résultat</h1>
-      <p class="lead">FunnyTools aide à effectuer une tâche précise dans le navigateur : calculer une moyenne de notes, assembler plusieurs PDF et, progressivement, traiter d’autres besoins courants. Chaque page française est rédigée pour la question réelle, testée sur mobile et accompagnée d’exemples, de limites et d’une méthode de contrôle.</p>
+      <p class="lead">FunnyTools aide à effectuer une tâche précise dans le navigateur : calculer une moyenne de notes, fusionner ou diviser des PDF, compresser une image et créer un QR code. Chaque page française est rédigée pour la question réelle, testée sur mobile et accompagnée d’exemples, de limites et d’une méthode de contrôle.</p>
       <ul class="hero-value-list">
         <li>Gratuit et sans inscription</li>
         <li>Interface et explications rédigées en français</li>
@@ -80,7 +98,7 @@ const itemListJsonLd = {
       <p class="eyebrow">Réponse directe</p>
       <h2 id="reponse-directe">Qu’est-ce que FunnyTools en français ?</h2>
       <p>FunnyTools est une boîte à outils en ligne pour les petites opérations qui prennent trop de temps lorsqu’on les refait à la main. Le but n’est pas d’empiler des boutons identiques à ceux de centaines d’autres sites. Une page utile doit annoncer ce qu’elle accepte, produire un résultat compréhensible et signaler ce qu’elle ne sait pas décider.</p>
-      <p>La version française n’est pas générée par traduction automatique. Elle part de formulations courantes comme « calcul moyenne notes », « calculer une moyenne avec coefficient », « fusionner PDF », « assembler plusieurs PDF » ou « mettre des PDF dans le bon ordre ». Les exemples sont ensuite construits autour des usages scolaires, administratifs et professionnels rencontrés dans l’espace francophone, sans prétendre qu’une même règle s’applique partout.</p>
+      <p>La version française n’est pas générée par traduction automatique. Elle part de formulations courantes comme « calcul moyenne notes », « fusionner PDF », « diviser un PDF », « compresser une image » ou « créer un QR code ». Les exemples sont ensuite construits autour des usages scolaires, administratifs et professionnels rencontrés dans l’espace francophone, sans prétendre qu’une même règle s’applique partout.</p>
     </section>
 
     <section id="outils-francais" class="wrap content-section" aria-labelledby="outils-titre">
@@ -123,7 +141,7 @@ const itemListJsonLd = {
 
     <section class="wrap content-section privacy-note" aria-labelledby="confidentialite">
       <h2 id="confidentialite">Confidentialité : ce que le traitement dans le navigateur change</h2>
-      <p>Pour les outils français actuellement disponibles, les notes, coefficients et contenus PDF sont traités dans l’onglet. Ils ne sont pas envoyés à FunnyTools pour effectuer le calcul ou la fusion. Il n’est pas nécessaire de créer un compte. La liste de travail n’est pas conservée lorsque vous rechargez ou fermez la page.</p>
+      <p>Pour les outils français actuellement disponibles, les notes, coefficients, images, textes destinés au QR code et contenus PDF sont traités dans l’onglet. Ils ne sont pas envoyés à FunnyTools pour effectuer le calcul ou la transformation. Il n’est pas nécessaire de créer un compte. La liste de travail n’est pas conservée lorsque vous rechargez ou fermez la page.</p>
       <p>Le mot « local » ne dispense pas de prudence. Un ordinateur partagé, une extension inconnue ou un appareil non mis à jour peut présenter un risque indépendant du site. Pour des données scolaires, médicales, administratives ou professionnelles, appliquez la politique de votre organisation et travaillez d’abord avec une copie ou un exemple fictif.</p>
       <p>Le chargement du site implique toujours des connexions techniques et peut inclure la mesure d’audience ou l’infrastructure publicitaire selon la configuration générale. Ces connexions sont distinctes de l’opération locale : le texte d’une note et le contenu d’un PDF ne sont pas ajoutés aux événements de mesure pour produire le résultat.</p>
       <p>La CNIL recommande une approche globale de la sécurité des postes, des logiciels et du cycle de vie des données. Le traitement local est une mesure utile, pas une garantie absolue. Gardez les originaux, fermez la page après usage et ne laissez pas un téléchargement sensible dans un dossier public.</p>
@@ -165,7 +183,7 @@ const itemListJsonLd = {
 
     <section class="wrap content-section trust-note" aria-labelledby="limites">
       <h2 id="limites">Ce que FunnyTools ne remplace pas</h2>
-      <p>FunnyTools ne délivre ni note officielle, ni avis juridique, ni validation administrative. La calculatrice peut révéler une incohérence, mais seul l’établissement explique la règle appliquée. La fusion PDF peut créer un dossier, mais seul le destinataire confirme sa conformité, son format et la validité d’une signature.</p>
+      <p>FunnyTools ne délivre ni note officielle, ni avis juridique, ni validation administrative. La calculatrice peut révéler une incohérence, mais seul l’établissement explique la règle appliquée. Les outils PDF créent des copies sans certifier une signature ; le compresseur ne garantit pas l’acceptation d’une image ; un QR code n’établit pas la sécurité ni la permanence de sa destination.</p>
       <p>Pour toute décision importante, conservez les entrées, notez la méthode et consultez la source officielle. Si vous trouvez une erreur reproductible, contactez <a href="mailto:btcson66@gmail.com">btcson66@gmail.com</a> avec l’adresse de la page, le navigateur et un exemple sans donnée personnelle.</p>
     </section>
 
