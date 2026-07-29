@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-10",
+  "activeLocaleBatch": "fr-11",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -429,30 +429,42 @@
       "key": "case-converter",
       "type": "tool",
       "batch": "es-11",
+      "localeBatches": {
+        "fr": "fr-11"
+      },
       "paths": {
         "zh": "/tools/case-converter/",
         "en": "/en/tools/case-converter/",
-        "es": "/es/herramientas/convertir-mayusculas-minusculas/"
+        "es": "/es/herramientas/convertir-mayusculas-minusculas/",
+        "fr": "/fr/outils/convertir-majuscules-minuscules/"
       }
     },
     {
       "key": "remove-empty-lines",
       "type": "tool",
       "batch": "es-11",
+      "localeBatches": {
+        "fr": "fr-11"
+      },
       "paths": {
         "zh": "/tools/remove-empty-lines/",
         "en": "/en/tools/remove-empty-lines/",
-        "es": "/es/herramientas/eliminar-lineas-vacias/"
+        "es": "/es/herramientas/eliminar-lineas-vacias/",
+        "fr": "/fr/outils/supprimer-lignes-vides/"
       }
     },
     {
       "key": "remove-duplicate-lines",
       "type": "tool",
       "batch": "es-11",
+      "localeBatches": {
+        "fr": "fr-11"
+      },
       "paths": {
         "zh": "/tools/remove-duplicate-lines/",
         "en": "/en/tools/remove-duplicate-lines/",
-        "es": "/es/herramientas/eliminar-lineas-duplicadas/"
+        "es": "/es/herramientas/eliminar-lineas-duplicadas/",
+        "fr": "/fr/outils/supprimer-lignes-doublons/"
       }
     },
     {

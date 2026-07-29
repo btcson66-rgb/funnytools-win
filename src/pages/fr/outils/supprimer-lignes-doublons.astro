@@ -1,0 +1,17 @@
+---
+import RemoveDuplicateLines from '../../../components/tools/RemoveDuplicateLines.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchRemoveDuplicateLines, frenchRemoveDuplicateLinesReview } from '../../../i18n/expansion/fr-tools-11';
+---
+
+<ExpansionToolLayout
+  routeKey="remove-duplicate-lines"
+  canonicalPath="/fr/outils/supprimer-lignes-doublons/"
+  content={frenchRemoveDuplicateLines}
+  categoryLabel="Texte et rédaction"
+  review={frenchRemoveDuplicateLinesReview}
+  locale="fr"
+  relatedTool={{ name: 'Supprimer les lignes vides', description: 'Nettoyez les blancs avant de vérifier une liste.', href: '/fr/outils/supprimer-lignes-vides/' }}
+>
+  <RemoveDuplicateLines labels={frenchRemoveDuplicateLines.labels} />
+</ExpansionToolLayout>

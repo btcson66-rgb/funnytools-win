@@ -108,6 +108,9 @@ const requiredTermsByKey = {
   'pie-chart-maker': ['diagramme circulaire', 'secteurs', 'pourcentage', 'dénominateur'],
   'word-counter': ['compteur de mots', 'caractères', 'paragraphes', 'temps de lecture'],
   'character-counter': ['compteur de caractères', 'octets utf-8', 'sms', 'méta-description'],
+  'case-converter': ['convertir majuscules', 'minuscules', 'camelcase', 'snake_case'],
+  'remove-empty-lines': ['supprimer les lignes vides', 'espaces', 'trim', 'lf'],
+  'remove-duplicate-lines': ['supprimer les lignes en double', 'première occurrence', 'casse', 'tri'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

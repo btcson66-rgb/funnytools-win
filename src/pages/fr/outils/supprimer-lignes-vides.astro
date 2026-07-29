@@ -1,0 +1,17 @@
+---
+import RemoveEmptyLines from '../../../components/tools/RemoveEmptyLines.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchRemoveEmptyLines, frenchRemoveEmptyLinesReview } from '../../../i18n/expansion/fr-tools-11';
+---
+
+<ExpansionToolLayout
+  routeKey="remove-empty-lines"
+  canonicalPath="/fr/outils/supprimer-lignes-vides/"
+  content={frenchRemoveEmptyLines}
+  categoryLabel="Texte et rédaction"
+  review={frenchRemoveEmptyLinesReview}
+  locale="fr"
+  relatedTool={{ name: 'Supprimer les lignes en double', description: 'Conservez une seule occurrence de chaque ligne.', href: '/fr/outils/supprimer-lignes-doublons/' }}
+>
+  <RemoveEmptyLines labels={frenchRemoveEmptyLines.labels} />
+</ExpansionToolLayout>

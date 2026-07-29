@@ -1,0 +1,17 @@
+---
+import CaseConverter from '../../../components/tools/CaseConverter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchCaseConverter, frenchCaseConverterReview } from '../../../i18n/expansion/fr-tools-11';
+---
+
+<ExpansionToolLayout
+  routeKey="case-converter"
+  canonicalPath="/fr/outils/convertir-majuscules-minuscules/"
+  content={frenchCaseConverter}
+  categoryLabel="Texte et rédaction"
+  review={frenchCaseConverterReview}
+  locale="fr"
+  relatedTool={{ name: 'Compteur de caractères', description: 'Mesurez la longueur de la version finale.', href: '/fr/outils/compteur-caracteres/' }}
+>
+  <CaseConverter labels={frenchCaseConverter.labels} />
+</ExpansionToolLayout>
