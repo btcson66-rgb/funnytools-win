@@ -1,0 +1,11 @@
+---
+import ExpansionInfoLayout from '../../../layouts/ExpansionInfoLayout.astro';
+import { spanishOfficeDocumentWorkflow } from '../../../i18n/expansion/es-workflows-45';
+---
+
+<ExpansionInfoLayout
+  currentKey="office-document-toolkit"
+  canonicalPath="/es/flujos/documentos-oficina/"
+  content={spanishOfficeDocumentWorkflow}
+  breadcrumbParent={{ name: 'Flujos de trabajo', path: '/es/flujos/' }}
+/>

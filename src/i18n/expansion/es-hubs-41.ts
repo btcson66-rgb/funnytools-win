@@ -346,6 +346,8 @@ export const spanishWorkflowIndex: SpanishInfoPage = {
         'Comprueba el límite de tamaño y el formato del portal al final, porque cualquier edición posterior puede cambiar el peso. No elimines originales hasta recibir confirmación de la entrega.',
       ],
       links: [
+        { label: 'Flujo para entregar un informe estudiantil', href: '/es/flujos/entrega-informe-estudiantil/', description: 'Consigna, palabras, fuentes, imágenes, PDF y confirmación del campus.' },
+        { label: 'Flujo de documentos de oficina', href: '/es/flujos/documentos-oficina/', description: 'Originales, PDF, imágenes, fechas, QR, datos y entrega administrativa.' },
         { label: 'Unir PDF', href: '/es/herramientas/unir-pdf/', description: 'Combina copias en el navegador y conserva el orden elegido.' },
         { label: 'Ordenar páginas PDF', href: '/es/herramientas/ordenar-paginas-pdf/', description: 'Revisa miniaturas, números originales y continuidad.' },
         { label: 'Comprimir PDF', href: '/es/herramientas/comprimir-pdf/', description: 'Prueba una optimización estructural sin prometer un tamaño exacto.' },
@@ -358,6 +360,7 @@ export const spanishWorkflowIndex: SpanishInfoPage = {
         'Abre la copia en el tamaño de visualización real, comprueba texto, caras, degradados y transparencia, y conserva una versión editable. Para correo, envía una prueba y verifica el archivo recibido.',
       ],
       links: [
+        { label: 'Flujo para contenido de redes sociales', href: '/es/flujos/contenido-redes-sociales/', description: 'Texto, imagen, accesibilidad, derechos, enlace, QR y revisión móvil.' },
         { label: 'Recortar imagen', href: '/es/herramientas/recortar-imagen/', description: 'Define el encuadre sin confundirlo con redimensionar.' },
         { label: 'Redimensionar imagen', href: '/es/herramientas/redimensionar-imagen/', description: 'Ajusta píxeles manteniendo proporción cuando corresponde.' },
         { label: 'Comprimir imágenes', href: '/es/herramientas/comprimir-imagenes/', description: 'Reduce peso tras fijar dimensiones y formato.' },

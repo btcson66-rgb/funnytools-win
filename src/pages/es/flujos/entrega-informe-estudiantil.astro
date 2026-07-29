@@ -1,0 +1,11 @@
+---
+import ExpansionInfoLayout from '../../../layouts/ExpansionInfoLayout.astro';
+import { spanishStudentReportWorkflow } from '../../../i18n/expansion/es-workflows-45';
+---
+
+<ExpansionInfoLayout
+  currentKey="student-report-toolkit"
+  canonicalPath="/es/flujos/entrega-informe-estudiantil/"
+  content={spanishStudentReportWorkflow}
+  breadcrumbParent={{ name: 'Flujos de trabajo', path: '/es/flujos/' }}
+/>

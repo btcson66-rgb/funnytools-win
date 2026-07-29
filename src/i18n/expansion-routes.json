@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-29",
-  "activeBatch": "es-44",
+  "activeBatch": "es-45",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1321,6 +1321,36 @@
         "zh": "/workflows/teacher-classroom-random-toolkit/",
         "en": "/en/workflows/teacher-classroom-random-toolkit/",
         "es": "/es/flujos/actividades-aleatorias-aula/"
+      }
+    },
+    {
+      "key": "student-report-toolkit",
+      "type": "page",
+      "batch": "es-45",
+      "paths": {
+        "zh": "/workflows/student-report-toolkit/",
+        "en": "/en/workflows/student-report-toolkit/",
+        "es": "/es/flujos/entrega-informe-estudiantil/"
+      }
+    },
+    {
+      "key": "office-document-toolkit",
+      "type": "page",
+      "batch": "es-45",
+      "paths": {
+        "zh": "/workflows/office-document-toolkit/",
+        "en": "/en/workflows/office-document-toolkit/",
+        "es": "/es/flujos/documentos-oficina/"
+      }
+    },
+    {
+      "key": "creator-social-toolkit",
+      "type": "page",
+      "batch": "es-45",
+      "paths": {
+        "zh": "/workflows/creator-social-toolkit/",
+        "en": "/en/workflows/creator-social-toolkit/",
+        "es": "/es/flujos/contenido-redes-sociales/"
       }
     }
   ]

@@ -193,6 +193,9 @@ for (const route of spanishRoutes) {
     'audience-developers': ['herramientas para desarrolladores online', 'json', 'comprobar'],
     'teacher-exam-score-toolkit': ['calcular una nota de oposición docente', 'ponderaciones', 'oficial'],
     'teacher-classroom-random-toolkit': ['grupos aleatorios en clase', 'alumnos', 'revisar'],
+    'student-report-toolkit': ['preparar un informe', 'pdf', 'entrega'],
+    'office-document-toolkit': ['organizar documentos de oficina', 'originales', 'comprobar'],
+    'creator-social-toolkit': ['preparar contenido de redes sociales', 'publicar', 'comprobar'],
   };
   const requiredTerms = requiredTermsByKey[route.key] ?? ['herramientas', 'navegador', 'comprobar'];
 
