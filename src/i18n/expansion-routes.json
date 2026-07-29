@@ -1,6 +1,6 @@
 {
-  "reviewedAt": "2026-07-28",
-  "activeBatch": "es-39",
+  "reviewedAt": "2026-07-29",
+  "activeBatch": "es-40",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1171,6 +1171,36 @@
         "zh": "/disclaimer/",
         "en": "/en/disclaimer/",
         "es": "/es/aviso-legal/"
+      }
+    },
+    {
+      "key": "terms",
+      "type": "page",
+      "batch": "es-40",
+      "paths": {
+        "zh": "/terms/",
+        "en": "/en/terms/",
+        "es": "/es/condiciones-de-uso/"
+      }
+    },
+    {
+      "key": "support",
+      "type": "page",
+      "batch": "es-40",
+      "paths": {
+        "zh": "/support/",
+        "en": "/en/support/",
+        "es": "/es/apoyar-funnytools/"
+      }
+    },
+    {
+      "key": "shop",
+      "type": "page",
+      "batch": "es-40",
+      "paths": {
+        "zh": "/shop/",
+        "en": "/en/shop/",
+        "es": "/es/tienda/"
       }
     }
   ]

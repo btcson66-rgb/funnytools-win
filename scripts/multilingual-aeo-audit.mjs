@@ -11,6 +11,7 @@ const pages = [];
 const specializedInformationPageTypes = {
   about: 'AboutPage',
   contact: 'ContactPage',
+  shop: 'CollectionPage',
 };
 
 function fail(message) {
@@ -167,6 +168,9 @@ for (const route of spanishRoutes) {
     'tools-index': ['herramientas online', 'sin registro', 'procesamiento local'],
     privacy: ['política de privacidad', 'cookies', 'google analytics'],
     'about-tools': ['procesamiento local', 'navegador', 'comprobar'],
+    terms: ['condiciones de uso', 'responsabilidad', 'comprobar'],
+    support: ['apoyar funnytools', 'informar', 'comprobar'],
+    shop: ['btcson lab', 'materiales digitales', 'comprobar'],
   };
   const requiredTerms = requiredTermsByKey[route.key] ?? ['herramientas', 'navegador', 'comprobar'];
 
