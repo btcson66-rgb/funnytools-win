@@ -1,0 +1,24 @@
+---
+import BreakReminder from '../../../components/tools/BreakReminder.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchBreakReminder,
+  frenchBreakReminderReview,
+} from '../../../i18n/expansion/fr-tools-20';
+---
+
+<ExpansionToolLayout
+  routeKey="break-reminder"
+  canonicalPath="/fr/outils/rappel-pause-ecran/"
+  locale="fr"
+  content={frenchBreakReminder}
+  categoryLabel="Temps et organisation"
+  review={frenchBreakReminderReview}
+  relatedTool={{
+    name: 'Minuteur en ligne',
+    description: 'Décomptez une durée ou visez une échéance locale précise.',
+    href: '/fr/outils/minuteur-en-ligne/',
+  }}
+>
+  <BreakReminder labels={frenchBreakReminder.labels} />
+</ExpansionToolLayout>

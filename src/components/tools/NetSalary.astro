@@ -10,31 +10,31 @@ const { labels } = Astro.props;
   <div class="form-grid">
     <label>
       <span>{labels.grossSalary}</span>
-      <input data-gross type="number" min="0" step="1000" value="50000" />
+      <input data-gross type="number" min="0" step="100" value={labels.defaultGross ?? '50000'} />
     </label>
     <label>
       <span>{labels.allowance}</span>
-      <input data-allowance type="number" min="0" step="500" value="0" />
+      <input data-allowance type="number" min="0" step="50" value={labels.defaultAllowance ?? '0'} />
     </label>
     <label>
       <span>{labels.otherDeduction}</span>
-      <input data-other type="number" min="0" step="100" value="0" />
+      <input data-other type="number" min="0" step="10" value={labels.defaultOther ?? '0'} />
     </label>
     <label>
       <span>{labels.laborRate}</span>
-      <input data-labor-rate type="number" min="0" max="100" step="0.01" value="2.4" />
+      <input data-labor-rate type="number" min="0" max="100" step="0.01" value={labels.defaultLaborRate ?? '2.4'} />
     </label>
     <label>
       <span>{labels.healthRate}</span>
-      <input data-health-rate type="number" min="0" max="100" step="0.01" value="1.55" />
+      <input data-health-rate type="number" min="0" max="100" step="0.01" value={labels.defaultHealthRate ?? '1.55'} />
     </label>
     <label>
       <span>{labels.pensionRate}</span>
-      <input data-pension-rate type="number" min="0" max="100" step="0.1" value="0" />
+      <input data-pension-rate type="number" min="0" max="100" step="0.1" value={labels.defaultPensionRate ?? '0'} />
     </label>
     <label>
       <span>{labels.taxRate}</span>
-      <input data-tax-rate type="number" min="0" max="100" step="0.1" value="5" />
+      <input data-tax-rate type="number" min="0" max="100" step="0.1" value={labels.defaultTaxRate ?? '5'} />
     </label>
   </div>
 
@@ -146,13 +146,13 @@ const { labels } = Astro.props;
     }
 
     function reset() {
-      inputs.gross.value = '50000';
-      inputs.allowance.value = '0';
-      inputs.other.value = '0';
-      inputs.laborRate.value = '2.4';
-      inputs.healthRate.value = '1.55';
-      inputs.pensionRate.value = '0';
-      inputs.taxRate.value = '5';
+      inputs.gross.value = labels.defaultGross ?? '50000';
+      inputs.allowance.value = labels.defaultAllowance ?? '0';
+      inputs.other.value = labels.defaultOther ?? '0';
+      inputs.laborRate.value = labels.defaultLaborRate ?? '2.4';
+      inputs.healthRate.value = labels.defaultHealthRate ?? '1.55';
+      inputs.pensionRate.value = labels.defaultPensionRate ?? '0';
+      inputs.taxRate.value = labels.defaultTaxRate ?? '5';
       calculate();
     }
 

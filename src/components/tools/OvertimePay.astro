@@ -10,39 +10,39 @@ const { labels } = Astro.props;
   <div class="form-grid">
     <label>
       <span>{labels.hourlyRate}</span>
-      <input data-hourly type="number" min="0" step="10" value="200" />
+      <input data-hourly type="number" min="0" step="0.01" value={labels.defaultHourly ?? '200'} />
     </label>
     <label>
       <span>{labels.weekdayHours}</span>
-      <input data-weekday-hours type="number" min="0" step="0.5" value="4" />
+      <input data-weekday-hours type="number" min="0" step="0.5" value={labels.defaultWeekdayHours ?? '4'} />
     </label>
     <label>
       <span>{labels.weekdayMultiplier}</span>
-      <input data-weekday-multiplier type="number" min="0" max="10" step="0.01" value="1.34" />
+      <input data-weekday-multiplier type="number" min="0" max="10" step="0.01" value={labels.defaultWeekdayMultiplier ?? '1.34'} />
     </label>
     <label>
       <span>{labels.extendedHours}</span>
-      <input data-extended-hours type="number" min="0" step="0.5" value="0" />
+      <input data-extended-hours type="number" min="0" step="0.5" value={labels.defaultExtendedHours ?? '0'} />
     </label>
     <label>
       <span>{labels.extendedMultiplier}</span>
-      <input data-extended-multiplier type="number" min="0" max="10" step="0.01" value="1.67" />
+      <input data-extended-multiplier type="number" min="0" max="10" step="0.01" value={labels.defaultExtendedMultiplier ?? '1.67'} />
     </label>
     <label>
       <span>{labels.restHours}</span>
-      <input data-rest-hours type="number" min="0" step="0.5" value="0" />
+      <input data-rest-hours type="number" min="0" step="0.5" value={labels.defaultRestHours ?? '0'} />
     </label>
     <label>
       <span>{labels.restMultiplier}</span>
-      <input data-rest-multiplier type="number" min="0" max="10" step="0.01" value="2" />
+      <input data-rest-multiplier type="number" min="0" max="10" step="0.01" value={labels.defaultRestMultiplier ?? '2'} />
     </label>
     <label>
       <span>{labels.holidayHours}</span>
-      <input data-holiday-hours type="number" min="0" step="0.5" value="0" />
+      <input data-holiday-hours type="number" min="0" step="0.5" value={labels.defaultHolidayHours ?? '0'} />
     </label>
     <label>
       <span>{labels.holidayMultiplier}</span>
-      <input data-holiday-multiplier type="number" min="0" max="10" step="0.01" value="2" />
+      <input data-holiday-multiplier type="number" min="0" max="10" step="0.01" value={labels.defaultHolidayMultiplier ?? '2'} />
     </label>
   </div>
 
@@ -175,15 +175,15 @@ const { labels } = Astro.props;
     }
 
     function reset() {
-      fields.hourly.value = '200';
-      fields.weekdayHours.value = '4';
-      fields.weekdayMultiplier.value = '1.34';
-      fields.extendedHours.value = '0';
-      fields.extendedMultiplier.value = '1.67';
-      fields.restHours.value = '0';
-      fields.restMultiplier.value = '2';
-      fields.holidayHours.value = '0';
-      fields.holidayMultiplier.value = '2';
+      fields.hourly.value = labels.defaultHourly ?? '200';
+      fields.weekdayHours.value = labels.defaultWeekdayHours ?? '4';
+      fields.weekdayMultiplier.value = labels.defaultWeekdayMultiplier ?? '1.34';
+      fields.extendedHours.value = labels.defaultExtendedHours ?? '0';
+      fields.extendedMultiplier.value = labels.defaultExtendedMultiplier ?? '1.67';
+      fields.restHours.value = labels.defaultRestHours ?? '0';
+      fields.restMultiplier.value = labels.defaultRestMultiplier ?? '2';
+      fields.holidayHours.value = labels.defaultHolidayHours ?? '0';
+      fields.holidayMultiplier.value = labels.defaultHolidayMultiplier ?? '2';
       calculate();
     }
 

@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-19",
+  "activeLocaleBatch": "fr-20",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -807,30 +807,42 @@
       "key": "break-reminder",
       "type": "tool",
       "batch": "es-20",
+      "localeBatches": {
+        "fr": "fr-20"
+      },
       "paths": {
         "zh": "/tools/break-reminder/",
         "en": "/en/tools/break-reminder/",
-        "es": "/es/herramientas/recordatorio-descansos/"
+        "es": "/es/herramientas/recordatorio-descansos/",
+        "fr": "/fr/outils/rappel-pause-ecran/"
       }
     },
     {
       "key": "net-salary",
       "type": "tool",
       "batch": "es-20",
+      "localeBatches": {
+        "fr": "fr-20"
+      },
       "paths": {
         "zh": "/tools/net-salary/",
         "en": "/en/tools/net-salary/",
-        "es": "/es/herramientas/calculadora-sueldo-neto/"
+        "es": "/es/herramientas/calculadora-sueldo-neto/",
+        "fr": "/fr/outils/calculateur-salaire-net/"
       }
     },
     {
       "key": "overtime-pay",
       "type": "tool",
       "batch": "es-20",
+      "localeBatches": {
+        "fr": "fr-20"
+      },
       "paths": {
         "zh": "/tools/overtime-pay/",
         "en": "/en/tools/overtime-pay/",
-        "es": "/es/herramientas/calculadora-horas-extra/"
+        "es": "/es/herramientas/calculadora-horas-extra/",
+        "fr": "/fr/outils/calculateur-heures-supplementaires/"
       }
     },
     {

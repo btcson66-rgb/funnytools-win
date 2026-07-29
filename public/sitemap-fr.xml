@@ -64,6 +64,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/standard-deviation/" />
   </url>
   <url>
+    <loc>https://funnytools.win/fr/outils/calculateur-heures-supplementaires/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/overtime-pay/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/overtime-pay/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-horas-extra/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/calculateur-heures-supplementaires/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/overtime-pay/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/fr/outils/calculateur-jours-ouvres/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/business-days/" />
@@ -80,6 +89,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-porcentajes/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/calculateur-pourcentage/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/percentage-calculator/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/calculateur-salaire-net/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/net-salary/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/net-salary/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-sueldo-neto/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/calculateur-salaire-net/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/net-salary/" />
   </url>
   <url>
     <loc>https://funnytools.win/fr/outils/calculer-difference-entre-dates/</loc>
@@ -431,6 +449,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/que-comer-hoy/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/quoi-manger-ce-soir/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/what-to-eat/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/rappel-pause-ecran/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/break-reminder/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/break-reminder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/recordatorio-descansos/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/rappel-pause-ecran/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/break-reminder/" />
   </url>
   <url>
     <loc>https://funnytools.win/fr/outils/recadrer-image/</loc>

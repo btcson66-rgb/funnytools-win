@@ -1,0 +1,24 @@
+---
+import OvertimePay from '../../../components/tools/OvertimePay.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchOvertimePay,
+  frenchOvertimePayReview,
+} from '../../../i18n/expansion/fr-tools-20';
+---
+
+<ExpansionToolLayout
+  routeKey="overtime-pay"
+  canonicalPath="/fr/outils/calculateur-heures-supplementaires/"
+  locale="fr"
+  content={frenchOvertimePay}
+  categoryLabel="Salaire et travail"
+  review={frenchOvertimePayReview}
+  relatedTool={{
+    name: 'Calculateur de salaire net',
+    description: 'Testez un passage brut-net avec des taux entièrement documentés.',
+    href: '/fr/outils/calculateur-salaire-net/',
+  }}
+>
+  <OvertimePay labels={frenchOvertimePay.labels} />
+</ExpansionToolLayout>

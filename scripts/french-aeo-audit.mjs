@@ -135,6 +135,9 @@ const requiredTermsByKey = {
   'date-difference': ['calculer la différence entre deux dates', 'date de fin', '30,4375', 'inclure'],
   'age-calculator': ['calculateur d’âge', 'années révolues', '29 février', '70 battements'],
   'business-days': ['calculateur de jours ouvrés', 'jours ouvrables', 'jours calendaires', 'jours fériés'],
+  'break-reminder': ['rappel de pause écran', 'pause active', 'date.now', 'notification système'],
+  'net-salary': ['calculateur de salaire net', 'brut', 'urssaf', 'aucun taux français'],
+  'overtime-pay': ['calculateur d’heures supplémentaires', '1,25', '1,50', 'heures complémentaires'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',
