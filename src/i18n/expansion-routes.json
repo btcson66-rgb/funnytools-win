@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-28",
-  "activeBatch": "es-38",
+  "activeBatch": "es-39",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1141,6 +1141,36 @@
         "zh": "/category/draw/",
         "en": "/en/category/draw/",
         "es": "/es/categorias/dibujo/"
+      }
+    },
+    {
+      "key": "about",
+      "type": "page",
+      "batch": "es-39",
+      "paths": {
+        "zh": "/about/",
+        "en": "/en/about/",
+        "es": "/es/sobre-funnytools/"
+      }
+    },
+    {
+      "key": "contact",
+      "type": "page",
+      "batch": "es-39",
+      "paths": {
+        "zh": "/contact/",
+        "en": "/en/contact/",
+        "es": "/es/contacto/"
+      }
+    },
+    {
+      "key": "disclaimer",
+      "type": "page",
+      "batch": "es-39",
+      "paths": {
+        "zh": "/disclaimer/",
+        "en": "/en/disclaimer/",
+        "es": "/es/aviso-legal/"
       }
     }
   ]

@@ -21,6 +21,7 @@
     <lastmod>2026-07-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/about/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/about/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/sobre-funnytools/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/about/" />
   </url>
   <url>
@@ -100,6 +101,7 @@
     <lastmod>2026-07-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/contact/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/contact/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/contacto/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/contact/" />
   </url>
   <url>
@@ -107,6 +109,7 @@
     <lastmod>2026-07-10</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/disclaimer/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/disclaimer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/aviso-legal/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/disclaimer/" />
   </url>
   <url>
@@ -259,6 +262,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/merge-pdf-private-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/unir-pdf-sin-subir-archivos/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/merge-pdf-private-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/multiplication-fact-fluency-guide/</loc>
+    <lastmod>2026-07-27</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/password-strength-basics-guide/</loc>

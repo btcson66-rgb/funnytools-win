@@ -8,6 +8,10 @@ const registry = JSON.parse(readFileSync(join(root, 'src', 'i18n', 'expansion-ro
 const siteOrigin = 'https://funnytools.win';
 const failures = [];
 const pages = [];
+const specializedInformationPageTypes = {
+  about: 'AboutPage',
+  contact: 'ContactPage',
+};
 
 function fail(message) {
   failures.push(message);
@@ -181,8 +185,11 @@ for (const route of spanishRoutes) {
   }
   if (route.type === 'home' && !types.has('WebSite')) fail(`${pathname}: homepage missing WebSite JSON-LD.`);
   if (route.key === 'tools-index' && !types.has('CollectionPage')) fail(`${pathname}: tools index missing CollectionPage JSON-LD.`);
-  if (route.type === 'page' && route.key !== 'tools-index' && !types.has('WebPage')) {
-    fail(`${pathname}: information page missing WebPage JSON-LD.`);
+  if (route.type === 'page' && route.key !== 'tools-index') {
+    const expectedInformationType = specializedInformationPageTypes[route.key] ?? 'WebPage';
+    if (!types.has(expectedInformationType)) {
+      fail(`${pathname}: information page missing ${expectedInformationType} JSON-LD.`);
+    }
   }
   if (/(?:How to use|What this tool can do|Use cases|Last updated|Privacy & local processing|Add row|Move up|Move down)/i.test(text)) {
     fail(`${pathname}: English UI or template leakage detected.`);

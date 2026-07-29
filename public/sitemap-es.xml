@@ -9,6 +9,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/" />
   </url>
   <url>
+    <loc>https://funnytools.win/es/aviso-legal/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/disclaimer/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/disclaimer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/aviso-legal/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/disclaimer/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/es/categorias/azar/</loc>
     <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/category/random/" />
@@ -87,6 +95,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/about-tools/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/como-funcionan-las-herramientas/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/about-tools/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/contacto/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/contact/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/contact/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/contacto/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/contact/" />
   </url>
   <url>
     <loc>https://funnytools.win/es/flujos/informe-estadistico-investigacion/</loc>
@@ -911,5 +927,13 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/privacy/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/privacidad/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/privacy/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/es/sobre-funnytools/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/about/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/about/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/sobre-funnytools/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/about/" />
   </url>
 </urlset>
