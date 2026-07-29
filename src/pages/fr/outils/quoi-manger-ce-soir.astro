@@ -1,0 +1,24 @@
+---
+import WhatToEat from '../../../components/tools/WhatToEat.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchWhatToEat,
+  frenchWhatToEatReview,
+} from '../../../i18n/expansion/fr-tools-18';
+---
+
+<ExpansionToolLayout
+  routeKey="what-to-eat"
+  canonicalPath="/fr/outils/quoi-manger-ce-soir/"
+  content={frenchWhatToEat}
+  categoryLabel="Repas et décisions"
+  review={frenchWhatToEatReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Choisir entre deux options',
+    description: 'Départagez deux solutions précises lorsque vous n’avez pas besoin d’une liste complète de repas.',
+    href: '/fr/outils/choisir-entre-deux-options/',
+  }}
+>
+  <WhatToEat labels={frenchWhatToEat.labels} />
+</ExpansionToolLayout>

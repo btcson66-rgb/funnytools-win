@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-17",
+  "activeLocaleBatch": "fr-18",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -723,30 +723,42 @@
       "key": "what-to-eat",
       "type": "tool",
       "batch": "es-18",
+      "localeBatches": {
+        "fr": "fr-18"
+      },
       "paths": {
         "zh": "/tools/what-to-eat/",
         "en": "/en/tools/what-to-eat/",
-        "es": "/es/herramientas/que-comer-hoy/"
+        "es": "/es/herramientas/que-comer-hoy/",
+        "fr": "/fr/outils/quoi-manger-ce-soir/"
       }
     },
     {
       "key": "countdown-timer",
       "type": "tool",
       "batch": "es-18",
+      "localeBatches": {
+        "fr": "fr-18"
+      },
       "paths": {
         "zh": "/tools/countdown-timer/",
         "en": "/en/tools/countdown-timer/",
-        "es": "/es/herramientas/temporizador-online/"
+        "es": "/es/herramientas/temporizador-online/",
+        "fr": "/fr/outils/minuteur-en-ligne/"
       }
     },
     {
       "key": "stopwatch",
       "type": "tool",
       "batch": "es-18",
+      "localeBatches": {
+        "fr": "fr-18"
+      },
       "paths": {
         "zh": "/tools/stopwatch/",
         "en": "/en/tools/stopwatch/",
-        "es": "/es/herramientas/cronometro-online/"
+        "es": "/es/herramientas/cronometro-online/",
+        "fr": "/fr/outils/chronometre-en-ligne/"
       }
     },
     {

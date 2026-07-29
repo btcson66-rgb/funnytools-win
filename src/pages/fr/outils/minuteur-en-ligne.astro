@@ -1,0 +1,24 @@
+---
+import CountdownTimer from '../../../components/tools/CountdownTimer.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchCountdownTimer,
+  frenchCountdownTimerReview,
+} from '../../../i18n/expansion/fr-tools-18';
+---
+
+<ExpansionToolLayout
+  routeKey="countdown-timer"
+  canonicalPath="/fr/outils/minuteur-en-ligne/"
+  content={frenchCountdownTimer}
+  categoryLabel="Temps et organisation"
+  review={frenchCountdownTimerReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Chronomètre en ligne',
+    description: 'Mesurez un temps écoulé et enregistrez des tours lorsque la fin n’est pas fixée à l’avance.',
+    href: '/fr/outils/chronometre-en-ligne/',
+  }}
+>
+  <CountdownTimer labels={frenchCountdownTimer.labels} />
+</ExpansionToolLayout>

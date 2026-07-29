@@ -129,6 +129,9 @@ const requiredTermsByKey = {
   'random-group-generator': ['générateur de groupes aléatoires', 'effectifs', 'fisher–yates', 'groupes de besoins'],
   'dice-roller': ['lancer de dés en ligne', 'dé virtuel', 'd20', 'probabilité'],
   'this-or-that': ['choisir entre deux options', '50/50', 'pile ou face', 'consentement'],
+  'what-to-eat': ['quoi manger ce soir', 'idée repas', 'une entrée par ligne', 'allergène'],
+  'countdown-timer': ['minuteur en ligne', 'compte à rebours', 'date et heure', 'mise en veille'],
+  stopwatch: ['chronomètre en ligne', 'temps partiel', 'temps total', 'performance.now'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

@@ -73,6 +73,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/this-or-that/" />
   </url>
   <url>
+    <loc>https://funnytools.win/fr/outils/chronometre-en-ligne/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/stopwatch/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/stopwatch/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/cronometro-online/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/chronometre-en-ligne/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/stopwatch/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/fr/outils/compresser-image/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-compressor/" />
@@ -377,6 +386,24 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/tirar-dados-online/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/lancer-des-en-ligne/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/dice-roller/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/minuteur-en-ligne/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/countdown-timer/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/countdown-timer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/temporizador-online/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/minuteur-en-ligne/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/countdown-timer/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/quoi-manger-ce-soir/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/what-to-eat/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/what-to-eat/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/que-comer-hoy/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/quoi-manger-ce-soir/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/what-to-eat/" />
   </url>
   <url>
     <loc>https://funnytools.win/fr/outils/recadrer-image/</loc>
