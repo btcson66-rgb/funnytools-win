@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-22",
+  "activeLocaleBatch": "fr-23",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -933,30 +933,42 @@
       "key": "sketchpad",
       "type": "tool",
       "batch": "es-23",
+      "localeBatches": {
+        "fr": "fr-23"
+      },
       "paths": {
         "zh": "/tools/sketchpad/",
         "en": "/en/tools/sketchpad/",
-        "es": "/es/herramientas/pizarra-dibujo-online/"
+        "es": "/es/herramientas/pizarra-dibujo-online/",
+        "fr": "/fr/outils/tableau-blanc-dessin-en-ligne/"
       }
     },
     {
       "key": "flowchart",
       "type": "tool",
       "batch": "es-23",
+      "localeBatches": {
+        "fr": "fr-23"
+      },
       "paths": {
         "zh": "/tools/flowchart/",
         "en": "/en/tools/flowchart/",
-        "es": "/es/herramientas/crear-diagrama-flujo/"
+        "es": "/es/herramientas/crear-diagrama-flujo/",
+        "fr": "/fr/outils/creer-diagramme-flux/"
       }
     },
     {
       "key": "random-student-picker",
       "type": "tool",
       "batch": "es-23",
+      "localeBatches": {
+        "fr": "fr-23"
+      },
       "paths": {
         "zh": "/tools/random-student-picker/",
         "en": "/en/tools/random-student-picker/",
-        "es": "/es/herramientas/selector-aleatorio-alumnos/"
+        "es": "/es/herramientas/selector-aleatorio-alumnos/",
+        "fr": "/fr/outils/tirage-au-sort-eleves/"
       }
     },
     {

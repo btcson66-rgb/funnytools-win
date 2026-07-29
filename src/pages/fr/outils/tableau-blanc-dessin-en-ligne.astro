@@ -1,0 +1,24 @@
+---
+import Sketchpad from '../../../components/tools/Sketchpad.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchSketchpad,
+  frenchSketchpadReview,
+} from '../../../i18n/expansion/fr-tools-23';
+---
+
+<ExpansionToolLayout
+  routeKey="sketchpad"
+  canonicalPath="/fr/outils/tableau-blanc-dessin-en-ligne/"
+  locale="fr"
+  content={frenchSketchpad}
+  categoryLabel="Dessin et communication visuelle"
+  review={frenchSketchpadReview}
+  relatedTool={{
+    name: 'Créer un diagramme de flux',
+    description: 'Organisez des étapes et décisions avec des nœuds modifiables et des flèches.',
+    href: '/fr/outils/creer-diagramme-flux/',
+  }}
+>
+  <Sketchpad labels={frenchSketchpad.labels} />
+</ExpansionToolLayout>

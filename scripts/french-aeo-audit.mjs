@@ -144,6 +144,9 @@ const requiredTermsByKey = {
   'pomodoro-timer': ['minuteur pomodoro en ligne', '25 minutes', 'pause longue', 'date.now'],
   inflation: ['calculateur d’inflation', 'pouvoir d’achat', 'ipc', 'insee'],
   'cad-2d': ['cao 2d en ligne', 'accrochage aux extrémités', 'mode orthogonal', 'svg'],
+  sketchpad: ['tableau blanc en ligne', 'dessiner en ligne', 'png', 'pointer events'],
+  flowchart: ['créer un diagramme de flux', 'losange de décision', 'flèche', 'processus'],
+  'random-student-picker': ['tirage au sort d’un élève', 'sans répétition', 'crypto.getrandomvalues', 'données personnelles'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

@@ -1,0 +1,24 @@
+---
+import FlowchartMaker from '../../../components/tools/FlowchartMaker.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchFlowchart,
+  frenchFlowchartReview,
+} from '../../../i18n/expansion/fr-tools-23';
+---
+
+<ExpansionToolLayout
+  routeKey="flowchart"
+  canonicalPath="/fr/outils/creer-diagramme-flux/"
+  locale="fr"
+  content={frenchFlowchart}
+  categoryLabel="Diagrammes et processus"
+  review={frenchFlowchartReview}
+  relatedTool={{
+    name: 'Tableau blanc pour dessiner',
+    description: 'Réalisez un croquis libre avec couleur, gomme, annulation et téléchargement PNG.',
+    href: '/fr/outils/tableau-blanc-dessin-en-ligne/',
+  }}
+>
+  <FlowchartMaker labels={frenchFlowchart.labels} />
+</ExpansionToolLayout>

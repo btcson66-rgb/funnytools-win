@@ -1,0 +1,24 @@
+---
+import RandomStudentPicker from '../../../components/tools/RandomStudentPicker.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchRandomStudentPicker,
+  frenchRandomStudentPickerReview,
+} from '../../../i18n/expansion/fr-tools-23';
+---
+
+<ExpansionToolLayout
+  routeKey="random-student-picker"
+  canonicalPath="/fr/outils/tirage-au-sort-eleves/"
+  locale="fr"
+  content={frenchRandomStudentPicker}
+  categoryLabel="Classe et participation"
+  review={frenchRandomStudentPickerReview}
+  relatedTool={{
+    name: 'Minuteur Pomodoro',
+    description: 'Organisez un travail en périodes de concentration et pauses réglables.',
+    href: '/fr/outils/minuteur-pomodoro/',
+  }}
+>
+  <RandomStudentPicker labels={frenchRandomStudentPicker.labels} />
+</ExpansionToolLayout>
