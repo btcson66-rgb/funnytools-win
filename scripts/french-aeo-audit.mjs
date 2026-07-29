@@ -96,6 +96,9 @@ const requiredTermsByKey = {
   'image-rotate-flip': ['faire pivoter une image', 'retourner', 'effet miroir', '90°'],
   'image-to-base64': ['convertir une image en base64', 'data uri', 'type mime', 'chiffrement'],
   'images-to-pdf': ['convertir des images en pdf', 'jpg', 'png', 'ordre'],
+  'rotate-pdf': ['faire pivoter un pdf', 'pages précises', '90°', 'rotation'],
+  'delete-pdf-pages': ['supprimer des pages', 'plages', 'au moins une', 'métadonnées'],
+  'extract-pdf-pages': ['extraire des pages', 'conserver', 'ordre', 'doublon'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

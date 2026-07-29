@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-06",
+  "activeLocaleBatch": "fr-07",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -261,30 +261,42 @@
       "key": "rotate-pdf",
       "type": "tool",
       "batch": "es-07",
+      "localeBatches": {
+        "fr": "fr-07"
+      },
       "paths": {
         "zh": "/tools/rotate-pdf/",
         "en": "/en/tools/rotate-pdf/",
-        "es": "/es/herramientas/rotar-pdf/"
+        "es": "/es/herramientas/rotar-pdf/",
+        "fr": "/fr/outils/faire-pivoter-pdf/"
       }
     },
     {
       "key": "delete-pdf-pages",
       "type": "tool",
       "batch": "es-07",
+      "localeBatches": {
+        "fr": "fr-07"
+      },
       "paths": {
         "zh": "/tools/delete-pdf-pages/",
         "en": "/en/tools/delete-pdf-pages/",
-        "es": "/es/herramientas/eliminar-paginas-pdf/"
+        "es": "/es/herramientas/eliminar-paginas-pdf/",
+        "fr": "/fr/outils/supprimer-pages-pdf/"
       }
     },
     {
       "key": "extract-pdf-pages",
       "type": "tool",
       "batch": "es-07",
+      "localeBatches": {
+        "fr": "fr-07"
+      },
       "paths": {
         "zh": "/tools/extract-pdf-pages/",
         "en": "/en/tools/extract-pdf-pages/",
-        "es": "/es/herramientas/extraer-paginas-pdf/"
+        "es": "/es/herramientas/extraer-paginas-pdf/",
+        "fr": "/fr/outils/extraire-pages-pdf/"
       }
     },
     {

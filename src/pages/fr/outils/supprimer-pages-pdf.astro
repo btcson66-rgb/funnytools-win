@@ -1,0 +1,21 @@
+---
+import DeletePdfPages from '../../../components/tools/DeletePdfPages.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchDeletePdfPages, frenchDeletePdfPagesReview } from '../../../i18n/expansion/fr-tools-07';
+---
+
+<ExpansionToolLayout
+  routeKey="delete-pdf-pages"
+  canonicalPath="/fr/outils/supprimer-pages-pdf/"
+  content={frenchDeletePdfPages}
+  categoryLabel="PDF et documents"
+  review={frenchDeletePdfPagesReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Extraire des pages d’un PDF',
+    description: 'Créez plutôt une copie avec seulement les quelques pages à conserver.',
+    href: '/fr/outils/extraire-pages-pdf/',
+  }}
+>
+  <DeletePdfPages labels={frenchDeletePdfPages.labels} />
+</ExpansionToolLayout>

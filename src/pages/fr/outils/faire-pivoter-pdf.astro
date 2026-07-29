@@ -1,0 +1,21 @@
+---
+import RotatePdf from '../../../components/tools/RotatePdf.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchRotatePdf, frenchRotatePdfReview } from '../../../i18n/expansion/fr-tools-07';
+---
+
+<ExpansionToolLayout
+  routeKey="rotate-pdf"
+  canonicalPath="/fr/outils/faire-pivoter-pdf/"
+  content={frenchRotatePdf}
+  categoryLabel="PDF et documents"
+  review={frenchRotatePdfReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Supprimer des pages d’un PDF',
+    description: 'Retirez ensuite les feuilles qui ne doivent plus figurer dans la copie.',
+    href: '/fr/outils/supprimer-pages-pdf/',
+  }}
+>
+  <RotatePdf labels={frenchRotatePdf.labels} />
+</ExpansionToolLayout>

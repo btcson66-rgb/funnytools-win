@@ -1,0 +1,21 @@
+---
+import ExtractPdfPages from '../../../components/tools/ExtractPdfPages.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchExtractPdfPages, frenchExtractPdfPagesReview } from '../../../i18n/expansion/fr-tools-07';
+---
+
+<ExpansionToolLayout
+  routeKey="extract-pdf-pages"
+  canonicalPath="/fr/outils/extraire-pages-pdf/"
+  content={frenchExtractPdfPages}
+  categoryLabel="PDF et documents"
+  review={frenchExtractPdfPagesReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Supprimer des pages d’un PDF',
+    description: 'Conservez tout le document sauf quelques pages précisément indiquées.',
+    href: '/fr/outils/supprimer-pages-pdf/',
+  }}
+>
+  <ExtractPdfPages labels={frenchExtractPdfPages.labels} />
+</ExpansionToolLayout>
