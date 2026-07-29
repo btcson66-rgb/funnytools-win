@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-21",
+  "activeLocaleBatch": "fr-22",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -891,30 +891,42 @@
       "key": "pomodoro-timer",
       "type": "tool",
       "batch": "es-22",
+      "localeBatches": {
+        "fr": "fr-22"
+      },
       "paths": {
         "zh": "/tools/pomodoro-timer/",
         "en": "/en/tools/pomodoro-timer/",
-        "es": "/es/herramientas/temporizador-pomodoro/"
+        "es": "/es/herramientas/temporizador-pomodoro/",
+        "fr": "/fr/outils/minuteur-pomodoro/"
       }
     },
     {
       "key": "inflation",
       "type": "tool",
       "batch": "es-22",
+      "localeBatches": {
+        "fr": "fr-22"
+      },
       "paths": {
         "zh": "/tools/inflation/",
         "en": "/en/tools/inflation/",
-        "es": "/es/herramientas/calculadora-inflacion/"
+        "es": "/es/herramientas/calculadora-inflacion/",
+        "fr": "/fr/outils/calculateur-inflation-pouvoir-achat/"
       }
     },
     {
       "key": "cad-2d",
       "type": "tool",
       "batch": "es-22",
+      "localeBatches": {
+        "fr": "fr-22"
+      },
       "paths": {
         "zh": "/tools/cad-2d/",
         "en": "/en/tools/cad-2d/",
-        "es": "/es/herramientas/cad-2d-online/"
+        "es": "/es/herramientas/cad-2d-online/",
+        "fr": "/fr/outils/cao-2d-en-ligne/"
       }
     },
     {

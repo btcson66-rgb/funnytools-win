@@ -10,15 +10,15 @@ const { labels } = Astro.props;
   <div class="form-grid">
     <label>
       <span>{labels.amount}</span>
-      <input data-amount type="number" inputmode="decimal" min="0" step="0.01" value="10000" />
+      <input data-amount type="number" inputmode="decimal" min="0" step="0.01" value={labels.defaultAmount || '10000'} />
     </label>
     <label>
       <span>{labels.annualRate}</span>
-      <input data-rate type="number" inputmode="decimal" min="-99.99" max="1000" step="0.01" value="3" />
+      <input data-rate type="number" inputmode="decimal" min="-99.99" max="1000" step="0.01" value={labels.defaultAnnualRate || '3'} />
     </label>
     <label>
       <span>{labels.years}</span>
-      <input data-years type="number" inputmode="numeric" min="0" max="200" step="1" value="5" />
+      <input data-years type="number" inputmode="numeric" min="0" max="200" step="1" value={labels.defaultYears || '5'} />
     </label>
     <label>
       <span>{labels.mode}</span>
@@ -37,6 +37,7 @@ const { labels } = Astro.props;
   </div>
 
   <p class="form-error" data-error role="alert" hidden></p>
+  {labels.assumption && <p class="note">{labels.assumption}</p>}
   <div class="stats-grid finance-stats" aria-live="polite">
     <div><span>{labels.adjustedAmount}</span><strong data-adjusted>-</strong></div>
     <div><span>{labels.change}</span><strong data-change>-</strong></div>
@@ -150,9 +151,9 @@ const { labels } = Astro.props;
     }
 
     function reset() {
-      amountInput.value = '10000';
-      rateInput.value = '3';
-      yearsInput.value = '5';
+      amountInput.value = labels.defaultAmount || '10000';
+      rateInput.value = labels.defaultAnnualRate || '3';
+      yearsInput.value = labels.defaultYears || '5';
       modeInput.value = 'futureCost';
       calculate();
     }

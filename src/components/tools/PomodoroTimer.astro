@@ -10,15 +10,15 @@ const { labels } = Astro.props;
   <div class="form-grid">
     <label>
       <span>{labels.workMinutes}</span>
-      <input data-work type="number" inputmode="numeric" value="25" min="1" max="180" step="1" />
+      <input data-work type="number" inputmode="numeric" value={labels.defaultWorkMinutes || '25'} min="1" max="180" step="1" />
     </label>
     <label>
       <span>{labels.breakMinutes}</span>
-      <input data-break type="number" inputmode="numeric" value="5" min="1" max="180" step="1" />
+      <input data-break type="number" inputmode="numeric" value={labels.defaultBreakMinutes || '5'} min="1" max="180" step="1" />
     </label>
     <label>
       <span>{labels.longBreakMinutes}</span>
-      <input data-long-break type="number" inputmode="numeric" value="15" min="1" max="180" step="1" />
+      <input data-long-break type="number" inputmode="numeric" value={labels.defaultLongBreakMinutes || '15'} min="1" max="180" step="1" />
     </label>
   </div>
   <div class="timer-panel">
@@ -32,6 +32,7 @@ const { labels } = Astro.props;
     <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
   </div>
   <p class="form-error" data-error role="alert" hidden></p>
+  {labels.assumption && <p class="note">{labels.assumption}</p>}
 </section>
 
 <script>

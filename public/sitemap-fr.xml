@@ -73,6 +73,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/overtime-pay/" />
   </url>
   <url>
+    <loc>https://funnytools.win/fr/outils/calculateur-inflation-pouvoir-achat/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/inflation/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/inflation/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-inflacion/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/calculateur-inflation-pouvoir-achat/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/inflation/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/fr/outils/calculateur-interets-composes/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/compound-interest/" />
@@ -134,6 +143,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calcular-diferencia-entre-fechas/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/calculer-difference-entre-dates/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/date-difference/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/cao-2d-en-ligne/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/cad-2d/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/cad-2d/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/cad-2d-online/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/cao-2d-en-ligne/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/cad-2d/" />
   </url>
   <url>
     <loc>https://funnytools.win/fr/outils/choisir-entre-deux-options/</loc>
@@ -467,6 +485,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/temporizador-online/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/minuteur-en-ligne/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/countdown-timer/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/minuteur-pomodoro/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pomodoro-timer/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/pomodoro-timer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/temporizador-pomodoro/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/minuteur-pomodoro/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pomodoro-timer/" />
   </url>
   <url>
     <loc>https://funnytools.win/fr/outils/quoi-manger-ce-soir/</loc>

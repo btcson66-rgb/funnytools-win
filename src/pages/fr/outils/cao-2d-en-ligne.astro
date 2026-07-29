@@ -1,0 +1,24 @@
+---
+import Cad2dBoard from '../../../components/tools/Cad2dBoard.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchCad2d,
+  frenchCad2dReview,
+} from '../../../i18n/expansion/fr-tools-22';
+---
+
+<ExpansionToolLayout
+  routeKey="cad-2d"
+  canonicalPath="/fr/outils/cao-2d-en-ligne/"
+  locale="fr"
+  content={frenchCad2d}
+  categoryLabel="Conception et dessin technique"
+  review={frenchCad2dReview}
+  relatedTool={{
+    name: 'Générateur de couleurs',
+    description: 'Créez des couleurs HEX, RGB et HSL pour vos éléments graphiques.',
+    href: '/fr/outils/generateur-couleurs-hex-rgb-hsl/',
+  }}
+>
+  <Cad2dBoard labels={frenchCad2d.labels} />
+</ExpansionToolLayout>

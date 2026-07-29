@@ -1,0 +1,24 @@
+---
+import PomodoroTimer from '../../../components/tools/PomodoroTimer.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchPomodoroTimer,
+  frenchPomodoroTimerReview,
+} from '../../../i18n/expansion/fr-tools-22';
+---
+
+<ExpansionToolLayout
+  routeKey="pomodoro-timer"
+  canonicalPath="/fr/outils/minuteur-pomodoro/"
+  locale="fr"
+  content={frenchPomodoroTimer}
+  categoryLabel="Temps et concentration"
+  review={frenchPomodoroTimerReview}
+  relatedTool={{
+    name: 'Rappel de pause écran',
+    description: 'Programmez des rappels réguliers pour vous lever, regarder au loin ou changer de posture.',
+    href: '/fr/outils/rappel-pause-ecran/',
+  }}
+>
+  <PomodoroTimer labels={frenchPomodoroTimer.labels} />
+</ExpansionToolLayout>

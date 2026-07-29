@@ -141,6 +141,9 @@ const requiredTermsByKey = {
   'mortgage-payment': ['calculateur de mensualité de prêt immobilier', 'taux nominal', 'taeg', 'assurance emprunteur'],
   'compound-interest': ['calculateur d’intérêts composés', 'versements mensuels', 'capitalisation', 'aucun rendement'],
   'savings-goal': ['calculateur d’objectif d’épargne', 'combien verser par mois', '1 200 mois', 'inflation'],
+  'pomodoro-timer': ['minuteur pomodoro en ligne', '25 minutes', 'pause longue', 'date.now'],
+  inflation: ['calculateur d’inflation', 'pouvoir d’achat', 'ipc', 'insee'],
+  'cad-2d': ['cao 2d en ligne', 'accrochage aux extrémités', 'mode orthogonal', 'svg'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

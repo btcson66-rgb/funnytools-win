@@ -1,0 +1,24 @@
+---
+import InflationCalculator from '../../../components/tools/InflationCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchInflationCalculator,
+  frenchInflationCalculatorReview,
+} from '../../../i18n/expansion/fr-tools-22';
+---
+
+<ExpansionToolLayout
+  routeKey="inflation"
+  canonicalPath="/fr/outils/calculateur-inflation-pouvoir-achat/"
+  locale="fr"
+  content={frenchInflationCalculator}
+  categoryLabel="Argent et pouvoir d’achat"
+  review={frenchInflationCalculatorReview}
+  relatedTool={{
+    name: 'Calculateur d’objectif d’épargne',
+    description: 'Transformez un capital cible en durée ou versement mensuel.',
+    href: '/fr/outils/calculateur-objectif-epargne/',
+  }}
+>
+  <InflationCalculator labels={frenchInflationCalculator.labels} />
+</ExpansionToolLayout>
