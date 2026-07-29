@@ -1,0 +1,12 @@
+---
+import ExpansionInfoLayout from '../../../layouts/ExpansionInfoLayout.astro';
+import { spanishStudentsAudience } from '../../../i18n/expansion/es-audiences-42';
+---
+
+<ExpansionInfoLayout
+  currentKey="audience-students"
+  canonicalPath="/es/para/estudiantes/"
+  content={spanishStudentsAudience}
+  pageType="CollectionPage"
+  breadcrumbParent={{ name: 'Herramientas por perfil', path: '/es/para/' }}
+/>

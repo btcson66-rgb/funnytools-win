@@ -15,6 +15,9 @@ const specializedInformationPageTypes = {
   'education-statistics': 'CollectionPage',
   'guides-index': 'CollectionPage',
   'workflows-index': 'CollectionPage',
+  'for-index': 'CollectionPage',
+  'audience-teachers': 'CollectionPage',
+  'audience-students': 'CollectionPage',
 };
 
 function fail(message) {
@@ -177,6 +180,9 @@ for (const route of spanishRoutes) {
     'education-statistics': ['estadística educativa', 'puntuación z', 'comprobar'],
     'guides-index': ['guías', 'herramientas', 'comprobar'],
     'workflows-index': ['flujos de trabajo', 'entrada', 'salida'],
+    'for-index': ['docentes', 'estudiantes', 'comprobar'],
+    'audience-teachers': ['herramientas para docentes', 'alumnos', 'comprobar'],
+    'audience-students': ['herramientas para estudiantes', 'entrega', 'comprobar'],
   };
   const requiredTerms = requiredTermsByKey[route.key] ?? ['herramientas', 'navegador', 'comprobar'];
 

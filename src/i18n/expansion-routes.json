@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-29",
-  "activeBatch": "es-41",
+  "activeBatch": "es-42",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1231,6 +1231,36 @@
         "zh": "/workflows/",
         "en": "/en/workflows/",
         "es": "/es/flujos/"
+      }
+    },
+    {
+      "key": "for-index",
+      "type": "page",
+      "batch": "es-42",
+      "paths": {
+        "zh": "/for/",
+        "en": "/en/for/",
+        "es": "/es/para/"
+      }
+    },
+    {
+      "key": "audience-teachers",
+      "type": "page",
+      "batch": "es-42",
+      "paths": {
+        "zh": "/for/teachers/",
+        "en": "/en/for/teachers/",
+        "es": "/es/para/docentes/"
+      }
+    },
+    {
+      "key": "audience-students",
+      "type": "page",
+      "batch": "es-42",
+      "paths": {
+        "zh": "/for/students/",
+        "en": "/en/for/students/",
+        "es": "/es/para/estudiantes/"
       }
     }
   ]
