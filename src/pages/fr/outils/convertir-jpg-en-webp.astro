@@ -1,0 +1,16 @@
+---
+import ImageFormatConverter from '../../../components/tools/ImageFormatConverter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchJpgToWebp, frenchJpgToWebpReview } from '../../../i18n/expansion/fr-tools-05';
+---
+<ExpansionToolLayout
+  routeKey="jpg-to-webp"
+  canonicalPath="/fr/outils/convertir-jpg-en-webp/"
+  content={frenchJpgToWebp}
+  categoryLabel="Convertisseur d’image"
+  review={frenchJpgToWebpReview}
+  relatedTool={{ name: 'Compresser une image', description: 'Comparez JPEG, PNG et WebP lorsque format et poids comptent.', href: '/fr/outils/compresser-image/' }}
+  locale="fr"
+>
+  <ImageFormatConverter labels={frenchJpgToWebp.labels} />
+</ExpansionToolLayout>

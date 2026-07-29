@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-04",
+  "activeLocaleBatch": "fr-05",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -177,30 +177,42 @@
       "key": "image-crop",
       "type": "tool",
       "batch": "es-05",
+      "localeBatches": {
+        "fr": "fr-05"
+      },
       "paths": {
         "zh": "/tools/image-crop/",
         "en": "/en/tools/image-crop/",
-        "es": "/es/herramientas/recortar-imagen/"
+        "es": "/es/herramientas/recortar-imagen/",
+        "fr": "/fr/outils/recadrer-image/"
       }
     },
     {
       "key": "jpg-to-webp",
       "type": "tool",
       "batch": "es-05",
+      "localeBatches": {
+        "fr": "fr-05"
+      },
       "paths": {
         "zh": "/tools/jpg-to-webp/",
         "en": "/en/tools/jpg-to-webp/",
-        "es": "/es/herramientas/convertir-jpg-a-webp/"
+        "es": "/es/herramientas/convertir-jpg-a-webp/",
+        "fr": "/fr/outils/convertir-jpg-en-webp/"
       }
     },
     {
       "key": "webp-to-jpg",
       "type": "tool",
       "batch": "es-05",
+      "localeBatches": {
+        "fr": "fr-05"
+      },
       "paths": {
         "zh": "/tools/webp-to-jpg/",
         "en": "/en/tools/webp-to-jpg/",
-        "es": "/es/herramientas/convertir-webp-a-jpg/"
+        "es": "/es/herramientas/convertir-webp-a-jpg/",
+        "fr": "/fr/outils/convertir-webp-en-jpg/"
       }
     },
     {

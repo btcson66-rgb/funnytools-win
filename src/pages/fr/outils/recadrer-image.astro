@@ -1,0 +1,16 @@
+---
+import ImageCrop from '../../../components/tools/ImageCrop.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchImageCropper, frenchImageCropperReview } from '../../../i18n/expansion/fr-tools-05';
+---
+<ExpansionToolLayout
+  routeKey="image-crop"
+  canonicalPath="/fr/outils/recadrer-image/"
+  content={frenchImageCropper}
+  categoryLabel="Outil pour les images"
+  review={frenchImageCropperReview}
+  relatedTool={{ name: 'Redimensionner une image', description: 'Ajustez ensuite les dimensions exactes sans changer le cadrage.', href: '/fr/outils/redimensionner-image/' }}
+  locale="fr"
+>
+  <ImageCrop labels={frenchImageCropper.labels} />
+</ExpansionToolLayout>

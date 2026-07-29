@@ -90,6 +90,9 @@ const requiredTermsByKey = {
   'image-resizer': ['redimensionner une image', 'largeur', 'hauteur', 'proportions'],
   'png-to-jpg': ['convertir un png en jpg', 'fond blanc', 'transparence', 'qualité'],
   'jpg-to-png': ['convertir un jpg en png', 'fond transparent', 'poids', 'dans le navigateur'],
+  'image-crop': ['recadrer une image', 'recadrage', 'rectangle', 'pixels'],
+  'jpg-to-webp': ['convertir un jpg en webp', 'qualité', 'poids', 'compatibilité'],
+  'webp-to-jpg': ['convertir un webp en jpg', 'fond blanc', 'transparence', 'animation'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',
