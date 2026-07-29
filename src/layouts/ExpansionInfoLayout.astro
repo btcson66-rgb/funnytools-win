@@ -124,6 +124,16 @@ const breadcrumbJsonLd = {
             {section.link.suffix}
           </p>
         )}
+        {section.links && (
+          <div class="resource-links">
+            {section.links.map((link) => (
+              <a href={link.href}>
+                <strong>{link.label}</strong>
+                <span>{link.description}</span>
+              </a>
+            ))}
+          </div>
+        )}
       </section>
     ))}
 
@@ -212,5 +222,40 @@ const breadcrumbJsonLd = {
 
   .section-link a {
     font-weight: 700;
+  }
+
+  .resource-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .resource-links a {
+    display: grid;
+    gap: 6px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--card);
+  }
+
+  .resource-links a:hover {
+    border-color: var(--brand);
+  }
+
+  .resource-links strong {
+    line-height: 1.35;
+  }
+
+  .resource-links span {
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 680px) {
+    .resource-links {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

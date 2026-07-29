@@ -12,6 +12,9 @@ const specializedInformationPageTypes = {
   about: 'AboutPage',
   contact: 'ContactPage',
   shop: 'CollectionPage',
+  'education-statistics': 'CollectionPage',
+  'guides-index': 'CollectionPage',
+  'workflows-index': 'CollectionPage',
 };
 
 function fail(message) {
@@ -171,6 +174,9 @@ for (const route of spanishRoutes) {
     terms: ['condiciones de uso', 'responsabilidad', 'comprobar'],
     support: ['apoyar funnytools', 'informar', 'comprobar'],
     shop: ['btcson lab', 'materiales digitales', 'comprobar'],
+    'education-statistics': ['estadística educativa', 'puntuación z', 'comprobar'],
+    'guides-index': ['guías', 'herramientas', 'comprobar'],
+    'workflows-index': ['flujos de trabajo', 'entrada', 'salida'],
   };
   const requiredTerms = requiredTermsByKey[route.key] ?? ['herramientas', 'navegador', 'comprobar'];
 

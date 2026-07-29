@@ -8,6 +8,11 @@ export interface SpanishInfoSection {
     href: string;
     suffix: string;
   };
+  links?: {
+    label: string;
+    href: string;
+    description: string;
+  }[];
 }
 
 export interface SpanishInfoPage {

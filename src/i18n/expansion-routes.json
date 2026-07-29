@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-29",
-  "activeBatch": "es-40",
+  "activeBatch": "es-41",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1201,6 +1201,36 @@
         "zh": "/shop/",
         "en": "/en/shop/",
         "es": "/es/tienda/"
+      }
+    },
+    {
+      "key": "education-statistics",
+      "type": "page",
+      "batch": "es-41",
+      "paths": {
+        "zh": "/education-statistics/",
+        "en": "/en/education-statistics/",
+        "es": "/es/estadisticas-educativas/"
+      }
+    },
+    {
+      "key": "guides-index",
+      "type": "page",
+      "batch": "es-41",
+      "paths": {
+        "zh": "/guides/",
+        "en": "/en/guides/",
+        "es": "/es/guias/"
+      }
+    },
+    {
+      "key": "workflows-index",
+      "type": "page",
+      "batch": "es-41",
+      "paths": {
+        "zh": "/workflows/",
+        "en": "/en/workflows/",
+        "es": "/es/flujos/"
       }
     }
   ]
