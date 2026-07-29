@@ -1,0 +1,21 @@
+---
+import DataConverter from '../../../components/tools/DataConverter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchJsonToCsv, frenchJsonToCsvReview } from '../../../i18n/expansion/fr-tools-14';
+---
+
+<ExpansionToolLayout
+  routeKey="json-to-csv"
+  canonicalPath="/fr/outils/convertir-json-en-csv/"
+  content={frenchJsonToCsv}
+  categoryLabel="Données et développement"
+  review={frenchJsonToCsvReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Convertir CSV en JSON',
+    description: 'Transformez une table avec en-têtes en objets JSON tout en contrôlant séparateur et types.',
+    href: '/fr/outils/convertir-csv-en-json/',
+  }}
+>
+  <DataConverter labels={frenchJsonToCsv.labels} />
+</ExpansionToolLayout>

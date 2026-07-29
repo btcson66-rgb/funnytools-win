@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-13",
+  "activeLocaleBatch": "fr-14",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -555,30 +555,42 @@
       "key": "csv-to-json",
       "type": "tool",
       "batch": "es-14",
+      "localeBatches": {
+        "fr": "fr-14"
+      },
       "paths": {
         "zh": "/tools/csv-to-json/",
         "en": "/en/tools/csv-to-json/",
-        "es": "/es/herramientas/convertir-csv-a-json/"
+        "es": "/es/herramientas/convertir-csv-a-json/",
+        "fr": "/fr/outils/convertir-csv-en-json/"
       }
     },
     {
       "key": "json-to-csv",
       "type": "tool",
       "batch": "es-14",
+      "localeBatches": {
+        "fr": "fr-14"
+      },
       "paths": {
         "zh": "/tools/json-to-csv/",
         "en": "/en/tools/json-to-csv/",
-        "es": "/es/herramientas/convertir-json-a-csv/"
+        "es": "/es/herramientas/convertir-json-a-csv/",
+        "fr": "/fr/outils/convertir-json-en-csv/"
       }
     },
     {
       "key": "markdown-previewer",
       "type": "tool",
       "batch": "es-14",
+      "localeBatches": {
+        "fr": "fr-14"
+      },
       "paths": {
         "zh": "/tools/markdown-previewer/",
         "en": "/en/tools/markdown-previewer/",
-        "es": "/es/herramientas/editor-markdown-online/"
+        "es": "/es/herramientas/editor-markdown-online/",
+        "fr": "/fr/outils/editeur-markdown-en-ligne/"
       }
     },
     {

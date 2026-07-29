@@ -100,6 +100,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/word-counter/" />
   </url>
   <url>
+    <loc>https://funnytools.win/fr/outils/convertir-csv-en-json/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/csv-to-json/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/csv-to-json/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-csv-a-json/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/convertir-csv-en-json/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/csv-to-json/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/fr/outils/convertir-image-en-base64/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-to-base64/" />
@@ -134,6 +143,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-jpg-a-webp/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/convertir-jpg-en-webp/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/jpg-to-webp/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/convertir-json-en-csv/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/json-to-csv/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/json-to-csv/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-json-a-csv/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/convertir-json-en-csv/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/json-to-csv/" />
   </url>
   <url>
     <loc>https://funnytools.win/fr/outils/convertir-majuscules-minuscules/</loc>
@@ -206,6 +224,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/dividir-pdf/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/diviser-pdf/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/split-pdf/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/editeur-markdown-en-ligne/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/markdown-previewer/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/markdown-previewer/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/editor-markdown-online/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/editeur-markdown-en-ligne/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/markdown-previewer/" />
   </url>
   <url>
     <loc>https://funnytools.win/fr/outils/encoder-decoder-base64/</loc>

@@ -1,0 +1,21 @@
+---
+import DataConverter from '../../../components/tools/DataConverter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchCsvToJson, frenchCsvToJsonReview } from '../../../i18n/expansion/fr-tools-14';
+---
+
+<ExpansionToolLayout
+  routeKey="csv-to-json"
+  canonicalPath="/fr/outils/convertir-csv-en-json/"
+  content={frenchCsvToJson}
+  categoryLabel="Données et développement"
+  review={frenchCsvToJsonReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Convertir JSON en CSV',
+    description: 'Faites le trajet inverse pour relire des objets plats dans Excel ou un autre système tabulaire.',
+    href: '/fr/outils/convertir-json-en-csv/',
+  }}
+>
+  <DataConverter labels={frenchCsvToJson.labels} />
+</ExpansionToolLayout>

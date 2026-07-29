@@ -1,0 +1,21 @@
+---
+import MarkdownPreviewer from '../../../components/tools/MarkdownPreviewer.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchMarkdownPreviewer, frenchMarkdownPreviewerReview } from '../../../i18n/expansion/fr-tools-14';
+---
+
+<ExpansionToolLayout
+  routeKey="markdown-previewer"
+  canonicalPath="/fr/outils/editeur-markdown-en-ligne/"
+  content={frenchMarkdownPreviewer}
+  categoryLabel="Rédaction et développement"
+  review={frenchMarkdownPreviewerReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Formater et valider du JSON',
+    description: 'Contrôlez les exemples JSON inclus dans une documentation technique ou une configuration.',
+    href: '/fr/outils/formater-valider-json/',
+  }}
+>
+  <MarkdownPreviewer labels={frenchMarkdownPreviewer.labels} />
+</ExpansionToolLayout>

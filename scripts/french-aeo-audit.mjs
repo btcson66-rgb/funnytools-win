@@ -117,6 +117,9 @@ const requiredTermsByKey = {
   'url-encoder': ['encoder', 'décoder', 'url', 'percent-encoding'],
   'timestamp-converter': ['timestamp unix', 'secondes', 'millisecondes', 'utc'],
   'uuid-generator': ['générateur', 'uuid v4', 'crypto.randomuuid', 'unicité'],
+  'csv-to-json': ['convertir csv en json', 'point-virgule', 'en-têtes', 'zéros initiaux'],
+  'json-to-csv': ['convertir json en csv', 'point-virgule', 'bom utf-8', 'formules'],
+  'markdown-previewer': ['éditeur markdown', 'aperçu html', 'dompurify', 'github'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',
