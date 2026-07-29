@@ -1,0 +1,24 @@
+---
+import ColorGenerator from '../../../components/tools/ColorGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchColorGenerator,
+  frenchColorGeneratorReview,
+} from '../../../i18n/expansion/fr-tools-15';
+---
+
+<ExpansionToolLayout
+  routeKey="color-generator"
+  canonicalPath="/fr/outils/generateur-couleurs-hex-rgb-hsl/"
+  content={frenchColorGenerator}
+  categoryLabel="Design et accessibilité"
+  review={frenchColorGeneratorReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Créer un graphique en barres',
+    description: 'Appliquez ensuite les couleurs en conservant étiquettes et signaux qui ne dépendent pas uniquement du ton.',
+    href: '/fr/outils/creer-graphique-barres/',
+  }}
+>
+  <ColorGenerator labels={frenchColorGenerator.labels} />
+</ExpansionToolLayout>

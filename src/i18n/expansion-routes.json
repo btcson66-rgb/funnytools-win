@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-14",
+  "activeLocaleBatch": "fr-15",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -597,30 +597,42 @@
       "key": "password-generator",
       "type": "tool",
       "batch": "es-15",
+      "localeBatches": {
+        "fr": "fr-15"
+      },
       "paths": {
         "zh": "/tools/password-generator/",
         "en": "/en/tools/password-generator/",
-        "es": "/es/herramientas/generador-contrasenas-seguras/"
+        "es": "/es/herramientas/generador-contrasenas-seguras/",
+        "fr": "/fr/outils/generateur-mot-de-passe-securise/"
       }
     },
     {
       "key": "barcode-generator",
       "type": "tool",
       "batch": "es-15",
+      "localeBatches": {
+        "fr": "fr-15"
+      },
       "paths": {
         "zh": "/tools/barcode-generator/",
         "en": "/en/tools/barcode-generator/",
-        "es": "/es/herramientas/generador-codigo-barras/"
+        "es": "/es/herramientas/generador-codigo-barras/",
+        "fr": "/fr/outils/generateur-code-barres/"
       }
     },
     {
       "key": "color-generator",
       "type": "tool",
       "batch": "es-15",
+      "localeBatches": {
+        "fr": "fr-15"
+      },
       "paths": {
         "zh": "/tools/color-generator/",
         "en": "/en/tools/color-generator/",
-        "es": "/es/herramientas/generador-colores-hex-rgb-hsl/"
+        "es": "/es/herramientas/generador-colores-hex-rgb-hsl/",
+        "fr": "/fr/outils/generateur-couleurs-hex-rgb-hsl/"
       }
     },
     {

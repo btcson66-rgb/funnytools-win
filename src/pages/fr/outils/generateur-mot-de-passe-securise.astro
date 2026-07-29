@@ -1,0 +1,24 @@
+---
+import PasswordGenerator from '../../../components/tools/PasswordGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchPasswordGenerator,
+  frenchPasswordGeneratorReview,
+} from '../../../i18n/expansion/fr-tools-15';
+---
+
+<ExpansionToolLayout
+  routeKey="password-generator"
+  canonicalPath="/fr/outils/generateur-mot-de-passe-securise/"
+  content={frenchPasswordGenerator}
+  categoryLabel="Sécurité et comptes"
+  review={frenchPasswordGeneratorReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Générateur d’UUID v4',
+    description: 'Créez des identifiants de données ou de test ; un UUID ne doit jamais remplacer un mot de passe.',
+    href: '/fr/outils/generateur-uuid-v4/',
+  }}
+>
+  <PasswordGenerator labels={frenchPasswordGenerator.labels} />
+</ExpansionToolLayout>

@@ -120,6 +120,9 @@ const requiredTermsByKey = {
   'csv-to-json': ['convertir csv en json', 'point-virgule', 'en-têtes', 'zéros initiaux'],
   'json-to-csv': ['convertir json en csv', 'point-virgule', 'bom utf-8', 'formules'],
   'markdown-previewer': ['éditeur markdown', 'aperçu html', 'dompurify', 'github'],
+  'password-generator': ['générateur de mot de passe sécurisé', 'crypto.getrandomvalues', 'gestionnaire', 'mfa'],
+  'barcode-generator': ['générateur de code-barres', 'ean-13', 'clé de contrôle', 'gs1'],
+  'color-generator': ['générateur de couleur', 'hex', 'contraste', 'wcag'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

@@ -427,6 +427,7 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/barcode-generator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/barcode-generator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-codigo-barras/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/generateur-code-barres/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/barcode-generator/" />
   </url>
   <url>
@@ -494,6 +495,7 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/color-generator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/color-generator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-colores-hex-rgb-hsl/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/generateur-couleurs-hex-rgb-hsl/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/color-generator/" />
   </url>
   <url>
@@ -758,6 +760,7 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/password-generator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/password-generator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-contrasenas-seguras/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/generateur-mot-de-passe-securise/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/password-generator/" />
   </url>
   <url>

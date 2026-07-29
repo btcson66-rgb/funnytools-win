@@ -1,0 +1,24 @@
+---
+import BarcodeGenerator from '../../../components/tools/BarcodeGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchBarcodeGenerator,
+  frenchBarcodeGeneratorReview,
+} from '../../../i18n/expansion/fr-tools-15';
+---
+
+<ExpansionToolLayout
+  routeKey="barcode-generator"
+  canonicalPath="/fr/outils/generateur-code-barres/"
+  content={frenchBarcodeGenerator}
+  categoryLabel="Commerce et opérations"
+  review={frenchBarcodeGeneratorReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Générateur de code QR',
+    description: 'Choisissez un QR statique pour une URL ou un texte plus long destiné à un téléphone.',
+    href: '/fr/outils/generateur-code-qr/',
+  }}
+>
+  <BarcodeGenerator labels={frenchBarcodeGenerator.labels} />
+</ExpansionToolLayout>
