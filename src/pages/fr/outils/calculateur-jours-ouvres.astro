@@ -1,0 +1,24 @@
+---
+import BusinessDays from '../../../components/tools/BusinessDays.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchBusinessDays,
+  frenchBusinessDaysReview,
+} from '../../../i18n/expansion/fr-tools-19';
+---
+
+<ExpansionToolLayout
+  routeKey="business-days"
+  canonicalPath="/fr/outils/calculateur-jours-ouvres/"
+  locale="fr"
+  content={frenchBusinessDays}
+  categoryLabel="Dates et organisation"
+  review={frenchBusinessDaysReview}
+  relatedTool={{
+    name: 'Calculer la différence entre deux dates',
+    description: 'Comparez un intervalle en jours, semaines et calendrier.',
+    href: '/fr/outils/calculer-difference-entre-dates/',
+  }}
+>
+  <BusinessDays labels={frenchBusinessDays.labels} />
+</ExpansionToolLayout>

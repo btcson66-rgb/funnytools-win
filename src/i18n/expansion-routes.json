@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-18",
+  "activeLocaleBatch": "fr-19",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -765,30 +765,42 @@
       "key": "date-difference",
       "type": "tool",
       "batch": "es-19",
+      "localeBatches": {
+        "fr": "fr-19"
+      },
       "paths": {
         "zh": "/tools/date-difference/",
         "en": "/en/tools/date-difference/",
-        "es": "/es/herramientas/calcular-diferencia-entre-fechas/"
+        "es": "/es/herramientas/calcular-diferencia-entre-fechas/",
+        "fr": "/fr/outils/calculer-difference-entre-dates/"
       }
     },
     {
       "key": "age-calculator",
       "type": "tool",
       "batch": "es-19",
+      "localeBatches": {
+        "fr": "fr-19"
+      },
       "paths": {
         "zh": "/tools/age-calculator/",
         "en": "/en/tools/age-calculator/",
-        "es": "/es/herramientas/calculadora-de-edad/"
+        "es": "/es/herramientas/calculadora-de-edad/",
+        "fr": "/fr/outils/calculateur-age/"
       }
     },
     {
       "key": "business-days",
       "type": "tool",
       "batch": "es-19",
+      "localeBatches": {
+        "fr": "fr-19"
+      },
       "paths": {
         "zh": "/tools/business-days/",
         "en": "/en/tools/business-days/",
-        "es": "/es/herramientas/calculadora-dias-laborables/"
+        "es": "/es/herramientas/calculadora-dias-laborables/",
+        "fr": "/fr/outils/calculateur-jours-ouvres/"
       }
     },
     {

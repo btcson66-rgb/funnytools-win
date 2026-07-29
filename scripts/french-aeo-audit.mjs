@@ -132,6 +132,9 @@ const requiredTermsByKey = {
   'what-to-eat': ['quoi manger ce soir', 'idée repas', 'une entrée par ligne', 'allergène'],
   'countdown-timer': ['minuteur en ligne', 'compte à rebours', 'date et heure', 'mise en veille'],
   stopwatch: ['chronomètre en ligne', 'temps partiel', 'temps total', 'performance.now'],
+  'date-difference': ['calculer la différence entre deux dates', 'date de fin', '30,4375', 'inclure'],
+  'age-calculator': ['calculateur d’âge', 'années révolues', '29 février', '70 battements'],
+  'business-days': ['calculateur de jours ouvrés', 'jours ouvrables', 'jours calendaires', 'jours fériés'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

@@ -1,0 +1,24 @@
+---
+import DateDifference from '../../../components/tools/DateDifference.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchDateDifference,
+  frenchDateDifferenceReview,
+} from '../../../i18n/expansion/fr-tools-19';
+---
+
+<ExpansionToolLayout
+  routeKey="date-difference"
+  canonicalPath="/fr/outils/calculer-difference-entre-dates/"
+  locale="fr"
+  content={frenchDateDifference}
+  categoryLabel="Dates et organisation"
+  review={frenchDateDifferenceReview}
+  relatedTool={{
+    name: 'Calculateur d’âge exact',
+    description: 'Calculez un âge en années, mois et jours à la date de votre choix.',
+    href: '/fr/outils/calculateur-age/',
+  }}
+>
+  <DateDifference labels={frenchDateDifference.labels} />
+</ExpansionToolLayout>

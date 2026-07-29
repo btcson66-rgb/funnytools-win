@@ -1,0 +1,24 @@
+---
+import AgeCalculator from '../../../components/tools/AgeCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchAgeCalculator,
+  frenchAgeCalculatorReview,
+} from '../../../i18n/expansion/fr-tools-19';
+---
+
+<ExpansionToolLayout
+  routeKey="age-calculator"
+  canonicalPath="/fr/outils/calculateur-age/"
+  locale="fr"
+  content={frenchAgeCalculator}
+  categoryLabel="Dates et organisation"
+  review={frenchAgeCalculatorReview}
+  relatedTool={{
+    name: 'Calculateur de jours ouvrés',
+    description: 'Comptez les jours restants après week-ends et jours fériés.',
+    href: '/fr/outils/calculateur-jours-ouvres/',
+  }}
+>
+  <AgeCalculator labels={frenchAgeCalculator.labels} />
+</ExpansionToolLayout>

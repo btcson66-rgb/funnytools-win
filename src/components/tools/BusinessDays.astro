@@ -32,6 +32,7 @@ const { labels } = Astro.props;
       <span>{labels.holidayPreset}</span>
       <select data-holiday-preset>
         <option value="">{labels.presetNone}</option>
+        {labels.presetFr2026 && <option value="fr2026">{labels.presetFr2026}</option>}
         <option value="tw2026">{labels.presetTw2026}</option>
       </select>
     </label>
@@ -106,6 +107,22 @@ const { labels } = Astro.props;
     // 台灣 2026（民國115年）國定假日與補假之平日（不含一般週末）。
     // 來源：行政院人事行政總處核定之 115 年政府行政機關辦公日曆表。
     const holidayPresets = {
+      // France métropolitaine 2026 : 11 fêtes légales nationales.
+      // Source : Code du travail, article L3133-1. Les particularités
+      // locales (notamment Alsace-Moselle) et conventionnelles restent à ajouter.
+      fr2026: [
+        '2026-01-01', // Jour de l'An
+        '2026-04-06', // Lundi de Pâques
+        '2026-05-01', // Fête du Travail
+        '2026-05-08', // Victoire 1945
+        '2026-05-14', // Ascension
+        '2026-05-25', // Lundi de Pentecôte
+        '2026-07-14', // Fête nationale
+        '2026-08-15', // Assomption
+        '2026-11-01', // Toussaint
+        '2026-11-11', // Armistice 1918
+        '2026-12-25', // Noël
+      ],
       tw2026: [
         '2026-01-01', // 元旦
         '2026-02-16', '2026-02-17', '2026-02-18', '2026-02-19', '2026-02-20', // 農曆春節
