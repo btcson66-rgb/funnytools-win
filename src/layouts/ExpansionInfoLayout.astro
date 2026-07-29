@@ -1,17 +1,41 @@
 ---
 import ExpansionLayout from './ExpansionLayout.astro';
-import type { SpanishInfoPage } from '../i18n/expansion/es-pages';
 import { expansionRoutesReviewedAt } from '../i18n/expansionRoutes';
+
+interface InfoPage {
+  seoTitle: string;
+  seoDescription: string;
+  keywords: string[];
+  eyebrow: string;
+  title: string;
+  intro: string;
+  directAnswer: string[];
+  sections: {
+    heading: string;
+    paragraphs: string[];
+    items?: string[];
+    link?: { prefix: string; label: string; href: string; suffix?: string };
+    links?: { label: string; description: string; href: string }[];
+  }[];
+  review: {
+    heading: string;
+    intro: string;
+    checks: { title: string; text: string }[];
+  };
+  faq: { q: string; a: string }[];
+  sources?: { label: string; href: string; note: string }[];
+}
 
 interface Props {
   currentKey: string;
   canonicalPath: string;
-  content: SpanishInfoPage;
+  content: InfoPage;
   pageType?: 'WebPage' | 'CollectionPage' | 'AboutPage' | 'ContactPage';
   breadcrumbParent?: {
     name: string;
     path: string;
   };
+  locale?: 'es' | 'fr';
 }
 
 const {
@@ -20,7 +44,40 @@ const {
   content,
   pageType = 'WebPage',
   breadcrumbParent,
+  locale = 'es',
 } = Astro.props;
+const copy = {
+  es: {
+    language: 'es',
+    siteName: 'FunnyTools en español',
+    homeUrl: 'https://funnytools.win/es/',
+    homePath: '/es/',
+    homeLabel: 'Inicio',
+    breadcrumb: 'Migas de pan',
+    directEyebrow: 'Respuesta directa',
+    directHeading: 'Lo esencial en menos de un minuto',
+    review: 'Revisión editorial y de funcionamiento',
+    faq: 'Preguntas frecuentes',
+    sources: 'Fuentes y controles externos',
+    sourcesIntro: 'Las fuentes ayudan a comprobar las prácticas de terceros y las obligaciones de información. La descripción del funcionamiento de FunnyTools se basa en la implementación publicada del sitio.',
+    updated: 'Última revisión editorial',
+  },
+  fr: {
+    language: 'fr',
+    siteName: 'FunnyTools en français',
+    homeUrl: 'https://funnytools.win/fr/',
+    homePath: '/fr/',
+    homeLabel: 'Accueil',
+    breadcrumb: 'Fil d’Ariane',
+    directEyebrow: 'Réponse directe',
+    directHeading: 'L’essentiel en moins d’une minute',
+    review: 'Relecture éditoriale et test de fonctionnement',
+    faq: 'Questions fréquentes',
+    sources: 'Sources et contrôles externes',
+    sourcesIntro: 'Ces sources permettent de vérifier les règles et les pratiques de tiers. La description du fonctionnement de FunnyTools repose sur l’implémentation publiée du site.',
+    updated: 'Dernière relecture éditoriale',
+  },
+}[locale];
 const absoluteUrl = `https://funnytools.win${canonicalPath}`;
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -37,12 +94,12 @@ const webPageJsonLd = {
   name: content.title,
   description: content.seoDescription,
   url: absoluteUrl,
-  inLanguage: 'es',
+  inLanguage: copy.language,
   dateModified: expansionRoutesReviewedAt,
   isPartOf: {
     '@type': 'WebSite',
     name: 'FunnyTools',
-    url: 'https://funnytools.win/es/',
+    url: copy.homeUrl,
   },
 };
 const breadcrumbJsonLd = {
@@ -52,8 +109,8 @@ const breadcrumbJsonLd = {
     {
       '@type': 'ListItem',
       position: 1,
-      name: 'FunnyTools en español',
-      item: 'https://funnytools.win/es/',
+      name: copy.siteName,
+      item: copy.homeUrl,
     },
     ...(breadcrumbParent ? [{
       '@type': 'ListItem',
@@ -79,15 +136,16 @@ const breadcrumbJsonLd = {
   keywords={content.keywords}
   type="article"
   jsonLd={[webPageJsonLd, faqJsonLd, breadcrumbJsonLd]}
+  locale={locale}
 >
   <article
     class="info-page"
-    data-native-locale="es"
+    data-native-locale={locale}
     data-editorial-mode="native-search-intent"
   >
     <section class="wrap page-head">
-      <nav class="breadcrumb" aria-label="Migas de pan">
-        <a href="/es/">Inicio</a>
+      <nav class="breadcrumb" aria-label={copy.breadcrumb}>
+        <a href={copy.homePath}>{copy.homeLabel}</a>
         <span aria-hidden="true">/</span>
         {breadcrumbParent && (
           <>
@@ -103,8 +161,8 @@ const breadcrumbJsonLd = {
     </section>
 
     <section class="wrap content-section answer-panel" aria-labelledby={`${currentKey}-respuesta`}>
-      <p class="eyebrow">Respuesta directa</p>
-      <h2 id={`${currentKey}-respuesta`}>Lo esencial en menos de un minuto</h2>
+      <p class="eyebrow">{copy.directEyebrow}</p>
+      <h2 id={`${currentKey}-respuesta`}>{copy.directHeading}</h2>
       {content.directAnswer.map((paragraph) => <p>{paragraph}</p>)}
     </section>
 
@@ -144,7 +202,7 @@ const breadcrumbJsonLd = {
       data-reviewed-at={expansionRoutesReviewedAt}
       aria-labelledby={`${currentKey}-revision`}
     >
-      <p class="eyebrow">Revisión editorial y de funcionamiento</p>
+      <p class="eyebrow">{copy.review}</p>
       <h2 id={`${currentKey}-revision`}>{content.review.heading}</h2>
       <p>{content.review.intro}</p>
       <div class="case-grid">
@@ -158,7 +216,7 @@ const breadcrumbJsonLd = {
     </section>
 
     <section class="wrap content-section" aria-labelledby={`${currentKey}-faq`}>
-      <h2 id={`${currentKey}-faq`}>Preguntas frecuentes</h2>
+      <h2 id={`${currentKey}-faq`}>{copy.faq}</h2>
       <div class="faq-list">
         {content.faq.map((item) => (
           <details>
@@ -171,8 +229,8 @@ const breadcrumbJsonLd = {
 
     {content.sources && (
       <section class="wrap content-section" aria-labelledby={`${currentKey}-fuentes`}>
-        <h2 id={`${currentKey}-fuentes`}>Fuentes y controles externos</h2>
-        <p>Las fuentes ayudan a comprobar las prácticas de terceros y las obligaciones de información. La descripción del funcionamiento de FunnyTools se basa en la implementación publicada del sitio.</p>
+        <h2 id={`${currentKey}-fuentes`}>{copy.sources}</h2>
+        <p>{copy.sourcesIntro}</p>
         <div class="source-list">
           {content.sources.map((source) => (
             <a href={source.href} rel="noopener noreferrer">
@@ -185,7 +243,7 @@ const breadcrumbJsonLd = {
     )}
 
     <p class="wrap updated">
-      Última revisión editorial: <time datetime={expansionRoutesReviewedAt}>{expansionRoutesReviewedAt}</time>
+      {copy.updated}: <time datetime={expansionRoutesReviewedAt}>{expansionRoutesReviewedAt}</time>
     </p>
   </article>
 </ExpansionLayout>

@@ -10,6 +10,33 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/" />
   </url>
   <url>
+    <loc>https://funnytools.win/fr/confidentialite/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/privacy/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/privacy/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/privacidad/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/confidentialite/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/privacy/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/fonctionnement-outils/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/about-tools/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/about-tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/como-funcionan-las-herramientas/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/fonctionnement-outils/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/about-tools/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/fr/outils/calcul-moyenne-notes/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/grade-average/" />

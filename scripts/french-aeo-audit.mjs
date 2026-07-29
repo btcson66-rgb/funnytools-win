@@ -81,6 +81,14 @@ const requiredTermsByKey = {
   home: ['outils en ligne', 'sans inscription', 'navigateur', 'vérifier'],
   'grade-average': ['calcul moyenne notes', 'moyenne pondérée', 'coefficient', 'sur 20'],
   'merge-pdf': ['fusionner pdf', 'sans téléverser', 'navigateur', 'ordre'],
+  'tools-index': ['outils en ligne gratuits', 'sans inscription', 'traitement local', 'vérifier'],
+  privacy: ['politique de confidentialité', 'données personnelles', 'cookies', 'consentement'],
+  'about-tools': ['fonctionnent les outils', 'traitement dans le navigateur', 'vérifier', 'limites'],
+};
+const expectedPageTypesByKey = {
+  'tools-index': 'CollectionPage',
+  privacy: 'WebPage',
+  'about-tools': 'AboutPage',
 };
 
 for (const route of frenchRoutes) {
@@ -117,6 +125,10 @@ for (const route of frenchRoutes) {
     fail(`${pathname}: WebApplication ou HowTo JSON-LD absent.`);
   }
   if (route.type === 'home' && !types.has('WebSite')) fail(`${pathname}: WebSite JSON-LD absent.`);
+  const expectedPageType = expectedPageTypesByKey[route.key];
+  if (expectedPageType && !types.has(expectedPageType)) {
+    fail(`${pathname}: ${expectedPageType} JSON-LD absent.`);
+  }
   if (/(?:Cómo usar|Preguntas frecuentes|Usar la herramienta|What this tool can do|Use cases|Last updated|Move up|Move down)/i.test(text)) {
     fail(`${pathname}: fuite d’interface espagnole ou anglaise détectée.`);
   }

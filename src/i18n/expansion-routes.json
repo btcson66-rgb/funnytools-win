@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-01",
+  "activeLocaleBatch": "fr-02",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -51,30 +51,42 @@
       "key": "tools-index",
       "type": "page",
       "batch": "es-02",
+      "localeBatches": {
+        "fr": "fr-02"
+      },
       "paths": {
         "zh": "/tools/",
         "en": "/en/tools/",
-        "es": "/es/herramientas/"
+        "es": "/es/herramientas/",
+        "fr": "/fr/outils/"
       }
     },
     {
       "key": "privacy",
       "type": "page",
       "batch": "es-02",
+      "localeBatches": {
+        "fr": "fr-02"
+      },
       "paths": {
         "zh": "/privacy/",
         "en": "/en/privacy/",
-        "es": "/es/privacidad/"
+        "es": "/es/privacidad/",
+        "fr": "/fr/confidentialite/"
       }
     },
     {
       "key": "about-tools",
       "type": "page",
       "batch": "es-02",
+      "localeBatches": {
+        "fr": "fr-02"
+      },
       "paths": {
         "zh": "/about-tools/",
         "en": "/en/about-tools/",
-        "es": "/es/como-funcionan-las-herramientas/"
+        "es": "/es/como-funcionan-las-herramientas/",
+        "fr": "/fr/fonctionnement-outils/"
       }
     },
     {

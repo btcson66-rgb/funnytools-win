@@ -1,0 +1,350 @@
+---
+import ExpansionLayout from '../../../layouts/ExpansionLayout.astro';
+import { expansionRoutesReviewedAt } from '../../../i18n/expansionRoutes';
+
+const tools = [
+  {
+    name: 'Calculer une moyenne de notes',
+    href: '/fr/outils/calcul-moyenne-notes/',
+    category: 'Études et calcul',
+    description: 'Calculez une moyenne simple ou pondérée avec des coefficients, sur 20 ou sur un autre barème cohérent.',
+    search: 'calcul moyenne notes moyenne pondérée coefficient sur 20 bulletin école université',
+    privacy: 'Les valeurs sont calculées dans cet onglet.',
+  },
+  {
+    name: 'Fusionner plusieurs PDF',
+    href: '/fr/outils/fusionner-pdf/',
+    category: 'PDF et documents',
+    description: 'Assemblez plusieurs documents dans l’ordre choisi et téléchargez une nouvelle copie sans envoyer les PDF à FunnyTools.',
+    search: 'fusionner pdf assembler regrouper combiner joindre documents pages ordre fichier',
+    privacy: 'Les documents sont lus et assemblés dans ce navigateur.',
+  },
+];
+
+const faq = [
+  {
+    q: 'Quels outils en ligne gratuits sont disponibles en français ?',
+    a: 'La collection française propose actuellement un calculateur de moyenne de notes et un outil pour fusionner plusieurs PDF. Chaque page comprend une fonction utilisable, des exemples, des limites et une méthode de vérification.',
+  },
+  {
+    q: 'Faut-il créer un compte ou installer un logiciel ?',
+    a: 'Non. Les deux outils s’ouvrent dans le navigateur, sans inscription ni installation. Une connexion est nécessaire pour charger le site.',
+  },
+  {
+    q: 'Les données sont-elles envoyées à FunnyTools ?',
+    a: 'Les notes et les PDF sont traités dans le navigateur pour produire le résultat. La page peut toutefois contacter des services techniques, analytiques ou publicitaires, comme l’explique la politique de confidentialité.',
+  },
+  {
+    q: 'Pourquoi le répertoire français ne contient-il que deux outils ?',
+    a: 'Une route française n’est ajoutée qu’après rédaction native, test mobile, vérification de la fonction, contrôle des liens de langue et publication réelle. Les prochaines pages arrivent par lots de trois au maximum.',
+  },
+  {
+    q: 'Puis-je utiliser le résultat pour une démarche officielle ?',
+    a: 'Vérifiez toujours la formule ou le fichier avec la règle et le système de destination. FunnyTools facilite une opération, mais ne délivre pas de validation officielle.',
+  },
+  {
+    q: 'Les outils fonctionnent-ils sur téléphone ?',
+    a: 'Oui, l’interface est testée à 390 pixels de large. Un PDF volumineux peut néanmoins dépasser la mémoire disponible sur un téléphone.',
+  },
+  {
+    q: 'La version française est-elle issue d’une traduction automatique ?',
+    a: 'Non. Les pages sont rédigées autour des formulations de recherche, des usages et des précautions pertinentes pour un public francophone.',
+  },
+  {
+    q: 'Comment proposer un nouvel outil ?',
+    a: 'Écrivez à btcson66@gmail.com avec le problème, les données d’entrée, le résultat attendu et un exemple fictif permettant de le vérifier.',
+  },
+];
+
+const collectionJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Outils en ligne gratuits en français',
+  description: 'Répertoire d’outils gratuits, sans inscription et expliqués en français pour les calculs et les documents PDF.',
+  url: 'https://funnytools.win/fr/outils/',
+  inLanguage: 'fr',
+  dateModified: expansionRoutesReviewedAt,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: tools.length,
+    itemListElement: tools.map((tool, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: tool.name,
+      url: `https://funnytools.win${tool.href}`,
+    })),
+  },
+};
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'FunnyTools en français',
+      item: 'https://funnytools.win/fr/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Outils',
+      item: 'https://funnytools.win/fr/outils/',
+    },
+  ],
+};
+---
+
+<ExpansionLayout
+  currentKey="tools-index"
+  canonicalPath="/fr/outils/"
+  title="Outils en ligne gratuits sans inscription | FunnyTools"
+  description="Découvrez des outils en ligne gratuits, sans inscription et expliqués en français. Filtrez par tâche, vérifiez les limites et protégez vos fichiers."
+  keywords={[
+    'outils en ligne gratuits',
+    'outil gratuit sans inscription',
+    'outils pratiques en français',
+    'outil PDF en ligne',
+    'calculatrice en ligne',
+    'outil dans le navigateur',
+  ]}
+  jsonLd={[collectionJsonLd, faqJsonLd, breadcrumbJsonLd]}
+  locale="fr"
+>
+  <article
+    class="tools-directory"
+    data-native-locale="fr"
+    data-editorial-mode="native-search-intent"
+  >
+    <section class="wrap page-head">
+      <nav class="breadcrumb" aria-label="Fil d’Ariane">
+        <a href="/fr/">Accueil</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Outils</span>
+      </nav>
+      <p class="eyebrow">Répertoire testé, sans page vide</p>
+      <h1>Outils en ligne gratuits en français</h1>
+      <p class="lead">Choisissez une fonction à partir du résultat recherché. Chaque outil publié fonctionne sans inscription, indique comment les données sont traitées et propose une vérification simple avant d’utiliser ou de transmettre la sortie.</p>
+      <label class="tools-search">
+        <span>Rechercher une tâche</span>
+        <input
+          type="search"
+          placeholder="Exemple : moyenne avec coefficient ou fusionner PDF"
+          autocomplete="off"
+          aria-describedby="fr-search-help"
+          data-fr-tools-search
+        />
+      </label>
+      <p id="fr-search-help" class="muted">Le filtre s’exécute dans cet onglet. La phrase saisie n’est pas envoyée à l’outil de mesure d’audience.</p>
+    </section>
+
+    <section class="wrap content-section answer-panel" aria-labelledby="fr-reponse-directe">
+      <p class="eyebrow">Réponse directe</p>
+      <h2 id="fr-reponse-directe">Quels outils sont disponibles maintenant ?</h2>
+      <p>La collection française comprend deux outils finalisés. Le calculateur de moyenne traite des notes simples ou pondérées, avec des coefficients et plusieurs barèmes. L’outil de fusion PDF assemble plusieurs documents dans l’ordre choisi et crée une nouvelle copie. Les deux fonctions s’exécutent dans le navigateur, sans compte, et leurs pages expliquent la méthode, les limites et les contrôles à effectuer.</p>
+      <p>Le nombre limité de cartes est volontaire. Une page n’apparaît ici qu’après rédaction française originale, test de l’interface, contrôle sur mobile, vérification du canonical, des variantes hreflang, du sitemap et des données structurées. Le répertoire n’utilise ni faux lien, ni page « bientôt disponible », ni traduction automatique pour donner une impression artificielle de volume.</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="fr-liste-outils">
+      <h2 id="fr-liste-outils">Ouvrir un outil</h2>
+      <p class="directory-status" aria-live="polite" data-fr-tools-status>
+        {tools.length} outils vérifiés disponibles.
+      </p>
+      <div class="tool-grid" data-fr-tools-grid>
+        {tools.map((tool) => (
+          <article class="tool-card" data-fr-tool-card data-search={tool.search}>
+            <span class="badge">{tool.category}</span>
+            <h3><a href={tool.href}>{tool.name}</a></h3>
+            <p>{tool.description}</p>
+            <p class="privacy-line">🔒 {tool.privacy}</p>
+            <a class="btn go" href={tool.href}>Ouvrir l’outil</a>
+          </article>
+        ))}
+      </div>
+      <p class="empty-state" data-fr-tools-empty hidden>Aucun outil français publié ne correspond à cette recherche. Essayez « moyenne », « coefficient », « PDF », « fusionner » ou « document ».</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="fr-choisir-outil">
+      <h2 id="fr-choisir-outil">Comment choisir le bon outil en ligne</h2>
+      <p>Commencez par décrire la sortie attendue. « Je veux connaître ma moyenne avec les coefficients du bulletin » appelle une calculatrice. « Je veux envoyer la demande et ses annexes dans un seul fichier » appelle une fusion de PDF. Une formulation vague comme « modifier un document » ne précise ni ce qui doit changer, ni ce qui doit rester intact.</p>
+      <p>Vérifiez ensuite que l’outil couvre réellement la transformation. Fusionner assemble les pages ; compresser cherche à réduire le poids ; convertir change le format ; diviser produit plusieurs fichiers. Pour les notes, une moyenne simple donne la même importance à chaque valeur, tandis qu’une moyenne pondérée tient compte des coefficients. Le choix du mauvais verbe produit parfois un fichier lisible ou une valeur plausible, mais répond à une autre question.</p>
+      <ol class="step-list">
+        <li><strong>Identifiez l’entrée.</strong> S’agit-il de nombres sur le même barème ou de fichiers PDF accessibles et non chiffrés ?</li>
+        <li><strong>Écrivez la transformation.</strong> Dites ce qui doit changer : calculer, pondérer ou assembler.</li>
+        <li><strong>Définissez la sortie.</strong> Prévoyez une valeur, un ordre de pages et un nom de fichier.</li>
+        <li><strong>Lisez les limites.</strong> Contrôlez arrondis, règles locales, mémoire, signatures et formulaires.</li>
+        <li><strong>Faites un essai connu.</strong> Utilisez des données fictives dont vous pouvez prévoir le résultat.</li>
+      </ol>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="fr-confidentialite-local">
+      <h2 id="fr-confidentialite-local">Confidentialité : local ne veut pas dire hors ligne</h2>
+      <p>Les outils actuels traitent leur entrée dans l’appareil. Les notes restent dans l’onglet ; les PDF sont lus et assemblés en mémoire ; aucune bibliothèque de fichiers n’est créée sur un compte FunnyTools. Cette conception évite un téléversement nécessaire à l’opération et convient aux essais rapides avec des données non sensibles.</p>
+      <p>La page doit malgré tout être téléchargée depuis Internet et peut contacter Cloudflare, Google Analytics ou l’infrastructure AdSense. Ces services peuvent traiter des signaux techniques liés à la navigation. La <a href="/fr/confidentialite/">politique de confidentialité</a> distingue précisément ces connexions du contenu de l’outil et présente les choix disponibles.</p>
+      <p>Pour un dossier confidentiel, la décision ne dépend pas seulement du site. Vérifiez les règles de l’établissement ou de l’employeur, l’état de l’appareil, les extensions, la synchronisation du dossier de téléchargement et le futur destinataire. Le traitement local réduit une voie d’exposition ; il ne neutralise pas tout l’environnement.</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="fr-verifier-calcul">
+      <h2 id="fr-verifier-calcul">Vérifier une moyenne avant de la retenir</h2>
+      <p>Pour une moyenne simple, essayez 10 et 14 : la somme vaut 24 et le résultat doit être 12. Avec 10 coefficient 1 et 14 coefficient 3, la moyenne pondérée vaut (10 × 1 + 14 × 3) ÷ 4, soit 13. Si l’outil produit une autre valeur, vérifiez les lignes vides, les séparateurs décimaux et le mode sélectionné.</p>
+      <p>Une opération correcte n’impose pas la règle de l’établissement. Un bulletin peut exclure une matière, appliquer des crédits, plafonner un bonus, exiger une note minimale ou arrondir seulement à la fin. Conservez donc les valeurs originales, lisez le règlement et comparez le résultat à l’ENT ou au relevé officiel. La calculatrice aide à comprendre un scénario ; elle ne remplace pas l’autorité qui valide la note.</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="fr-verifier-pdf">
+      <h2 id="fr-verifier-pdf">Vérifier un PDF fusionné avant de l’envoyer</h2>
+      <p>Créez deux petits PDF fictifs, l’un marqué A et l’autre B. Ajoutez-les, observez le nombre de pages, placez A avant B et lancez la fusion. Le fichier téléchargé doit s’ouvrir, contenir le total attendu et respecter l’ordre. Cette répétition sépare un problème général de la particularité d’un document réel.</p>
+      <p>Sur la copie finale, contrôlez la première page, la dernière et chaque jonction. Testez les liens, les formulaires, l’impression, les signets et les exigences du portail. Une signature numérique peut perdre sa validité quand un nouveau document est créé. Un PDF chiffré ou endommagé peut être refusé. Ne remplacez jamais les originaux avant que le résultat ait été accepté par le destinataire.</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="fr-publication-progressive">
+      <h2 id="fr-publication-progressive">Pourquoi la collection française grandit progressivement</h2>
+      <p>Publier des dizaines d’adresses sans interface complète ni explication approfondie ne rend pas un site plus utile. FunnyTools limite chaque lot à trois nouvelles pages substantielles. Une route française doit avoir sa propre intention de recherche, des formulations naturelles, des cas vérifiables, des limites précises et une fonction effectivement disponible.</p>
+      <p>Le contrôle porte aussi sur la technique : un seul H1, sections distinctes, FAQ cohérente, données structurées, URL canonique, hreflang réciproque, présence dans le sitemap français, liens internes sans erreur et affichage mobile sans débordement. La carte apparaît dans ce répertoire au même moment que la page publique, jamais avant.</p>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="fr-redaction-native">
+      <h2 id="fr-redaction-native">Une rédaction française, pas un remplacement de mots</h2>
+      <p>Une personne peut chercher « calcul moyenne notes », « moyenne avec coefficient », « moyenne sur 20 », « assembler des PDF », « regrouper des documents » ou « fusionner PDF gratuitement ». Le contenu rapproche ces formulations quand elles décrivent la même tâche et explique leurs différences lorsqu’elles peuvent orienter vers une mauvaise fonction.</p>
+      <p>Le français est utilisé dans de nombreux systèmes scolaires et administratifs. FunnyTools ne suppose pas qu’un barème, une règle d’arrondi ou une obligation juridique soit identique en France, en Belgique, en Suisse, au Canada ou ailleurs. Lorsqu’une source locale est indispensable, la page indique la limite et renvoie la décision à l’organisme compétent.</p>
+    </section>
+
+    <section
+      class="wrap content-section review-block"
+      data-content-value-review
+      data-review-key="tools-index"
+      data-reviewed-at={expansionRoutesReviewedAt}
+      aria-labelledby="fr-revision-repertoire"
+    >
+      <p class="eyebrow">Relecture éditoriale et test de fonctionnement</p>
+      <h2 id="fr-revision-repertoire">Ce qu’une carte doit prouver avant publication</h2>
+      <p>Une carte correspond à une route publique utilisable. Le nom, la fonction, l’explication et le résultat doivent traiter la même intention, sans attirer une recherche que l’outil ne peut pas résoudre.</p>
+      <div class="case-grid">
+        <article class="case-card">
+          <h3>Fonction réelle</h3>
+          <p>L’outil accepte une entrée, gère les erreurs et produit une valeur ou un fichier contrôlable.</p>
+        </article>
+        <article class="case-card">
+          <h3>Réponse démontrable</h3>
+          <p>La page donne un petit cas dont la sortie peut être calculée ou inspectée sans faire confiance au site.</p>
+        </article>
+        <article class="case-card">
+          <h3>Route complète</h3>
+          <p>Le français, le canonical, les variantes de langue, le sitemap, les liens et l’affichage mobile sont vérifiés après déploiement.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap content-section" aria-labelledby="fr-faq-repertoire">
+      <h2 id="fr-faq-repertoire">Questions fréquentes</h2>
+      <div class="faq-list">
+        {faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap content-section trust-note" aria-labelledby="fr-comprendre-methode">
+      <h2 id="fr-comprendre-methode">Comprendre la méthode avant d’utiliser la sortie</h2>
+      <p>Consultez <a href="/fr/fonctionnement-outils/">le fonctionnement des outils FunnyTools</a> pour comprendre le traitement dans le navigateur, les tests de calcul et de fichier, les contrôles de publication et la manière de signaler une anomalie sans transmettre de donnée personnelle.</p>
+    </section>
+
+    <p class="wrap updated">
+      Dernière relecture éditoriale : <time datetime={expansionRoutesReviewedAt}>{expansionRoutesReviewedAt}</time>
+    </p>
+  </article>
+</ExpansionLayout>
+
+<script is:inline>
+  (() => {
+    const input = document.querySelector('[data-fr-tools-search]');
+    const cards = Array.from(document.querySelectorAll('[data-fr-tool-card]'));
+    const empty = document.querySelector('[data-fr-tools-empty]');
+    const status = document.querySelector('[data-fr-tools-status]');
+    if (!(input instanceof HTMLInputElement) || !(empty instanceof HTMLElement) || !(status instanceof HTMLElement)) return;
+
+    const normalize = (value) => value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLocaleLowerCase('fr')
+      .trim();
+
+    input.addEventListener('input', () => {
+      const query = normalize(input.value);
+      const terms = query.split(/\s+/).filter(Boolean);
+      let visible = 0;
+      cards.forEach((card) => {
+        if (!(card instanceof HTMLElement)) return;
+        const haystack = normalize(`${card.dataset.search || ''} ${card.textContent || ''}`);
+        const matches = terms.length === 0 || terms.every((term) => haystack.includes(term));
+        card.hidden = !matches;
+        if (matches) visible += 1;
+      });
+      empty.hidden = visible > 0;
+      status.textContent = query === ''
+        ? `${visible} outils vérifiés disponibles.`
+        : `${visible} résultat${visible > 1 ? 's' : ''} pour le filtre actuel.`;
+    });
+  })();
+</script>
+
+<style>
+  .answer-panel {
+    border-left: 4px solid var(--brand);
+  }
+
+  .tools-search {
+    display: grid;
+    gap: 8px;
+    max-width: 720px;
+    margin-top: 24px;
+    font-weight: 700;
+  }
+
+  .tools-search input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--card);
+    color: var(--text);
+    font: inherit;
+  }
+
+  .directory-status,
+  .muted,
+  .privacy-line {
+    color: var(--muted);
+  }
+
+  .tool-card {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--card);
+  }
+
+  .tool-card .btn {
+    justify-self: start;
+  }
+
+  .empty-state {
+    padding: 18px;
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+  }
+</style>
