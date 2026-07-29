@@ -1,0 +1,21 @@
+---
+import PdfPageReorder from '../../../components/tools/PdfPageReorder.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchPdfPageReorder, frenchPdfPageReorderReview } from '../../../i18n/expansion/fr-tools-08';
+---
+
+<ExpansionToolLayout
+  routeKey="pdf-page-reorder"
+  canonicalPath="/fr/outils/reorganiser-pages-pdf/"
+  content={frenchPdfPageReorder}
+  categoryLabel="PDF et documents"
+  review={frenchPdfPageReorderReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Compresser un PDF',
+    description: 'Tentez l’optimisation seulement après avoir validé l’ordre final.',
+    href: '/fr/outils/compresser-pdf/',
+  }}
+>
+  <PdfPageReorder labels={frenchPdfPageReorder.labels} />
+</ExpansionToolLayout>

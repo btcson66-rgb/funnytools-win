@@ -1,0 +1,21 @@
+---
+import PdfToImage from '../../../components/tools/PdfToImage.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchPdfToImage, frenchPdfToImageReview } from '../../../i18n/expansion/fr-tools-08';
+---
+
+<ExpansionToolLayout
+  routeKey="pdf-to-image"
+  canonicalPath="/fr/outils/convertir-pdf-en-image/"
+  content={frenchPdfToImage}
+  categoryLabel="PDF et images"
+  review={frenchPdfToImageReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Extraire des pages PDF',
+    description: 'Créez d’abord un petit PDF si seules quelques pages doivent devenir des images.',
+    href: '/fr/outils/extraire-pages-pdf/',
+  }}
+>
+  <PdfToImage labels={frenchPdfToImage.labels} />
+</ExpansionToolLayout>

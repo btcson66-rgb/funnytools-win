@@ -1,0 +1,21 @@
+---
+import PdfCompressor from '../../../components/tools/PdfCompressor.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchPdfCompressor, frenchPdfCompressorReview } from '../../../i18n/expansion/fr-tools-08';
+---
+
+<ExpansionToolLayout
+  routeKey="pdf-compressor"
+  canonicalPath="/fr/outils/compresser-pdf/"
+  content={frenchPdfCompressor}
+  categoryLabel="PDF et documents"
+  review={frenchPdfCompressorReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Réorganiser les pages d’un PDF',
+    description: 'Corrigez la séquence avant de compresser uniquement la version finale.',
+    href: '/fr/outils/reorganiser-pages-pdf/',
+  }}
+>
+  <PdfCompressor labels={frenchPdfCompressor.labels} />
+</ExpansionToolLayout>

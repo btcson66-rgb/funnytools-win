@@ -99,6 +99,9 @@ const requiredTermsByKey = {
   'rotate-pdf': ['faire pivoter un pdf', 'pages précises', '90°', 'rotation'],
   'delete-pdf-pages': ['supprimer des pages', 'plages', 'au moins une', 'métadonnées'],
   'extract-pdf-pages': ['extraire des pages', 'conserver', 'ordre', 'doublon'],
+  'pdf-page-reorder': ['réorganiser les pages', 'ordre', 'monter', 'descendre'],
+  'pdf-to-image': ['convertir un pdf en jpg', 'png', 'échelle', 'pixels'],
+  'pdf-compressor': ['compresser un pdf', 'réduire', 'structure', 'pourcentage'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

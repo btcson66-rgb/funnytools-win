@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-07",
+  "activeLocaleBatch": "fr-08",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -303,30 +303,42 @@
       "key": "pdf-page-reorder",
       "type": "tool",
       "batch": "es-08",
+      "localeBatches": {
+        "fr": "fr-08"
+      },
       "paths": {
         "zh": "/tools/pdf-page-reorder/",
         "en": "/en/tools/pdf-page-reorder/",
-        "es": "/es/herramientas/ordenar-paginas-pdf/"
+        "es": "/es/herramientas/ordenar-paginas-pdf/",
+        "fr": "/fr/outils/reorganiser-pages-pdf/"
       }
     },
     {
       "key": "pdf-to-image",
       "type": "tool",
       "batch": "es-08",
+      "localeBatches": {
+        "fr": "fr-08"
+      },
       "paths": {
         "zh": "/tools/pdf-to-image/",
         "en": "/en/tools/pdf-to-image/",
-        "es": "/es/herramientas/convertir-pdf-a-imagen/"
+        "es": "/es/herramientas/convertir-pdf-a-imagen/",
+        "fr": "/fr/outils/convertir-pdf-en-image/"
       }
     },
     {
       "key": "pdf-compressor",
       "type": "tool",
       "batch": "es-08",
+      "localeBatches": {
+        "fr": "fr-08"
+      },
       "paths": {
         "zh": "/tools/pdf-compressor/",
         "en": "/en/tools/pdf-compressor/",
-        "es": "/es/herramientas/comprimir-pdf/"
+        "es": "/es/herramientas/comprimir-pdf/",
+        "fr": "/fr/outils/compresser-pdf/"
       }
     },
     {

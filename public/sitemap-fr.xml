@@ -55,6 +55,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/image-compressor/" />
   </url>
   <url>
+    <loc>https://funnytools.win/fr/outils/compresser-pdf/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pdf-compressor/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/pdf-compressor/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/comprimir-pdf/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/compresser-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pdf-compressor/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/fr/outils/convertir-image-en-base64/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-to-base64/" />
@@ -89,6 +98,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-jpg-a-webp/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/convertir-jpg-en-webp/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/jpg-to-webp/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/convertir-pdf-en-image/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pdf-to-image/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/pdf-to-image/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-pdf-a-imagen/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/convertir-pdf-en-image/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pdf-to-image/" />
   </url>
   <url>
     <loc>https://funnytools.win/fr/outils/convertir-png-en-jpg/</loc>
@@ -179,6 +197,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/redimensionar-imagen/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/redimensionner-image/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/image-resizer/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/reorganiser-pages-pdf/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pdf-page-reorder/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/pdf-page-reorder/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/ordenar-paginas-pdf/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/reorganiser-pages-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pdf-page-reorder/" />
   </url>
   <url>
     <loc>https://funnytools.win/fr/outils/supprimer-pages-pdf/</loc>
