@@ -1,0 +1,24 @@
+---
+import ImagesToPdf from '../../../components/tools/ImagesToPdf.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchImagesToPdf,
+  frenchImagesToPdfReview,
+} from '../../../i18n/expansion/fr-tools-06';
+---
+
+<ExpansionToolLayout
+  routeKey="images-to-pdf"
+  canonicalPath="/fr/outils/convertir-images-en-pdf/"
+  content={frenchImagesToPdf}
+  categoryLabel="PDF et documents"
+  review={frenchImagesToPdfReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Fusionner plusieurs PDF',
+    description: 'Assemblez ensuite le PDF créé avec d’autres documents dans l’ordre voulu.',
+    href: '/fr/outils/fusionner-pdf/',
+  }}
+>
+  <ImagesToPdf labels={frenchImagesToPdf.labels} />
+</ExpansionToolLayout>

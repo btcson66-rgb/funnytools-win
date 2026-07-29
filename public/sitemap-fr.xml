@@ -55,6 +55,24 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/image-compressor/" />
   </url>
   <url>
+    <loc>https://funnytools.win/fr/outils/convertir-image-en-base64/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-to-base64/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/image-to-base64/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-imagen-base64/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/convertir-image-en-base64/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/image-to-base64/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/convertir-images-en-pdf/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/images-to-pdf/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/images-to-pdf/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-imagenes-a-pdf/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/convertir-images-en-pdf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/images-to-pdf/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/fr/outils/convertir-jpg-en-png/</loc>
     <lastmod>2026-07-30</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/jpg-to-png/" />
@@ -98,6 +116,15 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/dividir-pdf/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/diviser-pdf/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/split-pdf/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/fr/outils/faire-pivoter-image/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-rotate-flip/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/image-rotate-flip/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/rotar-voltear-imagen/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/faire-pivoter-image/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/image-rotate-flip/" />
   </url>
   <url>
     <loc>https://funnytools.win/fr/outils/fusionner-pdf/</loc>

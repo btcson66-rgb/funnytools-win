@@ -1,0 +1,24 @@
+---
+import ImageRotateFlip from '../../../components/tools/ImageRotateFlip.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchImageRotateFlip,
+  frenchImageRotateFlipReview,
+} from '../../../i18n/expansion/fr-tools-06';
+---
+
+<ExpansionToolLayout
+  routeKey="image-rotate-flip"
+  canonicalPath="/fr/outils/faire-pivoter-image/"
+  content={frenchImageRotateFlip}
+  categoryLabel="Retouche d’image"
+  review={frenchImageRotateFlipReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Recadrer une image',
+    description: 'Retirez ensuite les bords inutiles sans modifier l’orientation de la copie.',
+    href: '/fr/outils/recadrer-image/',
+  }}
+>
+  <ImageRotateFlip labels={frenchImageRotateFlip.labels} />
+</ExpansionToolLayout>

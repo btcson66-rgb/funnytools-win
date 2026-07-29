@@ -1,0 +1,24 @@
+---
+import ImageToBase64 from '../../../components/tools/ImageToBase64.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchImageToBase64,
+  frenchImageToBase64Review,
+} from '../../../i18n/expansion/fr-tools-06';
+---
+
+<ExpansionToolLayout
+  routeKey="image-to-base64"
+  canonicalPath="/fr/outils/convertir-image-en-base64/"
+  content={frenchImageToBase64}
+  categoryLabel="Développement web"
+  review={frenchImageToBase64Review}
+  locale="fr"
+  relatedTool={{
+    name: 'Compresser une image',
+    description: 'Réduisez d’abord une copie si la Data URI devient trop longue pour le projet.',
+    href: '/fr/outils/compresser-image/',
+  }}
+>
+  <ImageToBase64 labels={frenchImageToBase64.labels} />
+</ExpansionToolLayout>

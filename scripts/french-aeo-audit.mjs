@@ -93,6 +93,9 @@ const requiredTermsByKey = {
   'image-crop': ['recadrer une image', 'recadrage', 'rectangle', 'pixels'],
   'jpg-to-webp': ['convertir un jpg en webp', 'qualité', 'poids', 'compatibilité'],
   'webp-to-jpg': ['convertir un webp en jpg', 'fond blanc', 'transparence', 'animation'],
+  'image-rotate-flip': ['faire pivoter une image', 'retourner', 'effet miroir', '90°'],
+  'image-to-base64': ['convertir une image en base64', 'data uri', 'type mime', 'chiffrement'],
+  'images-to-pdf': ['convertir des images en pdf', 'jpg', 'png', 'ordre'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',
