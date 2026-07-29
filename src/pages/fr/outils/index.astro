@@ -43,23 +43,47 @@ const tools = [
     search: 'diviser pdf séparer pages extraire découper plages document',
     privacy: 'Les pages sont copiées dans la mémoire du navigateur.',
   },
+  {
+    name: 'Redimensionner une image',
+    href: '/fr/outils/redimensionner-image/',
+    category: 'Images',
+    description: 'Changez la largeur et la hauteur en pixels, gardez les proportions et contrôlez la copie.',
+    search: 'redimensionner image changer taille photo largeur hauteur pixels proportions dimensions',
+    privacy: 'L’image est redimensionnée dans ce navigateur.',
+  },
+  {
+    name: 'Convertir un PNG en JPG',
+    href: '/fr/outils/convertir-png-en-jpg/',
+    category: 'Images',
+    description: 'Choisissez le fond de la transparence, réglez la qualité JPEG et comparez le poids.',
+    search: 'convertir png jpg jpeg fond blanc transparence qualité image',
+    privacy: 'La conversion et le fond sont produits dans cet onglet.',
+  },
+  {
+    name: 'Convertir un JPG en PNG',
+    href: '/fr/outils/convertir-jpg-en-png/',
+    category: 'Images',
+    description: 'Créez une copie PNG en comprenant pourquoi le fond reste opaque et le poids peut augmenter.',
+    search: 'convertir jpg jpeg png transparent fond poids format image',
+    privacy: 'La copie PNG est créée dans la mémoire du navigateur.',
+  },
 ];
 
 const faq = [
   {
     q: 'Quels outils en ligne gratuits sont disponibles en français ?',
-    a: 'La collection française propose cinq outils : moyenne de notes, fusion PDF, compression d’image, génération de QR code et division PDF. Chaque page comprend une fonction utilisable, des exemples, des limites et une méthode de vérification.',
+    a: 'La collection française propose huit outils : moyenne de notes, fusion et division PDF, compression et redimensionnement d’image, QR code, PNG vers JPG et JPG vers PNG. Chaque page comprend une fonction utilisable, des exemples, des limites et une méthode de vérification.',
   },
   {
     q: 'Faut-il créer un compte ou installer un logiciel ?',
-    a: 'Non. Les cinq outils s’ouvrent dans le navigateur, sans inscription ni installation. Une connexion est nécessaire pour charger le site.',
+    a: 'Non. Les huit outils s’ouvrent dans le navigateur, sans inscription ni installation. Une connexion est nécessaire pour charger le site.',
   },
   {
     q: 'Les données sont-elles envoyées à FunnyTools ?',
     a: 'Les notes et les PDF sont traités dans le navigateur pour produire le résultat. La page peut toutefois contacter des services techniques, analytiques ou publicitaires, comme l’explique la politique de confidentialité.',
   },
   {
-    q: 'Pourquoi le répertoire français ne contient-il que cinq outils ?',
+    q: 'Pourquoi le répertoire français ne contient-il que huit outils ?',
     a: 'Une route française n’est ajoutée qu’après rédaction native, test mobile, vérification de la fonction, contrôle des liens de langue et publication réelle. Les prochaines pages arrivent par lots de trois au maximum.',
   },
   {
@@ -174,7 +198,7 @@ const breadcrumbJsonLd = {
     <section class="wrap content-section answer-panel" aria-labelledby="fr-reponse-directe">
       <p class="eyebrow">Réponse directe</p>
       <h2 id="fr-reponse-directe">Quels outils sont disponibles maintenant ?</h2>
-      <p>La collection française comprend cinq outils finalisés. Le calculateur traite les moyennes simples ou pondérées ; les outils PDF assemblent plusieurs documents ou séparent des pages et des plages ; le compresseur réencode JPG, PNG et WebP ; le générateur crée un QR code statique pour une URL ou un texte. Les cinq fonctions s’exécutent dans le navigateur, sans compte, et leurs pages expliquent la méthode, les limites et les contrôles à effectuer.</p>
+      <p>La collection française comprend huit outils finalisés. Le calculateur traite les moyennes ; les outils PDF assemblent ou séparent des pages ; les outils d’image compressent, redimensionnent ou convertissent PNG et JPG ; le générateur crée un QR code statique. Les huit fonctions s’exécutent dans le navigateur, sans compte, et leurs pages expliquent la méthode, les limites et les contrôles à effectuer.</p>
       <p>Le nombre limité de cartes est volontaire. Une page n’apparaît ici qu’après rédaction française originale, test de l’interface, contrôle sur mobile, vérification du canonical, des variantes hreflang, du sitemap et des données structurées. Le répertoire n’utilise ni faux lien, ni page « bientôt disponible », ni traduction automatique pour donner une impression artificielle de volume.</p>
     </section>
 
@@ -194,7 +218,7 @@ const breadcrumbJsonLd = {
           </article>
         ))}
       </div>
-      <p class="empty-state" data-fr-tools-empty hidden>Aucun outil français publié ne correspond à cette recherche. Essayez « moyenne », « PDF », « image », « QR », « compresser » ou « diviser ».</p>
+      <p class="empty-state" data-fr-tools-empty hidden>Aucun outil français publié ne correspond à cette recherche. Essayez « moyenne », « PDF », « image », « QR », « redimensionner », « PNG » ou « JPG ».</p>
     </section>
 
     <section class="wrap content-section" aria-labelledby="fr-choisir-outil">
@@ -237,7 +261,7 @@ const breadcrumbJsonLd = {
 
     <section class="wrap content-section" aria-labelledby="fr-redaction-native">
       <h2 id="fr-redaction-native">Une rédaction française, pas un remplacement de mots</h2>
-      <p>Une personne peut chercher « calcul moyenne notes », « moyenne avec coefficient », « fusionner PDF gratuitement », « diviser un PDF », « compresser une image », « réduire le poids d’une photo », « créer un QR code » ou « faire un QR code pour un lien ». Le contenu rapproche ces formulations quand elles décrivent la même tâche et explique leurs différences lorsqu’elles peuvent orienter vers une mauvaise fonction.</p>
+      <p>Une personne peut chercher « calcul moyenne notes », « fusionner PDF gratuitement », « diviser un PDF », « compresser une image », « redimensionner une photo », « convertir PNG en JPG », « JPG en PNG transparent » ou « créer un QR code ». Le contenu rapproche les formulations qui décrivent la même tâche et explique leurs différences lorsqu’elles peuvent conduire à une mauvaise opération.</p>
       <p>Le français est utilisé dans de nombreux systèmes scolaires et administratifs. FunnyTools ne suppose pas qu’un barème, une règle d’arrondi ou une obligation juridique soit identique en France, en Belgique, en Suisse, au Canada ou ailleurs. Lorsqu’une source locale est indispensable, la page indique la limite et renvoie la décision à l’organisme compétent.</p>
     </section>
 

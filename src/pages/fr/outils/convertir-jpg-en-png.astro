@@ -1,0 +1,21 @@
+---
+import JpgToPng from '../../../components/tools/JpgToPng.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchJpgToPng, frenchJpgToPngReview } from '../../../i18n/expansion/fr-tools-04';
+---
+
+<ExpansionToolLayout
+  routeKey="jpg-to-png"
+  canonicalPath="/fr/outils/convertir-jpg-en-png/"
+  content={frenchJpgToPng}
+  categoryLabel="Convertisseur d’image"
+  review={frenchJpgToPngReview}
+  relatedTool={{
+    name: 'Convertir un PNG en JPG',
+    description: 'Créez au contraire un JPEG opaque et choisissez la couleur du fond.',
+    href: '/fr/outils/convertir-png-en-jpg/',
+  }}
+  locale="fr"
+>
+  <JpgToPng labels={frenchJpgToPng.labels} />
+</ExpansionToolLayout>

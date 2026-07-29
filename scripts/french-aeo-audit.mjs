@@ -87,6 +87,9 @@ const requiredTermsByKey = {
   'image-compressor': ['compresser une image', 'réduire le poids', 'jpeg', 'webp'],
   'qr-code-generator': ['générateur de code qr', 'qr code statique', 'correction', 'png'],
   'split-pdf': ['diviser un pdf', 'extraire les pages', 'plages', 'sans envoyer'],
+  'image-resizer': ['redimensionner une image', 'largeur', 'hauteur', 'proportions'],
+  'png-to-jpg': ['convertir un png en jpg', 'fond blanc', 'transparence', 'qualité'],
+  'jpg-to-png': ['convertir un jpg en png', 'fond transparent', 'poids', 'dans le navigateur'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

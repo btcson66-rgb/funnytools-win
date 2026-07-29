@@ -1,0 +1,21 @@
+---
+import ImageResizer from '../../../components/tools/ImageResizer.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchImageResizer, frenchImageResizerReview } from '../../../i18n/expansion/fr-tools-04';
+---
+
+<ExpansionToolLayout
+  routeKey="image-resizer"
+  canonicalPath="/fr/outils/redimensionner-image/"
+  content={frenchImageResizer}
+  categoryLabel="Outil pour les images"
+  review={frenchImageResizerReview}
+  relatedTool={{
+    name: 'Compresser une image',
+    description: 'Réduisez ensuite le poids si le destinataire limite aussi les Ko ou les Mo.',
+    href: '/fr/outils/compresser-image/',
+  }}
+  locale="fr"
+>
+  <ImageResizer labels={frenchImageResizer.labels} />
+</ExpansionToolLayout>

@@ -1,0 +1,21 @@
+---
+import PngToJpg from '../../../components/tools/PngToJpg.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchPngToJpg, frenchPngToJpgReview } from '../../../i18n/expansion/fr-tools-04';
+---
+
+<ExpansionToolLayout
+  routeKey="png-to-jpg"
+  canonicalPath="/fr/outils/convertir-png-en-jpg/"
+  content={frenchPngToJpg}
+  categoryLabel="Convertisseur d’image"
+  review={frenchPngToJpgReview}
+  relatedTool={{
+    name: 'Redimensionner une image',
+    description: 'Changez aussi la largeur et la hauteur si le destinataire impose des pixels précis.',
+    href: '/fr/outils/redimensionner-image/',
+  }}
+  locale="fr"
+>
+  <PngToJpg labels={frenchPngToJpg.labels} />
+</ExpansionToolLayout>

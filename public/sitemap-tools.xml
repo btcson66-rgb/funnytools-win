@@ -216,6 +216,7 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-resizer/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/image-resizer/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/redimensionar-imagen/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/redimensionner-image/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/image-resizer/" />
   </url>
   <url>
@@ -264,6 +265,7 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/jpg-to-png/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/jpg-to-png/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-jpg-a-png/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/convertir-jpg-en-png/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/jpg-to-png/" />
   </url>
   <url>
@@ -401,6 +403,7 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/png-to-jpg/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/png-to-jpg/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-png-a-jpg/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/convertir-png-en-jpg/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/png-to-jpg/" />
   </url>
   <url>
