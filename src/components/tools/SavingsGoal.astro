@@ -15,23 +15,23 @@ const { labels } = Astro.props;
   <div class="form-grid">
     <label>
       <span>{labels.target}</span>
-      <input data-target type="number" min="0" step="100" value="100000" />
+      <input data-target type="number" min="0" step="100" value={labels.defaultTarget || '100000'} />
     </label>
     <label>
       <span>{labels.current}</span>
-      <input data-current type="number" min="0" step="100" value="10000" />
+      <input data-current type="number" min="0" step="100" value={labels.defaultCurrent || '10000'} />
     </label>
     <label>
       <span>{labels.monthlyDeposit}</span>
-      <input data-monthly type="number" min="0" step="100" value="5000" />
+      <input data-monthly type="number" min="0" step="100" value={labels.defaultMonthlyDeposit || '5000'} />
     </label>
     <label>
       <span>{labels.targetMonths}</span>
-      <input data-months type="number" min="1" step="1" value="18" hidden />
+      <input data-months type="number" min="1" step="1" value={labels.defaultTargetMonths || '18'} hidden />
     </label>
     <label>
       <span>{labels.annualRate}</span>
-      <input data-rate type="number" min="0" step="0.1" value="1.5" />
+      <input data-rate type="number" min="0" step="0.1" value={labels.defaultAnnualRate || '1.5'} />
     </label>
   </div>
 
@@ -41,6 +41,7 @@ const { labels } = Astro.props;
   </div>
 
   <p class="form-error" data-error role="alert" hidden></p>
+  {labels.assumption && <p class="tool-assumption">{labels.assumption}</p>}
   <div class="bigresult" aria-live="polite">
     <span class="result-label" data-result-label>{labels.timeResult}</span>
     <output data-result>-</output>

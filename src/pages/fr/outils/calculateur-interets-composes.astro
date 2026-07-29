@@ -1,0 +1,24 @@
+---
+import CompoundInterest from '../../../components/tools/CompoundInterest.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchCompoundInterest,
+  frenchCompoundInterestReview,
+} from '../../../i18n/expansion/fr-tools-21';
+---
+
+<ExpansionToolLayout
+  routeKey="compound-interest"
+  canonicalPath="/fr/outils/calculateur-interets-composes/"
+  locale="fr"
+  content={frenchCompoundInterest}
+  categoryLabel="Épargne et projection"
+  review={frenchCompoundInterestReview}
+  relatedTool={{
+    name: 'Calculateur d’objectif d’épargne',
+    description: 'Transformez un capital cible en durée ou versement mensuel.',
+    href: '/fr/outils/calculateur-objectif-epargne/',
+  }}
+>
+  <CompoundInterest labels={frenchCompoundInterest.labels} />
+</ExpansionToolLayout>

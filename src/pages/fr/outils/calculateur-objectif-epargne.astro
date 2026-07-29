@@ -1,0 +1,24 @@
+---
+import SavingsGoal from '../../../components/tools/SavingsGoal.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchSavingsGoal,
+  frenchSavingsGoalReview,
+} from '../../../i18n/expansion/fr-tools-21';
+---
+
+<ExpansionToolLayout
+  routeKey="savings-goal"
+  canonicalPath="/fr/outils/calculateur-objectif-epargne/"
+  locale="fr"
+  content={frenchSavingsGoal}
+  categoryLabel="Épargne et projection"
+  review={frenchSavingsGoalReview}
+  relatedTool={{
+    name: 'Calculateur d’intérêts composés',
+    description: 'Comparez capital, versements, durée et fréquence de capitalisation.',
+    href: '/fr/outils/calculateur-interets-composes/',
+  }}
+>
+  <SavingsGoal labels={frenchSavingsGoal.labels} />
+</ExpansionToolLayout>

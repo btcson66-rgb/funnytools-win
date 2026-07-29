@@ -138,6 +138,9 @@ const requiredTermsByKey = {
   'break-reminder': ['rappel de pause écran', 'pause active', 'date.now', 'notification système'],
   'net-salary': ['calculateur de salaire net', 'brut', 'urssaf', 'aucun taux français'],
   'overtime-pay': ['calculateur d’heures supplémentaires', '1,25', '1,50', 'heures complémentaires'],
+  'mortgage-payment': ['calculateur de mensualité de prêt immobilier', 'taux nominal', 'taeg', 'assurance emprunteur'],
+  'compound-interest': ['calculateur d’intérêts composés', 'versements mensuels', 'capitalisation', 'aucun rendement'],
+  'savings-goal': ['calculateur d’objectif d’épargne', 'combien verser par mois', '1 200 mois', 'inflation'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

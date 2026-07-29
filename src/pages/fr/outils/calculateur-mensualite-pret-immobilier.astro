@@ -1,0 +1,24 @@
+---
+import MortgagePayment from '../../../components/tools/MortgagePayment.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchMortgagePayment,
+  frenchMortgagePaymentReview,
+} from '../../../i18n/expansion/fr-tools-21';
+---
+
+<ExpansionToolLayout
+  routeKey="mortgage-payment"
+  canonicalPath="/fr/outils/calculateur-mensualite-pret-immobilier/"
+  locale="fr"
+  content={frenchMortgagePayment}
+  categoryLabel="Crédit et logement"
+  review={frenchMortgagePaymentReview}
+  relatedTool={{
+    name: 'Calculateur d’objectif d’épargne',
+    description: 'Planifiez un apport ou une réserve sans présumer de rendement.',
+    href: '/fr/outils/calculateur-objectif-epargne/',
+  }}
+>
+  <MortgagePayment labels={frenchMortgagePayment.labels} />
+</ExpansionToolLayout>

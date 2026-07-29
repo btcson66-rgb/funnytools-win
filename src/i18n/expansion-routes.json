@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-20",
+  "activeLocaleBatch": "fr-21",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -849,30 +849,42 @@
       "key": "mortgage-payment",
       "type": "tool",
       "batch": "es-21",
+      "localeBatches": {
+        "fr": "fr-21"
+      },
       "paths": {
         "zh": "/tools/mortgage-payment/",
         "en": "/en/tools/mortgage-payment/",
-        "es": "/es/herramientas/calculadora-hipoteca/"
+        "es": "/es/herramientas/calculadora-hipoteca/",
+        "fr": "/fr/outils/calculateur-mensualite-pret-immobilier/"
       }
     },
     {
       "key": "compound-interest",
       "type": "tool",
       "batch": "es-21",
+      "localeBatches": {
+        "fr": "fr-21"
+      },
       "paths": {
         "zh": "/tools/compound-interest/",
         "en": "/en/tools/compound-interest/",
-        "es": "/es/herramientas/calculadora-interes-compuesto/"
+        "es": "/es/herramientas/calculadora-interes-compuesto/",
+        "fr": "/fr/outils/calculateur-interets-composes/"
       }
     },
     {
       "key": "savings-goal",
       "type": "tool",
       "batch": "es-21",
+      "localeBatches": {
+        "fr": "fr-21"
+      },
       "paths": {
         "zh": "/tools/savings-goal/",
         "en": "/en/tools/savings-goal/",
-        "es": "/es/herramientas/calculadora-meta-ahorro/"
+        "es": "/es/herramientas/calculadora-meta-ahorro/",
+        "fr": "/fr/outils/calculateur-objectif-epargne/"
       }
     },
     {
