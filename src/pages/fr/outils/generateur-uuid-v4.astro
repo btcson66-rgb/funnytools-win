@@ -1,0 +1,21 @@
+---
+import UuidGenerator from '../../../components/tools/UuidGenerator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchUuidGenerator, frenchUuidGeneratorReview } from '../../../i18n/expansion/fr-tools-13';
+---
+
+<ExpansionToolLayout
+  routeKey="uuid-generator"
+  canonicalPath="/fr/outils/generateur-uuid-v4/"
+  content={frenchUuidGenerator}
+  categoryLabel="Développement web"
+  review={frenchUuidGeneratorReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Formater et valider du JSON',
+    description: 'Préparez ensuite une fixture JSON en conservant les identifiants comme chaînes.',
+    href: '/fr/outils/formater-valider-json/',
+  }}
+>
+  <UuidGenerator labels={frenchUuidGenerator.labels} />
+</ExpansionToolLayout>

@@ -1,0 +1,21 @@
+---
+import TimestampConverter from '../../../components/tools/TimestampConverter.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchTimestampConverter, frenchTimestampConverterReview } from '../../../i18n/expansion/fr-tools-13';
+---
+
+<ExpansionToolLayout
+  routeKey="timestamp-converter"
+  canonicalPath="/fr/outils/convertir-timestamp-unix/"
+  content={frenchTimestampConverter}
+  categoryLabel="Date et heure"
+  review={frenchTimestampConverterReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Formater et valider du JSON',
+    description: 'Lisez un payload anonymisé avant d’interpréter l’unité et le sens de son timestamp.',
+    href: '/fr/outils/formater-valider-json/',
+  }}
+>
+  <TimestampConverter labels={frenchTimestampConverter.labels} />
+</ExpansionToolLayout>

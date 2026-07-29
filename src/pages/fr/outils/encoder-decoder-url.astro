@@ -1,0 +1,21 @@
+---
+import UrlEncoder from '../../../components/tools/UrlEncoder.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import { frenchUrlEncoder, frenchUrlEncoderReview } from '../../../i18n/expansion/fr-tools-13';
+---
+
+<ExpansionToolLayout
+  routeKey="url-encoder"
+  canonicalPath="/fr/outils/encoder-decoder-url/"
+  content={frenchUrlEncoder}
+  categoryLabel="Développement web"
+  review={frenchUrlEncoderReview}
+  locale="fr"
+  relatedTool={{
+    name: 'Encoder et décoder du Base64',
+    description: 'Distinguez la représentation UTF-8 Base64 du percent-encoding utilisé dans une URL.',
+    href: '/fr/outils/encoder-decoder-base64/',
+  }}
+>
+  <UrlEncoder labels={frenchUrlEncoder.labels} />
+</ExpansionToolLayout>

@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-12",
+  "activeLocaleBatch": "fr-13",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -513,30 +513,42 @@
       "key": "url-encoder",
       "type": "tool",
       "batch": "es-13",
+      "localeBatches": {
+        "fr": "fr-13"
+      },
       "paths": {
         "zh": "/tools/url-encoder/",
         "en": "/en/tools/url-encoder/",
-        "es": "/es/herramientas/codificar-decodificar-url/"
+        "es": "/es/herramientas/codificar-decodificar-url/",
+        "fr": "/fr/outils/encoder-decoder-url/"
       }
     },
     {
       "key": "timestamp-converter",
       "type": "tool",
       "batch": "es-13",
+      "localeBatches": {
+        "fr": "fr-13"
+      },
       "paths": {
         "zh": "/tools/timestamp-converter/",
         "en": "/en/tools/timestamp-converter/",
-        "es": "/es/herramientas/convertir-timestamp-unix/"
+        "es": "/es/herramientas/convertir-timestamp-unix/",
+        "fr": "/fr/outils/convertir-timestamp-unix/"
       }
     },
     {
       "key": "uuid-generator",
       "type": "tool",
       "batch": "es-13",
+      "localeBatches": {
+        "fr": "fr-13"
+      },
       "paths": {
         "zh": "/tools/uuid-generator/",
         "en": "/en/tools/uuid-generator/",
-        "es": "/es/herramientas/generador-uuid-v4/"
+        "es": "/es/herramientas/generador-uuid-v4/",
+        "fr": "/fr/outils/generateur-uuid-v4/"
       }
     },
     {

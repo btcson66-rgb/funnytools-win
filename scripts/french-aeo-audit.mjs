@@ -114,6 +114,9 @@ const requiredTermsByKey = {
   'sort-lines': ['trier des lignes', 'ordre alphabétique', 'nombre initial', 'longueur'],
   'json-formatter': ['formater', 'valider', 'json', 'clés en double'],
   base64: ['encoder', 'décoder', 'base64', 'utf-8'],
+  'url-encoder': ['encoder', 'décoder', 'url', 'percent-encoding'],
+  'timestamp-converter': ['timestamp unix', 'secondes', 'millisecondes', 'utc'],
+  'uuid-generator': ['générateur', 'uuid v4', 'crypto.randomuuid', 'unicité'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',
