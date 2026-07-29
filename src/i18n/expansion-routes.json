@@ -1,6 +1,6 @@
 {
   "reviewedAt": "2026-07-29",
-  "activeBatch": "es-42",
+  "activeBatch": "es-43",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1261,6 +1261,36 @@
         "zh": "/for/students/",
         "en": "/en/for/students/",
         "es": "/es/para/estudiantes/"
+      }
+    },
+    {
+      "key": "audience-office-workers",
+      "type": "page",
+      "batch": "es-43",
+      "paths": {
+        "zh": "/for/office-workers/",
+        "en": "/en/for/office-workers/",
+        "es": "/es/para/oficina/"
+      }
+    },
+    {
+      "key": "audience-creators",
+      "type": "page",
+      "batch": "es-43",
+      "paths": {
+        "zh": "/for/creators/",
+        "en": "/en/for/creators/",
+        "es": "/es/para/creadores/"
+      }
+    },
+    {
+      "key": "audience-designers",
+      "type": "page",
+      "batch": "es-43",
+      "paths": {
+        "zh": "/for/designers/",
+        "en": "/en/for/designers/",
+        "es": "/es/para/disenadores/"
       }
     }
   ]

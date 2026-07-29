@@ -1,0 +1,12 @@
+---
+import ExpansionInfoLayout from '../../../layouts/ExpansionInfoLayout.astro';
+import { spanishOfficeAudience } from '../../../i18n/expansion/es-audiences-43';
+---
+
+<ExpansionInfoLayout
+  currentKey="audience-office-workers"
+  canonicalPath="/es/para/oficina/"
+  content={spanishOfficeAudience}
+  pageType="CollectionPage"
+  breadcrumbParent={{ name: 'Herramientas por perfil', path: '/es/para/' }}
+/>

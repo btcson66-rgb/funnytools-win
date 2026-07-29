@@ -59,6 +59,7 @@ export const spanishAudienceIndex: SpanishInfoPage = {
         'Nóminas, contratos, impuestos y plazos legales necesitan la fuente vigente. Usa las utilidades para preparar o detectar incoherencias, y conserva el documento que autoriza la regla.',
       ],
       links: [
+        { label: 'Herramientas para oficina', href: '/es/para/oficina/', description: 'Documentos, fechas, cálculos y datos con una revisión antes de enviar.' },
         { label: 'Herramientas PDF', href: '/es/categorias/pdf/', description: 'Unir, dividir, ordenar, extraer, rotar y comprimir copias.' },
         { label: 'Tiempo y fechas', href: '/es/categorias/tiempo/', description: 'Diferencias, días laborables, edad, cuenta atrás y cronómetro.' },
         { label: 'Calculadoras de dinero', href: '/es/categorias/dinero/', description: 'Estimaciones transparentes con entradas y límites visibles.' },
@@ -71,6 +72,7 @@ export const spanishAudienceIndex: SpanishInfoPage = {
         'Guarda una copia maestra antes de comprimir o convertir. Revisa enlaces, texto alternativo, contraste y aspecto en móvil antes de distribuir.',
       ],
       links: [
+        { label: 'Herramientas para creadores', href: '/es/para/creadores/', description: 'Texto, imágenes, enlaces, color y controles antes de publicar.' },
         { label: 'Herramientas de texto', href: '/es/categorias/texto/', description: 'Contar, limpiar, ordenar, convertir y validar contenido.' },
         { label: 'Herramientas de imagen', href: '/es/categorias/imagen/', description: 'Recortar, redimensionar, comprimir y convertir formatos.' },
       ],
@@ -82,6 +84,7 @@ export const spanishAudienceIndex: SpanishInfoPage = {
         'Un QR debe probarse desde la distancia real y necesita una alternativa legible. Un contraste calculado ayuda, pero también debes revisar estados, tamaños y contexto.',
       ],
       links: [
+        { label: 'Herramientas para diseñadores', href: '/es/para/disenadores/', description: 'Dimensiones, formatos, contraste, QR y prueba de entrega.' },
         { label: 'Dibujo y diagramas', href: '/es/categorias/dibujo/', description: 'Bocetos, CAD 2D y diagramas de flujo para trabajo rápido.' },
         { label: 'Generador de colores', href: '/es/herramientas/generador-colores-hex-rgb-hsl/', description: 'Conversión de color y comprobación de contraste.' },
       ],

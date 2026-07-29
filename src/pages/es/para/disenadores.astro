@@ -1,0 +1,12 @@
+---
+import ExpansionInfoLayout from '../../../layouts/ExpansionInfoLayout.astro';
+import { spanishDesignersAudience } from '../../../i18n/expansion/es-audiences-43';
+---
+
+<ExpansionInfoLayout
+  currentKey="audience-designers"
+  canonicalPath="/es/para/disenadores/"
+  content={spanishDesignersAudience}
+  pageType="CollectionPage"
+  breadcrumbParent={{ name: 'Herramientas por perfil', path: '/es/para/' }}
+/>
