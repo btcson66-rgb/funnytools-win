@@ -150,6 +150,9 @@ const requiredTermsByKey = {
   'seating-chart': ['créer un plan de classe', 'placement élèves', 'accessibilité', 'minimisation'],
   'group-generator': ['générateur de groupes', 'nombre de groupes', 'groupes de besoins', 'crypto.getrandomvalues'],
   'percentile-rank-calculator': ['rang percentile', 'centile', 'ex æquo', 'groupe de référence'],
+  'z-score-calculator': ['calculateur de score z', 'écart-type', 'distribution normale', 'groupe de référence'],
+  't-score-calculator': ['calculateur de score t', 't = 50 + 10z', 't de student', 'moyenne 50'],
+  'weighted-average-calculator': ['calculateur de moyenne pondérée', 'coefficient', 'somme des poids', 'formule additive'],
 };
 const expectedPageTypesByKey = {
   'tools-index': 'CollectionPage',

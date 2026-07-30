@@ -1,0 +1,24 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchZScore,
+  frenchZScoreReview,
+} from '../../../i18n/expansion/fr-tools-25';
+---
+
+<ExpansionToolLayout
+  routeKey="z-score-calculator"
+  canonicalPath="/fr/outils/calculateur-score-z/"
+  locale="fr"
+  content={frenchZScore}
+  categoryLabel="Statistiques et éducation"
+  review={frenchZScoreReview}
+  relatedTool={{
+    name: 'Calculateur de rang percentile',
+    description: 'Calculez une position empirique par comptage, sans supposer une loi normale.',
+    href: '/fr/outils/calculateur-rang-percentile/',
+  }}
+>
+  <EducationStatisticsCalculator labels={frenchZScore.labels} slug="z-score-calculator" />
+</ExpansionToolLayout>

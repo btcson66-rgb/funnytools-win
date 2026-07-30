@@ -1,0 +1,24 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchTScore,
+  frenchTScoreReview,
+} from '../../../i18n/expansion/fr-tools-25';
+---
+
+<ExpansionToolLayout
+  routeKey="t-score-calculator"
+  canonicalPath="/fr/outils/calculateur-score-t/"
+  locale="fr"
+  content={frenchTScore}
+  categoryLabel="Statistiques et éducation"
+  review={frenchTScoreReview}
+  relatedTool={{
+    name: 'Calculateur de score z',
+    description: 'Standardisez d’abord une valeur avec la moyenne et l’écart-type de sa référence.',
+    href: '/fr/outils/calculateur-score-z/',
+  }}
+>
+  <EducationStatisticsCalculator labels={frenchTScore.labels} slug="t-score-calculator" />
+</ExpansionToolLayout>

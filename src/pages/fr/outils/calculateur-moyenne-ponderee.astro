@@ -1,0 +1,24 @@
+---
+import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
+import {
+  frenchWeightedAverage,
+  frenchWeightedAverageReview,
+} from '../../../i18n/expansion/fr-tools-25';
+---
+
+<ExpansionToolLayout
+  routeKey="weighted-average-calculator"
+  canonicalPath="/fr/outils/calculateur-moyenne-ponderee/"
+  locale="fr"
+  content={frenchWeightedAverage}
+  categoryLabel="Études et calcul"
+  review={frenchWeightedAverageReview}
+  relatedTool={{
+    name: 'Calculateur de moyenne de notes',
+    description: 'Utilisez une moyenne simple lorsque toutes les valeurs ont la même importance.',
+    href: '/fr/outils/calcul-moyenne-notes/',
+  }}
+>
+  <EducationStatisticsCalculator labels={frenchWeightedAverage.labels} slug="weighted-average-calculator" />
+</ExpansionToolLayout>

@@ -547,23 +547,47 @@ const tools = [
     search: 'calculateur rang percentile centile formule ex aequo position relative score',
     privacy: 'Les trois effectifs sont calculés dans cet onglet.',
   },
+  {
+    name: 'Calculateur de score z',
+    href: '/fr/outils/calculateur-score-z/',
+    category: 'Statistiques et éducation',
+    description: 'Standardisez une valeur avec la moyenne et l’écart-type de son groupe de référence.',
+    search: 'calculateur score z formule standardiser note écart type moyenne distribution normale',
+    privacy: 'La valeur, la moyenne et l’écart-type restent dans cet onglet.',
+  },
+  {
+    name: 'Calculateur de score T',
+    href: '/fr/outils/calculateur-score-t/',
+    category: 'Statistiques et éducation',
+    description: 'Convertissez z sur l’échelle de moyenne 50 et d’écart-type 10 avec T = 50 + 10z.',
+    search: 'calculateur score T convertir z T moyenne 50 écart type 10 psychométrie',
+    privacy: 'Le score z et sa conversion restent dans cet onglet.',
+  },
+  {
+    name: 'Calculateur de moyenne pondérée',
+    href: '/fr/outils/calculateur-moyenne-ponderee/',
+    category: 'Études et calcul',
+    description: 'Calculez Σ(valeur × poids) / Σpoids avec des coefficients ou pourcentages.',
+    search: 'calculateur moyenne pondérée coefficient poids pourcentage formule notes crédits',
+    privacy: 'Les valeurs, poids et résultats restent dans cet onglet.',
+  },
 ];
 
 const faq = [
   {
     q: 'Quels outils en ligne gratuits sont disponibles en français ?',
-    a: 'La collection française propose soixante-douze outils : calculs, rang percentile, salaire net, heures supplémentaires, mensualité immobilière, intérêts composés, objectif d’épargne, inflation et pouvoir d’achat, plan de classe, groupes et tirages aléatoires, tirage d’élèves, dés virtuels, choix de repas, décisions 50/50, minuteur classique, Pomodoro, chronomètre, rappel de pause, calcul de dates, d’âge et de jours ouvrés, CAO 2D, tableau blanc, diagramme de flux, graphiques, couleurs, codes-barres, mots de passe, compteurs, nettoyage de texte, JSON, CSV, Markdown, Base64, URL, timestamp Unix, UUID v4, PDF, QR code et outils d’image. Chaque page comprend une fonction utilisable, des exemples, des limites et une méthode de vérification.',
+    a: 'La collection française propose soixante-quinze outils : calculs, rang percentile, scores z et T, moyenne pondérée, salaire net, heures supplémentaires, mensualité immobilière, intérêts composés, objectif d’épargne, inflation et pouvoir d’achat, plan de classe, groupes et tirages aléatoires, tirage d’élèves, dés virtuels, choix de repas, décisions 50/50, minuteur classique, Pomodoro, chronomètre, rappel de pause, calcul de dates, d’âge et de jours ouvrés, CAO 2D, tableau blanc, diagramme de flux, graphiques, couleurs, codes-barres, mots de passe, compteurs, nettoyage de texte, JSON, CSV, Markdown, Base64, URL, timestamp Unix, UUID v4, PDF, QR code et outils d’image. Chaque page comprend une fonction utilisable, des exemples, des limites et une méthode de vérification.',
   },
   {
     q: 'Faut-il créer un compte ou installer un logiciel ?',
-    a: 'Non. Les soixante-douze outils s’ouvrent dans le navigateur, sans inscription ni installation. Une connexion est nécessaire pour charger le site.',
+    a: 'Non. Les soixante-quinze outils s’ouvrent dans le navigateur, sans inscription ni installation. Une connexion est nécessaire pour charger le site.',
   },
   {
     q: 'Les données sont-elles envoyées à FunnyTools ?',
     a: 'Les notes et les PDF sont traités dans le navigateur pour produire le résultat. La page peut toutefois contacter des services techniques, analytiques ou publicitaires, comme l’explique la politique de confidentialité.',
   },
   {
-    q: 'Pourquoi le répertoire français ne contient-il que soixante-douze outils ?',
+    q: 'Pourquoi le répertoire français ne contient-il que soixante-quinze outils ?',
     a: 'Une route française n’est ajoutée qu’après rédaction native, test mobile, vérification de la fonction, contrôle des liens de langue et publication réelle. Les prochaines pages arrivent par lots de trois au maximum.',
   },
   {
@@ -678,7 +702,7 @@ const breadcrumbJsonLd = {
     <section class="wrap content-section answer-panel" aria-labelledby="fr-reponse-directe">
       <p class="eyebrow">Réponse directe</p>
       <h2 id="fr-reponse-directe">Quels outils sont disponibles maintenant ?</h2>
-      <p>La collection française comprend soixante-douze outils finalisés. Les fonctions de classe créent un plan de placement, forment des groupes par nombre ou effectif et tirent un élève sans répétition ; les outils de hasard tirent aussi des entiers, des noms ou une option sur une roue, répartissent une liste, lancent des dés virtuels, départagent deux options ou proposent une idée de repas ; les fonctions de temps fournissent un minuteur classique, un minuteur Pomodoro, un chronomètre avec tours et un rappel de pause écran ; les calculateurs traitent moyenne, rang percentile, écart-type, variance, pourcentages, différence entre dates, âge exact, jours ouvrés, salaire net, heures supplémentaires, mensualité de prêt immobilier, intérêts composés, objectif d’épargne, inflation cumulée et pouvoir d’achat ; la CAO 2D trace des formes avec grille, accrochage et export PNG ou SVG ; le tableau blanc permet un dessin libre et le créateur de diagramme de flux relie processus et décisions ; les graphiques transforment une petite table en PNG ; les compteurs mesurent mots, caractères, octets, phrases, paragraphes et temps de lecture. Les fonctions de texte convertissent la casse, nettoient et classent les lignes. Les outils de développement formatent du JSON, convertissent UTF-8 en Base64, encodent un composant URL, lisent un timestamp Unix et génèrent des UUID v4. Les outils PDF assemblent, séparent, pivotent, suppriment, extraient, réorganisent, convertissent en images ou tentent une optimisation structurelle ; les outils d’image compressent, redimensionnent, recadrent, pivotent ou convertissent PNG, JPG et WebP. Les fonctions s’exécutent dans le navigateur, sans compte, et leurs pages expliquent méthode, limites et contrôles.</p>
+      <p>La collection française comprend soixante-quinze outils finalisés. Les fonctions de classe créent un plan de placement, forment des groupes par nombre ou effectif et tirent un élève sans répétition ; les outils de hasard tirent aussi des entiers, des noms ou une option sur une roue, répartissent une liste, lancent des dés virtuels, départagent deux options ou proposent une idée de repas ; les fonctions de temps fournissent un minuteur classique, un minuteur Pomodoro, un chronomètre avec tours et un rappel de pause écran ; les calculateurs traitent moyenne simple ou pondérée, rang percentile, scores z et T, écart-type, variance, pourcentages, différence entre dates, âge exact, jours ouvrés, salaire net, heures supplémentaires, mensualité de prêt immobilier, intérêts composés, objectif d’épargne, inflation cumulée et pouvoir d’achat ; la CAO 2D trace des formes avec grille, accrochage et export PNG ou SVG ; le tableau blanc permet un dessin libre et le créateur de diagramme de flux relie processus et décisions ; les graphiques transforment une petite table en PNG ; les compteurs mesurent mots, caractères, octets, phrases, paragraphes et temps de lecture. Les fonctions de texte convertissent la casse, nettoient et classent les lignes. Les outils de développement formatent du JSON, convertissent UTF-8 en Base64, encodent un composant URL, lisent un timestamp Unix et génèrent des UUID v4. Les outils PDF assemblent, séparent, pivotent, suppriment, extraient, réorganisent, convertissent en images ou tentent une optimisation structurelle ; les outils d’image compressent, redimensionnent, recadrent, pivotent ou convertissent PNG, JPG et WebP. Les fonctions s’exécutent dans le navigateur, sans compte, et leurs pages expliquent méthode, limites et contrôles.</p>
       <p>Le nombre limité de cartes est volontaire. Une page n’apparaît ici qu’après rédaction française originale, test de l’interface, contrôle sur mobile, vérification du canonical, des variantes hreflang, du sitemap et des données structurées. Le répertoire n’utilise ni faux lien, ni page « bientôt disponible », ni traduction automatique pour donner une impression artificielle de volume.</p>
     </section>
 

@@ -2,7 +2,7 @@
   "reviewedAt": "2026-07-30",
   "activeBatch": "es-47",
   "activeLocale": "fr",
-  "activeLocaleBatch": "fr-24",
+  "activeLocaleBatch": "fr-25",
   "maxBatchSize": 3,
   "routes": [
     {
@@ -1017,30 +1017,42 @@
       "key": "z-score-calculator",
       "type": "tool",
       "batch": "es-25",
+      "localeBatches": {
+        "fr": "fr-25"
+      },
       "paths": {
         "zh": "/tools/z-score-calculator/",
         "en": "/en/tools/z-score-calculator/",
-        "es": "/es/herramientas/calculadora-puntuacion-z/"
+        "es": "/es/herramientas/calculadora-puntuacion-z/",
+        "fr": "/fr/outils/calculateur-score-z/"
       }
     },
     {
       "key": "t-score-calculator",
       "type": "tool",
       "batch": "es-25",
+      "localeBatches": {
+        "fr": "fr-25"
+      },
       "paths": {
         "zh": "/tools/t-score-calculator/",
         "en": "/en/tools/t-score-calculator/",
-        "es": "/es/herramientas/calculadora-puntuacion-t/"
+        "es": "/es/herramientas/calculadora-puntuacion-t/",
+        "fr": "/fr/outils/calculateur-score-t/"
       }
     },
     {
       "key": "weighted-average-calculator",
       "type": "tool",
       "batch": "es-25",
+      "localeBatches": {
+        "fr": "fr-25"
+      },
       "paths": {
         "zh": "/tools/weighted-average-calculator/",
         "en": "/en/tools/weighted-average-calculator/",
-        "es": "/es/herramientas/calculadora-media-ponderada/"
+        "es": "/es/herramientas/calculadora-media-ponderada/",
+        "fr": "/fr/outils/calculateur-moyenne-ponderee/"
       }
     },
     {
