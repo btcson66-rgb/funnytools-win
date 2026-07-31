@@ -136,12 +136,23 @@ const jsonLd = [
     <h1>{title}</h1>
   </section>
   <section class="wrap prose-page">
+    {/*
+      Cloudflare Email Obfuscation rewrites any address in this prose into a
+      /cdn-cgi/l/email-protection link that only resolves once its decoder script
+      runs. Without JS — which includes the raw HTML an AdSense reviewer or a
+      crawler reads — the contact address renders as "[email protected]" and the
+      link itself returns 404, so the site has no verifiable way to be contacted.
+      These are Cloudflare's documented opt-out markers; they must reach the
+      served HTML, hence set:html rather than a plain JSX comment.
+    */}
+    <Fragment set:html="<!--email_off-->" />
     {body.map((paragraph, index) => (
       <>
         {bodyHeadings.has(index) && <h2>{bodyHeadings.get(index)}</h2>}
         <p>{paragraph}</p>
       </>
     ))}
+    <Fragment set:html="<!--email_on-->" />
     {extraLinks.length > 0 && (
       <div class="page-link-list">
         {extraLinks.map((link) => (
