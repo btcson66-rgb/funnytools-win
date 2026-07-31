@@ -976,6 +976,719 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
       '資料中如果有欄位值以 `=` `+` `-` `@` 開頭，已自行檢查過，因為這個工具的 CSV 匯出沒有自動防護公式注入。',
     ],
   },
+  'en:age-calculator': {
+    intro: 'This section only covers what Age Calculator actually computes: a calendar-based years/months/days breakdown, plus three approximated figures (days lived, hours lived, and a heartbeat count) that are simple multiplications, not verified biological data.',
+    panels: [
+      {
+        title: 'Check the calendar math with a fixed example',
+        text: 'Enter birthday 2000-01-01 and set “As of” to 2020-06-15. The result reads 20 years, 5 months, 14 days — not a flat 20.5 years — because the tool walks month-by-month from the birthday and only counts a full month once the calendar date has been reached. The same inputs give 7,471 days lived, an approximate 179,304 hours, a next-birthday countdown of 200 days (to 2021-01-01), and “Born on Saturday.” Recompute at least the days-lived figure with a date-difference tool before relying on it.',
+      },
+      {
+        title: 'Heartbeats and hours are arithmetic, not measurement',
+        text: 'The heartbeat figure is days lived × 1,440 × 70 — a flat 70-beats-per-minute assumption with no relation to the person’s actual pulse, age, or health. Hours lived is just days lived × 24. Both numbers are always prefixed “Approx.” in the output, and the tool’s own disclaimer says they should not be used for medical or health decisions. Treat them as trivia for birthday cards, not as data.',
+      },
+      {
+        title: 'Same-day and future-date edge cases',
+        text: 'If “As of” is set to the same date as the birthday, every figure — age, days lived, hours, heartbeats, and the next-birthday countdown — reads zero, because the tool measures elapsed time only. If the birthday is set after the “As of” date, Calculate refuses to run and shows an error instead of producing a negative age; there is no support for calculating an age on a date before someone was born.',
+      },
+    ],
+    checklist: [
+      'The “As of” date is not earlier than the birthday — otherwise Calculate blocks the result with an error instead of showing a negative age.',
+      'The years/months/days breakdown has been sanity-checked with a second date calculation, since it uses calendar month boundaries, not a fixed 30-day month.',
+      'Heartbeats and hours are understood as a fixed 70 bpm arithmetic estimate, not a health reading, before they are shared or quoted.',
+      'A same-day “As of” value is expected to show 0 for every field, including the next-birthday countdown — this is normal, not a bug.',
+    ],
+  },
+  'en:apa-7-report-generator': {
+    intro: 'This section covers the default independent-samples t-test scenario the page loads with, what changes when you switch test type, and the difference between the Example and Reset buttons.',
+    panels: [
+      {
+        title: 'The page auto-generates a sentence on load — check it against the visible inputs',
+        text: 'On load, Test type is “Independent samples t-test” with variable “test score,” Group A (M = 78.40, SD = 8.20), Group B (M = 73.10, SD = 9.50), t = 2.45, df = 28, p = 0.021, d = 0.89. Because p < .05, the generated sentence reads: “An independent-samples t test showed a significant result for test score: Group A (M = 78.40, SD = 8.20) and Group B (M = 73.10, SD = 9.50), t(28) = 2.45, p = .021, d = 0.89.” Every value in that sentence is copied straight from the input fields — the tool does not recompute t, df, or p from the group means and SDs, so inconsistent numbers still produce a grammatically valid but statistically wrong sentence.',
+      },
+      {
+        title: 'Switching test type does not clear the other type’s fields',
+        text: 'Selecting a different Test type (for example, one-way ANOVA) hides the t-test fields and shows F, df1, df2, and η² instead, but any values already typed into the hidden t-test fields stay on the page — they are simply not read again until you switch back. Each test type validates only its own required fields: p must be between 0 and 1 for every type, df/df1/df2 must be positive, and optional fields like η², Cramér’s V, and R² are checked to fall inside 0–1 only when they are filled in at all.',
+      },
+      {
+        title: 'Example resets only the t-test fields — Reset empties everything',
+        text: 'The Example button always refills the same nine t-test values (variable, t, df, p, d, both group names, means, and SDs) shown above, regardless of which test type is currently selected — it does not fill in ANOVA, chi-square, correlation, or regression fields. Reset, by contrast, clears every input on the page to blank and hides the output, so after Reset you need to either re-enter numbers or click Example (which only helps if you are back on the t-test option) before Generate produces a sentence again.',
+      },
+    ],
+    checklist: [
+      'The APA sentence’s numbers (t, df, p, d, means, SDs) match what you actually measured — the tool copies these values verbatim and does not recompute them from each other.',
+      'p is entered as a decimal between 0 and 1 (e.g., 0.021), since p values outside that range are rejected with an error.',
+      'After switching Test type, the fields now visible have been checked or re-entered — values left over in a previously visible, now-hidden field are not read.',
+      'If Example was clicked while on a non-t-test type, the ANOVA/chi-square/correlation/regression fields were checked separately, since Example does not touch them.',
+    ],
+  },
+  'en:bar-chart-maker': {
+    intro: 'This section covers Bar Chart Maker’s live-redraw behavior, what happens to invalid rows, and the label-truncation rule — details that matter for whoever reads the chart, not just whoever builds it.',
+    panels: [
+      {
+        title: 'The chart redraws on every keystroke — there is no separate Generate step',
+        text: 'The page loads with four rows already filled in: Jan 120, Feb 150, Mar 90, Apr 180, and the four bars are drawn immediately. Change any label or number and the canvas redraws instantly; the only button that does something separate is Export PNG, which re-runs the same drawing code before triggering the download — so whatever is on screen is exactly what gets saved, with a white background regardless of your site theme.',
+      },
+      {
+        title: 'A row with a blank, non-numeric, or negative value is dropped silently — not flagged',
+        text: 'Clear the Apr value, type a word into it, or make it negative, and that bar simply disappears from the chart with no error message; the remaining valid rows still render normally. Only when every single row is invalid does the canvas go blank and show “add at least one valid entry.” A typo in one row raises no warning — the chart just looks like it has one fewer bar than expected, and you have to notice the mismatch yourself.',
+      },
+      {
+        title: 'Long labels are cut to 9 characters plus an ellipsis, with no tooltip to recover the rest',
+        text: 'A label longer than 10 characters is truncated under its bar to its first 9 characters followed by “…” (for example, “Northeast Region Sales” becomes “Northeast…”), and the full text is not shown anywhere else on the chart. Value labels above each bar are always rounded to 2 decimal places and formatted with thousands separators (1234.567 becomes “1,234.57”), even if you typed in a whole number.',
+      },
+    ],
+    checklist: [
+      'Every row you expect to see on the chart has both a label and a non-negative number — a blank or negative value drops that row without any error.',
+      'Labels longer than 10 characters have been shortened before relying on the chart, since the canvas truncates them to 9 characters plus “…” with no way to see the rest.',
+      'The bar count on screen matches the number of rows you filled in — if they don’t match, at least one row was silently skipped.',
+      'Export PNG was checked against the on-screen chart, since it redraws from the current inputs onto a fixed white background rather than capturing a themed screenshot.',
+    ],
+  },
+  'en:base64': {
+    intro: 'This section covers what Base64 Encoder/Decoder’s encode and decode steps actually assume: UTF-8 text in, whitespace tolerance on decode, and a decode failure that can mean two different things.',
+    panels: [
+      {
+        title: 'Round-trip a non-ASCII string to confirm encode and decode match',
+        text: 'Type “Hello” and click Encode: the result is “SGVsbG8=”. Paste that result back in and click Decode: it returns “Hello” exactly. Non-ASCII text works the same way — encoding “café” produces a longer string because each multi-byte UTF-8 character expands to more Base64 characters, and decoding that string returns “café” unchanged. Round-tripping any input through Encode then Decode is the fastest way to confirm the tool handled it correctly.',
+      },
+      {
+        title: 'Whitespace in pasted Base64 is stripped before decoding, but the alphabet still has to be valid',
+        text: 'Before decoding, the tool removes every space and line break from the input, so Base64 copied from a source that wraps lines every 76 characters still decodes correctly. What it will not tolerate is anything outside the standard Base64 alphabet — URL-safe characters like “-” and “_”, or a string whose length (after whitespace removal) is not a multiple of 4 — either of those triggers “Invalid Base64” and clears the output.',
+      },
+      {
+        title: '“Invalid Base64” can mean the format is fine but the bytes are not text',
+        text: 'Decoding uses a strict UTF-8 decoder, so a string that is valid Base64 by every formatting rule can still fail if the decoded bytes are not legal UTF-8 — for example, Base64 of an image file, or of text saved in a non-UTF-8 encoding. In that case the tool shows the same “Invalid Base64” message as a genuine formatting error, which means this tool is for encoding and decoding text, not for recovering arbitrary binary files from a Base64 string.',
+      },
+    ],
+    checklist: [
+      'The input has been round-tripped through Encode then Decode to confirm it returns to the original text, including any non-ASCII characters.',
+      'Pasted Base64 contains only letters, digits, “+”, “/”, and “=” — URL-safe variants using “-” or “_” are rejected.',
+      'The pasted string’s length is a multiple of 4 after whitespace is removed, or Decode reports it as invalid.',
+      '“Invalid Base64” is understood to potentially mean well-formed Base64 that decodes to non-UTF-8 bytes (such as binary files), not only a typo in the text.',
+    ],
+  },
+  'en:break-reminder': {
+    intro: 'This section covers Break Reminder’s default 50/5 timer, why it never loops back into focus mode automatically, and what happens to the minute fields while it is running.',
+    panels: [
+      {
+        title: 'Run one full cycle with a short test interval to see the transition',
+        text: 'The page loads set to 50 minutes of focus and 5 minutes of break. To watch a full cycle without waiting an hour, set both fields to 1 minute and press Start: when the focus countdown hits 0:00, it switches into a brief “time to move” notice, then a running break countdown, and the reminder count increments from 0 to 1 automatically. When the break countdown finishes, the timer stops on its own — it does not loop back into another focus period, so you have to press the button again (now labeled Continue) to start the next round.',
+      },
+      {
+        title: 'Minute fields only update immediately while the timer is idle',
+        text: 'Editing the focus or break minutes while the timer is not running takes effect immediately and resets the display to the new value. Editing them while the countdown is active does nothing — the current round keeps running on the old numbers, and your edit only applies the next time the timer is reset or a new round starts. Minutes must be whole numbers from 1 to 240; anything outside that range is rejected with an error and Start refuses to run.',
+      },
+      {
+        title: 'Sound needs a prior click, and a failed beep does not affect the countdown',
+        text: 'Checking Sound plays a short tone at each phase change using the Web Audio API, but browsers block audio from starting before the page has registered a user interaction — so sound enabled immediately on page load, before any click, may not actually play. The display, the reminder counter, and the browser tab title (which shows a live countdown while running) all update normally regardless of whether the beep plays, so the visible timer is the reliable signal, not the sound.',
+      },
+    ],
+    checklist: [
+      'Both minute fields hold whole numbers between 1 and 240 — anything else is rejected and Start does nothing.',
+      'It is expected that the timer stops after a break finishes rather than starting the next focus round automatically.',
+      'Minute-field edits made mid-countdown are known to be ignored until the round ends or Reset is pressed.',
+      'The on-screen countdown and reminder count — not whether a beep was heard — are used to confirm the timer actually advanced.',
+    ],
+  },
+  'en:case-converter': {
+    intro: 'This section covers what Case Converter’s eight modes actually do to text outside the plain A–Z range — accented letters and other non-ASCII characters — since the tool converts case using an ASCII-only method on every locale version of the page.',
+    panels: [
+      {
+        title: 'Confirm the basic conversions with plain English text',
+        text: 'Type “hello world” and click Title Case: the result is “Hello World.” Click camelCase instead: the result is “helloWorld.” Both are straightforward to check visually and confirm the buttons are wired to the modes you expect.',
+      },
+      {
+        title: 'Accented and non-Latin characters are not converted — only plain A–Z is',
+        text: 'Type “café résumé” and click UPPERCASE: the result is “CAFé RéSUMé,” not “CAFÉ RÉSUMÉ” — the accented “é” characters pass through untouched because the conversion only matches the plain ASCII ranges A–Z and a–z. The same limitation applies to Title Case and Sentence case: a phrase like “à la carte” at the start of a sentence will not get its leading character capitalized correctly by Sentence case.',
+      },
+      {
+        title: 'snake_case and kebab-case only replace spaces — not punctuation you didn’t expect',
+        text: 'Converting “API Response (v2)” to snake_case produces “api_response_v2” — the parentheses are treated as separators and dropped, not preserved or escaped. Only the most recently clicked mode’s result is ever shown in Output, with no history of previous conversions, so if you need two different case styles from the same input, convert and copy each one separately before switching modes.',
+      },
+    ],
+    checklist: [
+      'The source text is plain ASCII English, or you have accepted that accented letters (é, à, ü, etc.) will not be uppercased, lowercased, or capitalized correctly.',
+      'Punctuation inside the text (parentheses, slashes, periods) has been checked against snake_case/kebab-case output, since it is dropped as a separator, not preserved.',
+      'Only the current Output value is relied on — a second case style needed from the same input has been copied out before clicking a different mode.',
+      'Sentence case has been visually checked on text that starts with a non-ASCII letter, since that first character will not be capitalized.',
+    ],
+  },
+  'en:class-rank-percentile-calculator': {
+    intro: 'This section covers what Class Rank Percentile Calculator’s rank-to-percentile formula rewards and penalizes, using the page’s own default numbers, since the formula is a midpoint estimate, not a lookup into an actual score distribution.',
+    panels: [
+      {
+        title: 'Check the default rank against the formula by hand',
+        text: 'The page loads with Rank 6 and Class size 40. Percentile rank = 100 × (40 − 6 + 0.5) ÷ 40 = 86.25, and the “approximate top percentage” field shows 100 × 6 ÷ 40 = 15%. Both numbers come from rank and class size alone — the tool has no idea what the actual test scores were, so two students with rank 6 in two very differently-scored classes get the identical 86.25 result.',
+      },
+      {
+        title: 'Rank 1 is never exactly the 100th percentile',
+        text: 'Change Rank to 1 with class size still 40: the result is 98.75, not 100 — the +0.5 term places every rank at the midpoint of the interval it represents, so even first place in a finite class falls a bit short of a perfect percentile. At the other end, Rank 40 (last place) in a 40-person class gives 1.25, not 0, for the same reason. Neither of those is a bug — it is the defined behavior of the midpoint method the tool uses.',
+      },
+      {
+        title: 'Tied ranks are not modeled — you decide what number to enter',
+        text: 'This calculator accepts a single integer rank with no option for ties, and rank must be a whole number no greater than class size or the calculation is blocked with an error. If two students are tied for 6th place, the tool will not detect or flag that; you have to decide in advance — based on your school’s or program’s actual tie-breaking rule — which number to type in, since different choices produce different percentile results.',
+      },
+    ],
+    checklist: [
+      'Rank and class size are both positive whole numbers, and rank does not exceed class size — otherwise Calculate is blocked.',
+      'The result has been checked against 100 × (class size − rank + 0.5) ÷ class size by hand at least once.',
+      'Rank 1 is expected to show a percentile just under 100 (98.75 in the default 40-person case), not exactly 100.',
+      'Any tied rank in the source data has been resolved into a single number using your institution’s actual rule before it goes into this tool.',
+    ],
+  },
+  'en:color-generator': {
+    intro: 'This section covers what Color Generator actually returns for each random color, the keyboard shortcut, and one built-in feature that never appears on the page despite existing in the code.',
+    panels: [
+      {
+        title: 'Generate a color and cross-check HEX, RGB, and HSL',
+        text: 'Click Generate: a random swatch appears with matching HEX, RGB, and HSL values, each with its own Copy button — for example, HEX #3E7BFA corresponds to RGB(62, 123, 250). All three are different representations of the same color rather than three separate random picks, so converting one to another with any color-conversion tool should match exactly.',
+      },
+      {
+        title: 'Pressing Space also generates a new color, but not while a field has focus',
+        text: 'Pressing the Space bar anywhere in the tool area triggers Generate the same as clicking the button — a shortcut worth knowing if you are cycling through many colors. It is disabled whenever a button, input, textarea, or select currently has keyboard focus, so Space can still be used normally to type a space character or activate a focused control instead of firing another random color.',
+      },
+      {
+        title: 'The 5-color palette has no contrast or accessibility ratings displayed',
+        text: 'Click Random palette to generate five new swatches at once, each clickable to copy its HEX code. The tool’s underlying code can calculate WCAG contrast ratios against black and white text, but that readout is not wired up to any visible label on this page, so no contrast ratio, AA/AAA pass-fail, or accessibility guidance is shown for either the main swatch or the palette; check contrast separately with a dedicated contrast checker before using a generated color for text.',
+      },
+    ],
+    checklist: [
+      'HEX, RGB, and HSL have been spot-checked against each other with a converter to confirm they describe the same color.',
+      'The Space-bar shortcut is used only when no input, textarea, select, or button is focused, since focus disables it.',
+      'A separate contrast checker is used before pairing a generated color with text, since this page does not display any contrast ratio.',
+      'The 5-swatch palette is treated as five independent random colors, not a designed, harmonious scheme (complementary, analogous, etc.).',
+    ],
+  },
+  'en:date-difference': {
+    intro: 'This section covers what changes when you toggle “Include end date,” using the page’s own day-count math rather than a rough estimate, and what the tool does and does not count as a weekday.',
+    panels: [
+      {
+        title: 'Verify a fixed range by hand',
+        text: 'Enter start date 2024-01-01 (a Monday) and end date 2024-01-31 with “Include end date” unchecked: Total days reads 30, Weeks reads “4 weeks 2 days,” the calendar breakdown reads “0 years, 0 months, 30 days,” and the weekday/weekend split is 22 weekdays and 8 weekend days — all independently verifiable by counting a January calendar.',
+      },
+      {
+        title: '“Include end date” changes both the day count and the calendar breakdown',
+        text: 'Keep the same two dates and check “Include end date”: Total days becomes 31, not 30, because the end day itself is now counted — and the calendar breakdown changes from “0 years, 0 months, 30 days” to exactly “0 years, 1 month, 0 days,” since Jan 1 to Feb 1 is precisely one calendar month once the end date counts. This is the most common source of an off-by-one surprise when this tool is used for billing periods or lease lengths.',
+      },
+      {
+        title: 'Weekday/weekend counts ignore public holidays, and date order does not matter',
+        text: 'The weekday/weekend split only checks whether each date falls on Saturday or Sunday — it does not subtract national holidays, so a range spanning a public holiday still counts that day as a “weekday.” Entering the later date as the start and the earlier date as the end does not break the calculator either: it automatically swaps them internally and reports the same absolute distance, so there is no need to double-check which date field you typed first.',
+      },
+    ],
+    checklist: [
+      'Whether “Include end date” should be checked has been decided based on how the destination context (billing, leave, a lease) counts its last day.',
+      'Total days and the calendar years/months/days breakdown have been checked together, since toggling Include end date changes both, not just one.',
+      'Public holidays inside the range have been subtracted manually if needed — the weekday/weekend counts do not remove them.',
+      'The approximate-months figure is treated as a rough average-month-length estimate, not the same number as the calendar years/months/days breakdown.',
+    ],
+  },
+  'en:delete-pdf-pages': {
+    intro: 'This section covers Delete PDF Pages’ page-range syntax, the one deletion it always refuses, and what the output file is named.',
+    panels: [
+      {
+        title: 'Delete a couple of pages from a small PDF and confirm the count',
+        text: 'Upload a 6-page PDF, type “2,4” into the page field, and click the delete action: the output has 4 pages, with the original pages 2 and 4 gone and the rest kept in their original order. Use Analyze first to confirm the tool actually read the source PDF as 6 pages before typing a range, since a range is validated against the page count the tool detected, not against what you assume the file contains.',
+      },
+      {
+        title: 'Deleting every page is always blocked',
+        text: 'Enter a range that covers the whole document — “1-6” for a 6-page file — and the tool refuses with “cannot delete all pages” instead of producing an empty PDF; this is a deliberate guardrail, not a bug. A reversed range (like “5-3”), a page number beyond the document’s length, or an empty field are all rejected the same way, with the operation blocked until the range is fixed.',
+      },
+      {
+        title: 'The output filename tells you it was edited — check the page count when you open it',
+        text: 'A successful deletion downloads a file named with a “-pages-removed” suffix appended to the original filename, worth noticing before you overwrite or file away the result. After downloading, reopen it and confirm the page count equals the original count minus the number of pages you removed, and that the surviving pages are still in their original relative order — the tool does not reorder anything on its own.',
+      },
+    ],
+    checklist: [
+      'Analyze was used to confirm the actual page count before typing a page range.',
+      'The page range does not cover every page in the document — that combination is always rejected.',
+      'Page numbers in the range are within 1 and the total page count, with the lower number first in any span.',
+      'The downloaded “-pages-removed” file has been reopened to confirm the resulting page count and page order.',
+    ],
+  },
+  'en:image-rotate-flip': {
+    intro: 'This section covers Image Rotate & Flip’s canvas-size change on 90-degree turns, the fact that every edit redraws from the original file, and the order rotation and flipping are actually applied in.',
+    panels: [
+      {
+        title: 'Rotate a landscape image and watch the dimensions swap',
+        text: 'Upload a 1600×900 image and click Rotate right once: the Dimensions readout changes to 900×1600 because a 90-degree turn swaps width and height on the canvas. Click Rotate right three more times (four total, back to 0 degrees) and the dimensions return to 1600×900 — a useful way to confirm the tool is tracking rotation state correctly rather than just visually appearing to spin.',
+      },
+      {
+        title: 'Every click redraws from the original upload — quality does not degrade with repeated edits',
+        text: 'Rotation and flip state are tracked as simple numbers and booleans and reapplied to the original uploaded image each time, not stacked on top of the previous canvas output — so clicking Rotate right ten times in a row does not cause any generational quality loss the way repeatedly re-saving a JPEG would. The one fixed constant is that if the output format ends up being JPEG, it is always saved at quality 0.92, regardless of how many rotate or flip actions were used to get there.',
+      },
+      {
+        title: 'Rotation is applied before flipping, so “horizontal” after a 90° turn is relative to the new orientation',
+        text: 'The drawing code always applies the rotation angle first and the horizontal/vertical flip second, which means once an image has been rotated 90 degrees, “Flip horizontal” mirrors it along what is now the horizontal axis of the rotated canvas — not the original photo’s left-right axis. Check the live preview after each click rather than mentally tracking rotation-plus-flip order; Reset transform clears both back to zero without needing to re-upload the file.',
+      },
+    ],
+    checklist: [
+      'The file is 20 MB or smaller with 40 million pixels or fewer — larger files are rejected before any preview appears.',
+      'The Dimensions readout has been checked to confirm it swapped width and height after a 90° or 270° rotation.',
+      'It is understood that each click redraws from the original upload, so repeated rotates do not degrade quality — only the final JPEG export uses a fixed 0.92 quality setting.',
+      'The direction of a flip applied after a rotation was confirmed visually in the preview, not assumed from the original photo’s orientation.',
+    ],
+  },
+  'en:independent-samples-t-test-calculator': {
+    intro: 'This section covers the Welch t-test math behind the page’s default two groups, and a specific gap between what the script computes and what the page actually displays.',
+    panels: [
+      {
+        title: 'Check the mean difference, t, df, and p against the default groups',
+        text: 'The page loads with Group 1: N = 30, mean = 78.4, SD = 8.2, and Group 2: N = 32, mean = 73.1, SD = 9.5. Mean difference = 78.4 − 73.1 = 5.3. The Welch t value comes out to about 2.356, the Welch–Satterthwaite degrees of freedom to about 59.61, and the two-tailed p value to about .022 — all four of those numbers are the only ones shown on the page.',
+      },
+      {
+        title: 'The standard error, confidence interval, and Hedges’ g are calculated but never shown',
+        text: 'Reading the underlying script confirms it computes a standard error, a 95% confidence interval (about [0.80, 9.80] for the default numbers), and a Hedges’ g effect size (about 0.588) — but none of the three has a corresponding label configured for either the English or Chinese version of this page, so none of them ever renders. If you need the standard error, confidence interval, or an effect size, you currently have to calculate them yourself with √(s₁²/n₁ + s₂²/n₂) and the standard Hedges’ g correction — this is a real content gap, not something you are missing in the interface.',
+      },
+      {
+        title: 'Equal means and very small samples are still accepted, with results that need extra care',
+        text: 'Set both group means to the same number and Calculate still runs, returning t = 0 and p = 1 — a valid “no difference detected” result, not an error. Reduce both sample sizes to the minimum accepted value of 2 (each group requires an integer greater than 1) and the tool still produces a t, df, and p, but the degrees of freedom collapse to a very small number, and a t value that would look significant with large samples can correspond to a much larger, non-significant p value at df = 2 — small-sample results here need more caution before quoting them.',
+      },
+    ],
+    checklist: [
+      'Both sample sizes are whole numbers greater than 1, and both standard deviations are entered as sample SDs greater than 0.',
+      'The mean difference shown has been hand-checked as Group 1 mean minus Group 2 mean.',
+      'It is understood that the standard error, 95% confidence interval, and Hedges’ g are computed internally but not displayed anywhere on this page, and must be calculated separately if needed.',
+      'A t = 0, p = 1 result from equal group means, or a very small df from tiny samples, is read as a real (if underpowered) result, not a broken calculation.',
+    ],
+  },
+  'en:inflation': {
+    intro: 'This section covers Inflation Calculator’s three modes and what each one actually multiplies or divides, using round numbers you can check with a basic calculator.',
+    panels: [
+      {
+        title: 'Confirm the default “Future cost” scenario',
+        text: 'The page loads with Amount 10,000, Annual rate 3%, Years 5, mode “Future cost.” The result is 10,000 × 1.03^5 ≈ 11,592.74, and the Change field shows about +1,592.74. The Formula readout literally states “amount × (1 + annual rate)^years,” the exact calculation being run — there is no compounding-frequency setting (monthly, daily); every calculation is annual compounding only.',
+      },
+      {
+        title: '“Future buying power” divides instead of multiplying — the direction matters',
+        text: 'Switch the mode to “Future purchasing power” with the same 10,000 / 3% / 5-year inputs: the result becomes 10,000 ÷ 1.03^5 ≈ 8,626.09, and the Change field turns negative, at about −1,373.91. This mode answers a different question from the first one — “what is 10,000 today worth in 5 years’ purchasing power” rather than “what will cost 10,000 today cost in 5 years” — mixing the two up gives numbers that look plausible but answer the wrong question.',
+      },
+      {
+        title: 'A negative rate is accepted — deflation, not just inflation, can be modeled',
+        text: 'The rate field accepts values down to −99.99%, so entering a negative number models deflation rather than inflation: for example 10,000 at −2% for 5 years under “Future cost” gives 10,000 × 0.98^5 ≈ 9,039.21, smaller than the input. Years must be a whole number from 0 to 200, and an invalid combination (a non-finite amount, a rate below −99.99% or above 1,000%, or a fractional year count) is rejected with an error rather than producing a nonsensical figure.',
+      },
+    ],
+    checklist: [
+      'The mode actually selected (Future cost, Future purchasing power, or Present equivalent) matches the question being asked, since “cost” and “purchasing power” answer opposite directions of the same formula.',
+      'The annual rate is understood to compound once per year — there is no monthly or daily compounding option on this page.',
+      'A negative rate has been entered deliberately when modeling deflation, and not typed by mistake when inflation was intended.',
+      'Years is a whole number from 0 to 200; a fractional value is rejected rather than rounded.',
+    ],
+  },
+  'en:json-formatter': {
+    intro: 'This section covers JSON Formatter’s three distinct buttons and how it locates an error inside the text you pasted.',
+    panels: [
+      {
+        title: 'Format and Minify should always round-trip the same data',
+        text: 'Paste {"name":"test","value":1} and click Format: the output becomes the same object spread across multiple lines with 2-space indentation. Click Minify next: the output collapses back to a single line with no extra whitespace. Both outputs represent identical data, just formatted differently, so comparing one against the other in any JSON diff tool should show no structural difference.',
+      },
+      {
+        title: 'The line/column error hint is computed from your exact pasted text',
+        text: 'Paste invalid JSON such as {"name":"test",} (a trailing comma) and click any of the three buttons: a red error appears with a line and column number appended in parentheses, calculated by counting characters back from where the native JSON parser reported the problem. That count is based on the line breaks actually present in your pasted text — reformat the source in a different editor with different line-wrapping and the reported line number no longer lines up, so re-paste before trusting the position again.',
+      },
+      {
+        title: 'Validate never gives you formatted output — even when the JSON is valid',
+        text: 'Clicking Validate only ever shows a short “valid” message or an error; it never fills the output box with formatted JSON, so click Format instead whenever you need a usable result — a successful Format run is itself proof the JSON was valid. When Format or Minify fails, the output box is overwritten with the error text itself rather than staying blank, so check whether the error banner above it is visible before copying anything out of it.',
+      },
+    ],
+    checklist: [
+      'Format and Minify have been compared for the same input to confirm they represent identical data in different layouts.',
+      'The reported error line/column is trusted only against the text as currently pasted in this tool, not against a different editor’s line numbering.',
+      'Validate is used only to check validity — Format is used whenever a usable formatted output is actually needed.',
+      'Before copying from the output box, the error banner’s visibility has been checked, since a failed run leaves the error message sitting in the output box itself.',
+    ],
+  },
+  'en:json-to-csv': {
+    intro: 'This section covers three ways JSON to CSV Converter differs from this site’s other CSV-exporting tools: no delimiter choice, no formula-injection guard, and no byte-order mark in the download.',
+    panels: [
+      {
+        title: 'Convert a small array and check the column order',
+        text: 'Paste [{"name":"Alice","age":18},{"name":"Bob","age":20}] and click Convert: the output is a two-row CSV with a header row, and the column order follows the order keys first appear across the objects — name, then age. This tool has no delimiter dropdown and no row/column summary line the way some other converters on this site do; the only way to check the result is to read the output box directly.',
+      },
+      {
+        title: 'Missing keys across objects become blank cells, not dropped columns',
+        text: 'Paste [{"name":"Alice","age":18},{"name":"Bob","city":"Taipei"}] — the second object has no “age” and an extra “city” — and the columns become the union of every key seen (name, age, city); Bob’s age cell and Alice’s city cell are both left blank rather than the column being removed or the conversion failing. Pasting a single object instead of an array, or an empty array [], both trigger the same “JSON root must be an array of objects” error — an empty array is technically an array, but with zero rows there are no columns to build, so it gets the same message as a genuinely wrong shape.',
+      },
+      {
+        title: 'The download has no BOM and no formula-injection escaping',
+        text: 'Unlike this site’s other CSV exporters, this file downloads without a UTF-8 byte-order mark, so a CSV containing non-ASCII text may look garbled if double-clicked open directly in Excel — importing it and manually selecting UTF-8 encoding avoids that. It also does not automatically neutralize values starting with “=”, “+”, “-”, or “@” (which spreadsheet apps can misread as formulas), so check any field starting with one of those characters before opening the file in a spreadsheet with macros enabled.',
+      },
+    ],
+    checklist: [
+      'The pasted content is a JSON array of objects (wrapped in [ ]), not a single object and not an empty array.',
+      'Column order and any blank cells from missing keys have been checked in the output, since columns are the union of all object keys, not just the first object’s keys.',
+      'The downloaded CSV is opened with UTF-8 explicitly selected (import, not double-click) whenever it contains non-ASCII text.',
+      'Any field value starting with =, +, -, or @ has been checked manually, since this converter does not add formula-injection protection the way some of this site’s other CSV tools do.',
+    ],
+  },
+  'en:markdown-previewer': {
+    intro: 'This section covers Markdown Previewer’s live rendering, what Copy HTML actually copies, and the standalone file that Download HTML produces.',
+    panels: [
+      {
+        title: 'Type Markdown on the left and watch the sanitized HTML on the right',
+        text: 'The editor loads with a short sample (a heading followed by bold text), already rendered in the preview pane. Every keystroke in the textarea re-renders the preview immediately — there is no separate render button — and the HTML is passed through a sanitizer before display, so a pasted script tag or an onclick attribute is stripped out rather than executed.',
+      },
+      {
+        title: 'Copy HTML copies the rendered markup, not your original Markdown source',
+        text: 'Clicking Copy HTML puts the preview pane’s current sanitized HTML on the clipboard — for example, “**bold**” becomes “<strong>bold</strong>” in what gets copied, not the literal Markdown characters you typed. If what you actually need is the original Markdown text, to paste into another Markdown editor, select and copy directly from the left-hand textarea instead; Copy HTML will not give you that.',
+      },
+      {
+        title: 'Download HTML produces a complete, styled standalone file — not a raw fragment',
+        text: 'Clicking Download HTML does not save just the inner content — it wraps the current sanitized preview in a full HTML document with its own head section, a basic readable stylesheet for headings, code blocks, tables, and blockquotes, and a default filename of “markdown-preview.html,” so the download opens correctly as a self-contained page in any browser. Links inside the live preview pane itself are inert by design — clicking one in the preview does not navigate away from the tool.',
+      },
+    ],
+    checklist: [
+      'Copy HTML is understood to copy the rendered sanitized HTML, not the original Markdown syntax you typed.',
+      'A pasted script tag or inline event handler has been confirmed to not execute in the preview, since the HTML is sanitized before display.',
+      'The downloaded HTML file has been opened once to confirm it renders as a complete standalone page, not a bare fragment.',
+      'If the raw Markdown source itself is needed elsewhere, it is copied from the left-hand editor, not from Copy HTML.',
+    ],
+  },
+  'en:net-salary': {
+    intro: 'This section covers what Net Salary actually assumes by default, and the one behavior that differs from calculators on this site that silently treat a blank field as zero.',
+    panels: [
+      {
+        title: 'Check the default estimate against the formula shown on the page',
+        text: 'The defaults are Monthly salary 50,000, Fixed allowance 0, Other deduction 0, Labor insurance 2.4%, Health insurance 1.55%, Voluntary pension 0%, Withholding tax 5%. Total deduction rate = 2.4 + 1.55 + 0 + 5 = 8.95%, so Total deductions = 50,000 × 0.0895 = 4,475, Gross income = 50,000, and Estimated net pay = 50,000 − 4,475 = 45,525 — every figure is visible in the results grid and matches the Formula line printed underneath it.',
+      },
+      {
+        title: 'Every rate on this page is an editable placeholder, not a live official figure',
+        text: 'The four percentage fields (labor insurance, health insurance, pension, withholding tax) and the note printed above the results both exist specifically because these numbers are not fetched from any government or payroll source — they are starting assumptions you are expected to overwrite with your actual employer’s or country’s current rates before trusting the result beyond a rough estimate.',
+      },
+      {
+        title: 'A blank or negative field blocks the whole calculation',
+        text: 'Clear any single field — salary, allowance, or any rate — and the three result values all switch to “-” with an error message, rather than treating the blank as zero; the same happens if any rate field is set above 100. This is a stricter behavior than some other calculators on this site, so an incomplete form here shows no result at all rather than a partial, possibly misleading one.',
+      },
+    ],
+    checklist: [
+      'Every field has a value — salary, allowance, other deduction, and all four rates — since leaving one blank blocks the calculation entirely instead of treating it as zero.',
+      'The four percentage rates have been replaced with your actual current employer or government figures rather than left at the page’s example defaults.',
+      'Total deductions has been hand-checked as salary × (sum of the four rate fields) plus the other fixed deduction.',
+      'No rate field exceeds 100 — a value above that is rejected along with any negative number.',
+    ],
+  },
+  'en:normalized-score-converter': {
+    intro: 'This section covers the two-step z-score-then-rescale math behind Normalized Score Converter, and — like the related t-test calculator on this site — a set of numbers the script computes internally but never actually shows.',
+    panels: [
+      {
+        title: 'Check the default conversion, which happens to match the T-score scale',
+        text: 'The page loads with raw score 82, original mean 70, original SD 10, target mean 50, target SD 10. The corresponding z score is (82 − 70) ÷ 10 = 1.2, and the converted score is 50 + 1.2 × 10 = 62. Because the default target mean and SD (50 and 10) match this site’s T-Score Calculator’s fixed scale, this default scenario’s converted score matches what that separate tool would produce for the same z score — a useful way to cross-check both at once.',
+      },
+      {
+        title: 'Changing only the target scale leaves the z score untouched',
+        text: 'Keep raw score 82, mean 70, and SD 10 the same, but change target mean to 500 and target SD to 100: the z score stays exactly 1.2, because z depends only on the three original-scale inputs, while the converted score becomes 500 + 1.2 × 100 = 620. Converting to z and rescaling to the target are two independent steps — editing the target scale can never retroactively change the z-score result.',
+      },
+      {
+        title: 'The original offset, target offset, and scale factor are calculated but not displayed',
+        text: 'The underlying script also computes the raw-score-minus-mean offset, the equivalent offset on the target scale, and the scale factor (target SD ÷ original SD) — for the default inputs these would be 12, 12, and 1 respectively — but none of the three has a label configured on this page in either language, so none of them renders anywhere in the results. If you need those intermediate values for a report, you currently have to calculate them yourself; this is a genuine content gap in the page, not a setting you can turn on.',
+      },
+    ],
+    checklist: [
+      'Both the original SD and the target SD are entered as numbers greater than 0 — either one at 0 or below is rejected with an error.',
+      'The z score has been hand-checked as (raw score − original mean) ÷ original SD before trusting the converted score.',
+      'It is understood that changing the target mean or SD only affects the converted score, never the z score itself.',
+      'The original offset, target offset, and scale factor are known to be computed internally but never shown on this page, and must be calculated separately if needed.',
+    ],
+  },
+  'en:password-generator': {
+    intro: 'This section covers Password Generator’s character-set logic, what “strength” is actually measuring, and what happens when every character class is unchecked.',
+    panels: [
+      {
+        title: 'Confirm the length slider and character composition',
+        text: 'The page loads at length 16 with uppercase, lowercase, numbers, and symbols all checked. Every generated password is guaranteed to contain at least one character from each checked class before the remaining slots are filled randomly from the combined set and the whole string is shuffled — so at 16 characters with all four classes checked, you are certain to see at least one of each type, not just a statistical likelihood.',
+      },
+      {
+        title: 'The strength meter is a simple length-and-variety score, not a real crack-time estimate',
+        text: 'The strength label and colored bar are computed from length thresholds (12, 16, and 24 characters) plus how many character classes are checked — it does not model actual entropy, dictionary attacks, or known password-cracking speeds. A 24-character password using only numbers can score as “strong” on this meter despite far less real entropy than a shorter password mixing all four character classes, so treat the label as a rough nudge, not a security audit.',
+      },
+      {
+        title: 'Unchecking every character class blocks generation entirely',
+        text: 'Uncheck all four boxes (uppercase, lowercase, numbers, symbols) — leaving only “exclude ambiguous characters” as an option — and clicking Generate produces no password at all; an error asks you to select at least one class instead. Checking “exclude ambiguous characters” removes the letters O, 0, l, 1, and I from whichever classes are active, which shortens the effective character pool slightly and can matter at very short lengths.',
+      },
+    ],
+    checklist: [
+      'At least one character class (uppercase, lowercase, numbers, or symbols) is checked — with none checked, Generate produces nothing.',
+      'The strength label is treated as a rough length-and-variety hint, not a measured guess-time or entropy calculation.',
+      'Length is set high enough (16+ recommended) rather than relying on “exclude ambiguous characters” or symbol variety alone for real security.',
+      'A freshly generated password — not a modified or partially retyped one — is the one actually copied and used, since editing it by hand defeats the randomness guarantee.',
+    ],
+  },
+  'en:pdf-page-reorder': {
+    intro: 'This section covers PDF Page Reorder’s move-based interface, since there is no drag-and-drop, and what the download actually contains.',
+    panels: [
+      {
+        title: 'Load a PDF and confirm pages list in their original order',
+        text: 'Upload a 5-page PDF: the page list shows five rows labeled “Page 1” through “Page 5” in that order, each with an Up and Down button — reordering only happens by repeatedly clicking these two buttons to move a page one position at a time. The buttons at either end of the list are disabled automatically (Up is disabled on the first row, Down on the last), so you cannot click past either end.',
+      },
+      {
+        title: 'The download reflects the list order at the moment you click Download',
+        text: 'Move Page 5 to the top using the Up button four times, then click Download reordered PDF: the saved file has the original page 5 as its new first page, with pages 1 through 4 following in their new relative order. The output is always saved with the fixed filename “reordered.pdf” regardless of the source file’s name, so rename it after downloading if you need to distinguish it from the original.',
+      },
+      {
+        title: 'Choosing a new file resets any reordering you had done',
+        text: 'The Reset button, and selecting a different file in the upload field, both discard the current page list entirely and start over — there is no undo for a single move, and there is no way to combine pages from more than one PDF into a single output; the tool only rearranges pages within one uploaded document. Files larger than 40 MB are rejected before the page list even loads.',
+      },
+    ],
+    checklist: [
+      'The file is a single PDF under 40 MB — larger files are rejected before the page list appears.',
+      'The reordering was done entirely with the Up/Down buttons, since there is no drag-and-drop in this tool.',
+      'The downloaded file (always named “reordered.pdf”) has been reopened and checked page-by-page against the intended order before it replaces the original.',
+      'It is understood that Reset or choosing a new file discards the current reordering with no way to undo a single move.',
+    ],
+  },
+  'en:percentage-calculator': {
+    intro: 'This section covers the three independent panels on Percentage Calculator, each with its own formula, and what happens at their respective zero-division edge cases.',
+    panels: [
+      {
+        title: 'Each panel’s default numbers are simple enough to check in your head',
+        text: 'The first panel (“Percentage of a number”) defaults to 25% of 200 = 50. The second (“Ratio as percentage”) defaults to 30 out of 120 = 25%. The third (“Percentage change”) defaults to a change from 80 to 100 = 25% increase. The three panels do not share any state — editing one never changes the numbers or results shown in the others.',
+      },
+      {
+        title: 'A zero denominator is caught explicitly, not shown as Infinity',
+        text: 'In the ratio panel, set the whole/total field to 0: the result reads “Whole or original cannot be 0” rather than Infinity or NaN. In the change panel, set the starting value to 0: the same message appears, since a percentage change from a starting point of zero has no defined baseline. Both are intentional guards, not calculation failures.',
+      },
+      {
+        title: 'Results are rounded to 4 decimal places with trailing zeros trimmed',
+        text: 'All three panels round their output to 4 decimal places and drop unnecessary trailing zeros (25.0000 displays as 25, but 33.3333 stays as 33.3333) — this happens on every keystroke with no separate Calculate button. For a grade, an invoice, or another figure where the required decimal precision differs from this default, re-verify the number in a spreadsheet using the same formula rather than trusting this display precision as final.',
+      },
+    ],
+    checklist: [
+      'The correct one of the three independent panels was actually used for the question being asked — their formulas are not interchangeable.',
+      'A denominator or starting value of 0 producing “Whole or original cannot be 0” is recognized as expected behavior, not an error to work around.',
+      'At least one result has been checked with a simple mental-math example (like 25% of 200) to confirm the right panel is answering the right question.',
+      'If more or fewer decimal places than this tool’s default 4 are required, the number has been re-verified in a spreadsheet with the same formula.',
+    ],
+  },
+  'en:percentile-rank-calculator': {
+    intro: 'This section covers Percentile Rank Calculator’s midpoint formula, using the page’s own defaults, and why it is not interchangeable with the site’s rank-based percentile tool despite a similar name.',
+    panels: [
+      {
+        title: 'Check the default PR value and the two supporting percentages',
+        text: 'The page loads with Number below 24, Number tied 1, Total group size 40. PR = 100 × (24 + 0.5 × 1) ÷ 40 = 61.25. The page also shows a below-percentage of 60% (100 × 24 ÷ 40) and an above-percentage of 37.5% (100 × (40 − 24 − 1) ÷ 40) — the three percentages (below, tied, above) should sum to 100%, a quick way to sanity-check your entries.',
+      },
+      {
+        title: 'The tied-count field is not optional decoration — it visibly shifts the result',
+        text: 'Change Number tied from 1 to 0, leaving everything else the same: PR drops to 100 × 24 ÷ 40 = 60, noticeably lower than 61.25. Omitting or zeroing out the tied count when there genuinely are tied scores systematically understates the percentile rank, since the +0.5 × tied term exists specifically to place tied scores at the midpoint of the range they occupy.',
+      },
+      {
+        title: 'Do not feed this tool’s inputs into the site’s Class Rank Percentile Calculator, or vice versa',
+        text: 'This calculator’s formula needs “how many people scored below this score” and “how many people are tied at this score” — counts derived from an actual score distribution. The site’s separate Class Rank Percentile Calculator instead needs a single ordinal rank (like “6th place”) and a different formula built around rank position, not score counts. Both tools produce numbers in a similar 0–100 range, which makes it easy to accidentally paste one tool’s input into the other and get a plausible-looking but wrong answer.',
+      },
+    ],
+    checklist: [
+      'Number below, Number tied, and Total group size are all whole numbers, and (below + tied) does not exceed the total — otherwise the calculation is blocked.',
+      'The result has been hand-checked against 100 × (below + 0.5 × tied) ÷ total.',
+      'The tied-score count reflects the actual number of people at that exact score, including the person being evaluated — it has not been left at 0 by default when ties exist.',
+      'This tool’s below/tied/total inputs have not been confused with the separate Class Rank Percentile Calculator’s rank/class-size inputs.',
+    ],
+  },
+  'en:remove-duplicate-lines': {
+    intro: 'This section covers how Remove Duplicate Lines’ three checkboxes interact, since combining them changes both what counts as a duplicate and what the counted statistics mean.',
+    panels: [
+      {
+        title: 'Confirm the default behavior with a small mixed-case list',
+        text: 'Paste three lines — apple / Apple / apple — with the defaults (Trim whitespace checked, Case-insensitive unchecked) and click Remove: the output keeps two lines, “apple” and “Apple,” because with case-sensitivity on, those count as different lines; Unique lines reads 2 and Removed lines reads 1, since only the second “apple” was an exact duplicate of the first.',
+      },
+      {
+        title: 'Case-insensitive changes which lines match, but never changes their spelling',
+        text: 'Check Case-insensitive and rerun the same three lines: only one line survives — whichever of “apple” or “Apple” appeared first in your pasted text — because now they are all treated as the same line. Case-insensitive only affects the duplicate check itself; the surviving line keeps its original capitalization exactly as typed, it is never converted to all-lowercase or all-uppercase.',
+      },
+      {
+        title: 'Blank lines are always removed and are counted in “Removed lines,” whether or not you asked for that',
+        text: 'A line that is empty, or becomes empty after trimming, is dropped from the output unconditionally — this is not controlled by any of the three checkboxes. The Removed lines count mixes together genuine duplicates and simple blank lines, so a large Removed lines number does not necessarily mean your list had a lot of actual repeats; check Unique lines against your expected non-blank line count to separate the two.',
+      },
+    ],
+    checklist: [
+      'Case-insensitive has been set deliberately based on whether “Apple” and “apple” should count as the same entry for this specific list.',
+      'It is understood that Case-insensitive changes only which lines are treated as duplicates, not the capitalization of the line that survives.',
+      'Removed lines is read as “duplicates plus blank lines combined,” not as a pure duplicate count, since blank lines are always stripped regardless of settings.',
+      'Sort output’s on/off state matches whether the original input order needs to be preserved.',
+    ],
+  },
+  'en:remove-empty-lines': {
+    intro: 'This section covers the real difference between Remove Empty Lines’ two modes on the same input, and what the four statistics actually count.',
+    panels: [
+      {
+        title: 'Run the same six lines through both modes and compare the counts',
+        text: 'Paste six lines: A / (blank) / (blank) / B / (blank) / C, choose “Remove all,” and process: the result is 3 lines (A, B, C), with Original lines 6, Result lines 3, Removed lines 3. Switch the mode dropdown to “Collapse multiple” and process the same input again: the result becomes 5 lines (A, one blank line, B, one blank line, C) — consecutive blank lines collapse down to a single blank rather than disappearing entirely, so Removed lines drops to just 1.',
+      },
+      {
+        title: '“Trim line endings” affects both what counts as blank and what survives',
+        text: 'With Trim line endings checked or unchecked, a line containing only spaces still counts as blank either way, since blank-detection already trims internally regardless of this setting. What the checkbox actually controls is whether the surviving, non-blank lines also have their own leading and trailing whitespace stripped in the output.',
+      },
+      {
+        title: 'A completely empty input reports 0 original lines, not 1',
+        text: 'Clear the input box entirely and process: all three counters (Original, Result, Removed) read 0, because the tool treats a zero-length string as containing no lines at all rather than one empty line. Type a single line-break character and nothing else, and Original lines reads 2 instead — the string splits into two empty strings around that one break — a distinction worth knowing if your statistics look off by one on a nearly-empty paste.',
+      },
+    ],
+    checklist: [
+      'The correct mode (“Remove all” vs. “Collapse multiple”) was chosen for the goal — collapsing preserves paragraph breaks as single blank lines, removing does not.',
+      'A completely empty input showing 0 for every counter, rather than 1, is recognized as expected, not a bug.',
+      '“Trim line endings” is understood to affect only the output’s leading/trailing whitespace on surviving lines, not which lines count as blank.',
+      'Removed lines has been checked against Original minus Result to confirm the math, rather than trusted blindly.',
+    ],
+  },
+  'en:sort-lines': {
+    intro: 'This section covers Sort Lines’ default alphabetical mode, since it is not numeric order, and what always happens to blank lines and duplicates regardless of settings.',
+    panels: [
+      {
+        title: '“Ascending” is string order, not numeric order, by default',
+        text: 'Paste three lines — 3, 1, 10 — keep the default “Ascending” mode, and click Sort: the result is 1, 10, 3, not the numerically expected 1, 3, 10, because ascending mode compares lines character-by-character as strings, and “10” sorts before “3” the same way it would in a phone book. Switch the mode dropdown to “Numeric” and re-sort the same three lines to get the numerically correct 1, 3, 10 instead.',
+      },
+      {
+        title: 'Blank lines are removed before sorting even runs — there is no option to keep them',
+        text: 'Every line is trimmed and any line that becomes empty is dropped before the sort logic runs at all, regardless of which checkboxes are set — unlike Remove Empty Lines elsewhere on this site, this tool has no “keep a single blank line” option, so a list with intentional blank separator lines loses every one of them once run through Sort Lines.',
+      },
+      {
+        title: '“Remove duplicates” keeps the first occurrence found in your original input, not in sorted order',
+        text: 'Check “Remove duplicates” on a list with a repeated entry: whether two entries count as duplicates depends on the Case-insensitive checkbox, but the surviving copy is always whichever occurrence appeared first in the order you originally pasted the lines — deduplication happens before the sort step, using input order rather than the final sorted order, to decide which copy to keep.',
+      },
+    ],
+    checklist: [
+      'The Numeric sort mode was selected whenever the lines contain numbers that need true numeric order, since the default Ascending mode sorts as text.',
+      'It is expected that blank lines disappear from the output unconditionally — there is no setting on this tool to preserve them.',
+      'Case-insensitive has been set to match whether entries differing only in capitalization should be treated as duplicates.',
+      'The result’s line count has been checked against the expected count, accounting for both blank-line removal and any deduplication.',
+    ],
+  },
+  'en:spss-result-interpreter': {
+    intro: 'This section covers what SPSS Result Interpreter’s three sections each expect as input, and one specific SPSS-reading step it does for you that is easy to get backwards manually.',
+    panels: [
+      {
+        title: 'The t-test section picks a row for you based on the Levene’s test values you enter',
+        text: 'The independent-samples t-test panel loads with Levene’s F = 1.26, Levene’s Sig. = 0.270, t = 2.45, df = 28, Sig. (2-tailed) = 0.021, mean difference = 5.30, and both group means. Because Levene’s Sig. (0.270) is at or above .05, the tool tells you to read the “Equal variances assumed” row of your SPSS table — reversing that logic when variances are actually unequal is one of the most common mistakes when reporting a t-test by hand, and this panel exists specifically to prevent it.',
+      },
+      {
+        title: 'The one-way ANOVA section accepts an optional post hoc summary you type in yourself',
+        text: 'Switching to the ANOVA section and calculating with its own default F, df, and Sig. values produces an APA-style sentence plus guidance on whether post hoc comparisons are worth checking. The post hoc textarea is free text with no validation — anything typed there, or left blank, is simply appended to the explanation as-is, so this section reminds you whether to look for post hoc results based on significance, it does not interpret them for you.',
+      },
+      {
+        title: 'The two-way section needs all three effects filled in — an incomplete set blocks the whole result',
+        text: 'The two-way ANOVA section requires valid F, df1, df2, and Sig. values for the interaction and both main effects; leaving any one of the three effects incomplete blocks the entire interpretation rather than partially reporting the other two. If the interaction term’s Sig. value is below .05, the guidance explicitly warns against interpreting the main effects broadly until simple effects have been checked first — a nuance easy to skip when reading raw SPSS output under time pressure.',
+      },
+    ],
+    checklist: [
+      'Levene’s Sig. value has been entered correctly, since it silently determines which SPSS table row (“Equal variances assumed” or “not assumed”) the guidance tells you to read.',
+      'The post hoc textarea is treated as your own free-text note, not as something the tool validates or interprets.',
+      'All three effects (interaction, Factor A, Factor B) have valid numbers before expecting a two-way ANOVA interpretation — one incomplete effect blocks the whole section.',
+      'A significant interaction result is read as a caution against broadly interpreting main effects until simple effects are checked, not as something to ignore.',
+    ],
+  },
+  'en:stopwatch': {
+    intro: 'This section covers Stopwatch’s split-versus-total lap math and what actually happens to recorded laps when you press Reset.',
+    panels: [
+      {
+        title: 'Confirm what “split” and “total” mean by recording a few laps',
+        text: 'Press Start, wait, and press Lap three times at roughly 10, 25, and 40 seconds elapsed: the three lap entries show splits of about 10s, 15s, and 15s (the time since the previous lap), alongside totals of about 10s, 25s, and 40s (the time since Start) — both numbers are shown for every lap and answer different questions, so read the label next to each number rather than assuming which one you are looking at.',
+      },
+      {
+        title: 'Pause and resume does not reset the running total, but Reset erases everything',
+        text: 'The Start/Stop button toggles between running and paused, and resuming after a pause continues accumulating from where the display stopped — pausing does not zero the clock. Reset, by contrast, stops the timer, zeroes the display back to 00:00:00.00, and clears every recorded lap from the list; there is no way to recover cleared laps after Reset, so copy them out first if you need the record.',
+      },
+      {
+        title: 'Copy Laps only works after at least one lap has been recorded',
+        text: 'The Copy Laps button copies a formatted line for each recorded lap (its number, split, and total) to the clipboard — but with zero laps recorded, clicking it does nothing at all, since there is no lap list yet to copy. If your workflow needs a record of only the final elapsed time rather than individual laps, you still need to press Lap at least once near the end to have anything to copy, since there is no separate “copy total time only” option.',
+      },
+    ],
+    checklist: [
+      'The split time (since the previous lap) and the total time (since Start) for each lap entry are read from the correct one of the two labels, not assumed.',
+      'It is understood that pausing and resuming keeps the accumulated time, while Reset erases both the display and every recorded lap with no undo.',
+      'At least one lap has been recorded before relying on Copy Laps, since it produces nothing with an empty lap list.',
+      'Lap times needed for a report have been copied out before pressing Reset, since cleared laps cannot be recovered afterward.',
+    ],
+  },
+  'en:this-or-that': {
+    intro: 'This section covers This or That Picker’s actual randomness source, what happens with incomplete input, and how re-deciding behaves differently from starting over.',
+    panels: [
+      {
+        title: 'Confirm the 50/50 mechanism with the default options',
+        text: 'The page loads with Option A “Pizza” and Option B “Ramen.” Click Decide: the two options briefly alternate on screen for about a second (12 rapid switches), then settle on one final choice drawn using the browser’s cryptographic random number generator with rejection sampling — the same secure randomness source this site’s other random-pick tools use, not a simple pseudo-random call.',
+      },
+      {
+        title: 'A blank option blocks the decision — it does not default to the other option winning',
+        text: 'Clear either the Option A or Option B field and click Decide: no animation plays and no choice is made; an error asks you to fill in both fields instead. This or That Picker requires two genuinely different, non-empty text values to compare — it will not silently treat a blank field as a loss for that side.',
+      },
+      {
+        title: 'Re-deciding reuses whatever text is currently in the fields, and Reset clears back to the defaults',
+        text: 'Click Decide again without changing either field: it draws a fresh, independent 50/50 choice between the same two current option texts — nothing is remembered from the previous decision that would bias a repeat. Reset, by contrast, clears the result and restores both fields to the built-in defaults “Pizza” and “Ramen,” which differs from simply re-deciding, since re-deciding keeps your custom text.',
+      },
+    ],
+    checklist: [
+      'Both Option A and Option B contain actual text before clicking Decide — a blank field blocks the decision rather than auto-selecting the other option.',
+      'It is understood that Decide uses the browser’s secure random source, not a predictable or seedable sequence — the same result cannot be reproduced from the same inputs.',
+      'Re-deciding is used to draw a fresh choice from the current text, while Reset is used only when the fields should also revert to the built-in defaults.',
+      'The result has been copied out immediately if it needs to be kept, since clicking Decide again overwrites it with a new independent draw.',
+    ],
+  },
+  'en:url-encoder': {
+    intro: 'This section covers why URL Encoder/Decoder encodes structural URL characters that some other encoders leave alone, and the difference between its two error messages.',
+    panels: [
+      {
+        title: 'Encode a full URL and see every structural character escaped',
+        text: 'Type “https://example.com?id=1&name=A B” and click Encode: the colon, both slashes, the question mark, the equals signs, and the ampersand are all converted to percent-codes, along with the space (which becomes %20) — the output is not a clickable link, because this tool uses encodeURIComponent, meant for encoding a single value inserted into a URL, not for encoding an entire URL while preserving its structure.',
+      },
+      {
+        title: 'Use this for one query parameter’s value, not for a whole URL you plan to paste into a browser',
+        text: 'To safely insert a value like “50% off & free shipping” into a query string, encode just that value with this tool and then build the full URL yourself around the encoded result. Encoding the entire URL string at once, including its own “https://” and “?” and “&” characters, breaks the URL’s structure rather than preserving it — a common mistake this tool’s output will not catch for you.',
+      },
+      {
+        title: 'Decode failures and encode failures show different error messages for different reasons',
+        text: 'Decode fails and shows an error whenever the pasted text contains an incomplete or malformed percent-sequence — a lone “%” or “%2” with no second hex digit, for instance. Encode almost never fails, but it can, specifically when the input contains a broken surrogate-pair character (which can happen from a corrupted copy-paste of certain emoji or rare symbols); the two error messages look similar but come from genuinely different causes, so check which button you actually clicked before assuming you know why it failed.',
+      },
+    ],
+    checklist: [
+      'This tool is used to encode a single parameter value, not an entire URL — encoding a whole URL string also escapes its own structural characters like : / ? and &.',
+      'A round trip (Encode, then Decode the result) has been checked to confirm text containing spaces or non-ASCII characters returns unchanged.',
+      'Pasted content has been checked for incomplete percent-sequences before decoding, since a lone “%” or a broken hex pair triggers a decode-specific error.',
+      'Which button was actually clicked (Encode vs. Decode) has been confirmed before troubleshooting an error message, since the two failure modes have different causes.',
+    ],
+  },
+  'en:webp-to-jpg': {
+    intro: 'This section covers WebP to JPG Converter’s handling of transparency, since JPG has none, and the file-size limits that block conversion before it starts.',
+    panels: [
+      {
+        title: 'Convert a WebP image and confirm the size comparison',
+        text: 'Upload a WebP file: the source preview appears immediately, and the output preview renders automatically as soon as the file loads — there is no separate Convert button, only the quality slider (defaulting to 85%) to adjust afterward. Original size and Output size are both shown, letting you compare the two directly before downloading.',
+      },
+      {
+        title: 'Transparent areas are filled with a solid background color, not preserved',
+        text: 'If the source WebP has a transparent background, the Background color picker (defaulting to white) fills that transparent area before the JPG is produced, since JPG has no transparency channel at all — this is a one-way, unrecoverable step for that file: once converted, the transparency information is gone, and only re-converting from the original WebP can bring it back. Changing the background color picker re-renders the output live, so try a couple of colors and compare before downloading.',
+      },
+      {
+        title: 'Files are capped at 20 MB and 40 million pixels — larger files are rejected outright',
+        text: 'A file over 20 MB, or with dimensions multiplying out to more than roughly 40 million pixels (about 6,300 × 6,300), is rejected with an error before any preview or conversion is attempted — there is no partial processing or automatic downscaling to fit under the limit. The output filename keeps your original name with a “.jpg” extension swapped in, so downloading twice with different quality settings overwrites the same filename unless you rename between downloads.',
+      },
+    ],
+    checklist: [
+      'The source WebP file is under 20 MB and under roughly 40 million total pixels, or the conversion is rejected before any preview appears.',
+      'A transparent background in the source has been checked, and a background color has been chosen deliberately rather than left at the default white.',
+      'It is understood that the transparency-to-background-color conversion is one-way — only re-converting the original WebP can recover it.',
+      'Output size has been compared against Original size in the stats row before deciding the quality slider setting is acceptable.',
+    ],
+  },
+  'en:what-to-eat': {
+    intro: 'This section covers which built-in categories actually appear on the English version of What Should I Eat, since they differ from the Chinese version, and how custom items combine with them.',
+    panels: [
+      {
+        title: 'The English page has five built-in categories, not six',
+        text: 'All five checkboxes — Chinese, Japanese, Western, Fast food, Healthy — are checked by default, each holding eight sample dishes (for example, Chinese includes “Beef noodle soup” and “Dumplings”). Unlike the Chinese-language version of this page, which also includes a “Taiwan common” category, the English version has no equivalent local-cuisine category built in — region-specific options beyond these five need to be added in the custom list.',
+      },
+      {
+        title: 'Custom items are merged with checked categories into one pool before picking',
+        text: 'Type three restaurant names into the Custom items box, one per line, keep all five categories checked, and click Decide: the tool briefly cycles through candidates before landing on one item pulled with equal probability from the combined pool of all checked-category dishes plus your custom lines — there is no separate weighting that favors custom entries over built-in ones, or vice versa.',
+      },
+      {
+        title: 'Duplicate entries occupy multiple slots and are more likely to be picked',
+        text: 'Uncheck every category and enter the same restaurant name on three separate lines in the custom box: Decide still works (at least one custom item is enough), but that repeated name now occupies three of the pool’s positions instead of one, making it three times more likely to be selected than a name entered only once — the random draw is by position, not by unique item, so intentional duplication is a legitimate way to weight your own list.',
+      },
+    ],
+    checklist: [
+      'It is understood that the English page offers five built-in categories (no Taiwan-specific one), unlike the Chinese version of this tool.',
+      'At least one category is checked or at least one custom item is entered — Decide blocks with an error if both are empty.',
+      'Custom items are entered one per line, since each line becomes a separate, equally-weighted candidate in the pool.',
+      'Deliberate duplicate entries have been used if a particular option should be more likely to be picked than the others.',
+    ],
+  },
 };
 
 /**
@@ -1243,39 +1956,7 @@ const audienceValueReviewOverrides: Partial<Record<string, ContentValueReviewOve
  * Keyed by `${lang}:${slug}`, grouped the same way as the override tables above.
  */
 const pendingHandwrittenReview: Record<'tool' | 'guide' | 'workflow' | 'category' | 'audience', string[]> = {
-  tool: [
-    'en:age-calculator',
-    'en:apa-7-report-generator',
-    'en:bar-chart-maker',
-    'en:base64',
-    'en:break-reminder',
-    'en:case-converter',
-    'en:class-rank-percentile-calculator',
-    'en:color-generator',
-    'en:date-difference',
-    'en:delete-pdf-pages',
-    'en:image-rotate-flip',
-    'en:independent-samples-t-test-calculator',
-    'en:inflation',
-    'en:json-formatter',
-    'en:json-to-csv',
-    'en:markdown-previewer',
-    'en:net-salary',
-    'en:normalized-score-converter',
-    'en:password-generator',
-    'en:pdf-page-reorder',
-    'en:percentage-calculator',
-    'en:percentile-rank-calculator',
-    'en:remove-duplicate-lines',
-    'en:remove-empty-lines',
-    'en:sort-lines',
-    'en:spss-result-interpreter',
-    'en:stopwatch',
-    'en:this-or-that',
-    'en:url-encoder',
-    'en:webp-to-jpg',
-    'en:what-to-eat',
-  ],
+  tool: [],
   guide: [
     'zh:anova-apa-format-guide',
     'zh:classroom-lottery-tool-guide',
