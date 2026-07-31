@@ -636,6 +636,35 @@ export async function googleAccessToken(scope = 'https://www.googleapis.com/auth
   return data.access_token;
 }
 
+// 2026-08-01（CEO 派工，任務 C）：GSC service account 在 Search Console 裡實際擁有
+// 的是 domain property（`sc-domain:funnytools.win`），不是 URL-prefix property
+// （`https://funnytools.win/`）。舊版把 `siteUrl`（= siteOrigin + '/'）直接當
+// Search Console property 用，sites.list 回來的清單裡根本沒有這個字串，一律
+// 403 "User does not have sufficient permission"。這支函式改成先呼叫
+// sites.list，依序嘗試 sc-domain 與 URL-prefix 兩種形式，都對不上就明確失敗並把
+// 這個 service account 實際可用的 property 清單印進錯誤訊息，避免下次換站/換憑證
+// 又踩同一個坑（紅線第 6 條：壞掉要通知，不得靜默跳過或用錯 ID 硬送出去）。
+export async function resolveGscSiteUrl(token) {
+  const hostname = new URL(siteOrigin).hostname;
+  const candidates = [`sc-domain:${hostname}`, `${siteOrigin}/`];
+  const { response, json } = await fetchJson('https://www.googleapis.com/webmasters/v3/sites', {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!response.ok) {
+    throw new Error(`Google Search Console sites.list failed: ${response.status} ${JSON.stringify(json).slice(0, 500)}`);
+  }
+  const available = (json?.siteEntry ?? []).map((entry) => entry.siteUrl);
+  const matched = candidates.find((candidate) => available.includes(candidate));
+  if (!matched) {
+    throw new Error(
+      `No Search Console property matches ${hostname}. Tried: ${candidates.join(', ')}. `
+      + `Properties this service account can actually access: ${available.length ? available.join(', ') : '(none)'}. `
+      + 'Grant the service account access to the right property in Search Console, or fix the expected property id.',
+    );
+  }
+  return matched;
+}
+
 export async function fetchJson(url, options = {}) {
   const response = await fetch(url, options);
   const text = await response.text();

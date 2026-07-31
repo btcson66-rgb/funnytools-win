@@ -7,6 +7,7 @@ import {
   priorityUrlsPath,
   readPriorityUrls,
   reportsDir,
+  resolveGscSiteUrl,
   siteUrl,
   writeJson,
   writeText,
@@ -21,6 +22,10 @@ const { submitted: urls, skipped } = filterSubmitCandidates(priorityUrls);
 const report = {
   generatedAt: new Date().toISOString(),
   siteUrl,
+  // Resolved Search Console property identifier actually used in the API
+  // calls below (e.g. `sc-domain:funnytools.win`). Not the same as `siteUrl`
+  // above, which is just the configured site origin for human reference.
+  gscSiteUrl: null,
   inspected: [],
   skipped,
   errors: [],
@@ -28,6 +33,8 @@ const report = {
 
 try {
   const token = await googleAccessToken();
+  const gscSiteUrl = await resolveGscSiteUrl(token);
+  report.gscSiteUrl = gscSiteUrl;
   for (const url of urls) {
     try {
       const response = await fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect', {
@@ -38,7 +45,7 @@ try {
         },
         body: JSON.stringify({
           inspectionUrl: url,
-          siteUrl,
+          siteUrl: gscSiteUrl,
           languageCode: 'zh-TW',
         }),
       });
@@ -79,6 +86,7 @@ const md = [
   '',
   `Generated: ${report.generatedAt}`,
   `Site URL: ${siteUrl}`,
+  `Search Console property: ${report.gscSiteUrl ?? '(not resolved)'}`,
   '',
   `- Priority URLs configured: ${priorityUrls.length}`,
   `- Inspected: ${report.inspected.length}`,

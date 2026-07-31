@@ -4,6 +4,7 @@ import {
   googleAccessToken,
   missingGscCredentialVars,
   reportsDir,
+  resolveGscSiteUrl,
   sitemapIndexUrl,
   siteUrl,
   writeJson,
@@ -29,13 +30,19 @@ const report = {
   generatedAt: new Date().toISOString(),
   sitemap: sitemapIndexUrl,
   siteUrl,
+  // Resolved Search Console property identifier actually used in the API
+  // calls below (e.g. `sc-domain:funnytools.win`). Not the same as `siteUrl`
+  // above, which is just the configured site origin for human reference.
+  gscSiteUrl: null,
   status: 'skipped',
   message: '',
 };
 
 try {
   const token = await googleAccessToken();
-  const endpoint = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/sitemaps/${encodeURIComponent(sitemapIndexUrl)}`;
+  const gscSiteUrl = await resolveGscSiteUrl(token);
+  report.gscSiteUrl = gscSiteUrl;
+  const endpoint = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(gscSiteUrl)}/sitemaps/${encodeURIComponent(sitemapIndexUrl)}`;
   const authHeaders = { Authorization: `Bearer ${token}` };
 
   const { response: getResponse, json: current } = await fetchJson(endpoint, { headers: authHeaders });
@@ -83,6 +90,7 @@ writeText(join(reportsDir, 'gsc-sitemap-submit-report.md'), [
   '',
   `Generated: ${report.generatedAt}`,
   `Sitemap: ${report.sitemap}`,
+  `Search Console property: ${report.gscSiteUrl ?? '(not resolved)'}`,
   `Status: ${report.status}`,
   '',
   report.message,

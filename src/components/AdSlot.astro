@@ -26,8 +26,23 @@ const enabled = Boolean(client && adSlot);
 <script>
   // AdSense fills an <ins> only after one adsbygoogle.push({}) per unit.
   // Astro hoists and dedupes this script, so it runs once per page.
+  //
+  // Guard against double-initialization: Google Auto Ads can independently
+  // discover and claim a manually placed ins.adsbygoogle element before (or
+  // after) this script runs. When AdSense claims an <ins>, it marks it with
+  // `data-adsbygoogle-status` immediately and/or injects a child element
+  // (e.g. an iframe) into it. `data-ad-status` is a *different* attribute
+  // that only appears later, once the fill outcome (filled/unfilled) is
+  // known — checking it here is too slow to catch the claim and lets this
+  // script push() again for an <ins> AdSense already owns, which throws:
+  //   "All 'ins' elements in the DOM with class=adsbygoogle already have
+  //   ads in them."
+  // Checking both signals right before each push covers both orderings
+  // (Auto Ads claims first, or this script runs first).
   const w = window as unknown as { adsbygoogle?: unknown[] };
-  document.querySelectorAll('ins.adsbygoogle:not([data-ad-status])').forEach(() => {
+  document.querySelectorAll('ins.adsbygoogle').forEach((ins) => {
+    const alreadyClaimed = ins.hasAttribute('data-adsbygoogle-status') || ins.childElementCount > 0;
+    if (alreadyClaimed) return;
     (w.adsbygoogle = w.adsbygoogle || []).push({});
   });
 </script>

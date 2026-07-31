@@ -2477,8 +2477,8 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
     problem: 'Adding raw component scores directly treats a 70% written test and a 10% portfolio as equally important, which gives the wrong total.',
     whoShouldUse: 'Use this for teacher exam estimates, school selection workflows, and score sheet checks.',
     explanation: [
-      'The weighted total is the sum of each score multiplied by its weight. Weights can be percentages or decimals, but the table should be consistent and usually sums to 100% or 1.',
-      'Some exam rules include thresholds, screening stages, standardization, or tie-breakers. A calculator can help check arithmetic, but it is not the official result.',
+      'The weighted total is the sum of each score multiplied by its weight. Weights can be percentages or decimals, but the table should be consistent and usually sums to 100% or 1. If the published weights add up to less than 100%, do not assume the shortfall is a rounding artifact — check whether a bonus point, a screening stage, or an item scored separately was deliberately left out of the linear formula and combined afterward instead.',
+      'Some exam rules include thresholds, screening stages, standardization, or tie-breakers. A calculator can help check arithmetic, but it is not the official result. For example, if the announcement states that any candidate scoring below 60 on the interview is disqualified regardless of total score, computing the weighted total first and only checking that number would incorrectly pass a disqualified candidate — apply hard thresholds separately from, and usually before, the weighted-average calculation.',
       statisticsDisclaimer.en,
     ],
     steps: [
@@ -2488,9 +2488,9 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
       'Sum the weighted parts and round only according to the official rule.',
     ],
     formula: 'Weighted total = sum of score × weight. A 50% weight can be entered as 0.50.',
-    example: 'Written test 50%, demo teaching 30%, interview 20%. Scores are 82, 88, and 90. Total = 82×0.50 + 88×0.30 + 90×0.20 = 85.4.',
+    example: 'Written test 50%, demo teaching 30%, interview 20%. Scores are 82, 88, and 90. Total = 82×0.50 + 88×0.30 + 90×0.20 = 85.4. To verify: 82 × 0.50 = 41.00, 88 × 0.30 = 26.40, and 90 × 0.20 = 18.00; those three partial products sum to 85.40, matching the reported total. If a partial product does not match when you recompute it by hand, the usual cause is a misplaced decimal in the weight rather than an arithmetic slip in the score itself.',
     commonMistakes: [
-      'Entering 50% as 50 instead of 0.50 in a decimal formula.',
+      'Entering 50% as 50 instead of 0.50 in a decimal formula — a fast way to catch this is that the weighted total comes out roughly a hundred times too large, since a single term such as 82 × 50 = 4,100 already exceeds any realistic score.',
       'Adding 82 + 88 + 90 without weights.',
       'Ignoring a weight total that does not equal 100%.',
       'Rounding every step instead of the final result.',
@@ -2498,7 +2498,7 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
     faq: [
       { question: 'Must weights sum to 100%?', answer: 'Usually yes, but always follow the official notice when special conversion rules are used.' },
       { question: 'Can written and demo scores be compared directly?', answer: 'Not safely. They have different purposes and weights.' },
-      { question: 'Do I need a T score after weighting?', answer: 'Only if the official process requires standardization or ranking after weighting.' },
+      { question: 'Do I need a T score after weighting?', answer: 'Only if the official process requires standardization or ranking after weighting. A T score standardizes one raw score against a distribution’s mean and standard deviation, which is a different calculation from combining several already-comparable component scores by weight — do not treat the two as interchangeable steps.' },
       { question: 'When should I round?', answer: 'Keep full precision until the final step, then follow the published rule.' },
     ],
     cta: 'Enter the components in the teacher exam score converter, then cross-check with the weighted average calculator.',
@@ -2553,8 +2553,8 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
     problem: 'Writing only "the groups differed significantly" leaves out the design, degrees of freedom, p value, effect size, and direction.',
     whoShouldUse: 'Use this for papers, assignments, research reports, and SPSS result write-ups.',
     explanation: [
-      'Independent-samples t tests compare independent groups. Paired-samples t tests compare repeated or matched observations. Confirm the design before writing the result.',
-      'Use p = .032 style formatting, and write p < .001 instead of p = .000. Follow your course or journal rules for exact formatting.',
+      'Independent-samples t tests compare independent groups. Paired-samples t tests compare repeated or matched observations. Confirm the design before writing the result. A t test is built for exactly two groups or two paired conditions — once you have three or more groups, running several pairwise t tests instead inflates the chance of a false positive, so switch to a one-way ANOVA (see the ANOVA APA 7 guide) rather than stacking t tests. If sample sizes are small and the data are clearly skewed rather than roughly normal, a nonparametric alternative such as the Mann-Whitney U test is usually a safer choice than forcing a t test.',
+      'Independent-samples t tests also assume the two groups have roughly equal variances. When Levene’s test (see the SPSS Levene test guide) signals unequal variances, report the Welch-corrected row instead, which typically has a non-integer degrees of freedom rather than a whole number. For p values, use p = .032 style formatting, and write p < .001 instead of p = .000 — follow your course or journal’s exact formatting rules either way.',
       statisticsDisclaimer.en,
     ],
     steps: [
@@ -2564,15 +2564,15 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
       'Add an effect size such as Cohen’s d and state the direction.',
     ],
     formula: 'Common APA fragment: t(df) = value, p = value, d = value.',
-    example: 'Independent example: The experimental group (M = 82.40, SD = 7.10) scored higher than the control group (M = 76.30, SD = 8.20), t(58) = 3.07, p = .003, d = 0.79. Paired example: Posttest scores (M = 85.20, SD = 6.40) were higher than pretest scores (M = 78.10, SD = 7.50), t(29) = 5.12, p < .001, d = 0.93.',
+    example: 'Independent example: The experimental group (M = 82.40, SD = 7.10) scored higher than the control group (M = 76.30, SD = 8.20), t(58) = 3.07, p = .003, d = 0.79. Paired example: Posttest scores (M = 85.20, SD = 6.40) were higher than pretest scores (M = 78.10, SD = 7.50), t(29) = 5.12, p < .001, d = 0.93. As a check on the independent example: with 30 participants in each group, the pooled degrees of freedom is (30 + 30) − 2 = 58, matching the t(58) reported above. If your own calculation instead lands on a decimal df, you have likely copied the Welch-corrected row rather than the equal-variances row, so confirm which row your software actually reported before writing the final sentence.',
     commonMistakes: [
       'Using Levene p as the t-test p value.',
-      'Omitting df or copying the wrong variance row.',
+      'Omitting df, or copying the wrong variance row — a quick tell is a non-integer df, since that only comes from the Welch-corrected row, so a df that is not a whole number means you should already be reading the second row, not the first.',
       'Writing p = .000 instead of p < .001.',
       'Not saying which group or time point was higher.',
     ],
     faq: [
-      { question: 'Do I need Cohen’s d?', answer: 'Many courses and journals require an effect size, and it helps explain the size of the difference.' },
+      { question: 'Do I need Cohen’s d?', answer: 'Many courses and journals require an effect size, and it helps explain the size of the difference. If the value looks implausibly large, such as d > 2 for a simple two-group comparison, recheck whether you divided by the pooled standard deviation rather than by a single group’s SD.' },
       { question: 'Can I copy p = .000 from SPSS?', answer: 'No. Write p < .001.' },
       { question: 'Can df be a decimal?', answer: 'Yes, especially with Welch t tests.' },
       { question: 'Where should descriptive statistics go?', answer: 'Put them in the same sentence or immediately before the test result.' },
@@ -2629,8 +2629,8 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
     problem: 'When an interaction is significant, saying only "the teaching method worked" may be misleading because it may work only under certain conditions.',
     whoShouldUse: 'Use this when reading two-way ANOVA output, SPSS tables, or research result sections.',
     explanation: [
-      'A main effect asks whether one factor differs overall. An interaction asks whether that difference depends on another factor. Significant interactions can hide or change main-effect interpretations.',
-      'Simple main effects examine differences within a specific level of another factor, such as comparing two teaching methods separately for lower and upper grades.',
+      'A main effect asks whether one factor differs overall. An interaction asks whether that difference depends on another factor. Significant interactions can hide or change main-effect interpretations. If you only have one categorical factor, this two-factor logic does not apply at all — use the one-way ANOVA guide instead. And if the interaction test itself is not significant, do not chase an interaction interpretation: report the two main effects on their own, because forcing an interaction narrative onto a non-significant result overstates the finding.',
+      'Simple main effects examine differences within a specific level of another factor, such as comparing two teaching methods separately for lower and upper grades. In the worked example below, the gap between methods is only 1 point in lower grades (78 vs. 77) but 8 points in upper grades (88 vs. 80) — that change in the size of the gap across grades, not just whether each individual gap happens to be significant, is what a significant interaction is describing.',
       statisticsDisclaimer.en,
     ],
     steps: [
@@ -2640,17 +2640,17 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
       'Then describe main effects carefully as supporting context.',
     ],
     formula: 'Common interpretation order: interaction -> simple main effects -> main effects.',
-    example: 'Method A and B are compared across lower and upper grades. In lower grades, A = 78 and B = 77. In upper grades, A = 88 and B = 80. If the interaction is F(1, 76) = 5.90, p = .018, the method effect changes by grade, so grade-specific comparisons are needed.',
+    example: 'Method A and B are compared across lower and upper grades. In lower grades, A = 78 and B = 77. In upper grades, A = 88 and B = 80. If the interaction is F(1, 76) = 5.90, p = .018, the method effect changes by grade, so grade-specific comparisons are needed. As a quick internal check, the interaction is really about the change in the gap: the lower-grade gap is 78 − 77 = 1, the upper-grade gap is 88 − 80 = 8, so the gap widens by 7 points across grades. If you recompute this from a data set and the gaps turn out nearly identical across grades instead, that pattern argues against an interaction regardless of what a p value from a different run might suggest.',
     commonMistakes: [
       'Interpreting only main effects after a significant interaction.',
       'Drawing conclusions without cell means or a plot.',
-      'Calling two significant main effects an interaction.',
+      'Calling two significant main effects an interaction — these are three separate questions (is factor A significant overall, is factor B significant overall, and does factor A’s effect change across levels of factor B), and a study can land on any combination of significant and non-significant results among them.',
       'Running many simple effects without a hypothesis or comparison control.',
     ],
     faq: [
       { question: 'Do I run simple main effects when interaction is not significant?', answer: 'Usually no, unless there is a clear planned reason.' },
       { question: 'What if a main effect and interaction are both significant?', answer: 'Interpret the interaction first, then discuss the main effect cautiously.' },
-      { question: 'Do I need an interaction plot?', answer: 'Not always, but it helps reveal the direction and pattern.' },
+      { question: 'Do I need an interaction plot?', answer: 'Not always, but it helps reveal the direction and pattern. A quick alternative without plotting software is comparing the cell-mean gaps by hand, the way the lower- and upper-grade gaps are compared in the worked example above.' },
       { question: 'Does SPSS automatically provide simple main effects?', answer: 'Not always. You may need EM Means or additional comparison settings.' },
     ],
     cta: 'Use the SPSS interpreter to organize interaction and main-effect results, then draft the APA wording.',
@@ -2705,7 +2705,7 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
     problem: 'Calling on the same students concentrates participation, but unclear random picking can feel like pressure or punishment.',
     whoShouldUse: 'Use this for answers, presentation order, group representatives, quick review, or classroom interaction.',
     explanation: [
-      'Use random-student-picker for class lists and random-name-picker for temporary activity lists. Both make the draw visible and less subjective.',
+      'Use random-student-picker for class lists and random-name-picker for temporary activity lists. Both make the draw visible and less subjective. random-student-picker also has a no-repeat toggle: with it on, the tool excludes anyone already drawn until every name on the current list has come up once, then it automatically clears that history and starts a fresh cycle — with it off, any name can be redrawn at any time, including immediately after being picked.',
       'Random picking should not be used to shame students. Consider a short thinking period, a group-help rule, or one pass option.',
       'A full activity flow can be: create groups, set a timer for preparation, then pick a representative or presentation order.',
     ],
@@ -2716,12 +2716,12 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
       'Give brief thinking or group-support time before the answer.',
       'Track recently picked students if you want to avoid repeated pressure.',
     ],
-    example: 'In a vocabulary review, the teacher gives groups 2 minutes on countdown-timer, then uses random-student-picker to choose one representative to share a sentence. Students get preparation time, so the picker feels like participation rather than a surprise test.',
+    example: 'In a vocabulary review, the teacher gives groups 2 minutes on countdown-timer, then uses random-student-picker to choose one representative to share a sentence. Students get preparation time, so the picker feels like participation rather than a surprise test. If the class has 24 students and the no-repeat toggle stays on for the whole lesson, every student is guaranteed exactly one turn before anyone repeats — the moment the 24th name is drawn, the tool resets automatically and a 25th draw can select any of the 24 students again.',
     commonMistakes: [
       'Drawing names without explaining the rule or purpose.',
       'Publicly criticizing a student who cannot answer.',
       'Leaving absent students in the list.',
-      'Picking the same student repeatedly without tracking recent draws.',
+      'Assuming names never repeat by default — repeats are only prevented while the no-repeat toggle is switched on, so check that setting before relying on it across a whole lesson.',
     ],
     faq: [
       { question: 'Can random picking increase student anxiety?', answer: 'Yes, if it is used without support. Give thinking time, allow group help, and avoid using the picker as punishment.' },
@@ -2744,7 +2744,7 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
     whoShouldUse: 'Use this for discussion, presentations, worksheets, stations, practice questions, and classroom transitions.',
     explanation: [
       'countdown-timer is best for short classroom activities such as 3-minute discussion, 5-minute writing, or 10-minute presentations. pomodoro-timer fits longer independent work.',
-      'A timer should create shared pacing, not panic. Give a warning before time expires so students can finish their thought.',
+      'A timer should create shared pacing, not panic. Give a warning before time expires so students can finish their thought. countdown-timer itself only sounds a tone and flashes the display once, at the exact moment the countdown reaches zero — it does not play any earlier warning sound, so a spoken "one minute left" cue has to come from the teacher, not from the tool.',
       'A useful flow is: group students, time the discussion, then randomly pick a presenter.',
     ],
     steps: [
@@ -2754,12 +2754,12 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
       'Give one reminder before time ends, such as one minute remaining.',
       'When time ends, move directly to picking, presenting, or closing the activity.',
     ],
-    example: 'A 15-minute activity can use 5 minutes for reading, 5 minutes for group discussion, 3 minutes for randomly selected sharing, and 2 minutes for teacher wrap-up. The teacher uses countdown-timer for the first two phases and random-student-picker for sharing.',
+    example: 'A 15-minute activity can use 5 minutes for reading, 5 minutes for group discussion, 3 minutes for randomly selected sharing, and 2 minutes for teacher wrap-up. The teacher uses countdown-timer for the first two phases and random-student-picker for sharing. Those four segments (5 + 5 + 3 + 2 = 15 minutes) should add up to the full activity block; if they do not, trim the largest segment first rather than shaving a few seconds off every phase, since small cuts everywhere tend to disrupt the discussion or writing phase the most.',
     commonMistakes: [
       'Setting the activity too short before students understand the task.',
       'Forgetting transition time for materials, movement, or slides.',
       'Always extending the timer, which weakens the signal.',
-      'Using the same time for every task regardless of difficulty.',
+      'Assuming the timer will announce a one-minute warning on its own — it only alerts once, at zero, so any earlier reminder has to be given by the teacher.',
     ],
     faq: [
       { question: 'How long should a classroom activity be?', answer: 'It depends on the task. Quick discussion may start at 2 to 5 minutes, while output tasks often need 8 to 15 minutes.' },
@@ -2782,7 +2782,7 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
     whoShouldUse: 'Use this for cooperative learning, group reports, lab work, discussions, and recurring group rotation.',
     explanation: [
       'Fair does not always mean fully random, and it does not mean the teacher cannot adjust. A strong process is random first, explain adjustments second.',
-      'Use group count for fixed stations, tables, or presentation slots. Use group size when each group has a maximum practical size.',
+      'Use group count for fixed stations, tables, or presentation slots. Use group size when each group has a maximum practical size. The two settings distribute an uneven number of students differently: choosing a group count spreads any remainder across the first few groups in turn, while choosing a group size fills full groups first and leaves a shorter final group. For 32 students, 6 groups produces four groups of 5 and two groups of 6, but a group size of 5 instead produces six full groups of 5 plus one short group of only 2 — pick whichever pattern actually matches the activity, since a lone 2-person group works for some tasks and not others.',
       'After grouping, use random-student-picker if you need a transparent presenter or role assignment.',
     ],
     steps: [
@@ -2792,7 +2792,7 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
       'Check repeated pairings, role balance, and support needs.',
       'Announce the grouping rule and keep adjustments minimal.',
     ],
-    example: 'For 30 students into 6 lab groups, enter the 30 names in group-generator and set 6 groups. Each group has 5 students. Then check whether each group has someone who can record results, and swap only if a support need makes it necessary.',
+    example: 'For 30 students into 6 lab groups, enter the 30 names in group-generator and set 6 groups. Each group has 5 students. Then check whether each group has someone who can record results, and swap only if a support need makes it necessary. To verify the split: 30 students divided into 6 equal groups is 30 ÷ 6 = 5 per group exactly, with no remainder to redistribute — a case worth noting because, as the uneven 32-student example above shows, group counts do not always divide this cleanly.',
     commonMistakes: [
       'Ignoring absent students so the generated groups do not match the room.',
       'Not saving past groups, causing repeated membership.',
@@ -2801,7 +2801,7 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
     ],
     faq: [
       { question: 'Does fair grouping have to be completely random?', answer: 'No. Full randomization is transparent, but small teacher adjustments can be appropriate for safety, support, or learning goals.' },
-      { question: 'How do I split 30 students into 6 groups?', answer: 'Set group count to 6 or group size to 5. If anyone is absent, update the list first.' },
+      { question: 'How do I split 30 students into 6 groups?', answer: 'Set group count to 6 or group size to 5 — for 30 students the two settings agree exactly, since 30 divides evenly by both 6 and 5. If anyone is absent, update the list first.' },
       { question: 'How do I avoid the same students grouping together?', answer: 'Save the previous result, compare the next draw, and swap only a few repeated pairings if needed.' },
       { question: 'Do I still need group roles?', answer: 'Usually yes. Grouping assigns people; roles such as facilitator, recorder, and presenter make the work smoother.' },
     ],
