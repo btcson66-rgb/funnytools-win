@@ -119,7 +119,13 @@ for (const [name, args] of Object.entries(ga4Queries)) {
 let searchConsole;
 try {
   const inventory = await jsonRequest('https://www.googleapis.com/webmasters/v3/sites', { headers: googleHeaders });
-  const expectedSites = ['sc-domain:FreeTools.win', 'https://FreeTools.win/'];
+  // 2026-08-01（CEO 派工）：這裡原本寫 'sc-domain:FreeTools.win' /
+  // 'https://FreeTools.win/'，網域名稱與大小寫都錯（應為 funnytools.win，
+  // 且 GSC property id 是區分大小寫的字串比對）。sites.list 回來的清單裡
+  // 從來沒有這個字串，所以 matchedSite 必定是 undefined，Search Console
+  // 區塊長期回報 status:'missing_property_access'，導致這支報告的 GSC
+  // 段落從建立以來從未真的抓到資料。修正為正確網域與大小寫。
+  const expectedSites = ['sc-domain:funnytools.win', 'https://funnytools.win/'];
   const matchedSite = inventory.siteEntry?.find(({ siteUrl }) => expectedSites.includes(siteUrl));
   if (!matchedSite) {
     searchConsole = {
