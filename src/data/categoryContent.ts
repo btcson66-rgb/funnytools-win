@@ -742,10 +742,12 @@ export const categoryContent: Record<string, CategoryContent> = {
         '製圖工具分類提供簡易的 2D 製圖板、線上繪圖板、流程圖，以及長條圖與圓餅圖製作工具，讓你不必安裝專業 CAD 或繪圖軟體，就能在瀏覽器中畫出基本圖形、示意圖與資料圖表。無論是教學、報告還是隨手記錄想法，都能快速上手。',
         '2D CAD 製圖板適合在網格上畫線段、矩形、圓形與折線，做簡單的平面配置或尺寸示意；線上繪圖板提供畫筆、顏色與橡皮擦，適合自由手繪、註記與塗鴉；流程圖工具能建立節點與箭頭，畫出流程、決策樹或步驟圖；長條圖與圓餅圖製作工具則讓你輸入資料即時產生圖表，方便視覺化數據。',
         '這些工具都著重在「簡單、即時」，並支援把成果匯出成 PNG 或 SVG，方便貼到文件、簡報或網頁中。所有繪製都在瀏覽器本機完成，免註冊也免安裝。若你需要的是複雜的工程製圖或專業向量編輯，仍建議搭配專門軟體使用；簡報草圖、課堂圖解、流程溝通與基礎資料視覺化則很適合直接從這裡開始。',
+        '五個工具該選哪一個，取決於你事後需要證明什麼：CAD 草圖要禁得起對照網格量測，圖表要禁得起別人重新輸入同一組數字得到相同結果，手繪或流程圖則主要是把想法講清楚，不強求精確到每個座標。分享到聊天室或簡報用 PNG 就足夠；若輸出還要放大列印或交給別人在向量軟體裡繼續編輯，CAD 與流程圖可以改用 SVG 保留線條清晰度。',
       ],
       en: [
         'The Drawing category offers a simple 2D CAD board, an online sketchpad, a flowchart maker, and bar and pie chart makers, so you can draw basic shapes, diagrams, and data charts in the browser without professional CAD or design software — handy for teaching, reports, or jotting down ideas.',
         'The 2D CAD board suits lines, rectangles, circles, and polylines on a grid; the sketchpad offers brush, color, and eraser for freehand notes; the flowchart tool builds nodes and arrows for flows and decision trees; and the bar and pie chart makers turn your data into charts instantly. Each supports PNG or SVG export. For complex engineering drawing or professional vector editing, dedicated software is still recommended.',
+        "Choosing between these five tools comes down to what you need to prove afterward. A CAD sketch should hold up when you check a measurement against the grid; a chart should hold up when someone re-enters your numbers and gets the same shape; a freehand sketch or flowchart mainly needs to communicate an idea clearly rather than be dimensionally exact. Export as PNG for quick sharing in a chat or slide, or as SVG when the CAD or flowchart output needs to stay sharp at a larger print size or will be edited further in vector software.",
       ],
     },
     useCases: {
@@ -787,6 +789,8 @@ export const categoryContent: Record<string, CategoryContent> = {
         { q: '作品會自動儲存到雲端嗎？', a: '不會，繪製都在本機進行，請記得自行匯出保存。' },
         { q: '手機可以使用嗎？', a: '可以，但較細緻的繪製在大螢幕與滑鼠操作下會更順手。' },
         { q: '流程圖可以加入多少節點？', a: '沒有硬性上限，但節點過多時建議分圖處理以保持清楚。' },
+        { q: '長條圖與圓餅圖可以匯入試算表資料嗎？', a: '不行，兩個工具都是直接在頁面輸入標籤與數值，沒有 CSV 或試算表匯入功能；資料量大時建議先在其他地方整理好數字，再依序貼上。' },
+        { q: '流程圖節點的文字可以之後修改嗎？', a: '可以，節點文字可以點選後編輯，但重新排版或大幅調整結構時建議先匯出一份備份，避免中途調整順序弄亂已經拉好的箭頭連線。' },
       ],
       en: [
         { q: 'Can these replace professional CAD?', a: 'No, they suit simple diagrams and teaching; complex engineering drawing needs dedicated software.' },
@@ -794,6 +798,8 @@ export const categoryContent: Record<string, CategoryContent> = {
         { q: 'Are my drawings saved to the cloud?', a: 'No, drawing happens locally, so remember to export and save.' },
         { q: 'Can I use these on mobile?', a: 'Yes, though detailed drawing is easier on a large screen with a mouse.' },
         { q: 'How many nodes can a flowchart have?', a: 'No hard limit, but split large diagrams to keep them clear.' },
+        { q: 'Can I import spreadsheet data into the bar or pie chart maker?', a: 'No, both tools take labels and values typed directly into the page; there is no CSV or spreadsheet import, so for a larger dataset it helps to organize the numbers elsewhere first and enter them in order.' },
+        { q: "Can I edit a flowchart node's text after placing it?", a: 'Yes, node text can be edited after you place it, but export a backup before a major restructure, since rearranging nodes can also disturb arrows you already connected.' },
       ],
     },
     relatedCategories: ['image', 'pdf', 'text'],

@@ -25,6 +25,14 @@ const copy = {
     lead: '從你的身份與任務開始，不必先猜工具名稱。每個頁面都整理常見痛點、推薦工具、簡單流程與延伸分類。',
     breadcrumb: '使用情境',
     open: '查看工具組',
+    overviewHeading: '怎麼挑選適合你的使用情境頁',
+    overviewParagraphs: [
+      '挑選使用情境頁，重點不是找出最符合你職稱的那個標籤，而是符合你現在手上這件任務。同一位老師在備課、和在準備自己教師甄試的成績試算，其實對應到本站兩個不同的頁面（教師常用工具，以及個人考試準備適合看的教師甄試成績工作流程），因為兩種情境需要的工具與要注意的檢查點不一樣。如果你同一週身兼多種身分，例如白天教書、晚上還經營一個小副業，建議依照今天實際要做的任務挑頁面，而不是依照你的主要職稱。',
+      '下面六個頁面大致可以分成兩種類型。教師工具、學生報告工具與上班族文件工具是圍繞「持續性的責任」設計：一個班級、一批作業、一連串的辦公文件，推薦工具會在很多次小任務中重複出現。創作者工具、設計師工具與開發者工具則是圍繞「交付格式」設計：一篇貼文、一張輸出圖片、一份測試資料，不管你是偶爾用一次還是每天都用，同一頁都適用。',
+      '每個使用情境頁都誠實標出邊界。FunnyTools 的工具都在瀏覽器本機執行，能處理計算、整理、轉檔與快速草稿，但不能取代學校的正式成績系統、公司的薪資系統、專業 CAD 或印刷輸出軟體，也不能取代管理正式帳號密碼的密碼管理器。如果你的任務依賴這些系統，對應頁面的 FAQ 會直接說明，頁面推薦的工具是用來準備或檢查要交給那些系統的資料，不是拿來取代它們。',
+      '每個頁面也至少收錄一個帶有具體步驟與驗收檢查的實作情境，而不只是列出工具名稱，因為知道有哪些工具存在只是任務的一小部分，知道操作順序以及交付前要再檢查什麼，通常更關鍵。如果六個頁面都不太符合你的情況，可以改成依分類瀏覽工具，或到工作流程庫找針對特定多步驟任務設計的工具包。',
+      '這些頁面也預設你大致知道自己要完成什麼任務；如果你真正想弄懂的是單一工具究竟在算什麼、轉換邏輯是什麼、公式在哪些情況容易被誤讀，直接打開該工具頁面本身附的驗證段落，會比使用情境頁的整體推薦清單更適合作為起點，因為那段內容是針對那一個工具的具體主張寫的，不是同時要涵蓋整個使用情境。',
+    ],
   },
   en: {
     title: 'Find FunnyTools by Audience',
@@ -34,6 +42,14 @@ const copy = {
     lead: 'Start from who you are and what you need to finish. Each page groups common pain points, recommended tools, quick workflows, and related categories.',
     breadcrumb: 'For',
     open: 'Open toolkit',
+    overviewHeading: 'How to pick the right audience page',
+    overviewParagraphs: [
+      "Choosing an audience page is not about picking the label that fits your job title most precisely — it is about matching the actual task in front of you right now. A teacher planning a lesson and a teacher grading their own certification-exam scores are covered by two different pages here (Teacher Tools, and for personal exam prep, the teacher exam score workflow), because the tools and the checks that matter differ in each situation. If you fill several of these roles in the same week — say you teach and also run a small side project — read the page that matches today's task rather than the page that matches your main title, and switch pages again tomorrow if tomorrow's task is different.",
+      'The six pages below fall into two groups. Teacher, Student Report, and Office Worker Tools are organized around a recurring responsibility — a classroom, a set of assignments, a stream of office paperwork — so their recommended tools repeat across many small tasks over time. Creator, Designer, and Developer Tools are organized around a deliverable format instead: a post, an exported image, or a piece of test data, so the same page serves someone doing this occasionally as well as someone doing it daily, without needing to match a specific job title.',
+      "Every audience page is honest about its edges. FunnyTools tools run locally in the browser and cover calculation, cleanup, conversion, and quick drafts; none of them replace a school's official grading system, a company's payroll system, professional CAD or print production software, or a password manager for real account secrets. If your task depends on one of those systems, the relevant audience page says so directly in its FAQ, and the tool recommendation there is meant to prepare or check your input for that system, not to substitute for it entirely.",
+      'Each page also includes at least one worked scenario with concrete steps and a verification check, not just a list of tool names, because knowing which tool exists is a smaller part of the task than knowing what order to use it in and what to double-check before the result leaves your hands. If none of the six pages matches your situation closely, browse tools by category instead, or check the workflow library for a toolkit built around a specific multi-step task.',
+      "These pages also assume you already know roughly what you need to accomplish. If you are instead trying to understand what a single tool actually calculates or converts, and where its formula or logic can be misread, that tool's own page and its verification section are a better starting point than an audience page's general recommendation list, since that section is written for the specific claims that one tool makes rather than for a whole audience at once. Treat the audience page as the entry point for discovery and the tool page as the place to confirm a result before you rely on it.",
+    ],
   },
 }[lang];
 const audienceViews = audiences
@@ -77,6 +93,11 @@ const collectionLd = {
     <p class="eyebrow">{copy.eyebrow}</p>
     <h1>{copy.h1}</h1>
     <p class="lead">{copy.lead}</p>
+  </section>
+
+  <section class="wrap content-section" aria-labelledby="audience-overview-title">
+    <h2 id="audience-overview-title">{copy.overviewHeading}</h2>
+    {copy.overviewParagraphs.map((paragraph) => <p>{paragraph}</p>)}
   </section>
 
   <section class="wrap content-section" aria-labelledby="audience-list-title">

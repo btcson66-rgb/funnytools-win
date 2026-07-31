@@ -191,6 +191,25 @@ export const audiences: Audience[] = [
       text('日期試算要記錄假設，例如是否排除週末或特定假日。', 'Record assumptions for date calculations, such as weekends or holidays.'),
       text('薪資與加班試算只作內部估算，正式金額請回到公司或法規資料。', 'Treat salary and overtime results as estimates, then confirm official figures elsewhere.'),
     ],
+    scenarios: [
+      {
+        title: text('流程：把簽核 PDF 與截止日整理成一份下班前可交付的檔案', 'Workflow: Turn a signed PDF and a deadline into one file ready before end of day'),
+        summary: text(
+          '適合臨時收到掃描簽核頁、需要在今天結束前送出完整附件包的情境。先確定要交付的是「一份完整檔案」還是「拆開的附件」，再決定合併或拆分的順序。',
+          'Use this when a scanned signature page arrives late and a complete attachment packet is due before the day ends. Decide whether the recipient needs one merged file or separate attachments before choosing merge or split first.'
+        ),
+        steps: [
+          text('用 PDF 合併把備忘錄封面、已簽核頁與掃描附件整理成一份工作稿，原始檔另外保留一份不要覆寫，之後如果合併錯誤還能從乾淨版本重來。', 'Use merge-pdf to combine the memo cover, signed pages, and any scanned attachment into one working file, keeping the original pages saved separately so a mistake can be undone by starting over from an untouched copy.'),
+          text('掃描頁如果方向歪掉，用 PDF 旋轉逐頁修正，修正後重新檢查頁序，因為旋轉工具只調整單頁方向，不會自動幫你排序。', 'If scanned pages came in sideways, straighten each one with rotate-pdf, then recheck page order afterward, since the rotation tool only fixes orientation and does not resequence pages for you.'),
+          text('用日期差或工作天計算確認截止日還剩幾個工作日，輸入前先決定是否要排除週末與國定假日，並把這個假設寫進信件或註記，避免對方誤以為是自然日。', 'Confirm how many working days remain before the deadline with date-difference or business-days, deciding up front whether to exclude weekends and public holidays, and note that assumption in the email or file name so the recipient does not mistake it for calendar days.'),
+          text('需要附上內部公告連結或線上表單時，把最終網址貼進 QR Code 產生器，換一台裝置或用登出狀態掃描測試，確認掃描後開啟的是最新版本而不是舊連結。', 'When an internal announcement link or online form needs to go out with the packet, paste the final URL into qr-code-generator, then scan it from another device or while signed out to confirm it opens the current version rather than a stale link.'),
+        ],
+        verification: text(
+          '交付前重新打開合併後的檔案逐頁核對：頁序正確、簽核頁清晰可讀、截止日假設已寫明、QR Code 掃描後導向正確版本，四項全部確認才送出。',
+          'Before sending, reopen the merged file and check it page by page: the order is correct, signed pages are legible, the deadline assumption is stated in writing, and the QR code opens the right version — confirm all four before delivery.'
+        ),
+      },
+    ],
     relatedCategoryIds: ['pdf', 'image', 'time', 'money', 'text'],
     relatedWorkflowIds: ['office-document-toolkit'],
     faq: [
@@ -222,6 +241,25 @@ export const audiences: Audience[] = [
       text('先用字元與字數工具檢查貼文、標題與摘要長度。', 'Check post, title, and summary length first.'),
       text('發布前壓縮圖片並確認文字截圖仍然清楚。', 'Compress images before publishing and confirm text remains readable.'),
       text('用 QR Code 或隨機輪盤處理活動連結與主題選擇。', 'Use QR codes or random wheels for event links and content choices.'),
+    ],
+    scenarios: [
+      {
+        title: text('流程：同一篇貼文改寫給兩個字數限制不同的平台', 'Workflow: Adapt one post for two platforms with different length limits'),
+        summary: text(
+          '同一段文案在不同平台常有不同的字數或字元規則，直接複製貼上很容易在其中一個平台被截斷或顯示異常。',
+          'The same caption often has to satisfy different length rules on different platforms, and copy-pasting it as-is can get it truncated or flagged on one of them.'
+        ),
+        steps: [
+          text('草稿寫完後，先用字元計數器對照字數規則寫的是「字元」的平台（含標點與空白），再用字數統計對照規則寫的是「字數」的平台，不要只查一個數字就當作兩邊都合格。', 'After drafting the caption, check it against the character counter for any platform whose limit counts characters, including spaces and punctuation, and separately against the word counter for a platform whose limit is stated in words; do not assume passing one check means the other platform is fine too.'),
+          text('兩邊長度都通過後，用大小寫轉換統一標題與內文的大小寫風格，處理掉從其他草稿複製貼上殘留的格式不一致。', 'Once both length checks pass, run the text through case-converter to fix inconsistent capitalization left over from an earlier draft, so the same caption does not read as an obvious copy-paste on either platform.'),
+          text('針對兩個平台各自偏好的圖片比例，用圖片尺寸調整分別輸出，再各自用圖片壓縮處理檔案大小，因為在一個平台看起來剛好的裁切，換到另一個平台常常會被系統二次裁切。', "Export the image separately for each platform's preferred aspect ratio with image-resizer, then compress each export with image-compressor, since a crop that looks right on one platform's feed is often re-cropped automatically by another."),
+          text('如果貼文要導向連結，先確認實際要貼上的網址是最新版本，再用 QR Code 產生器產生給實體物料使用的版本，兩者要各自核對，不要假設 QR Code 掃出來的網址一定和貼文裡貼的文字連結相同。', 'If the post links out, confirm the actual URL you are pasting into the caption is current, and separately generate a QR code with qr-code-generator for any printed material; check both, since a QR code and a text link created at different times can end up pointing to two different pages.'),
+        ],
+        verification: text(
+          '發布前分別在兩個平台的實際介面（不是草稿工具）預覽文字是否被截斷、圖片是否被裁切，並實際掃描 QR Code 確認導向與貼文文字連結一致。',
+          "Before publishing, preview the text and image inside each platform's own interface, not just the drafting tool, to confirm nothing is truncated or re-cropped, and scan the QR code to confirm it matches the text link in the post."
+        ),
+      },
     ],
     relatedCategoryIds: ['text', 'image', 'random'],
     relatedWorkflowIds: ['creator-social-toolkit', 'daily-decision-toolkit'],
@@ -255,6 +293,25 @@ export const audiences: Audience[] = [
       text('針對透明背景、照片或網頁使用情境選擇 PNG、JPG 或 WebP。', 'Choose PNG, JPG, or WebP based on transparency, photo content, and web use.'),
       text('發布前在目標裝置上檢查色彩、文字清晰度與 QR Code 掃描結果。', 'Before publishing, inspect color, text clarity, and QR scan results on the target device.'),
     ],
+    scenarios: [
+      {
+        title: text('流程：同一張照片輸出成網站主圖與簡報用圖兩種版本', 'Workflow: Export one photo as both a web hero image and a slide-deck image'),
+        summary: text(
+          '同一張原始照片給網站首圖和給客戶簡報，需要的比例、格式與檔案大小通常不一樣，直接用同一份裁切檔案交付，很容易在其中一邊出現裁切不當或檔案過大。',
+          'The same source photo usually needs a different crop, format, and file-size budget for a website hero than for a client slide deck. Delivering one crop for both jobs often leaves one version poorly framed or too large.'
+        ),
+        steps: [
+          text('先複製一份原始檔，保留完全未處理的版本，再分別用圖片裁切依網站首圖與簡報畫面各自需要的比例裁切，不要用同一個裁切結果套用到兩個用途。', 'Duplicate the original file first and keep a fully untouched copy, then crop separately with image-crop for the ratio the web hero needs and the ratio the slide needs, instead of applying one crop to both destinations.'),
+          text('網站版本視平台支援情況用 JPG 轉 WebP 輸出，通常在同等畫質下檔案更小；簡報版本則用 PNG 轉 JPG 輸出並選擇合適的底色（如果原始檔透明背景），因為多數簡報軟體處理 JPG 較穩定。', 'Export the web version as WebP with jpg-to-webp when the platform supports it, since it usually gives a smaller file at similar quality; export the slide version as JPG with png-to-jpg, choosing a background color if the source has transparency, since most presentation software handles JPG more predictably.'),
+          text('兩個版本分開用圖片壓縮處理，不要在裁切前就先壓縮一次共用，因為網站首圖和簡報用圖能接受的檔案大小通常不同，網站版本要更嚴格控制大小。', 'Compress each exported version separately with image-compressor rather than compressing once before cropping, because the web hero and the slide image usually tolerate different file sizes, with the web version needing the tighter budget.'),
+          text('壓縮完成後，把兩個檔案都放大到 100% 檢查文字疊加、人像五官與產品邊緣是否還清晰，縮圖預覽不容易看出壓縮造成的細節損失。', 'After compressing, zoom both final files to 100% to check text overlays, facial detail, and product edges, since a small thumbnail preview does not reveal compression artifacts.'),
+        ],
+        verification: text(
+          '交付前把網站版本放進實際網頁（或至少手機瀏覽器）檢視，把簡報版本放進真正的投影片而不是檔案總管縮圖，確認畫質與版面在各自的使用情境下都沒有問題。',
+          'Before delivery, view the web version inside an actual page (or at least a phone browser) and the slide version inside a real slide rather than a file-browser thumbnail, confirming quality and layout hold up in each real destination.'
+        ),
+      },
+    ],
     relatedCategoryIds: ['image', 'draw', 'pdf'],
     relatedWorkflowIds: [],
     faq: [
@@ -286,6 +343,25 @@ export const audiences: Audience[] = [
       text('只貼測試資料或已去識別內容，不要貼正式 token、密碼或個資。', 'Paste only test or anonymized data, not real tokens, passwords, or personal data.'),
       text('先格式化 JSON 或轉換 Timestamp，再回到程式碼確認欄位語意。', 'Format JSON or convert timestamps, then return to code to verify field meaning.'),
       text('CSV/JSON 轉換後抽查欄位名稱、空值與特殊字元。', 'After CSV/JSON conversion, spot-check field names, empty values, and special characters.'),
+    ],
+    scenarios: [
+      {
+        title: text('流程：把除錯用的原始 API 回應整理成可分享給同事的乾淨範例', 'Workflow: Turn a raw API response into a clean, shareable debugging sample'),
+        summary: text(
+          '除錯時常常直接複製整段原始回應丟給同事，裡面可能混著真實的使用者資料。這個流程把「先看得懂結構」和「先確認沒有敏感資料」分成兩個獨立步驟，不要用同一次操作解決。',
+          'Debugging often means pasting an entire raw response to a teammate, which can carry real user data along with it. This workflow treats "make the structure readable" and "confirm nothing sensitive remains" as two separate steps, not one.'
+        ),
+        steps: [
+          text('只複製和問題相關的 JSON 片段，貼進 JSON 格式化之前先用眼睛掃過一次，排版工具只會讓結構變得好讀，不會自動偵測或遮蔽任何欄位。', 'Copy only the JSON fragment relevant to the bug, and scan it by eye before pasting it into json-formatter, since the formatter only makes structure readable and does not detect or mask any field automatically.'),
+          text('格式化後，把看到的真實 email、token、使用者 ID 或姓名直接改成明顯是假的替代值，這一步一定要手動做，因為工具沒有欄位語意，不知道哪個值是敏感資料。', 'After formatting, manually replace any real email addresses, tokens, user IDs, or names you can see with obviously fake placeholders; this step has to be done by hand, since the tool has no awareness of which field is sensitive.'),
+          text('如果回應裡有 Unix 時間戳記不好判讀，挑一兩個代表性的值用 Timestamp 轉換器換算，確認自己讀的是秒還是毫秒，再把換算後的時間寫進回報訊息，避免討論時對時間軸有錯誤認知。', 'If the response contains Unix timestamps that are hard to read, convert one or two representative values with timestamp-converter to confirm whether you are reading seconds or milliseconds, then write the converted time into the bug report so the discussion does not drift on a wrong timeline.'),
+          text('修改完成後再格式化一次，確認結構仍然是合法的 JSON、沒有因為手動編輯漏掉括號或逗號，再把這份範例分享出去。', 'Run the edited text through the formatter once more to confirm it is still valid JSON and that manual edits did not drop a bracket or comma, then share the cleaned sample.'),
+        ],
+        verification: text(
+          '分享前再讀一次整份範例，確認裡面沒有任何看起來像真實使用者資料的值，也確認光靠這份範例無法回推出特定使用者或帳號。',
+          'Before sharing, read through the sample once more to confirm nothing looks like real user data, and that the sample alone cannot be used to re-identify a specific user or account.'
+        ),
+      },
     ],
     relatedCategoryIds: ['text', 'random', 'time'],
     relatedWorkflowIds: [],

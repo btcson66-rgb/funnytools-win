@@ -30,6 +30,14 @@ const copy = {
     open: '開啟流程',
     relatedGuides: '相關指南',
     updated: '更新 ',
+    overviewHeading: '工作流程頁和單一工具頁有什麼不同',
+    overviewParagraphs: [
+      '工作流程頁和單一工具頁不一樣：它不會另外做一個新的計算機或轉檔器，而是把既有工具串成有明確交接關係的步驟——前一步驟的輸出，就是下一步驟需要的輸入。如果你的任務真的有多個階段（例如原始考試分數要先加權，才能拿去比較 T 分數或 Z 分數），適合從工作流程頁開始；如果只是單一次計算或單一次轉檔，沒有交接需要規劃，直接找對應的單一工具頁會更快。',
+      '下面七個工具包大致可以分成三種類型。研究生統計報告和教師甄試成績屬於資料密集型：都需要同一群體真實的平均數與標準差，如果手上根本沒有這組參考資料，流程就無法正確進行，不是換個數字硬套就能解決。教師課堂隨機屬於現場即時型：設計上就是要在課堂上當場操作，所以步驟強調事前先準備好名單、抽完立即複製結果，而不是慢慢反覆調整。學生報告、辦公室文件、創作者社群與日常選擇工具組則屬於檔案與格式型：串接的是文件、圖片、日期或隨機抽選工具，目標是一份具體的交付物（例如要繳交的 PDF、要發布的貼文），而不是一個統計結果。',
+      '不管選哪一個流程，開始前建議先養成兩個習慣。第一，把原始素材（原始成績表、原始圖片、原始文件）保留一份完全不動的版本，另外建一份工作副本來修改，中途出錯時可以直接回到已知狀態重做，不必逐步反推哪裡出了問題。第二，把過程中做的假設寫下來，例如用了哪一組權重、日期試算有沒有排除週末、用的是哪一組參考平均數，因為這些流程頁設計的目標是「可以重現」，不只是「算出一個數字」。',
+      '每個工作流程頁下方都附有一段針對該頁具體結果的驗證方法，以及對應工具與相關指南的連結。如果找不到剛好符合你任務的流程，可以到指南庫找針對單一計算的詳細說明，或依使用情境瀏覽工具，找到目前最適合的組合。',
+      '這些頁面也不能取代指南庫：如果你真正需要的是深入理解單一公式或某個邊界情況，工作流程頁預設你已經大致知道每個工具在做什麼，重點放在順序與交接，而不是逐一講解公式細節；個別指南則專注在單一計算的深入說明，包含公式容易被誤用的地方。如果流程裡某一步驟提到你沒用過的工具，通常先打開那個工具本身的頁面，會比只靠這裡的一句話描述猜測操作方式更快。每個工作流程頁下方都標有最後複查日期，這比假設一個已發布的流程永遠不會變動更能反映內容目前的新舊程度。',
+    ],
   },
   en: {
     title: 'Education Statistics Workflows',
@@ -43,6 +51,14 @@ const copy = {
     open: 'Open workflow',
     relatedGuides: 'Related guides',
     updated: 'Updated ',
+    overviewHeading: 'How a workflow page differs from a single tool page',
+    overviewParagraphs: [
+      'A workflow page on FunnyTools is different from a single tool page: it does not introduce a new calculator or converter, it sequences existing tools with an explicit handoff between steps, so the output of one step is defined as the input of the next. Use a workflow page when your task genuinely has more than one stage — for example, raw exam scores that need weighting before they can be compared as T or Z scores — and go straight to a single tool page when your task is really one calculation or one file conversion with no handoff to plan and nothing to hand off to a second step.',
+      'The seven toolkits below fall into three rough groups. Graduate Statistics Report and Teacher Exam Score are data-heavy: they depend on having a real mean and standard deviation from the same group, and the workflow only works if that reference data actually exists before you start. Teacher Classroom Random is a live-session workflow, meant to run in front of a class in real time, so its steps emphasize preparing the list beforehand and copying the result quickly rather than iterating slowly. Student Report, Office Document, Creator & Social Media, and Daily Decision are file- and format-based: they combine document, image, date, or random-pick tools around a concrete deliverable, such as a submitted PDF or a published post, rather than around a statistical calculation. Knowing which group a workflow belongs to is a quick way to guess what will block you if the data or the timing is not ready yet.',
+      'Before starting any of these workflows, it helps to form the same two habits regardless of which one you pick. First, keep an untouched copy of whatever you start with — a raw score sheet, an original image, a source document — separate from the working copy you actually edit, so a mistake partway through can be undone by returning to a known state instead of trying to reverse each step. Second, write down the assumptions you make along the way, such as which weights you applied, whether a date calculation excluded weekends, or which reference group’s mean you used, since the workflow pages are designed to be reproducible, not just to produce one number.',
+      'Every workflow page below also includes a short review section explaining how to verify that page’s specific result before you rely on it, plus links to the individual tools and any related guide. If a workflow does not match your task closely enough, check the guide library for a narrower explanation of one calculation, or browse tools by audience if you are not yet sure which combination fits your situation.',
+      'These pages are also not a substitute for the guide library when your real need is a deep explanation of one formula or one edge case: a workflow page assumes you already understand roughly what each tool does and focuses on the order and the handoffs between them, rather than walking through formula details one by one. An individual guide instead focuses on one calculation in more depth, including where the underlying formula can mislead you. If a step in a workflow references a tool you have not used before, opening that tool’s own page first is usually faster than guessing from the short description here. Each workflow page also states the date it was last reviewed, which is a more reliable signal of how current the steps are than assuming a published workflow never changes.',
+    ],
   },
 }[lang];
 
@@ -95,6 +111,11 @@ const collectionLd = {
       <a class="btn go" href={localePath(lang, 'guides')}>{copy.guides}</a>
       <a class="btn" href={localePath(lang, 'education-statistics')}>{copy.hub}</a>
     </div>
+  </section>
+
+  <section class="wrap content-section" aria-labelledby="workflow-overview-title">
+    <h2 id="workflow-overview-title">{copy.overviewHeading}</h2>
+    {copy.overviewParagraphs.map((paragraph) => <p>{paragraph}</p>)}
   </section>
 
   <section class="wrap content-section" aria-labelledby="workflow-list-title">

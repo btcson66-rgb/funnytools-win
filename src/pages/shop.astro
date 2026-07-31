@@ -16,7 +16,7 @@ const lang = 'zh' as const;
 const title = 'Btcson Lab 教材商店';
 const seoTitle = 'Btcson Lab 教材商店｜自然發音、數學、視覺日程與 STEM 實驗教材';
 const description =
-  'FunnyTools 團隊自製的可列印學習教材：CVC 自然發音閱讀、數學事實練習、晨間慣例、視覺日程卡、精細動作任務，以及物理與化學動手實驗任務包。PDF 下載、在家即可使用。';
+  'FunnyTools 自製的可列印學習教材：CVC 自然發音閱讀、數學事實練習、晨間慣例、視覺日程卡、精細動作任務，以及物理與化學動手實驗任務包。PDF 下載、在家即可使用。';
 const shopUrl = localePath(lang, 'shop');
 const breadcrumbItems = [
   { name: '首頁', href: localePath(lang) },
@@ -48,7 +48,7 @@ const jsonLd = [
       <p class="eyebrow">教材商店</p>
       <h1>{title}</h1>
       <p class="lead">
-        Btcson Lab 是 FunnyTools 團隊自製的教材品牌：可列印的閱讀、數學、日常慣例教材，
+        Btcson Lab 是 FunnyTools 維護者以個人身分自製的教材品牌：可列印的閱讀、數學、日常慣例教材，
         以及在家就能做的物理、化學動手實驗任務包。全部是 PDF／離線檔案，購買後立即下載。
       </p>
     </section>
@@ -188,10 +188,19 @@ const jsonLd = [
     <section class="content-section shop-disclosure" aria-labelledby="disclosure-heading">
       <h2 id="disclosure-heading">關於這些商品</h2>
       <p>
-        本頁商品均為 FunnyTools 營運團隊（Btcson Lab）自行設計製作的數位教材或軟體原始碼工具，非第三方分潤商品。
+        本頁商品均由 FunnyTools 維護者以 Btcson Lab 名義自行設計製作的數位教材或軟體原始碼工具，非第三方分潤商品。
         交易與檔案下載在 Gumroad 或 Payhip 平台完成，付款與退款政策以平台頁面為準。
         購買前請先確認商品頁的內容說明與適用年齡。
       </p>
+    </section>
+
+    <section class="content-section shop-disclosure" aria-labelledby="revenue-heading">
+      <h2 id="revenue-heading">購買與收益怎麼運作</h2>
+      <p>這裡的商品跟「支持本站」頁的資源連結不一樣：不是分潤連結，是直接販售的教材與軟體工具包。你在 Gumroad 或 Payhip 完成付款後，檔案由該平台直接提供下載，FunnyTools 拿到的是扣除平台手續費後的實際收入，不是像酷澎或蝦皮那樣的分潤比例。</p>
+      <p>退款、發票與付款方式一律依照 Gumroad 或 Payhip 各自的平台規則處理，本站不會另外收款，也不會另外處理退款申請；如果購買後對商品內容有疑問，請先查看該筆訂單在對應平台上的商品頁說明與售後政策。</p>
+      <p>這個商店的收入用途很直接：維持 FunnyTools 免費工具的網域、託管與開發時間。免費工具區不會因為你買或不買商店裡的商品而改變功能或出現更多廣告，兩邊是分開運作的收入來源，商店存在與否都不影響工具本身能不能用。</p>
+      <p>購買前建議先讀商品頁列出的內容範圍與適用年齡：教材類商品標示的年齡區間是設計參考，不是保證適合每個孩子的程度；STEM 動手實驗包需要準備商品頁列出的材料才能完成任務，購買前請先確認家中是否方便取得。</p>
+      <p>本頁商品不使用倒數計時、庫存緊張提示或其他催促購買的手法；價格清楚列出，也沒有「現在不買折扣就消失」這類設計。如果商品頁的說明沒有回答你在意的具體問題，例如檔案格式、可列印頁數，或某個活動是否需要家長陪同，建議購買前先詢問，不要假設答案一定對你有利。</p>
     </section>
   </div>
 
