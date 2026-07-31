@@ -4,18 +4,42 @@ import type { ToolContent } from './_types';
 type Pair = { zh: string; en: string };
 type CasePair = { title: Pair; description: Pair };
 type Enhancement = Partial<ToolContent>;
+type SectionSpec = { heading: Pair; paragraphs: Pair[]; items?: Pair[] };
 
-function localize(audience: Pair[], caseStudies: CasePair[], notes: Pair[]): Record<Locale, Enhancement> {
+function localize(
+  audience: Pair[],
+  caseStudies: CasePair[],
+  notes: Pair[],
+  sections: SectionSpec[] = [],
+): Record<Locale, Enhancement> {
   return {
     zh: {
       audience: audience.map((item) => item.zh),
       caseStudies: caseStudies.map((item) => ({ title: item.title.zh, description: item.description.zh })),
       notes: notes.map((item) => item.zh),
+      ...(sections.length
+        ? {
+            contentSections: sections.map((section) => ({
+              heading: section.heading.zh,
+              paragraphs: section.paragraphs.map((item) => item.zh),
+              items: section.items?.map((item) => item.zh),
+            })),
+          }
+        : {}),
     },
     en: {
       audience: audience.map((item) => item.en),
       caseStudies: caseStudies.map((item) => ({ title: item.title.en, description: item.description.en })),
       notes: notes.map((item) => item.en),
+      ...(sections.length
+        ? {
+            contentSections: sections.map((section) => ({
+              heading: section.heading.en,
+              paragraphs: section.paragraphs.map((item) => item.en),
+              items: section.items?.map((item) => item.en),
+            })),
+          }
+        : {}),
     },
   };
 }
@@ -36,9 +60,45 @@ export const toolContentEnhancements: Record<string, Record<Locale, Enhancement>
       { title: { zh: '除錯有問題的 CSV', en: 'Diagnose a malformed CSV file' }, description: { zh: '若轉換失敗，先縮小到包含標題列與一筆錯誤資料的範例，檢查引號是否成對、各列欄位數是否一致及文字編碼是否為 UTF-8。', en: 'When conversion fails, reduce the file to the header and one problematic row. Check for unmatched quotes, inconsistent column counts, and UTF-8 text before retrying the complete dataset.' } },
     ],
     [
-      { zh: 'JSON 值預設會保留為文字，不會猜測日期、布林值或數字型別。', en: 'Values remain strings unless the source parser can identify structure; the tool does not guess dates or business-specific data types.' },
+      { zh: '這個轉換器預設啟用動態型別偵測，頁面上沒有關閉選項；純數字或 true/false 字串會被轉成 JSON 數字或布林值，不會保留為文字。', en: 'Dynamic type detection is on by default and there is no toggle to disable it; purely numeric or true/false strings become JSON numbers or booleans instead of staying as text.' },
       { zh: '大型資料仍可能受瀏覽器記憶體限制，正式匯入前應保留原始 CSV。', en: 'Large files are limited by browser memory. Keep the original CSV and validate the converted record count before a production import.' },
       { zh: '敏感資料雖不會上傳，仍應避免把轉換結果貼到不受信任的服務。', en: 'Processing is local, but the downloaded JSON still contains the original data and should be stored or shared with the same care.' },
+    ],
+    [
+      {
+        heading: { zh: '實測範例：3 列 CSV 轉 JSON', en: 'Worked example: 3 CSV rows to JSON' },
+        paragraphs: [
+          {
+            zh: '貼上這段含引號逗號的 CSV：第一列標題 name,role,dept，接著 Alice,"Senior, Eng",R&D 與 Bob,PM,"Ops, APAC"。轉換後會得到 2 筆物件的 JSON 陣列，Bob 那筆的 dept 欄位會正確還原成完整的 "Ops, APAC"，因為引號內的逗號不會被當成欄位分隔符。',
+            en: 'Paste this CSV with a quoted comma: header row name,role,dept, then Alice,"Senior, Eng",R&D and Bob,PM,"Ops, APAC". The result is a 2-object JSON array, and Bob\'s dept field correctly stays as the full "Ops, APAC" because a comma inside quotes is not treated as a field separator.',
+          },
+          {
+            zh: '動態型別預設開啟且無法關閉，會直接影響會被誤判成數字的欄位，例如員工編號或郵遞區號開頭是 0 的情況：',
+            en: 'Dynamic typing is on by default with no way to turn it off, which directly affects fields that look numeric, such as employee IDs or postal codes that start with a zero:',
+          },
+        ],
+        items: [
+          { zh: '輸入：id,code 標題列，接著 1,007 與 2,USD100 兩列。', en: 'Input: header id,code, then rows 1,007 and 2,USD100.' },
+          { zh: '輸出：[{"id":1,"code":7},{"id":2,"code":"USD100"}] — "007" 被動態型別讀成數字 7，前導零消失；"USD100" 不是純數字，保留為文字。', en: 'Output: [{"id":1,"code":7},{"id":2,"code":"USD100"}] — "007" is read as the number 7 by dynamic typing and loses its leading zero, while "USD100" is not purely numeric and stays as text.' },
+        ],
+      },
+      {
+        heading: { zh: '解析失敗的行為、如何驗證，以及該選哪個轉換方向', en: 'What happens on a parse error, how to verify, and which direction to use' },
+        paragraphs: [
+          {
+            zh: '格式錯誤時（例如引號未成對或某列欄位數與標題不同），錯誤訊息會直接顯示 PapaParse 回報的原始文字，並在後面加上出錯的列號，例如「Trailing quote on quoted field is malformed (row 3)」；這段附加的列號固定用英文 row 標示，不會因語系而翻譯，可用它直接定位到第幾列去修正來源 CSV。',
+            en: 'On a malformed row, such as an unmatched quote or a column count that does not match the header, the error message shows PapaParse\'s raw text with the offending row number appended, for example "Trailing quote on quoted field is malformed (row 3)". That row label always stays in English regardless of site language, and it points directly at which source row to fix.',
+          },
+          {
+            zh: '驗證輸出最簡單的方法：把結果貼回本站的 JSON 轉 CSV 工具轉一次，比對筆數與欄位是否與原始 CSV 一致；也可以在瀏覽器主控台執行 JSON.parse(貼上的文字) 確認語法正確。',
+            en: 'The simplest way to verify the output is to paste it into this site\'s JSON to CSV tool and convert it back, then compare the row and column counts against the original CSV. You can also run JSON.parse(pasted text) in the browser console to confirm the syntax is valid.',
+          },
+          {
+            zh: '選哪個方向：資料來源已經是逗號分隔（試算表匯出、資料庫查詢結果）時用 CSV 轉 JSON；已經有 API 回傳的物件陣列、想在 Excel 或 Google 試算表打開時改用 JSON 轉 CSV。兩個方向都不會自動展平巢狀物件或陣列，來源如果有巢狀欄位，要先手動拆成單層欄位再轉換。',
+            en: 'Which direction to pick: use CSV to JSON when the source is already comma-separated, such as a spreadsheet export or a database query result. Use JSON to CSV when you already have an array of objects from an API and want to open it in Excel or Google Sheets. Neither direction flattens nested objects or arrays automatically, so flatten nested fields manually before converting.',
+          },
+        ],
+      },
     ],
   ),
   'json-to-csv': localize(
@@ -56,6 +116,34 @@ export const toolContentEnhancements: Record<string, Record<Locale, Enhancement>
       { zh: '不同物件缺少的欄位會形成空白儲存格，下載前應檢查欄位完整性。', en: 'Missing keys can become blank cells, so review column completeness before importing the file elsewhere.' },
       { zh: 'CSV 不保留 JSON 的型別資訊，日期、前導零與長數字可能被試算表重新格式化。', en: 'CSV does not preserve JSON types; spreadsheets may reformat dates, leading zeros, and long numeric identifiers.' },
     ],
+    [
+      {
+        heading: { zh: '實測範例：物件陣列轉出含逗號欄位的 CSV', en: 'Worked example: an object array with a comma-containing field' },
+        paragraphs: [
+          {
+            zh: '輸入 [{"name":"Alice","role":"Senior, Eng"},{"name":"Bob","role":"PM"}]，轉換後會得到標題列 name,role，接著 Alice,"Senior, Eng" 與 Bob,PM 兩列；role 欄位因為本身含逗號，輸出時會自動補上引號，避免被試算表誤判成兩欄。',
+            en: 'Enter [{"name":"Alice","role":"Senior, Eng"},{"name":"Bob","role":"PM"}] and the output is a header row name,role, followed by Alice,"Senior, Eng" and Bob,PM. Because the role value itself contains a comma, the tool automatically wraps it in quotes so a spreadsheet does not split it into two columns.',
+          },
+          {
+            zh: '這個轉換方向的頁面沒有分隔符號選單，也沒有加入 UTF-8 BOM 的選項；輸出一律使用逗號分隔且不加 BOM。用滑鼠雙擊直接在 Excel 開啟含中文或表情符號的下載檔時，如果 Excel 判定的預設編碼不是 UTF-8，可能出現亂碼；比較保險的作法是改用「資料 > 從文字/CSV」匯入並手動選擇 UTF-8。',
+            en: 'This conversion direction has no delimiter selector and no option to add a UTF-8 BOM; the output always uses commas with no BOM. Double-clicking the downloaded file to open it directly in Excel can show garbled characters for Chinese text or emoji if Excel guesses a non-UTF-8 encoding; importing through Data > From Text/CSV and manually choosing UTF-8 is more reliable.',
+          },
+        ],
+      },
+      {
+        heading: { zh: '輸入不是陣列時的行為，以及如何驗證輸出', en: 'What happens when the input is not an array, and how to verify the output' },
+        paragraphs: [
+          {
+            zh: '如果貼上的是單一物件（例如 {"name":"Alice"}）而不是陣列，工具會顯示「JSON 最外層必須是物件陣列」並清空輸出；如果貼上的文字根本不是合法 JSON（例如漏了結尾的引號），會顯示一段固定的英文訊息 "The input is not valid JSON."，這段訊息不會隨頁面語系翻譯成中文，需要對照原始輸入自行抓漏字或漏引號。',
+            en: 'If you paste a single object such as {"name":"Alice"} instead of an array, the tool shows "The JSON root must be an array of objects" and clears the output. If the pasted text is not valid JSON at all, for example a missing closing quote, it shows a fixed English message, "The input is not valid JSON.", which does not get translated on the Chinese site, so you need to check the raw input yourself for the missing character.',
+          },
+          {
+            zh: '驗證輸出的方法：把 CSV 貼回本站的 CSV 轉 JSON 工具轉一次，確認還原後的物件數與鍵值跟原始 JSON 一致；也可以用試算表打開後手動核對含逗號或換行的欄位是否還在同一格內。',
+            en: 'To verify the output, paste the CSV back into this site\'s CSV to JSON tool and confirm the restored object count and keys match the original JSON. You can also open the file in a spreadsheet and manually check that fields containing a comma or line break stayed inside a single cell.',
+          },
+        ],
+      },
+    ],
   ),
   'timestamp-converter': localize(
     [
@@ -71,6 +159,38 @@ export const toolContentEnhancements: Record<string, Record<Locale, Enhancement>
       { zh: 'Unix 時間戳本身不含時區；時區只影響顯示方式。', en: 'A Unix timestamp represents an instant and does not contain a timezone; timezone only changes how that instant is displayed.' },
       { zh: 'ISO 8601 結尾的 Z 代表 UTC，本機時間可能因日光節約時間而不同。', en: 'A trailing Z in ISO 8601 means UTC. Browser-local output can differ because of locale and daylight-saving rules.' },
       { zh: '極大或負數時間戳可能超出瀏覽器日期範圍，正式資料應再由來源系統驗證。', en: 'Very large or negative values may fall outside browser date limits and should be checked against the source system.' },
+    ],
+    [
+      {
+        heading: { zh: '自動判斷秒或毫秒的實際規則', en: 'How automatic seconds-vs-milliseconds detection actually works' },
+        paragraphs: [
+          {
+            zh: '選擇「自動判斷」時，工具只看輸入的絕對值：小於 100,000,000,000（1000 億）視為秒，大於或等於這個門檻視為毫秒。輸入 1735689600（2025 年附近的秒數）會被判成秒，輸入 1735689600000（同一時間的毫秒數）會被判成毫秒，兩者換算後應該指向同一天。',
+            en: 'With "Auto detect" selected, the tool only looks at the absolute value of the input: anything below 100,000,000,000 is treated as seconds, and anything at or above that threshold is treated as milliseconds. Entering 1735689600 (a seconds value near 2025) is read as seconds, while 1735689600000 (the same instant in milliseconds) is read as milliseconds, and both should convert to the same calendar day.',
+          },
+          {
+            zh: '如何驗證結果：按「使用目前時間」會把目前時間同時填入輸入框並強制切成毫秒單位，這時可以直接比對電腦系統時間是否與畫面上的本機時間欄位一致，藉此確認轉換邏輯正常運作。',
+            en: 'To verify the result, click "Use current time" to fill the field with the current instant and force the unit to milliseconds, then compare the local-time field on screen with your computer\'s system clock to confirm the conversion logic is working correctly.',
+          },
+        ],
+        items: [
+          { zh: '輸入 1735689600，單位選自動 → 判定為秒，本機時間會顯示 2025 年附近的日期。', en: 'Input 1735689600 with Auto detect selected results in seconds, showing a local date near 2025.' },
+          { zh: '輸入 1735689600000，單位選自動 → 判定為毫秒，換算出的日期應與上一列相同。', en: 'Input 1735689600000 with Auto detect selected results in milliseconds, converting to the same date as the row above.' },
+        ],
+      },
+      {
+        heading: { zh: '輸入無效時的行為，以及和其他時間工具的分工', en: 'What happens on invalid input, and how this differs from other time tools' },
+        paragraphs: [
+          {
+            zh: '如果輸入框留空、輸入非數字文字，或換算出的日期超出瀏覽器 Date 物件能表示的範圍，畫面會直接顯示錯誤訊息並隱藏原本的結果區塊，不會顯示過去計算殘留的舊數值；修正輸入後再次按「轉換」即可重新顯示完整的本機時間、UTC、ISO 8601、Unix 秒與 Unix 毫秒五欄結果。',
+            en: 'If the field is left empty, contains non-numeric text, or converts to a date outside what the browser Date object can represent, the page shows an error message and hides the results panel instead of leaving a stale value on screen. Fixing the input and clicking Convert again redisplays all five fields: local time, UTC, ISO 8601, Unix seconds, and Unix milliseconds.',
+          },
+          {
+            zh: '這個工具只做「數字時間戳 ↔ 可讀日期」的雙向轉換，不做時區換算成第三個城市、不做日期加減、也不做工作天計算；需要那類需求時應改用本站的日期差計算器或工作日計算器。',
+            en: 'This tool only converts between a numeric timestamp and a readable date in both directions. It does not convert a time into a third city\'s timezone, add or subtract days, or calculate business days; use this site\'s date difference calculator or business days calculator for those tasks instead.',
+          },
+        ],
+      },
     ],
   ),
   'uuid-generator': localize(
@@ -88,6 +208,35 @@ export const toolContentEnhancements: Record<string, Record<Locale, Enhancement>
       { zh: '移除連字號或變更大小寫不會增加隨機性，只改變文字表示方式。', en: 'Removing hyphens or changing case alters representation only; it does not add randomness.' },
       { zh: '在大量或法規敏感系統中，仍應由應用程式或資料庫於寫入時產生並驗證識別碼。', en: 'For large or regulated systems, generate and validate identifiers in the application or database at write time.' },
     ],
+    [
+      {
+        heading: { zh: '數量與格式的實際限制', en: 'The real limits on count and format' },
+        paragraphs: [
+          {
+            zh: '數量欄位輸入超過 100 或小於 1 都會被自動夾回有效範圍：例如輸入 500，按下產生後欄位會自己改回 100，並只產生 100 個 UUID；輸入 0 或負數則會改回 1。這個限制寫死在程式碼裡，不是可調整的偏好設定。',
+            en: 'Entering more than 100 or less than 1 in the count field is automatically clamped back into range: type 500 and click generate, and the field silently resets to 100 while only 100 UUIDs are produced. Entering 0 or a negative number resets it to 1. This limit is hard-coded, not an adjustable preference.',
+          },
+          {
+            zh: '格式是單一下拉選單，只能三選一：小寫（預設，例如 3fa85f64-5717-4562-b3fc-2c963f66afa6）、大寫，或移除連字號；沒有辦法同時勾選「大寫」又「去連字號」，如果你需要大寫又無連字號的版本，要先產生後自行用文字編輯器的取代功能處理。',
+            en: 'The format control is a single dropdown with three mutually exclusive options: lowercase (default, e.g. 3fa85f64-5717-4562-b3fc-2c963f66afa6), uppercase, or no hyphens. There is no way to select uppercase and no-hyphens at the same time; if you need that combination, generate the list first and then run a find-and-replace in a text editor.',
+          },
+        ],
+        items: [
+          { zh: '驗證方法：用正規表達式 ^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$ 檢查小寫版本是否符合 UUID v4 格式（第三段以 4 開頭、第四段以 8/9/a/b 開頭）。', en: 'Verification method: check the lowercase output against the regular expression ^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$, which confirms UUID v4 format (the third group starts with 4, the fourth starts with 8, 9, a, or b).' },
+        ],
+      },
+      {
+        heading: { zh: '產生失敗時的行為，以及 UUID 不能拿來做什麼', en: 'What happens if generation fails, and what a UUID should not be used for' },
+        paragraphs: [
+          {
+            zh: '產生功能依賴瀏覽器的 crypto.randomUUID()，這個 API 需要安全環境（HTTPS 或 localhost）。如果瀏覽器不支援或執行環境不安全，工具會捕捉例外、清空輸出欄位，並顯示「UUID generation is unavailable in this browser.」之類的錯誤訊息，而不會退回到不安全的隨機數產生方式。',
+            en: 'Generation relies on the browser\'s crypto.randomUUID(), which requires a secure context such as HTTPS or localhost. If the browser lacks support or the page is not served securely, the tool catches the exception, clears the output field, and shows an error such as "UUID generation is unavailable in this browser." instead of silently falling back to a weaker random source.',
+          },
+          {
+            zh: 'UUID 不是 CSV 轉 JSON 或 JSON 轉 CSV 工具能自動填入的欄位型別，如果需要在轉換出的資料裡補上識別碼，通常是先用這個頁面產生一批 UUID，再手動貼進表格的對應欄位。UUID 本身也不驗證任何權限，不應取代密碼、API 金鑰或簽章。', en: 'A UUID is not a field type that the CSV to JSON or JSON to CSV converter fills in automatically; when a converted dataset needs identifiers, the usual workflow is to generate a batch on this page first and paste the values into the matching column by hand. A UUID also proves nothing about authorization and should not replace a password, API key, or signature.' },
+        ],
+      },
+    ],
   ),
   'markdown-previewer': localize(
     [
@@ -103,6 +252,38 @@ export const toolContentEnhancements: Record<string, Record<Locale, Enhancement>
       { zh: '預覽不會上傳或儲存內容，重新整理頁面後草稿會消失。', en: 'The preview is not uploaded or saved; refreshing the page removes the current draft.' },
       { zh: '清理後 HTML 降低腳本風險，但無法替你確認外部連結或圖片內容是否可信。', en: 'Sanitized HTML reduces script risk but cannot verify that external links or image sources are trustworthy.' },
       { zh: '不同平台的 Markdown 方言不完全相同，正式發布前應在目標平台再次預覽。', en: 'Markdown dialects differ, so perform a final preview in the destination platform before publishing.' },
+    ],
+    [
+      {
+        heading: { zh: '實測範例：一段會被清理的 HTML', en: 'Worked example: HTML that gets sanitized on preview' },
+        paragraphs: [
+          {
+            zh: '在左側貼上 `# Title` 加一行 `<script>alert(1)</script>` 加一行 `- item one`，右側預覽會顯示一個 h1 標題與一個項目清單，但 script 標籤整段消失，不會執行、也不會以文字形式出現，因為 DOMPurify 會在渲染前移除不安全的元素與屬性。',
+            en: 'Paste `# Title`, then a line with `<script>alert(1)</script>`, then a line with `- item one` on the left. The right-side preview shows an h1 heading and a bullet list, but the entire script tag disappears — it neither executes nor appears as visible text, because DOMPurify strips unsafe elements and attributes before rendering.',
+          },
+          {
+            zh: '每次在輸入框打字都會即時重新渲染（監聽 input 事件），沒有儲存草稿的功能；重新整理或關閉分頁後，輸入的內容會完全消失，沒有自動儲存或還原機制。',
+            en: 'The preview re-renders on every keystroke because it listens for the input event, and there is no draft-saving feature. Refreshing or closing the tab discards everything typed, with no autosave or recovery.',
+          },
+        ],
+        items: [
+          { zh: '驗證方法一：按「複製 HTML」把清理後的內容貼到純文字編輯器，確認裡面沒有 <script>、onclick 等可執行片段。', en: 'Verification method one: click Copy HTML, paste the sanitized output into a plain-text editor, and confirm there is no <script>, onclick, or other executable fragment left.' },
+          { zh: '驗證方法二：下載 HTML 後在瀏覽器開啟獨立檔案，比對排版與左側原始 Markdown 的標題層級、清單與程式碼區塊是否一致。', en: 'Verification method two: download the HTML, open the standalone file in a browser, and compare its heading levels, lists, and code blocks against the original Markdown on the left.' },
+        ],
+      },
+      {
+        heading: { zh: '連結行為與比較：什麼時候該用繪圖板而不是預覽器', en: 'Link behavior, and when a drawing tool fits better than a Markdown preview' },
+        paragraphs: [
+          {
+            zh: '預覽區塊裡的連結是不能點擊的：程式碼會攔截預覽內 <a> 標籤的點擊事件並呼叫 preventDefault()，所以貼上連結後想確認網址是否正確，必須用滑鼠懸停查看狀態列，或直接檢視左側原始 Markdown 文字，而不是在預覽中點下去。',
+            en: 'Links inside the preview are not clickable: the script intercepts click events on any <a> tag in the preview and calls preventDefault(). To check whether a pasted link is correct, hover to see the status-bar URL or look at the raw Markdown on the left instead of clicking inside the preview.',
+          },
+          {
+            zh: '如果你需要的是手繪草圖、簽名或流程示意圖而不是格式化文字，這個工具幫不上忙；本站的線上繪圖板可以手繪並匯出 PNG，流程圖製作工具則專門處理有方向箭頭的步驟圖，兩者都不會解析 Markdown 語法。',
+            en: 'If what you actually need is a freehand sketch, a signature, or a flow diagram rather than formatted text, this tool will not help. This site\'s Online Sketchpad supports freehand drawing with PNG export, and Flowchart Maker is built for directional step diagrams; neither one parses Markdown syntax.',
+          },
+        ],
+      },
     ],
   ),
   'jpg-to-webp': localize(
@@ -152,6 +333,34 @@ export const toolContentEnhancements: Record<string, Record<Locale, Enhancement>
       { zh: '工具不會修改頁面內容、方向、裁切範圍或檔案壓縮。', en: 'The tool changes page order only; it does not rotate, crop, edit, or compress page content.' },
       { zh: '重要文件下載後應重新開啟驗證，再取代原始檔。', en: 'Reopen and verify important output before replacing the original document.' },
     ],
+    [
+      {
+        heading: { zh: '實測範例：把第 3 頁移到最前面', en: 'Worked example: move page 3 to the front' },
+        paragraphs: [
+          {
+            zh: '上傳一份 5 頁 PDF 後，頁面清單會依原始順序列出「第 1 頁」到「第 5 頁」，每一列只有上移與下移兩個按鈕，沒有拖曳、也沒有直接輸入目標位置的欄位。要把第 3 頁移到最前面，需要連續按 2 次上移；清單第一列的上移按鈕、最後一列的下移按鈕會被停用，避免移出範圍。',
+            en: 'After uploading a 5-page PDF, the page list shows "Page 1" through "Page 5" in their original order. Each row has only an up and a down button — no drag-and-drop, and no field to jump straight to a target position. Moving page 3 to the front takes 2 clicks of the up button; the up button on the first row and the down button on the last row are disabled so a page cannot move out of range.',
+          },
+          {
+            zh: '下載的檔案固定命名為 reordered.pdf，不會沿用原始檔名（旋轉 PDF 工具則會在原檔名後加上 -rotated），如果同時處理多份文件，下載後要自行改檔名以免互相覆蓋。',
+            en: 'The downloaded file is always named reordered.pdf; it does not reuse the original filename (the Rotate PDF tool, by contrast, appends -rotated to the source name). If you are reordering several documents in the same session, rename each download yourself to avoid one overwriting another.',
+          },
+        ],
+      },
+      {
+        heading: { zh: '檔案限制、載入失敗的行為，以及該選哪個 PDF 工具', en: 'File limits, what happens when loading fails, and which PDF tool to use' },
+        paragraphs: [
+          {
+            zh: '程式碼裡寫死 40MB 的檔案大小上限（超過會顯示錯誤並中止），這是這一批 PDF 工具中對檔案大小最寬鬆的一個：PDF 轉圖片限制在 25MB，PDF 旋轉則完全沒有檔案大小檢查。加密或需要密碼開啟的 PDF 在讀取階段就會失敗，顯示「無法讀取 PDF」，不會進到頁面清單。',
+            en: 'A 40MB file-size ceiling is hard-coded in the script (going over it shows an error and stops), which is the most generous limit among this batch of PDF tools: PDF to Image caps at 25MB, while Rotate PDF has no file-size check at all. An encrypted or password-protected PDF fails at the loading step with "The PDF could not be loaded" and never reaches the page list.',
+          },
+          {
+            zh: '這個工具只搬動整頁順序，完全不碰頁面內容；如果同時還想旋轉方向錯誤的頁面，要另外用 PDF 旋轉工具處理，兩個工具不會互相呼叫。想確認結果正確，下載後重新打開 PDF，對照頁首文字或頁碼浮水印，確認移動後的順序符合預期，而不是只看檔案總頁數有沒有變。',
+            en: 'This tool only moves whole pages around and never touches page content. If some pages also need rotating, use the Rotate PDF tool separately; the two tools do not call each other. To confirm correctness, reopen the downloaded PDF and check header text or a page-number watermark against the expected order, rather than just checking that the total page count is unchanged.',
+          },
+        ],
+      },
+    ],
   ),
   'pdf-to-image': localize(
     [
@@ -167,6 +376,34 @@ export const toolContentEnhancements: Record<string, Record<Locale, Enhancement>
       { zh: '一次最多 20 頁，超大頁面或高倍率可能超出手機記憶體。', en: 'A maximum of 20 pages is supported, and large pages at high scale may exceed mobile memory.' },
       { zh: '輸出圖片不保留可搜尋文字、表單、連結、書籤或輔助功能標記。', en: 'Image output does not preserve searchable text, forms, links, bookmarks, or accessibility tags.' },
       { zh: 'PDF 內嵌色彩與字型的渲染結果可能因瀏覽器而略有不同。', en: 'Embedded fonts and color profiles can render slightly differently across browsers.' },
+    ],
+    [
+      {
+        heading: { zh: '實測範例：一份 8 頁 PDF 在 1.5× 倍率下的輸出', en: 'Worked example: an 8-page PDF rendered at 1.5x scale' },
+        paragraphs: [
+          {
+            zh: '上傳一份 8 頁、A4 尺寸的 PDF，格式選 PNG、倍率選 1.5×，狀態文字會依序顯示「正在處理第 1/8 頁…」到「正在處理第 8/8 頁…」，每處理完一頁就會多出一張縮圖，完成後改顯示「全部頁面處理完成」；每張縮圖下面都有獨立的下載連結，檔名固定是 page-1.png、page-2.png 這種格式，需要合併使用時要自己依序重新命名。',
+            en: 'Upload an 8-page A4 PDF, choose PNG format and 1.5x scale. The status text updates in order from "Processing page 1 of 8…" to "Processing page 8 of 8…", adding one thumbnail per completed page, then switches to "All pages are ready." Each thumbnail has its own download link with a fixed filename pattern like page-1.png, page-2.png, so renaming them in sequence is up to you if you need to combine the files.',
+          },
+          {
+            zh: '每頁像素上限是寬乘高 1,600 萬像素，一般 A4 或 Letter 文件即使放大到 2× 也遠低於這個門檻（大約 194 萬像素），只有海報尺寸或建築圖這類非常大的頁面才會觸發；JPG 品質固定為 0.9，畫面上沒有可調整的品質滑桿。',
+            en: 'Each page has a 16-million-pixel cap on width times height. A typical A4 or Letter page stays far under that limit even at 2x scale (about 1.94 million pixels), so only very large formats such as posters or architectural drawings tend to trigger it. JPG quality is fixed at 0.9, and there is no adjustable quality slider in the interface.',
+          },
+        ],
+      },
+      {
+        heading: { zh: '超過頁數上限時的行為，以及如何驗證輸出張數', en: 'What happens past the page limit, and how to verify the output count' },
+        paragraphs: [
+          {
+            zh: '如果 PDF 超過 20 頁，工具會在讀完頁數之後、開始渲染之前就丟出「一次最多處理 20 頁」的錯誤並停止，不會先渲染前 20 頁；但如果是在渲染過程中才超出單頁 1,600 萬像素的限制，已經完成的那幾張縮圖會保留在畫面上，只有卡住的那一頁之後會中止，等於是部分成功的狀態，此時應該先下載已完成的頁面，再把過大的原始頁面另外處理。',
+            en: 'If the PDF has more than 20 pages, the tool throws "A maximum of 20 pages can be processed at once" right after reading the page count and before rendering starts, rather than rendering the first 20 anyway. But if the 16-million-pixel cap is hit partway through rendering, the thumbnails already generated stay on screen and only the run past the oversized page stops — a partial-success state. In that case, download the pages already produced first, then deal with the oversized source page separately.',
+          },
+          {
+            zh: '驗證輸出最簡單的方法：比對畫面上產生的縮圖張數與原始 PDF 的總頁數是否一致，再挑一兩張圖片放大檢查文字是否清晰可讀；如果最終用途是嵌入簡報，需要在目標簡報軟體裡預覽實際顯示大小，而不是只看瀏覽器裡的縮圖。',
+            en: 'The simplest way to verify the output is to compare the number of thumbnails against the original PDF page count, then zoom into one or two images to check that text stays legible. If the images are going into a slide deck, preview them at their real display size inside the presentation software rather than judging only from the browser thumbnails.',
+          },
+        ],
+      },
     ],
   ),
   'pdf-compressor': localize(
@@ -295,6 +532,314 @@ export const toolContentEnhancements: Record<string, Record<Locale, Enhancement>
       { zh: '刪除所有空白行會合併段落視覺間距，但不會合併非空白文字行。', en: 'Removing every blank line changes paragraph spacing but does not join adjacent non-empty lines.' },
       { zh: '只含空格或 Tab 的行是否視為空白，取決於所選設定。', en: 'Whether whitespace-only lines count as blank depends on the selected option.' },
       { zh: '工具不會修復 PDF 斷行、連字號或欄位順序等其他複製問題。', en: 'The tool does not repair PDF line wrapping, hyphenation, column order, or other extraction problems.' },
+    ],
+  ),
+  'rotate-pdf': localize(
+    [
+      { zh: '需要修正掃描方向的行政與文件處理人員', en: 'Administrators and document handlers fixing scan orientation' },
+      { zh: '只想調整部分頁面方向的辦公室使用者', en: 'Office users who only need to rotate a subset of pages' },
+      { zh: '在本機處理合約與私人文件的專業人員', en: 'Professionals handling contracts and private documents locally' },
+    ],
+    [
+      { title: { zh: '修正整批橫向掃描頁', en: 'Fix a batch of sideways-scanned pages' }, description: { zh: '掃描機吃紙方向錯誤時，整份文件常常全部轉了 90 度；選擇「全部頁面」加上對應角度即可一次修正，下載後重新開啟確認方向正確。', en: 'When a scanner feeds paper in the wrong orientation, an entire document often ends up rotated 90 degrees. Choose "All pages" with the matching angle to fix it in one pass, then reopen the download to confirm the orientation.' } },
+      { title: { zh: '只轉正簽名頁', en: 'Rotate only the signature page' }, description: { zh: '合約掃描件裡通常只有簽名頁方向不同，用「指定頁面」輸入該頁頁碼並選 180 度，其餘頁面維持原狀，不需要整份重新掃描。', en: 'In a scanned contract, usually only the signature page is oriented differently. Enter that page number under "Selected pages" and choose 180 degrees, leaving the rest of the document untouched instead of rescanning everything.' } },
+    ],
+    [
+      { zh: '這個工具在程式碼裡沒有寫死檔案大小上限，跟另外兩個 PDF 工具（重新排序 40MB、轉圖片 25MB）不同。', en: 'This tool has no hard-coded file-size limit in the script, unlike the other two PDF tools here (Page Reorder at 40MB, PDF to Image at 25MB).' },
+      { zh: '旋轉角度會疊加在頁面原本的角度上，不是直接取代成你選的角度。', en: 'The chosen angle is added to the page\'s existing rotation, not used to replace it outright.' },
+      { zh: '頁碼範圍如果超出總頁數，會直接顯示錯誤並中止旋轉，不會自動修剪成有效範圍。', en: 'A page range that exceeds the total page count triggers an error and stops the rotation; it is not silently trimmed to the valid range.' },
+    ],
+    [
+      {
+        heading: { zh: '實測範例：指定頁面 2, 5-7 與超出範圍的輸入', en: 'Worked example: selected pages 2, 5-7 versus an out-of-range input' },
+        paragraphs: [
+          {
+            zh: '上傳一份 10 頁 PDF 並選「指定頁面」，輸入 2, 5-7 會旋轉第 2、5、6、7 頁共 4 頁；如果改輸入 2, 5-12（總頁數只有 10），工具不會自動修剪成 2, 5-10，而是直接顯示「頁碼範圍格式無效，請使用 2, 5-7 這類格式。」並整份中止，不會旋轉任何一頁。',
+            en: 'Upload a 10-page PDF and choose "Selected pages," then enter 2, 5-7 to rotate pages 2, 5, 6, and 7 — 4 pages in total. Enter 2, 5-12 instead (with only 10 total pages) and the tool does not trim it to 2, 5-10. It shows "Invalid page range. Use a format like 2, 5-7." and stops without rotating anything.',
+          },
+          {
+            zh: '旋轉角度是疊加、不是取代：如果某一頁在 PDF 內部已經帶有 90 度的旋轉標記，再對它套用「90 度」，該頁最終角度會變成 180 度，而不是回到 0 度。懷疑某頁方向已經被多次旋轉搞混時，先用「讀取頁數」確認檔案能正常載入，再從小角度開始逐步測試。',
+            en: 'The rotation angle stacks rather than replaces: if a page already carries a 90-degree rotation flag inside the PDF and you apply "90 degrees" to it, that page ends up at 180 degrees, not back at 0. If a page\'s orientation seems confused from repeated rotations, first click "Load page count" to confirm the file loads correctly, then test with a small angle before committing.',
+          },
+        ],
+        items: [
+          { zh: '輸入 2, 5-7（總頁數 10）→ 旋轉第 2、5、6、7 頁。', en: 'Enter 2, 5-7 with 10 total pages -> pages 2, 5, 6, and 7 rotate.' },
+          { zh: '輸入 2, 5-12（總頁數 10）→ 顯示「頁碼範圍格式無效」，不執行旋轉。', en: 'Enter 2, 5-12 with 10 total pages -> shows "Invalid page range," nothing rotates.' },
+        ],
+      },
+      {
+        heading: { zh: '沒有檔案大小上限的代價，以及如何驗證與搭配其他工具', en: 'The tradeoff of no file-size cap, and how to verify results or pair it with other tools' },
+        paragraphs: [
+          {
+            zh: '沒有寫死的檔案大小檢查，代表能處理多大的 PDF 完全取決於瀏覽器分頁當下可用的記憶體；非常大的檔案可能在「讀取頁數」階段就讓分頁變慢，沒有明確的錯誤提示可循，建議先用縮小過或分割過的檔案測試流程是否正常。',
+            en: 'Because there is no hard-coded size check, how large a PDF this tool can handle depends entirely on the memory available to the browser tab at that moment. A very large file may just make the tab slow at the "Load page count" step with no clear error to point to, so testing with a smaller or already-split file first is safer.',
+          },
+          {
+            zh: '驗證方法：下載後重新打開旋轉後的 PDF，逐頁檢查方向錯誤的頁面是否已經轉正，同時確認原本方向正確的頁面沒有被誤轉——因為「全部頁面」選項會套用到每一頁，用在只有部分頁面需要旋轉的文件上，會連帶把其他頁面也轉歪。',
+            en: 'To verify, reopen the rotated PDF and check page by page that the previously misoriented pages are now upright, while confirming pages that were already correct were not accidentally rotated too — the "All pages" option applies to every page, so using it on a document that only needs a few pages fixed will also rotate the rest incorrectly.',
+          },
+          {
+            zh: '這個工具只改變頁面顯示角度，不會重新排列頁面順序；如果同一份文件既要調整順序又要修正方向，需要另外用本站的 PDF 頁面重新排序工具分兩步驟處理，兩者是各自獨立的下載，不會互相呼叫。',
+            en: 'This tool only changes the display angle of pages; it does not reorder them. If the same document needs both a new page order and a rotation fix, use this site\'s PDF Page Reorder tool as a separate step — the two tools produce independent downloads and do not call each other.',
+          },
+        ],
+      },
+    ],
+  ),
+  sketchpad: localize(
+    [
+      { zh: '需要快速手繪草圖、簽名或批註的使用者', en: 'Users who need a quick freehand sketch, signature, or annotation' },
+      { zh: '製作課堂白板示意圖的老師', en: 'Teachers creating classroom whiteboard-style diagrams' },
+      { zh: '用手機或平板隨手記錄想法的使用者', en: 'Users capturing quick ideas from a phone or tablet' },
+    ],
+    [
+      { title: { zh: '手繪課堂示意圖', en: 'Sketch a classroom diagram by hand' }, description: { zh: '用不同顏色的筆刷畫出簡單的座位圖或概念關係，畫錯時用復原移除上一筆，完成後匯出 PNG 貼進投影片；畫布內部固定 960×560 像素，不論螢幕多寬，匯出的圖片尺寸都一樣。', en: 'Use different brush colors to sketch a simple seating chart or concept diagram, undo the last stroke if it goes wrong, then export a PNG for a slide. The canvas is internally fixed at 960 by 560 pixels, so the exported image is the same size no matter how wide the screen is.' } },
+      { title: { zh: '手機上快速記錄圖形', en: 'Capture a quick shape from a phone' }, description: { zh: '觸控座標會依目前畫布顯示寬度換算回固定的內部解析度，所以在小螢幕手機上用手指畫的線條，換算後仍對應到同一組座標，不會因裝置不同而跑位或變形。', en: 'Touch coordinates are converted back to the fixed internal resolution based on the canvas\'s current display width, so a line drawn with a finger on a small phone screen still maps to the same coordinate set and does not shift or distort across devices.' } },
+    ],
+    [
+      { zh: '復原歷史最多保留 30 筆，超過之後最舊的筆跡就無法再復原，只能用「清除」重畫。', en: 'Undo history keeps at most 30 steps; beyond that, the oldest strokes can no longer be undone and only "Clear" starts over.' },
+      { zh: '橡皮擦是用白色覆蓋筆跡，不是清除成透明；匯出的 PNG 一定帶不透明白底。', en: 'The eraser paints white over strokes rather than clearing to transparency; the exported PNG always has an opaque white background.' },
+      { zh: '這個工具沒有物件化的節點或圖層，畫完就是單純的像素圖，無法事後個別移動某一筆。', en: 'There are no objects or layers here — once drawn, it is a flat pixel image, and no individual stroke can be moved afterward.' },
+    ],
+    [
+      {
+        heading: { zh: '實測範例：復原上限與筆刷粗細範圍', en: 'Worked example: the undo limit and brush size range' },
+        paragraphs: [
+          {
+            zh: '畫布內部解析度固定是 960×560 像素，不管螢幕顯示多寬，滑鼠或手指座標都會依目前顯示寬度換算回這個固定尺寸，所以手機小螢幕上畫出的線條，跟桌機大螢幕上畫出的線條會對應到同一組內部座標，匯出的 PNG 永遠是 960×560。',
+            en: 'The canvas is internally fixed at 960 by 560 pixels. Regardless of how wide it displays on screen, mouse or touch coordinates are converted back to this fixed size, so a line drawn on a small phone screen maps to the same internal coordinates as one drawn on a large desktop screen, and the exported PNG is always 960 by 560.',
+          },
+          {
+            zh: '復原功能最多記住 30 個步驟：每畫完一筆，工具就把當下整張畫布存成一張 PNG 快照放進歷史紀錄；超過 30 筆之後，最舊的快照會被丟棄，也就是連續按「復原」超過 30 次之後，最早期的筆跡就無法再復原。',
+            en: 'Undo remembers at most 30 steps: after every completed stroke, the tool saves the whole canvas as a PNG snapshot in its history. Past 30 snapshots, the oldest one is dropped, meaning clicking "Undo" more than 30 times in a row can no longer bring back the earliest strokes.',
+          },
+        ],
+        items: [
+          { zh: '筆刷粗細滑桿範圍是 1 到 48 像素，數值旁邊會即時顯示目前粗細，例如「8 px」。', en: 'The brush-size slider ranges from 1 to 48 pixels, with a live readout next to it such as "8 px".' },
+          { zh: '復原機制以「最近 30 個畫布快照」為單位，不是以「最近 30 個滑鼠動作」為單位。', en: 'Undo tracks the "most recent 30 canvas snapshots," not the "most recent 30 pointer movements."' },
+        ],
+      },
+      {
+        heading: { zh: '匯出前的驗證方法，以及跟流程圖工具的分工', en: 'How to verify before exporting, and the split with Flowchart Maker' },
+        paragraphs: [
+          {
+            zh: '匯出前的驗證方法：按「匯出 PNG」下載後重新開啟圖片，確認筆跡位置、顏色與粗細跟畫面上看到的一致；如果之後想把圖案疊在有顏色的背景上，要知道這個工具不會輸出透明背景，需要另外用去背工具處理。',
+            en: 'To verify before exporting, click "Export PNG," reopen the downloaded image, and confirm the stroke position, color, and thickness match what was on screen. If the drawing needs to sit on a colored background later, note that this tool cannot output a transparent background, so a separate background-removal step is needed.',
+          },
+          {
+            zh: '如果你要畫的是有方向箭頭、可雙擊編輯文字的流程圖，而不是自由手繪，本站的流程圖製作工具提供矩形與菱形節點並支援拖曳；兩者都匯出 PNG，但繪圖板的筆跡沒有物件化，畫完就是純像素，無法之後單獨修改某一筆的文字或位置。',
+            en: 'If what is needed is a diagram with directional arrows and double-click-editable text rather than freehand drawing, this site\'s Flowchart Maker offers draggable rectangle and diamond nodes. Both export PNG, but sketchpad strokes are not objects — once drawn, they are plain pixels with no way to edit the text or position of a single stroke afterward.',
+          },
+        ],
+      },
+    ],
+  ),
+  flowchart: localize(
+    [
+      { zh: '需要整理審核流程或作業步驟的職員', en: 'Staff mapping an approval process or task workflow' },
+      { zh: '製作課堂決策樹或流程示意圖的老師', en: 'Teachers building a classroom decision tree or process diagram' },
+      { zh: '想快速畫出是否判斷邏輯的產品或支援人員', en: 'Product or support staff sketching yes/no decision logic' },
+    ],
+    [
+      { title: { zh: '整理審核流程', en: 'Map an approval workflow' }, description: { zh: '用流程矩形代表每個處理步驟、決策菱形代表是否判斷，畫完後用連線模式依序接上箭頭；節點上限是 20 個，複雜流程要先拆成幾張較小的圖。', en: 'Use process rectangles for each handling step and decision diamonds for yes/no checks, then switch to Connect mode to link them with arrows in order. The node limit is 20, so a complex process needs to be split into a few smaller diagrams.' } },
+      { title: { zh: '畫客服應答的分支邏輯', en: 'Diagram support-ticket branching logic' }, description: { zh: '用決策菱形列出常見的分岔問題，雙擊節點編輯文字，完成後匯出 PNG 放進內部知識庫；匯出時會自動隱藏編輯用的選取外框，畫面比較乾淨。', en: 'Use decision diamonds for common branch points, double-click a node to edit its text, then export a PNG for an internal knowledge base. Export automatically hides the selection outline used while editing, keeping the image clean.' } },
+    ],
+    [
+      { zh: '節點上限是 20 個；達到上限後再按新增，畫布不會新增節點，只會更新狀態文字，不會跳出錯誤視窗。', en: 'The node limit is 20; clicking add again past that point does not create a node — it only updates the status text, with no error dialog.' },
+      { zh: '兩個節點之間可以同時存在方向相反的兩條箭頭，畫面上會幾乎完全重疊，難以分辨。', en: 'Two nodes can have arrows pointing in both directions at once, and they render almost exactly on top of each other, making them hard to tell apart.' },
+      { zh: '節點文字用瀏覽器原生的輸入提示框編輯，不是直接在畫布上打字。', en: 'Node text is edited through the browser\'s native prompt dialog, not by typing directly on the canvas.' },
+    ],
+    [
+      {
+        heading: { zh: '實測範例：第 21 個節點與雙向箭頭', en: 'Worked example: the 21st node and a two-way arrow' },
+        paragraphs: [
+          {
+            zh: '頁面載入時已經內建 2 個節點（1 個流程、1 個決策）並用箭頭連好，方便直接體驗；持續按「新增流程」到第 21 個節點時，畫布不會新增節點，狀態列文字會改成「最多可建立 20 個節點。」，不會跳出錯誤訊息框，很容易被忽略——如果按了新增卻沒有新節點出現，先看狀態列文字，而不是重新整理頁面重來。',
+            en: 'The page loads with 2 nodes already in place (1 process, 1 decision) connected by an arrow, ready to try immediately. Clicking "Add process" repeatedly up to a 21st node does not add anything — the status line changes to "This canvas supports up to 20 nodes." with no error dialog, so it is easy to miss. If clicking add produces no new node, check the status line before reloading the page.',
+          },
+          {
+            zh: '從節點 A 連到節點 B 之後，切到連線模式再從 B 連回 A，工具允許建立第二條反方向箭頭（狀態列顯示「已選取箭頭」而不是拒絕），但兩條箭頭畫在同一條線段上，視覺上幾乎完全重疊；需要表達雙向關係時，建議直接在節點文字裡註明方向，而不是依賴兩條重疊的箭頭。',
+            en: 'After connecting node A to node B, switching to Connect mode and linking B back to A is allowed — the status line shows "Selected arrow" rather than rejecting it — but both arrows are drawn along the same line segment and end up nearly on top of each other. To express a two-way relationship, note the direction directly in the node text instead of relying on two overlapping arrows.',
+          },
+        ],
+        items: [
+          { zh: '節點文字用瀏覽器原生的「輸入提示框」（window.prompt）編輯，雙擊節點會跳出這個提示框。', en: 'Node text is edited through the browser\'s native prompt dialog; double-clicking a node opens it.' },
+          { zh: '匯出 PNG 時會暫時隱藏目前選取的橘色外框與虛線連線提示，輸出圖片不含編輯用的視覺標記。', en: 'Exporting a PNG temporarily hides the orange selection outline and the dashed connect-mode indicator, so the output has no editing markers.' },
+        ],
+      },
+      {
+        heading: { zh: '只有兩種節點形狀，以及跟繪圖板的分工', en: 'Only two node shapes, and the split with Sketchpad' },
+        paragraphs: [
+          {
+            zh: '這個工具只提供矩形（流程）與菱形（決策）兩種節點，沒有橢圓形的起訖點、沒有泳道，也沒有純文字標籤節點；如果流程需要區分「開始/結束」跟一般步驟，目前只能靠文字內容區分，不能靠形狀區分。',
+            en: 'The tool offers only two node shapes: rectangles for processes and diamonds for decisions. There is no oval start/end shape, no swimlanes, and no plain text-label node. If a process needs to distinguish "start/end" from a regular step, that has to happen through wording, not shape.',
+          },
+          {
+            zh: '驗證方法：畫完後先用「選取/移動」模式逐一點擊每個節點確認文字正確，再匯出 PNG 並放大檢查箭頭方向，尤其節點彼此靠得很近時，箭頭的起點與終點容易讓人誤判方向。',
+            en: 'To verify, use "Select/Move" mode to click through every node and confirm its text, then export the PNG and zoom in to check arrow direction — especially when nodes sit close together, where the arrow start and end points are easy to misread.',
+          },
+          {
+            zh: '如果需要的是自由手繪的草圖或簽名，而不是有方向的步驟圖，改用本站的線上繪圖板；兩個工具都匯出 PNG，但繪圖板沒有節點與箭頭的概念，畫完就是單純的筆跡像素，沒有可雙擊編輯的文字。',
+            en: 'If what is needed is a freehand sketch or signature rather than a directional step diagram, use this site\'s Online Sketchpad instead. Both tools export PNG, but sketchpad has no concept of nodes or arrows — once drawn, it is plain pixel strokes with no double-click-editable text.',
+          },
+        ],
+      },
+    ],
+  ),
+  'image-to-base64': localize(
+    [
+      { zh: '需要內嵌小圖示到 HTML 或 CSS 的前端開發者', en: 'Front-end developers embedding small icons in HTML or CSS' },
+      { zh: '沒有圖片主機、想直接把圖片放進網頁的使用者', en: 'Users without image hosting who need to embed an image directly' },
+      { zh: '準備 email 範本或設定檔內嵌圖片的行銷與工程人員', en: 'Marketing and engineering staff embedding images in email templates or config files' },
+    ],
+    [
+      { title: { zh: '把 Logo 內嵌進 CSS', en: 'Embed a logo directly in CSS' }, description: { zh: '上傳一張幾十 KB 的 PNG Logo，按「複製為 CSS」直接取得 background-image 那一整行，貼進樣式表就能省去一個額外的圖片請求；上傳前先確認檔案在 5MB 以內。', en: 'Upload a PNG logo of a few dozen KB, click "Copy as CSS" to get the full background-image line, and paste it into a stylesheet to remove one extra image request. Confirm the file is under 5MB before uploading.' } },
+      { title: { zh: '在 email 範本裡內嵌小圖', en: 'Embed a small image in an email template' }, description: { zh: '部分 email 系統不方便外部圖片連結，把小圖示轉成 Base64 資料 URI 直接寫進 HTML；但字串會讓範本原始碼變長很多，只適合小尺寸圖示。', en: 'Some email systems make external image links inconvenient, so a small icon can be converted to a Base64 data URI and written directly into the HTML. The string makes the template source much longer, so this only suits small icons.' } },
+    ],
+    [
+      { zh: '檔案大小上限精確寫死在程式碼是 5×1024×1024 位元組（約 5MB），超過會在選取當下就被拒絕。', en: 'The file-size ceiling is hard-coded at exactly 5 x 1024 x 1024 bytes (about 5MB), and larger files are rejected the moment they are selected.' },
+      { zh: '這個工具不會轉換圖片格式，輸出的 MIME 類型完全跟著上傳的原始檔案。', en: 'The tool does not convert image formats; the output MIME type always matches the original uploaded file.' },
+      { zh: 'Base64 字串通常比原始檔案大約三分之一，大型相片不適合用這種方式內嵌。', en: 'The Base64 string is typically about a third larger than the original file, so large photos are not a good fit for this kind of embedding.' },
+    ],
+    [
+      {
+        heading: { zh: '實測範例：小圖示的輸出大小與資料 URI 格式', en: 'Worked example: output size and data URI format for a small icon' },
+        paragraphs: [
+          {
+            zh: '上傳一張約 20KB 的 PNG 小圖示後，畫面上的「Base64 長度」欄位會顯示字元數，通常會落在原始位元組數的 4/3 倍左右；可以直接拿這個數字跟「原始檔案大小」欄位比較，實測驗證大約 33% 的膨脹率是否成立。',
+            en: 'After uploading a roughly 20KB PNG icon, the "Base64 length" field shows a character count that typically lands around 4/3 of the original byte size. Compare it directly with the "Original file size" field to confirm whether the roughly 33% expansion actually holds.',
+          },
+          {
+            zh: '輸出的資料 URI 開頭固定是 data:image/png;base64,（或依原始檔案類型顯示 image/jpeg、image/webp 等），這個工具不會幫你轉換圖片格式，如果需要先轉檔再取得 Base64，要先用本站的圖片格式轉換工具處理過一次。',
+            en: 'The output data URI always starts with data:image/png;base64, (or image/jpeg, image/webp, and so on, matching the source file). The tool does not convert formats, so if a format change is needed first, run the file through this site\'s image format converter before coming here.',
+          },
+        ],
+        items: [
+          { zh: '按「複製」拿到完整的 data:image/...;base64,... 字串，適合直接貼進 img 標籤的 src 屬性。', en: 'Click "Copy" for the full data:image/...;base64,... string, ready to paste into an img tag\'s src attribute.' },
+          { zh: '按「複製為 CSS」拿到 background-image: url("data:image/...;base64,..."); 這一整行，可以直接貼進 CSS 檔案。', en: 'Click "Copy as CSS" for the full line background-image: url("data:image/...;base64,..."); ready to paste into a CSS file.' },
+        ],
+      },
+      {
+        heading: { zh: '超過 5MB 時的行為，以及如何驗證輸出可用', en: 'What happens past 5MB, and how to verify the output actually works' },
+        paragraphs: [
+          {
+            zh: '超過 5MB 的檔案會在選取當下立即被拒絕，顯示「圖片過大（上限約 5MB），請選擇較小的檔案。」，不會嘗試部分讀取或先壓縮再轉換，也不會呼叫伺服器處理，所有動作都在瀏覽器分頁內完成。',
+            en: 'A file over 5MB is rejected the instant it is selected, showing "The image is too large (about 5MB max); please choose a smaller file." It does not attempt a partial read or compress-then-convert; nothing is sent to a server, and everything happens inside the browser tab.',
+          },
+          {
+            zh: '驗證輸出是否可用：把「複製為 CSS」的結果貼進一個測試用的 HTML 檔案的 style 屬性，在瀏覽器打開確認圖片正常顯示；也可以把完整字串貼進網址列的新分頁直接預覽，確認字串沒有被截斷。',
+            en: 'To verify the output works, paste the "Copy as CSS" result into a test HTML file\'s style attribute and open it in a browser to confirm the image displays. You can also paste the full string into a new browser tab\'s address bar to preview it directly and confirm nothing was truncated.',
+          },
+          {
+            zh: '這個工具適合幾 KB 到幾百 KB 的小圖示、Logo 或簡單插圖；大型相片轉成 Base64 之後字串長度會非常長，內嵌進 CSS 或 HTML 反而讓檔案難以維護，這種情況應該改用一般的圖片檔案搭配路徑引用，而不是內嵌。',
+            en: 'This tool suits small icons, logos, or simple graphics in the range of a few KB to a few hundred KB. A large photo converted to Base64 produces an extremely long string, and embedding that in CSS or HTML makes the file hard to maintain — a regular image file referenced by path is the better choice in that case.',
+          },
+        ],
+      },
+    ],
+  ),
+  'pie-chart-maker': localize(
+    [
+      { zh: '需要呈現預算或支出占比的職員', en: 'Staff presenting budget or spending shares' },
+      { zh: '整理問卷選項比例的分析人員', en: 'Analysts summarizing survey option proportions' },
+      { zh: '製作教學或報告用占比圖的老師與學生', en: 'Teachers and students making proportion charts for reports' },
+    ],
+    [
+      { title: { zh: '呈現支出分類占比', en: 'Show a spending breakdown by category' }, description: { zh: '用內建的四筆種子資料（居住、飲食、交通、娛樂）示範，改成自己的類別與數值後，圖表與圖例上的百分比會即時更新；類別建議控制在八項以內，避免顏色重複。', en: 'Start from the four built-in seed rows (housing, food, transport, leisure), then replace them with your own categories and values; the chart and legend percentages update instantly. Keep categories to about eight or fewer to avoid repeated colors.' } },
+      { title: { zh: '整理問卷選項比例', en: 'Summarize survey option shares' }, description: { zh: '把每個選項的票數當成一列輸入，圖表會自動算出各選項占全部票數的百分比並畫出圖例，適合快速做成報告用的視覺化圖表。', en: 'Enter each option\'s vote count as a row; the chart automatically calculates each option\'s share of the total and draws a legend, useful for a quick visualization in a report.' } },
+    ],
+    [
+      { zh: '圖表標題欄位有 60 字元的長度上限，超過的部分無法輸入。', en: 'The chart title field has a 60-character limit; anything beyond that cannot be typed.' },
+      { zh: '色盤固定循環使用 8 種顏色，輸入超過 8 筆資料時，顏色會重複，只能靠圖例文字分辨。', en: 'The color palette cycles through 8 fixed colors; entering more than 8 rows repeats colors, leaving legend text as the only way to tell them apart.' },
+      { zh: '標籤超過 14 個字元時，圖例上的顯示文字會被截斷並加上刪節號，輸入欄位裡的完整文字則不受影響。', en: 'A label longer than 14 characters is truncated with an ellipsis on the legend display, while the full text in the input field is unaffected.' },
+    ],
+    [
+      {
+        heading: { zh: '實測範例：4 筆種子資料的百分比與截斷規則', en: 'Worked example: percentages from the 4 seed rows, and the truncation rule' },
+        paragraphs: [
+          {
+            zh: '頁面預設帶入「居住 40、飲食 25、交通 20、娛樂 15」四筆種子資料，總和為 100，因此各項百分比剛好等於數值本身（40%、25%、20%、15%）；如果把其中一筆改成 0 但其他三筆仍大於 0，圖表仍會正常繪製，只是那一項在圓餅圖上不佔任何角度。只有「所有」數值都是 0 或空白時，才會顯示「請輸入至少一筆有效資料」的提示。',
+            en: 'The page loads with four seed rows — housing 40, food 25, transport 20, leisure 15 — summing to 100, so each percentage equals its value directly (40%, 25%, 20%, 15%). Change one row to 0 while the other three stay above 0, and the chart still renders normally; that slice simply takes up no angle in the pie. The "Enter at least one valid row" message only appears when every value is 0 or blank.',
+          },
+          {
+            zh: '標籤欄位超過 14 個字元時，圖例文字會被截斷並加上刪節號（例如很長的分類名稱可能顯示成前 13 個字加上一個「…」），完整文字仍保留在輸入欄位裡，只是畫布上的顯示被縮短；匯出 PNG 前建議先把過長的標籤縮短到 14 字以內。',
+            en: 'A label over 14 characters gets truncated with an ellipsis on the legend (for example, a long category name might show as its first 13 characters plus "…"), while the full text stays in the input field — only the canvas display is shortened. Shortening long labels to 14 characters or fewer before exporting a PNG avoids this.',
+          },
+        ],
+        items: [
+          { zh: '圖表標題欄位有 60 字元的長度上限（maxlength="60"），超過的部分無法輸入。', en: 'The chart title field has a 60-character limit (maxlength="60"); anything past that cannot be typed.' },
+          { zh: '色盤固定循環使用 8 種顏色；輸入超過 8 筆資料時，第 9 筆會重複使用第 1 筆的顏色。', en: 'The color palette cycles through 8 fixed colors; a 9th row reuses the same color as the 1st row.' },
+        ],
+      },
+      {
+        heading: { zh: '什麼時候該用圓餅圖，什麼時候改用長條圖', en: 'When a pie chart fits, and when a bar chart is the better call' },
+        paragraphs: [
+          {
+            zh: '圓餅圖工具比長條圖工具多一道檢查：只要所有數值加總為 0（例如全部留空或全部輸入 0），就不會嘗試畫出一個沒有意義的滿版圓；長條圖工具沒有這道加總檢查，即使數值全是 0 也會嘗試繪製座標軸。這代表圓餅圖比較適合「一定要看得出占比」的資料，長條圖比較能容忍暫時未填完的資料列。',
+            en: 'The pie chart tool has one extra check that the bar chart tool does not: if every value sums to 0 (all blank or all zero), it will not attempt to draw a meaningless full circle. The bar chart tool has no such total check and still tries to draw axes even when every value is 0. That makes the pie chart a better fit for data that must show clear proportions, while the bar chart tolerates rows that are still being filled in.',
+          },
+          {
+            zh: '選擇建議：類別在 2 到 6 項、彼此加總成一個有意義的「整體」時（例如預算分配、問卷選項占比），用圓餅圖比較容易一眼看出佔比；類別超過 8 項、數值之間沒有「加總為 100%」的關係，或需要比較數值大小而不是佔比（例如每月銷售額趨勢）時，改用長條圖，因為圓餅圖色盤只有 8 色，切片過多會重複顏色也難以分辨。',
+            en: 'As a rule of thumb: use the pie chart when there are 2 to 6 categories that add up to a meaningful whole, such as a budget split or survey shares, since proportions are easy to read at a glance. Switch to the bar chart when there are more than 8 categories, the values do not sum to a meaningful 100%, or the point is comparing magnitudes rather than shares, such as monthly sales trends — the pie chart\'s 8-color palette starts repeating colors once slices exceed 8, making them hard to tell apart.',
+          },
+          {
+            zh: '驗證方法：把畫面上每個扇形旁邊顯示的百分比手動加總，應該等於 100%（因四捨五入到小數點後 1 位，可能有極小誤差）；也可以另外用本站的百分比計算器，逐一算出每個數值占總和的比例，交叉核對圖例上顯示的數字。',
+            en: 'To verify, manually add up the percentage shown next to every slice; the total should equal 100% (allowing for a tiny rounding difference, since values round to one decimal place). You can also use this site\'s percentage calculator to compute each value\'s share of the total separately and cross-check it against the legend.',
+          },
+        ],
+      },
+    ],
+  ),
+  'gpa-calculator': localize(
+    [
+      { zh: '想在期末前預估 GPA 的學生', en: 'Students estimating GPA before final grades are official' },
+      { zh: '需要比較 4.3 制與 4.0 制差異的申請者', en: 'Applicants comparing results on the 4.3 and 4.0 scales' },
+      { zh: '協助整理成績試算表的老師與顧問', en: 'Teachers and advisors helping compile a grade spreadsheet' },
+    ],
+    [
+      { title: { zh: '期末前預估整體 GPA', en: 'Estimate overall GPA before finals' }, description: { zh: '把目前已知或預期的成績逐科輸入，留白學分的列會被自動忽略、不影響計算，適合在還有幾科成績未定時先抓一個大概的區間。', en: 'Enter each known or expected grade by course; a row with a blank credits field is automatically ignored and does not affect the calculation, which is useful for a rough estimate while a few grades are still pending.' } },
+      { title: { zh: '比較 4.3 制與 4.0 制結果', en: 'Compare results on the 4.3 and 4.0 scales' }, description: { zh: '同一組課程分別切換兩種制度查看差異；如果課表裡沒有任何一科拿到 A+，兩種制度算出的 GPA 會完全相同，只有出現 A+ 才會產生差異。', en: 'Switch between the two scales for the same set of courses to compare. If no course earned an A+, both scales produce the identical GPA — only an A+ grade causes them to diverge.' } },
+    ],
+    [
+      { zh: '4.3 制與 4.0 制的差異只在 A+：4.0 制把 A+ 降成跟 A 相同的 4.0，其餘等第完全一樣。', en: 'The 4.3 and 4.0 scales differ only at A+: the 4.0 scale drops A+ to the same 4.0 as a plain A, and every other grade is identical.' },
+      { zh: '學分欄位有輸入但是 0 或負數的列會被忽略，並在說明文字後加上提醒；學分留空的列則直接忽略、不特別提醒。', en: 'A row where credits are entered but are 0 or negative is ignored, with a reminder appended to the note text; a row with credits left blank is simply ignored with no extra reminder.' },
+      { zh: '這個工具只計算使用者輸入的單一組課程加權平均，不會核對任何學校的正式成績單或畢業門檻。', en: 'This tool only computes a weighted average from the courses you type in; it does not check any school\'s official transcript or graduation requirements.' },
+    ],
+    [
+      {
+        heading: { zh: '實測範例：預設 3 列資料的計算過程', en: 'Worked example: the calculation behind the 3 default rows' },
+        paragraphs: [
+          {
+            zh: '頁面載入時已經預帶 3 列範例：3 學分 A、3 學分 B+，第三列學分留空（會被忽略，不計入總學分）。在 4.3 制下，3 學分 A（4.0 績點）加 3 學分 B+（3.3 績點），總績點是 3×4.0 + 3×3.3 = 21.9，總學分是 6，GPA 是 21.9 ÷ 6 = 3.65。',
+            en: 'The page loads with 3 example rows: 3 credits at A, 3 credits at B+, and a third row with blank credits (ignored, so it does not count toward total credits). On the 4.3 scale, 3 credits at A (4.0 points) plus 3 credits at B+ (3.3 points) gives total quality points of 3x4.0 + 3x3.3 = 21.9, total credits of 6, and a GPA of 21.9 / 6 = 3.65.',
+          },
+          {
+            zh: '兩種制度只有一個地方不同：4.0 制把 A+ 的績點從 4.3 降成 4.0（跟 A 相同），A 到 F 其餘等第完全一樣。把其中一科改成 A+ 後再切換制度比較，就能直接看出這個差異只發生在有 A+ 的科目上。',
+            en: 'The two scales differ in exactly one place: the 4.0 scale drops A+ from 4.3 points down to 4.0, matching a plain A, while every other grade from A to F stays the same. Change one course to A+ and switch scales to compare, and the difference will only show up for that one course.',
+          },
+        ],
+        items: [
+          { zh: '輸入學分 3、成績 A，加上學分 3、成績 B+ → 4.3 制 GPA = 3.65。', en: 'Enter credits 3 grade A, plus credits 3 grade B+ -> 4.3-scale GPA = 3.65.' },
+          { zh: '把其中一科成績改成 A+ → 4.3 制下總績點增加 0.3 乘以該科學分，4.0 制下維持不變。', en: 'Change one course to A+ -> total quality points on the 4.3 scale rise by 0.3 times that course\'s credits, while the 4.0 scale stays unchanged.' },
+        ],
+      },
+      {
+        heading: { zh: '無效資料列的行為，以及如何用手算驗證', en: 'How invalid rows are handled, and how to verify by hand' },
+        paragraphs: [
+          {
+            zh: '學分欄位留空的列會被直接忽略、不計入任何計算，也不會出現警告；但如果學分欄位「有輸入」卻是 0 或負數，工具一樣會忽略這一列，同時在制度說明文字後面加上一句提醒，提示你檢查是不是打錯數字。',
+            en: 'A row with the credits field left blank is simply ignored and produces no warning. But a row where credits are entered as 0 or a negative number is also ignored, with a reminder line appended after the scale note to flag that a number may have been mistyped.',
+          },
+          {
+            zh: '驗證方法：挑畫面上其中一科手動反推，用「總績點 = GPA × 總學分」算出總績點，再減去其他科目的績點乘積，看剩下的數字是否等於該科成績對應的績點；一致就代表計算正確。',
+            en: 'To verify, pick one course on screen and work backward: compute total quality points as GPA times total credits, subtract the quality points from every other course, and check whether what remains matches the grade points for that one course. A match confirms the calculation is correct.',
+          },
+          {
+            zh: '這個工具算出的是「單一使用者輸入的一組課程」的加權平均，不會查詢或核對任何學校的正式成績單、學分抵免規則或畢業門檻；正式採認的 GPA 仍以學校教務系統或官方成績單為準。',
+            en: 'This tool computes a weighted average purely from the set of courses you type in. It does not look up or check any school\'s official transcript, credit-transfer rules, or graduation requirements; the officially recognized GPA still comes from the school\'s registrar system or transcript.',
+          },
+        ],
+      },
     ],
   ),
 };

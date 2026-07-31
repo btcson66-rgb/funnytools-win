@@ -40,7 +40,7 @@ export default {
       },
       {
         q: '指定頁碼範圍怎麼輸入？',
-        a: '可以輸入 2, 5-7 這種格式。頁碼從 1 開始，超出總頁數的端點會被限制在有效範圍內。',
+        a: '可以輸入 2, 5-7 這種格式。頁碼從 1 開始；如果輸入的頁碼超出目前 PDF 的總頁數，或格式不符（例如缺少數字、起始頁大於結束頁），工具會直接顯示錯誤並中止旋轉，不會自動修剪成有效範圍，需要修正後重新輸入。',
       },
       {
         q: '旋轉會覆蓋原始 PDF 嗎？',
@@ -104,7 +104,7 @@ export default {
       },
       {
         q: 'How do I enter selected pages?',
-        a: 'Use a format like 2, 5-7. Page numbers start at 1, and endpoints outside the document are clamped to valid pages.',
+        a: 'Use a format like 2, 5-7. Page numbers start at 1. If a page number is outside the current PDF\'s total page count, or the format is invalid (missing a number, or a start page after the end page), the tool shows an error and stops the rotation instead of clamping the range automatically; fix the input and try again.',
       },
       {
         q: 'Does this overwrite my original PDF?',
