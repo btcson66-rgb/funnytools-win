@@ -30,27 +30,31 @@ const sectionHeadings: Record<string, Record<Locale, { index: number; heading: s
       { index: 0, heading: '網站定位與服務範圍' },
       { index: 2, heading: '本機處理與資料原則' },
       { index: 4, heading: '內容維護與編輯標準' },
-      { index: 7, heading: '營運方式與使用界線' },
+      { index: 6, heading: '發現錯誤時的處理方式' },
+      { index: 10, heading: '廣告、分析與使用界線' },
     ],
     en: [
       { index: 0, heading: 'Purpose and service scope' },
       { index: 2, heading: 'Local processing and data principles' },
-      { index: 4, heading: 'Editorial and maintenance standards' },
-      { index: 7, heading: 'Operating model and boundaries' },
+      { index: 4, heading: 'How tools are built and checked' },
+      { index: 6, heading: 'What happens when something breaks' },
+      { index: 10, heading: 'Advertising, analytics, and where the line is' },
     ],
   },
   contact: {
     zh: [
       { index: 0, heading: '聯絡方式與處理時間' },
-      { index: 2, heading: '如何提交可重現的回報' },
-      { index: 5, heading: '敏感資料安全提醒' },
-      { index: 6, heading: '可以與無法協助的範圍' },
+      { index: 2, heading: '回報工具錯誤時該附什麼' },
+      { index: 4, heading: '建議新工具與內容修正' },
+      { index: 6, heading: 'GitHub Issues 與商業合作詢問' },
+      { index: 8, heading: '安全提醒與本站無法協助的範圍' },
     ],
     en: [
       { index: 0, heading: 'Contact channel and review time' },
-      { index: 2, heading: 'How to submit a reproducible report' },
-      { index: 5, heading: 'Sensitive-data safety' },
-      { index: 6, heading: 'What support can and cannot cover' },
+      { index: 2, heading: 'What to include when reporting a bug' },
+      { index: 4, heading: 'Suggesting a tool or requesting a content fix' },
+      { index: 6, heading: 'GitHub Issues and business inquiries' },
+      { index: 8, heading: 'Safety reminders and what support cannot do' },
     ],
   },
   privacy: {
@@ -58,63 +62,73 @@ const sectionHeadings: Record<string, Record<Locale, { index: number; heading: s
       { index: 0, heading: '政策範圍與生效日期' },
       { index: 1, heading: '瀏覽器本機處理' },
       { index: 4, heading: '本機儲存與電子郵件' },
-      { index: 6, heading: 'Cookie、廣告與第三方服務' },
-      { index: 9, heading: '兒童隱私、使用者權利與安全' },
+      { index: 7, heading: 'Cookie、廣告與第三方服務' },
+      { index: 12, heading: '兒童隱私、使用者權利與安全' },
     ],
     en: [
       { index: 0, heading: 'Policy scope and effective date' },
       { index: 1, heading: 'Local browser processing' },
       { index: 4, heading: 'Local storage and email' },
-      { index: 6, heading: 'Cookies, advertising, and third parties' },
-      { index: 9, heading: 'Children, user rights, and safety' },
+      { index: 7, heading: 'Cookies, advertising, and third parties' },
+      { index: 12, heading: 'Children, user rights, and safety' },
     ],
   },
   terms: {
     zh: [
       { index: 0, heading: '條款適用與服務說明' },
       { index: 2, heading: '使用者責任與查證義務' },
-      { index: 4, heading: '擔保與責任限制' },
-      { index: 6, heading: '可接受使用與智慧財產權' },
-      { index: 8, heading: '第三方服務、變更與準據法' },
+      { index: 5, heading: '擔保與責任限制' },
+      { index: 8, heading: '可接受使用與智慧財產權' },
+      { index: 11, heading: '第三方服務、變更與準據法' },
     ],
     en: [
       { index: 0, heading: 'Agreement and service scope' },
       { index: 2, heading: 'User responsibility and verification' },
-      { index: 4, heading: 'Warranty and liability limits' },
-      { index: 6, heading: 'Acceptable use and intellectual property' },
-      { index: 8, heading: 'Third parties, changes, and governing law' },
+      { index: 5, heading: 'Warranty and liability limits' },
+      { index: 8, heading: 'Acceptable use and intellectual property' },
+      { index: 11, heading: 'Third parties, changes, and governing law' },
     ],
   },
   disclaimer: {
     zh: [
-      { index: 0, heading: '一般聲明與非專業建議' },
-      { index: 2, heading: '金錢、公式與官方關係限制' },
-      { index: 5, heading: '教育、統計、檔案與內容工具' },
-      { index: 8, heading: '健康、隨機與使用者責任' },
+      { index: 0, heading: '一般聲明與適用範圍' },
+      { index: 2, heading: '金錢與估算類工具的限制' },
+      { index: 5, heading: '統計與教育類工具的限制' },
+      { index: 7, heading: 'PDF、圖片與檔案類工具的限制' },
+      { index: 9, heading: '健康、隨機與製圖類工具的限制' },
     ],
     en: [
-      { index: 0, heading: 'General disclaimer and no professional advice' },
-      { index: 2, heading: 'Financial, formula, and official-status limits' },
-      { index: 5, heading: 'Education, statistics, files, and content' },
-      { index: 8, heading: 'Health, random output, and user responsibility' },
+      { index: 0, heading: 'General disclaimer and scope' },
+      { index: 2, heading: 'Financial and estimate-based tools' },
+      { index: 5, heading: 'Statistics and education tools' },
+      { index: 7, heading: 'PDF, image, and file tools' },
+      { index: 9, heading: 'Health, random, and drawing tools' },
     ],
   },
   'about-tools': {
     zh: [
-      { index: 0, heading: '工具在瀏覽器中如何執行' },
-      { index: 2, heading: '圖片、PDF 與本機儲存' },
-      { index: 4, heading: '計算結果與正式使用限制' },
-      { index: 6, heading: '錯誤回報與新工具建議' },
+      { index: 0, heading: '工具在瀏覽器中如何運作' },
+      { index: 2, heading: '工具怎麼被選進來、怎麼決定要不要做' },
+      { index: 4, heading: '圖片、PDF 與本機儲存' },
+      { index: 6, heading: '計算結果與正式使用限制' },
+      { index: 9, heading: '錯誤回報與新工具建議' },
     ],
     en: [
       { index: 0, heading: 'How tools run in the browser' },
-      { index: 2, heading: 'Images, PDFs, and local storage' },
-      { index: 4, heading: 'Calculation and formal-use limits' },
-      { index: 6, heading: 'Bug reports and tool suggestions' },
+      { index: 2, heading: 'How a tool gets picked, and what stays out of scope' },
+      { index: 4, heading: 'Images, PDFs, and local storage' },
+      { index: 6, heading: 'Calculation results and their formal-use limits' },
+      { index: 9, heading: 'Bug reports and tool suggestions' },
     ],
   },
 };
 const bodyHeadings = new Map((sectionHeadings[pageKey]?.[lang] ?? []).map((item) => [item.index, item.heading]));
+// Built from parts on purpose. Writing the comment inline as
+// `set:html="<!--email_off-->"` makes the compiler escape it, so v5.102.1 shipped a
+// visible "<!--email_off-->" string on every prose page and Cloudflare never saw a
+// real comment. Assembling the string here keeps it out of the template parser.
+const EMAIL_OFF = `<!${'--'}email_off${'--'}>`;
+const EMAIL_ON = `<!${'--'}email_on${'--'}>`;
 const breadcrumbItems = [
   { name: ui.breadcrumbHome, href: localePath(lang) },
   { name: title, href: localePath(lang, pageKey) },
@@ -145,14 +159,14 @@ const jsonLd = [
       These are Cloudflare's documented opt-out markers; they must reach the
       served HTML, hence set:html rather than a plain JSX comment.
     */}
-    <Fragment set:html="<!--email_off-->" />
+    <Fragment set:html={EMAIL_OFF} />
     {body.map((paragraph, index) => (
       <>
         {bodyHeadings.has(index) && <h2>{bodyHeadings.get(index)}</h2>}
         <p>{paragraph}</p>
       </>
     ))}
-    <Fragment set:html="<!--email_on-->" />
+    <Fragment set:html={EMAIL_ON} />
     {extraLinks.length > 0 && (
       <div class="page-link-list">
         {extraLinks.map((link) => (
