@@ -23,6 +23,99 @@ function routeType(url) {
   return 'other';
 }
 
+// `${type}:${slug}` extraction, matching the routes each contentValue.ts builder covers.
+// Used only to look up whether a hand-written override exists for this exact page — see below.
+function routeSlug(url, type) {
+  const pathname = new URL(url).pathname;
+  const patterns = {
+    tool: /\/(?:tools|herramientas)\/([^/]+)\/$/,
+    guide: /\/guides\/([^/]+)\/$/,
+    workflow: /\/workflows\/([^/]+)\/$/,
+    category: /\/category\/([^/]+)\/$/,
+    audience: /\/for\/([^/]+)\/$/,
+  };
+  return patterns[type] ? (pathname.match(patterns[type])?.[1] ?? null) : null;
+}
+
+// contentValue.ts renders the "contextual verification review" block (data-content-value-review)
+// only for pages that have a hand-written override entry — see the remediation note at the top
+// of that file. `zh`/`en` tool/guide/workflow/category/audience pages are the only routes driven
+// by contentValue.ts (its `Locale` type is `'zh' | 'en'` — `es` pages use an entirely separate,
+// pre-existing hand-authored pipeline in `src/i18n/expansion/es*.ts` + `ExpansionToolLayout.astro`
+// that always renders its own review block and is out of scope here). Rather than trust the HTML
+// alone, parse contentValue.ts's override tables directly so the gate can tell "no block because
+// no hand-written content exists yet" apart from "block silently failed to render" in both
+// directions, without needing contentValue.ts to expose a runtime manifest.
+function extractOverrideKeys(constName) {
+  const source = fs.readFileSync(path.join(ROOT, 'src/lib/contentValue.ts'), 'utf8');
+  const declaration = new RegExp(`const ${constName}[^=]*=\\s*\\{`).exec(source);
+  if (!declaration) return new Set();
+  let depth = 1;
+  let index = declaration.index + declaration[0].length;
+  while (depth > 0 && index < source.length) {
+    if (source[index] === '{') depth += 1;
+    else if (source[index] === '}') depth -= 1;
+    index += 1;
+  }
+  const body = source.slice(declaration.index + declaration[0].length, index - 1);
+  const keys = new Set();
+  const keyPattern = /^\s*'([a-z]{2}:[a-zA-Z0-9_-]+)':/gm;
+  let match;
+  while ((match = keyPattern.exec(body))) keys.add(match[1]);
+  return keys;
+}
+
+const overrideKeysByType = {
+  tool: extractOverrideKeys('toolValueReviewOverrides'),
+  guide: extractOverrideKeys('guideValueReviewOverrides'),
+  workflow: extractOverrideKeys('workflowValueReviewOverrides'),
+  category: extractOverrideKeys('categoryValueReviewOverrides'),
+  audience: extractOverrideKeys('audienceValueReviewOverrides'),
+};
+
+// `pendingHandwrittenReview` in contentValue.ts is a TEMPORARY, shrinking list (added
+// 2026-08-01) of pages that still render the old auto-generated review block instead of a
+// hand-written override, so they stay above the word/H2 thresholds below while someone works
+// through them in later batches. It is a plain string array per type (not a quoted-object-key
+// table like the override tables above), so it needs its own bracket-depth extraction.
+function extractPendingKeys(type) {
+  const source = fs.readFileSync(path.join(ROOT, 'src/lib/contentValue.ts'), 'utf8');
+  const declaration = /const pendingHandwrittenReview[^=]*=\s*\{/.exec(source);
+  if (!declaration) return new Set();
+  let depth = 1;
+  let index = declaration.index + declaration[0].length;
+  while (depth > 0 && index < source.length) {
+    if (source[index] === '{') depth += 1;
+    else if (source[index] === '}') depth -= 1;
+    index += 1;
+  }
+  const body = source.slice(declaration.index + declaration[0].length, index - 1);
+  const typeDeclaration = new RegExp(`\\b${type}:\\s*\\[`).exec(body);
+  if (!typeDeclaration) return new Set();
+  let arrayDepth = 1;
+  let arrayIndex = typeDeclaration.index + typeDeclaration[0].length;
+  while (arrayDepth > 0 && arrayIndex < body.length) {
+    if (body[arrayIndex] === '[') arrayDepth += 1;
+    else if (body[arrayIndex] === ']') arrayDepth -= 1;
+    arrayIndex += 1;
+  }
+  const arrayBody = body.slice(typeDeclaration.index + typeDeclaration[0].length, arrayIndex - 1);
+  const keys = new Set();
+  const keyPattern = /'([a-z]{2}:[a-zA-Z0-9_-]+)'/g;
+  let match;
+  while ((match = keyPattern.exec(arrayBody))) keys.add(match[1]);
+  return keys;
+}
+
+const pendingKeysByType = {
+  tool: extractPendingKeys('tool'),
+  guide: extractPendingKeys('guide'),
+  workflow: extractPendingKeys('workflow'),
+  category: extractPendingKeys('category'),
+  audience: extractPendingKeys('audience'),
+};
+const pendingTotal = Object.values(pendingKeysByType).reduce((sum, set) => sum + set.size, 0);
+
 function outputFile(url) {
   const pathname = new URL(url).pathname;
   return path.join(
@@ -101,9 +194,34 @@ for (const url of urls) {
   if (!hasDescription) failures.push(`${url}: missing or very short meta description`);
   if (canonical !== url) failures.push(`${url}: canonical mismatch (${canonical ?? 'missing'})`);
   if (noindex) failures.push(`${url}: sitemap URL contains noindex`);
-  if (reviewedTypes.has(type) && !reviewed) failures.push(`${url}: missing contextual verification review`);
+  if (reviewedTypes.has(type)) {
+    if (lang === 'es') {
+      // The es tool pipeline (ExpansionToolLayout + i18n/expansion/es*.ts) is a separate,
+      // pre-existing, always-hand-written system outside contentValue.ts's scope — keep the
+      // original unconditional requirement for it rather than looking it up in overrideKeysByType.
+      if (!reviewed) failures.push(`${url}: missing contextual verification review`);
+    } else {
+      const slug = routeSlug(url, type);
+      const key = slug ? `${lang}:${slug}` : null;
+      const hasOverride = key ? overrideKeysByType[type]?.has(key) : false;
+      const isPending = key ? pendingKeysByType[type]?.has(key) : false;
+      const expectReviewed = hasOverride || isPending;
+      if (expectReviewed && !reviewed) {
+        const reason = hasOverride
+          ? 'hand-written override exists in contentValue.ts'
+          : 'page is listed in the temporary pendingHandwrittenReview list in contentValue.ts';
+        failures.push(`${url}: missing contextual verification review (${reason} but the block did not render)`);
+      }
+      if (!expectReviewed && reviewed) {
+        failures.push(`${url}: unexpected contextual verification review (block rendered but no hand-written override or pendingHandwrittenReview entry is registered in contentValue.ts for this page)`);
+      }
+      if (hasOverride && isPending) {
+        failures.push(`${url}: ${key} has a hand-written override in contentValue.ts AND is still listed in pendingHandwrittenReview — remove it from the pending list now that a real override exists`);
+      }
+    }
+  }
 
-  pages.push({ url, pathname, lang, type, count, h2Count, mainText });
+  pages.push({ url, pathname, lang, type, count, h2Count, mainText, reviewed });
 }
 
 function shingles(text, size = 7) {
@@ -150,7 +268,8 @@ const summary = {
   status: failures.length ? 'FAIL' : 'PASS',
   sitemapUrls: urls.length,
   builtPagesAudited: pages.length,
-  contextualReviews: pages.filter((page) => reviewedTypes.has(page.type)).length,
+  reviewablePages: pages.filter((page) => reviewedTypes.has(page.type)).length,
+  contextualReviews: pages.filter((page) => reviewedTypes.has(page.type) && page.reviewed).length,
   byLocaleAndType: Object.fromEntries(
     ['zh', 'en', 'es'].flatMap((lang) =>
       ['tool', 'guide', 'workflow', 'category', 'audience', 'other'].map((type) => {
@@ -173,8 +292,18 @@ const summary = {
     left: maximumSimilarity.left,
     right: maximumSimilarity.right,
   },
+  pendingHandwrittenReview: {
+    total: pendingTotal,
+    byType: Object.fromEntries(Object.entries(pendingKeysByType).map(([type, set]) => [type, set.size])),
+  },
   failures,
 };
 
 console.log(JSON.stringify(summary, null, 2));
+// Printed unconditionally (pass or fail) so this cannot be missed in a scrollback of a green
+// preflight run — the whole point of `pendingHandwrittenReview` being temporary depends on
+// someone actually seeing this number shrink over time.
+console.log(
+  `\n暫時清單剩餘 ${pendingTotal} 頁待手寫（tool ${pendingKeysByType.tool.size} / guide ${pendingKeysByType.guide.size} / workflow ${pendingKeysByType.workflow.size} / category ${pendingKeysByType.category.size} / audience ${pendingKeysByType.audience.size}）`,
+);
 if (failures.length) process.exitCode = 1;

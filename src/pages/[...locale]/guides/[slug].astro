@@ -97,7 +97,7 @@ const relatedWorkflowViews = guide.relatedWorkflowIds
 const hasSourceAlternates = sourceGuide.locales.includes('zh') && sourceGuide.locales.includes('en');
 const hasAlternates = hasSourceAlternates || Boolean(expansionRouteByPath(guidePath));
 const faqItems = guide.faq.map((item) => ({ q: item.question, a: item.answer }));
-const valueReview = buildGuideValueReview(lang, guide);
+const valueReview = buildGuideValueReview(lang, guide.slug, guide);
 const effectiveUpdatedAt = CONTENT_REVIEWED_AT;
 const articleLd = {
   '@context': 'https://schema.org',
@@ -188,7 +188,7 @@ const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guide
       </ul>
     </section>
 
-    <ContentValueReview {...valueReview} />
+    {valueReview && <ContentValueReview {...valueReview} />}
 
     {relatedTools.length > 0 && (
       <section class="guide-block tool-section" aria-labelledby="tools-title">

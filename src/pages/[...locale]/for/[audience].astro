@@ -72,7 +72,7 @@ const liveTool = (slug: string): ToolMeta | undefined => {
   return tool?.status === 'live' ? tool : undefined;
 };
 const recommendedTools = audience.recommendedToolIds.map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool));
-const valueReview = buildAudienceValueReview(lang, audience, recommendedTools.map((tool) => tool.name[lang]));
+const valueReview = buildAudienceValueReview(lang, audience.title, audience.slug, audience, recommendedTools.map((tool) => tool.name[lang]));
 const relatedCategories = audience.relatedCategoryIds
   .map(getCategoryById)
   .filter((category): category is (typeof categories)[number] => Boolean(category));
@@ -161,7 +161,7 @@ const collectionLd = {
       </ol>
     </section>
 
-    <ContentValueReview {...valueReview} />
+    {valueReview && <ContentValueReview {...valueReview} />}
 
     {audience.scenarios && audience.scenarios.length > 0 && (
       <section class="audience-block" aria-labelledby="audience-scenarios-title">

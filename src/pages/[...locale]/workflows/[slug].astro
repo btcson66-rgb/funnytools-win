@@ -70,7 +70,7 @@ const liveTool = (slug: string): ToolMeta | undefined => {
   return tool?.status === 'live' ? tool : undefined;
 };
 const recommendedTools = workflow.recommendedToolIds.map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool));
-const valueReview = buildWorkflowValueReview(lang, workflow, recommendedTools.map((tool) => tool.name[lang]));
+const valueReview = buildWorkflowValueReview(lang, workflow.slug, workflow, recommendedTools.map((tool) => tool.name[lang]));
 const effectiveUpdatedAt = CONTENT_REVIEWED_AT;
 const relatedGuides: SeoGuideView[] = workflow.relatedGuideIds
   .map((slug) => seoGuides.find((candidate) => candidate.slug === slug))
@@ -143,7 +143,7 @@ const articleLd = {
       </ol>
     </section>
 
-    <ContentValueReview {...valueReview} />
+    {valueReview && <ContentValueReview {...valueReview} />}
 
     {recommendedTools.length > 0 && (
       <section class="workflow-block" aria-labelledby="tools-title">

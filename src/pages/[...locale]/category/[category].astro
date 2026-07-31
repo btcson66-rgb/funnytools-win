@@ -109,6 +109,7 @@ const blurbFor = (slug: string): string =>
 const valueReview = buildCategoryValueReview(
   lang,
   categoryData.name[lang],
+  categoryData.id,
   categoryTools.slice(0, 3).map((tool) => ({ name: tool.name[lang], summary: blurbFor(tool.slug) })),
 );
 
@@ -254,9 +255,11 @@ if (faqItems.length > 0) {
     </section>
   )}
 
-  <div class="wrap">
-    <ContentValueReview {...valueReview} />
-  </div>
+  {valueReview && (
+    <div class="wrap">
+      <ContentValueReview {...valueReview} />
+    </div>
+  )}
 
   <section class="wrap content-section">
     <h2>{ui.category.recommendedHeading}</h2>
