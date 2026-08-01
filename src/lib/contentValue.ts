@@ -908,15 +908,15 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'zh:independent-samples-t-test-calculator': {
-    intro: '這一段用頁面預設的兩組資料示範 Welch t 檢定的計算，並說明頁面實際顯示的只有 4 個數字，比程式內部算出來的還少。',
+    intro: '這一段用頁面預設的兩組資料示範 Welch t 檢定的計算，並核對頁面實際顯示的全部 7 個數字：平均差、t 值、自由度、雙尾 p 值、標準誤、95% 信賴區間與 Hedges’ g 效果量。',
     panels: [
       {
         title: '先用頁面預設值核對平均差、t 值與自由度',
-        text: '頁面預設第一組 N=30、平均 78.4、標準差 8.2，第二組 N=32、平均 73.1、標準差 9.5：平均差＝78.4−73.1＝5.3，Welch t 值約為 2.356，自由度（Welch–Satterthwaite 近似）約為 59.61，雙尾 p 值約為 .022。這四個數字都會直接顯示在結果區，可以用計算機核對平均差，t 值與自由度需要搭配標準誤公式才能重算，程式本身沒有額外顯示中間的標準誤數字。',
+        text: '頁面預設第一組 N=30、平均 78.4、標準差 8.2，第二組 N=32、平均 73.1、標準差 9.5：平均差＝78.4−73.1＝5.3，Welch t 值約為 2.356，自由度（Welch–Satterthwaite 近似）約為 59.61，雙尾 p 值約為 .022。這四個數字都會直接顯示在結果區，可以用計算機核對平均差，t 值與自由度需要搭配標準誤公式才能重算。',
       },
       {
-        title: '頁面只顯示 4 個結果，標準誤、信賴區間與效果量算出來了但不會顯示',
-        text: '程式內部其實有計算標準誤、95% 信賴區間與 Hedges’ g 效果量（例如預設資料的信賴區間約為 [0.799, 9.801]、Hedges’ g 約 0.588），但頁面的標籤設定裡沒有對應這三項的顯示文字，所以畫面上只會看到「平均差、t 值、自由度、雙尾 p 值」四項，不會顯示標準誤、信賴區間或效果量，需要這些數字時必須自己依標準誤公式 √(s₁²/n₁+s₂²/n₂) 手動計算，不能假設頁面漏顯示是故障。',
+        title: '頁面同時顯示標準誤、95% 信賴區間與 Hedges’ g 效果量',
+        text: '程式內部除了平均差、t 值、自由度與雙尾 p 值以外，也會計算標準誤、95% 信賴區間與 Hedges’ g 效果量，這三項數字會接著顯示在結果區（例如預設資料的標準誤約為 2.250、信賴區間約為 [0.799, 9.801]、Hedges’ g 約 0.588）。信賴區間使用 Welch–Satterthwaite 自由度對應的臨界值，Hedges’ g 則改用兩組合併標準差（pooled SD）並乘上小樣本校正係數計算——這跟 Welch t 值本身不假設變異數相等的做法不同，但這是效果量報告的標準慣例，不是計算矛盾。',
       },
       {
         title: '兩組平均相同、或樣本數最小為 2 時的邊界行為',
@@ -926,12 +926,12 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     checklist: [
       '兩組樣本數都是大於 1 的整數，標準差都大於 0，否則會顯示錯誤，不會算出數字。',
       '已用平均差公式（M1−M2）手動核對過頁面顯示的「平均差」是否正確。',
-      '知道頁面只顯示平均差、t 值、自由度與雙尾 p 值，不會顯示標準誤、信賴區間或效果量，需要時要自己另外計算。',
+      '已核對頁面顯示的標準誤、95% 信賴區間與 Hedges’ g 效果量，理解信賴區間用 Welch 自由度、Hedges’ g 用合併標準差計算，兩者假設不同但都是標準統計慣例。',
       '兩組平均相同時 t=0、p=1 是正常結果；樣本數很小時得到的 p 值判斷要更保守，不要直接套用大樣本的顯著性直覺。',
     ],
   },
   'zh:normalized-score-converter': {
-    intro: '這一段用頁面預設值示範常態化分數轉換，並說明頁面同樣只顯示部分計算結果——原始差距、目標差距與縮放比例算出來了但沒有顯示欄位。',
+    intro: '這一段用頁面預設值示範常態化分數轉換，並核對頁面顯示的全部 5 個數字：對應 Z 分數、轉換後分數、原始差距、目標差距與縮放比例。',
     panels: [
       {
         title: '先用頁面預設值核對轉換公式',
@@ -942,15 +942,15 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
         text: '保持原始分數 82、原平均 70、原標準差 10 不變，把目標平均數改成 500、目標標準差改成 100：Z 分數仍是 1.2（因為 Z 只由原始三個數決定，跟目標量尺無關），但轉換後分數會變成 500+1.2×100=620。這示範了「Z 分數」與「轉換後分數」是兩個獨立步驟，改目標量尺只會影響第二步，不會動到 Z 分數。',
       },
       {
-        title: '頁面不會顯示「原始差距」「目標差距」與「縮放比例」',
-        text: '程式內部其實會算出原始分數與原平均的差距（本例為 12）、目標量尺下對應的差距（本例為 12，因為縮放比例剛好是 1）、以及縮放比例（目標標準差÷原標準差，本例為 1），但頁面標籤沒有設定這三項對應的顯示文字，所以只會看到「對應 Z 分數」與「轉換後分數」兩個數字。原標準差或目標標準差輸入 0 或負值都會被擋下，顯示「請輸入有效數字」的錯誤。',
+        title: '頁面同時顯示「原始差距」「目標差距」與「縮放比例」',
+        text: '程式內部會算出原始分數與原平均的差距（本例為 12）、目標量尺下對應的差距（本例為 12，因為縮放比例剛好是 1）、以及縮放比例（目標標準差÷原標準差，本例為 1），這三項數字會接續在「對應 Z 分數」與「轉換後分數」之後顯示。原標準差或目標標準差輸入 0 或負值都會被擋下，顯示「請輸入有效數字」的錯誤。',
       },
     ],
     checklist: [
       '原標準差與目標標準差都大於 0，否則會顯示錯誤而不是算出異常數字。',
       '已用 Z＝(原始分數−原平均)÷原標準差、轉換後分數＝目標平均+Z×目標標準差，手動核對過頁面顯示的兩個數字。',
       '知道換目標量尺只會改變「轉換後分數」，不會改變「對應 Z 分數」，因為 Z 分數只取決於原始三個輸入值。',
-      '頁面不會顯示原始差距、目標差距或縮放比例，需要這些中間數字時要自己額外計算，不是頁面遺漏顯示故障。',
+      '已核對頁面顯示的原始差距、目標差距與縮放比例是否符合公式：原始差距＝原始分數−原平均，目標差距＝Z×目標標準差，縮放比例＝目標標準差÷原標準差。',
     ],
   },
   'zh:json-to-csv': {
@@ -1230,15 +1230,15 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'en:independent-samples-t-test-calculator': {
-    intro: 'This section covers the Welch t-test math behind the page’s default two groups, and a specific gap between what the script computes and what the page actually displays.',
+    intro: 'This section covers the Welch t-test math behind the page’s default two groups, and confirms all seven numbers the page actually displays: mean difference, t, df, two-tailed p, standard error, the 95% confidence interval, and Hedges’ g.',
     panels: [
       {
         title: 'Check the mean difference, t, df, and p against the default groups',
-        text: 'The page loads with Group 1: N = 30, mean = 78.4, SD = 8.2, and Group 2: N = 32, mean = 73.1, SD = 9.5. Mean difference = 78.4 − 73.1 = 5.3. The Welch t value comes out to about 2.356, the Welch–Satterthwaite degrees of freedom to about 59.61, and the two-tailed p value to about .022 — all four of those numbers are the only ones shown on the page.',
+        text: 'The page loads with Group 1: N = 30, mean = 78.4, SD = 8.2, and Group 2: N = 32, mean = 73.1, SD = 9.5. Mean difference = 78.4 − 73.1 = 5.3. The Welch t value comes out to about 2.356, the Welch–Satterthwaite degrees of freedom to about 59.61, and the two-tailed p value to about .022 — these four numbers appear first in the results.',
       },
       {
-        title: 'The standard error, confidence interval, and Hedges’ g are calculated but never shown',
-        text: 'Reading the underlying script confirms it computes a standard error, a 95% confidence interval (about [0.80, 9.80] for the default numbers), and a Hedges’ g effect size (about 0.588) — but none of the three has a corresponding label configured for either the English or Chinese version of this page, so none of them ever renders. If you need the standard error, confidence interval, or an effect size, you currently have to calculate them yourself with √(s₁²/n₁ + s₂²/n₂) and the standard Hedges’ g correction — this is a real content gap, not something you are missing in the interface.',
+        title: 'The standard error, confidence interval, and Hedges’ g are also shown',
+        text: 'Beyond the mean difference, t, df, and p, the script also computes a standard error, a 95% confidence interval (about [0.80, 9.80] for the default numbers), and a Hedges’ g effect size (about 0.588), and all three render right after the first four values. The confidence interval uses a critical value from the Welch–Satterthwaite degrees of freedom, while Hedges’ g switches to the pooled standard deviation with a small-sample correction — a different variance assumption from Welch’s t itself, which is the standard convention for reporting an effect size alongside a Welch test, not an inconsistency.',
       },
       {
         title: 'Equal means and very small samples are still accepted, with results that need extra care',
@@ -1248,7 +1248,7 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     checklist: [
       'Both sample sizes are whole numbers greater than 1, and both standard deviations are entered as sample SDs greater than 0.',
       'The mean difference shown has been hand-checked as Group 1 mean minus Group 2 mean.',
-      'It is understood that the standard error, 95% confidence interval, and Hedges’ g are computed internally but not displayed anywhere on this page, and must be calculated separately if needed.',
+      'The standard error, 95% confidence interval, and Hedges’ g shown on the page have been checked; the confidence interval uses the Welch degrees of freedom while Hedges’ g uses the pooled SD — different assumptions, both standard practice.',
       'A t = 0, p = 1 result from equal group means, or a very small df from tiny samples, is read as a real (if underpowered) result, not a broken calculation.',
     ],
   },
@@ -1368,7 +1368,7 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'en:normalized-score-converter': {
-    intro: 'This section covers the two-step z-score-then-rescale math behind Normalized Score Converter, and — like the related t-test calculator on this site — a set of numbers the script computes internally but never actually shows.',
+    intro: 'This section covers the two-step z-score-then-rescale math behind Normalized Score Converter, and confirms all five numbers the page shows: the z score, the converted score, the original offset, the target offset, and the scale factor.',
     panels: [
       {
         title: 'Check the default conversion, which happens to match the T-score scale',
@@ -1379,15 +1379,15 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
         text: 'Keep raw score 82, mean 70, and SD 10 the same, but change target mean to 500 and target SD to 100: the z score stays exactly 1.2, because z depends only on the three original-scale inputs, while the converted score becomes 500 + 1.2 × 100 = 620. Converting to z and rescaling to the target are two independent steps — editing the target scale can never retroactively change the z-score result.',
       },
       {
-        title: 'The original offset, target offset, and scale factor are calculated but not displayed',
-        text: 'The underlying script also computes the raw-score-minus-mean offset, the equivalent offset on the target scale, and the scale factor (target SD ÷ original SD) — for the default inputs these would be 12, 12, and 1 respectively — but none of the three has a label configured on this page in either language, so none of them renders anywhere in the results. If you need those intermediate values for a report, you currently have to calculate them yourself; this is a genuine content gap in the page, not a setting you can turn on.',
+        title: 'The original offset, target offset, and scale factor are also shown',
+        text: 'The underlying script also computes the raw-score-minus-mean offset, the equivalent offset on the target scale, and the scale factor (target SD ÷ original SD) — for the default inputs these are 12, 12, and 1 respectively — and all three now render right after the z score and converted score.',
       },
     ],
     checklist: [
       'Both the original SD and the target SD are entered as numbers greater than 0 — either one at 0 or below is rejected with an error.',
       'The z score has been hand-checked as (raw score − original mean) ÷ original SD before trusting the converted score.',
       'It is understood that changing the target mean or SD only affects the converted score, never the z score itself.',
-      'The original offset, target offset, and scale factor are known to be computed internally but never shown on this page, and must be calculated separately if needed.',
+      'The original offset, target offset, and scale factor shown on the page have been checked against original offset = raw score − original mean, target offset = z × target SD, and scale factor = target SD ÷ original SD.',
     ],
   },
   'en:password-generator': {
