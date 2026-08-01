@@ -1743,6 +1743,673 @@ const guideValueReviewOverrides: Partial<Record<string, ContentValueReviewOverri
       '使用前已確認自己的資料分布形狀，知道算出 Z 分數不代表資料自動變成常態分配。',
     ],
   },
+  'zh:percentile-rank-guide': {
+    intro: '這一段用指南本身的例題（100 人中 72 人分數較低、4 人同分，PR=74）重新算一次，並用另一組不同人數的資料檢查自己是不是真的懂「中位排名」，而不是背下 74 這個答案。',
+    panels: [
+      {
+        title: '先獨立重算指南例題，確認 PR=74 怎麼來的',
+        text: '指南例題是 100 位考生中有 72 人分數低於某考生、另有 4 人同分，用中位排名法：PR = (72 + 0.5×4) / 100 × 100 = 74。自己動手把 0.5×4=2 這一步獨立算一次，確認自己知道「同分的人只算一半」，而不是把 4 位同分者整個算進「低於」或整個排除——這兩種算法都會得到不同於 74 的錯誤答案。',
+      },
+      {
+        title: '換一組不同人數與同分情況的資料，測試公式是否真的記得對',
+        text: '自己另外設一組資料驗證：50 人的班級中有 30 人分數比你低、2 人與你同分，PR = (30 + 0.5×2) / 50 × 100 = 62。這一步要確認自己記得分母是「總人數」而不是固定用 100，換成 50 人的班級後，同樣的中位排名邏輯要能算出正確答案，而不是套用例題的 100 這個數字。',
+      },
+      {
+        title: '用指南列出的常見錯誤逐條檢查自己的理解',
+        text: '指南列出的常見錯誤包括「把 PR 當百分比分數」與「拿不同常模的 PR 互比」。自我測試：PR 74 不代表「考了 74 分」或「答對 74%」，只代表在這個 100 人的比較群體中，相對位置高於約 74% 的人；如果換一個班級、換一次考試的比較群體，即使原始分數相同，PR 也可能完全不同，因為 PR 是相對這個特定群體算出來的，不能拿不同次考試或不同班級的 PR 直接相減或相加。',
+      },
+    ],
+    checklist: [
+      '已獨立重算指南例題（72 人較低、4 人同分），確認 PR=74 是用「同分算一半」的中位排名法算出來的。',
+      '已用另一組不同總人數的資料（例如 50 人班級）驗證公式，不是只背下 74 這個答案。',
+      '能說出 PR 74 不是「考了 74 分」、也不是「答對 74%」，而是相對於這個比較群體的位置。',
+      '已確認自己要引用的 PR 來自哪個比較群體，不會拿不同常模或不同次考試的 PR 直接比較或相減。',
+    ],
+  },
+  'zh:teacher-exam-weighted-score-guide': {
+    intro: '這一段用指南例題（筆試 50%、試教 30%、口試 20%，總分 85.4）重新算一次，並換一組不同權重比例驗證自己是否真的理解「分數 × 權重」，而不是背下 85.4 這個答案。',
+    panels: [
+      {
+        title: '先獨立重算指南例題，逐項確認 85.4 怎麼來的',
+        text: '指南例題是筆試 82 分（權重 50%）、試教 88 分（權重 30%）、口試 90 分（權重 20%）。自己動手分三步算：82×0.50=41.00、88×0.30=26.40、90×0.20=18.00，三個乘積加總 41+26.4+18=85.4。如果重算出來不是 85.4，先檢查是不是把 50% 打成了 50 而不是 0.50——這種錯誤通常會讓總分暴衝到不合理的三位數，一眼就能發現。',
+      },
+      {
+        title: '換一組不同權重比例的資料，測試自己是不是真的理解「分數×權重」',
+        text: '自己另外設一組資料：某甄試筆試 40%、試教 40%、口試 20%，同一位考生三項分數不變（82、88、90），總分＝82×0.4+88×0.4+90×0.2=32.8+35.2+18=86。這個總分比例題的 85.4 高，因為權重從偏重筆試改成筆試試教並重、且試教分數（88）比筆試分數（82）高——這一步用來確認自己知道「換了權重，同樣的分數會得到不同的總分」，而不是死記 85.4 這一個答案。',
+      },
+      {
+        title: '用指南列出的常見錯誤逐條檢查自己的算法',
+        text: '指南列出的常見錯誤包括「50% 打成 50」與「直接加總 82+88+90 沒有乘權重」。自我測試：82+88+90=260，這個數字本身沒有意義，因為沒有反映筆試、試教、口試三項的重要性不同；另外要先確認自己抄的三個權重加起來是不是 100%（本例 50+30+20=100），如果權重總和不是 100%，要先回頭查公告，而不是照樣往下算。',
+      },
+    ],
+    checklist: [
+      '已獨立重算指南例題（82×0.5+88×0.3+90×0.2），確認三個乘積分別是 41、26.4、18，加總 85.4。',
+      '已換一組不同權重比例（例如 40%/40%/20%）驗證，確認同樣三個分數會得到不同總分，不是背答案。',
+      '能說出直接加總 82+88+90=260 沒有意義，因為沒有反映筆試、試教、口試各自的權重。',
+      '使用前已核對自己抄的權重總和是否為 100%，不是的話已先回頭查公告而不是照樣往下算。',
+    ],
+  },
+  'zh:spss-levene-test-guide': {
+    intro: '這一段用指南例題（Levene F=6.21, p=.015）重做一次判斷，並換一個 Levene 不顯著的情境驗證自己不是固定讀同一列。',
+    panels: [
+      {
+        title: '先用例題確認 p=.015 為什麼要讀第二列',
+        text: '指南例題的 Levene F=6.21, p=.015。自己動手判斷：.015 < .05，所以不讀 Equal variances assumed（第一列），要讀 Equal variances not assumed（第二列），該列 t=2.48, df=37.62, p=.018 才是要抄進報告的數字。刻意練習「先比較 p 和 .05 的大小，再決定讀哪一列」這個順序，而不是先看到第一列的 t 值就直接抄。',
+      },
+      {
+        title: '換一個 Levene 不顯著的情境，確認自己不是固定都讀某一列',
+        text: '自己另外設一個情境：Levene F=1.02, p=.318。因為 .318 >= .05，這次要讀 Equal variances assumed（第一列），而不是像上一步的例題那樣讀第二列。這一步是在確認自己真的是「看 p 值決定讀哪一列」，而不是因為上一次練習讀了第二列，就以為 SPSS 獨立樣本 t 檢定永遠讀第二列。',
+      },
+      {
+        title: '用指南列出的常見錯誤自我檢查',
+        text: '指南列出的常見錯誤是「把 Levene 的 p 值當成平均數差異的 p 值」。自我測試：本例 Levene p=.015 只代表兩組變異數不能視為相等，不代表兩組平均數有沒有顯著差異——平均數是否顯著，要看你依規則選出的那一列（本例是第二列）的 t=2.48, df=37.62, p=.018，這個 p=.018 才是判斷平均數差異顯著與否的數字，兩個 p 值意義完全不同，不能只抄一個。',
+      },
+    ],
+    checklist: [
+      '已用例題（Levene p=.015）確認因為 p<.05，要讀 Equal variances not assumed 那一列（t=2.48, df=37.62, p=.018）。',
+      '已換一個 Levene 不顯著的情境（例如 p=.318）驗證會改讀第一列，確認自己不是固定都讀同一列。',
+      '能說出 Levene 的 p 值（本例 .015）和平均數差異的 p 值（本例 .018）是兩個不同的數字，意義也不同。',
+      '使用前已確認研究設計真的是獨立樣本 t 檢定，而不是配對樣本或其他不需要看 Levene 的設計。',
+    ],
+  },
+  'zh:t-test-apa-format-guide': {
+    intro: '這一段用指南同時給的獨立樣本與配對樣本兩個例句重做一次，並換一組資料練習組出一句完整的 APA 句子。',
+    panels: [
+      {
+        title: '分別重做獨立樣本與配對樣本兩個例句，確認自己分得清楚兩者的差異',
+        text: '指南同時給了兩個例句：獨立樣本是「實驗組 M=82.40, SD=7.10 高於控制組 M=76.30, SD=8.20，t(58)=3.07, p=.003, d=0.79」；配對樣本是「後測 M=85.20, SD=6.40 高於前測 M=78.10, SD=7.50，t(29)=5.12, p<.001, d=0.93」。自己動手把兩句拆開讀：獨立樣本句子裡出現的是「兩個不同群體」（實驗組、控制組），配對樣本句子裡出現的是「同一批人的兩次測量」（前測、後測）——如果研究設計是同一批學生的前測後測，卻抄了獨立樣本那句的格式，代表沒有先確認自己的設計屬於哪一種。',
+      },
+      {
+        title: '換一組資料，練習從 SPSS 常見輸出組出一句完整的 APA 句子',
+        text: '假設另一組獨立樣本資料：新教法組 M=85.00, SD=6.00，舊教法組 M=79.50, SD=7.20，t(46)=2.90, p=.006, d=0.62。依例句格式寫成一句：「新教法組的分數 (M=85.00, SD=6.00) 高於舊教法組 (M=79.50, SD=7.20)，差異達顯著，t(46)=2.90, p=.006, d=0.62。」這一步用來確認自己知道句子要包含哪五個元素：兩組描述統計、t 值、df、p 值、效果量與方向，缺一個都不算完整的 APA 報告句。',
+      },
+      {
+        title: '用指南列出的常見錯誤逐條檢查自己的句子',
+        text: '指南列出的常見錯誤包括「把 Levene 的 p 值當成 t 檢定 p 值」與「p 值寫成 0.000」。自我測試：如果你的 SPSS 輸出 p 值顯示 .000，正確寫法是 p < .001，不能照抄 0.000；另外要確認句子裡的 p 值是對應列（依 Levene 結果選出的那一列）的 t 檢定 p 值，而不是誤抄了 Levene 那一欄的 Sig. 值——這兩欄在同一張 SPSS 表格裡是分開的。',
+      },
+    ],
+    checklist: [
+      '已分別讀過獨立樣本與配對樣本兩個例句，能說出兩者的差異在於「兩個群體」還是「同一批人的兩次測量」。',
+      '已換一組資料練習寫出包含描述統計、t、df、p、效果量與方向五個元素的完整句子。',
+      '能說出 SPSS 顯示 p=.000 時，APA 報告要寫成 p < .001，不能照抄 0.000。',
+      '使用前已確認句子裡的 p 值是 t 檢定那一列的數字，不是誤抄 Levene 檢定欄位的 Sig. 值。',
+    ],
+  },
+  'zh:anova-apa-format-guide': {
+    intro: '這一段用指南的單因子例句（F(2,87)=6.42, p=.003, η²=.13）與二因子例句（交互作用 F(2,114)=4.18, p=.018, partial η²=.07）分別重做一次，並檢查兩種效果量符號是否被混用。',
+    panels: [
+      {
+        title: '先重做單因子例句，確認事後比較的角色',
+        text: '指南單因子例句是「不同教學法在後測成績上有顯著差異，F(2, 87)=6.42, p=.003, η²=.13。Tukey 事後比較顯示，合作學習組顯著高於講述組。」自己動手拆開這句話：F(2, 87)=6.42 只回答「至少有一組不同」，真正回答「哪一組比哪一組高」的是後面那句 Tukey 事後比較。如果只寫前半句就結束，讀者會知道有差異，但不知道差異在哪裡——這正是指南提醒的「整體顯著後沒有說明哪些組不同」。',
+      },
+      {
+        title: '換一組二因子資料，練習寫出交互作用句子',
+        text: '指南二因子例句是「教學法與年級的交互作用達顯著，F(2, 114)=4.18, p=.018, partial η²=.07。」自己動手換一組數字練習：假設另一個研究的地區與教材交互作用是 F(1, 96)=3.85, p=.028, partial η²=.04，依同樣格式寫成一句「地區與教材的交互作用達顯著，F(1, 96)=3.85, p=.028, partial η²=.04。」這一步用來確認自己記得交互作用句子要包含 F、兩個自由度、p 值與效果量，並且要標明是「交互作用」而不是主效果。',
+      },
+      {
+        title: '用指南列出的常見錯誤自我檢查',
+        text: '指南列出的常見錯誤包括「只報告 p 值沒有 F 與自由度」與「混用 η² 與 partial η² 卻沒有標明」。自我測試：單因子例句用的是 η²（本例 .13），二因子例句用的是 partial η²（本例 .07），這兩個符號不能在同一份報告裡混著用又不說明是哪一種；另外要確認二因子 ANOVA 的交互作用顯著時（本例 p=.018），不能只解讀兩個主效果就結束，要先處理交互作用。',
+      },
+    ],
+    checklist: [
+      '已重做單因子例句，能說出 F(2, 87)=6.42 只回答「有沒有差異」，Tukey 事後比較才回答「哪一組比哪一組高」。',
+      '已換一組資料練習寫出包含 F、兩個自由度、p 值與效果量的二因子交互作用句子。',
+      '能說出 η²（本例單因子 .13）與 partial η²（本例二因子 .07）是不同的效果量符號，不能混用又不標明。',
+      '使用前已確認：如果二因子交互作用顯著（本例 p=.018），報告時已先處理交互作用，不是只解讀主效果。',
+    ],
+  },
+  'zh:two-way-anova-interaction-guide': {
+    intro: '這一段用指南的教學法×年級例題（低年級 A=78/B=77，高年級 A=88/B=80）重新算一次差距變化，並換一組資料練習判斷「有沒有交互作用」而不是背答案。',
+    panels: [
+      {
+        title: '先算出例題兩個年級的差距，確認交互作用在講什麼',
+        text: '指南例題是：低年級中教學法 A=78、B=77，差距只有 1 分；高年級中 A=88、B=80，差距擴大到 8 分。自己動手算這兩個差距（78-77=1、88-80=8），再比較這兩個差距本身的大小差異（8-1=7）。交互作用 F(1, 76)=5.90, p=.018 講的正是這個「差距隨年級改變」的現象，而不是任何單一年級內的差距是否顯著——這一步用來確認自己知道交互作用檢查的是「差距的差距」，不是某一格的平均數本身。',
+      },
+      {
+        title: '換一組資料，練習判斷有沒有交互作用',
+        text: '自己另外設一組資料驗證判斷邏輯：如果低年級 A=80、B=79（差距 1），高年級 A=90、B=89（差距同樣是 1），這種情況下兩個年級的差距幾乎相同，通常不會出現顯著交互作用，因為教學法的效果沒有隨年級改變；相對地，例題中差距從 1 擴大到 8，才是交互作用可能顯著的訊號。這一步用來確認自己不是看到「兩個年級都有差距」就直接判斷有交互作用。',
+      },
+      {
+        title: '用指南列出的常見錯誤自我檢查',
+        text: '指南列出的常見錯誤是「把兩個主效果都顯著誤稱為交互作用」。自我測試：教學法的主效果、年級的主效果、教學法×年級的交互作用是三個獨立的問題，一個研究可能只有主效果顯著、只有交互作用顯著，或三者都顯著，不能因為看到教學法和年級各自的主效果都顯著，就直接說「有交互作用」——一定要另外查交互作用那一列的 F、p 值才能下結論。',
+      },
+    ],
+    checklist: [
+      '已算出例題低年級（差距 1 分）與高年級（差距 8 分）的差距變化，能說出交互作用檢查的是「差距的差距」。',
+      '已換一組資料練習判斷：兩個年級差距相近時通常不會有顯著交互作用，差距明顯擴大或縮小時才可能有。',
+      '能說出「教學法主效果」「年級主效果」「交互作用」是三個獨立的問題，不會因為兩個主效果顯著就直接認定有交互作用。',
+      '使用前已確認自己查的是交互作用那一列的 F 與 p 值，不是用主效果的結果去推論交互作用。',
+    ],
+  },
+  'zh:classroom-random-picker-guide': {
+    intro: '這一段用指南的英文課複習例子（先給 2 分鐘小組討論、再抽代表回答）重做一次流程，並針對「抽到缺席學生」與「抽到不會回答的學生」這兩個情境做自我檢查。',
+    panels: [
+      {
+        title: '先重做例題的順序，確認「先準備、再抽人」不能顛倒',
+        text: '指南例題的順序是：老師先用倒數計時器給各組 2 分鐘討論，再用隨機學生抽選器抽一位代表說明例句。自己動手把這個順序倒過來想一次：如果先抽人、再讓其他人準備，被抽到的學生就沒有機會先跟組員討論，抽人這件事就會變成臨場考試而不是參與機會。指南提到的「讓抽人更像參與而非突襲」正是靠這個順序達成的，不是靠工具本身。',
+      },
+      {
+        title: '換一個情境，練習「先更新名單再抽」而不是抽到才處理',
+        text: '假設今天班上有 2 位學生請假、1 位到保健室，自己動手模擬正確做法：先把這 3 位從名單中刪除，剩下的學生名單才貼進隨機學生抽選器抽人。如果沒有先更新名單、抽到請假的學生才發現，指南提到的正確處理是「直接略過並重新抽」，而不是把缺席者也算進這一輪的公平輪替次數裡。',
+      },
+      {
+        title: '用指南列出的常見錯誤自我檢查',
+        text: '指南列出的常見錯誤包括「抽到不會回答的學生時公開責備」與「連續抽同一位學生沒有追蹤已抽過名單」。自我測試：如果被抽到的學生答不出來，指南建議的做法是給支援（例如請小組協助）而不是責備，責備會讓學生下次更抗拒被抽到；另外要確認自己是不是有記錄這節課已經抽過的學生，避免同一位學生在同一節課裡被連續抽好幾次，而其他學生完全沒被抽到。',
+      },
+    ],
+    checklist: [
+      '已確認活動順序是「先給準備或小組協助時間，再抽人回答」，沒有把順序顛倒。',
+      '抽人前已先把請假、外出的學生從名單中移除，不是抽到才發現要略過重抽。',
+      '已想好學生答不出來時的支援做法（例如小組協助），不會公開責備。',
+      '這節課已記錄或留意已經抽過的學生名單，避免同一人被連續抽中而其他人沒有機會。',
+    ],
+  },
+  'zh:classroom-timer-guide': {
+    intro: '這一段用指南的 15 分鐘活動拆解（5+5+3+2 分鐘）重新加總一次，並換一組不同長度的活動練習分配轉換時間，同時檢查「時間到還要不要延長」這個常見兩難。',
+    panels: [
+      {
+        title: '先加總例題的四個階段，確認時間有沒有分配完',
+        text: '指南例題把 15 分鐘活動拆成：5 分鐘小組閱讀、5 分鐘討論、3 分鐘抽代表發表、2 分鐘老師整理。自己動手加總：5+5+3+2=15，剛好等於總時間，中間沒有預留額外的轉換時間。這一步用來確認自己知道，如果四段時間加起來超過總時數，代表某個階段一定要縮短，不能等到活動中才發現時間不夠。',
+      },
+      {
+        title: '換一組不同長度的活動，練習分配並預留轉換時間',
+        text: '假設換成一段 20 分鐘的活動，自己動手拆解：6 分鐘小組討論、6 分鐘產出、5 分鐘抽代表發表，實際只剩 3 分鐘可以用（20-6-6-5=3），這 3 分鐘要包含老師整理與轉換到下一個教學段落。指南提醒每個階段要預留 30 秒到 2 分鐘轉換時間，如果直接把 3 分鐘全部算成整理時間，收拾教材或移動座位的轉換時間就會被擠壓到下一堂課。',
+      },
+      {
+        title: '用指南列出的常見錯誤自我檢查',
+        text: '指南列出的常見錯誤是「時間到了卻繼續無限延長，學生會慢慢忽略計時器」。自我測試：如果這節課已經延長過一次倒數時間，下一次設定倒數時，學生對「時間到」這件事的信任度會下降，之後即使準時提醒，學生也可能不當一回事——這一步用來確認自己有沒有一致地執行時間到就進入下一階段，而不是每次都因為活動有趣就延長。',
+      },
+    ],
+    checklist: [
+      '已把活動拆成討論、產出、發表、轉換幾個階段，並確認加總時間沒有超過總時數。',
+      '已換一組不同長度的活動練習拆解，且有預留 30 秒到 2 分鐘的轉換時間，不是把全部時間都算成任務時間。',
+      '已在時間到前給過一次提醒（例如剩 1 分鐘），而不是讓倒數突然結束。',
+      '已確認自己不會每次時間到就無限延長，避免學生之後不再信任計時器的提醒。',
+    ],
+  },
+  'zh:fair-student-grouping-guide': {
+    intro: '這一段用指南 30 人分 6 組（每組 5 人）的例題重新算一次，並換一組除不盡的人數練習組數與人數的分配邏輯。',
+    panels: [
+      {
+        title: '先確認 30 人分 6 組為什麼每組剛好 5 人',
+        text: '指南例題是 30 位學生分 6 組做實驗，用 group-generator 輸入 30 人並設定 6 組。自己動手驗算：30÷6=5，沒有餘數，所以每組都是 5 人，不會有組別特別多或特別少人。這一步用來確認自己知道「組數設定」和「每組人數」在能整除時結果是一致的，但人數不能整除時就不一定了。',
+      },
+      {
+        title: '換一組除不盡的人數，練習組數和人數會產生不同結果',
+        text: '自己另外設一個情境：32 位學生。如果設定 6 組，32÷6 除不盡，會有幾組是 6 人、幾組是 5 人（4 組 5 人加 2 組 6 人剛好 32 人）；如果改成設定每組人數為 5，會產生 6 組滿 5 人加 1 組只有 2 人，變成 7 組而不是 6 組。這一步用來確認自己知道「組數」和「每組人數」在人數除不盡時會給出不同的分組結果，要先想清楚活動需要固定幾組還是固定每組人數上限，再決定用哪一種設定。',
+      },
+      {
+        title: '用指南列出的常見錯誤自我檢查',
+        text: '指南列出的常見錯誤是「調整太多但不說明原因，讓學生覺得隨機分組只是形式」。自我測試：例題中老師只做了一次交換——把兩位需要支援的學生從同一組分開，並且說明了原因；如果每次分組後都做超過一兩次交換，又不向學生解釋為什麼，學生會開始懷疑「隨機」只是老師想這樣分組的藉口，這一步用來確認自己把調整次數控制在有明確理由的最小範圍內。',
+      },
+    ],
+    checklist: [
+      '已確認 30 人分 6 組時每組剛好 5 人（30÷6=5，沒有餘數）。',
+      '已用一組除不盡的人數（例如 32 人）練習組數與每組人數設定會得到不同結果，並想清楚活動需要哪一種。',
+      '已檢查分組結果中是否有需要支援的學生被分在同一組，必要時只做少量、有理由的交換。',
+      '已確認自己公布分組時能說明調整的原因，不是做了多次交換卻沒有解釋。',
+    ],
+  },
+  'zh:classroom-lottery-tool-guide': {
+    intro: '這一段用指南的 8 個報告主題例子（用轉盤依序抽題、抽到後從清單移除）重做一次流程，並針對「什麼時候該移除選項」與「哪些情境不該用抽籤」做自我檢查。',
+    panels: [
+      {
+        title: '先重做例題的順序，確認候選清單要先公布',
+        text: '指南例題是社會課要分配 8 個報告主題，老師把主題放進轉盤，讓每組依序抽題，抽到的主題立即從清單移除並記在投影片上。自己動手模擬這個順序：如果沒有先讓學生看過完整的 8 個主題清單就開始抽，學生事後可能會質疑「是不是漏掉了我想要的主題」；指南強調要先讓學生確認候選清單，這一步不能省略或延後到抽完才公布。',
+      },
+      {
+        title: '換一個活動，練習判斷該不該移除已抽到的選項',
+        text: '假設換成一個複習題轉盤，用來抽選課堂複習的題目類型（例如單字題、文法題、閱讀題）。因為複習題轉盤的用途是「重複挑戰」而不是「每個選項只能用一次」，這種情況通常保留選項不移除；相對地，例題中的 8 個報告主題因為每組只能負責一個主題，抽到後就要移除。這一步用來確認自己會依「選項能不能重複使用」決定要不要移除，而不是每次都用同一套規則。',
+      },
+      {
+        title: '用指南列出的常見錯誤自我檢查',
+        text: '指南列出的常見錯誤是「把抽獎工具用在高風險評量或重要權益分配上」。自我測試：報告主題分配、發表順序、小獎勵抽選都是指南列出的合適情境；但如果是決定學生的正式成績等第、或分配有限且高度在意的資源（例如僅有一個名額的比賽代表），就不適合單靠一次轉盤抽選決定，這類決定需要更透明、可申覆的正式規則，而不是課堂抽籤工具能承擔的。',
+      },
+    ],
+    checklist: [
+      '已在開始抽選前，讓學生看過完整的候選清單（本例是 8 個主題），不是抽完才公布還有哪些選項。',
+      '已判斷這次活動的選項該不該在抽到後移除，並確認判斷依據是「選項能不能重複使用」。',
+      '已說明是否允許重抽，以及發生爭議時由誰確認結果，事先講清楚而不是抽完才決定規則。',
+      '已確認這次用途不是正式成績等第或高度在意的有限名額分配，這類決定不適合只靠課堂抽籤工具。',
+    ],
+  },
+  'zh:percentage-shortcuts-guide': {
+    intro: '這一段用指南的加權成績例題（30%/30%/40%，82.3 分）與折扣例題（8 折再 9 折＝72 折）重做一次，並針對「百分點」與「百分比」的差異做自我檢查。',
+    panels: [
+      {
+        title: '先重做加權成績例題，確認正確算法與錯誤算法的差距',
+        text: '指南例題是平時 30%、期中 30%、期末 40%，三次分數 82、75、88，加權平均＝82×0.3+75×0.3+88×0.4＝24.6+22.5+35.2＝82.3 分。自己動手把指南提到的錯誤算法也做一次：把權重記成 30、30、40 直接乘分數再除以 3，會得到 (82×30+75×30+88×40)/3＝(2460+2250+3520)/3＝2743.3——這個荒謬的數字本身就是警訊，代表算法一開始就錯了。這一步用來確認自己知道，加權平均的第一步永遠是先把權重換成 0.3、0.3、0.4 這種小數，而不是直接拿百分比數字去乘。',
+      },
+      {
+        title: '換一組折扣資料，練習連續折扣要用乘法而不是加法',
+        text: '指南例題是 1500 元的鞋子打 8 折再用 9 折券，實付＝1500×0.8×0.9＝1080 元，等於 72 折，比直覺的 7 折（1050 元）多付 30 元。自己動手換一組資料驗證同樣的邏輯：一件 2000 元的外套打 7 折再疊加 95 折的會員優惠，實付＝2000×0.7×0.95＝1330 元，等於 66.5 折——如果直覺地把 7 折和 95 折相加減（7 折再少 5%＝65 折），算出來的 1300 元會和正確答案 1330 元差 30 元，這一步用來確認自己記得連續折扣要用乘法連乘，不能用加減法估算。',
+      },
+      {
+        title: '用指南提到的百分點與百分比差異自我檢查',
+        text: '指南舉例：利率從 2% 升到 3%，是「上升 1 個百分點」，也是「上升 50%」（(3-2)/2=50%）。自我測試：如果看到新聞寫「利率上升了 1%」，先判斷這句話講的是百分點還是百分比——如果原意其實是「從 2% 升到 3%」，正確說法應該是「上升 1 個百分點」，寫成「上升 1%」會讓讀者誤以為漲幅很小（因為 1% 聽起來遠比實際的 50% 相對漲幅溫和），這正是指南提醒的「新聞與報告混用這兩者時，數字給人的感受會差非常多」。',
+      },
+    ],
+    checklist: [
+      '已重算加權成績例題（82×0.3+75×0.3+88×0.4=82.3），並確認自己不會把權重當成整數直接乘再除以人數。',
+      '已換一組折扣資料驗證連續折扣要用乘法連乘（例如 0.7×0.95），不是把折扣百分比直接相加減。',
+      '能舉出一個百分點與百分比意義不同的例子（例如利率從 2% 到 3% 是「1 個百分點」也是「50%」）。',
+      '使用加權平均前已確認自己輸入的權重總和是 100%（或 1），不是的話結果整個無效。',
+    ],
+  },
+  'en:percentile-rank-guide': {
+    intro: 'This section reproduces the guide’s own example (100 candidates, 72 scoring lower, 4 tied, PR = 74) and checks the "top X%" framing that trips up English-language test score reports specifically.',
+    panels: [
+      {
+        title: 'Reproduce the worked example and confirm where 74 comes from',
+        text: 'The guide’s example has 100 candidates, 72 scoring lower than yours and 4 tied with you: PR = (72 + 0.5 × 4) / 100 × 100 = 74. Work through the 0.5 × 4 = 2 step by hand and confirm you understand why tied scores count as half a point each rather than being fully included in "scored lower" or excluded entirely — either alternative would land on a different number than 74.',
+      },
+      {
+        title: 'Recompute with a different group size to confirm you understand the formula, not just the answer',
+        text: 'Set up your own case with a different total: in a group of 50, 30 score lower than you and 2 are tied. PR = (30 + 0.5 × 2) / 50 × 100 = 62. This checks that you know the denominator is the total group size, not a fixed 100 — swapping the example’s 100 candidates for 50 should not trip up the calculation.',
+      },
+      {
+        title: 'Check the "top X%" framing that causes real confusion in English score reports',
+        text: 'US test reports (SAT, GRE, and similar) often translate a percentile into "top X%" language, and that conversion flips a number: PR 90 is not "top 90%" — it is roughly "top 10%," because PR describes what share of the group you scored above, not what share is ahead of you. Convert the worked example the same way: PR 74 is roughly "top 26%" (100 − 74), not "top 74%." Getting this backward is the single most common English-language misreading of a percentile rank.',
+      },
+    ],
+    checklist: [
+      'Reproduced the worked example (72 lower, 4 tied) and can explain why ties count as half rather than being fully included or excluded.',
+      'Recomputed PR with a different group size (the 50-candidate case) and got 62, confirming the denominator is the group size, not a fixed 100.',
+      'Can correctly convert a PR value to "top X%" language without inverting it (PR 74 is roughly "top 26%," not "top 74%").',
+      'Confirmed which comparison group the PR came from before citing it, and would not average or subtract PR values computed from different norm groups.',
+    ],
+  },
+  'en:teacher-exam-weighted-score-guide': {
+    intro: 'This section reworks the guide’s own example (written 50%, demo 30%, interview 20%, total 85.4) and adds the sanity check the guide itself flags: a misplaced decimal makes the total roughly a hundred times too large.',
+    panels: [
+      {
+        title: 'Reproduce the worked example and verify each partial product by hand',
+        text: 'The example is written test 82 (weight 50%), demo teaching 88 (30%), interview 90 (20%). Compute each term separately: 82 × 0.50 = 41.00, 88 × 0.30 = 26.40, 90 × 0.20 = 18.00, and sum them to 85.40. If your recomputation lands somewhere near 4,000 instead, you almost certainly entered 50 instead of 0.50 for a weight — a single term like 82 × 50 = 4,100 already exceeds any realistic score, so a wildly oversized total is diagnostic on its own.',
+      },
+      {
+        title: 'Build a case with a hard threshold that a weighted total cannot reveal on its own',
+        text: 'Suppose the published notice adds one rule the linear formula does not capture: any candidate scoring below 60 on the interview is disqualified regardless of total score. Take a candidate with written 90, demo 90, interview 55, same 50/30/20 weights: the weighted total is 90×0.5 + 90×0.3 + 55×0.2 = 45 + 27 + 11 = 83, a total that looks competitive. Applying only the weighted-average calculation would incorrectly treat this candidate as passing — the disqualification threshold has to be checked separately, and usually before, the weighted total is computed at all.',
+      },
+      {
+        title: 'Distinguish a weighted total from a T score, since the guide warns they are not interchangeable',
+        text: 'The guide’s FAQ notes that a T score standardizes one raw score against a distribution’s mean and standard deviation — a different calculation from combining several already-comparable component scores by weight. Self-check: if someone asks whether to convert an 85.4 weighted total into a T score, the answer depends entirely on whether the official process requires standardization or ranking after weighting; a weighted total and a T score answer different questions and cannot be substituted for each other without checking which one the announcement actually calls for.',
+      },
+    ],
+    checklist: [
+      'Reproduced the worked example and verified each partial product (41.00, 26.40, 18.00) sums to 85.40.',
+      'Can explain the sanity check for a misplaced decimal: a single term like 82 × 50 = 4,100 already signals an entry error before checking anything else.',
+      'Built a threshold case (such as a below-60 interview disqualification) and confirmed a weighted total alone cannot catch it — hard thresholds are checked separately.',
+      'Can state why a weighted total and a T score are not interchangeable, and would check the official process before converting one into the other.',
+    ],
+  },
+  'en:spss-levene-test-guide': {
+    intro: 'This section reworks the guide’s own example (Levene F=6.21, p=.015) and builds a second case with p above .05 to confirm the row choice is not a fixed habit.',
+    panels: [
+      {
+        title: 'Reproduce the example and confirm why p = .015 selects the second row',
+        text: 'The worked example has Levene F=6.21, p=.015. Since .015 < .05, the correct row is Equal variances not assumed, which the example reports as t=2.48, df=37.62, p=.018 — those are the numbers that belong in the write-up, not the first row’s values. Deliberately practice the sequence "compare p to .05 first, then pick the row," rather than reading whichever row appears first in the SPSS output.',
+      },
+      {
+        title: 'Build a case with p above .05 to confirm the row choice is not fixed',
+        text: 'Set up your own case: Levene F=1.02, p=.318. Because .318 is not below .05, this time the correct row is Equal variances assumed — the first row, not the second. This checks that the decision genuinely depends on comparing p to .05 each time, rather than assuming every independent-samples t test reads the second row because the worked example happened to.',
+      },
+      {
+        title: 'Confirm the two p values in the output answer different questions',
+        text: 'The worked example’s Levene p is .015; the t-test p on the selected row is a separate number, .018. Self-check: .015 describes whether the two groups’ variances can be treated as equal, while .018 describes whether the group means differ — reporting .015 as if it were the significance of the mean difference is the exact mistake the guide calls out, and the two numbers coming from the same SPSS table does not make them interchangeable.',
+      },
+    ],
+    checklist: [
+      'Reproduced the example (Levene p=.015) and confirmed it selects Equal variances not assumed (t=2.48, df=37.62, p=.018).',
+      'Built a p ≥ .05 case (such as p=.318) and confirmed it selects the first row instead, showing the choice depends on the actual p value each time.',
+      'Can state that the Levene p (.015) and the t-test p (.018) answer different questions and are not interchangeable.',
+      'Confirmed the design is genuinely independent-samples before applying this rule at all.',
+    ],
+  },
+  'en:t-test-apa-format-guide': {
+    intro: 'This section reworks the guide’s own independent-samples example and uses the two numeric tells it flags — a pooled df that must match group sizes, and a Cohen’s d that looks implausibly large — as self-checks.',
+    panels: [
+      {
+        title: 'Reproduce the independent example and verify df = 58 against the actual group sizes',
+        text: 'The example reports t(58) = 3.07, p = .003, d = 0.79 for two groups of 30 each (M=82.40 vs M=76.30). Verify the degrees of freedom independently: pooled df = (30 + 30) − 2 = 58, matching the reported t(58). If your own recomputation instead produces a decimal df, such as 54.32, that is not a rounding artifact — it means you copied the Welch-corrected row rather than the equal-variances row, so go back and confirm which row your software actually reported before writing the sentence.',
+      },
+      {
+        title: 'Rewrite the same numbers as a paired-samples sentence to see why the design word matters',
+        text: 'The guide’s paired example is t(29) = 5.12, p < .001, d = 0.93 for pretest/posttest scores from the same 30 students. Compare the two df values side by side: the independent example with 30 per group gives df = 58, while the paired example with 30 students gives df = 29 (n − 1). Same sample size, different design, different formula for df — confirm which design you actually ran before copying either df pattern into your own report.',
+      },
+      {
+        title: 'Use the plausibility checks the guide flags for d and for row selection',
+        text: 'Self-test with the reported d = 0.79: if your own calculation instead produces something like d = 2.3 for a simple two-group comparison, that is implausibly large, and the likely cause is dividing by one group’s SD instead of the pooled SD. Similarly, a non-integer df by itself (not 58, but something like 54.3) tells you that you are already reading the Welch-corrected row, so a df that is not a whole number means you should not also be copying the equal-variances row’s t and p values.',
+      },
+    ],
+    checklist: [
+      'Reproduced the independent example and verified pooled df = (30+30)−2 = 58 matches the group sizes.',
+      'Rewrote the same scenario as a paired-samples sentence and can explain why df = 29 (n−1) differs from the independent df = 58 for the same sample size.',
+      'Would flag a Cohen’s d above roughly 2 for a simple two-group comparison as a signal to recheck whether the pooled SD was used.',
+      'Can state that a non-integer df on its own indicates the Welch-corrected row, not the equal-variances row.',
+    ],
+  },
+  'en:anova-apa-format-guide': {
+    intro: 'This section reworks the guide’s one-way example (F(2, 87) = 6.42) and two-way example (interaction F(2, 114) = 4.18) to check that "significant" is not read as "every group differs."',
+    panels: [
+      {
+        title: 'Reproduce the one-way example and confirm what the omnibus F does and does not tell you',
+        text: 'The example reports F(2, 87) = 6.42, p = .003, η² = .13, followed by "Tukey comparisons showed the cooperative learning group scored higher than the lecture group." Self-check: the omnibus F only establishes that at least one group differs from another somewhere among the three groups — it does not by itself say which pair. If the write-up stopped at F(2, 87) = 6.42, p = .003, a reader would know a difference exists but not where, which is exactly why the Tukey sentence has to follow it, not replace it.',
+      },
+      {
+        title: 'Reproduce the two-way example and confirm which effect size label applies',
+        text: 'The two-way example reports the interaction as F(2, 114) = 4.18, p = .018, partial η² = .07 — not plain η². Build a parallel case: a region × material interaction of F(1, 96) = 3.85, p = .028, partial η² = .04. Write it out in full: "The interaction between region and material was significant, F(1, 96) = 3.85, p = .028, partial η² = .04." This checks that you are labeling the effect size consistently as partial η² for the two-way design, matching the guide’s own example rather than switching to unlabeled η².',
+      },
+      {
+        title: 'Self-check the guide’s own warning about what a significant ANOVA means',
+        text: 'The guide states directly that a significant ANOVA "means at least one difference exists" — not that every group differs from every other group. Apply this to the one-way example: F(2, 87) = 6.42, p = .003 tells you at least one of the three teaching methods differs from another, and only the follow-up Tukey comparison narrows that down to "cooperative learning is higher than lecture." Writing "all three methods differed significantly" from the omnibus F alone would overstate what the test actually showed.',
+      },
+    ],
+    checklist: [
+      'Reproduced the one-way example and can explain that F(2, 87) = 6.42, p = .003 alone shows a difference exists but not where it is.',
+      'Reproduced the two-way interaction example and used partial η² consistently, matching the guide’s own labeling rather than switching to unlabeled η².',
+      'Would not conclude "every group differs" from a significant omnibus F without a follow-up comparison.',
+      'Confirmed whether the design is one-way or two-way before deciding which effect-size label (η² vs partial η²) applies.',
+    ],
+  },
+  'en:two-way-anova-interaction-guide': {
+    intro: 'This section reworks the guide’s own two-way example (a 1-point gap in lower grades widening to an 8-point gap in upper grades) and builds a counter-example where the gaps stay flat, to check that "interaction" means a changing gap, not just any gap.',
+    panels: [
+      {
+        title: 'Reproduce the example’s gap calculation, not just the p value',
+        text: 'The example has Method A=78, B=77 in lower grades (gap = 1) and A=88, B=80 in upper grades (gap = 8). Compute the change in the gap directly: 8 − 1 = 7 points. The interaction test, F(1, 76) = 5.90, p = .018, is describing that 7-point widening — not the fact that a gap exists in either grade individually. Checking only whether each grade’s gap was significant on its own would answer a different question than the interaction test answers.',
+      },
+      {
+        title: 'Build a case with flat gaps to see what "no interaction" looks like',
+        text: 'Set up a counter-example: lower grades A=80, B=79 (gap = 1), upper grades A=90, B=89 (gap = 1). The gap is identical across grades — nothing widens or narrows — so this pattern would typically not produce a significant interaction, even though a method effect might still exist within each grade separately. Comparing this to the worked example (gap growing from 1 to 8) is the check for whether you are looking for "a gap" or for "a gap that changes," since only the second is what an interaction describes.',
+      },
+      {
+        title: 'Self-check the guide’s point that three questions can combine in any pattern',
+        text: 'The guide states that a significant method main effect, a significant grade main effect, and a significant interaction are three separate questions, and a study can land on any combination of significant and non-significant results among them. Self-test: knowing that both main effects are significant tells you nothing about whether the interaction is significant — you would need to check the interaction row itself, the same way the worked example’s F(1, 76) = 5.90 had to be read on its own rather than inferred from the main effects.',
+      },
+    ],
+    checklist: [
+      'Computed the gap change in the worked example directly (1-point gap widening to 8 points, a 7-point change) rather than reading only the p value.',
+      'Built a flat-gap counter-example (equal 1-point gaps in both grades) and can explain why that pattern would not typically produce a significant interaction.',
+      'Can state that a significant main effect for one factor says nothing about whether the interaction is significant.',
+      'Would check the interaction row’s own F and p value rather than inferring significance from either main effect.',
+    ],
+  },
+  'en:classroom-random-group-guide': {
+    intro: 'This section reworks the guide’s own 30-student example (2 absent, list updated to 28 before grouping) and checks what happens when the remaining count does not divide evenly.',
+    panels: [
+      {
+        title: 'Reproduce the example and confirm why updating the list first matters',
+        text: 'The example starts with 30 students for a 10-minute discussion, set to 6 groups of 5. If 2 students are absent, the guide says to update the list to 28 before generating groups, not after. Do the division yourself: 28 ÷ 6 = 4 remainder 4, so six groups from 28 students cannot all be exactly equal — the tool will produce a mix of 4- and 5-person groups. If grouping happens first with all 30 names and the 2 absences are handled afterward by hand, you lose the chance to see this uneven split coming and adjust the group count instead.',
+      },
+      {
+        title: 'Compare group count and group size settings on the same uneven number',
+        text: 'Using the same 28 present students, compare two settings directly: setting 6 groups produces a mix of 4s and 5s as computed above; setting group size to 5 instead produces five full groups of 5 (25 students) plus one short group of only 3. These are genuinely different outcomes from the same input, so the choice between "group count" and "group size" is not cosmetic — pick whichever pattern actually fits the activity.',
+      },
+      {
+        title: 'Self-check the timing mistake the guide flags',
+        text: 'The guide’s listed mistake is forgetting absent students, which creates a group with a missing member — discovered only after the activity has already started. Self-test: if you generate groups from the full 30-name list and then remove 2 absent names afterward, at least one group loses a member and the group sizes you originally checked are no longer accurate. The fix has to happen before generation, not as a correction afterward.',
+      },
+    ],
+    checklist: [
+      'Reproduced the calculation: 28 present students split into 6 groups gives a mix of 4- and 5-person groups (28 ÷ 6 = 4 remainder 4).',
+      'Compared group-count and group-size settings on the same 28 students and got different results (a 4/5 mix vs. five groups of 5 plus one group of 3).',
+      'Updated the student list to remove absences before generating groups, not after.',
+      'Chose group count or group size based on whether the activity needs fixed stations or a capped discussion size.',
+    ],
+  },
+  'en:classroom-random-picker-guide': {
+    intro: 'This section reworks the guide’s own vocabulary-review example and the no-repeat toggle behavior it describes in detail, since that toggle’s exact reset point is easy to assume incorrectly.',
+    panels: [
+      {
+        title: 'Reproduce the example’s ordering and confirm why it comes before the draw',
+        text: 'The example gives groups 2 minutes on countdown-timer before using random-student-picker to choose a representative. Self-check the reason for that order: if the picker ran first, the chosen student would have no preparation time and the draw would function as a surprise test rather than a participation opportunity — giving preparation time first is what keeps the picker supportive rather than a source of pressure.',
+      },
+      {
+        title: 'Trace the no-repeat toggle through a full class list, using the guide’s own numbers',
+        text: 'The guide states that with the no-repeat toggle on, a class of 24 students is guaranteed exactly one turn each before anyone repeats, and the moment the 24th name is drawn, the tool resets automatically. Walk through this yourself: draws 1 through 24 each pick a different student; draw 25 can select any of the 24 students again, including one picked on draw 1. Stopping to worry about a repeat after only, say, 10 draws is premature — that point has not been reached yet.',
+      },
+      {
+        title: 'Self-check the assumption that names never repeat by default',
+        text: 'The guide’s listed mistake is assuming names never repeat by default. Self-test: the no-repeat behavior only holds while the toggle is switched on — with it off, the same student could be drawn twice in a row. Before relying on "no repeats" across a whole lesson, confirm the toggle’s actual state rather than assuming the tool always behaves that way.',
+      },
+    ],
+    checklist: [
+      'Reproduced the example’s order (preparation time before the draw) and can explain why reversing it turns participation into a surprise test.',
+      'Traced the no-repeat toggle through a 24-student class: draws 1–24 are each a different student, and draw 25 can repeat anyone.',
+      'Confirmed the no-repeat toggle’s actual on/off state before assuming repeats are prevented for the lesson.',
+      'Would skip and redraw immediately if an absent student is picked, rather than counting that draw toward the fair-rotation cycle.',
+    ],
+  },
+  'en:classroom-timer-guide': {
+    intro: 'This section reworks the guide’s own 15-minute breakdown and the alert-timing detail it specifies (the timer sounds only once, at zero) since assuming an earlier warning exists is an easy mistake.',
+    panels: [
+      {
+        title: 'Reproduce the example’s time breakdown and confirm it sums correctly',
+        text: 'The example splits 15 minutes into 5 for reading, 5 for group discussion, 3 for randomly selected sharing, and 2 for teacher wrap-up. Add them: 5 + 5 + 3 + 2 = 15, matching the total block exactly with no spare transition time built in. If your own breakdown for a different total does not sum to the full block, one segment has to be trimmed before the lesson starts, not discovered mid-activity.',
+      },
+      {
+        title: 'Build a 20-minute version and fix an overflow by trimming the largest segment',
+        text: 'Try a 20-minute activity: 6 minutes discussion, 6 minutes output, 5 minutes sharing, and 3 minutes wrap-up sums to 20 with nothing left for transitions. If you then need 2 minutes for moving into groups, trim the largest segment first — cutting discussion from 6 to 4 minutes — rather than shaving a few seconds off every phase, since small cuts everywhere tend to disrupt the discussion or writing phase the most.',
+      },
+      {
+        title: 'Self-check what the countdown timer actually alerts, versus what you might assume',
+        text: 'The guide is explicit that countdown-timer sounds a tone and flashes the display once, at the exact moment the countdown reaches zero — it does not play any earlier warning sound. Self-test: if your lesson plan assumes students will hear a "one minute left" cue from the tool itself, that cue does not exist unless you say it out loud; the timer’s only signal is the final one.',
+      },
+    ],
+    checklist: [
+      'Reproduced the 15-minute breakdown (5+5+3+2) and confirmed it sums to the full block with no spare transition time.',
+      'Built a 20-minute version and, when it overflowed, trimmed the largest segment first rather than shaving time off every phase.',
+      'Confirmed that countdown-timer only alerts once, at zero, and would not rely on it for an earlier spoken warning.',
+      'Gave the one-minute warning verbally rather than assuming the tool provides it automatically.',
+    ],
+  },
+  'en:fair-student-grouping-guide': {
+    intro: 'This section reworks the guide’s own 30-student example (dividing evenly into 6 groups of 5) and its 32-student counter-example (which does not divide evenly), to check that group count and group size do not always agree.',
+    panels: [
+      {
+        title: 'Reproduce the 30-student example and confirm the even split',
+        text: 'The example puts 30 students into group-generator set to 6 groups. Verify by hand: 30 ÷ 6 = 5 exactly, no remainder, so every group has 5 students and group count or group size would give the identical result here. This is the easy case — it is worth reproducing precisely because it can create a false impression that the two settings always agree.',
+      },
+      {
+        title: 'Reproduce the 32-student case where group count and group size disagree',
+        text: 'The guide’s own counter-example uses 32 students: setting a group count of 6 produces four groups of 5 and two groups of 6 (the remainder spread across the first few groups); setting a group size of 5 instead produces six full groups of 5 plus one short group of only 2. Work out both by hand before generating anything — a lone 2-person group works for some tasks (a quick peer-check) and not others (a lab requiring at least 3 roles), so the setting choice has to match the activity.',
+      },
+      {
+        title: 'Self-check the guide’s warning about unexplained adjustments',
+        text: 'The guide’s listed mistake is making many unexplained changes after claiming the groups were random. Self-test: in the 30-student example, the only adjustment described is checking for a recorder role and swapping two support-need students out of the same group, with the reason stated. If your own process involves several swaps with no stated reason, students have grounds to suspect the "random" claim was cosmetic — the fix is either fewer adjustments or an explanation for each one.',
+      },
+    ],
+    checklist: [
+      'Reproduced the 30-student example and confirmed 30 ÷ 6 = 5 with no remainder, so count and size settings agree.',
+      'Reproduced the 32-student case and got two different results from group count (4 groups of 5, 2 of 6) versus group size (6 groups of 5, 1 of 2).',
+      'Chose group count or group size based on which uneven-split pattern actually fits the activity, not by default.',
+      'Can state a reason for every adjustment made after generating groups, rather than making unexplained swaps.',
+    ],
+  },
+  'en:classroom-lottery-tool-guide': {
+    intro: 'This section reworks the guide’s own 8-topic example (drawn from a wheel, removed after selection) and checks the removal decision against a second scenario where removal would be wrong.',
+    panels: [
+      {
+        title: 'Reproduce the example’s sequence and confirm the candidate list comes first',
+        text: 'The example has a social studies class with 8 presentation topics added to random-wheel; each group draws one topic in order, and selected topics are removed immediately. Self-check the sequence: showing the full list of 8 topics before the first draw is what lets a student verify nothing was left out afterward — if the list were revealed only as topics got drawn, there would be no way to confirm the wheel started with the complete set.',
+      },
+      {
+        title: 'Build a second scenario where the same removal rule would be wrong',
+        text: 'Compare the topic-draw case to a review-game scenario: a wheel used to pick which question category (vocabulary, grammar, reading) comes up next in a repeatable review activity. Unlike the 8 topics, which each group can only be assigned once, the review categories are meant to come up again — removing "vocabulary" after its first spin would eventually leave the wheel empty and stop the activity. The rule depends on whether each option is meant to be used once or repeatedly, not on which tool is used.',
+      },
+      {
+        title: 'Self-check the guide’s warning against high-stakes misuse',
+        text: 'The guide’s listed mistake is using a draw tool for high-stakes grading or important rights. Self-test: assigning presentation topics or deciding next week’s order (as in the example) fits the guide’s description of appropriate use; deciding a student’s final grade tier, or which one student gets a single competition slot, does not — those decisions need a transparent, appealable formal process, not a single wheel spin.',
+      },
+    ],
+    checklist: [
+      'Reproduced the example’s sequence and confirmed the full 8-topic list was shown before the first draw, not revealed as topics were selected.',
+      'Built a second scenario (a repeatable review wheel) where removing a drawn option after use would be the wrong rule.',
+      'Can state the rule for removal: remove when each option is meant to be used once, keep it when the activity is repeatable.',
+      'Confirmed this use case is not a high-stakes grading or limited-slot decision, which the guide flags as inappropriate for a draw tool.',
+    ],
+  },
+  'en:merge-pdf-private-guide': {
+    intro: 'This section reworks the guide’s own job-seeker example (1+2+6 pages merging to 9 pages, 3.2 MB) and the two verification methods it names for confirming files never leave the device.',
+    panels: [
+      {
+        title: 'Reproduce the example and verify the page and size arithmetic',
+        text: 'The example combines a 1-page cover letter, 2-page resume, and 6-page portfolio. Add the pages yourself: 1 + 2 + 6 = 9, matching the reported 9-page output — a page count that does not match the sum of the parts is itself a sign something went wrong. The example’s 3.2 MB result sits comfortably under the stated 5 MB application cap, so no compression step was needed; if your own merge instead lands close to or over the target’s limit, that is the signal to compress before submitting, not after a rejection.',
+      },
+      {
+        title: 'Run both verification methods the guide names, not just one',
+        text: 'The guide gives two independent ways to confirm local processing: disconnect from the internet and try the merge again, or open the browser’s developer tools Network tab and watch for upload traffic during the merge. Do both once on a tool you plan to trust with sensitive files — the offline test is faster, but the Network tab additionally shows whether any other requests fire during processing, which the offline test alone would not reveal if the site has a fallback online mode.',
+      },
+      {
+        title: 'Self-check the large-file failure mode before it happens mid-task',
+        text: 'The guide’s listed mistake is feeding a 200 MB scan straight into the browser and crashing the tab. Self-test: if any source file individually runs into the tens of MB or larger, compress it with a PDF or image compressor first rather than discovering a crash partway through a merge of several other files, which can force you to redo the whole batch.',
+      },
+    ],
+    checklist: [
+      'Reproduced the example’s page count (1+2+6=9) and confirmed the arithmetic matches the merged output.',
+      'Ran both verification methods — the offline test and a browser Network-tab check — on any tool handling sensitive files, not just one.',
+      'Compared the merged file size (3.2 MB in the example) against the actual destination’s upload limit before deciding whether compression is needed.',
+      'Would compress any unusually large source scan before merging, rather than merging first and discovering a crash partway through.',
+    ],
+  },
+  'en:word-count-essay-limits-guide': {
+    intro: 'This section reworks the guide’s own Common App example (648 words in Google Docs, 653 in the portal, because of slash-joined phrases) and the hand-written line-estimation method it recommends for exam settings with no counter.',
+    panels: [
+      {
+        title: 'Reproduce the discrepancy and find where the 5-word gap comes from',
+        text: 'The example shows 648 words in Google Docs but 653 in the application portal — a gap of 5 words traced to five slash-joined phrases like reader/writer, which the portal’s counter splits into two words each while a word processor counts as one. Verify the arithmetic: 5 phrases each counted as 1 extra word explains exactly the 5-word gap (653 − 648 = 5). The fix in the example was rewriting three phrases as single nouns and two with commas, landing at 649 — a number worth recomputing yourself rather than trusting at face value, since different wording changes shift the count differently for different essays.',
+      },
+      {
+        title: 'Build your own line-estimation baseline for a paper exam with no counter',
+        text: 'The guide recommends writing one full line in your normal handwriting on the actual answer sheet and counting the words on it, expecting 9–12 per line for most people, with the full estimate landing within about 5%. Do this yourself before exam day: write a line, count the words, and multiply by the number of lines in a full response — if your own baseline comes out well outside the 9–12 range, use your own number instead of the guide’s average, since handwriting size varies enough that the generic range will not fit everyone.',
+      },
+      {
+        title: 'Self-check the guide’s warning against "safety" padding',
+        text: 'The guide’s listed mistake is writing 320 words on an IELTS Task 2 essay (recommended range roughly 250–270) "to be safe," which it says produces more errors and looser structure with no scoring benefit. Self-test: if a draft is already well past the recommended range, the fix is trimming rather than treating the extra length as a safety margin — check this against the draft’s actual word count before submitting, not just against the guide’s stated range.',
+      },
+    ],
+    checklist: [
+      'Reproduced the Common App discrepancy (648 vs 653) and traced the 5-word gap to slash-joined phrases being split by the portal’s counter.',
+      'Built a personal line-estimation baseline (words per handwritten line × number of lines) rather than assuming the guide’s 9–12 average applies to your own handwriting.',
+      'Checked a finished IELTS or TOEFL draft against the recommended range and trimmed excess rather than treating extra length as a safety margin.',
+      'Pasted the final text into the actual target system before submitting and used its displayed count as final, not a third-party tool’s number.',
+    ],
+  },
+  'en:bar-chart-school-report-guide': {
+    intro: 'This section reworks the guide’s own club-recruitment example (pie chart rebuilt as a sorted bar chart in 90 seconds) and verifies the specific distortion claim about a non-zero axis.',
+    panels: [
+      {
+        title: 'Reproduce the axis-distortion example with real numbers',
+        text: 'The guide claims an axis starting at 50 makes 55 versus 60 look far more different than they really are. Check this yourself: on a full 0-to-60 scale, the bars for 55 and 60 have lengths in a 55:60 ratio (about 1.09:1, barely different); on a scale truncated to start at 50, the same two values become 5 units and 10 units above the axis start — a 1:2 ratio, doubling the apparent gap even though the underlying numbers only moved from 55 to 60. Either way, the point holds: truncating the axis changes the visual comparison without changing the data.',
+      },
+      {
+        title: 'Reproduce the six-club rebuild and confirm the category-count threshold',
+        text: 'The example’s six clubs got a comment of "can’t tell who leads" as a pie chart, then became readable as horizontal bars sorted descending with the leader (48) in a darker shade. Apply the guide’s own category thresholds to this case: six categories sits right at the vertical-bar limit of about 6, which is why horizontal bars (usable up to 10–12) were not strictly required here but still made the ranking easier to scan. Test the threshold yourself with a 9-category dataset — vertical bars at that count typically need slanted or shrunken labels, the guide’s stated trigger for switching to horizontal.',
+      },
+      {
+        title: 'Self-check which chart type the zero-axis rule actually applies to',
+        text: 'The guide is explicit that the zero-based axis rule applies to bar charts, not line charts — a line chart tracking change over time may start elsewhere as long as the axis range is clearly labeled, because a line encodes trend direction rather than absolute length. Self-test: if you are building a line chart of the same club data over several years, do not apply the "must start at zero" rule automatically; check whether the chart type is actually a bar chart before enforcing that specific rule.',
+      },
+    ],
+    checklist: [
+      'Reproduced the axis-truncation example and can explain why 55 vs 60 looks far more different once the axis starts at 50 instead of 0.',
+      'Applied the category-count threshold (about 6 for vertical, 10–12 for horizontal) to a dataset with more than six categories and picked the layout accordingly.',
+      'Rebuilt a poorly-sorted or over-colored chart using the five-decision checklist rather than judging it on data accuracy alone.',
+      'Confirmed the chart type is a bar chart, not a line chart, before applying the zero-based-axis rule.',
+    ],
+  },
+  'en:qr-code-classroom-guide': {
+    intro: 'This section reworks the guide’s own sizing formula (scan distance ÷ 10) across its three worked distances, and the deliberately reversed sizing rule for the answer-key use case.',
+    panels: [
+      {
+        title: 'Reproduce the sizing formula for all three worked distances',
+        text: 'The guide gives three examples: a worksheet scanned at 20 cm needs 2 cm, a wall display at 2 m needs 20 cm, and an auditorium screen at 10 m needs a full meter. Verify each with the stated formula (distance ÷ 10): 20 cm ÷ 10 = 2 cm, 200 cm ÷ 10 = 20 cm, 1000 cm ÷ 10 = 100 cm — all three check out. Apply the same formula to a size the guide does not work out: a hallway poster scanned from 1 m needs 1 m ÷ 10 = 10 cm, which is the number to actually use when sizing that print, not a guess.',
+      },
+      {
+        title: 'Match the error-correction level to a specific classroom scenario, not a default',
+        text: 'The guide recommends M or Q for classrooms because worksheets get folded and bulletin boards get stapled, reserving H only for a code with a logo overlaid in the center. Self-test with two concrete cases: a code printed at the bottom of a worksheet that gets folded into a binder needs at least M; a code on the classroom door with the school crest placed over its center needs H, and the print size should increase to offset the denser grid that H produces. Picking the same level for both cases regardless of the actual physical handling is the mistake this comparison is meant to catch.',
+      },
+      {
+        title: 'Self-check the one use case where smaller printing is intentional',
+        text: 'Among the guide’s 12 uses, the answer-key code (use ②) is the one place where the sizing formula is deliberately not followed at full scale — it recommends printing it small, about 1.5 cm, specifically so students cannot conveniently scan it before finishing the work. Self-test: if every code on a worksheet gets printed at the same convenient size by habit, the answer key loses its self-check function, since a large, easy-to-scan code invites scanning before attempting the problem.',
+      },
+    ],
+    checklist: [
+      'Verified the sizing formula (distance ÷ 10) against all three worked examples (20 cm → 2 cm, 2 m → 20 cm, 10 m → 100 cm) and applied it to a new distance.',
+      'Matched error-correction level to actual physical handling (M/Q for folded worksheets, H only when a logo overlays the code) rather than using one default for everything.',
+      'Printed any answer-key or self-check code deliberately small, rather than at the same convenient size as navigational codes.',
+      'Test-scanned each code with two different phones at the real intended distance before posting it.',
+    ],
+  },
+  'en:percentage-shortcuts-guide': {
+    intro: 'This section reworks the guide’s own weighted-grade example (82.3) and its built-in sanity-check trap (a nonsense 2,743 from a common shortcut error), then checks the percentage-point distinction with the guide’s own rate example.',
+    panels: [
+      {
+        title: 'Reproduce the weighted average and its own error trap',
+        text: 'The example is 30% homework, 30% midterm, 40% final with scores 82, 75, 88: weighted average = 82×0.3 + 75×0.3 + 88×0.4 = 24.6 + 22.5 + 35.2 = 82.3. Deliberately reproduce the guide’s flagged error too: treating the weights as 30, 30, 40 and dividing by 3 gives (82×30 + 75×30 + 88×40)/3 = 2,743 — a number so far outside any possible grade range that it should be caught immediately, before checking anything else about the calculation.',
+      },
+      {
+        title: 'Reproduce the discount-stacking logic with a different pair of numbers',
+        text: 'The guide’s example is $1,500 at 20% off plus a 10% coupon: 1,500 × 0.8 × 0.9 = $1,080, which is 28% off, not the 30% intuition suggests. Verify the multiplier logic generalizes by testing a different pair: $800 at 15% off plus a 5% coupon gives 800 × 0.85 × 0.95 = $646, which is 19.25% off — again not the 20% that adding 15% + 5% would suggest. Both cases confirm the same rule: stacked percentage discounts multiply the "keep" fractions, they never simply add.',
+      },
+      {
+        title: 'Self-check percentage points against the guide’s own rate example',
+        text: 'The guide’s example is a rate moving from 2% to 3%, which is "up 1 percentage point" and also "up 50%" ((3−2)/2 = 50%). Self-test with a different pair: a rate moving from 4% to 5% is also "up 1 percentage point," but only "up 25%" ((5−4)/4 = 25%) — the same 1-point move produces a different percent change depending on the starting value, which is exactly why a headline reporting only "up 1%" is ambiguous about which of these very different changes it means.',
+      },
+    ],
+    checklist: [
+      'Reproduced the weighted average (82.3) and independently reproduced the guide’s flagged error trap (the nonsense 2,743 from dividing by 3).',
+      'Verified the discount-stacking rule with a second, different pair of numbers ($800 at 15% + 5%) and confirmed it multiplies rather than adds.',
+      'Computed a second percentage-point example (4% to 5%) and confirmed the same 1-point move produces a different percent change (25%) than the guide’s 2%-to-3% example (50%).',
+      'Would not average, add, or subtract weighted or percentage-based results without first confirming what unit — percent or percentage point — the reported number actually uses.',
+    ],
+  },
+  'en:t-score-calculator-guide': {
+    intro: 'This section reworks the guide’s own worked example (raw score 82, mean 70, SD 8, T = 65) and adds the one confusion that is specific to English statistical vocabulary: a "T score" and a "t value" are not the same thing, despite sharing a letter.',
+    panels: [
+      {
+        title: 'Reproduce the worked example in two separate steps',
+        text: 'The example is raw score 82, mean 70, SD 8: Z = (82 − 70) / 8 = 1.50, then T = 50 + 10 × 1.50 = 65. Compute this in two separate steps rather than combining them mentally — divide first to get Z = 1.50, then multiply and add to get T = 65. Keeping the steps separate is what catches an error like forgetting to multiply by 10, which would leave you at T = 51.5, an easy slip if both operations happen in your head at once.',
+      },
+      {
+        title: 'Recompute with a different mean and SD to confirm you are not just recalling 65',
+        text: 'Set up your own case with a different mean and SD: raw score 78, mean 60, SD 12. Z = (78 − 60) / 12 = 1.50 — the same Z as the worked example, purely by coincidence of these particular numbers — but this does not mean the two raw scores are comparable. T = 50 + 10 × 1.50 = 65 as well, which is exactly the point: two different subjects with different means and SDs can land on the same T score, and that shared T score is what makes them comparable, not their raw scores or Z scores.',
+      },
+      {
+        title: 'Separate "T score" from "t value" — a confusion unique to the English terminology',
+        text: 'In English statistical writing, "T score" (this page’s mean-50, SD-10 standardized score) and "t value" or "t statistic" (the test statistic reported by a t test, unrelated to any fixed mean or scale) share the same letter but describe completely different things. Self-test: if a search result or textbook mentions "the t value was 2.48," that is not a T score and cannot be plugged into T = 50 + 10Z — it comes from a t test comparing two groups, a different calculation covered in the SPSS Levene test and t test APA format guides, not this one.',
+      },
+    ],
+    checklist: [
+      'Reproduced the worked example (Z=1.50, T=65) as two separate steps and can identify where a forgotten ×10 would show up (T=51.5 instead of 65).',
+      'Recomputed with a different mean and SD (60 and 12) and confirmed a shared T score of 65 does not mean the two raw scores are directly comparable.',
+      'Can distinguish a "T score" (mean 50, SD 10) from a "t value" from a t test, and would not confuse the two despite the shared letter.',
+      'Confirmed the raw score, mean, and SD used all came from the same tested group before trusting the T score.',
+    ],
+  },
+  'en:z-score-calculator-guide': {
+    intro: 'This section reworks the guide’s own class example (mean 76, SD 6, two students at 88 and 70) and checks the specific overreach that "the empirical rule" — a mnemonic common in English-language statistics courses — invites when applied carelessly.',
+    panels: [
+      {
+        title: 'Reproduce both students’ Z scores and compare what the sign actually means',
+        text: 'The example has a class mean of 76 and SD of 6. Student A scores 88: Z = (88 − 76) / 6 = 2.00. Student B scores 70: Z = (70 − 76) / 6 = −1.00. Compute both by hand and compare only the absolute values, not the raw scores: Student A is 2 standard deviations above the mean, Student B is 1 standard deviation below. In raw points, A is 12 points above the mean and B is 6 points below — a 2:1 ratio in raw points that matches the 2:1 ratio in Z scores only because this class has a single shared SD; do not assume that relationship generalizes to a class with a different spread.',
+      },
+      {
+        title: 'Build a third case to confirm you are reading standard-deviation units, not points',
+        text: 'Add a third student to the same class: a score of 82. Z = (82 − 76) / 6 = 1.00. Self-test the guide’s flagged mistake directly: reading "Z = 1.00" as "one point above the mean" would be wrong — this student is 6 raw points above the mean (82 − 76 = 6), and Z = 1.00 says that 6-point gap equals exactly one standard deviation in this particular class. In a class with SD = 3 instead of 6, the same 6-point gap would be Z = 2.00 — the same raw distance, a different Z score, because the unit is standard deviations, not points.',
+      },
+      {
+        title: 'Self-check against over-applying the 68-95-99.7 rule',
+        text: 'English-language statistics courses often introduce Z scores alongside the "empirical rule" (roughly 68% of values fall within 1 SD, 95% within 2 SD, 99.7% within 3 SD for a normal distribution). The guide’s own warning applies directly here: standardizing scores into Z values does not make a skewed or non-normal class distribution normal, so citing "about 95% of the class scored within 2 SD" is only valid if the class’s actual score distribution is reasonably normal — check the shape of the real data before applying that rule to a specific class’s Z scores.',
+      },
+    ],
+    checklist: [
+      'Reproduced both students’ Z scores (A: 2.00, B: −1.00) and can state each as a standard-deviation distance, not a raw-point difference.',
+      'Computed a third case (82 → Z=1.00) and can explain that Z=1.00 does not mean "one point above the mean" — it means one SD, which depends on the class’s actual spread.',
+      'Would recompute the same raw gap with a different SD (such as 3 instead of 6) and confirm the Z score changes even though the raw distance does not.',
+      'Would not apply the 68-95-99.7 empirical rule to a specific class’s Z scores without first checking whether that class’s score distribution is reasonably normal.',
+    ],
+  },
 };
 const workflowValueReviewOverrides: Partial<Record<string, ContentValueReviewOverride>> = {
   'zh:graduate-statistics-report-toolkit': {
@@ -1883,6 +2550,144 @@ const workflowValueReviewOverrides: Partial<Record<string, ContentValueReviewOve
       '已確認「重抽」只用在候選名單本身有誤的情況，不是抽到不滿意的結果就重來一次。',
     ],
   },
+  'en:graduate-statistics-report-toolkit': {
+    intro: 'This section walks through the workflow’s own six steps with a small baseline case you can verify by hand, focusing on the step order the workflow insists on: descriptive statistics before significance, assumptions before the APA sentence.',
+    panels: [
+      {
+        title: 'Run a baseline case through "descriptive statistics before test type" in that order',
+        text: 'Take a small dataset you already know the answer to — six scores you entered into a spreadsheet and averaged yourself: 72, 75, 78, 80, 82, 85 (mean 78.67). Enter the same 6 values into the standard deviation calculator and confirm the mean matches your spreadsheet before deciding whether the design calls for an independent t test, a paired t test, or an ANOVA. Descriptive statistics catch input errors early — if the tool’s mean does not match your own calculation on a 6-number dataset, do not proceed to picking a test type until that discrepancy is resolved.',
+      },
+      {
+        title: 'Read the Levene row before copying any t or p value, using a deliberately mismatched case',
+        text: 'Suppose the SPSS interpreter shows Levene’s test as significant (p = .02) for an independent-samples comparison. That result determines which row of the t-test table to read — Equal variances not assumed, not the first row. Deliberately copy the wrong row once as a test: note the t, df, and p values from the first row, then compare them against the second row’s values. They will differ, usually with the second row showing a non-integer df — that difference is exactly what gets reported incorrectly if the Levene result is skipped.',
+      },
+      {
+        title: 'Treat the generated APA sentence as a draft, not a finished result',
+        text: 'After entering t, df, p, and effect size into the APA 7 report generator, compare the output sentence word for word against the numbers copied from the correct SPSS row. The workflow’s last step is "copy and revise" — in practice this means adding the actual variable names, the direction of the effect, and any caveats a supervisor or journal requires, none of which the generator can infer from four numbers alone.',
+      },
+    ],
+    checklist: [
+      'Verified a small baseline dataset’s mean and SD against a hand calculation before trusting the standard deviation calculator on real data.',
+      'Checked the Levene row before copying any t, df, or p value, and can explain what changes between the two candidate rows.',
+      'Compared the APA generator’s output sentence against the source numbers, word for word, rather than accepting it unread.',
+      'Added variable names, direction, and study-specific context to the generated sentence before treating it as a finished report line.',
+    ],
+  },
+  'en:teacher-classroom-random-toolkit': {
+    intro: 'This section reworks the workflow’s own example (30 present students, 6 groups, 5-minute discussion, one representative) and checks what changes when the count of present students is not a clean multiple of the group setting.',
+    panels: [
+      {
+        title: 'Reproduce the example’s numbers before running the full sequence',
+        text: 'The workflow’s example is 30 present students split into 6 groups (5 per group), 5 minutes of discussion, then one representative picked per group. Verify 30 ÷ 6 = 5 with no remainder before running the tools — this is the case where group count and group size settings would give an identical result, which makes it a poor test of whether you understand the difference between the two settings.',
+      },
+      {
+        title: 'Rebuild the same sequence with an uneven number of present students',
+        text: 'Suppose only 27 students are actually present today instead of 30. Update the list before generating groups, and compare two settings: 6 groups gives a mix of 4- and 5-person groups (27 ÷ 6 = 4 remainder 3), while a group size of 5 gives five full groups plus one short group of 2. Run this by hand before opening the tool, then confirm the tool’s output matches the arithmetic — a mismatch means the wrong setting was selected, not that the tool made an error.',
+      },
+      {
+        title: 'Self-check the workflow’s own warning that tool output does not replace teacher judgment',
+        text: 'The workflow’s FAQ states directly that tools create a fast, transparent result, but the teacher should still check absence, support needs, seating limits, and safety. Self-test with the example: after generating 6 groups from 27 present students, look specifically for any group where two students who need extra support landed together, or where the physical seating makes a 5-person cluster impractical — the random-group tool has no information about either constraint, so checking for them is a manual step every time.',
+      },
+    ],
+    checklist: [
+      'Verified 30 present students split into exactly 6 groups of 5 (30 ÷ 6 = 5, no remainder) before running the full example.',
+      'Rebuilt the sequence with 27 present students and compared group-count vs. group-size settings by hand before checking the tool’s output against that arithmetic.',
+      'Checked the generated groups for support-need pairings or seating constraints the tool cannot see, rather than publishing the first result.',
+      'Copied the final grouping, draw order, or timer result to slides or the class platform only after this manual check, not before.',
+    ],
+  },
+  'en:student-report-toolkit': {
+    intro: 'This section reworks three of the workflow’s own steps into checkable cases: the word-counter-versus-character-counter gap, the merge-before-split ordering rule, and the zoom-in check after image compression.',
+    panels: [
+      {
+        title: 'Build a case where the word counter and character counter genuinely disagree',
+        text: 'The workflow’s FAQ states that the word counter reports tokenized word counts while the character counter counts every character including spaces and punctuation, and that the gap can be large in reports that mix languages. Test this with a short mixed-language sentence, such as one that embeds a few Chinese characters inside an English paragraph: the word counter will likely undercount the Chinese portion (since it is not space-separated the way English words are), while the character counter treats every character, English or Chinese, the same way. Checking only one of the two counts against a submission rule that specifies the other is exactly the false pass the workflow warns about.',
+      },
+      {
+        title: 'Confirm the merge-then-split order on a report with a required cover page',
+        text: 'The workflow step is explicit: merge every confirmed page into one PDF first, then split out a cover, appendix, or signature page afterward if required — not split midway and lose track of page numbers. Test this with a 3-part report (4 body pages, a 1-page appendix, and a 1-page signature form): merge all 6 pages first and verify the total is 6, then split out the signature page as its own file. If the signature page is split out first and the rest merged afterward instead, check whether the page numbers in the final merged file still match expectations — that is the failure mode the step order is designed to prevent.',
+      },
+      {
+        title: 'Self-check the zoom-in step the workflow requires after compression',
+        text: 'The workflow step says to compress each image, then zoom in to check chart axis labels, scanned handwriting, and screenshot detail before placing it in the document, while keeping the original file separately. Self-test: open a compressed chart image at 100% zoom (not the thumbnail) and try to read the smallest axis label. If it is not legible at 100%, the compression level was too aggressive for that particular image, and the original file is what allows redoing the compression at a lighter setting instead of starting from a rescanned or reshot original.',
+      },
+    ],
+    checklist: [
+      'Tested a mixed-language sentence through both the word counter and character counter and confirmed the two numbers genuinely differ.',
+      'Confirmed which count — words or characters — the actual submission rule specifies before relying on either tool’s number.',
+      'Merged all confirmed pages into one file first, then split out a cover, appendix, or signature page afterward, and verified the page count at each step.',
+      'Zoomed each compressed image to 100% and confirmed axis labels, handwriting, or screenshot text are still legible, while keeping the original file available.',
+    ],
+  },
+  'en:office-document-toolkit': {
+    intro: 'This section reworks three of the workflow’s own steps: the merge-before-split rule, the fact that business-day calculations only exclude dates entered manually, and the limit of what JSON formatting actually checks.',
+    panels: [
+      {
+        title: 'Confirm merge-first on a document that needs both a full file and a separate attachment',
+        text: 'The workflow’s FAQ states directly: merge into one complete working draft first and confirm the overall page order, then split out attachments, a cover, or a signature page as the submission requires. Test this on a document with 5 source files that need to become one 12-page working draft plus a separately submitted 2-page appendix: merge all sources first, verify the working draft is 12 pages, and only then split out the 2-page appendix. Splitting the appendix out of one source file before merging the rest instead is where page-order mistakes are most often introduced — recheck the final order if that route was taken.',
+      },
+      {
+        title: 'Build a business-days case that only excludes what was actually entered',
+        text: 'The workflow step warns that a business-day tool only skips the dates entered manually and does not apply a regional calendar automatically. Test this directly: calculate business days between two dates that span a known public holiday in your region, without entering that holiday as an exclusion, and note the result. Then add the holiday as a manual exclusion and recalculate — the two results will differ by at least one day, concrete proof that the tool did not know about the holiday until told.',
+      },
+      {
+        title: 'Self-check what JSON formatting does and does not verify',
+        text: 'The workflow step is explicit that formatting only changes layout, not the data itself, and that anything unusual should be verified against the source system rather than edited directly in the formatted text. Self-test: take a JSON export with an obviously wrong value, such as a negative count or a date far in the future, and run it through the formatter — the formatter will make the structure easier to read but will not flag or correct that value. Confirm the next step is going back to the source system, not editing the formatted text and treating that as the fix.',
+      },
+    ],
+    checklist: [
+      'Merged all source files into one working draft and verified the total page count before splitting out any cover, appendix, or signature page.',
+      'Calculated business days across a known regional holiday both without and with that holiday manually excluded, and confirmed the results differ.',
+      'Ran an export with a deliberately wrong value through the JSON formatter and confirmed the formatter neither flagged nor corrected it.',
+      'Verified any unusual JSON value against the source system rather than editing the formatted text and treating that as the correction.',
+    ],
+  },
+  'en:creator-social-toolkit': {
+    intro: 'This section reworks the workflow’s own steps: checking length by the unit a platform actually uses, exporting one image at two different aspect ratios before compressing, and the boundary on what a random wheel should decide.',
+    panels: [
+      {
+        title: 'Confirm which counter a specific platform limit actually uses',
+        text: 'The workflow’s FAQ states plainly that some platform limits count characters and others count words, and mixing the two produces a wrong pass or fail. Test this with one caption: check it against the character counter (which includes spaces and punctuation) and separately against the word counter. If the target platform’s stated limit is, say, "280 characters," only the character counter’s number is relevant — a caption that passes the word counter but exceeds 280 characters would still be rejected or truncated there.',
+      },
+      {
+        title: 'Export one photo at two different aspect ratios before compressing either one',
+        text: 'The workflow step is explicit: confirm the target aspect ratio for each platform, resize separately for each, and only then compress. Test this with one source image intended for both a square feed post and a widescreen video thumbnail: crop it to the square ratio with image-resizer and save that as its own file, then separately crop the same source to the widescreen ratio and save that as a second file — do not compress a single crop and try to reuse it for both destinations, since the two ratios need different crops from the same original, not the same crop resized twice.',
+      },
+      {
+        title: 'Self-check what a random wheel is and is not appropriate for',
+        text: 'The workflow’s FAQ states that a random wheel works for topic ordering, small giveaways, or low-risk content experiments, but important business choices need data. Self-test: listing five roughly-equal blog topic ideas and spinning a wheel to decide which to write first fits the stated use; using a wheel to decide which of two paid ad campaigns to keep running does not, even though both are "content decisions" in a loose sense — the second one needs performance data, not a spin.',
+      },
+    ],
+    checklist: [
+      'Checked a caption against whichever counter (character or word) the actual target platform’s stated limit uses, not just one by default.',
+      'Exported one source image as two separate crops for two different aspect ratios, rather than resizing one crop to fit both destinations.',
+      'Compressed each aspect-ratio export separately and zoomed to check faces, product detail, or screenshot text before publishing.',
+      'Used a random wheel only for a low-risk choice (such as topic ordering), not for a decision that depends on performance data.',
+    ],
+  },
+  'en:daily-decision-toolkit': {
+    intro: 'This section reworks the workflow’s own risk gate, the wheel-versus-this-or-that switch point, and the narrow condition under which a redraw is legitimate.',
+    panels: [
+      {
+        title: 'Apply the risk gate to two examples before using any other step',
+        text: 'The workflow’s first step draws a hard line: skip this workflow for anything involving money, health, legal matters, or work commitments, and use it only where a wrong pick can simply be redone. Test the gate on two cases: "which of three nearby restaurants for tonight’s dinner" passes (any of the three can be tried another night), while "which of two job offers to accept" fails, even though both are technically decisions with multiple options — the second is not a low-risk choice a redo can fix.',
+      },
+      {
+        title: 'Confirm the switch between the wheel and this-or-that by candidate count',
+        text: 'The workflow step is explicit: use the random wheel when more than two candidates remain, and switch to this-or-that when exactly two options are left, since setting up a wheel for two options is an unnecessary extra step. Test this directly: filter a restaurant list down to exactly two options and use this-or-that; separately, filter a list down to four options and use the wheel. Using the wheel for the two-option case still works, but it is more setup than the situation needs.',
+      },
+      {
+        title: 'Self-check the one legitimate reason to redraw',
+        text: 'The workflow step states that a redraw is appropriate only when the candidate list itself was wrong — such as a missing person — and not simply because someone dislikes the outcome. Self-test with a concrete case: if a name picker selects someone who was actually absent, that is a wrong-list case and justifies an immediate redraw; if it selects someone who was present but the group simply wanted a different result, redrawing removes the point of using a transparent method in the first place.',
+      },
+    ],
+    checklist: [
+      'Applied the risk gate to a real decision before using any tool, and can give one example that would fail the gate (money, health, legal, or work).',
+      'Chose the random wheel for more than two remaining candidates and this-or-that for exactly two, rather than using the wheel by default.',
+      'Can state the one legitimate reason to redraw (a wrong candidate list, such as a missing person) versus the reason that does not justify it (disliking the result).',
+      'Recorded or screenshotted a name-picker result immediately, rather than assuming it would still be visible after refreshing the page.',
+    ],
+  },
 };
 const categoryValueReviewOverrides: Partial<Record<string, ContentValueReviewOverride>> = {
   'zh:draw': {
@@ -1933,8 +2738,193 @@ const categoryValueReviewOverrides: Partial<Record<string, ContentValueReviewOve
       '已確認這些都是數學估算，未涵蓋個別稅率、級距、保費或銀行核定條件，正式金額前已對照官方或銀行資料。',
     ],
   },
+  'en:draw': {
+    intro: 'This section works from the category’s own test — what you need to prove after the drawing is done — to show when each of the five tools fits, using the tool blurbs and FAQ answers rather than restating the tool names.',
+    panels: [
+      {
+        title: 'Choose the 2D CAD board when the drawing has to survive a grid-measurement check',
+        text: 'The 2D CAD board draws lines, rectangles, circles, and polylines on a grid, with move, zoom, and PNG/SVG export. The test for this tool is simple: after drawing, count grid squares against your intended dimensions rather than judging "looks about right" by eye. For anything needing true engineering precision, the category page itself still recommends dedicated CAD software — this tool is for simple floor plans and diagrams, not production drawings.',
+      },
+      {
+        title: 'Choose the bar or pie chart maker only when the chart needs to be reproducible, and remember there is no spreadsheet import',
+        text: 'The category FAQ states plainly that neither the bar nor the pie chart maker supports CSV or spreadsheet import — both take labels and values typed directly into the page. The test for whether this is the right tool: if someone else retyped the same labels and values, would they get the same shape of chart? For data with more than a handful of rows, organize the numbers elsewhere first, since re-entering a long list by hand invites transcription errors the tool has no way to catch.',
+      },
+      {
+        title: 'Use the sketchpad or flowchart maker when the goal is communication, not precision, and export a backup before restructuring',
+        text: 'The sketchpad and flowchart maker are for getting an idea across clearly rather than hitting exact coordinates — the test is whether someone else can follow the diagram, not whether a line is exactly the right length. The category FAQ also notes that flowchart node text can be edited after placement, but recommends exporting a backup before a major restructure, since rearranging nodes can disturb arrows already connected — worth following literally before dragging more than one or two nodes at once.',
+      },
+    ],
+    checklist: [
+      'Decided which of three outcomes is needed before picking a tool: something that holds up to a grid measurement, something reproducible from the same numbers, or something that just needs to communicate an idea.',
+      'Confirmed the bar or pie chart maker will not import a CSV or spreadsheet, and organized larger datasets elsewhere before typing them in by hand.',
+      'Kept flowchart node counts and structure changes small, or exported a backup first, since large restructures can disturb existing arrow connections.',
+      'Chose PNG for a quick share and SVG when the CAD or flowchart output needs to stay sharp at a larger print size or further vector editing.',
+    ],
+  },
+  'en:money': {
+    intro: 'This section works from the category’s own disclaimer — every result here is a math estimate, not a binding figure — to show how the six tools split into pairs that answer opposite questions.',
+    panels: [
+      {
+        title: 'Payslip checks need two separate tools, not one',
+        text: 'Net Salary estimates the amount that actually lands in your account after common deductions; Overtime Pay works out the overtime total from hourly rate, hours, and multipliers. These check different lines on a payslip — confirming take-home pay alone does not verify whether the overtime line is correct, and vice versa. Auditing a full payslip needs both tools, not just whichever one is faster to open.',
+      },
+      {
+        title: 'Mortgage Payment and Compound Interest ask opposite questions despite similar-looking inputs',
+        text: 'Both tools take an amount, a rate, and a number of years, which makes them easy to confuse. Mortgage Payment estimates equal monthly principal-and-interest payments — what you owe each month on a loan. Compound Interest projects how a principal plus monthly contributions grows over time — what you gain from an investment. Entering loan terms into the compound interest tool, or investment terms into the mortgage tool, produces a plausible-looking number that answers the wrong question entirely.',
+      },
+      {
+        title: 'Savings Goal and Inflation run in opposite directions',
+        text: 'Savings Goal starts from a target amount and works out how long it takes or how much to set aside each month — actively building toward a number. Inflation starts from an amount and a rate and estimates how much purchasing power the same money loses over time — money passively losing value while sitting still. The category’s own disclaimer applies to both equally: neither accounts for an actual tax bracket, fees, or bank terms, so treat every result here as a planning estimate to confirm against an official source, not a final figure.',
+      },
+    ],
+    checklist: [
+      'Identified which line of a payslip needs checking — Net Salary and Overtime Pay check different lines and neither substitutes for the other.',
+      'Confirmed whether the question is "what do I owe" (Mortgage Payment) or "what will this grow into" (Compound Interest) before entering loan or investment terms.',
+      'Confirmed whether the question is "how do I reach a target" (Savings Goal) or "how much value will this lose" (Inflation) before comparing results.',
+      'Treated every result as a math estimate per the category disclaimer, and checked real figures against a bank, payslip, or official source before acting on them.',
+    ],
+  },
+  'en:pdf': {
+    intro: 'This section works from the category’s own FAQ — everything runs locally, but editing body text is not supported — to show which of the nine PDF tools fits a specific document problem rather than listing what each one does.',
+    panels: [
+      {
+        title: 'Distinguish "keep some pages" from "remove some pages" before picking a tool',
+        text: 'Extract PDF Pages keeps the pages specified, in the order specified, and discards the rest; Delete PDF Pages removes the pages specified and keeps everything else. For a 40-page contract needing only pages 3–5 for a summary, Extract is the direct route; for the same contract with 2 blank pages to remove and everything else kept, Delete is the direct route. Using Extract to remove 2 pages out of 40 means manually specifying the other 38 — technically possible, but Delete does the same job in one step.',
+      },
+      {
+        title: 'Fix orientation and fix order are two different tools, not one',
+        text: 'Rotate PDF corrects pages that scanned in sideways or upside down; PDF Page Reorder changes which position a page sits in, without touching its orientation. A stack of scans rotated 90 degrees but in the correct sequence needs only Rotate PDF; a stack that is right-side up but in the wrong sequence needs only Reorder. A scan that is both sideways and out of sequence needs both tools — reopening the file to check both problems separately, rather than assuming fixing one fixes the other, catches the case where only one was actually needed.',
+      },
+      {
+        title: 'Match the compression expectation to the content, and remember output has no watermark either way',
+        text: 'The category FAQ states directly that compression varies by content — scan-heavy PDFs compress more, text-only files less — and that no FunnyTools output ever carries a watermark. Before compressing a text-heavy report expecting a large size reduction, check the file’s actual composition first: a PDF that is mostly typed text and vector content may already be near its practical minimum size, and pushing the compression harder risks blurring any embedded images without meaningfully shrinking the rest.',
+      },
+    ],
+    checklist: [
+      'Chose Extract when keeping a specific few pages was the goal, and Delete when removing a specific few pages was the goal — not the same tool for both.',
+      'Diagnosed whether a scan’s problem was orientation, sequence, or both before picking Rotate PDF, Reorder, or reaching for both.',
+      'Checked whether a file is scan-heavy or mostly text before expecting a specific compression result, since the two compress very differently.',
+      'Reopened the output file afterward — nothing is uploaded and no output carries a watermark, but page order and content still need a manual check.',
+    ],
+  },
+  'en:study': {
+    intro: 'This section works from the category’s own FAQ — a 4.3-scale GPA estimate and a no-repeat picker toggle — to show which of the four tools fits classroom picking, seating, grouping, or grade estimates.',
+    panels: [
+      {
+        title: 'Random Student Picker and Group Generator answer different classroom questions',
+        text: 'Random Student Picker selects one or a few individuals — for answering a question, presenting, or representing a group — and the category FAQ confirms it can be set to avoid repeats until the whole class has been called. Group Generator instead splits the entire class into teams by group count or group size. Needing "who answers next" calls for the picker; needing "how do we split into six teams" calls for the generator — using the picker repeatedly to build teams one student at a time works technically but skips the generator’s even-distribution logic entirely.',
+      },
+      {
+        title: 'Seating Chart is for layout, not selection',
+        text: 'Seating Chart plans a physical arrangement from a student list — it answers "where does each student sit," not "who gets picked" or "who is in which team." For an exam requiring specific seat assignments, this is the right tool; for randomly picking who answers next or which team someone joins, it is the wrong one even though all three tools start from the same student list.',
+      },
+      {
+        title: 'Treat the GPA calculator as a planning estimate on one specific scale',
+        text: 'The category FAQ states the GPA calculator estimates on a common 4.3 scale, and that a school using a different scale should treat the result only as a reference. Before using it to check eligibility for an application or scholarship, confirm the school’s actual scale matches 4.3 — a 4.0 or a different weighted system will not match the tool’s number to an official transcript, so treat the estimate as a starting point, not a substitute for the school’s own calculation.',
+      },
+    ],
+    checklist: [
+      'Used Random Student Picker for selecting individuals and Group Generator for splitting the whole class into teams, rather than using one tool to do the other’s job.',
+      'Used Seating Chart only for physical layout, not for randomly selecting who answers or which team someone joins.',
+      'Confirmed the school’s actual GPA scale matches the calculator’s 4.3 scale before relying on the estimate for an application or scholarship decision.',
+      'Confirmed that student lists and grades are processed locally, per the category FAQ, but still treated every result as a planning estimate rather than an official record.',
+    ],
+  },
+  'en:time': {
+    intro: 'This section works from the category’s own FAQ — timing runs in the active tab, and business-day calculations only exclude what is entered — to show which of the eight tools fits a specific timing or date problem.',
+    panels: [
+      {
+        title: 'Pomodoro Timer, Countdown Timer, and Stopwatch measure three different things',
+        text: 'Pomodoro Timer cycles between fixed work and break periods for sustained focus; Countdown Timer counts down a single fixed duration, such as a 5-minute presentation slot; Stopwatch counts up from zero to measure how long something actually takes, with lap support. Using a stopwatch to enforce a presentation time limit works only if someone is watching it continuously and stopping the speaker manually — it has no alert, unlike Countdown Timer, which the category FAQ confirms signals with a sound or visual cue when time is up.',
+      },
+      {
+        title: 'Confirm the timer keeps running in the tab actually being used',
+        text: 'The category FAQ states that timing runs in the active browser tab, and recommends keeping that tab open for accuracy. Before relying on a Pomodoro or Countdown session for something time-sensitive, such as a timed exam segment, check that the tab will not be closed, put to sleep, or navigated away from during the session — switching tabs partway through is exactly the situation the FAQ’s warning is meant to prevent.',
+      },
+      {
+        title: 'Business Days excludes only what is typed in, not a regional holiday calendar',
+        text: 'The category FAQ is explicit that Business Days mainly excludes weekends, and that public holidays vary by region and must be entered manually to be excluded. Test this before relying on it for a deadline: calculate the business days across a date range that includes a known holiday without entering it, note the result, then add the holiday as an exclusion and recalculate — the two answers will differ, concrete proof that the tool needed the holiday entered by hand rather than knowing about it automatically.',
+      },
+    ],
+    checklist: [
+      'Picked Countdown Timer for a fixed time limit with an alert, Stopwatch for measuring elapsed time, and Pomodoro Timer for a repeating focus-and-break cycle — not one tool for all three purposes.',
+      'Kept the timing tab open and active during a time-sensitive session, per the category FAQ’s own accuracy note.',
+      'Manually entered any regional public holidays before trusting a Business Days result for a real deadline, since the tool does not apply them automatically.',
+      'Confirmed which date or age calculation the task actually needs (Date Difference for a span, Age Calculator for a birth-date-based age) before reading the result.',
+    ],
+  },
 };
-const audienceValueReviewOverrides: Partial<Record<string, ContentValueReviewOverride>> = {};
+const audienceValueReviewOverrides: Partial<Record<string, ContentValueReviewOverride>> = {
+  'zh:students': {
+    intro: '這一段用頁面本身列出的痛點——字數限制、檔案太大、引用格式與 QR Code 常在最後一刻才處理——示範怎麼判斷該先查哪一個數字、該先處理哪一個檔案。',
+    panels: [
+      {
+        title: '先分清楚字數規則要查「字數統計」還是「字元計數器」',
+        text: '頁面列出的第一個痛點是報告有字數或字元限制。同一段文字兩個工具給的數字通常不同：字數統計對中英文的計數方式不同，字元計數器則不分語言逐字元計數，含標點與空白都算。用你自己的草稿實測：先查繳交規定寫的是「字數」還是「字元」上限，只查其中一個工具就當作兩邊都合格，是頁面痛點裡最容易踩到的一種。',
+      },
+      {
+        title: '圖片與 PDF 檔案太大時，先壓縮圖片再合併，不要顛倒順序',
+        text: '頁面建議的做法是先壓縮或轉檔圖片再放入文件，避免最後 PDF 檔案過大才回頭處理。自己動手驗證這個順序的差異：如果先把所有圖片貼進文件才發現整份 PDF 超過繳交系統的大小限制，這時要壓縮的對象已經變成一份合併後的大檔案，處理起來比壓縮完再放入的單張圖片複雜得多；先壓縮圖片、確認清晰度後再放入文件，PDF 合併後通常就不需要再整份壓縮。',
+      },
+      {
+        title: '引用格式與 QR Code 是「最後一刻才處理」的項目，草稿完成不代表可以直接交',
+        text: '頁面 FAQ 明確提醒 APA 7 產生器的輸出只是草稿，你仍需要檢查研究問題、變項名稱、統計假設、老師要求與引用格式；GPA 工具也不能代表正式成績，只適合試算與規劃。自我測試：如果你打算直接把 APA 7 產生器的句子貼進報告交出去，先確認自己有沒有把變項名稱、研究脈絡與方向補進去——這一步頁面已經明講不能省略。',
+      },
+    ],
+    checklist: [
+      '已確認繳交規定要求的是「字數」還是「字元」上限，分別用字數統計與字元計數器查過，不是只查一個就當作合格。',
+      '已先壓縮圖片、放大檢查清晰度後才放入文件，不是等 PDF 合併完才發現檔案過大回頭處理。',
+      '合併、拆分或壓縮 PDF 後已重新打開下載檔，確認頁面順序正確。',
+      'APA 7 產生器的輸出已補上變項名稱、研究脈絡與方向，GPA 試算結果已知道不能代表正式成績，兩者都已當作草稿而非最終結果。',
+    ],
+  },
+  'en:developers': {
+    intro: 'This section works from the page’s own scenario — turning a raw API response into a shareable debugging sample — and the FAQ’s warning that formatting tools change layout, not meaning.',
+    panels: [
+      {
+        title: 'Reproduce the two-step sanitization the scenario requires, in the stated order',
+        text: 'The page’s scenario is explicit that "make the structure readable" and "confirm nothing sensitive remains" are two separate steps, not one — the formatter only makes JSON structure readable and does not detect or mask any field automatically. Test this on a real but low-stakes JSON fragment: run it through json-formatter first, then read through the formatted output by eye specifically looking for emails, tokens, or user IDs, and manually replace anything real with an obviously fake placeholder. Skipping straight from formatting to sharing is the mistake this two-step sequence is meant to prevent.',
+      },
+      {
+        title: 'Confirm seconds versus milliseconds before writing a timestamp into a bug report',
+        text: 'The scenario recommends converting one or two representative Unix timestamps with timestamp-converter specifically to confirm whether the value is in seconds or milliseconds before writing the converted time into a report. Self-test: a 10-digit Unix value is almost always seconds, and a 13-digit value is almost always milliseconds — feeding a millisecond value into a converter expecting seconds produces a date far in the future or the distant past, which is itself the tell that the wrong unit was assumed.',
+      },
+      {
+        title: 'Self-check what json-formatter does not do, and where real secrets belong',
+        text: 'The FAQ states plainly that JSON formatting does not fix data meaning — it only helps readability and basic structure, while field meaning, types, and business rules still need review. It also states that real API keys should not be pasted here at all, even though the tool is browser-oriented, because production secrets belong in approved secure tooling, not a general-purpose formatter. Self-test: if a JSON fragment about to be pasted contains anything that would matter if leaked, redact it before pasting, not after.',
+      },
+    ],
+    checklist: [
+      'Ran a JSON fragment through the formatter, then manually scanned the output for real emails, tokens, or IDs and replaced them with placeholders — as two separate steps, not one.',
+      'Identified whether a Unix timestamp was in seconds (10 digits) or milliseconds (13 digits) before converting and citing it in a report.',
+      'Re-validated edited JSON as syntactically correct (no dropped brackets or commas) after manually redacting sensitive values.',
+      'Confirmed no real API keys, passwords, or production secrets were pasted into any formatting tool, regardless of how it processes data.',
+    ],
+  },
+  'en:students': {
+    intro: 'This section works from the page’s own pain points — word or character limits, oversized files, and citation or QR-code work that lands at the last minute — to show which check actually catches each problem.',
+    panels: [
+      {
+        title: 'Check the limit against the unit a submission system actually counts',
+        text: 'The page names word or character limits as the first pain point, and the two counters disagree in a mixed-language report because word counting and character counting follow different rules. Test this on a real draft: check it with word-counter and separately with character-counter, then compare both numbers against what the specific submission system states — if the stated limit is a character count, only the character-counter’s number matters, regardless of what the word count shows.',
+      },
+      {
+        title: 'Compress images before placing them in the document, not after the PDF is already too big',
+        text: 'The page’s suggested workflow is to compress or convert images before placing them in the document, specifically to avoid discovering the final PDF is too large only at the end. Self-test the alternative order: placing uncompressed images first and merging everything into a PDF means the file that then needs shrinking is the whole merged document, not the individual images — compressing that combined file risks blurring text pages along with the photos, which compressing each image beforehand avoids entirely.',
+      },
+      {
+        title: 'Treat generated report text and GPA estimates as drafts, per the page’s own FAQ',
+        text: 'The FAQ states directly that APA 7 generator output should be treated as a draft — variables, assumptions, teacher requirements, and citation rules still need checking — and that the GPA tool is not an official grade record, only useful for planning and estimates. Self-test before submitting: if generator output is about to go straight into a report, confirm the actual variable names, study context, and direction have been added, since the generator cannot know them on its own; if citing a GPA figure for an application, confirm it against the official transcript rather than the estimate alone.',
+      },
+    ],
+    checklist: [
+      'Checked a draft against whichever count — words or characters — the actual submission system specifies, since the two numbers can genuinely disagree.',
+      'Compressed images before placing them in the document, rather than compressing an already-merged PDF afterward.',
+      'Reopened a merged, split, or compressed PDF to confirm page order and file size before submitting.',
+      'Added variable names and study context to any generated report text, and confirmed a GPA figure against the official transcript rather than the tool’s estimate alone.',
+    ],
+  },
+};
 
 /**
  * TEMPORARY, shrinking list — created 2026-08-01 during the scaled-content-abuse remediation
@@ -1957,57 +2947,10 @@ const audienceValueReviewOverrides: Partial<Record<string, ContentValueReviewOve
  */
 const pendingHandwrittenReview: Record<'tool' | 'guide' | 'workflow' | 'category' | 'audience', string[]> = {
   tool: [],
-  guide: [
-    'zh:anova-apa-format-guide',
-    'zh:classroom-lottery-tool-guide',
-    'zh:classroom-random-picker-guide',
-    'zh:classroom-timer-guide',
-    'zh:fair-student-grouping-guide',
-    'zh:percentage-shortcuts-guide',
-    'zh:percentile-rank-guide',
-    'zh:spss-levene-test-guide',
-    'zh:t-test-apa-format-guide',
-    'zh:teacher-exam-weighted-score-guide',
-    'zh:two-way-anova-interaction-guide',
-    'en:anova-apa-format-guide',
-    'en:bar-chart-school-report-guide',
-    'en:classroom-lottery-tool-guide',
-    'en:classroom-random-group-guide',
-    'en:classroom-random-picker-guide',
-    'en:classroom-timer-guide',
-    'en:fair-student-grouping-guide',
-    'en:merge-pdf-private-guide',
-    'en:percentage-shortcuts-guide',
-    'en:percentile-rank-guide',
-    'en:qr-code-classroom-guide',
-    'en:spss-levene-test-guide',
-    'en:t-score-calculator-guide',
-    'en:t-test-apa-format-guide',
-    'en:teacher-exam-weighted-score-guide',
-    'en:two-way-anova-interaction-guide',
-    'en:word-count-essay-limits-guide',
-    'en:z-score-calculator-guide',
-  ],
-  workflow: [
-    'en:creator-social-toolkit',
-    'en:daily-decision-toolkit',
-    'en:graduate-statistics-report-toolkit',
-    'en:office-document-toolkit',
-    'en:student-report-toolkit',
-    'en:teacher-classroom-random-toolkit',
-  ],
-  category: [
-    'en:draw',
-    'en:money',
-    'en:pdf',
-    'en:study',
-    'en:time',
-  ],
-  audience: [
-    'zh:students',
-    'en:developers',
-    'en:students',
-  ],
+  guide: [],
+  workflow: [],
+  category: [],
+  audience: [],
 };
 
 function first(items: string[] | undefined, fallback: string): string {
