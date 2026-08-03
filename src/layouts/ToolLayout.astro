@@ -149,6 +149,20 @@ const downloadGateConfig = SITE.features.downloadGate
       </section>
     )}
 
+    {content.sources && content.sources.length > 0 && (
+      <section class="content-section">
+        <h2>{lang === 'zh' ? '方法與資料來源' : 'Method and sources'}</h2>
+        <ul class="note-list">
+          {content.sources.map((source) => (
+            <li>
+              <a href={source.href} target="_blank" rel="noopener noreferrer">{source.label}</a>
+              {source.note && <>：{source.note}</>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
     {content.reportTip && (
       <section class="content-section report-tip">
         <h2>{lang === 'zh' ? 'APA／研究報告描述提示' : 'APA / research reporting tip'}</h2>
