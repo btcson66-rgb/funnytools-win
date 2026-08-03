@@ -3833,7 +3833,16 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
 
 // 內容庫排程機制：publishAt 之前的 guide 不進 build（頁面、索引、sitemap 都看不到）。
 // 每日 release 重新 build 時，日期到了的 guide 自動上線。
-const contentLibraryToday = new Date().toISOString().slice(0, 10);
+//
+// 2026-08-03 凍結（老闆核准 W32 方案 D 選項 2）：funnytools 自 2026-06-28 起因
+// June 2026 spam update 被降權，曝光 -93% 一個多月未回升，事件報告的結論是
+// 「在信任恢復前不要再加頁」。但這個閘門是在 build 時依當天日期判斷，光停掉排程
+// 沒有用——任何一次 release 都還是會把到期的 guide 帶上線。因此把截止日釘死在
+// 凍結當天。內容庫本身完全保留、未刪任何 guide；解除凍結只要把常數改回
+// `new Date().toISOString().slice(0, 10)`，排到的 guide 會在下一次 release 自動補上。
+// 解除條件見 03_Incidents/2026-07-31-funnytools-gsc-collapse-june-spam-update.md。
+const CONTENT_LIBRARY_FREEZE_DATE = '2026-08-01';
+const contentLibraryToday = CONTENT_LIBRARY_FREEZE_DATE;
 
 export const seoGuides: SeoGuide[] = rawSeoGuides
   .filter((guide) => !guide.publishAt || guide.publishAt <= contentLibraryToday)
