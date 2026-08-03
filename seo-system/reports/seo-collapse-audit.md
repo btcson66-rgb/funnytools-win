@@ -1,6 +1,6 @@
 # SEO Collapse Audit
 
-Generated: 2026-08-03T02:50:24.257Z
+Generated: 2026-08-03T03:37:24.536Z
 Mode: local
 
 - Build pages: 948

@@ -560,6 +560,33 @@ function base64Url(input) {
   return Buffer.from(input).toString('base64').replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
 }
 
+// 2026-08-03：本機憑證檔 fallback。CI 有 GSC_SERVICE_ACCOUNT_JSON secret（2026-07-31 起
+// 已設定，Actions 上實際會提交），但本機跑 `npm run release` 時沒有這個環境變數，
+// 於是每次發布都印一行 `seo:gsc-sitemaps=fail`。那不是真的壞掉，卻讓「憑證缺失」
+// 這個早就修好的問題在營運紀錄裡連續留了好幾週的假警報，一路被抄進週決策包。
+// 本機的 service account 檔就在 repo 內（`api token/`，已在 .gitignore，未被追蹤），
+// 且實測對 sc-domain:funnytools.win 是 siteFullUser，有提交 sitemap 的權限。
+// CI 上這個檔不存在 → 回傳 null → 行為與過去完全相同，不影響 Actions。
+const LOCAL_SERVICE_ACCOUNT_FILES = [
+  process.env.GSC_SERVICE_ACCOUNT_FILE,
+  join(rootDir, 'api token', 'ga4-service-account.json'),
+].filter(Boolean);
+
+function readLocalServiceAccountFile() {
+  for (const path of LOCAL_SERVICE_ACCOUNT_FILES) {
+    if (!existsSync(path)) continue;
+    try {
+      const parsed = JSON.parse(readFileSync(path, 'utf8'));
+      if (parsed?.client_email && parsed?.private_key) {
+        return { client_email: parsed.client_email, private_key: parsed.private_key, source: path };
+      }
+    } catch {
+      // 壞掉的憑證檔不吞掉：往下走，最後由 missingGscCredentialVars() 具名回報
+    }
+  }
+  return null;
+}
+
 export function getServiceAccountCredentials() {
   if (process.env.GSC_SERVICE_ACCOUNT_JSON) {
     const parsed = JSON.parse(process.env.GSC_SERVICE_ACCOUNT_JSON);
@@ -574,7 +601,7 @@ export function getServiceAccountCredentials() {
       private_key: process.env.GSC_PRIVATE_KEY.replace(/\\n/g, '\n'),
     };
   }
-  return null;
+  return readLocalServiceAccountFile();
 }
 
 // 2026-07-25 CEO 審查（gsc-secrets 稽核修正）：紅線第 6 條要求「腳本壞掉要通知，不得
@@ -599,7 +626,9 @@ export function missingGscCredentialVars() {
     !process.env.GSC_CLIENT_EMAIL && 'GSC_CLIENT_EMAIL',
     !process.env.GSC_PRIVATE_KEY && 'GSC_PRIVATE_KEY',
   ].filter(Boolean);
-  if (missing.length === 2) return ['GSC_SERVICE_ACCOUNT_JSON (or GSC_CLIENT_EMAIL + GSC_PRIVATE_KEY)'];
+  if (missing.length === 2) {
+    return [`GSC_SERVICE_ACCOUNT_JSON (or GSC_CLIENT_EMAIL + GSC_PRIVATE_KEY), or a readable service account file at one of: ${LOCAL_SERVICE_ACCOUNT_FILES.join(', ')}`];
+  }
   return missing;
 }
 
