@@ -870,6 +870,8 @@ interface PrioritySpec {
   enContentSections?: NonNullable<ToolContent['contentSections']>;
   zhFaq?: ToolContent['faq'];
   enFaq?: ToolContent['faq'];
+  zhSources?: ToolContent['sources'];
+  enSources?: ToolContent['sources'];
 }
 
 function priorityEnhancement(spec: PrioritySpec): Record<Locale, Enhancement> {
@@ -947,6 +949,7 @@ function priorityEnhancement(spec: PrioritySpec): Record<Locale, Enhancement> {
         description,
       })),
       notes: spec.zhMistakes,
+      ...(spec.zhSources ? { sources: spec.zhSources } : {}),
       faq: spec.zhFaq ?? [
         { q: `${spec.zhName}可以免費使用嗎？`, a: '可以。FunnyTools 的工具可直接在瀏覽器使用，不需要註冊。' },
         { q: '資料會上傳到伺服器嗎？', a: '這個工具採瀏覽器本機處理；輸入內容與檔案不會主動上傳到 FunnyTools 伺服器。' },
@@ -965,6 +968,7 @@ function priorityEnhancement(spec: PrioritySpec): Record<Locale, Enhancement> {
         description,
       })),
       notes: spec.enMistakes,
+      ...(spec.enSources ? { sources: spec.enSources } : {}),
       faq: spec.enFaq ?? [
         { q: `Is ${spec.enName} free to use?`, a: 'Yes. You can use the tool directly in the browser with no registration.' },
         { q: 'Is my data uploaded?', a: 'No. This tool runs locally in your browser and does not actively upload inputs or files to FunnyTools servers.' },
@@ -989,7 +993,7 @@ const prioritySpecs: PrioritySpec[] = [
     enKeywords: ['teacher exam score calculator', 'weighted exam score', 'teaching demo score', 'teacher recruitment'],
     zhWho: '適合準備教師甄試的考生、協助整理成績試算表的老師，以及想快速比較不同權重情境的人。你可以把筆試、口試、試教或其他項目拆開輸入，先確認各項權重加總是否合理。',
     enWho: 'Useful for teacher-candidate score planning, spreadsheet checks, and quick what-if comparisons across written, interview, and teaching-demo components.',
-    zhMethod: '加權總分的核心是「分數乘以權重後加總」。若簡章使用先標準化、再加權或另有門檻，請依該年度公告調整，本頁只做一般加權試算。',
+    zhMethod: '程式計算 Σ(分數×權重)／Σ權重，權重不必剛好合計 100，但必須全部採同一單位。若簡章使用先標準化、再加權或另有門檻，請依該年度公告調整，本頁只做一般加權試算。',
     enMethod: 'The basic method multiplies each component by its weight and sums the weighted scores. If an official notice uses normalization, thresholds, or a different sequence, follow that notice.',
     zhExamples: [
       '考生把筆試 70%、口試 15%、試教 15% 輸入，先確認總分是否符合自己整理的表格。',
@@ -1001,10 +1005,71 @@ const prioritySpecs: PrioritySpec[] = [
       'A study group compares examples where the written score is strong but the demo score is average.',
       'A teacher checks whether several official-notice examples use the same weighting sequence.',
     ],
-    zhMistakes: ['不要把百分比權重和小數權重混用。', '不要把範例試算當成任何年度正式錄取規則。', '若簡章有最低門檻、同分比序或標準化規則，需另外確認。'],
+    zhMistakes: ['不要把百分比權重和小數權重混用。', '不要把範例試算當成任何年度正式錄取規則。', '若簡章有最低門檻、同分比序、加分或標準化規則，需另外確認。', '不要在不清楚簡章的四捨五入順序時，用畫面結果推算名次差。'],
     enMistakes: ['Do not mix percentage and decimal weights.', 'Do not treat a sample calculation as an official selection rule.', 'Check thresholds, tie-breakers, and normalization separately.'],
     relatedZh: '若需要比較標準化後的分數，可接著使用 T 分數計算器、Z 分數計算器、PR 百分等級計算器與加權平均計算器。',
     relatedEn: 'For standardized score workflows, use the T Score Calculator, Z Score Calculator, Percentile Rank Calculator, and Weighted Average Calculator.',
+    zhContentSections: [
+      {
+        heading: '工具實際使用的加權公式與精度',
+        paragraphs: [
+          '程式分別讀取筆試、試教、口試的分數與非負權重，至少要有一項權重大於 0。模擬總成績為 Σ(各項分數×各項權重)／Σ權重；權重合計不是 100 時仍會照總和正規化計算，同時顯示警告。這代表 40、40、20 與 0.4、0.4、0.2 會得到相同結果，但把 40、0.4、20 混在一起會扭曲比例。',
+          '乘法與除法先使用完整數值精度，模擬總成績最後顯示到小數點後最多 3 位；權重總和與明細中的分數、權重顯示到最多 2 位。「自動正規化權重」會先把各權重換成合計 100 的比例並保留最多 4 位，再重新計算。若簡章規定每項先取到小數第 2 位後再加總，本工具結果可能不同。',
+        ],
+      },
+      {
+        heading: '教甄三項成績的完整試算例子',
+        paragraphs: [
+          '假設筆試 80 分占 40%、試教 85 分占 40%、口試 82 分占 20%，模擬總成績為 (80×40+85×40+82×20)÷100=82.4。若只把試教提高 5 分到 90，其他不變，總成績變成 84.4，增加 2 分；因為試教權重是 40%，試教每增加 1 分只會讓總成績增加 0.4 分。',
+          '這個例子只能用來排定準備重點。正式結果還可能受到初試門檻、複試資格、原始分數標準化、加分、缺額與同分比序影響；工具沒有這些年度與縣市規則，也不會預測錄取。',
+        ],
+      },
+      {
+        heading: '0 權重、分數範圍與輸入邊界',
+        paragraphs: [
+          '權重可以是 0；該項分數仍會顯示在輸入欄，但乘積為 0，不影響模擬總成績。權重不能是負數，且三項不能全部為 0。分數欄只檢查是否為有限數值，程式不限制在 0 到 100，所以 105 分或負分也會照公式計算；這是為了保留自訂量尺彈性，不代表任何教甄允許超出公告範圍。正式試算前應自行檢查各欄滿分與可接受區間。',
+          '畫面沒有缺考、未到考或資格不符的專用狀態。把空白改成 0 會實際拉低總分，把該項權重改成 0 則等於完全排除，兩者意義不同；應依簡章規定處理，不要用方便計算的方式代替正式規則。',
+        ],
+      },
+      {
+        heading: '正式使用前的逐項核對表',
+        paragraphs: [
+          '先確認三項名稱是否真的是筆試、試教、口試，以及簡章中的數字是百分比、倍率或已換算分數；再確認計算順序是原始分數直接加權，還是各項先標準化、先取小數位、通過門檻後才加權。最後核對是否另有服務年資、證照、偏遠地區、身心障礙或其他依法加分項目。本工具沒有這些欄位，不能把它們併入某一項分數假裝完成。',
+          '試算後應保留簡章版本、輸入值、權重與計算明細。若兩位考生只差 0.001 分，不要用本站顯示的 3 位小數自行判定名次；主辦單位可能保留更多內部精度，或依另一項成績進行同分比序。',
+        ],
+      },
+      {
+        heading: '先核對簡章，再決定要用哪一種平均',
+        paragraphs: [
+          '若只是整理多次作業、段考或任意數量的評量，不必硬塞進固定三欄；一般成績工具能逐列輸入，並同時比較簡單平均與加權平均。',
+        ],
+        link: {
+          prefix: '改用',
+          label: '成績平均計算器整理多筆評量與權重',
+          href: '/tools/grade-average/',
+          suffix: '；正式教甄試算則應把本頁每個欄位逐一對照當年度簡章。',
+        },
+      },
+      {
+        heading: '簡章若使用標準分數',
+        paragraphs: [
+          '有些情境會先把原始成績轉為標準分數，再依權重合併；先標準化再加權和直接加權原始分數不是同一件事。只有簡章明確提供常模、平均、標準差或換算表時，才能依指定順序處理。',
+        ],
+        link: {
+          prefix: '需要檢查平均 50、標準差 10 的換算時，使用',
+          label: 'T 分數計算器並核對常模來源',
+          href: '/tools/t-score-calculator/',
+          suffix: '，不要自行假設所有教甄都採相同量尺。',
+        },
+      },
+    ],
+    zhSources: [
+      {
+        label: 'NIST Dataplot Reference Manual：Weighted Mean',
+        href: 'https://www.itl.nist.gov/div898/software/dataplot/refman2/ch2/weigmean.pdf',
+        note: '公開列出 Σ(wᵢxᵢ)／Σwᵢ 的加權平均定義；本工具依此公式試算三項成績，不代表任何主辦單位的正式規則。',
+      },
+    ],
   },
   {
     slug: 't-score-calculator',
@@ -1018,15 +1083,15 @@ const prioritySpecs: PrioritySpec[] = [
     enKeywords: ['t score calculator', 'z score to t score', 'standard score', 'education statistics'],
     zhWho: '適合需要把 Z 分數轉成平均 50、標準差 10 量尺的老師、考生與研究生。T 分數比 Z 分數更容易閱讀，常用於教育測驗與成績比較範例。',
     enWho: 'Useful for teachers, candidates, and graduate students who need a mean-50, SD-10 scale that is easier to read than raw z scores.',
-    zhMethod: 'T 分數公式為 T = 50 + 10z。z 為 0 時 T 分數是 50；z 為 1 時 T 分數是 60；z 為 -1 時 T 分數是 40。公式只改變量尺，不會讓偏態資料變成常態分配。',
+    zhMethod: 'T 分數公式為 T = 50 + 10z。程式先用完整數值精度運算，畫面最後顯示到小數點後最多 2 位；z 對照值顯示到最多 3 位。公式只改變量尺，不會讓偏態資料變成常態分配。',
     enMethod: 'T = 50 + 10z. A z score of 0 becomes 50, +1 becomes 60, and -1 becomes 40. The transformation changes the scale, not the distribution shape.',
     zhExamples: ['班級平均附近的學生 z = 0.1，換成 T 分數約 51，方便放入報告。', '教師甄試範例中若已取得 Z 分數，可快速轉成 T 分數做比較。', '研究生整理量表結果時，用 T 分數讓不同指標有相同基準。'],
     enExamples: ['A student near the class mean has z = 0.1, which becomes T = 51 for a short report.', 'A teacher-exam example with provided z scores can be converted to T scores for comparison.', 'A researcher puts multiple standardized indicators onto the same T-score scale.'],
-    zhMistakes: ['不要把 T 分數解讀成答對百分比。', '原始分數若尚未標準化，應先用 Z 分數計算器。', '極端分數需要搭配樣本數與分布形狀判讀。'],
+    zhMistakes: ['不要把 T 分數解讀成答對百分比。', '原始分數若尚未標準化，應先用同一參照群體的平均與標準差計算 Z 分數。', '不要把不同年度、不同考科或不同常模的 T 分數直接視為完全等值。', '極端分數需要搭配樣本數與分布形狀判讀。'],
     enMistakes: ['Do not read a T score as percent correct.', 'Use a z-score calculator first if the raw score is not standardized.', 'Interpret extreme scores with sample size and distribution shape.'],
     relatedZh: '可先用 Z 分數計算器取得 z，再搭配 PR 百分等級與教師甄試成績轉換模擬器整理完整流程。',
     relatedEn: 'Start with the Z Score Calculator, then use Percentile Rank and Teacher Exam Score tools for a fuller workflow.',
-    zhQuickAnswer: 'T 分數 = 50 + 10 × Z 分數；例如 z = 1.2 會得到 T = 62，平均 50、標準差 10，台灣會考、教育測驗與心理測驗常用這種標準分數量尺。',
+    zhQuickAnswer: 'T 分數 = 50 + 10 × Z 分數；例如 z = 1.2 會得到 T = 62。這是平均 50、標準差 10 的常見標準分數量尺，可見於教育與心理測驗，但實際定義仍要核對該測驗手冊。',
     enQuickAnswer: 'T score = 50 + 10 × z; for example, z = 1.2 becomes T = 62 on a scale with mean 50 and standard deviation 10, which is commonly used for educational and psychological test interpretation.',
     zhContentSections: [
       {
@@ -1040,6 +1105,56 @@ const prioritySpecs: PrioritySpec[] = [
           '範例：某次測驗原始分數 82 分，參照群體平均數 70、標準差 10，先算 z = (82 − 70) / 10 = 1.2。',
           '再代入 T = 50 + 10 × 1.2，得到 T = 62，表示比該參照群體平均高 1.2 個標準差。',
         ],
+      },
+      {
+        heading: '工具實作、四捨五入與輸入邊界',
+        paragraphs: [
+          '本工具只接收一個有限數值 Z，不會從原始分數自動猜平均數或標準差。程式直接計算 50 + 10×z，沒有先四捨五入 z；T 分數最後顯示到小數點後最多 2 位，輸入的 Z 對照值顯示到最多 3 位，尾端 0 會省略。因此 z = 0.126 會得到 T = 51.26，而不是先把 z 取成 0.13 再算 51.3。',
+          '輸入可以是負數或很大的數，程式不把 T 限制在 0 到 100。這和標準分數沒有固定滿分的定義一致，但極端結果常表示原始常模、平均數、標準差或輸入小數需要重新核對。',
+        ],
+      },
+      {
+        heading: '段考成績的常模參照例子',
+        paragraphs: [
+          '某次八年級數學段考，參照群體平均 70 分、母體標準差 10 分，學生得 82 分。先算 z=(82−70)/10=1.2，再算 T=50+10×1.2=62。正確說法是「在這次參照群體中高於平均 1.2 個標準差」；不能說成答對 62%、全國 PR 62，或已達某個課程精熟標準。',
+          '常模參照回答的是「相對於這群人在哪裡」，標準參照回答的是「是否達到事先設定的學習標準」。同一位學生可能 T 分數高於班級平均，卻仍未達學校設定的及格門檻，兩種判讀不可互相替代。',
+        ],
+      },
+      {
+        heading: '先確認平均與標準差的來源',
+        paragraphs: [
+          '若手上只有全班原始分數，應先決定這批資料是完整班級母體或抽樣資料，再取得相符的平均與標準差；混用不同群體會讓 Z 與 T 失去意義。',
+        ],
+        link: {
+          prefix: '可先用',
+          label: '標準差計算器核對母體與樣本標準差',
+          href: '/tools/standard-deviation/',
+          suffix: '，再把算出的 Z 分數帶回本頁。',
+        },
+      },
+      {
+        heading: 'T 分數、排名百分比與完整教學指南',
+        paragraphs: [
+          'T 分數保留標準差單位，排名百分比則從名次與群體人數估計相對位置；在沒有完整分布或常態假設不合理時，兩者不能直接互換。',
+        ],
+        link: {
+          prefix: '需要從原始分數一路檢查公式與限制時，請閱讀',
+          label: 'T 分數計算完整指南',
+          href: '/guides/t-score-calculator-guide/',
+          suffix: '；只有班級名次時則使用排名百分比計算器。',
+        },
+      },
+    ],
+    zhSources: [
+      {
+        label: 'NCES：ECLS-K 標準化 T 分數說明',
+        href: 'https://nces.ed.gov/pubs2002/kindergarten/21.asp?nav=4',
+        note: '美國教育統計中心以平均 50、標準差 10 的 T 分數作為常模參照量尺範例，並說明結果取決於分析所用群體。',
+      },
+      {
+        label: 'ETS Standards for Quality and Fairness：Norm Group 與 Normative Scale',
+        href: 'https://www.ets.org/pdfs/about/standards-quality-fairness.pdf',
+        note: '說明常模量尺必須交代參照群體；本頁因此不把不同群體的 T 分數視為可直接比較。',
       },
     ],
     enContentSections: [
