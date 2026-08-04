@@ -25,6 +25,7 @@ export const priorityUrlsPath = join(scriptsDir, 'bing-priority-urls.txt');
 export const gscPriorityUrlsPath = join(scriptsDir, 'gsc-priority-urls.txt');
 export const indexingConfigPath = join(rootDir, 'src', 'config', 'indexing.json');
 export const sitemapLastmodPath = join(rootDir, 'data', 'sitemap-lastmod.json');
+export const sitemapContentHashVersion = 2;
 export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
 export const enNoindex = indexingConfig.EN_NOINDEX === true;
 export const expansionRouteRegistry = readJson(
@@ -457,6 +458,13 @@ export function stableRenderedHtml(page) {
   // every URL even when that page's meaningful rendered content is unchanged.
   html = html.replace(/(\s\u00b7\s*v)\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?/g, '$1<version>');
 
+  // Tool pages also expose the same release number through WebApplication
+  // structured data. A release bump is deployment metadata, not a tool edit.
+  html = html.replace(
+    /(["']softwareVersion["']\s*:\s*["'])\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?(["'])/gi,
+    '$1<version>$2',
+  );
+
   // Astro content-hashed assets change names when the asset pipeline rebuilds.
   // Keep the logical asset path and extension while ignoring only the hash.
   html = html.replace(/\/_astro\/[^"'()\s<>?#]+/g, (assetUrl) =>
@@ -488,12 +496,25 @@ export function contentHashForPage(page) {
   return createHash('sha256').update(stableRenderedHtml(page)).digest('hex');
 }
 
-export function lastmodForPage(page, stored = null, today = new Date().toISOString().slice(0, 10)) {
+export function lastmodForPage(
+  page,
+  stored = null,
+  today = new Date().toISOString().slice(0, 10),
+  mode = 'update',
+) {
   const hash = contentHashForPage(page);
-  if (stored?.hash === hash && /^\d{4}-\d{2}-\d{2}$/.test(stored.lastmod ?? '')) {
-    return { hash, lastmod: stored.lastmod };
+  if (mode === 'preserve' && stored !== null && stored !== undefined) {
+    return { hash, lastmod: stored.lastmod, hashVersion: sitemapContentHashVersion };
   }
-  if (stored) return { hash, lastmod: today };
+  if (stored?.hash === hash && /^\d{4}-\d{2}-\d{2}$/.test(stored.lastmod ?? '')) {
+    return { hash, lastmod: stored.lastmod, hashVersion: sitemapContentHashVersion };
+  }
+  // Hash-normalization changes are map migrations, not page edits. Carry the
+  // evidence-backed date forward once while replacing the obsolete hash.
+  if (stored && stored.hashVersion !== sitemapContentHashVersion) {
+    return { hash, lastmod: stored.lastmod, hashVersion: sitemapContentHashVersion };
+  }
+  if (stored) return { hash, lastmod: today, hashVersion: sitemapContentHashVersion };
 
   // For a first-seen URL, prefer evidence tied to that route (a direct source
   // file or the blamed data line containing its path/slug). Shared review dates
@@ -501,7 +522,7 @@ export function lastmodForPage(page, stored = null, today = new Date().toISOStri
   const pageDates = pageSpecificGitDates(page).sort();
   const contentDates = renderedContentDates(page.html ?? readText(page.file)).sort();
   const signal = pageDates.at(-1) ?? contentDates.at(-1) ?? today;
-  return { hash, lastmod: signal > today ? today : signal };
+  return { hash, lastmod: signal > today ? today : signal, hashVersion: sitemapContentHashVersion };
 }
 
 function registryAlternates(loc) {

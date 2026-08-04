@@ -154,6 +154,16 @@ writeFileSync(readmePath, [
   '',
 ].join('\n'));
 
+// Rebuild after the version bump, then refresh the committed sitemap artifacts
+// before git add -A. This keeps release-only rendered metadata from leaving the
+// content-hash map one build behind.
+console.log('Refreshing release sitemaps (npm run release:sitemaps)...');
+try {
+  execSync('npm run release:sitemaps', { cwd: root, stdio: 'inherit' });
+} catch {
+  fail('Release sitemap refresh failed. No release files have been staged.');
+}
+
 const statusBeforeStage = git(['status', '--porcelain', '--untracked-files=all']);
 if (!statusBeforeStage) fail('No changes to release after version and backup preparation.');
 

@@ -18,6 +18,7 @@ import {
   publicDir,
   readJson,
   reportsDir,
+  sitemapContentHashVersion,
   sitemapLastmodPath,
   sitemapIndexUrl,
   sitemapFileForType,
@@ -52,6 +53,22 @@ async function fetchRemoteSitemapEntries() {
   }
 }
 
+function resolveLastmodMode() {
+  const explicitMode = process.env.SITEMAP_LASTMOD_MODE?.trim().toLowerCase();
+  const mode = explicitMode || (process.env.CI !== undefined ? 'preserve' : 'update');
+  if (!['preserve', 'update'].includes(mode)) {
+    console.error(
+      `Invalid SITEMAP_LASTMOD_MODE=${JSON.stringify(process.env.SITEMAP_LASTMOD_MODE)}. `
+      + 'Expected "preserve" or "update".',
+    );
+    process.exit(1);
+  }
+  return {
+    mode,
+    source: explicitMode ? 'SITEMAP_LASTMOD_MODE' : process.env.CI !== undefined ? 'CI' : 'local-default',
+  };
+}
+
 if (!existsSync(distDir)) {
   console.error('dist/ is missing. Run npm run build before generating deployment sitemaps.');
   process.exit(1);
@@ -64,6 +81,8 @@ ensureDefaultPriorityFiles();
 const storedLastmods = readJson(sitemapLastmodPath, {}) ?? {};
 const nextLastmods = {};
 const today = new Date().toISOString().slice(0, 10);
+const lastmodMode = resolveLastmodMode();
+const hashDriftUrls = [];
 
 const groups = new Map([
   ['tools', []],
@@ -84,18 +103,30 @@ for (const page of builtPages()) {
     continue;
   }
   const type = classifyUrl(page.loc);
-  const resolvedLastmod = lastmodForPage(page, storedLastmods[page.loc], today);
-  nextLastmods[page.loc] = resolvedLastmod;
+  const storedLastmod = Object.hasOwn(storedLastmods, page.loc)
+    ? storedLastmods[page.loc]
+    : undefined;
+  const resolvedLastmod = lastmodForPage(page, storedLastmod, today, lastmodMode.mode);
+  if (storedLastmod !== undefined && storedLastmod?.hash !== resolvedLastmod.hash) {
+    hashDriftUrls.push(page.loc);
+  }
+  nextLastmods[page.loc] = {
+    hash: resolvedLastmod.hash,
+    hashVersion: resolvedLastmod.hashVersion,
+    lastmod: resolvedLastmod.lastmod,
+  };
   groups.get(type).push({
     loc: page.loc,
     lastmod: resolvedLastmod.lastmod,
   });
 }
 
-writeJson(
-  sitemapLastmodPath,
-  Object.fromEntries(Object.entries(nextLastmods).sort(([a], [b]) => a.localeCompare(b))),
-);
+if (lastmodMode.mode === 'update') {
+  writeJson(
+    sitemapLastmodPath,
+    Object.fromEntries(Object.entries(nextLastmods).sort(([a], [b]) => a.localeCompare(b))),
+  );
+}
 
 const children = [];
 const allEntries = [];
@@ -150,6 +181,13 @@ writeJson(changedUrlsPath, {
 
 const summary = {
   sitemapIndex: 'public/sitemap.xml',
+  lastmodMode: lastmodMode.mode,
+  lastmodModeSource: lastmodMode.source,
+  contentHashVersion: sitemapContentHashVersion,
+  storedHashDrift: {
+    count: hashDriftUrls.length,
+    examples: hashDriftUrls.slice(0, 5),
+  },
   totalUrls: allEntries.length,
   bySitemap: Object.fromEntries([...groups].map(([type, entries]) => [sitemapFileForType(type), entries.length])),
   changed: {
@@ -163,4 +201,12 @@ const summary = {
 };
 
 writeJson(join(reportsDir, 'sitemap-generation-report.json'), summary);
+console.log(
+  `[sitemap:lastmod] mode=${lastmodMode.mode} source=${lastmodMode.source}; `
+  + `stored hash drift=${hashDriftUrls.length} URL(s).`,
+);
+if (hashDriftUrls.length) {
+  console.log(`[sitemap:lastmod] first ${Math.min(hashDriftUrls.length, 5)} drift example(s):`);
+  for (const url of hashDriftUrls.slice(0, 5)) console.log(`  - ${url}`);
+}
 console.log(JSON.stringify(summary, null, 2));

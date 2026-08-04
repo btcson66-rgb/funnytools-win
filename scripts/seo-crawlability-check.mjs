@@ -1,5 +1,5 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 
 const root = process.cwd();
 const distDir = join(root, 'dist');
@@ -25,6 +25,7 @@ const disallowedUrlPatterns = [
   { pattern: /localhost/i, label: 'localhost' },
   { pattern: /example\.com/i, label: 'example.com' },
 ];
+const COLLAPSED_LASTMOD_URL_THRESHOLD = 10;
 
 const failures = [];
 const warnings = [];
@@ -128,6 +129,26 @@ function validateRobots() {
   }
 }
 
+function validateLastmodDistribution(lastmods, context) {
+  const populatedLastmods = lastmods.filter(Boolean);
+  const distinctLastmods = [...new Set(populatedLastmods)];
+  if (
+    populatedLastmods.length > COLLAPSED_LASTMOD_URL_THRESHOLD
+    && distinctLastmods.length === 1
+  ) {
+    fail(
+      `${context} collapsed-lastmod guard failed: ${populatedLastmods.length} URL entries have `
+      + `only one distinct <lastmod> (${distinctLastmods[0]}). Threshold: more than `
+      + `${COLLAPSED_LASTMOD_URL_THRESHOLD} URLs. This matches the CI sitemap date-collapse regression.`,
+    );
+  }
+  return {
+    populated: populatedLastmods.length,
+    distinct: distinctLastmods.length,
+    values: distinctLastmods,
+  };
+}
+
 function validateSitemap() {
   if (!existsSync(sitemapPath)) {
     fail('dist/sitemap.xml is missing. Run npm.cmd run build before seo:check.');
@@ -175,6 +196,7 @@ function validateSitemap() {
   }
   const locs = [];
   const urlBlocks = [];
+  const lastmodDistributionBySitemap = {};
 
   for (const childPath of childPaths) {
     const sitemap = readFileSync(childPath, 'utf8');
@@ -192,11 +214,18 @@ function validateSitemap() {
       .replace(/<url>[\s\S]*?<\/url>/gi, '')
       .trim();
     if (withoutTags) fail(`${childName} contains text outside <url> entries.`);
-    urlBlocks.push(...[...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((match) => match[1]));
+    const childUrlBlocks = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((match) => match[1]);
+    const childLastmods = childUrlBlocks.flatMap((block) => parseTag(block, 'lastmod'));
+    lastmodDistributionBySitemap[childName] = validateLastmodDistribution(
+      childLastmods,
+      `Built child sitemap ${childName}`,
+    );
+    urlBlocks.push(...childUrlBlocks);
   }
 
   if (!urlBlocks.length) fail('child sitemaps contain no <url> entries.');
 
+  const lastmods = [];
   urlBlocks.forEach((block, index) => {
     const entryNumber = index + 1;
     const loc = parseTag(block, 'loc');
@@ -209,6 +238,7 @@ function validateSitemap() {
     if (changefreq.length > 1) fail(`sitemap entry ${entryNumber} must contain at most one <changefreq>.`);
     if (priority.length > 1) fail(`sitemap entry ${entryNumber} must contain at most one <priority>.`);
     if (lastmod[0] && !/^\d{4}-\d{2}-\d{2}$/.test(lastmod[0])) fail(`sitemap entry ${entryNumber} has invalid lastmod: ${lastmod[0]}.`);
+    if (lastmod.length === 1) lastmods.push(lastmod[0]);
     if (changefreq[0] && !/^(always|hourly|daily|weekly|monthly|yearly|never)$/.test(changefreq[0])) fail(`sitemap entry ${entryNumber} has invalid changefreq: ${changefreq[0]}.`);
     if (priority[0] && !/^(0(\.\d)?|1(\.0)?)$/.test(priority[0])) fail(`sitemap entry ${entryNumber} has invalid priority: ${priority[0]}.`);
     if (!loc[0]) return;
@@ -249,6 +279,8 @@ function validateSitemap() {
     if (canonical && canonical !== loc[0]) fail(`${loc[0]} canonical mismatch: ${canonical}.`);
   });
 
+  const lastmodDistribution = validateLastmodDistribution(lastmods, 'Built child sitemaps');
+
   const duplicateLocs = locs.filter((loc, index) => locs.indexOf(loc) !== index);
   if (duplicateLocs.length) fail(`sitemap.xml contains duplicate URLs: ${[...new Set(duplicateLocs)].slice(0, 10).join(', ')}.`);
 
@@ -279,23 +311,59 @@ function validateSitemap() {
     uniqueUrls: new Set(locs).size,
     sample: locs.slice(0, 3),
     orphanRoutes,
+    lastmodDistribution,
+    lastmodDistributionBySitemap,
   };
 }
 
-validateRobots();
-const sitemapSummary = validateSitemap() ?? { urls: 0, uniqueUrls: 0, sample: [], orphanRoutes: [] };
+const fixtureArg = process.argv.find((arg) => arg.startsWith('--lastmod-fixture='));
+const fixturePath = fixtureArg ? resolve(root, fixtureArg.slice('--lastmod-fixture='.length)) : '';
 
-const summary = {
-  robots: existsSync(robotsPath) ? 'present' : 'missing',
-  sitemapUrls: sitemapSummary.urls,
-  uniqueSitemapUrls: sitemapSummary.uniqueUrls,
-  sampleUrls: sitemapSummary.sample,
-  warnings,
-  failures,
-};
+if (fixturePath) {
+  if (!existsSync(fixturePath)) {
+    fail(`Lastmod fixture does not exist: ${fixturePath}`);
+  } else {
+    const fixtureXml = readFileSync(fixturePath, 'utf8');
+    const fixtureLastmods = [...fixtureXml.matchAll(/<url>([\s\S]*?)<\/url>/g)]
+      .flatMap((match) => parseTag(match[1], 'lastmod'));
+    const fixtureDistribution = validateLastmodDistribution(
+      fixtureLastmods,
+      `Fixture ${relative(root, fixturePath).replaceAll('\\', '/')}`,
+    );
+    console.log(JSON.stringify({
+      fixture: fixturePath,
+      collapsedLastmodUrlThreshold: COLLAPSED_LASTMOD_URL_THRESHOLD,
+      lastmodDistribution: fixtureDistribution,
+      failures,
+    }, null, 2));
+  }
+  if (failures.length) process.exitCode = 1;
+} else {
+  validateRobots();
+  const sitemapSummary = validateSitemap() ?? {
+    urls: 0,
+    uniqueUrls: 0,
+    sample: [],
+    orphanRoutes: [],
+    lastmodDistribution: { populated: 0, distinct: 0, values: [] },
+    lastmodDistributionBySitemap: {},
+  };
 
-console.log(JSON.stringify(summary, null, 2));
+  const summary = {
+    robots: existsSync(robotsPath) ? 'present' : 'missing',
+    sitemapUrls: sitemapSummary.urls,
+    uniqueSitemapUrls: sitemapSummary.uniqueUrls,
+    collapsedLastmodUrlThreshold: COLLAPSED_LASTMOD_URL_THRESHOLD,
+    lastmodDistribution: sitemapSummary.lastmodDistribution,
+    lastmodDistributionBySitemap: sitemapSummary.lastmodDistributionBySitemap,
+    sampleUrls: sitemapSummary.sample,
+    warnings,
+    failures,
+  };
 
-if (failures.length) {
-  process.exitCode = 1;
+  console.log(JSON.stringify(summary, null, 2));
+
+  if (failures.length) {
+    process.exitCode = 1;
+  }
 }
