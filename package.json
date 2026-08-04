@@ -1,6 +1,6 @@
 {
   "name": "funnytools",
-  "version": "5.103.1",
+  "version": "5.103.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -26,6 +26,7 @@
     "seo:indexnow": "node scripts/submit-indexnow.mjs",
     "seo:bing": "node scripts/submit-bing-urls.mjs",
     "seo:gsc-sitemaps": "node scripts/gsc-submit-sitemaps.mjs",
+    "sitemap-health": "node scripts/gsc-sitemap-health.mjs",
     "seo:gsc-inspect": "node scripts/gsc-inspect-priority-urls.mjs",
     "seo:all": "npm run seo:sitemap && npm run seo:validate && npm run seo:indexnow && npm run seo:bing && npm run seo:gsc-sitemaps",
     "report:analytics": "node scripts/analytics-report.mjs",

@@ -16,8 +16,9 @@ import {
   parseTags,
   previousState,
   publicDir,
-  readSitemapEntries,
+  readJson,
   reportsDir,
+  sitemapLastmodPath,
   sitemapIndexUrl,
   sitemapFileForType,
   sitemapIndexXml,
@@ -60,11 +61,9 @@ ensureDir(publicDir);
 ensureDir(reportsDir);
 ensureDefaultPriorityFiles();
 
-const previousLastmods = new Map(
-  [...readSitemapEntries(publicDir), ...readSitemapEntries(distDir)]
-    .filter((entry) => entry.loc && entry.lastmod)
-    .map((entry) => [entry.loc, entry.lastmod]),
-);
+const storedLastmods = readJson(sitemapLastmodPath, {}) ?? {};
+const nextLastmods = {};
+const today = new Date().toISOString().slice(0, 10);
 
 const groups = new Map([
   ['tools', []],
@@ -85,11 +84,18 @@ for (const page of builtPages()) {
     continue;
   }
   const type = classifyUrl(page.loc);
+  const resolvedLastmod = lastmodForPage(page, storedLastmods[page.loc], today);
+  nextLastmods[page.loc] = resolvedLastmod;
   groups.get(type).push({
     loc: page.loc,
-    lastmod: lastmodForPage(page, previousLastmods.get(page.loc)),
+    lastmod: resolvedLastmod.lastmod,
   });
 }
+
+writeJson(
+  sitemapLastmodPath,
+  Object.fromEntries(Object.entries(nextLastmods).sort(([a], [b]) => a.localeCompare(b))),
+);
 
 const children = [];
 const allEntries = [];

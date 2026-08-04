@@ -120,6 +120,12 @@ function validateRobots() {
   if (!/^Allow:\s*\/$/im.test(robots)) fail('robots.txt missing Allow: /.');
   if (/^Disallow:\s*\/\s*$/im.test(robots)) fail('robots.txt blocks all crawling with Disallow: /.');
   if (!/^Sitemap:\s*https:\/\/funnytools\.win\/sitemap\.xml$/im.test(robots)) fail('robots.txt missing the expected sitemap URL.');
+  for (const child of expectedChildSitemaps) {
+    const escaped = child.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (!new RegExp(`^Sitemap:\\s*${escaped}$`, 'im').test(robots)) {
+      fail(`robots.txt missing child sitemap discovery line: ${child}.`);
+    }
+  }
 }
 
 function validateSitemap() {

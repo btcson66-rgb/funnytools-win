@@ -30,3 +30,9 @@ Allow: /
 # Machine-readable site guide for LLMs: https://funnytools.win/llms.txt
 
 Sitemap: https://funnytools.win/sitemap.xml
+Sitemap: https://funnytools.win/sitemap-tools.xml
+Sitemap: https://funnytools.win/sitemap-guides.xml
+Sitemap: https://funnytools.win/sitemap-workflows.xml
+Sitemap: https://funnytools.win/sitemap-en.xml
+Sitemap: https://funnytools.win/sitemap-es.xml
+Sitemap: https://funnytools.win/sitemap-fr.xml

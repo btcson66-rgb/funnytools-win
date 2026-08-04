@@ -1,5 +1,6 @@
 import { join } from 'node:path';
 import {
+  expectedSitemapFiles,
   fetchJson,
   googleAccessToken,
   missingGscCredentialVars,
@@ -11,75 +12,163 @@ import {
   writeText,
 } from './seo-indexing-utils.mjs';
 
-// 2026-07-25 SEO 稽核（CEO 派工）：GSC Sitemaps API 顯示三站 sitemap 長期
-// lastDownloaded=NEVER / isPending=true。原本以為原因是「每次 push main 都重送、
-// 重置 Google 的下載時間線」，加了 7 天冷卻（下方 COOLDOWN_DAYS）。CEO 審查後
-// 用 `gh secret list` 查明真正原因：funnytools repo 根本沒有設定
-// GSC_SERVICE_ACCOUNT_JSON / GSC_CLIENT_EMAIL / GSC_PRIVATE_KEY 這三個 secret，
-// 這支腳本從 CI 建立以來就從未真的執行過 PUT——之前遇到缺憑證會落到下面 catch，
-// 舊版把這個情況標成 status:'skipped' 且不設 process.exitCode，等於「腳本壞掉但
-// workflow 照樣 success」，違反 CLAUDE.md 紅線第 6 條（壞掉要通知，不得靜默跳過）。
-// 現在缺憑證會是 status:'failed' + exitCode 1，log 會列出缺哪幾個環境變數。
-// 7 天冷卻本身無害（避免真的有憑證後又被同一問題誤導重送），照舊保留，但它
-// 不是這題的根本解方；根本解方是老闆補上 GSC secrets（交接見
-// Company Vault/10_Web_Department/2026-07-25-gsc-secrets-handoff.md）。
+const DAY_MS = 24 * 60 * 60 * 1000;
 const COOLDOWN_DAYS = 7;
-const COOLDOWN_MS = COOLDOWN_DAYS * 24 * 60 * 60 * 1000;
+const COOLDOWN_MS = COOLDOWN_DAYS * DAY_MS;
+const STUCK_DAYS = 14;
+const sitemapUrls = [
+  sitemapIndexUrl,
+  ...expectedSitemapFiles.map((file) => new URL(file, siteUrl).href),
+];
 
 const report = {
   generatedAt: new Date().toISOString(),
-  sitemap: sitemapIndexUrl,
   siteUrl,
-  // Resolved Search Console property identifier actually used in the API
-  // calls below (e.g. `sc-domain:funnytools.win`). Not the same as `siteUrl`
-  // above, which is just the configured site origin for human reference.
   gscSiteUrl: null,
   status: 'skipped',
   message: '',
+  entries: [],
+  alerts: [],
 };
+
+function apiSnapshot(requestedPath, current = {}) {
+  return {
+    path: current.path ?? requestedPath,
+    lastSubmitted: current.lastSubmitted ?? null,
+    isPending: current.isPending ?? null,
+    lastDownloaded: current.lastDownloaded ?? null,
+    isSitemapsIndex: current.isSitemapsIndex ?? null,
+    warnings: current.warnings ?? null,
+    errors: current.errors ?? null,
+  };
+}
+
+function parsedDate(value) {
+  if (!value) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function isStuck(entry, now = new Date()) {
+  const lastSubmitted = parsedDate(entry.lastSubmitted);
+  return entry.isPending === true
+    && !entry.lastDownloaded
+    && lastSubmitted
+    && now - lastSubmitted > STUCK_DAYS * DAY_MS;
+}
+
+function endpointFor(gscSiteUrl, sitemapPath) {
+  return `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(gscSiteUrl)}/sitemaps/${encodeURIComponent(sitemapPath)}`;
+}
+
+function markdownCell(value) {
+  if (value === null || value === undefined || value === '') return '(none)';
+  return String(value).replaceAll('|', '\\|').replace(/\r?\n/g, ' ');
+}
 
 try {
   const token = await googleAccessToken();
   const gscSiteUrl = await resolveGscSiteUrl(token);
   report.gscSiteUrl = gscSiteUrl;
-  const endpoint = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(gscSiteUrl)}/sitemaps/${encodeURIComponent(sitemapIndexUrl)}`;
   const authHeaders = { Authorization: `Bearer ${token}` };
+  const now = new Date();
+  let submittedCount = 0;
+  let cooldownCount = 0;
+  let failureCount = 0;
 
-  const { response: getResponse, json: current } = await fetchJson(endpoint, { headers: authHeaders });
-  let lastSubmittedAt = null;
-  if (getResponse.ok && current?.lastSubmitted) {
-    const parsed = new Date(current.lastSubmitted);
-    if (!Number.isNaN(parsed.getTime())) lastSubmittedAt = parsed;
+  for (const sitemapPath of sitemapUrls) {
+    const endpoint = endpointFor(gscSiteUrl, sitemapPath);
+    const { response: getResponse, json: current } = await fetchJson(endpoint, { headers: authHeaders });
+
+    if (!getResponse.ok && getResponse.status !== 404) {
+      failureCount += 1;
+      report.entries.push({
+        ...apiSnapshot(sitemapPath),
+        action: 'get_failed',
+        message: `GET failed: ${getResponse.status}`,
+      });
+      process.exitCode = 1;
+      continue;
+    }
+
+    const before = getResponse.ok ? apiSnapshot(sitemapPath, current) : apiSnapshot(sitemapPath);
+    if (isStuck(before, now)) {
+      report.alerts.push(`GSC sitemap is stuck pending with no download for more than ${STUCK_DAYS} days: ${before.path}`);
+    }
+
+    const lastSubmittedAt = parsedDate(before.lastSubmitted);
+    const msSinceLastSubmit = lastSubmittedAt ? now - lastSubmittedAt : null;
+    if (lastSubmittedAt && msSinceLastSubmit >= 0 && msSinceLastSubmit < COOLDOWN_MS) {
+      cooldownCount += 1;
+      report.entries.push({
+        ...before,
+        action: 'skipped_cooldown',
+        message: `Last submitted ${(msSinceLastSubmit / DAY_MS).toFixed(1)} days ago; next eligible ${new Date(lastSubmittedAt.getTime() + COOLDOWN_MS).toISOString()}.`,
+      });
+      continue;
+    }
+
+    const putResponse = await fetch(endpoint, { method: 'PUT', headers: authHeaders });
+    const putBody = await putResponse.text();
+    if (!putResponse.ok) {
+      failureCount += 1;
+      report.entries.push({
+        ...before,
+        action: 'submit_failed',
+        message: `PUT failed: ${putResponse.status} ${putBody.slice(0, 500)}`.trim(),
+      });
+      process.exitCode = 1;
+      continue;
+    }
+
+    // Re-read immediately so the report records Google's state for this exact
+    // path after submission instead of treating a successful PUT as sufficient.
+    const { response: verifyResponse, json: verified } = await fetchJson(endpoint, { headers: authHeaders });
+    if (!verifyResponse.ok) {
+      failureCount += 1;
+      report.entries.push({
+        ...before,
+        action: 'verification_failed',
+        message: `PUT succeeded but follow-up GET failed: ${verifyResponse.status}`,
+      });
+      process.exitCode = 1;
+      continue;
+    }
+
+    submittedCount += 1;
+    const after = apiSnapshot(sitemapPath, verified);
+    if (isStuck(after, now)) {
+      report.alerts.push(`GSC sitemap is stuck pending with no download for more than ${STUCK_DAYS} days: ${after.path}`);
+    }
+    report.entries.push({
+      ...after,
+      action: 'submitted',
+      message: lastSubmittedAt
+        ? `Submitted after ${(msSinceLastSubmit / DAY_MS).toFixed(1)} days.`
+        : 'Submitted with no prior submission on record.',
+    });
   }
 
-  const now = new Date();
-  const msSinceLastSubmit = lastSubmittedAt ? now - lastSubmittedAt : null;
-
-  if (lastSubmittedAt && msSinceLastSubmit < COOLDOWN_MS) {
-    const nextEligible = new Date(lastSubmittedAt.getTime() + COOLDOWN_MS);
-    const daysSince = (msSinceLastSubmit / (24 * 60 * 60 * 1000)).toFixed(1);
-    report.status = 'skipped_cooldown';
-    report.lastSubmitted = current.lastSubmitted;
-    report.isPending = current.isPending ?? null;
-    report.lastDownloaded = current.lastDownloaded ?? null;
-    report.message = `距上次提交（${current.lastSubmitted}）僅 ${daysSince} 天，未滿 ${COOLDOWN_DAYS} 天冷卻期，略過本次重送。下次可提交時間：${nextEligible.toISOString()}。（見 04_Knowledge/GSC Sitemap 無法擷取診斷.md 第 7 點：pending 時不要反覆重送）`;
+  report.alerts = [...new Set(report.alerts)];
+  if (report.alerts.length) {
+    report.status = 'stuck_pending';
+    report.message = report.alerts.join(' ');
+    process.exitCode = 1;
+  } else if (failureCount) {
+    report.status = 'failed';
+    report.message = `${failureCount} sitemap path(s) failed; see the per-path entries.`;
+  } else if (submittedCount) {
+    report.status = 'submitted';
+    report.message = `Submitted ${submittedCount} sitemap path(s); ${cooldownCount} path(s) remained inside the ${COOLDOWN_DAYS}-day cooldown.`;
   } else {
-    const response = await fetch(endpoint, {
-      method: 'PUT',
-      headers: authHeaders,
-    });
-    const body = await response.text();
-    report.status = response.ok ? 'submitted' : 'failed';
-    report.message = response.ok
-      ? `Sitemap index submitted to Google Search Console.${lastSubmittedAt ? ` (previous submit ${current.lastSubmitted}, ${(msSinceLastSubmit / (24 * 60 * 60 * 1000)).toFixed(1)} days ago, past ${COOLDOWN_DAYS}-day cooldown)` : ' (no prior submission on record)'}`
-      : `${response.status} ${body.slice(0, 500)}`;
-    if (!response.ok) process.exitCode = 1;
+    report.status = 'skipped_cooldown';
+    report.message = `All ${cooldownCount} sitemap path(s) remain inside the ${COOLDOWN_DAYS}-day cooldown.`;
   }
 } catch (error) {
   const isMissingCredentials = /Missing GSC/.test(error.message);
   report.status = 'failed';
   report.message = isMissingCredentials
-    ? `${error.message} Missing: ${missingGscCredentialVars().join(', ')}. Set these as GitHub Actions repo secrets (see Company Vault/10_Web_Department/2026-07-25-gsc-secrets-handoff.md) — this is a real outage, not an optional step.`
+    ? `${error.message} Missing: ${missingGscCredentialVars().join(', ')}. Set these as GitHub Actions repo secrets (see Company Vault/10_Web_Department/2026-07-25-gsc-secrets-handoff.md) -- this is a real outage, not an optional step.`
     : error.message;
   process.exitCode = 1;
 }
@@ -89,11 +178,17 @@ writeText(join(reportsDir, 'gsc-sitemap-submit-report.md'), [
   '# GSC Sitemap Submit Report',
   '',
   `Generated: ${report.generatedAt}`,
-  `Sitemap: ${report.sitemap}`,
   `Search Console property: ${report.gscSiteUrl ?? '(not resolved)'}`,
   `Status: ${report.status}`,
   '',
   report.message,
   '',
+  '| Path | Action | Last submitted | Last downloaded | Pending | Index | Warnings | Errors |',
+  '| --- | --- | --- | --- | --- | --- | ---: | ---: |',
+  ...report.entries.map((entry) =>
+    `| ${markdownCell(entry.path)} | ${markdownCell(entry.action)} | ${markdownCell(entry.lastSubmitted)} | ${markdownCell(entry.lastDownloaded)} | ${markdownCell(entry.isPending)} | ${markdownCell(entry.isSitemapsIndex)} | ${markdownCell(entry.warnings)} | ${markdownCell(entry.errors)} |`,
+  ),
+  '',
+  ...(report.alerts.length ? ['## Alerts', '', ...report.alerts.map((alert) => `- ${alert}`), ''] : []),
 ].join('\n'));
 console.log(JSON.stringify(report, null, 2));

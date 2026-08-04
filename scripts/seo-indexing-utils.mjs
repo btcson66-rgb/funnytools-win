@@ -7,7 +7,7 @@ import {
   statSync,
   writeFileSync,
 } from 'node:fs';
-import { createSign } from 'node:crypto';
+import { createHash, createSign } from 'node:crypto';
 import { dirname, join, relative } from 'node:path';
 
 export const rootDir = process.cwd();
@@ -24,6 +24,7 @@ export const changedUrlsPath = join(reportsDir, 'changed-urls.json');
 export const priorityUrlsPath = join(scriptsDir, 'bing-priority-urls.txt');
 export const gscPriorityUrlsPath = join(scriptsDir, 'gsc-priority-urls.txt');
 export const indexingConfigPath = join(rootDir, 'src', 'config', 'indexing.json');
+export const sitemapLastmodPath = join(rootDir, 'data', 'sitemap-lastmod.json');
 export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
 export const enNoindex = indexingConfig.EN_NOINDEX === true;
 export const expansionRouteRegistry = readJson(
@@ -260,16 +261,22 @@ export function readCurrentSitemapEntries() {
 }
 
 const gitDateCache = new Map();
+const gitBlameCache = new Map();
 
 function gitDateForPath(path) {
   if (gitDateCache.has(path)) return gitDateCache.get(path);
   let value = '';
   try {
-    value = execFileSync('git', ['log', '-1', '--format=%cs', '--', path], {
+    const timestamp = Number(execFileSync('git', ['log', '-1', '--format=%ct', '--', path], {
       cwd: rootDir,
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', 'ignore'],
-    }).trim();
+    }).trim());
+    // Sitemap dates and changed-page dates use UTC consistently. This matters
+    // for commits near local midnight, where %cs can report the next local day.
+    value = Number.isFinite(timestamp)
+      ? new Date(timestamp * 1000).toISOString().slice(0, 10)
+      : '';
   } catch {
     value = '';
   }
@@ -277,15 +284,44 @@ function gitDateForPath(path) {
   return value;
 }
 
+function gitBlameForPath(path) {
+  if (gitBlameCache.has(path)) return gitBlameCache.get(path);
+  let value = [];
+  try {
+    const output = execFileSync('git', ['blame', '--line-porcelain', '--', path], {
+      cwd: rootDir,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+      maxBuffer: 20 * 1024 * 1024,
+    });
+    let authorTime = '';
+    for (const line of output.split(/\r?\n/)) {
+      if (line.startsWith('author-time ')) {
+        const timestamp = Number(line.slice('author-time '.length));
+        authorTime = Number.isFinite(timestamp)
+          ? new Date(timestamp * 1000).toISOString().slice(0, 10)
+          : '';
+      } else if (line.startsWith('\t')) {
+        value.push({ text: line.slice(1), date: authorTime });
+      }
+    }
+  } catch {
+    value = [];
+  }
+  gitBlameCache.set(path, value);
+  return value;
+}
+
 export function sourceCandidatesForRoute(route) {
-  if (route.startsWith('/es/')) {
+  if (route.startsWith('/es/') || route.startsWith('/fr/')) {
+    const locale = route.split('/').filter(Boolean)[0];
     return [
       'src/i18n/expansion-routes.json',
-      'src/i18n/expansion/es.ts',
+      `src/i18n/expansion/${locale}.ts`,
       'src/i18n/expansionRoutes.ts',
       'src/layouts/ExpansionLayout.astro',
       'src/layouts/ExpansionToolLayout.astro',
-      `src/pages${route === '/es/' ? '/es/index.astro' : route.replace(/\/$/, '.astro')}`,
+      `src/pages${route === `/${locale}/` ? `/${locale}/index.astro` : route.replace(/\/$/, '.astro')}`,
     ];
   }
   const clean = route.replace(/^\/en\//, '/');
@@ -363,24 +399,109 @@ export function sourceCandidatesForRoute(route) {
   ].filter(Boolean);
 }
 
-export function lastmodForPage(page, previousLastmod = '') {
-  const sourceDates = sourceCandidatesForRoute(page.route)
-    .filter((candidate) => existsSync(join(rootDir, candidate)))
-    .map(gitDateForPath)
-    .filter(Boolean);
-  const html = readText(page.file);
-  const contentDates = [
+function renderedContentDates(html) {
+  return [
     ...[...html.matchAll(/["']dateModified["']\s*:\s*["'](\d{4}-\d{2}-\d{2})["']/g)]
       .map((match) => match[1]),
     html.match(/data-content-value-review[\s\S]*?<time\b[^>]*datetime=["'](\d{4}-\d{2}-\d{2})["']/i)?.[1] ?? '',
   ].filter(Boolean);
-  const dates = [
-    ...sourceDates,
-    ...contentDates,
-    ...(/^\d{4}-\d{2}-\d{2}$/.test(previousLastmod) ? [previousLastmod] : []),
-  ].sort();
-  if (dates.length) return dates.at(-1);
-  return statSync(page.file).mtime.toISOString().slice(0, 10);
+}
+
+function routeTokens(route) {
+  const pathname = new URL(route, siteOrigin).pathname;
+  const parts = pathname.split('/').filter(Boolean);
+  const withoutLocale = ['en', 'es', 'fr'].includes(parts[0]) ? parts.slice(1) : parts;
+  const slug = withoutLocale.at(-1) ?? '';
+  return [...new Set([pathname, pathname.replace(/\/$/, ''), slug].filter((token) => token.length >= 3))];
+}
+
+function pageSpecificGitDates(page) {
+  const candidates = sourceCandidatesForRoute(page.route)
+    .filter((candidate) => existsSync(join(rootDir, candidate)));
+  const tokens = routeTokens(page.route);
+  const directDates = candidates
+    .filter((candidate) => {
+      const normalized = candidate.replaceAll('\\', '/');
+      const slug = tokens.at(-1);
+      return normalized.startsWith('src/pages/es/')
+        || normalized.startsWith('src/pages/fr/')
+        || (slug && normalized.includes(`/${slug}.`));
+    })
+    .map(gitDateForPath)
+    .filter(Boolean);
+  const blamedDates = candidates.flatMap((candidate) =>
+    gitBlameForPath(candidate)
+      .filter((line) => line.date && tokens.some((token) => line.text.includes(token)))
+      .map((line) => line.date),
+  );
+  return [...new Set([...directDates, ...blamedDates])];
+}
+
+function isBuildInstant(value, pageMtimeMs) {
+  const parsed = Date.parse(value);
+  return Number.isFinite(parsed) && Math.abs(parsed - pageMtimeMs) <= 10 * 60 * 1000;
+}
+
+export function stableRenderedHtml(page) {
+  const pageMtimeMs = statSync(page.file).mtimeMs;
+  let html = page.html ?? readText(page.file);
+
+  // The footer counter is refreshed from analytics during releases. Its numbers
+  // are operational telemetry, not a content change to every rendered page.
+  html = html.replace(
+    /<p\b(?=[^>]*\bclass=["'][^"']*\bsite-stats\b)[^>]*>[\s\S]*?<\/p>/gi,
+    '<p data-sitemap-volatile="site-stats"></p>',
+  );
+
+  // Release version text appears in the shared footer and would otherwise bump
+  // every URL even when that page's meaningful rendered content is unchanged.
+  html = html.replace(/(\s\u00b7\s*v)\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?/g, '$1<version>');
+
+  // Astro content-hashed assets change names when the asset pipeline rebuilds.
+  // Keep the logical asset path and extension while ignoring only the hash.
+  html = html.replace(/\/_astro\/[^"'()\s<>?#]+/g, (assetUrl) =>
+    assetUrl.replace(/([._-])[A-Za-z0-9_-]{8,}(\.(?:css|js|mjs|map|woff2?|ttf|png|jpe?g|webp|avif|svg))$/i, '$1<asset-hash>$2'),
+  );
+
+  // Cache-busting parameters are deployment metadata. Other query parameters
+  // remain intact because they may carry page meaning.
+  html = html.replace(/([?&](?:v|ver|version|cb|cachebust)=)[^&#"'\s<]+/gi, '$1<cache-key>');
+
+  // generatedAt/build-time fields in inline JSON or scripts identify the build,
+  // not a page edit. Date-only and full ISO forms are both normalized here.
+  html = html.replace(
+    /(["'](?:generatedAt|buildTime|buildTimestamp|buildDate)["']\s*:\s*["'])(\d{4}-\d{2}-\d{2}(?:T[^"']+)?)(["'])/gi,
+    '$1<build-time>$3',
+  );
+
+  // A full ISO instant equal to this HTML file's build time is likewise build
+  // metadata. The tight ten-minute comparison avoids stripping publication or
+  // review timestamps that describe the content itself.
+  html = html.replace(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,9})?Z/g, (value) =>
+    isBuildInstant(value, pageMtimeMs) ? '<build-instant>' : value,
+  );
+
+  return html;
+}
+
+export function contentHashForPage(page) {
+  return createHash('sha256').update(stableRenderedHtml(page)).digest('hex');
+}
+
+export function lastmodForPage(page, stored = null, today = new Date().toISOString().slice(0, 10)) {
+  const hash = contentHashForPage(page);
+  if (stored?.hash === hash && /^\d{4}-\d{2}-\d{2}$/.test(stored.lastmod ?? '')) {
+    return { hash, lastmod: stored.lastmod };
+  }
+  if (stored) return { hash, lastmod: today };
+
+  // For a first-seen URL, prefer evidence tied to that route (a direct source
+  // file or the blamed data line containing its path/slug). Shared review dates
+  // remain a fallback for new URLs, never a reason to re-bump an unchanged URL.
+  const pageDates = pageSpecificGitDates(page).sort();
+  const contentDates = renderedContentDates(page.html ?? readText(page.file)).sort();
+  const signal = pageDates.at(-1) ?? contentDates.at(-1) ?? today;
+  return { hash, lastmod: signal > today ? today : signal };
 }
 
 function registryAlternates(loc) {
