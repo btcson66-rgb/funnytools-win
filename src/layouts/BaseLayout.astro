@@ -147,7 +147,7 @@ const contentSecurityPolicy = [
         <>
           <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ga4MeasurementId}`} />
-          <script is:inline define:vars={{ measurementId: SITE.ga4MeasurementId }}>
+          <script is:inline define:vars={{ measurementId: SITE.ga4MeasurementId, secondaryMeasurementId: SITE.ga4SecondaryMeasurementId }}>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             // Consent Mode v2: default denied in EEA/UK/CH until a certified CMP
@@ -168,6 +168,9 @@ const contentSecurityPolicy = [
             });
             gtag('js', new Date());
             gtag('config', measurementId);
+            // Mirror into the backup-account property. Same consent state, same events —
+            // only the destination differs.
+            if (secondaryMeasurementId) gtag('config', secondaryMeasurementId);
           </script>
           <script is:inline>
             window.__ft_track = function(eventName, params) {

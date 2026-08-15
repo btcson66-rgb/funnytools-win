@@ -12,6 +12,12 @@ export const SITE = {
     en: 'Free online toolbox with browser-based tools for PDF, images, text, QR codes, random picks, time, money, teachers and more.',
   },
   ga4MeasurementId: 'G-SV027MPXK4',
+  // Secondary GA4 tag, added 2026-08-16. The property behind ga4MeasurementId is owned by
+  // btcson66@gmail.com, which can no longer be signed into, so its data is being collected
+  // into an account nobody can read. This second tag mirrors the same hits into property
+  // 550070457 under the backup account, which the company can actually query. The original
+  // tag stays in place so the historical property keeps its continuity if access is restored.
+  ga4SecondaryMeasurementId: 'G-SJ90CBM9ZV',
   // Legacy fallback for local/preflight builds. Prefer PUBLIC_ADSENSE_CLIENT.
   adsenseClient: 'ca-pub-7052036786750044',
   // Keep enabled while the site is under AdSense review. Visible ad slots remain separately gated below.

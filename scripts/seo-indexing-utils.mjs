@@ -25,7 +25,11 @@ export const priorityUrlsPath = join(scriptsDir, 'bing-priority-urls.txt');
 export const gscPriorityUrlsPath = join(scriptsDir, 'gsc-priority-urls.txt');
 export const indexingConfigPath = join(rootDir, 'src', 'config', 'indexing.json');
 export const sitemapLastmodPath = join(rootDir, 'data', 'sitemap-lastmod.json');
-export const sitemapContentHashVersion = 2;
+// Bumped to 3 on 2026-08-16 when the analytics bootstrap joined the volatile set.
+// lastmodForPage treats a version change as a map migration: stored dates carry
+// forward once against the new hash, so normalizing the hash never itself becomes
+// a site-wide lastmod bump.
+export const sitemapContentHashVersion = 3;
 export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
 export const enNoindex = indexingConfig.EN_NOINDEX === true;
 export const expansionRouteRegistry = readJson(
@@ -487,6 +491,17 @@ export function stableRenderedHtml(page) {
   // review timestamps that describe the content itself.
   html = html.replace(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,9})?Z/g, (value) =>
     isBuildInstant(value, pageMtimeMs) ? '<build-instant>' : value,
+  );
+
+  // The analytics bootstrap sits in the shared layout, so any change to it —
+  // a new measurement id, a consent-mode tweak — rewrites the same bytes into
+  // all ~500 pages. Telling Google that every page changed on the same day
+  // because a tracking tag moved is a false signal, and after the worthcalc
+  // impression collapse it is one the company cannot afford to send. Which
+  // property receives the hits is not part of what a reader sees.
+  html = html.replace(
+    /<script\b[^>]*>(?:(?!<\/script>)[\s\S])*?window\.dataLayer(?:(?!<\/script>)[\s\S])*?<\/script>/gi,
+    '<script data-sitemap-volatile="analytics-bootstrap"></script>',
   );
 
   return html;

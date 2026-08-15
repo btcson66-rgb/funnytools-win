@@ -40,11 +40,13 @@ const contentSecurityPolicy = [
         <>
           <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ga4MeasurementId}`} />
-          <script is:inline define:vars={{ measurementId: SITE.ga4MeasurementId }}>
+          <script is:inline define:vars={{ measurementId: SITE.ga4MeasurementId, secondaryMeasurementId: SITE.ga4SecondaryMeasurementId }}>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', measurementId);
+            // Mirror into the backup-account property; see src/config/site.ts.
+            if (secondaryMeasurementId) gtag('config', secondaryMeasurementId);
           </script>
         </>
       )
