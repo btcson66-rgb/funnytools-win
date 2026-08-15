@@ -789,7 +789,55 @@ export function missingGscCredentialVars() {
   return missing;
 }
 
+// The service account can only see sc-domain:worthcalc.win — Search Console refuses to add
+// it to the other two properties at all — so sitemap submission for funnytools has been
+// failing with "No Search Console property matches funnytools.win". A user OAuth refresh
+// token for the backup account is siteOwner on all three, so prefer it whenever one is
+// available. CI reads it from secrets; local runs read the files under "api token".
+function userOAuthCredentials() {
+  const fromEnv = process.env.FABLE_OPS_OAUTH_CLIENT_JSON && process.env.FABLE_OPS_REFRESH_TOKEN;
+  if (fromEnv) {
+    try {
+      const raw = JSON.parse(process.env.FABLE_OPS_OAUTH_CLIENT_JSON);
+      const client = raw.installed || raw.web || raw;
+      if (client?.client_id && client?.client_secret) {
+        return { ...client, refresh_token: process.env.FABLE_OPS_REFRESH_TOKEN };
+      }
+    } catch { /* fall through to the file path below */ }
+  }
+  const clientPath = join(rootDir, 'api token', 'fable-ops-oauth-client.json');
+  const tokenPath = join(rootDir, 'api token', 'fable-ops-token.json');
+  if (!existsSync(clientPath) || !existsSync(tokenPath)) return null;
+  try {
+    const raw = JSON.parse(readText(clientPath));
+    const client = raw.installed || raw.web || raw;
+    const { refresh_token: refreshToken } = JSON.parse(readText(tokenPath));
+    if (!client?.client_id || !client?.client_secret || !refreshToken) return null;
+    return { ...client, refresh_token: refreshToken };
+  } catch {
+    return null;
+  }
+}
+
 export async function googleAccessToken(scope = 'https://www.googleapis.com/auth/webmasters') {
+  const oauth = userOAuthCredentials();
+  if (oauth) {
+    const response = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: oauth.refresh_token,
+        client_id: oauth.client_id,
+        client_secret: oauth.client_secret,
+      }),
+    });
+    const data = await response.json().catch(() => ({}));
+    if (response.ok && data.access_token) return data.access_token;
+    // Do not fail outright: the service account still works for worthcalc, and a silent
+    // downgrade is worse than a noisy one.
+    process.emitWarning(`user OAuth refresh failed (${response.status} ${data.error || ''}), falling back to the service account`);
+  }
   const credentials = getServiceAccountCredentials();
   if (!credentials?.client_email || !credentials?.private_key) {
     const missing = missingGscCredentialVars();

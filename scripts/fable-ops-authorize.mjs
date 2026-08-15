@@ -19,8 +19,11 @@ const TOKEN_DIR = path.join(process.cwd(), 'api token');
 const CLIENT_FILE = path.join(TOKEN_DIR, 'fable-ops-oauth-client.json');
 const TOKEN_FILE = path.join(TOKEN_DIR, 'fable-ops-token.json');
 
+// webmasters (not .readonly) is required because the release pipeline submits sitemaps to
+// Search Console; the read-only scope resolves properties but rejects the PUT with
+// ACCESS_TOKEN_SCOPE_INSUFFICIENT. Analytics stays read-only — nothing here writes to GA4.
 const SCOPES = [
-  'https://www.googleapis.com/auth/webmasters.readonly',
+  'https://www.googleapis.com/auth/webmasters',
   'https://www.googleapis.com/auth/analytics.readonly',
 ];
 
