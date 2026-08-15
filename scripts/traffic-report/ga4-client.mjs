@@ -171,5 +171,20 @@ export async function collectGA4(token) {
     }
   }
 
+  // status 一開始是樂觀的 'ok'，過去就算每一支查詢都 403 也照樣回 ok，
+  // 讓週報把「沒有資料」畫成一片 0。那等於偽造數據，必須依實際成敗收斂。
+  const okCount = Object.keys(result.data).length;
+  const failCount = Object.keys(result.errors).length;
+  if (okCount === 0) {
+    const first = Object.values(result.errors)[0];
+    result.status = 'error';
+    result.message = failCount
+      ? `全部 ${failCount} 支 GA4 查詢失敗：${first?.status ?? ''} ${first?.message ?? ''}`.trim()
+      : '沒有執行任何 GA4 查詢';
+  } else if (failCount > 0) {
+    result.status = 'partial';
+    result.message = `${failCount}/${okCount + failCount} 支 GA4 查詢失敗`;
+  }
+
   return result;
 }
