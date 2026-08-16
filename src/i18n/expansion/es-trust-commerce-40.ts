@@ -105,7 +105,7 @@ export const spanishTerms: SpanishInfoPage = {
       heading: 'Cambios, contacto y versión vigente',
       paragraphs: [
         'Las condiciones pueden actualizarse para reflejar nuevas herramientas, proveedores, riesgos o requisitos legales. Un cambio material debe publicarse con una fecha de revisión real. La versión vigente es la que aparece en esta URL; no se cambia la fecha solo para simular actualidad.',
-        'Puedes escribir a btcson66@gmail.com para comunicar una duda o un error relacionado con estas condiciones. Incluye la URL y el punto concreto. El correo no constituye un canal de asistencia urgente ni crea una relación profesional, pero permite revisar y corregir el contenido publicado.',
+        'Puedes escribir a btcson224@gmail.com para comunicar una duda o un error relacionado con estas condiciones. Incluye la URL y el punto concreto. El correo no constituye un canal de asistencia urgente ni crea una relación profesional, pero permite revisar y corregir el contenido publicado.',
       ],
       link: {
         prefix: 'Para preparar un informe útil, revisa primero la ',
@@ -155,7 +155,7 @@ export const spanishSupport: SpanishInfoPage = {
   eyebrow: 'Ayuda práctica · informes reproducibles · apoyo opcional',
   intro: 'FunnyTools puede seguir siendo útil cuando los problemas se describen con precisión y las personas encuentran una vía clara para resolverlos. Esta página separa la ayuda sobre herramientas gratuitas, las correcciones de contenido, los problemas de accesibilidad, las compras externas y las formas opcionales de apoyar el mantenimiento.',
   directAnswer: [
-    'La forma más útil de pedir ayuda es enviar la URL, el objetivo, los pasos, el navegador, el resultado observado y el resultado esperado a btcson66@gmail.com. Utiliza datos ficticios y pequeños. No envíes contraseñas, documentos privados, números completos de tarjeta, expedientes ni información de otras personas.',
+    'La forma más útil de pedir ayuda es enviar la URL, el objetivo, los pasos, el navegador, el resultado observado y el resultado esperado a btcson224@gmail.com. Utiliza datos ficticios y pequeños. No envíes contraseñas, documentos privados, números completos de tarjeta, expedientes ni información de otras personas.',
     'También puedes ayudar compartiendo una herramienta con alguien que realmente la necesite, proponiendo un caso verificable o utilizando un enlace afiliado cuando ya tenías intención de comprar. Compartir o informar de un error tiene tanto valor operativo como una compra; ninguna aportación cambia los resultados ni da prioridad especial.',
   ],
   sections: [
@@ -264,13 +264,13 @@ export const spanishSupport: SpanishInfoPage = {
     {
       heading: 'Contacto y expectativas razonables',
       paragraphs: [
-        'El correo operativo es btcson66@gmail.com. No se garantiza un plazo de respuesta, resolución individual ni asistencia urgente. Los fallos que puedan exponer datos, producir un cálculo materialmente incorrecto, bloquear una herramienta o impedir el acceso reciben prioridad sobre preferencias estéticas.',
+        'El correo operativo es btcson224@gmail.com. No se garantiza un plazo de respuesta, resolución individual ni asistencia urgente. Los fallos que puedan exponer datos, producir un cálculo materialmente incorrecto, bloquear una herramienta o impedir el acceso reciben prioridad sobre preferencias estéticas.',
         'Un mensaje claro puede convertirse en una corrección que beneficie a todas las personas. Si no recibes respuesta y el asunto depende de Gumroad, Payhip, Google, una institución o un proveedor, utiliza también el canal oficial que aparece en tu recibo o documentación.',
       ],
     },
   ],
   faq: [
-    { q: '¿Dónde informo de un error?', a: 'Escribe a btcson66@gmail.com con la URL, pasos, navegador y un ejemplo ficticio. No envíes el documento privado que contiene el problema.' },
+    { q: '¿Dónde informo de un error?', a: 'Escribe a btcson224@gmail.com con la URL, pasos, navegador y un ejemplo ficticio. No envíes el documento privado que contiene el problema.' },
     { q: '¿FunnyTools ofrece ayuda en directo?', a: 'No. El canal permite investigar fallos y corregir contenido, pero no garantiza respuesta inmediata ni asesoramiento profesional.' },
     { q: '¿Cómo recupero una compra?', a: 'Busca el recibo de Gumroad o Payhip, revisa spam y utiliza el enlace de acceso. Si persiste el problema, contacta al vendedor desde el propio recibo.' },
     { q: '¿FunnyTools puede devolver una compra desde esta página?', a: 'No. El pago y el reembolso se gestionan en la plataforma y según la política visible del producto, el vendedor y los derechos obligatorios aplicables.' },

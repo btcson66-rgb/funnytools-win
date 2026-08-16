@@ -25,11 +25,12 @@ export const priorityUrlsPath = join(scriptsDir, 'bing-priority-urls.txt');
 export const gscPriorityUrlsPath = join(scriptsDir, 'gsc-priority-urls.txt');
 export const indexingConfigPath = join(rootDir, 'src', 'config', 'indexing.json');
 export const sitemapLastmodPath = join(rootDir, 'data', 'sitemap-lastmod.json');
-// Bumped to 3 on 2026-08-16 when the analytics bootstrap joined the volatile set.
+// Bumped to 4 on 2026-08-16 when the shared footer's contact address joined the volatile set.
+// Bumped to 3 the same day when the analytics bootstrap joined it.
 // lastmodForPage treats a version change as a map migration: stored dates carry
 // forward once against the new hash, so normalizing the hash never itself becomes
 // a site-wide lastmod bump.
-export const sitemapContentHashVersion = 3;
+export const sitemapContentHashVersion = 4;
 export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
 export const enNoindex = indexingConfig.EN_NOINDEX === true;
 export const expansionRouteRegistry = readJson(
@@ -491,6 +492,16 @@ export function stableRenderedHtml(page) {
   // review timestamps that describe the content itself.
   html = html.replace(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,9})?Z/g, (value) =>
     isBuildInstant(value, pageMtimeMs) ? '<build-instant>' : value,
+  );
+
+  // The contact address in the shared footer is chrome, like the counter and the
+  // version beside it. Changing it rewrites every page that renders that footer, and
+  // a footer link is not what a reader came for. The same address appearing in body
+  // prose — a privacy policy, a support FAQ — is left alone on purpose: there the
+  // address is the content, and those pages genuinely did change.
+  html = html.replace(/<footer\b[^>]*>[\s\S]*?<\/footer>/gi, (footer) =>
+    footer.replace(/mailto:[^"'\s>]+/gi, 'mailto:<footer-contact>')
+      .replace(/[\w.+-]+@[\w-]+\.[\w.-]+/g, '<footer-contact>'),
   );
 
   // The analytics bootstrap sits in the shared layout, so any change to it —

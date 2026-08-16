@@ -34,7 +34,7 @@ export const frenchHome = {
     },
     {
       q: 'Comment signaler une erreur ou une formulation peu naturelle ?',
-      a: 'Écrivez à btcson66@gmail.com en indiquant l’adresse de la page, le navigateur utilisé et un exemple ne contenant aucune donnée personnelle.',
+      a: 'Écrivez à btcson224@gmail.com en indiquant l’adresse de la page, le navigateur utilisé et un exemple ne contenant aucune donnée personnelle.',
     },
   ],
 };

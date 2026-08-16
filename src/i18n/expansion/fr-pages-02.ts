@@ -61,7 +61,7 @@ export const frenchPrivacy = {
     {
       heading: 'Courriel volontaire et contact',
       paragraphs: [
-        'Si vous écrivez à btcson66@gmail.com, FunnyTools reçoit l’adresse d’expédition et le contenu volontaire du message afin de répondre. N’envoyez jamais de mot de passe, de document d’identité, de relevé scolaire, de dossier médical ou de fichier professionnel confidentiel pour signaler un bug. Un exemple fictif, l’URL, le navigateur et les étapes de reproduction suffisent généralement.',
+        'Si vous écrivez à btcson224@gmail.com, FunnyTools reçoit l’adresse d’expédition et le contenu volontaire du message afin de répondre. N’envoyez jamais de mot de passe, de document d’identité, de relevé scolaire, de dossier médical ou de fichier professionnel confidentiel pour signaler un bug. Un exemple fictif, l’URL, le navigateur et les étapes de reproduction suffisent généralement.',
         'Certaines fonctions du réseau FunnyTools peuvent proposer une inscription à une lettre d’information ou une livraison volontaire par courriel, gérée avec une infrastructure partagée et Brevo. Lorsque cette fonction est choisie, l’adresse sert à l’objectif annoncé. Elle n’est pas vendue à des annonceurs. Les messages d’information doivent proposer un moyen de se désinscrire, et une demande de suppression peut être envoyée au contact indiqué.',
       ],
     },
@@ -120,7 +120,7 @@ export const frenchPrivacy = {
     { q: 'Comment supprimer les préférences et le cache ?', a: 'Effacez les cookies et données du site funnytools.win dans les réglages du navigateur. Le thème, les préférences et les ressources PWA pourront être réinitialisés.' },
     { q: 'FunnyTools vend-il mon adresse électronique ?', a: 'Non. Une adresse fournie volontairement sert au contact, à la livraison ou à l’abonnement demandé et n’est pas vendue à des annonceurs.' },
     { q: 'Puis-je utiliser un dossier confidentiel ?', a: 'Vérifiez d’abord les règles de votre établissement ou employeur. Préférez une copie expurgée sur un appareil maîtrisé et contrôlez le fichier téléchargé.' },
-    { q: 'Comment exercer un droit ou signaler une anomalie ?', a: 'Écrivez à btcson66@gmail.com avec la page et une demande précise. N’ajoutez ni mot de passe ni document sensible.' },
+    { q: 'Comment exercer un droit ou signaler une anomalie ?', a: 'Écrivez à btcson224@gmail.com avec la page et une demande précise. N’ajoutez ni mot de passe ni document sensible.' },
   ],
   sources: [
     {
@@ -246,7 +246,7 @@ export const frenchAboutTools = {
       heading: 'Signaler un défaut de manière reproductible',
       paragraphs: [
         'Un bon rapport contient l’URL, le navigateur et sa version, le type d’appareil, les étapes exactes, le résultat attendu et celui observé. Pour un calcul, utilisez de petits nombres fictifs. Pour un PDF, créez deux documents de test sans donnée personnelle. Une capture d’écran peut aider si elle ne révèle rien de sensible.',
-        'Envoyez ces éléments à btcson66@gmail.com. Si l’erreur dépend d’une règle officielle, ajoutez le lien et la date de consultation. Ne transmettez pas le document réel pour prouver le problème. Une reproduction minimale permet de corriger le code sans transformer le support en canal de collecte.',
+        'Envoyez ces éléments à btcson224@gmail.com. Si l’erreur dépend d’une règle officielle, ajoutez le lien et la date de consultation. Ne transmettez pas le document réel pour prouver le problème. Une reproduction minimale permet de corriger le code sans transformer le support en canal de collecte.',
       ],
     },
   ],
@@ -276,7 +276,7 @@ export const frenchAboutTools = {
     { q: 'Les gros fichiers fonctionnent-ils mieux sur ordinateur ?', a: 'Souvent oui, car la mémoire disponible est généralement supérieure. La complexité interne du PDF compte toutefois davantage que son seul poids.' },
     { q: 'La version française est-elle traduite automatiquement ?', a: 'Non. Les pages sont rédigées pour les requêtes, le vocabulaire et les précautions réellement utiles à un lectorat francophone.' },
     { q: 'Un test automatique garantit-il le contenu ?', a: 'Non. Il vérifie des conditions programmées. FunnyTools ajoute une relecture éditoriale, des cas manuels et une vérification sur la page publique.' },
-    { q: 'Où signaler un résultat incorrect ?', a: 'Écrivez à btcson66@gmail.com avec l’URL et un exemple fictif reproductible. Ne joignez aucun document confidentiel.' },
+    { q: 'Où signaler un résultat incorrect ?', a: 'Écrivez à btcson224@gmail.com avec l’URL et un exemple fictif reproductible. Ne joignez aucun document confidentiel.' },
   ],
   sources: [
     {

@@ -54,7 +54,7 @@ export const spanishPrivacy: SpanishInfoPage = {
     {
       heading: 'Ámbito, responsable de contacto y fecha de revisión',
       paragraphs: [
-        'Esta política se aplica a funnytools.win y a las páginas de FunnyTools que enlazan a ella. La versión española fue revisada el 27 de julio de 2026. Para preguntas sobre privacidad, correcciones o solicitudes relacionadas con datos enviados voluntariamente, puedes escribir a btcson66@gmail.com e indicar la dirección de la página afectada.',
+        'Esta política se aplica a funnytools.win y a las páginas de FunnyTools que enlazan a ella. La versión española fue revisada el 27 de julio de 2026. Para preguntas sobre privacidad, correcciones o solicitudes relacionadas con datos enviados voluntariamente, puedes escribir a btcson224@gmail.com e indicar la dirección de la página afectada.',
         'FunnyTools es un sitio estático de herramientas gratuitas. No ofrece cuentas de usuario ni un panel con perfiles personales. Cuando una función futura necesite un servidor, una API o un proveedor distinto, la página correspondiente deberá indicarlo antes de pedir datos y esta política se actualizará si el cambio es material.',
       ],
     },
@@ -113,7 +113,7 @@ export const spanishPrivacy: SpanishInfoPage = {
       heading: 'Tus opciones, solicitudes y seguridad',
       paragraphs: [
         'Puedes bloquear o borrar cookies, eliminar datos locales, utilizar los controles de anuncios de Google, instalar el complemento de inhabilitación de Google Analytics o dejar de utilizar una función que requiera correo. Algunas medidas pueden afectar a preferencias, medición o publicidad, pero las herramientas principales no requieren iniciar sesión.',
-        'Si una norma aplicable te reconoce derechos de acceso, rectificación, supresión, oposición, limitación o retirada del consentimiento, escribe a btcson66@gmail.com describiendo la solicitud y el canal utilizado. Como el sitio no asocia por defecto los datos de herramienta a una identidad, puede que no exista un registro personal que FunnyTools pueda localizar. No envíes una copia completa de tu documento de identidad salvo que sea estrictamente necesaria y se acuerde un método seguro.',
+        'Si una norma aplicable te reconoce derechos de acceso, rectificación, supresión, oposición, limitación o retirada del consentimiento, escribe a btcson224@gmail.com describiendo la solicitud y el canal utilizado. Como el sitio no asocia por defecto los datos de herramienta a una identidad, puede que no exista un registro personal que FunnyTools pueda localizar. No envíes una copia completa de tu documento de identidad salvo que sea estrictamente necesaria y se acuerde un método seguro.',
         'El sitio no está dirigido específicamente a menores de 16 años y no pretende recopilar conscientemente sus datos personales. En actividades escolares, un adulto o la institución debe decidir qué información puede utilizarse y sustituir los datos reales por ejemplos cuando sea posible.',
       ],
     },
@@ -141,7 +141,7 @@ export const spanishPrivacy: SpanishInfoPage = {
     },
     {
       q: '¿Cómo hago una consulta de privacidad?',
-      a: 'Escribe a btcson66@gmail.com con la URL y una explicación breve. No incluyas contraseñas, archivos confidenciales ni más datos personales de los necesarios.',
+      a: 'Escribe a btcson224@gmail.com con la URL y una explicación breve. No incluyas contraseñas, archivos confidenciales ni más datos personales de los necesarios.',
     },
   ],
   review: {
@@ -286,7 +286,7 @@ export const spanishAboutTools: SpanishInfoPage = {
     },
     {
       q: '¿Dónde puedo comunicar un fallo?',
-      a: 'Escribe a btcson66@gmail.com con la URL y un caso ficticio reproducible. No adjuntes datos confidenciales.',
+      a: 'Escribe a btcson224@gmail.com con la URL y un caso ficticio reproducible. No adjuntes datos confidenciales.',
     },
   ],
   review: {

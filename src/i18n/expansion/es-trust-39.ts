@@ -14,7 +14,7 @@ export const spanishAbout: SpanishInfoPage = {
   eyebrow: 'Identidad del sitio · método de trabajo · transparencia',
   intro: 'FunnyTools es un proyecto independiente de herramientas gratuitas para resolver tareas concretas en el navegador. Esta página explica quién mantiene el sitio, por qué existe, cómo se decide qué publicar, qué pruebas se realizan y dónde terminan nuestras competencias. La confianza no depende de una frase promocional: debe poder contrastarse con el funcionamiento visible, las fuentes, las políticas y un canal real de corrección.',
   directAnswer: [
-    'FunnyTools está mantenido por un pequeño equipo editorial y técnico bajo el nombre del propio proyecto. No pertenece a Google, a una administración, a un banco, a una universidad ni a un proveedor de software. El contacto operativo es btcson66@gmail.com y el repositorio público permite informar de errores reproducibles. No inventamos una identidad corporativa, una oficina española ni acreditaciones que el proyecto no posee.',
+    'FunnyTools está mantenido por un pequeño equipo editorial y técnico bajo el nombre del propio proyecto. No pertenece a Google, a una administración, a un banco, a una universidad ni a un proveedor de software. El contacto operativo es btcson224@gmail.com y el repositorio público permite informar de errores reproducibles. No inventamos una identidad corporativa, una oficina española ni acreditaciones que el proyecto no posee.',
     'El sitio reúne 79 herramientas publicadas para documentos, imágenes, texto, azar, tiempo, dinero, dibujo, aula y estadística. La prioridad es que una persona pueda entender la entrada, obtener una salida y comprobar sus límites sin registrarse. Las versiones en español se redactan para búsquedas, normas, vocabulario y situaciones de uso en español; no se publican como una traducción automática de otra página.',
   ],
   sections: [
@@ -28,7 +28,7 @@ export const spanishAbout: SpanishInfoPage = {
     {
       heading: 'Quién mantiene el sitio',
       paragraphs: [
-        'El proyecto se publica y mantiene bajo la identidad editorial FunnyTools. El trabajo combina desarrollo del sitio, pruebas de herramientas, revisión de textos, seguimiento de páginas rotas y actualización de documentación. El correo btcson66@gmail.com recibe errores, correcciones y propuestas relacionadas con el sitio. Los cambios técnicos quedan vinculados a versiones visibles en el pie de página.',
+        'El proyecto se publica y mantiene bajo la identidad editorial FunnyTools. El trabajo combina desarrollo del sitio, pruebas de herramientas, revisión de textos, seguimiento de páginas rotas y actualización de documentación. El correo btcson224@gmail.com recibe errores, correcciones y propuestas relacionadas con el sitio. Los cambios técnicos quedan vinculados a versiones visibles en el pie de página.',
         'FunnyTools no se presenta como despacho profesional, entidad financiera, centro educativo, laboratorio, organismo público ni certificador. Cuando un tema requiere una autoridad externa, la página debe dirigir al contrato, la administración, la norma, la documentación del producto o el profesional correspondiente. Una fuente enlazada apoya una comprobación concreta; no convierte al sitio en representante de esa fuente.',
       ],
     },
@@ -155,14 +155,14 @@ export const spanishAbout: SpanishInfoPage = {
     },
   ],
   faq: [
-    { q: '¿Quién es el propietario de FunnyTools?', a: 'El sitio se mantiene de forma independiente bajo la identidad editorial FunnyTools. El canal operativo publicado es btcson66@gmail.com; no se presenta como administración, banco, escuela ni despacho profesional.' },
+    { q: '¿Quién es el propietario de FunnyTools?', a: 'El sitio se mantiene de forma independiente bajo la identidad editorial FunnyTools. El canal operativo publicado es btcson224@gmail.com; no se presenta como administración, banco, escuela ni despacho profesional.' },
     { q: '¿Cuántas herramientas hay publicadas?', a: 'El catálogo actual contiene 79 herramientas. El número puede cambiar con versiones posteriores y se comprueba en la página de todas las herramientas.' },
     { q: '¿El contenido en español es una traducción automática?', a: 'No. Las páginas españolas se redactan según vocabulario, intención de búsqueda, fuentes y situaciones de uso en español, con límites locales cuando corresponden.' },
     { q: '¿Cómo se comprueba una calculadora?', a: 'Se prueban casos calculables a mano, unidades, extremos, estados vacíos y redondeo; el usuario todavía debe comparar resultados formales con la fuente aplicable.' },
     { q: '¿FunnyTools guarda mis archivos?', a: 'Las herramientas locales procesan el contenido en la pestaña y no crean una biblioteca en FunnyTools. Conserva originales y revisa la política de privacidad y cada herramienta.' },
     { q: '¿La publicidad cambia los resultados?', a: 'No debe hacerlo. Los anuncios se separan de controles y resultados; una marca no paga para modificar una fórmula o aparecer como respuesta de la herramienta.' },
     { q: '¿Puedo solicitar una herramienta nueva?', a: 'Sí. Explica problema, entrada, salida y situación de uso. La propuesta se evalúa por utilidad, viabilidad local, seguridad y capacidad de mantenimiento.' },
-    { q: '¿Dónde informo de un error?', a: 'Utiliza GitHub Issues para errores públicos sin datos sensibles o escribe a btcson66@gmail.com. Incluye URL, pasos, ejemplo ficticio, resultado esperado, dispositivo y navegador.' },
+    { q: '¿Dónde informo de un error?', a: 'Utiliza GitHub Issues para errores públicos sin datos sensibles o escribe a btcson224@gmail.com. Incluye URL, pasos, ejemplo ficticio, resultado esperado, dispositivo y navegador.' },
   ],
   review: {
     heading: 'Comprobación pública de nuestras afirmaciones',
@@ -206,14 +206,14 @@ export const spanishContact: SpanishInfoPage = {
   eyebrow: 'Correo · GitHub Issues · informes reproducibles',
   intro: 'Esta página ayuda a elegir el canal correcto y a enviar la información mínima que permite comprobar un problema. FunnyTools no tiene chat, teléfono ni atención en tiempo real. Los errores y correcciones se atienden como mantenimiento de un sitio gratuito; una solicitud clara puede convertirse en una prueba, mientras que un archivo confidencial solo añade riesgo.',
   directAnswer: [
-    'Para contacto privado, escribe a btcson66@gmail.com. Para un fallo técnico o una propuesta que pueda discutirse públicamente y no contenga datos personales, abre una incidencia en GitHub: https://github.com/btcson66-rgb/funnytools-win/issues. Incluye URL, tarea, pasos, entrada ficticia, resultado esperado, resultado observado, dispositivo y navegador.',
+    'Para contacto privado, escribe a btcson224@gmail.com. Para un fallo técnico o una propuesta que pueda discutirse públicamente y no contenga datos personales, abre una incidencia en GitHub: https://github.com/btcson66-rgb/funnytools-win/issues. Incluye URL, tarea, pasos, entrada ficticia, resultado esperado, resultado observado, dispositivo y navegador.',
     'No publiques ni envíes contraseñas, claves, documentos de identidad, archivos financieros, expedientes escolares, datos médicos, documentos de clientes o contenido que no tengas permiso para compartir. No existe un equipo de asesoramiento individual: FunnyTools puede revisar el sitio, pero no certifica cálculos, recupera archivos, interpreta un caso legal o negocia con terceros.',
   ],
   sections: [
     {
       heading: 'Canales disponibles y cuándo usar cada uno',
       paragraphs: [
-        'El correo btcson66@gmail.com es el canal para privacidad, seguridad, accesibilidad con contexto personal, contenido que todavía no debe publicarse y consultas generales sobre el sitio. Escribe un asunto específico y una sola petición principal. Si informas de varias páginas, separa cada URL y resultado para que puedan verificarse de forma independiente.',
+        'El correo btcson224@gmail.com es el canal para privacidad, seguridad, accesibilidad con contexto personal, contenido que todavía no debe publicarse y consultas generales sobre el sitio. Escribe un asunto específico y una sola petición principal. Si informas de varias páginas, separa cada URL y resultado para que puedan verificarse de forma independiente.',
         'GitHub Issues es público y resulta útil para errores reproducibles, enlaces rotos, mejoras y propuestas sin información sensible. Cualquier texto, captura o archivo añadido puede quedar visible, indexarse o conservarse en el historial del proveedor. Sustituye nombres y documentos por datos ficticios antes de publicar.',
       ],
       link: {
@@ -338,7 +338,7 @@ export const spanishContact: SpanishInfoPage = {
     },
   ],
   faq: [
-    { q: '¿Cuál es el correo de FunnyTools?', a: 'El correo operativo publicado es btcson66@gmail.com. Indica URL y motivo, y no envíes datos sensibles.' },
+    { q: '¿Cuál es el correo de FunnyTools?', a: 'El correo operativo publicado es btcson224@gmail.com. Indica URL y motivo, y no envíes datos sensibles.' },
     { q: '¿Puedo informar de un error en GitHub?', a: 'Sí, si el contenido puede ser público. GitHub Issues sirve para errores, mejoras y propuestas sin datos personales ni vulnerabilidades explotables.' },
     { q: '¿Cuánto tarda una respuesta?', a: 'Los mensajes suelen revisarse en unos tres días laborables, pero no existe un plazo contractual ni se garantiza respuesta individual o corrección inmediata.' },
     { q: '¿Qué datos necesita un informe técnico?', a: 'URL, pasos, entrada ficticia mínima, resultado esperado y real, dispositivo, sistema y navegador. Añade el mensaje de error como texto.' },
@@ -399,14 +399,14 @@ export const spanishDisclaimer: SpanishInfoPage = {
   eyebrow: 'Titularidad · alcance · límites por tipo de herramienta',
   intro: 'Este aviso reúne la información de identificación disponible y explica qué puede —y qué no puede— significar un resultado de FunnyTools. No intenta convertir una limitación general en permiso para publicar cualquier cosa: cada herramienta sigue obligada a describir su método, sus riesgos y la comprobación adecuada. Ninguna cláusula pretende eliminar derechos que una ley aplicable reconozca de forma irrenunciable.',
   directAnswer: [
-    'FunnyTools es un proyecto independiente accesible en funnytools.win y mantenido bajo esa identidad editorial. El contacto es btcson66@gmail.com. El sitio ofrece gratuitamente herramientas y contenido general, sin cuenta y principalmente con procesamiento en el navegador. No está afiliado a administraciones, bancos, centros educativos, empleadores, organismos de evaluación, servicios sanitarios ni fuentes externas enlazadas.',
+    'FunnyTools es un proyecto independiente accesible en funnytools.win y mantenido bajo esa identidad editorial. El contacto es btcson224@gmail.com. El sitio ofrece gratuitamente herramientas y contenido general, sin cuenta y principalmente con procesamiento en el navegador. No está afiliado a administraciones, bancos, centros educativos, empleadores, organismos de evaluación, servicios sanitarios ni fuentes externas enlazadas.',
     'Los resultados son auxiliares. Una fórmula puede ser correcta y no incluir una excepción contractual; un archivo puede descargarse y perder metadatos; una estadística puede calcularse y ser metodológicamente inapropiada; un temporizador puede retrasarse; un sorteo informal puede no cumplir una regulación. Conserva entradas y originales, revisa la explicación de la página y contrasta decisiones importantes con la fuente competente.',
   ],
   sections: [
     {
       heading: 'Identificación del sitio y canal de contacto',
       paragraphs: [
-        'El servicio se publica con el nombre FunnyTools en https://funnytools.win/. La identidad operativa mostrada al visitante es FunnyTools y el correo de contacto es btcson66@gmail.com. El proyecto no declara establecimiento permanente, inscripción mercantil ni oficina en España. La disponibilidad de una versión española no debe interpretarse como una afirmación distinta.',
+        'El servicio se publica con el nombre FunnyTools en https://funnytools.win/. La identidad operativa mostrada al visitante es FunnyTools y el correo de contacto es btcson224@gmail.com. El proyecto no declara establecimiento permanente, inscripción mercantil ni oficina en España. La disponibilidad de una versión española no debe interpretarse como una afirmación distinta.',
         'La Ley española 34/2002 describe información general que determinados prestadores sujetos a su ámbito deben mantener accesible. Se enlaza como referencia de transparencia para visitantes en España, sin afirmar que una página pueda resolver por sí sola la jurisdicción aplicable. Si necesitas plantear una cuestión formal, indica país, URL y relación con el servicio para que pueda evaluarse el canal adecuado.',
       ],
     },

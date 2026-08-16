@@ -33,7 +33,9 @@ export const SITE = {
   // Shared Cloudflare Pages Functions (deployed with roomfeng.win) used by all three sites.
   newsletterEndpoint: 'https://roomfeng.win/api/newsletter',
   downloadGateEndpoint: 'https://roomfeng.win/api/download-gate',
-  email: 'btcson66@gmail.com',
+  // 2026-08-16: was btcson66@gmail.com. That mailbox can no longer be signed into, so
+  // anything a visitor sent there went nowhere. btcson224@gmail.com is reachable.
+  email: 'btcson224@gmail.com',
   htmlLang: { zh: 'zh-Hant', en: 'en' } as Record<Locale, string>,
   hreflang: { zh: 'zh-TW', en: 'en' } as Record<Locale, string>,
 };
