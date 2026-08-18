@@ -75,6 +75,11 @@ jobs:
         if: always()
         run: node scripts/gsc-submit-sitemaps.mjs
         env:
+          # Preferred: the backup account is siteOwner on all three properties. The service
+          # account below only ever reached worthcalc — Search Console will not accept it as a
+          # user on the other two — so on its own this step fails for funnytools.
+          FABLE_OPS_OAUTH_CLIENT_JSON: ${{ secrets.FABLE_OPS_OAUTH_CLIENT_JSON }}
+          FABLE_OPS_REFRESH_TOKEN: ${{ secrets.FABLE_OPS_REFRESH_TOKEN }}
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
           GSC_CLIENT_EMAIL: ${{ secrets.GSC_CLIENT_EMAIL }}
           GSC_PRIVATE_KEY: ${{ secrets.GSC_PRIVATE_KEY }}
@@ -114,6 +119,11 @@ jobs:
       - name: Inspect priority URLs with GSC URL Inspection API
         run: node scripts/gsc-inspect-priority-urls.mjs
         env:
+          # Preferred: the backup account is siteOwner on all three properties. The service
+          # account below only ever reached worthcalc — Search Console will not accept it as a
+          # user on the other two — so on its own this step fails for funnytools.
+          FABLE_OPS_OAUTH_CLIENT_JSON: ${{ secrets.FABLE_OPS_OAUTH_CLIENT_JSON }}
+          FABLE_OPS_REFRESH_TOKEN: ${{ secrets.FABLE_OPS_REFRESH_TOKEN }}
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
           GSC_CLIENT_EMAIL: ${{ secrets.GSC_CLIENT_EMAIL }}
           GSC_PRIVATE_KEY: ${{ secrets.GSC_PRIVATE_KEY }}

@@ -1,17 +1,4 @@
-interface ToolContent {
-  name: string;
-  short: string;
-  long: string;
-  seoTitle: string;
-  seoDescription: string;
-  keywords: string[];
-  instructions: string[];
-  examples: string[];
-  faq: { q: string; a: string }[];
-  labels: Record<string, string>;
-  disclaimer?: string;
-  privacyNote?: string;
-}
+import type { ToolContent } from './_types';
 
 export default {
   zh: {
@@ -116,24 +103,53 @@ export default {
   },
   en: {
     name: '2D CAD Drawing Board',
-    short: 'Draw 2D CAD drawings online free — lines, rectangles, circles, and polylines with PNG/SVG export.',
-    long: '2D CAD Drawing Board is a free online 2D CAD drawing tool that runs in your browser — no download, no signup. Draw lines, rectangles, circles, and polylines with dimensions on a grid drafting canvas; type exact lengths and angles, snap to grid, pan and zoom, undo and redo, then export PNG or SVG.',
-    seoTitle: '2D CAD Drawing Online — Free Drafting Tool',
-    seoDescription: 'Draw 2D CAD drawings online free, with grid snap and exact dimensions.',
+    short: 'Create free 2D CAD drawings in your browser, enter exact grid-unit sizes, and export PNG or SVG—no installation or account.',
+    long: 'This is a free browser tool for simple 2D CAD drawings. It needs no download, installation, or account. Enter exact grid-unit sizes, then export the result as PNG or SVG.',
+    seoTitle: 'Free Online 2D CAD Drawing to Exact Dimensions',
+    seoDescription: 'Draw 2D CAD online to size, with no install.',
     keywords: ['2d cad online', '2d drawing online', 'online 2d cad drawing', 'free 2d cad', 'online drafting tool', '2d drawing with dimensions', 'SVG export'],
     contentSections: [
       {
-        heading: 'Free online 2D CAD drawing — no download needed',
+        heading: 'Quick answer',
         paragraphs: [
-          'Most CAD software needs a download, a license, or an account before you can draw a single line. This drawing board opens instantly in the browser and is meant for the quick jobs: a room layout, a part sketch, a garden bed, a workshop plan, or a diagram for a document.',
-          'You can draw 2D drawings with dimensions by typing exact lengths, angles, widths, heights, and radii in grid units, so simple dimensioned sketches stay accurate without a full CAD workflow.',
+          'This is a free online 2D CAD drawing board that runs in your browser. No installation or registration is required. It creates simple drawings to exact grid-unit sizes and exports PNG or SVG.',
+        ],
+      },
+      {
+        heading: 'What this tool can and cannot do',
+        paragraphs: [
+          'Use it to draw lines, rectangles, circles, and polylines. You can enter line lengths and angles, rectangle widths and heights, or circle radii in grid units. Grid snap, endpoint snap, Ortho mode, joined endpoints, selection and movement, pan and zoom, undo and redo, and PNG or SVG export are available.',
+          'This is a lightweight drawing board, not a full CAD system. It does not create 3D models, import or export DWG or DXF files, manage layers, add text, save an editable project file, or place persistent dimension lines and labels on the drawing. Grid units are relative rather than built-in millimetres or inches.',
         ],
         items: [
-          'Runs in any modern browser on desktop or tablet — nothing to install',
-          'Free with no account, no watermark, and no export limit',
-          'Type exact dimensions for lines, rectangles, and circles in grid units',
-          'Export SVG to continue in Inkscape, Illustrator, or a full CAD package',
+          'Good fit: simple floor-plan ideas, part outlines, furniture layouts, diagrams, and shareable sketches',
+          'Not a fit: construction documents, manufacturing drawings, native AutoCAD files, layer-based drafting, or 3D work',
         ],
+      },
+      {
+        heading: 'How it compares to AutoCAD',
+        paragraphs: [
+          'This board is enough when you need a quick 2D sketch, want to set basic geometry to a chosen scale, or need a PNG or SVG that another person can view. It opens directly in the browser and keeps the workflow intentionally small.',
+          'Use AutoCAD or another full CAD application when the deliverable requires native DWG files, formal dimension annotations, layers, detailed documentation, 3D modelling, or an engineering, architectural, or manufacturing workflow. This tool does not claim AutoCAD compatibility and is not an AutoCAD replacement.',
+        ],
+      },
+      {
+        heading: 'Example: draw a 1200 × 600 mm tabletop',
+        paragraphs: [
+          'Because the canvas uses relative grid units, first choose a scale. For example, let 1 grid unit represent 100 mm; a 1200 × 600 mm tabletop then becomes a 12 × 6 unit rectangle.',
+        ],
+        items: [
+          'Select Rectangle and click the canvas to place the first corner.',
+          'In the floating fields, enter 12 for Width, press Tab, enter 6 for Height, then press Enter.',
+          'Use Select/Move to position the rectangle, and export PNG or SVG when the sketch is ready.',
+          'Record the 1 unit = 100 mm scale with the shared file. The tool does not place a permanent “1200 × 600 mm” label or conventional dimension lines on the drawing.',
+        ],
+        link: {
+          prefix: 'If you need freehand notes instead of scaled geometry, use the ',
+          label: 'Online Sketchpad',
+          href: '/en/tools/sketchpad/',
+          suffix: '.',
+        },
       },
     ],
     instructions: [
@@ -152,28 +168,28 @@ export default {
     ],
     faq: [
       {
-        q: 'Is this a full CAD application?',
-        a: 'No. It is a lightweight 2D drafting board for sketches, layouts, and diagrams. It does not replace professional CAD dimensioning or engineering workflows.',
+        q: 'Is there a free online 2D CAD tool?',
+        a: 'Yes. This free 2D CAD drawing board runs in your browser with no installation or account and exports simple drawings as PNG or SVG.',
       },
       {
-        q: 'What do the grid units mean?',
-        a: 'The canvas uses relative grid units for alignment and rough scale. Convert them to real measurements according to your own drawing scale.',
+        q: 'Can I add dimensions to my drawing?',
+        a: 'You can enter exact grid-unit lengths, angles, widths, heights, and radii. The tool does not add permanent dimension lines or text labels, so apply your own scale for millimetres or inches.',
       },
       {
-        q: 'How do I draw with an exact length and angle?',
-        a: 'Choose Line or Polyline and place the first point. Type a length in grid units and press Enter to draw in the current cursor direction, or press Tab, enter an angle, and press Enter. Angles use 0° to the right and 90° upward.',
+        q: 'Do I need to install AutoCAD?',
+        a: 'No. This tool works without AutoCAD. Use a full CAD application when you need DWG files, layers, formal dimension annotations, 3D modelling, or production documentation.',
       },
       {
-        q: 'Can I type exact rectangle or circle dimensions?',
-        a: 'Yes. Choose Rectangle, place the first corner, enter width and height in grid units, then press Enter. Choose Circle, place the center, enter a radius in grid units, then press Enter. Dimension commits keep the exact typed value and do not snap again to the grid.',
+        q: 'Can it open or save AutoCAD DWG files?',
+        a: 'No. It does not import or export DWG or DXF files. It exports the current drawing as PNG or SVG.',
       },
       {
-        q: 'How do I connect two separate lines?',
-        a: 'Press Connect endpoints, click the first line endpoint, then click the second line or polyline endpoint. The second endpoint moves onto the first and becomes joined, so moving either connected line keeps the shared point attached.',
+        q: 'Can I make a simple 2D drawing with exact sizes?',
+        a: 'Yes. Enter lengths and angles for lines, width and height for rectangles, or radius for circles. Values use relative grid units that you map to your chosen real-world scale.',
       },
       {
-        q: 'What does SVG export include?',
-        a: 'The SVG export includes the current model shapes: lines, rectangles, circles, and polylines, so they can be edited in vector tools.',
+        q: 'Does the tool save an editable CAD project?',
+        a: 'No. Export PNG or SVG before leaving the page. The tool does not save or reopen an editable project file.',
       },
     ],
     labels: {

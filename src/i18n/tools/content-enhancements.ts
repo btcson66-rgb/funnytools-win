@@ -4,7 +4,13 @@ import type { ToolContent } from './_types';
 type Pair = { zh: string; en: string };
 type CasePair = { title: Pair; description: Pair };
 type Enhancement = Partial<ToolContent>;
-type SectionSpec = { heading: Pair; paragraphs: Pair[]; items?: Pair[] };
+type SectionLink = { prefix: string; label: string; href: string; suffix?: string };
+type SectionSpec = {
+  heading: Pair;
+  paragraphs: Pair[];
+  items?: Pair[];
+  link?: Partial<Record<Locale, SectionLink>>;
+};
 
 function localize(
   audience: Pair[],
@@ -23,6 +29,7 @@ function localize(
               heading: section.heading.zh,
               paragraphs: section.paragraphs.map((item) => item.zh),
               items: section.items?.map((item) => item.zh),
+              link: section.link?.zh,
             })),
           }
         : {}),
@@ -37,6 +44,7 @@ function localize(
               heading: section.heading.en,
               paragraphs: section.paragraphs.map((item) => item.en),
               items: section.items?.map((item) => item.en),
+              link: section.link?.en,
             })),
           }
         : {}),
@@ -631,6 +639,14 @@ export const toolContentEnhancements: Record<string, Record<Locale, Enhancement>
             en: 'If what is needed is a diagram with directional arrows and double-click-editable text rather than freehand drawing, this site\'s Flowchart Maker offers draggable rectangle and diamond nodes. Both export PNG, but sketchpad strokes are not objects — once drawn, they are plain pixels with no way to edit the text or position of a single stroke afterward.',
           },
         ],
+        link: {
+          en: {
+            prefix: 'For straight geometry and exact relative sizes, open the ',
+            label: 'free online 2D CAD Drawing Board',
+            href: '/en/tools/cad-2d/',
+            suffix: '.',
+          },
+        },
       },
     ],
   ),
