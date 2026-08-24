@@ -43,6 +43,9 @@ const contentSecurityPolicy = [
           <script is:inline define:vars={{ measurementId: SITE.ga4MeasurementId, secondaryMeasurementId: SITE.ga4SecondaryMeasurementId }}>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
+            // See BaseLayout: define:vars puts this script in an IIFE, so gtag has to be
+            // published onto window explicitly or nothing outside this block can call it.
+            window.gtag = gtag;
             gtag('js', new Date());
             gtag('config', measurementId);
             // Mirror into the backup-account property; see src/config/site.ts.

@@ -77,6 +77,18 @@ for (const page of pages) {
   for (const payloadName of forbiddenPayloadNames) {
     if (analyticsHtml.includes(payloadName)) failures.push(`${page}: forbidden analytics payload ${payloadName}`);
   }
+  // Every custom event on this site reaches GA4 through window.gtag. Astro wraps the
+  // define:vars GA snippet in an IIFE, so `function gtag(){}` stays local to that block
+  // and window.gtag is undefined unless the layout publishes it explicitly. While that
+  // was broken, gtag('config') and page_view still worked from inside the IIFE, so GA4
+  // looked alive — but every custom event fell back to a bare dataLayer.push that
+  // nothing consumes, and this audit still passed because the event names were present
+  // in the HTML. Presence of an event name is not proof the call can reach GA4.
+  // The negative lookahead matters: `window.gtag === 'function'` appears in the
+  // __ft_track guard on every page, so a looser pattern passes on broken output.
+  if (!/window\.gtag\s*=(?!=)/.test(html)) {
+    failures.push(`${page}: GA snippet never assigns window.gtag, so custom events cannot fire`);
+  }
 }
 
 const supportHtml = readFileSync(join(dist, 'support', 'index.html'), 'utf8');
