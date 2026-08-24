@@ -58,7 +58,7 @@ if (!existsSync(adsPath)) {
   errors.push('缺少 dist/ads.txt。');
 } else {
   const ads = read(adsPath).trim();
-  const expected = 'google.com, pub-7052036786750044, DIRECT, f08c47fec0942fa0';
+  const expected = 'google.com, pub-9117672212804270, DIRECT, f08c47fec0942fa0';
   if (ads !== expected) errors.push('ads.txt 的 Google 發布商資料不正確。');
 }
 
