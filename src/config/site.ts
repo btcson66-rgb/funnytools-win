@@ -19,7 +19,13 @@ export const SITE = {
   // tag stays in place so the historical property keeps its continuity if access is restored.
   ga4SecondaryMeasurementId: 'G-SJ90CBM9ZV',
   // Legacy fallback for local/preflight builds. Prefer PUBLIC_ADSENSE_CLIENT.
-  adsenseClient: 'ca-pub-7052036786750044',
+  // 2026-08-24: was ca-pub-7052036786750044 (AdSense account btcson66). That account's
+  // sign-in mailbox is the same btcson66@gmail.com noted above, which can no longer be
+  // signed into, so the site is being re-submitted for review under account zxc851558.
+  // No workflow sets PUBLIC_ADSENSE_CLIENT, so production actually uses this fallback.
+  // Keep it in sync with public/ads.txt and with the expected string in
+  // scripts/adsense-preflight.mjs — all three must carry the same publisher ID.
+  adsenseClient: 'ca-pub-9117672212804270',
   // Keep enabled while the site is under AdSense review. Visible ad slots remain separately gated below.
   adsenseEnabled: true,
   features: {
