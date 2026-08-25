@@ -27,11 +27,20 @@ const TOKEN_FILE = path.join(TOKEN_DIR, 'fable-ops-token.json');
 // would also allow dismissing alerts and changing settings on the revenue
 // account, which nothing here needs. The AdSense Management API does not
 // support service accounts, so this user grant is the only way in.
+// openid + userinfo.email are what make the "授權帳號" read-back below actually
+// work. Without them the userinfo endpoint returns 401 and the script has been
+// printing "userinfo HTTP 401" instead of the address — which meant the one
+// guard against authorizing the wrong Google account has never once fired.
+// That matters here: a token for the wrong account would read a different
+// AdSense account's data and look perfectly healthy doing it.
 const SCOPES = [
+  'openid',
+  'https://www.googleapis.com/auth/userinfo.email',
   'https://www.googleapis.com/auth/webmasters',
   'https://www.googleapis.com/auth/analytics.readonly',
   'https://www.googleapis.com/auth/adsense.readonly',
 ];
+const EXPECTED_ACCOUNT = 'zxc851558@gmail.com';
 
 function b64url(buf) {
   return Buffer.from(buf).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -176,8 +185,25 @@ fs.writeFileSync(
 const who = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
   headers: { authorization: `Bearer ${tok.access_token}` },
 });
-const label = who.ok ? (await who.json()).email || '(未授予 email scope)' : `userinfo HTTP ${who.status}`;
+const email = who.ok ? (await who.json()).email : null;
+const label = email ?? `讀取失敗（userinfo HTTP ${who.status}）`;
 
 console.log(`已寫入 ${TOKEN_FILE}`);
 console.log(`授權帳號：${label}`);
 console.log(`授予範圍：${tok.scope}`);
+
+// Both of these are silent failures otherwise: the token file is written and
+// looks fine, and the problem only surfaces later as a confusing 403 or as
+// reports quietly describing the wrong account's data.
+const problems = [];
+if (email && email.toLowerCase() !== EXPECTED_ACCOUNT) {
+  problems.push(`授權帳號是 ${email}，不是預期的 ${EXPECTED_ACCOUNT}`);
+}
+if (!(tok.scope ?? '').includes('adsense')) {
+  problems.push('授予範圍沒有 adsense.readonly —— 若這份程式碼是舊版，請先 git pull 再重跑');
+}
+if (problems.length > 0) {
+  console.error('');
+  for (const problem of problems) console.error(`注意：${problem}`);
+  process.exit(3);
+}
