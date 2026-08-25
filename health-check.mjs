@@ -7,7 +7,7 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { execSync } from 'node:child_process';
+import { execFileSync, execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = dirname(fileURLToPath(import.meta.url));
@@ -756,6 +756,20 @@ function writeReports(snapshot, diff) {
     longLines.push('');
   }
 
+  longLines.push('## AdSense 帳戶', '');
+  if (!snapshot.adsense) {
+    longLines.push('本次未取得 AdSense 資料（未設定或檢查失敗，詳見上方問題清單）。', '');
+  } else {
+    const ad = snapshot.adsense;
+    longLines.push(`- 帳戶：${ad.account?.displayName ?? ad.account?.name}（${ad.account?.state ?? '狀態未知'}）`, '');
+    longLines.push('| 網站 | 狀態 | 自動廣告 |', '| --- | --- | --- |');
+    for (const site of ad.sites ?? []) {
+      longLines.push(`| ${site.domain ?? site.name} | ${site.state ?? '?'} | ${site.autoAdsEnabled ? '開啟' : '關閉'} |`);
+    }
+    longLines.push('');
+    longLines.push(`- 帳戶警示：${(ad.alerts ?? []).length} 則｜政策問題：${(ad.policyIssues ?? []).length} 項`, '');
+  }
+
   longLines.push('## 本機 repo 明細', '');
   longLines.push('```json', JSON.stringify(snapshot.local, null, 2), '```', '');
   longLines.push(`> 本報告由 D:\\funnytools\\health-check.mjs 於 ${snapshot.generatedAt} 自動產生。`);
@@ -766,6 +780,78 @@ function writeReports(snapshot, diff) {
   writeFileSync(join(healthDir, 'latest-status.json'), `${JSON.stringify(snapshot, null, 2)}\n`, 'utf8');
   writeFileSync(join(healthDir, 'history', `${date}.json`), `${JSON.stringify(snapshot, null, 2)}\n`, 'utf8');
   return { status, critical: critical.length, warning: warning.length, info: info.length };
+}
+
+/**
+ * Reads AdSense account health via scripts/adsense-status.mjs.
+ *
+ * Runs it as a child process rather than importing it: the CLI path is the one
+ * that has actually been exercised against the live API, and a crash or a hang
+ * in it must not be able to take down the whole daily health check. Its exit
+ * codes carry the meaning — 0 ran, 2 setup not done, anything else broken.
+ *
+ * Silence is not an option for a broken checker (CLAUDE.md 紅線第 6 條), so a
+ * failure here becomes a visible warning rather than a skipped section.
+ */
+function checkAdsense() {
+  const account = { id: 'adsense' };
+  let raw;
+  try {
+    raw = execFileSync(process.execPath, [join(rootDir, 'scripts', 'adsense-status.mjs'), '--json'], {
+      encoding: 'utf8',
+      timeout: 60_000,
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+  } catch (error) {
+    if (error.status === 2) {
+      // Not an error: the one-time OAuth grant has not been done on this machine.
+      addIssue(account, 'info', 'not-configured', `AdSense 狀態檢查未啟用：${(error.stderr ?? '').trim() || '缺少憑證'}`);
+      return null;
+    }
+    addIssue(account, 'warning', 'checker-failed',
+      `AdSense 狀態檢查失敗（exit ${error.status ?? '?'}）：${(error.stderr ?? error.message ?? '').trim().slice(0, 300)}`);
+    return null;
+  }
+
+  let status;
+  try {
+    status = JSON.parse(raw);
+  } catch {
+    addIssue(account, 'warning', 'checker-unparsable', 'AdSense 狀態檢查輸出無法解析為 JSON');
+    return null;
+  }
+
+  // Map AdSense domains back onto configured site ids so a policy issue lands on
+  // the site it belongs to; sites AdSense knows about but this check does not
+  // (familyboard) still surface, keyed by their domain.
+  const byDomain = new Map();
+  for (const site of sites) {
+    try { byDomain.set(new URL(site.baseUrl).hostname.replace(/^www\./, ''), site); } catch { /* ignore */ }
+  }
+  const siteFor = (domain) => byDomain.get(String(domain ?? '').replace(/^www\./, '')) ?? { id: domain || 'adsense' };
+
+  for (const issue of status.policyIssues ?? []) {
+    const topics = (issue.policyTopics ?? []).map((t) => t.topic ?? t.type).filter(Boolean).join('、');
+    addIssue(siteFor(issue.site ?? issue.uri), 'critical', 'adsense-policy',
+      `AdSense 政策問題（${issue.action ?? '未指明處置'}）${issue.uri ? ` 於 ${issue.uri}` : ''}${topics ? `：${topics}` : ''}`);
+  }
+
+  for (const alert of status.alerts ?? []) {
+    // Only SEVERE is actionable. Google keeps standing WARNING advisories on
+    // every publisher account (the Ukraine content policy notice, for one), and
+    // promoting those to daily issues would train everyone to ignore the report.
+    if (alert.severity !== 'SEVERE') continue;
+    addIssue(account, 'warning', 'adsense-alert', `AdSense 嚴重警示：${alert.message ?? alert.type ?? alert.name}`);
+  }
+
+  for (const site of status.sites ?? []) {
+    if (site.state === 'NEEDS_ATTENTION') {
+      addIssue(siteFor(site.domain), 'warning', 'adsense-site-state',
+        `AdSense 網站狀態為 NEEDS_ATTENTION：${site.domain}`);
+    }
+  }
+
+  return status;
 }
 
 async function main() {
@@ -779,12 +865,16 @@ async function main() {
     siteResults.push(await checkSite(site));
   }
 
+  console.log('[health-check] checking AdSense account status');
+  const adsense = checkAdsense();
+
   const snapshot = {
     date,
     generatedAt: new Date().toISOString(),
     issues,
     local,
     sites: siteResults,
+    adsense,
   };
   const dataDir = config.reporting?.dataDir ?? join(rootDir, 'reports', 'data');
   const diff = diffWithPrevious(snapshot, dataDir);
