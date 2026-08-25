@@ -75,6 +75,9 @@ console.log('');
 console.log(authUrl.toString());
 console.log('');
 console.log('若自動開啟的不是登入該帳號的瀏覽器，直接把上面整條網址複製過去開即可。');
+console.log('');
+console.log('授權後若瀏覽器顯示「無法連上 127.0.0.1」（在 WSL 裡跑、瀏覽器在 Windows 時會這樣），');
+console.log('不要緊——網址列裡已經帶著授權碼。把網址列那整條 http://127.0.0.1:... 複製，貼到這裡按 Enter：');
 
 if (!skipOpen) {
   // `start` treats its first quoted argument as a window title, hence the empty
@@ -85,8 +88,34 @@ if (!skipOpen) {
   spawn('cmd', args, { detached: true, stdio: 'ignore' }).unref();
 }
 
+/** Pull the code out of a callback URL, or accept a bare code pasted on its own. */
+function codeFromRedirect(text) {
+  const trimmed = text.trim().replace(/^["']|["']$/g, '');
+  if (!trimmed) return null;
+  if (!/^https?:\/\//i.test(trimmed)) {
+    // A bare code still has to be checked against something, but there is no
+    // state to compare — Google's codes are single-use and PKCE-bound, so an
+    // attacker-supplied one cannot be exchanged without this run's verifier.
+    return trimmed;
+  }
+  const url = new URL(trimmed);
+  const err = url.searchParams.get('error');
+  if (err) throw new Error(`授權失敗：${err}`);
+  if (url.searchParams.get('state') !== state) throw new Error('state 不符，中止');
+  const got = url.searchParams.get('code');
+  if (!got) throw new Error('這條網址裡沒有 code 參數，請確認複製的是授權後的網址列內容');
+  return got;
+}
+
+// Two ways in, whichever lands first. The loopback listener is the normal path.
+// The stdin paste is for when the browser cannot reach the listener at all —
+// running the script under WSL while the browser is on Windows puts them in
+// different network namespaces, so the callback never arrives even though the
+// authorization itself succeeded and the code is sitting in the address bar.
 const code = await new Promise((resolve, reject) => {
-  const timer = setTimeout(() => reject(new Error('等待授權逾時（5 分鐘）')), 5 * 60 * 1000);
+  const timer = setTimeout(() => reject(new Error('等待授權逾時（10 分鐘）')), 10 * 60 * 1000);
+  const done = (fn, value) => { clearTimeout(timer); process.stdin.pause(); fn(value); };
+
   server.on('request', (req, res) => {
     const url = new URL(req.url, `http://127.0.0.1:${port}`);
     if (url.pathname !== '/callback') {
@@ -97,11 +126,25 @@ const code = await new Promise((resolve, reject) => {
     const got = url.searchParams.get('code');
     res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
     res.end(`<meta charset="utf-8"><h2>${err ? '授權失敗：' + err : '授權完成，可以關閉這個分頁。'}</h2>`);
-    clearTimeout(timer);
-    if (err) reject(new Error(err));
-    else if (url.searchParams.get('state') !== state) reject(new Error('state 不符，中止'));
-    else resolve(got);
+    if (err) done(reject, new Error(err));
+    else if (url.searchParams.get('state') !== state) done(reject, new Error('state 不符，中止'));
+    else done(resolve, got);
   });
+
+  process.stdin.setEncoding('utf8');
+  process.stdin.on('data', (chunk) => {
+    let got;
+    try {
+      got = codeFromRedirect(chunk);
+    } catch (error) {
+      // Keep waiting rather than dying: a mistyped paste should not force the
+      // whole authorization to be restarted from the consent screen.
+      console.error(`${error.message}（可以重貼一次）`);
+      return;
+    }
+    if (got) done(resolve, got);
+  });
+  process.stdin.resume();
 });
 server.close();
 
