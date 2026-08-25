@@ -1,6 +1,6 @@
 {
   "name": "funnytools",
-  "version": "5.104.4",
+  "version": "5.104.5",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "audit:adsense": "node scripts/adsense-preflight.mjs",
+    "adsense-status": "node scripts/adsense-status.mjs",
     "audit:analytics": "node scripts/analytics-preflight.mjs",
     "audit:pwa": "node scripts/pwa-preflight.mjs",
     "audit:security": "node scripts/security-preflight.mjs",
