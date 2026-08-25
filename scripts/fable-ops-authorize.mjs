@@ -61,9 +61,29 @@ authUrl.searchParams.set('code_challenge', challenge);
 authUrl.searchParams.set('code_challenge_method', 'S256');
 authUrl.searchParams.set('state', state);
 
+// `start` hands the URL to Windows' default browser, which is not necessarily the
+// one the Google account is signed in to (Edge is the common default; the ops
+// account lives in Chrome). Copying the printed URL into the right browser has
+// always worked — the callback listener is on 127.0.0.1, so any local browser
+// reaches it — but the auto-opened window made it look like the flow was stuck.
+// --browser picks one explicitly, --no-open skips the launch entirely.
+const browserArg = process.argv.find((a) => a.startsWith('--browser='))?.slice('--browser='.length);
+const skipOpen = process.argv.includes('--no-open');
+
 console.log('請在瀏覽器完成授權（帳號必須是 zxc851558@gmail.com）：');
+console.log('');
 console.log(authUrl.toString());
-spawn('cmd', ['/c', 'start', '', authUrl.toString()], { detached: true, stdio: 'ignore' }).unref();
+console.log('');
+console.log('若自動開啟的不是登入該帳號的瀏覽器，直接把上面整條網址複製過去開即可。');
+
+if (!skipOpen) {
+  // `start` treats its first quoted argument as a window title, hence the empty
+  // string; a named browser goes in that slot's place as the program to run.
+  const args = browserArg
+    ? ['/c', 'start', browserArg, authUrl.toString()]
+    : ['/c', 'start', '', authUrl.toString()];
+  spawn('cmd', args, { detached: true, stdio: 'ignore' }).unref();
+}
 
 const code = await new Promise((resolve, reject) => {
   const timer = setTimeout(() => reject(new Error('等待授權逾時（5 分鐘）')), 5 * 60 * 1000);
