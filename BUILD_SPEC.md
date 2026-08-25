@@ -117,7 +117,7 @@ export const SITE = {
     zh: '免費線上工具大全，打開網頁即可使用，免下載 App。',
     en: 'Free online tools for everyday use. No installation required.',
   },
-  adsenseClient: 'ca-pub-7052036786750044',
+  adsenseClient: 'ca-pub-9117672212804270',
   adsenseEnabled: false, // Phase 1: AdSense components present but OFF
   email: 'btcson66@gmail.com',
   htmlLang: { zh: 'zh-Hant', en: 'en' } as Record<Locale,string>,

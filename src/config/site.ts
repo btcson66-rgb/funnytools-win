@@ -19,7 +19,7 @@ export const SITE = {
   // tag stays in place so the historical property keeps its continuity if access is restored.
   ga4SecondaryMeasurementId: 'G-SJ90CBM9ZV',
   // Legacy fallback for local/preflight builds. Prefer PUBLIC_ADSENSE_CLIENT.
-  // 2026-08-24: was ca-pub-7052036786750044 (AdSense account btcson66). That account's
+  // 2026-08-24: migrated off the old AdSense account (btcson66). That account's
   // sign-in mailbox is the same btcson66@gmail.com noted above, which can no longer be
   // signed into, so the site is being re-submitted for review under account zxc851558.
   // No workflow sets PUBLIC_ADSENSE_CLIENT, so production actually uses this fallback.

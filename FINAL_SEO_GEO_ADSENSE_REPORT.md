@@ -100,7 +100,7 @@ FreeTools (https://FreeTools.win/) is a bilingual (zh-TW / en) free online tools
 ### Loop 11: Measurement ✅
 - GA4 measurement ID configured (G-SV027MPXV4)
 - Sitemap ready for Search Console submission
-- AdSense client ID configured (ca-pub-7052036786750044)
+- AdSense client ID configured (ca-pub-9117672212804270)
 
 ### Loop 12: AdSense Readiness ✅
 - ads.txt present

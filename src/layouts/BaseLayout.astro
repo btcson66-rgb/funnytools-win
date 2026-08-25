@@ -217,6 +217,12 @@ const contentSecurityPolicy = [
       )
     }
     {
+      /* AdSense 網站擁有權驗證。主控台在無法執行 loader script 時改讀這個
+         meta，本身不發出廣告請求，因此沿用 adsenseEnabled 這個既有閘門，
+         noindex 頁自動排除。 */
+      adsenseEnabled && <meta name="google-adsense-account" content={adsenseClient} />
+    }
+    {
       adsenseEnabled && (
         <>
           <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
