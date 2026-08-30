@@ -94,12 +94,14 @@ const ui = {
     },
     privacy: {
       heading: '隱私與本機處理',
+      anonymousApiHeading: '隱私與暫時處理',
       localOnly: '🔒 此工具完全在您的瀏覽器本機執行，不會將任何資料上傳到伺服器。',
       defaultNote: '這個工具主要在你的瀏覽器中執行。你輸入的內容不會送到 FunnyTools 免費線上工具箱的伺服器。',
     },
     trust: {
       heading: '信任與使用提醒',
       general: '本工具主要在你的瀏覽器中執行，輸入內容不會主動上傳到伺服器。請避免輸入高度敏感資料。計算結果僅供參考。',
+      anonymousApi: '這是伺服器轉換工具；你選取的檔案會送到 FunnyTools Conversion API 暫時處理。請避免上傳不必要的個人或機密資料，並在下載後檢查結果。',
       financial: '本工具僅供估算，實際金額仍應以政府公告、公司薪資單、銀行條件或專業意見為準。',
     },
     monetization: {
@@ -295,12 +297,14 @@ const ui = {
     },
     privacy: {
       heading: 'Privacy & local processing',
+      anonymousApiHeading: 'Privacy & temporary processing',
       localOnly: '🔒 This tool runs entirely in your browser. No data is uploaded to any server.',
       defaultNote: 'This tool runs mainly in your browser. The content you enter is not sent to FunnyTools servers.',
     },
     trust: {
       heading: 'Trust & usage note',
       general: 'This tool runs mainly in your browser. Your input is not actively uploaded to a server. Avoid entering highly sensitive data. Results are for reference only.',
+      anonymousApi: 'This is a server-side conversion tool; files you choose are sent to the FunnyTools Conversion API for temporary processing. Do not upload unnecessary personal or confidential data, and inspect the result after downloading.',
       financial: 'This tool is for estimates only. Actual amounts should be confirmed with official government notices, company payslips, bank terms, or qualified professional advice.',
     },
     monetization: {

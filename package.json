@@ -1,6 +1,6 @@
 {
   "name": "funnytools",
-  "version": "5.105.1",
+  "version": "5.106.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,7 +8,8 @@
     "build": "astro build",
     "lint": "eslint \"src/**/*.ts\"",
     "typecheck": "tsc --noEmit --project tsconfig.typecheck.json",
-    "test": "npm run build && node --test tests/conversion-api-pages.test.mjs",
+    "test": "npm run build && node --experimental-strip-types --test tests/*.test.mjs",
+    "test:api": "node tests/conversion-api-integration.api.mjs",
     "preview": "astro preview",
     "audit:adsense": "node scripts/adsense-preflight.mjs",
     "adsense-status": "node scripts/adsense-status.mjs",

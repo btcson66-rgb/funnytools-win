@@ -164,7 +164,9 @@ def _parse_pages(pages: str | None) -> list[int] | None:
     for item in pages.split(","):
         item = item.strip()
         if not item:
-            continue
+            raise ValueError("pages must contain comma-separated positive page numbers")
+        if not item.isdigit():
+            raise ValueError("pages must contain comma-separated positive page numbers")
         n = int(item)
         if n < 1:
             raise ValueError("Page numbers are 1-based and must be >= 1")

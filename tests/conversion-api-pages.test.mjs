@@ -23,6 +23,8 @@ test('production build contains every conversion API tool in zh and en', () => {
       assert.ok(existsSync(file), `missing built route: ${prefix}tools/${slug}/`);
       const html = readFileSync(file, 'utf8');
       assert.match(html, /data-conversion-tool/, `missing conversion tool widget in ${file}`);
+      assert.match(html, /Privacy &amp; temporary processing|隱私與暫時處理/, `missing API privacy copy in ${file}`);
+      assert.doesNotMatch(html, /input is not actively uploaded|輸入內容不會主動上傳/, `misleading local-only copy in ${file}`);
     }
   }
   assert.ok(conversionAsset, 'missing conversion API endpoint in built widget asset');

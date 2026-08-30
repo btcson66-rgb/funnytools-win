@@ -30,7 +30,7 @@ export const bulkImageCompressorContent = makeLocalized(
       { q: '檔案會留在伺服器嗎？', a: privacy.zh },
     ],
     labels: {
-      serverNote: sourceNote.zh, upload: '選擇圖片（可多選）', quality: '品質', maxWidth: '最大寬度（可留白）', maxHeight: '最大高度（可留白）', outputFormat: '輸出格式', auto: '自動', jpeg: 'JPEG', png: 'PNG', webp: 'WebP', compress: '開始壓縮', cancel: '取消等待', download: '下載 ZIP', clear: '清除', waiting: '尚未選取檔案', processing: '正在處理…', ready: '已完成，請檢查清單後下載。', noFile: '請先選取至少一張圖片。', failed: '圖片壓縮失敗。', cancelNote: '取消會停止瀏覽器等待；已開始的伺服器處理不保證立即停止。', selected: '已選取 {count} 個檔案',
+      serverNote: sourceNote.zh, upload: '選擇圖片（可多選）', invalidFiles: '只會處理圖片檔案。', invalidPages: '頁碼請輸入正整數或遞增範圍，例如 1,3-5。', quality: '品質', maxWidth: '最大寬度（可留白）', maxHeight: '最大高度（可留白）', outputFormat: '輸出格式', auto: '自動', jpeg: 'JPEG', png: 'PNG', webp: 'WebP', compress: '開始壓縮', cancel: '取消等待', download: '下載 ZIP', clear: '清除', waiting: '尚未選取檔案', processing: '正在處理…', ready: '已完成，請檢查清單後下載。', noFile: '請先選取至少一張圖片。', failed: '圖片壓縮失敗。', cancelNote: '取消會停止瀏覽器等待；已開始的伺服器處理不保證立即停止。', selected: '已選取 {count} 個檔案',
     },
     privacyNote: privacy.zh,
     contentSections: [
@@ -56,7 +56,7 @@ export const bulkImageCompressorContent = makeLocalized(
       { q: 'Are my files retained?', a: privacy.en },
     ],
     labels: {
-      serverNote: sourceNote.en, upload: 'Choose images (multiple)', quality: 'Quality', maxWidth: 'Maximum width (optional)', maxHeight: 'Maximum height (optional)', outputFormat: 'Output format', auto: 'Auto', jpeg: 'JPEG', png: 'PNG', webp: 'WebP', compress: 'Compress images', cancel: 'Cancel waiting', download: 'Download ZIP', clear: 'Clear', waiting: 'No files selected', processing: 'Processing…', ready: 'Finished. Review the list before downloading.', noFile: 'Choose at least one image.', failed: 'Image compression failed.', cancelNote: 'Cancel stops the browser from waiting; it does not guarantee that server CPU work already started stops immediately.', selected: '{count} files selected',
+      serverNote: sourceNote.en, upload: 'Choose images (multiple)', invalidFiles: 'Only image files will be processed.', invalidPages: 'Use positive page numbers or ascending ranges, for example 1,3-5.', quality: 'Quality', maxWidth: 'Maximum width (optional)', maxHeight: 'Maximum height (optional)', outputFormat: 'Output format', auto: 'Auto', jpeg: 'JPEG', png: 'PNG', webp: 'WebP', compress: 'Compress images', cancel: 'Cancel waiting', download: 'Download ZIP', clear: 'Clear', waiting: 'No files selected', processing: 'Processing…', ready: 'Finished. Review the list before downloading.', noFile: 'Choose at least one image.', failed: 'Image compression failed.', cancelNote: 'Cancel stops the browser from waiting; it does not guarantee that server CPU work already started stops immediately.', selected: '{count} files selected',
     },
     privacyNote: privacy.en,
     contentSections: [
@@ -140,7 +140,7 @@ export const pdfTableToExcelContent = makeLocalized(
       { q: '檔案會留在伺服器嗎？', a: privacy.zh },
     ],
     labels: {
-      serverNote: sourceNote.zh, upload: '選擇 PDF', pages: '頁碼（可留白）', pagesPlaceholder: '例如 1,3,4', ocrMode: 'OCR 模式', auto: '自動', off: '關閉', force: '強制', ocrLang: 'OCR 語言', english: '英文', traditionalChinese: '繁體中文', preview: '預覽表格', export: '匯出編輯後的 Excel', cancel: '取消等待', waiting: '先上傳 PDF，再產生預覽。', processing: '正在偵測表格…', ready: '請檢查並編輯表格後再匯出。', noFile: '請先選取 PDF。', failed: 'PDF 表格處理失敗。', noTables: '沒有偵測到可編輯表格。', table: '表格 {number}', deleteTable: '刪除表格', deleteRow: '刪除列', deleteColumn: '刪除欄', columnNumber: '欄號', apply: '套用', cancelNote: '取消會停止瀏覽器等待；已開始的伺服器處理不保證立即停止。',
+      serverNote: sourceNote.zh, upload: '選擇 PDF', pages: '頁碼（可留白）', pagesPlaceholder: '例如 1,3,4', invalidPages: '頁碼請輸入正整數或遞增範圍，例如 1,3-5。', ocrMode: 'OCR 模式', auto: '自動', off: '關閉', force: '強制', ocrLang: 'OCR 語言', english: '英文', traditionalChinese: '繁體中文', preview: '預覽表格', export: '匯出編輯後的 Excel', cancel: '取消等待', waiting: '先上傳 PDF，再產生預覽。', processing: '正在偵測表格…', ready: '請檢查並編輯表格後再匯出。', noFile: '請先選取 PDF。', failed: 'PDF 表格處理失敗。', noTables: '沒有偵測到可編輯表格。', table: '表格 {number}', deleteTable: '刪除表格', deleteRow: '刪除列', deleteColumn: '刪除欄', columnNumber: '欄號', apply: '套用', cancelNote: '取消會停止瀏覽器等待；已開始的伺服器處理不保證立即停止。',
     },
     privacyNote: privacy.zh,
     contentSections: [
@@ -166,7 +166,7 @@ export const pdfTableToExcelContent = makeLocalized(
       { q: 'Are my files retained?', a: privacy.en },
     ],
     labels: {
-      serverNote: sourceNote.en, upload: 'Choose PDF', pages: 'Pages (optional)', pagesPlaceholder: 'For example 1,3,4', ocrMode: 'OCR mode', auto: 'Auto', off: 'Off', force: 'Force', ocrLang: 'OCR language', english: 'English', traditionalChinese: 'Traditional Chinese', preview: 'Preview tables', export: 'Export edited Excel', cancel: 'Cancel waiting', waiting: 'Upload a PDF to create a preview.', processing: 'Detecting tables…', ready: 'Review and edit the tables before exporting.', noFile: 'Choose a PDF first.', failed: 'PDF table processing failed.', noTables: 'No editable tables were detected.', table: 'Table {number}', deleteTable: 'Delete table', deleteRow: 'Delete row', deleteColumn: 'Delete column', columnNumber: 'Column number', apply: 'Apply', cancelNote: 'Cancel stops the browser from waiting; it does not guarantee that server CPU work already started stops immediately.',
+      serverNote: sourceNote.en, upload: 'Choose PDF', pages: 'Pages (optional)', pagesPlaceholder: 'For example 1,3,4', invalidPages: 'Use positive page numbers or ascending ranges, for example 1,3-5.', ocrMode: 'OCR mode', auto: 'Auto', off: 'Off', force: 'Force', ocrLang: 'OCR language', english: 'English', traditionalChinese: 'Traditional Chinese', preview: 'Preview tables', export: 'Export edited Excel', cancel: 'Cancel waiting', waiting: 'Upload a PDF to create a preview.', processing: 'Detecting tables…', ready: 'Review and edit the tables before exporting.', noFile: 'Choose a PDF first.', failed: 'PDF table processing failed.', noTables: 'No editable tables were detected.', table: 'Table {number}', deleteTable: 'Delete table', deleteRow: 'Delete row', deleteColumn: 'Delete column', columnNumber: 'Column number', apply: 'Apply', cancelNote: 'Cancel stops the browser from waiting; it does not guarantee that server CPU work already started stops immediately.',
     },
     privacyNote: privacy.en,
     contentSections: [

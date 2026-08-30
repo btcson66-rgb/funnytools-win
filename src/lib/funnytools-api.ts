@@ -6,6 +6,50 @@
 export type OcrMode = "auto" | "force" | "off";
 export type OcrLang = "eng" | "chi_tra" | "eng+chi_tra" | "chi_tra+eng";
 
+export type PageSelectionErrorCode =
+  | "empty-token"
+  | "invalid-token"
+  | "non-positive"
+  | "reversed-range"
+  | "too-many-pages";
+
+export class PageSelectionError extends Error {
+  readonly code: PageSelectionErrorCode;
+
+  constructor(code: PageSelectionErrorCode) {
+    super("Select pages with positive numbers or ascending ranges, for example 1,3-5.");
+    this.name = "PageSelectionError";
+    this.code = code;
+  }
+}
+
+/** Parse the human-facing 1-based page selector into the API's page array. */
+export function parsePageSelection(input: string): number[] | undefined {
+  const value = input.trim();
+  if (!value) return undefined;
+
+  const pages = new Set<number>();
+  for (const rawToken of value.split(",")) {
+    const token = rawToken.trim();
+    if (!token) throw new PageSelectionError("empty-token");
+    const match = /^(\d+)(?:\s*-\s*(\d+))?$/.exec(token);
+    if (!match) throw new PageSelectionError("invalid-token");
+
+    const start = Number(match[1]);
+    const end = Number(match[2] ?? match[1]);
+    if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start < 1 || end < 1) {
+      throw new PageSelectionError("non-positive");
+    }
+    if (end < start) throw new PageSelectionError("reversed-range");
+    for (let page = start; page <= end; page += 1) {
+      pages.add(page);
+      if (pages.size > 200) throw new PageSelectionError("too-many-pages");
+    }
+  }
+
+  return [...pages].sort((a, b) => a - b);
+}
+
 export type PdfTable = {
   page: number;
   table: number;

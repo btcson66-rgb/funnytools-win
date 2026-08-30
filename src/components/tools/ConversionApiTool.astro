@@ -17,7 +17,7 @@ const isPdf = slug === 'pdf-compressor';
 
   {isBulk && (
     <>
-      <label><span>{labels.upload}</span><input data-files type="file" accept="image/*" multiple /></label>
+      <label data-drop-zone><span>{labels.upload}</span><input data-files type="file" accept="image/*" multiple /></label>
       <div class="form-grid three-col">
         <label><span>{labels.quality}</span><input data-quality type="number" min="10" max="100" value="82" /></label>
         <label><span>{labels.maxWidth}</span><input data-max-width type="number" min="1" inputmode="numeric" /></label>
@@ -101,6 +101,8 @@ const isPdf = slug === 'pdf-compressor';
   .check-control input { width: 18px; height: 18px; }
   .file-list { display: grid; gap: 6px; margin: 0; padding-left: 20px; }
   .file-list li { overflow-wrap: anywhere; }
+  [data-drop-zone] { border: 1px dashed var(--line); border-radius: 8px; padding: 10px; }
+  [data-drop-zone].is-dragging { border-color: var(--accent); background: var(--soft); }
   .calibration-preview { min-height: 180px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); }
   .calibration-preview p { margin: 0 0 8px; color: var(--muted); font-weight: 800; }
   .calibration-preview canvas { display: block; max-width: 100%; max-height: 420px; margin: 0 auto; cursor: crosshair; }
@@ -125,6 +127,8 @@ const isPdf = slug === 'pdf-compressor';
     downloadBlob,
     exportEditedTables,
     imageToDxf,
+    PageSelectionError,
+    parsePageSelection,
     pdfToWord,
     pixelDistance,
     previewPdfTables,
@@ -150,6 +154,7 @@ const isPdf = slug === 'pdf-compressor';
     let selectedFiles = [];
     let calibrationImage = null;
     let calibrationPoints = [];
+    let runSerial = 0;
 
     const setError = (message = '') => { error.textContent = message; error.hidden = !message; };
     const setStatus = (message) => { status.textContent = message; };
@@ -161,10 +166,10 @@ const isPdf = slug === 'pdf-compressor';
       if (busy) setError('');
     };
     const size = (bytes) => bytes >= 1048576 ? `${(bytes / 1048576).toFixed(2)} MB` : `${(bytes / 1024).toFixed(1)} KB`;
-    const pages = () => root.querySelector('[data-pages]')?.value.trim() || undefined;
+    const pages = () => parsePageSelection(root.querySelector('[data-pages]')?.value || '');
     const clearOutput = () => { outputBlob = null; if (downloadButton) downloadButton.disabled = true; };
     const clear = () => {
-      controller?.abort(); controller = null; selectedFiles = []; tables = []; calibrationPoints = []; calibrationImage = null; clearOutput(); setError(''); setStatus(labels.waiting);
+      runSerial += 1; controller?.abort(); controller = null; selectedFiles = []; tables = []; calibrationPoints = []; calibrationImage = null; clearOutput(); setError(''); setStatus(labels.waiting);
       if (fileInput) fileInput.value = ''; if (filesInput) filesInput.value = '';
       root.querySelector('[data-file-list]')?.replaceChildren(); root.querySelector('[data-editor]')?.replaceChildren();
       if (root.querySelector('[data-editor]')) root.querySelector('[data-editor]').hidden = true;
@@ -174,11 +179,33 @@ const isPdf = slug === 'pdf-compressor';
       root.querySelectorAll('[data-original], [data-output], [data-change], [data-pixel-distance]').forEach((node) => { node.textContent = '—'; });
       setBusy(false);
     };
-    const run = async (work, doneName) => {
-      controller?.abort(); controller = new AbortController(); setBusy(true); setStatus(labels.processing);
-      try { outputBlob = await work(controller.signal); outputName = doneName; setStatus(labels.ready); downloadButton.disabled = false; }
-      catch (caught) { if (caught?.name !== 'AbortError') { setError(caught instanceof Error ? caught.message : labels.failed); setStatus(''); } }
-      finally { controller = null; setBusy(false); }
+    const run = async (work, doneName, onSuccess = null) => {
+      controller?.abort();
+      const currentRun = ++runSerial;
+      const activeController = new AbortController();
+      controller = activeController;
+      clearOutput(); setBusy(true); setStatus(labels.processing);
+      try {
+        const result = await work(activeController.signal);
+        if (currentRun !== runSerial) return;
+        if (onSuccess) onSuccess(result);
+        else { outputBlob = result; outputName = doneName; setStatus(labels.ready); downloadButton.disabled = false; }
+      } catch (caught) {
+        if (currentRun === runSerial && caught?.name !== 'AbortError') {
+          setError(caught instanceof PageSelectionError ? labels.invalidPages : caught instanceof Error ? caught.message : labels.failed);
+          setStatus('');
+        }
+      } finally {
+        if (currentRun === runSerial) { controller = null; setBusy(false); }
+      }
+    };
+
+    const setSelectedFiles = (files) => {
+      runSerial += 1; controller?.abort(); controller = null; clearOutput();
+      const imageFiles = files.filter((file) => file.type.startsWith('image/')).slice(0, 100);
+      selectedFiles = imageFiles;
+      setError(imageFiles.length === files.length ? '' : labels.invalidFiles);
+      renderFileList();
     };
 
     function renderFileList() {
@@ -215,14 +242,18 @@ const isPdf = slug === 'pdf-compressor';
       if (calibrationPoints.length === 2) { ctx.beginPath(); ctx.moveTo(calibrationPoints[0].x, calibrationPoints[0].y); ctx.lineTo(calibrationPoints[1].x, calibrationPoints[1].y); ctx.stroke(); root.querySelector('[data-pixel-distance]').textContent = pixelDistance(calibrationPoints[0].x, calibrationPoints[0].y, calibrationPoints[1].x, calibrationPoints[1].y).toFixed(2); }
     }
 
-    filesInput?.addEventListener('change', () => { selectedFiles = Array.from(filesInput.files || []).slice(0, 100); renderFileList(); });
-    fileInput?.addEventListener('change', () => { clearOutput(); setError(''); setBusy(false); });
+    filesInput?.addEventListener('change', () => { setSelectedFiles(Array.from(filesInput.files || [])); });
+    const dropZone = root.querySelector('[data-drop-zone]');
+    dropZone?.addEventListener('dragover', (event) => { event.preventDefault(); dropZone.classList.add('is-dragging'); });
+    dropZone?.addEventListener('dragleave', () => dropZone.classList.remove('is-dragging'));
+    dropZone?.addEventListener('drop', (event) => { event.preventDefault(); dropZone.classList.remove('is-dragging'); setSelectedFiles(Array.from(event.dataTransfer?.files || [])); });
+    fileInput?.addEventListener('change', () => { runSerial += 1; controller?.abort(); controller = null; clearOutput(); setError(''); setBusy(false); });
     root.querySelector('[data-action="cancel"]')?.addEventListener('click', () => controller?.abort());
     root.querySelector('[data-action="clear"]')?.addEventListener('click', clear);
     downloadButton?.addEventListener('click', () => { if (outputBlob) downloadBlob(outputBlob, outputName); });
 
     root.querySelector('[data-calibration]')?.addEventListener('click', (event) => { if (!calibrationImage) return; const canvas = event.currentTarget; const rect = canvas.getBoundingClientRect(); const point = { x: (event.clientX - rect.left) * canvas.width / rect.width, y: (event.clientY - rect.top) * canvas.height / rect.height }; calibrationPoints = calibrationPoints.length === 2 ? [point] : [...calibrationPoints, point]; drawCalibration(); });
-    fileInput?.addEventListener('change', () => { if (!isDxf) return; const file = fileInput.files?.[0]; if (!file) return; calibrationImage = new Image(); calibrationImage.onload = () => { const canvas = root.querySelector('[data-calibration]'); canvas.hidden = false; root.querySelector('[data-calibration-empty]').hidden = true; calibrationPoints = []; drawCalibration(); }; calibrationImage.src = URL.createObjectURL(file); });
+    fileInput?.addEventListener('change', () => { if (mode !== 'image-to-dxf') return; const file = fileInput.files?.[0]; if (!file) return; calibrationImage = new Image(); calibrationImage.onload = () => { const canvas = root.querySelector('[data-calibration]'); canvas.hidden = false; root.querySelector('[data-calibration-empty]').hidden = true; calibrationPoints = []; drawCalibration(); }; calibrationImage.src = URL.createObjectURL(file); });
 
     convertButton?.addEventListener('click', async () => {
       if (mode === 'bulk-image-compressor') {
@@ -233,7 +264,7 @@ const isPdf = slug === 'pdf-compressor';
         await run((signal) => pdfToWord(apiBase, file, { ocrMode: root.querySelector('[data-ocr-mode]').value, ocrLang: root.querySelector('[data-ocr-lang]').value, includeImages: root.querySelector('[data-include-images]').checked, signal }), 'converted.docx');
       } else if (mode === 'pdf-table-to-excel') {
         const file = fileInput.files?.[0]; if (!file) { setError(labels.noFile); return; }
-        controller = new AbortController(); setBusy(true); setStatus(labels.processing); try { const result = await previewPdfTables(apiBase, file, { pages: pages(), ocrMode: root.querySelector('[data-ocr-mode]').value, ocrLang: root.querySelector('[data-ocr-lang]').value, signal: controller.signal }); tables = result.tables; renderTables(); setStatus(tables.length ? labels.ready : labels.noTables); } catch (caught) { if (caught?.name !== 'AbortError') setError(caught instanceof Error ? caught.message : labels.failed); } finally { controller = null; setBusy(false); }
+        await run((signal) => previewPdfTables(apiBase, file, { pages: pages(), ocrMode: root.querySelector('[data-ocr-mode]').value, ocrLang: root.querySelector('[data-ocr-lang]').value, signal }), null, (result) => { tables = result.tables; renderTables(); setStatus(tables.length ? labels.ready : labels.noTables); });
       } else if (mode === 'image-to-dxf') {
         const file = fileInput.files?.[0]; if (!file) { setError(labels.noFile); return; } const points = calibrationPoints.length === 2 ? calibrationPoints : []; const px = points.length === 2 ? pixelDistance(points[0].x, points[0].y, points[1].x, points[1].y) : undefined; const real = Number(root.querySelector('[data-real-distance]')?.value) || undefined;
         await run((signal) => imageToDxf(apiBase, file, { threshold: Number(root.querySelector('[data-threshold]').value), invert: root.querySelector('[data-invert]').checked, blur: Number(root.querySelector('[data-blur]').value), epsilonRatio: Number(root.querySelector('[data-simplify]').value), minArea: Number(root.querySelector('[data-min-area]').value), units: root.querySelector('[data-units]').value, calibrationPixelDistance: px, calibrationRealDistance: real, signal }), 'vectorized.dxf');

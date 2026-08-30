@@ -37,6 +37,7 @@ const ui = t(lang);
 const currentUrl = absoluteUrl(toolUrl(lang, tool.slug));
 const seoTitle = toolSeoTitle(lang, content);
 const seoDescription = toolSeoDescription(lang, content, tool.privacyLevel === 'local-only');
+const isAnonymousApi = tool.privacyLevel === 'anonymous-api';
 const breadcrumbItems = [
   { label: ui.breadcrumbHome, href: localePath(lang) },
   { label: ui.allTools, href: localePath(lang, 'tools') },
@@ -263,14 +264,14 @@ const downloadGateConfig = SITE.features.downloadGate
     }
 
     <section class="content-section privacy-note">
-      <h2>{ui.privacy.heading}</h2>
+      <h2>{isAnonymousApi ? ui.privacy.anonymousApiHeading : ui.privacy.heading}</h2>
       {tool.privacyLevel === 'local-only' && <p class="privacy-highlight">{ui.privacy.localOnly}</p>}
       <p>{content.privacyNote ?? ui.privacy.defaultNote}</p>
     </section>
 
     <section class="content-section trust-note">
       <h2>{ui.trust.heading}</h2>
-      <p>{ui.trust.general}</p>
+      <p>{isAnonymousApi ? ui.trust.anonymousApi : ui.trust.general}</p>
       {category.id === 'money' && <p>{ui.trust.financial}</p>}
     </section>
 
