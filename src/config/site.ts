@@ -8,8 +8,8 @@ export const SITE = {
   defaultLocale: 'zh' as Locale,
   name: { zh: 'FunnyTools 免費線上工具箱', en: 'FunnyTools' },
   tagline: {
-    zh: '免費、免註冊、可在瀏覽器本機處理的 PDF、圖片、文字、QR Code、隨機、時間、金錢、教學與統計工具。',
-    en: 'Free online toolbox with browser-based tools for PDF, images, text, QR codes, random picks, time, money, teachers and more.',
+    zh: '免費、免註冊的 PDF、圖片、文字、QR Code、隨機、時間、金錢、教學與統計工具；多數本機處理，部分轉換使用暫時處理檔案的 API。',
+    en: 'Free online tools for PDF, images, text, QR codes, random picks, time, money, teachers and more — mostly browser-based, with selected conversions handled by a temporary-processing API.',
   },
   ga4MeasurementId: 'G-SV027MPXK4',
   // Secondary GA4 tag, added 2026-08-16. The property behind ga4MeasurementId is owned by

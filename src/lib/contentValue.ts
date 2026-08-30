@@ -2953,8 +2953,9 @@ const pendingHandwrittenReview: Record<'tool' | 'guide' | 'workflow' | 'category
   audience: [],
 };
 
-function first(items: string[] | undefined, fallback: string): string {
-  return items?.find((item) => item.trim().length > 0) ?? fallback;
+function first(items: ToolContent['examples'] | string[] | undefined, fallback: string): string {
+  const item = items?.find((value) => (typeof value === 'string' ? value : value.output).trim().length > 0);
+  return item ? (typeof item === 'string' ? item : `${item.input}: ${item.output}`) : fallback;
 }
 
 function last(items: string[] | undefined, fallback: string): string {
@@ -3008,7 +3009,12 @@ const categoryLens: Record<string, Record<Locale, string>> = {
  */
 function legacyToolReview(lang: Locale, toolName: string, category: Category, content: ToolContent): ContentValueReview {
   const exampleA = first(content.examples, lang === 'zh' ? '先用簡單、可手算或可目視確認的資料測試。' : 'Begin with a simple case that can be checked by hand or by sight.');
-  const exampleB = content.examples?.[1] ?? exampleA;
+  const exampleB = content.examples?.[1];
+  const exampleBText = exampleB
+    ? typeof exampleB === 'string'
+      ? exampleB
+      : `${exampleB.input}: ${exampleB.output}`
+    : exampleA;
   const openingStep = first(content.instructions, lang === 'zh' ? '先確認輸入格式與單位。' : 'Confirm the input format and units first.');
   const closingStep = last(content.instructions, lang === 'zh' ? '完成後重新檢查輸出。' : 'Recheck the output after completion.');
   const limitation = first(
@@ -3036,7 +3042,7 @@ function legacyToolReview(lang: Locale, toolName: string, category: Category, co
         },
         {
           title: '再測邊界與失敗情境',
-          text: `第二次可改用「${exampleB}」，並刻意測試空值、極端值、重複項目、特殊字元、大型檔案或不支援格式中的一種。已知判讀限制是：${limitation} 這一步用來確認工具在哪些條件下應停止使用。`,
+          text: `第二次可改用「${exampleBText}」，並刻意測試空值、極端值、重複項目、特殊字元、大型檔案或不支援格式中的一種。已知判讀限制是：${limitation} 這一步用來確認工具在哪些條件下應停止使用。`,
         },
         {
           title: '接受結果前做交叉核對',
@@ -3065,7 +3071,7 @@ function legacyToolReview(lang: Locale, toolName: string, category: Category, co
       },
       {
         title: 'Probe an edge or failure case',
-        text: `For a second run, adapt “${exampleB}” and deliberately include one empty value, extreme value, duplicate, unusual character, large file, or unsupported format. The relevant boundary is: ${limitation} This tells you when the page should be used as a draft aid rather than the final authority.`,
+          text: `For a second run, adapt “${exampleBText}” and deliberately include one empty value, extreme value, duplicate, unusual character, large file, or unsupported format. The relevant boundary is: ${limitation} This tells you when the page should be used as a draft aid rather than the final authority.`,
       },
       {
         title: 'Cross-check before acceptance',

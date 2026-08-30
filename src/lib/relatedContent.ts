@@ -16,7 +16,7 @@ export interface RelatedContentSet {
 export function getRelatedContentForTool(tool: ToolMeta, lang: Locale, limit = 6): RelatedContentSet {
   const manualTools = (tool.relatedTools ?? [])
     .map((slug) => liveTools.find((candidate) => candidate.slug === slug))
-    .filter((candidate): candidate is ToolMeta => Boolean(candidate) && candidate.slug !== tool.slug);
+    .filter((candidate): candidate is ToolMeta => candidate !== undefined && candidate.slug !== tool.slug);
   const categoryTools = liveTools.filter((candidate) =>
     candidate.slug !== tool.slug
     && candidate.category === tool.category

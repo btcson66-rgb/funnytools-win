@@ -67,9 +67,16 @@ import whatToEatContent from '../i18n/tools/what-to-eat';
 import wordCounterContent from '../i18n/tools/word-counter';
 import {
   csvToJsonContent, jpgToWebpContent, jsonToCsvContent, markdownPreviewerContent,
-  pdfCompressorContent, pdfPageReorderContent, pdfToImageContent, timestampConverterContent,
+  pdfPageReorderContent, pdfToImageContent, timestampConverterContent,
   uuidGeneratorContent, webpToJpgContent,
 } from '../i18n/tools/new-utility-tools';
+import {
+  bulkImageCompressorContent,
+  imageToDxfContent,
+  pdfTableToExcelContent,
+  pdfToWordContent,
+  serverPdfCompressorContent,
+} from '../i18n/tools/conversion-api-tools';
 
 export const contentBySlug = {
   'random-number-picker': randomNumberContent,
@@ -141,7 +148,11 @@ export const contentBySlug = {
   'webp-to-jpg': webpToJpgContent,
   'pdf-page-reorder': pdfPageReorderContent,
   'pdf-to-image': pdfToImageContent,
-  'pdf-compressor': pdfCompressorContent,
+  'bulk-image-compressor': bulkImageCompressorContent,
+  'pdf-to-word': pdfToWordContent,
+  'pdf-table-to-excel': pdfTableToExcelContent,
+  'image-to-dxf': imageToDxfContent,
+  'pdf-compressor': serverPdfCompressorContent,
   'standard-deviation': standardDeviationContent,
   'apa-7-report-generator': apa7ReportGeneratorContent,
   'spss-result-interpreter': spssResultInterpreterContent,

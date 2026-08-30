@@ -233,7 +233,7 @@ const breadcrumbJsonLd = {
     <section class="content-section">
       <h2>{copy.situations}</h2>
       <ul class="check-list">
-        {content.examples.map((item) => <li>{item}</li>)}
+          {content.examples.map((item) => <li>{typeof item === 'string' ? item : `${item.input}: ${item.output}`}</li>)}
       </ul>
     </section>
 

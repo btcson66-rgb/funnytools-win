@@ -1,0 +1,249 @@
+---
+interface Props {
+  labels: Record<string, string>;
+  slug: string;
+}
+
+const { labels, slug } = Astro.props;
+const isBulk = slug === 'bulk-image-compressor';
+const isWord = slug === 'pdf-to-word';
+const isTable = slug === 'pdf-table-to-excel';
+const isDxf = slug === 'image-to-dxf';
+const isPdf = slug === 'pdf-compressor';
+---
+
+<section class="tool-widget card conversion-tool" data-conversion-tool data-mode={slug} data-labels={JSON.stringify(labels)}>
+  <p class="note">{labels.serverNote}</p>
+
+  {isBulk && (
+    <>
+      <label><span>{labels.upload}</span><input data-files type="file" accept="image/*" multiple /></label>
+      <div class="form-grid three-col">
+        <label><span>{labels.quality}</span><input data-quality type="number" min="10" max="100" value="82" /></label>
+        <label><span>{labels.maxWidth}</span><input data-max-width type="number" min="1" inputmode="numeric" /></label>
+        <label><span>{labels.maxHeight}</span><input data-max-height type="number" min="1" inputmode="numeric" /></label>
+      </div>
+      <label><span>{labels.outputFormat}</span><select data-format><option value="auto">{labels.auto}</option><option value="jpeg">{labels.jpeg}</option><option value="png">{labels.png}</option><option value="webp">{labels.webp}</option></select></label>
+      <p data-file-summary aria-live="polite">{labels.waiting}</p>
+      <ul class="file-list" data-file-list></ul>
+    </>
+  )}
+
+  {isWord && (
+    <>
+      <label><span>{labels.upload}</span><input data-file type="file" accept="application/pdf,.pdf" /></label>
+      <div class="form-grid three-col">
+        <label><span>{labels.ocrMode}</span><select data-ocr-mode><option value="auto">{labels.auto}</option><option value="off">{labels.off}</option><option value="force">{labels.force}</option></select></label>
+        <label><span>{labels.ocrLang}</span><select data-ocr-lang><option value="eng">{labels.english}</option><option value="chi_tra">{labels.traditionalChinese}</option><option value="eng+chi_tra">English + Traditional Chinese</option><option value="chi_tra+eng">Traditional Chinese + English</option></select></label>
+        <label class="check-control"><input data-include-images type="checkbox" checked /> <span>{labels.includeImages}</span></label>
+      </div>
+    </>
+  )}
+
+  {isTable && (
+    <>
+      <label><span>{labels.upload}</span><input data-file type="file" accept="application/pdf,.pdf" /></label>
+      <div class="form-grid three-col">
+        <label><span>{labels.pages}</span><input data-pages type="text" placeholder={labels.pagesPlaceholder} inputmode="numeric" /></label>
+        <label><span>{labels.ocrMode}</span><select data-ocr-mode><option value="auto">{labels.auto}</option><option value="off">{labels.off}</option><option value="force">{labels.force}</option></select></label>
+        <label><span>{labels.ocrLang}</span><select data-ocr-lang><option value="eng">{labels.english}</option><option value="chi_tra">{labels.traditionalChinese}</option><option value="eng+chi_tra">English + Traditional Chinese</option><option value="chi_tra+eng">Traditional Chinese + English</option></select></label>
+      </div>
+      <div class="table-editor" data-editor hidden></div>
+    </>
+  )}
+
+  {isDxf && (
+    <>
+      <label><span>{labels.upload}</span><input data-file type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png" /></label>
+      <div class="calibration-preview"><p>{labels.originalPreview}</p><canvas data-calibration hidden></canvas><span data-calibration-empty>{labels.waiting}</span></div>
+      <p class="note" data-points-hint>{labels.pointsHint}</p>
+      <div class="form-grid three-col">
+        <label><span>{labels.threshold}</span><input data-threshold type="number" min="0" max="255" value="180" /></label>
+        <label><span>{labels.blur}</span><input data-blur type="number" min="0" max="31" step="2" value="3" /></label>
+        <label><span>{labels.simplify}</span><input data-simplify type="number" min="0.0001" max="0.1" step="0.0001" value="0.0025" /></label>
+        <label><span>{labels.minArea}</span><input data-min-area type="number" min="0" step="1" value="20" /></label>
+        <label><span>{labels.units}</span><select data-units><option value="unitless">{labels.unitless}</option><option value="inch">{labels.inch}</option><option value="mm">{labels.mm}</option><option value="cm">{labels.cm}</option><option value="m">{labels.m}</option></select></label>
+        <label class="check-control"><input data-invert type="checkbox" /> <span>{labels.invert}</span></label>
+      </div>
+      <div class="form-grid three-col calibration-fields">
+        <label><span>{labels.pixelDistance}</span><output data-pixel-distance>—</output></label>
+        <label><span>{labels.realDistance}</span><input data-real-distance type="number" min="0" step="any" placeholder={labels.realDistancePlaceholder} /></label>
+      </div>
+    </>
+  )}
+
+  {isPdf && (
+    <>
+      <label><span>{labels.upload}</span><input data-file type="file" accept="application/pdf,.pdf" /></label>
+      <label><span>{labels.preset}</span><select data-preset><option value="lossless">{labels.lossless}</option><option value="balanced" selected>{labels.balanced}</option><option value="strong">{labels.strong}</option></select></label>
+      <p class="note">{labels.signatureNote}</p>
+      <div class="stats-grid"><div><span>{labels.original}</span><strong data-original>—</strong></div><div><span>{labels.output}</span><strong data-output>—</strong></div><div><span>{labels.change}</span><strong data-change>—</strong></div></div>
+    </>
+  )}
+
+  <p class="form-error" data-error role="alert" hidden></p>
+  <p data-status aria-live="polite">{labels.waiting}</p>
+  <p class="note">{labels.cancelNote}</p>
+  <div class="actions">
+    <button class="btn go" type="button" data-action={isTable ? 'preview' : 'convert'} disabled>{isTable ? labels.preview : (isBulk ? labels.compress : isPdf ? labels.compress : isDxf ? labels.convert : labels.convert)}</button>
+    {isTable && <button class="btn go" type="button" data-action="export" disabled>{labels.export}</button>}
+    <button class="btn" type="button" data-action="cancel" hidden>{labels.cancel}</button>
+    <button class="btn" type="button" data-action="download" disabled>{isBulk ? labels.download : isWord ? labels.download : isDxf ? labels.download : isPdf ? labels.download : labels.export}</button>
+    <button class="btn ghost" type="button" data-action="clear">{isBulk ? labels.clear : 'Clear'}</button>
+  </div>
+</section>
+
+<style>
+  .conversion-tool { display: grid; gap: 14px; }
+  .three-col { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  select, input[type='number'], input[type='text'] { width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink); padding: 10px 12px; font: inherit; }
+  .check-control { display: flex; align-items: center; gap: 8px; min-height: 48px; }
+  .check-control input { width: 18px; height: 18px; }
+  .file-list { display: grid; gap: 6px; margin: 0; padding-left: 20px; }
+  .file-list li { overflow-wrap: anywhere; }
+  .calibration-preview { min-height: 180px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); }
+  .calibration-preview p { margin: 0 0 8px; color: var(--muted); font-weight: 800; }
+  .calibration-preview canvas { display: block; max-width: 100%; max-height: 420px; margin: 0 auto; cursor: crosshair; }
+  .calibration-preview span { display: block; padding: 54px 12px; color: var(--muted); text-align: center; font-weight: 800; }
+  .calibration-fields output { display: block; min-height: 48px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); font-weight: 800; }
+  .table-editor { display: grid; gap: 18px; }
+  .table-card { overflow-x: auto; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); }
+  .table-card h3 { margin-top: 0; }
+  .table-card table { width: 100%; border-collapse: collapse; min-width: 520px; }
+  .table-card th, .table-card td { border: 1px solid var(--line); padding: 6px; vertical-align: top; }
+  .table-card input { min-width: 100px; width: 100%; }
+  .table-card .table-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .table-card button { min-height: 36px; }
+  @media (max-width: 760px) { .three-col { grid-template-columns: 1fr; } .actions { display: grid; } }
+</style>
+
+<script>
+  // @ts-nocheck -- the component owns these data attributes and controls.
+  import {
+    compressImages,
+    compressPdf,
+    downloadBlob,
+    exportEditedTables,
+    imageToDxf,
+    pdfToWord,
+    pixelDistance,
+    previewPdfTables,
+  } from '../../lib/funnytools-api';
+
+  const apiBase = import.meta.env.PUBLIC_CONVERSION_API_URL || 'https://api.funnytools.win';
+
+  document.querySelectorAll('[data-conversion-tool]').forEach((root) => {
+    const mode = root.dataset.mode;
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const fileInput = root.querySelector('[data-file]');
+    const filesInput = root.querySelector('[data-files]');
+    const error = root.querySelector('[data-error]');
+    const status = root.querySelector('[data-status]');
+    const convertButton = root.querySelector('[data-action="convert"], [data-action="preview"]');
+    const exportButton = root.querySelector('[data-action="export"]');
+    const downloadButton = root.querySelector('[data-action="download"]');
+    const cancelButton = root.querySelector('[data-action="cancel"]');
+    let controller = null;
+    let outputBlob = null;
+    let outputName = 'converted-file';
+    let tables = [];
+    let selectedFiles = [];
+    let calibrationImage = null;
+    let calibrationPoints = [];
+
+    const setError = (message = '') => { error.textContent = message; error.hidden = !message; };
+    const setStatus = (message) => { status.textContent = message; };
+    const setBusy = (busy) => {
+      convertButton.disabled = busy || (mode === 'bulk-image-compressor' ? !selectedFiles.length : !(fileInput?.files?.[0]));
+      if (exportButton) exportButton.disabled = busy || !tables.length;
+      if (downloadButton) downloadButton.disabled = busy || !outputBlob;
+      cancelButton.hidden = !busy;
+      if (busy) setError('');
+    };
+    const size = (bytes) => bytes >= 1048576 ? `${(bytes / 1048576).toFixed(2)} MB` : `${(bytes / 1024).toFixed(1)} KB`;
+    const pages = () => root.querySelector('[data-pages]')?.value.trim() || undefined;
+    const clearOutput = () => { outputBlob = null; if (downloadButton) downloadButton.disabled = true; };
+    const clear = () => {
+      controller?.abort(); controller = null; selectedFiles = []; tables = []; calibrationPoints = []; calibrationImage = null; clearOutput(); setError(''); setStatus(labels.waiting);
+      if (fileInput) fileInput.value = ''; if (filesInput) filesInput.value = '';
+      root.querySelector('[data-file-list]')?.replaceChildren(); root.querySelector('[data-editor]')?.replaceChildren();
+      if (root.querySelector('[data-editor]')) root.querySelector('[data-editor]').hidden = true;
+      const canvas = root.querySelector('[data-calibration]'); if (canvas) { canvas.hidden = true; canvas.replaceChildren(); }
+      const empty = root.querySelector('[data-calibration-empty]'); if (empty) empty.hidden = false;
+      const summary = root.querySelector('[data-file-summary]'); if (summary) summary.textContent = labels.waiting;
+      root.querySelectorAll('[data-original], [data-output], [data-change], [data-pixel-distance]').forEach((node) => { node.textContent = '—'; });
+      setBusy(false);
+    };
+    const run = async (work, doneName) => {
+      controller?.abort(); controller = new AbortController(); setBusy(true); setStatus(labels.processing);
+      try { outputBlob = await work(controller.signal); outputName = doneName; setStatus(labels.ready); downloadButton.disabled = false; }
+      catch (caught) { if (caught?.name !== 'AbortError') { setError(caught instanceof Error ? caught.message : labels.failed); setStatus(''); } }
+      finally { controller = null; setBusy(false); }
+    };
+
+    function renderFileList() {
+      const list = root.querySelector('[data-file-list]'); if (!list) return;
+      list.replaceChildren();
+      selectedFiles.forEach((file) => { const item = document.createElement('li'); item.textContent = `${file.name} (${size(file.size)})`; list.append(item); });
+      root.querySelector('[data-file-summary]').textContent = selectedFiles.length ? labels.selected.replace('{count}', String(selectedFiles.length)) : labels.waiting;
+      setBusy(false);
+    }
+
+    function renderTables() {
+      const editor = root.querySelector('[data-editor]'); if (!editor) return;
+      editor.replaceChildren(); editor.hidden = !tables.length;
+      if (!tables.length) { setStatus(labels.noTables); return; }
+      tables.forEach((table, tableIndex) => {
+        const card = document.createElement('section'); card.className = 'table-card';
+        const heading = document.createElement('h3'); heading.textContent = labels.table.replace('{number}', String(tableIndex + 1)); card.append(heading);
+        const actions = document.createElement('div'); actions.className = 'table-actions';
+        const deleteTable = document.createElement('button'); deleteTable.className = 'btn ghost'; deleteTable.type = 'button'; deleteTable.textContent = labels.deleteTable; deleteTable.onclick = () => { tables.splice(tableIndex, 1); renderTables(); }; actions.append(deleteTable);
+        const columnSelect = document.createElement('select'); columnSelect.setAttribute('aria-label', labels.columnNumber); for (let i = 0; i < (table.rows[0]?.length || 0); i += 1) { const option = document.createElement('option'); option.value = String(i); option.textContent = `${labels.columnNumber} ${i + 1}`; columnSelect.append(option); }
+        const deleteColumn = document.createElement('button'); deleteColumn.className = 'btn ghost'; deleteColumn.type = 'button'; deleteColumn.textContent = labels.deleteColumn; deleteColumn.onclick = () => { const column = Number(columnSelect.value); table.rows.forEach((row) => row.splice(column, 1)); renderTables(); }; actions.append(columnSelect, deleteColumn); card.append(actions);
+        const tableElement = document.createElement('table'); const body = document.createElement('tbody');
+        table.rows.forEach((row, rowIndex) => { const tr = document.createElement('tr'); row.forEach((value, columnIndex) => { const td = document.createElement('td'); const input = document.createElement('input'); input.value = value; input.oninput = () => { table.rows[rowIndex][columnIndex] = input.value; }; td.append(input); tr.append(td); }); const td = document.createElement('td'); const remove = document.createElement('button'); remove.className = 'btn ghost'; remove.type = 'button'; remove.textContent = labels.deleteRow; remove.onclick = () => { table.rows.splice(rowIndex, 1); renderTables(); }; td.append(remove); tr.append(td); body.append(tr); });
+        tableElement.append(body); card.append(tableElement); editor.append(card);
+      });
+      exportButton.disabled = false;
+    }
+
+    function drawCalibration() {
+      const canvas = root.querySelector('[data-calibration]'); if (!canvas || !calibrationImage) return;
+      canvas.width = calibrationImage.naturalWidth; canvas.height = calibrationImage.naturalHeight; const ctx = canvas.getContext('2d'); ctx.drawImage(calibrationImage, 0, 0);
+      ctx.fillStyle = '#d64545'; ctx.strokeStyle = '#d64545'; ctx.lineWidth = Math.max(3, canvas.width / 400);
+      calibrationPoints.forEach((point) => { ctx.beginPath(); ctx.arc(point.x, point.y, Math.max(8, canvas.width / 100), 0, Math.PI * 2); ctx.fill(); });
+      if (calibrationPoints.length === 2) { ctx.beginPath(); ctx.moveTo(calibrationPoints[0].x, calibrationPoints[0].y); ctx.lineTo(calibrationPoints[1].x, calibrationPoints[1].y); ctx.stroke(); root.querySelector('[data-pixel-distance]').textContent = pixelDistance(calibrationPoints[0].x, calibrationPoints[0].y, calibrationPoints[1].x, calibrationPoints[1].y).toFixed(2); }
+    }
+
+    filesInput?.addEventListener('change', () => { selectedFiles = Array.from(filesInput.files || []).slice(0, 100); renderFileList(); });
+    fileInput?.addEventListener('change', () => { clearOutput(); setError(''); setBusy(false); });
+    root.querySelector('[data-action="cancel"]')?.addEventListener('click', () => controller?.abort());
+    root.querySelector('[data-action="clear"]')?.addEventListener('click', clear);
+    downloadButton?.addEventListener('click', () => { if (outputBlob) downloadBlob(outputBlob, outputName); });
+
+    root.querySelector('[data-calibration]')?.addEventListener('click', (event) => { if (!calibrationImage) return; const canvas = event.currentTarget; const rect = canvas.getBoundingClientRect(); const point = { x: (event.clientX - rect.left) * canvas.width / rect.width, y: (event.clientY - rect.top) * canvas.height / rect.height }; calibrationPoints = calibrationPoints.length === 2 ? [point] : [...calibrationPoints, point]; drawCalibration(); });
+    fileInput?.addEventListener('change', () => { if (!isDxf) return; const file = fileInput.files?.[0]; if (!file) return; calibrationImage = new Image(); calibrationImage.onload = () => { const canvas = root.querySelector('[data-calibration]'); canvas.hidden = false; root.querySelector('[data-calibration-empty]').hidden = true; calibrationPoints = []; drawCalibration(); }; calibrationImage.src = URL.createObjectURL(file); });
+
+    convertButton?.addEventListener('click', async () => {
+      if (mode === 'bulk-image-compressor') {
+        const width = Number(root.querySelector('[data-max-width]')?.value) || undefined; const height = Number(root.querySelector('[data-max-height]')?.value) || undefined;
+        await run((signal) => compressImages(apiBase, selectedFiles, { quality: Number(root.querySelector('[data-quality]').value), maxWidth: width, maxHeight: height, outputFormat: root.querySelector('[data-format]').value, signal }), 'compressed-images.zip');
+      } else if (mode === 'pdf-to-word') {
+        const file = fileInput.files?.[0]; if (!file) { setError(labels.noFile); return; }
+        await run((signal) => pdfToWord(apiBase, file, { ocrMode: root.querySelector('[data-ocr-mode]').value, ocrLang: root.querySelector('[data-ocr-lang]').value, includeImages: root.querySelector('[data-include-images]').checked, signal }), 'converted.docx');
+      } else if (mode === 'pdf-table-to-excel') {
+        const file = fileInput.files?.[0]; if (!file) { setError(labels.noFile); return; }
+        controller = new AbortController(); setBusy(true); setStatus(labels.processing); try { const result = await previewPdfTables(apiBase, file, { pages: pages(), ocrMode: root.querySelector('[data-ocr-mode]').value, ocrLang: root.querySelector('[data-ocr-lang]').value, signal: controller.signal }); tables = result.tables; renderTables(); setStatus(tables.length ? labels.ready : labels.noTables); } catch (caught) { if (caught?.name !== 'AbortError') setError(caught instanceof Error ? caught.message : labels.failed); } finally { controller = null; setBusy(false); }
+      } else if (mode === 'image-to-dxf') {
+        const file = fileInput.files?.[0]; if (!file) { setError(labels.noFile); return; } const points = calibrationPoints.length === 2 ? calibrationPoints : []; const px = points.length === 2 ? pixelDistance(points[0].x, points[0].y, points[1].x, points[1].y) : undefined; const real = Number(root.querySelector('[data-real-distance]')?.value) || undefined;
+        await run((signal) => imageToDxf(apiBase, file, { threshold: Number(root.querySelector('[data-threshold]').value), invert: root.querySelector('[data-invert]').checked, blur: Number(root.querySelector('[data-blur]').value), epsilonRatio: Number(root.querySelector('[data-simplify]').value), minArea: Number(root.querySelector('[data-min-area]').value), units: root.querySelector('[data-units]').value, calibrationPixelDistance: px, calibrationRealDistance: real, signal }), 'vectorized.dxf');
+      } else if (mode === 'pdf-compressor') {
+        const file = fileInput.files?.[0]; if (!file) { setError(labels.noFile); return; } const original = root.querySelector('[data-original]'); original.textContent = size(file.size);
+        await run((signal) => compressPdf(apiBase, file, root.querySelector('[data-preset]').value, signal), 'compressed.pdf'); if (outputBlob) { root.querySelector('[data-output]').textContent = size(outputBlob.size); root.querySelector('[data-change]').textContent = `${((outputBlob.size / file.size - 1) * 100).toFixed(1)}%`; }
+      }
+    });
+
+    exportButton?.addEventListener('click', () => run((signal) => exportEditedTables(apiBase, tables, signal), 'edited-pdf-tables.xlsx'));
+    setBusy(false);
+  });
+</script>

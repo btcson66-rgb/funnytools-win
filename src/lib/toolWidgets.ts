@@ -10,6 +10,7 @@ import CharacterCounter from '../components/tools/CharacterCounter.astro';
 import ClassGroupGenerator from '../components/tools/ClassGroupGenerator.astro';
 import ColorGenerator from '../components/tools/ColorGenerator.astro';
 import CompoundInterest from '../components/tools/CompoundInterest.astro';
+import ConversionApiTool from '../components/tools/ConversionApiTool.astro';
 import CountdownTimer from '../components/tools/CountdownTimer.astro';
 import DateDifference from '../components/tools/DateDifference.astro';
 import DeletePdfPages from '../components/tools/DeletePdfPages.astro';
@@ -31,7 +32,6 @@ import JsonFormatter from '../components/tools/JsonFormatter.astro';
 import DataConverter from '../components/tools/DataConverter.astro';
 import ImageFormatConverter from '../components/tools/ImageFormatConverter.astro';
 import MarkdownPreviewer from '../components/tools/MarkdownPreviewer.astro';
-import PdfCompressor from '../components/tools/PdfCompressor.astro';
 import PdfPageReorder from '../components/tools/PdfPageReorder.astro';
 import PdfToImage from '../components/tools/PdfToImage.astro';
 import TimestampConverter from '../components/tools/TimestampConverter.astro';
@@ -137,7 +137,11 @@ export const widgetBySlug = {
   'webp-to-jpg': ImageFormatConverter,
   'pdf-page-reorder': PdfPageReorder,
   'pdf-to-image': PdfToImage,
-  'pdf-compressor': PdfCompressor,
+  'bulk-image-compressor': ConversionApiTool,
+  'pdf-to-word': ConversionApiTool,
+  'pdf-table-to-excel': ConversionApiTool,
+  'image-to-dxf': ConversionApiTool,
+  'pdf-compressor': ConversionApiTool,
   'standard-deviation': StandardDeviation,
   'apa-7-report-generator': Apa7ReportGenerator,
   'spss-result-interpreter': SpssResultInterpreter,

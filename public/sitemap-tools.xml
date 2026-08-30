@@ -54,6 +54,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/break-reminder/" />
   </url>
   <url>
+    <loc>https://funnytools.win/tools/bulk-image-compressor/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/bulk-image-compressor/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/bulk-image-compressor/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/bulk-image-compressor/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/tools/business-days/</loc>
     <lastmod>2026-08-01</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/business-days/" />
@@ -258,6 +265,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/image-to-base64/" />
   </url>
   <url>
+    <loc>https://funnytools.win/tools/image-to-dxf/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-to-dxf/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/image-to-dxf/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/image-to-dxf/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/tools/images-to-pdf/</loc>
     <lastmod>2026-07-31</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/images-to-pdf/" />
@@ -400,6 +414,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pdf-page-reorder/" />
   </url>
   <url>
+    <loc>https://funnytools.win/tools/pdf-table-to-excel/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pdf-table-to-excel/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/pdf-table-to-excel/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pdf-table-to-excel/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/tools/pdf-to-image/</loc>
     <lastmod>2026-06-23</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pdf-to-image/" />
@@ -407,6 +428,13 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-pdf-a-imagen/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/convertir-pdf-en-image/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pdf-to-image/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/tools/pdf-to-word/</loc>
+    <lastmod>2026-08-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pdf-to-word/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/pdf-to-word/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/pdf-to-word/" />
   </url>
   <url>
     <loc>https://funnytools.win/tools/percentage-calculator/</loc>

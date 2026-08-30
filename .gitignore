@@ -1,6 +1,8 @@
 node_modules
 dist
 .astro
+__pycache__/
+*.pyc
 
 # Local secrets / Cloudflare API tokens & raw analytics — never commit
 cloudflare/
@@ -9,6 +11,7 @@ cloudflare/
 api token/
 reports/analytics/
 reports/daily/
+reports/data/
 reports/bing-submission-report.json
 reports/bing-submission-report.md
 reports/changed-urls.json

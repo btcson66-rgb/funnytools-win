@@ -17,7 +17,7 @@ export const GET: APIRoute = () => {
     .filter((route) => route.paths.fr)
     .map((route) => {
       const alternates = Object.entries(route.paths)
-        .filter(([, path]) => Boolean(path))
+        .filter((entry): entry is [string, string] => Boolean(entry[1]))
         .map(([locale, path]) =>
           `    <xhtml:link rel="alternate" hreflang="${hreflangByLocale[locale]}" href="${escapeXml(absoluteUrl(path))}" />`,
         );
@@ -28,7 +28,7 @@ export const GET: APIRoute = () => {
 
       return [
         '  <url>',
-        `    <loc>${escapeXml(absoluteUrl(route.paths.fr))}</loc>`,
+        `    <loc>${escapeXml(absoluteUrl(route.paths.fr!))}</loc>`,
         `    <lastmod>${routeRegistry.reviewedAt}</lastmod>`,
         '    <changefreq>monthly</changefreq>',
         `    <priority>${route.type === 'home' ? '0.8' : '0.7'}</priority>`,

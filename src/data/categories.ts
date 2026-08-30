@@ -90,22 +90,22 @@ export const categories: Category[] = [
     icon: '🖼️',
     name: { zh: '圖片與檔案', en: 'Image & File' },
     description: {
-      zh: "提供圖片壓縮、格式轉換、尺寸調整與 QR Code 等常用功能，主要在瀏覽器本機處理。大型圖片的速度與輸出品質會受到裝置效能及格式限制影響。",
-      en: "Compress, convert, and resize images, plus QR codes and other handy file tasks — all processed locally in your browser.",
+      zh: "提供圖片壓縮、格式轉換、尺寸調整與 QR Code 等常用功能；多數在瀏覽器本機處理，批次壓縮與圖片轉 DXF 等轉換則會暫時送至 Conversion API。大型圖片的速度與輸出品質會受到裝置效能及格式限制影響。",
+      en: "Compress, convert, and resize images, plus QR codes. Most run locally; batch compression and image-to-DXF use a temporary-processing API.",
     },
     relatedCategories: ['pdf', 'draw', 'text'],
     guide: {
       zh: {
         overview: [
           '圖片工具適合處理網站上傳、社群分享及一般文件需要的檔案。壓縮會在畫質與容量間取捨，尺寸調整會改變像素數，格式轉換則可能影響透明背景、動畫或色彩表現。',
-          '檔案主要由瀏覽器本機讀取及輸出，不會主動上傳到 FunnyTools 免費線上工具箱伺服器。處理大量或高解析度圖片時會占用裝置記憶體，手機上建議分批操作並在下載後檢查成品。',
+          '一般圖片工具會由瀏覽器本機讀取及輸出；批次壓縮與圖片轉 DXF 等 API 工具會把檔案暫時送至轉換服務處理，請在下載後檢查成品並避免上傳敏感資料。處理大量或高解析度圖片時會占用裝置記憶體，手機上建議分批操作。',
         ],
         tips: ['需要透明背景時優先保留 PNG 或 WebP。', '照片通常適合 JPEG 或 WebP，文字截圖需注意壓縮模糊。', 'QR Code 產生後先用另一台裝置實際掃描。'],
       },
       en: {
         overview: [
           'Image tools support common website uploads, social sharing, and document preparation. Compression trades quality for file size, resizing changes pixel dimensions, and format conversion can affect transparency, animation, or color rendering.',
-          'Files are read and exported locally in the browser rather than uploaded to FunnyTools servers. Large batches and high-resolution images can use substantial memory, so process them in smaller groups on mobile and inspect every downloaded result.',
+          'Regular image tools read and export files locally in the browser; batch compression and image-to-DXF use a Conversion API that temporarily processes uploaded files. Avoid sensitive data, inspect every download, and process large batches in smaller groups on mobile.',
         ],
         tips: ['Keep PNG or WebP when transparency is required.', 'JPEG or WebP usually suits photos; check text screenshots for blur.', 'Scan a generated QR code with another device before publishing it.'],
       },
@@ -116,8 +116,8 @@ export const categories: Category[] = [
     icon: '📄',
     name: { zh: 'PDF 工具', en: 'PDF Tools' },
     description: {
-      zh: '在瀏覽器本機合併、拆分、旋轉、排序與整理 PDF 檔案，不需把文件傳到本站伺服器。大型、加密或特殊格式檔案可能受瀏覽器能力限制。',
-      en: 'Merge, split, rotate, and organize PDF files locally in your browser — nothing is uploaded.',
+      zh: '可在瀏覽器本機合併、拆分、旋轉、排序與整理 PDF；PDF 壓縮、轉 Word、表格轉 Excel 等轉換會暫時送至 Conversion API。大型、加密或特殊格式檔案可能受處理能力限制。',
+      en: 'Merge, split, rotate, and organize PDFs locally; PDF compression, Word conversion, and table extraction use a temporary-processing API.',
     },
     relatedCategories: ['image', 'text', 'time'],
   },
@@ -126,8 +126,8 @@ export const categories: Category[] = [
     icon: '✏️',
     name: { zh: '製圖工具', en: 'Drawing & CAD' },
     description: {
-      zh: '在瀏覽器本機進行簡易二維製圖、手繪與流程圖，適合草稿、概念整理及快速示意。功能不取代專業 CAD 或設計軟體，重要圖面請另行檢查。',
-      en: 'Simple 2D drafting, sketching, and diagrams right in your browser — no CAD software to install.',
+      zh: '提供瀏覽器本機的簡易二維製圖、手繪與流程圖，也能把圖片輪廓轉成 DXF；適合草稿、概念整理及快速示意。DXF 轉換會暫時送至 Conversion API，且不取代專業 CAD 或設計軟體。',
+      en: 'Create simple 2D drafts, sketches, and diagrams in your browser, or turn an image outline into DXF. DXF conversion uses a temporary-processing Conversion API and does not replace professional CAD software.',
     },
     relatedCategories: ['image', 'study', 'pdf'],
     guide: {

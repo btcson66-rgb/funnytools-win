@@ -498,21 +498,21 @@ export const categoryContent: Record<string, CategoryContent> = {
       en: 'Image Tools | Compress, Convert & Resize - FunnyTools',
     },
     metaDescription: {
-      zh: '免費圖片工具：圖片壓縮、裁切、旋轉翻轉、尺寸調整、PNG／JPG／WebP 轉檔、轉 Base64 與 QR Code。全部在瀏覽器本機處理，圖片不上傳。',
-      en: 'Free image tools: compress, crop, rotate, resize, convert PNG/JPG/WebP, image to Base64, and QR codes. All processed locally — images never uploaded.',
+      zh: '免費圖片工具：圖片壓縮、批次壓縮、裁切、旋轉翻轉、尺寸調整、PNG／JPG／WebP 轉檔、轉 Base64、DXF 與 QR Code。多數功能在瀏覽器本機處理；批次壓縮與圖片轉 DXF 會暫時上傳檔案。',
+      en: 'Free image tools for compression, cropping, resizing, format conversion, Base64, DXF, and QR codes. Most run locally; batch and DXF use temporary file processing.',
     },
     h1: { zh: '圖片與檔案免費工具', en: 'Free Image & File Tools' },
     intro: {
       zh: [
-        '圖片與檔案分類提供圖片壓縮、裁切、旋轉翻轉、尺寸調整、格式轉換、轉 Base64 與 QR Code 產生等免費工具，全部在瀏覽器本機處理，圖片不會上傳到任何伺服器。當你需要為網站、社群或表單準備合適的圖片時，這些工具能快速完成常見的處理。',
+         '圖片與檔案分類提供圖片壓縮、批次壓縮、裁切、旋轉翻轉、尺寸調整、格式轉換、轉 Base64、圖片轉 DXF 與 QR Code 產生等免費工具。單檔瀏覽器工具仍在本機處理；批次壓縮與 DXF 向量化會暫時把檔案送到 Conversion API。',
         '想讓網頁載入更快或符合上傳容量限制，可以用圖片壓縮與 JPG 轉 WebP 來縮小檔案；需要特定尺寸的大頭貼、縮圖或封面時，圖片尺寸調整能維持比例輸出新檔，圖片裁切則能拖曳框出想保留的部分。手機拍歪或掃描方向錯誤時，旋轉翻轉工具可一鍵轉正。',
         'PNG、JPG、WebP 之間的互轉工具能解決不同平台對格式的要求；圖片轉 Base64 方便把小圖示內嵌到 HTML 或 CSS；QR Code 產生器則把網址或文字變成方便掃描的條碼。因為所有處理都在本機完成，即使是含個人資訊或尚未公開的圖片也能安心使用，無需擔心檔案外流。',
         '這類工具適合網站管理者、設計新手、社群小編、學生與需要提交線上表單的人。常見情境包括縮小上傳檔案、裁成指定比例、修正照片方向、把舊格式轉成平台支援的檔案，或替海報與名片製作 QR Code；輸出後仍建議檢查清晰度與尺寸。',
       ],
       en: [
-        'The Image & File category provides free tools for compressing, cropping, rotating, resizing, and converting images, plus image-to-Base64 and QR codes — all processed locally in your browser so images are never uploaded. When you need the right image for a site, social post, or form, these tools handle common tasks quickly.',
+         'The Image & File category provides free tools for compressing, batch-compressing, cropping, rotating, resizing, and converting images, plus image-to-Base64, Image to DXF, and QR codes. Single-image browser tools run locally; batch compression and DXF vectorization temporarily send files to the Conversion API.',
         'Compress images or convert JPG to WebP to load faster and meet upload limits; resize for avatars, thumbnails, or covers while keeping proportions, and crop by dragging to keep just the part you want. When a phone shot is tilted or a scan is sideways, the rotate and flip tool straightens it in one click.',
-        'Conversions between PNG, JPG, and WebP solve format requirements; image-to-Base64 embeds small icons in HTML or CSS; and the QR code generator turns links or text into scannable codes. Because everything runs locally, even private or unpublished images are safe to use without worrying about uploads.',
+         'Conversions between PNG, JPG, and WebP solve format requirements; image-to-Base64 embeds small icons in HTML or CSS; Image to DXF creates a contour reference; and the QR code generator turns links or text into scannable codes. Check the processing note before sending private or unpublished images.',
       ],
     },
     useCases: {
@@ -555,14 +555,14 @@ export const categoryContent: Record<string, CategoryContent> = {
     },
     faq: {
       zh: [
-        { q: '圖片會被上傳到伺服器嗎？', a: '不會，所有圖片都在你的瀏覽器本機處理，不會外流。' },
+        { q: '圖片會被上傳到伺服器嗎？', a: '視工具而定。一般圖片工具在瀏覽器本機處理；批次壓縮與圖片轉 DXF 會暫時送至 Conversion API。' },
         { q: '壓縮會讓畫質明顯變差嗎？', a: '壓縮會在檔案大小與畫質間取捨，多數工具可調整品質以取得平衡。' },
         { q: '支援哪些圖片格式？', a: '常見的 JPG、PNG、WebP 都支援，並提供彼此之間的轉換。' },
         { q: '可以一次處理多張圖片嗎？', a: '視工具而定，部分工具支援多檔處理，請參考各工具頁的說明。' },
         { q: 'QR Code 產生後可以商用嗎？', a: '可以，產生的 QR Code 可自由使用，內容由你提供。' },
       ],
       en: [
-        { q: 'Are images uploaded to a server?', a: 'No, all images are processed locally in your browser.' },
+        { q: 'Are images uploaded to a server?', a: 'It depends on the tool. Regular image tools run locally; batch compression and Image to DXF temporarily send files to the Conversion API.' },
         { q: 'Will compression noticeably reduce quality?', a: 'Compression trades size for quality; most tools let you adjust the quality.' },
         { q: 'Which formats are supported?', a: 'Common JPG, PNG, and WebP, with conversions between them.' },
         { q: 'Can I process multiple images at once?', a: "It depends on the tool; some support multiple files — check each tool's page." },
@@ -620,19 +620,19 @@ export const categoryContent: Record<string, CategoryContent> = {
       en: 'PDF Tools | Merge, Split, Rotate & Compress - FunnyTools',
     },
     metaDescription: {
-      zh: '免費 PDF 工具：合併、拆分、旋轉、刪除與擷取頁面、重新排序、轉圖片與壓縮。瀏覽器本機處理，檔案不上傳，適合整理報告、掃描文件與機密資料。',
-      en: 'Free PDF tools: merge, split, rotate, delete and extract pages, reorder, convert to image, and compress. Processed locally — nothing uploaded.',
+      zh: '免費 PDF 工具：合併、拆分、旋轉、刪除與擷取頁面、重新排序、轉圖片與壓縮。多數整理功能在瀏覽器本機處理；PDF 轉 Word、表格轉 Excel 與壓縮 API 會暫時接收檔案。',
+      en: 'Free PDF tools to merge, split, rotate, extract, reorder, convert, or compress. Organizers run locally; conversion tools process files temporarily.',
     },
     h1: { zh: 'PDF 免費工具', en: 'Free PDF Tools' },
     intro: {
       zh: [
-        'PDF 工具分類集合了合併、拆分、旋轉、刪除與擷取頁面、重新排序、轉圖片與壓縮等免費功能，協助你整理日常的文件、報告、合約與教材。所有 PDF 都在瀏覽器本機處理，檔案不會上傳到伺服器，特別適合處理含敏感資訊的文件。',
+         'PDF 工具分類集合了合併、拆分、旋轉、刪除與擷取頁面、重新排序、轉圖片與壓縮等免費功能，協助你整理日常的文件、報告、合約與教材。合併、拆分等整理工具在瀏覽器本機處理；PDF 轉 Word、表格轉 Excel 與新版 PDF 壓縮則會暫時上傳到 Conversion API。',
         '需要把多份檔案整合成一份時可以用 PDF 合併；想分發特定章節或抽出重點頁，則能用拆分、擷取或刪除頁面來精簡內容。掃描方向錯誤或頁序顛倒時，旋轉與重新排序工具能快速修正，讓文件閱讀與列印更順手。',
         '此外，PDF 轉圖片方便把內容貼到簡報或社群，PDF 壓縮則能在寄送 email 或上傳有容量限制的系統前縮小檔案。這些工具免費、免註冊，介面以「上傳—操作—下載」為主，不需要安裝任何桌面軟體就能完成大部分的文件整理工作。',
         '學生與老師可以合併講義、拆出指定章節或把掃描圖片轉成 PDF；上班族可旋轉掃描頁面、重排合約附件並整理申請資料；行政與求職者則能刪除不必要頁面後再壓縮寄送。處理完成後請下載並逐頁確認順序、方向與內容是否正確。',
       ],
       en: [
-        'The PDF category gathers free tools to merge, split, rotate, delete and extract pages, reorder, convert to images, and compress — helping you organize documents, reports, contracts, and teaching materials. All PDFs are processed locally, so files are never uploaded, which is ideal for sensitive documents.',
+         'The PDF category gathers free tools to merge, split, rotate, delete and extract pages, reorder, convert to images, and compress — helping you organize documents, reports, contracts, and teaching materials. Merge, split, and similar organizers run locally; PDF to Word, table to Excel, and the new API compressor temporarily receive files for conversion.',
         'Combine several files into one with Merge PDF, or slim content down by splitting, extracting, or deleting pages. Rotate and reorder fix scans that are sideways or out of order, while PDF to Image and PDF Compressor help you share or send files. These tools are free, need no sign-up, and require no desktop software.',
       ],
     },
@@ -659,7 +659,7 @@ export const categoryContent: Record<string, CategoryContent> = {
         { tip: '只想保留特定頁面，用擷取 PDF 頁面', toolSlug: 'extract-pdf-pages' },
         { tip: '要移除不需要的頁面，用刪除 PDF 頁面', toolSlug: 'delete-pdf-pages' },
         { tip: '掃描方向錯誤時，用 PDF 旋轉', toolSlug: 'rotate-pdf' },
-        { tip: '要縮小 PDF 檔案，用 PDF 壓縮工具', toolSlug: 'pdf-compressor' },
+         { tip: '要縮小 PDF 檔案，用 PDF 壓縮工具（檔案會暫時上傳處理）', toolSlug: 'pdf-compressor' },
       ],
       en: [
         { tip: 'To combine several PDFs, use Merge PDF', toolSlug: 'merge-pdf' },
@@ -667,19 +667,19 @@ export const categoryContent: Record<string, CategoryContent> = {
         { tip: 'To keep only certain pages, use Extract PDF Pages', toolSlug: 'extract-pdf-pages' },
         { tip: 'To remove unwanted pages, use Delete PDF Pages', toolSlug: 'delete-pdf-pages' },
         { tip: 'When a scan is sideways, use Rotate PDF', toolSlug: 'rotate-pdf' },
-        { tip: 'To shrink a PDF file, use the PDF Compressor', toolSlug: 'pdf-compressor' },
+         { tip: 'To shrink a PDF file, use PDF Compressor (files are temporarily uploaded for processing)', toolSlug: 'pdf-compressor' },
       ],
     },
     faq: {
       zh: [
-        { q: '我的 PDF 會被上傳嗎？', a: '不會，所有 PDF 都在瀏覽器本機處理，檔案不會送到伺服器，適合機密文件。' },
+         { q: '我的 PDF 會被上傳嗎？', a: '視工具而定。合併、拆分等整理工具在瀏覽器本機處理；PDF 轉 Word、表格轉 Excel 與 PDF 壓縮會把檔案暫時送到 Conversion API。' },
         { q: 'PDF 壓縮能縮小多少？', a: '壓縮幅度依檔案內容而定，以掃描圖片為主的 PDF 通常較有空間，純文字檔效果有限。' },
         { q: '合併或拆分有檔案數量限制嗎？', a: '沒有硬性限制，但檔案過大或過多時會受裝置記憶體影響。' },
         { q: '處理後的 PDF 會有浮水印嗎？', a: '不會，本站工具不會在輸出檔案加上浮水印。' },
         { q: '可以編輯 PDF 內的文字嗎？', a: '目前工具著重在頁面層級的整理（合併、拆分、旋轉等），尚不支援直接編輯內文。' },
       ],
       en: [
-        { q: 'Is my PDF uploaded?', a: 'No, all PDFs are processed locally, so files never reach a server — good for confidential documents.' },
+         { q: 'Is my PDF uploaded?', a: 'It depends on the tool. Merge, split, and similar organizers run locally; PDF to Word, table to Excel, and PDF Compressor temporarily send the file to the Conversion API.' },
         { q: 'How much can the PDF compressor reduce size?', a: 'It varies by content; scan-heavy PDFs compress more, text-only files less.' },
         { q: 'Is there a file limit for merge or split?', a: 'No hard limit, but very large or many files depend on device memory.' },
         { q: 'Do processed PDFs have a watermark?', a: 'No, our tools never add watermarks to output files.' },

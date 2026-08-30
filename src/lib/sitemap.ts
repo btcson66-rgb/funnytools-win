@@ -136,7 +136,7 @@ function blogPages(): SitemapPage[] {
 function guideArticlePages(): SitemapPage[] {
   const specialPostSlugs = new Set(
     allBlogPosts
-      .filter((post) => ['example', 'template', 'faq'].includes(post.categorySlug) || post.categoryLabel?.zh.includes('FAQ'))
+      .filter((post) => ['example', 'template', 'faq'].includes(post.categorySlug ?? '') || post.categoryLabel?.zh?.includes('FAQ'))
       .map((post) => post.slug),
   );
 

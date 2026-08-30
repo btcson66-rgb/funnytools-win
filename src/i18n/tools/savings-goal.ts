@@ -5,6 +5,7 @@ interface ToolContent {
   seoTitle: string;
   seoDescription: string;
   keywords: string[];
+  contentSections?: { heading: string; paragraphs: string[]; items?: string[] }[];
   instructions: string[];
   examples: string[];
   faq: { q: string; a: string }[];

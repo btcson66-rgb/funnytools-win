@@ -23,6 +23,11 @@ export interface ToolPageSource {
   note: string;
 }
 
+export interface ToolExample {
+  input: string;
+  output: string;
+}
+
 export interface ToolContent {
   name: string;
   short: string;
@@ -33,7 +38,7 @@ export interface ToolContent {
   capabilities?: string[];
   contentSections?: ToolPageSection[];
   instructions: string[];
-  examples: string[];
+  examples: (string | ToolExample)[];
   audience?: string[];
   caseStudies?: ToolPageCase[];
   notes?: string[];

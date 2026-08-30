@@ -1098,9 +1098,9 @@ export const tools: ToolMeta[] = [
     name: { zh: 'PDF 轉圖片', en: 'PDF to Image Converter' }, short: { zh: '將 PDF 頁面轉成 PNG 或 JPG。', en: 'Convert PDF pages into PNG or JPG images.' },
   },
   {
-    slug: 'pdf-compressor', category: 'pdf', icon: '🗜️', status: 'live', privacyLevel: 'local-only',
+    slug: 'pdf-compressor', category: 'pdf', icon: '🗜️', status: 'live', privacyLevel: 'anonymous-api',
     relatedTools: ['merge-pdf', 'pdf-page-reorder', 'split-pdf'], assetType: 'tool', searchIntent: 'high', shareIntent: 'low', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense', 'affiliate'], isNew: true, updated: '2026-06-18',
-    name: { zh: 'PDF 壓縮工具', en: 'PDF Compressor' }, short: { zh: '重新整理 PDF 結構並嘗試縮小檔案。', en: 'Rewrite PDF structure and attempt to reduce file size.' },
+    name: { zh: 'PDF 壓縮工具', en: 'PDF Compressor' }, short: { zh: '以保留文字與向量為優先的模式嘗試縮小 PDF。', en: 'Try three compression modes while preserving text and vector content when possible.' },
   },
   {
     slug: 'standard-deviation', category: 'statistics', icon: 'σ', status: 'live', privacyLevel: 'local-only',
@@ -1143,6 +1143,26 @@ export const tools: ToolMeta[] = [
     relatedTools: ['bar-chart-maker', 'flowchart', 'color-generator'], assetType: 'tool', searchIntent: 'medium', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-19',
     name: { zh: '圓餅圖製作工具', en: 'Pie Chart Maker' },
     short: { zh: '輸入標籤與數值，即時產生圓餅圖並匯出 PNG。', en: 'Enter labels and values to build a pie chart and export PNG.' },
+  },
+  {
+    slug: 'bulk-image-compressor', category: 'image', icon: '🗜️', status: 'live', privacyLevel: 'anonymous-api',
+    relatedTools: ['image-compressor', 'image-resizer', 'jpg-to-webp', 'png-to-jpg'], assetType: 'tool', searchIntent: 'high', shareIntent: 'low', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense', 'affiliate'], featured: true, isNew: true, updated: '2026-08-30',
+    name: { zh: '批次圖片壓縮器', en: 'Bulk Image Compressor' }, short: { zh: '一次壓縮多張圖片，調整品質與尺寸後下載 ZIP。', en: 'Compress multiple images with quality and size controls, then download one ZIP.' },
+  },
+  {
+    slug: 'pdf-to-word', category: 'pdf', icon: '📝', status: 'live', privacyLevel: 'anonymous-api',
+    relatedTools: ['pdf-table-to-excel', 'pdf-to-image', 'pdf-compressor', 'images-to-pdf'], assetType: 'tool', searchIntent: 'high', shareIntent: 'low', embedPotential: 'low', maintenanceRisk: 'high', monetizationTags: ['adsense', 'affiliate'], featured: true, isNew: true, updated: '2026-08-30',
+    name: { zh: 'PDF 轉可編輯 Word', en: 'PDF to Editable Word' }, short: { zh: '將原生文字或掃描 PDF 轉成可編輯 DOCX。', en: 'Convert native-text or scanned PDFs into an editable DOCX.' },
+  },
+  {
+    slug: 'pdf-table-to-excel', category: 'pdf', icon: '📊', status: 'live', privacyLevel: 'anonymous-api',
+    relatedTools: ['pdf-to-word', 'pdf-to-image', 'pdf-compressor', 'json-to-csv'], assetType: 'tool', searchIntent: 'high', shareIntent: 'low', embedPotential: 'low', maintenanceRisk: 'high', monetizationTags: ['adsense', 'affiliate'], featured: true, isNew: true, updated: '2026-08-30',
+    name: { zh: 'PDF 表格轉 Excel', en: 'PDF Table to Excel' }, short: { zh: '先預覽並編輯擷取的表格，再匯出 Excel。', en: 'Preview and edit detected tables before exporting an Excel workbook.' },
+  },
+  {
+    slug: 'image-to-dxf', category: 'draw', icon: '📐', status: 'live', privacyLevel: 'anonymous-api',
+    relatedTools: ['cad-2d', 'sketchpad', 'image-crop', 'image-resizer'], assetType: 'tool', searchIntent: 'high', shareIntent: 'low', embedPotential: 'low', maintenanceRisk: 'high', monetizationTags: ['adsense', 'affiliate'], featured: true, isNew: true, updated: '2026-08-30',
+    name: { zh: '圖片轉 DXF', en: 'Image to DXF' }, short: { zh: '將 JPG、PNG 線稿向量化成 DXF polyline，並可校正比例。', en: 'Vectorize JPG or PNG line art into DXF polylines with optional scale calibration.' },
   },
 ];
 
