@@ -137,7 +137,7 @@ const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guide
   alternateSegments={['guides', guide.slug]}
   altLang={hasSourceAlternates ? localeUrlPair('guides', guide.slug) : undefined}
   hasAlternates={hasAlternates}
-  jsonLd={[pageLd, articleLd, faqLd, breadcrumbLd]}
+    jsonLd={[pageLd, articleLd, ...(guide.noFaqSchema || faqItems.length === 0 ? [] : [faqLd]), breadcrumbLd]}
 >
   <article class="wrap guide-article">
     <Breadcrumb items={[
@@ -153,6 +153,9 @@ const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guide
       <p class="guide-date">{copy.updated}: <time datetime={effectiveUpdatedAt}>{effectiveUpdatedAt}</time></p>
     </header>
 
+    {guide.contentHtml ? (
+      <div class="markdown-body" set:html={guide.contentHtml} />
+    ) : (<>
     <section class="guide-block" aria-labelledby="problem-title">
       <h2 id="problem-title">{copy.problem}</h2>
       <p>{guide.problem}</p>
@@ -232,6 +235,7 @@ const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guide
         {relatedTools[0] && <a class="btn go" href={toolUrl(lang, relatedTools[0].slug)} data-article-cta="guide_primary_tool">{copy.openTool}: {relatedTools[0].name[lang]}</a>}
       </nav>
     </section>
+    </>)}
 
     {relatedWorkflowViews.length > 0 && (
       <section class="guide-block" aria-labelledby="related-workflows-title">
@@ -294,6 +298,16 @@ const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guide
   .guide-hero { padding-bottom: 8px; }
   .guide-hero h1 { max-width: 900px; font-size: clamp(2rem, 6vw, 3.45rem); }
   .guide-date { margin: 16px 0 0; color: var(--muted); font-size: 0.92rem; font-weight: 800; }
+  .markdown-body { margin-top: 32px; }
+  .markdown-body :global(h2) { margin-top: 38px; }
+  .markdown-body :global(h3) { margin-top: 28px; font-size: 1.18rem; }
+  .markdown-body :global(p), .markdown-body :global(li) { color: #384455; font-size: 1.03rem; line-height: 1.9; }
+  .markdown-body :global(ul), .markdown-body :global(ol) { padding-left: 1.4rem; }
+  .markdown-body :global(table) { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; }
+  .markdown-body :global(th), .markdown-body :global(td) { padding: 10px 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .markdown-body :global(th) { background: var(--soft); color: var(--ink); }
+  .markdown-body :global(pre) { overflow-x: auto; padding: 14px; border-radius: 10px; background: #101827; color: #f7fbff; }
+  .markdown-body :global(code) { font-size: 0.95em; }
   .guide-block { margin-top: 36px; }
   .guide-block p, .guide-block li { color: #384455; font-size: 1.03rem; line-height: 1.85; }
   .formula { padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); color: var(--ink); font-weight: 900; }

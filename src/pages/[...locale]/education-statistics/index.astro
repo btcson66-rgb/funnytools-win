@@ -187,6 +187,14 @@ const featuredGuides = seoGuides
 const featuredWorkflows = workflows
   .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
   .map((workflow) => viewWorkflow(workflow, lang));
+const coreGuideLinks = [
+  { label: '不知道該用什麼統計？', slug: 'statistical-test-selection' },
+  { label: 'p < .05 到底代表什麼？', slug: 'p-value-interpretation' },
+  { label: '顯著以後，效果到底多大？', slug: 'effect-size-guide' },
+  { label: '95% CI 為什麼要一起看？', slug: 'confidence-interval-95-guide' },
+  { label: '前後測該用 paired t test 嗎？', slug: 'independent-vs-paired-t-test' },
+  { label: 'SD 和 SE 常搞混？', slug: 'standard-deviation-vs-standard-error' },
+].filter((link) => seoGuides.some((guide) => guide.slug === link.slug && isSeoGuideAvailableInLocale(guide, lang)));
 const faqItems = {
   zh: [
     {
@@ -314,6 +322,23 @@ const jsonLd = [
       </section>
     </div>
   </section>
+
+  {lang === 'zh' && coreGuideLinks.length > 0 && (
+    <section class="wrap content-section" aria-labelledby="core-statistics-guides-title">
+      <div class="section-head">
+        <h2 id="core-statistics-guides-title">研究統計核心解讀</h2>
+        <p>算出統計量只是第一步。這組指南從「該選哪個方法」開始，接著帶你看懂 p 值、效果量、95% 信賴區間與 t 檢定設計，適合研究生、教師與正在整理 SPSS 結果的使用者。</p>
+      </div>
+      <div class="resource-list core-guide-list">
+        {coreGuideLinks.map((guide) => (
+          <a href={localePath(lang, 'guides', guide.slug)}>
+            <strong>{guide.label}</strong>
+            <span>閱讀完整研究統計解讀指南</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
 
   <div class="wrap">
     <Faq lang={lang} items={faqItems} emitJsonLd={false} />

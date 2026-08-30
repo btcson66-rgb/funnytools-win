@@ -1,4 +1,5 @@
 import type { Locale } from '../config/site';
+import { importedTaskSeoGuides } from './taskSeoGuides';
 
 export type LocalizedText = Record<Locale, string>;
 
@@ -34,6 +35,8 @@ export interface SeoGuide {
   cta: LocalizedText;
   updatedAt: string;
   publishAt?: string;
+  contentHtml?: LocalizedText;
+  noFaqSchema?: boolean;
 }
 
 export interface SeoGuideView {
@@ -63,6 +66,8 @@ export interface SeoGuideView {
   cta: string;
   updatedAt: string;
   publishAt?: string;
+  contentHtml?: string;
+  noFaqSchema?: boolean;
 }
 
 interface RawSeoGuide {
@@ -218,6 +223,8 @@ export function viewSeoGuide(guide: SeoGuide, lang: Locale): SeoGuideView {
     commonMistakes: guide.commonMistakes.map((mistake) => mistake[lang]),
     faq: guide.faq.map((item) => ({ question: item.question[lang], answer: item.answer[lang] })),
     cta: guide.cta[lang],
+    contentHtml: guide.contentHtml?.[lang],
+    noFaqSchema: guide.noFaqSchema,
   };
 }
 
@@ -3844,9 +3851,8 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
 const CONTENT_LIBRARY_FREEZE_DATE = '2026-08-01';
 const contentLibraryToday = CONTENT_LIBRARY_FREEZE_DATE;
 
-export const seoGuides: SeoGuide[] = rawSeoGuides
+export const seoGuides: SeoGuide[] = [...rawSeoGuides.map(localizeRawGuide), ...importedTaskSeoGuides]
   .filter((guide) => !guide.publishAt || guide.publishAt <= contentLibraryToday)
-  .map(localizeRawGuide);
 
 export function getSeoGuide(slug: string): SeoGuide | undefined {
   return seoGuides.find((guide) => guide.slug === slug);
