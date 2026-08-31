@@ -1,7 +1,11 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = new URL('..', import.meta.url).pathname.replace(/^\/(.:)/, '$1');
+// URL.pathname leaves spaces percent-encoded (for example Fable%20company),
+// which makes the mandatory preflight look in a directory that does not exist.
+// Convert the file URL with Node's platform-aware helper instead.
+const root = fileURLToPath(new URL('..', import.meta.url));
 const dist = join(root, 'dist');
 const requiredEvents = [
   'tool_view',

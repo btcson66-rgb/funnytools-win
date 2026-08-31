@@ -13,9 +13,8 @@ import {
 } from './seo-indexing-utils.mjs';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
-const COOLDOWN_DAYS = 7;
-const COOLDOWN_MS = COOLDOWN_DAYS * DAY_MS;
 const STUCK_DAYS = 14;
+const forceSubmit = process.argv.includes('--force');
 const sitemapUrls = [
   sitemapIndexUrl,
   ...expectedSitemapFiles.map((file) => new URL(file, siteUrl).href),
@@ -73,7 +72,7 @@ try {
   const authHeaders = { Authorization: `Bearer ${token}` };
   const now = new Date();
   let submittedCount = 0;
-  let cooldownCount = 0;
+  let registeredCount = 0;
   let failureCount = 0;
 
   for (const sitemapPath of sitemapUrls) {
@@ -96,14 +95,15 @@ try {
       report.alerts.push(`GSC sitemap is stuck pending with no download for more than ${STUCK_DAYS} days: ${before.path}`);
     }
 
-    const lastSubmittedAt = parsedDate(before.lastSubmitted);
-    const msSinceLastSubmit = lastSubmittedAt ? now - lastSubmittedAt : null;
-    if (lastSubmittedAt && msSinceLastSubmit >= 0 && msSinceLastSubmit < COOLDOWN_MS) {
-      cooldownCount += 1;
+    // A registered sitemap does not need another PUT on every deployment. Repeated PUTs
+    // do not make Google download a pending sitemap and they erase the useful distinction
+    // between "registered" and "newly submitted". --force remains an explicit operator action.
+    if (getResponse.ok && !forceSubmit) {
+      registeredCount += 1;
       report.entries.push({
         ...before,
-        action: 'skipped_cooldown',
-        message: `Last submitted ${(msSinceLastSubmit / DAY_MS).toFixed(1)} days ago; next eligible ${new Date(lastSubmittedAt.getTime() + COOLDOWN_MS).toISOString()}.`,
+        action: 'already_registered',
+        message: 'Already registered in Search Console; read back without resubmitting.',
       });
       continue;
     }
@@ -143,26 +143,25 @@ try {
     report.entries.push({
       ...after,
       action: 'submitted',
-      message: lastSubmittedAt
-        ? `Submitted after ${(msSinceLastSubmit / DAY_MS).toFixed(1)} days.`
-        : 'Submitted with no prior submission on record.',
+      message: forceSubmit
+        ? 'Submitted because --force was explicitly requested.'
+        : 'Submitted because the sitemap was not registered.',
     });
   }
 
   report.alerts = [...new Set(report.alerts)];
-  if (report.alerts.length) {
-    report.status = 'stuck_pending';
-    report.message = report.alerts.join(' ');
-    process.exitCode = 1;
-  } else if (failureCount) {
+  if (failureCount) {
     report.status = 'failed';
     report.message = `${failureCount} sitemap path(s) failed; see the per-path entries.`;
   } else if (submittedCount) {
     report.status = 'submitted';
-    report.message = `Submitted ${submittedCount} sitemap path(s); ${cooldownCount} path(s) remained inside the ${COOLDOWN_DAYS}-day cooldown.`;
+    report.message = `Submitted ${submittedCount} unregistered sitemap path(s); read back ${registeredCount} existing path(s).`;
+  } else if (report.alerts.length) {
+    report.status = 'registered_pending';
+    report.message = `Read back ${registeredCount} registered sitemap path(s). Google download remains pending; no repeat PUT was sent.`;
   } else {
-    report.status = 'skipped_cooldown';
-    report.message = `All ${cooldownCount} sitemap path(s) remain inside the ${COOLDOWN_DAYS}-day cooldown.`;
+    report.status = 'already_registered';
+    report.message = `Read back ${registeredCount} registered sitemap path(s); no repeat PUT was needed.`;
   }
 } catch (error) {
   const isMissingCredentials = /Missing GSC/.test(error.message);

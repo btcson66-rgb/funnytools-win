@@ -845,9 +845,13 @@ export async function googleAccessToken(scope = 'https://www.googleapis.com/auth
     });
     const data = await response.json().catch(() => ({}));
     if (response.ok && data.access_token) return data.access_token;
-    // Do not fail outright: the service account still works for worthcalc, and a silent
-    // downgrade is worse than a noisy one.
-    process.emitWarning(`user OAuth refresh failed (${response.status} ${data.error || ''}), falling back to the service account`);
+    // An explicitly configured owner OAuth identity must never silently downgrade to a
+    // different service account. That fallback hid the real identity drift in CI and made
+    // a valid refresh-token failure look like a Search Console property mismatch.
+    throw new Error(
+      `Configured user OAuth refresh failed (${response.status} ${data.error_description || data.error || 'unknown error'}). `
+      + 'Refresh FABLE_OPS_OAUTH_CLIENT_JSON and FABLE_OPS_REFRESH_TOKEN together.',
+    );
   }
   const credentials = getServiceAccountCredentials();
   if (!credentials?.client_email || !credentials?.private_key) {
