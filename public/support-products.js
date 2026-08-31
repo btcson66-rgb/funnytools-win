@@ -9,12 +9,12 @@
   };
   const platformLabels = { shopee: '蝦皮', coupang: '酷澎', amazon: 'Amazon', internal: 'FunnyTools', other: '其他' };
   const categoryAliases = {
-    computer: ['computer', 'digital-accessories', 'workspace', 'file-photo'],
-    mobile: ['mobile', 'mobile-photo', 'digital-accessories'],
-    office: ['office', 'workspace', 'organization', 'printing'],
-    student: ['student', 'workspace', 'organization'],
-    teacher: ['teacher', 'workspace', 'organization', 'student'],
-    home: ['home', 'workspace', 'organization'],
+    computer: ['computer', 'digital-accessories', 'workspace', 'file-photo', '3c', '電腦', '鍵盤', '滑鼠', '耳機', '螢幕', '記憶卡'],
+    mobile: ['mobile', 'mobile-photo', 'digital-accessories', '3c', '行動', '手機', '平板', '充電'],
+    office: ['office', 'workspace', 'organization', 'printing', '辦公', '收納', '文具', '桌面', '電腦', '3c'],
+    student: ['student', 'workspace', 'organization', '學習', '文具', '學生', '辦公', '3c'],
+    teacher: ['teacher', 'workspace', 'organization', 'student', '教學', '教師', '學習', '文具', '辦公', '3c'],
+    home: ['home', 'workspace', 'organization', '居家', '生活', '日用品', '廚房', '清潔', '收納'],
     general: [],
   };
 

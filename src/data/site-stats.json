@@ -2,8 +2,8 @@
   "generated": "2026-08-31",
   "sites": {
     "funnytools.win": {
-      "pageviews": 15051,
-      "users": 5771,
+      "pageviews": 15085,
+      "users": 5782,
       "asOf": "2026-08-31",
       "composition": {
         "legacy": {
@@ -14,8 +14,8 @@
           "note": "舊資源最後實測值；資源隨 btcson66 鎖死無法再查。2026-08-06~08-15 未計入，故本站累積為低估。"
         },
         "current": {
-          "pageviews": 7309,
-          "users": 2919,
+          "pageviews": 7343,
+          "users": 2930,
           "property": "550070457"
         },
         "caveat": "pageviews 為兩段實測相加；users 無法跨資源去重，可能重複計算同一人，屬上限值。"
@@ -23,7 +23,7 @@
     },
     "roomfeng.win": {
       "pageviews": 594,
-      "users": 407,
+      "users": 408,
       "asOf": "2026-08-31",
       "property": "543532668"
     },
