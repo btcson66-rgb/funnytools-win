@@ -52,6 +52,11 @@
     const aliases = categoryAliases[category] || [category];
     return aliases.some((alias) => productKey(product).includes(alias));
   };
+  const matchesTags = (product, requestedTags) => {
+    if (!requestedTags.length) return true;
+    const keys = productKey(product);
+    return requestedTags.some((tag) => keys.includes(tag));
+  };
   const shuffle = (items) => {
     const copy = [...items];
     for (let index = copy.length - 1; index > 0; index -= 1) {
@@ -186,6 +191,8 @@
 
     const context = shelf?.dataset.affiliateContext || 'support_page';
     const category = shelf?.dataset.affiliateCategory || '';
+    const requestedTags = (shelf?.dataset.affiliateTags || '')
+      .split(',').map((item) => item.trim().toLowerCase()).filter(Boolean);
     const toolSlug = shelf?.dataset.toolSlug || '';
     const platformFilter = (grid.dataset.supportProductsPlatforms || '')
       .split(',').map((item) => item.trim()).filter(Boolean);
@@ -201,6 +208,11 @@
     let shelfViewed = false;
     let successSeen = context !== 'tool_result';
     let revealTimer = 0;
+    const contextDimensions = () => context === 'article'
+      ? { article_slug: toolSlug, article_category: category }
+      : context === 'tool_result'
+        ? { tool_slug: toolSlug }
+        : {};
 
     const reveal = () => {
       if (!shelf || !successSeen || !pool.length || !grid.childElementCount || !shelf.hidden) return;
@@ -210,7 +222,7 @@
         if (!shelfViewed) {
           shelfViewed = true;
           const visible = [...grid.querySelectorAll('[data-affiliate-platform]')].map((item) => item.dataset.affiliatePlatform);
-          track('affiliate_shelf_view', { tool_slug: toolSlug, platform_mix: [...new Set(visible)].join(','), context });
+          track('affiliate_shelf_view', { ...contextDimensions(), platform_mix: [...new Set(visible)].join(','), context });
         }
       }, 380);
     };
@@ -226,8 +238,8 @@
       grid.replaceChildren(...items.map((item, index) => createCard(item, index + 1, context, toolSlug, batchNumber)));
       grid.setAttribute('aria-busy', 'false');
       updateControls();
-      if (reason === 'refresh') track('affiliate_refresh', { tool_slug: toolSlug, context, batch_number: batchNumber });
-      if (reason === 'expand') track('affiliate_expand', { tool_slug: toolSlug, context, to_count: items.length, batch_number: batchNumber });
+      if (reason === 'refresh') track('affiliate_refresh', { ...contextDimensions(), context, batch_number: batchNumber });
+      if (reason === 'expand') track('affiliate_expand', { ...contextDimensions(), context, to_count: items.length, batch_number: batchNumber });
     };
     const buildPool = (eligible, stored) => {
       const byId = new Map(eligible.map((item) => [item.id, item]));
@@ -262,7 +274,7 @@
       renderCurrent('expand');
       if (previousCount === displayLimit) return;
     });
-    supportLink?.addEventListener('click', () => track('affiliate_support_page_click', { tool_slug: toolSlug, context, batch_number: batchNumber }));
+    supportLink?.addEventListener('click', () => track('affiliate_support_page_click', { ...contextDimensions(), context, batch_number: batchNumber }));
     refreshButton.addEventListener('click', () => {
       if (!pool.length) return;
       displayLimit = batchSize;
@@ -274,11 +286,11 @@
       const target = event.target instanceof Element ? event.target.closest('a[data-affiliate-product-id]') : null;
       if (!(target instanceof HTMLAnchorElement)) return;
       track('affiliate_product_click', {
+        ...contextDimensions(),
         platform: target.dataset.affiliatePlatform || 'other',
         product_id: target.dataset.affiliateProductId || 'unknown',
         product_category: target.dataset.affiliateCategory || 'general',
         product_position: Number(target.dataset.affiliatePosition || 0),
-        tool_slug: target.dataset.affiliateToolSlug || '',
         context: target.dataset.affiliateContext || context,
         batch_number: Number(target.dataset.affiliateBatch || batchNumber),
       });
@@ -342,7 +354,14 @@
             .filter((item) => validAffiliateUrl(item.affiliateUrl) || validAffiliateUrl(item.fallbackUrl))
           : [];
         const categoryProducts = category ? allProducts.filter((item) => matchesCategory(item, category)) : allProducts;
-        const eligible = categoryProducts.length >= batchSize ? categoryProducts : allProducts;
+        const taggedProducts = requestedTags.length
+          ? categoryProducts.filter((item) => matchesTags(item, requestedTags))
+          : categoryProducts;
+        const eligible = taggedProducts.length >= batchSize
+          ? taggedProducts
+          : categoryProducts.length >= batchSize
+            ? categoryProducts
+            : allProducts;
         if (!eligible.length) {
           grid.setAttribute('aria-busy', 'false');
           if (status instanceof HTMLElement && supportPage) status.textContent = '目前沒有可顯示的資源。';

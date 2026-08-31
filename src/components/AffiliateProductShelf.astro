@@ -8,6 +8,8 @@ interface Props {
   category?: string;
   /** The current tool slug, sent only as an analytics dimension. */
   toolSlug?: string;
+  /** Optional article-specific product tags used to narrow the local catalog. */
+  affiliateTags?: string[];
   context?: 'tool_result' | 'article' | 'support_page';
   heading?: string;
   initialLimit?: number;
@@ -17,6 +19,7 @@ const {
   lang,
   category = '',
   toolSlug = '',
+  affiliateTags = [],
   context = 'tool_result',
   heading = '❤️ 這個工具有幫上忙嗎？',
   initialLimit = 4,
@@ -42,10 +45,13 @@ const shelfId = `affiliate-shelf-${toolSlug || context}`.replace(/[^a-z0-9_-]/gi
   <>
     <section
       id={shelfId}
-      class="content-section affiliate-shelf"
+      class="content-section affiliate-shelf affiliate-support-region"
+      data-nosnippet
+      data-adsense-exclude="affiliate-support"
       data-affiliate-shelf
       data-affiliate-context={context}
       data-affiliate-category={matchingCategory}
+      data-affiliate-tags={affiliateTags.join(',')}
       data-tool-slug={toolSlug}
       data-affiliate-initial-limit={String(Math.max(1, Math.min(initialLimit, 4)))}
       data-affiliate-products-src="/data/support-products.json"

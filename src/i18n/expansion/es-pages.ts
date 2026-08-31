@@ -110,6 +110,13 @@ export const spanishPrivacy: SpanishInfoPage = {
       ],
     },
     {
+      heading: 'Enlaces de afiliación y separación del resultado',
+      paragraphs: [
+        'El sitio chino de Taiwán puede mostrar enlaces de afiliación opcionales de Shopee o Coupang en la página de apoyo, después de completar correctamente una herramienta y, de forma selectiva, en guías relacionadas con una necesidad concreta. Si compras después de seguir uno de ellos, FunnyTools puede recibir una comisión sin coste adicional para ti; el precio lo fija la plataforma y sus propias políticas se aplican al uso posterior.',
+        'Estos enlaces aparecen en una zona claramente separada y no modifican fórmulas, cálculos, descargas ni respuestas. Puedes utilizarlos, ignorarlos o buscar directamente en la plataforma que prefieras: la decisión no cambia el resultado de la herramienta. La divulgación completa se mantiene en la página de apoyo.',
+      ],
+    },
+    {
       heading: 'Tus opciones, solicitudes y seguridad',
       paragraphs: [
         'Puedes bloquear o borrar cookies, eliminar datos locales, utilizar los controles de anuncios de Google, instalar el complemento de inhabilitación de Google Analytics o dejar de utilizar una función que requiera correo. Algunas medidas pueden afectar a preferencias, medición o publicidad, pero las herramientas principales no requieren iniciar sesión.',

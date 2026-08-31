@@ -1,6 +1,7 @@
 ---
 import ExpansionLayout from '../../../layouts/ExpansionLayout.astro';
 import { expansionRoutesReviewedAt } from '../../../i18n/expansionRoutes';
+import { liveToolCount } from '../../../data/tools';
 
 const tools = [
   {
@@ -644,7 +645,7 @@ const faq = [
   },
   {
     q: '¿El directorio español incluye todas las herramientas?',
-    a: 'Sí. Las 79 herramientas activas ya tienen página, interfaz, ejemplos, límites y revisión editorial en español. Las guías y flujos de trabajo adicionales se publican por lotes después de una revisión propia.',
+    a: `Sí. Las ${liveToolCount} herramientas activas ya tienen página, interfaz, ejemplos, límites y revisión editorial en español. Las guías y flujos de trabajo adicionales se publican por lotes después de una revisión propia.`,
   },
   {
     q: '¿Puedo utilizar las herramientas desde el móvil?',

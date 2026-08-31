@@ -5,12 +5,19 @@ import { test } from 'node:test';
 const catalog = JSON.parse(readFileSync('public/data/support-products.json', 'utf8'));
 const shelf = readFileSync('src/components/AffiliateProductShelf.astro', 'utf8');
 const runtime = readFileSync('public/support-products.js', 'utf8');
+const guidePage = readFileSync('src/pages/[...locale]/guides/[slug].astro', 'utf8');
+const guideConfig = readFileSync('src/data/guideAffiliate.ts', 'utf8');
+const pages = readFileSync('src/i18n/pages.ts', 'utf8');
+const spanishAbout = readFileSync('src/i18n/expansion/es-trust-39.ts', 'utf8');
+const spanishTools = readFileSync('src/pages/es/herramientas/index.astro', 'utf8');
+const tools = readFileSync('src/data/tools.ts', 'utf8');
 
 test('affiliate catalog has a usable multi-platform pool without fabricated prices', () => {
   const active = catalog.filter((item) => item.status === 'active' || item.enabled === true);
   assert.ok(active.length >= 40, `expected at least 40 active products, got ${active.length}`);
   assert.ok(active.some((item) => item.platform === 'shopee'));
   assert.ok(active.some((item) => item.platform === 'coupang'));
+  assert.ok(active.every((item) => ['shopee', 'coupang'].includes(item.platform)));
   assert.equal(new Set(active.map((item) => item.id)).size, active.length);
   assert.ok(active.every((item) => /^https:\/\//.test(item.affiliateUrl)));
   assert.ok(active.every((item) => !('price' in item) || typeof item.price === 'string'));
@@ -24,6 +31,10 @@ test('tool shelf is result-gated and exposes the required disclosure and control
   assert.match(shelf, /data-affiliate-expand/);
   assert.match(shelf, /data-affiliate-refresh/);
   assert.match(shelf, /data-affiliate-support-link/);
+  assert.match(shelf, /data-nosnippet/);
+  assert.match(shelf, /affiliate-support-region/);
+  assert.match(shelf, /data-adsense-exclude="affiliate-support"/);
+  assert.match(shelf, /data-affiliate-tags/);
 });
 
 test('runtime records affiliate interactions and uses safe external links', () => {
@@ -38,6 +49,32 @@ test('runtime records affiliate interactions and uses safe external links', () =
   assert.match(runtime, /link\.target = '_blank'/);
   assert.match(runtime, /查看目前價格/);
   assert.match(runtime, /sessionStorage/);
+  assert.match(runtime, /article_slug/);
+  assert.match(runtime, /article_category/);
+  assert.match(runtime, /let shelfViewed = false/);
+});
+
+test('article monetization is explicit, conservative, and context-aware', () => {
+  assert.match(guideConfig, /'merge-pdf-private-guide': \{ affiliateEnabled: true/);
+  assert.match(guideConfig, /'classroom-timer-guide': \{ affiliateEnabled: true/);
+  assert.match(guideConfig, /affiliateEnabled: false/);
+  for (const slug of ['t-score-calculator-guide', 'spss-levene-test-guide', 'anova-apa-format-guide', 'cronbach-alpha-quiz-guide']) {
+    assert.doesNotMatch(guideConfig, new RegExp(`['"]${slug}['"]`));
+  }
+  assert.match(guidePage, /context="article"/);
+  assert.match(guidePage, /initialLimit=\{3\}/);
+  assert.match(guidePage, /splitGuideContentHtml/);
+});
+
+test('public disclosures describe Taiwan affiliate sources and centralized tool count', () => {
+  assert.match(pages, /蝦皮或酷澎等平台的選擇性分潤連結/);
+  assert.match(pages, /Shopee or Coupang affiliate links/);
+  assert.doesNotMatch(pages, /Amazon Associates/);
+  assert.match(tools, /export const liveToolCount = liveTools\.length/);
+  assert.doesNotMatch(spanishAbout, /79 herramientas/);
+  assert.doesNotMatch(spanishTools, /79 herramientas/);
+  const legacyAmazon = catalog.find((item) => item.id === 'amazon-home-funnytools');
+  assert.equal(legacyAmazon?.status, 'inactive');
 });
 
 test('teacher shelf can mix Chinese-tagged Shopee products with Coupang products', () => {

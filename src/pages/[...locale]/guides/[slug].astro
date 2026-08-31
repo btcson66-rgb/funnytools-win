@@ -1,5 +1,6 @@
 ---
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import AffiliateProductShelf from '../../../components/AffiliateProductShelf.astro';
 import ContentValueReview from '../../../components/ContentValueReview.astro';
 import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
@@ -13,6 +14,7 @@ import { breadcrumbJsonLd, webPageJsonLd } from '../../../lib/seo';
 import { t } from '../../../i18n/ui';
 import { buildGuideValueReview, CONTENT_REVIEWED_AT } from '../../../lib/contentValue';
 import { expansionRouteByPath } from '../../../i18n/expansionRoutes';
+import { getGuideAffiliateConfig, splitGuideContentHtml } from '../../../data/guideAffiliate';
 
 export function getStaticPaths() {
   return seoGuides.flatMap((guide) => {
@@ -37,6 +39,10 @@ export function getStaticPaths() {
 const { lang, guide: sourceGuide } = Astro.props as { lang: Locale; guide: SeoGuide };
 const ui = t(lang);
 const guide = viewSeoGuide(sourceGuide, lang);
+const articleAffiliateConfig = getGuideAffiliateConfig(guide.slug);
+const articleContentSplit = articleAffiliateConfig.affiliateEnabled && guide.contentHtml
+  ? splitGuideContentHtml(guide.contentHtml)
+  : null;
 const copy = {
   zh: {
     breadcrumb: '指南',
@@ -154,7 +160,21 @@ const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guide
     </header>
 
     {guide.contentHtml ? (
-      <div class="markdown-body" set:html={guide.contentHtml} />
+      articleContentSplit ? (<>
+        <div class="markdown-body" set:html={articleContentSplit.before} />
+        <AffiliateProductShelf
+          lang={lang}
+          category={articleAffiliateConfig.affiliateCategory}
+          affiliateTags={articleAffiliateConfig.affiliateTags}
+          toolSlug={guide.slug}
+          context="article"
+          heading={lang === 'zh' ? '這篇指南可能用得到的工具與用品' : 'Relevant resources for this guide'}
+          initialLimit={3}
+        />
+        <div class="markdown-body" set:html={articleContentSplit.after} />
+      </>) : (
+        <div class="markdown-body" set:html={guide.contentHtml} />
+      )
     ) : (<>
     <section class="guide-block" aria-labelledby="problem-title">
       <h2 id="problem-title">{copy.problem}</h2>
@@ -178,6 +198,18 @@ const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guide
         {guide.steps.map((step) => <li>{step}</li>)}
       </ol>
     </section>
+
+    {articleAffiliateConfig.affiliateEnabled && (
+      <AffiliateProductShelf
+        lang={lang}
+        category={articleAffiliateConfig.affiliateCategory}
+        affiliateTags={articleAffiliateConfig.affiliateTags}
+        toolSlug={guide.slug}
+        context="article"
+        heading={lang === 'zh' ? '這篇指南可能用得到的工具與用品' : 'Relevant resources for this guide'}
+        initialLimit={3}
+      />
+    )}
 
     <section class="guide-block" aria-labelledby="example-title">
       <h2 id="example-title">{copy.example}</h2>

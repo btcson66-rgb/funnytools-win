@@ -1167,6 +1167,7 @@ export const tools: ToolMeta[] = [
 ];
 
 export const liveTools = tools.filter((tool) => tool.status === 'live');
+export const liveToolCount = liveTools.length;
 
 export function getEmbeddableTools(): ToolMeta[] {
   return liveTools.filter((tool) => tool.embedPotential !== 'low');

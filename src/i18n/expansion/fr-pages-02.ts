@@ -73,6 +73,13 @@ export const frenchPrivacy = {
       ],
     },
     {
+      heading: 'Liens affiliés et indépendance du résultat',
+      paragraphs: [
+        'Le site chinois de Taïwan peut afficher des liens affiliés facultatifs vers Shopee ou Coupang sur la page de soutien, après la réussite d’un outil et, de manière sélective, dans des guides liés à un besoin précis. Si vous achetez après avoir suivi l’un de ces liens, FunnyTools peut recevoir une commission sans coût supplémentaire pour vous ; le prix et les conditions de la plateforme concernée restent applicables.',
+        'Ces liens sont placés dans une zone clairement séparée et ne modifient ni les formules, ni les calculs, ni les téléchargements, ni les réponses. Vous pouvez les ignorer ou chercher directement auprès du service de votre choix : le résultat de l’outil reste identique. La divulgation complète figure sur la page de soutien.',
+      ],
+    },
+    {
       heading: 'Vos choix et demandes relatives aux données',
       paragraphs: [
         'Vous pouvez refuser ou supprimer des cookies, effacer le stockage local de funnytools.win, utiliser une fenêtre de navigation privée, limiter les extensions, installer le module de désactivation de Google Analytics ou ajuster les préférences publicitaires de Google. Certains choix peuvent réinitialiser le thème, le cache ou la mesure, mais les deux outils français restent accessibles sans connexion à un compte.',
@@ -165,6 +172,13 @@ export const frenchAboutTools = {
       paragraphs: [
         'Astro génère l’essentiel de la page sous forme de HTML : titre, explications, exemples, limites, navigation et données structurées sont lisibles sans attendre une application lourde. Le navigateur n’active du JavaScript que pour les interactions nécessaires, comme ajouter une note, choisir des fichiers, modifier leur ordre ou lancer un téléchargement.',
         'Cette architecture réduit le code envoyé et facilite l’affichage sur mobile. Elle ne signifie pas que le site n’utilise jamais Internet : les fichiers du site doivent être chargés, et des services d’hébergement, de sécurité, de mesure ou de publicité peuvent être contactés. En revanche, l’entrée d’un outil déclaré local suit un circuit distinct et reste dans l’appareil pour le calcul.',
+      ],
+    },
+    {
+      heading: 'Financement et indépendance du résultat',
+      paragraphs: [
+        'Les outils restent gratuits et les éventuels placements payants ne doivent jamais modifier un calcul ou une réponse. Le site chinois de Taïwan peut afficher, après la fin d’un outil ou dans certains guides pertinents, une zone distincte et facultative contenant des liens affiliés Shopee ou Coupang.',
+        'Utiliser ou ignorer cette zone ne change jamais le résultat. Les liens sont une possibilité de soutenir la maintenance lorsque vous aviez déjà l’intention d’acheter ; ils ne constituent ni un classement, ni une recommandation personnalisée, ni une condition d’accès à l’outil.',
       ],
     },
     {
