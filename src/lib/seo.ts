@@ -1,9 +1,8 @@
-import { SITE, type Locale } from '../config/site';
+import { SITE, SITE_VERSION, type Locale } from '../config/site';
 import type { Category } from '../data/categories';
 import type { ToolMeta } from '../data/tools';
 import { CONTENT_REVIEWED_AT } from './contentValue';
 import { absoluteUrl, altLinks, assetPath, localePath, toolUrl } from './url';
-import pkg from '../../package.json';
 
 interface ToolContentForSeo {
   name: string;
@@ -203,7 +202,7 @@ export function webApplicationJsonLd(
     browserRequirements: 'Requires a modern web browser with JavaScript enabled.',
     inLanguage: SITE.hreflang[lang],
     keywords: content.keywords.join(', '),
-    softwareVersion: pkg.version,
+    softwareVersion: SITE_VERSION,
     dateModified: CONTENT_REVIEWED_AT,
     offers: {
       '@type': 'Offer',
