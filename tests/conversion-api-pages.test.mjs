@@ -35,3 +35,14 @@ test('production build keeps the existing local image compressor route distinct'
   assert.ok(existsSync(file), 'missing existing local image compressor route');
   assert.doesNotMatch(readFileSync(file, 'utf8'), /bulk-image-compressor/);
 });
+
+test('conversion labels expose localized clear and bulk result actions', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const labels = await readFile(new URL('../src/i18n/tools/conversion-api-tools.ts', import.meta.url), 'utf8');
+  assert.equal((labels.match(/clear: '清除'/g) || []).length, 5);
+  assert.equal((labels.match(/clear: 'Clear'/g) || []).length, 5);
+  assert.match(labels, /remove: '移除'/);
+  assert.match(labels, /remove: 'Remove'/);
+  assert.match(labels, /savedPercent: '節省比例'/);
+  assert.match(labels, /savedPercent: 'Saved %'/);
+});

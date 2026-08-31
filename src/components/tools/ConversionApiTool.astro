@@ -26,6 +26,12 @@ const isPdf = slug === 'pdf-compressor';
       <label><span>{labels.outputFormat}</span><select data-format><option value="auto">{labels.auto}</option><option value="jpeg">{labels.jpeg}</option><option value="png">{labels.png}</option><option value="webp">{labels.webp}</option></select></label>
       <p data-file-summary aria-live="polite">{labels.waiting}</p>
       <ul class="file-list" data-file-list></ul>
+      <div class="stats-grid bulk-stats" data-bulk-stats hidden>
+        <div><span>{labels.original}</span><strong data-bulk-original>—</strong></div>
+        <div><span>{labels.output}</span><strong data-bulk-output>—</strong></div>
+        <div><span>{labels.saved}</span><strong data-bulk-saved>—</strong></div>
+        <div><span>{labels.savedPercent}</span><strong data-bulk-saved-percent>—</strong></div>
+      </div>
     </>
   )}
 
@@ -34,7 +40,7 @@ const isPdf = slug === 'pdf-compressor';
       <label><span>{labels.upload}</span><input data-file type="file" accept="application/pdf,.pdf" /></label>
       <div class="form-grid three-col">
         <label><span>{labels.ocrMode}</span><select data-ocr-mode><option value="auto">{labels.auto}</option><option value="off">{labels.off}</option><option value="force">{labels.force}</option></select></label>
-        <label><span>{labels.ocrLang}</span><select data-ocr-lang><option value="eng">{labels.english}</option><option value="chi_tra">{labels.traditionalChinese}</option><option value="eng+chi_tra">English + Traditional Chinese</option><option value="chi_tra+eng">Traditional Chinese + English</option></select></label>
+        <label><span>{labels.ocrLang}</span><select data-ocr-lang><option value="eng">{labels.english}</option><option value="chi_tra">{labels.traditionalChinese}</option><option value="eng+chi_tra">{labels.englishTraditionalChinese}</option><option value="chi_tra+eng">{labels.traditionalChineseEnglish}</option></select></label>
         <label class="check-control"><input data-include-images type="checkbox" checked /> <span>{labels.includeImages}</span></label>
       </div>
     </>
@@ -46,7 +52,7 @@ const isPdf = slug === 'pdf-compressor';
       <div class="form-grid three-col">
         <label><span>{labels.pages}</span><input data-pages type="text" placeholder={labels.pagesPlaceholder} inputmode="numeric" /></label>
         <label><span>{labels.ocrMode}</span><select data-ocr-mode><option value="auto">{labels.auto}</option><option value="off">{labels.off}</option><option value="force">{labels.force}</option></select></label>
-        <label><span>{labels.ocrLang}</span><select data-ocr-lang><option value="eng">{labels.english}</option><option value="chi_tra">{labels.traditionalChinese}</option><option value="eng+chi_tra">English + Traditional Chinese</option><option value="chi_tra+eng">Traditional Chinese + English</option></select></label>
+        <label><span>{labels.ocrLang}</span><select data-ocr-lang><option value="eng">{labels.english}</option><option value="chi_tra">{labels.traditionalChinese}</option><option value="eng+chi_tra">{labels.englishTraditionalChinese}</option><option value="chi_tra+eng">{labels.traditionalChineseEnglish}</option></select></label>
       </div>
       <div class="table-editor" data-editor hidden></div>
     </>
@@ -89,7 +95,7 @@ const isPdf = slug === 'pdf-compressor';
     {isTable && <button class="btn go" type="button" data-action="export" disabled>{labels.export}</button>}
     <button class="btn" type="button" data-action="cancel" hidden>{labels.cancel}</button>
     <button class="btn" type="button" data-action="download" disabled>{isBulk ? labels.download : isWord ? labels.download : isDxf ? labels.download : isPdf ? labels.download : labels.export}</button>
-    <button class="btn ghost" type="button" data-action="clear">{isBulk ? labels.clear : 'Clear'}</button>
+    <button class="btn ghost" type="button" data-action="clear">{labels.clear}</button>
   </div>
 </section>
 
@@ -101,6 +107,9 @@ const isPdf = slug === 'pdf-compressor';
   .check-control input { width: 18px; height: 18px; }
   .file-list { display: grid; gap: 6px; margin: 0; padding-left: 20px; }
   .file-list li { overflow-wrap: anywhere; }
+  .file-list li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-left: 4px; }
+  .file-list li span { min-width: 0; overflow-wrap: anywhere; }
+  .file-list li button { flex: 0 0 auto; min-height: 36px; }
   [data-drop-zone] { border: 1px dashed var(--line); border-radius: 8px; padding: 10px; }
   [data-drop-zone].is-dragging { border-color: var(--accent); background: var(--soft); }
   .calibration-preview { min-height: 180px; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); }
@@ -122,7 +131,7 @@ const isPdf = slug === 'pdf-compressor';
 <script>
   // @ts-nocheck -- the component owns these data attributes and controls.
   import {
-    compressImages,
+    compressImagesWithStats,
     compressPdf,
     downloadBlob,
     exportEditedTables,
@@ -167,7 +176,28 @@ const isPdf = slug === 'pdf-compressor';
     };
     const size = (bytes) => bytes >= 1048576 ? `${(bytes / 1048576).toFixed(2)} MB` : `${(bytes / 1024).toFixed(1)} KB`;
     const pages = () => parsePageSelection(root.querySelector('[data-pages]')?.value || '');
-    const clearOutput = () => { outputBlob = null; if (downloadButton) downloadButton.disabled = true; };
+    const clearBulkStats = () => {
+      const panel = root.querySelector('[data-bulk-stats]');
+      if (panel) panel.hidden = true;
+      root.querySelectorAll('[data-bulk-original], [data-bulk-output], [data-bulk-saved], [data-bulk-saved-percent]').forEach((node) => { node.textContent = '—'; });
+    };
+    const clearOutput = () => { outputBlob = null; clearBulkStats(); if (downloadButton) downloadButton.disabled = true; };
+    const renderBulkStats = (stats) => {
+      const panel = root.querySelector('[data-bulk-stats]');
+      if (!panel || !stats) { clearBulkStats(); return; }
+      const delta = stats.input_bytes - stats.output_bytes;
+      const magnitude = Math.abs(delta);
+      const percent = stats.input_bytes > 0 ? (magnitude / stats.input_bytes) * 100 : 0;
+      root.querySelector('[data-bulk-original]').textContent = size(stats.input_bytes);
+      root.querySelector('[data-bulk-output]').textContent = size(stats.output_bytes);
+      root.querySelector('[data-bulk-saved]').textContent = delta < 0
+        ? labels.increased.replace('{amount}', size(magnitude))
+        : size(magnitude);
+      root.querySelector('[data-bulk-saved-percent]').textContent = delta < 0
+        ? labels.increasedPercent.replace('{percent}', percent.toFixed(1))
+        : `${percent.toFixed(1)}%`;
+      panel.hidden = false;
+    };
     const clear = () => {
       runSerial += 1; controller?.abort(); controller = null; selectedFiles = []; tables = []; calibrationPoints = []; calibrationImage = null; clearOutput(); setError(''); setStatus(labels.waiting);
       if (fileInput) fileInput.value = ''; if (filesInput) filesInput.value = '';
@@ -202,16 +232,26 @@ const isPdf = slug === 'pdf-compressor';
 
     const setSelectedFiles = (files) => {
       runSerial += 1; controller?.abort(); controller = null; clearOutput();
-      const imageFiles = files.filter((file) => file.type.startsWith('image/')).slice(0, 100);
-      selectedFiles = imageFiles;
-      setError(imageFiles.length === files.length ? '' : labels.invalidFiles);
+      const allFiles = Array.from(files);
+      const imageFiles = allFiles.filter((file) => file.type.startsWith('image/'));
+      const messages = [];
+      if (allFiles.length > 100) messages.push(labels.tooMany.replace('{count}', String(allFiles.length)));
+      if (imageFiles.length !== allFiles.length) messages.push(labels.invalidFiles);
+      selectedFiles = imageFiles.slice(0, 100);
+      setError(messages.join(' '));
       renderFileList();
     };
 
     function renderFileList() {
       const list = root.querySelector('[data-file-list]'); if (!list) return;
       list.replaceChildren();
-      selectedFiles.forEach((file) => { const item = document.createElement('li'); item.textContent = `${file.name} (${size(file.size)})`; list.append(item); });
+      selectedFiles.forEach((file) => {
+        const item = document.createElement('li');
+        const name = document.createElement('span'); name.textContent = `${file.name} (${size(file.size)})`;
+        const remove = document.createElement('button'); remove.className = 'btn ghost'; remove.type = 'button'; remove.textContent = labels.remove; remove.setAttribute('aria-label', `${labels.remove}: ${file.name}`);
+        remove.onclick = () => setSelectedFiles(selectedFiles.filter((candidate) => candidate !== file));
+        item.append(name, remove); list.append(item);
+      });
       root.querySelector('[data-file-summary]').textContent = selectedFiles.length ? labels.selected.replace('{count}', String(selectedFiles.length)) : labels.waiting;
       setBusy(false);
     }
@@ -246,7 +286,7 @@ const isPdf = slug === 'pdf-compressor';
     const dropZone = root.querySelector('[data-drop-zone]');
     dropZone?.addEventListener('dragover', (event) => { event.preventDefault(); dropZone.classList.add('is-dragging'); });
     dropZone?.addEventListener('dragleave', () => dropZone.classList.remove('is-dragging'));
-    dropZone?.addEventListener('drop', (event) => { event.preventDefault(); dropZone.classList.remove('is-dragging'); setSelectedFiles(Array.from(event.dataTransfer?.files || [])); });
+    dropZone?.addEventListener('drop', (event) => { event.preventDefault(); event.stopPropagation(); dropZone.classList.remove('is-dragging'); setSelectedFiles(Array.from(event.dataTransfer?.files || [])); });
     fileInput?.addEventListener('change', () => { runSerial += 1; controller?.abort(); controller = null; clearOutput(); setError(''); setBusy(false); });
     root.querySelector('[data-action="cancel"]')?.addEventListener('click', () => controller?.abort());
     root.querySelector('[data-action="clear"]')?.addEventListener('click', clear);
@@ -258,7 +298,7 @@ const isPdf = slug === 'pdf-compressor';
     convertButton?.addEventListener('click', async () => {
       if (mode === 'bulk-image-compressor') {
         const width = Number(root.querySelector('[data-max-width]')?.value) || undefined; const height = Number(root.querySelector('[data-max-height]')?.value) || undefined;
-        await run((signal) => compressImages(apiBase, selectedFiles, { quality: Number(root.querySelector('[data-quality]').value), maxWidth: width, maxHeight: height, outputFormat: root.querySelector('[data-format]').value, signal }), 'compressed-images.zip');
+        await run((signal) => compressImagesWithStats(apiBase, selectedFiles, { quality: Number(root.querySelector('[data-quality]').value), maxWidth: width, maxHeight: height, outputFormat: root.querySelector('[data-format]').value, signal }), 'compressed-images.zip', (result) => { outputBlob = result.blob; outputName = 'compressed-images.zip'; renderBulkStats(result.stats); setStatus(labels.ready); downloadButton.disabled = false; });
       } else if (mode === 'pdf-to-word') {
         const file = fileInput.files?.[0]; if (!file) { setError(labels.noFile); return; }
         await run((signal) => pdfToWord(apiBase, file, { ocrMode: root.querySelector('[data-ocr-mode]').value, ocrLang: root.querySelector('[data-ocr-lang]').value, includeImages: root.querySelector('[data-include-images]').checked, signal }), 'converted.docx');

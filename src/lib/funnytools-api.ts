@@ -64,17 +64,38 @@ export type TablePreviewResponse = {
   tables: PdfTable[];
 };
 
+export type BatchCompressionStats = {
+  files: number;
+  input_bytes: number;
+  output_bytes: number;
+};
+
+export type BatchCompressionResult = {
+  blob: Blob;
+  stats: BatchCompressionStats | null;
+};
+
+type BatchCompressionOptions = {
+  quality?: number;
+  maxWidth?: number;
+  maxHeight?: number;
+  outputFormat?: "auto" | "jpeg" | "png" | "webp";
+  signal?: AbortSignal;
+};
+
 export async function compressImages(
   baseUrl: string,
   files: File[],
-  options: {
-    quality?: number;
-    maxWidth?: number;
-    maxHeight?: number;
-    outputFormat?: "auto" | "jpeg" | "png" | "webp";
-    signal?: AbortSignal;
-  } = {},
+  options: BatchCompressionOptions = {},
 ): Promise<Blob> {
+  return (await compressImagesWithStats(baseUrl, files, options)).blob;
+}
+
+export async function compressImagesWithStats(
+  baseUrl: string,
+  files: File[],
+  options: BatchCompressionOptions = {},
+): Promise<BatchCompressionResult> {
   if (!files.length) throw new Error("Please choose at least one image.");
   const form = new FormData();
   for (const file of files) form.append("files", file);
@@ -83,7 +104,7 @@ export async function compressImages(
   if (options.maxHeight != null) form.append("max_height", String(options.maxHeight));
   form.append("output_format", options.outputFormat ?? "auto");
 
-  return fetchBlob(`${normalizeBaseUrl(baseUrl)}/api/images/compress-batch`, {
+  return fetchBlobWithStats(`${normalizeBaseUrl(baseUrl)}/api/images/compress-batch`, {
     method: "POST",
     body: form,
     signal: options.signal,
@@ -248,6 +269,39 @@ async function fetchBlob(url: string, init: RequestInit): Promise<Blob> {
   const res = await fetch(url, init);
   if (!res.ok) throw new Error(await readApiError(res));
   return res.blob();
+}
+
+async function fetchBlobWithStats(url: string, init: RequestInit): Promise<BatchCompressionResult> {
+  const res = await fetch(url, init);
+  if (!res.ok) throw new Error(await readApiError(res));
+  return {
+    blob: await res.blob(),
+    stats: parseBatchCompressionStats(res.headers.get("X-Funnytools-Stats")),
+  };
+}
+
+function parseBatchCompressionStats(value: string | null): BatchCompressionStats | null {
+  if (!value) return null;
+  try {
+    const parsed = JSON.parse(value) as Partial<BatchCompressionStats>;
+    const files = parsed.files;
+    const inputBytes = parsed.input_bytes;
+    const outputBytes = parsed.output_bytes;
+    if (
+      typeof files === "number" && Number.isSafeInteger(files) && files >= 0
+      && typeof inputBytes === "number" && Number.isSafeInteger(inputBytes) && inputBytes >= 0
+      && typeof outputBytes === "number" && Number.isSafeInteger(outputBytes) && outputBytes >= 0
+    ) {
+      return {
+        files,
+        input_bytes: inputBytes,
+        output_bytes: outputBytes,
+      };
+    }
+  } catch {
+    // A missing or malformed optional header must not break the binary download.
+  }
+  return null;
 }
 
 function normalizeBaseUrl(baseUrl: string): string {

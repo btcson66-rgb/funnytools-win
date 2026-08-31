@@ -4,6 +4,9 @@ import { join } from 'node:path';
 import { inflateRawSync } from 'node:zlib';
 
 const base = (process.env.FUNNYTOOLS_SMOKE_BASE || 'http://127.0.0.1:8000').replace(/\/+$/, '');
+const productionSmoke = process.env.FUNNYTOOLS_SMOKE_PROFILE === 'production';
+const retryAttempts = productionSmoke ? Math.max(1, Number(process.env.FUNNYTOOLS_SMOKE_RETRIES || 3)) : 1;
+const retryDelayMs = Math.max(0, Number(process.env.FUNNYTOOLS_SMOKE_RETRY_DELAY_MS || 15000));
 const fixtureDir = join(process.cwd(), 'tests', 'fixtures');
 const imageA = await readFile(join(fixtureDir, 'sample-a.jpg'));
 const imageB = await readFile(join(fixtureDir, 'sample-b.jpg'));
@@ -13,8 +16,32 @@ function formFile(bytes, name, type) {
   return new File([bytes], name, { type });
 }
 
+function isRetryableStatus(status) {
+  return status === 408 || status === 425 || status === 429 || status >= 500;
+}
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function request(url, init) {
+  let lastError;
+  for (let attempt = 1; attempt <= retryAttempts; attempt += 1) {
+    try {
+      const response = await fetch(url, init);
+      if (!productionSmoke || !isRetryableStatus(response.status) || attempt === retryAttempts) return response;
+      lastError = new Error(`temporary HTTP ${response.status}`);
+    } catch (error) {
+      if (!productionSmoke || attempt === retryAttempts) throw error;
+      lastError = error;
+    }
+    await wait(retryDelayMs);
+  }
+  throw lastError;
+}
+
 async function post(path, form) {
-  const response = await fetch(`${base}${path}`, { method: 'POST', body: form, headers: { Origin: 'https://funnytools.win' } });
+  const response = await request(`${base}${path}`, { method: 'POST', body: form, headers: { Origin: 'https://funnytools.win' } });
   const body = Buffer.from(await response.arrayBuffer());
   assert.equal(response.status, 200, `${path} -> ${response.status}: ${body.toString('utf8').slice(0, 500)}`);
   assert.ok(body.length > 0, `${path} returned an empty body`);
@@ -22,7 +49,7 @@ async function post(path, form) {
 }
 
 async function postJson(path, payload) {
-  const response = await fetch(`${base}${path}`, {
+  const response = await request(`${base}${path}`, {
     method: 'POST',
     body: JSON.stringify(payload),
     headers: { Origin: 'https://funnytools.win', 'Content-Type': 'application/json' },
@@ -77,12 +104,12 @@ function assertJpeg(bytes, label) {
   assert.equal(bytes.at(-1), 0xd9, `${label} is not JPEG data`);
 }
 
-const health = await fetch(`${base}/health`, { headers: { Origin: 'https://funnytools.win' } });
+const health = await request(`${base}/health`, { headers: { Origin: 'https://funnytools.win' } });
 assert.equal(health.status, 200);
 assert.equal((await health.json()).ok, true);
 assert.equal(health.headers.get('access-control-allow-origin'), 'https://funnytools.win');
 
-const options = await fetch(`${base}/api/pdf/table-preview`, {
+const options = await request(`${base}/api/pdf/table-preview`, {
   method: 'OPTIONS',
   headers: {
     Origin: 'https://funnytools.win',
@@ -102,12 +129,19 @@ batchForm.set('max_width', '320');
 batchForm.set('max_height', '240');
 batchForm.set('output_format', 'jpeg');
 const batch = await post('/api/images/compress-batch', batchForm);
+const batchStats = JSON.parse(batch.response.headers.get('x-funnytools-stats') || 'null');
+assert.ok(batchStats, 'batch response must include X-Funnytools-Stats');
+assert.deepEqual(Object.keys(batchStats).sort(), ['files', 'input_bytes', 'output_bytes']);
+assert.equal(batchStats.files, 2);
+assert.ok(batchStats.input_bytes > 0);
+assert.ok(batchStats.output_bytes > 0);
+assert.match(batch.response.headers.get('access-control-expose-headers') || '', /X-Funnytools-Stats/);
 const batchEntries = zipEntries(batch.body);
 assertJpeg(batchEntries.get('sample-a.jpg'), 'sample-a.jpg');
 assertJpeg(batchEntries.get('sample-b.jpg'), 'sample-b.jpg');
 assert.match(batchEntries.get('compression-manifest.csv').toString('utf8'), /output_bytes/);
 
-for (const includeImages of ['false', 'true']) {
+for (const includeImages of (productionSmoke ? ['false'] : ['false', 'true'])) {
   const wordForm = new FormData();
   wordForm.append('file', formFile(pdf, 'sample-table.pdf', 'application/pdf'));
   wordForm.set('ocr_mode', 'off');
@@ -154,7 +188,7 @@ const dxf = await post('/api/image/to-dxf', dxfForm);
 assert.match(dxf.body.toString('utf8'), /SECTION/);
 assert.match(dxf.response.headers.get('content-disposition') || '', /vectorized\.dxf/);
 
-for (const preset of ['lossless', 'balanced', 'strong']) {
+for (const preset of (productionSmoke ? ['balanced'] : ['lossless', 'balanced', 'strong'])) {
   const compressForm = new FormData();
   compressForm.append('file', formFile(pdf, 'sample-table.pdf', 'application/pdf'));
   compressForm.set('preset', preset);
@@ -168,12 +202,13 @@ for (const preset of ['lossless', 'balanced', 'strong']) {
 const invalidPages = new FormData();
 invalidPages.append('file', formFile(pdf, 'sample-table.pdf', 'application/pdf'));
 invalidPages.set('pages', '1,,3');
-const invalid = await fetch(`${base}/api/pdf/table-preview`, { method: 'POST', body: invalidPages });
+const invalid = await request(`${base}/api/pdf/table-preview`, { method: 'POST', body: invalidPages });
 assert.equal(invalid.status, 400);
 assert.match((await invalid.json()).detail, /comma-separated positive/);
 
 console.log(JSON.stringify({
   base,
+  profile: productionSmoke ? 'production-lightweight' : 'full',
   health: 'PASS',
   cors_options: 'PASS',
   batch_images_zip_and_images: 'PASS',

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import {
+  compressImagesWithStats,
   PageSelectionError,
   parsePageSelection,
 } from '../src/lib/funnytools-api.ts';
@@ -28,5 +29,30 @@ test('conversion widget uses browser mode data and localized API error handling'
   assert.match(source, /if \(mode !== 'image-to-dxf'\) return/);
   assert.match(source, /parsePageSelection\(root\.querySelector\('\[data-pages\]'\)/);
   assert.match(source, /data-drop-zone/);
+  assert.match(source, /compressImagesWithStats/);
+  assert.match(source, /data-bulk-saved-percent/);
+  assert.match(source, /textContent = labels\.remove/);
+  assert.doesNotMatch(source, /innerHTML/);
+  assert.doesNotMatch(source, /: 'Clear'/);
   assert.doesNotMatch(source, /if \(!isDxf\) return/);
+});
+
+test('batch compression stats preserve the Blob API and tolerate missing metadata', async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    globalThis.fetch = async () => new Response(new Uint8Array([1, 2, 3]), {
+      status: 200,
+      headers: { 'X-Funnytools-Stats': '{"files":2,"input_bytes":100,"output_bytes":40}' },
+    });
+    const result = await compressImagesWithStats('https://api.example.test', [new File(['x'], 'one.jpg', { type: 'image/jpeg' })]);
+    assert.equal(result.blob.size, 3);
+    assert.deepEqual(result.stats, { files: 2, input_bytes: 100, output_bytes: 40 });
+
+    globalThis.fetch = async () => new Response(new Uint8Array([4]), { status: 200 });
+    const withoutHeader = await compressImagesWithStats('https://api.example.test', [new File(['x'], 'one.jpg', { type: 'image/jpeg' })]);
+    assert.equal(withoutHeader.blob.size, 1);
+    assert.equal(withoutHeader.stats, null);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });

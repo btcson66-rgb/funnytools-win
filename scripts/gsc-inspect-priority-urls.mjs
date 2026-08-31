@@ -29,7 +29,18 @@ const report = {
   inspected: [],
   skipped,
   errors: [],
+  manualActions: [],
 };
+
+function permissionGuidance(status, property, url) {
+  if (status === 401) {
+    return `Manual action: verify the Google OAuth refresh token or service-account credential in the GitHub Actions secrets, then rerun inspection for ${url}.`;
+  }
+  if (status === 403) {
+    return `Manual action: verify that the credential has Owner or Full user access to the Search Console property ${property || '(unresolved)'} and that ${url} belongs to that property.`;
+  }
+  return '';
+}
 
 try {
   const token = await googleAccessToken();
@@ -52,7 +63,10 @@ try {
       const data = await response.json().catch(() => ({}));
       const result = data.inspectionResult?.indexStatusResult ?? {};
       if (!response.ok) {
-        report.errors.push({ url, status: response.status, message: data.error?.message ?? 'URL Inspection request failed' });
+        const message = data.error?.message ?? 'URL Inspection request failed';
+        const guidance = permissionGuidance(response.status, report.gscSiteUrl, url);
+        if (guidance) report.manualActions.push(guidance);
+        report.errors.push({ url, status: response.status, property: report.gscSiteUrl, message: `${message} (property=${report.gscSiteUrl ?? '(unresolved)'})${guidance ? ` ${guidance}` : ''}` });
         continue;
       }
       report.inspected.push({
@@ -79,7 +93,10 @@ try {
     ? `${error.message} Missing: ${missingGscCredentialVars().join(', ')}. Set these as GitHub Actions repo secrets (see Company Vault/10_Web_Department/2026-07-25-gsc-secrets-handoff.md).`
     : error.message;
   report.errors.push({ url: '*', message });
+  if (isMissingCredentials) report.manualActions.push('Manual action: set the named GSC GitHub Actions secrets and ensure the Google identity has Owner or Full access to sc-domain:funnytools.win.');
 }
+
+report.manualActions = [...new Set(report.manualActions)];
 
 const md = [
   '# Weekly Indexing Report',
@@ -111,6 +128,10 @@ const md = [
   '## Errors',
   '',
   report.errors.length ? report.errors.map((item) => `- ${item.url} - ${item.status ?? ''} ${item.message}`).join('\n') : '- None',
+  '',
+  '## Manual actions',
+  '',
+  report.manualActions.length ? report.manualActions.map((item) => `- ${item}`).join('\n') : '- None',
   '',
   '## Skipped URLs',
   '',

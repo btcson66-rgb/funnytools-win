@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy-and-submit:
+  build_deploy:
     if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
     environment:
@@ -35,7 +35,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -60,6 +60,24 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+  submit-indexing:
+    name: Submit indexing signals
+    if: github.event_name != 'schedule' && needs.build_deploy.result == 'success'
+    needs: build_deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Submit IndexNow URLs
         run: node scripts/submit-indexnow.mjs
         env:
@@ -75,9 +93,6 @@ jobs:
         if: always()
         run: node scripts/gsc-submit-sitemaps.mjs
         env:
-          # Preferred: the backup account is siteOwner on all three properties. The service
-          # account below only ever reached worthcalc — Search Console will not accept it as a
-          # user on the other two — so on its own this step fails for funnytools.
           FABLE_OPS_OAUTH_CLIENT_JSON: ${{ secrets.FABLE_OPS_OAUTH_CLIENT_JSON }}
           FABLE_OPS_REFRESH_TOKEN: ${{ secrets.FABLE_OPS_REFRESH_TOKEN }}
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
@@ -105,7 +120,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm ci
 
       - name: Build
         run: npm run build

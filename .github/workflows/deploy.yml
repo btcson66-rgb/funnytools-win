@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  build-and-verify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,7 +32,16 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
 
       - name: Build
         run: npm run build
@@ -41,6 +50,9 @@ jobs:
         run: node scripts/generate-sitemaps.mjs
         env:
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+
+      - name: Validate sitemap URLs
+        run: node scripts/validate-indexable-urls.mjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -51,7 +63,7 @@ jobs:
           path: dist
 
   deploy:
-    needs: build
+    needs: build-and-verify
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -60,3 +72,37 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+
+  production-smoke:
+    name: Post-deploy production API smoke
+    needs: deploy
+    if: needs.deploy.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run lightweight production smoke
+        env:
+          FUNNYTOOLS_SMOKE_BASE: https://api.funnytools.win
+          FUNNYTOOLS_SMOKE_PROFILE: production
+          FUNNYTOOLS_SMOKE_RETRIES: 3
+          FUNNYTOOLS_SMOKE_RETRY_DELAY_MS: 15000
+        run: |
+          set -o pipefail
+          if npm run test:api; then
+            echo "DEPLOY SUCCESS"
+            echo "PRODUCTION SMOKE PASS"
+          else
+            echo "::error::PRODUCTION SMOKE FAIL (DEPLOY SUCCESS)"
+            exit 1
+          fi
