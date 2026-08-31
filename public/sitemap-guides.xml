@@ -247,8 +247,16 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-timer-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/confidence-interval-95-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/cvc-word-families-guide/</loc>
     <lastmod>2026-07-18</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/effect-size-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/fair-student-grouping-guide/</loc>
@@ -277,6 +285,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-compression-email-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/independent-vs-paired-t-test/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/merge-pdf-private-guide/</loc>
     <lastmod>2026-08-01</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/merge-pdf-private-guide/" />
@@ -289,6 +301,10 @@
     <lastmod>2026-07-18</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/multiplication-fact-fluency-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/fluidez-tablas-multiplicar/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/p-value-interpretation/</loc>
+    <lastmod>2026-08-01</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/password-strength-basics-guide/</loc>
@@ -335,6 +351,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/spss-levene-test-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/prueba-levene-spss/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/spss-levene-test-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/standard-deviation-vs-standard-error/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/statistical-test-selection/</loc>
+    <lastmod>2026-08-01</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/t-score-calculator-guide/</loc>
