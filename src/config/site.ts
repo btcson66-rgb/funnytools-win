@@ -30,7 +30,7 @@ export const SITE = {
   adsenseEnabled: true,
   features: {
     adsense: false,
-    affiliate: false,
+    affiliate: true,
     sponsor: false,
     relatedResources: false,
     newsletter: true,

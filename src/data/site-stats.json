@@ -2,7 +2,7 @@
   "generated": "2026-08-31",
   "sites": {
     "funnytools.win": {
-      "pageviews": 15040,
+      "pageviews": 15051,
       "users": 5771,
       "asOf": "2026-08-31",
       "composition": {
@@ -14,7 +14,7 @@
           "note": "舊資源最後實測值；資源隨 btcson66 鎖死無法再查。2026-08-06~08-15 未計入，故本站累積為低估。"
         },
         "current": {
-          "pageviews": 7298,
+          "pageviews": 7309,
           "users": 2919,
           "property": "550070457"
         },

@@ -171,6 +171,9 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
                 sendAnalyticsEvent('tool_completed');
                 sendCustomToolEvent('tool_use_completed');
                 sendCustomToolEvent('tool_use_success');
+                analyticsWindow.dispatchEvent(new CustomEvent('freetools:tool-success', {
+                  detail: { toolSlug, toolCategory, toolLanguage },
+                }));
               }
             }
           });

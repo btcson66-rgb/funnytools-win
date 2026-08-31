@@ -2,7 +2,7 @@
 import AdSlot from '../components/AdSlot.astro';
 import CategoryIcon from '../components/CategoryIcon.astro';
 import ContentValueReview from '../components/ContentValueReview.astro';
-import AffiliateBlock from '../components/AffiliateBlock.astro';
+import AffiliateProductShelf from '../components/AffiliateProductShelf.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import EmbedCode from '../components/EmbedCode.astro';
 import Faq from '../components/Faq.astro';
@@ -100,6 +100,8 @@ const downloadGateConfig = SITE.features.downloadGate
       <h2 id="tool-interaction-title">{ui.sections.toolArea}</h2>
       <slot />
     </section>
+
+    <AffiliateProductShelf lang={lang} category={category.id} toolSlug={tool.slug} />
 
     <ShareButtons lang={lang} url={currentUrl} title={content.name} />
 
@@ -289,7 +291,6 @@ const downloadGateConfig = SITE.features.downloadGate
     {tool.embedPotential !== 'low' && <EmbedCode lang={lang} tool={tool} />}
     <NewsletterSignup lang={lang} />
     <RelatedResources lang={lang} />
-    <AffiliateBlock lang={lang} toolSlug={tool.slug} />
     <AdSlot />
   </article>
 
@@ -330,27 +331,56 @@ const downloadGateConfig = SITE.features.downloadGate
     const successRecommendations = document.querySelector('[data-related-after-success]');
     if (interactionRoot instanceof HTMLElement && successRecommendations instanceof HTMLElement) {
       let shown = false;
+      let successEventSent = false;
+      let interactionStarted = false;
       const revealRecommendations = () => {
         if (shown) return;
         shown = true;
         successRecommendations.hidden = false;
+        if (!successEventSent) {
+          successEventSent = true;
+          document.dispatchEvent(new CustomEvent('freetools:tool-success', {
+            detail: {
+              toolSlug: document.querySelector('[data-tool-slug]')?.getAttribute('data-tool-slug') || '',
+            },
+          }));
+        }
         observer.disconnect();
       };
 
       document.addEventListener('freetools:tool-success', revealRecommendations);
 
+      interactionRoot.addEventListener('input', (event) => {
+        if (event.target instanceof HTMLInputElement || event.target instanceof HTMLSelectElement || event.target instanceof HTMLTextAreaElement) {
+          interactionStarted = true;
+        }
+      });
+      interactionRoot.addEventListener('change', (event) => {
+        if (event.target instanceof HTMLInputElement || event.target instanceof HTMLSelectElement || event.target instanceof HTMLTextAreaElement) {
+          interactionStarted = true;
+        }
+      });
+      interactionRoot.addEventListener('click', (event) => {
+        const target = event.target instanceof Element ? event.target.closest('button') : null;
+        if (!(target instanceof HTMLButtonElement) || target.disabled) return;
+        if (!target.matches('[data-reset], [data-clear], [data-copy], .copy-button')) interactionStarted = true;
+      });
+
       const isVisibleResult = (element) => {
         if (!(element instanceof HTMLElement)) return false;
         if (element.hidden || element.getAttribute('aria-hidden') === 'true') return false;
+        if (element.closest('[data-error], .form-error, [role="alert"], .toast')) return false;
         if (!element.getClientRects().length) return false;
         if (!element.textContent?.trim()) return false;
         return Boolean(element.closest('[data-results], [data-result], output, .resultbox, .bigresult, [aria-live="polite"]'));
       };
 
       const observer = new MutationObserver((mutations) => {
-        if (shown) return;
+        if (shown || !interactionStarted) return;
         for (const mutation of mutations) {
           const target = mutation.target instanceof Element ? mutation.target : mutation.target.parentElement;
+          const activeError = interactionRoot.querySelector('[data-error]:not([hidden]), .form-error:not([hidden]), [role="alert"]:not([hidden])');
+          if (activeError instanceof HTMLElement && activeError.getClientRects().length && activeError.textContent?.trim()) continue;
           if (isVisibleResult(target)) {
             revealRecommendations();
             break;

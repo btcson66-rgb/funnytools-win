@@ -25,6 +25,10 @@ reports/indexnow-submission-report.json
 reports/sitemap-generation-report.json
 reports/seo-indexing-state.json
 reports/weekly-indexing-report.md
+reports/affiliate-shelf-mobile-viewport.png
+reports/affiliate-support-page-test.png
+reports/affiliate-tool-mobile-test-after.png
+reports/affiliate-tool-mobile-test.png
 data/traffic/
 logs/traffic-report/
 backup/

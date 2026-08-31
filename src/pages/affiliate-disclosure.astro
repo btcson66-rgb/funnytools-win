@@ -1,0 +1,74 @@
+---
+import Breadcrumb from '../components/Breadcrumb.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { localePath } from '../lib/url';
+import { breadcrumbJsonLd, webPageJsonLd } from '../lib/seo';
+
+const title = '分潤連結透明說明';
+const description = 'FunnyTools 說明分潤連結、商品資料來源、價格與平台追蹤方式，以及使用者可以如何選擇；頁面也說明本站不保證價格、庫存、評價或商品供應狀態。';
+const path = '/affiliate-disclosure/';
+const jsonLd = [
+  webPageJsonLd('zh', title, description, path),
+  breadcrumbJsonLd([
+    { name: '首頁', href: localePath('zh') },
+    { name: title, href: path },
+  ]),
+];
+---
+
+<BaseLayout
+  lang="zh"
+  title={title}
+  description={description}
+  canonicalPath={path}
+  hasAlternates={false}
+  robots="index, follow"
+  jsonLd={jsonLd}
+>
+  <article class="wrap disclosure-page">
+    <Breadcrumb items={[{ label: '首頁', href: localePath('zh') }, { label: title }]} />
+    <header class="disclosure-hero">
+      <p class="eyebrow">透明說明</p>
+      <h1>{title}</h1>
+      <p class="lead">FunnyTools 的工具與教學內容以免費使用為主；分潤連結只是可選的支持方式，不會改變工具的計算、處理或結果。</p>
+    </header>
+
+    <section class="content-section">
+      <h2>什麼是分潤連結？</h2>
+      <p>部分商品連結會把訪問標記為來自 FunnyTools。如果你在平台自己的追蹤期間內完成符合條件的購買，平台可能從自己的利潤中提供少量分潤給 FunnyTools。你的購買價格不會因為使用這些連結而增加。</p>
+      <p>你不需要購買任何商品，也不需要為了支持本站改變原本的消費計畫。分享網站、回報問題或直接使用免費工具，同樣都是支持。</p>
+    </section>
+
+    <section class="content-section">
+      <h2>商品資訊如何呈現？</h2>
+      <ul class="check-list">
+        <li>商品名稱、分類、圖片與連結由維護者整理在公開商品清單中；目前不在瀏覽器端自動爬取平台頁面。</li>
+        <li>沒有提供可靠即時價格時，卡片會顯示「查看目前價格」，價格、庫存、規格與適用性請以平台商品頁為準。</li>
+        <li>商品出現不代表 FunnyTools 實測、保證、背書或宣稱它是市場最佳選擇；請依自己的需求比較。</li>
+        <li>所有分潤連結會以新分頁開啟，並標示 <code>rel="sponsored nofollow noopener"</code>。</li>
+      </ul>
+    </section>
+
+    <section class="content-section">
+      <h2>你可以如何選擇？</h2>
+      <p>先確認自己是否真的有購物需求，再到平台頁面核對商品規格、價格、運送、退換貨與最新供應狀態。如果不希望使用分潤連結，可以直接搜尋商品名稱，或只使用 FunnyTools 的免費工具與分享功能。</p>
+      <p><a class="inline-link" href={localePath('zh', 'support')}>查看支持本站的可選商品</a></p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .disclosure-page { max-width: 880px; }
+  .disclosure-hero {
+    margin-top: 20px;
+    padding: 28px 24px;
+    border: 1px solid rgba(15, 143, 140, 0.2);
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(15, 143, 140, 0.08), var(--card));
+  }
+  .disclosure-hero h1, .disclosure-hero p { margin: 0; }
+  .disclosure-hero h1 { margin-top: 5px; }
+  .disclosure-hero .lead { margin-top: 10px; }
+  .disclosure-page .content-section p { line-height: 1.8; }
+  .disclosure-page code { color: var(--brand-2); }
+</style>

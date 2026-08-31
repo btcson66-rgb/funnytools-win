@@ -1,0 +1,309 @@
+---
+import { SITE, type Locale } from '../config/site';
+import { assetPath, localePath } from '../lib/url';
+
+interface Props {
+  lang: Locale;
+  /** A direct product category such as teacher, office, or computer. */
+  category?: string;
+  /** The current tool slug, sent only as an analytics dimension. */
+  toolSlug?: string;
+  context?: 'tool_result' | 'article' | 'support_page';
+  heading?: string;
+  initialLimit?: number;
+}
+
+const {
+  lang,
+  category = '',
+  toolSlug = '',
+  context = 'tool_result',
+  heading = '❤️ 這個工具有幫上忙嗎？',
+  initialLimit = 4,
+} = Astro.props;
+
+const enabled = SITE.features.affiliate && lang === 'zh';
+const toolCategoryAliases: Record<string, string> = {
+  image: 'computer',
+  pdf: 'office',
+  text: 'office',
+  study: 'teacher',
+  statistics: 'teacher',
+  draw: 'computer',
+  time: 'office',
+  money: 'office',
+  random: 'teacher',
+};
+const matchingCategory = context === 'tool_result' ? (toolCategoryAliases[category] ?? category) : category;
+const shelfId = `affiliate-shelf-${toolSlug || context}`.replace(/[^a-z0-9_-]/gi, '-');
+---
+
+{enabled && (
+  <>
+    <section
+      id={shelfId}
+      class="content-section affiliate-shelf"
+      data-affiliate-shelf
+      data-affiliate-context={context}
+      data-affiliate-category={matchingCategory}
+      data-tool-slug={toolSlug}
+      data-affiliate-initial-limit={String(Math.max(1, Math.min(initialLimit, 4)))}
+      data-affiliate-products-src="/data/support-products.json"
+      hidden
+      aria-labelledby={`${shelfId}-heading`}
+    >
+      <div class="affiliate-shelf__intro">
+        <p class="affiliate-shelf__eyebrow">自願支持本站</p>
+        <h2 id={`${shelfId}-heading`}>{heading}</h2>
+        <p>
+          FunnyTools 希望所有工具都能持續免費。<br />
+          如果你剛好有購物需求，可以透過下面的分潤連結支持我們。你不需要多支付任何費用，我們可能會從符合條件的購買中獲得少量分潤。
+        </p>
+      </div>
+
+      <div class="affiliate-shelf__disclosure" aria-label="分潤連結說明">
+        部分連結為分潤連結。若您透過連結完成符合條件的購買，我們可能獲得分潤，您的購買價格不會因此增加。
+        <a href="/affiliate-disclosure/">完整說明</a>
+      </div>
+
+      <div
+        class="affiliate-shelf__products"
+        data-affiliate-products
+        aria-live="polite"
+        aria-label="可選的支持商品"
+        aria-busy="true"
+      ></div>
+
+      <div class="affiliate-shelf__actions">
+        <button class="btn ghost" type="button" data-affiliate-expand hidden>
+          <span aria-hidden="true">＋</span>查看更多支持商品
+        </button>
+        <button class="btn ghost" type="button" data-affiliate-refresh>
+          <span aria-hidden="true">↻</span>換一批商品
+        </button>
+        <a
+          class="affiliate-shelf__support-link"
+          href={localePath('zh', 'support')}
+          data-affiliate-support-link
+          hidden
+        >查看全部支持商品 →</a>
+      </div>
+    </section>
+    <script src={`${assetPath('support-products.js')}?v=20260831-affiliate-shelf`} defer></script>
+  </>
+)}
+
+<style>
+  .affiliate-shelf {
+    margin-top: 20px;
+    border: 1px solid rgba(15, 143, 140, 0.26);
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgba(15, 143, 140, 0.055), var(--card) 42%);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .affiliate-shelf[hidden] {
+    display: none;
+  }
+
+  .affiliate-shelf__intro h2,
+  .affiliate-shelf__intro p {
+    margin: 0;
+  }
+
+  .affiliate-shelf__intro h2 {
+    font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  }
+
+  .affiliate-shelf__intro p:not(.affiliate-shelf__eyebrow) {
+    max-width: 760px;
+    margin-top: 8px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .affiliate-shelf__eyebrow {
+    margin-bottom: 5px !important;
+    color: var(--brand-2);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+
+  .affiliate-shelf__disclosure {
+    margin-top: 14px;
+    padding: 10px 12px;
+    border-left: 3px solid var(--brand);
+    background: color-mix(in srgb, var(--soft) 68%, transparent);
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.6;
+  }
+
+  .affiliate-shelf__disclosure a {
+    margin-left: 6px;
+    color: var(--brand-2);
+    font-weight: 800;
+    text-underline-offset: 3px;
+  }
+
+  .affiliate-shelf__products {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .affiliate-shelf__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+    margin-top: 16px;
+  }
+
+  .affiliate-shelf__actions .btn {
+    min-height: 38px;
+    padding: 8px 12px;
+    font-size: 0.86rem;
+  }
+
+  .affiliate-shelf__support-link {
+    color: var(--brand-2);
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+
+  :global(.affiliate-product-card) {
+    display: flex;
+    min-width: 0;
+    min-height: 270px;
+    flex-direction: column;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: var(--card);
+  }
+
+  :global(.affiliate-product-media) {
+    display: grid;
+    width: 100%;
+    aspect-ratio: 1.35;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--soft);
+  }
+
+  :global(.affiliate-product-media img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  :global(.affiliate-product-placeholder) {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    color: var(--brand-2);
+    font-size: 1.8rem;
+  }
+
+  :global(.affiliate-product-platform) {
+    align-self: flex-start;
+    margin-top: 10px;
+    padding: 3px 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  :global(.affiliate-product-card h3) {
+    display: -webkit-box;
+    margin: 8px 0 0;
+    overflow: hidden;
+    font-size: 0.94rem;
+    line-height: 1.4;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  :global(.affiliate-product-description) {
+    display: -webkit-box;
+    margin: 6px 0 0;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  :global(.affiliate-product-price) {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  :global(.affiliate-product-card .affiliate-product-link) {
+    align-self: flex-start;
+    margin-top: auto;
+    padding-top: 10px;
+    color: var(--brand-2);
+    font-size: 0.86rem;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  :global(.affiliate-product-card .affiliate-product-link:focus-visible),
+  .affiliate-shelf__actions :is(.btn, a):focus-visible {
+    outline: 3px solid rgba(62, 99, 221, 0.3);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 820px) {
+    .affiliate-shelf__products {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .affiliate-shelf {
+      padding: 16px;
+    }
+
+    .affiliate-shelf__products {
+      display: flex;
+      margin-right: -16px;
+      padding-right: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+    }
+
+    :global(.affiliate-product-card) {
+      flex: 0 0 min(72vw, 250px);
+      scroll-snap-align: start;
+    }
+
+    .affiliate-shelf__actions {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .affiliate-shelf:not([hidden]) {
+      animation: affiliate-shelf-in 0.32s ease-out both;
+    }
+
+    @keyframes affiliate-shelf-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+</style>
