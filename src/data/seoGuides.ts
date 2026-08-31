@@ -3848,11 +3848,15 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
 // 凍結當天。內容庫本身完全保留、未刪任何 guide；解除凍結只要把常數改回
 // `new Date().toISOString().slice(0, 10)`，排到的 guide 會在下一次 release 自動補上。
 // 解除條件見 03_Incidents/2026-07-31-funnytools-gsc-collapse-june-spam-update.md。
+// Owner-approved release of Task 001 only; later staged packs remain held until their turn.
 const CONTENT_LIBRARY_FREEZE_DATE = '2026-08-01';
 const contentLibraryToday = CONTENT_LIBRARY_FREEZE_DATE;
+const releasedTaskGuideSlugs = new Set(
+  importedTaskSeoGuides.filter((guide) => guide.task === 'task-001').map((guide) => guide.slug),
+);
 
 export const seoGuides: SeoGuide[] = [...rawSeoGuides.map(localizeRawGuide), ...importedTaskSeoGuides]
-  .filter((guide) => !guide.publishAt || guide.publishAt <= contentLibraryToday)
+  .filter((guide) => !guide.publishAt || guide.publishAt <= contentLibraryToday || releasedTaskGuideSlugs.has(guide.slug))
 
 export function getSeoGuide(slug: string): SeoGuide | undefined {
   return seoGuides.find((guide) => guide.slug === slug);

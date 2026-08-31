@@ -1,7 +1,7 @@
 ---
 slug: /guides/standard-deviation-vs-standard-error/
 seo_title: "標準差 SD 與標準誤 SE 差在哪？公式、用途與 Error Bar 完整比較｜FunnyTools"
-meta_description: "SD 和 SE 差在哪？用成績與抽樣例子理解標準差、標準誤、SE = SD/√n、樣本數影響、error bar 與研究報告的正確寫法。"
+meta_description: "SD 和 SE 差在哪？用成績與抽樣例子理解標準差、標準誤、SE = SD/√n、樣本數影響、error bar 與研究報告的正確寫法，並避免把描述資料與估計精確度混在一起。"
 og_title: "SD vs SE：標準差與標準誤差在哪？"
 og_description: "SD 描述資料分散，SE 描述估計平均數的精確度。用公式、例子與圖表一次分清楚。"
 canonical: "https://funnytools.win/guides/standard-deviation-vs-standard-error/"

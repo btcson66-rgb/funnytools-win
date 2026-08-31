@@ -1,7 +1,7 @@
 ---
 slug: /guides/confidence-interval-95-guide/
 seo_title: "95% 信賴區間怎麼看？CI、p 值、包含 0 的意思完整指南｜FunnyTools"
-meta_description: "95% CI 怎麼看？用平均數、平均差與效果量範例理解信賴區間、包含 0、區間寬窄、與 p 值的關係，以及最常見的錯誤解讀。"
+meta_description: "95% CI 怎麼看？用平均數、平均差與效果量範例理解信賴區間、包含 0、區間寬窄、與 p 值的關係，以及最常見的錯誤解讀，並學會在研究報告中清楚說明不確定性。"
 og_title: "95% 信賴區間怎麼看？從包含 0 到估計精確度一次懂"
 og_description: "信賴區間不只是顯著性的另一種寫法，它還告訴你效果可能範圍與估計精確度。"
 canonical: "https://funnytools.win/guides/confidence-interval-95-guide/"

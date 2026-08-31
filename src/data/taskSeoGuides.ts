@@ -2,6 +2,7 @@ import { marked } from 'marked';
 import type { Locale } from '../config/site';
 
 export interface TaskSeoGuide {
+  task: string;
   id: string;
   locales: Locale[];
   slug: string;
@@ -119,6 +120,7 @@ export const importedTaskSeoGuides: TaskSeoGuide[] = Object.entries(sources)
     const bodyWithoutH1 = stripLeadingH1(body);
     const guideLinks = idsFrom(bodyWithoutH1, 'guides').filter((id) => id !== slug);
     return {
+      task,
       id: slug,
       locales: ['zh'],
       slug,
