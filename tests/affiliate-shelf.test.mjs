@@ -11,6 +11,8 @@ const pages = readFileSync('src/i18n/pages.ts', 'utf8');
 const spanishAbout = readFileSync('src/i18n/expansion/es-trust-39.ts', 'utf8');
 const spanishTools = readFileSync('src/pages/es/herramientas/index.astro', 'utf8');
 const tools = readFileSync('src/data/tools.ts', 'utf8');
+const site = readFileSync('src/config/site.ts', 'utf8');
+const affiliateProducts = readFileSync('src/data/affiliateProducts.ts', 'utf8');
 
 test('affiliate catalog has a usable multi-platform pool without fabricated prices', () => {
   const active = catalog.filter((item) => item.status === 'active' || item.enabled === true);
@@ -64,13 +66,22 @@ test('article monetization is explicit, conservative, and context-aware', () => 
   assert.match(guidePage, /context="article"/);
   assert.match(guidePage, /initialLimit=\{3\}/);
   assert.match(guidePage, /splitGuideContentHtml/);
+  const mergeGuideHtml = readFileSync('dist/guides/merge-pdf-private-guide/index.html', 'utf8');
+  const statisticsGuideHtml = readFileSync('dist/guides/t-score-calculator-guide/index.html', 'utf8');
+  assert.equal((mergeGuideHtml.match(/data-affiliate-context="article"/g) || []).length, 1);
+  assert.equal((statisticsGuideHtml.match(/data-affiliate-context="article"/g) || []).length, 0);
 });
 
 test('public disclosures describe Taiwan affiliate sources and centralized tool count', () => {
-  assert.match(pages, /蝦皮或酷澎等平台的選擇性分潤連結/);
-  assert.match(pages, /Shopee or Coupang affiliate links/);
+  assert.match(pages, /ACTIVE_AFFILIATE_PLATFORM_NAMES/);
+  assert.match(pages, /計算、資料處理、輸出內容及服務可用性/);
+  assert.match(pages, /calculation, processing, output, and availability/);
   assert.doesNotMatch(pages, /Amazon Associates/);
-  assert.match(tools, /export const liveToolCount = liveTools\.length/);
+  assert.match(tools, /export const TOOL_COUNT = liveTools\.length/);
+  assert.match(tools, /export const liveToolCount = TOOL_COUNT/);
+  assert.match(site, /export const SITE_VERSION = pkg\.version/);
+  assert.match(affiliateProducts, /ACTIVE_AFFILIATE_PLATFORMS = \['shopee', 'coupang'\]/);
+  assert.match(affiliateProducts, /Shopee and Coupang/);
   assert.doesNotMatch(spanishAbout, /79 herramientas/);
   assert.doesNotMatch(spanishTools, /79 herramientas/);
   const legacyAmazon = catalog.find((item) => item.id === 'amazon-home-funnytools');

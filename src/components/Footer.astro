@@ -1,8 +1,7 @@
 ---
-import { SITE, type Locale } from '../config/site';
+import { SITE, SITE_VERSION, type Locale } from '../config/site';
 import { t } from '../i18n/ui';
 import { localePath } from '../lib/url';
-import pkg from '../../package.json';
 import siteStats from '../data/site-stats.json';
 
 interface Props { lang: Locale; }
@@ -10,7 +9,7 @@ interface Props { lang: Locale; }
 const { lang } = Astro.props;
 const ui = t(lang);
 const year = new Date().getFullYear();
-const version = pkg.version;
+const version = SITE_VERSION;
 const footerBrand = lang === 'zh' ? `${SITE.name.zh} by FunnyTools.win` : SITE.name.en;
 
 // 累積數據為 GA4 真實快照（release 時由 scripts/site-stats.mjs 刷新）；

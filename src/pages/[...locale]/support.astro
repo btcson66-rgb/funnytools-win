@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE } from '../../config/site';
 import { absoluteUrl, assetPath, localePath, localeUrlPair } from '../../lib/url';
 import { breadcrumbJsonLd, webPageJsonLd } from '../../lib/seo';
+import { ACTIVE_AFFILIATE_PLATFORM_NAMES } from '../../data/affiliateProducts';
 
 export function getStaticPaths() {
   return [{ params: { locale: 'en' }, props: { lang: 'en' } }];
@@ -115,7 +116,7 @@ const jsonLd = [
           <p>When you already plan to shop, using an affiliate link may support ongoing maintenance without changing your price.</p>
           <div class="support-card-actions">
             <a class="inline-link" href="#resources" data-support-source="view_resources">View recommended resources</a>
-            <a class="btn support-home-link" href="#resources" data-support-source="view_resources">View Shopee and Coupang resources</a>
+            <a class="btn support-home-link" href="#resources" data-support-source="view_resources">View {ACTIVE_AFFILIATE_PLATFORM_NAMES.en} resources</a>
           </div>
         </article>
       </div>
@@ -135,13 +136,13 @@ const jsonLd = [
       <aside class="affiliate-disclosure" aria-label="Affiliate link disclosure">
         <strong>Affiliate disclosure</strong>
         <p>
-          Some recommended resource links may be affiliate links. FunnyTools may receive a commission
+          Some recommended resource links from {ACTIVE_AFFILIATE_PLATFORM_NAMES.en} or other listed platforms may be affiliate links. FunnyTools may receive a commission
           if you purchase after clicking, with no extra cost added by FunnyTools. Recommendations are
           kept separate from tool results and do not affect how the tools work.
         </p>
       </aside>
 
-      <p class="resource-note">This section may show optional Shopee or Coupang resources curated for the Taiwan Chinese site; use them only when they fit what you already need.</p>
+        <p class="resource-note">This section may show optional {ACTIVE_AFFILIATE_PLATFORM_NAMES.en} resources curated for the Taiwan Chinese site; use them only when they fit what you already need.</p>
       <p class="resource-status" data-resource-status role="status" aria-live="polite">Loading recommended resources...</p>
       <div
         class="support-product-grid"
@@ -160,7 +161,7 @@ const jsonLd = [
 
     <section class="content-section support-reminder" aria-labelledby="how-affiliate-works-heading">
       <h2 id="how-affiliate-works-heading">How the resource links on this page work</h2>
-      <p>When you click a link in the "Recommended resources" section, Shopee, Coupang, or another listed platform records that visit as coming from FunnyTools. If you complete a purchase within that platform's own tracking window, the platform may pay FunnyTools a small share of its own margin. The price you pay is set by the platform — it does not increase because you clicked through from here, and it would not be any cheaper if you searched for the same product directly instead. The only difference is whether the platform credits FunnyTools with a commission.</p>
+      <p>When you click a link in the "Recommended resources" section, {ACTIVE_AFFILIATE_PLATFORM_NAMES.en} or another listed platform records that visit as coming from FunnyTools. If you complete a purchase within that platform's own tracking window, the platform may pay FunnyTools a small share of its own margin. The price you pay is set by the platform — it does not increase because you clicked through from here, and it would not be any cheaper if you searched for the same product directly instead. The only difference is whether the platform credits FunnyTools with a commission.</p>
       <p>If you don't use these links, or a purchase happens outside the platform's tracking window, no commission is generated, and that's fine. Sharing the site with someone who needs it, or reporting a bug that wasn't obvious, supports FunnyTools just as much — sometimes more, since a useful bug report is harder to come by than a click.</p>
       <p>The "Refresh" button behind the resource grid draws from a fixed local list of items and shows a random subset each time you click it. It does not use your browsing history, and it is not ordered by which item pays the highest commission; the underlying list is curated and updated by hand, not pulled live from any platform.</p>
       <p>To be clear about the limits of this disclosure: FunnyTools has no way to confirm that any individual sale was actually credited, and does not publish monthly commission totals, because those numbers live on the platform's side — all FunnyTools can see is whether its own referral links were clicked. If you would rather avoid any affiliate relationship entirely, the simplest option is to share the site using "Copy site link," or search for a product directly on the platform you prefer instead of going through the links here.</p>
@@ -175,7 +176,7 @@ const jsonLd = [
 
     <section class="content-section support-reminder" aria-labelledby="not-best-pick-heading">
       <h2 id="not-best-pick-heading">Is this list a "best pick" ranking?</h2>
-      <p>No. The items on this page are hand-curated by whoever maintains the site because they seemed potentially useful for everyday work or life — they are not the result of hands-on testing, spec comparisons, or a market-wide search for the "best" option, and no independent lab or reviewer is involved. The Taiwan Chinese site may draw from Shopee and Coupang, not every retailer that might carry a similar item. If price or having the newest specification matters to you, search the platform directly and compare, rather than assuming the items shown here are the top choice. This disclosure is reviewed occasionally rather than on a fixed schedule, so treat it as an accurate general description of how the section works, not a live, item-by-item account of every listing currently shown.</p>
+      <p>No. The items on this page are hand-curated by whoever maintains the site because they seemed potentially useful for everyday work or life — they are not the result of hands-on testing, spec comparisons, or a market-wide search for the "best" option, and no independent lab or reviewer is involved. The Taiwan Chinese site may draw from {ACTIVE_AFFILIATE_PLATFORM_NAMES.en}, not every retailer that might carry a similar item. If price or having the newest specification matters to you, search the platform directly and compare, rather than assuming the items shown here are the top choice. This disclosure is reviewed occasionally rather than on a fixed schedule, so treat it as an accurate general description of how the section works, not a live, item-by-item account of every listing currently shown.</p>
     </section>
   </div>
 

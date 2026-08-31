@@ -1,3 +1,5 @@
+import { ACTIVE_AFFILIATE_PLATFORM_NAMES } from '../../data/affiliateProducts';
+
 export interface SpanishInfoSection {
   heading: string;
   paragraphs: string[];
@@ -112,7 +114,7 @@ export const spanishPrivacy: SpanishInfoPage = {
     {
       heading: 'Enlaces de afiliación y separación del resultado',
       paragraphs: [
-        'El sitio chino de Taiwán puede mostrar enlaces de afiliación opcionales de Shopee o Coupang en la página de apoyo, después de completar correctamente una herramienta y, de forma selectiva, en guías relacionadas con una necesidad concreta. Si compras después de seguir uno de ellos, FunnyTools puede recibir una comisión sin coste adicional para ti; el precio lo fija la plataforma y sus propias políticas se aplican al uso posterior.',
+        `El sitio chino de Taiwán puede mostrar enlaces de afiliación opcionales de ${ACTIVE_AFFILIATE_PLATFORM_NAMES.es} en la página de apoyo, después de completar correctamente una herramienta y, de forma selectiva, en guías relacionadas con una necesidad concreta. Si compras después de seguir uno de ellos, FunnyTools puede recibir una comisión sin coste adicional para ti; el precio lo fija la plataforma y sus propias políticas se aplican al uso posterior. La actividad de afiliación es independiente del cálculo, el procesamiento, la salida y la disponibilidad de la herramienta, y nunca modifica su resultado.`,
         'Estos enlaces aparecen en una zona claramente separada y no modifican fórmulas, cálculos, descargas ni respuestas. Puedes utilizarlos, ignorarlos o buscar directamente en la plataforma que prefieras: la decisión no cambia el resultado de la herramienta. La divulgación completa se mantiene en la página de apoyo.',
       ],
     },

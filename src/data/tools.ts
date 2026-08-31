@@ -1167,7 +1167,10 @@ export const tools: ToolMeta[] = [
 ];
 
 export const liveTools = tools.filter((tool) => tool.status === 'live');
-export const liveToolCount = liveTools.length;
+/** Canonical public count shared by the homepage and trust pages. */
+export const TOOL_COUNT = liveTools.length;
+// Keep the legacy export for callers that have not migrated yet.
+export const liveToolCount = TOOL_COUNT;
 
 export function getEmbeddableTools(): ToolMeta[] {
   return liveTools.filter((tool) => tool.embedPotential !== 'low');

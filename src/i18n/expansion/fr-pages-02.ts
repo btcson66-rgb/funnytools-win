@@ -1,3 +1,5 @@
+import { ACTIVE_AFFILIATE_PLATFORM_NAMES } from '../../data/affiliateProducts';
+
 export const frenchPrivacy = {
   title: 'Politique de confidentialité de FunnyTools',
   seoTitle: 'Confidentialité et données personnelles | FunnyTools',
@@ -75,7 +77,7 @@ export const frenchPrivacy = {
     {
       heading: 'Liens affiliés et indépendance du résultat',
       paragraphs: [
-        'Le site chinois de Taïwan peut afficher des liens affiliés facultatifs vers Shopee ou Coupang sur la page de soutien, après la réussite d’un outil et, de manière sélective, dans des guides liés à un besoin précis. Si vous achetez après avoir suivi l’un de ces liens, FunnyTools peut recevoir une commission sans coût supplémentaire pour vous ; le prix et les conditions de la plateforme concernée restent applicables.',
+        `Le site chinois de Taïwan peut afficher des liens affiliés facultatifs vers ${ACTIVE_AFFILIATE_PLATFORM_NAMES.fr} sur la page de soutien, après la réussite d’un outil et, de manière sélective, dans des guides liés à un besoin précis. Si vous achetez après avoir suivi l’un de ces liens, FunnyTools peut recevoir une commission sans coût supplémentaire pour vous ; le prix et les conditions de la plateforme concernée restent applicables. L’activité d’affiliation reste séparée du calcul, du traitement, de la sortie et de la disponibilité de l’outil, et ne modifie jamais son résultat.`,
         'Ces liens sont placés dans une zone clairement séparée et ne modifient ni les formules, ni les calculs, ni les téléchargements, ni les réponses. Vous pouvez les ignorer ou chercher directement auprès du service de votre choix : le résultat de l’outil reste identique. La divulgation complète figure sur la page de soutien.',
       ],
     },
@@ -177,7 +179,7 @@ export const frenchAboutTools = {
     {
       heading: 'Financement et indépendance du résultat',
       paragraphs: [
-        'Les outils restent gratuits et les éventuels placements payants ne doivent jamais modifier un calcul ou une réponse. Le site chinois de Taïwan peut afficher, après la fin d’un outil ou dans certains guides pertinents, une zone distincte et facultative contenant des liens affiliés Shopee ou Coupang.',
+        `Les outils restent gratuits. Après la fin d’un calcul ou d’un traitement, le site chinois de Taïwan peut afficher une zone distincte et facultative contenant des liens affiliés ${ACTIVE_AFFILIATE_PLATFORM_NAMES.fr} ; elle ne participe ni au calcul, ni au traitement, ni à la sortie, ni à la disponibilité de l’outil, et l’utiliser ou l’ignorer ne change ni le résultat ni l’accès.`,
         'Utiliser ou ignorer cette zone ne change jamais le résultat. Les liens sont une possibilité de soutenir la maintenance lorsque vous aviez déjà l’intention d’acheter ; ils ne constituent ni un classement, ni une recommandation personnalisée, ni une condition d’accès à l’outil.',
       ],
     },

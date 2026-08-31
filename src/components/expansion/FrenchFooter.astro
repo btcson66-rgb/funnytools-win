@@ -1,5 +1,5 @@
 ---
-import pkg from '../../../package.json';
+import { SITE_VERSION } from '../../config/site';
 const year = new Date().getFullYear();
 ---
 
@@ -35,7 +35,7 @@ const year = new Date().getFullYear();
     </nav>
   </div>
   <div class="footer-bottom">
-    <p class="fineprint">&copy; {year} FunnyTools · v{pkg.version}</p>
+    <p class="fineprint">&copy; {year} FunnyTools · v{SITE_VERSION}</p>
     <p>Les résultats sont des aides pratiques, pas des décisions officielles ou professionnelles.</p>
   </div>
 </footer>

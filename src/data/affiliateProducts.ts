@@ -7,6 +7,15 @@
  */
 export type AffiliatePlatform = 'shopee' | 'coupang' | 'amazon' | string;
 
+/** Active Taiwan-facing affiliate platforms; inactive catalog history may use other values. */
+export const ACTIVE_AFFILIATE_PLATFORMS = ['shopee', 'coupang'] as const;
+export const ACTIVE_AFFILIATE_PLATFORM_NAMES = {
+  zh: '蝦皮與酷澎',
+  en: 'Shopee and Coupang',
+  es: 'Shopee o Coupang',
+  fr: 'Shopee ou Coupang',
+} as const;
+
 export interface AffiliateProduct {
   id: string;
   platform: AffiliatePlatform;

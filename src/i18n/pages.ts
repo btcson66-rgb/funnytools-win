@@ -1,5 +1,6 @@
 import { SITE, type Locale } from '../config/site';
-import { liveToolCount } from '../data/tools';
+import { ACTIVE_AFFILIATE_PLATFORM_NAMES } from '../data/affiliateProducts';
+import { TOOL_COUNT } from '../data/tools';
 
 const adsenseDisclosure = {
   zh: SITE.adsenseEnabled
@@ -194,7 +195,7 @@ export const pages = {
       description: '了解 FunnyTools 免費線上工具箱的網站定位、工具原則、資料處理方式與目前涵蓋的工具分類。本站工具可免費使用且不需註冊，並優先採用瀏覽器本機處理，協助你安全完成日常工作、學習與檔案任務。',
       body: [
         "FunnyTools 免費線上工具箱是由一名學生獨立開發與維護的免費工具網站，把工作、學習、金錢與日常生活常用的小工具整理在乾淨、好讀、手機友善的頁面中。做這個網站的起點很單純：在課業與日常生活中常需要把好幾張圖片合成一份 PDF、幫班級抽籤分組、算加班費、或把統計成績轉換成百分等級，但網路上同類工具很多要求先註冊、被滿版廣告卡住，或是把檔案上傳到不清楚會被怎麼處理的伺服器，所以動手做了一個免安裝、免註冊、盡量在瀏覽器本機就能完成的版本。",
-        `本站目前提供 ${liveToolCount} 種免費工具，依用途分成金錢、時間、隨機、文字、圖片、PDF、製圖與統計等分類，另外整理出學生與老師常用的工具組合（例如隨機點名、課堂分組、成績百分等級、Cronbach's α 信度計算），持續新增與維護中。`,
+        `本站目前提供 ${TOOL_COUNT} 種免費工具，依用途分成金錢、時間、隨機、文字、圖片、PDF、製圖與統計等分類，另外整理出學生與老師常用的工具組合（例如隨機點名、課堂分組、成績百分等級、Cronbach's α 信度計算），持續新增與維護中。`,
         "我們優先設計可以在瀏覽器本機執行的工具，減少不必要的資料傳輸。站內幾乎所有工具的隱私設計都標記為「本機處理」——文字、名單、數字、圖片或 PDF 內容只在你目前的瀏覽器分頁中計算，不會主動送到本站伺服器。",
         "少數情境會用到網路服務，而且會在該工具頁明確說明。例如你在部分工具選擇「把結果寄到信箱」，或訂閱電子報時，站方會透過第三方寄信服務（Brevo）收集你的 email 與所使用的工具名稱，這件事在隱私權政策與工具頁都會標示，不會偷偷發生。",
         "每個工具頁會說明用途、基本操作、常見情境、資料處理方式與已知限制，多數工具頁下方也附有一段內容審閱說明，標示這個頁面的公式、範例或步驟最近一次被檢查或更新的日期，方便你判斷內容是不是新的。",
@@ -202,7 +203,7 @@ export const pages = {
         `如果你發現工具算錯、頁面顯示異常或說明有誤，可以寄信到 ${SITE.email}，或直接到 ${githubIssuesUrl} 開一個公開 issue，附上頁面網址與你輸入的條件。我們會依問題影響的使用者範圍安排修正順序，明顯算錯的功能會優先處理，措辭與排版類問題會排在後面。`,
         "本站有一些明確不做的事：不提供法律、醫療、投資或稅務的個別化建議，不能取代學校、雇主、銀行或政府機關開立的正式文件，也不會用計算結果替你認證資格、名次或申請結果——這些事永遠要以官方資料或專業人士的意見為準。",
         `本站目前由這名學生一個人維護：更新、除錯與內容修正都是同一個人處理，你寄到 ${SITE.email} 的信、或在 GitHub 開的 issue，也是由同一個人閱讀與回覆，中間沒有客服團隊或轉單流程。正因為是個人維護，本站不是政府、學校、銀行、醫療或法律機構，也不代表任何第三方服務；除了「由一名學生獨立維護」這一點之外，目前沒有可公開揭露的姓名、學校或其他個人資訊。`,
-        "FunnyTools 不要求建立帳號，付費置入不會影響計算或輸出。工具完成任務後，頁面可能在清楚分隔的區域顯示可選的支持本站分潤連結；使用或忽略這個區域，都不會改變結果。",
+        "FunnyTools 不要求建立帳號。工具完成計算或處理後，頁面可能在清楚分隔的區域顯示可選的支持本站分潤連結；這些連結與工具的計算、資料處理、輸出內容及服務可用性完全分開，使用或忽略它們都不會改變結果或工具是否可用。",
         `${adsenseDisclosure.zh} 本站另外使用 Google Analytics（GA4）記錄匿名流量統計，協助我們了解哪些工具比較常被使用，藉此決定優先維護與新增的方向；詳細的 Cookie 與資料處理範圍請見隱私權政策。`,
         "本站工具以日常便利、學習與初步估算為目的。涉及薪資、稅務、貸款、投資、醫療、法律或其他專業判斷時，結果僅供參考，正式決策仍應查證官方資料或諮詢專業人士，完整限制請見免責聲明與使用條款。",
         `如果你有工具建議、錯誤回報、內容修正或網站合作問題，歡迎來信 ${SITE.email}，或到 GitHub Issues 開票。`,
@@ -255,7 +256,7 @@ export const pages = {
         "你的權利：由於本站預設不蒐集可識別個人身分的資料，通常沒有可供存取或刪除的個人資料；若你曾訂閱電子報或使用過檔案寄送功能，可來信要求刪除我們透過 Brevo 保存的 email 記錄。若你位於歐盟 / 英國（GDPR）或加州（CCPA / CPRA）等地區並對資料處理有疑問，可透過下方聯絡方式與我們聯繫。",
         "安全提醒：請避免在任何線上工具中輸入高度敏感的個人資料、密碼、金融帳號或機密資訊；本站的本機處理設計是為了降低風險，但無法取代你自己對輸入內容的判斷。",
         `政策更新：本站可能不定期更新本政策，重大變更會更新本頁生效日期。如有疑問請來信 ${SITE.email}。`,
-        "分潤連結：台灣中文版網站可能在支持本站頁面、工具成功完成後的清楚分隔區域，以及少數與需求直接相關的指南文章中，顯示蝦皮或酷澎等平台的選擇性分潤連結。如果你透過這些連結完成購買，本站可能會收到少量分潤，購買價格不會因此增加；這些連結不會影響工具的計算或輸出。點擊追蹤是由對方平台處理，不經過本站自己的伺服器；詳細揭露請見支持本站頁面。",
+        `分潤連結：台灣中文版網站可能在支持本站頁面、工具成功完成後的清楚分隔區域，以及少數與需求直接相關的指南文章中，顯示 ${ACTIVE_AFFILIATE_PLATFORM_NAMES.zh} 的選擇性分潤連結。如果你透過這些連結完成購買，本站可能會收到少量分潤，購買價格不會因此增加；這些連結與工具的計算、資料處理、輸出內容及服務可用性完全分開，不會影響工具結果。點擊追蹤是由對方平台處理，不經過本站自己的伺服器；詳細揭露請見支持本站頁面。`,
         "跨境資料傳輸：由於 Google（Analytics、AdSense）與 Brevo 都採用跨國基礎設施，匿名分析事件或電子報 email 等資料可能會在你所在國家以外的伺服器上被處理。各服務商各自公開其資料處理與跨境傳輸的保障措施，詳情請參考其隱私權政策。",
         "Do Not Track：多數瀏覽器提供「請勿追蹤」等隱私訊號，但目前業界對網站該如何回應這類訊號並沒有統一標準，本站目前不會依此訊號改變分析行為；你仍可透過前述的 Cookie 與廣告個人化設定來限制追蹤。",
         "伺服器與主機紀錄：本站靜態頁面透過 GitHub Pages 搭配 Cloudflare 代管，兩者都可能基於安全與穩定性保留標準的連線技術紀錄（例如請求時間與 IP 位址），這與本政策所述的分析或廣告資料是分開的兩件事。",
@@ -344,7 +345,7 @@ export const pages = {
       description: 'Learn what FunnyTools is, how its free browser tools work, how local processing protects inputs, and what practical categories the site covers.',
       body: [
         "FunnyTools is a free, no-install, no-sign-up toolbox built and maintained by a single student, fitted in around classes and everyday tasks. It started from a simple frustration: routine jobs — combining scanned pages into one PDF, splitting a group into random teams, checking a loan estimate, or converting a raw score into a percentile — kept leading to tools that wanted an account first, buried the page in ads, or asked for a file upload with no clear explanation of where it went. A page that opens in a browser tab, does the one thing you need, and closes again seemed like the more honest option.",
-        `The site currently offers ${liveToolCount} free tools, organized into categories such as Money, Time, Random, Text, Image, PDF, Drawing, and Statistics, plus a set of tools built specifically for students and teachers (grade averages, percentile rank, Cronbach's alpha reliability, and similar classroom calculations). New tools and updates are added over time.`,
+        `The site currently offers ${TOOL_COUNT} free tools, organized into categories such as Money, Time, Random, Text, Image, PDF, Drawing, and Statistics, plus a set of tools built specifically for students and teachers (grade averages, percentile rank, Cronbach's alpha reliability, and similar classroom calculations). New tools and updates are added over time.`,
         "The site is built around tools that run in your browser rather than on a server. Almost every tool on FunnyTools is designed for local-only processing: the text, numbers, lists, images, or PDF pages you work with stay inside your current browser tab and are not automatically sent anywhere.",
         "There are a few deliberate exceptions, and each one is disclosed on the tool page where it applies. If you choose to have a result emailed to you, or you subscribe to the newsletter, the site collects your email address and the tool name through a third-party delivery service (Brevo). That is described in the Privacy Policy and on the relevant tool pages — it is not a hidden behavior.",
         "Most tool pages include a short content-review note near the bottom of the page, showing when the formula, steps, or examples on that page were last checked. That date is meant to give you a quick, honest signal about how current the page is, rather than leaving you to guess.",
@@ -352,7 +353,7 @@ export const pages = {
         `If you find a tool producing a wrong result, a broken page, or a misleading description, email ${SITE.email} or open a public issue at ${githubIssuesUrl} with the page URL and the inputs you used. Fixes are prioritized by how many people a problem likely affects — a calculation that's actually wrong is treated as more urgent than a wording or layout issue.`,
         "There are things this site deliberately does not do. It does not give individualized legal, medical, investment, or tax advice. It cannot replace an official document from a school, employer, bank, or government agency, and a result from a calculator here is never a substitute for an official eligibility, ranking, or admission decision.",
         `The site is currently maintained by one person — a student — end to end: updates, bug fixes, and content corrections are all handled by the same person who reads every message sent to ${SITE.email} and every GitHub issue. There's no support team or ticket queue behind it. Because of that, FunnyTools is not a government body, school, bank, medical provider, or law firm, and it does not represent any third-party service. Beyond "an independently maintained student project," there's no name, school, or other personal detail to disclose at this time.`,
-        "No account is required to use any tool, and paid placements never affect calculations or outputs. After a tool completes its task, a clearly separated optional affiliate-support section may appear; using or ignoring it never changes the result.",
+        "No account is required to use any tool. After a tool completes a calculation or processing task, a clearly separated optional affiliate-support section may appear; it is separate from the tool's calculation, processing, output, and availability, and using or ignoring it never changes the result or whether the tool is available.",
         `${adsenseDisclosure.en} The site also uses Google Analytics (GA4) to record anonymous traffic statistics, which helps decide which tools are worth maintaining or expanding. The full scope of cookies and data handling is in the Privacy Policy.`,
         "Tool results on this site are meant for everyday convenience, learning, and preliminary estimates. For salary, tax, loan, investment, medical, legal, or other high-stakes decisions, treat the output as a starting point and verify it against official sources or a qualified professional — see the Disclaimer and Terms of Use for the specific limits by tool category.",
         `For tool suggestions, bug reports, content corrections, or other site-related questions, email ${SITE.email} or open an issue on GitHub.`,
@@ -405,7 +406,7 @@ export const pages = {
         "Your rights: Because the Site does not collect personally identifiable information by default, there is usually no personal data to access or delete. If you've subscribed to the newsletter or used the file-delivery feature, you can email us to request deletion of any email record we hold through Brevo. If you are in the EU/UK (GDPR) or California (CCPA/CPRA) and have questions about data handling, contact us using the details below.",
         "Safety reminder: Please avoid entering highly sensitive personal data, passwords, financial account numbers, or confidential information into any online tool. The Site's local-processing design is meant to reduce risk, but it cannot replace your own judgment about what you type into a form.",
         `Updates: We may update this policy from time to time and will revise the effective date above for material changes. Questions: ${SITE.email}.`,
-        "Affiliate links: The Taiwan Chinese version of this Site may show optional Shopee or Coupang affiliate links on the Support page, after a tool completes successfully, and selectively in relevant guide articles. If you choose to purchase something after clicking one of those links, the Site may receive a commission at no extra cost to you. These links never affect calculations or outputs. Affiliate click tracking is handled by the destination platform rather than by this Site's own servers; see the Support page for the current disclosure.",
+        `Affiliate links: The Taiwan Chinese version of this Site may show optional ${ACTIVE_AFFILIATE_PLATFORM_NAMES.en} affiliate links on the Support page, after a tool completes successfully, and selectively in relevant guide articles. If you choose to purchase something after clicking one of those links, the Site may receive a commission at no extra cost to you. Affiliate activity is separate from the tool's calculation, processing, output, and availability and never affects the result. Affiliate click tracking is handled by the destination platform rather than by this Site's own servers; see the Support page for the current disclosure.`,
         "International data transfer: Because Google (Analytics, AdSense) and Brevo operate global infrastructure, data such as anonymous analytics events or a newsletter email address may be processed on servers outside your own country. Each provider publishes its own data-processing and transfer safeguards; see their respective privacy policies for details relevant to your location.",
         "Do Not Track: Most browsers offer a \"Do Not Track\" or similar privacy signal. Because there isn't yet a single agreed-upon standard for how sites should respond to that signal, this Site does not currently change its analytics behavior based on it; you can still limit tracking using the cookie and ad-personalization controls described above.",
         "Server and hosting logs: Static pages on this Site are hosted through GitHub Pages behind Cloudflare, both of which may keep standard technical connection logs (such as request timestamps and IP addresses) for security and reliability purposes, separate from any analytics or advertising data described elsewhere in this policy.",

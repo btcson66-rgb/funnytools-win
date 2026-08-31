@@ -3,6 +3,7 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { absoluteUrl, assetPath, localePath, localeUrlPair } from '../lib/url';
 import { breadcrumbJsonLd, webPageJsonLd } from '../lib/seo';
+import { ACTIVE_AFFILIATE_PLATFORM_NAMES } from '../data/affiliateProducts';
 
 const title = '支持 FunnyTools 持續提供免費工具';
 const seoTitle = '支持 FunnyTools｜免費工具網站營運支持';
@@ -139,7 +140,7 @@ const jsonLd = [
       <aside class="affiliate-disclosure" aria-label="分潤連結透明說明">
         <strong>透明說明</strong>
         <p>
-          本頁部分資源連結可能包含蝦皮、酷澎或其他平台的分潤連結。你透過這些連結購買商品時，購買價格不會因此增加，但本站可能會獲得少量回饋，用來維持網站營運與開發新工具。請依照自己的需求比較與選擇，本站不會因分潤而保證商品價格、庫存或適用性。
+          本頁部分資源連結可能包含 {ACTIVE_AFFILIATE_PLATFORM_NAMES.zh} 或其他平台的分潤連結。你透過這些連結購買商品時，購買價格不會因此增加，但本站可能會獲得少量回饋，用來維持網站營運與開發新工具。請依照自己的需求比較與選擇，本站不會因分潤而保證商品價格、庫存或適用性。
           <a class="inline-link" href="/affiliate-disclosure/">查看完整分潤說明</a>
         </p>
       </aside>
@@ -159,7 +160,7 @@ const jsonLd = [
 
     <section class="content-section support-reminder" aria-labelledby="how-affiliate-works-heading">
       <h2 id="how-affiliate-works-heading">這一頁的資源連結怎麼運作</h2>
-      <p>當你點擊「查看實用資源」區的連結，會被酷澎或蝦皮等平台記錄成從 FunnyTools 而來的訪問；如果你在該平台自己設定的追蹤期間內完成購買，平台可能會從自己的利潤中撥一小部分佣金給本站。你付的價格由平台決定，不會因為你是從這裡點進去而變貴，也不會因為你直接搜尋同一個商品而變便宜——差別只在於平台會不會回饋佣金給本站。</p>
+      <p>當你點擊「查看實用資源」區的連結，會被 {ACTIVE_AFFILIATE_PLATFORM_NAMES.zh} 等平台記錄成從 FunnyTools 而來的訪問；如果你在該平台自己設定的追蹤期間內完成購買，平台可能會從自己的利潤中撥一小部分佣金給本站。你付的價格由平台決定，不會因為你是從這裡點進去而變貴，也不會因為你直接搜尋同一個商品而變便宜——差別只在於平台會不會回饋佣金給本站。</p>
       <p>如果你沒有使用這些連結，或是購買發生在平台的追蹤期間之外，就不會產生任何佣金，這完全沒關係：分享本站給需要的人、回報一個沒說清楚的錯誤、或建議一個實用的新工具，對維持本站一樣重要，有時候甚至更難得。</p>
       <p>「換一批」按鈕背後是一份固定的本機商品清單，每次點擊會從清單中隨機抽出一批顯示，不會依照你過去瀏覽過什麼、也不會依照哪一項佣金比較高來排序；清單本身是由維護者手動整理與更新，不是自動從任一平台即時抓取。</p>
       <p>需要說明的是，本站目前沒有能力驗證每一筆交易確實入帳，也不會公開單月分潤的實際金額，因為這些數字掌握在平台端，本站只看得到自己的推廣連結有沒有被點擊。如果你希望完全不涉及任何分潤，最直接的作法是透過「複製首頁連結」分享本站，或直接搜尋商品名稱到你偏好的平台購買，不必透過這裡的連結。</p>

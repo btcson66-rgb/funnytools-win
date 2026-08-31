@@ -1,5 +1,6 @@
 import type { SpanishInfoPage } from './es-pages';
-import { liveToolCount } from '../../data/tools';
+import { ACTIVE_AFFILIATE_PLATFORM_NAMES } from '../../data/affiliateProducts';
+import { TOOL_COUNT } from '../../data/tools';
 
 export const spanishAbout: SpanishInfoPage = {
   title: 'Sobre FunnyTools: quiénes somos y cómo trabajamos',
@@ -16,7 +17,7 @@ export const spanishAbout: SpanishInfoPage = {
   intro: 'FunnyTools es un proyecto independiente de herramientas gratuitas para resolver tareas concretas en el navegador. Esta página explica quién mantiene el sitio, por qué existe, cómo se decide qué publicar, qué pruebas se realizan y dónde terminan nuestras competencias. La confianza no depende de una frase promocional: debe poder contrastarse con el funcionamiento visible, las fuentes, las políticas y un canal real de corrección.',
   directAnswer: [
     'FunnyTools está mantenido por un pequeño equipo editorial y técnico bajo el nombre del propio proyecto. No pertenece a Google, a una administración, a un banco, a una universidad ni a un proveedor de software. El contacto operativo es btcson224@gmail.com y el repositorio público permite informar de errores reproducibles. No inventamos una identidad corporativa, una oficina española ni acreditaciones que el proyecto no posee.',
-    `El sitio reúne ${liveToolCount} herramientas publicadas para documentos, imágenes, texto, azar, tiempo, dinero, dibujo, aula y estadística. La prioridad es que una persona pueda entender la entrada, obtener una salida y comprobar sus límites sin registrarse. Las versiones en español se redactan para búsquedas, normas, vocabulario y situaciones de uso en español; no se publican como una traducción automática de otra página.`,
+    `El sitio reúne ${TOOL_COUNT} herramientas publicadas para documentos, imágenes, texto, azar, tiempo, dinero, dibujo, aula y estadística. La prioridad es que una persona pueda entender la entrada, obtener una salida y comprobar sus límites sin registrarse. Las versiones en español se redactan para búsquedas, normas, vocabulario y situaciones de uso en español; no se publican como una traducción automática de otra página.`,
   ],
   sections: [
     {
@@ -105,7 +106,7 @@ export const spanishAbout: SpanishInfoPage = {
       heading: 'Publicidad, financiación e independencia del resultado',
       paragraphs: [
         'El acceso actual a las herramientas es gratuito. FunnyTools carga infraestructura de Google AdSense mientras el sitio se revisa o utiliza publicidad, y la analítica ayuda a identificar uso y errores. Los espacios publicitarios, cuando existan, deben quedar separados de botones, entradas y resultados. Una marca no paga para modificar el resultado de una fórmula o aparecer como respuesta de una herramienta.',
-        'La publicidad puede financiar alojamiento, desarrollo y mantenimiento, pero no garantiza ingresos ni aprobación por una red. La política de privacidad explica cookies, señales técnicas y controles. No vendemos como recomendación personalizada una salida calculada por el usuario. Los enlaces a fuentes externas se eligen por utilidad de verificación, no como aval comercial. En el sitio chino de Taiwán también puede aparecer, tras completar una herramienta o de forma selectiva en guías relevantes, una sección separada y opcional con enlaces de afiliación de Shopee o Coupang. Usarla o ignorarla no cambia ningún cálculo ni resultado.',
+        `La publicidad puede financiar alojamiento, desarrollo y mantenimiento, pero no garantiza ingresos ni aprobación por una red. La política de privacidad explica cookies, señales técnicas y controles. No vendemos como recomendación personalizada una salida calculada por el usuario. Los enlaces a fuentes externas se eligen por utilidad de verificación, no como aval comercial. En el sitio chino de Taiwán también puede aparecer, tras completar un cálculo o procesamiento y de forma selectiva en guías relevantes, una sección separada y opcional con enlaces de afiliación de ${ACTIVE_AFFILIATE_PLATFORM_NAMES.es}. Esa sección no interviene en el cálculo, el procesamiento, la salida ni la disponibilidad de la herramienta; usarla o ignorarla no cambia el resultado ni el acceso.`,
       ],
       link: {
         prefix: 'Consulta los proveedores y opciones en la ',
@@ -157,7 +158,7 @@ export const spanishAbout: SpanishInfoPage = {
   ],
   faq: [
     { q: '¿Quién es el propietario de FunnyTools?', a: 'El sitio se mantiene de forma independiente bajo la identidad editorial FunnyTools. El canal operativo publicado es btcson224@gmail.com; no se presenta como administración, banco, escuela ni despacho profesional.' },
-    { q: '¿Cuántas herramientas hay publicadas?', a: `El catálogo actual contiene ${liveToolCount} herramientas. El número puede cambiar con versiones posteriores y se comprueba en la página de todas las herramientas.` },
+    { q: '¿Cuántas herramientas hay publicadas?', a: `El catálogo actual contiene ${TOOL_COUNT} herramientas. El número puede cambiar con versiones posteriores y se comprueba en la página de todas las herramientas.` },
     { q: '¿El contenido en español es una traducción automática?', a: 'No. Las páginas españolas se redactan según vocabulario, intención de búsqueda, fuentes y situaciones de uso en español, con límites locales cuando corresponden.' },
     { q: '¿Cómo se comprueba una calculadora?', a: 'Se prueban casos calculables a mano, unidades, extremos, estados vacíos y redondeo; el usuario todavía debe comparar resultados formales con la fuente aplicable.' },
     { q: '¿FunnyTools guarda mis archivos?', a: 'Las herramientas locales procesan el contenido en la pestaña y no crean una biblioteca en FunnyTools. Conserva originales y revisa la política de privacidad y cada herramienta.' },

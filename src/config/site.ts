@@ -1,4 +1,8 @@
+import pkg from '../../package.json';
+
 export type Locale = 'zh' | 'en';
+
+export const SITE_VERSION = pkg.version;
 
 export const SITE = {
   url: 'https://funnytools.win',
