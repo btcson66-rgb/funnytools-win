@@ -165,8 +165,9 @@ export function isExcludedUrl(url) {
 }
 
 export function pageMeta(html) {
-  const metaTags = [...html.matchAll(/<meta\b[^>]*>/gi)].map((match) => match[0]);
-  const linkTags = [...html.matchAll(/<link\b[^>]*>/gi)].map((match) => match[0]);
+  const htmlTag = (name) => new RegExp(`<${name}\\b(?:[^"'<>]|"[^"]*"|'[^']*')*>`, 'gi');
+  const metaTags = [...html.matchAll(htmlTag('meta'))].map((match) => match[0]);
+  const linkTags = [...html.matchAll(htmlTag('link'))].map((match) => match[0]);
   const robots = metaTags.find((tag) => attr(tag, 'name').toLowerCase() === 'robots');
   const description = metaTags.find((tag) => attr(tag, 'name').toLowerCase() === 'description');
   const canonical = linkTags.find((tag) => attr(tag, 'rel').toLowerCase() === 'canonical');
