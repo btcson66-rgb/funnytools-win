@@ -62,3 +62,24 @@ test('the supplied Shopee batch is present with product-id-matched local images'
     assert.match(item.affiliateUrl, /^https:\/\/s\.shopee\.tw\//);
   }
 });
+
+test('the latest supplied Shopee batch is present with local images and refreshed links', () => {
+  const ids = ['40226146238', '24929453599', '29128478566', '40602393612', '23116194206', '27705427792', '26558404522', '41564489188', '51456028166', '29825815039', '40104781068', '28050228633', '28877481202', '19282781205', '25429452735', '49703218547', '29615726704', '27776728635', '28923368118', '56102966901', '44662612548', '27842633319', '25579454125', '22773493067', '22366001289', '3832725335', '14296820642', '14215047952', '5486041835', '17990090102', '62773401', '22277892176', '5162386294', '24484425177', '4244754434', '29113584128', '23987891531', '23222545282', '20480171534', '25067144383', '44251185038', '24126902985'];
+  const refreshedLinks = {
+    '27705427792': 'https://s.shopee.tw/4VcQcjGkLn',
+    '28050228633': 'https://s.shopee.tw/BTRSlXF93',
+    '24484425177': 'https://s.shopee.tw/AUtdlktuBP',
+    '44251185038': 'https://s.shopee.tw/6L44o69ldi',
+  };
+  const byId = new Map(catalog.map((item) => [item.id, item]));
+  for (const id of ids) {
+    const item = byId.get('shopee-' + id);
+    assert.ok(item, 'missing latest Shopee product ' + id);
+    assert.equal(item.platform, 'shopee');
+    assert.equal(item.imageUrl, '/assets/support-products/shopee-' + id + '.webp');
+    assert.match(item.affiliateUrl, /^https:\/\/s\.shopee\.tw\//);
+  }
+  for (const [id, url] of Object.entries(refreshedLinks)) {
+    assert.equal(byId.get('shopee-' + id).affiliateUrl, url);
+  }
+});

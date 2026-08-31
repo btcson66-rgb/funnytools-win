@@ -853,7 +853,7 @@
     "description": "蝦皮｜蝦皮直營生活超市。價格、庫存與商品規格請以商品頁面最新資訊為準。",
     "platform": "shopee",
     "linkType": "product",
-    "affiliateUrl": "https://s.shopee.tw/2BEVY3bMHF",
+    "affiliateUrl": "https://s.shopee.tw/4VcQcjGkLn",
     "fallbackUrl": "",
     "imageUrl": "/assets/support-products/shopee-27705427792.webp",
     "tags": [
@@ -1015,7 +1015,7 @@
     "description": "蝦皮｜涵雅嚴選放心購。價格、庫存與商品規格請以商品頁面最新資訊為準。",
     "platform": "shopee",
     "linkType": "product",
-    "affiliateUrl": "https://s.shopee.tw/3g3JKoVeEg",
+    "affiliateUrl": "https://s.shopee.tw/6L44o69ldi",
     "fallbackUrl": "",
     "imageUrl": "/assets/support-products/shopee-44251185038.webp",
     "tags": [
@@ -1249,7 +1249,7 @@
     "description": "蝦皮｜膜殼時代-直營 主營 3C手機殼/保護殼 保護膜 手錶殼。價格、庫存與商品規格請以商品頁面最新資訊為準。",
     "platform": "shopee",
     "linkType": "product",
-    "affiliateUrl": "https://s.shopee.tw/2qUCKx7MFb",
+    "affiliateUrl": "https://s.shopee.tw/AUtdlktuBP",
     "fallbackUrl": "",
     "imageUrl": "/assets/support-products/shopee-24484425177.webp",
     "tags": [
@@ -1339,7 +1339,7 @@
     "description": "蝦皮｜蝦皮直營生活超市。價格、庫存與商品規格請以商品頁面最新資訊為準。",
     "platform": "shopee",
     "linkType": "product",
-    "affiliateUrl": "https://s.shopee.tw/4LJ07i1eCy",
+    "affiliateUrl": "https://s.shopee.tw/BTRSlXF93",
     "fallbackUrl": "",
     "imageUrl": "/assets/support-products/shopee-28050228633.webp",
     "tags": [
@@ -1748,5 +1748,670 @@
     "imageUrl": "/assets/support-products/shopee-26702833231.webp",
     "tags": ["運動", "營養", "蛋白", "純素", "隨身"],
     "priority": 101
-  }
+  },
+    {
+      "id": "shopee-40226146238",
+      "status": "active",
+      "category": "home",
+      "title": "🔥在台現貨箱購36包 8640張 僅199元超低價🔥大尺寸衛生紙 全網cp值高  抽取式抽紙  加厚衛生紙 抽取式",
+      "description": "蝦皮｜拓米創新科技生活館。價格、規格、庫存與可選款式以商品頁為準。 圖片為同品類或相近款式示意，請以商品頁圖片與選項為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/50YhDeEqKo",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-40226146238.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 102
+    },
+    {
+      "id": "shopee-24929453599",
+      "status": "active",
+      "category": "wellness",
+      "title": "【蝦皮直營】白人口腔護理漱口水720mlX2入組/6入組 清新 護齦",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/5As7PxECzr",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-24929453599.webp",
+      "tags": [
+        "口腔清潔",
+        "漱口水",
+        "日用品"
+      ],
+      "priority": 103
+    },
+    {
+      "id": "shopee-29128478566",
+      "status": "active",
+      "category": "home",
+      "title": "【蝦皮直營】WOKY 沃廚 雙層陶瓷渾圓杯750ml、550ml(二代防漏) 手提保溫杯 隨行杯",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/40gA1oIeMe",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-29128478566.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 104
+    },
+    {
+      "id": "shopee-40602393612",
+      "status": "active",
+      "category": "home",
+      "title": "【蝦皮直營】Persil 寶瀅 深層酵解洗衣凝露 2.5L/1.4L 補充包1.5L",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/4AzaE7I11h",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-40602393612.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 105
+    },
+    {
+      "id": "shopee-23116194206",
+      "status": "active",
+      "category": "home",
+      "title": "【樂維根THE VEGAN】維根樂飲杯2.0 650ML 搖搖杯 環保隨行杯 健身 運動水壺 輕巧 好攜帶 大口徑 好清",
+      "description": "蝦皮｜THE VEGAN樂維根｜官方旗艦店。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/4LJ0QQHNgk",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-23116194206.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 106
+    },
+    {
+      "id": "shopee-26558404522",
+      "status": "active",
+      "category": "home",
+      "title": "【蝦皮直營】光泉 保久乳系列 200mlx24入 全脂/低脂/低脂高鈣/高鈣/巧克力/果汁/麥芽/蘋果 牛奶 保久乳",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/gPi3gVL84",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-26558404522.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 107
+    },
+    {
+      "id": "shopee-41564489188",
+      "status": "active",
+      "category": "home",
+      "title": "【蝦皮直營】家樂氏纖穀脆/麥纖脆 豐富堅果/超級莓果/黑巧野莓/榛果可可/鮮摘草莓/蜂蜜杏仁/醇粹巧莓/馥郁莓果",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/qj8FzUhn7",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-41564489188.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 108
+    },
+    {
+      "id": "shopee-51456028166",
+      "status": "active",
+      "category": "home",
+      "title": "【蝦皮直營】蓮蓬頭 負離子增壓 三擋調節 送5濾芯 沐浴過濾 省水節能 軟水淨化",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/112YSIU4SA",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-51456028166.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 109
+    },
+    {
+      "id": "shopee-29825815039",
+      "status": "active",
+      "category": "home",
+      "title": "【蝦皮直營】GP 超霸 碳鋅/鹼性電池 3號/4號 8/10/16/20/40入組 台灣公司貨 鹼性 電池 乾電池",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/1BLyebTR7D",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-29825815039.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 110
+    },
+    {
+      "id": "shopee-40104781068",
+      "status": "active",
+      "category": "home",
+      "title": "【蝦皮直營】汪喵星球 貓用 FANTASTIC 98%鮮肉無膠 主食罐/經典罐/營養罐/挑嘴罐/銀養罐 貓罐 現貨 無穀",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/1A1GSXsU0",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-40104781068.webp",
+      "tags": [
+        "寵物",
+        "貓",
+        "主食罐",
+        "生活"
+      ],
+      "priority": 111
+    },
+    {
+      "id": "shopee-28877481202",
+      "status": "active",
+      "category": "home",
+      "title": "🔥臺灣出貨🔥隔日達 LED感應小夜燈 磁吸感應燈 全自動超亮 感應燈走廊不插電 展示燈 床頭燈 櫥櫃燈 床頭燈 櫥櫃燈",
+      "description": "蝦皮｜心怡小鋪❤️。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/Lmrf4Wbo6",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-28877481202.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 112
+    },
+    {
+      "id": "shopee-19282781205",
+      "status": "active",
+      "category": "travel",
+      "title": "【悠遊購】日本eSIM｜日本網卡 esim日本 網卡 esim 吃到飽 原生網路 全境內 24H自助兌換快速發貨",
+      "description": "蝦皮｜YOYOGO悠遊購|旅遊上網卡專賣店。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/W6HrNVyT9",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-19282781205.webp",
+      "tags": [
+        "旅遊",
+        "日本",
+        "eSIM"
+      ],
+      "priority": 113
+    },
+    {
+      "id": "shopee-25429452735",
+      "status": "active",
+      "category": "family",
+      "title": "【蝦皮直營】韓國ibobomi嬰兒米餅片狀 乳酸菌優格點心 長米棒 米泡芙 玉米花 寶寶餅乾 韓國熱銷嬰兒餅乾",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/20v5e8QGQS",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-25429452735.webp",
+      "tags": [
+        "親子",
+        "嬰兒",
+        "零食"
+      ],
+      "priority": 114
+    },
+    {
+      "id": "shopee-49703218547",
+      "status": "active",
+      "category": "digital-accessories",
+      "title": "【蝦皮直營】Type C to C 手機充電傳輸線 40/60/100W 蘋果/iPhone/安卓 快充 充電線",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/2BEVqRPd5V",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-49703218547.webp",
+      "tags": [
+        "3C",
+        "充電",
+        "USB-C"
+      ],
+      "priority": 115
+    },
+    {
+      "id": "shopee-29615726704",
+      "status": "active",
+      "category": "digital-accessories",
+      "title": "【蝦皮直營】USB A to Type C 手機充電傳輸線 1-2米 適用蘋果/安卓/三星/小米 充電線 現貨 快充",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/2LXw2kOzkY",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-29615726704.webp",
+      "tags": [
+        "3C",
+        "充電",
+        "USB-C"
+      ],
+      "priority": 116
+    },
+    {
+      "id": "shopee-27776728635",
+      "status": "active",
+      "category": "home",
+      "title": "【蝦皮直營】Dove多芬 胺基酸修護系列洗髮乳/潤髮乳 700g 深層修護 直順亮澤 去屑修護",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/2VrMF3OMPb",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-27776728635.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 117
+    },
+    {
+      "id": "shopee-28923368118",
+      "status": "active",
+      "category": "wellness",
+      "title": "【蝦皮直營】DHC 持續型維他命C 120粒/包 30日份 長效型 維生素C",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/1LfOquSnmO",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-28923368118.webp",
+      "tags": [
+        "保健",
+        "維他命C",
+        "日常"
+      ],
+      "priority": 118
+    },
+    {
+      "id": "shopee-56102966901",
+      "status": "active",
+      "category": "home",
+      "title": "【蝦皮直營】CIAO 旨定罐 85g/罐 日本國產 貓罐頭 副食罐 INABA 原廠正貨 零食 點心",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/1Vyp3DSARR",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-56102966901.webp",
+      "tags": [
+        "寵物",
+        "貓",
+        "罐頭",
+        "生活"
+      ],
+      "priority": 119
+    },
+    {
+      "id": "shopee-44662612548",
+      "status": "active",
+      "category": "home",
+      "title": "【蝦皮直營】來一客 12杯/箱(京燉肉骨/肉燥菠菜/鮮蝦魚板/牛肉蔬菜/川辣牛肉/韓式泡菜) 箱購 泡麵 碗麵 即食麵",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/1gIFFWRX6U",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-44662612548.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 120
+    },
+    {
+      "id": "shopee-27842633319",
+      "status": "active",
+      "category": "home",
+      "title": "【蝦皮直營】3M 細滑牙線棒-雙線(156支入) /薄荷(156支入) /單線(180支入) 盒裝",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/1qbfRpQtlX",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-27842633319.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 121
+    },
+    {
+      "id": "shopee-25579454125",
+      "status": "active",
+      "category": "home",
+      "title": "【蝦皮直營】盛香珍 堅果罐系列(無調味綜合果/莓好綜合果/綜合纖果/腰果/核桃/杏仁果/杏仁小魚/夏威夷豆) 果乾 堅果",
+      "description": "蝦皮｜蝦皮直營 _ 生活超市 - 最快當日到。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/8fRzaO0sts",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-25579454125.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 122
+    },
+    {
+      "id": "shopee-22773493067",
+      "status": "active",
+      "category": "home",
+      "title": "🔥隔日到貨🔥5D日系口罩 蝶型口罩 3D立體口罩 買100送10片 小臉 不沾唇 不脫妝 夏日防曬 白色/多色 台灣現貨",
+      "description": "蝦皮｜Cobibene 口罩旗艦館。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/8plPmh0FYv",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-22773493067.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 123
+    },
+    {
+      "id": "shopee-22366001289",
+      "status": "active",
+      "category": "home",
+      "title": "台灣公司附發票 地毯 短絨毛地毯 北歐絨毛大地毯 客廳臥室房間床邊毯 超柔軟床邊毛絨厚地毯 毛地毯地墊小地毯客製化尺",
+      "description": "蝦皮｜順利居家生活館。價格、規格、庫存與可選款式以商品頁為準。 圖片為同品類或相近款式示意，請以商品頁圖片與選項為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/904pyzzcDy",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-22366001289.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 124
+    },
+    {
+      "id": "shopee-3832725335",
+      "status": "active",
+      "category": "digital-accessories",
+      "title": "三年保固台灣製造🔥全台第一百萬銷售🔥LED燈泡🔥護眼無藍光 億光晶片國家認證 E27燈座省電節能球泡 10W13W16W",
+      "description": "蝦皮｜JOYA 雙北免費安裝吸頂燈(指定款)經銷LED燈具 燈泡 3C 充電線 貓抓板。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/9AOGBIyyt1",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-3832725335.webp",
+      "tags": [
+        "照明",
+        "LED",
+        "居家"
+      ],
+      "priority": 125
+    },
+    {
+      "id": "shopee-14296820642",
+      "status": "active",
+      "category": "home",
+      "title": "【熱銷百萬支】防滑衣架 衣架 曬衣架 不鏽鋼衣架 掛衣架 晾衣架 成人衣架 浸塑衣架 止滑衣架 三角衣架 兒童衣架",
+      "description": "蝦皮｜爸爸忘記了。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/80CInA3QFo",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-14296820642.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 126
+    },
+    {
+      "id": "shopee-14215047952",
+      "status": "active",
+      "category": "home",
+      "title": "【萬人回購！熱銷top1！】衣架 加粗實心不銹鋼衣架 不鏽鋼曬衣架 衣架 白鐵衣架 掛衣架 防滑衣架 曬衣架",
+      "description": "蝦皮｜懶餅乾家居。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/8AVizT2mur",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-14215047952.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 127
+    },
+    {
+      "id": "shopee-5486041835",
+      "status": "active",
+      "category": "home",
+      "title": "一次性洗臉巾 現貨快速出貨 乾濕兩用棉柔巾 加厚加大不織布 美容巾 臉部清潔 拋棄式卸妝巾 擦臉巾  【WS0033】",
+      "description": "蝦皮｜JOEKI 揪去購物 收納 家居百貨 口罩 日用品 運動健身 美髮保養 美妝小物。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/8Kp9Bm29Zu",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-5486041835.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 128
+    },
+    {
+      "id": "shopee-17990090102",
+      "status": "active",
+      "category": "home",
+      "title": "寵物地墊 拼接地墊 可裁剪地墊 防滑地墊 靜電吸附 止滑墊 日式地墊 吸附式【現貨※開發票※SGS試驗合格】",
+      "description": "蝦皮｜快樂小島潮流用品批發館。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/8V8ZO51WEx",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-17990090102.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 129
+    },
+    {
+      "id": "shopee-62773401",
+      "status": "active",
+      "category": "home",
+      "title": "全台最低 除濕袋 除濕包 除溼 除濕 防潮 吊掛型 掛袋 除溼包 除溼袋【JJ0101】",
+      "description": "蝦皮｜JOEKI 揪去購物 收納 家居百貨 口罩 日用品 運動健身 美髮保養 美妝小物。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/9zxNApvoCG",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-62773401.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 130
+    },
+    {
+      "id": "shopee-22277892176",
+      "status": "active",
+      "category": "home",
+      "title": "洞洞板 洞洞板置物架 電箱洞洞板 【台灣出貨】 實木洞洞板 墻上置物架 木質洞洞板 洞洞板架子 電箱裝飾 金属洞洞板",
+      "description": "蝦皮｜宜佳家居館。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/AAGnN8vArJ",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-22277892176.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 131
+    },
+    {
+      "id": "shopee-5162386294",
+      "status": "active",
+      "category": "home",
+      "title": "【宏升角鋼】免螺絲角鋼架 【客製專區1元下單】｜角鋼｜三層架｜四層架｜五層架｜收納架｜置物架｜網拍｜層櫃｜真人快速回復",
+      "description": "蝦皮｜【HS宏升角鋼】免螺絲角鋼/層架/置物架。價格、規格、庫存與可選款式以商品頁為準。 圖片為同品類或相近款式示意，請以商品頁圖片與選項為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/AKaDZRuXWM",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-5162386294.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 132
+    },
+    {
+      "id": "shopee-4244754434",
+      "status": "active",
+      "category": "travel",
+      "title": "[Aneng] 機車胎壓偵測器 太陽能胎壓偵測器 胎壓偵測器 頂規電壓監測版 機車配件 中文彩色螢幕 防水無線胎壓偵測器",
+      "description": "蝦皮｜昇旺數位3C。價格、規格、庫存與可選款式以商品頁為準。 圖片為同品類或相近款式示意，請以商品頁圖片與選項為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/9KhgNbyLYC",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-4244754434.webp",
+      "tags": [
+        "汽機車",
+        "胎壓",
+        "行車"
+      ],
+      "priority": 133
+    },
+    {
+      "id": "shopee-29113584128",
+      "status": "active",
+      "category": "digital-accessories",
+      "title": "宏晉 全能旅充行動電源 V2 10000mAh 全新半固態電芯 一年保固 多合一磁吸自帶線快充行動電源",
+      "description": "蝦皮｜HONG JIN 宏晉 ｜3C資訊廣場。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/9V16ZuxiDF",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-29113584128.webp",
+      "tags": [
+        "3C",
+        "行動電源",
+        "旅遊"
+      ],
+      "priority": 134
+    },
+    {
+      "id": "shopee-23987891531",
+      "status": "active",
+      "category": "home",
+      "title": "露肚皮 台灣現貨秒發貨 寵物食品 寵物凍乾 雞肉凍乾 雞胸肉凍乾  貓咪凍乾 蔬菜凍乾 優格凍乾 牛肉凍乾 寵物零食",
+      "description": "蝦皮｜毛孩糧倉鋪。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/9fKWmDx4sI",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-23987891531.webp",
+      "tags": [
+        "寵物",
+        "零食",
+        "凍乾",
+        "生活"
+      ],
+      "priority": 135
+    },
+    {
+      "id": "shopee-23222545282",
+      "status": "active",
+      "category": "wellness",
+      "title": "日本新田專利膠原蛋白 膠原蛋白粉 魚鱗萃取專利小分子 富含POOG專利分子結構",
+      "description": "蝦皮｜沅夢國際保健食品客製化賣場。價格、規格、庫存與可選款式以商品頁為準。 圖片為同品類或相近款式示意，請以商品頁圖片與選項為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/9pdwyWwRXL",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-23222545282.webp",
+      "tags": [
+        "保健",
+        "膠原蛋白",
+        "美容"
+      ],
+      "priority": 136
+    },
+    {
+      "id": "shopee-20480171534",
+      "status": "active",
+      "category": "home",
+      "title": "【隔日到貨】硅藻軟地墊 腳踏墊 珪藻土軟墊 地墊 吸水地墊 防滑吸水地墊 浴室地墊 洗手間地墊 腳踏墊 硅藻地墊 地墊",
+      "description": "蝦皮｜Good Lab 好宅家居。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/60REPUB2Jc",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-20480171534.webp",
+      "tags": [
+        "生活",
+        "日用品"
+      ],
+      "priority": 137
+    },
+    {
+      "id": "shopee-25067144383",
+      "status": "active",
+      "category": "home",
+      "title": "露肚皮 雞肉凍乾 寵物凍乾 汪喵凍乾 貓咪凍乾 狗狗凍乾  原肉凍乾 貓咪點心 狗狗點心 凍乾零食 寵物零食 現貨秒發",
+      "description": "蝦皮｜毛孩糧倉鋪。價格、規格、庫存與可選款式以商品頁為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/6AkebnAOyf",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-25067144383.webp",
+      "tags": [
+        "寵物",
+        "零食",
+        "凍乾",
+        "生活"
+      ],
+      "priority": 138
+    },
+    {
+      "id": "shopee-24126902985",
+      "status": "active",
+      "category": "wellness",
+      "title": "隔日到貨🔥日本玻尿酸面膜 告別暗黃班點肌 美白更補水保濕 日本面膜 美白面膜 保濕面膜 補水面膜 早安面膜 玻尿酸面膜",
+      "description": "蝦皮｜甜粉·美妝屋。價格、規格、庫存與可選款式以商品頁為準。 圖片為同品類或相近款式示意，請以商品頁圖片與選項為準。",
+      "platform": "shopee",
+      "linkType": "product",
+      "affiliateUrl": "https://s.shopee.tw/6VNV0P98Il",
+      "fallbackUrl": "",
+      "imageUrl": "/assets/support-products/shopee-24126902985.webp",
+      "tags": [
+        "保養",
+        "面膜",
+        "保濕"
+      ],
+      "priority": 139
+    }
 ]
