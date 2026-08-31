@@ -29,6 +29,11 @@
     travel: '⌁',
     printing: '▤',
     'mobile-photo': '◉',
+    'digital-accessories': '⌘',
+    organization: '▦',
+    workspace: '▤',
+    wellness: '♡',
+    home: '⌂',
   };
   const platformLabels = {
     shopee: '蝦皮',
@@ -96,7 +101,7 @@
       media.className = 'support-product-media';
       const image = document.createElement('img');
       image.src = imageUrl;
-      image.alt = product.title || '酷澎商品圖片';
+      image.alt = product.title || '推薦商品圖片';
       image.loading = 'lazy';
       image.decoding = 'async';
       image.width = 640;
@@ -150,7 +155,7 @@
       link.target = '_blank';
       link.rel = 'sponsored nofollow noopener';
       link.textContent = '前往查看';
-      link.setAttribute('aria-label', `前往酷澎查看：${product.title || '實用資源'}`);
+      link.setAttribute('aria-label', `前往平台查看：${product.title || '實用資源'}`);
       if (labels) {
         link.textContent = labels.cta;
         link.setAttribute('aria-label', labels.ctaLabel(product.title));
