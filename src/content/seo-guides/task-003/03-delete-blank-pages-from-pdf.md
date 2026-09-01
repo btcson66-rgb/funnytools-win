@@ -1,7 +1,7 @@
 ---
 slug: "/guides/delete-blank-pages-from-pdf/"
 seo_title: "PDF 怎麼刪除空白頁、其中一頁？指定頁碼與刪頁完整指南｜FunnyTools"
-meta_description: "PDF 多一頁空白頁怎麼刪？教你移除其中一頁、最後一頁、重複頁與指定頁碼範圍，並說明頁碼對照、數位簽章、表單與刪頁後的檢查方式。"
+meta_description: "PDF 多一頁空白頁怎麼刪？教你移除其中一頁、最後一頁、重複頁與指定頁碼範圍，並說明頁碼對照、數位簽章、表單與刪頁後的檢查方式，避免刪錯重要內容。"
 og_title: "PDF 刪除空白頁／其中一頁：指定頁碼完整教學"
 og_description: "先確認 PDF 真正頁序，再刪掉不需要的頁面，避免刪錯附件或簽名頁。"
 canonical: "https://funnytools.win/guides/delete-blank-pages-from-pdf/"

@@ -1,7 +1,7 @@
 ---
 slug: "/guides/reorder-rotate-pdf-pages/"
 seo_title: "PDF 頁面順序錯誤、倒轉、橫向怎麼辦？重新排序與旋轉完整指南｜FunnyTools"
-meta_description: "PDF 頁面順序亂掉、掃描反序、部分頁面橫著或倒著？完整說明重新排序與旋轉差別、指定頁面 90/180/270 度、處理順序與輸出檢查。"
+meta_description: "PDF 頁面順序亂掉、掃描反序、部分頁面橫著或倒著？完整說明重新排序與旋轉差別、指定頁面 90/180/270 度、處理順序與輸出檢查，並附常見錯誤排除。"
 og_title: "PDF 頁序亂掉、方向錯誤？重排與旋轉一次處理"
 og_description: "頁序和方向是兩個不同問題：Reorder 搬頁，Rotate 轉方向。"
 canonical: "https://funnytools.win/guides/reorder-rotate-pdf-pages/"
