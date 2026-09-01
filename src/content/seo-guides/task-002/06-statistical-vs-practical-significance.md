@@ -1,7 +1,7 @@
 ---
 slug: /guides/statistical-vs-practical-significance/
 seo_title: "統計顯著 vs 實務顯著差在哪？p值、效果量與研究意義完整指南｜FunnyTools"
-meta_description: "p<.05 不代表結果重要。完整解釋統計顯著、實務顯著、效果量、樣本數、95% CI、最小重要差異，以及研究結果如何避免只剩顯著與不顯著。"
+meta_description: "p<.05 不代表結果重要。完整解釋統計顯著、實務顯著、效果量、樣本數、95% CI、最小重要差異，以及研究結果如何避免只剩顯著與不顯著，並附判讀流程。"
 og_title: "統計顯著 ≠ 實務重要：p<.05 之後還要看什麼？"
 og_description: "樣本大時很小差異也能顯著。用效果量、CI 和實際尺度判斷結果到底重不重要。"
 canonical: "https://funnytools.win/guides/statistical-vs-practical-significance/"

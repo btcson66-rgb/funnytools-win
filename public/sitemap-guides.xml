@@ -211,6 +211,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/anova-apa-format-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/anova-post-hoc-tukey-bonferroni/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/bar-chart-school-report-guide/</loc>
     <lastmod>2026-08-01</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/bar-chart-school-report-guide/" />
@@ -255,6 +259,10 @@
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/cronbach-alpha-interpretation/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/cvc-word-families-guide/</loc>
     <lastmod>2026-07-18</lastmod>
   </url>
@@ -293,6 +301,10 @@
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/mean-median-mode-when-to-use/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/merge-pdf-private-guide/</loc>
     <lastmod>2026-08-01</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/merge-pdf-private-guide/" />
@@ -307,6 +319,10 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/fluidez-tablas-multiplicar/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/outlier-detection-iqr-z-score-boxplot/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/p-value-interpretation/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
@@ -315,6 +331,10 @@
     <lastmod>2026-07-18</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/password-strength-basics-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/contrasena-segura-fuerte/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/pearson-vs-spearman-correlation/</loc>
+    <lastmod>2026-08-01</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/percentage-shortcuts-guide/</loc>
@@ -349,6 +369,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-classroom-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/r-squared-adjusted-r-squared/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/shapiro-wilk-normality-test/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/spss-levene-test-guide/</loc>
     <lastmod>2026-08-01</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/spss-levene-test-guide/" />
@@ -362,6 +390,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/statistical-test-selection/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/statistical-vs-practical-significance/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
