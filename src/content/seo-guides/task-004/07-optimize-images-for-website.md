@@ -313,7 +313,7 @@ LCP 圖 eager/high priority。
 ## 十八、FunnyTools可以幫哪一段？
 
 ### Crop
-[圖片裁切](/tools/image-cropper/)
+[圖片裁切](/tools/image-crop/)
 
 ### Resize
 [圖片尺寸調整](/tools/image-resizer/)

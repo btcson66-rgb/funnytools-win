@@ -284,7 +284,7 @@ FunnyTools 現行 Image Compressor：
 ## 十九、FunnyTools 對應工具
 
 ### Crop
-[圖片裁切工具](/tools/image-cropper/)
+[圖片裁切工具](/tools/image-crop/)
 
 ### Resize
 [圖片尺寸調整](/tools/image-resizer/)
@@ -343,7 +343,7 @@ FunnyTools 現行 Compressor 不改寬高。
 
 ## 二十三、延伸閱讀
 
-- [圖片裁切工具](/tools/image-cropper/)
+- [圖片裁切工具](/tools/image-crop/)
 - [圖片尺寸調整](/tools/image-resizer/)
 - [圖片壓縮](/tools/image-compressor/)
 - [圖片太大怎麼壓](/guides/compress-image-to-upload-limit/)

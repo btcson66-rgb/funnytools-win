@@ -308,7 +308,7 @@ FunnyTools 目前會擋更大的輸入，以降低瀏覽器記憶體風險。
 - [裁切 vs 縮放 vs 壓縮](/guides/crop-vs-resize-vs-compress-image/)
 - [圖片太大怎麼壓](/guides/compress-image-to-upload-limit/)
 - [網站圖片最佳化](/guides/optimize-images-for-website/)
-- [圖片裁切工具](/tools/image-cropper/)
+- [圖片裁切工具](/tools/image-crop/)
 
 ## 頁面 CTA
 

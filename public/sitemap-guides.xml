@@ -255,6 +255,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-timer-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/compress-image-to-upload-limit/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/compress-pdf-to-upload-limit/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
@@ -264,6 +268,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/cronbach-alpha-interpretation/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/crop-vs-resize-vs-compress-image/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
@@ -301,6 +309,10 @@
     <lastmod>2026-07-18</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/image-base64-data-uri-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/image-compression-email-guide/</loc>
     <lastmod>2026-07-18</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/image-compression-email-guide/" />
@@ -309,7 +321,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-compression-email-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/image-upload-failed-troubleshooting/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/independent-vs-paired-t-test/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/jpg-png-webp-which-to-use/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
@@ -329,6 +349,10 @@
     <lastmod>2026-07-18</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/multiplication-fact-fluency-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/fluidez-tablas-multiplicar/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/optimize-images-for-website/</loc>
+    <lastmod>2026-08-01</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/outlier-detection-iqr-z-score-boxplot/</loc>
@@ -385,6 +409,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/photos-to-pdf-phone-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/png-to-jpg-transparency-background/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/qr-code-classroom-guide/</loc>
     <lastmod>2026-08-01</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-classroom-guide/" />
@@ -398,6 +426,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/reorder-rotate-pdf-pages/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/resize-image-without-distortion/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
