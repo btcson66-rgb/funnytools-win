@@ -1,0 +1,819 @@
+{
+  "generatedAt": "2026-09-02T02:52:12.674Z",
+  "buildVersion": "5.126.0",
+  "status": "measured-with-partials",
+  "checkedRouteCount": 1057,
+  "issueCount": 458,
+  "completeIndexablePerLocale": {
+    "zh-TW": 245,
+    "en": 140,
+    "es": 139,
+    "fr": 75
+  },
+  "partialOrUiOnlyCount": 458,
+  "partialOrUiOnly": [
+    {
+      "route": "/blog/ad-block-safe-layout-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/after-midterm-final-score-needed/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/application-pdf-package-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/base64-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/browser-local-tool-privacy-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/calculate-t-score-from-z-score/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/can-pr-and-t-score-convert/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/can-z-score-be-greater-than-3/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/can-z-score-compare-different-exams/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/case-converter-writing-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/class-rank-to-percentile-rank/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/classroom-game-tools-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/classroom-icebreaker-random-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/classroom-list-cleaning-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/classroom-privacy-tools-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/classroom-random-tools-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/compound-interest-explained/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/compound-interest-reading-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/compress-large-images/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/countdown-timer-classroom-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/countdown-timer-productivity-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/csv-cleanup-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/current-score-58-final-exam-save-plan/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/cutoff-score-analysis-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/date-calculator-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/decision-fatigue-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/exam-score-normalization-mistakes/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/failing-grade-calculator-final-needed/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/fair-lottery-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/file-upload-safety-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/free-qr-code-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/ga4-basic-traffic-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/grade-average-weighted-gpa-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/group-role-assignment-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/gsc-indexing-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/image-compress-resize-format-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/image-compression-quality-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/image-for-homework-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/image-metadata-privacy-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/image-upload-limit-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/images-to-pdf-document-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/images-to-pdf-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/internal-linking-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/jpg-png-webp-difference-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/json-formatter-beginner-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/line-break-cleanup-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/logo-image-format-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/lucky-draw-event-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/markdown-to-html-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/mobile-pdf-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/mobile-pdf-merge/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/mortgage-calculation-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/mortgage-payment-explained/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/password-generator-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-blank-page-removal-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-file-naming-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-for-teachers-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-merge-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-merge-split-compress-workflow/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-offline-browser-safety/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-page-order-checklist/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-privacy-checklist/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-signature-workflow/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-split-extract-delete-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-split-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-too-large/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-too-large-upload-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pdf-troubleshooting-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/percentage-calculator-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/percentile-rank-formula-with-ties/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/percentile-rank-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/percentile-rank-vs-rank-percentage/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/percentile-rank-with-many-ties/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/photo-before-after-compress-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-84-meaning-example/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-common-error-as-correct-rate/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-percentile/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-percentile-10/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-percentile-2/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-percentile-3/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-percentile-4/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-percentile-5/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-percentile-6/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-percentile-7/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-percentile-8/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-percentile-9/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-percentile-rank-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/pr-z-t-score-comparison/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/profile-photo-resize-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/qr-code-best-practices/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/qr-code-generator-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/qr-code-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/qr-code-poster-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/random-group-classroom-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/random-grouping-classroom/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/random-grouping-classroom-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/random-number-lottery-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/random-student-picker-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/random-wheel-decision-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/ranking-percentile-class-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/raw-score-to-z-score-class-example/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/resume-pdf-preparation-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/rubric-score-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/scan-to-pdf-quality-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/score-appeal-record-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/screenshot-cleanup-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/seating-chart-practical-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/semester-grade-calculator-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/seo-title-description-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/sitemap-checklist-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/slug-generator-seo-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/small-sample-statistics-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/social-media-image-size-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/standard-deviation-classroom-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/student-presentation-order-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/student-toolkit-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-40-50-60-70-meaning/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-and-percentile-rank/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-calculator-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-common-errors-norm-direction/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-complete-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-high-does-not-guarantee-admission/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-in-psychological-educational-tests/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-is-not-percentage/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-pr-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-teacher-exam/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-10/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-2/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-3/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-4/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-5/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-6/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-7/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-8/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-9/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/t-score-vs-z-score/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/teacher-activity-flow-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/teacher-admin-toolkit-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/teacher-exam-score-calculation-written-demo-interview/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/teacher-exam-score-checklist/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/teacher-exam-t-score-fairness/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/teacher-exam-weight-written-teaching-interview/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/teacher-exam-weighted-score-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/teacher-random-grouping/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/teacher-score-spreadsheet-check/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/thin-content-cleanup-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/this-or-that-decision-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/time-zone-meeting-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/timestamp-converter-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/tool-page-content-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/transparent-background-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/unit-conversion-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/url-encode-decode-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/utm-link-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/uuid-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/webp-compatibility-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/weighted-average-common-cases/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/what-is-percentile-rank-not-percentage/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/what-is-t-score-mean-50-sd-10/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/what-is-z-score-standard-deviation/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/what-to-eat-decision-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/what-to-eat-decision-methods/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/word-count-social-media-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/word-counter-use-cases/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/yes-no-decision-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/z-score-0-1-minus-1-meaning/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/z-score-and-standard-deviation-relationship/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/z-score-formula-example-calculator/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/z-score-in-research-outlier-standardization/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/z-score-standardization-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/z-score-t-score-standard-score-guide/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/blog/z-score-to-t-score-formula-errors/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/age-calculator/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/apa-7-report-generator/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/bar-chart-maker/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/barcode-generator/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/break-reminder/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/business-days/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/cad-2d/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/character-counter/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/class-rank-percentile-calculator/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/color-generator/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/compound-interest/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/countdown-timer/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/date-difference/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/dice-roller/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/flowchart/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/gpa-calculator/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/grade-average/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/group-generator/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/image-compressor/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/image-crop/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/image-resizer/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/image-rotate-flip/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/inflation/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/jpg-to-png/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/jpg-to-webp/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/markdown-previewer/",
+      "status": "ui-only"
+    },
+    {
+      "route": "/embed/mortgage-payment/",
+      "status": "ui-only"
+    }
+  ],
+  "skippedChecks": [
+    "semantic content equivalence"
+  ]
+}

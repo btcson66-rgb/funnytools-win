@@ -30,6 +30,7 @@ const breadcrumb = breadcrumbJsonLd([
   title={page.metaTitle}
   description={page.metaDescription}
   type="article"
+  canonicalPath={pagePath}
   hasAlternates={false}
   jsonLd={[breadcrumb, { '@context': 'https://schema.org', '@type': 'WebPage', name: page.title, description: page.metaDescription, url: pagePath }]}
 >

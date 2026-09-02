@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-09-02T02:52:12.674Z",
+  "buildVersion": "5.126.0",
+  "status": "measured",
+  "checkedRouteCount": 1057,
+  "issueCount": 0,
+  "pagesPerLocale": {
+    "zh-TW": 641,
+    "en": 202,
+    "es": 139,
+    "fr": 75
+  },
+  "indexablePerLocale": {
+    "zh-TW": 245,
+    "en": 140,
+    "es": 139,
+    "fr": 75
+  },
+  "skippedChecks": [
+    "no historical baseline supplied"
+  ]
+}

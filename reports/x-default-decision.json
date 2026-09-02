@@ -1,0 +1,9 @@
+{
+  "generatedAt": "2026-09-02T02:52:12.674Z",
+  "buildVersion": "5.126.0",
+  "status": "measured",
+  "checkedRouteCount": 599,
+  "issueCount": 0,
+  "choice": "English equivalent when available; route registry otherwise falls back to zh-TW",
+  "source": "src/i18n/expansionRoutes.ts"
+}

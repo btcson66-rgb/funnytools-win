@@ -1,16 +1,16 @@
 ---
 slug: "/methodology/tool-verification/"
-seo_title: "線上工具怎麼驗證？Known Answer、Boundary、Round Trip 與 Regression Test｜FunnyTools"
+seo_title: "線上工具怎麼驗證？Known Answer、Boundary 與 Regression Test｜FunnyTools"
 meta_description: "FunnyTools如何測試線上工具？完整說明known-answer test、boundary test、round-trip test、error-state、regression test與人工瀏覽器驗證，並說明自動測試通過不等於所有情境都正確。"
 canonical: "https://funnytools.win/methodology/tool-verification/"
 primary_keyword: "線上工具 驗證 測試"
 card_title: "工具到底怎麼驗證？"
 card_description: "不是只點一次按鈕；要測已知答案、邊界、錯誤輸入、來回轉換與回歸。"
-hero_title: "線上工具怎麼驗證？Known Answer、Boundary、Round Trip 與 Regression Test"
+hero_title: "線上工具怎麼驗證？Known Answer、Boundary 與 Regression Test"
 hero_subtitle: "不同工具需要不同證據：計算器看已知答案，轉檔工具看來回開啟，亂數工具看不變條件與演算法，UI還要看真實瀏覽器。"
 ---
 
-# 線上工具怎麼驗證？Known Answer、Boundary、Round Trip 與 Regression Test
+# 線上工具怎麼驗證？Known Answer、Boundary 與 Regression Test
 
 「工具頁能開」只能證明：
 

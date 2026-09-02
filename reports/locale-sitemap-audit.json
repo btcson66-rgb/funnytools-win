@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2026-09-02T02:52:12.674Z",
+  "buildVersion": "5.126.0",
+  "status": "needs-review",
+  "checkedRouteCount": 599,
+  "issueCount": 11,
+  "sitemapFiles": [
+    "sitemap-en.xml",
+    "sitemap-es.xml",
+    "sitemap-fr.xml",
+    "sitemap-guides.xml",
+    "sitemap-tools.xml",
+    "sitemap-workflows.xml",
+    "sitemap.xml"
+  ],
+  "excludedRoutes": [
+    "/find-tools/",
+    "/methodology/accessibility-compatibility/",
+    "/methodology/ai-assisted-content/",
+    "/methodology/browser-local-processing/",
+    "/methodology/calculator-formula-verification/",
+    "/methodology/content-sourcing-corrections/",
+    "/methodology/file-tool-verification/",
+    "/methodology/",
+    "/methodology/public-test-cases/",
+    "/methodology/randomness-security/",
+    "/methodology/tool-verification/"
+  ],
+  "skippedChecks": [
+    "search engine acceptance and fetch status"
+  ]
+}

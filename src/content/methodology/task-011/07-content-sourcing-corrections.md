@@ -1,7 +1,7 @@
 ---
 slug: "/methodology/content-sourcing-corrections/"
 seo_title: "FunnyTools 內容來源、審閱日期與錯誤修正方法｜官方來源、版本與更新原則"
-meta_description: "FunnyTools如何選來源、何時更新文章日期、遇到政策變更怎麼修、使用者回報如何轉成回歸測試，以及為什麼不為SEO假改更新日期。"
+meta_description: "FunnyTools如何選來源、何時更新文章日期、遇到政策變更怎麼修、使用者回報如何轉成回歸測試，以及為什麼不為SEO假改更新日期，讓內容變更可追溯。"
 canonical: "https://funnytools.win/methodology/content-sourcing-corrections/"
 primary_keyword: "FunnyTools 內容 審閱 修正"
 card_title: "內容來源、審閱與修正"
@@ -14,13 +14,13 @@ hero_subtitle: "網站內容不是發布後就不變；真正重要的是哪些�
 
 工具網站會同時遇到兩種知識：
 
-### 穩定知識
+## 穩定知識
 - 加權平均公式
 - Base64
 - JSON
 - UUID標準
 
-### 會變的規則
+## 會變的規則
 - Google Search功能
 - NIST密碼建議
 - GS1規格

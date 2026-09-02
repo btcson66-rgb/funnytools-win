@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2026-09-02T02:52:12.674Z",
+  "buildVersion": "5.126.0",
+  "status": "not-available",
+  "checkedRouteCount": 1057,
+  "issueCount": 0,
+  "staleTranslations": [],
+  "skippedChecks": [
+    "review dates are not uniformly exposed in rendered HTML"
+  ]
+}

@@ -127,6 +127,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/education-statistics/" />
   </url>
   <url>
+    <loc>https://funnytools.win/find-tools/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/for/</loc>
     <lastmod>2026-07-31</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/for/" />
@@ -735,6 +739,46 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/z-score-calculator-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/puntuacion-z-interpretacion/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/z-score-calculator-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/methodology/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/methodology/accessibility-compatibility/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/methodology/ai-assisted-content/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/methodology/browser-local-processing/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/methodology/calculator-formula-verification/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/methodology/content-sourcing-corrections/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/methodology/file-tool-verification/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/methodology/public-test-cases/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/methodology/randomness-security/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/methodology/tool-verification/</loc>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/privacy/</loc>

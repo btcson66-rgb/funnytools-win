@@ -1,7 +1,7 @@
 ---
 slug: "/find-tools/"
 seo_title: "不知道工具名稱？依任務找 FunnyTools｜PDF、圖片、文字、成績、日期、開發者工具"
-meta_description: "不知道該用哪個工具？先選你手上的內容，再選要完成的動作：PDF合併拆分、圖片壓縮轉檔、文字整理、JSON/CSV、日期、成績統計、QR、隨機抽選與製圖。"
+meta_description: "不知道該用哪個工具？先選你手上的內容，再選要完成的動作：PDF合併拆分、圖片壓縮轉檔、文字整理、JSON/CSV、日期、成績統計、QR、隨機抽選與製圖，快速找到合適工具。"
 og_title: "依任務找 FunnyTools"
 og_description: "不用先知道工具名稱。從『我手上有什麼』和『我要做什麼』開始，找到最適合的工具、指南與工作流程。"
 canonical: "https://funnytools.win/find-tools/"

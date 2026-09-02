@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-09-02T02:52:12.674Z",
+  "buildVersion": "5.126.0",
+  "status": "measured",
+  "supportedLocales": [
+    "zh-TW",
+    "en",
+    "es",
+    "fr"
+  ],
+  "runtimeLocaleSources": [
+    "src/config/site.ts",
+    "src/i18n/expansion-routes.json"
+  ],
+  "pagesPerLocale": {
+    "zh-TW": 641,
+    "en": 202,
+    "es": 139,
+    "fr": 75
+  },
+  "indexablePerLocale": {
+    "zh-TW": 245,
+    "en": 140,
+    "es": 139,
+    "fr": 75
+  },
+  "skippedChecks": [
+    "translation quality requires human review"
+  ]
+}

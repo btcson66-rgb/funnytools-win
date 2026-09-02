@@ -17,7 +17,7 @@ export function getStaticPaths() {
 const { lang } = Astro.props as { lang: Locale };
 const ui = t(lang);
 const title = '不知道工具名稱？依任務找 FunnyTools';
-const description = '不確定工具叫什麼？依照 PDF、圖片、文字、日期、成績、隨機或開發者任務，從 FunnyTools 現有工具中找到下一步。';
+const description = '不確定工具叫什麼？依照 PDF、圖片、文字、日期、成績、隨機或開發者任務，從 FunnyTools 現有工具中找到下一步，並直接前往合適的免費工具。';
 const categoryViews = categories
   .map((category) => ({ category, tools: liveTools.filter((tool) => tool.category === category.id) }))
   .filter(({ tools }) => tools.length > 0);
@@ -31,7 +31,7 @@ const breadcrumbLd = breadcrumbJsonLd([
 ]);
 ---
 
-<BaseLayout lang={lang} title={title} description={description} hasAlternates={false} jsonLd={[breadcrumbLd, { '@context': 'https://schema.org', '@type': 'WebPage', name: title, description, url: localePath(lang, 'find-tools') }]}>
+<BaseLayout lang={lang} title={title} description={description} canonicalPath={localePath(lang, 'find-tools')} hasAlternates={false} jsonLd={[breadcrumbLd, { '@context': 'https://schema.org', '@type': 'WebPage', name: title, description, url: localePath(lang, 'find-tools') }]}>
   <article class="wrap finder-page">
     <Breadcrumb items={[{ label: ui.breadcrumbHome, href: localePath(lang) }, { label: title }]} />
     <header class="finder-hero">
