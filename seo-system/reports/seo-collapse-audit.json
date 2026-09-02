@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-09-02T02:24:17.539Z",
+  "generatedAt": "2026-09-02T02:28:45.076Z",
   "mode": "local",
   "local": {
-    "buildPages": 1018,
-    "indexablePages": 559,
-    "sitemapUrls": 559,
+    "buildPages": 1027,
+    "indexablePages": 568,
+    "sitemapUrls": 568,
     "internalHttpLinks": 0,
     "orphanIndexable": [],
     "corePaths": [

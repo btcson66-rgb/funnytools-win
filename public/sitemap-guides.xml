@@ -331,11 +331,19 @@
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/dice-probability-random-streaks-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/effect-size-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/extract-specific-pages-from-pdf/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/fair-random-draw-audit-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
@@ -439,6 +447,10 @@
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/password-manager-mfa-passkey-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/password-strength-basics-guide/</loc>
     <lastmod>2026-07-18</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/password-strength-basics-guide/" />
@@ -509,6 +521,18 @@
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/random-password-length-security-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/random-sampling-with-without-replacement/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/rejection-sampling-modulo-bias-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/remove-duplicate-lines-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
@@ -522,6 +546,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/scanned-pdf-searchable-ocr-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/secure-random-vs-math-random-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
@@ -594,6 +622,14 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/url-encoding-percent-encoding-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/uuid-v4-collision-probability-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/uuid-v4-vs-v7-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
