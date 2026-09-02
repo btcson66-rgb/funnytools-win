@@ -8,6 +8,7 @@ interface ExpansionRoute {
   type: 'home' | 'tool' | 'page' | 'guide' | 'workflow' | 'category';
   batch: string;
   localeBatches?: Partial<Record<ExpansionLocale, string>>;
+  missingLocales?: RouteLocale[];
   paths: Partial<Record<RouteLocale, string>>;
 }
 

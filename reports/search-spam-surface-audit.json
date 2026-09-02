@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-02T15:23:39.600Z",
+  "generatedAt": "2026-09-02T16:29:07.081Z",
   "environment": "local-static-build",
-  "buildVersion": "5.131.0",
+  "buildVersion": "5.131.1",
   "status": "measured-with-hold",
   "routesChecked": 1073,
   "issueCount": 0,

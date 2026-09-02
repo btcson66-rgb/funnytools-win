@@ -1,6 +1,6 @@
 # SEO Audit Report
 
-Generated: 2026-09-02T15:23:50.196Z
+Generated: 2026-09-02T16:28:39.318Z
 
 ## Critical
 
@@ -8,12 +8,7 @@ Generated: 2026-09-02T15:23:50.196Z
 
 ## Warning
 
-- /es/guias/contrasena-segura-fuerte/: hreflang missing en.
-- /es/guias/fluidez-tablas-multiplicar/: hreflang missing en.
-- /es/guias/kb-mb-gb-tb-conversion/: hreflang missing en.
-- /guides/file-size-units-guide/: hreflang missing en.
-- /guides/multiplication-fact-fluency-guide/: hreflang missing en.
-- /guides/password-strength-basics-guide/: hreflang missing en.
+- None
 
 ## Suggestion
 

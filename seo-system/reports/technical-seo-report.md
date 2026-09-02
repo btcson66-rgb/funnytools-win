@@ -1,6 +1,6 @@
 # Technical SEO Report
 
-Generated: 2026-09-02T15:23:50.248Z
+Generated: 2026-09-02T16:28:39.357Z
 
 ## Critical
 
@@ -8,7 +8,7 @@ Generated: 2026-09-02T15:23:50.248Z
 
 ## Warning
 
-- 6 localized page(s) have incomplete hreflang sets.
+- None
 
 ## Suggestion
 

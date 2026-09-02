@@ -7,6 +7,7 @@ const seoDir = join(root, 'seo-system');
 const reportsDir = join(seoDir, 'reports');
 const gscDir = join(seoDir, 'gsc');
 const keywordsPath = join(seoDir, 'keywords', 'tools-keywords.json');
+const expansionRoutesPath = join(root, 'src', 'i18n', 'expansion-routes.json');
 
 mkdirSync(reportsDir, { recursive: true });
 
@@ -150,6 +151,30 @@ function readKeywords() {
   return JSON.parse(readFileSync(keywordsPath, 'utf8'));
 }
 
+function readExpansionRoutes() {
+  if (!existsSync(expansionRoutesPath)) return [];
+  return JSON.parse(readFileSync(expansionRoutesPath, 'utf8')).routes ?? [];
+}
+
+const expansionRoutes = readExpansionRoutes();
+const expansionRouteByPath = new Map(
+  expansionRoutes.flatMap((route) => Object.values(route.paths ?? {})
+    .filter(Boolean)
+    .map((pathname) => [pathname.endsWith('/') ? pathname : `${pathname}/`, route])),
+);
+const hreflangByLocale = { zh: 'zh-TW', en: 'en', es: 'es', fr: 'fr', de: 'de', hi: 'hi' };
+
+function expectedHreflangs(route) {
+  const registered = expansionRouteByPath.get(route);
+  if (!registered) return ['zh-TW', 'en', 'x-default'];
+  const missing = new Set(registered.missingLocales ?? []);
+  const locales = Object.entries(registered.paths ?? {})
+    .filter(([locale, pathname]) => Boolean(pathname) && !missing.has(locale))
+    .map(([locale]) => hreflangByLocale[locale])
+    .filter(Boolean);
+  return registered.paths?.en || registered.paths?.zh || locales.length ? [...locales, 'x-default'] : locales;
+}
+
 function auditPages(pages) {
   const critical = [];
   const warning = [];
@@ -172,7 +197,7 @@ function auditPages(pages) {
     if (page.internalLinks.length < 3) warning.push(`${page.route}: only ${page.internalLinks.length} internal link(s).`);
     if (page.wordCount < 250) warning.push(`${page.route}: low visible text count (${page.wordCount}). Check for thin content or redirect stubs.`);
     if (page.hreflangs.length > 0) {
-      for (const required of ['zh-TW', 'en', 'x-default']) {
+      for (const required of expectedHreflangs(page.route)) {
         if (!page.hreflangs.includes(required)) warning.push(`${page.route}: hreflang missing ${required}.`);
       }
     }
@@ -286,7 +311,7 @@ function technicalReport(pages) {
   }
 
   const localized = eligiblePages.filter((page) => !page.route.startsWith('/blog/') && !page.route.startsWith('/support/'));
-  const missingAlternates = localized.filter((page) => page.hreflangs.length > 0 && !['zh-TW', 'en', 'x-default'].every((lang) => page.hreflangs.includes(lang)));
+  const missingAlternates = localized.filter((page) => page.hreflangs.length > 0 && !expectedHreflangs(page.route).every((lang) => page.hreflangs.includes(lang)));
   if (missingAlternates.length) warning.push(`${missingAlternates.length} localized page(s) have incomplete hreflang sets.`);
   suggestion.push(`Canonical present on ${eligiblePages.filter((page) => page.canonical).length}/${eligiblePages.length} SEO-eligible page(s).`);
 

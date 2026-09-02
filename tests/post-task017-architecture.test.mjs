@@ -105,3 +105,24 @@ test('new workflows have detected inbound internal links', () => {
   visit(dist);
   for (const [route, found] of targets) assert.equal(found, true, `${route} is orphaned`);
 });
+
+test('locale registry records missing English guides without fake English alternates', () => {
+  const registry = JSON.parse(readFileSync(join(root, 'src/i18n/expansion-routes.json'), 'utf8'));
+  const cases = [
+    ['/guides/file-size-units-guide/', '/es/guias/kb-mb-gb-tb-conversion/'],
+    ['/guides/multiplication-fact-fluency-guide/', '/es/guias/fluidez-tablas-multiplicar/'],
+    ['/guides/password-strength-basics-guide/', '/es/guias/contrasena-segura-fuerte/'],
+  ];
+  for (const [zhRoute, esRoute] of cases) {
+    const route = registry.routes.find((entry) => entry.paths.zh === zhRoute);
+    assert.deepEqual(route?.missingLocales, ['en']);
+    assert.equal(route?.paths.en, undefined);
+    for (const pageRoute of [zhRoute, esRoute]) {
+      const html = readRoute(pageRoute);
+      assert.doesNotMatch(html, /<link rel="alternate" hreflang="en"/);
+      assert.match(html, /<link rel="alternate" hreflang="zh-TW"/);
+      assert.match(html, /<link rel="alternate" hreflang="es"/);
+      assert.match(html, /<link rel="alternate" hreflang="x-default"/);
+    }
+  }
+});

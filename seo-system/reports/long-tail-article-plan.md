@@ -1,6 +1,6 @@
 # Long-Tail Article Draft Plan
 
-Generated: 2026-09-02T15:23:50.251Z
+Generated: 2026-09-02T16:28:39.359Z
 
 Status: draft planning only. Do not publish until human_reviewed=true and the quality gate passes.
 
