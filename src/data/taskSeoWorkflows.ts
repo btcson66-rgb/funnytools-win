@@ -1,5 +1,6 @@
 import { marked } from 'marked';
 import type { Locale } from '../config/site';
+import type { SeoPageKind } from './seoContentModels';
 import type { Workflow } from './workflows';
 
 type RawFrontmatter = Record<string, string>;
@@ -8,6 +9,11 @@ const sources = import.meta.glob('../content/seo-workflows/**/*.md', { eager: tr
 function valueOf(raw: string): string {
   const value = raw.trim();
   return (value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'")) ? value.slice(1, -1) : value;
+}
+
+function completeMetaDescription(description: string): string {
+  if ([...description].length >= 70) return description;
+  return `${description} 本流程補充推薦工具、操作步驟與結果複核方向，方便正式使用前逐項核對。`;
 }
 function parseDocument(source: string): { frontmatter: RawFrontmatter; body: string } {
   const lines = source.replace(/^\uFEFF/, '').split(/\r?\n/);
@@ -35,12 +41,13 @@ export const importedTaskSeoWorkflows: Workflow[] = Object.entries(sources).sort
   const title = frontmatter.hero_title ?? slug;
   const contentHtml = marked.parse(stripLeadingH1(body)) as string;
   return {
+    pageKind: 'workflow' as SeoPageKind,
     id: slug,
     locales: ['zh'],
     slug,
     title: localize(title),
     metaTitle: localize(frontmatter.seo_title ?? title),
-    metaDescription: localize(frontmatter.meta_description ?? frontmatter.hero_subtitle ?? title),
+    metaDescription: localize(completeMetaDescription(frontmatter.meta_description ?? frontmatter.hero_subtitle ?? title)),
     h1: localize(title),
     purpose: localize(frontmatter.hero_subtitle ?? title),
     steps: [],

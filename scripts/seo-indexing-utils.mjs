@@ -530,6 +530,10 @@ export function lastmodForPage(
   mode = 'update',
 ) {
   const hash = contentHashForPage(page);
+  const articleDateModified = guideArticleDateModified(page);
+  if (articleDateModified) {
+    return { hash, lastmod: articleDateModified, hashVersion: sitemapContentHashVersion };
+  }
   if (mode === 'preserve' && stored !== null && stored !== undefined) {
     return { hash, lastmod: stored.lastmod, hashVersion: sitemapContentHashVersion };
   }
@@ -550,6 +554,22 @@ export function lastmodForPage(
   const contentDates = renderedContentDates(page.html ?? readText(page.file)).sort();
   const signal = pageDates.at(-1) ?? contentDates.at(-1) ?? today;
   return { hash, lastmod: signal > today ? today : signal, hashVersion: sitemapContentHashVersion };
+}
+
+function guideArticleDateModified(page) {
+  if (!/^\/((?:en\/)?)guides\/[^/]+\/$/.test(page.route ?? '')) return undefined;
+  for (const match of page.html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)) {
+    try {
+      const schema = JSON.parse(match[1]);
+      if (schema?.['@type'] === 'Article' && /^\d{4}-\d{2}-\d{2}$/.test(schema.dateModified ?? '')) {
+        return schema.dateModified;
+      }
+    } catch {
+      // Ignore unrelated or malformed JSON-LD; the normal lastmod evidence
+      // chain below remains the safe fallback for that page.
+    }
+  }
+  return undefined;
 }
 
 function registryAlternates(loc) {

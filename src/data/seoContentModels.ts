@@ -1,6 +1,7 @@
 import type { Locale } from '../config/site';
 
 export type LocalizedText = Record<Locale, string>;
+export type SeoPageKind = 'guide' | 'guideHub' | 'workflow';
 export type SeoContentType =
   | 'ToolPage'
   | 'GuideArticle'

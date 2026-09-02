@@ -1,5 +1,7 @@
 import type { Locale } from '../config/site';
+import type { SeoPageKind } from './seoContentModels';
 import { importedTaskSeoGuides } from './taskSeoGuides';
+import { CONTENT_REVIEWED_AT } from '../lib/contentValue';
 
 export type LocalizedText = Record<Locale, string>;
 
@@ -10,6 +12,8 @@ export interface GuideFaq {
 
 export interface SeoGuide {
   id: string;
+  task?: string;
+  pageKind?: SeoPageKind;
   locales: Locale[];
   slug: string;
   title: LocalizedText;
@@ -41,6 +45,8 @@ export interface SeoGuide {
 
 export interface SeoGuideView {
   id: string;
+  task?: string;
+  pageKind?: SeoPageKind;
   locales: Locale[];
   slug: string;
   title: string;
@@ -72,6 +78,7 @@ export interface SeoGuideView {
 
 interface RawSeoGuide {
   id: string;
+  pageKind?: SeoPageKind;
   slug: string;
   title: string;
   metaTitle: string;
@@ -175,6 +182,7 @@ function localizeRawGuide(guide: RawSeoGuide): SeoGuide {
 
   return {
     ...guide,
+    pageKind: guide.pageKind ?? 'guide',
     // A scheduled Chinese article must never break the whole build merely
     // because its English editorial pass is not finished yet. Keep the
     // original article publishable in Chinese, and only expose an English
@@ -206,6 +214,7 @@ function localizeRawGuide(guide: RawSeoGuide): SeoGuide {
 export function viewSeoGuide(guide: SeoGuide, lang: Locale): SeoGuideView {
   return {
     ...guide,
+    updatedAt: guide.updatedAt ?? CONTENT_REVIEWED_AT,
     title: guide.title[lang],
     metaTitle: guide.metaTitle[lang],
     metaDescription: guide.metaDescription[lang],
@@ -226,6 +235,10 @@ export function viewSeoGuide(guide: SeoGuide, lang: Locale): SeoGuideView {
     contentHtml: guide.contentHtml?.[lang],
     noFaqSchema: guide.noFaqSchema,
   };
+}
+
+export function guideUpdatedAt(guide: Pick<SeoGuide, 'updatedAt'>): string {
+  return guide.updatedAt ?? CONTENT_REVIEWED_AT;
 }
 
 export function isSeoGuideAvailableInLocale(guide: SeoGuide, lang: Locale): boolean {

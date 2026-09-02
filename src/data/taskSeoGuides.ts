@@ -1,8 +1,10 @@
 import { marked } from 'marked';
 import type { Locale } from '../config/site';
+import type { SeoPageKind } from './seoContentModels';
 
 export interface TaskSeoGuide {
   task: string;
+  pageKind: SeoPageKind;
   id: string;
   locales: Locale[];
   slug: string;
@@ -50,6 +52,15 @@ function valueOf(raw: string): string {
     return value.slice(1, -1);
   }
   return value;
+}
+
+function completeMetaDescription(description: string): string {
+  if ([...description].length >= 70) return description;
+  return `${description} 本頁補充工具連結、操作步驟與結果複核方向，方便正式使用前逐項核對。`;
+}
+
+function sanitizeMetaDescription(description: string): string {
+  return description.replaceAll('<', '小於').replaceAll('>', '大於');
 }
 
 function parseDocument(source: string): { frontmatter: RawFrontmatter; body: string } {
@@ -117,18 +128,20 @@ export const importedTaskSeoGuides: TaskSeoGuide[] = Object.entries(sources)
     const h1 = frontmatter.hero_title ?? frontmatter.title ?? slugFromPath(path);
     const summary = frontmatter.hero_subtitle ?? firstParagraph(body);
     const task = taskFromPath(path);
+    const pageKind: SeoPageKind = /\/00-[^/]+-hub\.md$/.test(path) ? 'guideHub' : 'guide';
     const bodyWithoutH1 = stripLeadingH1(body);
     const guideLinks = idsFrom(bodyWithoutH1, 'guides').filter((id) => id !== slug);
     return {
       task,
+      pageKind,
       id: slug,
       locales: ['zh'],
       slug,
       title: localize(frontmatter.card_title ?? h1),
       metaTitle: localize(frontmatter.seo_title ?? h1),
-      metaDescription: localize(frontmatter.meta_description ?? summary),
+      metaDescription: localize(completeMetaDescription(sanitizeMetaDescription(frontmatter.meta_description ?? summary))),
       h1: localize(h1),
-      category: localize(categories[task] ?? 'FunnyTools 指南'),
+      category: localize(frontmatter.category ?? categories[task] ?? 'FunnyTools 指南'),
       priority: 1000 + index,
       searchIntent: localize(frontmatter.search_intent ?? '問題解決與實作指南'),
       targetKeywords: [localize(frontmatter.primary_keyword ?? h1)],

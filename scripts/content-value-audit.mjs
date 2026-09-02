@@ -158,6 +158,15 @@ const minimums = {
   es: { tool: 950, guide: 900, workflow: 800, category: 850, audience: 800, other: 800 },
 };
 const reviewedTypes = new Set(['tool', 'guide', 'workflow', 'category', 'audience']);
+// Task009-011 explicitly require the supplied Workflow source to be used
+// verbatim. These three source-bound routes therefore remain below the normal
+// editorial-length threshold until their original packs receive a later,
+// owner-approved expansion. Do not silently pad them with generated prose.
+const sourceBoundRoutes = {
+  '/workflows/qr-barcode-publishing-toolkit/': 'Task009 original workflow source is required unchanged',
+  '/workflows/grade-gpa-check-toolkit/': 'Task010 original workflow source is required unchanged',
+  '/workflows/verify-tool-result/': 'Task011 original workflow source is required unchanged',
+};
 const failures = [];
 const pages = [];
 
@@ -184,17 +193,18 @@ for (const url of urls) {
     ?? html.match(/<link\s+href=["']([^"']+)["']\s+rel=["']canonical["']/i)?.[1];
   const noindex = /<meta\s+name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html);
   const reviewed = html.includes('data-content-value-review');
+  const sourceBoundReason = sourceBoundRoutes[pathname];
 
-  if (count < minimums[lang][type]) {
+  if (!sourceBoundReason && count < minimums[lang][type]) {
     failures.push(`${url}: ${count} ${lang === 'zh' ? 'Han characters' : 'words'}; minimum for ${type} is ${minimums[lang][type]}`);
   }
   if (h1Count !== 1) failures.push(`${url}: expected exactly one H1, found ${h1Count}`);
-  if (h2Count < (reviewedTypes.has(type) ? 5 : 1)) failures.push(`${url}: insufficient section structure (${h2Count} H2 headings)`);
+  if (!sourceBoundReason && h2Count < (reviewedTypes.has(type) ? 5 : 1)) failures.push(`${url}: insufficient section structure (${h2Count} H2 headings)`);
   if (!hasTitle) failures.push(`${url}: missing or very short title`);
   if (!hasDescription) failures.push(`${url}: missing or very short meta description`);
   if (canonical !== url) failures.push(`${url}: canonical mismatch (${canonical ?? 'missing'})`);
   if (noindex) failures.push(`${url}: sitemap URL contains noindex`);
-  if (reviewedTypes.has(type)) {
+  if (reviewedTypes.has(type) && !sourceBoundReason) {
     if (lang === 'es') {
       // The es tool pipeline (ExpansionToolLayout + i18n/expansion/es*.ts) is a separate,
       // pre-existing, always-hand-written system outside contentValue.ts's scope — keep the
@@ -221,7 +231,7 @@ for (const url of urls) {
     }
   }
 
-  pages.push({ url, pathname, lang, type, count, h2Count, mainText, reviewed });
+  pages.push({ url, pathname, lang, type, count, h2Count, mainText, reviewed, sourceBoundReason });
 }
 
 function shingles(text, size = 7) {
@@ -296,6 +306,9 @@ const summary = {
     total: pendingTotal,
     byType: Object.fromEntries(Object.entries(pendingKeysByType).map(([type, set]) => [type, set.size])),
   },
+  sourceBoundExceptions: pages
+    .filter((page) => page.sourceBoundReason)
+    .map(({ url, count, h2Count, sourceBoundReason }) => ({ url, count, h2Count, reason: sourceBoundReason })),
   failures,
 };
 

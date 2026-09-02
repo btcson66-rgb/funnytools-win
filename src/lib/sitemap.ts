@@ -5,7 +5,7 @@ import { hasLiveTools, liveTools } from '../data/tools';
 import { allBlogPosts } from '../data/allBlogPosts';
 import { audiences } from '../data/audiences';
 import { isPostAvailableInLocale } from '../data/blogPosts';
-import { seoGuides } from '../data/seoGuides';
+import { guideUpdatedAt, seoGuides } from '../data/seoGuides';
 import { workflows } from '../data/workflows';
 import { editorialPages } from '../data/editorialPages';
 import { absoluteUrl, localePath } from './url';
@@ -17,7 +17,7 @@ const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disc
 const latestContentDate = [
   ...liveTools.map((tool) => tool.updated),
   ...allBlogPosts.map((post) => post.updated),
-  ...seoGuides.map((guide) => guide.updatedAt),
+  ...seoGuides.map((guide) => guideUpdatedAt(guide)),
   ...workflows.map((workflow) => workflow.updatedAt),
 ]
   .filter((value): value is string => Boolean(value))
@@ -146,10 +146,10 @@ function guideArticlePages(): SitemapPage[] {
 
 export function guidePages(): SitemapPage[] {
   return [
-    { segments: ['guides'], lastmod: seoGuides[0]?.updatedAt, changefreq: 'weekly', priority: '0.7', alternates: true },
+    { segments: ['guides'], lastmod: seoGuides[0] ? guideUpdatedAt(seoGuides[0]) : undefined, changefreq: 'weekly', priority: '0.7', alternates: true },
     ...seoGuides.map((guide) => ({
       segments: ['guides', guide.slug],
-      lastmod: guide.updatedAt,
+      lastmod: guideUpdatedAt(guide),
       changefreq: 'monthly' as const,
       priority: guide.priority <= 2 ? '0.7' : '0.6',
       alternates: guide.locales.includes('en'),

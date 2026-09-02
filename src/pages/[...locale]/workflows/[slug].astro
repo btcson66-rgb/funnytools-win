@@ -4,14 +4,15 @@ import ContentValueReview from '../../../components/ContentValueReview.astro';
 import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { SITE, type Locale } from '../../../config/site';
+import { type Locale } from '../../../config/site';
 import { getToolBySlug, type ToolMeta } from '../../../data/tools';
 import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide, type SeoGuide, type SeoGuideView } from '../../../data/seoGuides';
 import { workflows, isWorkflowAvailableInLocale, viewWorkflow, type Workflow } from '../../../data/workflows';
-import { absoluteUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/url';
+import { localePath, localeUrlPair, toolUrl } from '../../../lib/url';
 import { breadcrumbJsonLd, webPageJsonLd } from '../../../lib/seo';
 import { t } from '../../../i18n/ui';
 import { buildWorkflowValueReview, CONTENT_REVIEWED_AT } from '../../../lib/contentValue';
+import { resolveWorkflowHub } from '../../../data/guideNavigation';
 
 export function getStaticPaths() {
   return workflows.flatMap((workflow) => {
@@ -36,27 +37,26 @@ export function getStaticPaths() {
 const { lang, workflow: sourceWorkflow } = Astro.props as { lang: Locale; workflow: Workflow };
 const ui = t(lang);
 const workflow = viewWorkflow(sourceWorkflow, lang);
+const workflowHub = resolveWorkflowHub(sourceWorkflow, lang);
 const copy = {
   zh: {
     breadcrumb: '工作流程',
-    eyebrow: '教育統計流程',
+    eyebrow: '工作流程',
     purpose: '流程目的',
     steps: '流程步驟',
     tools: '推薦工具',
     relatedGuides: '相關指南',
-    hub: '回到教育統計工具中心',
     back: '回到工作流程',
     openTool: '開啟工具',
     updated: '更新日期',
   },
   en: {
     breadcrumb: 'Workflows',
-    eyebrow: 'Education statistics workflow',
+    eyebrow: 'Workflow',
     purpose: 'Purpose',
     steps: 'Workflow steps',
     tools: 'Recommended tools',
     relatedGuides: 'Related guides',
-    hub: 'Back to Education & Statistics hub',
     back: 'Back to workflows',
     openTool: 'Open tool',
     updated: 'Updated',
@@ -71,7 +71,7 @@ const liveTool = (slug: string): ToolMeta | undefined => {
 };
 const recommendedTools = workflow.recommendedToolIds.map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool));
 const valueReview = buildWorkflowValueReview(lang, workflow.slug, workflow, recommendedTools.map((tool) => tool.name[lang]));
-const effectiveUpdatedAt = CONTENT_REVIEWED_AT;
+const effectiveUpdatedAt = workflow.updatedAt ?? CONTENT_REVIEWED_AT;
 const relatedGuides: SeoGuideView[] = workflow.relatedGuideIds
   .map((slug) => seoGuides.find((candidate) => candidate.slug === slug))
   .filter((candidate): candidate is SeoGuide => candidate != null && isSeoGuideAvailableInLocale(candidate, lang))
@@ -93,29 +93,17 @@ const breadcrumbLd = breadcrumbJsonLd([
   { name: workflow.title, href: workflowPath },
 ]);
 const pageLd = webPageJsonLd(lang, workflow.metaTitle, workflow.metaDescription, workflowPath);
-const articleLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: workflow.h1,
-  description: workflow.metaDescription,
-  dateModified: effectiveUpdatedAt,
-  inLanguage: SITE.hreflang[lang],
-  mainEntityOfPage: absoluteUrl(workflowPath),
-  url: absoluteUrl(workflowPath),
-  author: { '@type': 'Organization', name: SITE.name[lang], url: SITE.url },
-  publisher: { '@type': 'Organization', name: SITE.name[lang], url: SITE.url },
-};
 ---
 
 <BaseLayout
   lang={lang}
   title={workflow.metaTitle}
   description={workflow.metaDescription}
-  type="article"
+  type="website"
   alternateSegments={['workflows', workflow.slug]}
   altLang={hasAlternates ? localeUrlPair('workflows', workflow.slug) : undefined}
   hasAlternates={hasAlternates}
-  jsonLd={[pageLd, articleLd, ...(workflow.noFaqSchema || faqItems.length === 0 ? [] : [faqLd]), breadcrumbLd]}
+  jsonLd={[pageLd, ...(workflow.noFaqSchema || faqItems.length === 0 ? [] : [faqLd]), breadcrumbLd]}
 >
   <article class="wrap workflow-article">
     <Breadcrumb items={[
@@ -176,7 +164,7 @@ const articleLd = {
 
     <nav class="workflow-bottom">
       <a class="btn" href={workflowIndexPath} data-hub-link="workflows">{copy.back}</a>
-      <a class="btn go" href={localePath(lang, 'education-statistics')} data-hub-link="education-statistics">{copy.hub}</a>
+      <a class="btn go" href={workflowHub.href} data-hub-link={workflowHub.id}>{workflowHub.label}</a>
     </nav>
 
     <Faq lang={lang} items={faqItems} emitJsonLd={false} />

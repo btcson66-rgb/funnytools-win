@@ -10,11 +10,12 @@ import { getToolBySlug, type ToolMeta } from '../../../data/tools';
 import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide, type SeoGuide, type SeoGuideView } from '../../../data/seoGuides';
 import { workflows, isWorkflowAvailableInLocale, viewWorkflow } from '../../../data/workflows';
 import { absoluteUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/url';
-import { breadcrumbJsonLd, webPageJsonLd } from '../../../lib/seo';
+import { breadcrumbJsonLd, collectionPageJsonLd, webPageJsonLd } from '../../../lib/seo';
 import { t } from '../../../i18n/ui';
-import { buildGuideValueReview, CONTENT_REVIEWED_AT } from '../../../lib/contentValue';
+import { buildGuideValueReview } from '../../../lib/contentValue';
 import { expansionRouteByPath } from '../../../i18n/expansionRoutes';
 import { getGuideAffiliateConfig, splitGuideContentHtml } from '../../../data/guideAffiliate';
+import { resolveGuideHub } from '../../../data/guideNavigation';
 
 export function getStaticPaths() {
   return seoGuides.flatMap((guide) => {
@@ -39,6 +40,8 @@ export function getStaticPaths() {
 const { lang, guide: sourceGuide } = Astro.props as { lang: Locale; guide: SeoGuide };
 const ui = t(lang);
 const guide = viewSeoGuide(sourceGuide, lang);
+const guideHub = sourceGuide.pageKind === 'guideHub' ? null : resolveGuideHub(sourceGuide, lang);
+const hubCta = guideHub ?? { id: 'guides', label: lang === 'zh' ? '指南' : 'Guides', href: localePath(lang, 'guides') };
 const articleAffiliateConfig = getGuideAffiliateConfig(guide.slug);
 const articleContentSplit = articleAffiliateConfig.affiliateEnabled && guide.contentHtml
   ? splitGuideContentHtml(guide.contentHtml)
@@ -46,7 +49,6 @@ const articleContentSplit = articleAffiliateConfig.affiliateEnabled && guide.con
 const copy = {
   zh: {
     breadcrumb: '指南',
-    eyebrow: '教育統計指南',
     problem: '要解決的問題',
     audience: '適合誰使用',
     concept: '公式與概念',
@@ -60,12 +62,11 @@ const copy = {
     back: '回到指南列表',
     openTool: '開啟工具',
     favorite: '加入常用工具',
-    hub: '教育統計工具中心',
+    guideSuffix: '指南',
     updated: '更新日期',
   },
   en: {
     breadcrumb: 'Guides',
-    eyebrow: 'Education statistics guide',
     problem: 'Problem',
     audience: 'Who should use this',
     concept: 'Formula and concept',
@@ -79,7 +80,7 @@ const copy = {
     back: 'Back to guides',
     openTool: 'Open tool',
     favorite: 'Add to favorites',
-    hub: 'Education & Statistics hub',
+    guideSuffix: 'guide',
     updated: 'Updated',
   },
 }[lang];
@@ -104,12 +105,19 @@ const hasSourceAlternates = sourceGuide.locales.includes('zh') && sourceGuide.lo
 const hasAlternates = hasSourceAlternates || Boolean(expansionRouteByPath(guidePath));
 const faqItems = guide.faq.map((item) => ({ q: item.question, a: item.answer }));
 const valueReview = buildGuideValueReview(lang, guide.slug, guide);
-const effectiveUpdatedAt = CONTENT_REVIEWED_AT;
+const effectiveUpdatedAt = guide.updatedAt;
+const breadcrumbItems = [
+  { label: ui.breadcrumbHome, href: localePath(lang) },
+  { label: copy.breadcrumb, href: guidesPath },
+  ...(guideHub && guideHub.href !== guidesPath ? [{ label: guideHub.label, href: guideHub.href }] : []),
+  { label: guide.title },
+];
 const articleLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: guide.h1,
   description: guide.metaDescription,
+  ...(sourceGuide.publishAt ? { datePublished: sourceGuide.publishAt } : {}),
   dateModified: effectiveUpdatedAt,
   inLanguage: SITE.hreflang[lang],
   mainEntityOfPage: guideUrl,
@@ -126,12 +134,10 @@ const faqLd = {
     acceptedAnswer: { '@type': 'Answer', text: item.answer },
   })),
 };
-const breadcrumbLd = breadcrumbJsonLd([
-  { name: ui.breadcrumbHome, href: localePath(lang) },
-  { name: copy.breadcrumb, href: guidesPath },
-  { name: guide.title, href: guidePath },
-]);
-const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guidePath);
+const breadcrumbLd = breadcrumbJsonLd(breadcrumbItems.map(({ label, href }) => ({ name: label, href: href ?? guidePath })));
+const pageLd = sourceGuide.pageKind === 'guideHub'
+  ? collectionPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guidePath)
+  : webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guidePath);
 ---
 
 <BaseLayout
@@ -139,21 +145,17 @@ const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guide
   title={guide.metaTitle}
   description={guide.metaDescription}
   keywords={guide.targetKeywords}
-  type="article"
+  type={sourceGuide.pageKind === 'guideHub' ? 'website' : 'article'}
   alternateSegments={['guides', guide.slug]}
   altLang={hasSourceAlternates ? localeUrlPair('guides', guide.slug) : undefined}
   hasAlternates={hasAlternates}
-    jsonLd={[pageLd, articleLd, ...(guide.noFaqSchema || faqItems.length === 0 ? [] : [faqLd]), breadcrumbLd]}
+    jsonLd={[pageLd, ...(sourceGuide.pageKind === 'guide' ? [articleLd] : []), ...(guide.noFaqSchema || faqItems.length === 0 ? [] : [faqLd]), breadcrumbLd]}
 >
   <article class="wrap guide-article">
-    <Breadcrumb items={[
-      { label: ui.breadcrumbHome, href: localePath(lang) },
-      { label: copy.breadcrumb, href: guidesPath },
-      { label: guide.title },
-    ]} />
+    <Breadcrumb items={breadcrumbItems} />
 
     <header class="guide-hero">
-      <p class="eyebrow">{copy.eyebrow}</p>
+      <p class="eyebrow">{guide.category} {copy.guideSuffix}</p>
       <h1>{guide.h1}</h1>
       <p class="lead">{guide.summary}</p>
       <p class="guide-date">{copy.updated}: <time datetime={effectiveUpdatedAt}>{effectiveUpdatedAt}</time></p>
@@ -263,7 +265,7 @@ const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guide
       <p>{guide.cta}</p>
       <nav class="guide-bottom">
         <a class="btn" href={guidesPath} data-hub-link="guides">{copy.back}</a>
-        <a class="btn" href={localePath(lang, 'education-statistics')} data-hub-link="education-statistics">{copy.hub}</a>
+        <a class="btn" href={hubCta.href} data-hub-link={hubCta.id}>{hubCta.label}</a>
         {relatedTools[0] && <a class="btn go" href={toolUrl(lang, relatedTools[0].slug)} data-article-cta="guide_primary_tool">{copy.openTool}: {relatedTools[0].name[lang]}</a>}
       </nav>
     </section>

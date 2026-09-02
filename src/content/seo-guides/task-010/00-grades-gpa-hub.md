@@ -141,6 +141,7 @@ GPA 本質是「grade points × credits」的學分加權平均。
 
 可直接使用：
 [教師成績與考試工具組](/workflows/teacher-exam-score-toolkit/)
+[成績與 GPA 檢查工具組](/workflows/grade-gpa-check-toolkit/)
 
 ## 延伸工具
 

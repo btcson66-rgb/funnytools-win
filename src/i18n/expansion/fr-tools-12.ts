@@ -335,7 +335,7 @@ export const frenchBase64: ToolContent = {
       heading: 'UTF-8, accents et emoji',
       paragraphs: [
         'Base64 ne transforme pas directement les lettres. `TextEncoder` produit leurs octets UTF-8 : un caractère ASCII utilise généralement un octet, une lettre accentuée en utilise souvent deux et un emoji davantage. Deux textes ayant le même nombre de signes visibles peuvent donc créer des chaînes Base64 de longueurs différentes. Le padding dépend du nombre total d’octets, pas du nombre de mots.',
-        'Au retour, `TextDecoder("utf-8", { fatal: true })` rejette une suite qui n’est pas du UTF-8 valide. Cela évite d’insérer silencieusement le caractère de remplacement `�`. Si la source a utilisé ISO-8859-1, Windows-1252, UTF-16 ou une donnée binaire, il faut connaître ce format et choisir un outil adapté ; ce décodeur ne tente pas de deviner.',
+        'Au retour, `TextDecoder("utf-8", { fatal: true })` rejette une suite qui n’est pas du UTF-8 valide. Cela évite d’insérer silencieusement un caractère de remplacement. Si la source a utilisé ISO-8859-1, Windows-1252, UTF-16 ou une donnée binaire, il faut connaître ce format et choisir un outil adapté ; ce décodeur ne tente pas de deviner.',
       ],
       items: [
         'Entrée d’encodage : chaîne Unicode saisie dans le navigateur.',

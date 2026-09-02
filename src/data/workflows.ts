@@ -1,4 +1,5 @@
 import type { Locale } from '../config/site';
+import type { SeoPageKind } from './seoContentModels';
 import { importedTaskSeoWorkflows } from './taskSeoWorkflows';
 
 export type LocalizedText = Record<Locale, string>;
@@ -10,6 +11,7 @@ export interface WorkflowFaq {
 
 export interface Workflow {
   id: string;
+  pageKind: SeoPageKind;
   locales: Locale[];
   slug: string;
   title: LocalizedText;
@@ -29,6 +31,7 @@ export interface Workflow {
 
 export interface WorkflowView {
   id: string;
+  pageKind: SeoPageKind;
   locales: Locale[];
   slug: string;
   title: string;
@@ -105,6 +108,7 @@ function localizeRawWorkflow(workflow: RawWorkflow): Workflow {
 
   return {
     ...workflow,
+    pageKind: 'workflow',
     locales: ['zh', 'en'],
     title: text(workflow.title, en.title),
     metaTitle: text(workflow.metaTitle, workflowSeoOverrides[workflow.slug]?.enMetaTitle ?? en.metaTitle),
@@ -490,7 +494,12 @@ const englishWorkflowContent: Record<string, EnglishWorkflowContent> = {
 };
 
 const WORKFLOW_CONTENT_FREEZE_DATE = '2026-08-01';
-const releasedTaskWorkflowSlugs = new Set(['text-cleanup-publishing-toolkit']);
+const releasedTaskWorkflowSlugs = new Set([
+  'qr-barcode-publishing-toolkit',
+  'grade-gpa-check-toolkit',
+  'verify-tool-result',
+  'text-cleanup-publishing-toolkit',
+]);
 export const workflows: Workflow[] = [...rawWorkflows.map(localizeRawWorkflow), ...importedTaskSeoWorkflows]
   .filter((workflow) => !workflow.publishAt || workflow.publishAt <= WORKFLOW_CONTENT_FREEZE_DATE || releasedTaskWorkflowSlugs.has(workflow.slug));
 
