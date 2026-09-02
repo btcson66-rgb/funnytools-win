@@ -28,7 +28,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/affiliate-disclosure/</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/category/draw/</loc>
@@ -223,6 +223,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/bar-chart-school-report-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/base64-utf8-unicode-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/classroom-lottery-tool-guide/</loc>
     <lastmod>2026-08-01</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/classroom-lottery-tool-guide/" />
@@ -272,6 +276,14 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/crop-vs-resize-vs-compress-image/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/csv-to-json-conversion-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/csv-utf8-bom-excel-garbled-text/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
@@ -330,6 +342,18 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/jpg-png-webp-which-to-use/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/json-error-fix-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/json-to-csv-excel-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/markdown-syntax-preview-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
@@ -425,6 +449,10 @@
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/remove-duplicate-lines-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/reorder-rotate-pdf-pages/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
@@ -495,6 +523,10 @@
   <url>
     <loc>https://funnytools.win/guides/unit-price-comparison-guide/</loc>
     <lastmod>2026-07-18</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/url-encoding-percent-encoding-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/visual-schedule-slots-guide/</loc>
