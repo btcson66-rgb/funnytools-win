@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.128.0",
+  "status": "measured-inventory",
+  "routeCount": 1057,
+  "imageTagCount": 78,
+  "imagesWithoutExplicitDimensions": 78,
+  "skippedReasons": [
+    "decoded image bytes and responsive viewport loading"
+  ]
+}

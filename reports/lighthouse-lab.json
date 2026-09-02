@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.128.0",
+  "status": "not-run",
+  "routeCount": 0,
+  "runs": [],
+  "measuredValues": {},
+  "skippedReasons": [
+    "Lighthouse executable/configuration was not invoked in this local gate"
+  ]
+}

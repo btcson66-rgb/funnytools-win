@@ -1,0 +1,138 @@
+{
+  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.128.0",
+  "status": "needs-review",
+  "routeCount": 1057,
+  "totalAssetBytes": 2523509,
+  "htmlBytes": 86216327,
+  "largestAssets": [
+    {
+      "file": "_astro/pdf.worker.min.D39lNQBd.mjs",
+      "bytes": 1299173
+    },
+    {
+      "file": "_astro/pdf.DgtVRDe5.js",
+      "bytes": 485565
+    },
+    {
+      "file": "_astro/index.DUdb4Tre.js",
+      "bytes": 437868
+    },
+    {
+      "file": "_astro/JsBarcode.BEzFGDmN.js",
+      "bytes": 68415
+    },
+    {
+      "file": "_astro/marked.esm.CoZRdNy7.js",
+      "bytes": 41612
+    },
+    {
+      "file": "_astro/purify.es.CC4Brkr_.js",
+      "bytes": 27950
+    },
+    {
+      "file": "_astro/browser.B1C1g1-t.js",
+      "bytes": 25787
+    },
+    {
+      "file": "_astro/Cad2dBoard.astro_astro_type_script_index_0_lang.CXw19P0I.js",
+      "bytes": 20315
+    },
+    {
+      "file": "_astro/papaparse.min.jbqUg7ph.js",
+      "bytes": 19791
+    },
+    {
+      "file": "_astro/ConversionApiTool.astro_astro_type_script_index_0_lang.COVVM_B9.js",
+      "bytes": 12662
+    },
+    {
+      "file": "_astro/EducationStatisticsCalculator.astro_astro_type_script_index_0_lang.Do2iE93n.js",
+      "bytes": 8902
+    },
+    {
+      "file": "_astro/Apa7ReportGenerator.astro_astro_type_script_index_0_lang.BVe3RGdM.js",
+      "bytes": 8382
+    },
+    {
+      "file": "_astro/SpssResultInterpreter.astro_astro_type_script_index_0_lang.DP6aZNsu.js",
+      "bytes": 6843
+    },
+    {
+      "file": "_astro/FlowchartMaker.astro_astro_type_script_index_0_lang.BSnluEnl.js",
+      "bytes": 6318
+    },
+    {
+      "file": "_astro/downloadGate.client.ThBF4cYi.js",
+      "bytes": 4771
+    },
+    {
+      "file": "_astro/MergePdf.astro_astro_type_script_index_0_lang.5Z5edvNi.js",
+      "bytes": 3642
+    },
+    {
+      "file": "_astro/SplitPdf.astro_astro_type_script_index_0_lang.ZGvxxFb7.js",
+      "bytes": 3637
+    },
+    {
+      "file": "_astro/ImagesToPdf.astro_astro_type_script_index_0_lang.COKX7lQk.js",
+      "bytes": 3362
+    },
+    {
+      "file": "_astro/ImageCompressor.astro_astro_type_script_index_0_lang.BPWtv47g.js",
+      "bytes": 3320
+    },
+    {
+      "file": "_astro/RotatePdf.astro_astro_type_script_index_0_lang.DYmKUZYJ.js",
+      "bytes": 2959
+    },
+    {
+      "file": "_astro/DataConverter.astro_astro_type_script_index_0_lang.DzTILIss.js",
+      "bytes": 2949
+    },
+    {
+      "file": "_astro/DeletePdfPages.astro_astro_type_script_index_0_lang.UmNM8TXo.js",
+      "bytes": 2902
+    },
+    {
+      "file": "_astro/BarcodeGenerator.astro_astro_type_script_index_0_lang.9S4PPuSP.js",
+      "bytes": 2821
+    },
+    {
+      "file": "_astro/ExtractPdfPages.astro_astro_type_script_index_0_lang.C5iZwxTc.js",
+      "bytes": 2800
+    },
+    {
+      "file": "_astro/ToolLayout.astro_astro_type_script_index_0_lang.DNuSGaUc.js",
+      "bytes": 2680
+    },
+    {
+      "file": "_astro/QrCodeGenerator.astro_astro_type_script_index_0_lang.1X8xKIgs.js",
+      "bytes": 2632
+    },
+    {
+      "file": "_astro/PdfPageReorder.astro_astro_type_script_index_0_lang.vzy-QT1n.js",
+      "bytes": 2047
+    },
+    {
+      "file": "_astro/index.astro_astro_type_script_index_0_lang.BA4bK3z_.js",
+      "bytes": 1971
+    },
+    {
+      "file": "_astro/MarkdownPreviewer.astro_astro_type_script_index_0_lang.DijiqeuX.js",
+      "bytes": 1922
+    },
+    {
+      "file": "_astro/PdfToImage.astro_astro_type_script_index_0_lang.CCzvpZS4.js",
+      "bytes": 1865
+    }
+  ],
+  "fieldDataAvailable": false,
+  "labDataAvailable": false,
+  "skippedReasons": [
+    "CWV field data",
+    "Lighthouse lab data",
+    "browser trace"
+  ]
+}

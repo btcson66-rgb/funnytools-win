@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.128.0",
+  "status": "measured-build-only",
+  "routeCount": 1057,
+  "measured": {
+    "htmlBytes": 86216327,
+    "assetBytes": 2523509,
+    "assetCount": 39
+  },
+  "baseline": "No prior committed performance baseline was available; this is a current-build snapshot.",
+  "skippedReasons": [
+    "p75 CWV",
+    "historical comparison"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.128.0",
+  "status": "needs-review",
+  "routeCount": 1057,
+  "hashedAssetCount": 0,
+  "assetCount": 39,
+  "skippedReasons": [
+    "production cache headers and CDN behavior"
+  ]
+}

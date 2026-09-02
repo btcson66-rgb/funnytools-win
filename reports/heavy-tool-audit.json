@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.128.0",
+  "status": "needs-review",
+  "routeCount": 252,
+  "thresholdBytes": 153600,
+  "heavyAssets": [
+    {
+      "file": "_astro/pdf.worker.min.D39lNQBd.mjs",
+      "bytes": 1299173
+    },
+    {
+      "file": "_astro/pdf.DgtVRDe5.js",
+      "bytes": 485565
+    },
+    {
+      "file": "_astro/index.DUdb4Tre.js",
+      "bytes": 437868
+    }
+  ],
+  "skippedReasons": [
+    "interaction-time profiling"
+  ]
+}

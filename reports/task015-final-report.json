@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.128.0",
+  "status": "PASS_WITH_WARNINGS",
+  "routeCount": 1057,
+  "archetypes": {
+    "home": 2,
+    "tool": 252,
+    "guide": 137,
+    "workflow": 16,
+    "other": 652
+  },
+  "bundle": {
+    "assetCount": 39,
+    "totalAssetBytes": 2523509,
+    "heavyAssetCount": 3
+  },
+  "fieldDataAvailable": false,
+  "labDataAvailable": false,
+  "warnings": [
+    "No p75 CWV is claimed.",
+    "No Lighthouse score is claimed.",
+    "Large build assets need route-level review."
+  ],
+  "skippedReasons": [
+    "production RUM",
+    "Lighthouse CI",
+    "browser long-task/CLS/LCP trace",
+    "CDN cache headers"
+  ],
+  "releaseDecision": "local performance gate only; no deployment performed"
+}

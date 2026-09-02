@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.128.0",
+  "status": "not-available",
+  "routeCount": 1057,
+  "fieldDataAvailable": false,
+  "measuredValues": {},
+  "skippedReasons": [
+    "RUM endpoint/sample data is not part of this repository audit"
+  ]
+}

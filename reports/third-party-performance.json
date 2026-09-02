@@ -1,0 +1,504 @@
+{
+  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.128.0",
+  "status": "measured-inventory",
+  "routeCount": 1057,
+  "hosts": [
+    {
+      "host": "funnytools.win",
+      "references": 3159
+    },
+    {
+      "host": "pagead2.googlesyndication.com",
+      "references": 1797
+    },
+    {
+      "host": "www.googletagmanager.com",
+      "references": 1446
+    },
+    {
+      "host": "worthcalc.win",
+      "references": 387
+    },
+    {
+      "host": "roomfeng.win",
+      "references": 387
+    },
+    {
+      "host": "www.facebook.com",
+      "references": 168
+    },
+    {
+      "host": "social-plugins.line.me",
+      "references": 167
+    },
+    {
+      "host": "twitter.com",
+      "references": 166
+    },
+    {
+      "host": "developer.mozilla.org",
+      "references": 93
+    },
+    {
+      "host": "www.w3.org",
+      "references": 47
+    },
+    {
+      "host": "payhip.com",
+      "references": 37
+    },
+    {
+      "host": "www.itl.nist.gov",
+      "references": 23
+    },
+    {
+      "host": "btcsonlab.gumroad.com",
+      "references": 20
+    },
+    {
+      "host": "www.aepd.es",
+      "references": 20
+    },
+    {
+      "host": "apastyle.apa.org",
+      "references": 14
+    },
+    {
+      "host": "www.insee.fr",
+      "references": 14
+    },
+    {
+      "host": "www.ibm.com",
+      "references": 12
+    },
+    {
+      "host": "www.boe.es",
+      "references": 11
+    },
+    {
+      "host": "www.cnil.fr",
+      "references": 11
+    },
+    {
+      "host": "www.education.gouv.fr",
+      "references": 10
+    },
+    {
+      "host": "www.educacionfpydeportes.gob.es",
+      "references": 8
+    },
+    {
+      "host": "intef.es",
+      "references": 8
+    },
+    {
+      "host": "formacion.intef.es",
+      "references": 8
+    },
+    {
+      "host": "pdf-lib.js.org",
+      "references": 7
+    },
+    {
+      "host": "udlguidelines.cast.org",
+      "references": 6
+    },
+    {
+      "host": "www.ine.es",
+      "references": 6
+    },
+    {
+      "host": "diposit.ub.edu",
+      "references": 6
+    },
+    {
+      "host": "clientebancario.bde.es",
+      "references": 5
+    },
+    {
+      "host": "descargas.intef.es",
+      "references": 5
+    },
+    {
+      "host": "pages.nist.gov",
+      "references": 5
+    },
+    {
+      "host": "owasp.org",
+      "references": 5
+    },
+    {
+      "host": "www.service-public.fr",
+      "references": 5
+    },
+    {
+      "host": "eduscol.education.fr",
+      "references": 5
+    },
+    {
+      "host": "www.incibe.es",
+      "references": 4
+    },
+    {
+      "host": "www.amf-france.org",
+      "references": 4
+    },
+    {
+      "host": "github.com",
+      "references": 3
+    },
+    {
+      "host": "gumroad.com",
+      "references": 3
+    },
+    {
+      "host": "help.payhip.com",
+      "references": 3
+    },
+    {
+      "host": "www.iso.org",
+      "references": 3
+    },
+    {
+      "host": "boe.es",
+      "references": 3
+    },
+    {
+      "host": "www.rfc-editor.org",
+      "references": 3
+    },
+    {
+      "host": "europa.eu",
+      "references": 3
+    },
+    {
+      "host": "cheatsheetseries.owasp.org",
+      "references": 3
+    },
+    {
+      "host": "helpx.adobe.com",
+      "references": 3
+    },
+    {
+      "host": "support.microsoft.com",
+      "references": 3
+    },
+    {
+      "host": "educationendowmentfoundation.org.uk",
+      "references": 3
+    },
+    {
+      "host": "itl.nist.gov",
+      "references": 3
+    },
+    {
+      "host": "www.pomodorotechnique.com",
+      "references": 3
+    },
+    {
+      "host": "help.autodesk.com",
+      "references": 3
+    },
+    {
+      "host": "www.inrs.fr",
+      "references": 3
+    },
+    {
+      "host": "x.com",
+      "references": 2
+    },
+    {
+      "host": "www.threads.net",
+      "references": 2
+    },
+    {
+      "host": "csrc.nist.gov",
+      "references": 2
+    },
+    {
+      "host": "dictionary.apa.org",
+      "references": 2
+    },
+    {
+      "host": "developers.google.com",
+      "references": 2
+    },
+    {
+      "host": "procomun.intef.es",
+      "references": 2
+    },
+    {
+      "host": "support.google.com",
+      "references": 2
+    },
+    {
+      "host": "datos.gob.es",
+      "references": 2
+    },
+    {
+      "host": "www.nist.gov",
+      "references": 2
+    },
+    {
+      "host": "ielts.org",
+      "references": 2
+    },
+    {
+      "host": "www.bde.es",
+      "references": 2
+    },
+    {
+      "host": "ine.es",
+      "references": 2
+    },
+    {
+      "host": "www.finanzasparatodos.es",
+      "references": 2
+    },
+    {
+      "host": "cc.sisal.unam.mx",
+      "references": 2
+    },
+    {
+      "host": "policies.google.com",
+      "references": 2
+    },
+    {
+      "host": "www.anil.org",
+      "references": 2
+    },
+    {
+      "host": "www.gs1.fr",
+      "references": 2
+    },
+    {
+      "host": "www.francenum.gouv.fr",
+      "references": 2
+    },
+    {
+      "host": "cnil.fr",
+      "references": 2
+    },
+    {
+      "host": "batiscolaire.education.gouv.fr",
+      "references": 2
+    },
+    {
+      "host": "www.ets.org",
+      "references": 2
+    },
+    {
+      "host": "www.unesco.org",
+      "references": 1
+    },
+    {
+      "host": "pdfa.org",
+      "references": 1
+    },
+    {
+      "host": "www.iana.org",
+      "references": 1
+    },
+    {
+      "host": "docs.github.com",
+      "references": 1
+    },
+    {
+      "host": "www.aesan.gob.es",
+      "references": 1
+    },
+    {
+      "host": "ref.gs1.org",
+      "references": 1
+    },
+    {
+      "host": "ies.ed.gov",
+      "references": 1
+    },
+    {
+      "host": "online.stat.psu.edu",
+      "references": 1
+    },
+    {
+      "host": "www.graphpad.com",
+      "references": 1
+    },
+    {
+      "host": "ladal.edu.au",
+      "references": 1
+    },
+    {
+      "host": "www.physics.nist.gov",
+      "references": 1
+    },
+    {
+      "host": "www.commonapp.org",
+      "references": 1
+    },
+    {
+      "host": "www.unicode.org",
+      "references": 1
+    },
+    {
+      "host": "fitbir.nih.gov",
+      "references": 1
+    },
+    {
+      "host": "repository.niddk.nih.gov",
+      "references": 1
+    },
+    {
+      "host": "pmc.ncbi.nlm.nih.gov",
+      "references": 1
+    },
+    {
+      "host": "www.inee.edu.mx",
+      "references": 1
+    },
+    {
+      "host": "udloncampus.cast.org",
+      "references": 1
+    },
+    {
+      "host": "www.uv.es",
+      "references": 1
+    },
+    {
+      "host": "digitum.um.es",
+      "references": 1
+    },
+    {
+      "host": "doi.org",
+      "references": 1
+    },
+    {
+      "host": "www.dgpa.gov.tw",
+      "references": 1
+    },
+    {
+      "host": "universidades.sede.gob.es",
+      "references": 1
+    },
+    {
+      "host": "fulbright.es",
+      "references": 1
+    },
+    {
+      "host": "www.profedet.gob.mx",
+      "references": 1
+    },
+    {
+      "host": "revista.condusef.gob.mx",
+      "references": 1
+    },
+    {
+      "host": "www.cnmv.es",
+      "references": 1
+    },
+    {
+      "host": "www.ehu.eus",
+      "references": 1
+    },
+    {
+      "host": "www.uam.es",
+      "references": 1
+    },
+    {
+      "host": "simulador.condusef.gob.mx",
+      "references": 1
+    },
+    {
+      "host": "educacion.castillalamancha.es",
+      "references": 1
+    },
+    {
+      "host": "repositorio.puce.edu.ec",
+      "references": 1
+    },
+    {
+      "host": "roderic.uv.es",
+      "references": 1
+    },
+    {
+      "host": "home.ubalt.edu",
+      "references": 1
+    },
+    {
+      "host": "centros.edu.xunta.gal",
+      "references": 1
+    },
+    {
+      "host": "sede.agenciatributaria.gob.es",
+      "references": 1
+    },
+    {
+      "host": "www.seg-social.es",
+      "references": 1
+    },
+    {
+      "host": "enlinea.intef.es",
+      "references": 1
+    },
+    {
+      "host": "www.gs1.org",
+      "references": 1
+    },
+    {
+      "host": "www.insst.es",
+      "references": 1
+    },
+    {
+      "host": "www.banque-france.fr",
+      "references": 1
+    },
+    {
+      "host": "www.legifrance.gouv.fr",
+      "references": 1
+    },
+    {
+      "host": "www.economie.gouv.fr",
+      "references": 1
+    },
+    {
+      "host": "travail-emploi.gouv.fr",
+      "references": 1
+    },
+    {
+      "host": "mon-entreprise.urssaf.fr",
+      "references": 1
+    },
+    {
+      "host": "support.gs1.org",
+      "references": 1
+    },
+    {
+      "host": "www.reseau-canope.fr",
+      "references": 1
+    },
+    {
+      "host": "cyber.gouv.fr",
+      "references": 1
+    },
+    {
+      "host": "www.mangerbouger.fr",
+      "references": 1
+    },
+    {
+      "host": "www.anses.fr",
+      "references": 1
+    },
+    {
+      "host": "coupa.ng",
+      "references": 1
+    },
+    {
+      "host": "nces.ed.gov",
+      "references": 1
+    }
+  ],
+  "skippedReasons": [
+    "third-party timing and blocking impact"
+  ]
+}

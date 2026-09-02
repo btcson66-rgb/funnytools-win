@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.128.0",
+  "status": "measured",
+  "routeCount": 1057,
+  "archetypes": {
+    "home": 2,
+    "tool": 252,
+    "guide": 137,
+    "workflow": 16,
+    "other": 652
+  },
+  "fieldDataAvailable": false,
+  "labDataAvailable": false,
+  "skippedReasons": [
+    "no deployed RUM sample in this local audit",
+    "Lighthouse CI not run by this gate"
+  ]
+}

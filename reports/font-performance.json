@@ -1,0 +1,11 @@
+{
+  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.128.0",
+  "status": "no-font-assets",
+  "routeCount": 1057,
+  "fontAssets": [],
+  "skippedReasons": [
+    "font-display visual timing"
+  ]
+}
