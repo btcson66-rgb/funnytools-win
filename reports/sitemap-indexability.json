@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-09-02T02:56:05.327Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.127.0",
+  "status": "pass",
+  "routesChecked": 599,
+  "issueCount": 0,
+  "findings": [],
+  "sitemapFiles": [
+    "sitemap-en.xml",
+    "sitemap-es.xml",
+    "sitemap-fr.xml",
+    "sitemap-guides.xml",
+    "sitemap-tools.xml",
+    "sitemap-workflows.xml",
+    "sitemap.xml"
+  ],
+  "skippedChecks": [
+    "search engine sitemap fetch status"
+  ]
+}

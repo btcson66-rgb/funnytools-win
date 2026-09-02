@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-09-02T02:56:05.327Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.127.0",
+  "status": "measured",
+  "routesChecked": 599,
+  "issueCount": 0,
+  "findings": [],
+  "policy": "lastmod is retained/preserved unless an intentional content change updates it",
+  "skippedChecks": [
+    "truth of dates relative to production deployment"
+  ]
+}

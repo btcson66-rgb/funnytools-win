@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2026-09-02T02:56:05.327Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.127.0",
+  "status": "measured-with-hold",
+  "routesChecked": 1057,
+  "issueCount": 0,
+  "findings": [
+    {
+      "surface": "publishAt/content-freeze",
+      "policy": "new imported SEO articles remain staged until the owner-approved content freeze is lifted"
+    }
+  ],
+  "skippedChecks": [
+    "quality judgment and AdSense review outcome"
+  ]
+}

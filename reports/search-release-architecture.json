@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-09-02T02:56:05.327Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.127.0",
+  "status": "measured",
+  "routesChecked": 1057,
+  "indexableRouteCount": 599,
+  "sources": [
+    "dist/",
+    "public/robots.txt",
+    "public/sitemap*.xml",
+    "src/config/indexing.json"
+  ],
+  "findings": [],
+  "skippedChecks": [
+    "production HTTP status and crawler response"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-09-02T02:56:05.327Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.127.0",
+  "status": "PASS",
+  "routesChecked": 1057,
+  "indexablePageCount": 599,
+  "blockers": [],
+  "warnings": [],
+  "skippedChecks": [
+    "online HTTP/crawler/GSC evidence",
+    "semantic soft-404 review",
+    "Indexing API"
+  ],
+  "releaseDecision": "local-static-gate-only; no deployment performed",
+  "robots": {
+    "present": true,
+    "sitemapDirective": true
+  },
+  "sitemapIssueCount": 0,
+  "canonicalIssueCount": 0,
+  "queryIssueCount": 0,
+  "structuredDataIssueCount": 0,
+  "testBuildStatus": "build and static gate run separately"
+}

@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-09-02T02:56:05.327Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.127.0",
+  "status": "measured-static",
+  "routesChecked": 1057,
+  "issueCount": 0,
+  "findings": [],
+  "note": "Astro static output is the release artifact; no separate browser-rendered metadata mutation was detected by this gate.",
+  "skippedChecks": [
+    "JavaScript execution in a real browser"
+  ]
+}

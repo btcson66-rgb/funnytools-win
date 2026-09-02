@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2026-09-02T02:56:05.327Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.127.0",
+  "status": "measured",
+  "routesChecked": 1057,
+  "issueCount": 0,
+  "findings": [
+    {
+      "risk": "local-build-is-not-production",
+      "mitigation": "release requires explicit preflight/publish and online read-back"
+    }
+  ],
+  "skippedChecks": [
+    "staging host configuration not present in this local build"
+  ]
+}

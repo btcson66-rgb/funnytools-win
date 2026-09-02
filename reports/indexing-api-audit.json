@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2026-09-02T02:56:05.327Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.127.0",
+  "status": "not-run",
+  "routesChecked": 0,
+  "issueCount": 0,
+  "findings": [
+    {
+      "policy": "no Indexing API call was made by this gate"
+    }
+  ],
+  "dataAvailable": false,
+  "skippedChecks": [
+    "GSC authentication, URL Inspection, Indexing API state"
+  ]
+}

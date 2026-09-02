@@ -1,0 +1,658 @@
+{
+  "generatedAt": "2026-09-02T02:56:05.327Z",
+  "environment": "local-static-build",
+  "buildVersion": "5.127.0",
+  "status": "measured",
+  "routesChecked": 1057,
+  "issueCount": 0,
+  "findings": [
+    {
+      "route": "/support-us/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/about/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/about-tools/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/category/draw/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/category/image/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/category/money/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/category/pdf/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/category/random/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/category/statistics/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/category/study/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/category/text/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/category/time/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/contact/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/disclaimer/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/age-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/apa-7-report-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/bar-chart-maker/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/barcode-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/break-reminder/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/business-days/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/cad-2d/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/character-counter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/class-rank-percentile-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/color-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/compound-interest/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/countdown-timer/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/date-difference/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/dice-roller/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/flowchart/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/gpa-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/grade-average/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/group-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/image-compressor/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/image-crop/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/image-resizer/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/image-rotate-flip/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/inflation/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/jpg-to-png/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/jpg-to-webp/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/markdown-previewer/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/mortgage-payment/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/net-salary/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/normalized-score-converter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/overtime-pay/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/password-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/percentage-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/percentile-rank-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/pie-chart-maker/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/png-to-jpg/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/pomodoro-timer/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/qr-code-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/random-group-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/random-name-picker/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/random-number-picker/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/random-student-picker/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/random-wheel/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/remove-duplicate-lines/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/remove-empty-lines/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/savings-goal/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/seating-chart/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/sketchpad/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/sort-lines/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/spss-result-interpreter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/standard-deviation/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/stopwatch/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/t-score-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/teacher-exam-score-converter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/this-or-that/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/timestamp-converter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/uuid-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/webp-to-jpg/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/weighted-average-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/what-to-eat/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/word-counter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/embed/z-score-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/privacy/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/terms/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/age-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/apa-7-report-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/bar-chart-maker/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/barcode-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/base64/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/break-reminder/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/bulk-image-compressor/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/business-days/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/cad-2d/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/case-converter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/character-counter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/class-rank-percentile-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/color-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/compound-interest/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/countdown-timer/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/cronbach-alpha-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/csv-to-json/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/date-difference/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/delete-pdf-pages/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/dice-roller/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/extract-pdf-pages/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/flowchart/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/gpa-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/grade-average/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/group-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/image-compressor/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/image-crop/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/image-resizer/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/image-rotate-flip/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/image-to-base64/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/image-to-dxf/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/images-to-pdf/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/independent-samples-t-test-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/inflation/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/jpg-to-png/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/jpg-to-webp/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/json-formatter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/json-to-csv/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/markdown-previewer/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/merge-pdf/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/mortgage-payment/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/net-salary/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/normalized-score-converter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/overtime-pay/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/password-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/pdf-compressor/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/pdf-page-reorder/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/pdf-table-to-excel/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/pdf-to-image/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/pdf-to-word/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/percentage-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/percentile-rank-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/pie-chart-maker/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/png-to-jpg/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/pomodoro-timer/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/qr-code-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/random-group-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/random-name-picker/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/random-number-picker/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/random-student-picker/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/random-wheel/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/remove-duplicate-lines/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/remove-empty-lines/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/rotate-pdf/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/savings-goal/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/seating-chart/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/sketchpad/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/sort-lines/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/split-pdf/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/spss-result-interpreter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/standard-deviation/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/stopwatch/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/t-score-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/teacher-exam-score-converter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/this-or-that/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/timestamp-converter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/url-encoder/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/uuid-generator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/webp-to-jpg/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/weighted-average-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/what-to-eat/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/word-counter/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    },
+    {
+      "route": "/zh/tools/z-score-calculator/",
+      "policy": "deprecated redirect stub excluded from indexability"
+    }
+  ]
+}
