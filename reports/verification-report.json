@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-09-02T02:45:52.621Z",
+  "dataAvailable": false,
+  "note": "This report contains repository checks only; it is not third-party certification or a claim that every tool has passed every runtime case.",
+  "overallStatus": "pass",
+  "checks": [
+    {
+      "name": "tool-slugs-unique",
+      "status": "pass",
+      "evidence": {
+        "toolCount": 83,
+        "duplicates": []
+      }
+    },
+    {
+      "name": "methodology-source-pack",
+      "status": "pass",
+      "evidence": {
+        "markdownFiles": 10
+      }
+    },
+    {
+      "name": "methodology-routes",
+      "status": "pass",
+      "evidence": {
+        "requiredRoutes": [
+          "src/pages/[...locale]/methodology/index.astro",
+          "src/pages/[...locale]/methodology/[slug].astro"
+        ]
+      }
+    },
+    {
+      "name": "tool-verification-block-wired",
+      "status": "pass",
+      "evidence": {
+        "layout": "ToolLayout.astro"
+      }
+    },
+    {
+      "name": "tool-verification-block-is-zh-gated",
+      "status": "pass",
+      "evidence": {
+        "reason": "English methodology translations are not claimed without source content."
+      }
+    }
+  ]
+}

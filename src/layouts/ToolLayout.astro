@@ -3,6 +3,7 @@ import AdSlot from '../components/AdSlot.astro';
 import CategoryIcon from '../components/CategoryIcon.astro';
 import ContentValueReview from '../components/ContentValueReview.astro';
 import AffiliateProductShelf from '../components/AffiliateProductShelf.astro';
+import VerificationBlock from '../components/VerificationBlock.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import EmbedCode from '../components/EmbedCode.astro';
 import Faq from '../components/Faq.astro';
@@ -191,6 +192,7 @@ const downloadGateConfig = SITE.features.downloadGate
     </section>
 
     {valueReview && <ContentValueReview {...valueReview} />}
+    {lang === 'zh' && <VerificationBlock lang={lang} tool={tool} />}
 
     {
       content.audience && content.audience.length > 0 && (

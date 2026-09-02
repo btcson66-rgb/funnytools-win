@@ -7,6 +7,7 @@ import { audiences } from '../data/audiences';
 import { isPostAvailableInLocale } from '../data/blogPosts';
 import { seoGuides } from '../data/seoGuides';
 import { workflows } from '../data/workflows';
+import { editorialPages } from '../data/editorialPages';
 import { absoluteUrl, localePath } from './url';
 
 const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
@@ -169,6 +170,16 @@ export function workflowPages(): SitemapPage[] {
   ];
 }
 
+export function methodologyPages(): SitemapPage[] {
+  return editorialPages.map((page) => ({
+    segments: page.slug === 'index' ? ['methodology'] : ['methodology', page.slug],
+    lastmod: page.updatedAt,
+    changefreq: page.slug === 'index' ? 'weekly' as const : 'monthly' as const,
+    priority: page.slug === 'index' ? '0.7' : '0.5',
+    alternates: false,
+  }));
+}
+
 export function audiencePages(): SitemapPage[] {
   return [
     { segments: ['for'], changefreq: 'weekly', priority: '0.7', alternates: true },
@@ -187,6 +198,7 @@ export function defaultPageEntries(): SitemapEntry[] {
     ...categoryPages(),
     ...guidePages(),
     ...workflowPages(),
+    ...methodologyPages(),
     ...audiencePages(),
   ].map((page) => ({ lang: 'zh', page }));
 }

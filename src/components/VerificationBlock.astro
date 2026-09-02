@@ -1,0 +1,45 @@
+---
+import type { Locale } from '../config/site';
+import type { ToolMeta } from '../data/tools';
+import { localePath } from '../lib/url';
+
+interface Props {
+  lang: Locale;
+  tool: ToolMeta;
+}
+
+const { lang, tool } = Astro.props as Props;
+const copy = lang === 'zh'
+  ? {
+      heading: '工具驗證與限制',
+      body: '這些公開頁面說明本站如何檢查公式、邊界值、資料處理與輸出；它們不是第三方認證，也不取代你對正式結果的複核。',
+      verification: '查看工具驗證方法',
+      tests: '查看公開測試案例',
+      local: '了解瀏覽器本機處理',
+    }
+  : {
+      heading: 'Verification and limitations',
+      body: 'These public pages explain how FunnyTools checks formulas, boundaries, processing, and outputs. They are not third-party certification and do not replace review of formal results.',
+      verification: 'How tools are verified',
+      tests: 'Public test cases',
+      local: 'Browser-local processing',
+    };
+---
+
+<section class="verification-block" data-verification-tool={tool.slug} aria-labelledby={`verification-${tool.slug}`}>
+  <h2 id={`verification-${tool.slug}`}>{copy.heading}</h2>
+  <p>{copy.body}</p>
+  <nav aria-label={copy.heading}>
+    <a href={localePath(lang, 'methodology', 'tool-verification')}>{copy.verification}</a>
+    <a href={localePath(lang, 'methodology', 'public-test-cases')}>{copy.tests}</a>
+    {tool.privacyLevel === 'local-only' && <a href={localePath(lang, 'methodology', 'browser-local-processing')}>{copy.local}</a>}
+  </nav>
+</section>
+
+<style>
+  .verification-block { margin-top: 28px; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+  .verification-block h2 { margin-top: 0; }
+  .verification-block p { color: var(--muted); line-height: 1.7; }
+  .verification-block nav { display: flex; flex-wrap: wrap; gap: 10px; }
+  .verification-block a { color: var(--brand-2); font-weight: 800; }
+</style>

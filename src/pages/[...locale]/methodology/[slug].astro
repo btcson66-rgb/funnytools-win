@@ -1,0 +1,62 @@
+---
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { type Locale } from '../../../config/site';
+import { editorialPages, getEditorialPage } from '../../../data/editorialPages';
+import { localePath } from '../../../lib/url';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+import { t } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return editorialPages
+    .filter((page) => page.slug !== 'index')
+    .map((page) => ({ params: { locale: undefined, slug: page.slug }, props: { lang: 'zh' as const, page } }));
+}
+
+const { lang, page: sourcePage } = Astro.props as { lang: Locale; page: (typeof editorialPages)[number] };
+const page = sourcePage ?? getEditorialPage(Astro.params.slug ?? '');
+if (!page) throw new Error(`Missing methodology page for ${Astro.params.slug}`);
+const ui = t(lang);
+const pagePath = localePath(lang, 'methodology', page.slug);
+const breadcrumb = breadcrumbJsonLd([
+  { name: ui.breadcrumbHome, href: localePath(lang) },
+  { name: '方法與驗證', href: localePath(lang, 'methodology') },
+  { name: page.title, href: pagePath },
+]);
+---
+
+<BaseLayout
+  lang={lang}
+  title={page.metaTitle}
+  description={page.metaDescription}
+  type="article"
+  hasAlternates={false}
+  jsonLd={[breadcrumb, { '@context': 'https://schema.org', '@type': 'WebPage', name: page.title, description: page.metaDescription, url: pagePath }]}
+>
+  <article class="wrap editorial-page">
+    <Breadcrumb items={[{ label: ui.breadcrumbHome, href: localePath(lang) }, { label: '方法與驗證', href: localePath(lang, 'methodology') }, { label: page.title }]} />
+    <header class="editorial-hero">
+      <p class="eyebrow">FunnyTools methodology</p>
+      <h1>{page.h1}</h1>
+      <p class="lead">{page.summary}</p>
+      <p class="updated">更新：<time datetime={page.updatedAt}>{page.updatedAt}</time></p>
+    </header>
+    <div class="editorial-body markdown-body" set:html={page.contentHtml} />
+    <p><a href={localePath(lang, 'methodology')}>回到方法與驗證中心</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .editorial-page { max-width: 960px; padding-top: 34px; }
+  .editorial-hero h1 { max-width: 900px; font-size: clamp(2rem, 6vw, 3.45rem); }
+  .updated { color: var(--muted); font-size: .92rem; font-weight: 800; }
+  .markdown-body { margin-top: 32px; }
+  .markdown-body :global(h2) { margin-top: 38px; }
+  .markdown-body :global(h3) { margin-top: 28px; font-size: 1.18rem; }
+  .markdown-body :global(p), .markdown-body :global(li) { color: #384455; font-size: 1.03rem; line-height: 1.9; }
+  .markdown-body :global(ul), .markdown-body :global(ol) { padding-left: 1.4rem; }
+  .markdown-body :global(table) { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; }
+  .markdown-body :global(th), .markdown-body :global(td) { padding: 10px 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .markdown-body :global(th) { background: var(--soft); color: var(--ink); }
+  .markdown-body :global(pre) { overflow-x: auto; padding: 14px; border-radius: 10px; background: #101827; color: #f7fbff; }
+</style>

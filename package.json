@@ -1,6 +1,6 @@
 {
   "name": "funnytools",
-  "version": "5.124.0",
+  "version": "5.125.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -16,6 +16,7 @@
     "audit:analytics": "node scripts/analytics-preflight.mjs",
     "audit:pwa": "node scripts/pwa-preflight.mjs",
     "audit:security": "node scripts/security-preflight.mjs",
+    "audit:verification": "node scripts/verification-preflight.mjs",
     "audit:content-value": "node scripts/content-value-audit.mjs",
     "audit:multilingual-aeo": "node scripts/multilingual-aeo-audit.mjs",
     "audit:french-aeo": "node scripts/french-aeo-audit.mjs",
