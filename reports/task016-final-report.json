@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-09-02T02:59:43.386Z",
+  "environment": "local-csv-adapter",
+  "buildVersion": "5.129.0",
+  "dataAvailable": false,
+  "status": "pipeline-ready-no-data",
+  "source": null,
+  "rows": 0,
+  "reportsGenerated": 15,
+  "destructiveActionsExecuted": false,
+  "recommendationsAreCandidatesOnly": true,
+  "skippedChecks": [
+    "GSC CSV/API/BigQuery data",
+    "all performance metrics",
+    "human review"
+  ],
+  "testBuildStatus": "CSV adapter and report generator executed"
+}

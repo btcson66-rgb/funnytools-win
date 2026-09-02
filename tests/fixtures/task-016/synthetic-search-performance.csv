@@ -1,0 +1,11 @@
+period,page_id,url,query,device,locale,clicks,impressions,avg_position,page_age_days,page_type
+recent,guide.pdf-split,/guides/pdf-split/,split pdf,MOBILE,en,8,200,8.5,180,guide
+prior,guide.pdf-split,/guides/pdf-split/,split pdf,MOBILE,en,12,210,7.8,180,guide
+recent,tool.split-pdf,/tools/split-pdf/,split pdf,MOBILE,en,10,180,6.9,400,tool
+prior,tool.split-pdf,/tools/split-pdf/,split pdf,MOBILE,en,9,170,7.1,400,tool
+recent,guide.gpa,/guides/gpa/,how to calculate gpa,DESKTOP,en,4,220,11.0,140,guide
+prior,guide.gpa,/guides/gpa/,how to calculate gpa,DESKTOP,en,7,200,8.0,140,guide
+recent,guide.new,/guides/new/,new calculator guide,MOBILE,en,0,12,48,20,guide
+prior,guide.new,/guides/new/,new calculator guide,MOBILE,en,0,0,999,20,guide
+recent,tool.word,/tools/word-counter/,word counter,MOBILE,en,100,1000,2.2,500,tool
+prior,tool.word,/tools/word-counter/,word counter,MOBILE,en,90,900,2.3,500,tool

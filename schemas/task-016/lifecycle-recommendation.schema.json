@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FunnyTools SEO Lifecycle Recommendation",
+  "type": "object",
+  "required": [
+    "pageId",
+    "state",
+    "confidence",
+    "evidence",
+    "automaticActionAllowed"
+  ],
+  "properties": {
+    "pageId": {
+      "type": "string"
+    },
+    "state": {
+      "enum": [
+        "protect",
+        "monitor_new",
+        "defend_winner",
+        "improve_ctr",
+        "strengthen_striking_distance",
+        "refresh_decay",
+        "investigate_cannibalization",
+        "merge_candidate",
+        "retain_low_search_high_utility",
+        "remove_candidate",
+        "technical_investigation",
+        "insufficient_data"
+      ]
+    },
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommendedReview": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "automaticActionAllowed": {
+      "const": false
+    }
+  }
+}

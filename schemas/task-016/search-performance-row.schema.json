@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FunnyTools Search Performance Normalized Row",
+  "type": "object",
+  "required": [
+    "periodStart",
+    "periodEnd",
+    "pageId",
+    "canonicalUrl",
+    "queryNormalized",
+    "clicks",
+    "impressions",
+    "ctr",
+    "avgPosition",
+    "sourceMode"
+  ],
+  "properties": {
+    "periodStart": {
+      "type": "string"
+    },
+    "periodEnd": {
+      "type": "string"
+    },
+    "pageId": {
+      "type": "string"
+    },
+    "canonicalUrl": {
+      "type": "string"
+    },
+    "pageType": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "locale": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "queryRaw": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "queryNormalized": {
+      "type": "string"
+    },
+    "device": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "country": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "searchType": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "clicks": {
+      "type": "number",
+      "minimum": 0
+    },
+    "impressions": {
+      "type": "number",
+      "minimum": 0
+    },
+    "ctr": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "avgPosition": {
+      "type": "number",
+      "minimum": 1
+    },
+    "sourceMode": {
+      "enum": [
+        "csv",
+        "api",
+        "bigquery"
+      ]
+    },
+    "sourceCompleteness": {
+      "enum": [
+        "manual_export",
+        "top_rows_limited",
+        "bulk_except_anonymized_queries"
+      ]
+    }
+  }
+}

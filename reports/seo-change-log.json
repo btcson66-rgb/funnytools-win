@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-09-02T02:59:43.386Z",
+  "environment": "local-csv-adapter",
+  "buildVersion": "5.129.0",
+  "dataAvailable": false,
+  "status": "measured-no-auto-changes",
+  "rows": 0,
+  "records": [],
+  "destructiveActionsExecuted": false,
+  "skippedChecks": [
+    "external release history not joined"
+  ]
+}

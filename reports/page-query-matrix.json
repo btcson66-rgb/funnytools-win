@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-09-02T02:59:43.386Z",
+  "environment": "local-csv-adapter",
+  "buildVersion": "5.129.0",
+  "dataAvailable": false,
+  "status": "no-data",
+  "rows": 0,
+  "records": [],
+  "skippedChecks": [
+    "沒有提供 GSC/CSV 資料；僅建立 pipeline，不填入推測數值。",
+    "GSC API/BigQuery credentials and exports were not used"
+  ]
+}
