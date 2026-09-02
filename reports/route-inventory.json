@@ -1,0 +1,5298 @@
+{
+  "generatedAt": "2026-09-02T02:50:16.788Z",
+  "status": "measured",
+  "routeCount": 1058,
+  "indexablePageCount": 599,
+  "routes": [
+    {
+      "route": "/404",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/about/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/about-tools/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/affiliate-disclosure/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/ad-block-safe-layout-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/after-midterm-final-score-needed/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/application-pdf-package-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/base64-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/browser-local-tool-privacy-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/calculate-t-score-from-z-score/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/can-pr-and-t-score-convert/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/can-z-score-be-greater-than-3/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/can-z-score-compare-different-exams/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/case-converter-writing-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/class-rank-to-percentile-rank/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/classroom-game-tools-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/classroom-icebreaker-random-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/classroom-list-cleaning-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/classroom-privacy-tools-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/classroom-random-tools-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/compound-interest-explained/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/compound-interest-reading-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/compress-large-images/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/countdown-timer-classroom-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/countdown-timer-productivity-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/csv-cleanup-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/current-score-58-final-exam-save-plan/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/cutoff-score-analysis-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/date-calculator-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/decision-fatigue-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/exam-score-normalization-mistakes/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/failing-grade-calculator-final-needed/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/fair-lottery-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/file-upload-safety-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/free-qr-code-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/ga4-basic-traffic-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/grade-average-weighted-gpa-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/group-role-assignment-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/gsc-indexing-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/image-compress-resize-format-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/image-compression-quality-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/image-for-homework-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/image-metadata-privacy-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/image-upload-limit-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/images-to-pdf-document-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/images-to-pdf-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/internal-linking-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/jpg-png-webp-difference-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/json-formatter-beginner-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/line-break-cleanup-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/logo-image-format-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/lucky-draw-event-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/markdown-to-html-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/mobile-pdf-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/mobile-pdf-merge/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/mortgage-calculation-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/mortgage-payment-explained/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/password-generator-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-blank-page-removal-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-file-naming-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-for-teachers-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-merge-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-merge-split-compress-workflow/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-offline-browser-safety/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-page-order-checklist/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-privacy-checklist/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-signature-workflow/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-split-extract-delete-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-split-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-too-large/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-too-large-upload-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pdf-troubleshooting-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/percentage-calculator-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/percentile-rank-formula-with-ties/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/percentile-rank-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/percentile-rank-vs-rank-percentage/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/percentile-rank-with-many-ties/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/photo-before-after-compress-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-84-meaning-example/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-common-error-as-correct-rate/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-percentile/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-percentile-10/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-percentile-2/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-percentile-3/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-percentile-4/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-percentile-5/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-percentile-6/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-percentile-7/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-percentile-8/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-percentile-9/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-percentile-rank-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/pr-z-t-score-comparison/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/profile-photo-resize-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/qr-code-best-practices/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/qr-code-generator-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/qr-code-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/qr-code-poster-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/random-group-classroom-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/random-grouping-classroom/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/random-grouping-classroom-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/random-number-lottery-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/random-student-picker-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/random-wheel-decision-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/ranking-percentile-class-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/raw-score-to-z-score-class-example/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/resume-pdf-preparation-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/rubric-score-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/scan-to-pdf-quality-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/score-appeal-record-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/screenshot-cleanup-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/seating-chart-practical-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/semester-grade-calculator-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/seo-title-description-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/sitemap-checklist-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/slug-generator-seo-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/small-sample-statistics-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/social-media-image-size-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/standard-deviation-classroom-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/student-presentation-order-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/student-toolkit-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-40-50-60-70-meaning/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-and-percentile-rank/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-calculator-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-common-errors-norm-direction/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-complete-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-high-does-not-guarantee-admission/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-in-psychological-educational-tests/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-is-not-percentage/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-pr-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-teacher-exam/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-10/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-2/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-3/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-4/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-5/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-6/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-7/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-8/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-teacher-exam-9/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/t-score-vs-z-score/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/teacher-activity-flow-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/teacher-admin-toolkit-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/teacher-exam-score-calculation-written-demo-interview/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/teacher-exam-score-checklist/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/teacher-exam-t-score-fairness/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/teacher-exam-weight-written-teaching-interview/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/teacher-exam-weighted-score-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/teacher-random-grouping/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/teacher-score-spreadsheet-check/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/thin-content-cleanup-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/this-or-that-decision-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/time-zone-meeting-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/timestamp-converter-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/tool-page-content-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/transparent-background-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/unit-conversion-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/url-encode-decode-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/utm-link-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/uuid-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/webp-compatibility-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/weighted-average-common-cases/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/what-is-percentile-rank-not-percentage/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/what-is-t-score-mean-50-sd-10/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/what-is-z-score-standard-deviation/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/what-to-eat-decision-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/what-to-eat-decision-methods/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/word-count-social-media-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/word-counter-use-cases/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/yes-no-decision-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/z-score-0-1-minus-1-meaning/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/z-score-and-standard-deviation-relationship/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/z-score-formula-example-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/z-score-in-research-outlier-standardization/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/z-score-standardization-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/z-score-t-score-standard-score-guide/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/blog/z-score-to-t-score-formula-errors/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/category/draw/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/category/image/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/category/money/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/category/pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/category/random/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/category/statistics/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/category/study/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/category/text/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/category/time/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/contact/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/disclaimer/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/education-statistics/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/age-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/apa-7-report-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/bar-chart-maker/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/barcode-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/break-reminder/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/business-days/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/cad-2d/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/character-counter/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/class-rank-percentile-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/color-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/compound-interest/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/countdown-timer/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/date-difference/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/dice-roller/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/flowchart/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/gpa-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/grade-average/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/group-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/image-compressor/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/image-crop/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/image-resizer/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/image-rotate-flip/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/inflation/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/jpg-to-png/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/jpg-to-webp/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/markdown-previewer/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/mortgage-payment/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/net-salary/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/normalized-score-converter/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/overtime-pay/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/password-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/percentage-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/percentile-rank-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/pie-chart-maker/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/png-to-jpg/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/pomodoro-timer/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/qr-code-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/random-group-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/random-name-picker/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/random-number-picker/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/random-student-picker/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/random-wheel/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/remove-duplicate-lines/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/remove-empty-lines/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/savings-goal/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/seating-chart/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/sketchpad/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/sort-lines/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/spss-result-interpreter/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/standard-deviation/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/stopwatch/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/t-score-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/teacher-exam-score-converter/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/this-or-that/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/timestamp-converter/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/uuid-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/webp-to-jpg/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/weighted-average-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/what-to-eat/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/word-counter/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/embed/z-score-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/about/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/about-tools/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/blog/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/category/draw/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/category/image/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/category/money/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/category/pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/category/random/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/category/statistics/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/category/study/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/category/text/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/category/time/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/contact/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/disclaimer/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/education-statistics/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/age-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/apa-7-report-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/bar-chart-maker/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/barcode-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/break-reminder/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/business-days/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/cad-2d/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/character-counter/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/class-rank-percentile-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/color-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/compound-interest/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/countdown-timer/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/date-difference/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/dice-roller/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/flowchart/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/gpa-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/grade-average/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/group-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/image-compressor/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/image-crop/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/image-resizer/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/image-rotate-flip/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/inflation/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/jpg-to-png/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/jpg-to-webp/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/markdown-previewer/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/mortgage-payment/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/net-salary/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/normalized-score-converter/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/overtime-pay/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/password-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/percentage-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/percentile-rank-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/pie-chart-maker/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/png-to-jpg/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/pomodoro-timer/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/qr-code-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/random-group-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/random-name-picker/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/random-number-picker/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/random-student-picker/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/random-wheel/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/remove-duplicate-lines/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/remove-empty-lines/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/savings-goal/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/seating-chart/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/sketchpad/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/sort-lines/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/spss-result-interpreter/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/standard-deviation/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/stopwatch/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/t-score-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/teacher-exam-score-converter/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/this-or-that/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/timestamp-converter/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/uuid-generator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/webp-to-jpg/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/weighted-average-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/what-to-eat/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/word-counter/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/embed/z-score-calculator/",
+      "indexable": false,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/for/creators/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/for/designers/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/for/developers/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/for/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/for/office-workers/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/for/students/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/for/teachers/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/a4-vs-us-letter-printing-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/anova-apa-format-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/bar-chart-school-report-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/classroom-lottery-tool-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/classroom-random-group-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/classroom-random-picker-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/classroom-timer-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/fair-student-grouping-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/image-compression-email-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/merge-pdf-private-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/percentage-shortcuts-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/percentile-rank-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/photos-to-pdf-phone-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/qr-code-classroom-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/spss-levene-test-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/t-score-calculator-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/t-test-apa-format-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/teacher-exam-weighted-score-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/two-way-anova-interaction-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/word-count-essay-limits-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/guides/z-score-calculator-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/privacy/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/shop/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/support/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/terms/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/age-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/apa-7-report-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/bar-chart-maker/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/barcode-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/base64/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/break-reminder/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/bulk-image-compressor/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/business-days/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/cad-2d/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/case-converter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/character-counter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/class-rank-percentile-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/color-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/compound-interest/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/countdown-timer/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/cronbach-alpha-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/csv-to-json/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/date-difference/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/delete-pdf-pages/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/dice-roller/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/extract-pdf-pages/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/flowchart/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/gpa-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/grade-average/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/group-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/image-compressor/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/image-crop/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/image-resizer/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/image-rotate-flip/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/image-to-base64/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/image-to-dxf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/images-to-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/independent-samples-t-test-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/inflation/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/jpg-to-png/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/jpg-to-webp/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/json-formatter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/json-to-csv/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/markdown-previewer/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/merge-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/mortgage-payment/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/net-salary/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/normalized-score-converter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/overtime-pay/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/password-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/pdf-compressor/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/pdf-page-reorder/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/pdf-table-to-excel/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/pdf-to-image/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/pdf-to-word/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/percentage-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/percentile-rank-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/pie-chart-maker/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/png-to-jpg/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/pomodoro-timer/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/qr-code-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/random-group-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/random-name-picker/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/random-number-picker/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/random-student-picker/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/random-wheel/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/remove-duplicate-lines/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/remove-empty-lines/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/rotate-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/savings-goal/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/seating-chart/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/sketchpad/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/sort-lines/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/split-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/spss-result-interpreter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/standard-deviation/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/stopwatch/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/t-score-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/teacher-exam-score-converter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/this-or-that/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/timestamp-converter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/url-encoder/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/uuid-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/webp-to-jpg/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/weighted-average-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/what-to-eat/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/word-counter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/tools/z-score-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/workflows/creator-social-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/workflows/daily-decision-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/workflows/graduate-statistics-report-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/workflows/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/workflows/office-document-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/workflows/student-report-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/workflows/teacher-classroom-random-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/en/workflows/teacher-exam-score-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/apoyar-funnytools/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/aviso-legal/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/categorias/azar/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/categorias/dibujo/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/categorias/dinero/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/categorias/estadistica/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/categorias/estudio/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/categorias/imagen/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/categorias/pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/categorias/texto/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/categorias/tiempo/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/como-funcionan-las-herramientas/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/condiciones-de-uso/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/contacto/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/estadisticas-educativas/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/flujos/actividades-aleatorias-aula/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/flujos/calcular-nota-oposicion-docente/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/flujos/contenido-redes-sociales/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/flujos/decisiones-cotidianas/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/flujos/documentos-oficina/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/flujos/entrega-informe-estudiantil/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/flujos/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/flujos/informe-estadistico-investigacion/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/a4-o-letter-para-imprimir/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/agrupamientos-equitativos-aula/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/anova-formato-apa-7/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/calcular-nota-oposicion-docente/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/calcular-porcentajes-rapido/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/codigos-qr-en-el-aula/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/comprimir-fotos-para-email/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/contrasena-segura-fuerte/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/fluidez-tablas-multiplicar/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/fotos-a-pdf-desde-movil/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/grafico-barras-trabajo-escolar/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/grupos-aleatorios-clase/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/interaccion-anova-dos-factores/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/kb-mb-gb-tb-conversion/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/limite-palabras-ensayos-examenes/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/prueba-levene-spss/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/prueba-t-formato-apa-7/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/puntuacion-t-interpretacion/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/puntuacion-z-interpretacion/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/rango-percentil-interpretacion/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/ruleta-sorteos-clase/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/selector-aleatorio-alumnos/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/temporizador-clase/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/guias/unir-pdf-sin-subir-archivos/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/cad-2d-online/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-alfa-cronbach/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-de-edad/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-desviacion-estandar/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-dias-laborables/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-gpa/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-hipoteca/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-horas-extra/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-inflacion/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-interes-compuesto/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-media-ponderada/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-meta-ahorro/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-nota-oposicion-docente/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-percentil-ranking-clase/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-porcentajes/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-promedio-notas/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-puntuacion-t/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-puntuacion-z/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-rango-percentil/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-sueldo-neto/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calculadora-t-muestras-independientes/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/calcular-diferencia-entre-fechas/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/codificar-decodificar-base64/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/codificar-decodificar-url/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/comprimir-imagenes/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/comprimir-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/contador-caracteres/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/contador-palabras/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/conversor-puntuaciones-estandarizadas/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/convertir-csv-a-json/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/convertir-imagen-base64/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/convertir-imagenes-a-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/convertir-jpg-a-png/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/convertir-jpg-a-webp/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/convertir-json-a-csv/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/convertir-mayusculas-minusculas/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/convertir-pdf-a-imagen/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/convertir-png-a-jpg/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/convertir-timestamp-unix/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/convertir-webp-a-jpg/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/crear-diagrama-flujo/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/crear-grafico-barras/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/crear-grafico-circular/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/crear-grupos-clase/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/crear-plano-asientos-aula/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/cronometro-online/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/decidir-entre-dos-opciones/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/dividir-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/editor-markdown-online/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/eliminar-lineas-duplicadas/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/eliminar-lineas-vacias/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/eliminar-paginas-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/extraer-paginas-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/formatear-validar-json/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/generador-codigo-barras/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/generador-codigo-qr/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/generador-colores-hex-rgb-hsl/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/generador-contrasenas-seguras/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/generador-grupos-aleatorios/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/generador-informe-apa-7/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/generador-numeros-aleatorios/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/generador-uuid-v4/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/interpretar-resultados-spss/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/ordenar-lineas-texto/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/ordenar-paginas-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/pizarra-dibujo-online/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/que-comer-hoy/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/recordatorio-descansos/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/recortar-imagen/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/redimensionar-imagen/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/rotar-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/rotar-voltear-imagen/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/ruleta-aleatoria/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/selector-aleatorio-alumnos/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/sorteo-nombres-aleatorio/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/temporizador-online/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/temporizador-pomodoro/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/tirar-dados-online/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/herramientas/unir-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/para/creadores/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/para/desarrolladores/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/para/disenadores/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/para/docentes/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/para/estudiantes/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/para/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/para/oficina/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/privacidad/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/sobre-funnytools/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/es/tienda/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/find-tools/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/for/creators/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/for/designers/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/for/developers/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/for/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/for/office-workers/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/for/students/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/for/teachers/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/confidentialite/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/fonctionnement-outils/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calcul-moyenne-notes/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-age/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-ecart-type/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-heures-supplementaires/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-inflation-pouvoir-achat/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-interets-composes/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-jours-ouvres/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-mensualite-pret-immobilier/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-moyenne-ponderee/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-objectif-epargne/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-pourcentage/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-rang-percentile/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-salaire-net/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-score-t/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculateur-score-z/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/calculer-difference-entre-dates/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/cao-2d-en-ligne/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/choisir-entre-deux-options/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/chronometre-en-ligne/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/compresser-image/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/compresser-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/compteur-caracteres/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/compteur-mots/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/convertir-csv-en-json/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/convertir-image-en-base64/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/convertir-images-en-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/convertir-jpg-en-png/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/convertir-jpg-en-webp/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/convertir-json-en-csv/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/convertir-majuscules-minuscules/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/convertir-pdf-en-image/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/convertir-png-en-jpg/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/convertir-timestamp-unix/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/convertir-webp-en-jpg/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/creer-diagramme-circulaire/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/creer-diagramme-flux/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/creer-graphique-barres/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/diviser-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/editeur-markdown-en-ligne/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/encoder-decoder-base64/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/encoder-decoder-url/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/extraire-pages-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/faire-pivoter-image/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/faire-pivoter-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/formater-valider-json/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/fusionner-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/generateur-code-barres/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/generateur-code-qr/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/generateur-couleurs-hex-rgb-hsl/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/generateur-groupes-aleatoires/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/generateur-groupes-classe/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/generateur-mot-de-passe-securise/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/generateur-nombres-aleatoires/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/generateur-uuid-v4/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/lancer-des-en-ligne/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/minuteur-en-ligne/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/minuteur-pomodoro/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/plan-de-classe-en-ligne/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/quoi-manger-ce-soir/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/rappel-pause-ecran/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/recadrer-image/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/redimensionner-image/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/reorganiser-pages-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/roue-aleatoire/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/supprimer-lignes-doublons/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/supprimer-lignes-vides/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/supprimer-pages-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/tableau-blanc-dessin-en-ligne/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/tirage-au-sort-eleves/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/tirage-au-sort-noms/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/fr/outils/trier-lignes-texte/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/a4-vs-us-letter-printing-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/age-calculator-school-cutoff-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/anova-apa-format-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/anova-post-hoc-tukey-bonferroni/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/bar-chart-school-report-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/barcode-printing-quiet-zone-svg-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/base64-utf8-unicode-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/break-reminder-work-interval-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/business-days-calendar-days-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/cad-grid-snap-orthogonal-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/chart-flowchart-alt-text-accessibility/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/chart-or-flowchart-selection-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/classroom-lottery-tool-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/classroom-random-group-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/classroom-random-picker-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/classroom-timer-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/code128-vs-code39-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/compress-image-to-upload-limit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/compress-pdf-to-upload-limit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/confidence-interval-95-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/countdown-stopwatch-pomodoro-comparison/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/cronbach-alpha-interpretation/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/crop-vs-resize-vs-compress-image/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/csv-to-json-conversion-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/csv-utf8-bom-excel-garbled-text/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/cvc-word-families-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/date-arithmetic-end-of-month-dst-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/date-difference-inclusive-exclusive-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/decision-tree-vs-flowchart-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/delete-blank-pages-from-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/dice-probability-random-streaks-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/ean13-upca-check-digit-gs1-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/effect-size-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/extra-credit-over-100-grade-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/extract-specific-pages-from-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/fair-random-draw-audit-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/fair-student-grouping-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/file-size-units-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/final-exam-score-needed-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/flowchart-design-checklist/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/flowchart-symbols-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/gpa-4-0-vs-4-3-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/gpa-credit-weighted-formula-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/grade-rounding-cutoff-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/grades-gpa/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/household-physics-demos-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/image-base64-data-uri-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/image-compression-email-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/image-upload-failed-troubleshooting/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/independent-vs-paired-t-test/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/iso-8601-utc-offset-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/jpg-png-webp-which-to-use/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/json-error-fix-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/json-to-csv-excel-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/markdown-syntax-preview-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/mean-median-mode-when-to-use/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/merge-pdf-private-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/misleading-chart-common-errors/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/missing-assignment-zero-exempt-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/multiplication-fact-fluency-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/optimize-images-for-website/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/outlier-detection-iqr-z-score-boxplot/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/p-value-interpretation/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/password-manager-mfa-passkey-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/password-strength-basics-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/pdf-split-vs-extract-vs-delete/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/pdf-to-jpg-vs-png/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/pdf-upload-failed-troubleshooting/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/pearson-vs-spearman-correlation/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/percentage-grade-to-gpa-conversion-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/percentage-shortcuts-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/percentile-rank-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/photos-to-pdf-phone-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/pie-chart-percentage-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/png-to-jpg-transparency-background/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/pomodoro-25-5-focus-interval-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/qr-barcode/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/qr-code-classroom-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/qr-code-not-scanning-print-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/qr-code-phishing-security-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/qr-code-vs-barcode-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/qr-error-correction-logo-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/r-squared-adjusted-r-squared/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/random-password-length-security-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/random-sampling-with-without-replacement/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/rejection-sampling-modulo-bias-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/remove-duplicate-lines-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/reorder-rotate-pdf-pages/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/resize-image-without-distortion/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/scanned-pdf-searchable-ocr-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/secure-random-vs-math-random-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/semester-vs-cumulative-gpa-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/shapiro-wilk-normality-test/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/spss-levene-test-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/standard-deviation-vs-standard-error/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/static-vs-dynamic-qr-code-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/statistical-test-selection/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/statistical-vs-practical-significance/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/svg-vs-png-diagram-export/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/t-score-calculator-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/t-test-apa-format-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/teacher-exam-weighted-score-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/two-way-anova-interaction-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/unit-price-comparison-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/unix-timestamp-seconds-milliseconds-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/url-encoding-percent-encoding-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/uuid-v4-collision-probability-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/uuid-v4-vs-v7-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/visual-schedule-slots-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/weighted-grade-weights-not-100-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/wifi-qr-code-format-security-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/word-count-essay-limits-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/work-deadline-business-day-planning/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/z-score-calculator-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/methodology/accessibility-compatibility/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/methodology/ai-assisted-content/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/methodology/browser-local-processing/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/methodology/calculator-formula-verification/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/methodology/content-sourcing-corrections/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/methodology/file-tool-verification/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/methodology/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/methodology/public-test-cases/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/methodology/randomness-security/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/methodology/tool-verification/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/privacy/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/shop/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/support/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/support-us/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/terms/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/age-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/apa-7-report-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/bar-chart-maker/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/barcode-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/base64/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/break-reminder/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/bulk-image-compressor/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/business-days/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/cad-2d/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/case-converter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/character-counter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/class-rank-percentile-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/color-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/compound-interest/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/countdown-timer/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/cronbach-alpha-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/csv-to-json/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/date-difference/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/delete-pdf-pages/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/dice-roller/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/extract-pdf-pages/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/flowchart/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/gpa-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/grade-average/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/group-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/image-compressor/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/image-crop/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/image-resizer/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/image-rotate-flip/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/image-to-base64/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/image-to-dxf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/images-to-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/independent-samples-t-test-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/inflation/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/jpg-to-png/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/jpg-to-webp/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/json-formatter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/json-to-csv/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/markdown-previewer/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/merge-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/mortgage-payment/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/net-salary/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/normalized-score-converter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/overtime-pay/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/password-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/pdf-compressor/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/pdf-page-reorder/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/pdf-table-to-excel/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/pdf-to-image/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/pdf-to-word/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/percentage-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/percentile-rank-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/pie-chart-maker/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/png-to-jpg/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/pomodoro-timer/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/qr-code-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/random-group-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/random-name-picker/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/random-number-picker/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/random-student-picker/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/random-wheel/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/remove-duplicate-lines/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/remove-empty-lines/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/rotate-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/savings-goal/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/seating-chart/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/sketchpad/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/sort-lines/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/split-pdf/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/spss-result-interpreter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/standard-deviation/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/stopwatch/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/t-score-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/teacher-exam-score-converter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/this-or-that/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/timestamp-converter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/url-encoder/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/uuid-generator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/webp-to-jpg/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/weighted-average-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/what-to-eat/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/word-counter/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/tools/z-score-calculator/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/workflows/creator-social-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/workflows/daily-decision-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/workflows/graduate-statistics-report-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/workflows/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/workflows/office-document-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/workflows/student-report-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/workflows/teacher-classroom-random-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/workflows/teacher-exam-score-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/zh/about/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/about-tools/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/category/draw/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/category/image/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/category/money/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/category/pdf/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/category/random/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/category/statistics/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/category/study/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/category/text/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/category/time/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/contact/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/disclaimer/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/age-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/apa-7-report-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/bar-chart-maker/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/barcode-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/break-reminder/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/business-days/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/cad-2d/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/character-counter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/class-rank-percentile-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/color-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/compound-interest/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/countdown-timer/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/date-difference/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/dice-roller/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/flowchart/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/gpa-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/grade-average/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/group-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/image-compressor/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/image-crop/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/image-resizer/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/image-rotate-flip/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/inflation/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/jpg-to-png/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/jpg-to-webp/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/markdown-previewer/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/mortgage-payment/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/net-salary/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/normalized-score-converter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/overtime-pay/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/password-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/percentage-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/percentile-rank-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/pie-chart-maker/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/png-to-jpg/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/pomodoro-timer/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/qr-code-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/random-group-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/random-name-picker/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/random-number-picker/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/random-student-picker/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/random-wheel/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/remove-duplicate-lines/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/remove-empty-lines/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/savings-goal/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/seating-chart/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/sketchpad/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/sort-lines/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/spss-result-interpreter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/standard-deviation/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/stopwatch/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/t-score-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/teacher-exam-score-converter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/this-or-that/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/timestamp-converter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/uuid-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/webp-to-jpg/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/weighted-average-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/what-to-eat/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/word-counter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/embed/z-score-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/privacy/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/terms/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/age-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/apa-7-report-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/bar-chart-maker/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/barcode-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/base64/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/break-reminder/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/bulk-image-compressor/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/business-days/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/cad-2d/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/case-converter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/character-counter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/class-rank-percentile-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/color-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/compound-interest/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/countdown-timer/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/cronbach-alpha-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/csv-to-json/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/date-difference/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/delete-pdf-pages/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/dice-roller/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/extract-pdf-pages/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/flowchart/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/gpa-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/grade-average/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/group-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/image-compressor/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/image-crop/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/image-resizer/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/image-rotate-flip/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/image-to-base64/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/image-to-dxf/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/images-to-pdf/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/independent-samples-t-test-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/inflation/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/jpg-to-png/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/jpg-to-webp/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/json-formatter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/json-to-csv/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/markdown-previewer/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/merge-pdf/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/mortgage-payment/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/net-salary/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/normalized-score-converter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/overtime-pay/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/password-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/pdf-compressor/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/pdf-page-reorder/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/pdf-table-to-excel/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/pdf-to-image/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/pdf-to-word/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/percentage-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/percentile-rank-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/pie-chart-maker/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/png-to-jpg/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/pomodoro-timer/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/qr-code-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/random-group-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/random-name-picker/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/random-number-picker/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/random-student-picker/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/random-wheel/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/remove-duplicate-lines/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/remove-empty-lines/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/rotate-pdf/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/savings-goal/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/seating-chart/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/sketchpad/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/sort-lines/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/split-pdf/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/spss-result-interpreter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/standard-deviation/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/stopwatch/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/t-score-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/teacher-exam-score-converter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/this-or-that/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/timestamp-converter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/url-encoder/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/uuid-generator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/webp-to-jpg/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/weighted-average-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/what-to-eat/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/word-counter/",
+      "indexable": false,
+      "redirectStub": true
+    },
+    {
+      "route": "/zh/tools/z-score-calculator/",
+      "indexable": false,
+      "redirectStub": true
+    }
+  ]
+}

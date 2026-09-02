@@ -1,0 +1,120 @@
+---
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import CategoryIcon from '../../components/CategoryIcon.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE, type Locale } from '../../config/site';
+import { categories } from '../../data/categories';
+import { finderContentHtml } from '../../data/finderContent';
+import { liveTools } from '../../data/tools';
+import { categoryUrl, localePath, toolUrl } from '../../lib/url';
+import { breadcrumbJsonLd } from '../../lib/seo';
+import { t } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return [{ params: { locale: undefined }, props: { lang: 'zh' as const } }];
+}
+
+const { lang } = Astro.props as { lang: Locale };
+const ui = t(lang);
+const title = '不知道工具名稱？依任務找 FunnyTools';
+const description = '不確定工具叫什麼？依照 PDF、圖片、文字、日期、成績、隨機或開發者任務，從 FunnyTools 現有工具中找到下一步。';
+const categoryViews = categories
+  .map((category) => ({ category, tools: liveTools.filter((tool) => tool.category === category.id) }))
+  .filter(({ tools }) => tools.length > 0);
+const searchCorpus = liveTools.map((tool) => ({
+  ...tool,
+  search: `${tool.name.zh} ${tool.name.en} ${tool.short.zh} ${tool.short.en} ${tool.slug} ${tool.category}`.toLowerCase(),
+}));
+const breadcrumbLd = breadcrumbJsonLd([
+  { name: ui.breadcrumbHome, href: localePath(lang) },
+  { name: title, href: localePath(lang, 'find-tools') },
+]);
+---
+
+<BaseLayout lang={lang} title={title} description={description} hasAlternates={false} jsonLd={[breadcrumbLd, { '@context': 'https://schema.org', '@type': 'WebPage', name: title, description, url: localePath(lang, 'find-tools') }]}>
+  <article class="wrap finder-page">
+    <Breadcrumb items={[{ label: ui.breadcrumbHome, href: localePath(lang) }, { label: title }]} />
+    <header class="finder-hero">
+      <p class="eyebrow">Task finder</p>
+      <h1>{title}</h1>
+      <p class="lead">用你想完成的事情、檔案格式或結果來找工具，不必先記住工具名稱。</p>
+      <label class="finder-search">
+        <span>搜尋任務或格式</span>
+        <input type="search" data-finder-search placeholder="例如：合併 PDF、壓縮圖片、QR Code、T 分數、整理文字" autocomplete="off" />
+      </label>
+      <p class="finder-status" data-finder-status aria-live="polite">顯示 {liveTools.length} 個目前可用工具</p>
+    </header>
+
+    <section class="finder-categories" aria-labelledby="finder-category-title">
+      <h2 id="finder-category-title">先從任務類型開始</h2>
+      <div class="category-grid">
+        {categoryViews.map(({ category, tools }) => (
+          <a class="category-tile" href={categoryUrl(lang, category.id)}>
+            <span class="tile-icon"><CategoryIcon category={category.id} /></span>
+            <strong>{category.name[lang]}</strong>
+            <span>{category.description[lang]}</span>
+            <small>{tools.length} 個工具</small>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="finder-tools" aria-labelledby="finder-tools-title">
+      <h2 id="finder-tools-title">目前可用工具</h2>
+      {categoryViews.map(({ category, tools }) => (
+        <section class="finder-group" aria-labelledby={`finder-${category.id}`}>
+          <h3 id={`finder-${category.id}`}>{category.icon} {category.name[lang]}</h3>
+          <div class="tool-grid">
+            {tools.map((tool) => {
+              const searchable = searchCorpus.find((candidate) => candidate.slug === tool.slug)?.search ?? '';
+              return <a class="finder-tool" data-finder-item data-search={searchable} href={toolUrl(lang, tool.slug)}><strong>{tool.name[lang]}</strong><span>{tool.short[lang]}</span></a>;
+            })}
+          </div>
+        </section>
+      ))}
+      <p class="finder-empty" data-finder-empty hidden>找不到完全相符的工具。可以改用格式、目的或分類搜尋，或先回到 <a href={localePath(lang, 'tools')}>全部工具</a>。</p>
+    </section>
+
+    <section class="finder-editorial markdown-body" set:html={finderContentHtml} />
+  </article>
+
+  <script is:inline>
+    const input = document.querySelector('[data-finder-search]');
+    const items = Array.from(document.querySelectorAll('[data-finder-item]'));
+    const empty = document.querySelector('[data-finder-empty]');
+    const status = document.querySelector('[data-finder-status]');
+    input?.addEventListener('input', () => {
+      const query = input.value.trim().toLowerCase();
+      let visible = 0;
+      items.forEach((item) => {
+        const match = !query || (item.getAttribute('data-search') || '').includes(query);
+        item.hidden = !match;
+        if (match) visible += 1;
+      });
+      if (empty) empty.hidden = visible !== 0;
+      if (status) status.textContent = query ? `符合條件的工具：${visible}` : `顯示 ${items.length} 個目前可用工具`;
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .finder-page { max-width: 1100px; padding-top: 34px; }
+  .finder-hero { padding-bottom: 12px; }
+  .finder-hero h1 { font-size: clamp(2rem, 6vw, 3.45rem); }
+  .finder-search { display: grid; gap: 8px; max-width: 760px; margin-top: 24px; font-weight: 800; }
+  .finder-search input { width: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--ink); font: inherit; }
+  .finder-status { color: var(--muted); font-size: .92rem; }
+  .finder-categories, .finder-tools, .finder-editorial { margin-top: 40px; }
+  .category-grid, .tool-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .category-tile, .finder-tool { display: grid; gap: 6px; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  .category-tile:hover, .finder-tool:hover { border-color: var(--brand); }
+  .category-tile span:not(.tile-icon), .finder-tool span { color: var(--muted); line-height: 1.6; }
+  .category-tile small { color: var(--brand-2); font-weight: 800; }
+  .finder-group { margin-top: 28px; }
+  .finder-group h3 { margin-bottom: 12px; }
+  .finder-empty { padding: 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); }
+  .markdown-body :global(h2) { margin-top: 36px; }
+  .markdown-body :global(h3) { margin-top: 26px; }
+  .markdown-body :global(p), .markdown-body :global(li) { color: #384455; line-height: 1.85; }
+  @media (max-width: 760px) { .category-grid, .tool-grid { grid-template-columns: 1fr; } }
+</style>

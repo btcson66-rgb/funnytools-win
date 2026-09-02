@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-09-02T02:50:16.788Z",
+  "status": "measured",
+  "sitemapFiles": [
+    "sitemap-en.xml",
+    "sitemap-es.xml",
+    "sitemap-fr.xml",
+    "sitemap-guides.xml",
+    "sitemap-tools.xml",
+    "sitemap-workflows.xml",
+    "sitemap.xml"
+  ],
+  "errors": [],
+  "note": "僅檢查本機 sitemap 結構；未宣稱已提交或已被搜尋引擎採用。"
+}

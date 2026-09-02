@@ -355,6 +355,7 @@ const popularItemListJsonLd = {
     <div class="hero-actions">
       <a class="btn go" href={localePath(lang, 'tools')}>{homeCopy.primaryCta}</a>
       <a class="btn ghost" href="#popular-tools">{homeCopy.secondaryCta}</a>
+      {lang === 'zh' && <a class="btn ghost" href={localePath(lang, 'find-tools')}>不知道工具名稱？依任務找工具</a>}
     </div>
     <div class="hero-stats" aria-label={ui.categories}>
       <span class="stat-chip">

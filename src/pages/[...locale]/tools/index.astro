@@ -108,6 +108,7 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
         data-tools-search
       />
     </label>
+    {lang === 'zh' && <p class="tools-finder-link"><a href={localePath(lang, 'find-tools')}>不知道名稱，只知道想完成什麼？依任務找工具</a></p>}
   </section>
 
   <!-- Popular tools -->

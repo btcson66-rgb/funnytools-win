@@ -110,6 +110,7 @@ const collectionLd = {
     <div class="index-actions">
       <a class="btn go" href={localePath(lang, 'guides')}>{copy.guides}</a>
       <a class="btn" href={localePath(lang, 'education-statistics')}>{copy.hub}</a>
+      {lang === 'zh' && <a class="btn" href={localePath(lang, 'find-tools')}>只有單一步驟？依任務找工具</a>}
     </div>
   </section>
 

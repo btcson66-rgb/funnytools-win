@@ -108,7 +108,7 @@ AI 可以幫忙整理與草擬，但公式、路徑、標準與產品行為需�
 
 使用：
 
-[工具結果複核 Workflow](/workflows/verify-tool-result/)
+[工具結果複核 Workflow](/methodology/tool-verification/)
 
 它會帶你完成：
 

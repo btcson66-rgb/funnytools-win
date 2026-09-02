@@ -267,4 +267,4 @@ FunnyTools的公開測試表示：
 - [公開測試案例](/methodology/public-test-cases/)
 - [計算器公式驗證](/methodology/calculator-formula-verification/)
 - [檔案工具驗證](/methodology/file-tool-verification/)
-- [工具結果複核 Workflow](/workflows/verify-tool-result/)
+- [工具結果複核 Workflow](/methodology/tool-verification/)

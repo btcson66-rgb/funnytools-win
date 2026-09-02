@@ -324,4 +324,4 @@ Task 011 應在repo新增小型測試資產：
 
 - [工具驗證方法](/methodology/tool-verification/)
 - [公式驗證](/methodology/calculator-formula-verification/)
-- [工具結果複核](/workflows/verify-tool-result/)
+- [工具結果複核](/methodology/tool-verification/)

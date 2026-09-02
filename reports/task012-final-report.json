@@ -1,0 +1,36 @@
+{
+  "generatedAt": "2026-09-02T02:50:16.788Z",
+  "task": "012",
+  "status": "verified-locally-with-review-items",
+  "buildVersion": "5.125.0",
+  "routeCount": 1058,
+  "toolCount": 83,
+  "indexablePageCount": 599,
+  "orphansBefore": null,
+  "orphansAfter": 0,
+  "brokenLinksBefore": null,
+  "brokenLinksAfter": 0,
+  "clickDepthHistogram": {
+    "0": 4,
+    "1": 457,
+    "2": 138
+  },
+  "duplicateTitleCount": 0,
+  "duplicateMetaCount": 0,
+  "canonicalErrors": 0,
+  "sitemapErrors": 0,
+  "finderFixtures": {
+    "passPresenceOnly": 0,
+    "needsReview": 1,
+    "manualReview": 4
+  },
+  "registryDuplicatesRemoved": 0,
+  "toolsWithSemanticRelatedLinks": 83,
+  "skippedDeferredDependencies": [
+    "live deployment",
+    "GSC/GA4 evidence",
+    "semantic ranking quality",
+    "before/after baseline not available in this branch"
+  ],
+  "lintTypecheckTestBuild": "run separately and recorded by operator"
+}

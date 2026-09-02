@@ -98,6 +98,7 @@ const collectionLd = {
   <section class="wrap content-section" aria-labelledby="audience-overview-title">
     <h2 id="audience-overview-title">{copy.overviewHeading}</h2>
     {copy.overviewParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+    {lang === 'zh' && <p><a href={localePath(lang, 'find-tools')}>如果你只知道手上有什麼檔案或資料，改用「依任務找工具」。</a></p>}
   </section>
 
   <section class="wrap content-section" aria-labelledby="audience-list-title">

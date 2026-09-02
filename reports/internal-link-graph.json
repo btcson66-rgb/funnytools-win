@@ -1,0 +1,208 @@
+{
+  "generatedAt": "2026-09-02T02:50:16.788Z",
+  "status": "measured",
+  "pageCount": 1058,
+  "internalLinkCount": 42825,
+  "topLinkedRoutes": [
+    {
+      "route": "/",
+      "count": 1701
+    },
+    {
+      "route": "/en/",
+      "count": 1065
+    },
+    {
+      "route": "/guides/",
+      "count": 892
+    },
+    {
+      "route": "/tools/",
+      "count": 846
+    },
+    {
+      "route": "/es/",
+      "count": 636
+    },
+    {
+      "route": "/support/",
+      "count": 594
+    },
+    {
+      "route": "/es/privacidad/",
+      "count": 568
+    },
+    {
+      "route": "/education-statistics/",
+      "count": 547
+    },
+    {
+      "route": "/en/tools/",
+      "count": 523
+    },
+    {
+      "route": "/en/guides/",
+      "count": 471
+    },
+    {
+      "route": "/fr/",
+      "count": 444
+    },
+    {
+      "route": "/es/herramientas/",
+      "count": 437
+    },
+    {
+      "route": "/es/herramientas/unir-pdf/",
+      "count": 437
+    },
+    {
+      "route": "/es/herramientas/calculadora-promedio-notas/",
+      "count": 435
+    },
+    {
+      "route": "/es/para/",
+      "count": 427
+    },
+    {
+      "route": "/es/flujos/",
+      "count": 427
+    },
+    {
+      "route": "/es/guias/",
+      "count": 424
+    },
+    {
+      "route": "/es/estadisticas-educativas/",
+      "count": 423
+    },
+    {
+      "route": "/en/education-statistics/",
+      "count": 317
+    },
+    {
+      "route": "/es/como-funcionan-las-herramientas/",
+      "count": 290
+    },
+    {
+      "route": "/en/support/",
+      "count": 285
+    },
+    {
+      "route": "/workflows/",
+      "count": 270
+    },
+    {
+      "route": "/methodology/",
+      "count": 268
+    },
+    {
+      "route": "/for/",
+      "count": 264
+    },
+    {
+      "route": "/privacy/",
+      "count": 260
+    },
+    {
+      "route": "/about/",
+      "count": 255
+    },
+    {
+      "route": "/about-tools/",
+      "count": 254
+    },
+    {
+      "route": "/contact/",
+      "count": 253
+    },
+    {
+      "route": "/find-tools/",
+      "count": 252
+    },
+    {
+      "route": "/terms/",
+      "count": 251
+    },
+    {
+      "route": "/disclaimer/",
+      "count": 251
+    },
+    {
+      "route": "/shop/",
+      "count": 250
+    },
+    {
+      "route": "/fr/outils/fusionner-pdf/",
+      "count": 238
+    },
+    {
+      "route": "/fr/outils/calcul-moyenne-notes/",
+      "count": 237
+    },
+    {
+      "route": "/fr/outils/",
+      "count": 231
+    },
+    {
+      "route": "/es/herramientas/comprimir-imagenes/",
+      "count": 164
+    },
+    {
+      "route": "/en/workflows/",
+      "count": 161
+    },
+    {
+      "route": "/es/herramientas/redimensionar-imagen/",
+      "count": 159
+    },
+    {
+      "route": "/es/herramientas/formatear-validar-json/",
+      "count": 159
+    },
+    {
+      "route": "/es/herramientas/generador-codigo-qr/",
+      "count": 159
+    },
+    {
+      "route": "/es/herramientas/generador-informe-apa-7/",
+      "count": 158
+    },
+    {
+      "route": "/es/herramientas/comprimir-pdf/",
+      "count": 158
+    },
+    {
+      "route": "/es/herramientas/ruleta-aleatoria/",
+      "count": 157
+    },
+    {
+      "route": "/en/for/",
+      "count": 156
+    },
+    {
+      "route": "/es/herramientas/contador-caracteres/",
+      "count": 156
+    },
+    {
+      "route": "/es/herramientas/generador-colores-hex-rgb-hsl/",
+      "count": 156
+    },
+    {
+      "route": "/es/herramientas/temporizador-online/",
+      "count": 156
+    },
+    {
+      "route": "/es/herramientas/convertir-csv-a-json/",
+      "count": 156
+    },
+    {
+      "route": "/es/herramientas/recortar-imagen/",
+      "count": 156
+    },
+    {
+      "route": "/es/herramientas/selector-aleatorio-alumnos/",
+      "count": 156
+    }
+  ]
+}

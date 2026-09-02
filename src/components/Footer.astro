@@ -35,6 +35,7 @@ const statsLine = stats
       <div>
         <span>{lang === 'zh' ? '工具入口' : 'Tool hubs'}</span>
         <a href={localePath(lang, 'tools')}>{ui.nav.tools}</a>
+        {lang === 'zh' && <a href={localePath(lang, 'find-tools')}>依任務找工具</a>}
         <a href={localePath(lang, 'guides')}>{lang === 'zh' ? '使用教學' : 'Guides'}</a>
         <a href={localePath(lang, 'for')}>{lang === 'zh' ? '依使用情境找工具' : 'For your work'}</a>
         <a href={localePath(lang, 'workflows')}>{lang === 'zh' ? '工作流工具組' : 'Workflows'}</a>

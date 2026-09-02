@@ -1,0 +1,379 @@
+{
+  "generatedAt": "2026-09-02T02:50:16.788Z",
+  "status": "needs-review",
+  "fixtureCount": 46,
+  "results": [
+    {
+      "query": "PDF頁面順序亂了",
+      "expected": "PDF Page Reorder",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [
+        "PDF Compressor"
+      ],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "只要PDF第2跟第5頁",
+      "expected": "Extract PDF Pages",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "刪掉PDF最後一頁",
+      "expected": "Delete PDF Pages",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "把三份PDF合成一份",
+      "expected": "Merge PDF",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "把PDF每頁拆開",
+      "expected": "Split PDF",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "PDF太大不能上傳",
+      "expected": "PDF Compressor",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "PDF轉成JPG",
+      "expected": "PDF to Image",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "照片全部做成一個PDF",
+      "expected": "Images to PDF",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "圖片太大不能上傳",
+      "expected": "Image Compressor",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [
+        "Image Resizer"
+      ],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "圖片改成800x600",
+      "expected": "Image Resizer",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "只要照片中間那一塊",
+      "expected": "Image Cropper",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "PNG透明背景轉JPG",
+      "expected": "PNG to JPG",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "JPG轉WebP",
+      "expected": "JPG to WebP",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "WebP轉JPG",
+      "expected": "WebP to JPG",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "圖片轉base64",
+      "expected": "Image to Base64",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "網址做QR code",
+      "expected": "QR Code Generator",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "商品EAN13條碼",
+      "expected": "Barcode Generator",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "文章有幾個字",
+      "expected": "Word Counter",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "我要算UTF8位元組",
+      "expected": "Character Counter",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "刪掉名單重複的人",
+      "expected": "Remove Duplicate Lines",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "刪掉多餘空白行",
+      "expected": "Remove Empty Lines",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "名單照字母排序",
+      "expected": "Sort Lines",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "JSON報錯",
+      "expected": "JSON Formatter",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "CSV轉JSON",
+      "expected": "CSV to JSON",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "JSON轉CSV",
+      "expected": "JSON to CSV",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "URL encode",
+      "expected": "URL Encoder / Decoder",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "文字base64解碼",
+      "expected": "Base64 Encoder / Decoder",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "產生uuid",
+      "expected": "UUID Generator",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "Unix毫秒轉日期",
+      "expected": "Timestamp Converter",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "兩個日期差幾天",
+      "expected": "Date Difference",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "生日現在幾歲",
+      "expected": "Age Calculator",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "兩日期中間幾個工作天",
+      "expected": "Business Days",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "倒數15分鐘",
+      "expected": "Countdown Timer",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "隨機抽一個學生",
+      "expected": "Random Student Picker",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "名單隨機分成5組",
+      "expected": "Random Group Generator",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "抽獎轉盤",
+      "expected": "Random Wheel",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "1到100抽10個不重複",
+      "expected": "Random Number Picker",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "期末要考幾分",
+      "expected": "Final Exam Score Needed Guide",
+      "expectedNoDirectTool": false,
+      "status": "needs-review",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "A B+學分算GPA",
+      "expected": "GPA Calculator",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "算標準差",
+      "expected": "Standard Deviation Calculator",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "做長條圖",
+      "expected": "Bar Chart Maker",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "畫流程圖",
+      "expected": "Flowchart Maker",
+      "expectedNoDirectTool": false,
+      "status": "manual-ranking-check",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "我需要OCR文字辨識",
+      "expected": null,
+      "expectedNoDirectTool": true,
+      "status": "manual-review",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "做動態QR可以改網址",
+      "expected": null,
+      "expectedNoDirectTool": true,
+      "status": "manual-review",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "保存所有密碼",
+      "expected": null,
+      "expectedNoDirectTool": true,
+      "status": "manual-review",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    },
+    {
+      "query": "剪輯影片",
+      "expected": null,
+      "expectedNoDirectTool": true,
+      "status": "manual-review",
+      "forbiddenPresentInFinder": [],
+      "note": "這是靜態存在性檢查；目前 Finder 沒有可由建置流程驗證的語意排序器，因此不宣稱排名正確。"
+    }
+  ]
+}
