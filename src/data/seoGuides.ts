@@ -3851,7 +3851,7 @@ const englishGuideContent: Record<string, EnglishSeoGuideContent> = {
 // Owner-approved releases only; later staged packs remain held until their turn.
 const CONTENT_LIBRARY_FREEZE_DATE = '2026-08-01';
 const contentLibraryToday = CONTENT_LIBRARY_FREEZE_DATE;
-const releasedTaskIds = new Set(['task-001', 'task-002', 'task-003', 'task-004', 'task-005', 'task-006', 'task-007', 'task-008']);
+const releasedTaskIds = new Set(['task-001', 'task-002', 'task-003', 'task-004', 'task-005', 'task-006', 'task-007', 'task-008', 'task-009']);
 const releasedTaskGuideSlugs = new Set(
   importedTaskSeoGuides.filter((guide) => releasedTaskIds.has(guide.task)).map((guide) => guide.slug),
 );

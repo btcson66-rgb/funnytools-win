@@ -223,6 +223,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/bar-chart-school-report-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/barcode-printing-quiet-zone-svg-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/base64-utf8-unicode-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
@@ -279,6 +283,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-timer-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/code128-vs-code39-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/compress-image-to-upload-limit/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
@@ -332,6 +340,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/dice-probability-random-streaks-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/ean13-upca-check-digit-gs1-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
@@ -509,12 +521,32 @@
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/qr-barcode/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/qr-code-classroom-guide/</loc>
     <lastmod>2026-08-01</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-classroom-guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-classroom-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/codigos-qr-en-el-aula/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-classroom-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/qr-code-not-scanning-print-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/qr-code-phishing-security-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/qr-code-vs-barcode-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/qr-error-correction-logo-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/r-squared-adjusted-r-squared/</loc>
@@ -566,6 +598,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/standard-deviation-vs-standard-error/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/static-vs-dynamic-qr-code-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
@@ -635,6 +671,10 @@
   <url>
     <loc>https://funnytools.win/guides/visual-schedule-slots-guide/</loc>
     <lastmod>2026-07-18</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/wifi-qr-code-format-security-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/word-count-essay-limits-guide/</loc>
