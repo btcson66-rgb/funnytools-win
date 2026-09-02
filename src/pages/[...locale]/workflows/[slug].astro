@@ -115,7 +115,7 @@ const articleLd = {
   alternateSegments={['workflows', workflow.slug]}
   altLang={hasAlternates ? localeUrlPair('workflows', workflow.slug) : undefined}
   hasAlternates={hasAlternates}
-  jsonLd={[pageLd, articleLd, faqLd, breadcrumbLd]}
+  jsonLd={[pageLd, articleLd, ...(workflow.noFaqSchema || faqItems.length === 0 ? [] : [faqLd]), breadcrumbLd]}
 >
   <article class="wrap workflow-article">
     <Breadcrumb items={[
@@ -131,6 +131,9 @@ const articleLd = {
       <p class="workflow-date">{copy.updated}: <time datetime={effectiveUpdatedAt}>{effectiveUpdatedAt}</time></p>
     </header>
 
+    {workflow.contentHtml ? (
+      <div class="workflow-block markdown-body" set:html={workflow.contentHtml} />
+    ) : (<>
     <section class="workflow-block" aria-labelledby="purpose-title">
       <h2 id="purpose-title">{copy.purpose}</h2>
       <p>{workflow.purpose}</p>
@@ -177,6 +180,7 @@ const articleLd = {
     </nav>
 
     <Faq lang={lang} items={faqItems} emitJsonLd={false} />
+    </>)}
   </article>
 
   <script>
@@ -215,6 +219,13 @@ const articleLd = {
   .related-list a:hover strong { color: var(--brand); }
   .related-list span { color: var(--muted); line-height: 1.65; }
   .workflow-bottom { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+  .markdown-body :global(h2) { margin-top: 38px; }
+  .markdown-body :global(h3) { margin-top: 28px; font-size: 1.18rem; }
+  .markdown-body :global(p), .markdown-body :global(li) { color: #384455; font-size: 1.03rem; line-height: 1.85; }
+  .markdown-body :global(ul), .markdown-body :global(ol) { padding-left: 1.4rem; }
+  .markdown-body :global(table) { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; }
+  .markdown-body :global(th), .markdown-body :global(td) { padding: 10px 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .markdown-body :global(th) { background: var(--soft); color: var(--ink); }
   @media (max-width: 760px) {
     .workflow-block { margin-top: 30px; }
     .tool-links .btn, .workflow-bottom .btn { width: 100%; justify-content: center; }

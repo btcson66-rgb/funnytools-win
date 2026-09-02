@@ -69,6 +69,7 @@ const pageDescription = lang === 'zh'
 const workflowViews = workflows
   .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
   .map((workflow) => viewWorkflow(workflow, lang));
+const textWritingWorkflow = workflowViews.find((workflow) => workflow.slug === 'text-cleanup-publishing-toolkit');
 const workflowPath = localePath(lang, 'workflows');
 const breadcrumbLd = breadcrumbJsonLd([
   { name: ui.breadcrumbHome, href: localePath(lang) },
@@ -111,6 +112,7 @@ const collectionLd = {
       <a class="btn go" href={localePath(lang, 'guides')}>{copy.guides}</a>
       <a class="btn" href={localePath(lang, 'education-statistics')}>{copy.hub}</a>
       {lang === 'zh' && <a class="btn" href={localePath(lang, 'find-tools')}>只有單一步驟？依任務找工具</a>}
+      {textWritingWorkflow && <a class="btn" href={localePath(lang, 'workflows', textWritingWorkflow.slug)}>文字清理與發布前檢查</a>}
     </div>
   </section>
 

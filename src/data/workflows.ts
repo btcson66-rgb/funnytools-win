@@ -1,4 +1,5 @@
 import type { Locale } from '../config/site';
+import { importedTaskSeoWorkflows } from './taskSeoWorkflows';
 
 export type LocalizedText = Record<Locale, string>;
 
@@ -21,6 +22,9 @@ export interface Workflow {
   relatedGuideIds: string[];
   faq: WorkflowFaq[];
   updatedAt: string;
+  publishAt?: string;
+  contentHtml?: LocalizedText;
+  noFaqSchema?: boolean;
 }
 
 export interface WorkflowView {
@@ -37,6 +41,9 @@ export interface WorkflowView {
   relatedGuideIds: string[];
   faq: { question: string; answer: string }[];
   updatedAt: string;
+  publishAt?: string;
+  contentHtml?: string;
+  noFaqSchema?: boolean;
 }
 
 interface RawWorkflow {
@@ -122,6 +129,8 @@ export function viewWorkflow(workflow: Workflow, lang: Locale): WorkflowView {
     purpose: workflow.purpose[lang],
     steps: workflow.steps.map((step) => step[lang]),
     faq: workflow.faq.map((item) => ({ question: item.question[lang], answer: item.answer[lang] })),
+    contentHtml: workflow.contentHtml?.[lang],
+    noFaqSchema: workflow.noFaqSchema,
   };
 }
 
@@ -480,7 +489,10 @@ const englishWorkflowContent: Record<string, EnglishWorkflowContent> = {
   },
 };
 
-export const workflows: Workflow[] = rawWorkflows.map(localizeRawWorkflow);
+const WORKFLOW_CONTENT_FREEZE_DATE = '2026-08-01';
+const releasedTaskWorkflowSlugs = new Set(['text-cleanup-publishing-toolkit']);
+export const workflows: Workflow[] = [...rawWorkflows.map(localizeRawWorkflow), ...importedTaskSeoWorkflows]
+  .filter((workflow) => !workflow.publishAt || workflow.publishAt <= WORKFLOW_CONTENT_FREEZE_DATE || releasedTaskWorkflowSlugs.has(workflow.slug));
 
 export function getWorkflow(slug: string): Workflow | undefined {
   return workflows.find((workflow) => workflow.slug === slug);

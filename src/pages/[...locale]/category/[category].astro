@@ -85,6 +85,20 @@ const classroomWorkflows = classroomCategoryPages.includes(categoryData.id)
       .slice(0, 1)
       .map((workflow) => viewWorkflow(workflow, lang))
   : [];
+const textWritingHub = categoryData.id === 'text'
+  ? seoGuides.find((guide) => guide.slug === 'text-writing' && isSeoGuideAvailableInLocale(guide, lang))
+  : undefined;
+const textWritingGuides = categoryData.id === 'text'
+  ? seoGuides
+      .filter((guide) => guide.category[lang] === (lang === 'zh' ? '文字與寫作' : '文字與寫作'))
+      .filter((guide) => isSeoGuideAvailableInLocale(guide, lang))
+      .sort((a, b) => a.priority - b.priority)
+      .slice(0, 12)
+      .map((guide) => viewSeoGuide(guide, lang))
+  : [];
+const textWritingWorkflow = categoryData.id === 'text'
+  ? workflows.find((workflow) => workflow.slug === 'text-cleanup-publishing-toolkit' && isWorkflowAvailableInLocale(workflow, lang))
+  : undefined;
 const guidesSectionCopy = lang === 'zh'
   ? { guides: '教學指南', workflows: '工具包流程' }
   : { guides: 'Guides', workflows: 'Workflow toolkits' };
@@ -234,6 +248,15 @@ if (faqItems.length > 0) {
           </div>
         </>
       )}
+    </section>
+  )}
+
+  {(textWritingHub || textWritingGuides.length > 0 || textWritingWorkflow) && (
+    <section class="wrap content-section statistics-guides" aria-labelledby="text-writing-guides-title">
+      <h2 id="text-writing-guides-title">{lang === 'zh' ? '文字、字元與格式整理' : 'Text, characters, and formatting'}</h2>
+      {textWritingHub && <a class="inline-link" href={localePath(lang, 'guides', textWritingHub.slug)}>{textWritingHub.title}</a>}
+      {textWritingGuides.length > 0 && <div class="related-guide-list">{textWritingGuides.map((guide) => <a href={localePath(lang, 'guides', guide.slug)}><strong>{guide.title}</strong><span>{guide.summary}</span></a>)}</div>}
+      {textWritingWorkflow && <p><a class="inline-link" href={localePath(lang, 'workflows', textWritingWorkflow.slug)}>{textWritingWorkflow.title}</a></p>}
     </section>
   )}
 

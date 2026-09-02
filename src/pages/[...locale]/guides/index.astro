@@ -55,6 +55,7 @@ const groupedGuides = [...guideViews.reduce((groups, guide) => {
   groups.set(guide.category, [...items, guide]);
   return groups;
 }, new Map<string, SeoGuideView[]>())];
+const textWritingHub = guideViews.find((guide) => guide.slug === 'text-writing');
 const workflowViews = workflows
   .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
   .map((workflow) => viewWorkflow(workflow, lang));
@@ -104,6 +105,13 @@ const collectionLd = {
   </section>
 
   <section class="wrap content-section" aria-labelledby="guide-list-title">
+    {textWritingHub && (
+      <section class="guide-feature" aria-labelledby="text-writing-hub-title">
+        <h2 id="text-writing-hub-title">文字、字元與格式整理</h2>
+        <p>一段文字可以同時有 word count、character count、UTF-8 bytes 與不同的可見字元數；從 PDF 或網頁複製內容後，空白、換行與 Unicode 字元又會進一步影響結果。</p>
+        <a class="btn go" href={localePath(lang, 'guides', textWritingHub.slug)}>{textWritingHub.title}</a>
+      </section>
+    )}
     <h2 id="guide-list-title">{copy.latest}</h2>
     <div class="category-groups">
       {groupedGuides.map(([category, items]) => (

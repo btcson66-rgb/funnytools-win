@@ -247,11 +247,19 @@
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/camelcase-snake-case-kebab-case-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/chart-flowchart-alt-text-accessibility/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/chart-or-flowchart-selection-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/chinese-english-mixed-word-count-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
@@ -285,6 +293,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/classroom-timer-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/temporizador-clase/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-timer-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/clean-copied-text-from-pdf-web-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/code128-vs-code39-guide/</loc>
@@ -352,6 +364,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/effect-size-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/emoji-character-count-grapheme-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
@@ -433,6 +449,10 @@
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/invisible-spaces-nbsp-zero-width-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/iso-8601-utc-offset-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
@@ -446,6 +466,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/json-to-csv-excel-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/line-breaks-lf-crlf-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
@@ -597,6 +621,10 @@
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/reading-time-estimate-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/rejection-sampling-modulo-bias-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
@@ -681,6 +709,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/teacher-exam-weighted-score-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/text-sort-alphabetical-numeric-length-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/text-writing/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/title-case-vs-sentence-case-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/two-way-anova-interaction-guide/</loc>
     <lastmod>2026-08-01</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/two-way-anova-interaction-guide/" />
@@ -698,6 +738,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/url-encoding-percent-encoding-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/utf8-bytes-vs-characters-guide/</loc>
     <lastmod>2026-08-01</lastmod>
   </url>
   <url>
@@ -727,6 +771,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/word-count-essay-limits-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/limite-palabras-ensayos-examenes/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/word-count-essay-limits-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/word-count-vs-character-count-guide/</loc>
+    <lastmod>2026-08-01</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/guides/work-deadline-business-day-planning/</loc>

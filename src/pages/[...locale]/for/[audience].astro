@@ -9,6 +9,7 @@ import { audiences, isAudienceAvailableInLocale, viewAudience, type Audience } f
 import { categories, getCategoryById } from '../../../data/categories';
 import { getToolBySlug, type ToolMeta } from '../../../data/tools';
 import { getWorkflow, isWorkflowAvailableInLocale, viewWorkflow } from '../../../data/workflows';
+import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide } from '../../../data/seoGuides';
 import { absoluteUrl, categoryUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/url';
 import { breadcrumbJsonLd, webPageJsonLd } from '../../../lib/seo';
 import { t } from '../../../i18n/ui';
@@ -80,6 +81,9 @@ const relatedWorkflows = audience.relatedWorkflowIds
   .map(getWorkflow)
   .filter((workflow) => workflow != null && isWorkflowAvailableInLocale(workflow, lang))
   .map((workflow) => viewWorkflow(workflow, lang));
+const textWritingHub = ['students', 'office-workers', 'creators', 'developers'].includes(audience.slug)
+  ? seoGuides.find((guide) => guide.slug === 'text-writing' && isSeoGuideAvailableInLocale(guide, lang))
+  : undefined;
 const faqItems = audience.faq.map((item) => ({ q: item.question, a: item.answer }));
 const hasAlternates = sourceAudience.locales.includes('zh') && sourceAudience.locales.includes('en');
 const faqLd = {
@@ -206,6 +210,16 @@ const collectionLd = {
             </a>
           ))}
         </div>
+      </section>
+    )}
+
+    {textWritingHub && (
+      <section class="audience-block" aria-labelledby="audience-text-writing-title">
+        <h2 id="audience-text-writing-title">{lang === 'zh' ? '文字與寫作延伸指南' : 'Text and writing guide'}</h2>
+        <a href={localePath(lang, 'guides', textWritingHub.slug)}>
+          <strong>{viewSeoGuide(textWritingHub, lang).title}</strong>
+          <span>{viewSeoGuide(textWritingHub, lang).summary}</span>
+        </a>
       </section>
     )}
 

@@ -145,7 +145,7 @@ export const importedTaskSeoGuides: TaskSeoGuide[] = Object.entries(sources)
       faq: [],
       cta: localize('可從頁面中的相關工具與延伸指南繼續操作。'),
       updatedAt: frontmatter.date_modified ?? frontmatter.date_published ?? '2026-08-27',
-      publishAt: frontmatter.date_published,
+      publishAt: task === 'task-017' ? (frontmatter.date_published ?? '2026-08-31') : frontmatter.date_published,
       contentHtml: localize(marked.parse(bodyWithoutH1) as string),
       noFaqSchema: true,
     } satisfies TaskSeoGuide;

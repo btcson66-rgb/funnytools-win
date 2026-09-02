@@ -1,6 +1,6 @@
 {
   "name": "funnytools",
-  "version": "5.130.0",
+  "version": "5.131.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -22,6 +22,7 @@
     "audit:indexation": "node scripts/indexation-release-gate.mjs",
     "audit:performance": "node scripts/performance-release-gate.mjs",
     "report:search-performance": "node scripts/search-performance-lifecycle.mjs",
+    "audit:task017": "node scripts/task017-content-audit.mjs",
     "audit:content-value": "node scripts/content-value-audit.mjs",
     "audit:multilingual-aeo": "node scripts/multilingual-aeo-audit.mjs",
     "audit:french-aeo": "node scripts/french-aeo-audit.mjs",

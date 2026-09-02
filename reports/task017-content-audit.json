@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-09-02T03:18:59.524Z",
+  "environment": "local-source-and-static-build",
+  "buildVersion": "5.130.0",
+  "status": "verified-with-freeze-hold",
+  "sourceGuideCount": 12,
+  "sourceWorkflowCount": 1,
+  "expectedNewUrls": 13,
+  "sourceRoutes": [
+    "/guides/text-writing/",
+    "/guides/word-count-vs-character-count-guide/",
+    "/guides/chinese-english-mixed-word-count-guide/",
+    "/guides/utf8-bytes-vs-characters-guide/",
+    "/guides/emoji-character-count-grapheme-guide/",
+    "/guides/reading-time-estimate-guide/",
+    "/guides/title-case-vs-sentence-case-guide/",
+    "/guides/camelcase-snake-case-kebab-case-guide/",
+    "/guides/clean-copied-text-from-pdf-web-guide/",
+    "/guides/invisible-spaces-nbsp-zero-width-guide/",
+    "/guides/line-breaks-lf-crlf-guide/",
+    "/guides/text-sort-alphabetical-numeric-length-guide/",
+    "/workflows/text-cleanup-publishing-toolkit/"
+  ],
+  "duplicateRoutes": [],
+  "stagedNotBuilt": [],
+  "builtTask017RouteCount": 13,
+  "builtToolLinks": 24,
+  "missingToolLinks": [],
+  "duplicateTitles": [],
+  "duplicateMetaDescriptions": [],
+  "contentFreeze": {
+    "freezeDate": "2026-08-01",
+    "defaultTask17PublishDate": "2026-08-31",
+    "publicRelease": "held-until-owner-approved-freeze-lift"
+  },
+  "skippedChecks": [
+    "human editorial accuracy review",
+    "online 200/index/sitemap read-back",
+    "GSC/AdSense outcome",
+    "browser rendering after freeze lift"
+  ]
+}
