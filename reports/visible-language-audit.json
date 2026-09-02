@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-02T02:52:12.674Z",
-  "buildVersion": "5.126.0",
+  "generatedAt": "2026-09-02T15:23:45.063Z",
+  "buildVersion": "5.131.0",
   "status": "needs-review",
-  "checkedRouteCount": 599,
-  "issueCount": 246,
+  "checkedRouteCount": 615,
+  "issueCount": 262,
   "issues": [
     {
       "route": "/about/",
@@ -176,12 +176,22 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/camelcase-snake-case-kebab-case-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/chart-flowchart-alt-text-accessibility/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
     {
       "route": "/guides/chart-or-flowchart-selection-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/chinese-english-mixed-word-count-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -202,6 +212,11 @@
     },
     {
       "route": "/guides/classroom-timer-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/clean-copied-text-from-pdf-web-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -287,6 +302,11 @@
     },
     {
       "route": "/guides/effect-size-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/emoji-character-count-grapheme-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -381,6 +401,11 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/invisible-spaces-nbsp-zero-width-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/iso-8601-utc-offset-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
@@ -397,6 +422,11 @@
     },
     {
       "route": "/guides/json-to-csv-excel-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/line-breaks-lf-crlf-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -556,6 +586,11 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/reading-time-estimate-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/rejection-sampling-modulo-bias-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
@@ -641,6 +676,21 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/text-sort-alphabetical-numeric-length-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/text-writing/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/title-case-vs-sentence-case-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/two-way-anova-interaction-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
@@ -657,6 +707,11 @@
     },
     {
       "route": "/guides/url-encoding-percent-encoding-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/utf8-bytes-vs-characters-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -687,6 +742,11 @@
     },
     {
       "route": "/guides/word-count-essay-limits-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/word-count-vs-character-count-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -942,66 +1002,6 @@
     },
     {
       "route": "/tools/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/inflation/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/jpg-to-png/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/jpg-to-webp/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/json-formatter/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/json-to-csv/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/markdown-previewer/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/merge-pdf/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/mortgage-payment/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/net-salary/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/normalized-score-converter/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/overtime-pay/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/password-generator/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     }

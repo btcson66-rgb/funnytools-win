@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-02T02:50:16.788Z",
+  "generatedAt": "2026-09-02T15:23:40.953Z",
   "status": "measured",
-  "pageCount": 1058,
-  "internalLinkCount": 42825,
+  "pageCount": 1074,
+  "internalLinkCount": 43600,
   "topLinkedRoutes": [
     {
       "route": "/",
-      "count": 1701
+      "count": 1797
     },
     {
       "route": "/en/",
@@ -14,11 +14,11 @@
     },
     {
       "route": "/guides/",
-      "count": 892
+      "count": 981
     },
     {
       "route": "/tools/",
-      "count": 846
+      "count": 894
     },
     {
       "route": "/es/",
@@ -26,7 +26,7 @@
     },
     {
       "route": "/support/",
-      "count": 594
+      "count": 626
     },
     {
       "route": "/es/privacidad/",
@@ -34,7 +34,7 @@
     },
     {
       "route": "/education-statistics/",
-      "count": 547
+      "count": 558
     },
     {
       "route": "/en/tools/",
@@ -42,7 +42,7 @@
     },
     {
       "route": "/en/guides/",
-      "count": 471
+      "count": 493
     },
     {
       "route": "/fr/",
@@ -77,60 +77,60 @@
       "count": 423
     },
     {
-      "route": "/en/education-statistics/",
-      "count": 317
+      "route": "/workflows/",
+      "count": 290
     },
     {
       "route": "/es/como-funcionan-las-herramientas/",
       "count": 290
     },
     {
+      "route": "/en/education-statistics/",
+      "count": 290
+    },
+    {
+      "route": "/methodology/",
+      "count": 285
+    },
+    {
       "route": "/en/support/",
       "count": 285
     },
     {
-      "route": "/workflows/",
-      "count": 270
-    },
-    {
-      "route": "/methodology/",
-      "count": 268
-    },
-    {
       "route": "/for/",
-      "count": 264
+      "count": 280
     },
     {
       "route": "/privacy/",
-      "count": 260
+      "count": 276
     },
     {
       "route": "/about/",
-      "count": 255
+      "count": 271
     },
     {
       "route": "/about-tools/",
-      "count": 254
+      "count": 270
     },
     {
       "route": "/contact/",
-      "count": 253
+      "count": 269
     },
     {
       "route": "/find-tools/",
-      "count": 252
+      "count": 268
     },
     {
       "route": "/terms/",
-      "count": 251
+      "count": 267
     },
     {
       "route": "/disclaimer/",
-      "count": 251
+      "count": 267
     },
     {
       "route": "/shop/",
-      "count": 250
+      "count": 266
     },
     {
       "route": "/fr/outils/fusionner-pdf/",

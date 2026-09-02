@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-02T02:52:12.674Z",
-  "buildVersion": "5.126.0",
+  "generatedAt": "2026-09-02T15:23:45.063Z",
+  "buildVersion": "5.131.0",
   "status": "verified-locally-with-review-items",
   "supportedLocales": [
     "zh-TW",
@@ -9,7 +9,7 @@
     "fr"
   ],
   "completePagesPerLocale": {
-    "zh-TW": 245,
+    "zh-TW": 261,
     "en": 140,
     "es": 139,
     "fr": 75
@@ -30,8 +30,8 @@
   "countDriftBefore": null,
   "countDriftAfter": 0,
   "staleTranslations": "not available",
-  "routesExcludedFromHreflang": 560,
-  "routesExcludedFromSitemap": 11,
+  "routesExcludedFromHreflang": 576,
+  "routesExcludedFromSitemap": 0,
   "xDefaultChoice": "English equivalent when available",
   "testBuildStatus": "build and static audit required; no online claim"
 }

@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "generatedAt": "2026-09-02T15:23:49.316Z",
   "environment": "local-static-build",
-  "buildVersion": "5.128.0",
+  "buildVersion": "5.131.0",
   "status": "measured",
-  "routeCount": 1057,
+  "routeCount": 1073,
   "archetypes": {
     "home": 2,
     "tool": 252,
-    "guide": 137,
-    "workflow": 16,
+    "guide": 149,
+    "workflow": 20,
     "other": 652
   },
   "fieldDataAvailable": false,

@@ -1,6 +1,6 @@
 # SEO Audit Report
 
-Generated: 2026-07-28T13:28:33.971Z
+Generated: 2026-09-02T15:23:50.196Z
 
 ## Critical
 
@@ -8,11 +8,16 @@ Generated: 2026-07-28T13:28:33.971Z
 
 ## Warning
 
-- None
+- /es/guias/contrasena-segura-fuerte/: hreflang missing en.
+- /es/guias/fluidez-tablas-multiplicar/: hreflang missing en.
+- /es/guias/kb-mb-gb-tb-conversion/: hreflang missing en.
+- /guides/file-size-units-guide/: hreflang missing en.
+- /guides/multiplication-fact-fluency-guide/: hreflang missing en.
+- /guides/password-strength-basics-guide/: hreflang missing en.
 
 ## Suggestion
 
-- Scanned 832 HTML page(s); 378 page(s) treated as SEO-eligible, including 158 tool page(s).
-- 158/158 tool page(s) have visible FAQ detected.
-- 158/158 tool page(s) have WebApplication or SoftwareApplication schema.
-- Markdown/source documentation files discovered: 264.
+- Scanned 1074 HTML page(s); 615 page(s) treated as SEO-eligible, including 166 tool page(s).
+- 166/166 tool page(s) have visible FAQ detected.
+- 166/166 tool page(s) have WebApplication or SoftwareApplication schema.
+- Markdown/source documentation files discovered: 377.

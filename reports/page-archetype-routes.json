@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "generatedAt": "2026-09-02T15:23:49.316Z",
   "environment": "local-static-build",
-  "buildVersion": "5.128.0",
+  "buildVersion": "5.131.0",
   "status": "measured",
-  "routeCount": 1057,
+  "routeCount": 1073,
   "archetypes": {
     "home": 2,
     "tool": 252,
-    "guide": 137,
-    "workflow": 16,
+    "guide": 149,
+    "workflow": 20,
     "other": 652
   },
   "sampleRoutes": {
@@ -71,12 +71,16 @@
       "/en/workflows/teacher-exam-score-toolkit/",
       "/workflows/creator-social-toolkit/",
       "/workflows/daily-decision-toolkit/",
+      "/workflows/grade-gpa-check-toolkit/",
       "/workflows/graduate-statistics-report-toolkit/",
       "/workflows/",
       "/workflows/office-document-toolkit/",
+      "/workflows/qr-barcode-publishing-toolkit/",
       "/workflows/student-report-toolkit/",
       "/workflows/teacher-classroom-random-toolkit/",
-      "/workflows/teacher-exam-score-toolkit/"
+      "/workflows/teacher-exam-score-toolkit/",
+      "/workflows/text-cleanup-publishing-toolkit/",
+      "/workflows/verify-tool-result/"
     ],
     "other": [
       "/about/",

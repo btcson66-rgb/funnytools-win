@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "generatedAt": "2026-09-02T15:23:49.316Z",
   "environment": "local-static-build",
-  "buildVersion": "5.128.0",
+  "buildVersion": "5.131.0",
   "status": "build-hints-only",
-  "routeCount": 1057,
+  "routeCount": 1073,
   "measuredValues": {
     "pagesWithPreload": 0,
     "pagesWithImages": 42

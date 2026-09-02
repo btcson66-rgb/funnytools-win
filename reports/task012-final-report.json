@@ -1,19 +1,19 @@
 {
-  "generatedAt": "2026-09-02T02:50:16.788Z",
+  "generatedAt": "2026-09-02T15:23:40.953Z",
   "task": "012",
   "status": "verified-locally-with-review-items",
-  "buildVersion": "5.125.0",
-  "routeCount": 1058,
+  "buildVersion": "5.131.0",
+  "routeCount": 1074,
   "toolCount": 83,
-  "indexablePageCount": 599,
+  "indexablePageCount": 615,
   "orphansBefore": null,
   "orphansAfter": 0,
   "brokenLinksBefore": null,
   "brokenLinksAfter": 0,
   "clickDepthHistogram": {
     "0": 4,
-    "1": 457,
-    "2": 138
+    "1": 469,
+    "2": 142
   },
   "duplicateTitleCount": 0,
   "duplicateMetaCount": 0,

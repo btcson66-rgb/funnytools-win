@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-02T02:56:05.327Z",
+  "generatedAt": "2026-09-02T15:23:39.600Z",
   "environment": "local-static-build",
-  "buildVersion": "5.127.0",
+  "buildVersion": "5.131.0",
   "status": "measured",
-  "routesChecked": 1057,
+  "routesChecked": 1073,
   "issueCount": 0,
   "records": [
     {
@@ -4788,6 +4788,13 @@
       "canonical": "https://funnytools.win/guides/cad-grid-snap-orthogonal-guide/"
     },
     {
+      "route": "/guides/camelcase-snake-case-kebab-case-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/camelcase-snake-case-kebab-case-guide/"
+    },
+    {
       "route": "/guides/chart-flowchart-alt-text-accessibility/",
       "indexable": true,
       "robots": null,
@@ -4800,6 +4807,13 @@
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/chart-or-flowchart-selection-guide/"
+    },
+    {
+      "route": "/guides/chinese-english-mixed-word-count-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/chinese-english-mixed-word-count-guide/"
     },
     {
       "route": "/guides/classroom-lottery-tool-guide/",
@@ -4828,6 +4842,13 @@
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/classroom-timer-guide/"
+    },
+    {
+      "route": "/guides/clean-copied-text-from-pdf-web-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/clean-copied-text-from-pdf-web-guide/"
     },
     {
       "route": "/guides/code128-vs-code39-guide/",
@@ -4947,6 +4968,13 @@
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/effect-size-guide/"
+    },
+    {
+      "route": "/guides/emoji-character-count-grapheme-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/emoji-character-count-grapheme-guide/"
     },
     {
       "route": "/guides/extra-credit-over-100-grade-guide/",
@@ -5075,6 +5103,13 @@
       "canonical": "https://funnytools.win/guides/"
     },
     {
+      "route": "/guides/invisible-spaces-nbsp-zero-width-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/invisible-spaces-nbsp-zero-width-guide/"
+    },
+    {
       "route": "/guides/iso-8601-utc-offset-guide/",
       "indexable": true,
       "robots": null,
@@ -5101,6 +5136,13 @@
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/json-to-csv-excel-guide/"
+    },
+    {
+      "route": "/guides/line-breaks-lf-crlf-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/line-breaks-lf-crlf-guide/"
     },
     {
       "route": "/guides/markdown-syntax-preview-guide/",
@@ -5320,6 +5362,13 @@
       "canonical": "https://funnytools.win/guides/random-sampling-with-without-replacement/"
     },
     {
+      "route": "/guides/reading-time-estimate-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/reading-time-estimate-guide/"
+    },
+    {
       "route": "/guides/rejection-sampling-modulo-bias-guide/",
       "indexable": true,
       "robots": null,
@@ -5439,6 +5488,27 @@
       "canonical": "https://funnytools.win/guides/teacher-exam-weighted-score-guide/"
     },
     {
+      "route": "/guides/text-sort-alphabetical-numeric-length-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/text-sort-alphabetical-numeric-length-guide/"
+    },
+    {
+      "route": "/guides/text-writing/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/text-writing/"
+    },
+    {
+      "route": "/guides/title-case-vs-sentence-case-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/title-case-vs-sentence-case-guide/"
+    },
+    {
       "route": "/guides/two-way-anova-interaction-guide/",
       "indexable": true,
       "robots": null,
@@ -5465,6 +5535,13 @@
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/url-encoding-percent-encoding-guide/"
+    },
+    {
+      "route": "/guides/utf8-bytes-vs-characters-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/utf8-bytes-vs-characters-guide/"
     },
     {
       "route": "/guides/uuid-v4-collision-probability-guide/",
@@ -5507,6 +5584,13 @@
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/word-count-essay-limits-guide/"
+    },
+    {
+      "route": "/guides/word-count-vs-character-count-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/word-count-vs-character-count-guide/"
     },
     {
       "route": "/guides/work-deadline-business-day-planning/",
@@ -6237,6 +6321,13 @@
       "canonical": "https://funnytools.win/workflows/daily-decision-toolkit/"
     },
     {
+      "route": "/workflows/grade-gpa-check-toolkit/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/workflows/grade-gpa-check-toolkit/"
+    },
+    {
       "route": "/workflows/graduate-statistics-report-toolkit/",
       "indexable": true,
       "robots": null,
@@ -6258,6 +6349,13 @@
       "canonical": "https://funnytools.win/workflows/office-document-toolkit/"
     },
     {
+      "route": "/workflows/qr-barcode-publishing-toolkit/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/workflows/qr-barcode-publishing-toolkit/"
+    },
+    {
       "route": "/workflows/student-report-toolkit/",
       "indexable": true,
       "robots": null,
@@ -6277,6 +6375,20 @@
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/workflows/teacher-exam-score-toolkit/"
+    },
+    {
+      "route": "/workflows/text-cleanup-publishing-toolkit/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/workflows/text-cleanup-publishing-toolkit/"
+    },
+    {
+      "route": "/workflows/verify-tool-result/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/workflows/verify-tool-result/"
     },
     {
       "route": "/zh/about/",

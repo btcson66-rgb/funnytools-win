@@ -25,6 +25,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/workflows/daily-decision-toolkit/" />
   </url>
   <url>
+    <loc>https://funnytools.win/workflows/grade-gpa-check-toolkit/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/workflows/graduate-statistics-report-toolkit/</loc>
     <lastmod>2026-08-01</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/graduate-statistics-report-toolkit/" />
@@ -39,6 +43,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/office-document-toolkit/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/documentos-oficina/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/workflows/office-document-toolkit/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/workflows/qr-barcode-publishing-toolkit/</loc>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/workflows/student-report-toolkit/</loc>
@@ -66,6 +74,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/workflows/text-cleanup-publishing-toolkit/</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/workflows/verify-tool-result/</loc>
     <lastmod>2026-09-02</lastmod>
   </url>
 </urlset>

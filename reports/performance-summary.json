@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-02T02:58:07.889Z",
+  "generatedAt": "2026-09-02T15:23:49.316Z",
   "environment": "local-static-build",
-  "buildVersion": "5.128.0",
+  "buildVersion": "5.131.0",
   "status": "needs-review",
-  "routeCount": 1057,
+  "routeCount": 1073,
   "totalAssetBytes": 2523509,
-  "htmlBytes": 86216327,
+  "htmlBytes": 87532207,
   "largestAssets": [
     {
       "file": "_astro/pdf.worker.min.D39lNQBd.mjs",

@@ -1,6 +1,6 @@
 # Technical SEO Report
 
-Generated: 2026-07-28T13:28:33.994Z
+Generated: 2026-09-02T15:23:50.248Z
 
 ## Critical
 
@@ -8,9 +8,9 @@ Generated: 2026-07-28T13:28:33.994Z
 
 ## Warning
 
-- None
+- 6 localized page(s) have incomplete hreflang sets.
 
 ## Suggestion
 
-- Sitemap contains 378 URL(s).
-- Canonical present on 378/378 SEO-eligible page(s).
+- Sitemap contains 615 URL(s).
+- Canonical present on 615/615 SEO-eligible page(s).

@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-02T02:56:05.327Z",
+  "generatedAt": "2026-09-02T15:23:39.600Z",
   "environment": "local-static-build",
-  "buildVersion": "5.127.0",
+  "buildVersion": "5.131.0",
   "status": "measured",
-  "routesChecked": 599,
+  "routesChecked": 615,
   "issueCount": 0,
   "localeIndexability": {
-    "zh-TW": 245,
+    "zh-TW": 261,
     "en": 140,
     "es": 139,
     "fr": 75

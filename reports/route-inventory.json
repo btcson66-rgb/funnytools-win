@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-02T02:50:16.788Z",
+  "generatedAt": "2026-09-02T15:23:40.953Z",
   "status": "measured",
-  "routeCount": 1058,
-  "indexablePageCount": 599,
+  "routeCount": 1074,
+  "indexablePageCount": 615,
   "routes": [
     {
       "route": "/404",
@@ -3425,12 +3425,22 @@
       "redirectStub": false
     },
     {
+      "route": "/guides/camelcase-snake-case-kebab-case-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
       "route": "/guides/chart-flowchart-alt-text-accessibility/",
       "indexable": true,
       "redirectStub": false
     },
     {
       "route": "/guides/chart-or-flowchart-selection-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/chinese-english-mixed-word-count-guide/",
       "indexable": true,
       "redirectStub": false
     },
@@ -3451,6 +3461,11 @@
     },
     {
       "route": "/guides/classroom-timer-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/clean-copied-text-from-pdf-web-guide/",
       "indexable": true,
       "redirectStub": false
     },
@@ -3536,6 +3551,11 @@
     },
     {
       "route": "/guides/effect-size-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/emoji-character-count-grapheme-guide/",
       "indexable": true,
       "redirectStub": false
     },
@@ -3630,6 +3650,11 @@
       "redirectStub": false
     },
     {
+      "route": "/guides/invisible-spaces-nbsp-zero-width-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
       "route": "/guides/iso-8601-utc-offset-guide/",
       "indexable": true,
       "redirectStub": false
@@ -3646,6 +3671,11 @@
     },
     {
       "route": "/guides/json-to-csv-excel-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/line-breaks-lf-crlf-guide/",
       "indexable": true,
       "redirectStub": false
     },
@@ -3805,6 +3835,11 @@
       "redirectStub": false
     },
     {
+      "route": "/guides/reading-time-estimate-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
       "route": "/guides/rejection-sampling-modulo-bias-guide/",
       "indexable": true,
       "redirectStub": false
@@ -3890,6 +3925,21 @@
       "redirectStub": false
     },
     {
+      "route": "/guides/text-sort-alphabetical-numeric-length-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/text-writing/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/title-case-vs-sentence-case-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
       "route": "/guides/two-way-anova-interaction-guide/",
       "indexable": true,
       "redirectStub": false
@@ -3906,6 +3956,11 @@
     },
     {
       "route": "/guides/url-encoding-percent-encoding-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/utf8-bytes-vs-characters-guide/",
       "indexable": true,
       "redirectStub": false
     },
@@ -3936,6 +3991,11 @@
     },
     {
       "route": "/guides/word-count-essay-limits-guide/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/guides/word-count-vs-character-count-guide/",
       "indexable": true,
       "redirectStub": false
     },
@@ -4460,6 +4520,11 @@
       "redirectStub": false
     },
     {
+      "route": "/workflows/grade-gpa-check-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
       "route": "/workflows/graduate-statistics-report-toolkit/",
       "indexable": true,
       "redirectStub": false
@@ -4475,6 +4540,11 @@
       "redirectStub": false
     },
     {
+      "route": "/workflows/qr-barcode-publishing-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
       "route": "/workflows/student-report-toolkit/",
       "indexable": true,
       "redirectStub": false
@@ -4486,6 +4556,16 @@
     },
     {
       "route": "/workflows/teacher-exam-score-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/workflows/text-cleanup-publishing-toolkit/",
+      "indexable": true,
+      "redirectStub": false
+    },
+    {
+      "route": "/workflows/verify-tool-result/",
       "indexable": true,
       "redirectStub": false
     },
