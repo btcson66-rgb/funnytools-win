@@ -1,0 +1,52 @@
+name: Preflight
+
+# 2026-09-02：在這之前 funnytools 的 CI 只有 deploy.yml（push 到 main 才跑），
+# 而且只跑 lint / typecheck / test / build / generate-sitemaps /
+# validate-indexable-urls——`npm run preflight` 裡的 seo:check 與 12 個 audit
+# 從來沒有在任何 workflow 執行過，PR 階段更是完全沒有自動檢查。
+# roomfeng 在 2026-09-02 因為「594 個頁面帶著指向 404 的內部連結進了 main」
+# 才補上同名的關卡（PR #55）；這個檔案是把同一層防護移植到 funnytools。
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: preflight-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # 與 deploy.yml 一致，避免 PR 過了但 deploy 因 Node 版本差異失敗。
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npm run typecheck
+
+      # npm test 自己會先 build，這裡不重複跑 build。
+      - run: npm test
+
+      # `npm run preflight` 會重跑一次 build 再依序跑 sitemap refresh、seo:check
+      # 與 11 個 audit。這裡直接呼叫整包而不攤開，是為了讓 PR 驗到的順序與
+      # 本機、與 CLAUDE.md 發布規則要求的「push 前必須通過 npm run preflight」
+      # 完全相同——攤開就會有人改了 package.json 的 preflight 卻忘了同步這裡。
+      #
+      # 注意 CI 會自動設 CI=true，generate-sitemaps.mjs 因此走 preserve 模式，
+      # 不會改寫 data/sitemap-lastmod.json，也不會把每一頁的 lastmod 撞成同一天
+      # （那正是 seo-crawlability-check.mjs 的 collapsed-lastmod 關卡要擋的事）。
+      - run: npm run preflight
+
+      # preflight 不含這兩項，但 deploy.yml 會跑，PR 階段就一起驗，
+      # 避免「PR 全綠、合併後 deploy 掛在 sitemap 驗證」。
+      - run: node scripts/generate-sitemaps.mjs
+
+      - run: node scripts/validate-indexable-urls.mjs
