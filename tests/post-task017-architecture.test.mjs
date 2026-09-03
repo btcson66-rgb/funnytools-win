@@ -70,6 +70,16 @@ test('guide page kind and category are data-driven', () => {
   }
 });
 
+test('released expansion guides emit Article schema when their source omits pageKind', () => {
+  for (const route of [
+    '/guides/qr-code-before-print-testing-guide/',
+    '/en/guides/qr-code-before-print-testing-guide/',
+  ]) {
+    const types = jsonLd(readRoute(route)).map((item) => item['@type']);
+    assert.ok(types.includes('Article'), `${route} missing Article schema`);
+  }
+});
+
 test('guide visible date, Article dateModified, and sitemap lastmod share the page source', () => {
   const cases = [
     ['/guides/t-score-calculator-guide/', '2026-06-25'],

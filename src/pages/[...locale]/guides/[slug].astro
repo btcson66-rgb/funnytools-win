@@ -149,7 +149,7 @@ const pageLd = sourceGuide.pageKind === 'guideHub'
   alternateSegments={['guides', guide.slug]}
   altLang={hasSourceAlternates ? localeUrlPair('guides', guide.slug) : undefined}
   hasAlternates={hasAlternates}
-    jsonLd={[pageLd, ...(sourceGuide.pageKind === 'guide' ? [articleLd] : []), ...(guide.noFaqSchema || faqItems.length === 0 ? [] : [faqLd]), breadcrumbLd]}
+    jsonLd={[pageLd, ...(guide.pageKind === 'guide' ? [articleLd] : []), ...(guide.noFaqSchema || faqItems.length === 0 ? [] : [faqLd]), breadcrumbLd]}
 >
   <article class="wrap guide-article">
     <Breadcrumb items={breadcrumbItems} />

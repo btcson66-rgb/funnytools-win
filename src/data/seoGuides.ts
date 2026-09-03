@@ -3918,7 +3918,9 @@ const releasedAdditionalGuideSlugs = new Set<string>([
 
 export const seoGuides: SeoGuide[] = [
   ...rawSeoGuides.map(localizeRawGuide),
-  ...additionalSeoGuides.filter((guide) => releasedAdditionalGuideSlugs.has(guide.slug)),
+  ...additionalSeoGuides
+    .filter((guide) => releasedAdditionalGuideSlugs.has(guide.slug))
+    .map((guide) => ({ ...guide, pageKind: guide.pageKind ?? 'guide' })),
   ...importedTaskSeoGuides,
 ]
   .filter((guide) => !guide.publishAt || guide.publishAt <= contentLibraryToday || releasedTaskGuideSlugs.has(guide.slug))

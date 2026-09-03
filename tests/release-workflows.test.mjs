@@ -5,7 +5,7 @@ import { test } from 'node:test';
 const root = new URL('..', import.meta.url);
 
 test('deployment workflow gates Pages deployment on checks and runs post-deploy smoke', async () => {
-  const workflow = await readFile(new URL('.github/workflows/deploy.yml', root), 'utf8');
+  const workflow = (await readFile(new URL('.github/workflows/deploy.yml', root), 'utf8')).replaceAll('\r\n', '\n');
   assert.match(workflow, /run: npm ci\n/);
   assert.match(workflow, /run: npm run lint/);
   assert.match(workflow, /run: npm run typecheck/);
@@ -21,7 +21,7 @@ test('deployment workflow gates Pages deployment on checks and runs post-deploy 
 });
 
 test('SEO workflow separates deployment from indexing and keeps weekly inspection separate', async () => {
-  const workflow = await readFile(new URL('.github/workflows/seo-indexing.yml', root), 'utf8');
+  const workflow = (await readFile(new URL('.github/workflows/seo-indexing.yml', root), 'utf8')).replaceAll('\r\n', '\n');
   assert.match(workflow, /build_deploy:/);
   assert.match(workflow, /submit-indexing:/);
   assert.match(workflow, /needs: build_deploy/);
