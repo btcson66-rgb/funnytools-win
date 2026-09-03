@@ -105,6 +105,8 @@ const { labels } = Astro.props;
     const error = root.querySelector('[data-error]');
     const status = root.querySelector('[data-status]');
     const actionButtons = root.querySelectorAll('button');
+    const maxFiles = 50;
+    const maxTotalBytes = 100 * 1024 * 1024;
     let items = [];
     let pdfLibPromise = null;
 
@@ -128,6 +130,19 @@ const { labels } = Astro.props;
 
     function isPdf(file) {
       return file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
+    }
+
+    function exceedsLimits(nextItems = items) {
+      if (nextItems.length > maxFiles) {
+        setError(labels.tooManyFiles.replace('{count}', String(maxFiles)));
+        return true;
+      }
+      const totalBytes = nextItems.reduce((total, item) => total + item.file.size, 0);
+      if (totalBytes > maxTotalBytes) {
+        setError(labels.tooLarge.replace('{size}', '100 MB'));
+        return true;
+      }
+      return false;
     }
 
     function safeBaseName(name) {
@@ -224,6 +239,7 @@ const { labels } = Astro.props;
         setError(labels.noFile);
         return false;
       }
+      if (exceedsLimits()) return false;
       try {
         setBusy(true);
         setError('');
@@ -253,6 +269,7 @@ const { labels } = Astro.props;
         setError(labels.noFile);
         return;
       }
+      if (exceedsLimits()) return;
       try {
         setBusy(true);
         setError('');
@@ -293,7 +310,13 @@ const { labels } = Astro.props;
         setError(labels.pdfOnly);
         return;
       }
-      items = files.map((file, index) => ({ file, id: `${Date.now()}-${index}`, pages: 0, doc: null }));
+      const nextItems = files.map((file, index) => ({ file, id: `${Date.now()}-${index}`, pages: 0, doc: null }));
+      if (exceedsLimits(nextItems)) {
+        items = [];
+        renderList();
+        return;
+      }
+      items = nextItems;
       renderList();
     });
 
