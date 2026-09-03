@@ -516,6 +516,14 @@ export function stableRenderedHtml(page) {
     '<script data-sitemap-volatile="analytics-bootstrap"></script>',
   );
 
+  // The Affiliate GA4 bridge is also shared layout chrome. Its minified inline
+  // bundle is emitted on every indexable page, but changing the bridge must not
+  // make every page look like its reader-facing content changed.
+  html = html.replace(
+    /\s*<script\b[^>]*>(?:(?!<\/script>)[\s\S])*?window\.__btcsonAffiliateTrack(?:(?!<\/script>)[\s\S])*?<\/script>/gi,
+    '',
+  );
+
   return html;
 }
 
