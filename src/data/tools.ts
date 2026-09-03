@@ -849,7 +849,7 @@ export const tools: ToolMeta[] = [
     monetizationTags: ['adsense'],
     featured: true,
     isNew: true,
-    updated: '2026-06-17',
+    updated: '2026-09-03',
     name: { zh: '簡易 2D CAD 製圖板', en: '2D CAD Drawing Board' },
     short: {
       zh: '在網格畫布上繪製線段、矩形、圓形與折線，支援拖曳、縮放、匯出 PNG/SVG。',
