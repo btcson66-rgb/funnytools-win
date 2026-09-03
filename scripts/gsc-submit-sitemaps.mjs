@@ -11,6 +11,7 @@ import {
   writeJson,
   writeText,
 } from './seo-indexing-utils.mjs';
+import { resolveSitemapOutcome } from './gsc-sitemap-outcome.mjs';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const STUCK_DAYS = 14;
@@ -150,19 +151,16 @@ try {
   }
 
   report.alerts = [...new Set(report.alerts)];
-  if (failureCount) {
-    report.status = 'failed';
-    report.message = `${failureCount} sitemap path(s) failed; see the per-path entries.`;
-  } else if (submittedCount) {
-    report.status = 'submitted';
-    report.message = `Submitted ${submittedCount} unregistered sitemap path(s); read back ${registeredCount} existing path(s).`;
-  } else if (report.alerts.length) {
-    report.status = 'registered_pending';
-    report.message = `Read back ${registeredCount} registered sitemap path(s). Google download remains pending; no repeat PUT was sent.`;
-  } else {
-    report.status = 'already_registered';
-    report.message = `Read back ${registeredCount} registered sitemap path(s); no repeat PUT was needed.`;
-  }
+  const outcome = resolveSitemapOutcome({
+    failureCount,
+    submittedCount,
+    registeredCount,
+    alertCount: report.alerts.length,
+  });
+  report.status = outcome.status;
+  report.message = outcome.message;
+  // 卡住的 sitemap 必須讓這一步失敗，否則警告會被印出來但沒有人看到。
+  if (outcome.exitCode !== 0) process.exitCode = outcome.exitCode;
 } catch (error) {
   const isMissingCredentials = /Missing GSC/.test(error.message);
   report.status = 'failed';
