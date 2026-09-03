@@ -2097,4 +2097,1104 @@ export const additionalSeoGuides: SeoGuide[] = [
     updatedAt: '2026-09-03',
     noFaqSchema: true,
   },
+  {
+    id: 'pdf-to-word-layout-fidelity-guide',
+    locales: ['zh', 'en'],
+    slug: 'pdf-to-word-layout-fidelity-guide',
+    title: {
+      zh: 'PDF 轉 Word 版面與內容驗收指南',
+      en: 'PDF to Word Layout Check Guide',
+    },
+    metaTitle: {
+      zh: 'PDF 轉 Word 後版面跑掉？文字、表格與圖片驗收流程',
+      en: 'PDF to Word: Check Layout and Text',
+    },
+    metaDescription: {
+      zh: 'PDF 轉 Word 後不要只看檔案能否開啟，還要逐頁檢查段落、表格、圖片、頁首頁尾、字型與可編輯性；保留原始 PDF，先用小樣本驗收，再決定是否交付可編輯版本。',
+      en: 'After converting PDF to Word, check paragraphs, tables, images, headers, fonts, and editability against the source before delivering an editable copy.',
+    },
+    h1: {
+      zh: 'PDF 轉 Word 後怎麼驗收：版面、文字與可編輯性的完整流程',
+      en: 'How to Check a PDF-to-Word Conversion Before You Deliver It',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 51,
+    searchIntent: {
+      zh: '使用者需要把 PDF 轉成可編輯的 Word，擔心轉換後文字順序、表格、圖片、頁首頁尾或字型跑版，想要一套可重複的驗收方法。',
+      en: 'A user needs an editable Word copy of a PDF and wants a repeatable way to catch shifted text, tables, images, headers, footers, or fonts before delivery.',
+    },
+    targetKeywords: [
+      { zh: 'PDF 轉 Word 版面跑掉', en: 'PDF to Word layout shifted' },
+      { zh: 'PDF 轉 Word 檢查', en: 'check PDF to Word conversion' },
+      { zh: 'PDF 轉可編輯文字', en: 'convert PDF to editable Word' },
+    ],
+    relatedToolIds: ['pdf-to-word', 'pdf-to-image', 'pdf-compressor'],
+    relatedGuideIds: ['pdf-to-image-raster-text-search-guide', 'merge-pdf-reading-order-checklist-guide', 'pdf-to-image-resolution-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: 'PDF 轉 Word 是格式重建，不是把每個像素原封不動搬進文件。成功開啟只證明檔案存在；真正交付前要比較文字順序、表格結構、圖片位置與編輯需求。',
+      en: 'PDF-to-Word is document reconstruction, not a pixel-perfect copy. A file opening proves only that it exists; delivery requires checks for reading order, tables, images, and the intended editing task.',
+    },
+    problem: {
+      zh: 'PDF 可能是文字型、掃描影像型，或混合文字、表單與圖層。轉換器若無法判斷欄位順序，雙欄文章會交錯，表格可能變成定位文字，簽名和註解也可能失去原本位置。',
+      en: 'A PDF may contain live text, scanned images, forms, or mixed layers. When a converter cannot infer reading order, two columns interleave, tables become positioned text, and signatures or annotations move away from their context.',
+    },
+    whoShouldUse: {
+      zh: '適合需要修改合約草稿、報告、表單、講義、會議紀錄或內部文件的人，也適合在交付前替同事檢查轉換品質。',
+      en: 'Useful for anyone editing a contract draft, report, form, handout, meeting record, or internal document, and for reviewers checking a converted file before handoff.',
+    },
+    explanation: [
+      {
+        zh: '先判斷原 PDF 是否有可選取的文字層。若整頁只能選到一張圖片，轉成 Word 後通常需要 OCR，辨識結果必須逐頁校對；若原檔有文字層，也不代表複雜欄位能完全重建。',
+        en: 'First determine whether the source has selectable text. If a whole page selects as one image, the Word result usually depends on OCR and needs page-by-page proofing. A live text layer still does not guarantee that complex layouts will rebuild perfectly. Adobe describes export choices in its official guide (https://helpx.adobe.com/acrobat/using/export-pdf-overview.html).',
+      },
+      {
+        zh: '把「視覺相同」與「可以編輯」分開驗收。Word 可能用文字方塊、表格或浮動圖片模擬原版面；它看似接近 PDF，卻不一定能讓你順利改寫段落、調整欄寬或重排頁面。',
+        en: 'Separate visual similarity from editability. Word may simulate the PDF with text boxes, tables, or floating images. The page can look close while paragraphs remain difficult to rewrite, columns resist resizing, or page breaks become fragile.',
+      },
+      {
+        zh: '先選一頁最能代表風險的樣本：雙欄文字、表格、腳註、圖片、頁首頁尾與特殊字型各挑一頁。小樣本能在整份文件處理前揭露工具是否適合，不必等到幾百頁完成才發現方向錯誤。',
+        en: 'Choose representative risk pages before converting everything: a two-column page, a table, a footnote, an image, a header or footer, and unusual fonts. A small sample reveals whether the method fits before hundreds of pages are processed.',
+      },
+      {
+        zh: '比較時要以原始 PDF 為基準，而不是只看 Word 預覽。逐段確認閱讀順序、標題層級、清單、頁碼與連結；對表格則檢查列欄是否仍能編輯，而非只比較邊框看起來像不像。',
+        en: 'Compare with the source PDF rather than trusting the Word preview alone. Check reading order, heading levels, lists, page numbers, and links. For tables, verify that rows and columns can be edited instead of checking only whether the borders look similar.',
+      },
+      {
+        zh: '圖片與掃描文字要分開處理。高解析度圖片可以保留外觀，卻不會自動產生可編輯文字；OCR 可能把 0 和 O、1 和 l 或表格欄位辨識錯。把需要修改的內容標出，必要時回到原始來源重打。',
+        en: 'Treat images and scanned text separately. A high-resolution image preserves appearance but does not create editable words. OCR can confuse 0 with O, 1 with l, or merge table cells. Adobe explains the recognize-text workflow (https://helpx.adobe.com/acrobat/using/recognize-text.html); mark content that needs editing and retype from a trusted source when accuracy matters.',
+      },
+      {
+        zh: '頁首頁尾、浮水印、註解與簽名是常見的隱性差異。轉換後要在不同頁面檢查它們是否被當成正文、重複出現或移到錯誤層級；若文件要簽署，不能只因文字正確就略過位置驗收。',
+        en: 'Headers, footers, watermarks, annotations, and signatures are common hidden differences. Check several pages to see whether they became body text, duplicated, or moved to another layer. A signing workflow needs position checks, not just correct wording.',
+      },
+      {
+        zh: '交付格式應依用途決定。若只需要引用或存檔，原 PDF 可能比轉換檔可靠；若需要編輯，交付 Word 時附上原檔與已知限制，並用版本日期命名。不要把可編輯誤說成完全等同原稿。',
+        en: 'Choose the delivery format from the job. For citation or archive, the original PDF may be safer. For editing, include the source and known limits with the Word file and use a dated filename. Do not describe an editable copy as fully identical to the source.',
+      },
+    ],
+    steps: [
+      { zh: '確認 PDF 是否有文字層，並挑出雙欄、表格、圖片與掃描頁作樣本。', en: 'Check for a text layer and select sample pages with columns, tables, images, and scans.' },
+      { zh: '保留原始檔，使用 PDF 轉 Word 工具輸出帶版本日期的副本。', en: 'Keep the original and export a dated copy with the PDF-to-Word tool.' },
+      { zh: '逐頁比較標題、段落順序、清單、頁碼、頁首頁尾與連結。', en: 'Compare headings, reading order, lists, page numbers, headers, footers, and links page by page.' },
+      { zh: '在表格中實際修改一個儲存格，確認列欄不是只用定位文字模擬。', en: 'Edit a table cell to confirm rows and columns are real editable structure, not positioned text.' },
+      { zh: '放大檢查 OCR 文字、數字、符號、圖片、簽名與浮水印位置。', en: 'Zoom in on OCR text, numbers, symbols, images, signatures, and watermark positions.' },
+      { zh: '在 Word 與 PDF 檢視器各開一次，檢查分頁、字型替代與列印預覽。', en: 'Open the result in Word and a PDF viewer and check page breaks, font substitutions, and print preview.' },
+      { zh: '將原 PDF、Word 副本、驗收紀錄與已知限制一起保存後再交付。', en: 'Deliver only after saving the source, Word copy, acceptance notes, and known limitations together.' },
+    ],
+    example: {
+      zh: '行政人員要修改一份 18 頁雙欄政策 PDF。團隊先測試一頁雙欄、一頁表格和一頁掃描簽名，發現表格可編輯但簽名被當成圖片移位。最後保留原 PDF，將 Word 只用於改寫正文，並在交付說明標出簽名頁必須回看原檔。',
+      en: 'An administrator must edit an 18-page two-column policy PDF. A sample of one column page, one table, and one scanned signature shows that the table is editable but the signature shifts as an image. The team keeps the PDF, uses Word for body edits only, and flags the signature page for source review.',
+    },
+    commonMistakes: [
+      { zh: '看到 Word 能開啟就當成轉換完成。', en: 'Treating a Word file that opens as proof that conversion is complete.' },
+      { zh: '只比較截圖，不實際修改段落或表格。', en: 'Comparing screenshots without editing a paragraph or table.' },
+      { zh: '把 OCR 辨識文字當成不需要校對的原文。', en: 'Assuming OCR text needs no proofreading.' },
+      { zh: '忽略頁首頁尾、浮水印、註解和簽名位置。', en: 'Ignoring headers, footers, watermarks, annotations, and signatures.' },
+      { zh: '用轉換後的 Word 取代唯一的原始 PDF。', en: 'Replacing the only source PDF with the converted Word file.' },
+      { zh: '宣稱版面百分之百相同，卻沒有測列印與字型替代。', en: 'Claiming a perfect match without testing printing or font substitution.' },
+    ],
+    faq: [
+      { question: { zh: 'PDF 轉 Word 後一定可以編輯嗎？', en: 'Is a PDF-to-Word result always editable?' }, answer: { zh: '不一定。文字層、掃描影像、表格與浮動物件會影響可編輯性；先用代表頁測試，再決定是否適合你的修改工作。', en: 'No. Text layers, scans, tables, and floating objects affect editability. Test representative pages before deciding whether the result fits your editing task.' } },
+      { question: { zh: '為什麼轉成 Word 後雙欄順序亂了？', en: 'Why do two columns appear in the wrong order?' }, answer: { zh: '轉換器需要推測閱讀順序，複雜欄位、圖片或註解可能讓推測失敗。逐頁與原 PDF 對照，必要時把內容拆成可重排的段落。', en: 'The converter must infer reading order, and columns, images, or annotations can confuse it. Compare page by page and rebuild content into reorderable paragraphs when needed.' } },
+      { question: { zh: '掃描 PDF 轉 Word 要不要用 OCR？', en: 'Should a scanned PDF use OCR?' }, answer: { zh: '若需要搜尋或修改文字通常需要，但 OCR 不是零錯誤。數字、專有名詞、表格與簽名頁應特別校對，重要內容可直接依可信來源重打。', en: 'Usually yes when search or editing is required, but OCR is not error-free. Proof numbers, names, tables, and signature pages, and retype critical text from a trusted source.' } },
+      { question: { zh: '交付 Word 後還要附 PDF 嗎？', en: 'Should I include the PDF with the Word file?' }, answer: { zh: '若版面、引用或簽署仍重要，建議保留並一併提供。Word 是工作副本，不應取代可追溯的原始文件。', en: 'Include it when layout, citation, or signing still matters. Word is an editing copy and should not replace the traceable source document.' } },
+    ],
+    cta: {
+      zh: '用 PDF 轉 Word 工具先做代表頁，再逐項驗收閱讀順序、表格、OCR 與頁面功能，保留原始 PDF 作為基準。',
+      en: 'Test representative pages with the PDF-to-Word tool, verify order, tables, OCR, and page features, and keep the original PDF as the baseline.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'pdf-table-to-excel-header-check-guide',
+    locales: ['zh', 'en'],
+    slug: 'pdf-table-to-excel-header-check-guide',
+    title: {
+      zh: 'PDF 表格轉 Excel 欄位與數值驗收指南',
+      en: 'PDF Table to Excel Validation Guide',
+    },
+    metaTitle: {
+      zh: 'PDF 表格轉 Excel 後怎麼檢查？欄位、數字與合併儲存格',
+      en: 'PDF Table to Excel: Validate Fields',
+    },
+    metaDescription: {
+      zh: 'PDF 表格轉 Excel 後，先核對欄位名稱、列數、合併儲存格、負號、小數與日期，再用總和與代表列比對原稿；不要因為資料能貼到試算表就直接拿去分析或匯入。',
+      en: 'After converting a PDF table to Excel, validate headers, row counts, merged cells, signs, decimals, and dates against the source before analysis or import.',
+    },
+    h1: {
+      zh: 'PDF 表格轉 Excel 後怎麼驗收：欄位、數字與匯入前檢查',
+      en: 'How to Validate a PDF Table Converted to Excel Before Analysis',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 52,
+    searchIntent: {
+      zh: '使用者想把 PDF 報表或表格轉成 Excel，擔心欄位錯位、合併儲存格、負數、小數和日期被誤讀，想在分析或匯入前找出錯誤。',
+      en: 'A user converts a PDF report or table to Excel and needs to catch shifted columns, merged cells, negative numbers, decimals, and dates before analysis or import.',
+    },
+    targetKeywords: [
+      { zh: 'PDF 表格轉 Excel 檢查', en: 'validate PDF table to Excel' },
+      { zh: 'PDF 轉 Excel 欄位錯位', en: 'PDF to Excel columns shifted' },
+      { zh: 'PDF 表格數字辨識錯誤', en: 'PDF table number conversion errors' },
+    ],
+    relatedToolIds: ['pdf-table-to-excel', 'csv-to-json', 'pdf-to-image'],
+    relatedGuideIds: ['csv-to-json-header-duplicate-column-guide', 'pdf-to-word-layout-fidelity-guide', 'pdf-to-image-raster-text-search-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: '表格轉換的風險在於欄位意義和數值型別可能改變，而不是檔案能否開啟。先用原始 PDF 對照欄位、列數與代表數字，再讓 Excel 進入分析流程。',
+      en: 'The main risk in table conversion is changed column meaning or numeric type, not whether the workbook opens. Compare fields, rows, and representative values with the PDF before analysis.',
+    },
+    problem: {
+      zh: 'PDF 表格常含多行標題、跨欄標題、合併儲存格、千分位、負號、括號、百分比與頁尾合計。轉換器可能把視覺位置當成欄位，造成一列少欄、數字變文字或標題重複。',
+      en: 'PDF tables often contain multi-line headers, merged cells, thousands separators, parentheses, percentages, and page totals. A converter may treat visual positions as fields, creating short rows, numeric text, or duplicate headers.',
+    },
+    whoShouldUse: {
+      zh: '適合整理財務報表、研究資料、成績表、庫存清單、發票明細與任何要從 PDF 進入 Excel、CSV 或資料庫的使用者。',
+      en: 'Useful for financial reports, research tables, grade sheets, inventory lists, invoices, and any workflow moving PDF data into Excel, CSV, or a database.',
+    },
+    explanation: [
+      {
+        zh: '先確認 PDF 的表格是文字型還是掃描影像型。文字型表格可保留字元但仍可能失去欄位邊界；掃描型需要 OCR，數字、負號和小數點必須用原稿逐格校對。',
+        en: 'Determine whether the table is live text or a scanned image. Live text can still lose column boundaries; scanned tables require OCR, so digits, minus signs, and decimals need cell-level proofing against the source.',
+      },
+      {
+        zh: '先建立欄位契約：每欄名稱、預期型別、允許空白與單位。不要只看第一列，因為跨頁表格可能在第二頁重複標題或少了某些欄位。',
+        en: 'Write a field contract with each header, expected type, allowed blanks, and unit. Do not inspect only the first row; tables that span pages may repeat headers or omit a column later.',
+      },
+      {
+        zh: '合併儲存格要先理解它代表的資料。視覺上跨三列的地區名稱，可能需要在 Excel 中填滿每列，也可能應保留為分組標籤；轉換器不應替你決定分析語意。',
+        en: 'Interpret merged cells before filling them. A region label spanning three rows may need to repeat on every record for analysis, or remain a group label for presentation. The converter cannot decide that meaning for you.',
+      },
+      {
+        zh: '數值欄位要分辨千分位、小數、百分比、貨幣與括號負數。`1,234`、`12.34%` 和 `(500)` 在 Excel 中可能被當成文字或套用不同格式；先保留原始顯示，再建立明確的標準化欄位。',
+        en: 'Distinguish thousands separators, decimals, percentages, currency, and parenthesized negatives. Excel may treat `1,234`, `12.34%`, and `(500)` as text or apply different formats. Microsoft Excel documentation (https://support.microsoft.com/en-us/excel) is a reference, but preserve the displayed value first and create an explicit normalized field.',
+      },
+      {
+        zh: '日期與代碼不能只靠試算表自動辨識。發票號碼前導零、郵遞區號、月份文字與不同地區日期格式都可能被改寫；把識別碼保存為文字，把日期依來源格式記錄後再轉換。',
+        en: 'Do not rely on spreadsheet auto-detection for dates or codes. Invoice IDs may lose leading zeros, month names vary, and regional date formats can be rewritten. Keep identifiers as text and document the source date format before normalizing it.',
+      },
+      {
+        zh: '用總和、筆數與代表列做三層驗證。若原稿有頁尾合計，可與 Excel 的數值欄重算；但合計列、重複表頭與備註不能直接當成資料列，否則總和會被重複計算。',
+        en: 'Use three checks: totals, counts, and representative rows. Recalculate a source total when available, but exclude page totals, repeated headers, and notes from data rows or the sum will be inflated.',
+      },
+      {
+        zh: '轉換完成後再決定要不要輸出 CSV 或 JSON。先在 Excel 內確認欄位唯一、型別一致與空值規則，再連到 CSV 轉 JSON 指南的清理流程；不要把錯誤的試算表直接放大成整批資料。',
+        en: 'Only export CSV or JSON after the workbook passes field, type, and blank-value checks. RFC 4180 (https://www.rfc-editor.org/rfc/rfc4180) is a useful CSV reference; then follow the CSV-to-JSON cleanup guidance and do not multiply a wrong spreadsheet into a whole dataset.',
+      },
+    ],
+    steps: [
+      { zh: '確認表格是文字型或掃描型，保留原始 PDF 與頁碼範圍。', en: 'Classify the table as live text or scanned and keep the source PDF with page ranges.' },
+      { zh: '列出每欄名稱、資料型別、單位、允許空白與預期列數。', en: 'List each header, type, unit, blank rule, and expected row count.' },
+      { zh: '用 PDF 表格轉 Excel 工具輸出副本，不覆蓋原始檔。', en: 'Export a copy with the PDF-table-to-Excel tool without overwriting the source.' },
+      { zh: '核對多行標題、重複表頭、合併儲存格與欄位數。', en: 'Check multi-line headers, repeated headers, merged cells, and field count.' },
+      { zh: '逐格抽查負數、小數、百分比、日期、代碼與前導零。', en: 'Sample negatives, decimals, percentages, dates, codes, and leading zeros cell by cell.' },
+      { zh: '比較資料筆數、頁尾合計與 Excel 重算結果，排除備註列。', en: 'Compare row count, page totals, and Excel recalculation while excluding notes.' },
+      { zh: '通過驗收後才另存 CSV／JSON，並保存轉換設定與差異。', en: 'Export CSV or JSON only after acceptance and save settings plus the differences.' },
+    ],
+    example: {
+      zh: '研究助理要把 6 頁 PDF 銷售表轉成 Excel。抽查發現第二頁重複表頭被當成資料、括號負數變成文字、產品代碼前導零消失。團隊排除表頭、把代碼設為文字、以原稿合計重算並保存一份未標準化欄位，確認後才匯入分析。',
+      en: 'A research assistant converts a six-page sales table to Excel. The sample shows a repeated header counted as data, parenthesized negatives stored as text, and leading zeros removed from product codes. The team excludes headers, keeps codes as text, reconciles a source total, and imports only after acceptance.',
+    },
+    commonMistakes: [
+      { zh: '看到表格線條完整就當成欄位一定正確。', en: 'Assuming intact grid lines mean the columns are correct.' },
+      { zh: '把重複表頭、頁尾合計或備註列算進資料。', en: 'Counting repeated headers, page totals, or notes as data.' },
+      { zh: '讓 Excel 自動把代碼、日期或百分比改寫。', en: 'Letting Excel rewrite codes, dates, or percentages automatically.' },
+      { zh: '忽略合併儲存格的分析語意，直接向下填滿。', en: 'Filling merged cells down without deciding their analytical meaning.' },
+      { zh: '只抽查第一頁，沒有檢查跨頁欄位與最後幾列。', en: 'Checking only page one and missing cross-page fields or final rows.' },
+      { zh: '驗收前就輸出 CSV／JSON，將一個錯誤放大成整批資料。', en: 'Exporting CSV or JSON before acceptance and multiplying one error into a dataset.' },
+    ],
+    faq: [
+      { question: { zh: 'PDF 表格轉 Excel 後可以直接分析嗎？', en: 'Can I analyze an Excel file immediately after PDF conversion?' }, answer: { zh: '不建議。先核對欄位、列數、數值型別、日期與合計，因為檔案能開啟不代表資料語意正確。', en: 'Not safely. Validate fields, rows, types, dates, and totals first; a workbook opening does not prove its data meaning is correct.' } },
+      { question: { zh: '為什麼 PDF 表格轉 Excel 後欄位會錯位？', en: 'Why do columns shift after converting a PDF table?' }, answer: { zh: 'PDF 儲存的是版面位置，轉換器要推測欄位邊界；多行文字、合併儲存格與掃描影像都可能讓推測失敗。', en: 'PDF stores layout positions, so the converter must infer boundaries. Multi-line text, merged cells, and scans can make that inference fail.' } },
+      { question: { zh: '負數括號要怎麼檢查？', en: 'How should I check parenthesized negatives?' }, answer: { zh: '把原稿的 `(500)`、`-500` 與 Excel 儲存值分開比對，確認它是數字而非文字，並在重算合計時納入正確符號。', en: 'Compare `(500)`, `-500`, and the Excel value separately. Confirm it is numeric rather than text and that recalculated totals use the correct sign.' } },
+      { question: { zh: '轉換後要保留原 PDF 嗎？', en: 'Should I keep the source PDF after conversion?' }, answer: { zh: '要。原 PDF 是欄位、數字與版面爭議時的對照基準，也能讓日後重新轉換有可追溯來源。', en: 'Yes. The PDF is the baseline for disputed fields, numbers, and layout, and it makes future re-conversion traceable.' } },
+    ],
+    cta: {
+      zh: '用 PDF 表格轉 Excel 工具先處理副本，依欄位契約、列數、數值與合計逐層驗收，再進入 CSV 或 JSON 流程。',
+      en: 'Convert a copy with the PDF-table-to-Excel tool, validate fields, rows, values, and totals, then continue to CSV or JSON workflows.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'pdf-to-word-review-track-changes-guide',
+    locales: ['zh', 'en'],
+    slug: 'pdf-to-word-review-track-changes-guide',
+    title: {
+      zh: 'PDF 轉 Word 後的修訂與協作驗收指南',
+      en: 'PDF to Word Review Guide',
+    },
+    metaTitle: {
+      zh: 'PDF 轉 Word 後怎麼開修訂？轉換、審稿與交付流程',
+      en: 'PDF to Word: Review Changes and Comments',
+    },
+    metaDescription: {
+      zh: '把 PDF 轉成 Word 只是第一步；本指南說明如何保留原檔、建立工作副本、開啟修訂與留言、逐頁對照版面，並在交付前清除未處理的變更與私人資訊。',
+      en: 'Convert a PDF to Word, keep the source, review with comments and tracked changes, compare pages, and prepare a clean handoff.',
+    },
+    h1: {
+      zh: 'PDF 轉 Word 後如何審稿與交付：修訂、留言和原稿對照流程',
+      en: 'How to Review and Handoff a PDF-to-Word Conversion',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 53,
+    searchIntent: {
+      zh: '使用者已把 PDF 轉成 Word，接下來要與同事審稿或修改，想知道如何使用修訂與留言、避免直接覆寫原稿，並確認交付檔沒有遺漏轉換錯誤。',
+      en: 'A user already converted a PDF to Word and needs a safe review workflow with colleagues, including comments, tracked changes, source comparison, and a clean final handoff.',
+    },
+    targetKeywords: [
+      { zh: 'PDF 轉 Word 修訂追蹤', en: 'track changes after PDF to Word' },
+      { zh: 'PDF 轉 Word 審稿流程', en: 'review PDF to Word conversion' },
+      { zh: 'Word 留言比較 PDF', en: 'use Word comments to review PDF conversion' },
+    ],
+    relatedToolIds: ['pdf-to-word', 'pdf-to-image'],
+    relatedGuideIds: ['pdf-to-word-layout-fidelity-guide', 'pdf-to-image-raster-text-search-guide', 'merge-pdf-reading-order-checklist-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: '轉換後的 Word 應被視為可追蹤的工作副本，而不是新的唯一正本。把版面驗收、文字修訂、留言決策與最後清稿拆成不同階段，才能知道錯誤來自 PDF 轉換還是後續編輯。',
+      en: 'Treat the converted Word file as a traceable working copy, not a replacement for the source. Separate layout acceptance, editorial revisions, comment decisions, and final cleanup so conversion defects are not confused with later edits.',
+    },
+    problem: {
+      zh: '若多人直接在轉換檔上改字，原本的轉換錯誤、編輯意見與已核准內容會混在一起。最後即使文字看似正確，也可能無法追溯誰改了什麼，或把未接受的留言一起交給外部收件人。',
+      en: 'When several people edit a converted file directly, conversion defects, editorial suggestions, and approved text become indistinguishable. A document may look correct yet lack an audit trail or expose unresolved comments to the recipient.',
+    },
+    whoShouldUse: {
+      zh: '適合行政、法務、研究、教育與內容團隊在 PDF 轉 Word 後共同校稿，也適合需要把可編輯副本交給客戶但仍要保留原始證據的工作。',
+      en: 'Useful for administrative, legal, research, education, and content teams reviewing a converted Word copy, especially when an editable file must be shared while the source remains authoritative.',
+    },
+    explanation: [
+      {
+        zh: '先建立檔案角色：原始 PDF 是來源、轉換後的 Word 是工作副本、清稿後的 Word 是交付候選。用檔名或資料夾明確區分，避免同事把尚未驗收的檔案當成正式版本。',
+        en: 'Define file roles first: the original PDF is the source, the converted Word file is the working copy, and the cleaned Word file is a delivery candidate. Separate them by names or folders so an unverified file is not mistaken for the final version.',
+      },
+      {
+        zh: '版面驗收要在編輯前完成。先用代表頁確認閱讀順序、表格、圖片、頁首頁尾與字型，再開啟修訂；否則後續每一個排版補救都會變成修訂紀錄，難以判斷原始轉換品質。',
+        en: 'Accept the layout before editorial work begins. Check reading order, tables, images, headers, footers, and fonts on representative pages, then enable review. Otherwise every layout repair becomes a tracked edit and hides the original conversion quality.',
+      },
+      {
+        zh: '修訂與留言用途不同。修訂代表實際改動，留言代表問題、理由或待辦事項；不要用刪除文字加留言假裝已完成，也不要把重要決策只放在聊天訊息裡。',
+        en: 'Tracked changes and comments serve different purposes. A change records an actual edit; a comment records a question, reason, or follow-up. Do not mark work complete with a comment alone or leave critical decisions only in chat. Microsoft documents these separate review features in its official Word guidance (https://support.microsoft.com/en-us/word/track-changes-and-view-add-or-edit-comments).',
+      },
+      {
+        zh: '設定修訂範圍時要先約定誰需要被追蹤。多人協作可以選擇追蹤所有作者，也可以只追蹤自己的修改；團隊應在文件開頭記下規則，避免有人以為已記錄而實際上沒有。',
+        en: 'Agree on who should be tracked before editing. A team may track everyone or only the current author, but the rule should be written in the review note so nobody assumes an edit was recorded when it was not.',
+      },
+      {
+        zh: '審稿順序應從高風險項目開始：數字、日期、法規用語、表格合計、簽名欄與連結。這些內容一旦轉換或改寫錯誤，影響通常比一般標點更大，應用原始 PDF 逐項核對。',
+        en: 'Review high-risk items first: numbers, dates, legal wording, table totals, signature fields, and links. A conversion or edit error in these items matters more than ordinary punctuation, so compare each with the source PDF.',
+      },
+      {
+        zh: '接受修訂前先處理留言。留言可能解釋為什麼某個數字不能改、哪個段落需要回到原始來源；若先批次接受修訂再回頭找留言，決策脈絡可能已經消失。',
+        en: 'Resolve comments before accepting changes in bulk. A comment may explain why a number must stay or why a paragraph needs a trusted source. Accepting everything first can destroy the context behind the decision.',
+      },
+      {
+        zh: '交付前要做一次「看不到標記」的清稿檢查，再做一次「顯示所有標記」的殘留檢查。確認沒有未決修訂、留言、隱藏文字或不該外流的檔案屬性，並保留一份含修訂的內部紀錄。',
+        en: 'Before handoff, inspect the clean view and then the all-markup view. Confirm there are no unresolved changes, comments, hidden text, or inappropriate document properties, while retaining an internal copy with the review history.',
+      },
+    ],
+    steps: [
+      { zh: '保留原始 PDF，建立帶日期與版本號的 Word 工作副本。', en: 'Keep the source PDF and create a dated, versioned Word working copy.' },
+      { zh: '先用代表頁完成版面、文字順序、表格與圖片驗收。', en: 'Accept layout, reading order, tables, and images on representative pages first.' },
+      { zh: '在文件開頭記下審稿人、修訂範圍、來源版本與交付條件。', en: 'Record reviewers, tracking scope, source version, and handoff conditions at the top.' },
+      { zh: '開啟修訂，使用留言標記問題與待查來源，不用留言取代實際改字。', en: 'Turn on tracking and use comments for questions or sources, not as a substitute for edits.' },
+      { zh: '依高風險清單逐項對照 PDF，測試表格、連結、頁碼與簽名欄。', en: 'Compare the high-risk checklist with the PDF and test tables, links, page numbers, and signature fields.' },
+      { zh: '逐一回覆或解決留言，再接受或拒絕修訂並記下理由。', en: 'Resolve comments one by one, then accept or reject changes with a recorded reason.' },
+      { zh: '用清稿與所有標記兩種檢視完成最後檢查，分開保存內部紀錄與交付檔。', en: 'Run the final clean and all-markup checks, saving the internal record separately from the handoff file.' },
+    ],
+    example: {
+      zh: '研究團隊把 24 頁政策 PDF 轉成 Word，三人分工校稿。先驗收雙欄頁與表格，再約定所有人開啟修訂；數字疑問用留言連回 PDF 頁碼，最後由負責人逐一處理留言、清除標記並另存交付檔，含修訂版本則留在內部資料夾。',
+      en: 'A research team converts a 24-page policy PDF to Word. After accepting sample columns and tables, all three reviewers turn on tracking; number questions cite PDF page numbers in comments. The owner resolves each comment, creates a clean handoff file, and keeps the marked-up copy internally.',
+    },
+    commonMistakes: [
+      { zh: '直接在原始轉換檔上覆寫，沒有保留 PDF 與工作副本。', en: 'Overwriting the converted file without keeping the PDF and a working copy.' },
+      { zh: '編輯開始後才檢查版面，導致轉換錯誤和排版修補混在一起。', en: 'Checking layout only after editing has mixed conversion defects with repairs.' },
+      { zh: '把留言當成已完成的修改，實際文字卻沒有更新。', en: 'Treating a comment as a completed edit when the text was never changed.' },
+      { zh: '批次接受所有修訂，沒有先閱讀數字或法規用語的留言。', en: 'Accepting every change before reading comments about numbers or legal wording.' },
+      { zh: '只用無標記檢視交付，沒有確認未決修訂和隱藏內容。', en: 'Delivering from a clean view without checking unresolved changes or hidden content.' },
+      { zh: '把含內部留言、作者姓名或修訂紀錄的檔案寄給外部收件人。', en: 'Sending internal comments, author names, or revision history to an external recipient.' },
+    ],
+    faq: [
+      { question: { zh: 'PDF 轉 Word 後要先開修訂還是先驗收版面？', en: 'Should I enable Track Changes before checking layout?' }, answer: { zh: '先驗收代表頁再開修訂較容易追蹤。若先修排版，後續很難分辨哪些是轉換錯誤、哪些是編輯決定。', en: 'Accept representative pages first, then enable tracking. Otherwise it is hard to distinguish conversion defects from editorial decisions.' } },
+      { question: { zh: '留言可以取代修訂嗎？', en: 'Can comments replace tracked changes?' }, answer: { zh: '不行。留言適合說明問題或理由，真正的文字、數字或格式變更仍應透過修訂留下可接受或拒絕的紀錄。', en: 'No. Comments explain a question or reason; actual text, number, or format edits should remain as changes that can be accepted or rejected.' } },
+      { question: { zh: '交付前要刪掉所有修訂嗎？', en: 'Should all tracked changes be removed before handoff?' }, answer: { zh: '依收件人需求決定，但應另存清稿並保留內部含修訂版本；不要為了清稿而失去審查紀錄。', en: 'It depends on the recipient, but save a clean copy and retain an internal marked-up copy so the review trail is not lost.' } },
+      { question: { zh: '怎麼確認 Word 沒有把 PDF 的錯誤一起交出去？', en: 'How do I make sure PDF conversion errors are not handed off?' }, answer: { zh: '用原始 PDF 對照高風險項目，並在清稿與所有標記檢視各看一次；檔案能開啟不等於內容已驗收。', en: 'Compare high-risk items with the source PDF and inspect both clean and all-markup views. A file opening does not prove its contents were accepted.' } },
+    ],
+    cta: {
+      zh: '先用 PDF 轉 Word 工具建立可追蹤副本，再配合原稿對照、修訂與留言完成安全的共同審稿。',
+      en: 'Create a traceable copy with the PDF-to-Word tool, then combine source comparison, tracked changes, and comments for a safe collaborative review.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'pdf-compressor-email-attachment-guide',
+    locales: ['zh', 'en'],
+    slug: 'pdf-compressor-email-attachment-guide',
+    title: {
+      zh: 'PDF 壓縮寄信與上傳容量驗收指南',
+      en: 'Compress PDF for Email and Upload',
+    },
+    metaTitle: {
+      zh: 'PDF 太大寄不出去怎麼辦？壓縮後容量與清晰度檢查',
+      en: 'Compress PDF for Email and Upload',
+    },
+    metaDescription: {
+      zh: 'PDF 壓縮不是只把檔案變小：先確認收件平台的總容量、選擇品質模式、保留文字與連結，再用實際附件或上傳流程驗證，不要用模糊掃描換取幾 MB。',
+      en: 'Compress a PDF for email or upload: confirm the limit, preserve readable text and links, and test the real attachment flow.',
+    },
+    h1: {
+      zh: 'PDF 太大寄不出去怎麼辦：壓縮、附件限制與清晰度驗收流程',
+      en: 'How to Compress a PDF for Email Without Losing Usable Quality',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 54,
+    searchIntent: {
+      zh: '使用者需要把 PDF 寄信或上傳到表單，遇到檔案太大，想知道應該壓到多少、如何避免文字模糊，以及壓縮後怎麼確認附件真的能送出。',
+      en: 'A user must email or upload a PDF that is too large and wants a target size, a way to preserve readable text, and a repeatable check that the final attachment really works.',
+    },
+    targetKeywords: [
+      { zh: 'PDF 壓縮 寄信 附件太大', en: 'compress PDF for email attachment' },
+      { zh: 'PDF 壓縮後模糊怎麼辦', en: 'PDF blurry after compression' },
+      { zh: 'PDF 上傳容量限制', en: 'PDF upload size limit' },
+    ],
+    relatedToolIds: ['pdf-compressor', 'pdf-to-image', 'pdf-to-word'],
+    relatedGuideIds: ['image-compression-quality-size-guide', 'pdf-to-image-resolution-guide', 'pdf-to-word-layout-fidelity-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: '正確的壓縮目標是「在平台限制內仍能完成工作」，不是追求最低檔案大小。先取得收件平台的限制，再以文字、圖片、表格與連結為驗收點，最後用實際上傳流程確認。',
+      en: 'The right target is a file that works within the platform limit, not the smallest possible PDF. Start with the recipient limit, validate text, images, tables, and links, and finish with the real upload flow.',
+    },
+    problem: {
+      zh: 'PDF 可能因掃描圖片、嵌入字型、透明效果或重複物件而變大；只調低品質常讓文字與細線先失去可讀性。不同平台還可能把超過限制的附件改成雲端連結，讓收件人權限與下載路徑變成另一個風險。',
+      en: 'Scans, embedded fonts, transparency, and duplicated objects can make a PDF large. Simply lowering quality often damages text and fine lines first. Platforms may also replace oversized attachments with cloud links, adding permission and download-path risks.',
+    },
+    whoShouldUse: {
+      zh: '適合寄送掃描合約、課程講義、投標文件、作品集、發票或報告的人，也適合要把 PDF 放進求職表單、客服系統或政府線上申請的使用者。',
+      en: 'Useful for sending scanned contracts, handouts, bids, portfolios, invoices, or reports, and for uploading PDFs to job, support, or government forms.',
+    },
+    explanation: [
+      {
+        zh: '先量測而不是猜測。記下原始檔案大小、頁數、紙張尺寸、是否含掃描圖片與收件平台限制；Gmail 個人帳戶的附件總大小上限目前為 25 MB，工作或學校帳戶可能由管理員設定，應以實際帳戶規則為準（https://support.google.com/mail/answer/6584?hl=zh-Hant）。',
+        en: 'Measure before changing anything. Record the source size, page count, page dimensions, scans, and recipient limit. Gmail lists a 25 MB total attachment limit for personal accounts, while work or school limits may be set by an administrator, so verify the actual account rules (https://support.google.com/mail/answer/6584).',
+      },
+      {
+        zh: '預留安全餘量，不要剛好壓到上限。郵件可能還包含其他附件，平台也可能用不同單位計算或在傳輸時加入編碼；把目標設在限制以下，並在實際撰寫郵件時重新看總大小。',
+        en: 'Leave headroom instead of targeting the exact limit. A message may contain other attachments, and platforms may measure units or encoding differently. Set a target below the limit and recheck the total while composing the message.',
+      },
+      {
+        zh: '先找出檔案的主要重量來源。文字型 PDF、向量圖和掃描圖片需要不同策略；若整份文件只有兩頁高解析掃描，降低所有頁面的品質會浪費清晰度，應優先處理最大的頁面或重複資源。',
+        en: 'Identify what makes the file heavy. Text PDFs, vector art, and scanned images need different strategies. If only two pages contain high-resolution scans, degrading every page wastes clarity; start with the largest pages or repeated resources.',
+      },
+      {
+        zh: '壓縮後要同時驗收「可讀」和「可用」。放大檢查最小字、表格線、條碼、簽名與圖片；另外測試文字搜尋、複製、連結、頁面旋轉與列印，因為檔案看起來變小不代表工作功能仍在。',
+        en: 'Validate both readability and usability after compression. Zoom into the smallest text, table lines, barcodes, signatures, and images, then test search, copy, links, rotation, and printing. A smaller file is not necessarily a functional file.',
+      },
+      {
+        zh: '如果來源是掃描文件，先判斷是否需要保留 OCR 文字層。把圖片壓得太低可能讓日後搜尋失效；若收件人只需視覺存檔，策略可以不同，但仍要保留一份未壓縮或高品質主檔。',
+        en: 'For scans, decide whether the OCR text layer must remain. Excessive image reduction can break future search. An archive-only delivery may use another strategy, but keep an uncompressed or high-quality master.',
+      },
+      {
+        zh: '平台的「超過限制」處理方式也要納入驗收。Gmail 可能把過大的檔案改成 Google Drive 連結；若文件含敏感資料，必須確認分享權限、有效期限與收件人是否能在不登入錯誤帳戶的情況下開啟。',
+        en: 'Include the platform fallback in acceptance. Gmail may turn an oversized file into a Google Drive link; for sensitive documents, verify sharing permission, expiration, and whether the recipient can open it without the wrong account. Google explains the Drive fallback in its attachment guidance (https://support.google.com/a/users/answer/11339703).',
+      },
+      {
+        zh: '最後用實際附件或表單做小型演練，而不是只看本機檔案屬性。確認上傳完成、郵件可以送出、收件端能下載並開啟，且檔名、頁數、連結與關鍵文字沒有在途中改變。',
+        en: 'Finish with a small real-world rehearsal rather than relying on local file properties. Confirm upload completion, successful sending, recipient download and opening, and unchanged filename, page count, links, and critical text.',
+      },
+    ],
+    steps: [
+      { zh: '記下原始大小、頁數、內容類型與平台的總附件限制。', en: 'Record the source size, pages, content types, and total attachment limit.' },
+      { zh: '設定低於平台上限的目標值，並保留原始主檔與一份工作副本。', en: 'Set a target below the limit and keep the master plus a working copy.' },
+      { zh: '用 PDF 壓縮工具輸出兩個模式或品質版本，不覆蓋來源。', en: 'Export two modes or quality variants with the PDF compressor without overwriting the source.' },
+      { zh: '比較檔案大小、最小文字、表格、圖片、條碼與簽名清晰度。', en: 'Compare size and the clarity of small text, tables, images, barcodes, and signatures.' },
+      { zh: '測試搜尋、複製、連結、旋轉、列印與頁數是否正常。', en: 'Test search, copy, links, rotation, printing, and page count.' },
+      { zh: '在實際郵件或表單中加入其他附件後，重新確認總大小與權限。', en: 'Recheck total size and permissions in the real email or form, including other attachments.' },
+      { zh: '用測試收件人或草稿流程完成下載與開啟驗收，再交付正式檔案。', en: 'Use a test recipient or draft flow to verify download and opening before formal delivery.' },
+    ],
+    example: {
+      zh: '求職者要上傳 42 MB 的掃描證明文件到表單，限制是 10 MB。團隊先保留主檔，找出三頁彩色掃描是主要容量來源，輸出兩個壓縮版本；選定仍能讀清證件號碼的 8.1 MB 版本，測試搜尋與頁數後再上傳，並在備註中標明檔案日期。',
+      en: 'A job applicant must upload a 42 MB scanned certificate to a 10 MB form. The team keeps the master, finds three color-scan pages driving the size, and compares two variants. They choose the 8.1 MB copy that keeps ID numbers readable, test search and page count, then upload the dated file.',
+    },
+    commonMistakes: [
+      { zh: '把目標設在平台上限整數，沒有預留其他附件與傳輸餘量。', en: 'Targeting the exact platform limit without room for other attachments or transport overhead.' },
+      { zh: '一律調到最低品質，沒有先找出真正佔容量的頁面。', en: 'Using the lowest quality everywhere without finding the pages that actually add weight.' },
+      { zh: '只看檔案大小，不檢查最小字、條碼、表格和簽名。', en: 'Checking only bytes and not small text, barcodes, tables, or signatures.' },
+      { zh: '壓縮後覆蓋唯一的原始掃描檔，日後無法重新輸出。', en: 'Overwriting the only source scan and losing the ability to export again.' },
+      { zh: '忽略 OCR、搜尋、連結或列印功能在壓縮後失效。', en: 'Ignoring broken OCR, search, links, or printing after compression.' },
+      { zh: '看到平台改成雲端連結就直接寄出，沒有驗證分享權限。', en: 'Sending the cloud-link fallback without verifying sharing permissions.' },
+    ],
+    faq: [
+      { question: { zh: 'PDF 壓到越小越好嗎？', en: 'Is the smallest PDF always the best one?' }, answer: { zh: '不是。應先符合平台容量，再以最小文字、表格、條碼與搜尋功能能否正常工作作為品質底線。', en: 'No. Meet the platform size with a quality floor based on small text, tables, barcodes, and required search or link functions.' } },
+      { question: { zh: 'Gmail 附件超過限制會怎樣？', en: 'What happens when a Gmail attachment exceeds the limit?' }, answer: { zh: '個人帳戶通常會改用 Google Drive 連結，但工作或學校帳戶規則可能不同；寄出前要確認連結權限與收件者能否開啟。', en: 'Personal Gmail generally falls back to a Google Drive link, but work or school rules may differ. Verify link permissions and recipient access before sending.' } },
+      { question: { zh: '掃描 PDF 壓縮後文字模糊怎麼辦？', en: 'What if scanned text becomes blurry after compression?' }, answer: { zh: '回到原始主檔，先只處理最大或不必要的圖片，再以證件號碼、細字和條碼做放大比較；不要反覆壓縮同一副本。', en: 'Return to the master, target the largest or unnecessary images, and compare ID numbers, small text, and barcodes at zoom. Do not repeatedly compress one copy.' } },
+      { question: { zh: '壓縮後要不要重新下載測試？', en: 'Should I download and test the compressed file again?' }, answer: { zh: '要。實際附件或表單流程可能重新處理檔案；用測試收件人下載並開啟，才能驗證交付端的檔案仍可用。', en: 'Yes. An email or form may process the file again. Download and open it as a test recipient to verify the delivered copy still works.' } },
+    ],
+    cta: {
+      zh: '用 PDF 壓縮工具先輸出比較版本，按照平台限制、關鍵細節與實際附件流程逐項驗收，再交付低容量但仍可工作的檔案。',
+      en: 'Create comparison variants with the PDF compressor, validate limits, critical detail, and the real attachment flow, then deliver a compact but usable file.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'merge-pdf-bookmarks-navigation-guide',
+    locales: ['zh', 'en'],
+    slug: 'merge-pdf-bookmarks-navigation-guide',
+    title: {
+      zh: '合併 PDF 書籤與導航驗收指南',
+      en: 'Merged PDF Bookmarks and Navigation Guide',
+    },
+    metaTitle: {
+      zh: '合併 PDF 後怎麼保留書籤？目錄、連結與導航檢查',
+      en: 'Merged PDF: Check Bookmarks, Links, and Navigation',
+    },
+    metaDescription: {
+      zh: '合併 PDF 後不要只確認頁面順序；逐項檢查書籤層級、目錄連結、頁面標籤與外部連結，並用實際讀者路徑驗證合併檔仍能快速找到章節與附件，方便閱讀。',
+      en: 'After merging PDFs, check bookmark hierarchy, table-of-contents links, page labels, and external links so readers can still navigate to the right section.',
+    },
+    h1: {
+      zh: '合併 PDF 後如何檢查書籤與導航：讓讀者找得到章節',
+      en: 'How to Check Bookmarks and Navigation After Merging PDFs',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 55,
+    searchIntent: {
+      zh: '使用者已合併多個 PDF，發現書籤、目錄連結或頁碼可能失效，想知道如何在交付前檢查章節導航，而不是只確認檔案能開啟。',
+      en: 'A user merged several PDFs and needs to verify bookmarks, table-of-contents links, and page labels before delivery instead of checking only that the file opens.',
+    },
+    targetKeywords: [
+      { zh: '合併 PDF 書籤', en: 'bookmarks after merging PDF' },
+      { zh: 'PDF 目錄連結失效', en: 'PDF table of contents links broken' },
+      { zh: 'PDF 導航檢查', en: 'check PDF navigation' },
+    ],
+    relatedToolIds: ['merge-pdf', 'pdf-page-reorder', 'pdf-to-image'],
+    relatedGuideIds: ['merge-pdf-reading-order-checklist-guide', 'merge-pdf-page-size-orientation-guide', 'pdf-to-image-raster-text-search-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: '合併 PDF 會重建頁面位置，但不一定能自動重建原本的書籤與目錄目標。把章節樹、頁面標籤、內外部連結和讀者任務分開驗收，才能交付真正可導航的文件。',
+      en: 'Merging PDFs rebuilds page positions but may not rebuild bookmarks or table-of-contents targets. Validate the outline, page labels, internal and external links, and reader tasks separately.',
+    },
+    problem: {
+      zh: '每份來源 PDF 可能都有自己的書籤層級、頁碼起點與目錄連結。合併後若只保留其中一份導航樹，其他章節會變成沒有入口的頁面；若頁面被重新排序，舊連結也可能指到錯誤位置。',
+      en: 'Each source PDF may have its own outline, page numbering, and link targets. A merge that keeps only one outline leaves other sections without an entry point, and reordering pages can send old links to the wrong place.',
+    },
+    whoShouldUse: {
+      zh: '適合合併課程講義、研究附件、投標文件、操作手冊、年度報告與多份客戶交付檔的人，也適合需要快速跳轉章節的長篇 PDF 讀者。',
+      en: 'Useful for merging handouts, research appendices, bids, manuals, annual reports, or client deliverables that readers must navigate quickly.',
+    },
+    explanation: [
+      {
+        zh: '先畫出來源清單和章節樹。記下每份 PDF 的檔名、版本、頁數、第一層章節與頁碼標籤，再決定合併檔要採來源名稱、主題或層級作為書籤文字，不要讓工具替你隨機命名。',
+        en: 'Map the source files and outline first. Record each filename, version, page count, top-level sections, and page labels, then decide whether merged bookmarks use source names, topics, or hierarchy instead of accepting random names.',
+      },
+      {
+        zh: '分辨「頁面順序」和「導航順序」。文件可能依合約附件順序合併，但讀者需要先看摘要再跳到附件；書籤可以提供另一條閱讀路徑，不能用目錄樹掩蓋頁面順序錯誤。',
+        en: 'Separate page order from navigation order. A contract may merge in attachment order while readers need a summary first. Bookmarks can offer another path, but they cannot hide a wrong physical page order.',
+      },
+      {
+        zh: '書籤目標要指向真正的頁面視圖，而不是只顯示章節文字。合併或刪頁後，原本的頁碼可能改變；Adobe 說明書籤可連到文件中的位置、另一份文件或網頁，驗收時應確認每個目標是否仍是預期內容（https://helpx.adobe.com/acrobat/using/page-thumbnails-bookmarks-pdfs.html）。',
+        en: 'A bookmark target must land on the intended page view, not merely display a chapter label. Page numbers can change after merging or deleting. Adobe notes that bookmarks can target a location, another document, or a web page; verify each target still reaches the intended content (https://helpx.adobe.com/acrobat/using/page-thumbnails-bookmarks-pdfs.html).',
+      },
+      {
+        zh: '目錄中的相對頁碼、頁面標籤和檢視器索引可能不是同一套數字。對照時同時記錄檔案頁序、印刷頁碼與檢視器顯示，並用點擊結果驗證，而不是靠心算加減。',
+        en: 'Printed page numbers, PDF page labels, and viewer indexes may be different systems. Record all three while checking and verify by clicking the target instead of relying on mental arithmetic.',
+      },
+      {
+        zh: '外部連結和跨文件連結是另一種風險。來源檔可能指向舊版本附件或本機路徑；合併後要測試網址、相對檔案、權限與離線情境，必要時改成明確的交付說明。',
+        en: 'External and cross-document links add another risk. A source may point to an old attachment or local path. Test URLs, relative files, permissions, and offline behavior, and replace fragile targets with explicit delivery notes when needed.',
+      },
+      {
+        zh: '長文件應用讀者任務做抽樣，而不是逐一點完所有書籤。挑選首頁、每個第一層章節、最深層節點、目錄、附件和最後一頁，記錄點擊後的章節標題與頁面內容。',
+        en: 'For a long file, sample reader tasks instead of clicking every bookmark. Check the cover, each top-level section, the deepest node, the table of contents, appendices, and final page, recording the landed heading and content.',
+      },
+      {
+        zh: '交付前保留一份不含失效連結的清單。若某個來源書籤無法移植，應在驗收紀錄標明限制並移除誤導入口；不要保留看似可點擊、實際跳到錯頁的導航。',
+        en: 'Keep a delivery checklist with no unresolved links. If a source bookmark cannot be migrated, document the limitation and remove the misleading entry instead of keeping a clickable item that lands on the wrong page.',
+      },
+    ],
+    steps: [
+      { zh: '列出來源檔案、版本、頁數、章節和頁面標籤。', en: 'List source files, versions, pages, sections, and page labels.' },
+      { zh: '使用 PDF 合併工具依已確認的順序輸出副本。', en: 'Export a copy in the confirmed order with the merge PDF tool.' },
+      { zh: '檢查書籤樹是否涵蓋每份來源與預期的層級。', en: 'Check that the bookmark tree covers every source and expected level.' },
+      { zh: '點擊目錄、第一層與最深層書籤，記錄實際落點。', en: 'Click the table of contents, top-level, and deepest bookmarks and record the landing pages.' },
+      { zh: '分開測試印刷頁碼、PDF 頁面標籤、內部與外部連結。', en: 'Test printed numbers, PDF labels, internal links, and external links separately.' },
+      { zh: '用首頁、摘要、附件和最後一頁做讀者任務抽樣。', en: 'Sample reader tasks from the cover, summary, appendices, and final page.' },
+      { zh: '保存合併檔、來源清單、導航驗收紀錄與已知限制再交付。', en: 'Save the merged file, source list, navigation checks, and known limits before handoff.' },
+    ],
+    example: {
+      zh: '團隊把報告正文、三份附件和修訂版合併成 86 頁 PDF。檢查時發現第二份附件的書籤仍指向合併前頁碼，目錄也把附件合計當成正文章節；團隊重建書籤層級、抽測每個附件入口並保留來源版本表後才寄出。',
+      en: 'A team merges a report, three appendices, and a revision into an 86-page PDF. Checks show appendix bookmarks still use pre-merge positions and the contents list treats an appendix total as a body section. The team rebuilds the outline, samples each appendix entry, and records source versions before sending.',
+    },
+    commonMistakes: [
+      { zh: '只看頁面順序，不檢查書籤樹和目錄落點。', en: 'Checking page order but not the outline or table-of-contents targets.' },
+      { zh: '用印刷頁碼推算檢視器頁碼，沒有實際點擊驗證。', en: 'Inferring viewer indexes from printed numbers without clicking to verify.' },
+      { zh: '保留指向舊附件、本機路徑或錯誤章節的跨文件連結。', en: 'Keeping links to old attachments, local paths, or wrong sections.' },
+      { zh: '把每份來源的最高層書籤直接平鋪，失去章節脈絡。', en: 'Flattening every source outline and losing chapter context.' },
+      { zh: '為了看起來完整而保留無法移植的失效書籤。', en: 'Keeping broken bookmarks merely to make the outline look complete.' },
+      { zh: '交付前沒有保存來源版本與導航驗收紀錄。', en: 'Delivering without saving source versions and navigation acceptance notes.' },
+    ],
+    faq: [
+      { question: { zh: '合併 PDF 後書籤一定會保留嗎？', en: 'Are bookmarks always preserved after merging PDFs?' }, answer: { zh: '不一定。工具和來源結構不同，書籤可能被合併、平鋪、遺失或指向舊頁面；要以實際點擊結果驗收。', en: 'No. Depending on the tool and source structure, bookmarks may merge, flatten, disappear, or keep old targets. Verify by clicking them.' } },
+      { question: { zh: 'PDF 目錄頁碼和檢視器頁碼不同正常嗎？', en: 'Is it normal for printed and viewer page numbers to differ?' }, answer: { zh: '可能正常，但必須能清楚對應。記錄印刷頁碼、頁面標籤和檢視器索引，並確認目錄連結落在正確內容。', en: 'It can be normal, but the systems must map clearly. Record printed numbers, labels, and viewer indexes and verify the links land on the right content.' } },
+      { question: { zh: '可以只保留目錄，不建立書籤嗎？', en: 'Can I keep only the table of contents and skip bookmarks?' }, answer: { zh: '短文件或許可以，但長文件在螢幕閱讀時需要可見的導航樹；依讀者任務決定，並至少測試目錄與章節入口。', en: 'For a short file perhaps, but long screen-read documents benefit from an outline. Decide from reader tasks and test at least the contents and section entries.' } },
+      { question: { zh: '書籤跳錯頁要怎麼處理？', en: 'What should I do when a bookmark lands on the wrong page?' }, answer: { zh: '回到合併檔重新指定頁面視圖，或移除誤導入口並在驗收紀錄說明限制；不要把錯誤導航交給收件人自行猜。', en: 'Retarget the bookmark in the merged file, or remove the misleading entry and document the limitation. Do not make recipients guess.' } },
+    ],
+    cta: {
+      zh: '用 PDF 合併工具輸出副本後，依章節樹、頁碼系統與讀者任務逐項點擊驗收，讓長文件真的找得到內容。',
+      en: 'Merge a copy, then test the outline, page-number systems, and reader tasks so a long PDF remains genuinely navigable.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'split-pdf-output-naming-batch-delivery-guide',
+    locales: ['zh', 'en'],
+    slug: 'split-pdf-output-naming-batch-delivery-guide',
+    title: {
+      zh: '拆分 PDF 批次輸出與檔名管理指南',
+      en: 'Split PDF Batch Output and File Naming Guide',
+    },
+    metaTitle: {
+      zh: '拆分 PDF 後檔案太多怎麼整理？命名、資料夾與驗收',
+      en: 'Split PDF Files: Naming, Folders, and Batch Checks',
+    },
+    metaDescription: {
+      zh: '拆分 PDF 前先決定分段規則、檔名欄位與輸出資料夾，再用頁數、章節、版本和檔案大小驗收每個副本；避免附件順序錯、同名覆蓋或把錯誤檔案寄出去。',
+      en: 'Plan split rules, filename fields, and an output folder, then verify page ranges, sections, versions, and sizes before delivery.',
+    },
+    h1: {
+      zh: '拆分 PDF 後如何整理檔案：批次命名、資料夾與交付檢查',
+      en: 'How to Organize Split PDFs for Batch Delivery',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 56,
+    searchIntent: {
+      zh: '使用者要把長 PDF 拆成多個章節、附件或容量較小的檔案，擔心輸出檔名混亂、頁面遺漏、同名覆蓋與交付順序錯誤，想要可重複的批次管理方法。',
+      en: 'A user needs to split a long PDF into sections, appendices, or smaller files and wants repeatable naming, folder, page-coverage, and delivery checks.',
+    },
+    targetKeywords: [
+      { zh: '拆分 PDF 檔名整理', en: 'name split PDF files' },
+      { zh: 'PDF 批次拆分檔案', en: 'split PDF into batches' },
+      { zh: '拆分 PDF 頁面遺漏', en: 'missing pages after splitting PDF' },
+    ],
+    relatedToolIds: ['split-pdf', 'pdf-compressor', 'pdf-page-reorder'],
+    relatedGuideIds: ['split-pdf-page-range-planning-guide', 'merge-pdf-reading-order-checklist-guide', 'pdf-compressor-email-attachment-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: '拆分工作的難點不是按下按鈕，而是讓每個輸出檔能被辨識、追溯和正確交付。先定義分段與命名，再用頁面覆蓋、版本、大小和開啟測試確認沒有漏檔或錯檔。',
+      en: 'The hard part of splitting is not clicking a button; it is making every output identifiable, traceable, and deliverable. Define ranges and names first, then verify coverage, versions, sizes, and opening tests.',
+    },
+    problem: {
+      zh: '同一份長 PDF 可能同時需要依章節、頁數或檔案大小拆分。若沒有先決定唯一規則，輸出檔會出現 `part-1`、`final`、`final2` 等無法追溯的名稱，甚至因同名而覆蓋上一批結果。',
+      en: 'A long PDF may need to be split by chapters, page ranges, or file size. Without one declared rule, outputs become untraceable names such as part-1, final, and final2, or overwrite an earlier batch.',
+    },
+    whoShouldUse: {
+      zh: '適合把報告拆成章節、把投標附件分開、把課程講義按週交付、把大型掃描檔分批上傳，或需要把多個輸出交給不同收件人的使用者。',
+      en: 'Useful for chapter-based reports, bid appendices, weekly handouts, large scans uploaded in batches, and deliveries where different outputs go to different recipients.',
+    },
+    explanation: [
+      {
+        zh: '先決定拆分依據並寫成小規格：連續頁、奇偶頁、章節書籤或最大檔案大小。Adobe 的桌面說明列出頁數、檔案大小與第一層書籤等方式，也提供輸出目的地與命名慣例設定；可把這些選項當成規劃時的檢查表（https://helpx.adobe.com/acrobat/desktop/edit-documents/organize-pages/split-pdfs.html）。',
+        en: 'Choose and document one split rule: consecutive ranges, odd/even pages, top-level bookmarks, or maximum file size. Adobe lists these options and provides destination and naming settings; use them as a planning checklist (https://helpx.adobe.com/acrobat/desktop/edit-documents/organize-pages/split-pdfs.html).',
+      },
+      {
+        zh: '檔名應包含能回答「這是哪一份」的欄位，例如文件代號、章節序號、主題、版本與日期。序號要固定寬度（01、02），避免檔案總管以字串排序時把 10 放到 2 前面。',
+        en: 'A filename should answer which file it is with a document ID, section number, topic, version, and date. Use fixed-width numbers such as 01 and 02 so string sorting does not place 10 before 2.',
+      },
+      {
+        zh: '輸出資料夾要和來源、交付包、失敗重試分開。先建立空的工作資料夾，完成驗收後再複製到交付資料夾；不要讓工具把新輸出混在含有同名舊檔的資料夾。',
+        en: 'Separate the source, working outputs, delivery package, and failed retries. Start with an empty work folder and copy only accepted files to delivery; do not mix new outputs with same-named older files.',
+      },
+      {
+        zh: '頁面覆蓋檢查要同時看起點、終點與相鄰邊界。若第 1–8 頁和第 8–15 頁都含第 8 頁，可能是刻意重複封面，也可能是範圍錯誤；把預期重複規則寫清楚，不要只用總頁數相加。',
+        en: 'Check starts, ends, and boundaries. If outputs 1–8 and 8–15 both contain page 8, that may be an intentional cover repeat or an error. Document the expected overlap instead of relying only on summed page counts.',
+      },
+      {
+        zh: '版本和日期不是裝飾。來源更新後重新拆分，舊檔和新檔可能頁數相同但內容不同；把來源版本寫入檔名或清單，並保留產出時間與規則，日後才知道哪一批可以撤回。',
+        en: 'Version and date fields are not decoration. A revised source can produce the same page counts with different content. Put the source version in the filename or manifest and keep the rule and time so a batch can be withdrawn later.',
+      },
+      {
+        zh: '每個輸出都要通過基本開啟和內容抽查。檔案大小為零、頁面旋轉錯誤、第一頁缺失或書籤仍指向原檔的結果，都應回到工作資料夾修正，不要在交付包內覆蓋。',
+        en: 'Every output needs a basic open and content spot check. Zero-byte files, wrong rotation, missing first pages, or bookmarks still pointing to the source belong in the work folder for repair, not in the delivery package.',
+      },
+      {
+        zh: '若拆分是為了寄信或上傳，最後還要檢查總容量與收件人對應。單檔通過限制不表示整批附件能送出；用交付清單逐一對照檔名、頁碼範圍、收件人和權限。',
+        en: 'When splitting for email or upload, check total size and recipient mapping at the end. Each file can meet a limit while the batch still fails. Match filename, page range, recipient, and permission in a delivery manifest.',
+      },
+    ],
+    steps: [
+      { zh: '列出來源版本、預期分段規則、頁面範圍與交付對象。', en: 'List the source version, split rule, page ranges, and recipients.' },
+      { zh: '建立空的工作資料夾與固定欄位的檔名格式。', en: 'Create an empty work folder and a fixed-field filename format.' },
+      { zh: '用 PDF 拆分工具輸出副本，指定目的地與命名慣例。', en: 'Export copies with the split PDF tool using the destination and naming convention.' },
+      { zh: '以頁面起迄、重複規則和預期檔案數檢查覆蓋範圍。', en: 'Check coverage with page starts, ends, overlap rules, and expected file count.' },
+      { zh: '逐檔開啟並抽查章節標題、方向、書籤和檔案大小。', en: 'Open each file and sample headings, orientation, bookmarks, and size.' },
+      { zh: '建立交付清單，對照檔名、版本、收件人、權限和總附件大小。', en: 'Create a manifest matching names, versions, recipients, permissions, and total attachment size.' },
+      { zh: '只把通過驗收的檔案複製到交付資料夾，保留失敗與來源紀錄。', en: 'Copy only accepted files to delivery and retain failed outputs and source records.' },
+    ],
+    example: {
+      zh: '教學團隊要把 72 頁講義按四週寄給不同助教。先把每週頁碼和重複封面規則寫入清單，輸出 `course-v3-w01` 到 `w04`，發現第三週檔名被舊檔覆蓋；團隊清空工作資料夾、重跑拆分、逐檔開啟抽查後才建立寄信附件包。',
+      en: 'A teaching team splits a 72-page handout into four weekly deliveries for different assistants. They document ranges and repeated covers, export course-v3-w01 through w04, catch an old file overwriting week three, then clear the work folder, rerun, sample each file, and build the email package.',
+    },
+    commonMistakes: [
+      { zh: '沒有先決定拆分規則，看到輸出結果才臨時改範圍。', en: 'Changing ranges after seeing outputs because no split rule was declared.' },
+      { zh: '使用 `final`、`new` 等檔名，無法追溯來源版本。', en: 'Using names such as final or new that cannot trace the source version.' },
+      { zh: '把新輸出放進含有同名舊檔的資料夾而被覆蓋。', en: 'Writing new outputs into a folder with same-named files and overwriting them.' },
+      { zh: '只把各檔案頁數相加，沒有檢查邊界遺漏或非預期重複。', en: 'Adding page counts without checking missing boundaries or unintended overlap.' },
+      { zh: '只檢查第一個輸出，沒有開啟最後一個和最大檔案。', en: 'Checking only the first output and not the last or largest file.' },
+      { zh: '單檔大小合格就直接寄出，忽略整批附件和收件人權限。', en: 'Sending once each file meets a size limit without checking the batch or permissions.' },
+    ],
+    faq: [
+      { question: { zh: '拆分 PDF 應該依頁數還是依章節？', en: 'Should I split a PDF by pages or chapters?' }, answer: { zh: '依交付任務決定：章節需要獨立閱讀時用章節或書籤，容量受限時用頁數或大小；先寫規則再輸出，避免混用。', en: 'Choose from the delivery task: chapters or bookmarks for independent reading, pages or size for capacity limits. Document one rule before exporting.' } },
+      { question: { zh: '拆分後檔名怎麼取比較好？', en: 'What is a good naming pattern for split PDFs?' }, answer: { zh: '至少包含文件代號、固定寬度序號、主題、來源版本和日期；用清單保存頁面範圍，檔名不必塞入所有說明。', en: 'Include a document ID, fixed-width sequence, topic, source version, and date. Keep page ranges in a manifest rather than making the filename unreadably long.' } },
+      { question: { zh: '拆分後怎麼確認沒有漏頁？', en: 'How can I check that no pages are missing?' }, answer: { zh: '對照預期檔案數、每段起迄和邊界重複規則，再開啟第一個、最後一個與相鄰輸出抽查；只加總頁數不夠。', en: 'Compare expected file count, starts, ends, and overlap rules, then sample the first, last, and adjacent outputs. Summing page counts alone is not enough.' } },
+      { question: { zh: '拆分後可以刪除原始 PDF 嗎？', en: 'Can I delete the source PDF after splitting?' }, answer: { zh: '不建議。來源版本是日後重跑、比對與追溯的基準；先確認備份與保存政策，再清理不需要的副本。', en: 'Usually not. The source version is the baseline for reruns, comparison, and traceability. Confirm backups and retention policy before cleaning copies.' } },
+    ],
+    cta: {
+      zh: '用 PDF 拆分工具依規格輸出到空的工作資料夾，再以頁面覆蓋、檔名、版本與收件人清單完成批次交付驗收。',
+      en: 'Split into an empty work folder, then validate page coverage, names, versions, and recipients before batch delivery.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'pdf-page-reorder-appendix-merge-check-guide',
+    locales: ['zh', 'en'],
+    slug: 'pdf-page-reorder-appendix-merge-check-guide',
+    title: {
+      zh: 'PDF 附錄重排與合併前檢查指南',
+      en: 'PDF Appendix Reorder Check Guide',
+    },
+    metaTitle: {
+      zh: 'PDF 附錄怎麼重排？合併前頁碼、版本與引用檢查',
+      en: 'PDF Appendix Reorder: Pages and References',
+    },
+    metaDescription: {
+      zh: '把附件、證據與表格放進 PDF 前，先規劃頁面順序、版本與引用，重排後再驗收目錄、頁碼、連結和重複頁，避免合併檔難以追溯，讓讀者能快速找到正確資料。',
+      en: 'Reorder PDF appendices before merging: map versions and references, then check page labels, links, duplicates, and traceability in the final file.',
+    },
+    h1: {
+      zh: 'PDF 附錄重排與合併前怎麼檢查：讓證據頁可追溯的流程',
+      en: 'How to Reorder PDF Appendices Before a Reliable Merge',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 52,
+    searchIntent: {
+      zh: '使用者要把附件、證據、表格或補充頁加入主 PDF，想先重排內容並確認版本、引用與頁碼，避免合併後找不到來源或重複附錄。',
+      en: 'A user needs to add evidence, tables, or supporting pages to a main PDF and wants a repeatable reorder check for versions, references, page labels, and duplicates before merging.',
+    },
+    targetKeywords: [
+      { zh: 'PDF 附錄重排', en: 'reorder PDF appendix' },
+      { zh: '合併 PDF 附件順序', en: 'PDF appendix merge order' },
+      { zh: 'PDF 頁面版本檢查', en: 'PDF page version check' },
+    ],
+    relatedToolIds: ['pdf-page-reorder', 'merge-pdf', 'split-pdf'],
+    relatedGuideIds: ['merge-pdf-reading-order-checklist-guide', 'merge-pdf-bookmarks-navigation-guide', 'split-pdf-page-range-planning-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: '附錄重排不是把頁面拖到最後就完成。每一頁都要有來源、版本與用途，並在合併前確認主文引用、頁碼與目錄會如何變動。',
+      en: 'Reordering an appendix is more than dragging pages to the end. Each page needs a source, version, and purpose, and the main document references and navigation must be checked before merging.',
+    },
+    problem: {
+      zh: '附件常來自不同人、不同日期或不同範本。若先合併再整理，舊版表格可能蓋過新版，引用頁碼會失效，重複的封面與空白頁也會讓讀者誤判內容。',
+      en: 'Appendices often come from different people, dates, or templates. Merging first can leave an old table beside a new one, break page references, and add duplicate covers or blank pages that confuse readers.',
+    },
+    whoShouldUse: {
+      zh: '適合整理研究報告、申請文件、課程講義、稽核證據與專案交付包的人，也適合在多人協作後替最終 PDF 做版本驗收。',
+      en: 'Useful for research reports, applications, course handouts, audit evidence, project handoffs, and final-version reviews after several people contribute PDFs.',
+    },
+    explanation: [
+      {
+        zh: '先建立附錄清單，不要直接在檔案總管依檔名排序。清單至少記錄附件代號、負責人、來源日期、版本、預期位置與主文引用，讓每一頁在合併後仍能追溯。',
+        en: 'Start with an appendix manifest instead of sorting filenames in a folder. Record an item ID, owner, source date, version, intended position, and main-text reference so every page stays traceable after merging.',
+      },
+      {
+        zh: '把「附件順序」和「頁面順序」分開思考。主文可能需要先看到定義，再看到證據，最後才是原始表格；若只依收到檔案的先後排列，讀者路徑通常不會合理。',
+        en: 'Separate appendix order from file-arrival order. The reader may need a definition, then evidence, then the raw table; arranging by upload time rarely creates a useful path.',
+      },
+      {
+        zh: '版本判定要有明確規則，例如以核准日期、文件編號或資料截點為準。不要把檔名中的 `final` 當成證據；必要時打開頁面查看頁尾、表格日期與簽核欄。',
+        en: 'Define a version rule using an approval date, document ID, or data cutoff. Do not treat a filename containing final as proof; inspect footers, table dates, and approval fields when needed.',
+      },
+      {
+        zh: '重排工具只改變頁面容器，不會自動修正正文中的「見附錄 A 第 12 頁」。重排後先標記所有頁碼與章節引用，等最終合併後再重新核對落點。',
+        en: 'A reorder tool changes the page container but cannot automatically fix text such as “see Appendix A, page 12.” Mark every page and section reference, then verify destinations again after the final merge.',
+      },
+      {
+        zh: '對每份附件檢查開頭與結尾，特別留意重複封面、空白頁、旋轉方向與不同紙張尺寸。Adobe 的頁面整理說明也把插入、移動、刪除與旋轉視為獨立操作，應逐項驗收（https://helpx.adobe.com/acrobat/using/manipulate-pages-pdfs.html）。',
+        en: 'Inspect the beginning and end of every appendix, especially duplicate covers, blank pages, rotation, and mixed paper sizes. Adobe documents insert, move, delete, and rotate as separate page operations, so check each one (https://helpx.adobe.com/acrobat/using/manipulate-pages-pdfs.html).',
+      },
+      {
+        zh: '若附錄包含敏感資料，先確認應保留的頁面與應遮蔽的版本，再做重排。把刪除的頁面從工作檔移走並留下紀錄，避免誤把未核准的附件放回最終包。',
+        en: 'When appendices contain sensitive data, decide which version is approved and which pages need redaction before reordering. Move removed pages out of the work file and record the decision so an unapproved appendix is not reintroduced.',
+      },
+      {
+        zh: '完成合併後要用讀者任務做驗收：從正文引用跳到附錄、從附錄回看主文、開啟目錄與外部連結，並在另一個 PDF 閱讀器抽查，避免只在編輯器預覽中通過。',
+        en: 'After merging, test reader tasks: follow a main-text reference to an appendix, return to the main section, open the table of contents and external links, and sample in another PDF viewer instead of trusting one editor preview.',
+      },
+    ],
+    steps: [
+      { zh: '建立附錄清單，記下代號、版本、來源、用途與預期順序。', en: 'Create a manifest with each appendix ID, version, source, purpose, and intended order.' },
+      { zh: '打開每份 PDF，確認封面、頁數、方向、紙張尺寸與版本標記。', en: 'Open each PDF and confirm its cover, page count, orientation, paper size, and version mark.' },
+      { zh: '刪除或隔離重複封面、空白頁與未核准的舊附件，留下處理紀錄。', en: 'Remove or isolate duplicate covers, blank pages, and unapproved old appendices with a record of the decision.' },
+      { zh: '用 PDF 頁面重排工具依清單插入、移動、旋轉或刪除頁面。', en: 'Use the PDF page reorder tool to insert, move, rotate, or delete pages according to the manifest.' },
+      { zh: '逐項核對正文引用、附錄標籤、頁碼與版本是否仍指向正確頁面。', en: 'Check main-text references, appendix labels, page numbers, and versions against the correct destinations.' },
+      { zh: '合併後開啟目錄、書籤、內外部連結，抽查第一頁、邊界頁與最後一頁。', en: 'After merging, open the contents, bookmarks, and links; sample the first, boundary, and last pages.' },
+      { zh: '輸出帶有版本與日期的交付檔，保留來源、清單與驗收結果。', en: 'Export a dated, versioned delivery file and retain the sources, manifest, and acceptance result.' },
+    ],
+    example: {
+      zh: '研究小組要把問卷、原始統計表與受試者說明加入報告。清單顯示統計表 v2 才是核准版；重排時移除 v1、補上附錄標籤，合併後從正文的三個引用逐一跳轉，才發現一處頁碼仍指向舊版，於是先修正文再交付。',
+      en: 'A research team adds a survey, raw tables, and participant notes to a report. The manifest identifies table v2 as approved, so they isolate v1, label the appendices, and follow three references after merging. One page number still pointed to the old table, so they fixed the main text before delivery.',
+    },
+    commonMistakes: [
+      { zh: '依檔名或收到時間排序，沒有先定義讀者需要的順序。', en: 'Sorting by filenames or arrival time without defining the reader’s sequence.' },
+      { zh: '把 `final`、`最新版` 當成版本證據，沒有核對頁尾或核准日期。', en: 'Treating final or latest in a filename as version proof without checking the page or approval date.' },
+      { zh: '重排後只看頁數，沒有重新驗證正文中的頁碼與附錄名稱。', en: 'Checking only the page count after reordering and not the references or appendix names.' },
+      { zh: '忽略重複封面、空白頁、旋轉頁與混合紙張尺寸。', en: 'Ignoring duplicate covers, blank pages, rotated pages, or mixed paper sizes.' },
+      { zh: '在工作檔直接覆蓋來源，之後無法重建或解釋變更。', en: 'Overwriting the source in the work file and losing the ability to rebuild or explain changes.' },
+      { zh: '只在同一個編輯器預覽，沒有用讀者流程和另一個閱讀器抽查。', en: 'Trusting one editor preview without testing reader paths or another PDF viewer.' },
+    ],
+    faq: [
+      { question: { zh: '附錄一定要放在 PDF 最後嗎？', en: 'Must an appendix be at the end of a PDF?' }, answer: { zh: '不一定；依讀者任務與正文引用安排。若證據需要緊接章節，可放在相關段落後，但要維持清楚標籤與目錄。', en: 'Not always. Place it where the reader and main-text references need it, while keeping clear labels and navigation.' } },
+      { question: { zh: '重排頁面會自動更新正文頁碼嗎？', en: 'Does reordering automatically update page references?' }, answer: { zh: '通常不會。頁面工具改變順序，但正文文字、目錄與外部索引可能仍是舊值，必須在最終檔逐項驗證。', en: 'Usually not. Reordering changes pages, while body text, contents, and external indexes may keep old values; verify them in the final file.' } },
+      { question: { zh: '如何避免把舊版附件合併進去？', en: 'How can I keep an old appendix out of the merge?' }, answer: { zh: '以清單指定核准版本，隔離舊檔並在每頁核對文件編號、日期或資料截點，不要只依檔名判定。', en: 'Specify the approved version in a manifest, isolate old files, and check IDs, dates, or data cutoffs on the pages rather than relying on names.' } },
+      { question: { zh: '重排完成後要保留哪些紀錄？', en: 'What should I retain after reordering?' }, answer: { zh: '保留來源檔、附錄清單、版本決策、處理日期與驗收結果；這些紀錄能支援重跑、稽核與日後更新。', en: 'Retain source files, the manifest, version decisions, processing date, and acceptance result for reruns, audits, and future updates.' } },
+    ],
+    cta: {
+      zh: '先用 PDF 頁面重排工具整理附件，再依版本、引用、頁碼與連結清單完成合併前後驗收。',
+      en: 'Reorder appendix pages first, then use the version, reference, page, and link checklist before and after merging.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'pdf-to-image-print-crop-marks-guide',
+    locales: ['zh', 'en'],
+    slug: 'pdf-to-image-print-crop-marks-guide',
+    title: {
+      zh: 'PDF 轉圖片列印裁切與出血指南',
+      en: 'PDF to Image Print Crop Guide',
+    },
+    metaTitle: {
+      zh: 'PDF 轉 JPG／PNG 列印怎麼不被裁掉？出血與裁切檢查',
+      en: 'PDF to Image for Print: Crop and Bleed Checks',
+    },
+    metaDescription: {
+      zh: '把 PDF 轉成 JPG 或 PNG 送印前，先分清頁面尺寸、出血、裁切線與安全邊界，檢查文字、條碼與圖片是否靠邊，避免成品被裁掉或細節變得難以辨識。',
+      en: 'Before sending a PDF-to-JPG or PNG export to print, check page size, bleed, crop marks, and safe margins so text, barcodes, and images are not cut off.',
+    },
+    h1: {
+      zh: 'PDF 轉圖片列印前怎麼檢查裁切線與出血：避免文字被切掉',
+      en: 'How to Check Crop and Bleed Before Printing a PDF as an Image',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 53,
+    searchIntent: {
+      zh: '使用者要把 PDF 轉成 JPG／PNG 交給印刷或貼圖平台，擔心出血、裁切線、解析度與安全邊界造成文字或條碼被切掉，想要交付前的檢查流程。',
+      en: 'A user needs a JPG or PNG from a PDF for print or a signage platform and wants to verify bleed, crop marks, resolution, and safe margins before delivery.',
+    },
+    targetKeywords: [
+      { zh: 'PDF 轉圖片 列印裁切', en: 'PDF to image print crop' },
+      { zh: 'PDF 出血與裁切線', en: 'PDF bleed and crop marks' },
+      { zh: 'JPG 列印安全邊界', en: 'JPG print safe margin' },
+    ],
+    relatedToolIds: ['pdf-to-image', 'image-resizer', 'image-compressor'],
+    relatedGuideIds: ['pdf-to-image-resolution-guide', 'pdf-to-image-background-contrast-guide', 'image-resize-aspect-ratio-guide'],
+    relatedWorkflowIds: ['creator-social-toolkit'],
+    summary: {
+      zh: 'PDF 頁面轉成圖片後，印刷端只看到像素，不會替你理解文字安全區。先確認輸出尺寸與裁切規格，再用邊界檢查確保重要內容離裁切線足夠遠。',
+      en: 'After a PDF becomes an image, the printer sees pixels rather than layout intent. Confirm the output size and trim specification, then check that important content stays clear of the cut line.',
+    },
+    problem: {
+      zh: '螢幕預覽完整不代表印刷不會缺角。不同平台可能要求出血、移除裁切標記或使用固定像素尺寸；若把安全區的文字、條碼或商標放得太靠邊，裁切誤差就會變成成品缺失。',
+      en: 'A complete screen preview does not guarantee a safe print. A platform may require bleed, no crop marks, or a fixed pixel size; text, barcodes, and logos near the edge can disappear with normal trim tolerance.',
+    },
+    whoShouldUse: {
+      zh: '適合製作海報、講義封面、菜單、貼紙、社群圖卡與簡報海報的人，也適合把 PDF 交給印刷店或線上上傳平台前做最後檢查。',
+      en: 'Useful for posters, handout covers, menus, labels, social graphics, and presentation boards before sending a PDF-derived image to a printer or upload platform.',
+    },
+    explanation: [
+      {
+        zh: '先向印刷端取得實際規格：成品尺寸、出血寬度、是否需要裁切線、色彩模式、檔案格式與最低解析度。不要把網路上通用的 A4 或 300 dpi 當成所有平台的規則。',
+        en: 'Get the printer’s specification first: trim size, bleed, crop-mark policy, color mode, file format, and minimum resolution. Do not assume generic A4 or 300 dpi rules fit every platform.',
+      },
+      {
+        zh: '分清成品尺寸與含出血尺寸。成品是裁切後留下的範圍，含出血檔則要在外圍多留背景；重要文字與條碼仍應放在安全邊界內，而不是把它們延伸到出血區。',
+        en: 'Separate the trim size from the bleed size. The trim is what remains after cutting; the bleed extends background beyond it. Keep important text and barcodes inside the safe area rather than extending them into bleed.',
+      },
+      {
+        zh: '裁切線不是設計內容。若平台要求無標記檔案，輸出時要移除裁切線；若印刷店需要標記，確認它們位於出血外並不會被當成成品的一部分。',
+        en: 'Crop marks are production aids, not design content. Remove them when the platform asks for a clean file; when required, place them outside the bleed so they are not mistaken for the finished artwork.',
+      },
+      {
+        zh: 'PDF 轉圖片時要固定頁面比例，避免為了符合像素尺寸而非等比例拉伸。先用比例計算目標像素，再檢查圓形、字體與條碼是否仍保持正確形狀。',
+        en: 'Keep the page ratio during PDF-to-image export instead of stretching to a pixel box. Calculate target pixels from the ratio, then check circles, type, and barcodes for distortion.',
+      },
+      {
+        zh: '靠邊的內容需要視覺檢查，不只是量距離。斜線、細字、淡色背景與條碼在螢幕上可能看似安全，縮小成縮圖或換成實際列印尺寸後卻難以辨識；Adobe 的列印 PDF 說明可用來核對頁面與列印設定（https://helpx.adobe.com/acrobat/using/print-pdf.html）。',
+        en: 'Edge content needs a visual check, not just a measured distance. Diagonals, small type, pale backgrounds, and barcodes can look safe on screen but fail at print size; Adobe’s PDF printing guidance helps verify page and print settings (https://helpx.adobe.com/acrobat/using/print-pdf.html).',
+      },
+      {
+        zh: '轉成圖片後不要再把圖片壓縮到看不清細字。若平台有限制，先做一份符合尺寸的主檔，再輸出壓縮副本，並保留能重新轉出的 PDF 原始版本。',
+        en: 'Do not compress the image until fine type becomes unreadable. Keep a correctly sized master, create a compressed copy only when needed, and retain the source PDF for a clean re-export.',
+      },
+      {
+        zh: '交付前應在 100% 尺寸檢查整頁、四個角落、裁切邊界與最小文字，並讓實際印刷者確認規格。轉檔成功只代表有圖片，不代表它符合裁切與交付條件。',
+        en: 'Before delivery, inspect the full page, all four corners, trim boundaries, and smallest type at 100% size, then have the printer confirm the specification. A successful export only proves an image exists.',
+      },
+    ],
+    steps: [
+      { zh: '記下印刷端的成品尺寸、出血、裁切線、解析度與格式規格。', en: 'Record the printer’s trim size, bleed, crop-mark, resolution, and format requirements.' },
+      { zh: '在 PDF 原檔標出成品範圍、安全邊界與不應被裁掉的元素。', en: 'Mark the trim, safe area, and must-keep elements on the source PDF.' },
+      { zh: '用 PDF 轉圖片工具依比例輸出，不要用非等比例縮放硬塞進像素框。', en: 'Export with the PDF-to-image tool using the page ratio instead of forcing a stretched pixel box.' },
+      { zh: '確認輸出是否包含裁切線與出血，依平台規格保留或移除。', en: 'Check whether crop marks and bleed are included, then keep or remove them to match the specification.' },
+      { zh: '在 100% 尺寸檢查四邊文字、條碼、商標、細線與背景延伸。', en: 'At 100% size, inspect edge text, barcodes, logos, fine lines, and background extension.' },
+      { zh: '輸出符合容量的交付副本，保留原始 PDF 與未壓縮主檔。', en: 'Create a delivery copy that meets the size limit while retaining the source PDF and uncompressed master.' },
+      { zh: '把檔案交給印刷端確認，記錄檔名、規格與最終驗收結果。', en: 'Ask the printer to confirm the file, and record its name, specification, and final acceptance.' },
+    ],
+    example: {
+      zh: '設計者把 A4 活動海報轉成 PNG 上傳印刷平台。平台要求四邊 3 mm 出血且不接受裁切線；第一次輸出把標題放在安全區外，100% 檢查時發現條碼也貼近邊緣。重新調整 PDF 原檔、按比例輸出並保留未壓縮主檔後才送印。',
+      en: 'A designer exports an A4 event poster to PNG for an online printer. The printer requires 3 mm bleed and no crop marks. A 100% check catches a headline outside the safe area and a barcode too close to the edge, so the source is adjusted and re-exported proportionally before delivery.',
+    },
+    commonMistakes: [
+      { zh: '沒有取得印刷端規格，就直接套用 A4 或 300 dpi。', en: 'Using A4 or 300 dpi without getting the printer’s actual specification.' },
+      { zh: '把出血區當成安全區，把重要文字或條碼放到裁切附近。', en: 'Treating bleed as the safe area and placing text or barcodes near the trim.' },
+      { zh: '平台不接受裁切線，仍把標記一起輸出。', en: 'Including crop marks when the platform requires a clean artwork file.' },
+      { zh: '為了符合像素尺寸而拉伸圖片，造成字體或圓形變形。', en: 'Stretching the image to fit pixels and distorting type or circles.' },
+      { zh: '只看縮小預覽，沒有在 100% 尺寸檢查最小文字與條碼。', en: 'Checking only a thumbnail instead of the smallest type and barcode at 100%.' },
+      { zh: '壓縮交付檔後刪掉 PDF 原檔，無法依新規格重新輸出。', en: 'Deleting the source PDF after compressing the delivery copy and losing a clean re-export path.' },
+    ],
+    faq: [
+      { question: { zh: 'PDF 轉 JPG 列印一定要加出血嗎？', en: 'Does every PDF-to-JPG print need bleed?' }, answer: { zh: '不一定，取決於印刷端是否要求滿版裁切。先取得實際規格；有出血需求時，背景延伸到裁切外，但重要內容仍放在安全區。', en: 'Not always; it depends on the printer and whether the piece is trimmed full bleed. Follow the specification and keep important content inside the safe area.' } },
+      { question: { zh: '裁切線應該保留在圖片裡嗎？', en: 'Should crop marks stay in the image?' }, answer: { zh: '只有印刷端明確要求時才保留，並確認標記在出血外；上傳平台通常要求不含裁切線的乾淨成品。', en: 'Only when the printer explicitly asks for them, and they must sit outside the bleed. Upload platforms often want clean artwork without marks.' } },
+      { question: { zh: '如何知道圖片解析度足夠列印？', en: 'How do I know the image resolution is enough?' }, answer: { zh: '用印刷端提供的成品尺寸與最低解析度計算目標像素，再在 100% 尺寸查看細字與條碼；不要只用檔案大小判定。', en: 'Calculate target pixels from the printer’s trim size and minimum resolution, then inspect fine type and barcodes at 100%; file size alone is not a quality test.' } },
+      { question: { zh: '轉成圖片後還能修改文字嗎？', en: 'Can I edit text after converting to an image?' }, answer: { zh: '圖片中的文字已變成像素，應回到 PDF 或原始設計檔修改，再重新輸出；不要把圖片當成可編輯文件。', en: 'Text becomes pixels in the image. Edit the PDF or original design and export again instead of treating the image as an editable document.' } },
+    ],
+    cta: {
+      zh: '用 PDF 轉圖片工具依印刷規格輸出，再以出血、裁切線、安全邊界與 100% 檢視完成交付前驗收。',
+      en: 'Export with the PDF-to-image tool, then check bleed, crop marks, safe margins, and 100% scale before sending the print file.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'pdf-compressor-form-fields-links-guide',
+    locales: ['zh', 'en'],
+    slug: 'pdf-compressor-form-fields-links-guide',
+    title: {
+      zh: 'PDF 壓縮後表單欄位與連結驗收指南',
+      en: 'PDF Compression Form and Link Check',
+    },
+    metaTitle: {
+      zh: 'PDF 壓縮後表單不能填？欄位、連結與附件驗收流程',
+      en: 'PDF Compression: Check Forms and Links',
+    },
+    metaDescription: {
+      zh: 'PDF 壓縮後不要只看檔案變小，還要測試表單欄位、核取方塊、超連結、附件與 JavaScript 是否仍能使用，並保留原檔作為失敗時的回復基準。',
+      en: 'After compressing a PDF, test form fields, checkboxes, links, attachments, and scripts instead of checking size alone; keep the source as a recovery baseline.',
+    },
+    h1: {
+      zh: 'PDF 壓縮後怎麼驗收互動功能：表單欄位、連結與附件檢查',
+      en: 'How to Check PDF Forms and Links After Compression',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 54,
+    searchIntent: {
+      zh: '使用者需要縮小 PDF 上傳或寄送，但檔案含有可填表單、核取方塊、連結、附件或腳本，想知道壓縮後哪些互動功能必須重新測試。',
+      en: 'A user needs a smaller PDF for upload or email, but the file contains forms, checkboxes, links, attachments, or scripts and needs a post-compression interaction checklist.',
+    },
+    targetKeywords: [
+      { zh: 'PDF 壓縮後表單不能填', en: 'PDF form broken after compression' },
+      { zh: '壓縮 PDF 連結失效', en: 'compressed PDF links not working' },
+      { zh: 'PDF 互動功能驗收', en: 'PDF interactive feature check' },
+    ],
+    relatedToolIds: ['pdf-compressor', 'pdf-to-image', 'pdf-to-word'],
+    relatedGuideIds: ['pdf-compressor-email-attachment-guide', 'pdf-to-image-raster-text-search-guide', 'pdf-to-word-review-track-changes-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: '壓縮 PDF 的風險不只在文字變模糊，也可能是欄位、連結與附件被扁平化或失去作用。先列出互動功能，再用實際讀者任務逐一測試。',
+      en: 'PDF compression can affect more than visual quality: fields, links, and attachments may be flattened or lost. Inventory interactive features and test them through real reader tasks.',
+    },
+    problem: {
+      zh: '不同壓縮器可能重新取樣圖片、移除嵌入資源或改寫 PDF 結構。檔案大小雖然達標，收件人卻可能無法輸入姓名、點開目錄、下載附件或執行必要的表單流程。',
+      en: 'Compressors may resample images, remove embedded resources, or rewrite the PDF structure. The file can meet a size limit while recipients can no longer enter a name, open a link, download an attachment, or complete the form.',
+    },
+    whoShouldUse: {
+      zh: '適合處理申請表、報名表、回覆表、產品手冊、含附件的報告與線上簽核文件的人，尤其是需要把檔案交給不熟悉技術的收件者時。',
+      en: 'Useful for applications, registration forms, response sheets, manuals, reports with attachments, and approval documents sent to readers who may not know technical workarounds.',
+    },
+    explanation: [
+      {
+        zh: '壓縮前先列出互動元件：文字欄位、核取方塊、選單、簽名區、內部連結、外部連結、附件、書籤與腳本。沒有清單就無法知道壓縮後要驗收什麼。',
+        en: 'Inventory interactive elements before compression: text fields, checkboxes, menus, signature areas, internal and external links, attachments, bookmarks, and scripts. Without a list, you cannot know what to retest.',
+      },
+      {
+        zh: '設定容量目標時，先決定哪些品質與功能不能犧牲。表單檔通常比純掃描講義更重視欄位與連結；不要為了少幾百 KB 就接受功能失效。',
+        en: 'Set a size target together with non-negotiable quality and feature requirements. A form usually values fields and links more than a scanned handout; saving a few kilobytes is not worth a broken workflow.',
+      },
+      {
+        zh: '壓縮後用支援表單的 PDF 閱讀器打開，不要只在瀏覽器快速預覽。Adobe 的 PDF 最佳化說明指出，可移除或改寫不同資源，因此必須在目標閱讀器檢查輸出（https://helpx.adobe.com/acrobat/using/optimizing-pdfs-acrobat-pro.html）。',
+        en: 'Open the compressed file in a PDF viewer that supports forms instead of relying on a quick browser preview. Adobe’s PDF optimizer guidance describes changes to different resources, so inspect the output in the target viewer (https://helpx.adobe.com/acrobat/using/optimizing-pdfs-acrobat-pro.html).',
+      },
+      {
+        zh: '表單欄位要測試輸入、清除、選取、必填提示與儲存後重開。只看到欄位外框不代表欄位仍可互動，也不代表值會在不同閱讀器中保留。',
+        en: 'Test entering, clearing, selecting, required-field prompts, saving, and reopening. Seeing a field outline does not prove it remains interactive or that values survive in every viewer.',
+      },
+      {
+        zh: '連結要從兩種路徑測試：點擊文字或按鈕，以及從書籤或目錄跳轉。外部連結還要確認 HTTPS、網址沒有被截斷，附件則要測試下載後檔名與內容。',
+        en: 'Test links through both visible text or buttons and bookmarks or contents navigation. For external links, confirm HTTPS and the full URL; for attachments, test the downloaded filename and contents.',
+      },
+      {
+        zh: '若壓縮器提供「移除互動內容」或「扁平化」選項，先讀懂它的含義再使用。扁平化可能讓畫面看起來不變，卻把欄位變成不可編輯的外觀；交付前要明確標示這是可填版還是封存版。',
+        en: 'Understand options such as remove interactive content or flatten before selecting them. Flattening can preserve appearance while making fields uneditable; label the deliverable clearly as fillable or archival.',
+      },
+      {
+        zh: '保存原始 PDF、壓縮設定與驗收紀錄。若收件人回報連結或欄位失效，可以回到原檔重做較保守的壓縮，而不是在已損壞的副本上反覆修改。',
+        en: 'Keep the source PDF, compression settings, and acceptance record. If a recipient reports a broken link or field, rerun a conservative compression from the source instead of patching a damaged copy.',
+      },
+    ],
+    steps: [
+      { zh: '列出所有表單欄位、連結、書籤、附件與腳本，標記不可失效的功能。', en: 'List fields, links, bookmarks, attachments, and scripts, marking features that must survive.' },
+      { zh: '記下目前檔案大小、頁數、閱讀器與可重現的測試值。', en: 'Record the current size, page count, viewer, and reproducible test values.' },
+      { zh: '用 PDF 壓縮工具輸出副本，保留原檔與壓縮設定。', en: 'Create a copy with the PDF compressor while retaining the source and settings.' },
+      { zh: '在目標閱讀器測試輸入、清除、儲存、重開與必填提示。', en: 'In the target viewer, test entering, clearing, saving, reopening, and required prompts.' },
+      { zh: '點擊文字、按鈕、目錄與書籤，並下載每個附件抽查內容。', en: 'Click text, buttons, contents, and bookmarks, and download each attachment for a content sample.' },
+      { zh: '比較壓縮前後容量、可搜尋文字、視覺品質與互動結果。', en: 'Compare size, searchable text, visual quality, and interaction results before and after compression.' },
+      { zh: '只交付通過清單的版本，註明可填或封存狀態與版本日期。', en: 'Deliver only the version that passes the checklist, labeling it fillable or archival with a version date.' },
+    ],
+    example: {
+      zh: '社團把 18 頁報名表壓到平台限制以下。團隊先記錄兩個文字欄位、三個核取方塊、四個外部連結與一個附件；壓縮後發現欄位仍可見但無法儲存輸入，於是改用保留表單的設定，並在桌面閱讀器與瀏覽器各測一次才上傳。',
+      en: 'A club compresses an 18-page registration form to meet an upload limit. They inventory two text fields, three checkboxes, four external links, and one attachment; after compression the fields are visible but do not save. They switch to a form-preserving setting and test in both a desktop viewer and browser before upload.',
+    },
+    commonMistakes: [
+      { zh: '只比較檔案大小，沒有列出或測試互動元件。', en: 'Comparing file size only without inventorying or testing interactive elements.' },
+      { zh: '啟用扁平化後仍把檔案當成可填表單交付。', en: 'Flattening the file and still delivering it as a fillable form.' },
+      { zh: '只在瀏覽器預覽，沒有用實際表單閱讀器儲存再重開。', en: 'Using only a browser preview and never saving and reopening in a form-capable viewer.' },
+      { zh: '沒有點擊書籤、目錄與外部連結，誤以為文字存在就代表連結正常。', en: 'Not clicking bookmarks, contents, or external links and assuming visible text means a link works.' },
+      { zh: '壓縮後覆蓋唯一的原始檔，失去保守重做的基準。', en: 'Overwriting the only source and losing a baseline for a conservative rerun.' },
+      { zh: '把容量剛好壓到上限，沒有為平台重新編碼或附件變化留餘量。', en: 'Compressing exactly to the limit without headroom for platform encoding or attachments.' },
+    ],
+    faq: [
+      { question: { zh: 'PDF 壓縮一定會讓表單失效嗎？', en: 'Does compression always break PDF forms?' }, answer: { zh: '不一定，取決於工具與設定；但含互動元件時不能只看大小，必須在目標閱讀器測試輸入、儲存與重開。', en: 'No. It depends on the tool and settings, but interactive PDFs must be tested for entry, save, and reopen in the target viewer.' } },
+      { question: { zh: '怎麼知道 PDF 連結還能點？', en: 'How do I know PDF links still work?' }, answer: { zh: '逐一從正文、按鈕、目錄與書籤點擊，外部連結確認完整 HTTPS 網址；不要只看文字底線或游標變化。', en: 'Click links from body text, buttons, contents, and bookmarks, and verify the full HTTPS destination. Underlining or a cursor change is not enough.' } },
+      { question: { zh: '可填表單與封存 PDF 有什麼差別？', en: 'What is the difference between a fillable and archival PDF?' }, answer: { zh: '可填表單保留欄位互動；封存版通常把內容固定以便閱讀或保存。交付前要清楚標示狀態，避免收件人拿錯版本。', en: 'A fillable PDF retains field interaction; an archival copy fixes the content for reading or retention. Label the status clearly so recipients use the right version.' } },
+      { question: { zh: '壓縮後附件下載失敗怎麼辦？', en: 'What if an attachment fails after compression?' }, answer: { zh: '回到原始 PDF，以保留附件的設定重做，並測試下載檔名、大小與內容；不要只把壓縮副本再壓一次。', en: 'Rerun from the source with an attachment-preserving setting, then test filename, size, and contents. Do not repeatedly compress the damaged copy.' } },
+    ],
+    cta: {
+      zh: '用 PDF 壓縮工具輸出副本後，依表單、連結、書籤與附件清單逐項測試，再交付可填或封存的正確版本。',
+      en: 'Create a compressed copy, test forms, links, bookmarks, and attachments, then deliver the correctly labeled fillable or archival version.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'pdf-to-word-form-field-editing-guide',
+    locales: ['zh', 'en'],
+    slug: 'pdf-to-word-form-field-editing-guide',
+    title: {
+      zh: 'PDF 表單轉 Word 編輯欄位指南',
+      en: 'PDF Form to Word Editing Guide',
+    },
+    metaTitle: {
+      zh: 'PDF 表單轉 Word 後怎麼改？欄位、標籤與可填性檢查',
+      en: 'PDF Form to Word: Edit Fields and Labels',
+    },
+    metaDescription: {
+      zh: '把 PDF 表單轉成 Word 前，先分清固定版面與可編輯欄位；轉換後重建標籤、表格、選項與說明，逐項驗證收件人能否完成填寫、回存與再次開啟。',
+      en: 'Before converting a PDF form to Word, separate fixed layout from editable fields; rebuild labels, tables, choices, and instructions, then test the completed handoff.',
+    },
+    h1: {
+      zh: 'PDF 表單轉 Word 後怎麼重建欄位：可編輯與可填寫的驗收流程',
+      en: 'How to Rebuild Editable Fields When Converting a PDF Form to Word',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 55,
+    searchIntent: {
+      zh: '使用者要把 PDF 申請表或問卷轉成 Word 來修改欄位與說明，擔心轉換後底線、核取方塊、表格與欄位順序失真，想知道如何重建並測試。',
+      en: 'A user needs to edit a PDF application or questionnaire in Word and wants to rebuild fields, labels, checkboxes, tables, and order after conversion.',
+    },
+    targetKeywords: [
+      { zh: 'PDF 表單轉 Word 編輯', en: 'convert PDF form to editable Word' },
+      { zh: 'PDF 欄位轉 Word', en: 'PDF fields to Word' },
+      { zh: 'Word 表單欄位驗收', en: 'Word form field checklist' },
+    ],
+    relatedToolIds: ['pdf-to-word', 'pdf-table-to-excel', 'pdf-to-image'],
+    relatedGuideIds: ['pdf-to-word-layout-fidelity-guide', 'pdf-to-word-review-track-changes-guide', 'pdf-table-to-excel-header-check-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: 'PDF 表單轉 Word 後，外觀相似不代表欄位可用。把標籤、輸入區、選項與說明視為一個表單系統，重建後再用真實填寫任務驗收。',
+      en: 'A similar-looking Word page does not prove a converted PDF form is usable. Treat labels, inputs, choices, and instructions as one form system and test it with a real completion task.',
+    },
+    problem: {
+      zh: 'PDF 表單常把文字、線條、欄位與背景圖層分開保存。轉成 Word 後，底線可能變成段落框、核取方塊變成圖片，原本的欄位順序與說明也可能無法直接編輯。',
+      en: 'PDF forms often store text, lines, fields, and backgrounds on separate layers. After conversion, an underline may become a paragraph border, a checkbox an image, and the original field order or instructions may not be editable.',
+    },
+    whoShouldUse: {
+      zh: '適合維護報名表、問卷、行政申請、內部稽核表與教學回饋單的人，也適合要把舊 PDF 表單改成可長期維護 Word 範本的團隊。',
+      en: 'Useful for registration forms, surveys, administrative applications, audit checklists, feedback sheets, and teams maintaining an old PDF as a reusable Word template.',
+    },
+    explanation: [
+      {
+        zh: '先判斷目標是「修改版面」還是「重建表單」。若收件人只需要列印，固定版面可能足夠；若要在 Word 輸入、排序、回存或協作，就要把欄位當成結構重新設計。',
+        en: 'Decide whether the goal is layout editing or form rebuilding. A fixed layout may work for printing, but typing, sorting, saving, or collaboration in Word requires structural field design.',
+      },
+      {
+        zh: '保留原始 PDF 作為視覺與欄位基準，逐頁標出標題、說明、輸入區、選項、必填項與簽名位置。這張盤點表能防止轉換後只修到看得見的文字。',
+        en: 'Keep the source PDF as the visual and field baseline. Mark headings, instructions, inputs, choices, required items, and signature areas page by page so the conversion does not focus only on visible text.',
+      },
+      {
+        zh: '轉換工具能協助產生初稿，但不會替你決定欄位語意。Adobe 的 PDF 匯出說明把 Word 轉換視為輸出格式選擇，實際欄位仍需要人工檢查（https://helpx.adobe.com/acrobat/using/export-pdf-overview.html）。',
+        en: 'A converter can produce a draft but cannot decide field semantics. Adobe presents Word conversion as an output-format choice, so the resulting fields still need human review (https://helpx.adobe.com/acrobat/using/export-pdf-overview.html).',
+      },
+      {
+        zh: '欄位標籤要靠近輸入區，並使用一致的語句與順序。不要只留下空白底線；收件人需要知道格式、單位、日期範圍與是否可略過，這些說明應成為文件的一部分。',
+        en: 'Keep labels near inputs and use consistent wording and order. Do not leave blank lines alone; recipients need format, units, date range, and optionality instructions as part of the document.',
+      },
+      {
+        zh: '核取方塊、單選選項與下拉選單的語意不同。轉換後若只剩圖片，必須重建可操作的控制項，並確認互斥選項不會被誤設為可以同時選取。',
+        en: 'Checkboxes, radio choices, and dropdowns have different meanings. If they become images, rebuild usable controls and confirm mutually exclusive choices cannot be selected together by mistake.',
+      },
+      {
+        zh: '重建表格時先處理資料順序，再處理線條與間距。若表格是要匯入 Excel 或 CSV，欄位名稱、單位與日期格式要固定；Microsoft 的 Word 表格與表單說明可作為編輯介面參考（https://support.microsoft.com/en-us/word）。',
+        en: 'When rebuilding tables, fix data order before borders and spacing. If the table will move to Excel or CSV, standardize headers, units, and date formats; Microsoft’s Word guidance is a useful interface reference (https://support.microsoft.com/en-us/word).',
+      },
+      {
+        zh: '完成後要讓不熟悉原 PDF 的人實際填寫，觀察他是否能找到每個欄位、理解格式並回存。由原作者自己檢查容易把舊習慣當成清楚說明，測試者回饋能揭露真正的障礙。',
+        en: 'Have someone unfamiliar with the source complete the form, observing whether they can find every field, understand formats, and save the result. Authors often mistake familiar habits for clear instructions.',
+      },
+    ],
+    steps: [
+      { zh: '決定要做固定版面文件還是可維護、可填寫的 Word 表單。', en: 'Decide whether the output is a fixed layout or a maintainable, fillable Word form.' },
+      { zh: '逐頁盤點標籤、輸入區、選項、必填項、簽名與附件說明。', en: 'Inventory labels, inputs, choices, required items, signatures, and attachment notes page by page.' },
+      { zh: '用 PDF 轉 Word 工具產生副本，保留原始 PDF 與轉換日期。', en: 'Create a copy with the PDF-to-Word tool while retaining the source and conversion date.' },
+      { zh: '依盤點表重建底線、核取方塊、單選項與表格欄位。', en: 'Rebuild lines, checkboxes, radio choices, and table fields from the inventory.' },
+      { zh: '統一欄位標籤、格式、單位、日期規則與必填提示。', en: 'Standardize labels, formats, units, date rules, and required-field guidance.' },
+      { zh: '請未參與轉換的人完成一份，記錄找不到欄位或誤解的地方。', en: 'Ask someone outside the conversion to complete a copy and record missing or misunderstood fields.' },
+      { zh: '回存、重開並與原 PDF 逐頁比對，輸出有版本號的 Word 範本。', en: 'Save, reopen, compare page by page with the source PDF, and export a versioned Word template.' },
+    ],
+    example: {
+      zh: '行政團隊把紙本申請 PDF 轉成 Word，第一次只修正字型，卻發現核取方塊是圖片、日期底線無法對齊、必填欄位沒有提示。團隊依欄位盤點重建控制項，讓新同事實際填寫並回存，才把範本交給全公司使用。',
+      en: 'An admin team converts a paper application PDF to Word and fixes fonts first. They then find that checkboxes are images, date lines shift, and required fields have no prompts. They rebuild controls from a field inventory, ask a new colleague to complete and save it, and only then release the template company-wide.',
+    },
+    commonMistakes: [
+      { zh: '把畫面看起來像原檔當成欄位已可編輯。', en: 'Assuming a similar appearance means fields are editable.' },
+      { zh: '沒有區分核取方塊、單選項與下拉選單的語意。', en: 'Treating checkboxes, radio choices, and dropdowns as the same control.' },
+      { zh: '只重建底線，沒有補上格式、單位與必填說明。', en: 'Rebuilding lines without format, unit, or required-field instructions.' },
+      { zh: '重排表格線條後才發現欄位順序與匯出資料不一致。', en: 'Fixing table borders before confirming field order and export data.' },
+      { zh: '由原作者獨自測試，沒有請陌生使用者完成一份。', en: 'Testing alone as the author and never asking an unfamiliar user to complete it.' },
+      { zh: '覆蓋原始 PDF，之後無法比較轉換差異或重做。', en: 'Overwriting the source PDF and losing a comparison and rerun baseline.' },
+    ],
+    faq: [
+      { question: { zh: 'PDF 表單轉 Word 後欄位會自動生成嗎？', en: 'Are form fields created automatically when converting PDF to Word?' }, answer: { zh: '不一定。轉換器可能只產生文字、線條或圖片；可填欄位、選項與驗證規則通常需要人工重建與測試。', en: 'Not necessarily. A converter may produce text, lines, or images; fillable fields, choices, and validation usually need manual rebuilding and tests.' } },
+      { question: { zh: '要保留原 PDF 的外觀還是優先可編輯？', en: 'Should I prioritize the original look or editability?' }, answer: { zh: '看使用任務：列印交付偏向外觀，長期維護與填寫偏向結構。先決定目標，再接受必要的版面差異。', en: 'Choose from the task: print delivery favors appearance, while maintenance and completion favor structure. Decide first and accept necessary visual differences.' } },
+      { question: { zh: '轉換後的核取方塊是圖片怎麼辦？', en: 'What if converted checkboxes are images?' }, answer: { zh: '刪除圖片並依原意重建可操作控制項，確認單選與複選行為正確，再請測試者完成一份。', en: 'Replace the images with usable controls, verify single- versus multi-select behavior, and have a tester complete a copy.' } },
+      { question: { zh: '如何確認 Word 表單可以長期維護？', en: 'How can I tell whether a Word form is maintainable?' }, answer: { zh: '檢查標籤、欄位、樣式與表格是否有一致規則，並讓另一位編輯新增一個欄位、回存與重開，確認不會破壞版面。', en: 'Check consistent rules for labels, fields, styles, and tables. Have another editor add a field, save, and reopen to see whether the layout remains stable.' } },
+    ],
+    cta: {
+      zh: '先用 PDF 轉 Word 工具產生副本，再依欄位盤點重建表單控制項，最後請陌生使用者實際填寫與回存。',
+      en: 'Create a PDF-to-Word copy, rebuild controls from a field inventory, and have an unfamiliar user complete and save the form before release.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
 ]; 

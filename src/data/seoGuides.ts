@@ -3894,6 +3894,16 @@ const releasedAdditionalGuideSlugs = new Set<string>([
   'json-formatter-trailing-comma-error-guide',
   'image-resize-aspect-ratio-guide',
   'image-compression-quality-size-guide',
+  'pdf-to-word-layout-fidelity-guide',
+  'pdf-table-to-excel-header-check-guide',
+  'pdf-to-word-review-track-changes-guide',
+  'pdf-compressor-email-attachment-guide',
+  'merge-pdf-bookmarks-navigation-guide',
+  'split-pdf-output-naming-batch-delivery-guide',
+  'pdf-page-reorder-appendix-merge-check-guide',
+  'pdf-to-image-print-crop-marks-guide',
+  'pdf-compressor-form-fields-links-guide',
+  'pdf-to-word-form-field-editing-guide',
 ]);
 
 export const seoGuides: SeoGuide[] = [

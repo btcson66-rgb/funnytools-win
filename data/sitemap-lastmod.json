@@ -190,7 +190,7 @@
     "lastmod": "2026-06-26"
   },
   "https://funnytools.win/en/guides/": {
-    "hash": "8b69ccee62b46f4187c93f7a4042cbc0a8f6fce3f6d36d05eb049ecc5d9f43df",
+    "hash": "bf5b3509549361a7a4ac6a0133c200935a4f879f0ee3023de6a99e9912725e44",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -269,6 +269,11 @@
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
+  "https://funnytools.win/en/guides/merge-pdf-bookmarks-navigation-guide/": {
+    "hash": "793975f05476fe11d0ce0e0dae6d2e132a024b65474c07fbe1f117089fc2ca3b",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/en/guides/merge-pdf-page-size-orientation-guide/": {
     "hash": "e44cceadbc685d000b33610c100f1924d3878cc9a18919d5eaea98e5efa3a759",
     "hashVersion": 4,
@@ -284,6 +289,26 @@
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
+  "https://funnytools.win/en/guides/pdf-compressor-email-attachment-guide/": {
+    "hash": "e85c2aeeea39b57c516799342379dc2eda4e1f58d78d00f343c185323ec23e1d",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/pdf-compressor-form-fields-links-guide/": {
+    "hash": "2545541e85010d3071c16e665c847b118b29c6201d8ae1bfb75a5c18ffc228de",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/pdf-page-reorder-appendix-merge-check-guide/": {
+    "hash": "6051b45800ffcf31ac5e7497e3047616daaf5d5552d716967f2b008c75e5bcdb",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/pdf-table-to-excel-header-check-guide/": {
+    "hash": "1fd8d68495e9ce1b16789077dc3e46243ea9039d51fb1c6dffdeba6f7106e8ad",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/en/guides/pdf-to-image-background-contrast-guide/": {
     "hash": "ace8d84f2e9fee00d55364344966fe16f9810bd3845984ce6e15539126509dca",
     "hashVersion": 4,
@@ -294,6 +319,11 @@
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
+  "https://funnytools.win/en/guides/pdf-to-image-print-crop-marks-guide/": {
+    "hash": "0f3e9829adac3c7ad8830bb617e67880fb65a9752e60e0157ff44eea509ce491",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/en/guides/pdf-to-image-raster-text-search-guide/": {
     "hash": "a6bfe95096c077eaa926a4b92fbac7b2bc8064e343d61d63883a45dbb49806e2",
     "hashVersion": 4,
@@ -301,6 +331,21 @@
   },
   "https://funnytools.win/en/guides/pdf-to-image-resolution-guide/": {
     "hash": "2e44eaa801189702ae821ffe3f942b7719a1a1332dd929e86a22abfd0acd8324",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/pdf-to-word-form-field-editing-guide/": {
+    "hash": "bd8aadc6279be4701c7505073c41d3e80033c75a4c6abd4e33b5543a1e8061d6",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/pdf-to-word-layout-fidelity-guide/": {
+    "hash": "e571ce4269f1d859c23e7e9d8647ba016ab64c43bc70375df1fcd28683db29eb",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/pdf-to-word-review-track-changes-guide/": {
+    "hash": "526ea7a1c4dabc0cbde67e8ef918edf41c9a411c1bea5b015656ff2cd9888952",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -356,6 +401,11 @@
   },
   "https://funnytools.win/en/guides/seating-chart-student-needs-intake-guide/": {
     "hash": "56f903f2e65cd88550b85216ffc5e0d365b419af31e29f0232be3682275cf0df",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/split-pdf-output-naming-batch-delivery-guide/": {
+    "hash": "78b3a2c67e46207f0d2b091587bfdbb0b16bc3111ed7ca7c70665a9edf94b651",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -505,7 +555,7 @@
     "lastmod": "2026-08-03"
   },
   "https://funnytools.win/en/tools/csv-to-json/": {
-    "hash": "c1c745fe4b90fba2b42d1df96f1da2c5330975d77f7532b5915aa8d760a74d25",
+    "hash": "4665efd6936bd5fa404a129246552b0b378b3a5791e8d79a5eaf4bd250511e83",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -620,7 +670,7 @@
     "lastmod": "2026-07-31"
   },
   "https://funnytools.win/en/tools/merge-pdf/": {
-    "hash": "a1c8bf0216144c1342fff8e8a77a99ada6c813e81f91e8fb08b9fd4c5620a8ca",
+    "hash": "37f0b795651169532e9786d904aad876c41eb544f1528d61788a82437318463c",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -660,9 +710,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/pdf-table-to-excel/": {
-    "hash": "7ad0203d73b70ff3f8d71e1a9c5602a9085d671d7fde878f25fecd92a10e070d",
+    "hash": "ce5de9eaef137b02bcd02189ee8c48e6d7499537dd8c5bd1b88ee6aed2ed5ce4",
     "hashVersion": 4,
-    "lastmod": "2026-08-30"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/pdf-to-image/": {
     "hash": "869862df2eb76f383c9b17d1dc2d4cac8575f670867d543a720e5acb465dc452",
@@ -670,9 +720,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/pdf-to-word/": {
-    "hash": "bbeb6bbaf8011bf9c2f83e39b663894eaf8ad3a70ae1a617d58ee0a5a0a3a2cb",
+    "hash": "b177620389a1485b84896d5764a5f513e30886c6aaf4adf5322884db2896f14d",
     "hashVersion": 4,
-    "lastmod": "2026-08-30"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/percentage-calculator/": {
     "hash": "a11dc3ab4cfadf317c546bebb15372453056ffb5cdba2783a362380eeaf88017",
@@ -765,7 +815,7 @@
     "lastmod": "2026-07-31"
   },
   "https://funnytools.win/en/tools/split-pdf/": {
-    "hash": "38251f1ffb0938e234d894fab2219b4cb0b030746039bfd9372dde334d17c75a",
+    "hash": "de4c20f14477d5a2736eaf4d64cfc6cc3ec6757c30100a4ca48beee5a6eca779",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -1990,7 +2040,7 @@
     "lastmod": "2026-07-29"
   },
   "https://funnytools.win/guides/": {
-    "hash": "cd1a801b1c3e208c8a268eee08654e0b21b7a2e44baca34376a37567565a9939",
+    "hash": "a2ea3c1ee3b5abad1aa0592666291ce87ec7503c75dfda323f1e65066c680398",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -2334,6 +2384,11 @@
     "hashVersion": 4,
     "lastmod": "2026-08-27"
   },
+  "https://funnytools.win/guides/merge-pdf-bookmarks-navigation-guide/": {
+    "hash": "bdc81b41220d6aff7924d3c4ac5e9f5db5e8c6a9c245b560393a19841dca22c4",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/guides/merge-pdf-page-size-orientation-guide/": {
     "hash": "e23811a279ad9f7839a567405d0ff9f0e482faaa504f0be701a98b5bb5b758df",
     "hashVersion": 4,
@@ -2389,10 +2444,30 @@
     "hashVersion": 4,
     "lastmod": "2026-07-27"
   },
+  "https://funnytools.win/guides/pdf-compressor-email-attachment-guide/": {
+    "hash": "c83af5f3ec384e9731334f919fedf99b2f179784a5a7fa01e1176c01530f416c",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/pdf-compressor-form-fields-links-guide/": {
+    "hash": "671a177e7deef985bb0a5fd6d7eedcb0048ed7e7a0704030013662169f14215d",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/pdf-page-reorder-appendix-merge-check-guide/": {
+    "hash": "c67dfcb2bf58b62c06e8d45b6e17247f4fe7d9b1f6a13b1aa20646e3ae9016dc",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/guides/pdf-split-vs-extract-vs-delete/": {
     "hash": "ca50835fe862a8c95b2255ab988526e5b970eb972e83a15e2f3d3183e4532c32",
     "hashVersion": 4,
     "lastmod": "2026-08-27"
+  },
+  "https://funnytools.win/guides/pdf-table-to-excel-header-check-guide/": {
+    "hash": "eb9b41493e5f288de153f23b81b49d43c458e91244228620591b5eb744f9a02e",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/pdf-to-image-background-contrast-guide/": {
     "hash": "81fdfad3f78b318fd32f37f918718c2a0361684c77dd4951177d4299d7679e8c",
@@ -2401,6 +2476,11 @@
   },
   "https://funnytools.win/guides/pdf-to-image-multipage-download-guide/": {
     "hash": "9ce5d236069c6c3877769b9ad352badfe5f15505ff01f56e28bc821bd4e1aa31",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/pdf-to-image-print-crop-marks-guide/": {
+    "hash": "38fc513daad3232e3e01adde8e9335e2f1ff7ba617b48bdf65d15b15e377a5ad",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -2418,6 +2498,21 @@
     "hash": "b43c9ade2f7d07334364112ce559ce4b1789b43523b526406831cf60f777ff11",
     "hashVersion": 4,
     "lastmod": "2026-08-27"
+  },
+  "https://funnytools.win/guides/pdf-to-word-form-field-editing-guide/": {
+    "hash": "9d90d9af07135548f709077017bcd93a3c153bbc3a26a25574e23f3566048029",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/pdf-to-word-layout-fidelity-guide/": {
+    "hash": "56109663b1f29973c4f389b3f00509a7188d44fcee7b53e015f9fb33560bc778",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/pdf-to-word-review-track-changes-guide/": {
+    "hash": "0319f565582bc03ae29e8db4c8cd636f2184aff221a775aa865f3793c833909e",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/pdf-upload-failed-troubleshooting/": {
     "hash": "a4de87cf75667106d28532f3d38bc48f84a613370ca443ddc5288824190223d8",
@@ -2588,6 +2683,11 @@
     "hash": "29f73cb70599ccec2dab33f46bcb69a2cec69024c0323533f4a4b82713b334e1",
     "hashVersion": 4,
     "lastmod": "2026-08-27"
+  },
+  "https://funnytools.win/guides/split-pdf-output-naming-batch-delivery-guide/": {
+    "hash": "343ebf3f8b283098498a44bd98b51adf62bf4280391b19648ac36ea713469afa",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/split-pdf-page-range-planning-guide/": {
     "hash": "a8939f2258c9f461dad98b3941ebdfe2392e095714600ff81fd432c7e1bb5f7b",
@@ -2880,7 +2980,7 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/csv-to-json/": {
-    "hash": "9e2b0b87c4d500f8b1a32a5c5f976d965883916cdcc58dae4c3e46a6d76db08d",
+    "hash": "4da2a98aab25c9b5c6d829648c591f586a0076e78577483b4a325ab2286fcc04",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -2995,7 +3095,7 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/merge-pdf/": {
-    "hash": "b65a418e80db231c2e91834e3bd510dd4a9cae15c39435c7d41c0da4aa1b5901",
+    "hash": "df9a628cdbda8e1f60ed75d056e325725b0ba2bbb736ea5bbe2a95b8a0e3a73f",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -3035,9 +3135,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/pdf-table-to-excel/": {
-    "hash": "e78b2ad2a68341ded4d0425680bfb62765f7b9f13f2f5faaeb4dc9a942dd59ff",
+    "hash": "446ba6dd9367fae61725ab3121554b4a1cd70c3c848b0cc6d680a78631c2c48a",
     "hashVersion": 4,
-    "lastmod": "2026-08-30"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/pdf-to-image/": {
     "hash": "ba7d289869ca94fd69011839079de3828562e18fd304b6fd33395a2ea6434372",
@@ -3045,9 +3145,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/pdf-to-word/": {
-    "hash": "e552fb016b31a4d712843001e5397a11f74755b03aada42ecba5882e069efdba",
+    "hash": "3ce637d0a283e4c9049867b5844d1913bb056ff24767920e65562af8b7e01933",
     "hashVersion": 4,
-    "lastmod": "2026-08-30"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/percentage-calculator/": {
     "hash": "5bb504700f9b3df4d00bc543f8a8fb05145371bf011c9b103c14f2a22ee51a00",
@@ -3140,7 +3240,7 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/split-pdf/": {
-    "hash": "b9983f6dd11a85004aafcd1d6dae11b1f9b0a330a2083ebecf81f4836a8d075d",
+    "hash": "14eeb8f7dbd41edc81ca8294e60bdecc1d0e159f0e93e5f8b5f76d6e290434bb",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },

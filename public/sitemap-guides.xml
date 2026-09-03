@@ -523,6 +523,13 @@
     <lastmod>2026-08-27</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/merge-pdf-bookmarks-navigation-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/merge-pdf-bookmarks-navigation-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/merge-pdf-bookmarks-navigation-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/merge-pdf-bookmarks-navigation-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/merge-pdf-page-size-orientation-guide/</loc>
     <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/merge-pdf-page-size-orientation-guide/" />
@@ -581,8 +588,36 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/contrasena-segura-fuerte/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/pdf-compressor-email-attachment-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-compressor-email-attachment-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-compressor-email-attachment-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-compressor-email-attachment-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/pdf-compressor-form-fields-links-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-compressor-form-fields-links-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-compressor-form-fields-links-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-compressor-form-fields-links-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/pdf-page-reorder-appendix-merge-check-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-page-reorder-appendix-merge-check-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-page-reorder-appendix-merge-check-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-page-reorder-appendix-merge-check-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/pdf-split-vs-extract-vs-delete/</loc>
     <lastmod>2026-08-27</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/pdf-table-to-excel-header-check-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-table-to-excel-header-check-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-table-to-excel-header-check-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-table-to-excel-header-check-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/pdf-to-image-background-contrast-guide/</loc>
@@ -597,6 +632,13 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-image-multipage-download-guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-image-multipage-download-guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-image-multipage-download-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/pdf-to-image-print-crop-marks-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-image-print-crop-marks-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-image-print-crop-marks-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-image-print-crop-marks-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/pdf-to-image-raster-text-search-guide/</loc>
@@ -615,6 +657,27 @@
   <url>
     <loc>https://funnytools.win/guides/pdf-to-jpg-vs-png/</loc>
     <lastmod>2026-08-27</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/pdf-to-word-form-field-editing-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-word-form-field-editing-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-word-form-field-editing-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-word-form-field-editing-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/pdf-to-word-layout-fidelity-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-word-layout-fidelity-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-word-layout-fidelity-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-word-layout-fidelity-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/pdf-to-word-review-track-changes-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-word-review-track-changes-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-word-review-track-changes-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-word-review-track-changes-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/pdf-upload-failed-troubleshooting/</loc>
@@ -788,6 +851,13 @@
   <url>
     <loc>https://funnytools.win/guides/shapiro-wilk-normality-test/</loc>
     <lastmod>2026-08-27</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/split-pdf-output-naming-batch-delivery-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/split-pdf-output-naming-batch-delivery-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/split-pdf-output-naming-batch-delivery-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/split-pdf-output-naming-batch-delivery-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/split-pdf-page-range-planning-guide/</loc>
