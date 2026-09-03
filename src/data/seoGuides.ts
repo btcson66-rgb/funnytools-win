@@ -1,6 +1,7 @@
 import type { Locale } from '../config/site';
 import type { SeoPageKind } from './seoContentModels';
 import { importedTaskSeoGuides } from './taskSeoGuides';
+import { additionalSeoGuides } from './seoGuidesExpansion';
 import { CONTENT_REVIEWED_AT } from '../lib/contentValue';
 
 export type LocalizedText = Record<Locale, string>;
@@ -3868,8 +3869,17 @@ const releasedTaskIds = new Set(['task-001', 'task-002', 'task-003', 'task-004',
 const releasedTaskGuideSlugs = new Set(
   importedTaskSeoGuides.filter((guide) => releasedTaskIds.has(guide.task)).map((guide) => guide.slug),
 );
+// New editorial batches stay out of the indexable catalogue until their
+// related cluster has passed review and is approved as one release unit.
+// Add a complete cluster here at release time; do not add single pages just
+// to make a local build look larger.
+const releasedAdditionalGuideSlugs = new Set<string>();
 
-export const seoGuides: SeoGuide[] = [...rawSeoGuides.map(localizeRawGuide), ...importedTaskSeoGuides]
+export const seoGuides: SeoGuide[] = [
+  ...rawSeoGuides.map(localizeRawGuide),
+  ...additionalSeoGuides.filter((guide) => releasedAdditionalGuideSlugs.has(guide.slug)),
+  ...importedTaskSeoGuides,
+]
   .filter((guide) => !guide.publishAt || guide.publishAt <= contentLibraryToday || releasedTaskGuideSlugs.has(guide.slug))
 
 export function getSeoGuide(slug: string): SeoGuide | undefined {
