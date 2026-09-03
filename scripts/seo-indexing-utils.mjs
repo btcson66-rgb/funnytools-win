@@ -30,7 +30,7 @@ export const sitemapLastmodPath = join(rootDir, 'data', 'sitemap-lastmod.json');
 // lastmodForPage treats a version change as a map migration: stored dates carry
 // forward once against the new hash, so normalizing the hash never itself becomes
 // a site-wide lastmod bump.
-export const sitemapContentHashVersion = 4;
+export const sitemapContentHashVersion = 5;
 export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
 export const enNoindex = indexingConfig.EN_NOINDEX === true;
 export const expansionRouteRegistry = readJson(
