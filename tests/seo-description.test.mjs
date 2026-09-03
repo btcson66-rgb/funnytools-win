@@ -14,6 +14,6 @@ test('rendered CAD metadata is complete and stays within the description budget'
   const description = cadHtml.match(/<meta name="description" content="([^"]+)"/)?.[1] ?? '';
   assert.ok(description);
   assert.ok([...description].length <= 150);
-  assert.match(description, /^Create 2D CAD sketches; export PNG or SVG\./);
+  assert.match(description, /^Create simple 2D CAD drawings online with grid snap, exact grid-unit sizes/);
   assert.doesNotMatch(description, /for simple\.$/);
 });
