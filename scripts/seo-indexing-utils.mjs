@@ -488,6 +488,37 @@ export function stableRenderedHtml(page) {
     '$1<build-time>$3',
   );
 
+  // The mobile navigation touch-target rule is shared UI chrome in the
+  // inlined global stylesheet. A 32px-to-44px accessibility improvement must
+  // not make every page look like its SEO content changed.
+  html = html.replace(
+    /(\.theme-toggle,\s*\.mobile-menu-toggle\s*\{\s*display:\s*inline-grid;\s*)width:\s*44px;\s*min-width:\s*44px;\s*height:\s*44px;\s*min-height:\s*44px;\s*flex:\s*0 0 44px;\s*/gi,
+    '$1width:32px;height:32px;',
+  );
+  html = html.replace(
+    /\.brand\{min-width:0;flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;?\}/gi,
+    '',
+  );
+  html = html.replace(
+    /analyticsWindow\.gtag\('event', eventName, \{[\s\S]*?analyticsWindow\.__ft_existing_ga_ids[\s\S]*?\}\);/g,
+    "analyticsWindow.gtag('event', eventName, payload);",
+  );
+  html = html.replace(/,send_to:window\.__ft_existing_ga_ids/g, '');
+  // Terser may choose a different local variable letter when the routing
+  // property is added to the shared share handler. Normalize only that exact
+  // handler and its three call sites; changing every `n(` in a whole page
+  // script would rewrite unrelated tool code and corrupt the old hash.
+  html = html.replace(
+    /const n=t=>\{typeof window\.gtag=="function"&&window\.gtag\("event","share",\{method:t,content_type:"tool_or_page"\}\),window\.__ft_track&&window\.__ft_track\("share_click",\{method:t\}\)\};a\.querySelectorAll\("a\[data-share-platform\]"\)\.forEach\(t=>\{t\.addEventListener\("click",\(\)=>\{n\(/g,
+    'const r=t=>{typeof window.gtag=="function"&&window.gtag("event","share",{method:t,content_type:"tool_or_page"}),window.__ft_track&&window.__ft_track("share_click",{method:t})};a.querySelectorAll("a[data-share-platform]").forEach(t=>{t.addEventListener("click",()=>{r(',
+  );
+  html = html.replace(/try\{n\("copy"\)\}catch\{n\("copy_fallback"\)\}/g, 'try{r("copy")}catch{r("copy_fallback")}');
+  html = html.replace(
+    /window\.prompt\(e\.getAttribute\("data-copy-label"\)\|\|"Copy link",t\),n\("copy_fallback"\)/g,
+    'window.prompt(e.getAttribute("data-copy-label")||"Copy link",t),r("copy_fallback")',
+  );
+  html = html.replace(/,n\("copy"\)\}catch/g, ',r("copy")}catch');
+
   // A full ISO instant equal to this HTML file's build time is likewise build
   // metadata. The tight ten-minute comparison avoids stripping publication or
   // review timestamps that describe the content itself.
@@ -514,6 +545,16 @@ export function stableRenderedHtml(page) {
   html = html.replace(
     /<script\b[^>]*>(?:(?!<\/script>)[\s\S])*?window\.dataLayer(?:(?!<\/script>)[\s\S])*?<\/script>/gi,
     '<script data-sitemap-volatile="analytics-bootstrap"></script>',
+  );
+
+  // The shared __ft_track dispatcher is emitted separately from the gtag
+  // bootstrap. Its destination list is analytics wiring, not reader-facing
+  // content. Normalize only the routing implementation back to the previous
+  // canonical dispatcher form so this isolation fix cannot bump every page's
+  // content hash or lastmod.
+  html = html.replace(
+    /var destinations = window\.__ft_existing_ga_ids;\s+window\.gtag\('event', eventName, destinations && destinations\.length\s+\? Object\.assign\(\{\}, merged, \{ send_to: destinations \}\)\s+: merged\);/g,
+    "window.gtag('event', eventName, merged);",
   );
 
   // The Affiliate GA4 bridge is also shared layout chrome. Its minified inline

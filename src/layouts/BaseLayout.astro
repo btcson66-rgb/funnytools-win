@@ -156,6 +156,11 @@ const contentSecurityPolicy = [
             // page_view still work from in here, but every custom event we send from anywhere
             // else is silently dropped.
             window.gtag = gtag;
+            // Keep ordinary FunnyTools events on the two existing properties. Affiliate
+            // events opt into their own destination explicitly in affiliateAnalytics.ts.
+            window.__ft_existing_ga_ids = secondaryMeasurementId
+              ? [measurementId, secondaryMeasurementId]
+              : [measurementId];
             // Consent Mode v2: default denied in EEA/UK/CH until a certified CMP
             // (AdSense Privacy & messaging) collects consent; granted elsewhere.
             gtag('consent', 'default', {
@@ -213,7 +218,10 @@ const contentSecurityPolicy = [
                     if (forbiddenNames.indexOf(String(k).toLowerCase()) === -1) merged[k] = params[k];
                   }
                 }
-                window.gtag('event', eventName, merged);
+                var destinations = window.__ft_existing_ga_ids;
+                window.gtag('event', eventName, destinations && destinations.length
+                  ? Object.assign({}, merged, { send_to: destinations })
+                  : merged);
               }
             };
           </script>

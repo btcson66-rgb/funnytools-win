@@ -220,7 +220,12 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
       };
 
       if (typeof analyticsWindow.gtag === 'function') {
-        analyticsWindow.gtag('event', 'site_search', eventParams);
+        analyticsWindow.gtag('event', 'site_search', {
+          ...eventParams,
+          ...(analyticsWindow.__ft_existing_ga_ids?.length
+            ? { send_to: analyticsWindow.__ft_existing_ga_ids }
+            : {}),
+        });
       } else {
         analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
         analyticsWindow.dataLayer.push(['event', 'site_search', eventParams]);

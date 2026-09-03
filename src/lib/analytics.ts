@@ -2,13 +2,14 @@
 // All events use gtag() which is already loaded in BaseLayout.astro
 // ChatGPT referrals should be tagged with utm_source=chatgpt.com; GA4 captures UTM params automatically.
 
-type GA4Params = Record<string, string | number | boolean | undefined>;
+type GA4Params = Record<string, string | number | boolean | string[] | undefined>;
 const forbiddenParamNames = /^(input|input_value|user_input|raw_value|text|result_text|file_name|filename|student_name|student_names|grade|grades|research_data|password|qr_payload)$/i;
 
 declare global {
   interface Window {
     gtag?: (command: 'event', eventName: string, params?: GA4Params) => void;
     __ft_track?: (eventName: string, params?: GA4Params) => void;
+    __ft_existing_ga_ids?: string[];
   }
 }
 
@@ -19,7 +20,11 @@ function track(eventName: string, params: GA4Params = {}) {
       language: document.documentElement.lang || 'zh-Hant',
     };
     const safeParams = Object.fromEntries(Object.entries(params).filter(([key]) => !forbiddenParamNames.test(key)));
-    window.gtag('event', eventName, { ...base, ...safeParams });
+    window.gtag('event', eventName, {
+      ...base,
+      ...safeParams,
+      ...(window.__ft_existing_ga_ids?.length ? { send_to: window.__ft_existing_ga_ids } : {}),
+    });
   }
 }
 

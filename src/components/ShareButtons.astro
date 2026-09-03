@@ -36,6 +36,7 @@ const encodedTitle = encodeURIComponent(title);
         window.gtag('event', 'share', {
           method: platform,
           content_type: 'tool_or_page',
+          send_to: window.__ft_existing_ga_ids,
         });
       }
       if (window.__ft_track) {

@@ -46,6 +46,9 @@ const contentSecurityPolicy = [
             // See BaseLayout: define:vars puts this script in an IIFE, so gtag has to be
             // published onto window explicitly or nothing outside this block can call it.
             window.gtag = gtag;
+            window.__ft_existing_ga_ids = secondaryMeasurementId
+              ? [measurementId, secondaryMeasurementId]
+              : [measurementId];
             gtag('js', new Date());
             // Keep embed page_views explicit for the two existing properties. This
             // prevents a linked Google tag destination from inheriting page_view hits.

@@ -79,7 +79,12 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
         const sendAnalyticsEvent = (eventName, params = {}) => {
           const payload = { ...eventParams, ...params };
           if (typeof analyticsWindow.gtag === 'function') {
-            analyticsWindow.gtag('event', eventName, payload);
+            analyticsWindow.gtag('event', eventName, {
+              ...payload,
+              ...(analyticsWindow.__ft_existing_ga_ids?.length
+                ? { send_to: analyticsWindow.__ft_existing_ga_ids }
+                : {}),
+            });
             return;
           }
           analyticsWindow.dataLayer = analyticsWindow.dataLayer || [];
