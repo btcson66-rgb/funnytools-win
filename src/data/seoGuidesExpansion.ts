@@ -4548,10 +4548,10 @@ export const additionalSeoGuides: SeoGuide[] = [
     locales: ['zh', 'en'],
     slug: '2d-cad-drawing-board-workflow-guide',
     title: { zh: '2D CAD 線上繪圖板工作流程指南', en: '2D CAD Drawing Board Workflow Guide' },
-    metaTitle: { zh: '線上 2D CAD 怎麼畫？格線、正交線與 PNG／SVG 匯出流程', en: 'How to Draw 2D CAD Online: Grid, Orthogonal Lines, PNG and SVG Export' },
+    metaTitle: { zh: '線上 2D CAD 怎麼畫？格線、正交線與 PNG／SVG 匯出流程', en: '2D CAD Drawing Board: Grid to PNG/SVG' },
     metaDescription: {
       zh: '用瀏覽器 2D CAD 繪圖板畫簡單平面圖與技術草圖：先設格線與吸附，再用正交線完成輪廓，最後按用途匯出 PNG 或 SVG 並檢查尺寸與線條。',
-      en: 'Draw simple 2D CAD sketches in a browser: set the grid and snap, use orthogonal lines for clean geometry, then export PNG or SVG and check the result at its real size.',
+      en: 'Draw 2D CAD sketches in a browser: set grid and snap, use orthogonal lines, export PNG or SVG, and check the result at its real size.',
     },
     h1: { zh: '線上 2D CAD 怎麼畫：從格線設定到 PNG／SVG 交付', en: 'How to Draw 2D CAD Online: From Grid Setup to PNG or SVG Handoff' },
     category: { zh: '繪圖與 CAD', en: 'Drawing and CAD' },
