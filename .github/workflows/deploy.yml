@@ -78,6 +78,8 @@ jobs:
     needs: deploy
     if: needs.deploy.result == 'success'
     runs-on: ubuntu-latest
+    # 就緒等待最多 4 分鐘，加上測試本身，15 分鐘足夠且能擋住卡死。
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -97,6 +99,10 @@ jobs:
           FUNNYTOOLS_SMOKE_PROFILE: production
           FUNNYTOOLS_SMOKE_RETRIES: 3
           FUNNYTOOLS_SMOKE_RETRY_DELAY_MS: 15000
+          # 後端 container 不由本 workflow 部署，重啟後就緒需要數分鐘；
+          # 先用有上限的窗口輪詢 /health，再跑其餘 API 斷言。
+          FUNNYTOOLS_SMOKE_READY_TIMEOUT_MS: 240000
+          FUNNYTOOLS_SMOKE_READY_POLL_MS: 10000
         run: |
           set -o pipefail
           if npm run test:api; then
