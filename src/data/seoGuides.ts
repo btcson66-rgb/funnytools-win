@@ -3920,6 +3920,7 @@ const releasedAdditionalGuideSlugs = new Set<string>([
   'image-resolution-print-web-guide',
   'image-color-profile-web-print-guide',
   'image-resampling-quality-guide',
+  '2d-cad-drawing-board-workflow-guide',
 ]);
 
 export const seoGuides: SeoGuide[] = [
