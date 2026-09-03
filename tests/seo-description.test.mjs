@@ -14,6 +14,10 @@ test('rendered CAD metadata is complete and stays within the description budget'
   const description = cadHtml.match(/<meta name="description" content="([^"]+)"/)?.[1] ?? '';
   assert.ok(description);
   assert.ok([...description].length <= 150);
-  assert.match(description, /^Create 2D CAD sketches; export PNG or SVG\./);
+  // The shared helper enforces the 150-character budget and appends the
+  // browser-only privacy suffix, so the descriptive source text may be
+  // truncated at an ellipsis in the rendered metadata.
+  assert.match(description, /^Create simple 2D CAD drawings online with…/);
+  assert.match(description, /Free, no registration\. Inputs and files stay in your browser and are not uploaded to FunnyTools servers\.$/);
   assert.doesNotMatch(description, /for simple\.$/);
 });
