@@ -7,6 +7,16 @@ const base = (process.env.FUNNYTOOLS_SMOKE_BASE || 'http://127.0.0.1:8000').repl
 const productionSmoke = process.env.FUNNYTOOLS_SMOKE_PROFILE === 'production';
 const retryAttempts = productionSmoke ? Math.max(1, Number(process.env.FUNNYTOOLS_SMOKE_RETRIES || 3)) : 1;
 const retryDelayMs = Math.max(0, Number(process.env.FUNNYTOOLS_SMOKE_RETRY_DELAY_MS || 15000));
+// 部署後 origin 就緒等待：後端是獨立的 FastAPI/Uvicorn container，不由 Pages workflow
+// 部署，重啟後需要數分鐘才就緒。2026-09-02 實測 attempt 1（15:29:33）得到 530、
+// container 於 15:32:10 重啟後 attempt 2（15:33:26）才通過——原本 3 次 × 15 秒
+// 的通用重試只有 30 秒窗口，涵蓋不到，導致整個更新期間幾乎每次部署都紅。
+// 這裡把「等 origin 起來」與「API 是否正常」分成兩件事：readiness 用較長但有上限的
+// 窗口輪詢 /health，其餘請求維持原本的短重試，真正壞掉時仍然快速失敗。
+const readinessTimeoutMs = productionSmoke
+  ? Math.max(0, Number(process.env.FUNNYTOOLS_SMOKE_READY_TIMEOUT_MS || 240000))
+  : 0;
+const readinessPollMs = Math.max(1000, Number(process.env.FUNNYTOOLS_SMOKE_READY_POLL_MS || 10000));
 const fixtureDir = join(process.cwd(), 'tests', 'fixtures');
 const imageA = await readFile(join(fixtureDir, 'sample-a.jpg'));
 const imageB = await readFile(join(fixtureDir, 'sample-b.jpg'));
@@ -38,6 +48,35 @@ async function request(url, init) {
     await wait(retryDelayMs);
   }
   throw lastError;
+}
+
+// 有上限的就緒輪詢。刻意不重用 request()——那個函式自己會重試，巢狀後窗口會失控。
+// 逾時訊息明確區分「origin 沒起來」與「API 壞了」，讓紅燈重新帶有資訊。
+async function waitForOrigin() {
+  if (readinessTimeoutMs === 0) return;
+  const deadline = Date.now() + readinessTimeoutMs;
+  let last = 'no response';
+  for (let attempt = 1; ; attempt += 1) {
+    try {
+      const response = await fetch(`${base}/health`, { headers: { Origin: 'https://funnytools.win' } });
+      if (response.status === 200) {
+        if (attempt > 1) console.log(`[smoke] origin ready after ${attempt} attempt(s)`);
+        return;
+      }
+      last = `HTTP ${response.status}`;
+    } catch (error) {
+      last = error.message;
+    }
+    if (Date.now() + readinessPollMs >= deadline) {
+      throw new Error(
+        `ORIGIN NOT READY: ${base}/health did not return 200 within ${Math.round(readinessTimeoutMs / 1000)}s `
+        + `(${attempt} attempt(s), last: ${last}). 後端 container 可能未啟動或部署失敗——`
+        + `這與 API 業務邏輯錯誤是不同的問題。`,
+      );
+    }
+    console.log(`[smoke] origin not ready yet (attempt ${attempt}, ${last}), retrying in ${readinessPollMs / 1000}s`);
+    await wait(readinessPollMs);
+  }
 }
 
 async function post(path, form) {
@@ -103,6 +142,8 @@ function assertJpeg(bytes, label) {
   assert.equal(bytes.at(-2), 0xff, `${label} is not JPEG data`);
   assert.equal(bytes.at(-1), 0xd9, `${label} is not JPEG data`);
 }
+
+await waitForOrigin();
 
 const health = await request(`${base}/health`, { headers: { Origin: 'https://funnytools.win' } });
 assert.equal(health.status, 200);
