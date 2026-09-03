@@ -41,19 +41,22 @@ test('tool shelf is result-gated and exposes the required disclosure and control
 
 test('runtime records affiliate interactions and uses safe external links', () => {
   for (const eventName of [
-    'affiliate_shelf_view',
-    'affiliate_product_click',
+    'affiliate_module_view',
+    'affiliate_item_view',
+    'affiliate_click',
     'affiliate_refresh',
-    'affiliate_expand',
-    'affiliate_support_page_click',
   ]) assert.match(runtime, new RegExp(eventName));
   assert.match(runtime, /link\.rel = 'sponsored nofollow noopener'/);
   assert.match(runtime, /link\.target = '_blank'/);
   assert.match(runtime, /查看目前價格/);
   assert.match(runtime, /sessionStorage/);
-  assert.match(runtime, /article_slug/);
-  assert.match(runtime, /article_category/);
+  assert.match(runtime, /article_inline/);
+  assert.match(runtime, /surface_type/);
   assert.match(runtime, /let shelfViewed = false/);
+  assert.match(runtime, /IntersectionObserver/);
+  assert.match(runtime, /threshold: \[0\.5\]/);
+  assert.match(runtime, /__btcsonAffiliateTrack/);
+  assert.doesNotMatch(runtime, /affiliate_product_click|affiliate_shelf_view/);
 });
 
 test('article monetization is explicit, conservative, and context-aware', () => {

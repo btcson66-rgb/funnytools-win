@@ -147,7 +147,7 @@ const contentSecurityPolicy = [
         <>
           <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ga4MeasurementId}`} />
-          <script is:inline define:vars={{ measurementId: SITE.ga4MeasurementId, secondaryMeasurementId: SITE.ga4SecondaryMeasurementId }}>
+          <script is:inline define:vars={{ measurementId: SITE.ga4MeasurementId, secondaryMeasurementId: SITE.ga4SecondaryMeasurementId, affiliateMeasurementId: SITE.affiliateGa4MeasurementId }}>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             // Astro wraps a define:vars script in an IIFE, so the function declaration above
@@ -177,6 +177,10 @@ const contentSecurityPolicy = [
             // Mirror into the backup-account property. Same consent state, same events —
             // only the destination differs.
             if (secondaryMeasurementId) gtag('config', secondaryMeasurementId);
+            // The affiliate destination must not create a second automatic page_view.
+            if (affiliateMeasurementId && affiliateMeasurementId !== measurementId && affiliateMeasurementId !== secondaryMeasurementId) {
+              gtag('config', affiliateMeasurementId, { send_page_view: false });
+            }
           </script>
           <script is:inline>
             window.__ft_track = function(eventName, params) {
@@ -248,6 +252,10 @@ const contentSecurityPolicy = [
     </main>
     {Astro.slots.has('footer') ? <slot name="footer" /> : <Footer lang={lang} />}
     <script src={assetPath('install-prompt.js')} defer></script>
+    {ga4Enabled && <script>
+      import { installAffiliateAnalytics } from '../lib/affiliateAnalytics';
+      installAffiliateAnalytics();
+    </script>}
     <script is:inline>
       // Lightweight speculative prefetch: warm the HTTP cache for same-origin
       // pages when the user hovers or touches a link.

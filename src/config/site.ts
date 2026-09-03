@@ -22,6 +22,7 @@ export const SITE = {
   // 550070457 under the backup account, which the company can actually query. The original
   // tag stays in place so the historical property keeps its continuity if access is restored.
   ga4SecondaryMeasurementId: 'G-SJ90CBM9ZV',
+  affiliateGa4MeasurementId: import.meta.env.PUBLIC_AFFILIATE_GA_ID?.trim() || 'G-Q78WN8NZ0R',
   // Legacy fallback for local/preflight builds. Prefer PUBLIC_ADSENSE_CLIENT.
   // 2026-08-24: migrated off the old AdSense account (btcson66). That account's
   // sign-in mailbox is the same btcson66@gmail.com noted above, which can no longer be

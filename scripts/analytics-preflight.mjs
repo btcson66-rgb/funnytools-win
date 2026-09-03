@@ -97,8 +97,11 @@ for (const page of pages) {
 
 const supportHtml = readFileSync(join(dist, 'support', 'index.html'), 'utf8');
 const supportScript = readFileSync(join(dist, 'support-products.js'), 'utf8');
-if (!supportHtml.includes('G-SV027MPXK4')) failures.push('support page: GA4 measurement ID missing');
-if (!supportScript.includes('affiliate_product_click')) failures.push('support-products.js: affiliate_product_click missing');
+if (!supportHtml.includes('G-SV027MPXK4')) failures.push('support page: primary GA4 measurement ID missing');
+if (!supportHtml.includes('G-Q78WN8NZ0R')) failures.push('support page: affiliate GA4 measurement ID missing');
+for (const eventName of ['affiliate_module_view', 'affiliate_item_view', 'affiliate_click', 'affiliate_refresh']) {
+  if (!supportScript.includes(eventName)) failures.push(`support-products.js: ${eventName} missing`);
+}
 
 if (!contentHtml.includes('article_cta_click')) {
   failures.push('content pages: article_cta_click missing');
