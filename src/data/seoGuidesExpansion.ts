@@ -106,10 +106,6 @@ export const additionalSeoGuides: SeoGuide[] = [
       en: 'Create a test file with the FunnyTools QR Code generator, complete the screen, physical-size, and fallback-path checks, then send it to print.',
     },
     updatedAt: '2026-09-02',
-    contentHtml: {
-      zh: '<h2>先測目的地，再測圖案</h2><p>QR Code 列印前最容易漏掉的不是產生步驟，而是讀者掃描後的下一步。先核對網址、語言、活動日期與登入限制，再用不同手機與實際紙張尺寸測試。螢幕預覽只能當第一關。</p><h2>列印前的五個檢查點</h2><ol><li>兩支不同手機都能掃描並開啟頁面。</li><li>深色模組、淺色背景與完整外圍留白仍存在。</li><li>從預計距離與角度掃描，不需要反覆尋找焦點。</li><li>QR Code 旁有短網址或簡短備援指示。</li><li>保存已核准的圖檔與目的地版本。</li></ol><h2>可靠來源與限制</h2><p>DENSO WAVE 的 <a href="https://www.qrcode.com/en/about/">QR Code 基礎說明</a>可用來理解結構與錯誤修正；實際可讀性仍受紙張、尺寸、光線與相機影響，不能用單次成功掃描保證所有場景。</p>',
-      en: '<h2>Test the destination before the pixels</h2><p>The most common pre-print failure is not generating the symbol; it is sending readers to the wrong page. Check the URL, language, event date, and login requirement first, then test on different phones and at the final paper size. A screen preview is only the first gate.</p><h2>Five print checks</h2><ol><li>Two different phones scan and open the page.</li><li>Dark modules, a light background, and the full quiet space remain.</li><li>The code scans from the expected distance and angle.</li><li>A short URL or one-line fallback appears beside it.</li><li>The approved image and destination version are saved.</li></ol><h2>Source and limits</h2><p>Use <a href="https://www.qrcode.com/en/about/">DENSO WAVE’s QR Code basics</a> for structural concepts and error correction. Actual readability still depends on paper, size, light, and camera; one successful scan cannot guarantee every context.</p>',
-    },
     noFaqSchema: true,
   },
   {
@@ -122,11 +118,11 @@ export const additionalSeoGuides: SeoGuide[] = [
     },
     metaTitle: {
       zh: 'QR Code 掃描後頁面怎麼設計？手機操作、語言與備援清單',
-      en: 'QR Code Mobile Landing Page Checklist: Fast, Clear, and Accessible',
+      en: 'QR Code Mobile Landing Page Checklist',
     },
     metaDescription: {
       zh: 'QR Code 掃描成功只是開始：檢查手機頁面載入、單手操作、標題、語言、表單欄位、無障礙與無法掃描時的替代路徑，降低入口流失、表單中斷與誤解風險。',
-      en: 'A successful QR scan is only the start. Check mobile loading, one-hand actions, headings, language, form fields, accessibility, and a fallback path for people who cannot scan.',
+      en: 'After a QR scan, check mobile loading, headings, forms, language, accessibility, and a fallback path for people who cannot scan.',
     },
     h1: {
       zh: 'QR Code 掃描後要看到什麼？手機落地頁的實用檢查清單',
@@ -209,10 +205,6 @@ export const additionalSeoGuides: SeoGuide[] = [
       en: 'Create the entry with the QR Code generator, then validate the landing page on phones, a slow connection, both languages, and the fallback path.',
     },
     updatedAt: '2026-09-03',
-    contentHtml: {
-      zh: '<h2>掃描成功只是第一關</h2><p>落地頁要在小螢幕與弱網路中快速說明用途、主要行動與替代路徑。表單只問完成任務需要的資料，並清楚標示語言。</p><h2>用兩支手機與可操作性檢查</h2><p>測試 iOS、Android、觸控按鈕、輸入鍵盤、錯誤訊息與語言切換。可參考 <a href="https://www.w3.org/TR/WCAG22/">W3C WCAG 2.2</a>的可操作性與輸入協助原則，再回到實際頁面驗證。</p><h2>保留不用掃描的替代入口</h2><p>在紙面與頁面放短網址或可複製連結，讓相機故障、沒有權限或不便掃描的人仍能完成任務。完成後再回到<a href="/guides/qr-code-before-print-testing-guide/">列印前測試指南</a>檢查整條路徑。</p>',
-      en: '<h2>A successful scan is only the first gate</h2><p>The landing page should explain the purpose, main action, and fallback on a small screen and a slow connection. Ask only for task-related data and label the language clearly.</p><h2>Test two phones and operability</h2><p>Check iOS, Android, touch targets, input keyboards, errors, and language switching. Use <a href="https://www.w3.org/TR/WCAG22/">W3C WCAG 2.2</a> for operability and input-assistance principles, then verify the actual page.</p><h2>Keep a non-scan fallback</h2><p>Print a short URL and show a copyable link so people with camera or permission problems can continue. Finish with the <a href="/guides/qr-code-before-print-testing-guide/">pre-print testing guide</a> to check the complete journey.</p>',
-    },
     noFaqSchema: true,
   },
   {
@@ -225,11 +217,11 @@ export const additionalSeoGuides: SeoGuide[] = [
     },
     metaTitle: {
       zh: 'QR Code 可以放多少文字？網址、Unicode 與內容密度怎麼取捨',
-      en: 'How Much Text Fits in a QR Code? URL, Unicode, and Density Trade-offs',
+      en: 'QR Code Text Capacity and Density Guide',
     },
     metaDescription: {
       zh: 'QR Code 不是越能塞資料越好：比較短網址、純文字、中文與 Emoji 對容量和模組密度的影響，並用最少資料設計可測試、可維護的入口與頁面。',
-      en: 'A QR code is not better because it stores more. Compare short URLs, plain text, Chinese, and emoji payloads, then design a minimal, testable entry.',
+      en: 'Learn how URL length, plain text, Chinese, and emoji affect QR density, then design a short, testable entry.',
     },
     h1: {
       zh: 'QR Code 可以放多少內容？從短網址到中文 Emoji 的密度取捨',
@@ -312,10 +304,204 @@ export const additionalSeoGuides: SeoGuide[] = [
       en: 'Check the payload with the character counter, generate a short stable entry with the QR Code generator, and test at the real print size.',
     },
     updatedAt: '2026-09-03',
-    contentHtml: {
-      zh: '<h2>容量不是固定字數</h2><p>QR Code 的容量會受 version、錯誤修正與編碼模式影響。中文與 Emoji 也不能只用肉眼計數；先用字元計數工具，再以實際尺寸解碼。</p><h2>把內容放在頁面，圖案只做入口</h2><p>短而穩定的網址通常比把全文塞入圖案更適合印刷。頁面可以承載完整說明、語言切換與更新，並避免把秘密或個資永久暴露在紙張上。</p><h2>來源與實測界線</h2><p>可參考 <a href="https://www.qrcode.com/en/about/">DENSO WAVE QR Code 基礎說明</a>的容量與結構概念；最終仍要用預計尺寸、紙材與兩支手機測試，不能用字數推算保證所有相機都能掃描。</p>',
-      en: '<h2>Capacity is not one character count</h2><p>QR capacity depends on version, error correction, and encoding mode. Chinese and emoji cannot be estimated from visible glyphs alone; measure them, then decode at the intended size.</p><h2>Keep content on the page</h2><p>A short stable URL is usually better for print than embedding a full article. The page can hold instructions, language switching, and updates without exposing secrets or personal data on paper.</p><h2>Source and testing boundary</h2><p>See <a href="https://www.qrcode.com/en/about/">DENSO WAVE’s QR Code basics</a> for capacity and structure concepts. Test with the intended size, paper, and two phones; a character count cannot guarantee every camera will scan it.</p>',
+    noFaqSchema: true,
+  },
+  {
+    id: 'pdf-to-image-resolution-guide',
+    locales: ['zh', 'en'],
+    slug: 'pdf-to-image-resolution-guide',
+    title: {
+      zh: 'PDF 轉圖片解析度怎麼選',
+      en: 'PDF to Image Resolution Guide',
     },
+    metaTitle: {
+      zh: 'PDF 轉 JPG／PNG 要選多高解析度？螢幕、Email 與列印設定指南',
+      en: 'PDF to JPG or PNG Resolution Guide',
+    },
+    metaDescription: {
+      zh: 'PDF 轉 JPG 或 PNG 時，不要只追求最高解析度：依螢幕預覽、Email 附件、簡報與列印用途選擇像素尺寸，兼顧文字清晰、檔案大小、記憶體與隱私，並用實際輸出檢查小字。',
+      en: 'Choose PDF-to-JPG or PNG resolution for screens, email, slides, or print while balancing clarity and file size.',
+    },
+    h1: {
+      zh: 'PDF 轉圖片要選多高解析度？先看用途再決定像素',
+      en: 'What Resolution Should You Use for PDF to Image Conversion?',
+    },
+    category: { zh: '檔案與 PDF', en: 'Files and PDFs' },
+    priority: 34,
+    searchIntent: {
+      zh: '使用者要把 PDF 轉成 JPG 或 PNG，想知道螢幕、Email、簡報與列印各需要多少解析度，避免文字模糊或檔案過大。',
+      en: 'A user needs to convert a PDF to JPG or PNG and wants a practical resolution choice for screens, email, slides, or print without blurry text or oversized files.',
+    },
+    targetKeywords: [
+      { zh: 'PDF 轉圖片 解析度', en: 'PDF to image resolution' },
+      { zh: 'PDF 轉 JPG DPI', en: 'PDF to JPG DPI' },
+      { zh: 'PDF 轉 PNG 清晰度', en: 'PDF to PNG quality' },
+    ],
+    relatedToolIds: ['pdf-to-image', 'image-compressor', 'image-resizer'],
+    relatedGuideIds: ['pdf-to-jpg-vs-png', 'image-compression-email-guide', 'a4-vs-us-letter-printing-guide'],
+    relatedWorkflowIds: [],
+    summary: {
+      zh: '解析度不是越高越好，而是要配合觀看距離、版面尺寸與文字大小。先決定用途，再檢查輸出的像素、檔案大小與小字可讀性。',
+      en: 'Resolution is not automatically better when it is higher. Match pixel dimensions to viewing distance, page size, and text, then verify readability and file size in the actual output.',
+    },
+    problem: {
+      zh: '有人把每一頁都用最高解析度輸出，結果 Email 附件超過限制、手機記憶體不足；也有人用低解析度做簡報或列印，放大後小字和表格變成馬賽克。只看設定中的 DPI 數字，沒有回到使用場景驗證。',
+      en: 'Exporting every page at the highest setting can exceed an email limit or consume phone memory. Exporting too low makes small text and tables turn blocky in slides or print. A DPI number alone cannot replace checking the intended use.',
+    },
+    whoShouldUse: {
+      zh: '適合要把報告、講義、收據、圖表或掃描 PDF 放到網站、Email、社群、簡報或紙張上的學生、行政人員與內容創作者。',
+      en: 'This is for students, office teams, and creators placing reports, handouts, receipts, charts, or scanned PDFs in websites, email, social posts, slides, or print.',
+    },
+    explanation: [
+      {
+        zh: '先分清楚「像素尺寸」和「DPI」。轉成點陣圖後，真正影響螢幕顯示的是寬高像素；DPI 多半是列印工作流程用來描述每英吋的輸出密度。相同像素在不同檔案中可能帶有不同 DPI 標籤，因此不要只用標籤推論螢幕清晰度。',
+        en: 'Separate pixel dimensions from DPI. Once a page is rasterized, screen display is governed by its pixel width and height; DPI is mainly a density description in print workflows. The same pixels can carry different DPI metadata, so a label alone does not prove screen sharpness.',
+      },
+      {
+        zh: '螢幕預覽、Email 與社群通常重視載入速度和檔案大小；可先用足以閱讀標題與正文的中等尺寸，再在手機與桌面各看一次。若文字需要反覆放大，回到原 PDF 或改用更高輸出，而不是把壓縮後的圖片再放大。',
+        en: 'Screen previews, email, and social posts usually prioritize loading and file size. Start with a moderate pixel size that keeps headings and body text readable, then inspect it on phone and desktop. If readers must zoom repeatedly, return to the PDF or export larger instead of enlarging a compressed image.',
+      },
+      {
+        zh: '簡報或投影要按預計顯示尺寸測試。把整頁 PDF 轉成縮圖後塞進投影片，遠端觀眾看到的可能只剩模糊小字；若只需要一個圖表，先裁出圖表再輸出，比整頁用超高解析度更有效率。',
+        en: 'Test slides at the size they will actually be shown. A full-page thumbnail can make remote viewers see blurry small type; if you need one chart, crop that chart before exporting instead of making the entire page enormous.',
+      },
+      {
+        zh: '列印時要把紙張尺寸、觀看距離與文字大小一起考慮。A4 或 Letter 頁面若要保留細字，輸出像素應足以支援目標紙張；完成後請用列印預覽和一張樣張檢查，因為印表機邊界與縮放也會影響結果。',
+        en: 'For print, consider paper size, viewing distance, and text size together. An A4 or Letter page with small type needs enough pixels for the target sheet; use print preview and one proof sheet because printer margins and scaling also change the result.',
+      },
+      {
+        zh: 'Adobe Acrobat 的 PDF 最佳化說明把影像取樣、壓縮與目標用途分開處理（https://helpx.adobe.com/acrobat/using/optimizing-pdfs-acrobat-pro.html）。這些設定不能替你的實際檔案做保證；輸出後仍要檢查文字、條碼、圖片邊緣和檔案大小。',
+        en: 'Adobe Acrobat’s PDF optimization guidance treats image downsampling, compression, and target use as separate decisions (https://helpx.adobe.com/acrobat/using/optimizing-pdfs-acrobat-pro.html). Those settings do not guarantee your file; inspect text, barcodes, image edges, and size after export.',
+      },
+    ],
+    steps: [
+      { zh: '寫下輸出目的：手機閱讀、Email、簡報、網站嵌圖或實體列印。', en: 'Write down the output job: phone reading, email, slides, a website image, or physical print.' },
+      { zh: '先用 PDF 轉圖片工具輸出一頁中等尺寸，記錄像素寬高、檔案大小與格式。', en: 'Export one page at a moderate size with the PDF-to-image tool and record pixels, file size, and format.' },
+      { zh: '在預計使用的裝置或投影片版面檢查正文、表格、條碼與細線。', en: 'Check body text, tables, barcodes, and fine lines on the target device or slide layout.' },
+      { zh: '若小字模糊，優先提高像素或裁出真正需要的區域；不要只重複放大壓縮圖。', en: 'If small type is blurry, increase pixels or crop the needed area instead of repeatedly enlarging a compressed image.' },
+      { zh: '若檔案太大，先比較 JPG／PNG 和圖片壓縮結果，再確認文字沒有出現暈邊。', en: 'If the file is too large, compare JPG/PNG and compression results, then confirm text has no halos or block artifacts.' },
+      { zh: '列印用途先印一張樣張，核對紙張尺寸、縮放、邊界與實際可讀性。', en: 'For print, make one proof and check paper size, scaling, margins, and real readability.' },
+    ],
+    example: {
+      zh: '行政人員要把兩頁收據放進 Email。第一次用最高解析度輸出 PNG，附件超過限制；改成以手機閱讀為目標的中等像素 JPG，正文仍清楚。另一份要放進 A4 報告的表格則改輸出較大 PNG，並印一張樣張確認細線沒有消失。兩份檔案使用不同設定，而不是套同一個「最高品質」。',
+      en: 'An office worker needs to email two receipt pages. A maximum-resolution PNG exceeds the attachment limit, so a moderate-pixel JPG for phone reading keeps the text clear. A table destined for an A4 report uses a larger PNG and one proof print to check fine lines. The two jobs use different settings instead of one maximum-quality preset.',
+    },
+    commonMistakes: [
+      { zh: '把 DPI 標籤當成螢幕清晰度的唯一指標。', en: 'Treating the DPI label as the only measure of screen sharpness.' },
+      { zh: '不看用途，所有 PDF 頁面都用最高解析度輸出。', en: 'Using maximum resolution for every page without considering the job.' },
+      { zh: '先用低解析度輸出，再把圖片放大到簡報或列印尺寸。', en: 'Exporting low and enlarging the image later for slides or print.' },
+      { zh: '只檢查第一頁，忽略其他頁的小字、條碼或掃描陰影。', en: 'Checking only the first page and missing small type, barcodes, or scan shadows elsewhere.' },
+      { zh: '壓縮後沒有重新打開檔案，直接假設檔案大小和清晰度都可接受。', en: 'Skipping a post-compression check and assuming both size and clarity are acceptable.' },
+    ],
+    faq: [
+      { question: { zh: 'PDF 轉圖片一定要 300 DPI 嗎？', en: 'Does every PDF-to-image job need 300 DPI?' }, answer: { zh: '不一定。螢幕、Email 與縮圖通常不需要印刷工作流程的同一密度；列印才要按紙張、文字大小與樣張調整。先看用途，不要把單一數字當成保證。', en: 'No. Screen, email, and thumbnails do not require the same density as a print workflow. Print jobs need a choice based on paper, text size, and a proof; no single number is a guarantee.' } },
+      { question: { zh: 'JPG 和 PNG 哪個比較清楚？', en: 'Is JPG or PNG sharper?' }, answer: { zh: '格式只是其中一項。照片常適合 JPG，文字與線條常適合 PNG；輸出像素、壓縮程度與原始 PDF 內容同樣重要。', en: 'Format is only one factor. Photos often suit JPG and text or lines often suit PNG; output pixels, compression, and the source PDF matter too.' } },
+      { question: { zh: '為什麼轉出來的圖片在 PDF 裡很清楚，放大後卻模糊？', en: 'Why is the converted image blurry when enlarged?' }, answer: { zh: '點陣圖只包含有限像素，放大會把像素攤開。重新以較大像素輸出，或在需要時保留原 PDF，通常比放大舊圖片可靠。', en: 'A raster image has a finite pixel grid, so enlarging spreads those pixels. Export larger or keep the original PDF when possible instead of enlarging the old image.' } },
+    ],
+    cta: {
+      zh: '用 PDF 轉圖片工具先輸出一頁做用途測試，再依清晰度與檔案限制調整解析度和格式。',
+      en: 'Use the PDF-to-image tool to test one page first, then adjust resolution and format against clarity and file limits.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'merge-pdf-page-size-orientation-guide',
+    locales: ['zh', 'en'],
+    slug: 'merge-pdf-page-size-orientation-guide',
+    title: {
+      zh: '合併 PDF 後紙張大小與方向整理指南',
+      en: 'Merged PDF Page Size and Orientation Guide',
+    },
+    metaTitle: {
+      zh: '合併 PDF 後大小不一、方向混亂怎麼辦？A4、Letter 與橫直頁整理教學',
+      en: 'Merged PDF Page Sizes and Orientations Guide',
+    },
+    metaDescription: {
+      zh: '合併 PDF 後出現 A4、Letter、橫向與直向混在一起，不代表檔案損壞。本指南教你先盤點頁面尺寸、決定是否需要統一、避免不必要縮放，並在列印與分享前逐頁驗證。',
+      en: 'Mixed A4, Letter, portrait, and landscape pages are not automatically corruption. Check each page, avoid needless scaling, and verify before printing.',
+    },
+    h1: {
+      zh: '合併 PDF 後頁面大小不一怎麼整理？先判斷再縮放',
+      en: 'How to Fix Mixed Page Sizes After Merging PDFs',
+    },
+    category: { zh: '檔案與 PDF', en: 'Files and PDFs' },
+    priority: 35,
+    searchIntent: {
+      zh: '使用者合併多份 PDF 後發現紙張大小或橫直方向不一致，想知道是否要統一、怎麼列印與如何避免內容被裁切。',
+      en: 'A user merged PDFs and found mixed paper sizes or portrait and landscape pages, and needs to decide whether to standardize them without clipping content.',
+    },
+    targetKeywords: [
+      { zh: '合併 PDF 大小不一', en: 'merged PDF different page sizes' },
+      { zh: 'PDF 橫向直向混合', en: 'PDF mixed portrait landscape' },
+      { zh: 'PDF A4 Letter 合併', en: 'merge A4 and Letter PDF' },
+    ],
+    relatedToolIds: ['merge-pdf', 'pdf-page-reorder', 'pdf-compressor'],
+    relatedGuideIds: ['merge-pdf-private-guide', 'a4-vs-us-letter-printing-guide', 'pdf-to-jpg-vs-png'],
+    relatedWorkflowIds: [],
+    summary: {
+      zh: '合併只是在同一檔案中排列頁面，不會自動把所有頁面變成同一紙張。先確認接收者要閱讀、列印還是歸檔，再決定保留原尺寸或另做統一版本。',
+      en: 'Merging places pages in one file; it does not automatically make every page the same paper size. Decide whether the file is for reading, printing, or archiving before changing original dimensions.',
+    },
+    problem: {
+      zh: '履歷、附件、表單和掃描件常來自不同來源。直接合併後，預覽器可能出現頁面忽大忽小、橫向頁旋轉、列印時被裁切。為了「看起來整齊」硬縮放，反而可能讓表格或簽名失去可讀性。',
+      en: 'Resumes, attachments, forms, and scans often come from different sources. A merged file can show pages at different scales, rotated landscape pages, or clipped printouts. Forcing everything to look uniform may make tables or signatures unreadable.',
+    },
+    whoShouldUse: {
+      zh: '適合整理申請資料、報告附件、合約、學習單與掃描收據的學生、求職者、行政人員和教師。',
+      en: 'This helps students, applicants, office teams, and teachers assembling application packets, reports, contracts, worksheets, and scanned receipts.',
+    },
+    explanation: [
+      {
+        zh: '先把「頁面尺寸」與「檢視器縮放」分開。檢視器可能把 Letter 顯示得和 A4 一樣大，但列印時仍是不同實體尺寸。ISO 216 定義 A 系列紙張；美國 Letter 則是另一套常見規格，不能靠螢幕預覽猜測。',
+        en: 'Separate physical page size from viewer zoom. A viewer can display Letter and A4 at a similar on-screen scale while printing them at different dimensions. ISO 216 defines the A series, while US Letter is a different common specification; do not infer paper size from preview alone.',
+      },
+      {
+        zh: '如果目標是數位閱讀或保留原始證據，保留混合尺寸通常比重排安全。每頁旁邊加清楚的頁碼與來源，讓讀者知道附件本來就是不同格式；只有在接收系統明確要求單一紙張時才建立統一版本。',
+        en: 'For digital reading or preserving source evidence, keeping mixed sizes is often safer than reflowing them. Add clear page numbers and source labels so readers understand the attachments differ; standardize only when the receiving system requires one sheet size.',
+      },
+      {
+        zh: '要列印時，先決定每頁要「符合可列印範圍」還是「實際大小」。一般文字附件可縮小到紙張內；尺規、表格欄位、簽名框與裁切模板則屬尺寸敏感，縮放後應用尺再次核對。',
+        en: 'For printing, choose between fitting each page to the printable area and preserving actual size. Ordinary text attachments can usually fit the sheet; rulers, form fields, signature boxes, and cutting templates are size-sensitive and need a ruler check after scaling.',
+      },
+      {
+        zh: '橫向頁不必為了統一而旋轉內容。比較好的做法是保留頁面方向，在目錄或檔名中標示；若收件者需要裝訂，另做一份經過預覽和樣張驗證的列印版。',
+        en: 'A landscape page does not need its content rotated merely to look uniform. Keep its orientation and label it in the contents or filename; if binding is required, make a separate print version validated in preview and with a proof sheet. This preserves the author’s intended reading direction and makes later revisions easier to audit.',
+      },
+      {
+        zh: '可參考 ISO 216 的 A 系列紙張標準（https://www.iso.org/obp/ui/#iso:std:iso:216:ed-2:v1:en）確認 A4 的規格，再把接收端的印表機設定與邊界納入測試。標準尺寸不等於每台印表機都能無邊界輸出。',
+        en: 'Use ISO 216’s A-series paper standard (https://www.iso.org/obp/ui/#iso:std:iso:216:ed-2:v1:en) to confirm A4 dimensions, then include the receiving printer’s margins and settings in testing. A standard sheet does not mean every printer can print edge to edge.',
+      },
+    ],
+    steps: [
+      { zh: '列出每個來源檔案的頁數、A4／Letter／其他尺寸與橫直方向。', en: 'List each source file’s page count, A4/Letter/other size, and orientation.' },
+      { zh: '決定合併檔是用於閱讀、上傳歸檔，還是實體列印；不要先為了外觀縮放。', en: 'Decide whether the merged file is for reading, submission, archiving, or print before scaling for appearance.' },
+      { zh: '用合併 PDF 工具排列檔案，再用頁面重排工具檢查封面、附件與分隔頁。', en: 'Merge the files, then use the page reorder tool to check cover, attachments, and separator pages.' },
+      { zh: '在預覽中逐頁查看方向、頁碼、表格與簽名框；特別標記尺寸敏感頁。', en: 'Inspect orientation, page numbers, tables, and signature boxes page by page, flagging size-sensitive pages.' },
+      { zh: '列印前選擇符合頁面或實際大小，先印一頁樣張並用尺核對必要尺寸。', en: 'Before printing, choose fit or actual size, make one proof, and measure any required dimensions.' },
+      { zh: '保留原始檔與合併版，將統一紙張的版本另存並清楚命名。', en: 'Keep the source files and merged version, saving any standardized print version under a clear separate name.' },
+    ],
+    example: {
+      zh: '求職者要提交一份 PDF：履歷是 A4 直向、作品集是 Letter 直向、作品截圖有兩頁橫向。數位上傳沒有要求單一尺寸，因此他保留原始比例，重新排序並加頁碼；列印給面試官時才另存「Fit to A4」版本，先印一頁確認 QR Code、簽名欄與橫向截圖沒有被裁切。',
+      en: 'An applicant submits one PDF with an A4 portrait resume, a Letter portrait portfolio, and two landscape screenshots. Because the portal does not require one size, they preserve the proportions, reorder pages, and add page numbers. For an interviewer’s paper copy, they create a separate fit-to-A4 version and proof the QR code, signature field, and landscape pages.',
+    },
+    commonMistakes: [
+      { zh: '只看檢視器畫面，沒有確認每頁的實體尺寸。', en: 'Relying on viewer appearance without checking physical page dimensions.' },
+      { zh: '把所有頁面硬縮成同一大小，導致表格、簽名或條碼難以閱讀。', en: 'Forcing every page to one scale and making tables, signatures, or barcodes hard to read.' },
+      { zh: '橫向頁旋轉了內容，卻沒有確認讀者或列印裝訂方向。', en: 'Rotating landscape content without checking reading or binding direction.' },
+      { zh: '列印混合尺寸檔案時沿用上一份文件的縮放設定。', en: 'Reusing a previous document’s scaling setting for a mixed-size file.' },
+      { zh: '統一版本覆蓋原始檔，之後無法追查哪一頁被縮放或裁切。', en: 'Overwriting the source with a standardized copy and losing the audit trail for scaling or clipping.' },
+    ],
+    faq: [
+      { question: { zh: '合併 PDF 一定要把 A4 和 Letter 統一嗎？', en: 'Must A4 and Letter pages be standardized after merging?' }, answer: { zh: '不一定。數位閱讀與保留原始附件時可保留混合尺寸；只有接收系統、裝訂或印刷流程要求單一紙張時，才另做統一版本。', en: 'No. Keep mixed sizes for digital reading or source preservation. Make a separate standardized version only when a portal, binding plan, or print workflow requires one sheet size.' } },
+      { question: { zh: '混合橫向與直向會讓 PDF 壞掉嗎？', en: 'Does mixing portrait and landscape corrupt a PDF?' }, answer: { zh: '不會。PDF 可以保存不同方向的頁面；問題通常出在檢視、列印或裝訂設定。合併後逐頁預覽並做一張樣張即可發現問題。', en: 'No. PDFs can contain pages with different orientations. Problems usually come from viewing, printing, or binding settings; inspect pages and make one proof after merging.' } },
+      { question: { zh: '怎麼避免合併後頁面被裁切？', en: 'How can I prevent clipping after merging?' }, answer: { zh: '先知道每頁原始尺寸，列印時選符合可列印範圍並先印一頁；尺寸敏感內容則選實際大小並量測。不要只依賴檢視器的自動縮放。', en: 'Know each original size, choose fit to printable area for ordinary pages, and proof one page. Use actual size and measure size-sensitive content instead of trusting automatic viewer scaling.' } },
+    ],
+    cta: {
+      zh: '用合併 PDF 工具先保留原始頁面，再依閱讀或列印需求建立經過樣張驗證的版本。',
+      en: 'Merge PDFs while preserving source pages, then make a proofed version for the actual reading or print requirement.',
+    },
+    updatedAt: '2026-09-03',
     noFaqSchema: true,
   },
 ]; 
