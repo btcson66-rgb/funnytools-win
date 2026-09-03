@@ -801,4 +801,202 @@ export const additionalSeoGuides: SeoGuide[] = [
     updatedAt: '2026-09-03',
     noFaqSchema: true,
   },
+  {
+    id: 'classroom-group-roles-rotation-guide',
+    locales: ['zh', 'en'],
+    slug: 'classroom-group-roles-rotation-guide',
+    title: {
+      zh: '課堂小組角色分工與輪替指南',
+      en: 'Classroom Group Roles and Rotation Guide',
+    },
+    metaTitle: {
+      zh: '小組討論要分哪些角色？主持、記錄、報告與檢查輪替教學',
+      en: 'Classroom Group Roles and Rotation Guide',
+    },
+    metaDescription: {
+      zh: '隨機分組只決定誰和誰一起工作，不會自動分配責任。本指南提供主持、記錄、報告、時間與檢查角色的簡化做法，示範如何依任務輪替並檢查交付，不把角色標籤固定在某位學生身上。',
+      en: 'Assign lightweight roles, rotate them by task, and review the deliverable without fixing labels to students.',
+    },
+    h1: {
+      zh: '小組討論怎麼分工？用角色輪替讓每個人都有明確下一步',
+      en: 'How to Assign Classroom Group Roles and Rotate Them Fairly',
+    },
+    category: { zh: '教學與課堂工具', en: 'Teaching and classroom tools' },
+    priority: 39,
+    searchIntent: {
+      zh: '老師已經完成分組，但學生互相等待或工作集中在一人身上，想找一套簡單的角色分工、輪替與交付檢查方法。',
+      en: 'A teacher has groups but sees waiting or one student doing all the work and needs a simple role, rotation, and deliverable-checking routine.',
+    },
+    targetKeywords: [
+      { zh: '小組角色分工', en: 'classroom group roles' },
+      { zh: '小組角色輪替', en: 'rotate group roles' },
+      { zh: '小組討論主持記錄報告', en: 'facilitator recorder reporter group work' },
+    ],
+    relatedToolIds: ['random-group-generator', 'random-student-picker', 'countdown-timer'],
+    relatedGuideIds: ['classroom-random-group-guide', 'classroom-random-group-no-repeat-guide', 'classroom-timer-guide'],
+    relatedWorkflowIds: ['teacher-classroom-random-toolkit'],
+    summary: {
+      zh: '角色不是給學生貼標籤，而是把這一輪任務的責任說清楚。先用少量角色啟動合作，再依下一次活動輪替，最後檢查作品而不是只檢查誰講得最大聲。',
+      en: 'Roles are temporary responsibilities, not labels. Start with a small set for this task, rotate them next round, and review the work rather than rewarding whoever speaks loudest.',
+    },
+    problem: {
+      zh: '沒有角色時，最快的學生常同時主持、寫答案與報告，其他人只能旁觀；角色太多時，學生又花時間爭論職稱而不是完成任務。若每次都讓同一人當報告者，老師也很難知道其他人是否真正理解。',
+      en: 'Without roles, the fastest student may facilitate, write, and report while others watch. Too many titles create a new negotiation instead of progress. If the same student always reports, a teacher cannot tell whether others understood the work.',
+    },
+    whoShouldUse: {
+      zh: '適合討論、實驗、閱讀理解、問題解決、報告準備與站點活動的國高中、大學小班與社團帶領者。',
+      en: 'Use this for discussions, labs, reading tasks, problem solving, presentations, and station activities in schools, small university classes, or clubs.',
+    },
+    explanation: [
+      {
+        zh: '角色應該描述可觀察的行動，而不是能力或人格。主持人負責讓每人有發言機會並回到題目；記錄者整理共同決定；報告者代表小組說明證據；時間員提醒剩餘時間；檢查者依題目或格式逐項核對。小組只有三人時可以合併時間與檢查，無須硬湊五個職稱。',
+        en: 'Describe observable actions, not ability or personality. A facilitator invites each voice and returns to the prompt; a recorder captures decisions; a reporter explains evidence; a timekeeper signals remaining time; a checker compares the work with the task. With three students, combine time and checking instead of forcing five titles.',
+      },
+      {
+        zh: '分工卡最好寫「完成條件」。例如記錄者不是只負責寫字，而是要留下三個共同理由與一個未解問題；報告者不是背稿，而是指出資料在哪裡。這讓老師和學生都能在活動結束時檢查角色是否真的完成，而不是靠印象評分。',
+        en: 'Write a completion condition for each role. A recorder does more than write: they capture three shared reasons and one open question. A reporter points to the evidence instead of reciting a script. Clear conditions let students and teachers check the role without relying on impressions.',
+      },
+      {
+        zh: 'Vanderbilt Center for Teaching 的 Group Work 指南（https://cft.vanderbilt.edu/guides-sub-pages/group-work/）將小組合作視為需要設計、支援與評量的教學活動。角色能降低「誰來做」的起始摩擦，但不會自動讓小組公平或高效；任務說明、時間、材料與回饋同樣重要。',
+        en: 'Vanderbilt’s Center for Teaching group-work guide (https://cft.vanderbilt.edu/guides-sub-pages/group-work/) treats collaboration as an activity that needs design, support, and assessment. Roles reduce the opening “who does what?” friction, but they do not automatically make a group fair or effective; task directions, time, materials, and feedback still matter.',
+      },
+      {
+        zh: '輪替可以按活動、課堂或小組週期進行。若同一任務只有十分鐘，活動中途換角色可能增加成本；若是四週專題，則每次會議輪替一次並留下簡短紀錄。輪替不代表每人每個角色都必須完全相同時間，而是避免責任長期固定，並讓教師看見不同學生的理解。',
+        en: 'Rotate by activity, lesson, or project meeting. For a ten-minute task, changing roles halfway can cost more than it helps; for a four-week project, rotate at each meeting and keep a short log. Rotation need not give every student identical minutes in every role, but it prevents permanent responsibility and reveals different kinds of understanding.',
+      },
+      {
+        zh: '用隨機抽選器決定第一輪角色可以增加透明度，但要保留學生合理的支援與可及性調整。老師可先產生隨機起點，再確認需要使用不同表達方式、設備或安靜準備時間的學生能完成角色；不要把「隨機」當成拒絕調整的理由。',
+        en: 'A random picker can make the first role assignment transparent, but keep reasonable access and support adjustments. Generate a starting point, then check whether a student needs another way to communicate, equipment, or quiet preparation time. Randomness is not a reason to refuse an adjustment.',
+      },
+    ],
+    steps: [
+      { zh: '先寫出這次任務真正需要的兩到五種行動，不要先列漂亮的職稱。', en: 'List the two to five actions this task actually needs before naming roles.' },
+      { zh: '為每個角色寫一個完成條件，讓學生知道交付長什麼樣子。', en: 'Write one completion condition for each role so the deliverable is visible.' },
+      { zh: '用隨機抽選器或小組共識分配第一輪，保留老師必要的支援調整。', en: 'Assign the first round with a random picker or group agreement, keeping necessary teacher support adjustments.' },
+      { zh: '用倒數計時器切出討論、整理、檢查與報告時間，避免角色失去節奏。', en: 'Use a countdown timer for discussion, synthesis, checking, and reporting so roles have a shared rhythm.' },
+      { zh: '活動結束檢查每個完成條件，讓報告者不成為唯一被看見的人。', en: 'Check every completion condition so the reporter is not the only visible contributor.' },
+      { zh: '保存角色與日期，下一次活動先看歷史再輪替，並記錄缺席或支援調整。', en: 'Save roles and dates, review the history before rotating next time, and note absences or support adjustments.' },
+    ],
+    example: {
+      zh: '四人小組要在 12 分鐘內比較兩種解法。老師只設四個行動：主持、記錄、檢查、報告，並把完成條件寫在投影片上。用抽選器決定第一輪後，倒數計時器提醒剩 4 分鐘時開始檢查。下一堂課同一批學生換角色，老師從紀錄看見原本只報告的學生開始提出證據；這不是保證每人能力相同，而是讓參與機會不被固定。',
+      en: 'A four-person group has twelve minutes to compare two methods. The teacher defines four actions—facilitator, recorder, checker, reporter—and puts completion conditions on the slide. A picker assigns the first round, and the timer signals checking at four minutes remaining. The same students rotate next lesson; the log shows a former reporter beginning to cite evidence. Rotation does not guarantee identical ability, but it prevents visibility from staying fixed.',
+    },
+    commonMistakes: [
+      { zh: '角色太多、定義太抽象，學生記得職稱卻不知道下一步。', en: 'Creating too many abstract titles so students remember labels but not actions.' },
+      { zh: '每次都讓同一位學生主持或報告，卻稱為「合作學習」。', en: 'Letting the same student facilitate or report every time while calling it collaboration.' },
+      { zh: '用隨機抽選結果拒絕必要的支援、可及性或語言調整。', en: 'Using a random result to refuse necessary access, language, or support adjustments.' },
+      { zh: '只評報告者的口頭表現，沒有檢查記錄、證據與共同決定。', en: 'Assessing only the reporter’s speaking and not the notes, evidence, or shared decisions.' },
+      { zh: '沒有記錄輪替日期，下一次又從同一個人開始。', en: 'Keeping no rotation date and assigning the same role again by accident.' },
+    ],
+    faq: [
+      { question: { zh: '小組一定要有五種角色嗎？', en: 'Does every group need five roles?' }, answer: { zh: '不需要。依任務需要設兩到五種可觀察行動即可；三人小組可以合併時間與檢查，重點是責任清楚。', en: 'No. Use two to five observable actions that fit the task. A three-person group can combine timekeeping and checking; clarity matters more than titles.' } },
+      { question: { zh: '角色要每堂課都換嗎？', en: 'Must roles change every lesson?' }, answer: { zh: '看任務長度與熟悉度。短活動可每次換，長專題可每次會議換；若中途換角色會打斷工作，就在下一個活動輪替並留下紀錄。', en: 'It depends on task length and familiarity. Rotate short activities each round and longer projects each meeting; if mid-task changes interrupt work, rotate next activity and log it.' } },
+      { question: { zh: '可以用隨機工具分配角色嗎？', en: 'Can a random tool assign roles?' }, answer: { zh: '可以當透明起點，但老師仍要檢查支援、可及性與任務需求。公開「隨機起點加教師審查」比宣稱完全隨機更準確。', en: 'Yes, as a transparent starting point, while the teacher checks support, access, and task needs. “Random start plus teacher review” is more accurate than claiming fully random.' } },
+    ],
+    cta: {
+      zh: '先用隨機分組工具建立小組，再以抽選器、倒數計時器與角色完成條件讓每個人都有可檢查的下一步。',
+      en: 'Create groups first, then use a picker, countdown timer, and role completion conditions to give everyone a reviewable next step.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'seating-chart-changeover-routine-guide',
+    locales: ['zh', 'en'],
+    slug: 'seating-chart-changeover-routine-guide',
+    title: {
+      zh: '換座位表的現場執行流程',
+      en: 'Classroom Seating Chart Changeover Routine',
+    },
+    metaTitle: {
+      zh: '換座位怎麼不混亂？座位表公告、標記、動線與課後檢查流程',
+      en: 'Seating Chart Changeover Routine',
+    },
+    metaDescription: {
+      zh: '新座位表畫好不代表換位完成：本指南整理公告時機、姓名標記、分批移動、通道檢查、設備與缺席處理，並教你用座位表工具保存版本，降低學生走錯位或課堂中斷。',
+      en: 'Plan announcements, movement batches, aisle checks, equipment, and absences, then save a dated seating-chart version.',
+    },
+    h1: {
+      zh: '換座位表怎麼執行？讓學生移動、找位與課堂恢復都有步驟',
+      en: 'How to Run a Seating Chart Changeover Without Derailing Class',
+    },
+    category: { zh: '教學與課堂工具', en: 'Teaching and classroom tools' },
+    priority: 40,
+    searchIntent: {
+      zh: '老師已經排好新座位，但擔心公告、搬動、缺席與設備調整造成混亂，想找一套可在一堂課內完成的換位流程。',
+      en: 'A teacher has a new seating chart but needs a practical in-class routine for announcing it, moving students, handling absences and equipment, and restoring the lesson.',
+    },
+    targetKeywords: [
+      { zh: '換座位流程', en: 'seating chart changeover routine' },
+      { zh: '座位表公告怎麼做', en: 'how to announce a new seating chart' },
+      { zh: '教室換座位不混亂', en: 'classroom seat change without chaos' },
+    ],
+    relatedToolIds: ['seating-chart', 'countdown-timer', 'random-student-picker'],
+    relatedGuideIds: ['seating-chart-strategies-guide', 'seating-chart-student-needs-intake-guide', 'classroom-timer-guide'],
+    relatedWorkflowIds: ['teacher-classroom-random-toolkit'],
+    summary: {
+      zh: '換位是一次小型現場作業：先讓學生知道目的與順序，再分批移動、檢查通道與設備，最後保存日期版本，下一堂課才不會一直重問「我坐哪裡」。',
+      en: 'A seat change is a small operations task: explain the purpose and order, move in batches, check aisles and equipment, and save a dated version so the next lesson starts clearly.',
+    },
+    problem: {
+      zh: '老師常在下課前宣布「下節課換座位」，卻沒有標記、移動順序或缺席處理。結果學生圍在座位表前、桌椅撞在一起、投影或插座被換掉，下一節課前幾分鐘都在找位子。',
+      en: 'A teacher may announce “new seats next lesson” without labels, movement order, or an absence plan. Students crowd around the chart, desks collide, projector or power access changes, and the first minutes of the next lesson disappear into seat-finding.',
+    },
+    whoShouldUse: {
+      zh: '適合學期初、每月輪換、課型變更、考試後重新編組，以及需要讓代課老師快速接手的班級。',
+      en: 'Use this at the start of term, during scheduled rotations, after exams, when the lesson format changes, or when a substitute needs a clear handoff.',
+    },
+    explanation: [
+      {
+        zh: '先在課前產生並保存座位表版本，標示日期與使用情境。公開版可以是投影、紙本或每桌的小卡，但不要只依賴一張拍照後會反光的牆面表；讓學生能在自己的位置附近找到姓名，也能在需要時詢問老師。',
+        en: 'Generate and save a dated seating version before class, including the reason or lesson context. The public copy can be projected, printed, or shown on desk cards, but do not rely on one glare-prone wall chart; students need a nearby way to find their place and ask for help.',
+      },
+      {
+        zh: '把換位拆成可預測的批次，例如先搬靠窗一側、再搬靠門一側，或按座號區塊依序移動。每批只在上一批坐定、通道恢復後開始，避免全班同時起身。倒數計時器可以提醒剩餘時間，但不能取代老師口頭確認。',
+        en: 'Break the move into predictable batches, such as window side then door side, or numbered zones. Start the next batch only after the previous one is seated and the aisle is clear; a countdown timer can signal time but cannot replace a teacher check.',
+      },
+      {
+        zh: '換位前先處理固定設備與可及性需求：投影視線、桌面電源、輪椅或助行器轉身空間、教師走動線和需要安靜準備的位置。若缺席者未到，不要讓全班自行猜測是否補位；先保留該位置，課後再依教師紀錄調整。',
+        en: 'Before moving, check projector sight lines, desk power, turning space for mobility aids, teacher circulation, and low-distraction preparation areas. If someone is absent, do not let the class guess whether to fill the seat; hold the place and adjust from the private teacher record later.',
+      },
+      {
+        zh: '公告內容只說明學生需要知道的規則，例如「先拿個人物品、依區域移動、坐定後舉手」。不要在全班面前解釋某位學生為何被安排到某處。CAST UDL Guidelines（https://udlguidelines.cast.org/）鼓勵降低不必要的環境障礙；清楚流程與替代詢問方式能讓換位更可預期。',
+        en: 'Announce only the rules students need: take personal items first, move by zone, and raise a hand after sitting. Do not explain in front of the class why one student is placed somewhere. CAST’s UDL Guidelines (https://udlguidelines.cast.org/) support reducing unnecessary environmental barriers; a clear routine and a private way to ask make the move more predictable.',
+      },
+      {
+        zh: '完成後用一分鐘做「現場驗收」：姓名與座位相符、通道暢通、桌椅沒有擋住門或設備、學生知道下一堂課仍沿用哪一版。把需要微調的地方寫下來，下一次更新座位表時才有依據，而不是靠記憶重新排一次。',
+        en: 'Finish with a one-minute acceptance check: names match seats, aisles are clear, desks do not block doors or equipment, and everyone knows which version applies next lesson. Write down small adjustments so the next chart is based on evidence rather than memory.',
+      },
+    ],
+    steps: [
+      { zh: '用座位表工具保存帶日期的新版本，先核對固定物、設備與必要限制。', en: 'Save a dated version with the seating tool and verify fixed features, equipment, and hard constraints.' },
+      { zh: '在課前公告目的、移動區域、個人物品與坐定後的確認方式。', en: 'Announce the purpose, movement zones, personal items, and the seated confirmation method before moving.' },
+      { zh: '依區域或座號分批移動，每批完成後清空通道再開始下一批。', en: 'Move by zone or number in batches, clearing the aisle after each batch.' },
+      { zh: '缺席者保留位置，不公開原因；設備或可及性問題交由老師私下調整。', en: 'Hold absent students’ places without public reasons and handle equipment or access changes privately.' },
+      { zh: '全班坐定後用姓名、門口、投影、插座與教師動線快速驗收。', en: 'After everyone sits, check names, doors, projector, outlets, and teacher circulation.' },
+      { zh: '把交換、缺席與現場摩擦記在版本旁，下一次換位先讀紀錄。', en: 'Record swaps, absences, and friction beside the version and review it before the next change.' },
+    ],
+    example: {
+      zh: '老師要在週一把 32 人班級換成討論用分組島。週五先用座位表工具輸出帶日期版本，標出門、投影和保留通道；週一開課前說明「先收好物品、後排兩區移動、坐定舉手」。學生依窗側與門側分批換位，缺席者位置保留，最後老師檢查投影視線與走動線。全程花 6 分鐘，課後把兩個反光位置記在版本旁，下一次直接調整。',
+      en: 'A teacher changes a class of 32 into discussion islands on Monday. On Friday, they save a dated chart with the door, projector, and clear aisle marked. Before class, students hear “pack items, move by two zones, raise a hand when seated.” Window and door zones move in batches, absent seats stay open, and the teacher checks sight lines and circulation. The move takes six minutes; two glare-prone seats are logged for the next version.',
+    },
+    commonMistakes: [
+      { zh: '只公布新座位表，沒有說明移動順序與坐定後怎麼確認。', en: 'Publishing the chart without a movement order or seated confirmation method.' },
+      { zh: '讓全班同時搬桌椅，通道與門口變成瓶頸。', en: 'Moving every desk at once and turning aisles and doors into bottlenecks.' },
+      { zh: '缺席者位置由同學自行補位，下一堂課又無法追查版本。', en: 'Letting classmates fill absent seats and losing track of the next version.' },
+      { zh: '在公開場合解釋個別學生的座位原因或敏感需求。', en: 'Explaining an individual student’s placement or sensitive need publicly.' },
+      { zh: '換完只看姓名有沒有坐對，沒有檢查投影、插座、門與教師動線。', en: 'Checking names only and missing the projector, outlets, doors, or teacher circulation.' },
+    ],
+    faq: [
+      { question: { zh: '換座位一定要花一整節課嗎？', en: 'Does a seating change take a whole lesson?' }, answer: { zh: '不一定。事前把版本、公告和分區順序準備好，常可在幾分鐘內完成；班級大小、桌型與設備會影響實際時間，仍要預留驗收。', en: 'No. Preparing the version, announcement, and zones beforehand can make it take minutes. Class size, desks, and equipment change the time, so reserve a final check.' } },
+      { question: { zh: '缺席學生的座位要先給別人坐嗎？', en: 'Should an absent student’s seat be given away?' }, answer: { zh: '通常先保留，避免全班形成未記錄的臨時版本。若課堂確實需要調整，老師私下記下變更，下一次再依實際名單更新。', en: 'Usually hold it to avoid an unlogged temporary version. If the lesson requires a change, the teacher should record it privately and update the chart from actual attendance next time.' } },
+      { question: { zh: '要不要把座位表拍照傳到班級群組？', en: 'Should I photograph the chart in a class group chat?' }, answer: { zh: '先看學校政策與學生隱私。能用投影、紙本或受控平台就不要擴散；公開版本只放完成課堂所需的最少資訊。', en: 'Follow school policy and privacy rules. Prefer projection, paper, or a controlled platform over broad sharing; the public version should contain only what the class needs.' } },
+    ],
+    cta: {
+      zh: '用座位表工具保存版本，按區域分批移動，最後驗收通道、設備與姓名，讓換位不再打斷整堂課。',
+      en: 'Save a dated chart, move by zones, and check aisles, equipment, and names so the change does not derail the lesson.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
 ]; 

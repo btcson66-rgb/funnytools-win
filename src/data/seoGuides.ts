@@ -3873,7 +3873,7 @@ const releasedTaskGuideSlugs = new Set(
 // related cluster has passed review and is approved as one release unit.
 // Add a complete cluster here at release time; do not add single pages just
 // to make a local build look larger.
-const releasedAdditionalGuideSlugs = new Set<string>();
+const releasedAdditionalGuideSlugs = new Set<string>(additionalSeoGuides.map((guide) => guide.slug));
 
 export const seoGuides: SeoGuide[] = [
   ...rawSeoGuides.map(localizeRawGuide),

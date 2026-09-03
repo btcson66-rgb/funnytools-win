@@ -180,7 +180,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/guides/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/" />
@@ -211,6 +211,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/bar-chart-school-report-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/en/guides/classroom-group-roles-rotation-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/classroom-group-roles-rotation-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/classroom-group-roles-rotation-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-group-roles-rotation-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/en/guides/classroom-lottery-tool-guide/</loc>
     <lastmod>2026-06-26</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/classroom-lottery-tool-guide/" />
@@ -225,6 +232,13 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/classroom-random-group-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/grupos-aleatorios-clase/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-random-group-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/classroom-random-group-no-repeat-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/classroom-random-group-no-repeat-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/classroom-random-group-no-repeat-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-random-group-no-repeat-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/en/guides/classroom-random-picker-guide/</loc>
@@ -259,12 +273,33 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-compression-email-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/en/guides/merge-pdf-page-size-orientation-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/merge-pdf-page-size-orientation-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/merge-pdf-page-size-orientation-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/merge-pdf-page-size-orientation-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/en/guides/merge-pdf-private-guide/</loc>
     <lastmod>2026-07-17</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/merge-pdf-private-guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/merge-pdf-private-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/unir-pdf-sin-subir-archivos/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/merge-pdf-private-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/pdf-to-image-multipage-download-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-image-multipage-download-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-image-multipage-download-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-image-multipage-download-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/pdf-to-image-resolution-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-image-resolution-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-image-resolution-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-image-resolution-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/en/guides/percentage-shortcuts-guide/</loc>
@@ -291,12 +326,47 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/photos-to-pdf-phone-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/en/guides/qr-code-before-print-testing-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-before-print-testing-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-before-print-testing-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-before-print-testing-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/en/guides/qr-code-classroom-guide/</loc>
     <lastmod>2026-07-22</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-classroom-guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-classroom-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/codigos-qr-en-el-aula/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-classroom-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/qr-code-mobile-landing-page-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-mobile-landing-page-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-mobile-landing-page-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-mobile-landing-page-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/qr-code-payload-length-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-payload-length-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-payload-length-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-payload-length-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/seating-chart-changeover-routine-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/seating-chart-changeover-routine-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/seating-chart-changeover-routine-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/seating-chart-changeover-routine-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/seating-chart-student-needs-intake-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/seating-chart-student-needs-intake-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/seating-chart-student-needs-intake-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/seating-chart-student-needs-intake-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/en/guides/spss-levene-test-guide/</loc>
@@ -485,7 +555,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/character-counter/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/character-counter/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/character-counter/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/contador-caracteres/" />
@@ -520,7 +590,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/countdown-timer/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/countdown-timer/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/countdown-timer/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/temporizador-online/" />
@@ -608,7 +678,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/group-generator/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/group-generator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/group-generator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-grupos-clase/" />
@@ -617,7 +687,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/image-compressor/</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-compressor/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/image-compressor/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/comprimir-imagenes/" />
@@ -635,7 +705,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/image-resizer/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-resizer/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/image-resizer/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/redimensionar-imagen/" />
@@ -740,7 +810,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/merge-pdf/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/merge-pdf/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/merge-pdf/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/unir-pdf/" />
@@ -793,7 +863,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/pdf-compressor/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pdf-compressor/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/pdf-compressor/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/comprimir-pdf/" />
@@ -802,7 +872,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/pdf-page-reorder/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pdf-page-reorder/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/pdf-page-reorder/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/ordenar-paginas-pdf/" />
@@ -818,7 +888,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/pdf-to-image/</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/pdf-to-image/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/pdf-to-image/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-pdf-a-imagen/" />
@@ -861,7 +931,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/png-to-jpg/</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/png-to-jpg/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/png-to-jpg/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-png-a-jpg/" />
@@ -879,7 +949,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/qr-code-generator/</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/qr-code-generator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/qr-code-generator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/generador-codigo-qr/" />
@@ -897,7 +967,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/random-name-picker/</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/random-name-picker/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/random-name-picker/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/sorteo-nombres-aleatorio/" />
@@ -969,7 +1039,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/seating-chart/</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/seating-chart/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/seating-chart/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-plano-asientos-aula/" />
@@ -1066,7 +1136,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/url-encoder/</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/url-encoder/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/url-encoder/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/codificar-decodificar-url/" />
@@ -1137,7 +1207,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/workflows/creator-social-toolkit/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/creator-social-toolkit/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/creator-social-toolkit/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/contenido-redes-sociales/" />
@@ -1145,7 +1215,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/workflows/daily-decision-toolkit/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/daily-decision-toolkit/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/daily-decision-toolkit/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/decisiones-cotidianas/" />
@@ -1153,7 +1223,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/workflows/graduate-statistics-report-toolkit/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/graduate-statistics-report-toolkit/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/graduate-statistics-report-toolkit/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/informe-estadistico-investigacion/" />
@@ -1161,7 +1231,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/workflows/office-document-toolkit/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/office-document-toolkit/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/office-document-toolkit/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/documentos-oficina/" />
@@ -1169,7 +1239,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/workflows/student-report-toolkit/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/student-report-toolkit/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/student-report-toolkit/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/entrega-informe-estudiantil/" />
@@ -1177,7 +1247,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/workflows/teacher-classroom-random-toolkit/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/teacher-classroom-random-toolkit/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/teacher-classroom-random-toolkit/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/actividades-aleatorias-aula/" />
@@ -1185,7 +1255,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/workflows/teacher-exam-score-toolkit/</loc>
-    <lastmod>2026-06-26</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/workflows/teacher-exam-score-toolkit/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/teacher-exam-score-toolkit/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/calcular-nota-oposicion-docente/" />

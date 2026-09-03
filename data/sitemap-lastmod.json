@@ -1,8 +1,8 @@
 {
   "https://funnytools.win/": {
-    "hash": "fb7627b1a6f66e6fafbf16da4623ae485e7e59125343d90b98267a9280aa3a4c",
+    "hash": "14fac6d002622469c19ad13bd42543c1af4cc02fb99a51ea28e061b53b0d0693",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/about-tools/": {
     "hash": "39b398d468e86272e4e5c95ef1db29745fca71d7d418d9565254034c98bc7152",
@@ -25,9 +25,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/category/image/": {
-    "hash": "8ddbc61e72bf3e21a2bbdd30f5f0593899dcd3760433d28731202a542ea96eba",
+    "hash": "796867c9cc1acc63a801afead94e585402323a4c05ef6aca28223c0003a5b178",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/category/money/": {
     "hash": "d1dc590d4c53ebb819e7c07d61cf47cd5d53520b5d8d7b483ac4b85cef14b4a9",
@@ -45,14 +45,14 @@
     "lastmod": "2026-08-01"
   },
   "https://funnytools.win/category/statistics/": {
-    "hash": "9b6e278a3816df2733eff8349cef38f67745696cc45d7c7e334819acb179e4a3",
+    "hash": "fff3705f7504c637a003a4e97e4f59f0237001daf21e767ca764d8a2de4e3bf7",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/category/study/": {
-    "hash": "b4c3603e2748f8ba9cd48279888c37e3e46401eeb18f6aa3daac93769465e86d",
+    "hash": "374df21842ec05fc6213a8c01a60408e682f2dacbc3c288ecdc1025aaec032bb",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/category/text/": {
     "hash": "5486b9f43aa34204752bd8628d69389cd796f66699f72cf02b9507010b024d4b",
@@ -75,9 +75,9 @@
     "lastmod": "2026-06-17"
   },
   "https://funnytools.win/education-statistics/": {
-    "hash": "16ee1496c4a5ee3196a71dc45bc0ab0f59b1cfb604347ec22249d57ec6114403",
+    "hash": "ebccec73ac64517e11a4f5474cfd2be0eb3bb648e99603221e0e8b8499e4d5fb",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/": {
     "hash": "994a3e8c0a49088b8f1009db282308cbe7da908d697b7169b3c7e5e3ac202d00",
@@ -190,114 +190,164 @@
     "lastmod": "2026-06-26"
   },
   "https://funnytools.win/en/guides/": {
-    "hash": "045c8da720b5bb505e518583e25c702d9c2f347cd8108d2b674a4f9e36b64070",
+    "hash": "2a51e39af87cf766bff4198e713de1fcf34a91f482400c9ad5f7f1220c29dc8a",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/guides/a4-vs-us-letter-printing-guide/": {
-    "hash": "5b00b6261f31239694f22c1048b5dd93c91042a2fe8f47053054fbbac73c2f68",
-    "hashVersion": 4,
-    "lastmod": "2026-09-02"
-  },
-  "https://funnytools.win/en/guides/anova-apa-format-guide/": {
-    "hash": "ed77a84937bd931865a52b16be9b1d7be1ea9abd952039388e90d80e9d45eb96",
-    "hashVersion": 4,
-    "lastmod": "2026-08-01"
-  },
-  "https://funnytools.win/en/guides/bar-chart-school-report-guide/": {
-    "hash": "626ab4edfd4f934d66915f2f47bd6cc7d7aa77905f1f40bf9e5e73c778c3def0",
-    "hashVersion": 4,
-    "lastmod": "2026-08-01"
-  },
-  "https://funnytools.win/en/guides/classroom-lottery-tool-guide/": {
-    "hash": "024a1b08e06e3ee33c51d217f24931590e5e45b53c48b1ee269658119e8a1c87",
-    "hashVersion": 4,
-    "lastmod": "2026-08-01"
-  },
-  "https://funnytools.win/en/guides/classroom-random-group-guide/": {
-    "hash": "abd4e54703fcf59c887c58cd512aef5f9dc0161c5215bd87f4a78d46a66e7560",
-    "hashVersion": 4,
-    "lastmod": "2026-08-01"
-  },
-  "https://funnytools.win/en/guides/classroom-random-picker-guide/": {
-    "hash": "8e4f1e4e1e7d604c27c3486ce31f3ce7fdfd6d1102a6ee09a560166eebc03e15",
-    "hashVersion": 4,
-    "lastmod": "2026-08-01"
-  },
-  "https://funnytools.win/en/guides/classroom-timer-guide/": {
-    "hash": "ac67b450c42edf4aca9ecab03dcb7287c1a6b7a39944058a62057415d2067e89",
-    "hashVersion": 4,
-    "lastmod": "2026-08-01"
-  },
-  "https://funnytools.win/en/guides/fair-student-grouping-guide/": {
-    "hash": "f0b49e71201d9fa03389ebd3b95506553a979d0a6532ba0f1d0e12d959f071d1",
-    "hashVersion": 4,
-    "lastmod": "2026-08-01"
-  },
-  "https://funnytools.win/en/guides/image-compression-email-guide/": {
-    "hash": "9b3ad838314fc23278d34eb46a95cf9eb9c33402c5d0419cb62dc5c1f88f128b",
+    "hash": "4c52a8f8eeffd47c4268f9667ba428e2ed58e0c97a321fbc80669722c203b20a",
     "hashVersion": 4,
     "lastmod": "2026-07-18"
   },
-  "https://funnytools.win/en/guides/merge-pdf-private-guide/": {
-    "hash": "6b8158ed4429cb7c4d8a413caf49e09f885ea50e0c1cf00cd877a3e55e2755a1",
+  "https://funnytools.win/en/guides/anova-apa-format-guide/": {
+    "hash": "e4dbb7536444d3a823713f05c6dd0d03bc97b726ff88d6e8ab0cd23c1a3e1694",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-06-25"
+  },
+  "https://funnytools.win/en/guides/bar-chart-school-report-guide/": {
+    "hash": "14d361e04b9c57c408cf00e0bfdadea41ea8971f51272a37bd7a705470e326a7",
+    "hashVersion": 4,
+    "lastmod": "2026-07-21"
+  },
+  "https://funnytools.win/en/guides/classroom-group-roles-rotation-guide/": {
+    "hash": "95f9f81ad230523683bf76fc18c1fa0791cb48efbb21c36c5c0f60488650a7e8",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/classroom-lottery-tool-guide/": {
+    "hash": "a3c6bf3b96c4d92168a625fcb033a3ffb2291130632cc0cb6603e8dbf8af0892",
+    "hashVersion": 4,
+    "lastmod": "2026-06-26"
+  },
+  "https://funnytools.win/en/guides/classroom-random-group-guide/": {
+    "hash": "8b194966b01a0e9998908446c71fe6003aea5ca41b0fe6851231cb4b77f285ab",
+    "hashVersion": 4,
+    "lastmod": "2026-06-26"
+  },
+  "https://funnytools.win/en/guides/classroom-random-group-no-repeat-guide/": {
+    "hash": "50c21738abd20bbe0aeaa985bb39cccb3e263b65d892dd85f06b56fe821799d3",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/classroom-random-picker-guide/": {
+    "hash": "4cd595f88564bb5222039250f25f50f1ab3104b8aa7d92b5aed8fec450091257",
+    "hashVersion": 4,
+    "lastmod": "2026-06-26"
+  },
+  "https://funnytools.win/en/guides/classroom-timer-guide/": {
+    "hash": "93bda570b1f6dc5dbb8d9687fcd04d8d635303eb04c7fcc0cb441accb17fe65e",
+    "hashVersion": 4,
+    "lastmod": "2026-06-26"
+  },
+  "https://funnytools.win/en/guides/fair-student-grouping-guide/": {
+    "hash": "28a8dd7c175ac044b217e223e26fe92edd4efe5a266456db820f0c6edb578206",
+    "hashVersion": 4,
+    "lastmod": "2026-06-26"
+  },
+  "https://funnytools.win/en/guides/image-compression-email-guide/": {
+    "hash": "caf33c36669d966a787649465cc794c9944d3d51aa9bcd9ecaa728bff1b2d084",
+    "hashVersion": 4,
+    "lastmod": "2026-07-20"
+  },
+  "https://funnytools.win/en/guides/merge-pdf-page-size-orientation-guide/": {
+    "hash": "e44cceadbc685d000b33610c100f1924d3878cc9a18919d5eaea98e5efa3a759",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/merge-pdf-private-guide/": {
+    "hash": "4ddf58062267d781cf16e0ed8653e788b81ed327fa6760646e433c736fa3647b",
+    "hashVersion": 4,
+    "lastmod": "2026-07-17"
+  },
+  "https://funnytools.win/en/guides/pdf-to-image-multipage-download-guide/": {
+    "hash": "430acfe9b08cb4fbc2071885b2299563ba53918d244254dd08f3fc7a89aab31a",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/pdf-to-image-resolution-guide/": {
+    "hash": "2e44eaa801189702ae821ffe3f942b7719a1a1332dd929e86a22abfd0acd8324",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/guides/percentage-shortcuts-guide/": {
-    "hash": "b26a4033b43d505ca650d6f05ea872e12668d724f57f7410afbca2d51d879ca9",
+    "hash": "eabbb649108c84dec6b103b2211629139d5a168999d8933b32a232af3b486a7b",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-07-23"
   },
   "https://funnytools.win/en/guides/percentile-rank-guide/": {
-    "hash": "942e247e38222ffb50dcbf26f475aedd1ef850c2104364dbb72abf04d9b85278",
+    "hash": "8e6dc3366e1772ca4c6ca99c8be97f399f02495a8c43fcc74f826573fb4fee6f",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/en/guides/photos-to-pdf-phone-guide/": {
-    "hash": "c7f9649d613ef13853a558d4b624533df6cbf1ae5bb453bd4a8c82546e537913",
+    "hash": "1339dc2408c85f262182cecb04ecdffff3bed311161a2c3604e4d0ad44df74da",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-07-24"
+  },
+  "https://funnytools.win/en/guides/qr-code-before-print-testing-guide/": {
+    "hash": "5b8ae1a172ba901141ac11845a437f23b7665a6c0edb0d85a1e0fed64f343c3c",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/guides/qr-code-classroom-guide/": {
-    "hash": "f2bf059905175ae1fbc66b160a23cc2a93f2dd89a50a6f7581db227616825382",
+    "hash": "e76b2be7c0236d71651de887fb313167a8e6ff3e766141610b924553f5d9d445",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-07-22"
+  },
+  "https://funnytools.win/en/guides/qr-code-mobile-landing-page-guide/": {
+    "hash": "3978d41b860962faa9b0d99bffbe2f5e24d53f9dffe7e74b071627f09369749b",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/qr-code-payload-length-guide/": {
+    "hash": "346f20a0788af66044a443bb90896a6ba08b85895a3c00d714cba02b06c5a634",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/seating-chart-changeover-routine-guide/": {
+    "hash": "a8f120a4fd0d27a604745153309a587dd95da9d7b2f2d31ec14c1ae578a3f0ec",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/seating-chart-student-needs-intake-guide/": {
+    "hash": "56f903f2e65cd88550b85216ffc5e0d365b419af31e29f0232be3682275cf0df",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/guides/spss-levene-test-guide/": {
-    "hash": "4e634701f951ab948d2462fef825e1afa02dddd2b491e35b62bcf11654046796",
+    "hash": "3b61bf99f692722d9ef4a9b7d210c37c760d6ed64425ff5b6a10ce505a15abfa",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/en/guides/t-score-calculator-guide/": {
-    "hash": "c03d169bbed2ef61c076e2eeabb2844efa7b646814af2f3ac7df0501d5758969",
+    "hash": "02fc6fa2d18fb7ea005331ce3d68ece5d007e5f6e103267cc5d5e66653cd8c55",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/en/guides/t-test-apa-format-guide/": {
-    "hash": "105c1a4f2601a988369a86c2219c0278f5f846a328a0ea255df1e7e92d0f854e",
+    "hash": "0d9e481da0d5c5154f9faa21708440526efbe21f74d51f17ba4063cd8c7f145d",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/en/guides/teacher-exam-weighted-score-guide/": {
-    "hash": "db2f44db44ad990e6c6533cfaa5fe82053b2a764923e8fa5fcb00b14cc27fcf3",
+    "hash": "fe1973ab97724343964d50a9b20a58daf691e0fc53771daf12a8c4880270baf4",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/en/guides/two-way-anova-interaction-guide/": {
-    "hash": "25b1e60e57cd4a66b2fd8a42961494a3419719fd3bda4cd3076bd47adc4bdd39",
+    "hash": "a2b96e1a95d9cd014ddbbbaa23d8bc4190f1aa5f75a83bbdebb5aa1bd3ba3439",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/en/guides/word-count-essay-limits-guide/": {
-    "hash": "1f51781045a629ba395ce2660b527766587b9ba1a409b363e23dbe5588896a6c",
+    "hash": "414eca82ac1827c2aa861e9f47ac1228fd858d4d78457ae6cb2e68cf21b852c6",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-07-19"
   },
   "https://funnytools.win/en/guides/z-score-calculator-guide/": {
-    "hash": "cd13fcc8c767e2692c008b4da618ab547247c1d47d8a5b0dd878a2dcbadf7d6c",
+    "hash": "166fb374a8a4da3fa6615b7d9c95b97a2364092cf63b08657012ac9f75edcf43",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/en/privacy/": {
     "hash": "816c6ef55a210adecb187085d678cf9f3d770c356ae68d4c690aeb2599a31562",
@@ -375,9 +425,9 @@
     "lastmod": "2026-07-31"
   },
   "https://funnytools.win/en/tools/character-counter/": {
-    "hash": "bbaf7e4378f06ac660b99de3532cba75ffff247602a160fd3028ee9dde7455e1",
+    "hash": "c73fb11b6f53bdc0f7658288d9a9ca2190df9626455ae90121f5eb020aa5ef85",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/class-rank-percentile-calculator/": {
     "hash": "2aeb28332a3f44ff1c6187fed43b567ce8e3e12ca4c410e7189cd7421d142530",
@@ -395,9 +445,9 @@
     "lastmod": "2026-06-23"
   },
   "https://funnytools.win/en/tools/countdown-timer/": {
-    "hash": "f91c8201710edf4f6de883cae6f9e851d3cf1b5cfae60191a263ac3fd24dd9b5",
+    "hash": "c56819eed69bfa26e92aeb6d0d9bb5362609649cf680cc696f15707d0da71318",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/cronbach-alpha-calculator/": {
     "hash": "7a2eab34aad9e94abbe34a4a9269d8a03a7e607f0a5b1acc715f15240f400952",
@@ -445,14 +495,14 @@
     "lastmod": "2026-08-03"
   },
   "https://funnytools.win/en/tools/group-generator/": {
-    "hash": "8e6bb4a5b4da4f60dcd01d268d86d5d832a1e46366c108c4106e75b36af75ee3",
+    "hash": "e395530715d06716cf03d129eafef4ed80ac51a8b77fa2aa49f6f3e303386195",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/image-compressor/": {
-    "hash": "003b31482e739f0850fa0cfaddf9b272eacc5efbd3c3fe4208f624111851b532",
+    "hash": "20ac6e8433e37b5b22080222567b1d778cbf9d7dc4b2ba6a1221d757d21b6ac0",
     "hashVersion": 4,
-    "lastmod": "2026-07-31"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/image-crop/": {
     "hash": "15a1bf079db5356395a2d00d0238e7eadc05657fc94551ae35e257191fa0d01a",
@@ -460,9 +510,9 @@
     "lastmod": "2026-07-31"
   },
   "https://funnytools.win/en/tools/image-resizer/": {
-    "hash": "a83be7b2f3787bf5ef2043e96f13163923a642f8638a9e9e044a77ef4d1bd5cf",
+    "hash": "31a5c6e2e44a499ac3a8885e1b2ab1835ed7d665f9098ce37ab64f7857b9d517",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/image-rotate-flip/": {
     "hash": "6c98cc20e4fb0f41dde4130084eaeb4e7803c80e92af7b9fae19fb0da2e7b278",
@@ -520,9 +570,9 @@
     "lastmod": "2026-07-31"
   },
   "https://funnytools.win/en/tools/merge-pdf/": {
-    "hash": "8ce2e64b8eb914469f53b1df7068bd0849af664eff8440e60445bedd177b4bc6",
+    "hash": "8e0d6e5eb7a3b5d32387d34b57a465f9e9bfa97b6d75f9bac41d5cc8d5071d42",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/mortgage-payment/": {
     "hash": "e366c013bf609a42c3e53a1899b0025373d7bc64b2e8c41dd5f975e9910e4155",
@@ -550,14 +600,14 @@
     "lastmod": "2026-07-31"
   },
   "https://funnytools.win/en/tools/pdf-compressor/": {
-    "hash": "c6a73c208ba0ebbfd489f3a72f81e09efc21d8d0465c95bba290570b479f04ee",
+    "hash": "0bd3ad3160bfb7d85da35bbcce5967bf9c339479af103a859c8c765d3dd808b4",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/pdf-page-reorder/": {
-    "hash": "adcdb3b2082fffee1ec48065da2ebda971d602cd8e15d133b38d84b7c992f483",
+    "hash": "7bdf5ece023cfafeac92c38d3701361451db0a8f8f177471538eac980612c0f4",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/pdf-table-to-excel/": {
     "hash": "7ad0203d73b70ff3f8d71e1a9c5602a9085d671d7fde878f25fecd92a10e070d",
@@ -565,9 +615,9 @@
     "lastmod": "2026-08-30"
   },
   "https://funnytools.win/en/tools/pdf-to-image/": {
-    "hash": "be62794d778db003ac109f2569ea69f266e1f9c61314509a803f10a2f0c1adeb",
+    "hash": "2943c12733030cea73196d2c5e4c5438d03f6685a83e98f4a225f64b457b9c57",
     "hashVersion": 4,
-    "lastmod": "2026-06-23"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/pdf-to-word/": {
     "hash": "bbeb6bbaf8011bf9c2f83e39b663894eaf8ad3a70ae1a617d58ee0a5a0a3a2cb",
@@ -590,9 +640,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/en/tools/png-to-jpg/": {
-    "hash": "ae365d0063f1f667f07ec747997afb7bf8bcfdd86fcc3b478099e8523c4a1ed7",
+    "hash": "3e3fe3a1fd6c5430540f977c8813a82ecc35ab8af1a20f09af396a7207b7a5b5",
     "hashVersion": 4,
-    "lastmod": "2026-07-31"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/pomodoro-timer/": {
     "hash": "dda2c9f42eb5fe3d217ea8eb0711ac354501e32f47a90af84d0e6e106054ea07",
@@ -600,9 +650,9 @@
     "lastmod": "2026-07-07"
   },
   "https://funnytools.win/en/tools/qr-code-generator/": {
-    "hash": "e953b3655ca2acb7982716ebeb58a95adc9538329aa9b075278c8afb05e43f0a",
+    "hash": "845599f94b7bf044e2ef1a8ce53b63a8052c190bd65a37c59f714fb265454129",
     "hashVersion": 4,
-    "lastmod": "2026-07-13"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/random-group-generator/": {
     "hash": "e18be392b8fb8dc60eadd6e1a028467e3eea286b097edb9d475cf30b13d901b1",
@@ -610,9 +660,9 @@
     "lastmod": "2026-07-27"
   },
   "https://funnytools.win/en/tools/random-name-picker/": {
-    "hash": "385c62457951c89ae40dc740b5a037755ab54ae078d73f8c3477db58f84ce409",
+    "hash": "ba064bb77cc0fe7c94f8c79f7f7a4d93329a00f5897956bd37ce719d4c905e82",
     "hashVersion": 4,
-    "lastmod": "2026-08-03"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/random-number-picker/": {
     "hash": "c8f72d6dbd3bcb808d054fdcf1a7198fa48f20472544b8eec3024ddf966721d0",
@@ -650,9 +700,9 @@
     "lastmod": "2026-07-10"
   },
   "https://funnytools.win/en/tools/seating-chart/": {
-    "hash": "02f0b4e65948aee5b17b3f511dd9bbc514ce4e94c746e3d517f8cd07e07e7c22",
+    "hash": "3763a4ae31d3cd52c0e8d01f28e59472bac239d16782d3015a1fec88f2a7db9e",
     "hashVersion": 4,
-    "lastmod": "2026-07-31"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/sketchpad/": {
     "hash": "6a8592d3c71c417bf2c310ec3983ec944620b22dfbbe4b0ab17ab02d0c59f6e6",
@@ -705,9 +755,9 @@
     "lastmod": "2026-08-01"
   },
   "https://funnytools.win/en/tools/url-encoder/": {
-    "hash": "c2d3832f7869ffe3b809c9841b61f0aefe51b9318f63366c052144ae7b2be749",
+    "hash": "03fb8489d97635573c0c5b93ecbfbd41f4736ba8d56512c9c1b22db9fa3e801b",
     "hashVersion": 4,
-    "lastmod": "2026-07-31"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/uuid-generator/": {
     "hash": "29d5a28b22ea031eb46ecb7a92f20b52a1b4674f0a87a03cf0bc80e18e56f41a",
@@ -745,39 +795,39 @@
     "lastmod": "2026-07-31"
   },
   "https://funnytools.win/en/workflows/creator-social-toolkit/": {
-    "hash": "e67ff3d968cc79eddcff2f834f06b7ad388cb39afecb1cb4706d5c66992b914b",
+    "hash": "3af979021a0108a481c090008b05a82dae18bb5a3f1219568aeb23dab2b28e40",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/workflows/daily-decision-toolkit/": {
-    "hash": "abcb8fffb9840773af2f7fd16dfed6b851d5a2614f2f7e34988b28fae3827621",
+    "hash": "567f54e3365558828b4db84c7774eb36a3af73de63240169b5eb896a0f2456d7",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/workflows/graduate-statistics-report-toolkit/": {
-    "hash": "099fd2da041e704b3fdecd3f793c36f24adbae7eff9fec65de1e87fbf001325a",
+    "hash": "7e2f5d70113a934cfe1c8828fcc6dd87026646f847f5cd60600a0cceec503482",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/workflows/office-document-toolkit/": {
-    "hash": "5d5870323e611e571646d9ef493f50571cac99e26dcb40d4422802dac4283984",
+    "hash": "88488fbf95d84068f26bff9a167d8445584e3581dfcb6782a6df425846611a0f",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/workflows/student-report-toolkit/": {
-    "hash": "4fc816870a35f19cf2a3797bae14e1e06e66b3b8f61f5160f2429a0bc3019884",
+    "hash": "a64fa8f75f41e300f2f911a999056da689e1c682a2eb70fa7780b4128ca0bf22",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/workflows/teacher-classroom-random-toolkit/": {
-    "hash": "15f2ba32350e2e1c3c5028fe98a247516e587b8a3cfbf03e76b67089a0edb911",
+    "hash": "011a21242034607dca62372ffb1671af906e614f9166ce0854eaa51a5a589df5",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/workflows/teacher-exam-score-toolkit/": {
-    "hash": "77dfb8f6513ef1649acc8177fe3f0277677c38cc9aa47008c21432cc2456e735",
+    "hash": "c39e44083c2f9c0255360b5a14d354c91b1efbd5ccfabcbfa3ae5d209eb009f4",
     "hashVersion": 4,
-    "lastmod": "2026-06-26"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/es/": {
     "hash": "1442bb2fe243fb270db0fa5b70ac9b84ee2ba1a4f4fa5e4f0357e1bb1f468c52",
@@ -1730,9 +1780,9 @@
     "lastmod": "2026-07-29"
   },
   "https://funnytools.win/fr/outils/encoder-decoder-base64/": {
-    "hash": "415f4c68dc736b361338b7a5b5dc13d4b1fa890e9c81392fc6f5671f15156037",
+    "hash": "bad45ba35dfc3235f4c44556cbd0509b38f708586b33873f57e2b3f862276659",
     "hashVersion": 4,
-    "lastmod": "2026-07-29"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/fr/outils/encoder-decoder-url/": {
     "hash": "b3aacdc77626ed31179854810f167a5121c405bfc2564c91efaa58356868c9a5",
@@ -1890,644 +1940,694 @@
     "lastmod": "2026-07-29"
   },
   "https://funnytools.win/guides/": {
-    "hash": "181d9304e50bccd85077d7e97ec152761935cdc5fb8e67eef8fb8692141eaf38",
+    "hash": "12ecf661d2de917a6a047bed50427bd9750c7bfa1bfa09c092cd4e7b5e4e23c0",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/a4-vs-us-letter-printing-guide/": {
-    "hash": "0c278c7c903c876bff5b463df4bbe33c6968368a49bce9298887eeaf6b0f17df",
+    "hash": "b61358c98402bafe69df346033da572367c1f41bf199b5bb1931315a0a0dcfdc",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-07-18"
   },
   "https://funnytools.win/guides/age-calculator-school-cutoff-guide/": {
-    "hash": "cc1e82477cf59e9d5d36c224f388287822823804d3f3f270d4145fddc8c7ff3c",
+    "hash": "3c00ff7e33ac49a43edaa73d1846aaf066da2dc8e3ed3a419e417ff4b227eee0",
     "hashVersion": 4,
-    "lastmod": "2026-07-18"
+    "lastmod": "2026-07-25"
   },
   "https://funnytools.win/guides/anova-apa-format-guide/": {
-    "hash": "b4561483d592b912b84e4f6518d295fbc187964a02c4f59ad8987ffc4f621576",
+    "hash": "ee7e82ae3e167d5e875997a257e7b55b636846d222c166579fa90e30aec9ce30",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/guides/anova-post-hoc-tukey-bonferroni/": {
-    "hash": "4118d32007a74cd950d43a7e6f7a0e023a322784b17cb31a10b0775f81a338f3",
+    "hash": "4c09fec4cc546213e797c1d5339d9730a6bdcbe3ed85e59a4b507e177e85b6ae",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/bar-chart-school-report-guide/": {
-    "hash": "c28e88bac279caa003870d6f0c9c5293d871ceb397ff34a05a5a4a13627e3cf9",
+    "hash": "d83cfb5e372f578515e40477d03708d3df3a4264ba41dd2ef7a19c6f20f2cecb",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-07-21"
   },
   "https://funnytools.win/guides/barcode-printing-quiet-zone-svg-guide/": {
-    "hash": "d578450614f97fa301f7ef0b56dc3036b8b5d3be97669161492ae9b3b45887fa",
+    "hash": "a9294ef6781ecfb3b79265bf2d007c71c7c9b30549abb532ca8c6355c791bf02",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/base64-utf8-unicode-guide/": {
-    "hash": "8ff68f8bcc014c60d1fd55e4a2e854c1d24d1529e844f8fb508fd8b8115ab158",
+    "hash": "c2d2b2a3935b822128e5c443ad17b21e5d320846948486a9f3d76557ad403150",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/break-reminder-work-interval-guide/": {
-    "hash": "413db1db783644215b8322f74578e9cb34622d67f4e81ea8f1a2c122a15315c0",
+    "hash": "49095fe089c12fe62a83384536ec20f50a0d3f53f0d904f30db05077b5db1969",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/business-days-calendar-days-guide/": {
-    "hash": "aa0cd4dff37eb0554a773ca503e0e414b5c5b2ac10d9376c91702df56f2bd316",
+    "hash": "665d83aedd59fb7125ca545acff5d0b69b0fca6d027925e44123a953f0782885",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/cad-grid-snap-orthogonal-guide/": {
-    "hash": "acf22932b13994a92ae9b9aefad9c7933c78b9bd046f35fa26137aa8abc4d638",
+    "hash": "1bb12e9ca46af0884c612a05c390964bbb1ed65a603b2cb7605348e367f60859",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/camelcase-snake-case-kebab-case-guide/": {
-    "hash": "2645b50835fda25eba697ef49beb6efff2ca8abb81801bf53f25b4021d04454a",
+    "hash": "b5e1acfcd28a00c2669d8eaca3c1d42066afb7e465ca4eaf36c9477a0b1fba17",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/chart-flowchart-alt-text-accessibility/": {
-    "hash": "fb26a4a193e0963c78125475a1c1370be48cfc4b6820b76a93fe624ec39178dd",
+    "hash": "a8758989be4774664f00bb05a51c05f4beb5d3dc63c311e616db31b1354e788f",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/chart-or-flowchart-selection-guide/": {
-    "hash": "dbf6603229c3f920c34a7069ef6e2ad0ad32557a11b6825ff9d90cb16ada5c43",
+    "hash": "11701bf24b543042a18721a19f87b21bbc19dbe5b29e312a6025c85e61bc4168",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/chinese-english-mixed-word-count-guide/": {
-    "hash": "9fa3a438c1a9209f79b53aef048e215bfa5cc09b640795e39d93a01c2e195aa3",
+    "hash": "fe1ab9e7403b5433b352a628e83094533841df866c506d8f556abf4bbfdf6e40",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
+  },
+  "https://funnytools.win/guides/classroom-group-roles-rotation-guide/": {
+    "hash": "adcfaa8bfbdb8b2f3a29a58f7e318fb31ff4d3e0a377c4c2175b6c27433f348f",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/classroom-lottery-tool-guide/": {
-    "hash": "c4b16b5363131ce9da68bc40a36298f6fe8a0a3c9d5ae0d202f548fec3bb1d84",
+    "hash": "44439e220d3c77028eb1ff4d8d233fa06d07b66148dd1898e61b1ba7d6300431",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-06-26"
   },
   "https://funnytools.win/guides/classroom-random-group-guide/": {
-    "hash": "57531485f051a6e20c8d2beea0e3c9fc1b890a47fd1e5bfcb4c0c24997cddd09",
+    "hash": "d46d8ae018c8fb8b0777b12377ff28f8554c8c599cb67808d2e71f79fc022715",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-06-26"
+  },
+  "https://funnytools.win/guides/classroom-random-group-no-repeat-guide/": {
+    "hash": "e5db1acb8c18bd70c082fc6b86b331c180763b606a77417857df321d9bd7a103",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/classroom-random-picker-guide/": {
-    "hash": "409f7b248553abe0c2fabfd2f04e5523807b43c99f5b52c7050fbcea5f5f507d",
+    "hash": "deb113a222ac5d3f0d0d289a84e1cad2b9f10680649d6eda5e7df8f8a1affde5",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-06-26"
   },
   "https://funnytools.win/guides/classroom-timer-guide/": {
-    "hash": "a402f2991ced7bae94ed7f9440badbddfba50c07b90df5aa5335e433f3a3d51f",
+    "hash": "b42d93a174aee2dec80c838647cee45669e81179d8c203c8161b3f84a9f2859a",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-06-26"
   },
   "https://funnytools.win/guides/clean-copied-text-from-pdf-web-guide/": {
-    "hash": "6ad470c8bac40d62aaca30ca21a6250d4b5fc6ab48bf5b3e5f6acac3f17e41cb",
+    "hash": "1cd9b2045cd322438adf548feec5e543317270241e98e0ba3b6076ab4237e9f0",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/code128-vs-code39-guide/": {
-    "hash": "b859b6925d65960a8a529a3c9b9767195b3d57604844bf36164a83094b29e4e2",
+    "hash": "8cbdf21581e51a0793cf7c8cb8ab1280f0bef467f1a4fa0dde7d2effb85568ee",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/compress-image-to-upload-limit/": {
-    "hash": "296cda4dec8697db962aa044604d47602727a2f98284249485fc05721be53f33",
+    "hash": "2c83e2c67036cc6821e8fa15245c160f2428250498a9e46b1101fafbc259aced",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/compress-pdf-to-upload-limit/": {
-    "hash": "1cc3891f3ef4920d492a91f1347a7d82b0a409218b0076ccda981ce9aea37f9b",
+    "hash": "ed39267cd16d835e02eb6848030f53790287791247116d94addb4496b5f05788",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/confidence-interval-95-guide/": {
-    "hash": "5cf4227e3e4235b9095bfc27b236c108f722c8f45496c6142e2ecbbc8ebc31ae",
+    "hash": "71e6afb8c17534a4d9e5facaf8f5a82fb23ee8a0dcb15f49ae227c3b9c5928c8",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/countdown-stopwatch-pomodoro-comparison/": {
-    "hash": "c73aa7e415cdae9fd60a44b6a571c5f8df4c4915832d52d9462519da230773d3",
+    "hash": "cf8ce7d2fa68db0d72fa5e0add9802d2e3927cf78b1c7e0b3b2e4b38b08a1929",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/cronbach-alpha-interpretation/": {
-    "hash": "dd0fa030b5c9daddaa82943459595db8d78250b3660827c451082993ff845fc9",
+    "hash": "7bf0271dd9b6242c5512df88448fcec9265ffbe971ab6959d7c7041cae4ae239",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/crop-vs-resize-vs-compress-image/": {
-    "hash": "19d4af2478cd09940f87de1ef35cc7730853d03f2abc1a6696aa13f3164f4ab9",
+    "hash": "566d29f0917612f3419bb8dd3a2fda4e37ced5b1a0440d000b84c83881cb4f34",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/csv-to-json-conversion-guide/": {
-    "hash": "b7dda9ded6405e0ff6042c01e07e63f0db0fd99b1096b6ffb4f5aa2a470ccf46",
+    "hash": "e04286049b99f3a442ec5bcedb4e917b2bbfe7434ee221cd08f4480a87496592",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/csv-utf8-bom-excel-garbled-text/": {
-    "hash": "cac766bf2cb0762da7d4debda8a23349fa1b747c3bdb8991d4686c52bc2731b1",
+    "hash": "2e8c9ef9a24a439d5413c444782deeb59081166d9fdce85e5716e3c6ad25eee6",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/cvc-word-families-guide/": {
-    "hash": "b009c5f383a1ca2b40bbb320906df74070c862c885a15f7114f116800683fa4f",
+    "hash": "d41fbef2a5754c19ed5403ae6eadb340c2dd6f85cbfb6ec8e6be137193c28ee6",
     "hashVersion": 4,
-    "lastmod": "2026-07-18"
+    "lastmod": "2026-07-31"
   },
   "https://funnytools.win/guides/date-arithmetic-end-of-month-dst-guide/": {
-    "hash": "0a7e355c5bd997a92995d10a93b858affa7576067200597a0dd72ea2c48a6ba5",
+    "hash": "0e7bf53a9b8a9a5a1d955d0cd4b822e83d16c5f2b2c930093c8a1f56c9090f98",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/date-difference-inclusive-exclusive-guide/": {
-    "hash": "ba955287860b6aa7f83879298bbbb99e835c8210386f4e774f07c2972d711c4e",
+    "hash": "618a5bc8bc7983d6cd88035c180f299dc9b17a139fc3fcd0761451473d891d77",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/decision-tree-vs-flowchart-guide/": {
-    "hash": "c50694f42c37b04ef138bf0d2b2f9e0be72523845f6733baec3f4cb6d01ede01",
+    "hash": "ffe35ff1f194900b9f20fe9963f90db4da29a7ffa7e49b1929f65fc6fffc94b9",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/delete-blank-pages-from-pdf/": {
-    "hash": "ba8f01d805f36612a5b2546652f4063b4bab019ca7f4ac39da8d14faf058b573",
+    "hash": "44f319f374f8ab376f54c6a3e51adf55803e1f15d0f25db274629a1978ca1055",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/dice-probability-random-streaks-guide/": {
-    "hash": "203b88de64461a11ca55624af7d633d430882e84317497c1e0d08a2983390af5",
+    "hash": "f78efa2c432f49509a1d94d42fc3a99e984720fd1b238088dc71fd161fba3e55",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/ean13-upca-check-digit-gs1-guide/": {
-    "hash": "7efde0a01bbe966cd4afa8965c75ba774de984a5679edb9f65f8a69111fa3c90",
+    "hash": "20efb37d5f7e8d12c268701dc8d4c9bdcbddbefb91a2b4aea3a3f92714fd8334",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/effect-size-guide/": {
-    "hash": "12f75c5d671978a5d8449e91b8fa4e65c3937ff264e328443b5d7f6c3634ec12",
+    "hash": "12a962cefb32bb3b89d2fecc281990b8c2777c093f4c8f1703bee7d64f813888",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/emoji-character-count-grapheme-guide/": {
-    "hash": "dcb4a4efd4608349d821700d610ff3ddfdf0d4698840cf540e3a86c2d2e140eb",
+    "hash": "e78bc642151939c2055de765b63c3d7c439d00a3f4fe5da299c90d65fa7a7924",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/extra-credit-over-100-grade-guide/": {
-    "hash": "939713c9a3981fb8698e01dca8534911c90c23e30705388a0e248eda6f231d0b",
+    "hash": "4702a3c2247c7a55deb54eb574fe5e310d9649ba5b081a51300b604e9e5e9b6f",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/extract-specific-pages-from-pdf/": {
-    "hash": "85e116a0b3b05e686ddb6dc147750e90852b709769993f15d2a827187d2d366a",
+    "hash": "f87ab0252365157bd7f0269c33cb9f821f6dccadea6c8241a5de133a2ac3fa55",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/fair-random-draw-audit-guide/": {
-    "hash": "1bf4f3f763a95e45c95c8321faccd65132a3ae1028494f147ed5eb478b420709",
+    "hash": "6fc5effd78882ab9e03f31181f6103afbccd7b1a1d8fcd19ae9ee133d73d2fec",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/fair-student-grouping-guide/": {
-    "hash": "dee8b54d7244a692fedf2266ac0f7e1fbc5ac5dd552504c704bdbbbd9dc20290",
+    "hash": "9e60499aab4477d58a9ef2cfb06d42529b4121e42857d50e680518a8de1c9bd0",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-06-26"
   },
   "https://funnytools.win/guides/file-size-units-guide/": {
-    "hash": "b9f1aedf1aaad416e0da3b7b5dcac653623777c62493dfb8585e434b4e465754",
+    "hash": "9e8261a2c4eeee6da45092307348492f179ba85d96de419474631d2226e7c594",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-07-28"
   },
   "https://funnytools.win/guides/final-exam-score-needed-guide/": {
-    "hash": "baacb13bffd926c563d9133dd65ab1de3a7123862ea723a66dc81a8fb1258eb1",
+    "hash": "25743567f7f677b1c9fd8303406cf508b6fb4bc8b1ac68937da5f9364712ec1a",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/flowchart-design-checklist/": {
-    "hash": "8b33d177b556cc874f92f5acdd4c46ee76292b06553a6961186a2801c062e34b",
+    "hash": "23a9773f346ed4cf36753ce0ce314c1aa22f784e7838a94f0d11d182a6a2c3d9",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/flowchart-symbols-guide/": {
-    "hash": "50739ca8538709abbb29da494ad513c57e36228e05d17e38fbdd3cdd1f8f29c6",
+    "hash": "3d9216147b3db979224cd088b45a7f419dd5a2aa9753c6f8d8a373e0d0c8b4fc",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/gpa-4-0-vs-4-3-guide/": {
-    "hash": "f8d0e71bb798e15cc0a1e4efe670ddbe31bcdb91717be9507222bbd62ded1d91",
+    "hash": "a513152932abab422c13ca114fd146027230689610c027ae3388c8efa6b7a0c6",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/gpa-credit-weighted-formula-guide/": {
-    "hash": "34c5bd26b45388dfce6950c3a2820e60ba320363d4af074e0d2f333dff9a50a3",
+    "hash": "96f824c932c2f97b9695511dbfcd7c7759e0445e0c8bd2ea71fd128966ef9e16",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/grade-rounding-cutoff-guide/": {
-    "hash": "e20429fd951d61ab6e13ea7e27eb3569785d5446acbcadb10ee6dbd03a92bc9f",
+    "hash": "0c924819c55173bcb55cde11126633efe34563efcad2926780b378667717da4b",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/grades-gpa/": {
-    "hash": "3ed2feb1f992d5f9297a1ef939c221389e86064a37f77a05663113c838d85092",
+    "hash": "fdecc6ba0286c81f3afa7976abc2c1791bb502c6954b1b33cc77719796cbcba0",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/household-physics-demos-guide/": {
-    "hash": "c31d035e90f8e9e75adc1db9851d56c854366c7ee15faffd61e0e99e974f81ff",
+    "hash": "0c2d7aa9eccd4abb7e1a4c6dd0e8edaa0d7f5ec361f655f2851275fc0fc972a1",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-08-01"
   },
   "https://funnytools.win/guides/image-base64-data-uri-guide/": {
-    "hash": "8d6cd05721c6d2806f57259e16b654d9a87f56ade5b675a6f3fbd88a71b9c372",
+    "hash": "009b5c5115ddba871b699f9abcd5ebbbc6a9330a50600f0e16eeb99addfbc536",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/image-compression-email-guide/": {
-    "hash": "a1b60418f0ec2b216ac1366a7b150b2516f6162f6c2852d4cdf8f8d7f92babab",
+    "hash": "2e88124d68521d84ebb0085330a37de2824cd6c152187df26e9cd37b3f3770db",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-07-20"
   },
   "https://funnytools.win/guides/image-upload-failed-troubleshooting/": {
-    "hash": "3b34ef2df598882c5144a56d717962b0fbe4a2557605b4933b6003f79f91045f",
+    "hash": "bd3b33c37bc8fe2ae11b6d47e84beb5cd0d783db71eca3ee373689deebf1f173",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/independent-vs-paired-t-test/": {
-    "hash": "1b31a3917ce0c3dc8cd33ca34edf2c953e22cac54081a12dad20b855b9292997",
+    "hash": "1332e0d5b04b2b59dedb47b2faec399ce60e2ed37582f144b09519bddd1d31fd",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/invisible-spaces-nbsp-zero-width-guide/": {
-    "hash": "ee1b1faeab9ae203bc0e1e058c8918771ae9f24e2a6cd3083b77e1fbea9e30cb",
+    "hash": "703b3b2eccf160b69af0f623405dc05945b29636fdd67a3a5fa5280b3c2b0926",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/iso-8601-utc-offset-guide/": {
-    "hash": "7b50a852fdecd972eeecf4f4c91da5938db1f01eeaeda5d0abd1b47140293b9f",
+    "hash": "714105b0c41cbf1a465c2f05b7509a9f5f359bade68c7023e0c8e70856423865",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/jpg-png-webp-which-to-use/": {
-    "hash": "79e8d013b0fa6baf0c8af888df59e4d5d5302cd8fffd519d2f080f6c5bc6cd38",
+    "hash": "73b53f152bec83d7b22b1471cad634d5480374e48c628f66da52cb9903c6e267",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/json-error-fix-guide/": {
-    "hash": "bf7000a74581531f89d23dc2f750d11f6dcc40c97cd8353ff0c3787291828d3b",
+    "hash": "959dbcc851ecd384bd8dc498850ee99331bf8a0da110a2e62195fb14365e3c1b",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/json-to-csv-excel-guide/": {
-    "hash": "f89a56f22caca5ccc742a17c52ac1d22c088e4990bb4984972983725bd22e668",
+    "hash": "be7c697bb5af139303fa9c14bcd8cd5e91058b7f417ed7477f59e518276c418b",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/line-breaks-lf-crlf-guide/": {
-    "hash": "80312bfe088e87ae5ed56febde617e447b466e1eeff8c9799e5f3997d091c655",
+    "hash": "bc180728ca80ba38f73c0267eb0afdc7422addc24531965f18f7fa80016e5526",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/markdown-syntax-preview-guide/": {
-    "hash": "6fdcb6686723cd225319f00809f039612d6a5ec1a3c6faf03a0d2bf1778250b1",
+    "hash": "2dab0271b9d81c50aac0f3572925cc021cc72430dc97fbf9de048c8948f973a0",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/mean-median-mode-when-to-use/": {
-    "hash": "0b1c5064998cb23a313ca43058f9073da580e1f6e30374a40d1694c3ce9da088",
+    "hash": "48bca490fe114a00ec72e5a94e92cba418e9b81745bc9bae106d8c20e28d0510",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
+  },
+  "https://funnytools.win/guides/merge-pdf-page-size-orientation-guide/": {
+    "hash": "e23811a279ad9f7839a567405d0ff9f0e482faaa504f0be701a98b5bb5b758df",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/merge-pdf-private-guide/": {
-    "hash": "5eeae44378b42cc2fe04dbf3f31dc2e73956ce16943dde02ae66d15cc6a7854a",
+    "hash": "5a569f2f3b0eaf65feb2815160d29d40bb908aee30b02423e733c31a16d52a7b",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-07-17"
   },
   "https://funnytools.win/guides/misleading-chart-common-errors/": {
-    "hash": "6db87882a706df2b1fd952cd0cea849e27cfd0d6652d7afc5fcdee5fdabf8b45",
+    "hash": "25d2561a8c53f12df2a08cc9f6f58ab00d89b1807d31adffdc1840dbbcee1a77",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/missing-assignment-zero-exempt-guide/": {
-    "hash": "64c3e737149cd89f3b38c4fae96a4456942cc0c728cb3b5b0755200406e99832",
+    "hash": "1ed00cc4521f6d35cc89407cea52e8856f6c997f1a280c4e2f0176311e40c55d",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/multiplication-fact-fluency-guide/": {
-    "hash": "d05abe979ee7c7488b5b3da5295018eff110787ae7bd27cc9068bb3f01deef81",
+    "hash": "507cf38acd67d8efd8a528f2bcc705cd3de7fc8f9473819f1484981178de223c",
     "hashVersion": 4,
-    "lastmod": "2026-07-18"
+    "lastmod": "2026-07-29"
   },
   "https://funnytools.win/guides/optimize-images-for-website/": {
-    "hash": "43c60d4616ed903f97e9206ba27598423ddd684ad3924f67d69ca35f521c3587",
+    "hash": "92347b03eff785621dd7bc90c1ed7a78b3717d1014e89b8ec9ab87b1a27a5aac",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/outlier-detection-iqr-z-score-boxplot/": {
-    "hash": "6ee59bec2356373ab2775b2c0f622cd96f4efd601cdcfac74b2fbaf18aaa5a39",
+    "hash": "23b8ca57af00b4df250f257e367d6a0a20e84b7416eba02da8182366ee051af2",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/p-value-interpretation/": {
-    "hash": "c5cf6cf73ec5c5017397089fe724c7dfd1d52bf9416ff122ec4b35df4fd7fc4b",
+    "hash": "c289940ff36ec73e19d798b2941e9e8dcc665a3e4b7b1946cdead4900502ed09",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/password-manager-mfa-passkey-guide/": {
-    "hash": "729d17ab9d41cdee233600c1e98287030b5206f6ef8ab949aa0e1380b254151d",
+    "hash": "c55fe7fc6cae7a88f5b78d0580dcb397fffca87e691a77fab87670aef566d193",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/password-strength-basics-guide/": {
-    "hash": "82593e2ad447c45a331adb7f35dc86b5f491dc4b481c1e14ae216ea942d5f05f",
+    "hash": "935c8a4e3e4228ac948ff71d7e7d805aaa90e90b5d073839ee904824614c8446",
     "hashVersion": 4,
-    "lastmod": "2026-07-18"
+    "lastmod": "2026-07-27"
   },
   "https://funnytools.win/guides/pdf-split-vs-extract-vs-delete/": {
-    "hash": "7269c6347c4530b85dc19864b7f84b2b353fe478fa41929c7ebfdfddb7d4e763",
+    "hash": "ca50835fe862a8c95b2255ab988526e5b970eb972e83a15e2f3d3183e4532c32",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
+  },
+  "https://funnytools.win/guides/pdf-to-image-multipage-download-guide/": {
+    "hash": "9ce5d236069c6c3877769b9ad352badfe5f15505ff01f56e28bc821bd4e1aa31",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/pdf-to-image-resolution-guide/": {
+    "hash": "1ee38f988932d9afb9e6739b476ae5b33f5ca93aab24677c7543a870fa9c6ce6",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/pdf-to-jpg-vs-png/": {
-    "hash": "6903c4de5df3c3f655abf05d4b98def46915b1e6e3662294666b7d9dc81c3ba3",
+    "hash": "b43c9ade2f7d07334364112ce559ce4b1789b43523b526406831cf60f777ff11",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/pdf-upload-failed-troubleshooting/": {
-    "hash": "ea1c7d1d89bdc29b6977038cd1366acf19ff9961ee0fa3606f73767c6c6f519b",
+    "hash": "a4de87cf75667106d28532f3d38bc48f84a613370ca443ddc5288824190223d8",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/pearson-vs-spearman-correlation/": {
-    "hash": "81148f287d2b7e8e99a900cc82c7304001ec576aee7b5200e5f2c7500bfc6353",
+    "hash": "815db800ca71e631ffdb141ab56f31d9389d9452756b487f13307b2c5fed88b1",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/percentage-grade-to-gpa-conversion-guide/": {
-    "hash": "ff0a94e1b5c6589b7a1fe9e74a32c1b7247460089dc1660231463e78a31e9fe2",
+    "hash": "31afb18162bfc651c6a6a08a852b10523b747cb3fa858bdff19226e0693fe313",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/percentage-shortcuts-guide/": {
-    "hash": "f8bb4ff31f3f65cde179fdb94479ee03e7d52b9fe5167291cc676ddedee3aa1d",
+    "hash": "5e44dd5e50aeb347dc0c0aa5c5a2303b24261d4d3f5dd430de31cd15b718046e",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-07-23"
   },
   "https://funnytools.win/guides/percentile-rank-guide/": {
-    "hash": "d5174cf7df660c68f66085a8c19393540c6d42c97242d4b5d1cb59cef5897eeb",
+    "hash": "dfa7227c2c7403d10c574197474a1c5b8cefac15d4154f2c11415a75ed12e0e1",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/guides/photos-to-pdf-phone-guide/": {
-    "hash": "4e574f0790837bd6883b950b4bdb8d6dab30a5a88ff54285b5f8d837fe9728d7",
+    "hash": "ebcd3a9275e171b59830974e5bfb65d7d19a44a88df2d1863cd790f7aeb8a869",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-07-24"
   },
   "https://funnytools.win/guides/pie-chart-percentage-guide/": {
-    "hash": "0b51810176367c3c9ce75042d5148be12ccde1c9ac3599e1c2eee6fd0e97b7e6",
+    "hash": "33dfdab327e07bbcb881acd5a0f25365623478c0ce092636e079f9643a8f9263",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/png-to-jpg-transparency-background/": {
-    "hash": "e764e232b351d14f2581baa18918f1be36e82cbc5e4debeff72530c4fbbb3e04",
+    "hash": "3c255c712b391ce48f6a9f9bd849edf26608a508ddd6098b5a3b521aab53e908",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/pomodoro-25-5-focus-interval-guide/": {
-    "hash": "fcbbb71ae4ccc357a3d3b5d53a5519d786efe6ee5a7cd7126724e7052afea0a4",
+    "hash": "1d5ccd0b5686a01bd16a286d061521715c9e7b20ca697368939c75ec8c8c540b",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/qr-barcode/": {
-    "hash": "645eac619a7f10f0a4b687806e40144e5f9d8f9b1b855650dd4b9611d7ead1f0",
+    "hash": "1578b70b3906b90236b5c61d51b3c28de8dc52119133172e387e3a5153a7bd01",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/qr-code-before-print-testing-guide/": {
+    "hash": "45bf2aacbbfd0ff99b6fc115c080eb57748dd45cd1b89285ff7b54c20ebf8fc9",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/qr-code-classroom-guide/": {
-    "hash": "4d830563166b37d11e6ba5e9ce6c333574d846b17fc66ffca673b1948cd4dbe9",
+    "hash": "49b8640586516a5ef10a01654b7b3d12b162e5f335e59ba040d34a12924e0bea",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-07-22"
+  },
+  "https://funnytools.win/guides/qr-code-mobile-landing-page-guide/": {
+    "hash": "ff25c75e17562bf48a0c7fec997f4c259525dfb5d6653fb6b927e336655426bc",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/qr-code-not-scanning-print-guide/": {
-    "hash": "2b2f2501a6219fca7535a385e8603d36ae6bd11309b9fb2f659575a2ab7fca0f",
+    "hash": "392159b8bc2f50ffbe41158d65d69bdcc3202717597887a1bf1e156343e12056",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
+  },
+  "https://funnytools.win/guides/qr-code-payload-length-guide/": {
+    "hash": "ef7dc6a658481d80e64897c2f2b24bc0d3c05fccef906642950dd8dd96e06166",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/qr-code-phishing-security-guide/": {
-    "hash": "da4d0cd4799dce40912dcf531816091030c39109baab2235763315d94a896cf5",
+    "hash": "28a7037a868c084bf2ae53209b24d1bd266dc515a6865f9f51f27f43622381eb",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/qr-code-vs-barcode-guide/": {
-    "hash": "cec720064c3f81056d97700637a2656d743d230891043a938f425adc64cd00d3",
+    "hash": "a53ef938d80ebac67d5de8cb00cc005616235013012c5dbfd7592a8117e44eb5",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/qr-error-correction-logo-guide/": {
-    "hash": "35543862bca93ec28c8a094fe68d587c338e7b90b6ed9ca5a2c41d8f317f9a56",
+    "hash": "f79bce61c708c3ec729455c2f959755694656683c3fdc3eff39ccbbddfe3e5f6",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/r-squared-adjusted-r-squared/": {
-    "hash": "88afc70752cb2d7b644951fc734ccd38f0e8e45728fa6d07e16b4a777b7a10ec",
+    "hash": "7a253c8752c4202f9a5bd9b4232d56fc57905c95911630cca925ef40f302f2f6",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/random-password-length-security-guide/": {
-    "hash": "ffb84a734d50fb1def80e2c012f7b63ee3059b6a7a6aef8c7997e6f6f1c8a309",
+    "hash": "666f784c9d25daeaa58e64f6f920419f34a7e608f88f54e411c7fd2c74fd8a75",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/random-sampling-with-without-replacement/": {
-    "hash": "5772f09e43a36a997755071ef7b1d1800a5239ffddb7802f1f2d4389ff825836",
+    "hash": "9dbe8c2dc0061f64f37d1b9b7e9e0ca293472dcef3a1edadbf48fcf1f2ffa978",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/reading-time-estimate-guide/": {
-    "hash": "f2d065edb20b73a0e77b40cd11ff2768aa596e82441bd4c35a30766fa3c4e3fe",
+    "hash": "33a8dd171ec4e29ea138fcde3a6386784ec9a8fd584e63c5e8a96a9ea468825e",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/rejection-sampling-modulo-bias-guide/": {
-    "hash": "c1ac11dc0f4025dd4860bae1c5a36d8e93a52d10ba846a3b18a1ec2ca7057cda",
+    "hash": "e55a72013aa611aa3a96742947cb7dc725b209efa9e4aeba6bca3c992fe229d7",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/remove-duplicate-lines-guide/": {
-    "hash": "ace6be0b096371389568e0eef78f4972a7d73bc46a23fcabb56d1adb2e83225c",
+    "hash": "f6be4b29b790bef020c6314fbfeea4b2b81313fc7b9bd0abea07c7df5fac2128",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/reorder-rotate-pdf-pages/": {
-    "hash": "7ce128995cd29c9eb546d6458e7741dbc3b35588c7df773c8b411ef550173793",
+    "hash": "40d1a7acd6fb2d3fb6b4e17bf7a6760235d0a0afdff02b67afb7f3cc967a9553",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/resize-image-without-distortion/": {
-    "hash": "46d91e7962d599829e2c130c24bfe10bcb83b91dfc4176062ac7e5e8340b27dd",
+    "hash": "50f50944c582b7f83de9122c9b4c6a3cfa7b18cbab9d29bd420d3037a2d10977",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/scanned-pdf-searchable-ocr-guide/": {
-    "hash": "a9f8cfdc36b260d3b29d05fe5e25967dd737a950b42741eed816f09d46535cd4",
+    "hash": "2957888c620b68f29bac2eb2765a994d5d76e5635fa7a826f783c7627611a40c",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
+  },
+  "https://funnytools.win/guides/seating-chart-changeover-routine-guide/": {
+    "hash": "2e5e50d35c1992d86b24823e5198616fc6e8232416f6ca00cf21fc96cd4b0da9",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/seating-chart-student-needs-intake-guide/": {
+    "hash": "b58517da0899cfa018d7bc6365dd2237955711019bb3624ead931fe39f5c3a41",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/secure-random-vs-math-random-guide/": {
-    "hash": "7d3bc3d1713c31881e1b2c7a0aa53c25b0907263ced4e4d03c6d02f2c9383362",
+    "hash": "d3c995db469b4303d3281c641f223d2084d6d39aaada1afd87f641e0c6fe3a37",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/semester-vs-cumulative-gpa-guide/": {
-    "hash": "6add9a1de3bad3080bd6a40249635ae9fd4035674f53a4311ca7af3c2b343341",
+    "hash": "96ecb305eb7400a8840708c054a12fa84d87ac0e1f6874fba00cc564167ec145",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/shapiro-wilk-normality-test/": {
-    "hash": "2e137943635790abbbb54c0996ade7be5511b6d1c4b2e38254e3e85cb2166f47",
+    "hash": "29f73cb70599ccec2dab33f46bcb69a2cec69024c0323533f4a4b82713b334e1",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/spss-levene-test-guide/": {
-    "hash": "3273cce80f60552a6c4ecda6136b8624a2f8730e815ce47e92ec983ef4c558ba",
+    "hash": "ad87e9ef96b8cae6b74a80a939324fe3ff231ca3b31a2aa3d32dd2b3e4215820",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/guides/standard-deviation-vs-standard-error/": {
-    "hash": "6288b30452cee1af17e70cc047dbe16cc323e1c0d41ab8c03180242a31136745",
+    "hash": "83f64a2ae30766420ef4294366874686bd95a657b952585ef57e8abd2164b2d2",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/static-vs-dynamic-qr-code-guide/": {
-    "hash": "494c9a56ec51bf43d3e066fc9eef2442e77466080431a7ef0ad55abba2938ff6",
+    "hash": "2f09a90659584d5cdbe6588ab198d11b2ff48de3f5c8fd22831daa9a24243237",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/statistical-test-selection/": {
-    "hash": "82e506ff94db78eb0905eb710d2880317306d41ff35479d0efb1868b98ab38f6",
+    "hash": "f1cc17fbe70e428c1c287b784781d7769dc1bad4693e10fc27c5451f0803dfd3",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/statistical-vs-practical-significance/": {
-    "hash": "86796c2bb859be908e7c41377c1ead41e2e7cc8f9712904035741dc4f85d9118",
+    "hash": "bd88a3751a812655bb2d004d14d2859258d28eba1da47ccde84f85fe2c89333a",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/svg-vs-png-diagram-export/": {
-    "hash": "180102b8daef6c3f993ccd5c3fb0e4384f9322e47bff870ea29d60374aa7e772",
+    "hash": "88c98cf072008e53211086c581ba854a068649f95c79a4a7739b6f08f45d282b",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/t-score-calculator-guide/": {
-    "hash": "f3cf136fa45a7541ff464e6faeb4708875f77a44fc43bb73738c99fda975d25a",
+    "hash": "c9f2aaad662e68980e44a52845644a8a7d1e66e40d2607651eb4056938d38806",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/guides/t-test-apa-format-guide/": {
-    "hash": "6cbe1869056e8b01983ee525eca9b692a2f388011f94014ecd90604c47ebc1e9",
+    "hash": "cb09b04f2e35718085f19c91802a16ce01390b790421b61682a016d74d0de20b",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/guides/teacher-exam-weighted-score-guide/": {
-    "hash": "c2ea6be1d07636ce83f848de080a06f68190bf676a74461af21b3695f1a2d178",
+    "hash": "c4cb0c6a79e182e226f93facab7d2245e1adf471d68496a7b31d3b41d4eb9d7f",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/guides/text-sort-alphabetical-numeric-length-guide/": {
-    "hash": "68e3772962a4f73f3a3f08924c01452ef51542221c1ef0798a90651b8416623f",
+    "hash": "3d51c6e46a976ebdaef048bd899e9c2516a6868f48cff37864fbf36f78d02b8d",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/text-writing/": {
-    "hash": "cde97f303c5d705e02e88a2b547e37fb43c2fafcc1dcf15140205eda58f20a9e",
+    "hash": "f708af02fbd7a6617867e5a549d0d26eafd491eb08926c16faced19b306a2931",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/title-case-vs-sentence-case-guide/": {
-    "hash": "c50ce85fa86d5ae9605123573e80ee9ddc62c79202d526f67db5f382082f8ae9",
+    "hash": "7f490d7a9a02b093abb7625593afaa531f06d1a01e7ee1197f9452bb06017b94",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/two-way-anova-interaction-guide/": {
-    "hash": "fdb79555a80a04c04655c6667c296602b971477188e267c7db7a196e56396424",
+    "hash": "d0cd4190c10fdcccc0aba78cac03fc2fdd04e5b8feac09b390af1f6812829c0e",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/guides/unit-price-comparison-guide/": {
-    "hash": "8d124da3c3aed4830c13f8f553be8340b4851d7e58475cce83215439cbe669ee",
+    "hash": "ab9ed6b411e3bc2437dc3592d8b2fcae27170907a709bf63c8e9da403068c61f",
     "hashVersion": 4,
-    "lastmod": "2026-07-18"
+    "lastmod": "2026-07-26"
   },
   "https://funnytools.win/guides/unix-timestamp-seconds-milliseconds-guide/": {
-    "hash": "f5694aa62f723c1266791fa6a526f110105790059c14e69779135fe94e355496",
+    "hash": "7b5e3462862f2a2fd964519e67ae6b4946febae6b136734421170d79d96d4caa",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/url-encoding-percent-encoding-guide/": {
-    "hash": "d1f0c5b8228cc20bbd5952825e1bacbcbb14bd8c153ae4230e4bb8862b47f6dc",
+    "hash": "2e93a6ef3856b0a66697be8d293252a4d1c910279b90d605ed256a61f1db4a24",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/utf8-bytes-vs-characters-guide/": {
-    "hash": "c42855267465382987edb8463d6eb64c8b842da360b4be97bc9b32be786bb6a1",
+    "hash": "4d75981da99bcc4dbcb8e80c3d6dc8fc4ecc3d06fa8c092982010d3b308e23af",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/uuid-v4-collision-probability-guide/": {
-    "hash": "f6336bd11db678ff7446a7ffceb0830e0844eef98a7e1264dd232e9023f9145b",
+    "hash": "4078ebe6d88080f47ff3d5aa220f11785b8f21b06ec0988105bb628f944a763e",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/uuid-v4-vs-v7-guide/": {
-    "hash": "0ac3fa276f4c4415d6a98d69c922deef8e670c2f3cac5ae3a8b8fb7c43680a2f",
+    "hash": "d57b1719281077beb1006e1a3b7b5e275769f6c4ffb185af3805ce84909e8cc9",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/visual-schedule-slots-guide/": {
-    "hash": "85a25d0bf2577f54edf27c21a5062454b13bda35aeb973677950bd760cbd9887",
+    "hash": "3b7bdc4210c45077b0105ad966290ba018c7ce92b5abbf058081a4834b89c6af",
     "hashVersion": 4,
-    "lastmod": "2026-07-18"
+    "lastmod": "2026-07-30"
   },
   "https://funnytools.win/guides/weighted-grade-weights-not-100-guide/": {
-    "hash": "304b7a93767187728f2dbebd708851a156aeeb082564832f7d67488891367477",
+    "hash": "d73aa74b3e7487bdda93c224179b1d46d19f19da4b36de27440dab5e97222f33",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/wifi-qr-code-format-security-guide/": {
-    "hash": "9d010bf8213e019b2da7a99eecea573e0a2e3a870ac64114561c30874d9fb47d",
+    "hash": "85ff2c450e0e6d1a0167d08f83768ac3e785265625a832e7e55f0bc7f1d05c7f",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/word-count-essay-limits-guide/": {
-    "hash": "789db1c5440109799a821d071dfea5f9f7fc0e43a3ca4454f10bed4cb9da004e",
+    "hash": "374920ea7765c624f4b37ca8b8bd5668afa32faae5be6acbfd1fee0eac40106e",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-07-19"
   },
   "https://funnytools.win/guides/word-count-vs-character-count-guide/": {
-    "hash": "1582f0ae8928616455ce4c6fe0f4189d4bd6388f4e038f3943aefa6d08ba801b",
+    "hash": "831eb97c44bb8c591e6cfa64cf976a5e4b762e8632be4b8d44a44b0d6aa1d7ad",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/work-deadline-business-day-planning/": {
-    "hash": "8d80521ed4d7124cd2c22b5f1f483cee48bff01e71733bff6011e2dc0920107a",
+    "hash": "0b0d323b3907b3231536897ba62a718f064c6b1df9983a9a08819e37a3b31fdf",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/z-score-calculator-guide/": {
-    "hash": "1c3c5cb65a75cc1cf72471def69f866a00e3808984268411657e97514aaeefd9",
+    "hash": "915a54f3baee576d2ba8eea90755a15e8bcd2c0d02fab22f0e6372f763f2ee51",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-06-25"
   },
   "https://funnytools.win/methodology/": {
-    "hash": "02c7b9a99f01c6c0bee814da5d7404268768920db2a17b3c0ff97f19e839da0b",
+    "hash": "3cdccc2d977f1d2d2a89028af1794b392e03f842f6c8a7b1ea54d201dee57257",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/methodology/accessibility-compatibility/": {
     "hash": "e39db5d607908d613b9dd163213f6cd14ff24c29d489e46d058078897ea5d786",
@@ -2570,9 +2670,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/methodology/tool-verification/": {
-    "hash": "0561649221d00a9f0dff41dc04c4135529cb967248017eefdc0d2b09cf16f8ac",
+    "hash": "afd8034482c7274b509b24897d904252b3e83707414ed2a52532e311f5dbc448",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/privacy/": {
     "hash": "75860734a50a9eb4b88442dcd9dfebce16ec959930027006fc00ec48c4290146",
@@ -2615,9 +2715,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/barcode-generator/": {
-    "hash": "8fddb7c8d7461d626336af31295f2888f2bf5754e804e23300baad3ebe999130",
+    "hash": "26b720c269efbc4891876b93ba7fc6793bdef69921fe8087626bbf92f1bf63d9",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/base64/": {
     "hash": "697bc67b936b1f83dc6759d36e33f8180be6b6bff582950aa5097fdc3a32c824",
@@ -2650,9 +2750,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/character-counter/": {
-    "hash": "7ee1e8a97b5cebf2b49ca9779f9837f9f70593b855bf1cce54da06571ee835dc",
+    "hash": "8ef79915b2026e5d42759588ead895a6b79f3f3b50545cd5b16ccab8a074c930",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/class-rank-percentile-calculator/": {
     "hash": "ec2ae702161b4930752ebc36883f3a7b6af53e943adf30d667642a270c4ba187",
@@ -2670,9 +2770,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/countdown-timer/": {
-    "hash": "d0c69ef2f3b3ef8dda01b32a5968d2e56c18d4bbfc8bd72062d7e0d66098d178",
+    "hash": "c9eebb5396c18ddcf32b18676864fabfba7322f4fada303eb5610881efbe23bd",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/cronbach-alpha-calculator/": {
     "hash": "27cc8631fcfe3d531deb1ccfcb600b6a44483f293015f6c01c0ce060b70a6ba5",
@@ -2710,24 +2810,24 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/gpa-calculator/": {
-    "hash": "a2f8080db64083795d2acb489690a5b445660552b13129441980aa818f43b6be",
+    "hash": "8112b3421487787be1acf16739e1131a5ab736bfe6efb6f15fba2c50faea6c0f",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/grade-average/": {
-    "hash": "a2d174086341aaf69451353bd3956fca519d5cfe393c466716a9d5cff6e56518",
+    "hash": "e9bac5738a28bbf37c8b1b45a83af7f26f6f8cb14ffc170294e9f1cb350eee6b",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/group-generator/": {
-    "hash": "99fad31d8514d272c7fc013aa0ec370fb9ed9f34f74e3967ced5e583a39b5464",
+    "hash": "2cb78ca403e7f15b0195da9d172f856450538d67b7b7fdd1481fcbb72facd3f6",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/image-compressor/": {
-    "hash": "f46ea95b5cf54c960811e1fca5ae729ec8ce42d9444ac874db2a9bd449cfa7ac",
+    "hash": "04346abbfa8259722039e5c45c68978b07075ddb0db23326aaf965661707c6d3",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/image-crop/": {
     "hash": "a0296ebf1778c1050d42e1243c2ed53ffd259831a13c83035df2b01481e87fdd",
@@ -2735,9 +2835,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/image-resizer/": {
-    "hash": "48c96511035afd065090cd3a878dec7c9e9b65a013d339ebca550e54d9b17224",
+    "hash": "b558c9f334af4e050604507e2302129fcde3ad95b076997d5b3d178a10318a22",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/image-rotate-flip/": {
     "hash": "e85f74b2ae584202d356f43f5bc6eb8ac708b35dbc1b5415b46b5a47b16b7098",
@@ -2795,9 +2895,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/merge-pdf/": {
-    "hash": "296024c924172a427bc7a42ece06d288bf22d54912eb90f97a917bec77505cce",
+    "hash": "6ab57e4a7d22e516155e5f01bd057d4299a07772d42a767d3dc9aa72be6149c2",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/mortgage-payment/": {
     "hash": "56d4c95dc77a2460f839dfed3d7ff0a6ec2d2b3cb2fb2852bc155194c2b81971",
@@ -2830,9 +2930,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/pdf-page-reorder/": {
-    "hash": "41143bef26664c3748001b9c05c75e0a650029262ea5a1171ece0603aecfdb98",
+    "hash": "c64d8dedcf67cd6bcf886f32835e7d994c609e6e152a0107fa627cc9c05786ef",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/pdf-table-to-excel/": {
     "hash": "e78b2ad2a68341ded4d0425680bfb62765f7b9f13f2f5faaeb4dc9a942dd59ff",
@@ -2840,9 +2940,9 @@
     "lastmod": "2026-08-30"
   },
   "https://funnytools.win/tools/pdf-to-image/": {
-    "hash": "88e267ff5ebdeaff6287ba954f81d33345645d240e54d2eaf947f4baa45735b2",
+    "hash": "e8cabda9a4490ba67fba5ebcfa73481e6255c9d9fb338126debed0acf99a96a0",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/pdf-to-word/": {
     "hash": "e552fb016b31a4d712843001e5397a11f74755b03aada42ecba5882e069efdba",
@@ -2850,9 +2950,9 @@
     "lastmod": "2026-08-30"
   },
   "https://funnytools.win/tools/percentage-calculator/": {
-    "hash": "b5dd71e1a50549db0c9ef15219f65627bc74d460574f45acc98f54b6d43d17a6",
+    "hash": "5bb504700f9b3df4d00bc543f8a8fb05145371bf011c9b103c14f2a22ee51a00",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/percentile-rank-calculator/": {
     "hash": "f9ccdfeafb4ef20f2181f5e2568827baa1090c46e4aa96df593a79e3f81f4288",
@@ -2865,9 +2965,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/png-to-jpg/": {
-    "hash": "38f6f83715aabee5c93870e649aeaa0bcf1b8970013b8a93cbfd5b6b0856f55d",
+    "hash": "d9de85f88dc90749786c485689326ff28242d2fcfb2b8e6053697712bd540e31",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/pomodoro-timer/": {
     "hash": "9c137cf99cd9ee750671c6957eee40531294e36a8c805e663d32e11bc9277d03",
@@ -2875,9 +2975,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/qr-code-generator/": {
-    "hash": "106c0a4d8b8bfb648397747713d3b4e1a53ae408573debea77b377b8c321b6b9",
+    "hash": "c16f7ee94b84b3c0007948947573e41763779ecc17cfaa1244e810072b4d9492",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/random-group-generator/": {
     "hash": "1dda0abe8095564723a6954f61fb2138aade18adf5b08dea63e122658960ec96",
@@ -2885,9 +2985,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/random-name-picker/": {
-    "hash": "38a9f09644825de1019506c278f70407735fd4e4fba755b6b74c8f2009e06936",
+    "hash": "2986ca611f2715b0bfb327aca5b9cdf9c4bb079f1c9b39919e98b896366e020d",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/random-number-picker/": {
     "hash": "6893dc77f94f4ec84808f4cd8e5dca16edd2a9df729c3a4625c236f1c9054e00",
@@ -2925,9 +3025,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/seating-chart/": {
-    "hash": "c77993b00db5c1a762346ab11f4aa4d85f212f6a348451f382082c7bdcd9a561",
+    "hash": "d47650dd3c3d74285f46e9fe711d1234a53f75675a474b4f6984da92b0cedee8",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/sketchpad/": {
     "hash": "7b55144e053dcdbfb79adb846f1f19fe5a21e18678df562ae1719a78f1820c35",
@@ -2980,9 +3080,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/url-encoder/": {
-    "hash": "7222733a7ac5264bc3c1b4f24f190aa5397edc4843d33d771b3977a81f0e5492",
+    "hash": "ade8f1f817ef14e41162f33e7c295649ddf07303a271d1f491fcf5fd4e437ff3",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/uuid-generator/": {
     "hash": "d5ae4a5bcc4b936d68a07096722b2d9ec0f67ea878a1c74280b61eab2e6ecec2",
@@ -2995,9 +3095,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/tools/weighted-average-calculator/": {
-    "hash": "ab1b8fdd7fb42e0bb7a4a406711a6ec52051cbc2a3a7815280eef7307703041e",
+    "hash": "9d85c9d6cedbb78c1777ced40ba72ca2dd4f330624ffb0338920feb937a7338f",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/what-to-eat/": {
     "hash": "a0ab549502884a685fd2d35fddc7387766db6be0fbee8e44af368df729c12442",
@@ -3015,47 +3115,62 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/workflows/": {
-    "hash": "522d1394ef1680d82a07537ab03056543620285d20dbc066fe5d53d381dc2845",
+    "hash": "64e5626b0283ff915621ab57596ffa5214fcb2b93741bc55da16fb7f0074858e",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/workflows/creator-social-toolkit/": {
+    "hash": "b733e53daf5251948d698f56a3f454b061ba4134e62cc5f5affcce15b74cf0e6",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/workflows/daily-decision-toolkit/": {
+    "hash": "4f9795c64a0198752c4f3798f792939f1d97dd7fd3ea0979ef3eaf7eab515a41",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/workflows/grade-gpa-check-toolkit/": {
+    "hash": "64dd1dfc09345ff27cff444fb3fd6ac43f3c9afcfc9fc77af8999d5d681b8cb1",
     "hashVersion": 4,
     "lastmod": "2026-09-02"
   },
-  "https://funnytools.win/workflows/creator-social-toolkit/": {
-    "hash": "4e5278f876be515e562568b723bbbdcbcd66d68af7c6c6b91c6797b98a52fa59",
-    "hashVersion": 4,
-    "lastmod": "2026-08-01"
-  },
-  "https://funnytools.win/workflows/daily-decision-toolkit/": {
-    "hash": "737024743592f76ae72916b5b11a708d66f8f92e2086311be8e959ae7fd6af3c",
-    "hashVersion": 4,
-    "lastmod": "2026-08-01"
-  },
   "https://funnytools.win/workflows/graduate-statistics-report-toolkit/": {
-    "hash": "a90dcac664a2ae30a11fee08d821220d18e5ac940fd7c5bfdbe20eb7cfd94f5c",
+    "hash": "53f5bb059e76b97a3fadf83a17d2b691eed5438e742faf8d78d42794411ddb75",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/workflows/office-document-toolkit/": {
-    "hash": "b271dde6c7e78aaaecabc7311e03b99aa4c23d9cb65fb4ae3a087dc4ba46177f",
+    "hash": "1d751fa352190efc0b109348341b92c44f75d9bc09e118e04c9fa91889742af8",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/workflows/qr-barcode-publishing-toolkit/": {
+    "hash": "642cde959dbe3f46bd005e830fdb67cd77b5f88fe916fb1ffea33ef02b72f7f7",
     "hashVersion": 4,
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/workflows/student-report-toolkit/": {
-    "hash": "053045303491ef54fdf254dfa6f2858332436b134e89558fee921f17eb380fd0",
+    "hash": "27b12453112eb21e399fd3f5ece0fad59fc592816e8fc994380cc57601093daa",
     "hashVersion": 4,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/workflows/teacher-classroom-random-toolkit/": {
-    "hash": "25338a0ba5772993fdb42e0bb5d63bf94887a0e697565ee8c4b667d9a29d4e77",
+    "hash": "761d4c49f35edc42287ba5415eea54f82e2ab99e908a4edb2a2fd9b684cb9f25",
     "hashVersion": 4,
-    "lastmod": "2026-08-01"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/workflows/teacher-exam-score-toolkit/": {
-    "hash": "aef2673ff6cbdecee78375b261ce947550f09ab17fc5165902e57f1c15c40313",
+    "hash": "96088ced486ce1bf28c65b686a9fc8c0a77faca5fdac7829c8680e21fd762a79",
     "hashVersion": 4,
-    "lastmod": "2026-06-26"
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/workflows/text-cleanup-publishing-toolkit/": {
-    "hash": "1f661c45d04d6a6ac1859e9900b8dd8813d542a4c8b362939f2f8e41a7e7187f",
+    "hash": "996ac92080652c0098caef7713bccedec9d37bf30adaac29b02fffc54f7dd4da",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/workflows/verify-tool-result/": {
+    "hash": "add242f6e24b8e72e910cf19e5d4de16c2fc7b15aad46ba6373266b600613dd3",
     "hashVersion": 4,
     "lastmod": "2026-09-02"
   }
