@@ -190,7 +190,7 @@
     "lastmod": "2026-06-26"
   },
   "https://funnytools.win/en/guides/": {
-    "hash": "bf5b3509549361a7a4ac6a0133c200935a4f879f0ee3023de6a99e9912725e44",
+    "hash": "86b4141d07af0b08d430a25e7636fc7206c1f8a7308cbf0235ebf7ae0ddb81d3",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -219,13 +219,38 @@
     "hashVersion": 4,
     "lastmod": "2026-06-26"
   },
+  "https://funnytools.win/en/guides/classroom-random-group-absent-student-repair-guide/": {
+    "hash": "0a5d8df5aced0f78fecf2a99aea94d2ba53efbc8685143a72357472cd5faf49f",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/en/guides/classroom-random-group-guide/": {
     "hash": "8b194966b01a0e9998908446c71fe6003aea5ca41b0fe6851231cb4b77f285ab",
     "hashVersion": 4,
     "lastmod": "2026-06-26"
   },
+  "https://funnytools.win/en/guides/classroom-random-group-materials-handoff-guide/": {
+    "hash": "895297ce4de0e23197caafe8091c5b8d3220b102cb6247ba8d9aab006968f87f",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/en/guides/classroom-random-group-no-repeat-guide/": {
     "hash": "50c21738abd20bbe0aeaa985bb39cccb3e263b65d892dd85f06b56fe821799d3",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/classroom-random-group-seat-transition-guide/": {
+    "hash": "fc84a62cc80f9d91cdaf04cfb0bddc691088ae47285489dfa3934f982cc869ca",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/classroom-random-group-shareable-result-guide/": {
+    "hash": "ff5d599bae95377e46ecfa1b7b011096904767aac44751ddf692186a0c15164d",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/classroom-random-group-size-balance-guide/": {
+    "hash": "91ac9568d1ecef789b6b3f2965d55a4a501ed92b2de782b7ddc4ca051a90014e",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -364,6 +389,11 @@
     "hashVersion": 4,
     "lastmod": "2026-07-24"
   },
+  "https://funnytools.win/en/guides/qr-code-accessible-fallback-guide/": {
+    "hash": "fdec1487f01f97ff696e58b42668c0960fdb4568376b6ddedc53401c55cd98bc",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/en/guides/qr-code-before-print-testing-guide/": {
     "hash": "5b8ae1a172ba901141ac11845a437f23b7665a6c0edb0d85a1e0fed64f343c3c",
     "hashVersion": 4,
@@ -373,6 +403,11 @@
     "hash": "e76b2be7c0236d71651de887fb313167a8e6ff3e766141610b924553f5d9d445",
     "hashVersion": 4,
     "lastmod": "2026-07-22"
+  },
+  "https://funnytools.win/en/guides/qr-code-destination-change-log-guide/": {
+    "hash": "b2fd5f6d13735a6744aa16d2301e43247f4bd3b8926343dc7b7cf6f0ac37b9eb",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/guides/qr-code-event-page-expiry-guide/": {
     "hash": "94e7196aa40b4bf1fd52cc07df8a3c6413b1032e74d7f9adacc09809c3a9a40d",
@@ -384,6 +419,11 @@
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
+  "https://funnytools.win/en/guides/qr-code-multi-placement-consistency-guide/": {
+    "hash": "af1d3a10d127da9588409b16b2dcb5beb489a0f0872dd005498ea1643d8a2b09",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/en/guides/qr-code-multilingual-switch-testing-guide/": {
     "hash": "24313c5e1e3a8eabf82b3093420ada3e107e84c9a0311747851fdfc7dbb4dcfe",
     "hashVersion": 4,
@@ -391,6 +431,16 @@
   },
   "https://funnytools.win/en/guides/qr-code-payload-length-guide/": {
     "hash": "346f20a0788af66044a443bb90896a6ba08b85895a3c00d714cba02b06c5a634",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/qr-code-scan-failure-field-troubleshooting-guide/": {
+    "hash": "48becd2d383c16ae8b8564a5eddb40d1dc5d76fcff54c021a6824665865b59d3",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/qr-code-utm-campaign-link-guide/": {
+    "hash": "cb47e43f1d9a98680b2239a053f36ea0e6cf51baa0a3933ea1db661f9605868c",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -595,7 +645,7 @@
     "lastmod": "2026-08-03"
   },
   "https://funnytools.win/en/tools/group-generator/": {
-    "hash": "e395530715d06716cf03d129eafef4ed80ac51a8b77fa2aa49f6f3e303386195",
+    "hash": "2e93de211ac97610936da2e08d9bd2de60afc3ab46b09c73579d051962077c1e",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -2040,7 +2090,7 @@
     "lastmod": "2026-07-29"
   },
   "https://funnytools.win/guides/": {
-    "hash": "a2ea3c1ee3b5abad1aa0592666291ce87ec7503c75dfda323f1e65066c680398",
+    "hash": "1abcb2c5a4be50c10c7182975b7ca17b9d14a01a2bf1b0d813d1d86886910de7",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -2124,13 +2174,38 @@
     "hashVersion": 4,
     "lastmod": "2026-06-26"
   },
+  "https://funnytools.win/guides/classroom-random-group-absent-student-repair-guide/": {
+    "hash": "b66f9234414009b1b274243dc3d9e8f9648bd55dda5ec391f93f52cc1a896256",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/guides/classroom-random-group-guide/": {
     "hash": "d46d8ae018c8fb8b0777b12377ff28f8554c8c599cb67808d2e71f79fc022715",
     "hashVersion": 4,
     "lastmod": "2026-06-26"
   },
+  "https://funnytools.win/guides/classroom-random-group-materials-handoff-guide/": {
+    "hash": "b2a4488e2b7c467f25e64036b6538672633002892f6d66d057ec1bc6eb5b6b7e",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/guides/classroom-random-group-no-repeat-guide/": {
     "hash": "e5db1acb8c18bd70c082fc6b86b331c180763b606a77417857df321d9bd7a103",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/classroom-random-group-seat-transition-guide/": {
+    "hash": "0d00acf54c4e5e5a747be14094cba8fd34121f40878f902af9cd164393e7ddd7",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/classroom-random-group-shareable-result-guide/": {
+    "hash": "843b757a1fbf30f22d00c43a2e818747afead767d0c59c8d9624dad1a186be96",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/classroom-random-group-size-balance-guide/": {
+    "hash": "2dfd84ab28da12da085271709ff3ac025801182fc23b4da4c007c7b3b41e3a24",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -2564,6 +2639,11 @@
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
+  "https://funnytools.win/guides/qr-code-accessible-fallback-guide/": {
+    "hash": "6f98815a48e25041189d45b1f413d944fccc5bc91c39777fdbf6ec4a90f58e74",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/guides/qr-code-before-print-testing-guide/": {
     "hash": "45bf2aacbbfd0ff99b6fc115c080eb57748dd45cd1b89285ff7b54c20ebf8fc9",
     "hashVersion": 4,
@@ -2574,6 +2654,11 @@
     "hashVersion": 4,
     "lastmod": "2026-07-22"
   },
+  "https://funnytools.win/guides/qr-code-destination-change-log-guide/": {
+    "hash": "b17a90200b18858436eefc806913092029cd4d25979cca13937065019f9f79a4",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
   "https://funnytools.win/guides/qr-code-event-page-expiry-guide/": {
     "hash": "688801d3b4aabf9ec83fb819f2225071edcbd6b301fc8bad465af30b277f7fc4",
     "hashVersion": 4,
@@ -2581,6 +2666,11 @@
   },
   "https://funnytools.win/guides/qr-code-mobile-landing-page-guide/": {
     "hash": "ff25c75e17562bf48a0c7fec997f4c259525dfb5d6653fb6b927e336655426bc",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/qr-code-multi-placement-consistency-guide/": {
+    "hash": "2a1577b9f503e2cfbd8e3cbf8da0e1d5522ec16fe416d6da6968ee3e6f8b90ee",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },
@@ -2603,6 +2693,16 @@
     "hash": "28a7037a868c084bf2ae53209b24d1bd266dc515a6865f9f51f27f43622381eb",
     "hashVersion": 4,
     "lastmod": "2026-08-27"
+  },
+  "https://funnytools.win/guides/qr-code-scan-failure-field-troubleshooting-guide/": {
+    "hash": "9992cb4cd4a3eb97e9b0f7ac4988dc53fef730d758582a707d7bcc8557be2c07",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/guides/qr-code-utm-campaign-link-guide/": {
+    "hash": "0b4b051c46cdf14edb124e0d7d4be447c5bb37a248bb01a4f3071f06e66fa232",
+    "hashVersion": 4,
+    "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/qr-code-vs-barcode-guide/": {
     "hash": "a53ef938d80ebac67d5de8cb00cc005616235013012c5dbfd7592a8117e44eb5",
@@ -3020,7 +3120,7 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/group-generator/": {
-    "hash": "2cb78ca403e7f15b0195da9d172f856450538d67b7b7fdd1481fcbb72facd3f6",
+    "hash": "b385c094593c35cd94f492c3995af9ed7039f50c3341437a960b0790d25e9f14",
     "hashVersion": 4,
     "lastmod": "2026-09-03"
   },

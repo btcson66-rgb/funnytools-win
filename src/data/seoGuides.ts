@@ -3904,6 +3904,16 @@ const releasedAdditionalGuideSlugs = new Set<string>([
   'pdf-to-image-print-crop-marks-guide',
   'pdf-compressor-form-fields-links-guide',
   'pdf-to-word-form-field-editing-guide',
+  'qr-code-utm-campaign-link-guide',
+  'classroom-random-group-size-balance-guide',
+  'qr-code-accessible-fallback-guide',
+  'classroom-random-group-absent-student-repair-guide',
+  'qr-code-destination-change-log-guide',
+  'classroom-random-group-shareable-result-guide',
+  'qr-code-scan-failure-field-troubleshooting-guide',
+  'classroom-random-group-seat-transition-guide',
+  'classroom-random-group-materials-handoff-guide',
+  'qr-code-multi-placement-consistency-guide',
 ]);
 
 export const seoGuides: SeoGuide[] = [

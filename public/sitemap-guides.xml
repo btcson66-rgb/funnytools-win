@@ -278,6 +278,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-lottery-tool-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/classroom-random-group-absent-student-repair-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/classroom-random-group-absent-student-repair-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/classroom-random-group-absent-student-repair-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-random-group-absent-student-repair-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/classroom-random-group-guide/</loc>
     <lastmod>2026-06-26</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/classroom-random-group-guide/" />
@@ -286,11 +293,39 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-random-group-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/classroom-random-group-materials-handoff-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/classroom-random-group-materials-handoff-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/classroom-random-group-materials-handoff-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-random-group-materials-handoff-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/classroom-random-group-no-repeat-guide/</loc>
     <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/classroom-random-group-no-repeat-guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/classroom-random-group-no-repeat-guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-random-group-no-repeat-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/classroom-random-group-seat-transition-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/classroom-random-group-seat-transition-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/classroom-random-group-seat-transition-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-random-group-seat-transition-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/classroom-random-group-shareable-result-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/classroom-random-group-shareable-result-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/classroom-random-group-shareable-result-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-random-group-shareable-result-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/classroom-random-group-size-balance-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/classroom-random-group-size-balance-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/classroom-random-group-size-balance-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-random-group-size-balance-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/classroom-random-picker-guide/</loc>
@@ -732,6 +767,13 @@
     <lastmod>2026-09-03</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/qr-code-accessible-fallback-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-accessible-fallback-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-accessible-fallback-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-accessible-fallback-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/qr-code-before-print-testing-guide/</loc>
     <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-before-print-testing-guide/" />
@@ -747,6 +789,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-classroom-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/qr-code-destination-change-log-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-destination-change-log-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-destination-change-log-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-destination-change-log-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/qr-code-event-page-expiry-guide/</loc>
     <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-event-page-expiry-guide/" />
@@ -759,6 +808,13 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-mobile-landing-page-guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-mobile-landing-page-guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-mobile-landing-page-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/qr-code-multi-placement-consistency-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-multi-placement-consistency-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-multi-placement-consistency-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-multi-placement-consistency-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/qr-code-multilingual-switch-testing-guide/</loc>
@@ -781,6 +837,20 @@
   <url>
     <loc>https://funnytools.win/guides/qr-code-phishing-security-guide/</loc>
     <lastmod>2026-08-27</lastmod>
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/qr-code-scan-failure-field-troubleshooting-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-scan-failure-field-troubleshooting-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-scan-failure-field-troubleshooting-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-scan-failure-field-troubleshooting-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/qr-code-utm-campaign-link-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-utm-campaign-link-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-utm-campaign-link-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-utm-campaign-link-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/qr-code-vs-barcode-guide/</loc>
