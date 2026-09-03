@@ -504,4 +504,103 @@ export const additionalSeoGuides: SeoGuide[] = [
     updatedAt: '2026-09-03',
     noFaqSchema: true,
   },
+  {
+    id: 'pdf-to-image-multipage-download-guide',
+    locales: ['zh', 'en'],
+    slug: 'pdf-to-image-multipage-download-guide',
+    title: {
+      zh: '多頁 PDF 轉圖片下載與檔名整理',
+      en: 'Multi-page PDF to Image Download Guide',
+    },
+    metaTitle: {
+      zh: '多頁 PDF 轉 JPG／PNG 後怎麼下載？頁碼、檔名與 20 頁限制教學',
+      en: 'Multi-page PDF Image Download Guide',
+    },
+    metaDescription: {
+      zh: '多頁 PDF 轉成圖片後通常是一頁一個檔案：本指南說明 FunnyTools 的頁碼檔名、PNG／JPG 選擇、20 頁與 25MB 邊界、逐頁檢查和批次整理方式，避免漏頁、覆蓋或把敏感文件留在共用裝置。',
+      en: 'Convert each PDF page to an image: learn page filenames, PNG/JPG choices, the 20-page and 25MB limits, proofing, and safe file organization.',
+    },
+    h1: {
+      zh: '多頁 PDF 轉成 JPG／PNG 後怎麼下載與整理？',
+      en: 'How to Download and Organize Images from a Multi-page PDF',
+    },
+    category: { zh: '檔案與 PDF', en: 'Files and PDFs' },
+    priority: 36,
+    searchIntent: {
+      zh: '使用者要把多頁 PDF 轉成圖片，想知道輸出會有幾個檔案、如何依頁碼下載與命名，以及遇到檔案或頁數限制時怎麼處理。',
+      en: 'A user needs every page of a PDF as an image and wants to understand the number of files, page-number downloads, naming, and what to do when file or page limits apply.',
+    },
+    targetKeywords: [
+      { zh: '多頁 PDF 轉圖片下載', en: 'multi-page PDF to images download' },
+      { zh: 'PDF 每頁轉 JPG', en: 'convert every PDF page to JPG' },
+      { zh: 'PDF 轉 PNG 檔名', en: 'PDF to PNG page filenames' },
+    ],
+    relatedToolIds: ['pdf-to-image', 'image-compressor', 'pdf-page-reorder'],
+    relatedGuideIds: ['pdf-to-image-resolution-guide', 'pdf-to-jpg-vs-png', 'merge-pdf-page-size-orientation-guide'],
+    relatedWorkflowIds: [],
+    summary: {
+      zh: '多頁轉圖不是把 PDF 變成一張長圖，而是依頁面產生獨立圖片。先規劃頁碼、格式、檔案夾與檢查順序，後續上傳或分享才不容易漏頁。',
+      en: 'Multi-page conversion does not make one tall image; it creates one image per page. Plan filenames, format, folders, and a proofing order before uploading or sharing.',
+    },
+    problem: {
+      zh: '轉換完成後才發現下載資料夾有 page-1、page-2……，卻不知道原始頁碼、檔案順序或是否漏掉最後一頁。若把不同 PDF 都下載到同一個資料夾，重複檔名還可能被系統自動加上括號或直接覆蓋。',
+      en: 'After conversion, a folder may contain page-1, page-2, and so on without the original section name or proof that the last page exists. Saving multiple PDFs to one folder can also create duplicate names, automatic parentheses, or overwrites.',
+    },
+    whoShouldUse: {
+      zh: '適合要把講義、報告、收據、掃描文件或簡報逐頁放入網站、簡報、社群與檔案夾的學生、行政人員與內容創作者。',
+      en: 'Use this for handouts, reports, receipts, scans, or slide PDFs that must become page-by-page images for websites, presentations, social posts, or folders.',
+    },
+    explanation: [
+      {
+        zh: 'FunnyTools PDF 轉圖片工具會為每一頁建立獨立預覽與下載連結，檔名使用 `page-1.png` 或 `page-1.jpg` 這種頁碼格式。這讓單頁使用很方便，但若是多份文件，下載前應先建立以原始檔命名的資料夾，避免不同來源互相混淆。',
+        en: 'FunnyTools creates a separate preview and download link for each page, using filenames such as `page-1.png` or `page-1.jpg`. That is convenient for single-page use, but create a folder named after the source PDF before downloading multiple documents.',
+      },
+      {
+        zh: '目前工具接受單一 PDF，檔案上限 25MB、最多 20 頁，並限制單頁畫布面積避免瀏覽器記憶體失控。這些是工具的處理邊界，不是 PDF 格式本身的容量標準；超過時應先拆分檔案或改用桌面流程，不能靠重試繞過。',
+        en: 'The current tool accepts one PDF up to 25 MB and 20 pages, with a per-page canvas-area guard to avoid exhausting browser memory. These are tool limits, not universal PDF limits; split the source or use a desktop workflow when it exceeds them.',
+      },
+      {
+        zh: 'PNG 與 JPG 的選擇要看後續工作。文字、表格、線條和條碼通常需要乾淨邊緣，可先用 PNG；照片頁面或需要縮小附件時，JPG 往往更省空間。格式選定後仍要逐頁放大檢查，不能把副檔名當成清晰度保證。',
+        en: 'Choose PNG or JPG for the next task. Text, tables, lines, and barcodes often benefit from PNG’s clean edges; photo-heavy pages or smaller attachments often suit JPG. After choosing, zoom into every page—an extension alone does not guarantee clarity.',
+      },
+      {
+        zh: '下載順序最好與原始頁序一致。先下載全部頁面，再用檔案總管依數字排序；不要讓 page-10 排在 page-2 前面，也不要只憑縮圖判斷順序。若要重新組回 PDF，先用頁面重排工具或明確的數字前綴建立可追溯順序。',
+        en: 'Keep the download order aligned with the source. Download all pages, then sort numerically; lexical sorting can place page-10 before page-2, and thumbnails alone may hide a sequence error. If rebuilding a PDF, use the reorder tool or clear numeric prefixes.',
+      },
+      {
+        zh: 'PDF.js 是瀏覽器端的 PDF 解析與渲染專案（https://mozilla.github.io/pdf.js/）。工具實作會在裝置上讀取檔案並建立 Blob 預覽；關閉或離開頁面後，暫存的物件網址會被釋放。這不等於所有使用情境都沒有風險，下載後仍應依共享裝置政策清理檔案。',
+        en: 'PDF.js is a browser-side PDF parsing and rendering project (https://mozilla.github.io/pdf.js/). The tool reads the file on the device and creates Blob previews; those object URLs are released when the page is left. That does not remove every local-device risk, so follow your shared-device cleanup policy after downloading.',
+      },
+    ],
+    steps: [
+      { zh: '先確認 PDF 檔案小於 25MB、頁數不超過 20 頁，並把原始檔名記下來。', en: 'Confirm the PDF is under 25 MB and no more than 20 pages, and note the source filename.' },
+      { zh: '為這份文件建立獨立資料夾，例如 `meeting-notes-2026-09`。', en: 'Create a dedicated folder, such as `meeting-notes-2026-09`, for this source.' },
+      { zh: '開啟 PDF 轉圖片工具，選擇 PNG 或 JPG 與合適的 1×、1.5× 或 2× 輸出倍率。', en: 'Open the PDF-to-image tool and choose PNG or JPG plus a suitable 1×, 1.5×, or 2× scale.' },
+      { zh: '等待每頁完成，核對最後的頁碼與原始 PDF 頁數一致。', en: 'Wait for every page to finish and compare the final page number with the source page count.' },
+      { zh: '逐頁下載並保留 `page-N` 檔名；需要跨文件整理時，再加上原始檔名前綴。', en: 'Download each page while retaining its `page-N` name; add a source prefix later when combining multiple documents.' },
+      { zh: '抽查第一頁、中間頁、最後一頁和含小字／條碼的頁面，再上傳或分享。', en: 'Proof the first, a middle, and the last page plus pages with small type or barcodes before uploading or sharing.' },
+    ],
+    example: {
+      zh: '老師要把 12 頁講義中的第 3、7、12 頁放進投影片。他先建立 `science-handout` 資料夾，選 PNG 與 1.5×，等 12 個預覽完成後確認最後一頁存在，再下載全部檔案。依數字排序後只挑出 page-3、page-7、page-12，並放大檢查圖表文字；沒有把原始 PDF 直接截圖，也沒有把兩份講義存進同一資料夾。',
+      en: 'A teacher needs pages 3, 7, and 12 of a 12-page handout for slides. They create a `science-handout` folder, choose PNG at 1.5×, wait for all 12 previews, confirm the last page exists, and download the set. Numeric sorting makes page-3, page-7, and page-12 easy to select, and chart text is checked before the slides are shared.',
+    },
+    commonMistakes: [
+      { zh: '不同 PDF 都下載成 `page-1`，卻沒有用資料夾或前綴區分來源。', en: 'Saving several PDFs as `page-1` files without a source folder or prefix.' },
+      { zh: '用檔名字串排序，導致 page-10 出現在 page-2 前面。', en: 'Using lexical filename sorting so page-10 appears before page-2.' },
+      { zh: '只看前幾頁縮圖，沒有確認最後一頁和中間頁是否完成。', en: 'Checking only the first thumbnails and missing an unfinished middle or final page.' },
+      { zh: '遇到 25MB 或 20 頁限制時反覆重試，沒有先拆分來源檔。', en: 'Retrying a file over 25 MB or 20 pages instead of splitting the source.' },
+      { zh: '下載後把含個資的圖片留在共用電腦或同步資料夾，忘記清理。', en: 'Leaving downloaded pages with personal data on a shared computer or synced folder.' },
+    ],
+    faq: [
+      { question: { zh: '多頁 PDF 會下載成一張長圖嗎？', en: 'Does a multi-page PDF download as one tall image?' }, answer: { zh: '不會。工具會依頁面產生獨立圖片與下載連結，例如 page-1、page-2。這樣可以單獨使用某頁，但也要核對總頁數。', en: 'No. The tool creates one image and download link per page, such as page-1 and page-2. That makes individual pages useful, but you must still check the total count.' } },
+      { question: { zh: '為什麼找不到第 21 頁？', en: 'Why cannot I convert page 21?' }, answer: { zh: '目前工具最多處理 20 頁；這是瀏覽器工具的安全邊界。可先用 PDF 分割工具拆成較小檔案，再分批轉換。', en: 'The current tool processes up to 20 pages as a browser safety boundary. Split the PDF into smaller files with a PDF splitter and convert them in batches.' } },
+      { question: { zh: '下載的圖片可以重新合成 PDF 嗎？', en: 'Can downloaded images be made into a PDF again?' }, answer: { zh: '可以，但這會把頁面重新點陣化，原 PDF 的文字搜尋、連結、表單與書籤不會由圖片自動恢復。先保留原檔，再用圖片轉 PDF 工具建立副本。', en: 'Yes, but the pages are rasterized and the source PDF’s searchable text, links, forms, and bookmarks do not return automatically. Keep the original and create a copy with an image-to-PDF workflow.' } },
+    ],
+    cta: {
+      zh: '用 PDF 轉圖片工具逐頁輸出，依原始檔建立資料夾並檢查首頁、中頁與末頁，再交付使用。',
+      en: 'Convert the PDF page by page, use a source-named folder, proof the first, middle, and last pages, and then deliver the images.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
 ]; 
