@@ -1325,8 +1325,11 @@ h3 { font-size: 1rem; }
 
 .theme-toggle, .mobile-menu-toggle {
   display: inline-grid;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  flex: 0 0 44px;
   padding: 0;
   place-items: center;
   border: 0;
@@ -1460,6 +1463,7 @@ input:focus, textarea:focus, select:focus { border-color: var(--color-primary-60
   .wrap { width: min(calc(100% - 32px), 960px); }
   .site-main { padding-bottom: 40px; }
   .nav-inner { width: calc(100% - 32px); min-height: 52px; padding: 0; flex-wrap: nowrap; gap: 8px; }
+  .brand { min-width: 0; flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .nav-links { display: none; }
   .lang-switch { margin-left: 0; }
   .theme-toggle { margin-left: auto; }
