@@ -179,9 +179,8 @@ const contentSecurityPolicy = [
             // the two existing properties' page_view behavior explicit instead.
             gtag('config', measurementId, { send_page_view: false });
             if (secondaryMeasurementId) gtag('config', secondaryMeasurementId, { send_page_view: false });
-            gtag('event', 'page_view', {
-              send_to: secondaryMeasurementId ? [measurementId, secondaryMeasurementId] : measurementId,
-            });
+            gtag('event', 'page_view', { send_to: measurementId });
+            if (secondaryMeasurementId) gtag('event', 'page_view', { send_to: secondaryMeasurementId });
           </script>
           <script is:inline>
             window.__ft_track = function(eventName, params) {
