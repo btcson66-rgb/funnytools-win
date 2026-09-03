@@ -1,4 +1,4 @@
-(() => {
+const startAffiliateShelf = () => {
   const productGrids = [...document.querySelectorAll('[data-affiliate-products], [data-support-products]')];
   if (!productGrids.length) return;
 
@@ -68,7 +68,7 @@
   const idsOf = (items) => items.map((item) => item.id).join('|');
   const track = (eventName, params = {}) => {
     try {
-      window.__ft_track?.(eventName, { page_path: window.location.pathname, ...params });
+      window.__btcsonAffiliateTrack?.(eventName, params);
     } catch {
       // Analytics must never affect the tool or the shelf.
     }
@@ -156,7 +156,7 @@
       link.dataset.affiliatePosition = String(position);
       link.dataset.affiliateToolSlug = toolSlug;
       link.dataset.affiliateContext = context;
-      link.dataset.affiliateBatch = String(batchNumber);
+       link.dataset.affiliateBatch = `${asText(product.batch_id) || 'catalog-legacy'}:${batchNumber}`;
       article.append(link);
     }
     return article;
@@ -206,13 +206,36 @@
     let batchNumber = 1;
     let lastBatchIds = '';
     let shelfViewed = false;
+    let itemObserver = null;
     let successSeen = context !== 'tool_result';
     let revealTimer = 0;
-    const contextDimensions = () => context === 'article'
-      ? { article_slug: toolSlug, article_category: category }
-      : context === 'tool_result'
-        ? { tool_slug: toolSlug }
-        : {};
+    const contextDimensions = () => ({
+      placement: context === 'article' ? 'article_inline' : context === 'support_page' ? 'support_page' : 'result_card',
+      surface_type: context === 'article' ? 'article' : context === 'support_page' ? 'support' : 'tool',
+    });
+    const batchIdFor = (items) => `${asText(items[0]?.batch_id) || 'catalog-legacy'}:${batchNumber}`;
+    const observeItemViews = () => {
+      itemObserver?.disconnect();
+      if (!('IntersectionObserver' in window)) return;
+      itemObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting || entry.intersectionRatio < 0.5) continue;
+          const card = entry.target;
+          const link = card.querySelector('a[data-affiliate-product-id]');
+          if (!(link instanceof HTMLAnchorElement)) continue;
+          track('affiliate_item_view', {
+            ...contextDimensions(),
+            affiliate_network: link.dataset.affiliatePlatform || 'other',
+            product_id: link.dataset.affiliateProductId || 'unknown',
+            product_category: link.dataset.affiliateCategory || 'general',
+            batch_id: link.dataset.affiliateBatch || 'catalog-legacy',
+            card_position: Number(link.dataset.affiliatePosition || 0),
+          });
+          itemObserver.unobserve(card);
+        }
+      }, { threshold: [0.5] });
+      grid.querySelectorAll('.affiliate-product-card').forEach((card) => itemObserver.observe(card));
+    };
 
     const reveal = () => {
       if (!shelf || !successSeen || !pool.length || !grid.childElementCount || !shelf.hidden) return;
@@ -221,8 +244,12 @@
         shelf.hidden = false;
         if (!shelfViewed) {
           shelfViewed = true;
-          const visible = [...grid.querySelectorAll('[data-affiliate-platform]')].map((item) => item.dataset.affiliatePlatform);
-          track('affiliate_shelf_view', { ...contextDimensions(), platform_mix: [...new Set(visible)].join(','), context });
+          const visible = [...grid.querySelectorAll('[data-affiliate-platform]')].map((item) => item.dataset.affiliatePlatform || 'other');
+          track('affiliate_module_view', {
+            ...contextDimensions(),
+            affiliate_network: [...new Set(visible)].length === 1 ? visible[0] : 'mixed',
+            batch_id: `catalog-legacy:${batchNumber}`,
+          });
         }
       }, 380);
     };
@@ -237,9 +264,16 @@
     const render = (items, reason = 'initial') => {
       grid.replaceChildren(...items.map((item, index) => createCard(item, index + 1, context, toolSlug, batchNumber)));
       grid.setAttribute('aria-busy', 'false');
+      observeItemViews();
       updateControls();
-      if (reason === 'refresh') track('affiliate_refresh', { ...contextDimensions(), context, batch_number: batchNumber });
-      if (reason === 'expand') track('affiliate_expand', { ...contextDimensions(), context, to_count: items.length, batch_number: batchNumber });
+      if (reason === 'refresh') {
+        const visible = [...new Set(items.map((item) => asText(item.platform) || 'other'))];
+        track('affiliate_refresh', {
+          ...contextDimensions(),
+          affiliate_network: visible.length === 1 ? visible[0] : 'mixed',
+          batch_id: batchIdFor(items),
+        });
+      }
     };
     const buildPool = (eligible, stored) => {
       const byId = new Map(eligible.map((item) => [item.id, item]));
@@ -274,7 +308,6 @@
       renderCurrent('expand');
       if (previousCount === displayLimit) return;
     });
-    supportLink?.addEventListener('click', () => track('affiliate_support_page_click', { ...contextDimensions(), context, batch_number: batchNumber }));
     refreshButton.addEventListener('click', () => {
       if (!pool.length) return;
       displayLimit = batchSize;
@@ -285,14 +318,13 @@
     grid.addEventListener('click', (event) => {
       const target = event.target instanceof Element ? event.target.closest('a[data-affiliate-product-id]') : null;
       if (!(target instanceof HTMLAnchorElement)) return;
-      track('affiliate_product_click', {
+      track('affiliate_click', {
         ...contextDimensions(),
-        platform: target.dataset.affiliatePlatform || 'other',
+        affiliate_network: target.dataset.affiliatePlatform || 'other',
         product_id: target.dataset.affiliateProductId || 'unknown',
         product_category: target.dataset.affiliateCategory || 'general',
-        product_position: Number(target.dataset.affiliatePosition || 0),
-        context: target.dataset.affiliateContext || context,
-        batch_number: Number(target.dataset.affiliateBatch || batchNumber),
+        card_position: Number(target.dataset.affiliatePosition || 0),
+        batch_id: target.dataset.affiliateBatch || `catalog-legacy:${batchNumber}`,
       });
     });
     document.addEventListener('freetools:tool-success', () => {
@@ -384,4 +416,7 @@
   }
 
   productGrids.forEach(mountGrid);
-})();
+};
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startAffiliateShelf, { once: true });
+else startAffiliateShelf();

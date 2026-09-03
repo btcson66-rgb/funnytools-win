@@ -105,8 +105,8 @@ export default {
     name: '2D CAD Drawing Board',
     short: 'Create free 2D CAD drawings in your browser, enter exact grid-unit sizes, and export PNG or SVG—no installation or account.',
     long: 'This is a free browser tool for simple 2D CAD drawings. It needs no download, installation, or account. Enter exact grid-unit sizes, then export the result as PNG or SVG.',
-    seoTitle: 'Free Online 2D CAD Drawing to Exact Dimensions',
-    seoDescription: 'Draw 2D CAD online to size, with no install.',
+    seoTitle: 'Free Online 2D CAD Drawing Board | PNG & SVG',
+    seoDescription: 'Create 2D CAD sketches; export PNG or SVG.',
     keywords: ['2d cad online', '2d drawing online', 'online 2d cad drawing', 'free 2d cad', 'online drafting tool', '2d drawing with dimensions', 'SVG export'],
     contentSections: [
       {

@@ -74,6 +74,9 @@ try {
         googleKnown: Boolean(result.verdict || result.coverageState || result.indexingState),
         indexed: result.verdict === 'PASS',
         verdict: result.verdict ?? '',
+        coverageState: result.coverageState ?? '',
+        pageFetchState: result.pageFetchState ?? '',
+        crawledAs: result.crawledAs ?? '',
         crawlState: result.lastCrawlTime ? `Last crawled ${result.lastCrawlTime}` : (result.coverageState ?? ''),
         indexingState: result.indexingState ?? '',
         canonicalState: {
@@ -117,6 +120,8 @@ const md = [
       `### ${item.url}`,
       `- Google knows URL: ${item.googleKnown ? 'yes' : 'no'}`,
       `- Indexed: ${item.indexed ? 'yes' : 'no'}`,
+      `- Coverage: ${item.coverageState || 'unknown'}`,
+      `- Fetch: ${item.pageFetchState || 'unknown'}; Crawler: ${item.crawledAs || 'unknown'}`,
       `- Crawl status: ${item.crawlState || 'unknown'}`,
       `- Indexing status: ${item.indexingState || item.verdict || 'unknown'}`,
       `- Canonical: Google=${item.canonicalState.googleCanonical || 'unknown'}; User=${item.canonicalState.userCanonical || 'unknown'}`,

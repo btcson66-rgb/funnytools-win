@@ -14,7 +14,7 @@ interface ToolContentForSeo {
 
 function endSentence(value: string, locale: Locale): string {
   const trimmed = value.trim();
-  return /[。！？.!?]$/.test(trimmed) ? trimmed : `${trimmed}${locale === 'zh' ? '。' : '.'}`;
+  return /[。！？.!?…]$/.test(trimmed) ? trimmed : `${trimmed}${locale === 'zh' ? '。' : '.'}`;
 }
 
 function cleanSentenceFragment(value: string, locale: Locale): string {
@@ -22,16 +22,25 @@ function cleanSentenceFragment(value: string, locale: Locale): string {
   return value.replace(/\s+\b(?:and|or|with|for|to|from|of|in|on|by|as|the|a|an)$/i, '');
 }
 
-function truncateText(value: string, maxLength: number, locale: Locale): string {
+function truncateText(value: string, maxLength: number, locale: Locale, addEllipsis = false): string {
   if ([...value].length <= maxLength) return value;
 
-  const chars = [...value].slice(0, maxLength + 1).join('');
+  const reserve = addEllipsis ? 1 : 0;
+  const limit = Math.max(1, maxLength - reserve);
+  const chars = [...value].slice(0, limit + 1).join('');
+  const terminalPattern = locale === 'zh' ? /[。！？]/g : /[.!?](?=\s|$)/g;
+  const terminalBreaks = [...chars.matchAll(terminalPattern)];
+  const terminalBreak = terminalBreaks.at(-1)?.index;
   const breakPattern = locale === 'zh' ? /[，、；。]/g : /[\s,;.!?]/g;
   const breaks = [...chars.matchAll(breakPattern)];
-  const lastBreak = breaks.at(-1)?.index ?? maxLength;
+  const lastBreak = breaks.at(-1)?.index ?? limit;
   const minimumUsefulLength = locale === 'zh' ? 24 : 36;
-  const cutAt = lastBreak >= minimumUsefulLength ? lastBreak : maxLength;
-  return [...value].slice(0, cutAt).join('').trim();
+  const cutAt = terminalBreak !== undefined && terminalBreak + 1 >= minimumUsefulLength
+    ? terminalBreak + 1
+    : lastBreak >= minimumUsefulLength ? lastBreak : limit;
+  const output = [...value].slice(0, cutAt).join('').trim();
+  if (!addEllipsis || (terminalBreak !== undefined && cutAt === terminalBreak + 1)) return output;
+  return `${output.replace(/[，、；,;:：]$/, '').trim()}…`;
 }
 
 export function toolSeoTitle(lang: Locale, content: ToolContentForSeo): string {
@@ -45,14 +54,14 @@ export function toolSeoDescription(lang: Locale, content: ToolContentForSeo, loc
     const usage = localOnly
       ? `本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 ${SITE.name.zh} 伺服器。`
       : '本工具可免費使用且不需註冊；若操作需要網路傳輸，頁面會清楚說明資料處理方式與使用限制。';
-    const purpose = endSentence(truncateText(content.seoDescription || content.short, 150 - [...usage].length - 1, lang), lang);
+    const purpose = endSentence(truncateText(content.seoDescription || content.short, 150 - [...usage].length - 1, lang, true), lang);
     return `${purpose} ${usage}`;
   }
 
   const usage = localOnly
     ? 'Free, no registration. Inputs and files stay in your browser and are not uploaded to FunnyTools servers.'
     : 'Free, no registration. Any required network transfer and related limitations are clearly explained on the page.';
-  const purpose = endSentence(cleanSentenceFragment(truncateText(content.seoDescription || content.short, 150 - usage.length - 2, lang), lang), lang);
+  const purpose = endSentence(cleanSentenceFragment(truncateText(content.seoDescription || content.short, 150 - usage.length - 2, lang, true), lang), lang);
   return `${purpose} ${usage}`;
 }
 
@@ -64,7 +73,7 @@ export function categorySeoDescription(lang: Locale, category: Category): string
   }
 
   const usage = 'Free, no registration, with local browser processing on mobile and desktop.';
-  const concisePurpose = endSentence(cleanSentenceFragment(truncateText(category.description[lang], 150 - usage.length - 2, lang), lang), lang);
+  const concisePurpose = endSentence(cleanSentenceFragment(truncateText(category.description[lang], 150 - usage.length - 2, lang, true), lang), lang);
   return `${concisePurpose} ${usage}`;
 }
 

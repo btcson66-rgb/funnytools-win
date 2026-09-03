@@ -70,8 +70,8 @@ export default {
     name: 'This or That Picker',
     short: 'A 50/50 decider: make a quick random choice between two options.',
     long: 'This or That Picker is a 50/50 decider and random decision maker for when two options feel equally good. Enter Option A and Option B, press Decide, watch the brief alternating animation, and get one fair result with a true 50/50 chance — like a coin flip, but with your actual choices on screen.',
-    seoTitle: 'This or That Picker | Free 50/50 Decider',
-    seoDescription: '50/50 decider: enter two options, get one random fair pick.',
+    seoTitle: '50/50 Decision Maker | Free This or That Picker',
+    seoDescription: 'Enter two options for a fair 50/50 pick.',
     keywords: ['50/50 decider', '50 50 decision maker', '50/50 chooser', 'this or that generator', 'random decision maker', 'A or B picker'],
     instructions: [
       'Enter Option A and Option B.',

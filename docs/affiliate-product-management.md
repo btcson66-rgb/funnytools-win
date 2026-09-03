@@ -60,4 +60,6 @@ FunnyTools 的唯一可編輯商品清單是 `public/data/support-products.json`
 
 ## 分析事件
 
-聯盟事件包括 `affiliate_shelf_view`、`affiliate_product_click`、`affiliate_refresh`、`affiliate_expand` 與 `affiliate_support_page_click`。文章事件帶 `context=article`、`article_slug`、`article_category`；工具結果事件帶 `context=tool_result`、`tool_slug`。事件不可帶入文字輸入、名單、檔案內容或其他個資。貨架可見事件每次掛載只記錄一次；重新計算或重新渲染不得重複計算同一個可見貨架，除非是新的頁面或新的實際可見掛載。
+標準聯盟事件為 `affiliate_module_view`、`affiliate_item_view`、`affiliate_click`、`affiliate_refresh`、`affiliate_close`；目前 FunnyTools 實際貨架使用前四者，因現有 UI 沒有可關閉的 Popup，不虛構 `affiliate_close`。事件送往公司級 GA4 `G-Q78WN8NZ0R`，不改動既有站點 GA4。工具結果貨架使用 `placement=result_card`、`surface_type=tool`；文章貨架使用 `article_inline`／`article`；Support 頁使用 `support_page`／`support`。
+
+商品卡進入 viewport 至少 50% 才記錄 `affiliate_item_view`；原頁重新渲染、重掛載與快速連點由 helper 去重。事件只帶 `site_name`、`placement`、`surface_type`、`affiliate_network`、`product_id`、`product_category`、`batch_id`、`card_position` 及必要的 `close_method`，不帶輸入內容或個資。現有 catalog 尚未有 `batch_id` 欄位，runtime 以 `catalog-legacy:<rotation>` 作為明確 adapter 值，下一次商品資料集中化時應改由資料庫批次欄位提供。

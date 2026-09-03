@@ -973,7 +973,7 @@ export const tools: ToolMeta[] = [
     featured: true,
     isNew: true,
     updated: '2026-06-18',
-    name: { zh: '成績平均計算器強化版', en: 'Grade Average Calculator' },
+    name: { zh: '成績平均計算器', en: 'Grade Average Calculator' },
     short: { zh: '計算成績總分、簡單平均與加權平均。', en: 'Calculate simple and weighted averages from grade entries.' },
   },
   {
