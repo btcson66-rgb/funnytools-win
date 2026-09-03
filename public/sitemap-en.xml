@@ -257,6 +257,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/classroom-timer-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/en/guides/csv-to-json-header-duplicate-column-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/csv-to-json-header-duplicate-column-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/csv-to-json-header-duplicate-column-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/csv-to-json-header-duplicate-column-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/en/guides/fair-student-grouping-guide/</loc>
     <lastmod>2026-06-26</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/fair-student-grouping-guide/" />
@@ -271,6 +278,27 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/image-compression-email-guide/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/comprimir-fotos-para-email/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-compression-email-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/image-compression-quality-size-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/image-compression-quality-size-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/image-compression-quality-size-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-compression-quality-size-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/image-resize-aspect-ratio-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/image-resize-aspect-ratio-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/image-resize-aspect-ratio-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-resize-aspect-ratio-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/json-formatter-trailing-comma-error-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/json-formatter-trailing-comma-error-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/json-formatter-trailing-comma-error-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/json-formatter-trailing-comma-error-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/en/guides/merge-pdf-page-size-orientation-guide/</loc>
@@ -288,11 +316,32 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/merge-pdf-private-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/en/guides/merge-pdf-reading-order-checklist-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/merge-pdf-reading-order-checklist-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/merge-pdf-reading-order-checklist-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/merge-pdf-reading-order-checklist-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/pdf-to-image-background-contrast-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-image-background-contrast-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-image-background-contrast-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-image-background-contrast-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/en/guides/pdf-to-image-multipage-download-guide/</loc>
     <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-image-multipage-download-guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-image-multipage-download-guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-image-multipage-download-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/pdf-to-image-raster-text-search-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-image-raster-text-search-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-image-raster-text-search-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-image-raster-text-search-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/en/guides/pdf-to-image-resolution-guide/</loc>
@@ -341,11 +390,25 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-classroom-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/en/guides/qr-code-event-page-expiry-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-event-page-expiry-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-event-page-expiry-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-event-page-expiry-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/en/guides/qr-code-mobile-landing-page-guide/</loc>
     <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-mobile-landing-page-guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-mobile-landing-page-guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-mobile-landing-page-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/qr-code-multilingual-switch-testing-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/qr-code-multilingual-switch-testing-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/qr-code-multilingual-switch-testing-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/qr-code-multilingual-switch-testing-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/en/guides/qr-code-payload-length-guide/</loc>
@@ -367,6 +430,13 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/seating-chart-student-needs-intake-guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/seating-chart-student-needs-intake-guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/seating-chart-student-needs-intake-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/split-pdf-page-range-planning-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/split-pdf-page-range-planning-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/split-pdf-page-range-planning-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/split-pdf-page-range-planning-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/en/guides/spss-levene-test-guide/</loc>
@@ -607,7 +677,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/csv-to-json/</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/csv-to-json/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/csv-to-json/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-csv-a-json/" />
@@ -643,7 +713,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/extract-pdf-pages/</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/extract-pdf-pages/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/extract-pdf-pages/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/extraer-paginas-pdf/" />
@@ -696,7 +766,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/image-crop/</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/image-crop/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/image-crop/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/recortar-imagen/" />
@@ -739,7 +809,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/images-to-pdf/</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/images-to-pdf/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/images-to-pdf/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-imagenes-a-pdf/" />
@@ -774,7 +844,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/jpg-to-webp/</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/jpg-to-webp/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/jpg-to-webp/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-jpg-a-webp/" />
@@ -783,7 +853,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/json-formatter/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/json-formatter/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/json-formatter/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/formatear-validar-json/" />
@@ -792,7 +862,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/json-to-csv/</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/json-to-csv/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/json-to-csv/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-json-a-csv/" />
@@ -1066,7 +1136,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/split-pdf/</loc>
-    <lastmod>2026-09-02</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/split-pdf/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/split-pdf/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/dividir-pdf/" />

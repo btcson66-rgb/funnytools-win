@@ -3873,7 +3873,28 @@ const releasedTaskGuideSlugs = new Set(
 // related cluster has passed review and is approved as one release unit.
 // Add a complete cluster here at release time; do not add single pages just
 // to make a local build look larger.
-const releasedAdditionalGuideSlugs = new Set<string>(additionalSeoGuides.map((guide) => guide.slug));
+const releasedAdditionalGuideSlugs = new Set<string>([
+  'qr-code-before-print-testing-guide',
+  'qr-code-mobile-landing-page-guide',
+  'qr-code-payload-length-guide',
+  'pdf-to-image-resolution-guide',
+  'merge-pdf-page-size-orientation-guide',
+  'pdf-to-image-multipage-download-guide',
+  'seating-chart-student-needs-intake-guide',
+  'classroom-random-group-no-repeat-guide',
+  'classroom-group-roles-rotation-guide',
+  'seating-chart-changeover-routine-guide',
+  'qr-code-event-page-expiry-guide',
+  'qr-code-multilingual-switch-testing-guide',
+  'split-pdf-page-range-planning-guide',
+  'merge-pdf-reading-order-checklist-guide',
+  'pdf-to-image-background-contrast-guide',
+  'pdf-to-image-raster-text-search-guide',
+  'csv-to-json-header-duplicate-column-guide',
+  'json-formatter-trailing-comma-error-guide',
+  'image-resize-aspect-ratio-guide',
+  'image-compression-quality-size-guide',
+]);
 
 export const seoGuides: SeoGuide[] = [
   ...rawSeoGuides.map(localizeRawGuide),

@@ -999,4 +999,1102 @@ export const additionalSeoGuides: SeoGuide[] = [
     updatedAt: '2026-09-03',
     noFaqSchema: true,
   },
+  {
+    id: 'qr-code-event-page-expiry-guide',
+    locales: ['zh', 'en'],
+    slug: 'qr-code-event-page-expiry-guide',
+    title: {
+      zh: '活動 QR Code 到期與失效處理指南',
+      en: 'QR Code Event Page Expiry and Recovery Guide',
+    },
+    metaTitle: {
+      zh: '活動 QR Code 到期怎麼辦？網址失效與更新流程',
+      en: 'QR Code Event Page Expiry: Prevent Broken Links',
+    },
+    metaDescription: {
+      zh: '活動結束後不要讓 QR Code 變成死連結：用可控網址、到期頁、備援訊息與版本紀錄，規劃更新、轉址和撤下時機，避免使用者掃描後看到錯誤或無法繼續。',
+      en: 'Keep event QR codes useful after a campaign ends with a controlled URL, expiry page, fallback message, redirects, and a documented retirement plan.',
+    },
+    h1: {
+      zh: '活動 QR Code 到期與失效：從設計到撤下的維護流程',
+      en: 'QR Code Event Page Expiry: A Practical Maintenance and Recovery Plan',
+    },
+    category: { zh: 'QR Code 與條碼', en: 'QR codes and barcodes' },
+    priority: 41,
+    searchIntent: {
+      zh: '使用者的活動 QR Code 即將到期或已失效，想知道如何在不重印的情況下更新目的地並保留清楚的使用者訊息。',
+      en: 'An event QR code is nearing expiry or already broken, and the owner wants to update the destination without reprinting while giving visitors a clear next step.',
+    },
+    targetKeywords: [
+      { zh: 'QR Code 到期處理', en: 'QR code event expiry' },
+      { zh: 'QR Code 失效怎麼更新', en: 'update a broken QR code link' },
+      { zh: '活動 QR Code 轉址', en: 'event QR code redirect' },
+    ],
+    relatedToolIds: ['qr-code-generator', 'url-encoder', 'character-counter'],
+    relatedGuideIds: ['qr-code-before-print-testing-guide', 'qr-code-mobile-landing-page-guide', 'qr-code-payload-length-guide'],
+    relatedWorkflowIds: ['qr-barcode-publishing-toolkit'],
+    summary: {
+      zh: '印在海報上的圖形通常不能直接改寫；真正可維護的是它指向的網址。把活動頁、到期頁、轉址與撤下紀錄先設計好，才能在活動結束後仍提供有用回應。',
+      en: 'The printed symbol usually cannot be edited. The maintainable part is its destination URL, so plan the event page, expiry response, redirect, and retirement record before publishing.',
+    },
+    problem: {
+      zh: '活動結束後，主辦方刪掉頁面或讓短網址失效，訪客掃描 QR Code 只看到 404、空白頁或過期報名表。重新印刷成本高，臨時把網址換掉又可能讓既有宣傳失去一致性。',
+      en: 'After an event, an organizer deletes the page or lets a short link expire. Visitors then see a 404, blank page, or closed registration form. Reprinting is expensive, while an undocumented last-minute change breaks consistency across promotion.',
+    },
+    whoShouldUse: {
+      zh: '適合活動主辦、展場、學校、社群管理者、餐飲店與任何會在固定印刷品上放限時 QR Code 的團隊。',
+      en: 'Useful for event organizers, venues, schools, community managers, restaurants, and teams placing time-limited QR codes on printed materials.',
+    },
+    explanation: [
+      {
+        zh: '先把 QR Code 指向自己能控制的穩定入口，而不是把一次性報名表或含日期的長網址直接編碼。印刷圖形固定後，只要入口頁仍存在，就能在頁面內更新活動狀態、提供新資訊或引導到下一個活動。這不是把靜態碼變成動態碼的保證，而是把維護責任放在可管理的網頁上。',
+        en: 'Point the code to a stable entry you control instead of encoding a one-time form or a long date-specific URL. Once the symbol is printed, a living entry page can show status, updates, or the next event. This does not magically make a static code dynamic; it places maintenance on a page you can manage.',
+      },
+      {
+        zh: '到期頁不應只是「活動已結束」。說明結束日期、目前狀態、替代入口與聯絡方式；若還有錄影、資料下載或下一場活動，給出明確按鈕。不要要求訪客猜測是否要重試，也不要把過期表單留在畫面上讓人重複提交。',
+        en: 'An expiry page should say more than “event over.” State the end date, current status, alternative links, and contact route; offer a clear button for a recording, resources, or the next event. Do not leave a closed form that invites repeated submissions or make visitors guess whether to retry.',
+      },
+      {
+        zh: '轉址要保留可理解的路徑與語言，不要在無紀錄的情況下連續跳轉。建立一份版本表，記下 QR Code 印刷品、入口路徑、生效日、到期處理、負責人與最後測試時間。這份表也能讓代班或新成員知道哪些舊海報仍在流通。',
+        en: 'Keep redirects understandable and language-aware; avoid chains of undocumented hops. Maintain a version table with the printed asset, entry path, effective date, expiry action, owner, and last test. That record helps a substitute or new teammate handle posters that are still in circulation.',
+      },
+      {
+        zh: '撤下前先從真實紙張掃描，不只在後台打開網址。用不同手機確認到期頁仍能載入、按鈕可用、聯絡方式正確；也檢查紙張上的短網址或備援文字是否仍與頁面一致。DENSO WAVE 的 QR Code 基礎說明可作為符號結構與留白的參考，但不能替你的活動頁維運背書。',
+        en: 'Before retiring a page, scan the real printed material rather than opening the URL only in an admin screen. Test the expiry page, buttons, and contact route on different phones, and check that the printed fallback text still matches. DENSO WAVE is a reference for QR structure and quiet space, not a guarantee for your page operations.',
+      },
+      {
+        zh: '若網址已經失效，先恢復一個清楚的狀態頁再處理長期轉址。不要把所有未知舊路徑都導到首頁，因為使用者會失去上下文；保留可辨識的「活動已結束」訊息，並在分析工具中把掃描、頁面瀏覽與後續點擊分開觀察。',
+        en: 'If the URL is already broken, restore a clear status page first, then decide on a long-term redirect. Sending every unknown path to the home page loses context; keep an identifiable “event ended” message and measure scans, page views, and follow-up clicks separately.',
+      },
+    ],
+    steps: [
+      { zh: '列出所有仍在紙本、簡報、包裝或社群貼文中的活動 QR Code。', en: 'Inventory event QR codes still present on print, slides, packaging, or social posts.' },
+      { zh: '為每個圖形指定一個可控制、可記錄的入口網址。', en: 'Assign each symbol a controllable, documented entry URL.' },
+      { zh: '建立活動中、即將到期、已結束三種頁面狀態與替代連結。', en: 'Define active, expiring, and ended states with alternative links.' },
+      { zh: '在真正的印刷尺寸上用兩支不同手機測試入口與備援文字。', en: 'Test the entry and fallback text at print size with two different phones.' },
+      { zh: '在版本表記下生效日、到期日、負責人與最後一次掃描時間。', en: 'Record effective date, expiry date, owner, and last scan in a version table.' },
+      { zh: '活動結束後先切換狀態頁，再依資料決定保留、轉址或撤下。', en: 'After the event, switch to the status page before deciding whether to keep, redirect, or retire it.' },
+    ],
+    example: {
+      zh: '一張校園講座海報預計張貼三個月。主辦方讓 QR Code 指向 `/events/spring-talk`，頁面在報名關閉後顯示日期、錄影連結與聯絡信箱；版本表記錄海報批次與最後測試。活動結束兩週後仍有人掃描，團隊保留頁面而沒有導回首頁，避免訪客以為連結壞掉。',
+      en: 'A campus talk poster will remain up for three months. Its QR code points to `/events/spring-talk`; after registration closes, the page shows the date, recording link, and contact email. The version table records the poster batch and last test. When scans continue two weeks later, the team keeps the status page instead of redirecting to the home page.',
+    },
+    commonMistakes: [
+      { zh: '把 QR Code 直接編碼到一次性表單或帶有到期日期的路徑。', en: 'Encoding a one-time form or date-bound path directly in the QR code.' },
+      { zh: '活動結束只刪頁面，沒有提供狀態、替代入口或聯絡方式。', en: 'Deleting the page without a status message, alternative link, or contact route.' },
+      { zh: '所有失效網址都導回首頁，讓訪客失去活動上下文。', en: 'Redirecting every broken URL to the home page and losing event context.' },
+      { zh: '只在後台測試網址，沒有掃描仍在流通的實體印刷品。', en: 'Testing only in an admin screen and never scanning the physical material still in circulation.' },
+      { zh: '沒有保存 URL 版本與負責人，導致到期日只能靠猜。', en: 'Keeping no URL version or owner record and guessing when an event expires.' },
+    ],
+    faq: [
+      { question: { zh: 'QR Code 印出去後可以直接改網址嗎？', en: 'Can I change the URL after printing a QR code?' }, answer: { zh: '圖形本身通常不能改；若它指向你能控制的入口頁，可以更新入口內容或設定清楚的轉址。若是把一次性網址直接編碼，通常需要重新產生與印刷。', en: 'The printed symbol usually cannot be edited. If it points to a page you control, update that entry or its redirect. A one-time URL encoded directly in the symbol usually requires a new code and reprint.' } },
+      { question: { zh: '活動結束後應該把 QR Code 轉到首頁嗎？', en: 'Should an ended event QR code redirect to the home page?' }, answer: { zh: '不一定。保留活動名稱、日期與替代資訊的狀態頁通常更符合訪客期待；只有在內容確實沒有保留價值時，才考慮有說明的轉址。', en: 'Not automatically. A status page preserving the event name, date, and alternatives usually matches visitor expectations; redirect only when the content has no useful context, and explain the destination.' } },
+      { question: { zh: '要保留過期活動頁多久？', en: 'How long should an ended event page stay online?' }, answer: { zh: '依紙本仍在流通時間、資料保存政策與聯絡需求決定。先保留一個不含個資的狀態頁，再依實際掃描與維運成本調整，並記錄決策日期。', en: 'Base it on how long the print remains in circulation, retention policy, and support needs. Keep a privacy-safe status page first, then adjust from real scans and maintenance cost with a dated decision record.' } },
+    ],
+    cta: {
+      zh: '用 QR Code 產生器建立入口，先寫好活動中與到期後的頁面狀態，再用實體樣張測試並留下版本紀錄。',
+      en: 'Create the entry with the QR Code generator, define active and expired states, test a real sample, and keep a version record.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'qr-code-multilingual-switch-testing-guide',
+    locales: ['zh', 'en'],
+    slug: 'qr-code-multilingual-switch-testing-guide',
+    title: {
+      zh: '多語 QR Code 語言切換測試指南',
+      en: 'Multilingual QR Code Language-Switch Testing Guide',
+    },
+    metaTitle: {
+      zh: '多語 QR Code 怎麼測試？語言切換與備援流程',
+      en: 'Multilingual QR Codes: Test Language Switching',
+    },
+    metaDescription: {
+      zh: '為中文與英文 QR Code 落地頁建立語言切換測試：檢查自動判斷、手動切換、日期與表單文字、錯誤頁及短網址備援，避免掃描後進入錯誤語言或卡在錯誤流程。',
+      en: 'Test a bilingual QR code landing page for automatic detection, manual switching, dates, forms, errors, and a short-URL fallback so visitors reach the right language.',
+    },
+    h1: {
+      zh: '多語 QR Code 語言切換：中文與英文落地頁的測試方法',
+      en: 'Multilingual QR Code Testing: A Reliable Language-Switch Workflow',
+    },
+    category: { zh: 'QR Code 與條碼', en: 'QR codes and barcodes' },
+    priority: 42,
+    searchIntent: {
+      zh: '使用者已準備好多語 QR Code 頁面，想確認不同裝置與語言設定不會把訪客帶到錯誤翻譯或無法返回的頁面。',
+      en: 'A multilingual QR destination exists, and the owner needs to verify that devices and language settings do not send visitors to the wrong translation or a page they cannot escape.',
+    },
+    targetKeywords: [
+      { zh: '多語 QR Code 測試', en: 'test multilingual QR code' },
+      { zh: 'QR Code 語言切換', en: 'QR code language switch' },
+      { zh: 'QR Code 中文英文頁面', en: 'bilingual QR code landing page' },
+    ],
+    relatedToolIds: ['qr-code-generator', 'url-encoder', 'character-counter'],
+    relatedGuideIds: ['qr-code-mobile-landing-page-guide', 'qr-code-before-print-testing-guide', 'qr-code-event-page-expiry-guide'],
+    relatedWorkflowIds: ['qr-barcode-publishing-toolkit'],
+    summary: {
+      zh: '多語 QR Code 的難點不是產生圖形，而是讓掃描後的頁面清楚顯示目前語言、允許手動切換，並在自動判斷錯誤時仍保留可理解的備援入口。',
+      en: 'The hard part of a multilingual QR code is not making the symbol. It is showing the current language, keeping a manual switch, and preserving a useful fallback when automatic detection is wrong.',
+    },
+    problem: {
+      zh: '同一個 QR Code 服務不同語言的訪客時，瀏覽器語言、手機共用、轉址參數與快取可能把人送到錯誤頁面。表單欄位看似翻譯完成，提交後訊息、日期格式或客服連結卻仍是另一種語言。',
+      en: 'When one QR code serves multiple languages, browser settings, shared phones, redirect parameters, and caches can send people to the wrong page. A form may look translated while its confirmation, dates, or support link remains in another language.',
+    },
+    whoShouldUse: {
+      zh: '適合服務台、活動報名、校園通知、餐飲菜單、跨地區產品說明與同時面向中文和英文使用者的團隊。',
+      en: 'Use this for help desks, registrations, campus notices, menus, product instructions, and teams serving both Chinese- and English-speaking visitors.',
+    },
+    explanation: [
+      {
+        zh: '把語言切換視為完整任務，不是只替換標題。測試頁面標題、主要按鈕、表單欄位、錯誤訊息、日期時間、價格、隱私說明與提交後確認；任一關鍵步驟混語，都可能讓訪客不敢繼續。',
+        en: 'Treat language switching as a complete task, not a title replacement. Test headings, primary buttons, form fields, errors, dates, prices, privacy text, and confirmation messages; mixed language at a critical step can stop a visitor.',
+      },
+      {
+        zh: '自動依瀏覽器語言判斷可以減少一步，但不能取代可見的手動切換。W3C WCAG 2.2 的可理解性原則支持讓目前語言與操作狀態清楚可辨；不要讓訪客只能清除 Cookie 或猜 URL 才能回到另一種語言。',
+        en: 'Browser-language detection may remove one step, but it must not replace a visible manual switch. WCAG 2.2’s understandable-content principles support making the current language and state clear; visitors should not have to clear cookies or guess a URL to switch back.',
+      },
+      {
+        zh: '用固定測試矩陣記錄裝置與入口：中文手機、英文手機、無偏好語言、私密瀏覽、慢速網路，以及直接開短網址。每種情況都記下最後 URL、頁面語言、切換後是否保留表單內容，以及返回 QR Code 入口是否仍合理。',
+        en: 'Use a fixed test matrix: Chinese phone, English phone, no preferred language, private browsing, slow network, and a direct short-URL visit. Record the final URL, page language, preserved form state, and whether returning to the QR entry still makes sense.',
+      },
+      {
+        zh: '不要把翻譯檔的存在當成完成證據。真正的驗收要從掃描或貼上入口開始，走過語言切換、填寫、錯誤與成功狀態；若使用參數記錄來源，確認轉址不會刪除語言選擇或重複附加參數。',
+        en: 'The existence of translation files is not proof of completion. Start from a scan or pasted entry, then walk through switching, filling, errors, and success; if source parameters are used, verify redirects do not drop the language choice or append it repeatedly.',
+      },
+      {
+        zh: '為無法掃描或無法使用自動偵測的人保留短網址與語言連結。這不只是可及性補救，也能協助客服描述問題、讓桌面使用者直接開啟同一入口。測試結果應記錄「哪一個語言、哪一台裝置、哪一個版本」而非只寫通過。',
+        en: 'Keep a short URL and explicit language links for people who cannot scan or whose automatic detection fails. This is both an accessibility fallback and a support aid. Record which language, device, and version passed—not just a generic “works.”',
+      },
+      {
+        zh: '發布前安排一位不熟悉流程的人盲測，請他只依展板、短網址與頁面提示完成任務，記下猶豫與誤按的位置。',
+        en: 'Before publishing, ask someone unfamiliar with the flow to complete it using only the poster, short URL, and page prompts. Note hesitation and wrong taps; real-user behavior exposes entry problems an experienced team may overlook.',
+      },
+    ],
+    steps: [
+      { zh: '列出中文、英文與未設定語言三種預期入口結果。', en: 'Define expected results for Chinese, English, and no-language-preference entry.' },
+      { zh: '用 QR Code 產生器與短網址各建立一份可重現的測試入口。', en: 'Create reproducible test entries with the QR generator and the short URL.' },
+      { zh: '在兩支不同手機掃描，記錄最終 URL、頁面語言與轉址次數。', en: 'Scan on two different phones and record the final URL, language, and redirect count.' },
+      { zh: '在頁面中手動切換語言，確認標題、表單、日期、錯誤與成功訊息完整一致。', en: 'Switch language manually and verify headings, forms, dates, errors, and success messages.' },
+      { zh: '用私密瀏覽與慢速網路重做一次，確認沒有依賴快取或登入狀態。', en: 'Repeat in private browsing and on a slow connection to avoid cache or login assumptions.' },
+      { zh: '把短網址、語言連結與測試矩陣放入發布紀錄，版本更新後重新抽測。', en: 'Add the fallback URL, language links, and matrix to the release record and retest after changes.' },
+    ],
+    example: {
+      zh: '展場 QR Code 連到雙語產品頁。測試發現英文手機會正確進英文首頁，但按下「立即預約」後的表單確認仍是中文。團隊把表單與成功頁列入同一語言路由，保留頁首的中／EN 切換，並在展板旁印上短網址；重新用私密瀏覽和慢速網路測試後才發布。',
+      en: 'A trade-show QR code opens a bilingual product page. Testing shows an English phone reaches the English home but the booking confirmation remains Chinese. The team puts the form and success page under the same language route, keeps a visible 中文/EN switch, and prints the short URL beside the poster before retesting privately and on a slow connection.',
+    },
+    commonMistakes: [
+      { zh: '只翻譯首屏標題，沒有測表單、錯誤與成功訊息。', en: 'Translating the first-screen heading but not the form, errors, or success message.' },
+      { zh: '依賴自動語言判斷，卻沒有可見的手動切換。', en: 'Relying on automatic detection without a visible manual switch.' },
+      { zh: '只在同一支手機與已登入狀態測試，忽略快取與權限差異。', en: 'Testing on one phone while logged in and missing cache or permission differences.' },
+      { zh: '轉址後遺失語言參數，或每次跳轉都重複附加參數。', en: 'Dropping the language parameter or appending it repeatedly during redirects.' },
+      { zh: '沒有提供短網址或文字備援，客服也無法重現訪客路徑。', en: 'Providing no short-URL or text fallback, leaving support unable to reproduce the path.' },
+    ],
+    faq: [
+      { question: { zh: '一個 QR Code 可以同時服務中文和英文嗎？', en: 'Can one QR code serve Chinese and English visitors?' }, answer: { zh: '可以，前提是入口頁能清楚顯示目前語言並提供手動切換。自動偵測只能當輔助，且每種語言都要測完整任務流程。', en: 'Yes, if the entry clearly shows the current language and offers a manual switch. Automatic detection is only an aid, and each language needs a full task-flow test.' } },
+      { question: { zh: '應該把中文與英文做成兩個 QR Code 嗎？', en: 'Should Chinese and English use separate QR codes?' }, answer: { zh: '若受眾、版面或追蹤需求明確分開，兩個碼可降低語言猜測；若希望印刷簡潔，一個碼加上清楚切換與短網址備援也可行。先以實際掃描流程與維護成本決定。', en: 'Use separate codes when audiences, layout, or measurement must be clearly separated. One code with a clear switch and fallback can keep print simpler; choose from the scan flow and maintenance cost.' } },
+      { question: { zh: '切換語言時要保留已填寫的表單嗎？', en: 'Should a language switch preserve form entries?' }, answer: { zh: '若不會造成個資暴露或欄位格式錯誤，保留未提交內容能減少重填；否則要先清楚提醒並提供回到原語言的方式。測試時要記錄實際行為，不要假設所有瀏覽器相同。', en: 'Preserve unsubmitted fields when it is safe and format-compatible, because it reduces retyping. Otherwise warn clearly and provide a way back; record actual browser behavior rather than assuming it is universal.' } },
+    ],
+    cta: {
+      zh: '先用 QR Code 產生器建立測試入口，再按裝置、語言與網路條件走完切換和表單流程，讓多語頁面在真實掃描後仍然清楚。',
+      en: 'Create a test entry with the QR Code generator, then walk through switching and forms across devices, languages, and network conditions.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'split-pdf-page-range-planning-guide',
+    locales: ['zh', 'en'],
+    slug: 'split-pdf-page-range-planning-guide',
+    title: {
+      zh: 'PDF 分割頁碼範圍規劃指南',
+      en: 'PDF Page-Range Splitting Planning Guide',
+    },
+    metaTitle: {
+      zh: 'PDF 怎麼分割頁碼？範圍、奇偶頁與檔案驗收',
+      en: 'How to Split PDF Pages by Range: A Safe Checklist',
+    },
+    metaDescription: {
+      zh: '分割 PDF 前先規劃頁碼範圍、奇偶頁與輸出命名，並在下載後核對頁數、順序與檔案內容，避免把原檔刪錯、頁面漏掉或交付不完整，分享前也更容易複核。',
+      en: 'Plan PDF page ranges, odd or even selections, and output names before splitting, then verify page count, order, and contents after download.',
+    },
+    h1: {
+      zh: 'PDF 分割頁碼怎麼規劃：從範圍選擇到輸出驗收',
+      en: 'How to Split PDF Pages by Range Without Losing Context',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 43,
+    searchIntent: {
+      zh: '使用者需要從長篇 PDF 擷取連續頁、奇偶頁或多個區段，想先避免頁碼計算錯誤，再確認輸出的檔案可交付。',
+      en: 'A user needs consecutive pages, odd or even pages, or several ranges from a long PDF and wants a repeatable plan that avoids page-number mistakes.',
+    },
+    targetKeywords: [
+      { zh: 'PDF 分割頁碼範圍', en: 'split PDF by page range' },
+      { zh: 'PDF 擷取奇數偶數頁', en: 'extract odd even PDF pages' },
+      { zh: 'PDF 分割後檢查頁數', en: 'verify split PDF page count' },
+    ],
+    relatedToolIds: ['split-pdf', 'extract-pdf-pages', 'pdf-page-reorder'],
+    relatedGuideIds: ['merge-pdf-page-size-orientation-guide', 'pdf-to-image-multipage-download-guide', 'merge-pdf-private-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: '分割 PDF 的核心不是按下按鈕，而是把「原始 PDF 頁碼」和「輸出檔案用途」對上。先保留原檔、寫清楚範圍，再用頁數與內容抽查驗收。',
+      en: 'Splitting a PDF is less about clicking a button than mapping source page numbers to the purpose of each output. Keep the original, write the ranges down, and verify page count and content.',
+    },
+    problem: {
+      zh: '長篇報告常同時有 PDF 內頁碼與檢視器顯示的索引，封面、目錄或插頁讓「第 10 頁」產生歧義。只憑記憶輸入範圍，容易少一頁、多一頁，或把不該分享的附錄一起輸出。',
+      en: 'Long reports may contain printed page numbers and viewer indexes, with covers and inserts making “page 10” ambiguous. Guessing a range can omit a page, include an extra one, or expose an appendix that should not be shared.',
+    },
+    whoShouldUse: {
+      zh: '適合學生交作業、行政人員寄送附件、研究者整理章節、教師分享講義與需要從 PDF 取出指定頁面的任何人。',
+      en: 'Useful for students submitting assignments, administrators sending attachments, researchers extracting chapters, and teachers sharing selected handouts.',
+    },
+    explanation: [
+      {
+        zh: '先確認工具使用的頁碼規則。檢視器顯示的是第幾張紙、PDF 內的印刷頁碼，還是從 1 開始的檔案索引？打開縮圖並寫下第一張與最後一張的可辨識標題，讓範圍有內容線索，不只是一串數字。',
+        en: 'Confirm the tool’s page-number convention first. Is it the sheet count, the printed number inside the PDF, or a file index starting at one? Use thumbnails and write the first and last recognizable headings so a range has content context, not only numbers.',
+      },
+      {
+        zh: '把輸出目標拆成任務：例如第 3–8 頁給同學、第 12 頁留作封面、第 20–25 頁交給審閱者。每個任務使用清楚檔名，避免下載後出現多個 `split.pdf` 而無法辨識。',
+        en: 'Split the output by purpose: pages 3–8 for a classmate, page 12 as a cover, and pages 20–25 for a reviewer. Give each purpose a clear filename so several `split.pdf` downloads are not confused.',
+      },
+      {
+        zh: '多個區段最好先列成表格再操作，並標記是否要保留原始順序。若需要奇數或偶數頁，先確認這裡指檔案索引的奇偶，而不是頁面上印出的數字；封面與插頁可能讓兩者不同。',
+        en: 'List several ranges in a small table and mark whether source order must stay intact. For odd or even pages, confirm that the selection uses file indexes rather than printed numbers; covers and inserts can differ.',
+      },
+      {
+        zh: '分割不應取代原檔備份。本站工具會在瀏覽器中處理檔案並提供下載，但下載檔仍要依共用裝置政策管理；不要在尚未驗收前刪除原始 PDF，也不要把檔名當作內容正確的證明。',
+        en: 'Splitting should not replace the original backup. The site tool processes the file in the browser and offers a download, but follow shared-device cleanup policy; do not delete the source before verification or treat a filename as proof of content.',
+      },
+      {
+        zh: '驗收至少包含輸出檔案能否開啟、頁數是否符合、第一與最後一頁是否正確，以及中間一頁是否仍有文字、圖片、連結或表格。PDF.js 的文件可作為瀏覽器解析概念參考，但不保證所有檔案的特殊字型或註解都能以相同方式呈現。',
+        en: 'Verify that each output opens, has the expected count, starts and ends correctly, and keeps text, images, links, or tables in a middle page. PDF.js documents browser parsing concepts, but unusual fonts or annotations may render differently across files.',
+      },
+      {
+        zh: '多個區段要分別命名並記錄原始頁碼，若印刷頁碼與 PDF 索引不同，交付說明要同時標示兩者。',
+        en: 'Name separate ranges with their source pages, such as `proposal-p03-05`, so recipients do not have to guess. If printed page numbers differ from the PDF index, document both before splitting and repeat the mapping in the delivery note.',
+      },
+    ],
+    steps: [
+      { zh: '複製並保留原始 PDF，記下檔名、總頁數與用途。', en: 'Keep a copy of the original and record its filename, total pages, and purpose.' },
+      { zh: '用縮圖核對工具頁碼與 PDF 內頁碼的差異。', en: 'Use thumbnails to compare tool indexes with printed PDF numbers.' },
+      { zh: '把每個輸出任務寫成連續範圍或奇偶規則。', en: 'Write each output as a range or an odd/even rule.' },
+      { zh: '在分割 PDF 工具中逐項輸入並使用可辨識的檔名。', en: 'Enter each selection in the split-PDF tool with an identifiable filename.' },
+      { zh: '下載後開啟檔案，核對頁數、首尾頁與一頁中段內容。', en: 'Open each download and check count, first and last pages, and one middle page.' },
+      { zh: '在確認收件人與權限後才分享，並依政策清理暫存檔。', en: 'Share only after checking recipients and permissions, then clean temporary files by policy.' },
+    ],
+    example: {
+      zh: '研究報告有 48 頁，前 4 頁是封面與目錄。作者要寄出方法章第 15–22 頁，先在縮圖確認這對應檔案索引 15–22，再以 `method-15-22.pdf` 輸出。下載後檢查 8 頁、首尾標題與第 18 頁表格，確認沒有把附錄一起寄出。',
+      en: 'A research report has 48 pages, including a four-page cover and contents section. The author needs methods pages 15–22, checks thumbnails to confirm those file indexes, and exports `method-15-22.pdf`. The eight-page file is opened and its headings and page-18 table are checked before sharing.',
+    },
+    commonMistakes: [
+      { zh: '把 PDF 內印刷頁碼當成工具索引，導致整段偏移。', en: 'Confusing printed page numbers with the tool index and shifting the range.' },
+      { zh: '一次輸出多個檔案卻都使用相同預設檔名。', en: 'Exporting several files with the same default filename.' },
+      { zh: '驗收只看檔案能開啟，沒有核對頁數與首尾內容。', en: 'Checking that a file opens but not its count or boundary pages.' },
+      { zh: '在確認輸出前刪除原始 PDF，失去重新擷取的依據。', en: 'Deleting the original before verifying the outputs.' },
+      { zh: '把奇偶頁規則套到印刷頁碼，忽略封面與插頁。', en: 'Applying odd/even rules to printed numbers while ignoring inserts.' },
+    ],
+    faq: [
+      { question: { zh: 'PDF 分割的頁碼從 0 還是 1 開始？', en: 'Does PDF splitting start at page 0 or 1?' }, answer: { zh: '要看工具的介面規則，常見是從 1 開始；仍應用縮圖核對第一頁，並用首尾標題驗證，不要只靠習慣猜測。', en: 'It depends on the interface, though one-based indexes are common. Confirm the first thumbnail and use boundary headings instead of relying on habit.' } },
+      { question: { zh: '分割 PDF 會改變原始檔嗎？', en: 'Does splitting change the original PDF?' }, answer: { zh: '瀏覽器工具通常產生新的下載檔，但仍應保留原檔並在交付前檢查輸出。實際行為以工具當下說明與你的檔案驗收為準。', en: 'A browser tool typically creates a new download, but keep the original and verify the output before delivery. Follow the tool’s current behavior and your own acceptance check.' } },
+      { question: { zh: '可以一次輸入多個頁碼範圍嗎？', en: 'Can I enter several page ranges at once?' }, answer: { zh: '若工具介面支援，可以；先把每段用途與檔名寫清楚，下載後分別核對頁數和首尾內容，避免把多段混成一個不易追蹤的檔案。', en: 'If the interface supports it, yes. Document each purpose and filename, then verify each file separately so ranges do not become one untraceable output.' } },
+    ],
+    cta: {
+      zh: '用分割 PDF 工具前先核對縮圖與頁碼規則，下載後檢查頁數和內容，再安全分享指定頁面。',
+      en: 'Check thumbnails and page rules before splitting, then verify count and content before sharing selected pages.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'merge-pdf-reading-order-checklist-guide',
+    locales: ['zh', 'en'],
+    slug: 'merge-pdf-reading-order-checklist-guide',
+    title: {
+      zh: '合併 PDF 閱讀順序與檔案驗收指南',
+      en: 'Merged PDF Reading Order and Acceptance Checklist',
+    },
+    metaTitle: {
+      zh: '合併 PDF 後順序錯了？檔案閱讀與交付檢查表',
+      en: 'Merged PDF Order: Reading Checklist',
+    },
+    metaDescription: {
+      zh: '合併多個 PDF 前先決定檔案順序、封面與版本，完成後檢查頁面連續性、方向、書籤、連結與檔案大小，降低交付錯檔或漏章風險，讓收件人能直接閱讀。',
+      en: 'Plan PDF file order, covers, and versions before merging, then check continuity, orientation, bookmarks, links, and file size before delivery.',
+    },
+    h1: {
+      zh: '合併 PDF 後怎麼確認閱讀順序：交付前完整驗收清單',
+      en: 'How to Check Reading Order After Merging PDFs',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 44,
+    searchIntent: {
+      zh: '使用者已把多個 PDF 合成一份，想確認章節順序、頁面方向、版本與可讀性，避免交付一份看似完成但無法順利閱讀的檔案。',
+      en: 'A user merged several PDFs and needs to verify chapter order, orientation, versions, and readability before delivering the combined file.',
+    },
+    targetKeywords: [
+      { zh: '合併 PDF 順序檢查', en: 'check merged PDF order' },
+      { zh: 'PDF 合併後驗收', en: 'merged PDF acceptance checklist' },
+      { zh: 'PDF 章節順序錯誤', en: 'merged PDF chapters out of order' },
+    ],
+    relatedToolIds: ['merge-pdf', 'pdf-page-reorder', 'pdf-compressor'],
+    relatedGuideIds: ['merge-pdf-page-size-orientation-guide', 'split-pdf-page-range-planning-guide', 'merge-pdf-private-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: '合併 PDF 的正確順序來自一份可追溯的檔案清單，而不是上傳區的偶然排列。合併後要用章節、頁面方向與連結做抽查，才能放心交付。',
+      en: 'Correct merged-PDF order comes from a traceable file list, not an accidental upload arrangement. Sample chapters, orientation, and links after merging before delivery.',
+    },
+    problem: {
+      zh: '資料夾中的檔名可能混用版本、日期或語言，拖曳上傳後順序又不容易察覺。結果是封面在中間、舊版頁面混進新版、橫頁旋轉錯誤，收件人必須自己猜讀法。',
+      en: 'Filenames may mix versions, dates, and languages, while upload order can be hard to notice. A cover ends up in the middle, an old page mixes with a new one, or landscape pages rotate incorrectly.',
+    },
+    whoShouldUse: {
+      zh: '適合整理報告、課程講義、投標文件、會議資料、研究附件與任何需要把多份 PDF 交付成單一檔案的使用者。',
+      en: 'Useful for reports, course handouts, proposals, meeting packets, research appendices, and any delivery that combines several PDFs into one.',
+    },
+    explanation: [
+      {
+        zh: '合併前先建立來源清單，包含順序、檔名、版本、頁數與用途。若檔名不可靠，打開每份 PDF 的第一頁確認標題；檔案系統的字母排序不等於讀者需要的章節順序。',
+        en: 'Create a source list with order, filename, version, page count, and purpose before merging. If names are unreliable, open each first page; alphabetical order is not the reader’s chapter order.',
+      },
+      {
+        zh: '封面、摘要與附錄要先決定位置，並把它們當作正式章節記錄。不要只在合併後靠拖曳補救，因為重排可能連帶影響頁面方向與版本追蹤。',
+        en: 'Decide where covers, abstracts, and appendices belong and record them as formal sections. Do not rely on post-merge dragging, which can obscure orientation and version tracking.',
+      },
+      {
+        zh: '混合 A4／Letter 或橫直頁時，先採用與交付場景相符的策略，再抽查實際列印或螢幕閱讀。既有紙張尺寸指南與 ISO 216 可作為尺寸參考，但不能取代對你這份檔案的檢查。',
+        en: 'For mixed A4/Letter or portrait/landscape pages, choose a strategy for the delivery context and proof real print or screen viewing. The existing paper-size guide and ISO 216 are references, not substitutes for checking your file.',
+      },
+      {
+        zh: '合併後至少檢查第一頁、每個章節交界、最後一頁與一個含表格或連結的頁面。檔案能開啟只代表容器可讀，不代表順序、超連結或書籤仍符合用途；若工具不保留某種書籤，應在交付說明中明白標示。',
+        en: 'After merging, check the first page, every chapter boundary, the last page, and a page with a table or link. Opening successfully proves only that the container is readable; order, links, and bookmarks may differ. If the tool does not preserve a bookmark type, say so in delivery notes.',
+      },
+      {
+        zh: '交付前用清楚的新檔名與版本日期保存，並保留來源清單。若檔案過大，再使用 PDF 壓縮工具，但壓縮後要重做順序、圖片清晰度與連結抽查；不要把壓縮當成免費的品質保證。',
+        en: 'Save the delivery with a clear filename and version date while keeping the source list. If it is too large, compress it and repeat order, image clarity, and link checks; compression is not a free quality guarantee.',
+      },
+      {
+        zh: '若檔案由不同部門提供，約定檔名與頁碼規則並記錄每次替換來源，避免新封面混入舊章節。',
+        en: 'When several teams contribute, agree on one page and filename convention and record every replaced source. This prevents a new cover or appendix from shipping with an old chapter still inside.',
+      },
+      {
+        zh: '驗收表記錄順序、頁數、方向、書籤、連結與檔案大小；不適用項目標記 N/A 而不是留白。',
+        en: 'Use a checklist for order, count, orientation, bookmarks, links, and file size. Mark an item N/A when it does not apply so the next reviewer can distinguish an intentional boundary from an unchecked task.',
+      },
+    ],
+    steps: [
+      { zh: '建立來源清單，記下每份 PDF 的版本、頁數與預期位置。', en: 'List each source PDF with version, page count, and intended position.' },
+      { zh: '依清單順序上傳合併 PDF，完成後立即保存版本檔名。', en: 'Upload in list order, then immediately save a versioned output filename.' },
+      { zh: '檢查封面、章節交界、附錄與最後一頁是否連續。', en: 'Check the cover, chapter boundaries, appendices, and final page for continuity.' },
+      { zh: '抽查橫直方向、紙張尺寸、表格、圖片與至少一個連結。', en: 'Sample orientation, page size, tables, images, and at least one link.' },
+      { zh: '若需壓縮或重排，記錄動作並在輸出檔上重做驗收。', en: 'If compressing or reordering, record it and repeat acceptance on the output.' },
+      { zh: '把合併檔、來源清單與交付版本一起保存，必要時清理暫存檔。', en: 'Store the merged file with its source list and delivery version, then clean temporary files as needed.' },
+    ],
+    example: {
+      zh: '團隊要交付年度報告，來源包括封面、執行摘要、三份部門報告和附錄。合併前先列出版本與頁數，完成後檢查五個章節交界、兩頁橫向圖表和附錄連結；發現第二份部門報告是舊版，立即替換後重新合併，而不是在交付郵件中補充說明。',
+      en: 'A team delivers an annual report built from a cover, executive summary, three department reports, and an appendix. It records versions and counts, checks five boundaries, two landscape charts, and an appendix link, then replaces an outdated department report and merges again before delivery.',
+    },
+    commonMistakes: [
+      { zh: '直接依資料夾或上傳順序合併，沒有來源清單。', en: 'Merging by folder or upload order without a source list.' },
+      { zh: '只看總頁數，沒有檢查章節交界與版本。', en: 'Checking total pages but not chapter boundaries or versions.' },
+      { zh: '混合橫直頁後只在檢視器看一眼，沒有測列印或實際閱讀。', en: 'Glancing at mixed orientations in a viewer without testing the delivery context.' },
+      { zh: '壓縮後沿用原本的驗收結果，沒有重新抽查圖片與連結。', en: 'Reusing pre-compression checks without sampling images and links again.' },
+      { zh: '把工具未保留的書籤或連結功能當成一定存在。', en: 'Assuming bookmarks or links are preserved when the tool may not support them.' },
+    ],
+    faq: [
+      { question: { zh: '合併 PDF 後頁面順序可以再改嗎？', en: 'Can I change page order after merging PDFs?' }, answer: { zh: '可以用 PDF 頁面重排工具調整，但要重新檢查章節交界、頁碼、方向與連結。若來源版本改變，最好回到清單重新合併並留下新版本。', en: 'Yes, with a PDF page-reorder tool, but recheck boundaries, numbering, orientation, and links. If a source version changed, re-merge from the list and create a new version.' } },
+      { question: { zh: '合併 PDF 後書籤一定會保留嗎？', en: 'Are bookmarks always preserved after merging?' }, answer: { zh: '不一定，取決於來源檔與工具實作。把書籤視為需要驗收的功能；若收件人依賴導覽，請在交付前實際點選或提供章節頁。', en: 'Not always; it depends on the source files and tool implementation. Treat bookmarks as an acceptance item and click them or provide a contents page when navigation matters.' } },
+      { question: { zh: '合併 PDF 檔案太大怎麼辦？', en: 'What if the merged PDF is too large?' }, answer: { zh: '先確認是否真的需要所有頁面，再考慮壓縮或分割交付。壓縮後要重測文字、圖片、連結與檔案大小，不能只看檔案變小。', en: 'Confirm that every page is needed, then consider compression or split delivery. After compression, retest text, images, links, and size rather than checking only that it became smaller.' } },
+    ],
+    cta: {
+      zh: '用合併 PDF 工具前先列出來源順序與版本，完成後逐段驗收，再交付一份可追溯的檔案。',
+      en: 'List source order and versions before merging, then verify each boundary before delivering a traceable PDF.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'pdf-to-image-background-contrast-guide',
+    locales: ['zh', 'en'],
+    slug: 'pdf-to-image-background-contrast-guide',
+    title: {
+      zh: 'PDF 轉圖片背景與對比檢查指南',
+      en: 'PDF-to-Image Background and Contrast Guide',
+    },
+    metaTitle: {
+      zh: 'PDF 轉圖片背景變黑或太淡？對比與閱讀檢查',
+      en: 'PDF-to-Image Background Too Dark? Contrast Checklist',
+    },
+    metaDescription: {
+      zh: 'PDF 轉成 JPG 或 PNG 後若背景變黑、文字變淡或圖表不清，先分辨原稿、透明度與渲染差異，再用實際螢幕和列印樣張檢查對比與可讀性，避免直接交付失真的圖片。',
+      en: 'If a PDF-to-JPG or PNG export has a dark background or faint text, separate source, transparency, and rendering causes, then proof contrast on screen and in print.',
+    },
+    h1: {
+      zh: 'PDF 轉圖片後背景與對比異常：從原因到驗收',
+      en: 'PDF-to-Image Background and Contrast Problems: Diagnose and Verify',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 45,
+    searchIntent: {
+      zh: '使用者將 PDF 轉成圖片後發現背景、透明區或文字對比異常，想找出是原始檔、輸出格式還是檢視環境造成，並確認成品可讀。',
+      en: 'A user exported a PDF as images and sees unexpected backgrounds or contrast, seeking to distinguish source, format, and viewing causes before delivery.',
+    },
+    targetKeywords: [
+      { zh: 'PDF 轉圖片背景黑色', en: 'PDF to image black background' },
+      { zh: 'PDF 轉 JPG 文字變淡', en: 'PDF to JPG faint text' },
+      { zh: 'PDF 圖片對比檢查', en: 'check PDF image contrast' },
+    ],
+    relatedToolIds: ['pdf-to-image', 'image-compressor', 'image-resizer'],
+    relatedGuideIds: ['pdf-to-image-resolution-guide', 'pdf-to-jpg-vs-png', 'pdf-to-image-multipage-download-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: '轉檔後的背景與對比問題，可能來自原 PDF 的透明物件、渲染器的背景處理或後續壓縮。先分層診斷，再用目標裝置驗收，不能只看一張縮圖。',
+      en: 'Background and contrast issues can come from transparent objects in the source, renderer behavior, or later compression. Diagnose each layer and proof on the target device instead of trusting one thumbnail.',
+    },
+    problem: {
+      zh: '同一份 PDF 在閱讀器中正常，轉成 JPG 後卻出現黑底、灰文字或白色標誌消失；PNG 在某個簡報軟體裡又顯示不同。若直接交付，收件人可能無法閱讀，卻很難從檔名看出原因。',
+      en: 'A PDF may look normal in a viewer but become black-backed or low-contrast as a JPG; a PNG may look different in presentation software. A filename cannot reveal these rendering differences before delivery.',
+    },
+    whoShouldUse: {
+      zh: '適合把報告、表單、圖表、投影片或含透明圖形的 PDF 轉成圖片，用於簡報、社群、列印與上傳平台的使用者。',
+      en: 'Useful for people converting reports, forms, charts, slides, or transparent graphics to images for presentations, social posts, print, or uploads.',
+    },
+    explanation: [
+      {
+        zh: '先用原始 PDF 的閱讀器與轉出圖片並排比較同一頁。檢查背景是否真的存在於原稿、透明物件是否依賴閱讀器合成，以及問題只發生在某個檢視器。這一步能把「轉檔錯誤」與「顯示器或軟體差異」分開。',
+        en: 'Compare the source PDF and exported image side by side on the same page. Check whether the background is in the source, whether transparency depends on viewer compositing, and whether only one viewer shows the issue. This separates conversion from display differences.',
+      },
+      {
+        zh: 'JPG 會把畫面合成為不透明像素，適合照片但不保留透明區；PNG 能保留較多圖形細節，但不同應用程式仍可能用自己的背景顯示。不要把「檔案有透明通道」誤當成所有平台都會呈現透明。',
+        en: 'JPG flattens the page into opaque pixels and suits photos, while PNG retains more graphic detail; applications may still display transparency against their own background. An alpha channel is not a promise that every platform will show it identically.',
+      },
+      {
+        zh: '以文字、細線、條碼與圖表做對比抽查，而不是只看大面積照片。若背景色接近文字色，縮小或投影時更容易失去層次；可先回到 PDF 修正色彩，再重新轉出，而不是在低品質 JPG 上反覆加深。',
+        en: 'Sample text, fine lines, barcodes, and charts rather than only large photos. Similar background and text colors lose separation when scaled or projected; fix the source PDF and re-export instead of repeatedly darkening a low-quality JPG.',
+      },
+      {
+        zh: '輸出尺寸與對比是兩個不同問題。解析度指南處理像素與用途；本頁處理背景與明暗。Adobe Acrobat 的 PDF 最佳化說明可作為影像取樣與壓縮的參考，但實際可讀性仍要在目標螢幕與紙張上驗收。',
+        en: 'Output dimensions and contrast are separate decisions. The resolution guide covers pixels and use; this guide covers backgrounds and lightness. Adobe Acrobat’s optimization guidance is a reference for sampling and compression, but readability still needs target-screen and paper proofing.',
+      },
+      {
+        zh: '若只是某一頁異常，保留原檔、頁碼與軟體版本，並用另一個檢視器重現。工具在瀏覽器端產生圖片時，檔案格式、瀏覽器與來源 PDF 的特殊效果都可能影響結果；記錄條件比宣稱「一定支援透明」更可靠。',
+        en: 'If only one page is affected, keep the source, page number, and software version and reproduce it in another viewer. Browser-side rendering can vary with format, browser, and special PDF effects; record conditions instead of promising universal transparency support.',
+      },
+      {
+        zh: '對比驗收要設定門檻，例如手機寬度仍可讀、條碼可掃描、投影時圖例不融入背景，並把門檻寫入交付單。',
+        en: 'Set explicit contrast thresholds, such as readable body text at phone width, a scannable barcode, and a legend that stays distinct on a projector. Put them in the delivery record so future exports are judged consistently.',
+      },
+    ],
+    steps: [
+      { zh: '保留原始 PDF，挑一頁包含文字、圖表或透明圖形作對照。', en: 'Keep the source PDF and choose a page with text, a chart, or transparency for comparison.' },
+      { zh: '在原閱讀器與 PDF 轉圖片工具中並排查看同一頁。', en: 'View the same page side by side in the source reader and the PDF-to-image tool.' },
+      { zh: '分別輸出 PNG 與 JPG，記錄背景、文字與檔案大小差異。', en: 'Export PNG and JPG separately and record background, text, and size differences.' },
+      { zh: '在目標瀏覽器、簡報或手機上檢查細字、線條、條碼與圖表。', en: 'Check small text, lines, barcodes, and charts in the target browser, presentation app, or phone.' },
+      { zh: '若需壓縮或縮放，完成後重新檢查對比與邊緣，不沿用舊結果。', en: 'After compression or resizing, recheck contrast and edges instead of reusing old results.' },
+      { zh: '在交付紀錄中寫下格式、尺寸、檢視器與已知限制。', en: 'Record format, dimensions, viewer, and known limits in the delivery notes.' },
+    ],
+    example: {
+      zh: '公司手冊的白色標誌位於深藍色區塊。轉成 JPG 後在白色網頁背景看似消失；團隊回到 PDF 確認標誌本來就使用透明區，改用有明確背景的 PNG 版本，再在簡報與手機上檢查文字與條碼，才上傳給客戶。',
+      en: 'A company handbook has a white logo over a navy panel. After JPG export it appears to vanish on a white webpage. The team confirms the source uses transparency, creates a PNG with an intentional background, and checks text and barcodes in a presentation and phone before delivery.',
+    },
+    commonMistakes: [
+      { zh: '只在原 PDF 閱讀器看正常，就假設轉出圖片也相同。', en: 'Assuming the image matches because the source PDF looks correct in one reader.' },
+      { zh: '把 JPG 與 PNG 的透明處理當成完全一樣。', en: 'Treating JPG and PNG transparency behavior as identical.' },
+      { zh: '只檢查照片，不檢查細字、條碼、圖表與線條。', en: 'Checking photos but not small text, barcodes, charts, or fine lines.' },
+      { zh: '壓縮或縮放後沿用原本的對比驗收。', en: 'Reusing contrast checks after compression or resizing.' },
+      { zh: '遇到單頁異常就刪除原檔，沒有保存重現條件。', en: 'Deleting the source when one page fails and keeping no reproduction conditions.' },
+    ],
+    faq: [
+      { question: { zh: '為什麼 PDF 轉 JPG 後背景變黑？', en: 'Why did the background turn black after PDF-to-JPG export?' }, answer: { zh: '可能是透明物件被不透明背景合成、原稿本身含深色底，或不同渲染器處理方式不同。把原 PDF、PNG 與 JPG 同頁比較，並在目標軟體重現後再決定修正方式。', en: 'Transparency may have been flattened, the source may contain a dark background, or renderers may differ. Compare the source, PNG, and JPG on one page and reproduce it in the target software before fixing.' } },
+      { question: { zh: 'PDF 轉圖片應該選 PNG 還是 JPG？', en: 'Should I choose PNG or JPG for PDF images?' }, answer: { zh: '含文字、線條、圖表或透明需求時通常先試 PNG；照片型頁面可比較 JPG 的大小與品質。最後仍要用交付平台實測，因為平台可能重新壓縮。', en: 'Start with PNG for text, lines, charts, or transparency; compare JPG for photo-heavy pages. Test on the delivery platform because it may recompress either format.' } },
+      { question: { zh: '可以在圖片工具裡直接修正 PDF 的背景嗎？', en: 'Can the image tool directly fix a PDF background?' }, answer: { zh: '轉圖工具主要負責渲染與輸出，不一定能理解原稿圖層。若問題源於原 PDF，回到原始檔修正背景或透明設定，再重新輸出通常更可追蹤。', en: 'A converter mainly renders and exports; it may not understand source layers. If the source causes the issue, fix its background or transparency and export again for a traceable result.' } },
+    ],
+    cta: {
+      zh: '用 PDF 轉圖片工具輸出 PNG／JPG 對照，從原稿到目標裝置逐層檢查背景、文字與圖表對比。',
+      en: 'Export PNG and JPG comparisons, then check backgrounds, text, and charts from source PDF to target device.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'pdf-to-image-raster-text-search-guide',
+    locales: ['zh', 'en'],
+    slug: 'pdf-to-image-raster-text-search-guide',
+    title: {
+      zh: 'PDF 轉圖片後文字搜尋與複製限制指南',
+      en: 'PDF-to-Image Rasterization and Text Search Guide',
+    },
+    metaTitle: {
+      zh: 'PDF 轉圖片後文字不能搜尋？點陣化前要知道的事',
+      en: 'PDF-to-Image: Why Text Search Stops Working',
+    },
+    metaDescription: {
+      zh: 'PDF 轉成圖片會把文字變成像素，可能失去搜尋、複製、超連結與書籤；先決定是否需要可搜尋原檔，再用圖片與 PDF 雙版本交付並驗證，避免收件人無法查找內容。',
+      en: 'Converting PDF pages to images can remove searchable text, links, and bookmarks. Keep the original when search matters, then verify both versions before delivery.',
+    },
+    h1: {
+      zh: 'PDF 轉圖片後文字不能搜尋：點陣化的功能取捨與交付方法',
+      en: 'PDF-to-Image Rasterization: Search, Copy, and Delivery Trade-offs',
+    },
+    category: { zh: 'PDF 工作流程', en: 'PDF workflows' },
+    priority: 46,
+    searchIntent: {
+      zh: '使用者把 PDF 轉成圖片後發現文字不能搜尋或複製，想了解這是正常的點陣化結果，並規劃兼顧視覺與可用性的交付版本。',
+      en: 'A user converted PDF pages to images and lost text search or copying, seeking to understand rasterization and choose a usable delivery format.',
+    },
+    targetKeywords: [
+      { zh: 'PDF 轉圖片文字不能搜尋', en: 'PDF image text not searchable' },
+      { zh: 'PDF 點陣化限制', en: 'PDF rasterization limitations' },
+      { zh: 'PDF 圖片與原檔交付', en: 'deliver PDF and image versions' },
+    ],
+    relatedToolIds: ['pdf-to-image', 'images-to-pdf', 'pdf-compressor'],
+    relatedGuideIds: ['pdf-to-image-resolution-guide', 'pdf-to-image-background-contrast-guide', 'pdf-to-image-multipage-download-guide'],
+    relatedWorkflowIds: ['office-document-toolkit'],
+    summary: {
+      zh: 'PDF 轉圖片是渲染，不是文字格式轉換；每一頁會成為像素圖。視覺版方便放入簡報或社群，但搜尋、複製、連結與書籤通常要保留原 PDF 才能使用。',
+      en: 'PDF-to-image is rendering, not text conversion: each page becomes pixels. Images help presentations and social posts, while search, copying, links, and bookmarks usually require the original PDF.',
+    },
+    problem: {
+      zh: '使用者為了上傳限制把 PDF 轉成 JPG，交付後才發現收件人無法搜尋關鍵字、複製引用或點開原本的連結。重新 OCR 也可能產生辨識錯字，且無法自動恢復書籤與表單。',
+      en: 'Someone converts a PDF to JPG to meet an upload limit, then discovers recipients cannot search, copy citations, or follow links. OCR may add recognition errors and does not automatically restore bookmarks or forms.',
+    },
+    whoShouldUse: {
+      zh: '適合製作簡報圖片、社群貼文、縮圖、列印樣張，以及必須同時提供可視版本與可搜尋原始文件的團隊。',
+      en: 'Useful for presentation images, social posts, thumbnails, print proofs, and teams that need both a visual version and a searchable source document.',
+    },
+    explanation: [
+      {
+        zh: '把「看起來一樣」與「功能一樣」分開。圖片可以保留頁面外觀，但不等於保留文字層、超連結、表單、註解或書籤；在交付規格中先寫清楚收件人需要的是視覺素材還是可操作文件。',
+        en: 'Separate visual similarity from functional equivalence. An image can preserve appearance without text layers, links, forms, annotations, or bookmarks; state whether the recipient needs a visual asset or an interactive document.',
+      },
+      {
+        zh: '若必須把圖片重新放回 PDF，結果仍是圖片型 PDF，搜尋能力不會自動回來。可搜尋需求應保留原始 PDF，或另行建立並校對 OCR 文字層；不要把 OCR 當成無錯誤的還原。',
+        en: 'Putting images back into a PDF still creates an image-only PDF; search does not return automatically. Keep the source or create and proof an OCR text layer separately instead of treating OCR as perfect restoration.',
+      },
+      {
+        zh: '依用途保存兩種版本通常比只交付一種格式更穩：圖片版服務簡報或平台上傳，原 PDF 服務搜尋、引用、列印與存檔。檔名與資料夾要標明 `visual`、`source` 或版本日期，避免收件人拿錯檔。',
+        en: 'Two versions are often safer: an image version for slides or uploads and the source PDF for search, citation, printing, and archive. Label filenames and folders with `visual`, `source`, or a version date.',
+      },
+      {
+        zh: '檢查是否仍需保留可及性資訊。W3C WCAG 2.2 的文字替代與可操作性原則提醒我們，單純圖片可能讓輔助技術與鍵盤使用者少了內容入口；必要時附上原 PDF 或文字稿，而不是只貼一張無替代文字的圖片。',
+        en: 'Check whether accessibility information must remain. WCAG 2.2 principles for text alternatives and operability warn that an image alone can remove an entry point for assistive technology and keyboard users; include the source PDF or transcript when needed.',
+      },
+      {
+        zh: '驗收時實際嘗試搜尋、選取、複製、點擊連結與列印，而不是只比較截圖。用瀏覽器 PDF 檢視器與目標平台各測一次，記錄哪些能力屬於圖片版限制，讓交付說明可被查證。',
+        en: 'For acceptance, actually search, select, copy, click links, and print instead of comparing screenshots. Test the browser PDF viewer and target platform and document which limits belong to the image version.',
+      },
+      {
+        zh: '若原檔含表單、註解或簽名，先確認收件人需要編輯還是只查看，把「可查看」和「可操作」列為不同交付條件。',
+        en: 'If the source contains forms, annotations, or signatures, confirm whether recipients must edit or only view them. List “viewable” and “operable” as separate delivery requirements because an image can block filling and assistive technology.',
+      },
+      {
+        zh: '對需要引用的文件，交付圖片時附上頁碼與文字來源，讓讀者能回到原始 PDF，而不是事後靠 OCR 猜測。',
+        en: 'For documents that will be cited, include page references and the text source alongside images so readers can return to the original PDF. This is more reliable than reconstructing quotations with OCR and keeps a visual export from pretending to be complete.',
+      },
+    ],
+    steps: [
+      { zh: '列出收件人需要的搜尋、複製、連結、列印與可及性功能。', en: 'List the search, copy, link, print, and accessibility features recipients need.' },
+      { zh: '用 PDF 轉圖片工具輸出視覺版，保留帶版本的原 PDF。', en: 'Export the visual version and keep a versioned original PDF.' },
+      { zh: '在兩種檔案上測試搜尋、選取文字、連結與書籤。', en: 'Test search, text selection, links, and bookmarks on both versions.' },
+      { zh: '若平台只接受圖片，附上可搜尋來源或文字替代入口。', en: 'If a platform accepts only images, provide a searchable source or text alternative.' },
+      { zh: '把限制、檔名、版本與用途寫入交付說明。', en: 'Document limitations, filenames, versions, and purposes in delivery notes.' },
+      { zh: '平台重新壓縮或轉檔後，再抽查清晰度與可操作性。', en: 'After platform recompression or conversion, sample clarity and usability again.' },
+    ],
+    example: {
+      zh: '設計師要把 12 頁產品手冊放入社群貼文，因此輸出每頁 PNG；同時把原 PDF 放在可搜尋的說明連結。貼文圖片驗收文字清晰，說明頁則測試搜尋型號、複製規格與點擊客服連結，兩種用途沒有互相取代。',
+      en: 'A designer exports a 12-page product manual as PNGs for a social post while linking the searchable source PDF. The images are checked for legibility; the source is tested for model search, copying specs, and support links.',
+    },
+    commonMistakes: [
+      { zh: '把圖片外觀相同誤認為文字、連結和書籤功能也相同。', en: 'Assuming identical appearance means identical text, link, and bookmark behavior.' },
+      { zh: '刪掉原 PDF，交付後才發現收件人需要搜尋或複製。', en: 'Deleting the source PDF and discovering search or copy needs after delivery.' },
+      { zh: '把 OCR 當成完全準確的文字還原，沒有逐頁校對。', en: 'Treating OCR as perfect restoration without page-by-page proofing.' },
+      { zh: '只交付圖片，沒有提供文字替代或可及性入口。', en: 'Delivering only images without a text alternative or accessible entry.' },
+      { zh: '平台重新壓縮後沿用原本的清晰度驗收。', en: 'Reusing clarity checks after the platform recompresses the images.' },
+    ],
+    faq: [
+      { question: { zh: 'PDF 轉成 JPG 後還能搜尋文字嗎？', en: 'Can I search text after converting a PDF to JPG?' }, answer: { zh: '一般 JPG 只有像素，不能像原始 PDF 的文字層那樣搜尋或複製。若必須搜尋，保留原 PDF 或另行建立並校對 OCR 版本。', en: 'A JPG usually contains pixels, not a searchable text layer. Keep the original PDF or create and proof an OCR version when search is required.' } },
+      { question: { zh: '把圖片再轉回 PDF 就能恢復搜尋嗎？', en: 'Does converting images back to PDF restore search?' }, answer: { zh: '不會自動恢復；那通常仍是圖片型 PDF。需要搜尋時要保留文字來源或建立 OCR 文字層，並檢查辨識品質。', en: 'Not automatically; it is usually still an image-only PDF. Keep the text source or create an OCR layer and check its accuracy.' } },
+      { question: { zh: '交付時可以只給圖片版嗎？', en: 'Can I deliver only the image version?' }, answer: { zh: '若收件人只需要視覺素材可以，但要先確認沒有搜尋、引用、連結、列印或可及性需求。規格不確定時，同時提供圖片與原 PDF 通常更安全。', en: 'Yes when recipients need only visual assets, but confirm there is no search, citation, link, print, or accessibility need. When uncertain, provide both images and the source PDF.' } },
+    ],
+    cta: {
+      zh: '用 PDF 轉圖片工具建立視覺版，同時保留可搜尋原檔，逐一驗收兩種格式的功能差異。',
+      en: 'Create the visual version with the PDF-to-image tool, keep the searchable source, and verify the functional differences.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'csv-to-json-header-duplicate-column-guide',
+    locales: ['zh', 'en'],
+    slug: 'csv-to-json-header-duplicate-column-guide',
+    title: {
+      zh: 'CSV 轉 JSON 標題列與重複欄位指南',
+      en: 'CSV-to-JSON Headers and Duplicate Columns Guide',
+    },
+    metaTitle: {
+      zh: 'CSV 轉 JSON 欄位錯位？標題列與重複欄位檢查',
+      en: 'CSV-to-JSON Columns Misaligned? Check Headers First',
+    },
+    metaDescription: {
+      zh: 'CSV 轉 JSON 後欄位名稱錯位、空白或重複時，先檢查標題列、分隔符號、引號與編碼，再用少量資料驗證輸出，避免整批資料靜默錯欄、覆蓋或漏值。',
+      en: 'When CSV-to-JSON fields shift or duplicate, check headers, delimiters, quotes, and encoding, then validate a small sample before converting the whole file.',
+    },
+    h1: {
+      zh: 'CSV 轉 JSON 欄位錯位怎麼查：標題列與重複欄位驗收',
+      en: 'CSV-to-JSON Column Misalignment: A Header and Sample-Check Workflow',
+    },
+    category: { zh: '文字與資料格式', en: 'Text and data formats' },
+    priority: 47,
+    searchIntent: {
+      zh: '使用者將 CSV 轉成 JSON 後發現鍵名錯誤、欄位移位或重複，想知道如何從標題列與分隔規則找出原因並安全轉換。',
+      en: 'A user converted CSV to JSON and found wrong keys, shifted values, or duplicate fields, seeking a safe way to diagnose headers and delimiters.',
+    },
+    targetKeywords: [
+      { zh: 'CSV 轉 JSON 欄位錯位', en: 'CSV to JSON columns shifted' },
+      { zh: 'CSV 重複欄位名稱', en: 'duplicate CSV headers' },
+      { zh: 'CSV 標題列檢查', en: 'check CSV header row' },
+    ],
+    relatedToolIds: ['csv-to-json', 'json-formatter', 'character-counter'],
+    relatedGuideIds: ['csv-utf8-bom-excel-garbled-text', 'json-error-fix-guide', 'json-to-csv-excel-guide'],
+    relatedWorkflowIds: ['text-cleanup-publishing-toolkit'],
+    summary: {
+      zh: 'CSV 的第一列常被當成 JSON 鍵名，但分隔符號、引號與重複標題會讓整列資料錯位。先檢查小樣本與欄位數，再轉換完整檔案。',
+      en: 'The first CSV row often becomes JSON keys, but delimiters, quotes, and duplicate headers can shift every value. Check a small sample and field count before converting the full file.',
+    },
+    problem: {
+      zh: '同一份 CSV 在試算表看似正常，轉換後卻出現空鍵、`undefined`、後半欄位消失或重複鍵被覆蓋。這類錯誤常不會讓轉換程式報錯，卻會在匯入資料庫後才被發現。',
+      en: 'A CSV can look fine in a spreadsheet yet produce empty keys, missing trailing fields, or overwritten duplicate keys after conversion. These issues may not throw an error and appear only after database import.',
+    },
+    whoShouldUse: {
+      zh: '適合整理問卷、名單、產品表、交易匯出與任何要把表格資料交給 API 或程式處理的人。',
+      en: 'Useful for survey exports, contact lists, product tables, transaction data, and any spreadsheet being sent to an API or program.',
+    },
+    explanation: [
+      {
+        zh: '先確認標題列是否真的在第一列。部分匯出檔前面會有報表名稱、空白列或欄位說明；轉換器若把那一列當鍵名，後續每個物件都會使用錯誤名稱。RFC 4180 將第一列視為可選的欄位名稱列，不能假設所有 CSV 都有相同結構。',
+        en: 'Confirm that the header is truly the first row. Some exports include a report title, blank line, or notes; treating it as headers gives every object the wrong keys. RFC 4180 describes an optional header row, so do not assume every CSV has the same shape.',
+      },
+      {
+        zh: '逐列計算分隔後的欄位數，並注意引號內的逗號不應切開欄位。若某列少一欄，可能是未成對引號、換行文字或錯用分號／逗號；先在小樣本定位，不要直接修改整批資料。',
+        en: 'Count fields after parsing each row and remember that commas inside quotes do not split a field. A short row may come from unclosed quotes, embedded newlines, or the wrong semicolon/comma setting; locate it in a sample before bulk edits.',
+      },
+      {
+        zh: '重複標題是資料模型問題，不只是顯示問題。JSON 物件通常不能安全表達兩個同名鍵；轉換器可能保留最後一個值、加上數字後綴，或把其中一欄捨去。先把標題改成明確且唯一，再記錄欄位對應。',
+        en: 'Duplicate headers are a data-model problem, not merely a display issue. JSON objects cannot safely represent two identical keys; a converter may keep the last value, add suffixes, or drop one. Rename headers uniquely and document the mapping first.',
+      },
+      {
+        zh: '編碼與分隔符號要分開診斷。中文亂碼多半是讀取編碼不符，欄位全部擠在一欄則常是分隔符號不符；同一份檔案可能同時有兩種問題。本站 CSV 轉 JSON 工具適合在清理後做轉換，但輸出仍應抽查。',
+        en: 'Diagnose encoding separately from delimiters. Garbled Chinese often indicates a charset mismatch, while every field in one column suggests the wrong separator; both can occur together. Use the CSV-to-JSON tool after cleanup and still sample the output.',
+      },
+      {
+        zh: '轉換後比較原 CSV 的標題、第一筆、中間一筆與最後一筆。檢查數字是否被當字串、空白是否有意義、日期是否保留原樣；不要用試算表自動格式化後的畫面當唯一真相。',
+        en: 'After conversion, compare headers and the first, middle, and last records. Check numeric strings, meaningful blanks, and date text; a spreadsheet’s auto-format display is not the only source of truth.',
+      },
+      {
+        zh: '若目的地是既有 API，先對照 schema 決定空值要保留為 null 還是省略，並把決策寫入轉換紀錄。',
+        en: 'When an existing API is the destination, compare its schema before deciding whether blanks become `null` or are omitted. Record that decision so another operator can reproduce the same JSON shape.',
+      },
+      {
+        zh: '最後再檢查標題是否含前後空白、不可見字元或不同大小寫，並保留欄位對應表。',
+        en: 'Finally inspect headers for leading spaces, invisible characters, or inconsistent case. They can look identical while producing different API keys, so keep a mapping note after cleanup for later imports.',
+      },
+      {
+        zh: '轉換前先定義欄位契約：必填鍵、可空白欄位與日期數字格式，並把清理與轉換分開記錄。',
+        en: 'Define the data contract before converting: required keys, allowed blanks, and date or number formats. Keep cleanup and conversion as separate notes so import failures can be traced to structure, encoding, or downstream validation.',
+      },
+      {
+        zh: '抽查完成後確認總筆數與欄位數，並加入含逗號、換行、引號及中文的邊界案例；把通過樣本留作回歸測試。',
+        en: 'After the sample passes, compare total rows and fields and include commas, newlines, quotes, and Chinese in boundary cases. These cases often shift columns in an apparently normal CSV; keep the passing sample as a regression fixture.',
+      },
+      {
+        zh: '匯入前再以唯讀方式保存清理後 CSV 與轉換設定，並記錄誰核對了首、中、尾資料。這份小型稽核軌跡能在下游欄位錯置時快速回到原始樣本，不必重新猜測分隔符號。',
+        en: 'Before import, keep the cleaned CSV and conversion settings read-only and record who checked the first, middle, and last records. This small audit trail lets you trace a downstream shift back to the sample instead of guessing delimiter settings again.',
+      },
+      {
+        zh: '匯入後比對一筆原始資料與 API 回應。',
+        en: 'After import, compare at least one source record with the API response.',
+      },
+    ],
+    steps: [
+      { zh: '複製原始 CSV，記下預期欄位名稱與資料筆數。', en: 'Copy the source CSV and record expected headers and row count.' },
+      { zh: '確認標題列位置、分隔符號、引號規則與文字編碼。', en: 'Confirm header position, delimiter, quote rules, and text encoding.' },
+      { zh: '找出空白或重複標題，改成唯一且可理解的名稱。', en: 'Find blank or duplicate headers and rename them uniquely.' },
+      { zh: '用少量含逗號、引號、空值與中文的列先轉換。', en: 'Convert a small sample containing commas, quotes, blanks, and Chinese text.' },
+      { zh: '比較 JSON 的鍵、欄位數、首中尾資料與型別。', en: 'Compare JSON keys, field count, first/middle/last records, and types.' },
+      { zh: '確認抽查無誤後再轉換完整檔案並保存版本。', en: 'Convert the full file only after the sample passes and save a version.' },
+    ],
+    example: {
+      zh: '產品匯出檔前面多了一列報表標題，且最後兩個欄位都叫 `Status`。團隊先移除非資料列、將欄位改成 `stock_status` 與 `order_status`，用含逗號的商品描述做小樣本轉換，確認每筆仍有 8 個鍵後才處理完整檔。',
+      en: 'A product export begins with a report title and ends with two columns both named `Status`. The team removes the non-data row, renames the fields to `stock_status` and `order_status`, tests a product description containing a comma, and converts the full file only after every sample has eight keys.',
+    },
+    commonMistakes: [
+      { zh: '把報表標題或空白列誤當成 CSV 標題列。', en: 'Treating a report title or blank line as the CSV header.' },
+      { zh: '看到逗號就切欄，忽略引號內的逗號與換行。', en: 'Splitting every comma and ignoring quoted commas or newlines.' },
+      { zh: '保留重複鍵名，期待 JSON 自動保存兩個值。', en: 'Keeping duplicate keys and expecting JSON to preserve both values.' },
+      { zh: '只看試算表畫面，不驗證轉換後的實際鍵與資料筆數。', en: 'Trusting a spreadsheet view without checking JSON keys or row count.' },
+      { zh: '整批轉換後才發現編碼或分隔符號設定錯誤。', en: 'Converting the whole file before testing encoding or delimiter settings.' },
+    ],
+    faq: [
+      { question: { zh: 'CSV 可以有重複欄位名稱嗎？', en: 'Can a CSV have duplicate column names?' }, answer: { zh: 'CSV 格式本身可能允許，但轉成 JSON 物件後同名鍵會產生覆蓋或改名問題。若欄位都重要，先改成唯一名稱並保存對應表。', en: 'The CSV text may contain them, but JSON objects can overwrite or rename duplicate keys. Rename them uniquely and keep a mapping when both fields matter.' } },
+      { question: { zh: '為什麼 CSV 轉 JSON 後每筆欄位都錯一格？', en: 'Why are every JSON fields shifted by one column?' }, answer: { zh: '常見原因是標題列位置錯誤、分隔符號設定不符，或某列的引號沒有成對。先檢查原始文字與少量樣本，再修正設定。', en: 'Common causes are a wrong header row, delimiter mismatch, or unclosed quotes. Inspect the raw text and a small sample before changing settings.' } },
+      { question: { zh: 'CSV 轉 JSON 會自動判斷數字和日期嗎？', en: 'Will CSV-to-JSON automatically detect numbers and dates?' }, answer: { zh: '不同工具可能把值保留為字串或嘗試轉型；不要假設結果。用代表性資料抽查型別，尤其是前導零、帳號、郵遞區號和日期。', en: 'Tools may preserve strings or coerce types differently. Sample representative values, especially leading-zero IDs, postal codes, and dates, instead of assuming.' } },
+    ],
+    cta: {
+      zh: '用 CSV 轉 JSON 工具前先確認標題與分隔規則，先轉小樣本，再驗收完整輸出。',
+      en: 'Check headers and delimiters before using the CSV-to-JSON tool, test a sample, then accept the full output.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'json-formatter-trailing-comma-error-guide',
+    locales: ['zh', 'en'],
+    slug: 'json-formatter-trailing-comma-error-guide',
+    title: {
+      zh: 'JSON 尾端逗號錯誤排查指南',
+      en: 'JSON Trailing-Comma Error Troubleshooting Guide',
+    },
+    metaTitle: {
+      zh: 'JSON 為什麼解析失敗？尾端逗號與引號檢查',
+      en: 'JSON Parse Error: Find Trailing Commas',
+    },
+    metaDescription: {
+      zh: 'JSON 解析失敗時，先檢查物件或陣列最後一項的尾端逗號、雙引號、括號與控制字元，再用格式化工具定位行列，避免只刪一個逗號卻留下更深層語法錯誤。',
+      en: 'When JSON parsing fails, check trailing commas, double quotes, brackets, and control characters, then use a formatter to locate the exact line instead of guessing.',
+    },
+    h1: {
+      zh: 'JSON 尾端逗號與解析錯誤：用格式化工具定位問題',
+      en: 'JSON Trailing Commas and Parse Errors: Locate the Real Problem',
+    },
+    category: { zh: '文字與資料格式', en: 'Text and data formats' },
+    priority: 48,
+    searchIntent: {
+      zh: '使用者收到 JSON parse error，懷疑是最後多了一個逗號，想用線上格式化工具確認行列、引號、括號與資料值是否合法。',
+      en: 'A user sees a JSON parse error and suspects a trailing comma, wanting a formatter to identify the line, brackets, quotes, and values that violate JSON syntax.',
+    },
+    targetKeywords: [
+      { zh: 'JSON 尾端逗號錯誤', en: 'JSON trailing comma error' },
+      { zh: 'JSON parse error 怎麼修', en: 'how to fix JSON parse error' },
+      { zh: 'JSON 格式化定位錯誤', en: 'format JSON to find error' },
+    ],
+    relatedToolIds: ['json-formatter', 'csv-to-json', 'json-to-csv'],
+    relatedGuideIds: ['json-error-fix-guide', 'csv-to-json-conversion-guide', 'csv-to-json-header-duplicate-column-guide'],
+    relatedWorkflowIds: ['text-cleanup-publishing-toolkit'],
+    summary: {
+      zh: '標準 JSON 不允許物件或陣列最後一項後面再放逗號；但錯誤也可能來自單引號、未跳脫換行或括號不成對。格式化工具可縮小範圍，不能代替理解資料。',
+      en: 'Standard JSON does not allow a comma after the last object or array item, but single quotes, unescaped newlines, and mismatched brackets cause similar errors. A formatter narrows the location but does not replace data understanding.',
+    },
+    problem: {
+      zh: '設定檔在 JavaScript 中能執行，貼到 API 或其他語言卻解析失敗；錯誤訊息指向下一行，讓人誤刪正確內容。這通常是把寬鬆的程式語法與嚴格的 JSON 格式混在一起。',
+      en: 'A configuration runs in JavaScript but fails in an API or another language; the error points to the next line, tempting someone to delete valid content. The root is often mixing permissive code syntax with strict JSON.',
+    },
+    whoShouldUse: {
+      zh: '適合處理 API 回應、設定檔、匯入資料與需要在不同程式語言間交換 JSON 的開發者、分析師與內容編輯。',
+      en: 'Useful for developers, analysts, and editors handling API responses, config files, imports, and JSON exchanged between languages.',
+    },
+    explanation: [
+      {
+        zh: '先把 JSON 複製到格式化工具，保留原始檔不直接覆蓋。RFC 8259 定義 JSON 語法；尾端逗號不是標準 JSON 的一部分，即使某些語言或編輯器會寬容接受，也不代表 API 或資料庫會接受。',
+        en: 'Paste a copy into the formatter and keep the original untouched. RFC 8259 defines JSON syntax; trailing commas are not standard JSON, even if a language or editor accepts them permissively.',
+      },
+      {
+        zh: '錯誤位置常落在真正問題的下一個 token。看到「unexpected character」時，回看前一個逗號、引號或括號；不要只刪掉錯誤訊息指出的那一行。格式化成功後，再用語法高亮檢查鍵和值是否仍屬於預期結構。',
+        en: 'The reported location may be the token after the real problem. When you see an unexpected character, inspect the preceding comma, quote, or bracket instead of deleting the named line. After formatting, confirm keys and values still have the intended structure.',
+      },
+      {
+        zh: 'JSON 的字串要使用雙引號，換行、反斜線與控制字元需要正確跳脫。註解、`undefined`、`NaN` 與函式不是標準 JSON 值；若來源是程式碼，先序列化或移除程式專用語法。',
+        en: 'JSON strings use double quotes, and newlines, backslashes, and control characters need escaping. Comments, `undefined`, `NaN`, and functions are not standard JSON values; serialize or remove code-only syntax from the source.',
+      },
+      {
+        zh: '格式化只是語法檢查，不會確認欄位名稱、數字單位或個資是否正確。通過後仍要對照 API schema、資料筆數與必要欄位；若 JSON 要交給別人，附上版本和來源。',
+        en: 'Formatting checks syntax, not field meaning, units, or personal data. After it passes, compare the API schema, row count, and required fields, and include a source and version when sharing JSON.',
+      },
+      {
+        zh: '若檔案很大，先縮小到能重現的區段，但不要只保留錯誤行而破壞上下文。修正後用完整檔再驗證一次，並以唯讀副本保存修正前後差異，方便回溯。',
+        en: 'For a large file, reduce it to a reproducible section without losing context. Validate the complete file after fixing and keep read-only before/after copies for traceability.',
+      },
+      {
+        zh: '修正後用實際 API 或匯入器做少量整合測試，保存回應與測試資料版本，以區分語法和型別問題。',
+        en: 'After syntax is fixed, run a small test through the real API staging endpoint or importer. Save the response and fixture version to separate syntax fixes from permissions, field-type, or encoding issues.',
+      },
+      {
+        zh: '若錯誤只在某個編輯器出現，確認它是否使用 JSON5；交付標準應以真正接收資料的解析器為準。',
+        en: 'If an error appears in only one editor, check whether it uses JSON5 or another permissive syntax. Let the receiving parser define the delivery standard and keep the formatted diff so the same comma is not reintroduced.',
+      },
+      {
+        zh: '對外分享前移除測試個資與秘密值，確認跳脫後的換行與反斜線仍代表原意；格式化工具不會替你做安全審查。',
+        en: 'Before sharing, remove test personal data and secrets and confirm escaped newlines and backslashes still mean what you intend. Valid JSON can still contain tokens or internal paths; a formatter does not perform a security review.',
+      },
+      {
+        zh: '最後用接收端的錯誤處理與少量真實資料做回歸測試，確認鍵名、順序依賴與數字精度未被改變，再替換正式檔。',
+        en: 'Finish with a regression test using the consumer’s error handling and a small real-data fixture. Confirm keys, ordering assumptions, and numeric precision did not change; replace the production file only after it passes and keep a recoverable original.',
+      },
+      {
+        zh: '把修正後檔案交給第二位使用者重新格式化一次，確認工具不再報錯且輸出一致，再提交正式環境。',
+        en: 'Have a second operator format the corrected file once more and confirm the tool reports no error and produces consistent output before submitting it to production.',
+      },
+    ],
+    steps: [
+      { zh: '複製 JSON 並記下來源、版本與解析錯誤訊息。', en: 'Copy the JSON and record its source, version, and parse error.' },
+      { zh: '用 JSON 格式化工具定位第一個語法錯誤。', en: 'Use the JSON formatter to locate the first syntax error.' },
+      { zh: '從錯誤位置向前檢查尾端逗號、雙引號與括號。', en: 'Inspect the preceding comma, double quote, and bracket from that location.' },
+      { zh: '移除註解、單引號、未跳脫控制字元與程式專用值。', en: 'Remove comments, single quotes, unescaped controls, and code-only values.' },
+      { zh: '格式化後對照 schema、筆數與必要欄位。', en: 'After formatting, compare the schema, record count, and required fields.' },
+      { zh: '用目標 API 或匯入器做一次小範圍測試，再保存完整版本。', en: 'Run a small target-API or import test, then save the complete version.' },
+    ],
+    example: {
+      zh: 'API 設定在 JavaScript 中能讀取，但服務端回報第 18 行錯誤。格式化工具顯示第 17 行陣列最後一項後多了一個逗號；修正後又發現一個單引號字串，團隊依序改成雙引號並跳脫換行，最後用測試 endpoint 驗證必要欄位。',
+      en: 'A configuration runs in JavaScript but the service rejects line 18. The formatter shows a trailing comma after the final array item on line 17; after fixing it, a single-quoted string appears. The team switches to double quotes, escapes a newline, and tests required fields on a staging endpoint.',
+    },
+    commonMistakes: [
+      { zh: '只刪除錯誤訊息指出的行，沒有回看前一個 token。', en: 'Deleting only the named line without checking the preceding token.' },
+      { zh: '把 JavaScript 物件或帶註解設定檔當成標準 JSON。', en: 'Treating a JavaScript object or commented config as standard JSON.' },
+      { zh: '使用單引號、`undefined` 或未跳脫換行。', en: 'Using single quotes, `undefined`, or unescaped newlines.' },
+      { zh: '格式化成功就直接交付，沒有驗證 schema 與必要欄位。', en: 'Delivering after formatting without checking schema or required fields.' },
+      { zh: '直接覆蓋原始檔，失去修正前後的可追溯差異。', en: 'Overwriting the original and losing before/after traceability.' },
+    ],
+    faq: [
+      { question: { zh: 'JSON 最後一項後面可以加逗號嗎？', en: 'Can JSON have a comma after the last item?' }, answer: { zh: '標準 JSON 不允許物件或陣列最後一項後的尾端逗號。某些程式語言接受寬鬆寫法，但跨系統交換時應移除。', en: 'Standard JSON does not allow a trailing comma after the last object or array item. Some languages accept it, but remove it for cross-system exchange.' } },
+      { question: { zh: '為什麼錯誤行號通常不是問題所在？', en: 'Why is the reported line often not the real problem?' }, answer: { zh: '解析器常在讀到下一個無法理解的 token 才報錯，因此要回看前一個逗號、引號或括號。格式化工具能協助縮小範圍，但仍要理解結構。', en: 'A parser may fail only when it reaches the next unexpected token, so inspect the previous comma, quote, or bracket. A formatter narrows the range but structure still matters.' } },
+      { question: { zh: 'JSON 可以寫註解嗎？', en: 'Can JSON contain comments?' }, answer: { zh: '標準 JSON 不包含註解語法。若設定工具支援 JSON5 或自訂格式，輸出給 API 前要轉成標準 JSON 並重新驗證。', en: 'Standard JSON has no comment syntax. If a config tool supports JSON5 or a custom format, convert to standard JSON before sending it to an API and validate again.' } },
+    ],
+    cta: {
+      zh: '把 JSON 複製到格式化工具定位語法，再用目標 API 和 schema 驗收，不直接覆蓋原始檔。',
+      en: 'Copy JSON into the formatter, verify syntax with the target API and schema, and keep the original file intact.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'image-resize-aspect-ratio-guide',
+    locales: ['zh', 'en'],
+    slug: 'image-resize-aspect-ratio-guide',
+    title: {
+      zh: '圖片調整尺寸與比例裁切指南',
+      en: 'Image Resizing and Aspect-Ratio Cropping Guide',
+    },
+    metaTitle: {
+      zh: '圖片調整尺寸不變形：比例、裁切與留白選擇',
+      en: 'Resize Images Without Stretching: Crop or Pad',
+    },
+    metaDescription: {
+      zh: '圖片要符合頭像、網站或簡報尺寸時，先決定鎖定比例、裁切或留白，再用實際寬高與焦點驗收，避免人物變形、文字被切掉或畫面留白失控，並保留可回復的原圖。',
+      en: 'Fit an image to a profile, website, or slide by choosing locked ratio, crop, or padding, then verify dimensions and focal content without stretching.',
+    },
+    h1: {
+      zh: '圖片調整尺寸不變形：比例、裁切與留白的實作流程',
+      en: 'Resize Images Without Distortion: A Practical Ratio and Crop Workflow',
+    },
+    category: { zh: '圖片工作流程', en: 'Image workflows' },
+    priority: 49,
+    searchIntent: {
+      zh: '使用者需要把圖片放進固定尺寸的頭像、網站卡片或簡報，想知道該鎖定比例、裁切還是加留白，並避免內容變形。',
+      en: 'A user must fit an image into a fixed profile, card, or slide size and needs to choose locked scaling, cropping, or padding without distortion.',
+    },
+    targetKeywords: [
+      { zh: '圖片調整比例不變形', en: 'resize image without distortion' },
+      { zh: '圖片裁切還是留白', en: 'crop or pad image' },
+      { zh: '圖片固定尺寸比例', en: 'fit image to fixed aspect ratio' },
+    ],
+    relatedToolIds: ['image-resizer', 'image-crop', 'image-compressor'],
+    relatedGuideIds: ['resize-image-without-distortion', 'crop-vs-resize-vs-compress-image', 'image-compression-email-guide'],
+    relatedWorkflowIds: ['creator-social-toolkit'],
+    summary: {
+      zh: '固定尺寸不代表要把原圖硬拉成同樣比例。先決定內容不能被切掉、畫面必須填滿，或可以接受留白，再用鎖定比例、裁切或 padding 完成。',
+      en: 'A fixed box does not mean stretching the source. Decide whether content must stay intact, the box must be filled, or padding is acceptable, then use locked scaling, crop, or padding.',
+    },
+    problem: {
+      zh: '把 4:3 照片直接拉成 1:1，人物臉部和圓形標誌會變形；改用自動裁切又可能切掉文字或商品。只看輸出寬高，沒有檢查焦點與邊界，往往要上傳後才發現。',
+      en: 'Stretching a 4:3 photo into a square distorts faces and logos; automatic cropping may cut text or a product. Checking dimensions alone misses the focal area until the upload is already live.',
+    },
+    whoShouldUse: {
+      zh: '適合製作社群頭像、商品縮圖、網站卡片、投影片圖片、證件照與任何需要符合固定寬高的使用者。',
+      en: 'Useful for social avatars, product thumbnails, website cards, slides, ID photos, and any fixed-width and height destination.',
+    },
+    explanation: [
+      {
+        zh: '先量出來源與目標比例。比例相同時可鎖定比例縮放；比例不同時必須在「裁切內容」與「保留完整畫面加留白」之間選擇。不要把「符合尺寸」和「保留所有內容」當成同一個要求。',
+        en: 'Measure source and target ratios first. Matching ratios can use locked scaling; mismatched ratios require a choice between cropping content and keeping the full image with padding. Fitting dimensions and preserving everything are different requirements.',
+      },
+      {
+        zh: '裁切前先設定焦點安全區：人物臉、產品標誌、圖表標題或 QR Code 不應貼近邊緣。先在裁切工具預覽，再輸出；自動置中只是起點，不一定符合每張圖的重點。',
+        en: 'Set a safe focal area before cropping: faces, logos, chart titles, and QR codes should not sit on the edge. Preview in the crop tool; center cropping is only a starting point.',
+      },
+      {
+        zh: '若圖片要放在多個版位，保留原始比例的主檔，再各自輸出目標尺寸。反覆在已裁切檔上縮放會累積取捨，之後很難找回被切掉的內容。',
+        en: 'For multiple placements, keep a proportional master and export each target size separately. Repeatedly resizing a cropped file compounds trade-offs and cannot restore removed content.',
+      },
+      {
+        zh: '鎖定比例只能避免幾何變形，不能保證文字清晰或檔案適合上傳。完成尺寸後，依用途決定是否再壓縮，並在手機、網站卡片或簡報投影等實際情境查看。',
+        en: 'Locked ratio prevents geometric distortion but not blurry text or upload limits. After sizing, decide whether to compress and view it in the real context: phone, card, or projected slide.',
+      },
+      {
+        zh: '使用本站圖片調整尺寸工具時，輸出後檢查像素寬高、檔案方向、焦點與透明背景。工具在瀏覽器端處理檔案；下載檔仍應依共享裝置政策清理，不要把暫存檔當成主檔。',
+        en: 'After using the browser-based image resizer, check pixel dimensions, orientation, focal content, and transparency. Follow shared-device cleanup policy for downloads and keep a separate master.',
+      },
+      {
+        zh: '為不同版位使用可追蹤的輸出命名並記錄裁切焦點，之後需要另一比例時一律回到主檔重做。',
+        en: 'Use traceable output names such as `avatar-square` and `card-4x3`, and record the crop focus before delivery. Return to the master when another ratio is requested instead of guessing removed edges.',
+      },
+      {
+        zh: '交付前寫下目標寬高、格式、透明需求與裁切規則，並在瀏覽器與手機各開一次確認。',
+        en: 'Before delivery, write a short spec for target dimensions, format, transparency, and crop rules, then open the result in a browser and on a phone. Completion means focal content and readability survive the real placement.',
+      },
+      {
+        zh: '若圖片同時用於頭像、卡片與列印，保留主檔並各自輸出，不用一個折衷尺寸服務所有場景；每個輸出標明版位與日期。',
+        en: 'When an image serves an avatar, card, and print job, keep a master plus purpose-specific exports instead of one compromise size. Label each output by placement and date so a later change replaces only the affected version.',
+      },
+      {
+        zh: '固定框若包含文字或商品，裁切後再次確認安全邊界與最小可讀尺寸；必要時保留少量留白並記錄手動調整。',
+        en: 'For boxes containing text or products, recheck safe margins and minimum readable size after cropping. A little padding is safer than touching a logo, face, or barcode; record any manual exception beside the version.',
+      },
+      {
+        zh: '若目標平台會自動裁切，先上傳測試圖確認其焦點規則，再調整輸出，不要只依賴本站預覽。',
+        en: 'If the destination auto-crops, upload a test image to learn its focal rule and adjust the export before the real campaign. Do not rely on the local preview alone when the platform changes the frame.',
+      },
+    ],
+    steps: [
+      { zh: '記下原圖寬高、目標寬高與不可裁切的重點。', en: 'Record source and target dimensions and content that must not be cropped.' },
+      { zh: '計算兩者比例，選擇鎖定比例、裁切或留白。', en: 'Compare ratios and choose locked scaling, crop, or padding.' },
+      { zh: '在圖片裁切工具中定位焦點並預覽邊界。', en: 'Position the focal area and preview edges in the crop tool.' },
+      { zh: '用圖片調整尺寸工具輸出目標像素，保持比例。', en: 'Export target pixels with the image resizer while preserving ratio.' },
+      { zh: '在實際版位檢查人物、文字、標誌、透明與方向。', en: 'Check faces, text, logos, transparency, and orientation in the real placement.' },
+      { zh: '需要時再壓縮，保存主檔與用途明確的輸出檔。', en: 'Compress only if needed and save the master separately from purpose-named outputs.' },
+    ],
+    example: {
+      zh: '網站卡片要求 1200×800，但原圖是 4000×3000。團隊鎖定比例縮小到 1067×800，再從主檔裁切左右，確保商品標籤留在安全區；另一個社群方形版則重新定位焦點，而不是把卡片檔再拉成正方形。',
+      en: 'A website card needs 1200×800 while the source is 4000×3000. The team scales proportionally to 1067×800, crops the sides from the master, and keeps the product label safe. The square social version is cropped from the master again rather than stretching the card file.',
+    },
+    commonMistakes: [
+      { zh: '為了符合寬高直接拉伸，讓人物、圓形標誌或文字變形。', en: 'Stretching to target dimensions and distorting faces, logos, or text.' },
+      { zh: '使用自動置中裁切，卻沒有檢查焦點與邊緣。', en: 'Using center crop without checking the focal area and edges.' },
+      { zh: '在已裁切輸出檔上反覆縮放，遺失可恢復的原始內容。', en: 'Repeatedly resizing a cropped output and losing recoverable content.' },
+      { zh: '只看像素尺寸，不看網站、手機或簡報中的實際效果。', en: 'Checking pixels but not the real website, phone, or slide context.' },
+      { zh: '把輸出檔當成主檔，未保存原始比例與透明資訊。', en: 'Treating an output as the master and losing original ratio or transparency.' },
+    ],
+    faq: [
+      { question: { zh: '調整圖片尺寸一定要裁切嗎？', en: 'Must I crop when resizing an image?' }, answer: { zh: '不一定。比例相同時鎖定比例縮放即可；比例不同時可選裁切、留白或改變版位。先依內容重要性和版位規格決定。', en: 'No. Matching ratios need only locked scaling; mismatched ratios can use crop, padding, or a different layout. Decide from content importance and destination rules.' } },
+      { question: { zh: '鎖定比例會讓圖片符合固定寬高嗎？', en: 'Does locking the ratio fit a fixed width and height?' }, answer: { zh: '它會避免變形，但可能只符合其中一邊，另一邊需要裁切或留白。固定框的完整處理需要兩個步驟。', en: 'It prevents distortion but may fit only one dimension; the other needs crop or padding. A fixed box usually requires both decisions.' } },
+      { question: { zh: '可以先壓縮再調整尺寸嗎？', en: 'Should I compress before resizing?' }, answer: { zh: '通常先從主檔調整尺寸，再依用途壓縮較容易控制品質。若先壓縮又大幅縮放，細節可能重複損失；每次輸出都要實測。', en: 'Usually resize from the master first, then compress for the destination. Compressing before a large resize can compound detail loss; test each output.' } },
+    ],
+    cta: {
+      zh: '先用圖片裁切與調整尺寸工具選好比例策略，再到實際版位檢查焦點與清晰度。',
+      en: 'Choose a ratio strategy with crop and resize tools, then check the focal content and clarity in the real placement.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'image-compression-quality-size-guide',
+    locales: ['zh', 'en'],
+    slug: 'image-compression-quality-size-guide',
+    title: {
+      zh: '圖片壓縮品質與檔案大小取捨指南',
+      en: 'Image Compression Quality and File-Size Trade-off Guide',
+    },
+    metaTitle: {
+      zh: '圖片壓縮品質怎麼選？檔案大小與清晰度驗收',
+      en: 'Image Compression Quality: Balance Size and Clarity',
+    },
+    metaDescription: {
+      zh: '圖片壓縮不是越小越好：先設定上傳大小與可接受清晰度，再比較文字邊緣、細節、色塊與檔案重量，保存原圖並用實際平台驗收輸出，避免只追求最低容量。',
+      en: 'Smaller is not always better. Set the upload limit, compare text edges and detail, keep the original, and proof the compressed image on the real platform.',
+    },
+    h1: {
+      zh: '圖片壓縮品質怎麼選：檔案大小、細節與上傳驗收',
+      en: 'How to Choose Image Compression Quality: Size, Detail, and Acceptance',
+    },
+    category: { zh: '圖片工作流程', en: 'Image workflows' },
+    priority: 50,
+    searchIntent: {
+      zh: '使用者需要把圖片壓到上傳限制以下，又不想讓文字、商品細節或圖表模糊，想知道如何比較品質與檔案大小。',
+      en: 'A user must meet an upload limit without making text, product detail, or charts blurry and needs a repeatable quality-versus-size comparison.',
+    },
+    targetKeywords: [
+      { zh: '圖片壓縮品質設定', en: 'image compression quality setting' },
+      { zh: '圖片壓縮不失真', en: 'compress image without visible loss' },
+      { zh: '圖片檔案太大怎麼辦', en: 'reduce image file size' },
+    ],
+    relatedToolIds: ['image-compressor', 'image-resizer', 'jpg-to-webp'],
+    relatedGuideIds: ['image-compression-email-guide', 'compress-image-to-upload-limit', 'jpg-png-webp-which-to-use'],
+    relatedWorkflowIds: ['creator-social-toolkit'],
+    summary: {
+      zh: '壓縮品質要由用途決定：照片可接受細微雜訊，截圖、文字與圖表則更怕邊緣糊掉。先調整不必要的尺寸，再用副本比較大小與可讀性。',
+      en: 'Compression quality follows the job: photos tolerate small artifacts, while screenshots, text, and charts expose fuzzy edges. Resize unnecessary pixels first, then compare size and readability on a copy.',
+    },
+    problem: {
+      zh: '有人把品質滑桿直接拉到最低，檔案雖符合限制，卻讓發票號碼、商品邊緣或簡報小字無法辨識；也有人反覆壓縮同一檔案，品質越來越差卻沒有保留可回復版本。',
+      en: 'A lowest-quality export may meet the limit but make invoice numbers, product edges, or slide text unreadable. Recompressing the same file repeatedly compounds damage without a recoverable master.',
+    },
+    whoShouldUse: {
+      zh: '適合寄 Email、上傳表單、網站、社群、電商與需要在檔案大小限制內保留可讀性的使用者。',
+      en: 'Useful for email, forms, websites, social posts, ecommerce, and any upload with a size limit and readability requirement.',
+    },
+    explanation: [
+      {
+        zh: '先確認限制是檔案大小、像素尺寸、格式還是三者都有。若只需要 1200 像素寬，先縮小超過需求的原圖常比大幅降低品質更乾淨；不要用壓縮解決其實是尺寸過大的問題。',
+        en: 'Identify whether the constraint is file size, pixel dimensions, format, or all three. If 1200 pixels wide is enough, resizing excess pixels is often cleaner than severe quality reduction.',
+      },
+      {
+        zh: '照片、截圖、掃描與圖表的失真容忍度不同。照片可比較天空或皮膚的色階，截圖要看文字邊緣，掃描要看細線和印章，圖表要看座標與標籤；用與用途相同的區域做比較。',
+        en: 'Photos, screenshots, scans, and charts tolerate different artifacts. Compare gradients in photos, text edges in screenshots, fine lines in scans, and labels in charts using areas that match the real job.',
+      },
+      {
+        zh: '每次比較至少保留原圖、兩個品質版本與檔案大小。放大看細節，也縮小到收件人實際看到的尺寸；只看 400% 放大或只看縮圖都可能做出錯誤選擇。',
+        en: 'Keep the original, two quality variants, and their sizes for each comparison. Inspect enlarged detail and the recipient’s actual display size; either view alone can mislead.',
+      },
+      {
+        zh: '格式也會改變取捨。JPG 適合照片的有損壓縮，PNG 適合文字與透明圖形，WebP 可在支援的平台減少重量；但收件平台可能重新壓縮或拒絕某格式，仍要實測。',
+        en: 'Format changes the trade-off: JPG suits lossy photo compression, PNG suits text and transparency, and WebP can reduce weight where supported. The destination may recompress or reject a format, so test it.',
+      },
+      {
+        zh: '本站圖片壓縮工具在瀏覽器端處理檔案，下載後要確認檔案真的能開啟、方向與色彩沒有改變。壓縮不是隱私或品質的絕對保證，敏感資料仍應依你的裝置與共享政策處理。',
+        en: 'The browser-based image compressor processes files locally in the page; verify that downloads open and preserve orientation and color. Compression is not an absolute privacy or quality guarantee, so follow your device policy for sensitive data.',
+      },
+      {
+        zh: '把通過測試的品質、格式、像素與檔案大小記成小規格，平台規則改變時從主檔重跑候選版本再更新。',
+        en: 'Turn the passing quality, format, pixels, and file size into a small specification. If a platform changes its limit, regenerate candidates from the master and update the spec instead of lowering a whole folder without comparison.',
+      },
+      {
+        zh: '對含文字或條碼的圖片，固定放大檢視區比較壓縮前後邊緣；正常尺寸就難讀時應提高品質或改用 PNG。',
+        en: 'For text or barcodes, keep a fixed zoomed inspection area and compare edges before and after compression. A defect visible only when enlarged may be acceptable, but blur at normal size means raising quality or choosing PNG is safer.',
+      },
+      {
+        zh: '對一批圖片先抽取最細文字、最複雜色階、最高對比與最大檔案作代表樣本，用同一組樣本比較設定後再套用整批。',
+        en: 'For a batch, choose representative samples: the smallest text, hardest gradient, highest contrast, and largest file. Compare settings on those samples before applying them broadly, and keep failures for retesting when limits change.',
+      },
+      {
+        zh: '若壓縮針對特定平台，先記錄大小與格式限制，再用草稿上傳測試；二次壓縮出現色帶、方向錯誤或模糊時回到主檔調整。',
+        en: 'When compression targets a platform, record its size and format limits and test with a draft upload. If recompression creates banding, rotation errors, or blurry text, return to the master instead of compressing the same copy again.',
+      },
+    ],
+    steps: [
+      { zh: '寫下上傳大小、尺寸、格式與最低可接受清晰度。', en: 'Write down size, dimensions, format, and minimum acceptable clarity.' },
+      { zh: '從原圖輸出兩個品質版本，不要覆蓋主檔。', en: 'Export two quality variants from the original without overwriting it.' },
+      { zh: '比較檔案大小與用途關鍵區域的文字、細節和色階。', en: 'Compare file sizes and text, detail, and gradients in task-critical areas.' },
+      { zh: '在實際網站、表單、Email 或社群平台上傳測試。', en: 'Upload a test to the real website, form, email, or social platform.' },
+      { zh: '檢查平台重新壓縮後的清晰度、方向與色彩。', en: 'Check clarity, orientation, and color after platform recompression.' },
+      { zh: '保存通過版本與設定，避免下次重新猜品質滑桿。', en: 'Save the passing version and settings so the slider is not guessed next time.' },
+    ],
+    example: {
+      zh: '表單限制單張 2 MB，原始商品照片 6.8 MB、寬 4000 像素。團隊先縮到 1600 像素，再輸出 JPG 品質 80 與 60；品質 60 的檔案較小但商品序號邊緣變糊，最後選品質 80 並在表單實際上傳確認。',
+      en: 'A form limits each product photo to 2 MB; the source is 6.8 MB at 4000 pixels wide. The team resizes to 1600 pixels, compares JPG quality 80 and 60, rejects 60 because the serial edge blurs, and confirms quality 80 in the actual form.',
+    },
+    commonMistakes: [
+      { zh: '用最低品質滑桿直接解決尺寸問題，沒有先縮小多餘像素。', en: 'Using the lowest quality to solve a dimension problem without resizing excess pixels.' },
+      { zh: '只看檔案大小，不檢查文字、條碼、細線與商品細節。', en: 'Checking size but not text, barcodes, fine lines, or product detail.' },
+      { zh: '反覆壓縮同一個輸出檔，沒有保留原始主檔。', en: 'Recompressing the same output repeatedly without a master.' },
+      { zh: '忽略平台重新壓縮、格式限制與色彩變化。', en: 'Ignoring platform recompression, format limits, and color changes.' },
+      { zh: '把瀏覽器端處理誤當成所有裝置與資料都沒有風險。', en: 'Treating browser-side processing as a guarantee for every device and data risk.' },
+    ],
+    faq: [
+      { question: { zh: '圖片壓縮品質越低越好嗎？', en: 'Is lower image quality always better?' }, answer: { zh: '不是。品質越低通常越省容量，但可能破壞文字、圖表或商品細節。先依用途設定最低可讀性，再選能通過實際平台測試的版本。', en: 'No. Lower quality usually saves space but can destroy text, charts, or product detail. Set a minimum readability level and choose the version that passes the real platform test.' } },
+      { question: { zh: '先調整尺寸還是先壓縮？', en: 'Should I resize or compress first?' }, answer: { zh: '通常先從原圖調整到用途需要的像素，再壓縮輸出較好控制。兩者都要測試，因為某些平台還會再次處理檔案。', en: 'Usually resize from the original to the needed pixels, then compress. Test both steps because some platforms process the file again.' } },
+      { question: { zh: '壓縮後可以刪掉原圖嗎？', en: 'Can I delete the original after compressing?' }, answer: { zh: '若未來可能需要不同尺寸、格式或更高品質，應保留原圖或無損主檔。只在確認保存政策與備份後才清理副本。', en: 'Keep the original or lossless master if another size, format, or quality may be needed. Clean copies only after confirming retention and backup policy.' } },
+    ],
+    cta: {
+      zh: '用圖片調整尺寸與壓縮工具建立兩個版本，先比對關鍵細節，再到實際平台驗收大小與清晰度。',
+      en: 'Create two versions with resize and compression tools, compare critical detail, and verify size and clarity on the real platform.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
 ]; 
