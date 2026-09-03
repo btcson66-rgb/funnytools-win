@@ -603,4 +603,202 @@ export const additionalSeoGuides: SeoGuide[] = [
     updatedAt: '2026-09-03',
     noFaqSchema: true,
   },
+  {
+    id: 'seating-chart-student-needs-intake-guide',
+    locales: ['zh', 'en'],
+    slug: 'seating-chart-student-needs-intake-guide',
+    title: {
+      zh: '排座位前的學生需求清單',
+      en: 'Student Needs Checklist Before Making a Seating Chart',
+    },
+    metaTitle: {
+      zh: '排座位表前要收集什麼？視線、動線、專注與隱私需求清單',
+      en: 'Seating Chart Student Needs Checklist',
+    },
+    metaDescription: {
+      zh: '不要一開學就把名單丟進座位表：先整理視線、聽講、進出動線、設備、同儕支援與安靜區等可觀察需求，再用座位表工具做草稿並由老師逐項核對；本文也說明如何避免公開敏感資訊。',
+      en: 'Collect observable needs for sight lines, movement, equipment, and low-distraction areas before drafting and privately reviewing a seating chart.',
+    },
+    h1: {
+      zh: '排座位表前先做什麼？把學生需求整理成可執行清單',
+      en: 'What to Do Before Making a Seating Chart: An Actionable Student-Needs Checklist',
+    },
+    category: { zh: '教學與課堂工具', en: 'Teaching and classroom tools' },
+    priority: 37,
+    searchIntent: {
+      zh: '老師想製作座位表，但不想只按身高或成績排位，需要一份能兼顧視線、動線、設備、專注與隱私的事前檢查流程。',
+      en: 'A teacher wants a seating chart that accounts for sight lines, movement, equipment, attention, and privacy instead of sorting only by height or grades.',
+    },
+    targetKeywords: [
+      { zh: '座位表 需求清單', en: 'seating chart student needs checklist' },
+      { zh: '教室排座位 注意事項', en: 'classroom seating chart considerations' },
+      { zh: '學生座位安排 視線 動線', en: 'student seating sight lines movement' },
+    ],
+    relatedToolIds: ['seating-chart', 'random-group-generator', 'random-student-picker'],
+    relatedGuideIds: ['seating-chart-strategies-guide', 'classroom-random-group-guide', 'fair-student-grouping-guide'],
+    relatedWorkflowIds: ['teacher-classroom-random-toolkit'],
+    summary: {
+      zh: '好的座位表不是把名字平均填滿格子，而是先把可觀察的學習與動線需求整理好，再用工具畫出能被老師檢查、調整與說明的草稿。',
+      en: 'A useful seating chart is not a grid filled evenly with names. Collect observable learning and movement needs first, then make a draft that a teacher can review, adjust, and explain.',
+    },
+    problem: {
+      zh: '只按身高、座號或成績排序，看似快速，卻可能讓學生看不到投影、輪椅或助行器沒有轉身空間、需要設備的人離插座太遠，或兩位容易互相干擾的同學被固定在一起。更敏感的是，把診斷、家庭或行為標籤直接寫在公開座位表上，會把排課工具變成不必要的個資曝光。',
+      en: 'Sorting by height, number, or grades may leave a student unable to see the screen, a mobility aid without turning space, a device user far from power, or two easily distracted peers side by side. Writing diagnoses, family details, or behavior labels on a public chart also exposes more personal information than the seating task needs.',
+    },
+    whoShouldUse: {
+      zh: '適合國小、中學、大學小班、社團與課後班教師，以及需要在換教室、換課型或新學期重新排座位的人。',
+      en: 'Use this for primary and secondary teachers, small university classes, clubs, and after-school groups when a room, term, or lesson format changes.',
+    },
+    explanation: [
+      {
+        zh: '先記錄「會改變座位決策的觀察」，不要蒐集一張與任務無關的完整個人檔案。可觀察項目包括：是否需要看清黑板或投影、進出教室的路線、桌面設備與充電位置、是否需要靠近教師示範、以及哪些位置能降低走廊或門口干擾。這些描述能支援排位，卻不必公開敏感原因。',
+        en: 'Record observations that change a seating decision, not a full personal profile unrelated to the task. Useful observations include sight of the board or projector, routes in and out, desk equipment and power, proximity to demonstrations, and positions with less corridor or door traffic. They support placement without publishing sensitive reasons.',
+      },
+      {
+        zh: '把需求分成「必要限制」與「可嘗試偏好」。必要限制可能是通道不能被堵住、視線不能被高櫃遮擋、設備需要穩定放置；偏好則是靠前、靠邊或與熟悉同伴同組。先滿足必要限制，再在剩餘空間中調整偏好，避免一個人的偏好意外破壞全班安全動線。',
+        en: 'Separate hard constraints from preferences. A clear aisle, an unobstructed sight line, or stable equipment placement may be necessary; front, side, or a familiar peer may be a preference. Satisfy hard constraints first, then fit preferences without compromising the room’s shared movement and safety.',
+      },
+      {
+        zh: '座位需求應以學生能完成任務為中心，而不是把學生固定在某個標籤。CAST 的 Universal Design for Learning Guidelines（https://udlguidelines.cast.org/）提醒教學設計要提供多種參與、呈現與行動表達方式；座位只是其中一項環境調整。安排後仍要觀察實際課程，必要時改變桌型、投影位置或活動流程。',
+        en: 'Keep the goal on task access, not on fixing a student to a label. CAST’s Universal Design for Learning Guidelines (https://udlguidelines.cast.org/) frame multiple means of engagement, representation, and action; seating is only one environmental adjustment. Observe the real lesson and change the table layout, screen position, or activity flow when needed.',
+      },
+      {
+        zh: '把清單放在私下的教師備課紀錄，公開版只呈現姓名、組別或座號。若需要和代課老師交接，使用最少必要資訊，例如「靠近投影」或「保留通道」，不要把醫療、家庭或行為推論寫在教室牆上。這也讓座位表在換班、拍照或上傳平台時較不容易外洩。',
+        en: 'Keep the detailed checklist in a private planning note; the public chart can show names, groups, or numbers only. If a substitute needs context, share the minimum actionable note, such as “near the projector” or “keep aisle clear,” rather than medical, family, or behavioral inferences. This also reduces exposure when charts are photographed or uploaded.',
+      },
+      {
+        zh: '使用座位表工具時先產生草稿，再做人工審查。工具能快速畫出格子與姓名配置，不能替你判斷門、窗、反光、插座、教師走動路線或學生當天狀態。把「草稿→現場走一圈→試教→微調」當成流程，而不是把第一次隨機結果當成唯一正解。',
+        en: 'Use the seating-chart tool to make a draft, then review it yourself. A tool can place names in a grid but cannot judge doors, glare, outlets, teacher circulation, or a student’s state that day. Treat “draft, walk the room, teach, adjust” as the process instead of treating the first random result as final.',
+      },
+    ],
+    steps: [
+      { zh: '畫出教室固定物：門、窗、投影、黑板、插座、柱子與不可阻擋的通道。', en: 'Map fixed features: doors, windows, projector, board, outlets, pillars, and aisles that must stay clear.' },
+      { zh: '只記錄會改變座位的可觀察需求，分成必要限制與可嘗試偏好。', en: 'Record only observable needs that change placement and divide them into hard constraints and preferences.' },
+      { zh: '把詳細備註留在私下紀錄，公開座位表只放完成課堂所需的最少資訊。', en: 'Keep detailed notes private and put only the minimum task-related information on the public chart.' },
+      { zh: '用座位表工具建立草稿；需要分組時，再用隨機分組工具產生可檢查的初始組合。', en: 'Create a seating draft, then use the random-group tool for a reviewable starting grouping when needed.' },
+      { zh: '站在學生預計的位置看一次黑板、投影與教師示範，並走過主要通道。', en: 'View the board and demonstrations from student positions and walk the main routes once.' },
+      { zh: '試行一堂課後記錄實際摩擦，做最小幅度調整並註明日期。', en: 'After one trial lesson, record real friction, make the smallest useful adjustment, and date the note.' },
+    ],
+    example: {
+      zh: '新學期教室有一根柱子遮住右側投影，且靠門位置人流很多。老師先在私下清單標出投影死角、保留通道與需要穩定桌面設備的學生，公開座位表只放姓名。用座位表工具排出草稿後，老師從最後一排和側邊各看一次，發現兩個位置仍會反光，便交換座位並在一週後再檢查，而不是把任何學生的敏感原因貼在牆上。',
+      en: 'A new classroom has a pillar blocking the right side of the projector and heavy traffic by the door. The teacher privately marks the sight-line problem, clear aisle, and students who need stable desk equipment; the public chart shows names only. After drafting with the seating tool, the teacher checks from the back and side, swaps two glare-prone seats, and reviews again after a week without posting sensitive reasons.',
+    },
+    commonMistakes: [
+      { zh: '只按身高或座號排位，沒有走到學生視角檢查投影、黑板與反光。', en: 'Sorting by height or number without checking the board, projector, and glare from student positions.' },
+      { zh: '把診斷、家庭或行為推論寫在公開座位表。', en: 'Writing diagnoses, family details, or behavioral inferences on a public chart.' },
+      { zh: '把偏好當成硬限制，為了滿足一個位置而堵住全班通道。', en: 'Treating a preference as a hard constraint and blocking a shared aisle to satisfy one placement.' },
+      { zh: '把工具第一次產生的座位當成終稿，沒有試教與回看。', en: 'Treating the first generated layout as final without a trial lesson or room walk.' },
+      { zh: '一次大幅度搬動整班，卻沒有記錄哪個變更改善或製造摩擦。', en: 'Moving the whole class at once without recording which change helped or created friction.' },
+    ],
+    faq: [
+      { question: { zh: '座位表要不要公開學生需求？', en: 'Should a seating chart show student needs?' }, answer: { zh: '公開版只放完成課堂所需的最少資訊，例如姓名或座號。詳細原因與觀察留在受控的教師紀錄，交接時也只分享可執行的必要提醒。', en: 'Keep the public chart to the minimum needed for class, such as names or numbers. Store reasons and observations in a controlled teacher note and share only actionable context during handoff.' } },
+      { question: { zh: '一定要把需要支援的學生排前面嗎？', en: 'Must students who need support sit in front?' }, answer: { zh: '不一定。先看實際任務、視線、聲音、動線與設備，再決定哪個位置能降低障礙；前排只是可能的方案，不是通用規則。', en: 'No. Consider the actual task, sight, sound, movement, and equipment before choosing a position. The front is one possible option, not a universal rule.' } },
+      { question: { zh: '隨機座位表能取代老師判斷嗎？', en: 'Can a random seating chart replace teacher judgment?' }, answer: { zh: '不能。隨機工具適合快速產生草稿，但固定物、課型、可及性與學生當天狀態仍需要老師檢查和微調。', en: 'No. Random placement is useful for a quick draft, but room features, lesson type, access, and current student needs still require teacher review and adjustment.' } },
+    ],
+    cta: {
+      zh: '先畫固定物與需求清單，再用座位表工具建立草稿，走一圈、試教一次後才公布版本。',
+      en: 'Map the room and needs first, draft with the seating-chart tool, then walk, teach, and review before publishing the chart.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
+  {
+    id: 'classroom-random-group-no-repeat-guide',
+    locales: ['zh', 'en'],
+    slug: 'classroom-random-group-no-repeat-guide',
+    title: {
+      zh: '課堂分組如何避免一直同組',
+      en: 'How to Avoid Repeating the Same Classroom Groups',
+    },
+    metaTitle: {
+      zh: '學生分組一直重複怎麼辦？用歷史紀錄檢查組員與最小調整',
+      en: 'Avoid Repeating Classroom Groups: Pairing Log',
+    },
+    metaDescription: {
+      zh: '隨機分組不會自動記得上次結果：本指南教你保存日期、組合與缺席紀錄，檢查重複組員，再用最少交換改善下一次分組；同時說明隨機性、公平與教師判斷不能混為一談。',
+      en: 'Track group dates, absences, and pairings so you can reduce repeats with small, transparent adjustments without confusing randomness with fairness.',
+    },
+    h1: {
+      zh: '學生分組一直遇到同一批人？用紀錄降低重複的實用流程',
+      en: 'Students Keep Getting the Same Partners? A Practical History-Based Grouping Process',
+    },
+    category: { zh: '教學與課堂工具', en: 'Teaching and classroom tools' },
+    priority: 38,
+    searchIntent: {
+      zh: '老師已使用隨機分組工具，但多次活動仍常出現相同組員，想知道如何記錄歷史結果、處理缺席並做透明的小幅調整。',
+      en: 'A teacher uses a random group generator but sees repeated partners across activities and needs a transparent way to log results, handle absences, and make small adjustments.',
+    },
+    targetKeywords: [
+      { zh: '分組避免重複組員', en: 'avoid repeating group members' },
+      { zh: '課堂分組紀錄', en: 'classroom group history' },
+      { zh: '隨機分組一直同組', en: 'random groups keep repeating' },
+    ],
+    relatedToolIds: ['random-group-generator', 'group-generator', 'seating-chart'],
+    relatedGuideIds: ['classroom-random-group-guide', 'fair-student-grouping-guide', 'seating-chart-student-needs-intake-guide'],
+    relatedWorkflowIds: ['teacher-classroom-random-toolkit'],
+    summary: {
+      zh: '隨機只描述這一次怎麼抽，不會自動最佳化整學期的組合。把每次結果留下來，再用重複檢查和少量交換讓下一次更符合活動目標。',
+      en: 'Randomness describes one draw; it does not optimize a whole term. Keep each result, check repeats, and use small swaps when the next activity needs more variety.',
+    },
+    problem: {
+      zh: '30 人分 6 組時，一次隨機結果可能很公平，但連續幾週重抽仍可能讓兩三位學生反覆同組。若老師為了避免重複而完全手排，又容易失去透明度、耗掉備課時間，或在缺席後忘記自己改了哪些人。',
+      en: 'A draw for 30 students in six groups can be fair for that round while still repeating the same partners over several weeks. Fully hand-building every group may lose transparency, consume planning time, and make absence changes hard to audit.',
+    },
+    whoShouldUse: {
+      zh: '適合每週合作學習、實驗、討論、報告或輪站活動的老師、助教與社團帶領者。',
+      en: 'Use this for teachers, teaching assistants, and club leaders running weekly cooperative work, labs, discussions, presentations, or stations.',
+    },
+    explanation: [
+      {
+        zh: '先定義「重複」要算什麼。最簡單是記錄同組過的配對；若活動是四人一組，也可以檢查整組是否完全重現。不要把「同一排座位」或「曾經同時出席」誤當成同組，否則紀錄會比問題更混亂。',
+        en: 'Define what counts as a repeat. The simplest rule records pairs who have shared a group; for four-person projects, you can also flag an identical full group. Do not confuse sitting in the same row or attending the same lesson with actually sharing a group.',
+      },
+      {
+        zh: '每次活動留下日期、實際在場名單、組數或每組人數、產生結果與教師交換。缺席者不要寫進歷史配對，否則下一次會把從未合作的人誤判成重複；交換也要標記原因是缺席、動線、支援需求還是單純增加多樣性。',
+        en: 'Log the date, present roster, group count or size, generated result, and teacher swaps. Do not add absent students to pair history or you will mark students as repeats when they never worked together. Note whether a swap addressed absence, movement, support, or simply variety.',
+      },
+      {
+        zh: 'Vanderbilt Center for Teaching 的 Group Work 指南（https://cft.vanderbilt.edu/guides-sub-pages/group-work/）把分組視為教學設計的一部分，而不是抽籤本身。歷史紀錄能支援組合多樣性，但不能保證每組能力、語言、關係或角色都完美平衡；教師仍要依任務和課堂脈絡判斷。',
+        en: 'Vanderbilt’s Center for Teaching group-work guide (https://cft.vanderbilt.edu/guides-sub-pages/group-work/) treats grouping as part of instructional design, not merely a draw. A history log can increase variety but cannot guarantee perfect balance of skills, language, relationships, or roles; the teacher still decides in context.',
+      },
+      {
+        zh: '一個可說明的流程是「隨機產生→檢查重複→最多交換少數人→公開原則」。若交換超過一小部分，就應記錄並說明課堂理由，避免把「避免重複」變成另一種不透明的固定分組。下次仍從新名單開始，不要承諾數學上完全不重複。',
+        en: 'A explainable process is “generate, check repeats, swap a small number at most, and state the rule.” If many swaps are needed, log the instructional reason rather than turning “avoid repeats” into another opaque fixed assignment. Start from the updated roster next time and do not promise mathematically perfect non-repetition.',
+      },
+      {
+        zh: '紀錄可以是簡單試算表或純文字，不需要把學生資料上傳到第三方服務。只保留完成分組所需的識別方式，並依學校政策保存與刪除；公開投影片可顯示組別，歷史配對表則應留在教師可控的位置。',
+        en: 'A simple spreadsheet or text note is enough; the history does not need to be uploaded to a third-party service. Keep only the identifiers needed for grouping and follow school retention rules. Slides can show current groups while the pairing history stays under teacher control.',
+      },
+    ],
+    steps: [
+      { zh: '建立只包含本次在場學生的名單，記下日期、活動名稱與組數。', en: 'Create a roster containing only students present and note the date, activity, and group count.' },
+      { zh: '用隨機分組工具產生結果，先保存原始順序再做任何交換。', en: 'Generate groups with the random-group tool and save the original result before any swaps.' },
+      { zh: '把每組轉成配對或整組紀錄，和前幾次歷史結果比對重複。', en: 'Turn each group into pair or full-group records and compare them with prior results.' },
+      { zh: '若重複與活動目標衝突，只交換少數人，並記錄可說明的課堂原因。', en: 'If repeats conflict with the activity goal, swap a small number and record the instructional reason.' },
+      { zh: '公布本次分組與「隨機起點、教師檢查」原則，不公開私人歷史表。', en: 'Publish the current groups and the rule of random start plus teacher review, not the private history table.' },
+      { zh: '活動後保存結果與缺席／交換註記，下一次先更新名單再重新檢查。', en: 'Save the result and absence or swap notes, then update the roster before the next check.' },
+    ],
+    example: {
+      zh: '四週的實驗課每次 24 人分 6 組。老師用工具產生第四週結果後，把每組拆成兩兩配對，發現 A 與 B 已連續三次同組。老師只交換 B 與另一組一位學生，並註記「增加合作對象；不改變需要支援的座位安排」。投影片公布新組別，歷史表留在教師檔案；下週再用實際出席名單重新計算。',
+      en: 'A lab class of 24 students uses six groups for four weeks. In week four, the teacher expands each group into pairs and sees that A and B have shared three rounds. They swap B with one student from another group, note “increase partners; preserve support seating,” publish the new groups on slides, and keep the history private. The next week starts with the actual attendance list.',
+    },
+    commonMistakes: [
+      { zh: '把缺席學生算進歷史配對，讓從未同組的人被錯誤標成重複。', en: 'Counting absent students in pairing history and flagging students who never worked together.' },
+      { zh: '看到一次重複就完全放棄隨機，改成沒有紀錄的手排。', en: 'Abandoning randomness after one repeat and hand-assigning without an audit trail.' },
+      { zh: '為了不重複交換太多人，結果組別失去可說明的規則。', en: 'Swapping so many students that the result no longer has an explainable rule.' },
+      { zh: '只看完整小組是否重現，忽略兩人配對已反覆出現。', en: 'Checking only identical full groups and missing repeated pairs inside different groups.' },
+      { zh: '把歷史配對表放在公開投影片或共用連結，暴露不必要的學生資料。', en: 'Putting the pairing history in public slides or shared links and exposing unnecessary student data.' },
+    ],
+    faq: [
+      { question: { zh: '隨機分組可以保證不重複嗎？', en: 'Can random grouping guarantee no repeats?' }, answer: { zh: '不能。隨機抽選只保證這一次的產生方式；要降低學期內重複，必須保存結果、檢查配對並做有限度的教師調整。', en: 'No. Random selection describes how this round was generated. Reducing repeats across a term requires saved results, pair checks, and limited teacher adjustments.' } },
+      { question: { zh: '要記錄整組還是兩人配對？', en: 'Should I record full groups or pairs?' }, answer: { zh: '看活動目標。要避免同一整組重現可記整組；要增加合作對象多樣性，記錄兩人配對通常更敏感，但資料量也較大。', en: 'It depends on the goal. Record full groups to avoid an identical team; record pairs to increase partner variety, knowing the history is larger.' } },
+      { question: { zh: '交換學生後還算隨機分組嗎？', en: 'Is it still random after swapping students?' }, answer: { zh: '可以說是「隨機起點加教師審查」，不要宣稱完全隨機。公開這個原則並留下交換原因，比假裝沒有人工判斷更透明。', en: 'Describe it as “a random starting point with teacher review,” not fully random. Stating the rule and recording the reason is more transparent than hiding judgment.' } },
+    ],
+    cta: {
+      zh: '用隨機分組工具產生起點，留下每次結果與缺席紀錄，再用配對檢查做少量、可說明的調整。',
+      en: 'Use the random-group tool for a starting point, log each result and absence, then make small, explainable adjustments after checking pairs.',
+    },
+    updatedAt: '2026-09-03',
+    noFaqSchema: true,
+  },
 ]; 
