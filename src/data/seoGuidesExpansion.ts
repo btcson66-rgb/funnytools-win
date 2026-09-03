@@ -215,4 +215,107 @@ export const additionalSeoGuides: SeoGuide[] = [
     },
     noFaqSchema: true,
   },
-];
+  {
+    id: 'qr-code-payload-length-guide',
+    locales: ['zh', 'en'],
+    slug: 'qr-code-payload-length-guide',
+    title: {
+      zh: 'QR Code 內容長度與密度指南',
+      en: 'QR Code Payload Length and Density Guide',
+    },
+    metaTitle: {
+      zh: 'QR Code 可以放多少文字？網址、Unicode 與內容密度怎麼取捨',
+      en: 'How Much Text Fits in a QR Code? URL, Unicode, and Density Trade-offs',
+    },
+    metaDescription: {
+      zh: 'QR Code 不是越能塞資料越好：比較短網址、純文字、中文與 Emoji 對容量和模組密度的影響，並用最少資料設計可測試、可維護的入口與頁面。',
+      en: 'A QR code is not better because it stores more. Compare short URLs, plain text, Chinese, and emoji payloads, then design a minimal, testable entry.',
+    },
+    h1: {
+      zh: 'QR Code 可以放多少內容？從短網址到中文 Emoji 的密度取捨',
+      en: 'How Much Can a QR Code Store? Density Trade-offs from Short URLs to Unicode',
+    },
+    category: { zh: 'QR Code 與條碼', en: 'QR codes and barcodes' },
+    priority: 33,
+    searchIntent: {
+      zh: '使用者想把文字、網址、中文或 Emoji 放進 QR Code，並理解內容變長後為何圖案變密、尺寸需求變大或難以掃描。',
+      en: 'A user wants to encode text, URLs, Chinese, or emoji and needs to understand why longer payloads make a symbol denser and harder to scan at small sizes.',
+    },
+    targetKeywords: [
+      { zh: 'QR Code 文字容量', en: 'QR code text capacity' },
+      { zh: 'QR Code 中文 Emoji', en: 'QR code Chinese emoji' },
+      { zh: 'QR Code 網址太長', en: 'QR code URL too long' },
+    ],
+    relatedToolIds: ['qr-code-generator', 'url-encoder', 'character-counter'],
+    relatedGuideIds: ['qr-code-before-print-testing-guide', 'qr-code-mobile-landing-page-guide', 'qr-code-print-size-guide'],
+    relatedWorkflowIds: [],
+    summary: {
+      zh: 'QR Code 的容量與圖案版本、錯誤修正、資料類型和字元編碼有關；實務上優先放短而穩定的入口，讓詳細內容留在手機頁。',
+      en: 'QR capacity depends on symbol version, error correction, data type, and encoding. In practice, use a short stable entry and keep detailed content on the mobile page.',
+    },
+    problem: {
+      zh: '把整段說明、名單或長網址直接塞入 QR Code，圖案很快變得密集。設計檔在螢幕上仍能掃描，縮到貼紙或講義後卻需要更近距離，使用者便誤以為產生器失效。',
+      en: 'Putting a full instruction, list, or long URL inside the symbol quickly increases density. It may scan on a large screen yet require a much closer camera on a sticker or worksheet, making the generator look broken.',
+    },
+    whoShouldUse: {
+      zh: '適合要編入網址、聯絡資訊、短訊息、產品說明或活動資料的設計者、教師、店家與開發者。',
+      en: 'Use this when encoding URLs, contact details, short messages, product instructions, or event data for print or screen.',
+    },
+    explanation: [
+      {
+        zh: 'QR Code 有不同 version 與資料容量上限；內容越長，通常需要更多 modules。若固定印刷寬度，modules 越多代表每個小方格越小，遠距離或低品質鏡頭更難分辨。DENSO WAVE 的容量表也提醒，容量會依數字、英數、位元組與漢字模式而變，不能用一個「固定字數」回答所有情況。',
+        en: 'QR codes have symbol versions and data limits; longer payloads generally require more modules. At a fixed print width, more modules make each cell smaller and harder to resolve at distance or with a poor camera. DENSO WAVE’s capacity tables also show that limits vary by numeric, alphanumeric, byte, and Kanji modes, so there is no universal character count.',
+      },
+      {
+        zh: '網址通常比把整篇內容直接編入更適合印刷。網址只需提供入口，頁面可以承載標題、說明、圖片、語言切換與更新；若要追蹤來源，用你控制的短路徑加上不含個資的參數，並先測試參數是否會被系統截斷。',
+        en: 'A URL is usually better for print than embedding an entire article. The URL provides the entry while the page holds headings, instructions, images, language switching, and updates. If source measurement is needed, use a controlled short path with non-identifying parameters and test that the parameters survive redirects.',
+      },
+      {
+        zh: '中文、日文或 Emoji 不應只用肉眼計算「幾個字」。不同編碼模式與 UTF-8 位元組可能需要不同容量；Emoji 還可能由多個 code point 組成。若內容是跨裝置顯示的文字，先用字元計數工具檢查長度，再用兩種手機解碼與開啟結果。',
+        en: 'Do not estimate Chinese, Japanese, or emoji capacity by counting visible glyphs alone. Encoding modes and UTF-8 bytes can require different capacity, and an emoji may contain multiple code points. For cross-device text, check length with a character counter, then decode and open the result on two phones.',
+      },
+      {
+        zh: '錯誤修正提高可恢復程度，也會增加符號需要的資料。當目標是小尺寸印刷時，先縮短 payload 通常比盲目提高容錯更有效；容錯等級仍應依紙張磨損、Logo 與實際環境選擇，不能拿百分比當作可遮住的面積。',
+        en: 'Higher error correction improves recoverability but also adds symbol data. For a small print target, shortening the payload is often more effective than blindly increasing correction; choose the level for paper wear, logos, and context, not as a percentage of surface area that may be covered.',
+      },
+      {
+        zh: '不要把秘密、存取權杖或不必要的個資當成「方便」塞進圖案。QR Code 常被拍照、轉貼與長期保存；需要權限的內容應由受控 HTTPS 頁面處理，並設定適當的失效與撤銷機制。',
+        en: 'Do not put secrets, access tokens, or unnecessary personal data in a symbol for convenience. QR codes are photographed, reposted, and kept; protected content belongs behind a controlled HTTPS page with an appropriate expiry and revocation process.',
+      },
+    ],
+    steps: [
+      { zh: '先寫出使用者掃描後真正需要完成的任務，把詳細說明移到手機頁。', en: 'Write the task users must complete after scanning and move detailed instructions to the mobile page.' },
+      { zh: '用字元計數工具比較網址、純文字與中文／Emoji 版本，不用肉眼猜容量。', en: 'Compare URL, plain-text, and Chinese/emoji versions with a character counter instead of guessing.' },
+      { zh: '優先縮短並穩定網址；移除不必要的追蹤參數、空白與重複內容，但不要移除必要語意。', en: 'Prefer a short stable URL; remove unnecessary parameters, whitespace, and repetition without removing required meaning.' },
+      { zh: '以預計尺寸產生圖檔，檢查 modules 是否過密，再依環境調整錯誤修正等級。', en: 'Generate at the intended size, inspect module density, and then choose error correction for the context.' },
+      { zh: '用兩支手機解碼，確認中文、Emoji、跳轉參數與 HTTPS 頁面都照預期顯示。', en: 'Decode with two phones and confirm Chinese, emoji, redirect parameters, and the HTTPS page behave as expected.' },
+      { zh: '若仍需縮小，先回到 payload 與頁面架構處理，不要只把圖案硬縮到看不清楚。', en: 'If the symbol is still too large, fix the payload or page architecture instead of shrinking an unreadable image.' },
+    ],
+    example: {
+      zh: '餐盒貼紙原本直接放入 180 字中英文保存說明，QR Code 變得很密。店家改成只編入 `/care` 短路徑，頁面提供完整保存方式、語言切換與客服電話；貼紙旁保留短網址。兩支手機與實際貼紙測試都通過，且不需要把顧客資料或一次性權杖放進圖案。',
+      en: 'A food-label sticker originally encoded 180 Chinese and English characters, creating a dense symbol. The owner switches to a `/care` short path, puts the full storage instructions, language switch, and support number on the page, and prints the short URL beside it. Two phones scan the real sticker, without exposing customer data or a one-time token in the symbol.',
+    },
+    commonMistakes: [
+      { zh: '把可放入的字數當成固定值，忽略數字、英數、位元組與漢字模式差異。', en: 'Treating capacity as one fixed character count and ignoring numeric, alphanumeric, byte, and Kanji modes.' },
+      { zh: '把完整文章、名單或秘密直接編入 QR Code，而不是提供受控頁面入口。', en: 'Encoding an article, list, or secret instead of linking to a controlled page.' },
+      { zh: '為了塞更多資料只提高錯誤修正，卻沒有檢查小尺寸下的 module 密度。', en: 'Raising error correction to fit more data without checking module density at the print size.' },
+      { zh: '用肉眼把一個 Emoji 當成一個 code unit，導致跨裝置內容長度判斷錯誤。', en: 'Counting one visible emoji as one code unit and misjudging cross-device length.' },
+      { zh: '縮短網址時使用不受控或會到期的第三方短網址，之後無法維護入口。', en: 'Using an uncontrolled or expiring third-party shortener that cannot be maintained later.' },
+    ],
+    faq: [
+      { question: { zh: 'QR Code 能放幾個中文字？', en: 'How many Chinese characters fit in a QR code?' }, answer: { zh: '沒有單一答案，會受 version、錯誤修正、編碼模式與其他資料影響。實務上先放短網址，並用預計尺寸與兩支手機實測，不要以字數保證可讀性。', en: 'There is no single answer; version, error correction, encoding mode, and the rest of the payload matter. Use a short URL and test at the intended size on two phones instead of promising readability from a character count.' } },
+      { question: { zh: '把文章全文放進 QR Code 會比較方便嗎？', en: 'Is it more convenient to encode an entire article?' }, answer: { zh: '通常不是。圖案會變密且難以縮小，內容更新也要重新產生；連到受控頁面能保留完整排版、語言與更新能力。', en: 'Usually not. The symbol becomes denser and harder to print small, and every update requires a new symbol. A controlled page keeps formatting, language, and updateability.' } },
+      { question: { zh: 'Emoji 會讓 QR Code 變大嗎？', en: 'Do emoji make a QR code larger?' }, answer: { zh: '可能。Emoji 的實際編碼可能包含多個 code point，容量判斷不能只看畫面上的一個圖示；請計數、解碼並在不同手機測試。', en: 'They can. An emoji may contain multiple code points, so visual glyph count is not enough; measure, decode, and test on different phones.' } },
+    ],
+    cta: {
+      zh: '先用字元計數工具檢查 payload，再用 QR Code 產生器輸出短而穩定的入口，最後按實際尺寸測試。',
+      en: 'Check the payload with the character counter, generate a short stable entry with the QR Code generator, and test at the real print size.',
+    },
+    updatedAt: '2026-09-03',
+    contentHtml: {
+      zh: '<h2>容量不是固定字數</h2><p>QR Code 的容量會受 version、錯誤修正與編碼模式影響。中文與 Emoji 也不能只用肉眼計數；先用字元計數工具，再以實際尺寸解碼。</p><h2>把內容放在頁面，圖案只做入口</h2><p>短而穩定的網址通常比把全文塞入圖案更適合印刷。頁面可以承載完整說明、語言切換與更新，並避免把秘密或個資永久暴露在紙張上。</p><h2>來源與實測界線</h2><p>可參考 <a href="https://www.qrcode.com/en/about/">DENSO WAVE QR Code 基礎說明</a>的容量與結構概念；最終仍要用預計尺寸、紙材與兩支手機測試，不能用字數推算保證所有相機都能掃描。</p>',
+      en: '<h2>Capacity is not one character count</h2><p>QR capacity depends on version, error correction, and encoding mode. Chinese and emoji cannot be estimated from visible glyphs alone; measure them, then decode at the intended size.</p><h2>Keep content on the page</h2><p>A short stable URL is usually better for print than embedding a full article. The page can hold instructions, language switching, and updates without exposing secrets or personal data on paper.</p><h2>Source and testing boundary</h2><p>See <a href="https://www.qrcode.com/en/about/">DENSO WAVE’s QR Code basics</a> for capacity and structure concepts. Test with the intended size, paper, and two phones; a character count cannot guarantee every camera will scan it.</p>',
+    },
+    noFaqSchema: true,
+  },
+]; 
