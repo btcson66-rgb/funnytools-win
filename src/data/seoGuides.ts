@@ -3914,6 +3914,12 @@ const releasedAdditionalGuideSlugs = new Set<string>([
   'classroom-random-group-seat-transition-guide',
   'classroom-random-group-materials-handoff-guide',
   'qr-code-multi-placement-consistency-guide',
+  'pdf-to-word-ocr-language-check-guide',
+  'pdf-accessibility-reading-order-check-guide',
+  'image-compressor-metadata-privacy-guide',
+  'image-resolution-print-web-guide',
+  'image-color-profile-web-print-guide',
+  'image-resampling-quality-guide',
 ]);
 
 export const seoGuides: SeoGuide[] = [

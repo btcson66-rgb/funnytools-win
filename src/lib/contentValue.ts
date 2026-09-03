@@ -75,7 +75,7 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'zh:grade-average': {
-    intro: '這一段用「成績平均計算器強化版」實際的兩種輸出（未加權平均、加權平均）示範怎麼核對，而不是抽象規則。',
+    intro: '這一段用「成績平均計算器」實際的兩種輸出（未加權平均、加權平均）示範怎麼核對，而不是抽象規則。',
     panels: [
       {
         title: '先用三科加權成績核對公式',

@@ -489,6 +489,13 @@
     <lastmod>2026-08-27</lastmod>
   </url>
   <url>
+    <loc>https://funnytools.win/guides/image-color-profile-web-print-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/image-color-profile-web-print-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/image-color-profile-web-print-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-color-profile-web-print-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/image-compression-email-guide/</loc>
     <lastmod>2026-07-20</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/image-compression-email-guide/" />
@@ -504,11 +511,32 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-compression-quality-size-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/image-compressor-metadata-privacy-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/image-compressor-metadata-privacy-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/image-compressor-metadata-privacy-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-compressor-metadata-privacy-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/image-resampling-quality-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/image-resampling-quality-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/image-resampling-quality-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-resampling-quality-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/image-resize-aspect-ratio-guide/</loc>
     <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/image-resize-aspect-ratio-guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/image-resize-aspect-ratio-guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-resize-aspect-ratio-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/image-resolution-print-web-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/image-resolution-print-web-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/image-resolution-print-web-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/image-resolution-print-web-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/image-upload-failed-troubleshooting/</loc>
@@ -623,6 +651,13 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/contrasena-segura-fuerte/" />
   </url>
   <url>
+    <loc>https://funnytools.win/guides/pdf-accessibility-reading-order-check-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-accessibility-reading-order-check-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-accessibility-reading-order-check-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-accessibility-reading-order-check-guide/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/guides/pdf-compressor-email-attachment-guide/</loc>
     <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-compressor-email-attachment-guide/" />
@@ -706,6 +741,13 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-word-layout-fidelity-guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-word-layout-fidelity-guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-word-layout-fidelity-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/guides/pdf-to-word-ocr-language-check-guide/</loc>
+    <lastmod>2026-09-03</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-word-ocr-language-check-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-word-ocr-language-check-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-word-ocr-language-check-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/pdf-to-word-review-track-changes-guide/</loc>
