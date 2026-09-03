@@ -47,9 +47,13 @@ const contentSecurityPolicy = [
             // published onto window explicitly or nothing outside this block can call it.
             window.gtag = gtag;
             gtag('js', new Date());
-            gtag('config', measurementId);
-            // Mirror into the backup-account property; see src/config/site.ts.
-            if (secondaryMeasurementId) gtag('config', secondaryMeasurementId);
+            // Keep embed page_views explicit for the two existing properties. This
+            // prevents a linked Google tag destination from inheriting page_view hits.
+            gtag('config', measurementId, { send_page_view: false });
+            if (secondaryMeasurementId) gtag('config', secondaryMeasurementId, { send_page_view: false });
+            gtag('event', 'page_view', {
+              send_to: secondaryMeasurementId ? [measurementId, secondaryMeasurementId] : measurementId,
+            });
           </script>
         </>
       )

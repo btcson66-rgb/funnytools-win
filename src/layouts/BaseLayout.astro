@@ -173,10 +173,15 @@ const contentSecurityPolicy = [
               analytics_storage: 'granted',
             });
             gtag('js', new Date());
-            gtag('config', measurementId);
-            // Mirror into the backup-account property. Same consent state, same events —
-            // only the destination differs.
-            if (secondaryMeasurementId) gtag('config', secondaryMeasurementId);
+            // Do not let the Google tag's linked destinations inherit an automatic
+            // page_view. The affiliate property is intentionally not configured here,
+            // but a linked Google tag can still fan out config page_views to it. Keep
+            // the two existing properties' page_view behavior explicit instead.
+            gtag('config', measurementId, { send_page_view: false });
+            if (secondaryMeasurementId) gtag('config', secondaryMeasurementId, { send_page_view: false });
+            gtag('event', 'page_view', {
+              send_to: secondaryMeasurementId ? [measurementId, secondaryMeasurementId] : measurementId,
+            });
           </script>
           <script is:inline>
             window.__ft_track = function(eventName, params) {
