@@ -122,11 +122,7 @@ FunnyTools 的 PDF 工具現階段主要處理：
 
 > OCR / Searchable Text Layer Generator。
 
-因此 Codex 不得在這篇文章、CTA 或 SEO metadata 中寫：
-
-> 「FunnyTools 免費 OCR PDF」。
-
-這會是錯誤功能宣稱。
+由於站內目前沒有 OCR 文字層產生器，本頁不會把「FunnyTools 免費 OCR PDF」當成可用功能。這個限制很重要：你可以先用站內工具擷取、旋轉或整理頁面，再交給具備 OCR 的軟體處理，避免誤以為轉檔就會自動辨識文字。
 
 ## 六、真正需要 OCR 時，應找什麼工具？
 
