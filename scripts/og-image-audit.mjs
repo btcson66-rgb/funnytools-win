@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 const root = process.cwd();
 const publicDir = `${root}/public`;
@@ -21,7 +22,7 @@ const imageHashes = new Set();
 const dimensions = new Map();
 
 function routeFile(route) {
-  return `${distDir}${route.endsWith('/') ? `${route}index.html` : route}`;
+  return join(distDir, route.replace(/^\/+/, ''), route.endsWith('/') ? 'index.html' : '');
 }
 
 function pngMetadata(buffer) {
@@ -45,7 +46,7 @@ for (const route of routes) {
   if (og !== twitter) failures.push(`${route}: OG/Twitter image mismatch`);
   imageCounts.set(og, (imageCounts.get(og) ?? 0) + 1);
   const pathname = new URL(og).pathname;
-  const assetPath = `${publicDir}${pathname.replaceAll('/', '\\')}`;
+  const assetPath = join(publicDir, pathname.replace(/^\/+/, ''));
   if (!existsSync(assetPath)) {
     failures.push(`${route}: image asset missing (${pathname})`);
     continue;
