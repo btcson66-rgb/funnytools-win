@@ -253,3 +253,22 @@ export function categoryOgImage(lang: Locale, categoryId: string): string {
   if (!supported.has(categoryId)) return defaultOgImage();
   return absoluteUrl(assetPath(`og/${lang}-${categoryId}.png`));
 }
+
+const ogCategoryRules: Array<[string, string[]]> = [
+  ['pdf', ['pdf']],
+  ['image', ['image', 'jpg', 'jpeg', 'png', 'webp', 'photo', 'qr', 'barcode']],
+  ['statistics', ['statistic', 'score', 'percentile', 'average', 'anova', 'test', 'gpa', 'grade']],
+  ['random', ['random', 'dice', 'wheel', 'roulette', 'choice', 'decision']],
+  ['text', ['text', 'word', 'character', 'json', 'csv', 'markdown', 'base64', 'url-encoding']],
+  ['time', ['time', 'date', 'timer', 'stopwatch', 'pomodoro', 'deadline', 'break']],
+  ['money', ['salary', 'overtime', 'mortgage', 'interest', 'savings', 'inflation', 'price', 'money']],
+  ['draw', ['draw', 'drawing', 'cad', 'chart', 'flowchart', 'diagram', 'sketch']],
+  ['study', ['student', 'teacher', 'classroom', 'seating', 'group', 'exam', 'education']],
+];
+
+/** Choose a topic image for non-tool pages when the canonical path is clear. */
+export function contextualOgImage(lang: Locale, canonicalPath: string): string {
+  const normalized = canonicalPath.toLowerCase();
+  const category = ogCategoryRules.find(([, terms]) => terms.some((term) => normalized.includes(term)))?.[0];
+  return category ? categoryOgImage(lang, category) : defaultOgImage();
+}
