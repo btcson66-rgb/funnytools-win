@@ -16,6 +16,8 @@
     "audit:analytics": "node scripts/analytics-preflight.mjs",
     "audit:pwa": "node scripts/pwa-preflight.mjs",
     "audit:security": "node scripts/security-preflight.mjs",
+    "audit:og": "node scripts/og-image-audit.mjs",
+    "generate:og": "node scripts/generate-og-images.mjs",
     "audit:verification": "node scripts/verification-preflight.mjs",
     "audit:task012": "node scripts/task012-audit.mjs",
     "audit:locale-quality": "node scripts/locale-quality-audit.mjs",
@@ -45,7 +47,7 @@
     "report:analytics": "node scripts/analytics-report.mjs",
     "traffic-report": "node scripts/traffic-report/index.mjs",
     "daily-health": "node health-check.mjs",
-    "preflight": "npm run build && npm run seo:sitemap:refresh && npm run seo:check && npm run audit:seo-collapse && npm run audit:lang-switch && npm run audit:adsense && npm run audit:content-value && npm run audit:multilingual-aeo && npm run audit:french-aeo && npm run audit:analytics && npm run audit:pwa && npm run audit:security",
+    "preflight": "npm run build && npm run seo:sitemap:refresh && npm run seo:check && npm run audit:seo-collapse && npm run audit:lang-switch && npm run audit:adsense && npm run audit:content-value && npm run audit:multilingual-aeo && npm run audit:french-aeo && npm run audit:analytics && npm run audit:pwa && npm run audit:security && npm run audit:og",
     "release:sitemaps": "npm run build && npm run seo:sitemap:refresh && npm run seo:check",
     "stats:site": "node scripts/site-stats.mjs",
     "release": "node scripts/site-stats.mjs && node scripts/release.mjs"

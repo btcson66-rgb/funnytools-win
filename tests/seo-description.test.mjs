@@ -27,3 +27,11 @@ test('shared OG fallback uses the page title for meaningful alt text', () => {
   assert.match(baseLayoutSource, /const ogAlt = ogImageAlt \?\? title;/);
   assert.doesNotMatch(baseLayoutSource, /const ogAlt = ogImageAlt \?\? SITE\.name\[lang\];/);
 });
+
+test('tool pages use topic-specific social images', () => {
+  assert.match(seoSource, /export function categoryOgImage\(lang: Locale, categoryId: string\)/);
+  assert.match(seoSource, /og\/\$\{lang\}-\$\{categoryId\}\.png/);
+  const toolLayoutSource = readFileSync(new URL('../src/layouts/ToolLayout.astro', import.meta.url), 'utf8');
+  assert.match(toolLayoutSource, /ogImage=\{categoryOgImage\(lang, category\.id\)\}/);
+  assert.match(toolLayoutSource, /ogImageAlt=\{`\$\{content\.name\} · \$\{category\.name\[lang\]\}`\}/);
+});

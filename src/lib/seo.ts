@@ -228,3 +228,28 @@ export function webApplicationJsonLd(
 export function defaultOgImage(): string {
   return absoluteUrl(assetPath('og-default.png'));
 }
+
+/**
+ * Pick a stable, topic-specific social image for tool pages.
+ *
+ * A single fallback image is useful for generic routes, but using it for every
+ * tool makes social previews indistinguishable. These assets are grouped by
+ * user-facing category and locale so a shared preview communicates the task
+ * without exposing user input.
+ */
+export function categoryOgImage(lang: Locale, categoryId: string): string {
+  const supported = new Set([
+    'money',
+    'time',
+    'random',
+    'text',
+    'image',
+    'pdf',
+    'draw',
+    'study',
+    'personality',
+    'statistics',
+  ]);
+  if (!supported.has(categoryId)) return defaultOgImage();
+  return absoluteUrl(assetPath(`og/${lang}-${categoryId}.png`));
+}
