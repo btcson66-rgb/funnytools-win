@@ -32,6 +32,9 @@ test('conversion widget uses browser mode data and localized API error handling'
   assert.match(source, /compressImagesWithStats/);
   assert.match(source, /data-bulk-saved-percent/);
   assert.match(source, /textContent = labels\.remove/);
+  assert.match(source, /const pdfModes = new Set\(\['pdf-to-word', 'pdf-table-to-excel', 'pdf-compressor'\]\)/);
+  assert.match(source, /const isPdfFile = \(file\) =>/);
+  assert.match(source, /labels\.invalidFile \|\| labels\.noFile/);
   assert.doesNotMatch(source, /innerHTML/);
   assert.doesNotMatch(source, /: 'Clear'/);
   assert.doesNotMatch(source, /if \(!isDxf\) return/);
