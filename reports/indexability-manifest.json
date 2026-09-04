@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-02T16:29:07.081Z",
+  "generatedAt": "2026-09-04T01:11:12.985Z",
   "environment": "local-static-build",
-  "buildVersion": "5.131.1",
+  "buildVersion": "5.136.6",
   "status": "measured",
-  "routesChecked": 1073,
+  "routesChecked": 1167,
   "issueCount": 0,
   "records": [
     {
@@ -2331,6 +2331,13 @@
       "canonical": "https://funnytools.win/en/for/teachers/"
     },
     {
+      "route": "/en/guides/2d-cad-drawing-board-workflow-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/2d-cad-drawing-board-workflow-guide/"
+    },
+    {
       "route": "/en/guides/a4-vs-us-letter-printing-guide/",
       "indexable": true,
       "robots": null,
@@ -2352,6 +2359,13 @@
       "canonical": "https://funnytools.win/en/guides/bar-chart-school-report-guide/"
     },
     {
+      "route": "/en/guides/classroom-group-roles-rotation-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/classroom-group-roles-rotation-guide/"
+    },
+    {
       "route": "/en/guides/classroom-lottery-tool-guide/",
       "indexable": true,
       "robots": null,
@@ -2359,11 +2373,53 @@
       "canonical": "https://funnytools.win/en/guides/classroom-lottery-tool-guide/"
     },
     {
+      "route": "/en/guides/classroom-random-group-absent-student-repair-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/classroom-random-group-absent-student-repair-guide/"
+    },
+    {
       "route": "/en/guides/classroom-random-group-guide/",
       "indexable": true,
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/en/guides/classroom-random-group-guide/"
+    },
+    {
+      "route": "/en/guides/classroom-random-group-materials-handoff-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/classroom-random-group-materials-handoff-guide/"
+    },
+    {
+      "route": "/en/guides/classroom-random-group-no-repeat-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/classroom-random-group-no-repeat-guide/"
+    },
+    {
+      "route": "/en/guides/classroom-random-group-seat-transition-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/classroom-random-group-seat-transition-guide/"
+    },
+    {
+      "route": "/en/guides/classroom-random-group-shareable-result-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/classroom-random-group-shareable-result-guide/"
+    },
+    {
+      "route": "/en/guides/classroom-random-group-size-balance-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/classroom-random-group-size-balance-guide/"
     },
     {
       "route": "/en/guides/classroom-random-picker-guide/",
@@ -2380,11 +2436,25 @@
       "canonical": "https://funnytools.win/en/guides/classroom-timer-guide/"
     },
     {
+      "route": "/en/guides/csv-to-json-header-duplicate-column-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/csv-to-json-header-duplicate-column-guide/"
+    },
+    {
       "route": "/en/guides/fair-student-grouping-guide/",
       "indexable": true,
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/en/guides/fair-student-grouping-guide/"
+    },
+    {
+      "route": "/en/guides/image-color-profile-web-print-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/image-color-profile-web-print-guide/"
     },
     {
       "route": "/en/guides/image-compression-email-guide/",
@@ -2394,6 +2464,41 @@
       "canonical": "https://funnytools.win/en/guides/image-compression-email-guide/"
     },
     {
+      "route": "/en/guides/image-compression-quality-size-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/image-compression-quality-size-guide/"
+    },
+    {
+      "route": "/en/guides/image-compressor-metadata-privacy-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/image-compressor-metadata-privacy-guide/"
+    },
+    {
+      "route": "/en/guides/image-resampling-quality-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/image-resampling-quality-guide/"
+    },
+    {
+      "route": "/en/guides/image-resize-aspect-ratio-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/image-resize-aspect-ratio-guide/"
+    },
+    {
+      "route": "/en/guides/image-resolution-print-web-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/image-resolution-print-web-guide/"
+    },
+    {
       "route": "/en/guides/",
       "indexable": true,
       "robots": null,
@@ -2401,11 +2506,137 @@
       "canonical": "https://funnytools.win/en/guides/"
     },
     {
+      "route": "/en/guides/json-formatter-trailing-comma-error-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/json-formatter-trailing-comma-error-guide/"
+    },
+    {
+      "route": "/en/guides/merge-pdf-bookmarks-navigation-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/merge-pdf-bookmarks-navigation-guide/"
+    },
+    {
+      "route": "/en/guides/merge-pdf-page-size-orientation-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/merge-pdf-page-size-orientation-guide/"
+    },
+    {
       "route": "/en/guides/merge-pdf-private-guide/",
       "indexable": true,
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/en/guides/merge-pdf-private-guide/"
+    },
+    {
+      "route": "/en/guides/merge-pdf-reading-order-checklist-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/merge-pdf-reading-order-checklist-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-accessibility-reading-order-check-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-accessibility-reading-order-check-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-compressor-email-attachment-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-compressor-email-attachment-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-compressor-form-fields-links-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-compressor-form-fields-links-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-page-reorder-appendix-merge-check-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-page-reorder-appendix-merge-check-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-table-to-excel-header-check-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-table-to-excel-header-check-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-to-image-background-contrast-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-to-image-background-contrast-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-to-image-multipage-download-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-to-image-multipage-download-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-to-image-print-crop-marks-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-to-image-print-crop-marks-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-to-image-raster-text-search-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-to-image-raster-text-search-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-to-image-resolution-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-to-image-resolution-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-to-word-form-field-editing-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-to-word-form-field-editing-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-to-word-layout-fidelity-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-to-word-layout-fidelity-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-to-word-ocr-language-check-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-to-word-ocr-language-check-guide/"
+    },
+    {
+      "route": "/en/guides/pdf-to-word-review-track-changes-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/pdf-to-word-review-track-changes-guide/"
     },
     {
       "route": "/en/guides/percentage-shortcuts-guide/",
@@ -2429,11 +2660,109 @@
       "canonical": "https://funnytools.win/en/guides/photos-to-pdf-phone-guide/"
     },
     {
+      "route": "/en/guides/qr-code-accessible-fallback-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/qr-code-accessible-fallback-guide/"
+    },
+    {
+      "route": "/en/guides/qr-code-before-print-testing-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/qr-code-before-print-testing-guide/"
+    },
+    {
       "route": "/en/guides/qr-code-classroom-guide/",
       "indexable": true,
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/en/guides/qr-code-classroom-guide/"
+    },
+    {
+      "route": "/en/guides/qr-code-destination-change-log-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/qr-code-destination-change-log-guide/"
+    },
+    {
+      "route": "/en/guides/qr-code-event-page-expiry-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/qr-code-event-page-expiry-guide/"
+    },
+    {
+      "route": "/en/guides/qr-code-mobile-landing-page-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/qr-code-mobile-landing-page-guide/"
+    },
+    {
+      "route": "/en/guides/qr-code-multi-placement-consistency-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/qr-code-multi-placement-consistency-guide/"
+    },
+    {
+      "route": "/en/guides/qr-code-multilingual-switch-testing-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/qr-code-multilingual-switch-testing-guide/"
+    },
+    {
+      "route": "/en/guides/qr-code-payload-length-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/qr-code-payload-length-guide/"
+    },
+    {
+      "route": "/en/guides/qr-code-scan-failure-field-troubleshooting-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/qr-code-scan-failure-field-troubleshooting-guide/"
+    },
+    {
+      "route": "/en/guides/qr-code-utm-campaign-link-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/qr-code-utm-campaign-link-guide/"
+    },
+    {
+      "route": "/en/guides/seating-chart-changeover-routine-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/seating-chart-changeover-routine-guide/"
+    },
+    {
+      "route": "/en/guides/seating-chart-student-needs-intake-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/seating-chart-student-needs-intake-guide/"
+    },
+    {
+      "route": "/en/guides/split-pdf-output-naming-batch-delivery-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/split-pdf-output-naming-batch-delivery-guide/"
+    },
+    {
+      "route": "/en/guides/split-pdf-page-range-planning-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/en/guides/split-pdf-page-range-planning-guide/"
     },
     {
       "route": "/en/guides/spss-levene-test-guide/",
@@ -4718,6 +5047,13 @@
       "canonical": "https://funnytools.win/fr/outils/trier-lignes-texte/"
     },
     {
+      "route": "/guides/2d-cad-drawing-board-workflow-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/2d-cad-drawing-board-workflow-guide/"
+    },
+    {
       "route": "/guides/a4-vs-us-letter-printing-guide/",
       "indexable": true,
       "robots": null,
@@ -4816,6 +5152,13 @@
       "canonical": "https://funnytools.win/guides/chinese-english-mixed-word-count-guide/"
     },
     {
+      "route": "/guides/classroom-group-roles-rotation-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/classroom-group-roles-rotation-guide/"
+    },
+    {
       "route": "/guides/classroom-lottery-tool-guide/",
       "indexable": true,
       "robots": null,
@@ -4823,11 +5166,53 @@
       "canonical": "https://funnytools.win/guides/classroom-lottery-tool-guide/"
     },
     {
+      "route": "/guides/classroom-random-group-absent-student-repair-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/classroom-random-group-absent-student-repair-guide/"
+    },
+    {
       "route": "/guides/classroom-random-group-guide/",
       "indexable": true,
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/classroom-random-group-guide/"
+    },
+    {
+      "route": "/guides/classroom-random-group-materials-handoff-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/classroom-random-group-materials-handoff-guide/"
+    },
+    {
+      "route": "/guides/classroom-random-group-no-repeat-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/classroom-random-group-no-repeat-guide/"
+    },
+    {
+      "route": "/guides/classroom-random-group-seat-transition-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/classroom-random-group-seat-transition-guide/"
+    },
+    {
+      "route": "/guides/classroom-random-group-shareable-result-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/classroom-random-group-shareable-result-guide/"
+    },
+    {
+      "route": "/guides/classroom-random-group-size-balance-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/classroom-random-group-size-balance-guide/"
     },
     {
       "route": "/guides/classroom-random-picker-guide/",
@@ -4905,6 +5290,13 @@
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/csv-to-json-conversion-guide/"
+    },
+    {
+      "route": "/guides/csv-to-json-header-duplicate-column-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/csv-to-json-header-duplicate-column-guide/"
     },
     {
       "route": "/guides/csv-utf8-bom-excel-garbled-text/",
@@ -5075,11 +5467,53 @@
       "canonical": "https://funnytools.win/guides/image-base64-data-uri-guide/"
     },
     {
+      "route": "/guides/image-color-profile-web-print-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/image-color-profile-web-print-guide/"
+    },
+    {
       "route": "/guides/image-compression-email-guide/",
       "indexable": true,
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/image-compression-email-guide/"
+    },
+    {
+      "route": "/guides/image-compression-quality-size-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/image-compression-quality-size-guide/"
+    },
+    {
+      "route": "/guides/image-compressor-metadata-privacy-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/image-compressor-metadata-privacy-guide/"
+    },
+    {
+      "route": "/guides/image-resampling-quality-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/image-resampling-quality-guide/"
+    },
+    {
+      "route": "/guides/image-resize-aspect-ratio-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/image-resize-aspect-ratio-guide/"
+    },
+    {
+      "route": "/guides/image-resolution-print-web-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/image-resolution-print-web-guide/"
     },
     {
       "route": "/guides/image-upload-failed-troubleshooting/",
@@ -5131,6 +5565,13 @@
       "canonical": "https://funnytools.win/guides/json-error-fix-guide/"
     },
     {
+      "route": "/guides/json-formatter-trailing-comma-error-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/json-formatter-trailing-comma-error-guide/"
+    },
+    {
       "route": "/guides/json-to-csv-excel-guide/",
       "indexable": true,
       "robots": null,
@@ -5159,11 +5600,32 @@
       "canonical": "https://funnytools.win/guides/mean-median-mode-when-to-use/"
     },
     {
+      "route": "/guides/merge-pdf-bookmarks-navigation-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/merge-pdf-bookmarks-navigation-guide/"
+    },
+    {
+      "route": "/guides/merge-pdf-page-size-orientation-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/merge-pdf-page-size-orientation-guide/"
+    },
+    {
       "route": "/guides/merge-pdf-private-guide/",
       "indexable": true,
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/merge-pdf-private-guide/"
+    },
+    {
+      "route": "/guides/merge-pdf-reading-order-checklist-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/merge-pdf-reading-order-checklist-guide/"
     },
     {
       "route": "/guides/misleading-chart-common-errors/",
@@ -5222,6 +5684,34 @@
       "canonical": "https://funnytools.win/guides/password-strength-basics-guide/"
     },
     {
+      "route": "/guides/pdf-accessibility-reading-order-check-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-accessibility-reading-order-check-guide/"
+    },
+    {
+      "route": "/guides/pdf-compressor-email-attachment-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-compressor-email-attachment-guide/"
+    },
+    {
+      "route": "/guides/pdf-compressor-form-fields-links-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-compressor-form-fields-links-guide/"
+    },
+    {
+      "route": "/guides/pdf-page-reorder-appendix-merge-check-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-page-reorder-appendix-merge-check-guide/"
+    },
+    {
       "route": "/guides/pdf-split-vs-extract-vs-delete/",
       "indexable": true,
       "robots": null,
@@ -5229,11 +5719,81 @@
       "canonical": "https://funnytools.win/guides/pdf-split-vs-extract-vs-delete/"
     },
     {
+      "route": "/guides/pdf-table-to-excel-header-check-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-table-to-excel-header-check-guide/"
+    },
+    {
+      "route": "/guides/pdf-to-image-background-contrast-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-to-image-background-contrast-guide/"
+    },
+    {
+      "route": "/guides/pdf-to-image-multipage-download-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-to-image-multipage-download-guide/"
+    },
+    {
+      "route": "/guides/pdf-to-image-print-crop-marks-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-to-image-print-crop-marks-guide/"
+    },
+    {
+      "route": "/guides/pdf-to-image-raster-text-search-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-to-image-raster-text-search-guide/"
+    },
+    {
+      "route": "/guides/pdf-to-image-resolution-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-to-image-resolution-guide/"
+    },
+    {
       "route": "/guides/pdf-to-jpg-vs-png/",
       "indexable": true,
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/pdf-to-jpg-vs-png/"
+    },
+    {
+      "route": "/guides/pdf-to-word-form-field-editing-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-to-word-form-field-editing-guide/"
+    },
+    {
+      "route": "/guides/pdf-to-word-layout-fidelity-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-to-word-layout-fidelity-guide/"
+    },
+    {
+      "route": "/guides/pdf-to-word-ocr-language-check-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-to-word-ocr-language-check-guide/"
+    },
+    {
+      "route": "/guides/pdf-to-word-review-track-changes-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/pdf-to-word-review-track-changes-guide/"
     },
     {
       "route": "/guides/pdf-upload-failed-troubleshooting/",
@@ -5306,11 +5866,60 @@
       "canonical": "https://funnytools.win/guides/qr-barcode/"
     },
     {
+      "route": "/guides/qr-code-accessible-fallback-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/qr-code-accessible-fallback-guide/"
+    },
+    {
+      "route": "/guides/qr-code-before-print-testing-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/qr-code-before-print-testing-guide/"
+    },
+    {
       "route": "/guides/qr-code-classroom-guide/",
       "indexable": true,
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/qr-code-classroom-guide/"
+    },
+    {
+      "route": "/guides/qr-code-destination-change-log-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/qr-code-destination-change-log-guide/"
+    },
+    {
+      "route": "/guides/qr-code-event-page-expiry-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/qr-code-event-page-expiry-guide/"
+    },
+    {
+      "route": "/guides/qr-code-mobile-landing-page-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/qr-code-mobile-landing-page-guide/"
+    },
+    {
+      "route": "/guides/qr-code-multi-placement-consistency-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/qr-code-multi-placement-consistency-guide/"
+    },
+    {
+      "route": "/guides/qr-code-multilingual-switch-testing-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/qr-code-multilingual-switch-testing-guide/"
     },
     {
       "route": "/guides/qr-code-not-scanning-print-guide/",
@@ -5320,11 +5929,32 @@
       "canonical": "https://funnytools.win/guides/qr-code-not-scanning-print-guide/"
     },
     {
+      "route": "/guides/qr-code-payload-length-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/qr-code-payload-length-guide/"
+    },
+    {
       "route": "/guides/qr-code-phishing-security-guide/",
       "indexable": true,
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/qr-code-phishing-security-guide/"
+    },
+    {
+      "route": "/guides/qr-code-scan-failure-field-troubleshooting-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/qr-code-scan-failure-field-troubleshooting-guide/"
+    },
+    {
+      "route": "/guides/qr-code-utm-campaign-link-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/qr-code-utm-campaign-link-guide/"
     },
     {
       "route": "/guides/qr-code-vs-barcode-guide/",
@@ -5404,6 +6034,20 @@
       "canonical": "https://funnytools.win/guides/scanned-pdf-searchable-ocr-guide/"
     },
     {
+      "route": "/guides/seating-chart-changeover-routine-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/seating-chart-changeover-routine-guide/"
+    },
+    {
+      "route": "/guides/seating-chart-student-needs-intake-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/seating-chart-student-needs-intake-guide/"
+    },
+    {
       "route": "/guides/secure-random-vs-math-random-guide/",
       "indexable": true,
       "robots": null,
@@ -5423,6 +6067,20 @@
       "robots": null,
       "redirect": false,
       "canonical": "https://funnytools.win/guides/shapiro-wilk-normality-test/"
+    },
+    {
+      "route": "/guides/split-pdf-output-naming-batch-delivery-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/split-pdf-output-naming-batch-delivery-guide/"
+    },
+    {
+      "route": "/guides/split-pdf-page-range-planning-guide/",
+      "indexable": true,
+      "robots": null,
+      "redirect": false,
+      "canonical": "https://funnytools.win/guides/split-pdf-page-range-planning-guide/"
     },
     {
       "route": "/guides/spss-levene-test-guide/",

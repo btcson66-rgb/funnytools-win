@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-02T16:28:44.238Z",
-  "buildVersion": "5.131.1",
+  "generatedAt": "2026-09-04T01:22:41.510Z",
+  "buildVersion": "5.136.6",
   "status": "verified-locally-with-review-items",
   "supportedLocales": [
     "zh-TW",
@@ -9,8 +9,8 @@
     "fr"
   ],
   "completePagesPerLocale": {
-    "zh-TW": 261,
-    "en": 140,
+    "zh-TW": 308,
+    "en": 187,
     "es": 139,
     "fr": 75
   },
@@ -20,7 +20,7 @@
     "es": 0,
     "fr": 0
   },
-  "hreflangClusters": 497,
+  "hreflangClusters": 591,
   "brokenReciprocityBefore": null,
   "brokenReciprocityAfter": 0,
   "invalidCanonicalBefore": null,

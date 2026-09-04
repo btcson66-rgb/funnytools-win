@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-02T16:28:44.238Z",
-  "buildVersion": "5.131.1",
+  "generatedAt": "2026-09-04T01:22:41.510Z",
+  "buildVersion": "5.136.6",
   "status": "needs-review",
-  "checkedRouteCount": 615,
-  "issueCount": 262,
+  "checkedRouteCount": 709,
+  "issueCount": 309,
   "issues": [
     {
       "route": "/about/",
@@ -126,6 +126,11 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/2d-cad-drawing-board-workflow-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/a4-vs-us-letter-printing-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
@@ -196,12 +201,47 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/classroom-group-roles-rotation-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/classroom-lottery-tool-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/classroom-random-group-absent-student-repair-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/classroom-random-group-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/classroom-random-group-materials-handoff-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/classroom-random-group-no-repeat-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/classroom-random-group-seat-transition-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/classroom-random-group-shareable-result-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/classroom-random-group-size-balance-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -257,6 +297,11 @@
     },
     {
       "route": "/guides/csv-to-json-conversion-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/csv-to-json-header-duplicate-column-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -381,7 +426,37 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/image-color-profile-web-print-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/image-compression-email-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/image-compression-quality-size-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/image-compressor-metadata-privacy-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/image-resampling-quality-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/image-resize-aspect-ratio-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/image-resolution-print-web-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -421,6 +496,11 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/json-formatter-trailing-comma-error-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/json-to-csv-excel-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
@@ -441,7 +521,22 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/merge-pdf-bookmarks-navigation-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/merge-pdf-page-size-orientation-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/merge-pdf-private-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/merge-pdf-reading-order-checklist-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -486,12 +581,82 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/pdf-accessibility-reading-order-check-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/pdf-compressor-email-attachment-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/pdf-compressor-form-fields-links-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/pdf-page-reorder-appendix-merge-check-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/pdf-split-vs-extract-vs-delete/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/pdf-table-to-excel-header-check-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/pdf-to-image-background-contrast-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/pdf-to-image-multipage-download-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/pdf-to-image-print-crop-marks-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/pdf-to-image-raster-text-search-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/pdf-to-image-resolution-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/pdf-to-jpg-vs-png/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/pdf-to-word-form-field-editing-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/pdf-to-word-layout-fidelity-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/pdf-to-word-ocr-language-check-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/pdf-to-word-review-track-changes-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -546,7 +711,42 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/qr-code-accessible-fallback-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/qr-code-before-print-testing-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/qr-code-classroom-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/qr-code-destination-change-log-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/qr-code-event-page-expiry-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/qr-code-mobile-landing-page-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/qr-code-multi-placement-consistency-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/qr-code-multilingual-switch-testing-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -556,7 +756,22 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/qr-code-payload-length-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/qr-code-phishing-security-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/qr-code-scan-failure-field-troubleshooting-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/qr-code-utm-campaign-link-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -616,6 +831,16 @@
       "issue": "heuristic-visible-language-mix"
     },
     {
+      "route": "/guides/seating-chart-changeover-routine-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/seating-chart-student-needs-intake-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
       "route": "/guides/secure-random-vs-math-random-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
@@ -627,6 +852,16 @@
     },
     {
       "route": "/guides/shapiro-wilk-normality-test/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/split-pdf-output-naming-batch-delivery-guide/",
+      "htmlLanguage": "zh-Hant",
+      "issue": "heuristic-visible-language-mix"
+    },
+    {
+      "route": "/guides/split-pdf-page-range-planning-guide/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     },
@@ -767,241 +1002,6 @@
     },
     {
       "route": "/methodology/accessibility-compatibility/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/methodology/ai-assisted-content/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/methodology/browser-local-processing/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/methodology/calculator-formula-verification/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/methodology/content-sourcing-corrections/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/methodology/file-tool-verification/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/methodology/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/methodology/public-test-cases/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/methodology/randomness-security/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/methodology/tool-verification/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/privacy/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/shop/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/support/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/terms/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/age-calculator/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/apa-7-report-generator/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/bar-chart-maker/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/barcode-generator/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/base64/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/break-reminder/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/bulk-image-compressor/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/business-days/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/cad-2d/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/case-converter/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/character-counter/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/class-rank-percentile-calculator/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/color-generator/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/compound-interest/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/countdown-timer/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/cronbach-alpha-calculator/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/csv-to-json/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/date-difference/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/delete-pdf-pages/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/dice-roller/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/extract-pdf-pages/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/flowchart/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/gpa-calculator/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/grade-average/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/group-generator/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/image-compressor/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/image-crop/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/image-resizer/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/image-rotate-flip/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/image-to-base64/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/image-to-dxf/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/images-to-pdf/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/independent-samples-t-test-calculator/",
-      "htmlLanguage": "zh-Hant",
-      "issue": "heuristic-visible-language-mix"
-    },
-    {
-      "route": "/tools/",
       "htmlLanguage": "zh-Hant",
       "issue": "heuristic-visible-language-mix"
     }

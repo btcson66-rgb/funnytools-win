@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-02T16:29:07.081Z",
+  "generatedAt": "2026-09-04T01:11:12.985Z",
   "environment": "local-static-build",
-  "buildVersion": "5.131.1",
+  "buildVersion": "5.136.6",
   "status": "measured",
-  "routesChecked": 1073,
+  "routesChecked": 1167,
   "issueCount": 0,
   "findings": [],
   "note": "No automated semantic soft-404 classifier is asserted; 404 and noindex policy remain separate.",
