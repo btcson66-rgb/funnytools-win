@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const seoSource = readFileSync(new URL('../src/lib/seo.ts', import.meta.url), 'utf8');
+const baseLayoutSource = readFileSync(new URL('../src/layouts/BaseLayout.astro', import.meta.url), 'utf8');
 const cadHtml = readFileSync(new URL('../dist/en/tools/cad-2d/index.html', import.meta.url), 'utf8');
 
 test('shared SEO description helper uses an ellipsis for truncated fragments', () => {
@@ -20,4 +21,9 @@ test('rendered CAD metadata is complete and stays within the description budget'
   assert.match(description, /^Create simple 2D CAD drawings online with…/);
   assert.match(description, /Free, no registration\. Inputs and files stay in your browser and are not uploaded to FunnyTools servers\.$/);
   assert.doesNotMatch(description, /for simple\.$/);
+});
+
+test('shared OG fallback uses the page title for meaningful alt text', () => {
+  assert.match(baseLayoutSource, /const ogAlt = ogImageAlt \?\? title;/);
+  assert.doesNotMatch(baseLayoutSource, /const ogAlt = ogImageAlt \?\? SITE\.name\[lang\];/);
 });

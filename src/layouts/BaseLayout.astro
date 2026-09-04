@@ -69,7 +69,10 @@ const hreflangs = registryHreflangs.length ? registryHreflangs : defaultHreflang
 const jsonLdItems = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
 const ogLocale = ogLocaleOverride ?? (lang === 'zh' ? 'zh_TW' : 'en_US');
 const ogImage = customOgImage ?? defaultOgImage();
-const ogAlt = ogImageAlt ?? SITE.name[lang];
+// A page-specific title is a safer fallback than the site name: it gives
+// screen readers and social previews meaningful context even when a route
+// intentionally uses the shared default image.
+const ogAlt = ogImageAlt ?? title;
 const brandedTitle = title.includes('FunnyTools') ? title : `${title} - FunnyTools`;
 const brandedDescription = description;
 const ui = t(lang);
