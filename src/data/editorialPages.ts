@@ -1,4 +1,5 @@
 import { marked } from 'marked';
+import { sanitizePublicMarkdown } from '../lib/publicMarkdown';
 
 export interface EditorialPage {
   slug: string;
@@ -52,7 +53,7 @@ export const editorialPages: EditorialPage[] = Object.entries(sources)
     const { data, body } = parse(source);
     const route = data.slug ?? '/methodology/';
     const segments = route.split('/').filter(Boolean);
-    const pageBody = withoutH1(body);
+    const pageBody = sanitizePublicMarkdown(withoutH1(body));
     const title = data.hero_title ?? data.title ?? segments.at(-1) ?? 'Methodology';
     return {
       slug: segments.slice(1).join('/') || 'index',

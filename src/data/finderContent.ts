@@ -1,4 +1,5 @@
 import { marked } from 'marked';
+import { sanitizePublicMarkdown } from '../lib/publicMarkdown';
 
 const sources = import.meta.glob('../content/finder/**/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
 
@@ -9,4 +10,4 @@ function parseBody(source: string): string {
   return body.replace(/^# .*?(?:\r?\n){1,2}/, '').trim();
 }
 
-export const finderContentHtml = marked.parse(parseBody(Object.values(sources)[0] ?? '')) as string;
+export const finderContentHtml = marked.parse(sanitizePublicMarkdown(parseBody(Object.values(sources)[0] ?? ''))) as string;

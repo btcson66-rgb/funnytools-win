@@ -1,6 +1,7 @@
 import { marked } from 'marked';
 import type { Locale } from '../config/site';
 import type { SeoPageKind } from './seoContentModels';
+import { sanitizePublicMarkdown } from '../lib/publicMarkdown';
 
 export interface TaskSeoGuide {
   task: string;
@@ -142,11 +143,11 @@ export const importedTaskSeoGuides: TaskSeoGuide[] = Object.entries(sources)
     const summary = frontmatter.hero_subtitle ?? firstParagraph(body);
     const task = taskFromPath(path);
     const pageKind: SeoPageKind = /\/00-[^/]+-hub\.md$/.test(path) ? 'guideHub' : 'guide';
-    const bodyWithoutH1 = stripLeadingH1(body);
+    const bodyWithoutH1 = sanitizePublicMarkdown(stripLeadingH1(body));
     const guideLinks = idsFrom(bodyWithoutH1, 'guides').filter((id) => id !== slug);
     const englishSource = sourceForSlug(englishSources, slug);
     const englishDocument = englishSource ? parseDocument(englishSource) : undefined;
-    const englishBody = englishDocument ? stripLeadingH1(englishDocument.body) : undefined;
+    const englishBody = englishDocument ? sanitizePublicMarkdown(stripLeadingH1(englishDocument.body)) : undefined;
     const englishFrontmatter = englishDocument?.frontmatter;
     const englishSummary = englishFrontmatter?.hero_subtitle
       ?? (englishDocument ? firstParagraph(englishDocument.body) : undefined);

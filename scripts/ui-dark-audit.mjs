@@ -9,6 +9,7 @@ const origin = (
 ).replace(/\/$/, '');
 const interactionMode = process.argv.includes('--interactions');
 const viewportWidth = Number(process.argv.find((arg) => arg.startsWith('--width='))?.split('=')[1] || 1440);
+const requestedRoutes = process.argv.filter((arg) => arg.startsWith('--route=')).map((arg) => arg.slice('--route='.length));
 const viewportHeight = viewportWidth < 600 ? 844 : viewportWidth < 1024 ? 1024 : 1100;
 const chromeCandidates = [
   process.env.CHROME_PATH,
@@ -102,6 +103,17 @@ async function evaluateAudit(cdp, route, attempts = 3) {
   throw new Error(`${route}: UI audit expression failed (${detail}).`);
 }
 
+async function waitForLoad(cdp, timeoutMs = 5000) {
+  let timer;
+  const loaded = cdp.once('Page.loadEventFired').then(() => true);
+  const timeout = new Promise((resolve) => {
+    timer = setTimeout(() => resolve(false), timeoutMs);
+  });
+  const result = await Promise.race([loaded, timeout]);
+  clearTimeout(timer);
+  return result;
+}
+
 const auditExpression = String.raw`(() => {
   const parseColor = (value) => {
     const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
@@ -190,12 +202,15 @@ try {
   const sitemapDocuments = await Promise.all(
     sitemapFiles.map((name) => readFile(new URL(name, distDirectory), 'utf8')),
   );
-  const routes = [...new Set(sitemapDocuments.flatMap(extractRoutes))];
+  const allRoutes = [...new Set(sitemapDocuments.flatMap(extractRoutes))];
+  const routes = requestedRoutes.length ? allRoutes.filter((route) => requestedRoutes.includes(route)) : allRoutes;
   const failures = [];
+  const loadTimeouts = [];
   for (const route of routes) {
-    const loaded = cdp.once('Page.loadEventFired');
+    const loaded = waitForLoad(cdp);
     await cdp.send('Page.navigate', { url: `${origin}${route}` });
-    await loaded;
+    const didLoad = await loaded;
+    if (!didLoad) loadTimeouts.push(route);
     await new Promise((resolve) => setTimeout(resolve, 35));
     const findings = await evaluateAudit(cdp, route);
     if (interactionMode) {
@@ -249,6 +264,7 @@ try {
     failingRoutes: failures.length,
     wrongThemeRoutes: failures.filter((item) => item.theme !== 'dark').map((item) => item.route),
     horizontalOverflowRoutes: failures.filter((item) => item.horizontalOverflow).map((item) => item.route),
+    loadTimeouts,
     whiteSurfaces: groupFindings('whiteSurfaces'),
     lowContrastControls: groupFindings('lowContrastControls'),
     smallControls: groupFindings('smallControls'),

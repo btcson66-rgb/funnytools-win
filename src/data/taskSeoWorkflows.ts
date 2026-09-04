@@ -2,6 +2,7 @@ import { marked } from 'marked';
 import type { Locale } from '../config/site';
 import type { SeoPageKind } from './seoContentModels';
 import type { Workflow } from './workflows';
+import { sanitizePublicMarkdown } from '../lib/publicMarkdown';
 
 type RawFrontmatter = Record<string, string>;
 const sources = import.meta.glob('../content/seo-workflows/**/*.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
@@ -39,7 +40,7 @@ export const importedTaskSeoWorkflows: Workflow[] = Object.entries(sources).sort
   const route = frontmatter.slug ?? `/${sourcePath.split('/').at(-1)?.replace(/\.md$/, '') ?? 'workflow'}/`;
   const slug = route.split('/').filter(Boolean).at(-1) ?? 'workflow';
   const title = frontmatter.hero_title ?? slug;
-  const contentHtml = marked.parse(stripLeadingH1(body)) as string;
+  const contentHtml = marked.parse(sanitizePublicMarkdown(stripLeadingH1(body))) as string;
   return {
     pageKind: 'workflow' as SeoPageKind,
     id: slug,
@@ -51,8 +52,8 @@ export const importedTaskSeoWorkflows: Workflow[] = Object.entries(sources).sort
     h1: localize(title),
     purpose: localize(frontmatter.hero_subtitle ?? title),
     steps: [],
-    recommendedToolIds: idsFrom(body, 'tools'),
-    relatedGuideIds: idsFrom(body, 'guides'),
+    recommendedToolIds: idsFrom(sanitizePublicMarkdown(body), 'tools'),
+    relatedGuideIds: idsFrom(sanitizePublicMarkdown(body), 'guides'),
     faq: [],
     updatedAt: frontmatter.date_modified ?? frontmatter.date_published ?? '2026-08-31',
     publishAt: frontmatter.date_published ?? '2026-08-31',
