@@ -180,7 +180,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/guides/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/" />
@@ -428,6 +428,13 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-page-reorder-appendix-merge-check-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/en/guides/pdf-split-vs-extract-vs-delete/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-split-vs-extract-vs-delete/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-split-vs-extract-vs-delete/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-split-vs-extract-vs-delete/" />
+  </url>
+  <url>
     <loc>https://funnytools.win/en/guides/pdf-table-to-excel-header-check-guide/</loc>
     <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-table-to-excel-header-check-guide/" />
@@ -496,6 +503,20 @@
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-to-word-review-track-changes-guide/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-to-word-review-track-changes-guide/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-to-word-review-track-changes-guide/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/pdf-upload-failed-troubleshooting/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-upload-failed-troubleshooting/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-upload-failed-troubleshooting/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-upload-failed-troubleshooting/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/guides/percentage-grade-to-gpa-conversion-guide/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/percentage-grade-to-gpa-conversion-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/percentage-grade-to-gpa-conversion-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/percentage-grade-to-gpa-conversion-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/en/guides/percentage-shortcuts-guide/</loc>
@@ -884,7 +905,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/delete-pdf-pages/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/delete-pdf-pages/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/delete-pdf-pages/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/eliminar-paginas-pdf/" />
@@ -902,7 +923,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/extract-pdf-pages/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/extract-pdf-pages/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/extract-pdf-pages/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/extraer-paginas-pdf/" />
@@ -920,7 +941,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/gpa-calculator/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/gpa-calculator/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/gpa-calculator/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-gpa/" />
@@ -998,7 +1019,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/images-to-pdf/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/images-to-pdf/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/images-to-pdf/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/convertir-imagenes-a-pdf/" />
@@ -1015,7 +1036,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/inflation/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/inflation/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/tools/inflation/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/calculadora-inflacion/" />

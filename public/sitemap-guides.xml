@@ -188,7 +188,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/</loc>
-    <lastmod>2026-09-03</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/guias/" />
@@ -687,7 +687,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/pdf-split-vs-extract-vs-delete/</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-04</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-split-vs-extract-vs-delete/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-split-vs-extract-vs-delete/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-split-vs-extract-vs-delete/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/pdf-table-to-excel-header-check-guide/</loc>
@@ -765,7 +768,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/pdf-upload-failed-troubleshooting/</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-04</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/pdf-upload-failed-troubleshooting/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/pdf-upload-failed-troubleshooting/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/pdf-upload-failed-troubleshooting/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/pearson-vs-spearman-correlation/</loc>
@@ -773,7 +779,10 @@
   </url>
   <url>
     <loc>https://funnytools.win/guides/percentage-grade-to-gpa-conversion-guide/</loc>
-    <lastmod>2026-08-27</lastmod>
+    <lastmod>2026-09-04</lastmod>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/guides/percentage-grade-to-gpa-conversion-guide/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/guides/percentage-grade-to-gpa-conversion-guide/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/percentage-grade-to-gpa-conversion-guide/" />
   </url>
   <url>
     <loc>https://funnytools.win/guides/percentage-shortcuts-guide/</loc>
