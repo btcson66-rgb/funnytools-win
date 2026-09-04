@@ -39,11 +39,18 @@ for (const route of routes) {
   const html = await readFile(htmlPath, 'utf8');
   const og = html.match(/<meta property="og:image" content="([^"]+)"/i)?.[1];
   const twitter = html.match(/<meta name="twitter:image" content="([^"]+)"/i)?.[1];
+  const ogAlt = html.match(/<meta property="og:image:alt" content="([^"]+)"/i)?.[1];
+  const twitterAlt = html.match(/<meta name="twitter:image:alt" content="([^"]+)"/i)?.[1];
   if (!og || !twitter) {
     failures.push(`${route}: missing OG/Twitter image`);
     continue;
   }
   if (og !== twitter) failures.push(`${route}: OG/Twitter image mismatch`);
+  if (!ogAlt || !twitterAlt) failures.push(`${route}: missing OG/Twitter image alt`);
+  else if (ogAlt !== twitterAlt) failures.push(`${route}: OG/Twitter image alt mismatch`);
+  const declaredWidth = html.match(/<meta property="og:image:width" content="(\d+)"/i)?.[1];
+  const declaredHeight = html.match(/<meta property="og:image:height" content="(\d+)"/i)?.[1];
+  if (declaredWidth !== '1200' || declaredHeight !== '630') failures.push(`${route}: OG metadata must declare 1200x630`);
   imageCounts.set(og, (imageCounts.get(og) ?? 0) + 1);
   const pathname = new URL(og).pathname;
   const assetPath = join(publicDir, pathname.replace(/^\/+/, ''));
