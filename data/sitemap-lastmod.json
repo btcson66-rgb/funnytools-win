@@ -190,9 +190,9 @@
     "lastmod": "2026-06-26"
   },
   "https://funnytools.win/en/guides/": {
-    "hash": "8fcb28cadf037e5219ca3b83aff16f7ad4b340bec1b32c9148198597216f0132",
+    "hash": "f8aae223ed69d7c0aa5fb12678f5716b025b96058751b45ba238bb8ac1b59458",
     "hashVersion": 6,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/en/guides/2d-cad-drawing-board-workflow-guide/": {
     "hash": "1dec038e64f854a904a4026bd243217c154e5fc5bba807225e2d64dae17ac3af",
@@ -359,6 +359,11 @@
     "hashVersion": 6,
     "lastmod": "2026-09-03"
   },
+  "https://funnytools.win/en/guides/pdf-split-vs-extract-vs-delete/": {
+    "hash": "72d7bfd9b7b815af43cb62d7043d4b34390bc700601c785df64af28ab2353edc",
+    "hashVersion": 6,
+    "lastmod": "2026-09-04"
+  },
   "https://funnytools.win/en/guides/pdf-table-to-excel-header-check-guide/": {
     "hash": "bb4f400e72f70d18d243cca8f5f98a89bcb2c217f2351da840e40b25db73e75f",
     "hashVersion": 6,
@@ -408,6 +413,16 @@
     "hash": "7bb3911ff0facc8426ff06c7cab57fe000f311f95694b7dc08a9b7edc80ef742",
     "hashVersion": 6,
     "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/guides/pdf-upload-failed-troubleshooting/": {
+    "hash": "ef7eddc71d94c2a488171acc0c5c974acd0caadb93ffe70ecd0af82f9003af74",
+    "hashVersion": 6,
+    "lastmod": "2026-09-04"
+  },
+  "https://funnytools.win/en/guides/percentage-grade-to-gpa-conversion-guide/": {
+    "hash": "0243e349aac89b6a9e9607eb54e6e3b13cf502bd29ce332ff9577ca08918b4e8",
+    "hashVersion": 6,
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/en/guides/percentage-shortcuts-guide/": {
     "hash": "e4a99d59820565d10d8c09e88765bef216ba40c9bdc03a36a80efec7df76da05",
@@ -650,9 +665,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/delete-pdf-pages/": {
-    "hash": "2dafd6f507bfac10503c05fdea291f80763579a8a0a551a443f5d2d52054b85c",
+    "hash": "b4542ffb1985c95e87dec7ce1c20fee3e2599bdc6d6a3dc2d51f9fdb35b29eb3",
     "hashVersion": 6,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/en/tools/dice-roller/": {
     "hash": "f2940dc3f8804fc854b898c8b826f862db22d58d48d5a4cd01d6ed2f84a92c01",
@@ -660,9 +675,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/extract-pdf-pages/": {
-    "hash": "25099e1858368c815a50cbe104637941d9427421bf845b9f0edf3359aad65bcf",
+    "hash": "80a532d82861f199a6d5bbf43f66927ba9813c2fd345b0ff284e56dc18f174af",
     "hashVersion": 6,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/en/tools/flowchart/": {
     "hash": "38eb771af855dbefde409f18abb73c467777b603ec76bf885d8884a68a77afed",
@@ -670,9 +685,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/gpa-calculator/": {
-    "hash": "9639e58e51d5a3b3ed60bf130b45fae3619cdd072cfdcbdc1e9c2c7f39254c1d",
+    "hash": "84dbbb50eb922c86c180a71152433b5358e96c6e2fcc20808cca51410ac645ed",
     "hashVersion": 6,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/en/tools/grade-average/": {
     "hash": "92f444e69c0d90d44d66816197c7e502bec708734466f3b320d6d76097219b35",
@@ -715,9 +730,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/images-to-pdf/": {
-    "hash": "d20112d486b922a52c613fd2bc546837b8c8fda4b06a3d91728e2283c129a125",
+    "hash": "f0c634d6afea66861908a5d8282efd4058efdf3b0d52554e7edfcc6a63c3b428",
     "hashVersion": 6,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/en/tools/independent-samples-t-test-calculator/": {
     "hash": "313ac612fed90f9ab9cc33aaa30ca6667be88ebe602f68e5d2eb2967eff42c65",
@@ -725,9 +740,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/inflation/": {
-    "hash": "fdd8b5110bcdfd49f8296be35fb693f5dd35537c3308eccebaf76647012c4fb8",
+    "hash": "2285cb701f9fed07fdedf21e0f756215cd185b7b5fed960a20ebe1e987f25778",
     "hashVersion": 6,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/en/tools/jpg-to-png/": {
     "hash": "5a33b818dac70ed775656b7cbee0b47a0ae1334be69c22003d88b689817da450",
@@ -1305,9 +1320,9 @@
     "lastmod": "2026-07-29"
   },
   "https://funnytools.win/es/herramientas/calculadora-inflacion/": {
-    "hash": "22cab8212fc39cc1c2a9498bbb0408c3ecf683daf6be0f353c9abdf641bb1ec5",
+    "hash": "01cabe442c650dbcdf7509eee08455c6efd110bf5c9ad272f70d92a7e76fb892",
     "hashVersion": 6,
-    "lastmod": "2026-07-29"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/es/herramientas/calculadora-interes-compuesto/": {
     "hash": "d295aa0d84444dae82382e9e40823ecb1ac0878a18ef799703bccff615a76fe4",
@@ -1790,9 +1805,9 @@
     "lastmod": "2026-07-29"
   },
   "https://funnytools.win/fr/outils/calculateur-inflation-pouvoir-achat/": {
-    "hash": "29b3b4ee28b7859491e640f4d89543ca39dc20ffc0d677a0a7dc811252387758",
+    "hash": "3a3c2d35ee4a226774ad43428be22982f6b7ed95bb7eee8558aabf3a45fbfb16",
     "hashVersion": 6,
-    "lastmod": "2026-07-29"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/fr/outils/calculateur-interets-composes/": {
     "hash": "a22d94fd68aef85eba92ebdf82c4808b8a0cf3d3db2076b52965765a7bb11e7d",
@@ -2125,9 +2140,9 @@
     "lastmod": "2026-07-29"
   },
   "https://funnytools.win/guides/": {
-    "hash": "cd0cd0193d1aafbc8e97571297228779eb93676b9ad1d42a5891569e2461d0dd",
+    "hash": "b15d52e05686f43d4b8869453994780cc094a0c12752c8500a47e87de5f2cad8",
     "hashVersion": 6,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/guides/2d-cad-drawing-board-workflow-guide/": {
     "hash": "ac624e0e8b4e891f31b4ab7a754e7e0e925ead1c6a6d31d39b5cc896c5cf35bc",
@@ -2600,9 +2615,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/pdf-split-vs-extract-vs-delete/": {
-    "hash": "004b4591082da3b8d94a68e704bea899b433b0fe65352f06e8584f98ad189d25",
+    "hash": "22f3eb12c004d40409136b23d2328eb4093e7d554440ebb84b095cfecac8c597",
     "hashVersion": 6,
-    "lastmod": "2026-08-27"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/guides/pdf-table-to-excel-header-check-guide/": {
     "hash": "54758e6dea5f4bb3d4dcaaf5f4aca024feebd1bfa2b72ba95612dfe1cc2ec4c4",
@@ -2660,9 +2675,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/guides/pdf-upload-failed-troubleshooting/": {
-    "hash": "603b6c1113f8b80b03307041876062379ab3a890bc764183d141977d230bd6ad",
+    "hash": "554e605839746274d0d85eef37d1df6f40a9948728417b3151f2ee27f2a96ea5",
     "hashVersion": 6,
-    "lastmod": "2026-08-27"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/guides/pearson-vs-spearman-correlation/": {
     "hash": "ac12d62da3520491b175f42284aafb42f99df2aae3f27f691049ac89789bfa19",
@@ -2670,9 +2685,9 @@
     "lastmod": "2026-08-27"
   },
   "https://funnytools.win/guides/percentage-grade-to-gpa-conversion-guide/": {
-    "hash": "f1061a832cc05759b0dce46749f2722d26c158c09e43315ecc144e0669eed5dc",
+    "hash": "e8ac77427e02e50a2c402c61c7a25423fd21fd08d13b9e296d7a85dede89fd8d",
     "hashVersion": 6,
-    "lastmod": "2026-08-27"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/guides/percentage-shortcuts-guide/": {
     "hash": "19b77d892b21486e70fdefd91819ad4ba94674f16300c571f7af110e73a39034",
@@ -3235,9 +3250,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/inflation/": {
-    "hash": "4a3172e08791b329a753a100b288aec4688a8604463c7a32146f1713a5ed8c8a",
+    "hash": "025e008bc203c9dccaa8f3e817d8601c95ef1897b07ee02aa5e51072e5c76b24",
     "hashVersion": 6,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-09-04"
   },
   "https://funnytools.win/tools/jpg-to-png/": {
     "hash": "b3b18c80e1040dc74589374172680dfc7f45ea804fc7f38be405fed598c6a4bc",

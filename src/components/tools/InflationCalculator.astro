@@ -102,12 +102,18 @@ const { labels } = Astro.props;
     }
 
     function calculate() {
+      const amountRaw = amountInput.value.trim();
+      const rateRaw = rateInput.value.trim();
+      const yearsRaw = yearsInput.value.trim();
       const amount = Number(amountInput.value);
       const ratePercent = Number(rateInput.value);
       const rate = ratePercent / 100;
       const years = Number(yearsInput.value);
       if (
-        ![amount, ratePercent, years].every(Number.isFinite)
+        !amountRaw
+        || !rateRaw
+        || !yearsRaw
+        || ![amount, ratePercent, years].every(Number.isFinite)
         || amount < 0
         || ratePercent < -99.99
         || ratePercent > 1000

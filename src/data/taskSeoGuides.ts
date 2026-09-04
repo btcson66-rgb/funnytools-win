@@ -42,6 +42,15 @@ const sources = import.meta.glob('../content/seo-guides/**/*.md', {
   import: 'default',
 }) as Record<string, string>;
 
+// English editorial passes live in a separate tree so a translated article
+// cannot accidentally be parsed as a second Chinese route.  A file is only
+// exposed at /en/guides/ when it has its own English copy and metadata.
+const englishSources = import.meta.glob('../content/seo-guides-en/**/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+}) as Record<string, string>;
+
 function localize(zh: string): Record<Locale, string> {
   return { zh, en: zh };
 }
@@ -79,6 +88,10 @@ function parseDocument(source: string): { frontmatter: RawFrontmatter; body: str
 function slugFromPath(path: string): string {
   const match = path.match(/\/([^/]+)\.md$/);
   return match?.[1] ?? path;
+}
+
+function sourceForSlug(sourceMap: Record<string, string>, targetSlug: string): string | undefined {
+  return Object.entries(sourceMap).find(([path]) => slugFromPath(path) === targetSlug)?.[1];
 }
 
 function stripLeadingH1(body: string): string {
@@ -131,35 +144,61 @@ export const importedTaskSeoGuides: TaskSeoGuide[] = Object.entries(sources)
     const pageKind: SeoPageKind = /\/00-[^/]+-hub\.md$/.test(path) ? 'guideHub' : 'guide';
     const bodyWithoutH1 = stripLeadingH1(body);
     const guideLinks = idsFrom(bodyWithoutH1, 'guides').filter((id) => id !== slug);
+    const englishSource = sourceForSlug(englishSources, slug);
+    const englishDocument = englishSource ? parseDocument(englishSource) : undefined;
+    const englishBody = englishDocument ? stripLeadingH1(englishDocument.body) : undefined;
+    const englishFrontmatter = englishDocument?.frontmatter;
+    const englishSummary = englishFrontmatter?.hero_subtitle
+      ?? (englishDocument ? firstParagraph(englishDocument.body) : undefined);
+    const englishContent = englishBody ? marked.parse(englishBody) as string : undefined;
+    const englishTitle = englishFrontmatter?.card_title ?? englishFrontmatter?.hero_title;
+    const englishMetaTitle = englishFrontmatter?.seo_title ?? englishFrontmatter?.hero_title;
+    const englishMetaDescription = englishFrontmatter?.meta_description
+      ? completeMetaDescription(sanitizeMetaDescription(englishFrontmatter.meta_description))
+      : undefined;
+    const englishH1 = englishFrontmatter?.hero_title ?? englishFrontmatter?.title;
+    const englishCategory = englishFrontmatter?.category;
+    const englishSearchIntent = englishFrontmatter?.search_intent;
+    const englishKeyword = englishFrontmatter?.primary_keyword;
+    const englishProblem = englishDocument ? firstParagraph(englishDocument.body) : undefined;
+    const englishAudience = englishFrontmatter?.audience ?? englishSummary;
+    const englishCta = englishFrontmatter?.cta;
+    const updatedAt = [frontmatter.date_modified, englishFrontmatter?.date_modified, frontmatter.date_published]
+      .filter((value): value is string => Boolean(value))
+      .sort()
+      .at(-1) ?? '2026-08-27';
     return {
       task,
       pageKind,
       id: slug,
-      locales: ['zh'],
+      locales: englishDocument ? ['zh', 'en'] : ['zh'],
       slug,
-      title: localize(frontmatter.card_title ?? h1),
-      metaTitle: localize(frontmatter.seo_title ?? h1),
-      metaDescription: localize(completeMetaDescription(sanitizeMetaDescription(frontmatter.meta_description ?? summary))),
-      h1: localize(h1),
-      category: localize(frontmatter.category ?? categories[task] ?? 'FunnyTools 指南'),
+      title: { zh: frontmatter.card_title ?? h1, en: englishTitle ?? frontmatter.card_title ?? h1 },
+      metaTitle: { zh: frontmatter.seo_title ?? h1, en: englishMetaTitle ?? frontmatter.seo_title ?? h1 },
+      metaDescription: {
+        zh: completeMetaDescription(sanitizeMetaDescription(frontmatter.meta_description ?? summary)),
+        en: englishMetaDescription ?? completeMetaDescription(sanitizeMetaDescription(frontmatter.meta_description ?? summary)),
+      },
+      h1: { zh: h1, en: englishH1 ?? h1 },
+      category: { zh: frontmatter.category ?? categories[task] ?? 'FunnyTools 指南', en: englishCategory ?? frontmatter.category ?? categories[task] ?? 'FunnyTools guide' },
       priority: 1000 + index,
-      searchIntent: localize(frontmatter.search_intent ?? '問題解決與實作指南'),
-      targetKeywords: [localize(frontmatter.primary_keyword ?? h1)],
+      searchIntent: { zh: frontmatter.search_intent ?? '問題解決與實作指南', en: englishSearchIntent ?? frontmatter.search_intent ?? 'Problem-solving and practical guide' },
+      targetKeywords: [{ zh: frontmatter.primary_keyword ?? h1, en: englishKeyword ?? frontmatter.primary_keyword ?? h1 }],
       relatedToolIds: idsFrom(bodyWithoutH1, 'tools'),
       relatedGuideIds: guideLinks,
       relatedWorkflowIds: idsFrom(bodyWithoutH1, 'workflows'),
-      summary: localize(summary),
-      problem: localize(firstParagraph(body)),
-      whoShouldUse: localize(summary),
+      summary: { zh: summary, en: englishSummary ?? summary },
+      problem: { zh: firstParagraph(body), en: englishProblem ?? summary },
+      whoShouldUse: { zh: summary, en: englishAudience ?? summary },
       explanation: [],
       steps: [],
-      example: localize('請依頁面中的條件、限制與範例逐項核對。'),
+      example: { zh: '請依頁面中的條件、限制與範例逐項核對。', en: englishFrontmatter?.example ?? 'Check the page conditions, limits, and worked example before relying on the result.' },
       commonMistakes: [],
       faq: [],
-      cta: localize('可從頁面中的相關工具與延伸指南繼續操作。'),
-      updatedAt: frontmatter.date_modified ?? frontmatter.date_published ?? '2026-08-27',
+      cta: { zh: '可從頁面中的相關工具與延伸指南繼續操作。', en: englishCta ?? 'Continue with the related tools and guides linked on this page.' },
+      updatedAt,
       publishAt: task === 'task-017' ? (frontmatter.date_published ?? '2026-08-31') : frontmatter.date_published,
-      contentHtml: localize(marked.parse(bodyWithoutH1) as string),
+      contentHtml: { zh: marked.parse(bodyWithoutH1) as string, en: englishContent ?? (marked.parse(bodyWithoutH1) as string) },
       noFaqSchema: true,
     } satisfies TaskSeoGuide;
   });
