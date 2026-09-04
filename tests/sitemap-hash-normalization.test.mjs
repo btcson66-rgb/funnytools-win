@@ -76,3 +76,14 @@ test('share handler minifier variable renaming does not change sitemap content h
     contentHashForPage({ file: fixtureFile, html: oldShare }),
   );
 });
+
+test('social preview image metadata does not change sitemap content hash', () => {
+  const page = '<main><h1>Reader-facing content</h1></main>';
+  const genericPreview = '<meta property="og:image" content="https://funnytools.win/og-default.png"><meta property="og:image:alt" content="FunnyTools">';
+  const topicPreview = '<meta property="og:image" content="https://funnytools.win/og/zh-pdf.png"><meta property="og:image:alt" content="PDF 合併 · PDF 工具">';
+
+  assert.equal(
+    contentHashForPage({ file: fixtureFile, html: `${page}${genericPreview}` }),
+    contentHashForPage({ file: fixtureFile, html: `${page}${topicPreview}` }),
+  );
+});

@@ -30,7 +30,11 @@ export const sitemapLastmodPath = join(rootDir, 'data', 'sitemap-lastmod.json');
 // lastmodForPage treats a version change as a map migration: stored dates carry
 // forward once against the new hash, so normalizing the hash never itself becomes
 // a site-wide lastmod bump.
-export const sitemapContentHashVersion = 5;
+// Increment when stableRenderedHtml normalization changes.  The migration
+// path carries existing evidence-backed lastmod dates forward while replacing
+// obsolete hashes, so a shared metadata audit cannot collapse every URL onto
+// the release date.
+export const sitemapContentHashVersion = 6;
 export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
 export const enNoindex = indexingConfig.EN_NOINDEX === true;
 export const expansionRouteRegistry = readJson(
@@ -480,6 +484,15 @@ export function stableRenderedHtml(page) {
   // Cache-busting parameters are deployment metadata. Other query parameters
   // remain intact because they may carry page meaning.
   html = html.replace(/([?&](?:v|ver|version|cb|cachebust)=)[^&#"'\s<]+/gi, '$1<cache-key>');
+
+  // Social preview metadata is deliberately allowed to vary by locale and
+  // topic without claiming that the reader-facing page was rewritten.  OG and
+  // Twitter image URLs/alt text are distribution chrome; the visible title,
+  // description, and article/tool content remain part of the hash below.
+  html = html.replace(
+    /(<meta\b[^>]*\b(?:property|name)=["'](?:og:image|og:image:width|og:image:height|og:image:alt|twitter:image|twitter:image:alt)["'][^>]*\bcontent=["'])[^"']*(["'][^>]*>)/gi,
+    '$1<social-preview>$2',
+  );
 
   // generatedAt/build-time fields in inline JSON or scripts identify the build,
   // not a page edit. Date-only and full ISO forms are both normalized here.
