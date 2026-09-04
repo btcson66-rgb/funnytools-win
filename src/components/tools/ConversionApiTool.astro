@@ -164,11 +164,18 @@ const isPdf = slug === 'pdf-compressor';
     let calibrationImage = null;
     let calibrationPoints = [];
     let runSerial = 0;
+    const pdfModes = new Set(['pdf-to-word', 'pdf-table-to-excel', 'pdf-compressor']);
+    const requiresPdf = pdfModes.has(mode);
+    const isPdfFile = (file) => Boolean(file && (file.type === 'application/pdf' || /\.pdf$/i.test(file.name || '')));
+    const hasValidSingleFile = () => {
+      const file = fileInput?.files?.[0];
+      return Boolean(file) && (!requiresPdf || isPdfFile(file));
+    };
 
     const setError = (message = '') => { error.textContent = message; error.hidden = !message; };
     const setStatus = (message) => { status.textContent = message; };
     const setBusy = (busy) => {
-      convertButton.disabled = busy || (mode === 'bulk-image-compressor' ? !selectedFiles.length : !(fileInput?.files?.[0]));
+      convertButton.disabled = busy || (mode === 'bulk-image-compressor' ? !selectedFiles.length : !hasValidSingleFile());
       if (exportButton) exportButton.disabled = busy || !tables.length;
       if (downloadButton) downloadButton.disabled = busy || !outputBlob;
       cancelButton.hidden = !busy;
@@ -287,7 +294,22 @@ const isPdf = slug === 'pdf-compressor';
     dropZone?.addEventListener('dragover', (event) => { event.preventDefault(); dropZone.classList.add('is-dragging'); });
     dropZone?.addEventListener('dragleave', () => dropZone.classList.remove('is-dragging'));
     dropZone?.addEventListener('drop', (event) => { event.preventDefault(); event.stopPropagation(); dropZone.classList.remove('is-dragging'); setSelectedFiles(Array.from(event.dataTransfer?.files || [])); });
-    fileInput?.addEventListener('change', () => { runSerial += 1; controller?.abort(); controller = null; clearOutput(); setError(''); setBusy(false); });
+    fileInput?.addEventListener('change', () => {
+      runSerial += 1;
+      controller?.abort();
+      controller = null;
+      clearOutput();
+      const file = fileInput.files?.[0];
+      if (requiresPdf && file && !isPdfFile(file)) {
+        fileInput.value = '';
+        setError(labels.invalidFile || labels.noFile);
+        setStatus(labels.waiting);
+        setBusy(false);
+        return;
+      }
+      setError('');
+      setBusy(false);
+    });
     root.querySelector('[data-action="cancel"]')?.addEventListener('click', () => controller?.abort());
     root.querySelector('[data-action="clear"]')?.addEventListener('click', clear);
     downloadButton?.addEventListener('click', () => { if (outputBlob) downloadBlob(outputBlob, outputName); });
@@ -300,16 +322,16 @@ const isPdf = slug === 'pdf-compressor';
         const width = Number(root.querySelector('[data-max-width]')?.value) || undefined; const height = Number(root.querySelector('[data-max-height]')?.value) || undefined;
         await run((signal) => compressImagesWithStats(apiBase, selectedFiles, { quality: Number(root.querySelector('[data-quality]').value), maxWidth: width, maxHeight: height, outputFormat: root.querySelector('[data-format]').value, signal }), 'compressed-images.zip', (result) => { outputBlob = result.blob; outputName = 'compressed-images.zip'; renderBulkStats(result.stats); setStatus(labels.ready); downloadButton.disabled = false; });
       } else if (mode === 'pdf-to-word') {
-        const file = fileInput.files?.[0]; if (!file) { setError(labels.noFile); return; }
+        const file = fileInput.files?.[0]; if (!isPdfFile(file)) { setError(labels.invalidFile || labels.noFile); return; }
         await run((signal) => pdfToWord(apiBase, file, { ocrMode: root.querySelector('[data-ocr-mode]').value, ocrLang: root.querySelector('[data-ocr-lang]').value, includeImages: root.querySelector('[data-include-images]').checked, signal }), 'converted.docx');
       } else if (mode === 'pdf-table-to-excel') {
-        const file = fileInput.files?.[0]; if (!file) { setError(labels.noFile); return; }
+        const file = fileInput.files?.[0]; if (!isPdfFile(file)) { setError(labels.invalidFile || labels.noFile); return; }
         await run((signal) => previewPdfTables(apiBase, file, { pages: pages(), ocrMode: root.querySelector('[data-ocr-mode]').value, ocrLang: root.querySelector('[data-ocr-lang]').value, signal }), null, (result) => { tables = result.tables; renderTables(); setStatus(tables.length ? labels.ready : labels.noTables); });
       } else if (mode === 'image-to-dxf') {
         const file = fileInput.files?.[0]; if (!file) { setError(labels.noFile); return; } const points = calibrationPoints.length === 2 ? calibrationPoints : []; const px = points.length === 2 ? pixelDistance(points[0].x, points[0].y, points[1].x, points[1].y) : undefined; const real = Number(root.querySelector('[data-real-distance]')?.value) || undefined;
         await run((signal) => imageToDxf(apiBase, file, { threshold: Number(root.querySelector('[data-threshold]').value), invert: root.querySelector('[data-invert]').checked, blur: Number(root.querySelector('[data-blur]').value), epsilonRatio: Number(root.querySelector('[data-simplify]').value), minArea: Number(root.querySelector('[data-min-area]').value), units: root.querySelector('[data-units]').value, calibrationPixelDistance: px, calibrationRealDistance: real, signal }), 'vectorized.dxf');
       } else if (mode === 'pdf-compressor') {
-        const file = fileInput.files?.[0]; if (!file) { setError(labels.noFile); return; } const original = root.querySelector('[data-original]'); original.textContent = size(file.size);
+        const file = fileInput.files?.[0]; if (!isPdfFile(file)) { setError(labels.invalidFile || labels.noFile); return; } const original = root.querySelector('[data-original]'); original.textContent = size(file.size);
         await run((signal) => compressPdf(apiBase, file, root.querySelector('[data-preset]').value, signal), 'compressed.pdf'); if (outputBlob) { root.querySelector('[data-output]').textContent = size(outputBlob.size); root.querySelector('[data-change]').textContent = `${((outputBlob.size / file.size - 1) * 100).toFixed(1)}%`; }
       }
     });

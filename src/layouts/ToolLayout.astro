@@ -21,7 +21,7 @@ import type { ToolContent } from '../i18n/tools/_types';
 import { getGuidesForTool } from '../data/seoGuides';
 import { getWorkflowsForTool } from '../data/workflows';
 import { t } from '../i18n/ui';
-import { toolSeoDescription, toolSeoTitle } from '../lib/seo';
+import { categoryOgImage, toolSeoDescription, toolSeoTitle } from '../lib/seo';
 import { absoluteUrl, categoryUrl, localePath, localeUrlPair, toolUrl } from '../lib/url';
 import { buildToolValueReview, CONTENT_REVIEWED_AT } from '../lib/contentValue';
 
@@ -64,6 +64,8 @@ const downloadGateConfig = SITE.features.downloadGate
   alternateSegments={['tools', tool.slug]}
   altLang={localeUrlPair('tools', tool.slug)}
   jsonLd={jsonLd}
+  ogImage={categoryOgImage(lang, category.id)}
+  ogImageAlt={`${content.name} · ${category.name[lang]}`}
 >
   <article class="wrap tool-page" data-category={category.id} data-tool-slug={tool.slug}>
     {downloadGateConfig && (

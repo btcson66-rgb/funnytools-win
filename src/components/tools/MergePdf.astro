@@ -125,7 +125,13 @@ const { labels } = Astro.props;
         if (button.matches('[data-reset]')) return;
         button.disabled = isBusy;
       });
-      if (isBusy) setStatus(labels.processing);
+      if (isBusy) {
+        setStatus(labels.processing);
+      } else if (status.textContent === labels.processing) {
+        // Do not leave a stale "processing" message behind when the gate
+        // panel is shown (or when a local download fallback has completed).
+        setStatus('');
+      }
     }
 
     function isPdf(file) {
