@@ -68,7 +68,7 @@
 `.github/workflows/backend-tests.yml` 在 `backend/**` 有變動時執行，
 並安裝與 Dockerfile 相同的 tesseract 套件，讓 OCR 路徑實際被跑到。
 
-本機（已裝 tesseract）：**340 passed, 0 skipped**。
+本機（已裝 tesseract）：**343 passed, 0 skipped**。
 
 ## 5. 尚未證明的事
 

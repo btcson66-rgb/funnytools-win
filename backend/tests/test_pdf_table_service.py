@@ -153,11 +153,28 @@ def test_tables_to_xlsx_stringifies_every_cell_type():
     assert values == ["1", "2.5", None, "True", "=1+1", "-cmd"]
 
 
-def test_tables_to_xlsx_writes_formula_text_verbatim_known_gap():
-    """已知缺口（低風險）：以 = 開頭的儲存格會被寫成公式字串，
-    Excel 開啟時可能觸發 CSV/公式注入提示。目前只寫 str()，沒有做前綴消毒。"""
-    wb = sheet_of(tables_to_xlsx([{"page": 1, "table": 1, "rows": [["=HYPERLINK(\"x\")"]]}]))
-    assert wb["P1_T1"]["A1"].value.startswith("=")
+@pytest.mark.parametrize(
+    "payload",
+    ['=HYPERLINK("http://evil.example","click")', "=1+1", "=cmd|'/c calc'!A1"],
+)
+def test_tables_to_xlsx_neutralises_formula_cells(payload):
+    """openpyxl 的 Cell._bind_value 會把長度 >1 且以 "=" 開頭的字串標成
+    data_type='f'，也就是寫成真正的 Excel 公式。惡意 PDF 表格、或直接
+    POST /api/pdf/export-tables 的 JSON，都能靠這個把公式塞進使用者的試算表。"""
+    cell = sheet_of(tables_to_xlsx([{"page": 1, "table": 1, "rows": [[payload]]}]))["P1_T1"]["A1"]
+    assert cell.data_type == "s", "儲存格仍是公式型別，Excel 開啟時會執行它"
+    # 中和方式是改型別而不是加單引號前綴，所以讀回來的值必須完全沒變
+    # （加前綴會把 ' 寫進資料本身，破壞非 Excel 讀取端看到的內容）。
+    assert cell.value == payload
+
+
+def test_tables_to_xlsx_leaves_non_formula_cells_as_plain_strings():
+    """+ - @ tab CR 在 openpyxl 不會被轉成公式節點，中和步驟不得誤傷它們。"""
+    row = sheet_of(tables_to_xlsx([
+        {"page": 1, "table": 1, "rows": [["-cmd", "+1", "@SUM", "plain"]]},
+    ]))["P1_T1"][1]
+    assert [c.data_type for c in row] == ["s", "s", "s", "s"]
+    assert [c.value for c in row] == ["-cmd", "+1", "@SUM", "plain"]
 
 
 def test_tables_to_xlsx_rejects_a_non_list_row():
