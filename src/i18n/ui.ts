@@ -130,7 +130,7 @@ const ui = {
       invalidEmail: '請輸入有效的 email。',
       error: '暫時無法處理，請稍後再試。',
       privacyNote: '我們只用這個 email 寄送檔案與新工具通知，不會外流，可隨時退訂。詳見隱私權政策。',
-      changeEmail: '不是你的信箱？換一個',
+      skip: '不用寄送，直接下載檔案',
     },
     assetTypes: {
       tool: '工具',
@@ -333,7 +333,7 @@ const ui = {
       invalidEmail: 'Please enter a valid email.',
       error: 'Something went wrong. Please try again later.',
       privacyNote: 'We only use this email to send your file and new-tool updates. Never shared; unsubscribe anytime. See the privacy policy.',
-      changeEmail: 'Not your email? Change it',
+      skip: 'No email — just download the file',
     },
     assetTypes: {
       tool: 'Tool',

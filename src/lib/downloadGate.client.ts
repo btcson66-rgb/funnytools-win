@@ -1,8 +1,10 @@
-// Email download gate: results stay free on-page; downloading a file asks for
-// an email first and the backend mails the file (or unlocks a local download).
-// Config + labels are injected by ToolLayout as a JSON script tag so this
-// module stays i18n-free. If the config tag is missing the gate is disabled
-// and every download falls back to the original local behavior.
+// Email download gate: results stay free on-page; downloading a file offers to
+// email it (the backend mails the file) and always keeps a plain "download it
+// now" escape hatch so no output is ever held hostage.
+// Config + labels are injected by ToolLayout as a JSON script tag, and only for
+// the slugs in src/lib/downloadGateTools.ts, so this module stays i18n-free.
+// If the config tag is missing the gate is disabled and every download falls
+// back to the original local behavior.
 
 import { SITE } from '../config/site';
 import { trackDownloadGate } from './analytics';
@@ -38,7 +40,7 @@ interface GateLabels {
   invalidEmail: string;
   error: string;
   privacyNote: string;
-  changeEmail: string;
+  skip: string;
 }
 
 interface GateConfig {
@@ -83,14 +85,6 @@ function saveEmail(email: string) {
   }
 }
 
-function clearEmail() {
-  try {
-    window.localStorage.removeItem(STORAGE_KEY);
-  } catch {
-    /* ignore */
-  }
-}
-
 function injectStyles() {
   if (stylesInjected) return;
   stylesInjected = true;
@@ -103,7 +97,7 @@ function injectStyles() {
     '.ft-gate form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;}',
     '.ft-gate input[type=email]{min-height:44px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);padding:8px 12px;font:inherit;}',
     '.ft-gate .ft-gate-status[hidden]{display:none;}',
-    '.ft-gate .ft-gate-change{background:none;border:none;padding:0;color:var(--brand);cursor:pointer;font:inherit;text-decoration:underline;}',
+    '.ft-gate .ft-gate-skip{justify-self:start;background:none;border:none;padding:0;color:var(--brand);cursor:pointer;font:inherit;text-decoration:underline;}',
     '@media (max-width:560px){.ft-gate form{grid-template-columns:1fr;}}',
   ].join('\n');
   document.head.appendChild(style);
@@ -236,9 +230,22 @@ function renderPanel(request: GateRequest, config: GateConfig, mount: HTMLElemen
   note.className = 'ft-gate-note';
   note.textContent = labels.privacyNote;
 
+  const skipButton = document.createElement('button');
+  skipButton.type = 'button';
+  skipButton.className = 'ft-gate-skip';
+  skipButton.textContent = labels.skip;
+
   form.append(emailInput, honeypot, submitButton);
-  panel.append(title, desc, form, status, note);
+  panel.append(title, desc, form, skipButton, status, note);
   mount.insertAdjacentElement('afterend', panel);
+
+  skipButton.addEventListener('click', () => {
+    // Declining email delivery must never cost the visitor their file, and it
+    // must not send anything: no email, no output file, no request at all.
+    trackDownloadGate('gate_fallback_local', request.tool, 'user_skipped');
+    panel.hidden = true;
+    request.fallback();
+  });
 
   const setStatus = (text: string, busy = false) => {
     status.textContent = text;
@@ -266,9 +273,10 @@ function renderPanel(request: GateRequest, config: GateConfig, mount: HTMLElemen
 
 /**
  * Entry point for tool components: call instead of triggering the download
- * directly. Shows the email panel (or reuses the saved email) and delivers
- * the file by email, falling back to the original local download whenever
- * delivery by email is not possible.
+ * directly. Shows the email panel (prefilled with a remembered address) and
+ * delivers the file by email once the visitor submits it, while the panel's
+ * plain-download button and every failure path fall back to the original
+ * local download.
  */
 export function requestGatedDownload(request: GateRequest): void {
   const config = readConfig();
@@ -290,42 +298,8 @@ export function requestGatedDownload(request: GateRequest): void {
     return;
   }
 
+  // A remembered address only prefills the form. It never auto-submits: each
+  // download is a new file, so sending it needs a fresh, explicit click.
   const known = savedEmail();
-
-  if (known && EMAIL_PATTERN.test(known)) {
-    const panel = renderPanel(request, config, mount, known);
-    const status = panel.querySelector<HTMLElement>('.ft-gate-status');
-    const form = panel.querySelector('form');
-    const submitButton = panel.querySelector<HTMLButtonElement>('button[type=submit]');
-    if (form) form.hidden = true;
-
-    const setStatus = (text: string, busy = false) => {
-      if (status) {
-        status.textContent = text;
-        status.hidden = !text;
-      }
-      if (submitButton) submitButton.disabled = busy;
-    };
-
-    void submitGate(known, request, config.labels, config.lang, setStatus).then(() => {
-      if (!status || status.hidden) return;
-      const change = document.createElement('button');
-      change.type = 'button';
-      change.className = 'ft-gate-change';
-      change.textContent = config.labels.changeEmail;
-      change.addEventListener('click', () => {
-        clearEmail();
-        change.remove();
-        if (form) {
-          form.hidden = false;
-          panel.querySelector<HTMLInputElement>('input[type=email]')?.focus();
-        }
-      });
-      status.append(' ');
-      status.appendChild(change);
-    });
-    return;
-  }
-
-  renderPanel(request, config, mount, '');
+  renderPanel(request, config, mount, known && EMAIL_PATTERN.test(known) ? known : '');
 }

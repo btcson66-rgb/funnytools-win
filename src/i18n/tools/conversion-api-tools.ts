@@ -1,8 +1,8 @@
 import type { LocalizedToolContent, ToolContent } from './_types';
 
 const privacy = {
-  zh: '檔案只為轉換而上傳，於請求期間暫時處理，完成後不會刻意保留。請勿上傳不必要的個人或機密資料。',
-  en: 'Files are uploaded only for conversion, processed temporarily, and not intentionally retained after the request completes. Do not upload unnecessary personal or confidential data.',
+  zh: '檔案會上傳到 FunnyTools Conversion API 進行轉換，於請求期間暫時處理，完成後不會刻意保留。下載時若選擇把成品寄到信箱，產出檔案與你填寫的 email 會再送到寄送服務（roomfeng.win）並用於新工具通知；選擇直接下載則不會有第二次上傳。請勿上傳不必要的個人或機密資料。',
+  en: 'Files are uploaded to the FunnyTools Conversion API for conversion, processed temporarily, and not intentionally retained after the request completes. If you choose to have the result emailed to you, the output file and the address you type are then sent to the delivery service on roomfeng.win and used for new-tool updates; choosing the plain download instead sends nothing further. Do not upload unnecessary personal or confidential data.',
 };
 
 const sourceNote = {

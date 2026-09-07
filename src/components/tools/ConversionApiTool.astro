@@ -142,6 +142,7 @@ const isPdf = slug === 'pdf-compressor';
     pixelDistance,
     previewPdfTables,
   } from '../../lib/funnytools-api';
+  import { requestGatedDownload } from '../../lib/downloadGate.client';
 
   const apiBase = import.meta.env.PUBLIC_CONVERSION_API_URL || 'https://api.funnytools.win';
 
@@ -312,7 +313,20 @@ const isPdf = slug === 'pdf-compressor';
     });
     root.querySelector('[data-action="cancel"]')?.addEventListener('click', () => controller?.abort());
     root.querySelector('[data-action="clear"]')?.addEventListener('click', clear);
-    downloadButton?.addEventListener('click', () => { if (outputBlob) downloadBlob(outputBlob, outputName); });
+    downloadButton?.addEventListener('click', () => {
+      // Only offer the email download gate once a conversion actually
+      // produced a file; on an error state there is nothing to deliver.
+      if (!outputBlob) return;
+      const blob = outputBlob;
+      const filename = outputName;
+      const directDownload = () => downloadBlob(blob, filename);
+      requestGatedDownload({
+        tool: mode,
+        anchor: root.querySelector('.actions'),
+        getFile: () => ({ blob, filename }),
+        fallback: directDownload,
+      });
+    });
 
     root.querySelector('[data-calibration]')?.addEventListener('click', (event) => { if (!calibrationImage) return; const canvas = event.currentTarget; const rect = canvas.getBoundingClientRect(); const point = { x: (event.clientX - rect.left) * canvas.width / rect.width, y: (event.clientY - rect.top) * canvas.height / rect.height }; calibrationPoints = calibrationPoints.length === 2 ? [point] : [...calibrationPoints, point]; drawCalibration(); });
     fileInput?.addEventListener('change', () => { if (mode !== 'image-to-dxf') return; const file = fileInput.files?.[0]; if (!file) return; calibrationImage = new Image(); calibrationImage.onload = () => { const canvas = root.querySelector('[data-calibration]'); canvas.hidden = false; root.querySelector('[data-calibration-empty]').hidden = true; calibrationPoints = []; drawCalibration(); }; calibrationImage.src = URL.createObjectURL(file); });
