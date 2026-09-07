@@ -225,7 +225,15 @@ def tables_to_xlsx(tables: list[dict]) -> bytes:
                 for c, value in enumerate(row, start=1):
                     if isinstance(value, (dict, list)):
                         raise ValueError("Table cells must be scalar values")
-                    ws.cell(r, c, "" if value is None else str(value))
+                    cell = ws.cell(r, c, "" if value is None else str(value))
+                    # openpyxl 只有在字串以 "=" 開頭時才會把儲存格轉成公式節點
+                    # （+ - @ tab CR 都存成字串，實測確認）。把它強制轉回字串型別，
+                    # 讓惡意 PDF 或直接 POST /api/pdf/export-tables 送進來的
+                    # "=HYPERLINK(...)" 在 Excel 開啟時是文字而不是可執行的公式。
+                    # 用 data_type 而非前綴單引號：前綴會把 ' 寫進資料本身，
+                    # 破壞非 Excel 讀取端看到的內容；改型別則讀回來的值完全不變。
+                    if cell.data_type == "f":
+                        cell.data_type = "s"
             max_cols = max((len(r) for r in rows), default=1)
             for c in range(1, max_cols + 1):
                 values = [str(ws.cell(r, c).value or "") for r in range(1, ws.max_row + 1)]

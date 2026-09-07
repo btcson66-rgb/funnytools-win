@@ -120,7 +120,10 @@ const { labels } = Astro.props;
         result.textContent = fmt((a / b) * 100) + '%';
       } else {
         if (a === 0) { result.textContent = labels.divideZero; return; }
-        const change = ((b - a) / a) * 100;
+        // 除以 |a| 而非 a：基準為負時 (b−a)/a 會把符號翻轉，例如由 −80 變成 −100
+        // 會算出 +25 而顯示成「增加」，但數值其實是變差的。改用絕對值後，
+        // 方向字取自數值的實際變化方向；基準為正時結果與原本完全相同。
+        const change = ((b - a) / Math.abs(a)) * 100;
         const word = change > 0 ? labels.increase : change < 0 ? labels.decrease : labels.noChange;
         result.textContent = `${fmt(Math.abs(change))}% ${word}`;
       }

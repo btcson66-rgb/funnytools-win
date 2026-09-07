@@ -102,7 +102,10 @@ const { labels } = Astro.props;
           output.value = Papa.unparse(parsed, {
             delimiter: selectedDelimiter() || ',',
             columns,
-            escapeFormulae: root.querySelector('[data-escape-formulae]')?.checked || false,
+            // 這個 checkbox 只有 es/fr 有 label，因此 zh/en 頁面根本不渲染它。
+            // 原本的 `|| false` 讓那兩個語系靜默關閉公式逸出——而有渲染的語系
+            // 預設是勾選的，可見原意就是要開。控制項不存在時一律採取保護。
+            escapeFormulae: root.querySelector('[data-escape-formulae]')?.checked ?? true,
           });
           showSummary(parsed.length, columns.length, selectedDelimiter() || ',');
         }
