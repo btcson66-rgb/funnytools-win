@@ -32,6 +32,9 @@ export interface AffiliateProduct {
   optionalPriceLabel?: string;
   optionalSubId?: string;
   optionalCampaign?: string;
+  official_product_link_code?: string;
+  product_link_type?: string;
+  amazon_content_mode?: 'product_link' | 'text_only' | 'creators_api' | string;
   description?: string;
   fallbackUrl?: string;
 }

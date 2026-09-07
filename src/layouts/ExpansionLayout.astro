@@ -4,6 +4,7 @@ import LocalizedFooter from '../components/expansion/LocalizedFooter.astro';
 import LocalizedNav from '../components/expansion/LocalizedNav.astro';
 import FrenchFooter from '../components/expansion/FrenchFooter.astro';
 import FrenchNav from '../components/expansion/FrenchNav.astro';
+import AffiliateProductShelf from '../components/AffiliateProductShelf.astro';
 
 interface Props {
   currentKey: string;
@@ -40,6 +41,7 @@ const localeMeta = {
     skipLabel: 'Aller au contenu',
   },
 }[locale];
+const isLegalPath = ['/privacidad/', '/condiciones-de-uso/', '/aviso-legal/'].includes(canonicalPath);
 ---
 
 <BaseLayout
@@ -55,11 +57,20 @@ const localeMeta = {
   ogImageAlt={ogImageAlt}
   skipToContentLabel={localeMeta.skipLabel}
   hasAlternates={true}
+  automaticAffiliate={false}
 >
   {locale === 'fr'
     ? <FrenchNav slot="nav" currentKey={currentKey} />
     : <LocalizedNav slot="nav" currentKey={currentKey} />}
   <slot />
+  {!isLegalPath && (
+    <AffiliateProductShelf
+      lang={locale}
+      context={canonicalPath.includes('/herramientas/') || canonicalPath.includes('/outils/') ? 'tool_result' : 'article'}
+      toolSlug={canonicalPath}
+      initialLimit={4}
+    />
+  )}
   {locale === 'fr'
     ? <FrenchFooter slot="footer" />
     : <LocalizedFooter slot="footer" />}

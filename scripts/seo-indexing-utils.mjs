@@ -34,7 +34,10 @@ export const sitemapLastmodPath = join(rootDir, 'data', 'sitemap-lastmod.json');
 // path carries existing evidence-backed lastmod dates forward while replacing
 // obsolete hashes, so a shared metadata audit cannot collapse every URL onto
 // the release date.
-export const sitemapContentHashVersion = 6;
+// Bump when the normalization contract changes. A version bump migrates the
+// stored hashes while preserving their evidence-backed lastmod dates; it is
+// reported separately from a real same-version content drift.
+export const sitemapContentHashVersion = 8;
 export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
 export const enNoindex = indexingConfig.EN_NOINDEX === true;
 export const expansionRouteRegistry = readJson(
@@ -456,7 +459,6 @@ function isBuildInstant(value, pageMtimeMs) {
 export function stableRenderedHtml(page) {
   const pageMtimeMs = statSync(page.file).mtimeMs;
   let html = page.html ?? readText(page.file);
-
   // The footer counter is refreshed from analytics during releases. Its numbers
   // are operational telemetry, not a content change to every rendered page.
   html = html.replace(
@@ -577,6 +579,38 @@ export function stableRenderedHtml(page) {
     /\s*<script\b[^>]*>(?:(?!<\/script>)[\s\S])*?window\.__btcsonAffiliateTrack(?:(?!<\/script>)[\s\S])*?<\/script>/gi,
     '',
   );
+
+  // Amazon image hosts are required by the affiliate shelf's runtime, but the
+  // CSP allowlist is shared layout chrome. It must not make every page look
+  // like its reader-facing content changed when the affiliate network changes.
+  html = html
+    .replaceAll(' https://m.media-amazon.com', '')
+    .replaceAll(' https://images-na.ssl-images-amazon.com', '')
+    .replaceAll(' https://images.amazon.com', '');
+
+  // The shelf is optional support UI. Its hidden server shell, emitted
+  // runtime script, and component CSS are not the page's primary content and
+  // therefore must not drive sitemap lastmod. Keep the normalization scoped to
+  // the explicit affiliate markers so visible prose and ordinary layout stay
+  // hashable.
+  html = html.replace(
+    /<section\b[^>]*data-affiliate-shelf[^>]*>[\s\S]*?<\/section>/gi,
+    '',
+  );
+  html = html.replace(
+    /<script\b[^>]*\bsrc=["'][^"']*support-products\.js[^"']*["'][^>]*>\s*<\/script>/gi,
+    '',
+  );
+  html = html.replace(
+    /\.affiliate-shelf\[data-astro-cid-[^}]+\{[\s\S]*?@keyframes affiliate-shelf-in\{[\s\S]*?\}\}\}/gi,
+    '',
+  );
+
+  // Optional shared slots can leave a different number of separator spaces
+  // before the main closing tag. This boundary whitespace is layout chrome,
+  // not reader-facing content, so keep it stable for every page variant.
+  html = html.replace(/\s+<\/main>/gi, ' </main>');
+  html = html.replace(/\n{2,}:root\{/gi, '\n:root{');
 
   return html;
 }

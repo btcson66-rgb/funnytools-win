@@ -87,3 +87,23 @@ test('social preview image metadata does not change sitemap content hash', () =>
     contentHashForPage({ file: fixtureFile, html: `${page}${topicPreview}` }),
   );
 });
+
+test('Amazon affiliate CSP hosts do not change sitemap content hash', () => {
+  const page = '<meta http-equiv="Content-Security-Policy" content="img-src self">';
+  const affiliateCsp = '<meta http-equiv="Content-Security-Policy" content="img-src self https://m.media-amazon.com https://images-na.ssl-images-amazon.com https://images.amazon.com">';
+
+  assert.equal(
+    contentHashForPage({ file: fixtureFile, html: affiliateCsp }),
+    contentHashForPage({ file: fixtureFile, html: page }),
+  );
+});
+
+test('affiliate shelf shell, runtime, and component CSS do not change sitemap content hash', () => {
+  const page = '<style>.reader-content{color: black}</style><main><h1>Reader-facing content</h1></main>';
+  const affiliatePage = '<style>.reader-content{color: black}.affiliate-shelf[data-astro-cid-test]{display:grid}@media(prefers-reduced-motion:no-preference){.affiliate-shelf[data-astro-cid-test]:not([hidden]){animation:affiliate-shelf-in .32s ease-out both}@keyframes affiliate-shelf-in{0%{opacity:0}to{opacity:1}}}</style><main><h1>Reader-facing content</h1></main><section class="affiliate-shelf" data-affiliate-shelf hidden></section><script src="/support-products.js?v=20260901-affiliate-shelf" defer></script>';
+
+  assert.equal(
+    contentHashForPage({ file: fixtureFile, html: affiliatePage }),
+    contentHashForPage({ file: fixtureFile, html: page }),
+  );
+});

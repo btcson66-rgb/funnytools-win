@@ -139,7 +139,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout lang={lang} title={seoTitle} description={description} alternateSegments={[pageKey]} altLang={localeUrlPair(pageKey)} jsonLd={jsonLd}>
+<BaseLayout lang={lang} title={seoTitle} description={description} alternateSegments={[pageKey]} altLang={localeUrlPair(pageKey)} jsonLd={jsonLd} automaticAffiliate={lang === 'en' && !['privacy', 'terms', 'disclaimer'].includes(pageKey)}>
   <section class="wrap page-head">
     <Breadcrumb
       items={[

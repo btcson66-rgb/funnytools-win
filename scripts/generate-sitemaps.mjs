@@ -83,6 +83,7 @@ const nextLastmods = {};
 const today = new Date().toISOString().slice(0, 10);
 const lastmodMode = resolveLastmodMode();
 const hashDriftUrls = [];
+const hashMigrationUrls = [];
 
 const groups = new Map([
   ['tools', []],
@@ -108,7 +109,8 @@ for (const page of builtPages()) {
     : undefined;
   const resolvedLastmod = lastmodForPage(page, storedLastmod, today, lastmodMode.mode);
   if (storedLastmod !== undefined && storedLastmod?.hash !== resolvedLastmod.hash) {
-    hashDriftUrls.push(page.loc);
+    if (storedLastmod?.hashVersion !== sitemapContentHashVersion) hashMigrationUrls.push(page.loc);
+    else hashDriftUrls.push(page.loc);
   }
   nextLastmods[page.loc] = {
     hash: resolvedLastmod.hash,
@@ -188,6 +190,10 @@ const summary = {
     count: hashDriftUrls.length,
     examples: hashDriftUrls.slice(0, 5),
   },
+  storedHashMigration: {
+    count: hashMigrationUrls.length,
+    examples: hashMigrationUrls.slice(0, 5),
+  },
   totalUrls: allEntries.length,
   bySitemap: Object.fromEntries([...groups].map(([type, entries]) => [sitemapFileForType(type), entries.length])),
   changed: {
@@ -203,7 +209,8 @@ const summary = {
 writeJson(join(reportsDir, 'sitemap-generation-report.json'), summary);
 console.log(
   `[sitemap:lastmod] mode=${lastmodMode.mode} source=${lastmodMode.source}; `
-  + `stored hash drift=${hashDriftUrls.length} URL(s).`,
+  + `stored hash drift=${hashDriftUrls.length} URL(s); `
+  + `hash normalization migration=${hashMigrationUrls.length} URL(s).`,
 );
 if (hashDriftUrls.length) {
   console.log(`[sitemap:lastmod] first ${Math.min(hashDriftUrls.length, 5)} drift example(s):`);

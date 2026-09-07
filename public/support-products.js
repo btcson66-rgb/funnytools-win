@@ -29,14 +29,16 @@ const startAffiliateShelf = () => {
       return '';
     }
   };
-  const validImageUrl = (value) => {
+  const validImageUrl = (value, allowRemote = false) => {
     const text = asText(value);
     if (!text) return '';
     try {
       const url = new URL(text, window.location.origin);
-      const allowed = url.origin === window.location.origin
-        && url.pathname.startsWith('/assets/support-products/')
-        && /\.(webp|avif|png|jpe?g)$/i.test(url.pathname);
+      const allowed = allowRemote
+        ? url.protocol === 'https:' && url.hostname === 'm.media-amazon.com' && /\.(webp|avif|png|jpe?g)(?:$|[?#])/i.test(url.pathname)
+        : url.origin === window.location.origin
+          && url.pathname.startsWith('/assets/support-products/')
+          && /\.(webp|avif|png|jpe?g)$/i.test(url.pathname);
       return allowed ? url.href : '';
     } catch {
       return '';
@@ -65,7 +67,9 @@ const startAffiliateShelf = () => {
     }
     return copy;
   };
-  const idsOf = (items) => items.map((item) => item.id).join('|');
+  const productId = (product) => asText(product.id) || asText(product.product_id);
+  const productNetwork = (product) => asText(product.platform) || (asText(product.tracking_id) ? 'amazon' : 'other');
+  const idsOf = (items) => items.map(productId).join('|');
   const track = (eventName, params = {}) => {
     try {
       window.__btcsonAffiliateTrack?.(eventName, params);
@@ -76,29 +80,59 @@ const startAffiliateShelf = () => {
 
   function balancePlatforms(batch, pool, cursor, batchSize) {
     if (batchSize < 2) return batch;
-    const shown = new Set(batch.map((item) => item.platform));
-    const available = new Set(pool.map((item) => item.platform));
+    const shown = new Set(batch.map(productNetwork));
+    const available = new Set(pool.map(productNetwork));
     if (available.size < 2 || shown.size > 1) return batch;
-    const missing = [...available].find((platform) => platform !== batch[0]?.platform);
-    const replacementIndex = pool.findIndex((item, index) => index >= cursor + batch.length && item.platform === missing);
+    const missing = [...available].find((platform) => platform !== productNetwork(batch[0]));
+    const replacementIndex = pool.findIndex((item, index) => index >= cursor + batch.length && productNetwork(item) === missing);
     if (replacementIndex < 0) return batch;
     const lastIndex = cursor + batch.length - 1;
     [pool[lastIndex], pool[replacementIndex]] = [pool[replacementIndex], pool[lastIndex]];
     return pool.slice(cursor, cursor + batchSize);
   }
 
-  function createCard(product, position, context, toolSlug, batchNumber) {
+  function createCard(product, position, context, toolSlug, batchNumber, options = {}) {
+    const isAmazon = options.isAmazon === true;
+    const language = options.language || 'zh';
+    const amazonContentMode = isAmazon ? (asText(product.amazon_content_mode) || 'text_only') : '';
+    const labels = {
+      zh: { imageAlt: '推薦商品圖片', cta: '查看商品', price: '查看目前價格' },
+      en: { imageAlt: 'Amazon product image', cta: 'View on Amazon', price: '' },
+      es: { imageAlt: 'Imagen del producto de Amazon', cta: 'Ver en Amazon', price: '' },
+      fr: { imageAlt: 'Image du produit Amazon', cta: 'Voir sur Amazon', price: '' },
+    }[language] || { imageAlt: 'Amazon product image', cta: 'View on Amazon', price: '' };
     const article = document.createElement('article');
     article.className = 'affiliate-product-card support-product-card';
-    const title = asText(product.shortTitle) || asText(product.title) || '實用支持商品';
+    if (isAmazon) article.dataset.amazonContentMode = amazonContentMode;
+    const title = isAmazon
+      ? asText(product.internal_display_name) || asText(product.product_title) || asText(product.title) || 'Amazon product'
+      : asText(product.shortTitle) || asText(product.title) || '實用支持商品';
+    const href = isAmazon
+      ? validAffiliateUrl(product.affiliate_url_full)
+      : validAffiliateUrl(product.affiliateUrl) || validAffiliateUrl(product.fallbackUrl);
+    const decorateLink = (link) => {
+      link.href = href;
+      link.target = '_blank';
+      link.rel = 'sponsored nofollow noopener';
+      link.dataset.affiliateProductId = asText(product.id) || asText(product.product_id);
+      link.dataset.affiliatePlatform = isAmazon ? 'amazon' : asText(product.platform) || 'other';
+      link.dataset.affiliateCategory = isAmazon ? asText(product.internal_category) || 'general' : asText(product.category) || 'general';
+      link.dataset.affiliateTrackingId = isAmazon ? asText(product.tracking_id) : '';
+      link.dataset.affiliatePosition = String(position);
+      link.dataset.affiliateToolSlug = toolSlug;
+      link.dataset.affiliateContext = context;
+      link.dataset.affiliateBatch = `${asText(product.batch_id) || 'catalog-legacy'}:${batchNumber}`;
+      if (isAmazon) link.dataset.affiliateContentMode = amazonContentMode;
+      return link;
+    };
 
     const media = document.createElement('div');
     media.className = 'affiliate-product-media support-product-media';
-    const imageUrl = validImageUrl(product.imageUrl);
+    const imageUrl = validImageUrl(isAmazon ? product.image_url : product.imageUrl, isAmazon);
     if (imageUrl) {
       const image = document.createElement('img');
       image.src = imageUrl;
-      image.alt = title || '推薦商品圖片';
+      image.alt = asText(product.internal_alt_text) || asText(product.alt_text) || title || labels.imageAlt;
       image.loading = 'lazy';
       image.decoding = 'async';
       image.width = 640;
@@ -108,55 +142,66 @@ const startAffiliateShelf = () => {
         const placeholder = document.createElement('span');
         placeholder.className = 'affiliate-product-placeholder support-product-icon';
         placeholder.setAttribute('aria-hidden', 'true');
-        placeholder.textContent = icons[asText(product.category)] || '◇';
+        placeholder.textContent = icons[asText(product.category || product.internal_category)] || '◇';
         media.append(placeholder);
       }, { once: true });
       media.append(image);
     } else {
+      if (isAmazon) media.classList.add('affiliate-product-media--text-only');
       const placeholder = document.createElement('span');
       placeholder.className = 'affiliate-product-placeholder support-product-icon';
       placeholder.setAttribute('aria-hidden', 'true');
-      placeholder.textContent = icons[asText(product.category)] || '◇';
+      placeholder.textContent = icons[asText(product.category || product.internal_category)] || '◇';
       media.append(placeholder);
     }
-    article.append(media);
+    if (isAmazon && href) {
+      const mediaLink = decorateLink(document.createElement('a'));
+      mediaLink.className = 'affiliate-product-media-link';
+      mediaLink.setAttribute('aria-label', `${labels.cta}：${title}`);
+      mediaLink.append(media);
+      article.append(mediaLink);
+    } else {
+      article.append(media);
+    }
 
     const platform = document.createElement('span');
     platform.className = 'affiliate-product-platform support-product-platform';
-    platform.textContent = platformLabels[asText(product.platform)] || platformLabels.other;
+    platform.textContent = platformLabels[productNetwork(product)] || platformLabels.other;
     article.append(platform);
 
     const heading = document.createElement('h3');
-    heading.textContent = title;
+    if (isAmazon && href) {
+      const titleLink = decorateLink(document.createElement('a'));
+      titleLink.className = 'affiliate-product-title-link';
+      titleLink.textContent = title;
+      titleLink.setAttribute('aria-label', `${labels.cta}：${title}`);
+      heading.append(titleLink);
+    } else {
+      heading.textContent = title;
+    }
     article.append(heading);
-    const descriptionText = asText(product.optionalDescription) || asText(product.description);
+    const descriptionText = isAmazon
+      ? asText(product.internal_description) || asText(product.product_summary) || asText(product.description)
+      : asText(product.optionalDescription) || asText(product.description);
     if (descriptionText) {
       const description = document.createElement('p');
       description.className = 'affiliate-product-description';
       description.textContent = descriptionText;
       article.append(description);
     }
-    const price = document.createElement('p');
-    price.className = 'affiliate-product-price';
-    price.textContent = asText(product.optionalPriceLabel) || '查看目前價格';
-    article.append(price);
+    if (!isAmazon) {
+      const price = document.createElement('p');
+      price.className = 'affiliate-product-price';
+      price.textContent = asText(product.optionalPriceLabel) || labels.price;
+      article.append(price);
+    }
 
-    const href = validAffiliateUrl(product.affiliateUrl) || validAffiliateUrl(product.fallbackUrl);
     if (href) {
       const link = document.createElement('a');
       link.className = 'affiliate-product-link btn';
-      link.href = href;
-      link.target = '_blank';
-      link.rel = 'sponsored nofollow noopener';
-      link.textContent = '查看商品';
-      link.setAttribute('aria-label', `查看商品：${title}`);
-      link.dataset.affiliateProductId = asText(product.id);
-      link.dataset.affiliatePlatform = asText(product.platform) || 'other';
-      link.dataset.affiliateCategory = asText(product.category) || 'general';
-      link.dataset.affiliatePosition = String(position);
-      link.dataset.affiliateToolSlug = toolSlug;
-      link.dataset.affiliateContext = context;
-       link.dataset.affiliateBatch = `${asText(product.batch_id) || 'catalog-legacy'}:${batchNumber}`;
+      link.textContent = isAmazon ? asText(product.suggested_cta) || labels.cta : labels.cta;
+      link.setAttribute('aria-label', `${link.textContent}：${title}`);
+      decorateLink(link);
       article.append(link);
     }
     return article;
@@ -183,6 +228,8 @@ const startAffiliateShelf = () => {
     const shelf = grid.closest('[data-affiliate-shelf]');
     const supportPage = !shelf;
     const root = shelf || grid.closest('section') || document.body;
+    const isAmazon = shelf?.dataset.affiliateNetwork === 'amazon';
+    const language = shelf?.dataset.affiliateLanguage || 'zh';
     const refreshButton = root.querySelector('[data-affiliate-refresh], [data-refresh-products]');
     const expandButton = root.querySelector('[data-affiliate-expand]');
     const supportLink = root.querySelector('[data-affiliate-support-link]');
@@ -199,11 +246,13 @@ const startAffiliateShelf = () => {
     const initialLimit = Number(shelf?.dataset.affiliateInitialLimit || (supportPage ? 8 : 4));
     const batchSize = Math.max(1, Math.min(initialLimit, 8));
     const productsSrc = shelf?.dataset.affiliateProductsSrc || grid.dataset.supportProductsSrc || '/data/support-products.json';
+    const contentSrc = shelf?.dataset.affiliateProductsContentSrc || '';
     const stateKey = getStorageKey(context, category, toolSlug);
     let pool = [];
     let cursor = 0;
     let displayLimit = batchSize;
     let batchNumber = 1;
+    let refreshCount = 0;
     let lastBatchIds = '';
     let shelfViewed = false;
     let itemObserver = null;
@@ -211,7 +260,21 @@ const startAffiliateShelf = () => {
     let revealTimer = 0;
     const contextDimensions = () => ({
       placement: context === 'article' ? 'article_inline' : context === 'support_page' ? 'support_page' : 'result_card',
+      affiliate_placement: context === 'article' ? 'article_inline' : context === 'support_page' ? 'support_page' : 'tool_result',
       surface_type: context === 'article' ? 'article' : context === 'support_page' ? 'support' : 'tool',
+      affiliate_site: 'funnytools',
+      locale: language,
+      page_type: context === 'article' ? 'article' : context === 'support_page' ? 'support' : 'tool',
+    });
+    const itemDimensions = (link) => ({
+      ...contextDimensions(),
+      affiliate_network: link.dataset.affiliatePlatform || 'other',
+      amazon_content_mode: isAmazon ? link.dataset.affiliateContentMode || 'text_only' : undefined,
+      product_id: link.dataset.affiliateProductId || 'unknown',
+      product_category: link.dataset.affiliateCategory || 'general',
+      tracking_id: link.dataset.affiliateTrackingId || undefined,
+      batch_id: link.dataset.affiliateBatch || 'catalog-legacy',
+      card_position: Number(link.dataset.affiliatePosition || 0),
     });
     const batchIdFor = (items) => `${asText(items[0]?.batch_id) || 'catalog-legacy'}:${batchNumber}`;
     const observeItemViews = () => {
@@ -223,14 +286,7 @@ const startAffiliateShelf = () => {
           const card = entry.target;
           const link = card.querySelector('a[data-affiliate-product-id]');
           if (!(link instanceof HTMLAnchorElement)) continue;
-          track('affiliate_item_view', {
-            ...contextDimensions(),
-            affiliate_network: link.dataset.affiliatePlatform || 'other',
-            product_id: link.dataset.affiliateProductId || 'unknown',
-            product_category: link.dataset.affiliateCategory || 'general',
-            batch_id: link.dataset.affiliateBatch || 'catalog-legacy',
-            card_position: Number(link.dataset.affiliatePosition || 0),
-          });
+          track('affiliate_item_view', itemDimensions(link));
           itemObserver.unobserve(card);
         }
       }, { threshold: [0.5] });
@@ -262,23 +318,26 @@ const startAffiliateShelf = () => {
       if (status instanceof HTMLElement && supportPage) status.textContent = `目前顯示 ${grid.childElementCount} 項資源，共整理 ${pool.length} 項。`;
     };
     const render = (items, reason = 'initial') => {
-      grid.replaceChildren(...items.map((item, index) => createCard(item, index + 1, context, toolSlug, batchNumber)));
+      grid.replaceChildren(...items.map((item, index) => createCard(item, index + 1, context, toolSlug, batchNumber, { isAmazon, language })));
       grid.setAttribute('aria-busy', 'false');
       observeItemViews();
       updateControls();
       if (reason === 'refresh') {
-        const visible = [...new Set(items.map((item) => asText(item.platform) || 'other'))];
+        const visible = [...new Set(items.map(productNetwork))];
         track('affiliate_refresh', {
           ...contextDimensions(),
           affiliate_network: visible.length === 1 ? visible[0] : 'mixed',
+          amazon_content_mode: isAmazon ? [...new Set(items.map((item) => asText(item.amazon_content_mode) || 'text_only'))][0] : undefined,
           batch_id: batchIdFor(items),
+          products_shown: items.length,
+          refresh_count: refreshCount,
         });
       }
     };
     const buildPool = (eligible, stored) => {
-      const byId = new Map(eligible.map((item) => [item.id, item]));
+      const byId = new Map(eligible.map((item) => [productId(item), item]));
       const storedPool = (stored?.poolIds || []).map((id) => byId.get(id)).filter(Boolean);
-      const missing = shuffle(eligible.filter((item) => !storedPool.some((storedItem) => storedItem.id === item.id)));
+      const missing = shuffle(eligible.filter((item) => !storedPool.some((storedItem) => productId(storedItem) === productId(item))));
       return storedPool.length ? [...storedPool, ...missing] : shuffle(eligible);
     };
     const nextBatch = (size) => {
@@ -295,7 +354,7 @@ const startAffiliateShelf = () => {
       cursor = Math.min(pool.length, cursor + batch.length);
       lastBatchIds = idsOf(batch);
       batchNumber += 1;
-      saveState(stateKey, { poolIds: pool.map((item) => item.id), cursor, batchNumber, lastBatchIds, displayLimit });
+      saveState(stateKey, { poolIds: pool.map(productId), cursor, batchNumber, lastBatchIds, displayLimit });
       return batch;
     };
     const renderCurrent = (reason = 'initial') => render(pool.slice(0, Math.min(displayLimit, pool.length)), reason);
@@ -304,13 +363,14 @@ const startAffiliateShelf = () => {
       const previousCount = displayLimit;
       displayLimit = Math.min(displayLimit < 8 ? 8 : 12, pool.length);
       cursor = Math.max(cursor, displayLimit);
-      saveState(stateKey, { poolIds: pool.map((item) => item.id), cursor, batchNumber, lastBatchIds, displayLimit });
+      saveState(stateKey, { poolIds: pool.map(productId), cursor, batchNumber, lastBatchIds, displayLimit });
       renderCurrent('expand');
       if (previousCount === displayLimit) return;
     });
     refreshButton.addEventListener('click', () => {
       if (!pool.length) return;
       displayLimit = batchSize;
+      refreshCount += 1;
       const next = nextBatch(batchSize);
       render(next, 'refresh');
       reveal();
@@ -319,12 +379,7 @@ const startAffiliateShelf = () => {
       const target = event.target instanceof Element ? event.target.closest('a[data-affiliate-product-id]') : null;
       if (!(target instanceof HTMLAnchorElement)) return;
       track('affiliate_click', {
-        ...contextDimensions(),
-        affiliate_network: target.dataset.affiliatePlatform || 'other',
-        product_id: target.dataset.affiliateProductId || 'unknown',
-        product_category: target.dataset.affiliateCategory || 'general',
-        card_position: Number(target.dataset.affiliatePosition || 0),
-        batch_id: target.dataset.affiliateBatch || `catalog-legacy:${batchNumber}`,
+        ...itemDimensions(target),
       });
     });
     document.addEventListener('freetools:tool-success', () => {
@@ -374,16 +429,50 @@ const startAffiliateShelf = () => {
       }
     }
 
-    fetch(productsSrc, { headers: { Accept: 'application/json' } })
-      .then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json();
-      })
+    const fetchJson = (url) => fetch(url, { headers: { Accept: 'application/json' } }).then((response) => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.json();
+    });
+    const normalizeAmazonMode = (value) => ['false', 'creators_api', 'creators-api'].includes(asText(value).toLowerCase())
+      ? 'creators_api'
+      : ['true', 'bootstrap'].includes(asText(value).toLowerCase()) ? 'bootstrap' : 'auto';
+    const bootstrapAmazonProducts = (master) => (Array.isArray(master) ? master : []).map((item) => ({
+      ...item,
+      internal_display_name: asText(item.internal_display_name) || 'Amazon product option',
+      internal_description: asText(item.internal_description),
+      internal_alt_text: asText(item.internal_alt_text) || 'Optional Amazon product recommendation',
+      amazon_content_mode: item.official_product_link_code ? 'product_link' : 'text_only',
+    }));
+    const mergeAmazonContent = (master, cache, configuredMode) => {
+      const mode = normalizeAmazonMode(configuredMode);
+      if (mode === 'bootstrap') return bootstrapAmazonProducts(master);
+      if (!cache || cache.schema_version !== 1 || cache.source !== 'amazon-creators-api' || cache.ttl_seconds > 86400) return mode === 'creators_api' ? [] : bootstrapAmazonProducts(master);
+      const expiresAt = Date.parse(cache.expires_at || '');
+      const fetchedAt = Date.parse(cache.fetched_at || '');
+      if (!Number.isFinite(expiresAt) || !Number.isFinite(fetchedAt) || Date.now() >= expiresAt || expiresAt - fetchedAt > 86400000) return mode === 'creators_api' ? [] : bootstrapAmazonProducts(master);
+      const byAsin = new Map((Array.isArray(cache.records) ? cache.records : []).map((record) => [asText(record.asin), record]));
+      return (Array.isArray(master) ? master : []).map((item) => {
+        const content = byAsin.get(asText(item.asin));
+        if (!content?.title || !content?.image_url) return mode === 'creators_api' ? null : { ...item, amazon_content_mode: item.official_product_link_code ? 'product_link' : 'text_only' };
+        return { ...item, product_title: content.title, image_url: content.image_url, product_summary: item.internal_description, alt_text: `${content.title} product image`, amazon_content_mode: 'creators_api' };
+      }).filter(Boolean);
+    };
+    const configuredAmazonMode = normalizeAmazonMode(shelf?.dataset.affiliateAmazonMode);
+    const dataPromise = isAmazon
+      ? fetchJson(productsSrc).then((master) => configuredAmazonMode === 'bootstrap'
+        ? mergeAmazonContent(master, null, configuredAmazonMode)
+        : contentSrc
+          ? fetchJson(contentSrc).then((cache) => mergeAmazonContent(master, cache, configuredAmazonMode)).catch(() => mergeAmazonContent(master, null, configuredAmazonMode))
+          : mergeAmazonContent(master, null, configuredAmazonMode))
+      : fetchJson(productsSrc);
+    dataPromise
       .then((data) => {
         const allProducts = Array.isArray(data)
-          ? data.filter((item) => item && (item.enabled === true || item.status === 'active') && typeof item.id === 'string')
+          ? data.filter((item) => item && (item.enabled === true || item.status === 'active') && productId(item))
             .filter((item) => !platformFilter.length || platformFilter.includes(item.platform))
-            .filter((item) => validAffiliateUrl(item.affiliateUrl) || validAffiliateUrl(item.fallbackUrl))
+            .filter((item) => isAmazon
+              ? validAffiliateUrl(item.affiliate_url_full)
+              : validAffiliateUrl(item.affiliateUrl) || validAffiliateUrl(item.fallbackUrl))
           : [];
         const categoryProducts = category ? allProducts.filter((item) => matchesCategory(item, category)) : allProducts;
         const taggedProducts = requestedTags.length

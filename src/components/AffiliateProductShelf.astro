@@ -2,8 +2,10 @@
 import { SITE, type Locale } from '../config/site';
 import { assetPath, localePath } from '../lib/url';
 
+type AffiliateLocale = Locale | 'es' | 'fr';
+
 interface Props {
-  lang: Locale;
+  lang: AffiliateLocale;
   /** A direct product category such as teacher, office, or computer. */
   category?: string;
   /** The current tool slug, sent only as an analytics dimension. */
@@ -25,7 +27,60 @@ const {
   initialLimit = 4,
 } = Astro.props;
 
-const enabled = SITE.features.affiliate && lang === 'zh';
+const enabled = SITE.features.affiliate;
+const isAmazon = lang !== 'zh';
+const copy = {
+  zh: {
+    eyebrow: '自願支持本站',
+    heading: heading,
+    intro: 'FunnyTools 希望所有工具都能持續免費。',
+    intro2: '如果你剛好有購物需求，可以透過下面的分潤連結支持我們。你不需要多支付任何費用，我們可能會從符合條件的購買中獲得少量分潤。',
+    disclosure: '部分連結為分潤連結。若您透過連結完成符合條件的購買，我們可能獲得分潤，您的購買價格不會因此增加。',
+    disclosureLink: '完整說明',
+    more: '查看更多支持商品',
+    refresh: '換一批商品',
+    support: '查看全部支持商品 →',
+    productsLabel: '可選的支持商品',
+  },
+  en: {
+    eyebrow: 'Optional product discovery',
+    heading: heading === '❤️ 這個工具有幫上忙嗎？' ? (context === 'tool_result' ? 'You may also like' : 'Recommended products') : heading,
+    intro: 'FunnyTools keeps its tools free to use.',
+    intro2: 'If you are already shopping, these Amazon links may help support the site. We may earn from qualifying purchases at no extra cost to you.',
+    disclosure: 'Affiliate links: we may earn a commission from qualifying purchases.',
+    disclosureLink: 'Full disclosure',
+    more: 'Show more products',
+    refresh: 'Refresh products',
+    support: 'See all support products →',
+    productsLabel: 'Optional product recommendations',
+  },
+  es: {
+    eyebrow: 'Descubrimiento opcional de productos',
+    heading: heading === '❤️ 這個工具有幫上忙嗎？' ? 'Productos recomendados' : heading,
+    intro: 'FunnyTools mantiene sus herramientas disponibles de forma gratuita.',
+    intro2: 'Si ya estás comprando, estos enlaces de Amazon pueden ayudar a mantener el sitio. Podemos recibir una comisión por compras que cumplan los requisitos, sin coste adicional para ti.',
+    disclosure: 'Enlaces de afiliado: podemos recibir una comisión por compras que cumplan los requisitos.',
+    disclosureLink: 'Información completa',
+    more: 'Ver más productos',
+    refresh: 'Cambiar productos',
+    support: 'Ver todos los productos →',
+    productsLabel: 'Recomendaciones opcionales de productos',
+  },
+  fr: {
+    eyebrow: 'Découverte facultative de produits',
+    heading: heading === '❤️ 這個工具有幫上忙嗎？' ? 'Produits recommandés' : heading,
+    intro: 'FunnyTools garde ses outils accessibles gratuitement.',
+    intro2: 'Si vous faites déjà des achats, ces liens Amazon peuvent aider à soutenir le site. Nous pouvons recevoir une commission sur les achats admissibles, sans coût supplémentaire pour vous.',
+    disclosure: 'Liens affiliés : nous pouvons recevoir une commission sur les achats admissibles.',
+    disclosureLink: 'Informations complètes',
+    more: 'Voir plus de produits',
+    refresh: 'Changer de produits',
+    support: 'Voir tous les produits →',
+    productsLabel: 'Recommandations facultatives de produits',
+  },
+}[lang];
+const productsSrc = isAmazon ? '/data/amazon-products.json' : '/data/support-products.json';
+const amazonMode = String(import.meta.env.AMAZON_AFFILIATE_BOOTSTRAP_MODE || 'auto').trim().toLowerCase();
 const toolCategoryAliases: Record<string, string> = {
   image: 'computer',
   pdf: 'office',
@@ -50,49 +105,53 @@ const shelfId = `affiliate-shelf-${toolSlug || context}`.replace(/[^a-z0-9_-]/gi
       data-adsense-exclude="affiliate-support"
       data-affiliate-shelf
       data-affiliate-context={context}
+      data-affiliate-network={isAmazon ? 'amazon' : 'existing'}
+      data-affiliate-language={lang}
       data-affiliate-category={matchingCategory}
       data-affiliate-tags={affiliateTags.join(',')}
       data-tool-slug={toolSlug}
       data-affiliate-initial-limit={String(Math.max(1, Math.min(initialLimit, 4)))}
-      data-affiliate-products-src="/data/support-products.json"
+      data-affiliate-products-src={productsSrc}
+      data-affiliate-products-content-src={isAmazon ? '/data/amazon-product-content.json' : undefined}
+      data-affiliate-amazon-mode={isAmazon ? amazonMode : undefined}
       hidden
       aria-labelledby={`${shelfId}-heading`}
     >
       <div class="affiliate-shelf__intro">
-        <p class="affiliate-shelf__eyebrow">自願支持本站</p>
-        <h2 id={`${shelfId}-heading`}>{heading}</h2>
+        <p class="affiliate-shelf__eyebrow">{copy.eyebrow}</p>
+        <h2 id={`${shelfId}-heading`}>{copy.heading}</h2>
         <p>
-          FunnyTools 希望所有工具都能持續免費。<br />
-          如果你剛好有購物需求，可以透過下面的分潤連結支持我們。你不需要多支付任何費用，我們可能會從符合條件的購買中獲得少量分潤。
+          {copy.intro}<br />
+          {copy.intro2}
         </p>
       </div>
 
-      <div class="affiliate-shelf__disclosure" aria-label="分潤連結說明">
-        部分連結為分潤連結。若您透過連結完成符合條件的購買，我們可能獲得分潤，您的購買價格不會因此增加。
-        <a href="/affiliate-disclosure/">完整說明</a>
+      <div class="affiliate-shelf__disclosure" aria-label={copy.disclosureLink}>
+        {copy.disclosure}
+        <a href="/affiliate-disclosure/">{copy.disclosureLink}</a>
       </div>
 
       <div
         class="affiliate-shelf__products"
         data-affiliate-products
         aria-live="polite"
-        aria-label="可選的支持商品"
+        aria-label={copy.productsLabel}
         aria-busy="true"
       ></div>
 
       <div class="affiliate-shelf__actions">
         <button class="btn ghost" type="button" data-affiliate-expand hidden>
-          <span aria-hidden="true">＋</span>查看更多支持商品
+          <span aria-hidden="true">＋</span>{copy.more}
         </button>
         <button class="btn ghost" type="button" data-affiliate-refresh>
-          <span aria-hidden="true">↻</span>換一批商品
+          <span aria-hidden="true">↻</span>{copy.refresh}
         </button>
         <a
           class="affiliate-shelf__support-link"
           href={localePath('zh', 'support')}
           data-affiliate-support-link
           hidden
-        >查看全部支持商品 →</a>
+        >{copy.support}</a>
       </div>
     </section>
     <script src={`${assetPath('support-products.js')}?v=20260901-affiliate-shelf`} defer></script>
@@ -205,6 +264,17 @@ const shelfId = `affiliate-shelf-${toolSlug || context}`.replace(/[^a-z0-9_-]/gi
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  :global(.affiliate-product-media-link) {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :global(.affiliate-product-title-link) {
+    color: inherit;
+    text-decoration: none;
   }
 
   :global(.affiliate-product-placeholder) {

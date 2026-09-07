@@ -142,6 +142,7 @@ const pageLd = sourceGuide.pageKind === 'guideHub'
 
 <BaseLayout
   lang={lang}
+  automaticAffiliate={false}
   title={guide.metaTitle}
   description={guide.metaDescription}
   keywords={guide.targetKeywords}
@@ -164,7 +165,7 @@ const pageLd = sourceGuide.pageKind === 'guideHub'
     {guide.contentHtml ? (
       articleContentSplit ? (<>
         <div class="markdown-body" set:html={articleContentSplit.before} />
-        <AffiliateProductShelf
+        {lang === 'zh' && <AffiliateProductShelf
           lang={lang}
           category={articleAffiliateConfig.affiliateCategory}
           affiliateTags={articleAffiliateConfig.affiliateTags}
@@ -172,7 +173,7 @@ const pageLd = sourceGuide.pageKind === 'guideHub'
           context="article"
           heading={lang === 'zh' ? '這篇指南可能用得到的工具與用品' : 'Relevant resources for this guide'}
           initialLimit={3}
-        />
+        />}
         <div class="markdown-body" set:html={articleContentSplit.after} />
       </>) : (
         <div class="markdown-body" set:html={guide.contentHtml} />
@@ -201,7 +202,7 @@ const pageLd = sourceGuide.pageKind === 'guideHub'
       </ol>
     </section>
 
-    {articleAffiliateConfig.affiliateEnabled && (
+    {lang === 'zh' && articleAffiliateConfig.affiliateEnabled && (
       <AffiliateProductShelf
         lang={lang}
         category={articleAffiliateConfig.affiliateCategory}
@@ -285,6 +286,18 @@ const pageLd = sourceGuide.pageKind === 'guideHub'
       </section>
     )}
   </article>
+
+  {lang !== 'zh' && (
+    <AffiliateProductShelf
+      lang={lang}
+      category={articleAffiliateConfig.affiliateCategory}
+      affiliateTags={articleAffiliateConfig.affiliateTags}
+      toolSlug={guide.slug}
+      context="article"
+      heading="Relevant resources for this guide"
+      initialLimit={3}
+    />
+  )}
 
   <script>
     import { isFavoriteTool, toggleFavoriteTool } from '../../../lib/userTools.client';

@@ -28,6 +28,15 @@ jobs:
 
       - run: npm ci
 
+      - name: Refresh Amazon Product Advertising Content
+        run: npm run amazon:refresh
+        env:
+          AMAZON_AFFILIATE_BOOTSTRAP_MODE: auto
+          AMAZON_CREATORS_API_CLIENT_ID: ${{ secrets.AMAZON_CREATORS_API_CLIENT_ID }}
+          AMAZON_CREATORS_API_CLIENT_SECRET: ${{ secrets.AMAZON_CREATORS_API_CLIENT_SECRET }}
+          AMAZON_CREATORS_API_VERSION: ${{ secrets.AMAZON_CREATORS_API_VERSION }}
+          AMAZON_CREATORS_API_MARKETPLACE: www.amazon.com
+
       - run: npm run lint
 
       - run: npm run typecheck
@@ -44,6 +53,8 @@ jobs:
       # 不會改寫 data/sitemap-lastmod.json，也不會把每一頁的 lastmod 撞成同一天
       # （那正是 seo-crawlability-check.mjs 的 collapsed-lastmod 關卡要擋的事）。
       - run: npm run preflight
+        env:
+          AMAZON_AFFILIATE_BOOTSTRAP_MODE: auto
 
       # preflight 不含這兩項，但 deploy.yml 會跑，PR 階段就一起驗，
       # 避免「PR 全綠、合併後 deploy 掛在 sitemap 驗證」。

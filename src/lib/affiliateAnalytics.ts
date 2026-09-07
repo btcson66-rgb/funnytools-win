@@ -10,6 +10,14 @@ export type AffiliateEventParams = {
   surface_type: string;
   affiliate_network: string;
   batch_id: string;
+  affiliate_site?: string;
+  affiliate_placement?: string;
+  tracking_id?: string;
+  locale?: string;
+  page_type?: string;
+  amazon_content_mode?: 'product_link' | 'text_only' | 'creators_api' | string;
+  products_shown?: number;
+  refresh_count?: number;
   product_id?: string;
   product_category?: string;
   card_position?: number;
@@ -62,7 +70,7 @@ export function trackAffiliateEvent(eventName: AffiliateEventName, params: Affil
     affiliate_network: params.affiliate_network,
     batch_id: params.batch_id,
   };
-  for (const key of ['product_id', 'product_category', 'card_position', 'close_method'] as const) {
+  for (const key of ['affiliate_site', 'affiliate_placement', 'tracking_id', 'locale', 'page_type', 'amazon_content_mode', 'product_id', 'product_category', 'card_position', 'products_shown', 'refresh_count', 'close_method'] as const) {
     const value = params[key];
     if (value !== undefined) payload[key] = value;
   }

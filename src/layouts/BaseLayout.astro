@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 import Nav from '../components/Nav.astro';
+import AffiliateProductShelf from '../components/AffiliateProductShelf.astro';
 import { SITE, type Locale } from '../config/site';
 import indexingConfig from '../config/indexing.json';
 import { absoluteUrl, assetPath, localePath } from '../lib/url';
@@ -29,6 +30,7 @@ interface Props {
   htmlLanguage?: string;
   ogLocaleOverride?: string;
   skipToContentLabel?: string;
+  automaticAffiliate?: boolean;
 }
 
 const {
@@ -49,6 +51,7 @@ const {
   htmlLanguage,
   ogLocaleOverride,
   skipToContentLabel,
+  automaticAffiliate = true,
 } = Astro.props;
 
 const canonical = absoluteUrl(canonicalPath ?? localePath(lang, ...alternateSegments));
@@ -79,6 +82,8 @@ const ui = t(lang);
 const enNoindex = indexingConfig.EN_NOINDEX === true && lang === 'en';
 const shouldNoindex = noindex || enNoindex;
 const robotsContent = enNoindex ? 'noindex, follow' : (robots ?? 'noindex, follow');
+const affiliateContext = canonical.includes('/tools/') ? 'tool_result' : canonical.includes('/blog/') || canonical.includes('/guides/') ? 'article' : 'support_page';
+const showAutomaticAffiliate = automaticAffiliate && lang === 'en' && !shouldNoindex;
 const envAdsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? import.meta.env.PUBLIC_ADSENSE_ID;
 const adsenseClient = envAdsenseClient ?? SITE.adsenseClient;
 // Google ads must never load on noindex/error/retired pages. Keeping the gate
@@ -92,7 +97,7 @@ const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com${ga4Enabled ? ' https://www.googletagmanager.com' : ''}${adsenseEnabled ? ' https://pagead2.googlesyndication.com https://www.googletagservices.com https://adservice.google.com https://*.adtrafficquality.google' : ''}`,
   "style-src 'self' 'unsafe-inline'",
-  `img-src 'self' data: blob:${ga4Enabled ? ' https://www.googletagmanager.com' : ''}${adsenseEnabled ? ' https://pagead2.googlesyndication.com https://*.googleusercontent.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.adtrafficquality.google' : ''}`,
+  `img-src 'self' data: blob: https://m.media-amazon.com https://images-na.ssl-images-amazon.com https://images.amazon.com${ga4Enabled ? ' https://www.googletagmanager.com' : ''}${adsenseEnabled ? ' https://pagead2.googlesyndication.com https://*.googleusercontent.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.adtrafficquality.google' : ''}`,
   `frame-src 'self'${adsenseEnabled ? ' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.adtrafficquality.google https://www.google.com' : ''}`,
   `connect-src 'self' https://cloudflareinsights.com https://api.funnytools.win${ga4Enabled ? ' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://analytics.google.com https://www.googletagmanager.com https://www.google.com' : ''}${adsenseEnabled ? ' https://pagead2.googlesyndication.com https://*.adtrafficquality.google https://googleads.g.doubleclick.net https://csi.gstatic.com' : ''}${emailEndpointsEnabled ? ' https://roomfeng.win' : ''}`,
   "object-src 'none'",
@@ -260,6 +265,14 @@ const contentSecurityPolicy = [
     {Astro.slots.has('nav') ? <slot name="nav" /> : <Nav lang={lang} segments={alternateSegments} showLangSwitch={hasAlternates} />}
     <main id="content" class="site-main">
       <slot />
+      {showAutomaticAffiliate && (
+        <AffiliateProductShelf
+          lang="en"
+          context={affiliateContext}
+          toolSlug={canonical}
+          initialLimit={4}
+        />
+      )}
     </main>
     {Astro.slots.has('footer') ? <slot name="footer" /> : <Footer lang={lang} />}
     <script src={assetPath('install-prompt.js')} defer></script>
