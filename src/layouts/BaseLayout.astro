@@ -169,22 +169,19 @@ const contentSecurityPolicy = [
             window.__ft_existing_ga_ids = secondaryMeasurementId
               ? [measurementId, secondaryMeasurementId]
               : [measurementId];
-            // Consent Mode v2: default denied in EEA/UK/CH until a certified CMP
-            // (AdSense Privacy & messaging) collects consent; granted elsewhere.
+            // Consent Mode v2: remain denied until the visitor makes an explicit choice.
             gtag('consent', 'default', {
               ad_storage: 'denied',
               ad_user_data: 'denied',
               ad_personalization: 'denied',
               analytics_storage: 'denied',
               wait_for_update: 500,
-              region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IS','IE','IT','LV','LI','LT','LU','MT','NL','NO','PL','PT','RO','SK','SI','ES','SE','GB','CH'],
             });
-            gtag('consent', 'default', {
-              ad_storage: 'granted',
-              ad_user_data: 'granted',
-              ad_personalization: 'granted',
-              analytics_storage: 'granted',
-            });
+            var savedConsent = null;
+            try { savedConsent = window.localStorage.getItem('btcson_consent_v1'); } catch {}
+            if (savedConsent === 'accepted') {
+              gtag('consent', 'update', { analytics_storage: 'granted' });
+            }
             gtag('js', new Date());
             // Do not let the Google tag's linked destinations inherit an automatic
             // page_view. The affiliate property is intentionally not configured here,
@@ -197,6 +194,42 @@ const contentSecurityPolicy = [
             }
             gtag('event', 'page_view', { send_to: measurementId });
             if (secondaryMeasurementId) gtag('event', 'page_view', { send_to: secondaryMeasurementId });
+            const initConsentUi = () => {
+              if (document.querySelector('[data-consent-widget]')) return;
+              const isZh = (document.documentElement.lang || '').toLowerCase().startsWith('zh');
+              const widget = document.createElement('div');
+              widget.setAttribute('data-consent-widget', '');
+              widget.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:1000;max-width:min(440px,calc(100vw - 32px));color:#172033;font-family:inherit';
+              widget.innerHTML = isZh
+                ? '<section role="dialog" aria-labelledby="consent-title" aria-describedby="consent-description" style="display:grid;gap:12px;padding:16px;border:1px solid #cbd5e1;border-radius:12px;background:#fff;box-shadow:0 8px 28px rgb(15 23 42 / 18%)"><div><h2 id="consent-title" style="margin:0 0 6px;font-size:1rem">分析與 Cookie 選擇</h2><p id="consent-description" style="margin:0;font-size:.875rem;line-height:1.5">我們使用必要技術維持網站運作；只有在你選擇接受後，才啟用分析儲存。你可以隨時重新修改選擇。</p></div><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end"><button type="button" data-consent-action="reject">拒絕分析</button><button type="button" data-consent-action="accept" style="border-color:#0f766e;background:#0f766e;color:#fff">接受分析</button></div></section><button type="button" data-consent-action="settings" hidden style="display:block;margin-left:auto;min-height:36px;padding:8px 12px;border:1px solid #94a3b8;border-radius:8px;background:#fff;color:inherit;cursor:pointer;font:inherit;font-weight:700">Cookie 設定</button>'
+                : '<section role="dialog" aria-labelledby="consent-title" aria-describedby="consent-description" style="display:grid;gap:12px;padding:16px;border:1px solid #cbd5e1;border-radius:12px;background:#fff;box-shadow:0 8px 28px rgb(15 23 42 / 18%)"><div><h2 id="consent-title" style="margin:0 0 6px;font-size:1rem">Analytics and cookie choices</h2><p id="consent-description" style="margin:0;font-size:.875rem;line-height:1.5">We use essential technology to keep this site working. Analytics storage is enabled only after you choose to accept it. You can change your choice at any time.</p></div><div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end"><button type="button" data-consent-action="reject">Reject analytics</button><button type="button" data-consent-action="accept" style="border-color:#0f766e;background:#0f766e;color:#fff">Accept analytics</button></div></section><button type="button" data-consent-action="settings" hidden style="display:block;margin-left:auto;min-height:36px;padding:8px 12px;border:1px solid #94a3b8;border-radius:8px;background:#fff;color:inherit;cursor:pointer;font:inherit;font-weight:700">Cookie settings</button>';
+              const banner = widget.firstElementChild;
+              const settings = widget.lastElementChild;
+              const readChoice = () => {
+                try {
+                  const choice = window.localStorage.getItem('btcson_consent_v1');
+                  return choice === 'accepted' || choice === 'rejected' ? choice : null;
+                } catch { return null; }
+              };
+              const render = () => {
+                const choice = readChoice();
+                banner.hidden = Boolean(choice);
+                settings.hidden = !choice;
+              };
+              widget.addEventListener('click', (event) => {
+                const action = event.target.closest('[data-consent-action]')?.getAttribute('data-consent-action');
+                if (action === 'settings') { banner.hidden = false; settings.hidden = true; return; }
+                if (action !== 'accept' && action !== 'reject') return;
+                const choice = action === 'accept' ? 'accepted' : 'rejected';
+                try { window.localStorage.setItem('btcson_consent_v1', choice); } catch {}
+                window.gtag('consent', 'update', { analytics_storage: choice === 'accepted' ? 'granted' : 'denied' });
+                render();
+              });
+              document.body.appendChild(widget);
+              render();
+            };
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initConsentUi, { once: true });
+            else initConsentUi();
           </script>
           <script is:inline>
             window.__ft_track = function(eventName, params) {
