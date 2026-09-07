@@ -179,7 +179,10 @@ test('ConversionApiTool pdf-table-to-excel per-cell inputs expose an accessible 
 test('BreakReminder phase status announces changes via aria-live or role=status', () => {
   const source = readTool('BreakReminder');
   assert.match(source, /data-status/, 'expected BreakReminder.astro to still render a [data-status] phase label');
-  const statusTagMatch = /<p class="phase-label" data-status>[^<]*<\/p>/.exec(source);
+  // 錨點原本把開標籤寫死到 data-status 後立刻結束，於是加了 aria-live／role="status"
+  // （正是本測試要求的修法）反而匹配不到，兩個方向都不可能通過。改成允許開標籤帶
+  // 其他屬性；下方的斷言強度完全不變，仍要求該元素具備 aria-live 或 role="status"。
+  const statusTagMatch = /<p class="phase-label" data-status[^>]*>[^<]*<\/p>/.exec(source);
   assert.ok(statusTagMatch, 'expected to find the phase-label <p data-status> markup');
   assert.match(
     statusTagMatch[0],

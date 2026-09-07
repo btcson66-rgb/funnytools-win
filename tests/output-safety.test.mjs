@@ -180,10 +180,12 @@ test('§4 [RED] json-to-csv 每個語系的上線頁都必須提供公式逸出�
   // 英文與中文頁根本沒有渲染這個控制項，於是 DataConverter.astro:105 的
   // `?.checked || false` 直接落到 false，papaparse 完全不做公式逸出。
   // 修法：把 escapeFormulae 改成預設開啟、與 label 是否存在脫鉤。
+  // /zh/ 整個命名空間都是 canonical + meta refresh 的轉址 stub（實測 dist/zh/ 全站
+  // 零個工具 widget），要求它渲染工具控制項在現行架構下永遠不可能成立，因此不列入。
+  // 四個真正的上線頁仍全數斷言，強度不變。
   const pages = [
     'tools/json-to-csv/index.html',
     'en/tools/json-to-csv/index.html',
-    'zh/tools/json-to-csv/index.html',
     'es/herramientas/convertir-json-a-csv/index.html',
     'fr/outils/convertir-json-en-csv/index.html',
   ];

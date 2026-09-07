@@ -33,7 +33,12 @@ const { labels } = Astro.props;
       }
     }
     root.querySelector('[data-generate]')?.addEventListener('click', generate);
-    root.querySelector('[data-copy]')?.addEventListener('click', () => output.value && navigator.clipboard.writeText(output.value));
+    root.querySelector('[data-copy]')?.addEventListener('click', async () => {
+      if (!output.value) return;
+      // Clipboard API 被拒絕時退回 prompt，讓使用者仍能手動複製。
+      try { await navigator.clipboard.writeText(output.value); }
+      catch { window.prompt(labels.copy, output.value); }
+    });
     root.querySelector('[data-download]')?.addEventListener('click', () => { if (!output.value) return; const url = URL.createObjectURL(new Blob([output.value + '\n'], {type:'text/plain'})); const a=document.createElement('a'); a.href=url; a.download='uuids.txt'; a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000); });
     generate();
   });
