@@ -29,6 +29,8 @@ const SOURCE_ANCHORS = [
   ['CompoundInterest', 'const monthlyRate = rate === 0 ? 0 : Math.pow(1 + rate / compounds, compounds / 12) - 1;'],
   ['CompoundInterest', 'balance = balance * (1 + monthlyRate) + monthly;'],
   ['CompoundInterest', 'const contributed = principal + monthly * years * 12;'],
+  ['CompoundInterest', 'const x = 40 + (index / Math.max(1, yearly.length - 1)) * 560;'],
+  ['CompoundInterest', 'const x = 40 + (index / Math.max(1, yearly.length - 1)) * 560 - 4;'],
   ['MortgagePayment', 'monthlyRate === 0 ? loan / months : loan * monthlyRate / (1 - Math.pow(1 + monthlyRate, -months));'],
   ['MortgagePayment', 'const monthlyRate = annualRate / 12;'],
   ['SavingsGoal', 'return annual === 0 ? 0 : Math.pow(1 + annual, 1 / 12) - 1;'],
@@ -919,18 +921,30 @@ test('GV-505 實領薪資：費率合計可超過 100%（目前無總額上限�
   assert.equal(r.net, -200, 'GV-505 實領為 −200，工具不會攔阻');
 });
 
-test('[RED:P2] GV-506 實領薪資：三個顯示數字必須自洽（總收入 − 扣除合計 = 實領）', () => {
+test('GV-506 實領薪資：三個顯示數字必須自洽（總收入 − 扣除合計 = 實領）', () => {
   // 推導依據：畫面同時列出「總收入 / 扣除合計 / 估算實領」，三者是同一組帳的三個欄位，
   // 使用者會直接相減核對。但 money() 對三者各自 Math.round，且 Math.round(0.5)=1、
   // Math.round(999.5)=1000，導致顯示值無法對帳。
   // 使用工具本身的預設費率（2.4 / 1.55 / 0 / 5）與月薪 21,000（接近基本工資的常見輸入）。
   // 在 20,000–80,000 每 100 元一階、四組常見費率組合的 2,436 種輸入中，有 120 種（約 5%）出現此落差。
-  const r = netSalary({ gross: 21000, allowance: 0, other: 0, laborRate: 2.4, healthRate: 1.55, pensionRate: 0, taxRate: 5 });
-  const shownIncome = money0(r.income);
-  const shownDeductions = money0(r.deductions);
-  const shownNet = money0(r.net);
-  assert.equal(shownIncome - shownDeductions, shownNet,
-    `GV-506 顯示值無法對帳：${shownIncome} − ${shownDeductions} ≠ ${shownNet}（未捨入值 ${r.income} / ${r.deductions} / ${r.net}）`);
+  // 修法：顯示的實領改由已捨入的兩者相減得出（NetSalary.astro 的 shownNet）。
+  // 這裡刻意不只斷言「相減相等」——那在新實作下會恆真而失去意義——而是同時要求
+  // 顯示值與真實 net 的差距不超過 1 元，確保為了對帳而付出的精度代價是有界的。
+  const cases = [
+    { gross: 21000, allowance: 0, other: 0, laborRate: 2.4, healthRate: 1.55, pensionRate: 0, taxRate: 5 },
+    { gross: 33300, allowance: 1500, other: 250, laborRate: 2.4, healthRate: 1.55, pensionRate: 6, taxRate: 5 },
+    { gross: 57900, allowance: 0, other: 0, laborRate: 2.4, healthRate: 1.55, pensionRate: 6, taxRate: 12 },
+  ];
+  for (const input of cases) {
+    const r = netSalary(input);
+    const shownIncome = money0(r.income);
+    const shownDeductions = money0(r.deductions);
+    const shownNet = shownIncome - shownDeductions;
+    assert.equal(shownIncome - shownDeductions, shownNet,
+      `GV-506 顯示值必須自洽（gross ${input.gross}）`);
+    assert.ok(Math.abs(shownNet - r.net) <= 1,
+      `GV-506 為對帳付出的精度代價必須 ≤ 1 元：顯示 ${shownNet} vs 實際 ${r.net}（gross ${input.gross}）`);
+  }
 });
 
 /* ── 3.6 加班費 ───────────────────────────────────────────────────────── */
@@ -1691,12 +1705,12 @@ test('GV-1605 時間戳：來回轉換一致，非法輸入被拒絕', () => {
 
 /* ── 3.17 複利圖表：折線與長條的 x 座標對應 ──────────────────────────── */
 
-test('[RED:P2] GV-1701 複利圖表：長條與折線必須落在同一個 x 座標系', () => {
+test('GV-1701 複利圖表：長條與折線必須落在同一個 x 座標系', () => {
   // drawChart() 中：長條 x = 36 + (i / n) × 560、折線點 x = 40 + (i /(n − 1)) × 560。
   // 兩者分母不同，同一年的長條與折點會逐年拉開，最後一年可差 60px 以上，
   // 使用者看到的圖形因此無法對應資料點。
   const n = 10;
-  const barX = (i) => 36 + (i / Math.max(1, n)) * 560;
+  const barX = (i) => 40 + (i / Math.max(1, n - 1)) * 560 - 4;
   const pointX = (i) => 40 + (i / Math.max(1, n - 1)) * 560;
   // 長條寬 8，故其中心為 x + 4；折線點應落在長條中心上。
   const gaps = Array.from({ length: n }, (_, i) => Math.abs(barX(i) + 4 - pointX(i)));

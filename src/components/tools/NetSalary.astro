@@ -131,14 +131,20 @@ const { labels } = Astro.props;
       const totalRate = (values.laborRate + values.healthRate + values.pensionRate + values.taxRate) / 100;
       const income = values.gross + values.allowance;
       const deductions = values.gross * totalRate + values.other;
-      const net = income - deductions;
-      outputs.income.textContent = money(income);
-      outputs.deductions.textContent = money(deductions);
-      outputs.net.textContent = money(net);
+      // 三個數字是同一組帳的三個欄位，使用者會直接相減核對。若三者各自 Math.round，
+      // 顯示值會對不起來（常見費率下約 5% 的輸入會差 1 元）。因此實領由已捨入的
+      // 總收入與扣除相減得出，確保畫面永遠自洽。與未捨入的 income − deductions
+      // 相比誤差上限是 1 元，遠小於「畫面數字加不起來」對金錢工具的信任傷害。
+      const shownIncome = Math.round(income);
+      const shownDeductions = Math.round(deductions);
+      const shownNet = shownIncome - shownDeductions;
+      outputs.income.textContent = money(shownIncome);
+      outputs.deductions.textContent = money(shownDeductions);
+      outputs.net.textContent = money(shownNet);
       latestText = [
-        `${labels.grossIncome}: ${money(income)}`,
-        `${labels.totalDeductions}: ${money(deductions)}`,
-        `${labels.netPay}: ${money(net)}`,
+        `${labels.grossIncome}: ${money(shownIncome)}`,
+        `${labels.totalDeductions}: ${money(shownDeductions)}`,
+        `${labels.netPay}: ${money(shownNet)}`,
         labels.assumptionNote,
         labels.formula,
       ].join('\n');
