@@ -1,0 +1,94 @@
+{
+  "task": "02_CLAUDE_CLOUD_FUNNYTOOLS_RELIABILITY_V6",
+  "branch": "claude/task-02-funnytools-reliability",
+  "pull_request": "https://github.com/btcson66-rgb/funnytools-win/pull/21",
+  "date": "2026-09-07",
+  "release_gate": {
+    "verdict": "BLOCKED",
+    "reason": "production conversion API is still truly broken for live backend-dependent tools",
+    "other_blocking_conditions": {
+      "p0_wrong_calculation": "cleared",
+      "privacy_false_claim": "cleared",
+      "unsafe_output": "cleared"
+    },
+    "unblocks_when": "line-level availability of api.funnytools.win is restored and observed"
+  },
+  "environment_limits": {
+    "production_reachable": false,
+    "blocked_hosts": [
+      "funnytools.win",
+      "api.funnytools.win"
+    ],
+    "note": "All findings derive from source, local dist/ build, and GitHub Actions logs. No live verification was performed or claimed."
+  },
+  "red_smoke_triage": {
+    "classification": "ORIGIN_NOT_READY / EXTERNAL_RUNTIME",
+    "decisive_evidence": "same commit ea44fdb passed 09-04 and failed 09-05 and 09-06; /health returned HTTP 530 for 24 consecutive attempts over 240s on scheduled runs with no deployment",
+    "prior_model_falsified": "post-deploy container restart window (PR #9)",
+    "workflow_silenced": false,
+    "assertions_weakened": false,
+    "retries_inflated": false
+  },
+  "inventory": {
+    "live_tools": 83,
+    "local_only": 78,
+    "backend_dependent": 5,
+    "backend_endpoints": 7,
+    "backend_endpoints_covered_by_smoke": 7
+  },
+  "fixes": {
+    "backend": [
+      "event-loop blocking: sync CPU work moved to threadpool with a bounded concurrency gate (503 + Retry-After when saturated); /health excluded",
+      "pdf_render: pixel-dimension guard applied before bitmap allocation",
+      "pdfium access serialised (not thread-safe)",
+      "xlsx export: cells starting with '=' forced to string type"
+    ],
+    "frontend": [
+      "download gate moved off three local-only tools onto the five upload tools, with privacy copy disclosing both upload legs",
+      "percentage change: negative base flipped the direction word",
+      "net salary: displayed figures now reconcile",
+      "compound interest chart: bars and line share one x mapping",
+      "json-to-csv formula escaping now active in every locale",
+      "clipboard failure handling, accessible names, aria-live status region",
+      "object URL revoked; ImageFormatConverter filename sanitised"
+    ],
+    "docs": [
+      "README no longer claims the site runs without a backend"
+    ],
+    "ops_repo_fable_company": [
+      "uptime monitor now covers api.funnytools.win/health",
+      "forensics no longer misreads Cloudflare 520-527/530 as an application-layer fault"
+    ]
+  },
+  "tests": {
+    "frontend": {
+      "total": 220,
+      "passed": 220,
+      "failed": 0
+    },
+    "backend": {
+      "total": 333,
+      "passed": 331,
+      "skipped": 2,
+      "skip_reason": "tesseract not installed locally; OCR paths not faked as passing"
+    },
+    "lint": "pass",
+    "typecheck": "pass",
+    "build": "pass (1171 pages)"
+  },
+  "not_verified": [
+    "live pages and live API behaviour",
+    "backend OCR full path",
+    "real mobile devices and screen readers",
+    "contrast ratios by rendered sampling",
+    "Excel's actual open-file behaviour",
+    "backend host location, restart mechanism and resource limits (undocumented in repo; owner unknown)"
+  ],
+  "task_brief_corrections": [
+    "backend uses no ghostscript; the only subprocess is tesseract and PDF compression is pure pypdf",
+    "FUNNYTOOLS_ALLOWED_ORIGINS already defaults to include the production domain",
+    "live tool count is 83, not 79",
+    "all 7 backend endpoints are already covered by smoke; the real gaps are parameter-level (OCR path never exercised)",
+    "PdfCompressor.astro is not dead code; es/fr routes import it, so pdf-compressor is two implementations across locales"
+  ]
+}

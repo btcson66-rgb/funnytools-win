@@ -23,6 +23,7 @@ import { getWorkflowsForTool } from '../data/workflows';
 import { t } from '../i18n/ui';
 import { categoryOgImage, toolSeoDescription, toolSeoTitle } from '../lib/seo';
 import { absoluteUrl, categoryUrl, localePath, localeUrlPair, toolUrl } from '../lib/url';
+import { usesDownloadGate } from '../lib/downloadGateTools';
 import { buildToolValueReview, CONTENT_REVIEWED_AT } from '../lib/contentValue';
 
 interface Props {
@@ -50,7 +51,9 @@ const relatedGuidesHeading = lang === 'zh' ? '延伸閱讀：使用教學' : 'Re
 const relatedWorkflows = getWorkflowsForTool(tool.slug, lang).slice(0, 2);
 const relatedWorkflowsHeading = lang === 'zh' ? '相關工具包' : 'Related toolkits';
 const valueReview = buildToolValueReview(lang, content.name, tool.slug, category, content);
-const downloadGateConfig = SITE.features.downloadGate
+// Only the tools that actually route their download through the gate get the
+// config tag; browser-local tools must not even be able to activate it.
+const downloadGateConfig = SITE.features.downloadGate && usesDownloadGate(tool.slug)
   ? JSON.stringify({ lang, labels: ui.downloadGate })
   : null;
 ---

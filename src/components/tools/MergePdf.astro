@@ -96,8 +96,6 @@ const { labels } = Astro.props;
 </style>
 
 <script>
-  import { requestGatedDownload } from '../../lib/downloadGate.client';
-
   document.querySelectorAll('[data-merge-pdf-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
     const fileInput = root.querySelector('[data-file]');
@@ -128,8 +126,8 @@ const { labels } = Astro.props;
       if (isBusy) {
         setStatus(labels.processing);
       } else if (status.textContent === labels.processing) {
-        // Do not leave a stale "processing" message behind when the gate
-        // panel is shown (or when a local download fallback has completed).
+        // Do not leave a stale "processing" message behind once the local
+        // merge + download has completed.
         setStatus('');
       }
     }
@@ -290,15 +288,8 @@ const { labels } = Astro.props;
         const bytes = await merged.save();
         const baseName = safeBaseName(items[0].file.name);
         const filename = `${baseName}-merged.pdf`;
-        requestGatedDownload({
-          tool: 'merge-pdf',
-          anchor: root.querySelector('.actions'),
-          getFile: () => ({ blob: new Blob([bytes], { type: 'application/pdf' }), filename }),
-          fallback: () => {
-            downloadPdf(bytes, filename);
-            setStatus(labels.downloaded);
-          },
-        });
+        downloadPdf(bytes, filename);
+        setStatus(labels.downloaded);
       } catch {
         setError(labels.mergeError);
       } finally {

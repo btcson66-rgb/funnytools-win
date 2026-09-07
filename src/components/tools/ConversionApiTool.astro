@@ -142,6 +142,7 @@ const isPdf = slug === 'pdf-compressor';
     pixelDistance,
     previewPdfTables,
   } from '../../lib/funnytools-api';
+  import { requestGatedDownload } from '../../lib/downloadGate.client';
 
   const apiBase = import.meta.env.PUBLIC_CONVERSION_API_URL || 'https://api.funnytools.win';
 
@@ -162,6 +163,15 @@ const isPdf = slug === 'pdf-compressor';
     let tables = [];
     let selectedFiles = [];
     let calibrationImage = null;
+    let calibrationObjectUrl = null;
+    // 每次選校正圖都會 createObjectURL；不 revoke 的話換一張就洩漏一份完整影像
+    // 記憶體，直到分頁關閉。圖片 decode 完（onload）之後 blob URL 就不再需要，
+    // 這裡沒有任何下載依賴這個 URL（下載走 downloadBlob()，它自己管理 URL）。
+    const releaseCalibrationObjectUrl = () => {
+      if (!calibrationObjectUrl) return;
+      URL.revokeObjectURL(calibrationObjectUrl);
+      calibrationObjectUrl = null;
+    };
     let calibrationPoints = [];
     let runSerial = 0;
     const pdfModes = new Set(['pdf-to-word', 'pdf-table-to-excel', 'pdf-compressor']);
@@ -206,7 +216,7 @@ const isPdf = slug === 'pdf-compressor';
       panel.hidden = false;
     };
     const clear = () => {
-      runSerial += 1; controller?.abort(); controller = null; selectedFiles = []; tables = []; calibrationPoints = []; calibrationImage = null; clearOutput(); setError(''); setStatus(labels.waiting);
+      runSerial += 1; controller?.abort(); controller = null; selectedFiles = []; tables = []; calibrationPoints = []; releaseCalibrationObjectUrl(); calibrationImage = null; clearOutput(); setError(''); setStatus(labels.waiting);
       if (fileInput) fileInput.value = ''; if (filesInput) filesInput.value = '';
       root.querySelector('[data-file-list]')?.replaceChildren(); root.querySelector('[data-editor]')?.replaceChildren();
       if (root.querySelector('[data-editor]')) root.querySelector('[data-editor]').hidden = true;
@@ -275,7 +285,11 @@ const isPdf = slug === 'pdf-compressor';
         const columnSelect = document.createElement('select'); columnSelect.setAttribute('aria-label', labels.columnNumber); for (let i = 0; i < (table.rows[0]?.length || 0); i += 1) { const option = document.createElement('option'); option.value = String(i); option.textContent = `${labels.columnNumber} ${i + 1}`; columnSelect.append(option); }
         const deleteColumn = document.createElement('button'); deleteColumn.className = 'btn ghost'; deleteColumn.type = 'button'; deleteColumn.textContent = labels.deleteColumn; deleteColumn.onclick = () => { const column = Number(columnSelect.value); table.rows.forEach((row) => row.splice(column, 1)); renderTables(); }; actions.append(columnSelect, deleteColumn); card.append(actions);
         const tableElement = document.createElement('table'); const body = document.createElement('tbody');
-        table.rows.forEach((row, rowIndex) => { const tr = document.createElement('tr'); row.forEach((value, columnIndex) => { const td = document.createElement('td'); const input = document.createElement('input'); input.value = value; input.oninput = () => { table.rows[rowIndex][columnIndex] = input.value; }; td.append(input); tr.append(td); }); const td = document.createElement('td'); const remove = document.createElement('button'); remove.className = 'btn ghost'; remove.type = 'button'; remove.textContent = labels.deleteRow; remove.onclick = () => { table.rows.splice(rowIndex, 1); renderTables(); }; td.append(remove); tr.append(td); body.append(tr); });
+        const tableName = labels.table.replace('{number}', String(tableIndex + 1));
+        // 每一格都要有可定位的可及名稱（表格 N · 列號 R · 欄號 C），
+        // 否則螢幕閱讀器在幾十格之間只會一律唸「編輯文字」。
+        const cellName = (rowIndex, columnIndex) => `${tableName} · ${labels.rowNumber} ${rowIndex + 1} · ${labels.columnNumber} ${columnIndex + 1}`;
+        table.rows.forEach((row, rowIndex) => { const tr = document.createElement('tr'); row.forEach((value, columnIndex) => { const td = document.createElement('td'); const input = document.createElement('input'); input.setAttribute('aria-label', cellName(rowIndex, columnIndex)); input.value = value; input.oninput = () => { table.rows[rowIndex][columnIndex] = input.value; }; td.append(input); tr.append(td); }); const td = document.createElement('td'); const remove = document.createElement('button'); remove.className = 'btn ghost'; remove.type = 'button'; remove.textContent = labels.deleteRow; remove.setAttribute('aria-label', `${labels.deleteRow}: ${tableName} · ${labels.rowNumber} ${rowIndex + 1}`); remove.onclick = () => { table.rows.splice(rowIndex, 1); renderTables(); }; td.append(remove); tr.append(td); body.append(tr); });
         tableElement.append(body); card.append(tableElement); editor.append(card);
       });
       exportButton.disabled = false;
@@ -312,10 +326,39 @@ const isPdf = slug === 'pdf-compressor';
     });
     root.querySelector('[data-action="cancel"]')?.addEventListener('click', () => controller?.abort());
     root.querySelector('[data-action="clear"]')?.addEventListener('click', clear);
-    downloadButton?.addEventListener('click', () => { if (outputBlob) downloadBlob(outputBlob, outputName); });
+    downloadButton?.addEventListener('click', () => {
+      // Only offer the email download gate once a conversion actually
+      // produced a file; on an error state there is nothing to deliver.
+      if (!outputBlob) return;
+      const blob = outputBlob;
+      const filename = outputName;
+      const directDownload = () => downloadBlob(blob, filename);
+      requestGatedDownload({
+        tool: mode,
+        anchor: root.querySelector('.actions'),
+        getFile: () => ({ blob, filename }),
+        fallback: directDownload,
+      });
+    });
 
     root.querySelector('[data-calibration]')?.addEventListener('click', (event) => { if (!calibrationImage) return; const canvas = event.currentTarget; const rect = canvas.getBoundingClientRect(); const point = { x: (event.clientX - rect.left) * canvas.width / rect.width, y: (event.clientY - rect.top) * canvas.height / rect.height }; calibrationPoints = calibrationPoints.length === 2 ? [point] : [...calibrationPoints, point]; drawCalibration(); });
-    fileInput?.addEventListener('change', () => { if (mode !== 'image-to-dxf') return; const file = fileInput.files?.[0]; if (!file) return; calibrationImage = new Image(); calibrationImage.onload = () => { const canvas = root.querySelector('[data-calibration]'); canvas.hidden = false; root.querySelector('[data-calibration-empty]').hidden = true; calibrationPoints = []; drawCalibration(); }; calibrationImage.src = URL.createObjectURL(file); });
+    fileInput?.addEventListener('change', () => {
+      if (mode !== 'image-to-dxf') return;
+      const file = fileInput.files?.[0]; if (!file) return;
+      releaseCalibrationObjectUrl();
+      const objectUrl = URL.createObjectURL(file);
+      calibrationObjectUrl = objectUrl;
+      const release = () => { if (calibrationObjectUrl === objectUrl) releaseCalibrationObjectUrl(); else URL.revokeObjectURL(objectUrl); };
+      calibrationImage = new Image();
+      calibrationImage.onload = () => {
+        release();
+        const canvas = root.querySelector('[data-calibration]');
+        canvas.hidden = false; root.querySelector('[data-calibration-empty]').hidden = true;
+        calibrationPoints = []; drawCalibration();
+      };
+      calibrationImage.onerror = () => { release(); };
+      calibrationImage.src = objectUrl;
+    });
 
     convertButton?.addEventListener('click', async () => {
       if (mode === 'bulk-image-compressor') {
