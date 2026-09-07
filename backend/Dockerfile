@@ -1,8 +1,18 @@
 FROM python:3.12-slim
 
+# production image 目前是手動 build 的，沒有這個標記就無法從外部確認容器裡跑的是哪個
+# commit。正式 build 必須傳入 git SHA：--build-arg GIT_REVISION=$(git rev-parse HEAD)。
+# 沒傳時退回 unknown，不讓 build 失敗（見 BACKEND_DEPLOY_RUNBOOK.md）。
+ARG GIT_REVISION=unknown
+
+LABEL org.opencontainers.image.title="funnytools-conversion-api" \
+      org.opencontainers.image.source="https://github.com/btcson66-rgb/funnytools-win" \
+      org.opencontainers.image.revision="${GIT_REVISION}"
+
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1
+    PIP_NO_CACHE_DIR=1 \
+    FUNNYTOOLS_REVISION=${GIT_REVISION}
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     tesseract-ocr \
