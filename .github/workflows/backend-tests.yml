@@ -1,0 +1,67 @@
+name: Backend tests
+
+# backend/ 的程式碼在 2026-09-07 之前沒有任何 CI：preflight.yml 只跑前端，
+# deploy.yml 只部署前端，conversion-api-smoke.yml 打的是已經上線的 production。
+# 也就是說 conversion API 的改動在合併前從來沒有被自動驗證過。這個 workflow
+# 補上那一層：backend/ 有變動就跑 pytest。
+#
+# 注意：這個 workflow 不會部署 backend。production container 目前是手動
+# build/替換的（見 BACKEND_DEPLOY_RUNBOOK.md）——合併 PR ≠ 後端已上線。
+on:
+  pull_request:
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-tests.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          # 與 backend/Dockerfile 的 python:3.12-slim 對齊。
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: |
+            backend/requirements.txt
+            backend/requirements-test.txt
+
+      # 與 Dockerfile 安裝的 OCR 套件相同。少了這一步，pdf_word 的 OCR 測試
+      # 會被 skip，等於 CI 對 OCR 路徑完全沒有覆蓋。
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            tesseract-ocr \
+            tesseract-ocr-eng \
+            tesseract-ocr-chi-tra \
+            libgomp1
+
+      - name: Verify tesseract is available
+        run: tesseract --version
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-test.txt
+
+      - name: Run pytest
+        run: python -m pytest
