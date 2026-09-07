@@ -272,10 +272,14 @@ const startAffiliateShelf = () => {
       amazon_content_mode: isAmazon ? link.dataset.affiliateContentMode || 'text_only' : undefined,
       product_id: link.dataset.affiliateProductId || 'unknown',
       product_category: link.dataset.affiliateCategory || 'general',
-      tracking_id: link.dataset.affiliateTrackingId || undefined,
+      affiliate_tracking_id: link.dataset.affiliateTrackingId || undefined,
       batch_id: link.dataset.affiliateBatch || 'catalog-legacy',
       card_position: Number(link.dataset.affiliatePosition || 0),
     });
+const batchTrackingId = (values) => {
+  const ids = [...new Set(values.map((value) => asText(value)).filter(Boolean))];
+  return ids.length === 1 ? ids[0] : undefined;
+};
     const batchIdFor = (items) => `${asText(items[0]?.batch_id) || 'catalog-legacy'}:${batchNumber}`;
     const observeItemViews = () => {
       itemObserver?.disconnect();
@@ -304,6 +308,7 @@ const startAffiliateShelf = () => {
           track('affiliate_module_view', {
             ...contextDimensions(),
             affiliate_network: [...new Set(visible)].length === 1 ? visible[0] : 'mixed',
+            affiliate_tracking_id: batchTrackingId([...grid.querySelectorAll('a[data-affiliate-product-id]')].map((link) => link.dataset.affiliateTrackingId)),
             batch_id: `catalog-legacy:${batchNumber}`,
           });
         }
@@ -327,6 +332,7 @@ const startAffiliateShelf = () => {
         track('affiliate_refresh', {
           ...contextDimensions(),
           affiliate_network: visible.length === 1 ? visible[0] : 'mixed',
+          affiliate_tracking_id: batchTrackingId(items.map((item) => item.tracking_id)),
           amazon_content_mode: isAmazon ? [...new Set(items.map((item) => asText(item.amazon_content_mode) || 'text_only'))][0] : undefined,
           batch_id: batchIdFor(items),
           products_shown: items.length,

@@ -40,7 +40,7 @@ const contentSecurityPolicy = [
         <>
           <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ga4MeasurementId}`} />
-          <script is:inline define:vars={{ measurementId: SITE.ga4MeasurementId, secondaryMeasurementId: SITE.ga4SecondaryMeasurementId }}>
+          <script is:inline define:vars={{ measurementId: SITE.ga4MeasurementId, secondaryMeasurementId: SITE.ga4SecondaryMeasurementId, affiliateMeasurementId: SITE.affiliateGa4MeasurementId }}>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             // See BaseLayout: define:vars puts this script in an IIFE, so gtag has to be
@@ -54,6 +54,9 @@ const contentSecurityPolicy = [
             // prevents a linked Google tag destination from inheriting page_view hits.
             gtag('config', measurementId, { send_page_view: false });
             if (secondaryMeasurementId) gtag('config', secondaryMeasurementId, { send_page_view: false });
+            if (affiliateMeasurementId && [measurementId, secondaryMeasurementId].indexOf(affiliateMeasurementId) === -1) {
+              gtag('config', affiliateMeasurementId, { send_page_view: false });
+            }
             gtag('event', 'page_view', { send_to: measurementId });
             if (secondaryMeasurementId) gtag('event', 'page_view', { send_to: secondaryMeasurementId });
           </script>
