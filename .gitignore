@@ -3,6 +3,7 @@ dist
 .astro
 __pycache__/
 *.pyc
+backend/.pytest_cache/
 
 # Local secrets / Cloudflare API tokens & raw analytics — never commit
 cloudflare/
