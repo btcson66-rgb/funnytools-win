@@ -96,6 +96,7 @@ const ui = {
       heading: '隱私與本機處理',
       anonymousApiHeading: '隱私與暫時處理',
       localOnly: '🔒 此工具完全在您的瀏覽器本機執行，不會將任何資料上傳到伺服器。',
+      downloadGated: '🔒 此工具在您的瀏覽器本機處理，內容不會為了執行這個工具而傳出去。若你選擇把成品寄到信箱，產生的檔案（5 MB 以內）與你填寫的 email 會送到寄送服務。',
       defaultNote: '這個工具主要在你的瀏覽器中執行。你輸入的內容不會送到 FunnyTools 免費線上工具箱的伺服器。',
     },
     trust: {
@@ -299,6 +300,7 @@ const ui = {
       heading: 'Privacy & local processing',
       anonymousApiHeading: 'Privacy & temporary processing',
       localOnly: '🔒 This tool runs entirely in your browser. No data is uploaded to any server.',
+      downloadGated: '🔒 This tool processes your input in your browser; running it does not send your content to a server. If you choose to have the result emailed, the generated file (up to 5 MB) and the address you type are sent to the delivery service.',
       defaultNote: 'This tool runs mainly in your browser. The content you enter is not sent to FunnyTools servers.',
     },
     trust: {

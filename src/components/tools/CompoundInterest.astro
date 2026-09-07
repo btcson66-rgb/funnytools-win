@@ -153,7 +153,11 @@ const { labels } = Astro.props;
         .join(' ');
       const bars = yearly
         .map((item, index) => {
-          const x = 36 + (index / Math.max(1, yearly.length)) * 560;
+          // 長條中心必須與折線點落在同一個 x 映射上。原本長條用 i/n、折線用
+          // i/(n−1)，兩者分母不同會逐年拉開，10 年時最後一根可差 56px，
+          // 圖形因此無法對應資料。折線已正確錨在座標軸（40→600），故以它為準；
+          // 長條寬 8，所以左緣 = 中心 − 4。
+          const x = 40 + (index / Math.max(1, yearly.length - 1)) * 560 - 4;
           const height = Math.max(2, (item.balance / max) * 150);
           return `<rect x="${x.toFixed(1)}" y="${(180 - height).toFixed(1)}" width="8" height="${height.toFixed(1)}" rx="4" fill="#cfe6e3" />`;
         })

@@ -4,18 +4,20 @@ const { labels } = Astro.props;
 ---
 <section class="tool-widget card" data-data-converter data-labels={JSON.stringify(labels)}>
   <label class="textarea-label"><span>{labels.input}</span><textarea data-input rows="11" placeholder={labels.placeholder}></textarea></label>
-  {labels.delimiterLabel && (
-    <div class="form-grid two-col">
-      <label>
-        <span>{labels.delimiterLabel}</span>
-        <select data-delimiter>
-          <option value="">{labels.delimiterAuto}</option>
-          <option value=",">{labels.delimiterComma}</option>
-          <option value=";">{labels.delimiterSemicolon}</option>
-          <option value="\t">{labels.delimiterTab}</option>
-          <option value="|">{labels.delimiterPipe}</option>
-        </select>
-      </label>
+  {(labels.delimiterLabel || labels.dynamicTypingLabel || labels.escapeFormulaeLabel || labels.bomLabel) && (
+    <div class={labels.delimiterLabel ? 'form-grid two-col' : 'form-grid'}>
+      {labels.delimiterLabel && (
+        <label>
+          <span>{labels.delimiterLabel}</span>
+          <select data-delimiter>
+            <option value="">{labels.delimiterAuto}</option>
+            <option value=",">{labels.delimiterComma}</option>
+            <option value=";">{labels.delimiterSemicolon}</option>
+            <option value="\t">{labels.delimiterTab}</option>
+            <option value="|">{labels.delimiterPipe}</option>
+          </select>
+        </label>
+      )}
       <div class="converter-options">
         {labels.dynamicTypingLabel && <label><input data-dynamic-typing type="checkbox" /> <span>{labels.dynamicTypingLabel}</span></label>}
         {labels.escapeFormulaeLabel && <label><input data-escape-formulae type="checkbox" checked /> <span>{labels.escapeFormulaeLabel}</span></label>}
@@ -102,7 +104,10 @@ const { labels } = Astro.props;
           output.value = Papa.unparse(parsed, {
             delimiter: selectedDelimiter() || ',',
             columns,
-            escapeFormulae: root.querySelector('[data-escape-formulae]')?.checked || false,
+            // 這個 checkbox 只有 es/fr 有 label，因此 zh/en 頁面根本不渲染它。
+            // 原本的 `|| false` 讓那兩個語系靜默關閉公式逸出——而有渲染的語系
+            // 預設是勾選的，可見原意就是要開。控制項不存在時一律採取保護。
+            escapeFormulae: root.querySelector('[data-escape-formulae]')?.checked ?? true,
           });
           showSummary(parsed.length, columns.length, selectedDelimiter() || ',');
         }
@@ -111,7 +116,13 @@ const { labels } = Astro.props;
         showError(caught instanceof Error ? caught.message : String(caught));
       }
     }
-    root.querySelector('[data-convert]')?.addEventListener('click', convert); root.querySelector('[data-copy]')?.addEventListener('click',()=>output.value&&navigator.clipboard.writeText(output.value));
+    root.querySelector('[data-convert]')?.addEventListener('click', convert); root.querySelector('[data-copy]')?.addEventListener('click', async () => {
+      if (!output.value) return;
+      // Clipboard API 在非安全上下文或使用者拒絕權限時會 reject；
+      // 沒有 catch 的話會變成未處理的 rejection，使用者完全沒有回饋。
+      try { await navigator.clipboard.writeText(output.value); }
+      catch { window.prompt(labels.copy, output.value); }
+    });
     root.querySelector('[data-clear]')?.addEventListener('click',()=>{input.value='';output.value='';error.hidden=true;summary.hidden=true;input.focus();});
     root.querySelector('[data-download]')?.addEventListener('click',()=>{
       if(!output.value)return;

@@ -1,8 +1,8 @@
 import type { LocalizedToolContent, ToolContent } from './_types';
 
 const privacy = {
-  zh: '檔案只為轉換而上傳，於請求期間暫時處理，完成後不會刻意保留。請勿上傳不必要的個人或機密資料。',
-  en: 'Files are uploaded only for conversion, processed temporarily, and not intentionally retained after the request completes. Do not upload unnecessary personal or confidential data.',
+  zh: '檔案會上傳到 FunnyTools Conversion API 進行轉換，於請求期間暫時處理，完成後不會刻意保留。請勿上傳不必要的個人或機密資料。',
+  en: 'Files are uploaded to the FunnyTools Conversion API for conversion, processed temporarily, and not intentionally retained after the request completes. Do not upload unnecessary personal or confidential data.',
 };
 
 const sourceNote = {
@@ -140,7 +140,7 @@ export const pdfTableToExcelContent = makeLocalized(
       { q: '檔案會留在伺服器嗎？', a: privacy.zh },
     ],
     labels: {
-      serverNote: sourceNote.zh, upload: '選擇 PDF', pages: '頁碼（可留白）', pagesPlaceholder: '例如 1,3,4', invalidPages: '頁碼請輸入正整數或遞增範圍，例如 1,3-5。', ocrMode: 'OCR 模式', auto: '自動', off: '關閉', force: '強制', ocrLang: 'OCR 語言', english: '英文', traditionalChinese: '繁體中文', englishTraditionalChinese: '英文＋繁體中文', traditionalChineseEnglish: '繁體中文＋英文', preview: '預覽表格', export: '匯出編輯後的 Excel', cancel: '取消等待', clear: '清除', waiting: '先上傳 PDF，再產生預覽。', processing: '正在偵測表格…', ready: '請檢查並編輯表格後再匯出。', noFile: '請先選取 PDF。', invalidFile: '檔案格式不是 PDF，請重新選擇。', failed: 'PDF 表格處理失敗。', noTables: '沒有偵測到可編輯表格。', table: '表格 {number}', deleteTable: '刪除表格', deleteRow: '刪除列', deleteColumn: '刪除欄', columnNumber: '欄號', apply: '套用', cancelNote: '取消會停止瀏覽器等待；已開始的伺服器處理不保證立即停止。',
+      serverNote: sourceNote.zh, upload: '選擇 PDF', pages: '頁碼（可留白）', pagesPlaceholder: '例如 1,3,4', invalidPages: '頁碼請輸入正整數或遞增範圍，例如 1,3-5。', ocrMode: 'OCR 模式', auto: '自動', off: '關閉', force: '強制', ocrLang: 'OCR 語言', english: '英文', traditionalChinese: '繁體中文', englishTraditionalChinese: '英文＋繁體中文', traditionalChineseEnglish: '繁體中文＋英文', preview: '預覽表格', export: '匯出編輯後的 Excel', cancel: '取消等待', clear: '清除', waiting: '先上傳 PDF，再產生預覽。', processing: '正在偵測表格…', ready: '請檢查並編輯表格後再匯出。', noFile: '請先選取 PDF。', invalidFile: '檔案格式不是 PDF，請重新選擇。', failed: 'PDF 表格處理失敗。', noTables: '沒有偵測到可編輯表格。', table: '表格 {number}', deleteTable: '刪除表格', deleteRow: '刪除列', deleteColumn: '刪除欄', columnNumber: '欄號', rowNumber: '列號', apply: '套用', cancelNote: '取消會停止瀏覽器等待；已開始的伺服器處理不保證立即停止。',
     },
     privacyNote: privacy.zh,
     contentSections: [
@@ -166,7 +166,7 @@ export const pdfTableToExcelContent = makeLocalized(
       { q: 'Are my files retained?', a: privacy.en },
     ],
     labels: {
-      serverNote: sourceNote.en, upload: 'Choose PDF', pages: 'Pages (optional)', pagesPlaceholder: 'For example 1,3,4', invalidPages: 'Use positive page numbers or ascending ranges, for example 1,3-5.', ocrMode: 'OCR mode', auto: 'Auto', off: 'Off', force: 'Force', ocrLang: 'OCR language', english: 'English', traditionalChinese: 'Traditional Chinese', englishTraditionalChinese: 'English + Traditional Chinese', traditionalChineseEnglish: 'Traditional Chinese + English', preview: 'Preview tables', export: 'Export edited Excel', cancel: 'Cancel waiting', clear: 'Clear', waiting: 'Upload a PDF to create a preview.', processing: 'Detecting tables…', ready: 'Review and edit the tables before exporting.', noFile: 'Choose a PDF first.', invalidFile: 'This file is not a PDF. Choose a PDF file.', failed: 'PDF table processing failed.', noTables: 'No editable tables were detected.', table: 'Table {number}', deleteTable: 'Delete table', deleteRow: 'Delete row', deleteColumn: 'Delete column', columnNumber: 'Column number', apply: 'Apply', cancelNote: 'Cancel stops the browser from waiting; it does not guarantee that server CPU work already started stops immediately.',
+      serverNote: sourceNote.en, upload: 'Choose PDF', pages: 'Pages (optional)', pagesPlaceholder: 'For example 1,3,4', invalidPages: 'Use positive page numbers or ascending ranges, for example 1,3-5.', ocrMode: 'OCR mode', auto: 'Auto', off: 'Off', force: 'Force', ocrLang: 'OCR language', english: 'English', traditionalChinese: 'Traditional Chinese', englishTraditionalChinese: 'English + Traditional Chinese', traditionalChineseEnglish: 'Traditional Chinese + English', preview: 'Preview tables', export: 'Export edited Excel', cancel: 'Cancel waiting', clear: 'Clear', waiting: 'Upload a PDF to create a preview.', processing: 'Detecting tables…', ready: 'Review and edit the tables before exporting.', noFile: 'Choose a PDF first.', invalidFile: 'This file is not a PDF. Choose a PDF file.', failed: 'PDF table processing failed.', noTables: 'No editable tables were detected.', table: 'Table {number}', deleteTable: 'Delete table', deleteRow: 'Delete row', deleteColumn: 'Delete column', columnNumber: 'Column number', rowNumber: 'Row number', apply: 'Apply', cancelNote: 'Cancel stops the browser from waiting; it does not guarantee that server CPU work already started stops immediately.',
     },
     privacyNote: privacy.en,
     contentSections: [

@@ -44,6 +44,13 @@ export const SITE = {
   // Shared Cloudflare Pages Functions (deployed with roomfeng.win) used by all three sites.
   newsletterEndpoint: 'https://roomfeng.win/api/newsletter',
   downloadGateEndpoint: 'https://roomfeng.win/api/download-gate',
+  // The tools whose download button routes through requestGatedDownload().
+  // This list does NOT switch the gate on or off -- the components wire it
+  // themselves. It exists so the privacy copy on those pages can say that the
+  // generated file is sent somewhere, which the shared local-only badge denies.
+  // tests/tool-dependency-map.test.mjs keeps it equal to the components that
+  // actually call the gate.
+  downloadGateTools: ['image-compressor', 'merge-pdf', 'qr-code-generator'] as readonly string[],
   // 2026-08-16: was btcson66@gmail.com. That mailbox can no longer be signed into, so
   // anything a visitor sent there went nowhere. btcson224@gmail.com is reachable.
   email: 'btcson224@gmail.com',

@@ -33,7 +33,11 @@ Type **Markdown** here.`}</textarea></label><div><span class="field-title">{labe
       preview.addEventListener('click',(event)=>{
         if(event.target.closest('a')) event.preventDefault();
       });
-      root.querySelector('[data-copy]')?.addEventListener('click',()=>navigator.clipboard.writeText(preview.innerHTML));
+      root.querySelector('[data-copy]')?.addEventListener('click',async()=>{
+        // Clipboard API 被拒絕時退回 prompt，讓使用者仍能手動複製。
+        try{await navigator.clipboard.writeText(preview.innerHTML);}
+        catch{window.prompt(labels.copyHtml,preview.innerHTML);}
+      });
       root.querySelector('[data-download]')?.addEventListener('click',()=>{
         const title=labels.documentTitle || 'Markdown preview';
         const documentHtml=`<!doctype html>

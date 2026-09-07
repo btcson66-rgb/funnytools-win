@@ -39,6 +39,10 @@ const currentUrl = absoluteUrl(toolUrl(lang, tool.slug));
 const seoTitle = toolSeoTitle(lang, content);
 const seoDescription = toolSeoDescription(lang, content, tool.privacyLevel === 'local-only');
 const isAnonymousApi = tool.privacyLevel === 'anonymous-api';
+// These tools process locally but route their download through the email gate,
+// which sends the generated file to a second origin. The shared local-only
+// badge claims nothing is uploaded, which is false on exactly these pages.
+const isDownloadGated = SITE.features.downloadGate && SITE.downloadGateTools.includes(tool.slug);
 const breadcrumbItems = [
   { label: ui.breadcrumbHome, href: localePath(lang) },
   { label: ui.allTools, href: localePath(lang, 'tools') },
@@ -272,7 +276,7 @@ const downloadGateConfig = SITE.features.downloadGate
 
     <section class="content-section privacy-note">
       <h2>{isAnonymousApi ? ui.privacy.anonymousApiHeading : ui.privacy.heading}</h2>
-      {tool.privacyLevel === 'local-only' && <p class="privacy-highlight">{ui.privacy.localOnly}</p>}
+      {tool.privacyLevel === 'local-only' && <p class="privacy-highlight">{isDownloadGated ? ui.privacy.downloadGated : ui.privacy.localOnly}</p>}
       <p>{content.privacyNote ?? ui.privacy.defaultNote}</p>
     </section>
 
