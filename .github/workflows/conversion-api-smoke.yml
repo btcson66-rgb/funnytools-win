@@ -2,6 +2,11 @@ name: Conversion API production smoke
 
 on:
   workflow_dispatch:
+    inputs:
+      expected_build_sha:
+        description: 'Optional backend SHA to assert after an owner-host deployment'
+        required: false
+        type: string
   schedule:
     - cron: '17 3 * * *'
 
@@ -34,4 +39,7 @@ jobs:
           FUNNYTOOLS_SMOKE_PROFILE: production
           FUNNYTOOLS_SMOKE_RETRIES: 3
           FUNNYTOOLS_SMOKE_RETRY_DELAY_MS: 15000
+          # workflow_dispatch may assert an owner-host backend deployment. The
+          # scheduled generic health run leaves this empty and remains valid.
+          EXPECTED_BUILD_SHA: ${{ github.event.inputs.expected_build_sha }}
         run: npm run test:api

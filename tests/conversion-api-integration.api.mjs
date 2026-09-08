@@ -5,6 +5,9 @@ import { inflateRawSync } from 'node:zlib';
 
 const base = (process.env.FUNNYTOOLS_SMOKE_BASE || 'http://127.0.0.1:8000').replace(/\/+$/, '');
 const productionSmoke = process.env.FUNNYTOOLS_SMOKE_PROFILE === 'production';
+// Optional immutable identity assertion. Scheduled generic health checks omit it;
+// a backend post-deploy verification supplies the exact source SHA.
+const expectedBuildSha = String(process.env.EXPECTED_BUILD_SHA || '').trim();
 const retryAttempts = productionSmoke ? Math.max(1, Number(process.env.FUNNYTOOLS_SMOKE_RETRIES || 3)) : 1;
 const retryDelayMs = Math.max(0, Number(process.env.FUNNYTOOLS_SMOKE_RETRY_DELAY_MS || 15000));
 // 部署後 origin 就緒等待：後端是獨立的 FastAPI/Uvicorn container，不由 Pages workflow
@@ -147,7 +150,12 @@ await waitForOrigin();
 
 const health = await request(`${base}/health`, { headers: { Origin: 'https://funnytools.win' } });
 assert.equal(health.status, 200);
-assert.equal((await health.json()).ok, true);
+const healthBody = await health.json();
+assert.equal(healthBody.ok, true);
+if (expectedBuildSha) {
+  assert.equal(healthBody.revision, expectedBuildSha,
+    `IDENTITY_MISMATCH: expected ${expectedBuildSha}, production reported ${healthBody.revision || 'missing'}`);
+}
 assert.equal(health.headers.get('access-control-allow-origin'), 'https://funnytools.win');
 
 const options = await request(`${base}/api/pdf/table-preview`, {
@@ -251,6 +259,7 @@ console.log(JSON.stringify({
   base,
   profile: productionSmoke ? 'production-lightweight' : 'full',
   health: 'PASS',
+  identity: expectedBuildSha ? 'MATCHED_EXPECTED_BUILD_SHA' : 'NOT_ASSERTED',
   cors_options: 'PASS',
   batch_images_zip_and_images: 'PASS',
   docx_ooxml_and_text: 'PASS',

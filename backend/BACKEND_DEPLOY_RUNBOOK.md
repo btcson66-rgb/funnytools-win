@@ -133,6 +133,11 @@ npm run test:api
 最後在 GitHub 手動觸發 `Conversion API production smoke` workflow，確認雲端也是綠的。
 （Actions → Conversion API production smoke → Run workflow）
 
+手動觸發時把步驟 1-1 的完整 SHA 填入 `expected_build_sha`。workflow 會將它作為
+`EXPECTED_BUILD_SHA` 傳給 smoke；若 `/health.revision` 不相符，會以
+`IDENTITY_MISMATCH` 失敗。每日排程不填這個欄位，只驗證一般健康與功能，因此不會把
+「沒有指定預期 SHA」誤判成故障。
+
 ## 4. 回滾
 
 出現以下任一情況就回滾，不要現場除錯：
