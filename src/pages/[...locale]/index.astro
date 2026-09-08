@@ -658,33 +658,6 @@ const popularItemListJsonLd = {
       });
     });
   </script>
-
-  <style is:global>
-    .lang-switch,
-    .home-page .inline-link {
-      color: #0f766e;
-    }
-
-    .home-page .btn.go {
-      border-color: #0f766e;
-      background: #0f766e;
-      color: #fff;
-    }
-
-    .home-page .btn.go:hover {
-      border-color: #115e59;
-      background: #115e59;
-    }
-
-    html:not([data-theme="dark"]) .site-main:has(.home-page) ~ .site-footer .footer-brand strong {
-      color: #0f766e;
-    }
-
-    html:not([data-theme="dark"]) .site-main:has(.home-page) ~ .site-footer .footer-links span,
-    html:not([data-theme="dark"]) .site-main:has(.home-page) ~ .site-footer .footer-bottom p {
-      color: #475569;
-    }
-  </style>
   <script src="/home-search.js" is:inline defer></script>
   <script>
     import { getFavoriteTools, getRecentlyUsedTools } from '../../lib/userTools.client';
