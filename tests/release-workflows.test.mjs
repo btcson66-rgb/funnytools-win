@@ -29,3 +29,14 @@ test('SEO workflow separates deployment from indexing and keeps weekly inspectio
   assert.doesNotMatch(workflow, /npm ci \|\| npm install/);
   assert.doesNotMatch(workflow, /continue-on-error/);
 });
+
+test('backend smoke supports optional deployment identity without breaking scheduled health', async () => {
+  const workflow = (await readFile(new URL('.github/workflows/conversion-api-smoke.yml', root), 'utf8')).replaceAll('\r\n', '\n');
+  const smoke = await readFile(new URL('tests/conversion-api-integration.api.mjs', root), 'utf8');
+  assert.match(workflow, /expected_build_sha:/);
+  assert.match(workflow, /required: false/);
+  assert.match(workflow, /EXPECTED_BUILD_SHA: \$\{\{ github\.event\.inputs\.expected_build_sha \}\}/);
+  assert.match(smoke, /if \(expectedBuildSha\)/);
+  assert.match(smoke, /IDENTITY_MISMATCH/);
+  assert.doesNotMatch(workflow, /EXPECTED_BUILD_SHA: [0-9a-f]{40}/);
+});
