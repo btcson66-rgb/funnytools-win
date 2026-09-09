@@ -641,6 +641,42 @@ const itemListJsonLd = {
   </article>
 </ExpansionLayout>
 
+<style is:global>
+  html:not([data-theme="dark"]):has(.home-page[data-native-locale="es"])
+    .home-page[data-native-locale="es"]
+    .btn.go {
+    border-color: var(--color-primary-700);
+    background: var(--color-primary-700);
+  }
+
+  html:not([data-theme="dark"]):has(.home-page[data-native-locale="es"])
+    .site-nav
+    :is(.brand, a[aria-current="page"]),
+  html:not([data-theme="dark"]):has(.home-page[data-native-locale="es"])
+    .home-page[data-native-locale="es"]
+    :is(.eyebrow, .inline-link) {
+    color: var(--color-primary-700);
+  }
+
+  html:has(.home-page[data-native-locale="es"])
+    .site-footer
+    .footer-brand
+    strong {
+    color: var(--color-primary-700);
+  }
+
+  html:has(.home-page[data-native-locale="es"])
+    .site-footer
+    :is(.footer-links span, .fineprint, .footer-bottom p) {
+    color: var(--color-slate-500);
+  }
+
+  html[data-theme="dark"]:has(.home-page[data-native-locale="es"])
+    .affiliate-shelf__disclosure {
+    color: var(--color-slate-900);
+  }
+</style>
+
 <style>
   .answer-panel {
     border-left: 4px solid var(--brand);
