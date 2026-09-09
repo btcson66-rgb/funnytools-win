@@ -658,6 +658,38 @@ const popularItemListJsonLd = {
       });
     });
   </script>
+
+  <style is:global>
+    /* This route-local sheet must reach the shared nav/footer, so every global
+       selector is gated by the homepage marker and light/dark stay separate. */
+    html:not([data-theme="dark"]):has(.home-page) .home-page .btn.go {
+      border-color: var(--color-primary-700);
+      background: var(--color-primary-700);
+      color: #fff;
+    }
+
+    html:not([data-theme="dark"]):has(.home-page) .home-page .inline-link {
+      color: var(--color-primary-700);
+    }
+
+    html:not([data-theme="dark"]):has(.home-page) .site-nav .brand {
+      color: var(--color-primary-700);
+    }
+
+    html:has(.home-page) .home-page .hero-tool-card__desc,
+    html:has(.home-page) .home-page .category-card__count {
+      color: var(--color-slate-500);
+    }
+
+    html:has(.home-page) .site-footer .footer-brand strong {
+      color: var(--color-primary-700);
+    }
+
+    html:has(.home-page) .site-footer .footer-links span,
+    html:has(.home-page) .site-footer .footer-bottom p {
+      color: var(--color-slate-500);
+    }
+  </style>
   <script src="/home-search.js" is:inline defer></script>
   <script>
     import { getFavoriteTools, getRecentlyUsedTools } from '../../lib/userTools.client';
