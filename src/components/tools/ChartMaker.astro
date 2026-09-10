@@ -107,17 +107,29 @@ const { labels } = Astro.props;
     const note = root.querySelector('[data-note]');
     const palette = ['#3e63dd', '#0f8f8c', '#f2994a', '#eb5757', '#9b51e0', '#2d9cdb', '#27ae60', '#f2c94c'];
 
+    const rowFieldName = (header, position) => `${header} ${position}`;
+
+    function renumberRows() {
+      Array.from(rowsWrap.querySelectorAll('.chart-row')).forEach((row, index) => {
+        row.querySelector('[data-label]')?.setAttribute('aria-label', rowFieldName(labels.labelHeader, index + 1));
+        row.querySelector('[data-value]')?.setAttribute('aria-label', rowFieldName(labels.valueHeader, index + 1));
+      });
+    }
+
     function createRow(label = '', value = '') {
+      const position = rowsWrap.children.length + 1;
       const row = document.createElement('div');
       row.className = 'chart-row';
       const labelInput = document.createElement('input');
       labelInput.type = 'text';
       labelInput.setAttribute('data-label', '');
+      labelInput.setAttribute('aria-label', rowFieldName(labels.labelHeader, position));
       labelInput.placeholder = labels.labelHeader;
       labelInput.value = label;
       const valueInput = document.createElement('input');
       valueInput.type = 'number';
       valueInput.setAttribute('data-value', '');
+      valueInput.setAttribute('aria-label', rowFieldName(labels.valueHeader, position));
       valueInput.setAttribute('inputmode', 'decimal');
       valueInput.step = 'any';
       valueInput.min = '0';
@@ -130,12 +142,14 @@ const { labels } = Astro.props;
       removeBtn.addEventListener('click', () => {
         row.remove();
         if (!rowsWrap.children.length) createRow();
+        renumberRows();
         render();
       });
       labelInput.addEventListener('input', render);
       valueInput.addEventListener('input', render);
       row.append(labelInput, valueInput, removeBtn);
       rowsWrap.append(row);
+      renumberRows();
     }
 
     function readData() {
