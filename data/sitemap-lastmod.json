@@ -1,8 +1,8 @@
 {
   "https://funnytools.win/": {
-    "hash": "3ee6d61ee4fef9ea4beb47543f48caa74e7f64603f4066a76f5c580d392ad810",
+    "hash": "b9f477b301c59e62daff723df66da7052ab6786499c24e0cecf5b06af3ef4fd4",
     "hashVersion": 8,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/about-tools/": {
     "hash": "388b5e2316c622f574dbc363d37634e035c3a517d0839e09bb59cae165ec1124",
@@ -80,9 +80,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/": {
-    "hash": "c694badb53cfaaf20e0f7458077c3e88e81cfd115e7b6f054922e21b6673a1f7",
+    "hash": "6524122e9fa4e4fef76afb0beb318353ee8475a2e4833d5d8a0b4156ad33f23f",
     "hashVersion": 8,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/en/about-tools/": {
     "hash": "fe75903c79a1a7d4b4c5067c37c88f2c6e6863396b3aa5707f80490740bd4cd9",
@@ -630,9 +630,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/en/tools/class-rank-percentile-calculator/": {
-    "hash": "f6f6b513edfbe0014b2dfea2f4075f48b943e8e1b93d02edcde4d0db0e2ba8eb",
+    "hash": "cc6289244b5d95bc3f0e2164e465aac56c7855b1a143fd5e3c446f7f22487c34",
     "hashVersion": 8,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/en/tools/color-generator/": {
     "hash": "3c404a19d0de0c1443d30e0cbe19d7db3d90ee0839f558311bd6aa147aad4c21",
@@ -690,9 +690,9 @@
     "lastmod": "2026-09-04"
   },
   "https://funnytools.win/en/tools/grade-average/": {
-    "hash": "c427db433949934ae8a095b2f1f11188d4582f84bfdee0f2bda20358a747b1db",
+    "hash": "434cee35aca1274b205b97f9cf852f34aa27ed2944145aca70a78b3ef7667817",
     "hashVersion": 8,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/en/tools/group-generator/": {
     "hash": "27bfb2d4dbd6911a39fbc0f5d259b6d2ad12098389a58aa5ca8aa49348929a8b",
@@ -735,9 +735,9 @@
     "lastmod": "2026-09-04"
   },
   "https://funnytools.win/en/tools/independent-samples-t-test-calculator/": {
-    "hash": "94395d4c2336d0d34f70edcb7acc0f09015ac14aac172b9696bae664f2fed42d",
+    "hash": "5fab46cb170388924cac43a0b02b2310279db31ac1ff23320e54fedb7a6dd1cf",
     "hashVersion": 8,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/en/tools/inflation/": {
     "hash": "bdbcdcee375cb6123acfe534e09bdd236b177c6d68d3cbb5b22f88c7764e7ddc",
@@ -1030,9 +1030,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/es/": {
-    "hash": "cec8a58058e5e7d102fa809886af631dac72fef2aa7fa6af9823418328dc2913",
+    "hash": "c9ea52d9bf8991d195e86aff84ec94377c3613677b27088b878e54af03aa79dc",
     "hashVersion": 8,
-    "lastmod": "2026-07-30"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/es/apoyar-funnytools/": {
     "hash": "d925754dc16ec8f91b76aedd8da940d9feb0d337323b44ed198201c264d10bce",
@@ -1345,9 +1345,9 @@
     "lastmod": "2026-07-28"
   },
   "https://funnytools.win/es/herramientas/calculadora-percentil-ranking-clase/": {
-    "hash": "cd1bfea1423de9719c3661a534728cde4aff74fda58ac8841a19a8a8fe3dd1c1",
+    "hash": "d1c9d8b23d318f2140f7a24bd769b1ffa339c361a105857c206fc6e32f32a469",
     "hashVersion": 8,
-    "lastmod": "2026-07-28"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/es/herramientas/calculadora-porcentajes/": {
     "hash": "adfaeb17defda801a6b3a557d8be9d6c8bdd81ff3b69a340bb55680ddd50a926",
@@ -1355,9 +1355,9 @@
     "lastmod": "2026-07-29"
   },
   "https://funnytools.win/es/herramientas/calculadora-promedio-notas/": {
-    "hash": "b92028c184a20ee3033cd8474fd7e5721036b6eca044d14777e2ec59b6a3df19",
+    "hash": "73c40509307758c12672c8382712ffc363b6eae12acd589a8660c41e90fb0344",
     "hashVersion": 8,
-    "lastmod": "2026-07-29"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/es/herramientas/calculadora-puntuacion-t/": {
     "hash": "ea61979e973b2e1324b6621c363733c741c54dd076579a3713c3479d498320c0",
@@ -1380,9 +1380,9 @@
     "lastmod": "2026-07-29"
   },
   "https://funnytools.win/es/herramientas/calculadora-t-muestras-independientes/": {
-    "hash": "5e72e606b2403f3353396e72b6fbb6574bd8d321f52e8e4ddd81535d7bb03c4a",
+    "hash": "97ad6382e9acaac5803f6e40b0e56b44429d82545c585e71899c8817abe5da58",
     "hashVersion": 8,
-    "lastmod": "2026-07-28"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/es/herramientas/calcular-diferencia-entre-fechas/": {
     "hash": "19c74dec1d3e67464743098d9e2eb8462f145faf0cf2ddd66beaa83aab93b365",
@@ -1785,9 +1785,9 @@
     "lastmod": "2026-09-02"
   },
   "https://funnytools.win/fr/outils/calcul-moyenne-notes/": {
-    "hash": "da8032ade1a77c13585596b6954e283caf5b2da9b35bae74fde8c0a6e283c9ee",
+    "hash": "507590f6689971b74714ab62ecc3a0702e86dff15eb50905d0b53bae30160c38",
     "hashVersion": 8,
-    "lastmod": "2026-07-29"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/fr/outils/calculateur-age/": {
     "hash": "d40dc8734fb76665b4fc0e96006bcde9e0a822f546be02c5fe92254b48b8bfd5",
@@ -3140,9 +3140,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/class-rank-percentile-calculator/": {
-    "hash": "8ca59c4b0d7940a81193b10ab4432c51874c9780bb0d685c6488996c7858d0a3",
+    "hash": "edfa661e06ba6c3b611784ad8ad139865c65a558994d9e9659eb4f62dbc9e60c",
     "hashVersion": 8,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/tools/color-generator/": {
     "hash": "a9efc1379b23f39d3ce3ca7df7b1898e291395bcbee45492fa0a5a703d74e872",
@@ -3200,9 +3200,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/grade-average/": {
-    "hash": "b8ba4c4877898c5d1db5c5cb0769c76b01ce97c5b2d241ad5e6c0bedf4767eba",
+    "hash": "74864dbf4c0ed38c5acbcb7a71fff3bf3bec14be716cae033099bd06abd9d6b2",
     "hashVersion": 8,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/tools/group-generator/": {
     "hash": "e3befc07e5142baa8432fcfcf38f57d352369e6d4317f7425285bfc04d9a94f3",
@@ -3245,9 +3245,9 @@
     "lastmod": "2026-09-03"
   },
   "https://funnytools.win/tools/independent-samples-t-test-calculator/": {
-    "hash": "5df99018af169c99ef4c617a7d03f1e803938e4edf5b03faa8977e223bb84cf2",
+    "hash": "8f466854d46c10bbcb54cb6b0ae5ef46fa620df0e20ec8f0c6e98e005932519c",
     "hashVersion": 8,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-10"
   },
   "https://funnytools.win/tools/inflation/": {
     "hash": "ec9b7cb8a06225916715a42da573031752abec0817ac0b93b973d2ac859eff54",
