@@ -1,0 +1,128 @@
+---
+type EnhancementKind = 'class-rank-target' | 'grade-target' | 'ttest-handoff';
+type EnhancementLocale = 'zh' | 'en' | 'es' | 'fr';
+
+interface Props {
+  kind: EnhancementKind;
+  locale: EnhancementLocale;
+}
+
+const { kind, locale } = Astro.props;
+const copy = {
+  zh: {
+    rankHeading: '反推目標名次', rankTop: '目標前百分比', rankButton: '計算最高符合名次', rankResult: '最高符合名次',
+    rankSmall: '依目前班級人數，這個前百分比小於 1 個名次。', rankInvalid: '請輸入有效的總人數與 0 到 100 之間的目標前百分比。',
+    gradeHeading: '規劃剩餘成績', currentGrade: '目前已完成部分的平均', completedWeight: '已完成權重（%）', targetGrade: '目標總成績',
+    gradeButton: '計算剩餘所需成績', requiredScore: '剩餘部分所需平均', remainingWeight: '剩餘權重',
+    gradeInvalid: '請輸入有效數字，且已完成權重必須大於 0 並小於 100。', aboveMaximum: '若滿分為 100，這個目標目前無法達成。', alreadySecured: '即使剩餘部分得到 0 分，目前也已達成目標。',
+    copyResult: '複製 Welch 結果', copied: '已複製', apaLink: '下一步：整理 APA 7 報告', apaHref: '/tools/apa-7-report-generator/', noResult: '請先執行 Welch t 檢定。',
+  },
+  en: {
+    rankHeading: 'Work backward from a target', rankTop: 'Target top percentage', rankButton: 'Find highest qualifying rank', rankResult: 'Highest qualifying rank',
+    rankSmall: 'At this class size, the selected top percentage is less than one rank.', rankInvalid: 'Enter a valid class size and a target top percentage above 0 and no more than 100.',
+    gradeHeading: 'Plan the remaining grade', currentGrade: 'Average on completed work', completedWeight: 'Completed weight (%)', targetGrade: 'Target overall grade',
+    gradeButton: 'Calculate required score', requiredScore: 'Required average on remaining work', remainingWeight: 'Remaining weight',
+    gradeInvalid: 'Enter valid numbers and a completed weight above 0 and below 100.', aboveMaximum: 'If the maximum score is 100, this target is currently out of reach.', alreadySecured: 'The target is already secured even if the remaining score is zero.',
+    copyResult: 'Copy Welch results', copied: 'Copied', apaLink: 'Next: draft an APA 7 report', apaHref: '/en/tools/apa-7-report-generator/', noResult: 'Run the Welch t test first.',
+  },
+  es: {
+    rankHeading: 'Calcular desde un objetivo', rankTop: 'Porcentaje superior objetivo', rankButton: 'Hallar el último puesto que cumple', rankResult: 'Último puesto que cumple',
+    rankSmall: 'Con este tamaño de grupo, el porcentaje elegido representa menos de un puesto.', rankInvalid: 'Introduce un tamaño válido y un porcentaje superior mayor que 0 y no superior a 100.',
+    gradeHeading: 'Planificar la nota restante', currentGrade: 'Media del trabajo completado', completedWeight: 'Peso completado (%)', targetGrade: 'Nota final objetivo',
+    gradeButton: 'Calcular nota necesaria', requiredScore: 'Media necesaria en lo que falta', remainingWeight: 'Peso restante',
+    gradeInvalid: 'Introduce cifras válidas y un peso completado mayor que 0 y menor que 100.', aboveMaximum: 'Si la nota máxima es 100, el objetivo ya no es alcanzable.', alreadySecured: 'El objetivo ya está asegurado aunque la nota restante sea cero.',
+    copyResult: 'Copiar resultados de Welch', copied: 'Resultados copiados', apaLink: 'Siguiente paso: redactar en APA 7', apaHref: '/es/herramientas/generador-informe-apa-7/', noResult: 'Ejecuta primero la prueba t de Welch.',
+  },
+  fr: {
+    rankHeading: '', rankTop: '', rankButton: '', rankResult: '', rankSmall: '', rankInvalid: '',
+    gradeHeading: 'Planifier la note restante', currentGrade: 'Moyenne du travail déjà évalué', completedWeight: 'Poids déjà évalué (%)', targetGrade: 'Moyenne finale visée',
+    gradeButton: 'Calculer la note nécessaire', requiredScore: 'Moyenne nécessaire sur le reste', remainingWeight: 'Poids restant',
+    gradeInvalid: 'Saisissez des nombres valides et un poids déjà évalué supérieur à 0 et inférieur à 100.', aboveMaximum: 'Si la note maximale est 100, cet objectif n’est plus atteignable.', alreadySecured: 'L’objectif est déjà atteint même avec une note restante de zéro.',
+    copyResult: '', copied: '', apaLink: '', apaHref: '', noResult: '',
+  },
+}[locale];
+---
+
+<section class="seo-coach-enhancement card" data-seo-coach-batch1={kind}>
+  {kind === 'class-rank-target' && (
+    <fieldset>
+      <legend>{copy.rankHeading}</legend>
+      <div class="enhancement-grid rank-grid">
+        <label><span>{copy.rankTop}</span><input data-target-top type="number" inputmode="decimal" min="0.01" max="100" step="0.01" value="10" /></label>
+        <button class="btn ghost" type="button" data-rank-plan>{copy.rankButton}</button>
+      </div>
+      <p class="note" data-enhancement-result role="status" aria-live="polite" hidden></p>
+    </fieldset>
+  )}
+
+  {kind === 'grade-target' && (
+    <fieldset>
+      <legend>{copy.gradeHeading}</legend>
+      <div class="enhancement-grid grade-grid">
+        <label><span>{copy.currentGrade}</span><input data-current-grade type="number" inputmode="decimal" step="0.01" value="80" /></label>
+        <label><span>{copy.completedWeight}</span><input data-completed-weight type="number" inputmode="decimal" min="0.01" max="99.99" step="0.01" value="70" /></label>
+        <label><span>{copy.targetGrade}</span><input data-target-grade type="number" inputmode="decimal" step="0.01" value="85" /></label>
+        <button class="btn ghost" type="button" data-grade-plan>{copy.gradeButton}</button>
+      </div>
+      <p class="note" data-enhancement-result role="status" aria-live="polite" hidden></p>
+    </fieldset>
+  )}
+
+  {kind === 'ttest-handoff' && (
+    <div class="handoff-actions">
+      <button class="btn ghost" type="button" data-copy-welch>{copy.copyResult}</button>
+      <a class="btn ghost" href={copy.apaHref}>{copy.apaLink}</a>
+      <span class="note" data-enhancement-result role="status" aria-live="polite" hidden></span>
+    </div>
+  )}
+</section>
+
+<style is:inline>
+  .seo-coach-enhancement{margin-top:18px}.seo-coach-enhancement fieldset{display:grid;gap:12px;margin:0;padding:16px;border:1px solid var(--line);border-radius:14px}.seo-coach-enhancement legend{padding:0 6px;color:var(--ink);font-weight:900}.enhancement-grid{display:grid;gap:10px;align-items:end}.rank-grid{grid-template-columns:minmax(170px,1fr) auto}.grade-grid{grid-template-columns:repeat(3,minmax(140px,1fr)) auto}.enhancement-grid .btn{min-height:48px}.handoff-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}@media(max-width:760px){.rank-grid,.grade-grid{grid-template-columns:1fr}.handoff-actions{align-items:stretch;flex-direction:column}.handoff-actions .btn{width:100%;text-align:center}}
+</style>
+
+<script is:inline define:vars={{ kind, copy }}>
+  (() => {
+    const root = document.querySelector(`[data-seo-coach-batch1="${kind}"]`);
+    if (!(root instanceof HTMLElement)) return;
+    const result = root.querySelector('[data-enhancement-result]');
+    const show = (text) => {
+      if (!(result instanceof HTMLElement)) return;
+      result.textContent = text;
+      result.hidden = false;
+    };
+    const read = (selector) => {
+      const input = root.querySelector(selector);
+      return input instanceof HTMLInputElement && input.value.trim() !== '' ? Number(input.value) : Number.NaN;
+    };
+    root.querySelector('[data-rank-plan]')?.addEventListener('click', () => {
+      const totalInput = document.querySelector('[data-stat-tool][data-slug="class-rank-percentile-calculator"] [data-field="total"]');
+      const total = totalInput instanceof HTMLInputElement ? Number(totalInput.value) : Number.NaN;
+      const target = read('[data-target-top]');
+      if (!Number.isInteger(total) || total < 1 || !Number.isFinite(target) || target <= 0 || target > 100) return show(copy.rankInvalid);
+      const rank = Math.floor(total * target / 100);
+      show(rank < 1 ? copy.rankSmall : `${copy.rankResult}: ${rank}`);
+    });
+    root.querySelector('[data-grade-plan]')?.addEventListener('click', () => {
+      const current = read('[data-current-grade]');
+      const completed = read('[data-completed-weight]');
+      const target = read('[data-target-grade]');
+      if (![current, completed, target].every(Number.isFinite) || completed <= 0 || completed >= 100) return show(copy.gradeInvalid);
+      const remaining = 100 - completed;
+      const required = (target - current * completed / 100) / (remaining / 100);
+      const note = required > 100 ? ` ${copy.aboveMaximum}` : required <= 0 ? ` ${copy.alreadySecured}` : '';
+      show(`${copy.requiredScore}: ${required.toFixed(2)} (${copy.remainingWeight}: ${remaining.toFixed(2)}%)${note}`);
+    });
+    root.querySelector('[data-copy-welch]')?.addEventListener('click', async () => {
+      const output = document.querySelector('[data-stat-tool][data-slug="independent-samples-t-test-calculator"] [data-results]');
+      const text = output instanceof HTMLElement && !output.hidden ? output.innerText.trim() : '';
+      if (!text) return show(copy.noResult);
+      try {
+        await navigator.clipboard.writeText(text);
+        show(copy.copied);
+      } catch {
+        window.prompt(copy.copyResult, text);
+      }
+    });
+  })();
+</script>

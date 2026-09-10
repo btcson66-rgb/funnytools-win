@@ -1,28 +1,21 @@
 ---
-import ToolLayout from '../../../layouts/ToolLayout.astro';
-import { SITE, type Locale } from '../../../config/site';
-import { getCategoryById } from '../../../data/categories';
-import { liveTools, type ToolMeta } from '../../../data/tools';
-import { t } from '../../../i18n/ui';
-import { breadcrumbJsonLd, howToJsonLd, webApplicationJsonLd } from '../../../lib/seo';
-import { getToolContent } from '../../../lib/toolContent';
-import { getToolWidget } from '../../../lib/toolWidgets';
-import { categoryUrl, localePath, toolUrl } from '../../../lib/url';
+import ToolLayout from '../../layouts/ToolLayout.astro';
+import SeoCoachBatch1Enhancement from './SeoCoachBatch1Enhancement.astro';
+import { SITE, type Locale } from '../../config/site';
+import { getCategoryById } from '../../data/categories';
+import { liveTools, type ToolMeta } from '../../data/tools';
+import { t } from '../../i18n/ui';
+import { breadcrumbJsonLd, howToJsonLd, webApplicationJsonLd } from '../../lib/seo';
+import { getToolContent } from '../../lib/toolContent';
+import { getToolWidget } from '../../lib/toolWidgets';
+import { categoryUrl, localePath, toolUrl } from '../../lib/url';
 
-export function getStaticPaths() {
-  return SITE.locales.flatMap((lang) =>
-    liveTools.filter(({ slug }) => ![
-      'class-rank-percentile-calculator',
-      'grade-average',
-      'independent-samples-t-test-calculator',
-    ].includes(slug)).map((tool) => ({
-      params: { locale: lang === SITE.defaultLocale ? undefined : lang, slug: tool.slug },
-      props: { lang, tool },
-    })),
-  );
+
+const { lang, slug } = Astro.props as { lang: Locale; slug: string };
+const tool = liveTools.find((candidate) => candidate.slug === slug) as ToolMeta | undefined;
+if (!tool) {
+  throw new Error(`Missing tool metadata: ${slug}`);
 }
-
-const { lang, tool } = Astro.props as { lang: Locale; tool: ToolMeta };
 const category = getCategoryById(tool.category);
 if (!category) {
   throw new Error(`Missing category for tool: ${tool.slug}`);
@@ -53,8 +46,12 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
 
 <ToolLayout lang={lang} tool={tool} category={category} content={content} jsonLd={jsonLd}>
   <Widget labels={content.labels} slug={tool.slug} />
+  <SeoCoachBatch1Enhancement
+    kind={tool.slug === 'class-rank-percentile-calculator' ? 'class-rank-target' : tool.slug === 'grade-average' ? 'grade-target' : 'ttest-handoff'}
+    locale={lang}
+  />
   <script>
-    import { recordRecentlyUsedTool } from '../../../lib/userTools.client';
+    import { recordRecentlyUsedTool } from '../../lib/userTools.client';
 
     const toolPage = document.querySelector('[data-tool-slug]');
     if (toolPage instanceof HTMLElement) {

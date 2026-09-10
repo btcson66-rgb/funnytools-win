@@ -1,5 +1,6 @@
 ---
 import EducationStatisticsCalculator from '../../../components/tools/EducationStatisticsCalculator.astro';
+import SeoCoachBatch1Enhancement from '../../../components/tools/SeoCoachBatch1Enhancement.astro';
 import ExpansionToolLayout from '../../../layouts/ExpansionToolLayout.astro';
 import { spanishClassRankPercentile, spanishClassRankPercentileReview } from '../../../i18n/expansion/es-tools-26';
 ---
@@ -17,4 +18,5 @@ import { spanishClassRankPercentile, spanishClassRankPercentileReview } from '..
   }}
 >
   <EducationStatisticsCalculator labels={spanishClassRankPercentile.labels} slug="class-rank-percentile-calculator" />
+  <SeoCoachBatch1Enhancement kind="class-rank-target" locale="es" />
 </ExpansionToolLayout>
