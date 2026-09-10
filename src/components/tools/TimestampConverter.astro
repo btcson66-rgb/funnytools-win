@@ -21,6 +21,8 @@ const { labels } = Astro.props;
 
 <script>
   // @ts-nocheck -- DOM nodes are guaranteed by this component template.
+  import { copyTextWithFallback } from '../../lib/clipboard-fallback';
+
   document.querySelectorAll('[data-timestamp-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
     const locale = labels.locale || undefined;
@@ -45,7 +47,7 @@ const { labels } = Astro.props;
     }
     root.querySelector('[data-convert]')?.addEventListener('click', convert);
     root.querySelector('[data-now]')?.addEventListener('click', () => { input.value = String(Date.now()); unit.value = 'milliseconds'; show(new Date()); });
-    root.querySelector('[data-copy]')?.addEventListener('click', async () => { const iso = root.querySelector('[data-iso]')?.textContent; if (iso) await navigator.clipboard.writeText(iso); });
+    root.querySelector('[data-copy]')?.addEventListener('click', () => { const iso = root.querySelector('[data-iso]')?.textContent; if (iso) copyTextWithFallback(iso, labels.copy || 'Copy'); });
     input.value = String(Date.now()); show(new Date());
   });
 </script>

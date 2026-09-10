@@ -36,6 +36,8 @@ const { labels } = Astro.props;
 </style>
 <script>
   // @ts-nocheck -- DOM nodes are guaranteed by this component template.
+  import { copyTextWithFallback } from '../../lib/clipboard-fallback';
+
   document.querySelectorAll('[data-data-converter]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
     const input = root.querySelector('[data-input]');
@@ -99,10 +101,11 @@ const { labels } = Astro.props;
           }
           const columns = [...new Set(parsed.flatMap((row) => Object.keys(row)))];
           if (!columns.length) throw new Error(labels.emptyArray || labels.arrayRequired);
+          const formulaeControl = root.querySelector('[data-escape-formulae]');
           output.value = Papa.unparse(parsed, {
             delimiter: selectedDelimiter() || ',',
             columns,
-            escapeFormulae: root.querySelector('[data-escape-formulae]')?.checked || false,
+            escapeFormulae: formulaeControl ? formulaeControl.checked : true,
           });
           showSummary(parsed.length, columns.length, selectedDelimiter() || ',');
         }
@@ -111,7 +114,10 @@ const { labels } = Astro.props;
         showError(caught instanceof Error ? caught.message : String(caught));
       }
     }
-    root.querySelector('[data-convert]')?.addEventListener('click', convert); root.querySelector('[data-copy]')?.addEventListener('click',()=>output.value&&navigator.clipboard.writeText(output.value));
+    root.querySelector('[data-convert]')?.addEventListener('click', convert);
+    root.querySelector('[data-copy]')?.addEventListener('click', () => {
+      if (output.value) copyTextWithFallback(output.value, labels.copy || 'Copy');
+    });
     root.querySelector('[data-clear]')?.addEventListener('click',()=>{input.value='';output.value='';error.hidden=true;summary.hidden=true;input.focus();});
     root.querySelector('[data-download]')?.addEventListener('click',()=>{
       if(!output.value)return;

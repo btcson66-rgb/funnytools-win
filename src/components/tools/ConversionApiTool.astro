@@ -142,6 +142,7 @@ const isPdf = slug === 'pdf-compressor';
     pixelDistance,
     previewPdfTables,
   } from '../../lib/funnytools-api';
+  import { createOwnedObjectUrl } from '../../lib/owned-object-url';
 
   const apiBase = import.meta.env.PUBLIC_CONVERSION_API_URL || 'https://api.funnytools.win';
 
@@ -162,6 +163,8 @@ const isPdf = slug === 'pdf-compressor';
     let tables = [];
     let selectedFiles = [];
     let calibrationImage = null;
+    let calibrationObjectUrl = null;
+    const calibrationUrlLease = createOwnedObjectUrl();
     let calibrationPoints = [];
     let runSerial = 0;
     const pdfModes = new Set(['pdf-to-word', 'pdf-table-to-excel', 'pdf-compressor']);
@@ -205,8 +208,21 @@ const isPdf = slug === 'pdf-compressor';
         : `${percent.toFixed(1)}%`;
       panel.hidden = false;
     };
+    const releaseCalibrationImage = () => {
+      const image = calibrationImage;
+      calibrationImage = null;
+      if (image) {
+        image.onload = null;
+        image.onerror = null;
+        image.src = '';
+      }
+      if (calibrationObjectUrl) {
+        calibrationUrlLease.release();
+        calibrationObjectUrl = null;
+      }
+    };
     const clear = () => {
-      runSerial += 1; controller?.abort(); controller = null; selectedFiles = []; tables = []; calibrationPoints = []; calibrationImage = null; clearOutput(); setError(''); setStatus(labels.waiting);
+      runSerial += 1; controller?.abort(); controller = null; selectedFiles = []; tables = []; calibrationPoints = []; releaseCalibrationImage(); clearOutput(); setError(''); setStatus(labels.waiting);
       if (fileInput) fileInput.value = ''; if (filesInput) filesInput.value = '';
       root.querySelector('[data-file-list]')?.replaceChildren(); root.querySelector('[data-editor]')?.replaceChildren();
       if (root.querySelector('[data-editor]')) root.querySelector('[data-editor]').hidden = true;
@@ -315,7 +331,35 @@ const isPdf = slug === 'pdf-compressor';
     downloadButton?.addEventListener('click', () => { if (outputBlob) downloadBlob(outputBlob, outputName); });
 
     root.querySelector('[data-calibration]')?.addEventListener('click', (event) => { if (!calibrationImage) return; const canvas = event.currentTarget; const rect = canvas.getBoundingClientRect(); const point = { x: (event.clientX - rect.left) * canvas.width / rect.width, y: (event.clientY - rect.top) * canvas.height / rect.height }; calibrationPoints = calibrationPoints.length === 2 ? [point] : [...calibrationPoints, point]; drawCalibration(); });
-    fileInput?.addEventListener('change', () => { if (mode !== 'image-to-dxf') return; const file = fileInput.files?.[0]; if (!file) return; calibrationImage = new Image(); calibrationImage.onload = () => { const canvas = root.querySelector('[data-calibration]'); canvas.hidden = false; root.querySelector('[data-calibration-empty]').hidden = true; calibrationPoints = []; drawCalibration(); }; calibrationImage.src = URL.createObjectURL(file); });
+    fileInput?.addEventListener('change', () => {
+      if (mode !== 'image-to-dxf') return;
+      const file = fileInput.files?.[0];
+      if (!file) return;
+      releaseCalibrationImage();
+      const objectUrl = calibrationUrlLease.replace(file);
+      calibrationObjectUrl = objectUrl;
+      const image = new Image();
+      calibrationImage = image;
+      const finish = () => {
+        if (calibrationImage !== image || calibrationObjectUrl !== objectUrl) return;
+        calibrationObjectUrl = null;
+        image.onload = null;
+        image.onerror = null;
+        calibrationUrlLease.release();
+      };
+      image.onload = () => {
+        finish();
+        const canvas = root.querySelector('[data-calibration]');
+        canvas.hidden = false;
+        root.querySelector('[data-calibration-empty]').hidden = true;
+        calibrationPoints = [];
+        drawCalibration();
+      };
+      image.onerror = () => releaseCalibrationImage();
+      image.src = objectUrl;
+    });
+    window.addEventListener('beforeunload', releaseCalibrationImage);
+    window.addEventListener('pagehide', releaseCalibrationImage);
 
     convertButton?.addEventListener('click', async () => {
       if (mode === 'bulk-image-compressor') {
