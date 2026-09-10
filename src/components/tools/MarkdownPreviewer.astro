@@ -12,6 +12,8 @@ Type **Markdown** here.`}</textarea></label><div><span class="field-title">{labe
 <style>.markdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.markdown-grid textarea{width:100%;min-height:360px}.field-title{display:block;margin-bottom:8px;font-weight:800}.preview{min-height:360px;padding:14px;border:1px solid var(--line);border-radius:8px;background:var(--card);overflow-wrap:anywhere}.preview :global(pre){overflow:auto;padding:12px;background:var(--bg)}.preview :global(img){max-width:100%}@media(max-width:760px){.markdown-grid{grid-template-columns:1fr}}</style>
 <script>
   // @ts-nocheck -- DOM nodes are guaranteed by this component template.
+  import { copyTextWithFallback } from '../../lib/clipboard-fallback';
+
   document.querySelectorAll('[data-markdown-tool]').forEach(async(root)=>{
     const labels=JSON.parse(root.getAttribute('data-labels') || '{}');
     const input=root.querySelector('[data-input]');
@@ -33,7 +35,7 @@ Type **Markdown** here.`}</textarea></label><div><span class="field-title">{labe
       preview.addEventListener('click',(event)=>{
         if(event.target.closest('a')) event.preventDefault();
       });
-      root.querySelector('[data-copy]')?.addEventListener('click',()=>navigator.clipboard.writeText(preview.innerHTML));
+      root.querySelector('[data-copy]')?.addEventListener('click', () => copyTextWithFallback(preview.innerHTML, labels.copyHtml || 'Copy HTML'));
       root.querySelector('[data-download]')?.addEventListener('click',()=>{
         const title=labels.documentTitle || 'Markdown preview';
         const documentHtml=`<!doctype html>

@@ -9,6 +9,8 @@ const { labels } = Astro.props;
 </section>
 <script>
   // @ts-nocheck -- DOM nodes are guaranteed by this component template.
+  import { copyTextWithFallback } from '../../lib/clipboard-fallback';
+
   document.querySelectorAll('[data-uuid-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
     const output = root.querySelector('[data-output]');
@@ -33,7 +35,7 @@ const { labels } = Astro.props;
       }
     }
     root.querySelector('[data-generate]')?.addEventListener('click', generate);
-    root.querySelector('[data-copy]')?.addEventListener('click', () => output.value && navigator.clipboard.writeText(output.value));
+    root.querySelector('[data-copy]')?.addEventListener('click', () => output.value && copyTextWithFallback(output.value, labels.copy || 'Copy'));
     root.querySelector('[data-download]')?.addEventListener('click', () => { if (!output.value) return; const url = URL.createObjectURL(new Blob([output.value + '\n'], {type:'text/plain'})); const a=document.createElement('a'); a.href=url; a.download='uuids.txt'; a.click(); setTimeout(()=>URL.revokeObjectURL(url),1000); });
     generate();
   });
