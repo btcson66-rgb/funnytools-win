@@ -144,16 +144,17 @@ const { labels } = Astro.props;
         return;
       }
       const max = Math.max(...yearly.map((item) => item.balance), 1);
+      const xForIndex = (index) => 40 + (index / Math.max(1, yearly.length - 1)) * 560;
       const points = yearly
         .map((item, index) => {
-          const x = 40 + (index / Math.max(1, yearly.length - 1)) * 560;
+          const x = xForIndex(index);
           const y = 180 - (item.balance / max) * 150;
           return `${x.toFixed(1)},${y.toFixed(1)}`;
         })
         .join(' ');
       const bars = yearly
         .map((item, index) => {
-          const x = 36 + (index / Math.max(1, yearly.length)) * 560;
+          const x = xForIndex(index) - 4;
           const height = Math.max(2, (item.balance / max) * 150);
           return `<rect x="${x.toFixed(1)}" y="${(180 - height).toFixed(1)}" width="8" height="${height.toFixed(1)}" rx="4" fill="#cfe6e3" />`;
         })
