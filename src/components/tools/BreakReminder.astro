@@ -23,7 +23,7 @@ const { labels } = Astro.props;
   </div>
 
   <div class="timer-panel break-panel" data-panel>
-    <p class="phase-label" data-status>{labels.ready}</p>
+    <p class="phase-label" data-status role="status" aria-live="polite">{labels.ready}</p>
     <output class="timer-display" data-display>50:00</output>
     <p class="session-count"><span data-reminders>0</span> {labels.reminders}</p>
   </div>
@@ -163,9 +163,12 @@ const { labels } = Astro.props;
       document.title = running
         ? `${format(remainingSeconds)} · ${phase === 'break' ? labels.breakTime : labels.focus}`
         : originalTitle;
-      if (phaseNotice) status.textContent = phaseNotice;
-      else if (phase === 'break') status.textContent = labels.breakTime;
-      else status.textContent = running ? labels.focus : labels.ready;
+      const nextStatus = phaseNotice
+        ? phaseNotice
+        : phase === 'break'
+          ? labels.breakTime
+          : (running ? labels.focus : labels.ready);
+      if (status.textContent !== nextStatus) status.textContent = nextStatus;
       startButton.textContent = phase === 'break' || reminders > 0 ? labels.continue : labels.start;
     }
 
