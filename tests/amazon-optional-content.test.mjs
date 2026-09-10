@@ -21,10 +21,10 @@ const buildWithCacheState = (withCache) => {
       mkdirSync(join(projectRoot, 'public', 'data'), { recursive: true });
       writeFileSync(cachePath, '{"schema_version":1,"source":"synthetic-test-cache"}\n');
     }
-    execFileSync('npm.cmd', ['run', 'build', '--', '--outDir', outputRoot], {
+    execFileSync(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['run', 'build', '--', '--outDir', outputRoot], {
       cwd: projectRoot,
       stdio: 'pipe',
-      shell: true,
+      shell: process.platform === 'win32',
       windowsHide: true,
     });
     return readFileSync(join(outputRoot, 'en', 'tools', 'image-compressor', 'index.html'), 'utf8');
