@@ -1,6 +1,7 @@
 ---
 import { SITE, type Locale } from '../config/site';
 import { assetPath, localePath } from '../lib/url';
+import { getAmazonProductContentSource } from '../lib/amazonProductContentSource';
 
 type AffiliateLocale = Locale | 'es' | 'fr';
 
@@ -80,6 +81,7 @@ const copy = {
   },
 }[lang];
 const productsSrc = isAmazon ? '/data/amazon-products.json' : '/data/support-products.json';
+const amazonContentSrc = isAmazon ? getAmazonProductContentSource() : undefined;
 const amazonMode = String(import.meta.env.AMAZON_AFFILIATE_BOOTSTRAP_MODE || 'auto').trim().toLowerCase();
 const toolCategoryAliases: Record<string, string> = {
   image: 'computer',
@@ -112,7 +114,7 @@ const shelfId = `affiliate-shelf-${toolSlug || context}`.replace(/[^a-z0-9_-]/gi
       data-tool-slug={toolSlug}
       data-affiliate-initial-limit={String(Math.max(1, Math.min(initialLimit, 4)))}
       data-affiliate-products-src={productsSrc}
-      data-affiliate-products-content-src={isAmazon ? '/data/amazon-product-content.json' : undefined}
+      data-affiliate-products-content-src={amazonContentSrc}
       data-affiliate-amazon-mode={isAmazon ? amazonMode : undefined}
       hidden
       aria-labelledby={`${shelfId}-heading`}
