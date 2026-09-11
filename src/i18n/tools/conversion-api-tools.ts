@@ -1,8 +1,8 @@
 import type { LocalizedToolContent, ToolContent } from './_types';
 
 const privacy = {
-  zh: '檔案只為轉換而上傳，於請求期間暫時處理，完成後不會刻意保留。請勿上傳不必要的個人或機密資料。',
-  en: 'Files are uploaded only for conversion, processed temporarily, and not intentionally retained after the request completes. Do not upload unnecessary personal or confidential data.',
+  zh: '檔案會上傳至 FunnyTools Conversion API 進行轉換，於請求期間處理；請勿上傳不必要的個人或機密資料。',
+  en: 'Files are uploaded to the FunnyTools Conversion API for conversion and processed during the request; do not upload unnecessary personal or confidential data.',
 };
 
 const sourceNote = {

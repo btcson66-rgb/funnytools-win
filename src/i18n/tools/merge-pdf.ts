@@ -22,9 +22,9 @@ export default {
   zh: {
     name: 'PDF 合併',
     short: '選取多個 PDF、調整順序，並在瀏覽器本機合併成一份檔案。',
-    long: 'PDF 合併工具適合把合約附件、掃描章節、課堂講義或申請資料整理成一份檔案。你可以在瀏覽器內選取多個 PDF、查看頁數、調整順序，再下載新的合併檔；處理過程使用本機 JavaScript 與 pdf-lib，檔案不會上傳到本站或第三方伺服器。',
+    long: 'PDF 合併工具適合把合約附件、掃描章節、課堂講義或申請資料整理成一份檔案。你可以在瀏覽器內選取多個 PDF、查看頁數、調整順序，再下載新的合併檔；合併使用本機 JavaScript 與 pdf-lib，若選擇寄送下載，產生的合併檔可能進入寄送流程。',
     seoTitle: "PDF 合併工具｜免費線上合併，排序後一鍵下載",
-    seoDescription: '免費線上合併多個 PDF，自由調整順序、預覽頁數，全程在瀏覽器本機處理，不需安裝也不用上傳。',
+    seoDescription: '免費線上合併多個 PDF，自由調整順序、預覽頁數；原始檔在瀏覽器本機處理，寄送下載時另有輸出檔說明。',
     keywords: [
       "合併 PDF",
       "PDF 合併",
@@ -37,7 +37,7 @@ export default {
     capabilities: [
       '一次選取多份 PDF，並依清單順序合併成單一檔案。',
       '讀取各檔頁數，合併前可用上移、下移調整文件順序。',
-      '在瀏覽器本機完成處理，不需上傳合約、申請書或掃描檔。',
+      '在瀏覽器本機完成合併，不需為了合併上傳合約、申請書或掃描檔。',
     ],
     contentSections: [
       {
@@ -134,7 +134,7 @@ export default {
       },
       {
         q: "PDF 會被上傳嗎？",
-        a: "不會。檔案只在目前瀏覽器分頁讀取與合併，不會離開你的裝置，也不會儲存在 FunnyTools 伺服器。"
+        a: "原始 PDF 不會為了合併而上傳，因為合併在你的瀏覽器內完成；若使用寄送下載，產生的合併檔可能進入 FunnyTools 的 Brevo 寄送流程。"
       },
       {
         q: "加密或有密碼的 PDF 怎麼辦？",
@@ -150,7 +150,7 @@ export default {
       }
     ],
     labels: {
-      localNote: '檔案只在你的瀏覽器本機處理，不會上傳。',
+      localNote: '原始檔只在你的瀏覽器本機合併；寄送下載可能傳送產生的合併檔。',
       upload: '選擇 PDF 檔案',
       selectedFiles: '已選檔案',
       noFiles: '尚未選擇 PDF',
@@ -171,14 +171,14 @@ export default {
       loadError: '無法讀取其中一個 PDF，請確認檔案未損毀。',
       mergeError: '合併 PDF 時發生錯誤，請改用較小或未加密的檔案。',
     },
-    privacyNote: '所有 PDF 都只在你的瀏覽器本機處理，檔案不會離開瀏覽器，也不會上傳到本站或第三方伺服器。',
+    privacyNote: '原始 PDF 只在你的瀏覽器本機合併，不會為了合併而上傳；若使用寄送下載，產生的合併檔與電子郵件會依頁面說明進入 FunnyTools 的寄送流程。',
   },
   en: {
     name: 'Merge PDF',
     short: 'Combine multiple PDFs in your chosen order locally in the browser.',
-    long: 'Merge PDF is a browser-based PDF combiner for contracts, scans, class handouts, application packets, and other small document batches. Choose multiple PDFs, review page counts, move files into the right order, and download one combined file. Processing runs locally with JavaScript and pdf-lib, so your documents are not uploaded to FunnyTools or a third-party server.',
+    long: 'Merge PDF is a browser-based PDF combiner for contracts, scans, class handouts, application packets, and other small document batches. Choose multiple PDFs, review page counts, move files into the right order, and download one combined file. Processing runs locally with JavaScript and pdf-lib; email delivery, if selected, can send the generated merged file.',
     seoTitle: "Merge PDF Online Free | Combine Multiple PDF Files Locally",
-    seoDescription: 'Merge multiple PDF files locally in your browser, reorder them, view page counts, and download one combined PDF. Files are never uploaded.',
+    seoDescription: 'Merge multiple PDF files locally in your browser, reorder them, view page counts, and download one combined PDF; email delivery has separate output-file disclosure.',
     keywords: [
       "merge PDF",
       "combine PDF files",
@@ -271,7 +271,7 @@ export default {
     faq: [
       {
         q: "Are my PDFs uploaded?",
-        a: "No. Files are read and merged inside your browser. They are not uploaded or stored by FunnyTools."
+        a: "Source PDFs are not uploaded for merging because the merge runs in your browser. If you choose email delivery, the generated file may enter FunnyTools' Brevo delivery flow."
       },
       {
         q: "Can I change the merge order?",
@@ -287,7 +287,7 @@ export default {
       }
     ],
     labels: {
-      localNote: 'Files are processed locally in your browser and never uploaded.',
+      localNote: 'Source files are merged locally in your browser; email delivery can send the generated file.',
       upload: 'Choose PDF files',
       selectedFiles: 'Selected files',
       noFiles: 'No PDFs selected',
@@ -308,6 +308,6 @@ export default {
       loadError: 'Could not read one of the PDFs. Make sure the file is not damaged.',
       mergeError: 'Could not merge the PDFs. Try smaller or unencrypted files.',
     },
-    privacyNote: 'All PDFs are processed locally in your browser. Files never leave the browser and are never uploaded to this site or a third-party server.',
+    privacyNote: 'Source PDFs are merged locally in your browser and are not uploaded for the merge; if you choose email delivery, the generated file and email address enter FunnyTools\' delivery flow as described on this page.',
   },
 } satisfies Record<'zh' | 'en', ToolContent>;

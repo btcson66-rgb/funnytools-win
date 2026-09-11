@@ -4,9 +4,9 @@ export default {
   zh: {
     name: '圖片壓縮',
     short: '在瀏覽器內壓縮 JPG、PNG、WebP 圖片，快速取得較小的下載檔。',
-    long: '圖片壓縮工具適合處理社群貼文、頭像、商品圖、截圖與部落格配圖。你可以調整品質、比較壓縮前後大小，並選擇保留格式或輸出 JPEG、WebP。處理過程在瀏覽器內完成，原圖不會上傳到伺服器，也能協助降低頁面載入負擔。',
-    seoTitle: "圖片壓縮工具｜免費線上壓縮，不上傳更安心",
-    seoDescription: '免費線上壓縮 JPG、PNG、WebP 圖片，即時比較壓縮前後容量與畫質，全程在瀏覽器本機處理，不上傳、不外流。',
+    long: '圖片壓縮工具適合處理社群貼文、頭像、商品圖、截圖與部落格配圖。你可以調整品質、比較壓縮前後大小，並選擇保留格式或輸出 JPEG、WebP。原圖在瀏覽器內壓縮；若選擇寄送下載，產生的輸出檔可能進入寄送流程，也能協助降低頁面載入負擔。',
+    seoTitle: "圖片壓縮工具｜免費線上瀏覽器壓縮",
+    seoDescription: '免費線上壓縮 JPG、PNG、WebP 圖片，即時比較壓縮前後容量與畫質；原圖在瀏覽器本機處理，寄送下載時另有輸出檔說明。',
     keywords: [
       "圖片壓縮",
       "壓縮 JPG",
@@ -76,7 +76,7 @@ export default {
     faq: [
       {
         q: "圖片會上傳到伺服器嗎？",
-        a: "不會。壓縮在你的瀏覽器內完成，原圖與輸出圖不會傳到 FunnyTools。",
+        a: "原圖不會為了壓縮而上傳，因為壓縮在你的瀏覽器內完成；若使用寄送下載，產生的輸出圖可能進入 FunnyTools 的 Brevo 寄送流程。",
       },
       {
         q: "JPEG、WebP 要怎麼選？",
@@ -126,16 +126,16 @@ export default {
       invalidType: '請選擇有效的圖片檔。',
       tooLarge: '這張圖片太大，請使用 20 MB 以下且像素較少的檔案。',
       processError: '無法處理這張圖片，請改用其他檔案。',
-      localNote: '圖片會在你的瀏覽器內處理，不會上傳到伺服器。',
+      localNote: '原圖在瀏覽器內處理；若選擇寄送下載，產生的輸出檔可能進入寄送流程。',
     },
-    privacyNote: '圖片壓縮在瀏覽器本機完成。本站不會接收、儲存或上傳你選擇的圖片檔。',
+    privacyNote: '原圖在瀏覽器本機壓縮，不會為了壓縮而上傳；若使用寄送下載，產生的輸出檔與電子郵件會依頁面說明進入 FunnyTools 的寄送流程。',
   },
   en: {
     name: 'Image Compressor',
     short: 'Reduce JPG, PNG, and WebP file size locally in the browser.',
-    long: 'Image Compressor is built for social posts, avatars, product images, screenshots, and blog graphics that need a smaller file before publishing or sharing. Adjust quality, compare the before-and-after size, and choose whether to keep the format or export JPEG or WebP. Processing happens in your browser, so the original image is not uploaded.',
+    long: 'Image Compressor is built for social posts, avatars, product images, screenshots, and blog graphics that need a smaller file before publishing or sharing. Adjust quality, compare the before-and-after size, and choose whether to keep the format or export JPEG or WebP. The original image is compressed in your browser; email delivery, if selected, can send the generated output.',
     seoTitle: "Free Image Compressor Online | Shrink JPG, PNG & WebP Fast",
-    seoDescription: 'Compress JPG, PNG, and WebP images free online. Adjust quality, compare before/after size, and keep files private — nothing is uploaded.',
+    seoDescription: 'Compress JPG, PNG, and WebP images free online. Adjust quality and compare before/after size; the original is processed locally, with separate output-delivery disclosure.',
     keywords: [
       "image compressor",
       "compress JPG",
@@ -206,7 +206,7 @@ export default {
     faq: [
       {
         q: "Are my images uploaded?",
-        a: "No. Compression runs in your browser, and the original image is not sent to FunnyTools.",
+        a: "The original image is not sent for compression because processing runs in your browser. If you choose email delivery, the generated output may enter FunnyTools' Brevo delivery flow.",
       },
       {
         q: "Should I choose JPEG or WebP?",
@@ -255,8 +255,8 @@ export default {
       invalidType: 'Choose a valid image file.',
       tooLarge: 'This image is too large. Use a file under 20 MB with fewer pixels.',
       processError: 'Could not process this image. Try another file.',
-      localNote: 'Files are processed locally in your browser and never uploaded.',
+      localNote: 'The original is processed locally in your browser; email delivery can send the generated output.',
     },
-    privacyNote: 'Image compression runs locally in your browser. This site does not receive, store, or upload the image file you choose.',
+    privacyNote: 'The original image is compressed locally in your browser and is not uploaded for compression; if you choose email delivery, the generated output and email address enter FunnyTools\' delivery flow as described on this page.',
   },
 } satisfies Record<'zh' | 'en', ToolContent>;
