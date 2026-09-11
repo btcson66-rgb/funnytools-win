@@ -3,6 +3,7 @@ import type { Category } from '../data/categories';
 import type { ToolMeta } from '../data/tools';
 import { CONTENT_REVIEWED_AT } from './contentValue';
 import { absoluteUrl, altLinks, assetPath, localePath, toolUrl } from './url';
+import { isCanonicalDownloadGatedTool } from './toolDataFlow';
 
 interface ToolContentForSeo {
   name: string;
@@ -205,7 +206,7 @@ export function webApplicationJsonLd(
     '@type': 'WebApplication',
     name: content.name,
     url: absoluteUrl(toolUrl(lang, tool.slug)),
-    description: toolSeoDescription(lang, content, tool.privacyLevel === 'local-only'),
+    description: toolSeoDescription(lang, content, tool.privacyLevel === 'local-only' && !isCanonicalDownloadGatedTool(tool.slug)),
     applicationCategory,
     operatingSystem: 'Any',
     browserRequirements: 'Requires a modern web browser with JavaScript enabled.',

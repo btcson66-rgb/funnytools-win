@@ -118,7 +118,7 @@ export default {
       copied: '圖片已複製',
       canvasAlt: 'QR Code 預覽',
     },
-    privacyNote: 'QR Code 內容在瀏覽器內產生。本站不會接收、儲存或上傳你輸入的文字或網址。',
+    privacyNote: 'QR Code 內容與標誌檔案在瀏覽器內處理；若使用寄送下載，產生的 PNG 與電子郵件會依頁面說明進入 FunnyTools 的寄送流程。本站不會為了產生 QR Code 而接收、儲存或上傳你輸入的文字或網址。',
   },
   en: {
     name: 'QR Code Generator',
@@ -238,6 +238,6 @@ export default {
       copied: 'Image copied',
       canvasAlt: 'QR code preview',
     },
-    privacyNote: 'QR code generation runs locally in your browser. This site does not receive, store, or upload the text or URL you enter.',
+    privacyNote: 'QR code generation runs locally in your browser; if you choose email delivery, the generated PNG and email address enter FunnyTools\' delivery flow as described on this page. This site does not receive, store, or upload the text or URL for QR generation.',
   },
 } satisfies Record<'zh' | 'en', ToolContent>;

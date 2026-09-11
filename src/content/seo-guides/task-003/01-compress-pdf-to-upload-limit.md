@@ -2,7 +2,7 @@
 slug: "/guides/compress-pdf-to-upload-limit/"
 seo_title: "PDF 太大怎麼壓縮到 10MB、5MB、2MB？上傳限制與畫質完整指南｜FunnyTools"
 meta_description: "PDF 太大無法上傳？完整說明如何壓到 10MB、5MB、2MB，先判斷檔案為何變大，再選結構最佳化、圖片降解析度、減少頁面或重建 PDF，避免把文字與簽章壓到看不清。"
-og_title: "PDF 太大怎麼辦？從 40MB 壓到 10MB、5MB、2MB 的正確思路"
+og_title: "PDF 太大怎麼辦？從 80MB 壓到 10MB、5MB、2MB 的正確思路"
 og_description: "先找出 PDF 為何變大，再選對方法；不是每個 PDF 都能靠一鍵壓縮大幅縮小。"
 canonical: "https://funnytools.win/guides/compress-pdf-to-upload-limit/"
 primary_keyword: "PDF 太大怎麼壓縮"
@@ -14,12 +14,12 @@ hero_subtitle: "真正有效的壓縮不是一直按同一個按鈕，而是先�
 
 # PDF 太大怎麼壓縮到 10MB、5MB、2MB？上傳限制與畫質完整指南
 
-申請系統、學校作業、公司報帳、履歷平台或政府網站常會遇到同一個問題：**PDF 明明只有幾頁，卻有 20MB、40MB，平台只收 10MB、5MB，甚至 2MB。**
+申請系統、學校作業、公司報帳、履歷平台或政府網站常會遇到同一個問題：**PDF 明明只有幾頁，卻有 20MB、80MB，平台只收 10MB、5MB，甚至 2MB。**
 
 很多人第一個反應是一直找「PDF 壓縮」，但按了幾次只從 28MB 變成 27MB。原因通常不是工具壞掉，而是 **PDF 變大的原因不同，真正有效的縮檔方式也不同**。
 
 > **速答：PDF 太大怎麼壓？**  
-> 先確認平台的實際限制，再判斷 PDF 是「文字／向量型」還是「高解析掃描／照片型」。文字型 PDF 可以先嘗試結構最佳化；掃描型 PDF 的容量通常主要來自圖片，需要降低原始圖片尺寸、品質或頁數。FunnyTools 的 PDF 壓縮工具目前做的是**瀏覽器本機 PDF 結構重新整理，不會重新採樣圖片，也不保證每份 PDF 都會變小**。如果目標是從 40MB 壓到 5MB，而檔案主要是高解析掃描，通常必須從圖片來源下手。
+> 先確認平台的實際限制，再判斷 PDF 是「文字／向量型」還是「高解析掃描／照片型」。FunnyTools 的 PDF 壓縮工具會把檔案送到 **FunnyTools Conversion API**，提供 Lossless、Balanced、Strong 三種模式，並不保證每份 PDF 都會變小。若檔案主要是高解析掃描，通常仍必須從圖片來源下手。
 
 ## 一、先確認平台到底限制什麼
 
@@ -85,12 +85,11 @@ PDF 是一種容器，不是「一頁固定多少 KB」的格式。它可能包�
 
 目前 FunnyTools PDF Compressor 的定位是：
 
-- 在瀏覽器本機處理；
-- 重新寫入／整理 PDF 結構；
-- 嘗試降低未最佳化的物件與結構負擔；
-- **不會降低內嵌圖片解析度**；
+- 將檔案暫時上傳到 FunnyTools Conversion API；
+- 依 Lossless、Balanced 或 Strong 模式處理；
+- 盡可能保留文字與向量，實際效果依檔案內容而定；
 - **不保證輸出一定比原檔小**；
-- 目前單檔輸入上限為 **40MB**。
+- 目前單檔輸入上限為 **80MB**。
 
 這種方式的優點是：不會為了硬壓檔案而直接把掃描文字壓糊。
 
@@ -108,7 +107,7 @@ PDF 是一種容器，不是「一頁固定多少 KB」的格式。它可能包�
 
 FunnyTools 不能承諾：
 
-> 「任何 40MB PDF 都能壓到 10MB。」
+> 「任何 PDF 都能壓到 10MB。」
 
 這種承諾本身就不合理。
 
@@ -217,9 +216,9 @@ FunnyTools 不能承諾：
 
 如果輸出比較大，沒有必要拿新檔取代原檔。
 
-## 十三、超過 FunnyTools 40MB 上限怎麼辦？
+## 十三、超過 FunnyTools 80MB 上限怎麼辦？
 
-目前 PDF Compressor 會阻止超過 40MB 的輸入。
+目前 PDF Compressor 會阻止超過 80MB 的輸入；檔案會送至 FunnyTools Conversion API 暫時處理。
 
 此時可依情況：
 
@@ -321,7 +320,7 @@ FunnyTools 目前不降低內嵌圖片解析度，因此不以犧牲圖片畫質
 ### PDF 轉 JPG 再轉回 PDF 可以嗎？
 可以，但會失去可搜尋文字、連結、表單等文件特性，只適合明確知道代價的影像型文件。
 
-### PDF 超過 40MB 怎麼辦？
+### PDF 超過 80MB 怎麼辦？
 目前 FunnyTools PDF Compressor 無法處理，建議回來源檔重新輸出、降低掃描圖片尺寸，或使用適合大型文件的桌面工具。
 
 ## 二十、延伸閱讀
@@ -334,9 +333,9 @@ FunnyTools 目前不降低內嵌圖片解析度，因此不以犧牲圖片畫質
 
 ## 頁面 CTA
 
-**你的 PDF 低於 40MB，而且想先嘗試不降低圖片解析度的方式？**
+**你的 PDF 低於 80MB，而且願意將檔案暫時送至 FunnyTools Conversion API 處理？**
 
-先用 FunnyTools PDF 壓縮工具做本機結構最佳化，再比較輸出大小。如果沒有明顯變小，就不要無限重複壓縮，改從圖片來源或頁數下手。
+先用 FunnyTools PDF 壓縮工具選擇 Lossless、Balanced 或 Strong 模式，再比較輸出大小與可讀性。如果沒有明顯變小，就不要無限重複壓縮，改從圖片來源或頁數下手。
 
 CTA：`開啟 PDF 壓縮工具`
 

@@ -506,7 +506,7 @@ export const categoryContent: Record<string, CategoryContent> = {
       zh: [
          '圖片與檔案分類提供圖片壓縮、批次壓縮、裁切、旋轉翻轉、尺寸調整、格式轉換、轉 Base64、圖片轉 DXF 與 QR Code 產生等免費工具。單檔瀏覽器工具仍在本機處理；批次壓縮與 DXF 向量化會暫時把檔案送到 Conversion API。',
         '想讓網頁載入更快或符合上傳容量限制，可以用圖片壓縮與 JPG 轉 WebP 來縮小檔案；需要特定尺寸的大頭貼、縮圖或封面時，圖片尺寸調整能維持比例輸出新檔，圖片裁切則能拖曳框出想保留的部分。手機拍歪或掃描方向錯誤時，旋轉翻轉工具可一鍵轉正。',
-        'PNG、JPG、WebP 之間的互轉工具能解決不同平台對格式的要求；圖片轉 Base64 方便把小圖示內嵌到 HTML 或 CSS；QR Code 產生器則把網址或文字變成方便掃描的條碼。因為所有處理都在本機完成，即使是含個人資訊或尚未公開的圖片也能安心使用，無需擔心檔案外流。',
+        'PNG、JPG、WebP 之間的互轉工具能解決不同平台對格式的要求；圖片轉 Base64 方便把小圖示內嵌到 HTML 或 CSS；QR Code 產生器則把網址或文字變成方便掃描的條碼。多數單檔工具在本機處理，但批次壓縮與圖片轉 DXF 會使用 Conversion API；請在各工具頁確認資料流後再處理私人或尚未公開的素材。',
         '這類工具適合網站管理者、設計新手、社群小編、學生與需要提交線上表單的人。常見情境包括縮小上傳檔案、裁成指定比例、修正照片方向、把舊格式轉成平台支援的檔案，或替海報與名片製作 QR Code；輸出後仍建議檢查清晰度與尺寸。',
       ],
       en: [
@@ -572,8 +572,8 @@ export const categoryContent: Record<string, CategoryContent> = {
     relatedCategories: ['pdf', 'text', 'draw'],
     toolBlurbs: {
       'image-compressor': {
-        zh: '在瀏覽器本機壓縮 JPG、PNG、WebP 圖片以縮小檔案大小，加快網站載入或符合上傳限制，圖片不會上傳到伺服器。',
-        en: 'Reduce JPG, PNG, and WebP file size locally to speed up sites or meet upload limits — images never leave your browser.',
+        zh: '在瀏覽器本機壓縮 JPG、PNG、WebP 圖片以縮小檔案大小；原圖不會為了壓縮而上傳，寄送下載時另有輸出檔說明。',
+        en: 'Reduce JPG, PNG, and WebP file size locally; the original is not uploaded for compression, while email delivery has separate output-file disclosure.',
       },
       'image-resizer': {
         zh: '自訂寬高調整圖片大小並可維持比例，輸出新檔案，適合製作大頭貼、縮圖或符合平台尺寸要求的圖片。',
@@ -689,8 +689,8 @@ export const categoryContent: Record<string, CategoryContent> = {
     relatedCategories: ['image', 'text', 'draw'],
     toolBlurbs: {
       'merge-pdf': {
-        zh: '選取多個 PDF、調整先後順序後合併成一份檔案，整理報告、合約附件或掃描文件時很方便，檔案全程不離開瀏覽器。',
-        en: 'Combine multiple PDFs in your chosen order into one file — all locally, with nothing uploaded.',
+        zh: '選取多個 PDF、調整先後順序後在瀏覽器本機合併成一份檔案；原始檔不會為了合併而上傳，寄送下載時另有輸出檔說明。',
+        en: 'Combine multiple PDFs in your chosen order locally in the browser; source files are not uploaded for the merge, while email delivery has separate output-file disclosure.',
       },
       'split-pdf': {
         zh: '把一份 PDF 每頁拆開，或依自訂頁碼範圍輸出成多份檔案，適合分發特定章節或抽出需要的部分。',
@@ -741,13 +741,13 @@ export const categoryContent: Record<string, CategoryContent> = {
       zh: [
         '製圖工具分類提供簡易的 2D 製圖板、線上繪圖板、流程圖，以及長條圖與圓餅圖製作工具，讓你不必安裝專業 CAD 或繪圖軟體，就能在瀏覽器中畫出基本圖形、示意圖與資料圖表。無論是教學、報告還是隨手記錄想法，都能快速上手。',
         '2D CAD 製圖板適合在網格上畫線段、矩形、圓形與折線，做簡單的平面配置或尺寸示意；線上繪圖板提供畫筆、顏色與橡皮擦，適合自由手繪、註記與塗鴉；流程圖工具能建立節點與箭頭，畫出流程、決策樹或步驟圖；長條圖與圓餅圖製作工具則讓你輸入資料即時產生圖表，方便視覺化數據。',
-        '這些工具都著重在「簡單、即時」，並支援把成果匯出成 PNG 或 SVG，方便貼到文件、簡報或網頁中。所有繪製都在瀏覽器本機完成，免註冊也免安裝。若你需要的是複雜的工程製圖或專業向量編輯，仍建議搭配專門軟體使用；簡報草圖、課堂圖解、流程溝通與基礎資料視覺化則很適合直接從這裡開始。',
+        '這些工具都著重在「簡單、即時」，並支援把成果匯出成 PNG 或 SVG，方便貼到文件、簡報或網頁中。繪圖與圖表製作在瀏覽器本機完成；同站的 Image to DXF 是另一個會把圖片暫時送到 Conversion API 的工具。免註冊也免安裝；若你需要的是複雜的工程製圖或專業向量編輯，仍建議搭配專門軟體使用。',
         '五個工具該選哪一個，取決於你事後需要證明什麼：CAD 草圖要禁得起對照網格量測，圖表要禁得起別人重新輸入同一組數字得到相同結果，手繪或流程圖則主要是把想法講清楚，不強求精確到每個座標。分享到聊天室或簡報用 PNG 就足夠；若輸出還要放大列印或交給別人在向量軟體裡繼續編輯，CAD 與流程圖可以改用 SVG 保留線條清晰度。',
       ],
       en: [
         'The Drawing category offers a simple 2D CAD board, an online sketchpad, a flowchart maker, and bar and pie chart makers, so you can draw basic shapes, diagrams, and data charts in the browser without professional CAD or design software — handy for teaching, reports, or jotting down ideas.',
         'The 2D CAD board suits lines, rectangles, circles, and polylines on a grid; the sketchpad offers brush, color, and eraser for freehand notes; the flowchart tool builds nodes and arrows for flows and decision trees; and the bar and pie chart makers turn your data into charts instantly. Each supports PNG or SVG export. For complex engineering drawing or professional vector editing, dedicated software is still recommended.',
-        "Choosing between these five tools comes down to what you need to prove afterward. A CAD sketch should hold up when you check a measurement against the grid; a chart should hold up when someone re-enters your numbers and gets the same shape; a freehand sketch or flowchart mainly needs to communicate an idea clearly rather than be dimensionally exact. Export as PNG for quick sharing in a chat or slide, or as SVG when the CAD or flowchart output needs to stay sharp at a larger print size or will be edited further in vector software.",
+        "Choosing between these drawing and chart tools comes down to what you need to prove afterward. The drawing and chart makers run locally; Image to DXF is a separate Conversion API workflow that temporarily receives the source image. A CAD sketch should hold up when you check a measurement against the grid; a chart should hold up when someone re-enters your numbers and gets the same shape. Export as PNG for quick sharing, or as SVG when output needs to stay sharp at a larger print size.",
       ],
     },
     useCases: {

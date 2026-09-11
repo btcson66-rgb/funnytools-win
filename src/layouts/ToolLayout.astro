@@ -24,6 +24,8 @@ import { t } from '../i18n/ui';
 import { categoryOgImage, toolSeoDescription, toolSeoTitle } from '../lib/seo';
 import { absoluteUrl, categoryUrl, localePath, localeUrlPair, toolUrl } from '../lib/url';
 import { buildToolValueReview, CONTENT_REVIEWED_AT } from '../lib/contentValue';
+import { isCanonicalDownloadGatedTool } from '../lib/toolDataFlow';
+import { getDownloadGateDisclosure } from '../i18n/download-gate-disclosure';
 
 interface Props {
   lang: Locale;
@@ -37,7 +39,10 @@ const { lang, tool, category, content, jsonLd } = Astro.props;
 const ui = t(lang);
 const currentUrl = absoluteUrl(toolUrl(lang, tool.slug));
 const seoTitle = toolSeoTitle(lang, content);
-const seoDescription = toolSeoDescription(lang, content, tool.privacyLevel === 'local-only');
+const isDownloadGated = isCanonicalDownloadGatedTool(tool.slug);
+const isStrictlyLocal = tool.privacyLevel === 'local-only' && !isDownloadGated;
+const gateDisclosure = isDownloadGated ? getDownloadGateDisclosure(lang, tool.slug) : null;
+const seoDescription = toolSeoDescription(lang, content, isStrictlyLocal);
 const isAnonymousApi = tool.privacyLevel === 'anonymous-api';
 const breadcrumbItems = [
   { label: ui.breadcrumbHome, href: localePath(lang) },
@@ -50,8 +55,12 @@ const relatedGuidesHeading = lang === 'zh' ? '延伸閱讀：使用教學' : 'Re
 const relatedWorkflows = getWorkflowsForTool(tool.slug, lang).slice(0, 2);
 const relatedWorkflowsHeading = lang === 'zh' ? '相關工具包' : 'Related toolkits';
 const valueReview = buildToolValueReview(lang, content.name, tool.slug, category, content);
+const privacyHighlightText = gateDisclosure?.description ?? ui.privacy.localOnly;
+const downloadGateLabels = gateDisclosure
+  ? { ...ui.downloadGate, desc: gateDisclosure.description, privacyNote: gateDisclosure.privacyNote, sentLocal: gateDisclosure.sentLocal }
+  : ui.downloadGate;
 const downloadGateConfig = SITE.features.downloadGate
-  ? JSON.stringify({ lang, labels: ui.downloadGate })
+  ? JSON.stringify({ lang, labels: downloadGateLabels })
   : null;
 ---
 
@@ -272,7 +281,7 @@ const downloadGateConfig = SITE.features.downloadGate
 
     <section class="content-section privacy-note">
       <h2>{isAnonymousApi ? ui.privacy.anonymousApiHeading : ui.privacy.heading}</h2>
-      {tool.privacyLevel === 'local-only' && <p class="privacy-highlight">{ui.privacy.localOnly}</p>}
+      {tool.privacyLevel === 'local-only' && <p class="privacy-highlight">{privacyHighlightText}</p>}
       <p>{content.privacyNote ?? ui.privacy.defaultNote}</p>
     </section>
 
