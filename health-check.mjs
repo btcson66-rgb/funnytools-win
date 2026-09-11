@@ -9,10 +9,20 @@ import {
 import { dirname, join } from 'node:path';
 import { execFileSync, execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import {
+  classifySourceIdentity,
+  diffSourceIdentity,
+  evaluateContractProbe,
+  evaluateJsonHealth,
+  summarizeKnownBaselines,
+} from './scripts/health-contracts.mjs';
 
 const rootDir = dirname(fileURLToPath(import.meta.url));
 const configPath = join(rootDir, 'config', 'company.json');
 const config = JSON.parse(readFileSync(configPath, 'utf8'));
+const knownBaselinesPath = join(rootDir, 'config', 'health-known-baselines.json');
+const knownBaselinesConfig = JSON.parse(readFileSync(knownBaselinesPath, 'utf8'));
+const knownBaselines = summarizeKnownBaselines(knownBaselinesConfig.items ?? []);
 const hc = config.healthCheck ?? {};
 const sites = normalizeSites(config);
 const issues = [];
@@ -22,10 +32,13 @@ function normalizeSites(rawConfig) {
     return rawConfig.sites.map((site) => ({
       ...site,
       baseUrl: String(site.baseUrl ?? site.domain ?? '').replace(/\/+$/, ''),
+      githubRepo: site.githubRepo ? String(site.githubRepo) : null,
       primaryPath: site.primaryPath ?? '/',
       sitemapPath: site.sitemapPath ?? '/sitemap.xml',
       samplePageCount: Number(site.samplePageCount ?? site.sitemapSampleCount ?? rawConfig.healthCheck?.sitemapSampleCount ?? 6),
       sampleUrls: site.sampleUrls ?? ['/'],
+      services: Array.isArray(site.services) ? site.services : [],
+      contractProbes: Array.isArray(site.contractProbes) ? site.contractProbes : [],
       monitorHttpsRedirect: Boolean(site.monitorHttpsRedirect),
       sitemapDropAlertPercent: Number(site.sitemapDropAlertPercent ?? 10),
       expectations: {
@@ -41,11 +54,14 @@ function normalizeSites(rawConfig) {
       id: rawConfig.site.id ?? 'funnytools',
       name: rawConfig.site.name ?? 'FunnyTools',
       baseUrl: String(rawConfig.site.domain ?? '').replace(/\/+$/, ''),
+      githubRepo: rawConfig.site.githubRepo ? String(rawConfig.site.githubRepo) : null,
       localRepo: rawConfig.site.localRepo,
       primaryPath: '/',
       sitemapPath: '/sitemap.xml',
       samplePageCount: Number(rawConfig.healthCheck?.sitemapSampleCount ?? 6),
       sampleUrls: rawConfig.healthCheck?.sampleUrls ?? ['/'],
+      services: Array.isArray(rawConfig.site.services) ? rawConfig.site.services : [],
+      contractProbes: Array.isArray(rawConfig.site.contractProbes) ? rawConfig.site.contractProbes : [],
       expectations: {
         expectAdsense: Boolean(rawConfig.healthCheck?.expectAdsense),
         expectAdsTxt: true,
@@ -103,9 +119,18 @@ function endpointUrl(site, pathOrUrl) {
 
 function requestHeaders() {
   return {
-    'user-agent': hc.userAgent ?? 'FableCompany-HealthCheck/2.0',
+    'user-agent': hc.userAgent ?? 'FableCompany-HealthCheck/3.0',
     accept: 'text/html,application/xhtml+xml,application/xml,text/xml,text/plain;q=0.9,*/*;q=0.8',
   };
+}
+
+function githubHeaders() {
+  const headers = {
+    accept: 'application/vnd.github+json',
+    'user-agent': 'FableCompany-HealthCheck/3.0',
+  };
+  if (process.env.GITHUB_TOKEN) headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  return headers;
 }
 
 function networkErrorKind(error) {
@@ -115,7 +140,7 @@ function networkErrorKind(error) {
   return 'network';
 }
 
-async function fetchText(url, label) {
+async function fetchText(url, label, headers = requestHeaders()) {
   const attempts = [];
   const maxAttempts = Math.max(1, Number(hc.retryAttempts ?? 3));
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
@@ -124,7 +149,7 @@ async function fetchText(url, label) {
       const response = await fetch(url, {
         redirect: 'follow',
         signal: AbortSignal.timeout(Number(hc.timeoutMs ?? 15000)),
-        headers: requestHeaders(),
+        headers,
       });
       const body = await response.text();
       const result = {
@@ -355,6 +380,125 @@ function checkLocalRepo() {
   return result;
 }
 
+function recordContractIssues(site, contractIssues) {
+  for (const issue of contractIssues) {
+    addIssue(site, issue.severity, issue.code, issue.message);
+  }
+}
+
+async function checkSourceIdentity(site) {
+  const result = {
+    repo: site.githubRepo,
+    branch: 'main',
+    state: 'UNKNOWN',
+    mainSha: null,
+    status: 0,
+    observedAt: new Date().toISOString(),
+  };
+  if (!site.githubRepo) return result;
+
+  const url = `https://api.github.com/repos/${site.githubRepo}/branches/main`;
+  const response = await fetchText(url, 'github-source-identity', githubHeaders());
+  result.status = response.status;
+  if (response.layer === 'http') {
+    let json = null;
+    try { json = JSON.parse(response.body); } catch { /* classified UNKNOWN below */ }
+    const classification = classifySourceIdentity({
+      status: response.status,
+      sha: json?.commit?.sha,
+      rateLimited: response.status === 429,
+    });
+    Object.assign(result, classification);
+  } else {
+    Object.assign(result, classifySourceIdentity({ status: 0 }));
+  }
+  if (result.state === 'NO_ACCESS') {
+    addIssue(site, 'info', 'source-identity-no-access', `${site.name} GitHub main SHA 無法讀取（HTTP ${result.status}），不視為網站故障`);
+  } else if (result.state === 'UNKNOWN') {
+    addIssue(site, 'info', 'source-identity-unknown', `${site.name} GitHub main SHA 暫時無法分類，不視為網站故障`);
+  }
+  return result;
+}
+
+async function checkServices(site) {
+  if (!site.services.length) return { items: [], evidence: 'NOT_APPLICABLE' };
+  const items = [];
+  let complete = true;
+  for (const service of site.services) {
+    const response = await fetchText(endpointUrl(site, service.url), `service:${service.id}`);
+    let json = null;
+    if (response.layer === 'http') {
+      try { json = JSON.parse(response.body); } catch { json = null; }
+    } else {
+      complete = false;
+    }
+    const contractIssues = evaluateJsonHealth(service, { status: response.status, json });
+    recordContractIssues(site, contractIssues);
+    items.push({
+      id: service.id,
+      type: service.type,
+      url: service.url,
+      status: response.status,
+      layer: response.layer,
+      ok: response.ok,
+      jsonOk: json?.ok,
+      version: json?.version,
+      revision: json?.revision,
+      ms: response.ms,
+      attempts: response.attempts,
+      issues: contractIssues,
+    });
+  }
+  return { items, evidence: complete ? 'COMPLETE' : 'UNKNOWN' };
+}
+
+function detectContractAnalytics(html) {
+  return /googletagmanager\.com\/gtag\/js|<script\b[^>]+src=["'][^"']*(?:analytics|gtag)[^"']*["']/i.test(html)
+    || /(?:^|["'=])G-[A-Z0-9]{6,}(?:["'&\s<])/.test(html);
+}
+
+async function checkContractProbes(site) {
+  if (!site.contractProbes.length) return { items: [], evidence: 'NOT_APPLICABLE' };
+  const items = [];
+  let complete = true;
+  for (const probe of site.contractProbes) {
+    const url = endpointUrl(site, probe.path);
+    const response = await fetchText(url, `contract:${probe.id}`);
+    if (response.layer !== 'http') complete = false;
+    const head = response.layer === 'http' ? parseHead(response.body) : {};
+    const contractAnalytics = response.layer === 'http' ? detectContractAnalytics(response.body) : false;
+    const contractIssues = evaluateContractProbe(probe, {
+      status: response.status,
+      noindex: head.noindex,
+      analytics: contractAnalytics,
+      adsense: head.hasAdsense,
+      body: response.body,
+    });
+    recordContractIssues(site, contractIssues);
+    const forbiddenMatches = (probe.forbidPatterns ?? []).filter((pattern) => response.body.toLowerCase().includes(String(pattern).toLowerCase()));
+    items.push({
+      id: probe.id,
+      path: probe.path,
+      url,
+      status: response.status,
+      layer: response.layer,
+      noindex: head.noindex ?? null,
+      analytics: response.layer === 'http' ? contractAnalytics : null,
+      adsense: head.hasAdsense ?? null,
+      forbiddenPatternCount: forbiddenMatches.length,
+      ms: response.ms,
+      attempts: response.attempts,
+      issues: contractIssues,
+    });
+  }
+  return { items, evidence: complete ? 'COMPLETE' : 'PARTIAL' };
+}
+
+function liveHttpEvidence(live) {
+  const responses = [live.home, live.primary, live.adsTxt, live.robots, live.sitemap, ...(live.samples ?? [])];
+  return responses.every((response) => response?.layer === 'http') ? 'COMPLETE' : 'UNKNOWN';
+}
+
 async function checkHome(site) {
   const homeUrl = endpointUrl(site, '/');
   const response = await fetchText(homeUrl, 'home');
@@ -574,6 +718,17 @@ async function checkSite(site) {
   for (const [url, source] of sampleEntries) {
     live.samples.push(await checkSamplePage(site, url, source));
   }
+  live.sourceIdentity = await checkSourceIdentity(site);
+  const services = await checkServices(site);
+  live.services = services.items;
+  const contractProbes = await checkContractProbes(site);
+  live.contractProbes = contractProbes.items;
+  live.evidence = {
+    liveHttp: liveHttpEvidence(live),
+    sourceIdentity: live.sourceIdentity.state,
+    serviceHealth: services.evidence,
+    contractProbes: contractProbes.evidence,
+  };
   live.status = siteStatus(site.id);
   return live;
 }
@@ -606,9 +761,10 @@ function summarizeResponse(response, url = response.url) {
 
 function diffWithPrevious(snapshot, dataDir) {
   const previousPath = join(dataDir, 'health', 'latest-status.json');
-  if (!existsSync(previousPath)) return { hasPrevious: false };
+  if (!existsSync(previousPath)) return { hasPrevious: false, changes: [] };
   try {
     const previous = JSON.parse(readFileSync(previousPath, 'utf8'));
+    const changes = [];
     for (const site of snapshot.sites) {
       const prior = previous.sites?.find((item) => item.id === site.id);
       const priorCount = Number(prior?.sitemap?.urlCount ?? 0);
@@ -625,25 +781,48 @@ function diffWithPrevious(snapshot, dataDir) {
           addIssue(sites.find((item) => item.id === site.id), 'critical', 'core-canonical-changed', `${site.name} 核心頁 canonical 改變：${sample.url}（${old.canonical} → ${sample.canonical}）`);
         }
       }
+      const sourceChange = diffSourceIdentity(prior?.sourceIdentity?.mainSha, site.sourceIdentity?.mainSha);
+      if (sourceChange.changed) changes.push({ ...sourceChange, site: site.id });
+      const priorServices = new Map((prior?.services ?? []).map((service) => [service.id, service]));
+      for (const service of site.services ?? []) {
+        const old = priorServices.get(service.id);
+        if (old?.revision && service.revision && old.revision !== service.revision && service.status === 200 && service.jsonOk === true) {
+          changes.push({
+            type: 'SERVICE_REVISION_CHANGED',
+            severity: 'info',
+            site: site.id,
+            service: service.id,
+            from: old.revision,
+            to: service.revision,
+          });
+        }
+      }
     }
     const prevCodes = new Set((previous.issues ?? []).map((issue) => `${issue.code}:${issue.message}`));
     const currentCodes = new Set(snapshot.issues.map((issue) => `${issue.code}:${issue.message}`));
     return {
       hasPrevious: true,
       previousDate: previous.date,
+      changes,
       newIssues: snapshot.issues.filter((issue) => !prevCodes.has(`${issue.code}:${issue.message}`)),
       resolvedIssues: (previous.issues ?? []).filter((issue) => !currentCodes.has(`${issue.code}:${issue.message}`)),
       persistingIssues: snapshot.issues.filter((issue) => prevCodes.has(`${issue.code}:${issue.message}`)),
     };
   } catch (error) {
-    return { hasPrevious: false, error: error.message };
+    return { hasPrevious: false, changes: [], error: error.message };
   }
+}
+
+function reportingDirs() {
+  return {
+    vaultDir: process.env.FABLE_HEALTH_VAULT_DIR || config.reporting?.vaultDir || join(rootDir, 'reports', 'vault'),
+    dataDir: process.env.FABLE_HEALTH_DATA_DIR || config.reporting?.dataDir || join(rootDir, 'reports', 'data'),
+  };
 }
 
 function writeReports(snapshot, diff) {
   const date = snapshot.date;
-  const vaultDir = config.reporting?.vaultDir ?? join(rootDir, 'reports', 'vault');
-  const dataDir = config.reporting?.dataDir ?? join(rootDir, 'reports', 'data');
+  const { vaultDir, dataDir } = reportingDirs();
   const critical = issues.filter((issue) => issue.severity === 'critical');
   const warning = issues.filter((issue) => issue.severity === 'warning');
   const info = issues.filter((issue) => issue.severity === 'info');
@@ -665,7 +844,9 @@ function writeReports(snapshot, diff) {
     '',
     `**狀態：${icon} ${status === 'OK' ? '正常，無需介入' : '發現問題，需要處理'}**`,
     '',
-    '## 三站摘要',
+    `## ${snapshot.sites.length}站摘要`,
+    '',
+    `- 監測站點：${snapshot.sites.length}（含 FamilyBoard）`,
     '',
   ];
   for (const site of snapshot.sites) {
@@ -692,7 +873,7 @@ function writeReports(snapshot, diff) {
 
   const longDir = ensureDir(join(vaultDir, '01_Daily_Reports', 'Long'));
   const longLines = [
-    `# 每日健康長報告 ${date} — funnytools / roomfeng / worthcalc`,
+    `# 每日健康長報告 ${date} — ${snapshot.sites.length}站`,
     '',
     `- 狀態：${icon} ${status}（🔴 ${critical.length}／🟡 ${warning.length}／ℹ️ ${info.length}）`,
     `- 網站：${snapshot.sites.map((site) => site.baseUrl).join('、')}`,
@@ -722,10 +903,17 @@ function writeReports(snapshot, diff) {
     for (const issue of diff.resolvedIssues) longLines.push(`  - ✅ \`${issue.code}\` ${issue.message}`);
     longLines.push(`- 持續存在問題：${diff.persistingIssues.length ? '' : '無'}`);
     for (const issue of diff.persistingIssues) longLines.push(`  - ${severityIcon(issue.severity)} \`${issue.code}\` ${issue.message}`);
+    longLines.push(`- 觀察變更：${diff.changes?.length ? '' : '無'}`);
+    for (const change of diff.changes ?? []) {
+      const label = change.type === 'SOURCE_MAIN_ADVANCED'
+        ? `${change.site} main SHA ${change.from} → ${change.to}`
+        : `${change.site}/${change.service} revision ${change.from} → ${change.to}`;
+      longLines.push(`  - ℹ️ \`${change.type}\` ${label}`);
+    }
     longLines.push('');
   }
 
-  longLines.push('## 三站深檢明細', '');
+  longLines.push(`## ${snapshot.sites.length}站深檢明細`, '');
   for (const site of snapshot.sites) {
     longLines.push(`### ${site.name}（${site.baseUrl}）`, '');
     longLines.push(`- 狀態：critical ${site.status.critical} / warning ${site.status.warning} / info ${site.status.info}`);
@@ -736,6 +924,14 @@ function writeReports(snapshot, diff) {
     longLines.push(`- ads.txt：HTTP ${site.adsTxt.status}（expect=${site.expectations.expectAdsTxt}）${site.adsTxt.hasGoogleSeller ? ' / google seller detected' : ''}`);
     longLines.push(`- robots.txt：HTTP ${site.robots.status}，Sitemap=${site.robots.hasSitemap ? 'yes' : 'no'}`);
     longLines.push(`- sitemap：${site.sitemap.url}｜HTTP ${site.sitemap.status}｜index=${site.sitemap.isIndex ? 'yes' : 'no'}｜URLs=${site.sitemap.urlCount}`);
+    longLines.push(`- Source main：${site.sourceIdentity?.mainSha ?? '?'}（${site.sourceIdentity?.state ?? 'UNKNOWN'}）`);
+    longLines.push(`- Evidence：liveHttp=${site.evidence?.liveHttp ?? 'UNKNOWN'}｜sourceIdentity=${site.evidence?.sourceIdentity ?? 'UNKNOWN'}｜serviceHealth=${site.evidence?.serviceHealth ?? 'NOT_APPLICABLE'}｜contractProbes=${site.evidence?.contractProbes ?? 'NOT_APPLICABLE'}`);
+    for (const service of site.services ?? []) {
+      longLines.push(`- Service ${service.id}：HTTP ${service.status}｜ok=${service.jsonOk ?? 'unknown'}｜version=${service.version ?? '?'}｜revision=${service.revision ?? '?'}`);
+    }
+    for (const probe of site.contractProbes ?? []) {
+      longLines.push(`- Contract ${probe.id}：HTTP ${probe.status}｜noindex=${probe.noindex ? 'yes' : 'no'}｜analytics=${probe.analytics ? 'yes' : 'no'}｜adsense=${probe.adsense ? 'yes' : 'no'}｜forbidden=${probe.forbiddenPatternCount}｜${probe.issues.length ? 'FAIL' : 'PASS'}`);
+    }
     longLines.push('');
     longLines.push('| 頁面 | 來源 | HTTP | layer | ms | noindex 分類 | title | canonical |');
     longLines.push('|------|------|------|-------|----|--------------|-------|-----------|');
@@ -744,6 +940,12 @@ function writeReports(snapshot, diff) {
     }
     longLines.push('');
   }
+
+  longLines.push('## Known baselines / accepted debt', '');
+  for (const baseline of snapshot.knownBaselines ?? []) {
+    longLines.push(`- \`${baseline.id}\`｜site=${baseline.site}｜state=${baseline.state}｜severity=${baseline.severity}｜${baseline.description}`);
+  }
+  longLines.push('');
 
   longLines.push('## 網路層診斷', '');
   const networkIssues = issues.filter((issue) => issue.code.endsWith('network_suspect'));
@@ -869,15 +1071,18 @@ async function main() {
   const adsense = checkAdsense();
 
   const snapshot = {
+    schemaVersion: 3,
     date,
     generatedAt: new Date().toISOString(),
     issues,
     local,
     sites: siteResults,
     adsense,
+    knownBaselines,
   };
-  const dataDir = config.reporting?.dataDir ?? join(rootDir, 'reports', 'data');
+  const { dataDir } = reportingDirs();
   const diff = diffWithPrevious(snapshot, dataDir);
+  snapshot.diff = diff;
   for (const site of siteResults) site.status = siteStatus(site.id);
   const summary = writeReports(snapshot, diff);
 
