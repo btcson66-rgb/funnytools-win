@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
-import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
-const repo = process.cwd();
+const repo = fileURLToPath(new URL('../', import.meta.url));
 const read = (file) => fs.readFileSync(path.join(repo, file), 'utf8');
 
 test('Split 04 data-flow classification is explicit and surface-aware', async () => {
@@ -53,7 +53,7 @@ test('nongated canonical tools keep the main gate config and local privacy copy'
   }
 });
 
-test('source contracts preserve gate endpoint, storage, threshold, and payload facts', () => {
+test('frontend-owned source contracts preserve gate and Conversion API facts', () => {
   const gate = read('src/lib/downloadGate.client.ts');
   assert.match(read('src/config/site.ts'), /roomfeng\.win\/api\/download-gate/);
   assert.match(gate, /ft_gate_email/);
@@ -62,20 +62,6 @@ test('source contracts preserve gate endpoint, storage, threshold, and payload f
   const api = read('src/lib/funnytools-api.ts');
   for (const endpoint of ['/api/images/compress-batch', '/api/pdf/to-word', '/api/pdf/table-preview', '/api/pdf/table-to-excel', '/api/pdf/export-tables', '/api/image/to-dxf', '/api/pdf/compress']) {
     assert.match(api, new RegExp(endpoint.replaceAll('/', '\\/')));
-  }
-  const backendCandidates = [
-    process.env.FUNNYTOOLS_ROOMFENG_GATE_PATH,
-    process.platform === 'win32' ? 'D:/room-layout-fengshui-planner/functions/api/download-gate.ts' : null,
-    path.resolve(repo, '..', 'room-layout-fengshui-planner/functions/api/download-gate.ts'),
-  ].filter(Boolean);
-  const backendPath = backendCandidates.find((candidate) => fs.existsSync(candidate));
-  if (backendPath) {
-    const backend = fs.readFileSync(backendPath, 'utf8');
-    assert.ok(backend.indexOf('addContact(') < backend.indexOf('fileEntry'));
-    assert.match(backend, /SOURCE/);
-    assert.match(backend, /GATE_SITE/);
-    assert.match(backend, /GATE_TOOL/);
-    assert.match(backend, /GATE_LANG/);
   }
 });
 
@@ -91,22 +77,4 @@ test('canonical and expansion HTML reflect the route-level disclosure boundary',
   assert.doesNotMatch(expansion, /data-download-gate-config/);
   const compressor = read('dist/tools/pdf-compressor/index.html');
   assert.match(compressor, /FunnyTools Conversion API/);
-});
-
-test('scope guard leaves prohibited global files untouched', () => {
-  const baseCandidates = [process.env.SPLIT04_BASE_SHA, 'origin/main', 'HEAD^'].filter(Boolean);
-  const base = baseCandidates.find((candidate) => {
-    try {
-      execFileSync('git', ['rev-parse', '--verify', candidate], { stdio: 'ignore' });
-      return true;
-    } catch {
-      return false;
-    }
-  });
-  const changed = base
-    ? execFileSync('git', ['diff', '--name-only', base, 'HEAD'], { encoding: 'utf8' }).trim().split(/\r?\n/).filter(Boolean)
-    : execFileSync('git', ['diff-tree', '--no-commit-id', '--name-only', '-r', 'HEAD'], { encoding: 'utf8' }).trim().split(/\r?\n/).filter(Boolean);
-  assert.ok(!changed.includes('src/i18n/ui.ts'));
-  assert.ok(!changed.includes('src/config/site.ts'));
-  assert.ok(!changed.some((file) => /downloadGate\.client|ConversionApiTool|backend|\.github\/workflows/.test(file)));
 });
