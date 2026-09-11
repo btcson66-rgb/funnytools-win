@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "FUNNYTOOLS_BASELINE_UPDATE_MODE_HASH_DEBT",
+      "site": "funnytools",
+      "state": "KNOWN_DEBT",
+      "severity": "info",
+      "description": "Local sitemap update mode can rewrite same-version hash-drifted lastmod values and collapse tool lastmod dates. CI/production preserve mode and the live sitemap are healthy. This is not a live outage."
+    },
+    {
+      "id": "FUNNYTOOLS_WINDOWS_DESKTOP_RUNTIME",
+      "site": "funnytools",
+      "state": "KNOWN_ARCHITECTURE_RISK",
+      "severity": "info",
+      "description": "The Conversion API currently depends on Docker Desktop on the owner Windows host. Runtime watchdog recovery exists, but owner-login dependency remains an architecture risk."
+    }
+  ]
+}

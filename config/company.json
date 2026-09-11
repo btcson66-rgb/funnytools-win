@@ -5,7 +5,7 @@
     "slowResponseMs": 4000,
     "retryAttempts": 3,
     "retryBackoffMs": 1000,
-    "userAgent": "FableCompany-HealthCheck/2.0 (+https://funnytools.win)"
+    "userAgent": "FableCompany-HealthCheck/3.0 (+https://funnytools.win)"
   },
   "reporting": {
     "vaultDir": "D:/Fable company/Company Vault",
@@ -17,6 +17,7 @@
       "id": "funnytools",
       "name": "FunnyTools",
       "baseUrl": "https://funnytools.win",
+      "githubRepo": "btcson66-rgb/funnytools-win",
       "localRepo": "D:/funnytools",
       "primaryPath": "/",
       "sitemapPath": "/sitemap.xml",
@@ -36,12 +37,24 @@
         "expectAdsense": true,
         "expectAdsTxt": true,
         "expectAnalytics": true
-      }
+      },
+      "services": [
+        {
+          "id": "conversion-api",
+          "type": "json-health",
+          "url": "https://api.funnytools.win/health",
+          "expectStatus": 200,
+          "expectJson": {
+            "ok": true
+          }
+        }
+      ]
     },
     {
       "id": "roomfeng",
       "name": "RoomFeng",
       "baseUrl": "https://roomfeng.win",
+      "githubRepo": "btcson66-rgb/room-layout-fengshui-planner",
       "primaryPath": "/",
       "sitemapPath": "/sitemap-index.xml",
       "samplePageCount": 6,
@@ -58,6 +71,7 @@
       "id": "worthcalc",
       "name": "WorthCalc",
       "baseUrl": "https://worthcalc.win",
+      "githubRepo": "btcson66-rgb/worthcalc",
       "primaryPath": "/en/",
       "sitemapPath": "/sitemap-index.xml",
       "samplePageCount": 6,
@@ -69,6 +83,54 @@
         "expectAdsTxt": false,
         "expectAnalytics": true
       }
+    },
+    {
+      "id": "familyboard",
+      "name": "FamilyBoard",
+      "baseUrl": "https://familyboard.win",
+      "githubRepo": "btcson66-rgb/familyboard",
+      "primaryPath": "/",
+      "sitemapPath": "/sitemap-index.xml",
+      "samplePageCount": 6,
+      "sampleUrls": [
+        "/",
+        "/zh-tw/"
+      ],
+      "expectations": {
+        "expectAdsense": false,
+        "expectAdsTxt": false,
+        "expectAnalytics": true
+      },
+      "contractProbes": [
+        {
+          "id": "private-app-en",
+          "path": "/app/",
+          "expectStatus": 200,
+          "expectNoindex": true,
+          "expectAnalytics": false,
+          "expectAdsense": false,
+          "forbidPatterns": [
+            "googletagmanager.com/gtag/js",
+            "adsbygoogle",
+            "pagead2.googlesyndication.com",
+            "doubleclick.net"
+          ]
+        },
+        {
+          "id": "private-app-zh",
+          "path": "/zh-tw/app/",
+          "expectStatus": 200,
+          "expectNoindex": true,
+          "expectAnalytics": false,
+          "expectAdsense": false,
+          "forbidPatterns": [
+            "googletagmanager.com/gtag/js",
+            "adsbygoogle",
+            "pagead2.googlesyndication.com",
+            "doubleclick.net"
+          ]
+        }
+      ]
     }
   ]
 }
