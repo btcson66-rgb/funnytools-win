@@ -1,4 +1,4 @@
-// Fable Company three-site daily health check.
+// Fable Company multi-site daily health and drift check.
 // Writes backward-compatible short/long reports for fable-daily-review.
 import {
   existsSync,
@@ -16,6 +16,14 @@ import {
   evaluateJsonHealth,
   summarizeKnownBaselines,
 } from './scripts/health-contracts.mjs';
+import {
+  deploymentFreshnessIssue,
+  diffDeploymentIdentity,
+  evaluateDeploymentFreshness,
+  normalizeCloudflarePagesProject,
+  normalizeGithubPagesDeployment,
+  normalizeWorkflowDeployment,
+} from './scripts/deployment-identity.mjs';
 
 const rootDir = dirname(fileURLToPath(import.meta.url));
 const configPath = join(rootDir, 'config', 'company.json');
@@ -392,6 +400,7 @@ async function checkSourceIdentity(site) {
     branch: 'main',
     state: 'UNKNOWN',
     mainSha: null,
+    committedAt: null,
     status: 0,
     observedAt: new Date().toISOString(),
   };
@@ -409,6 +418,9 @@ async function checkSourceIdentity(site) {
       rateLimited: response.status === 429,
     });
     Object.assign(result, classification);
+    result.committedAt = json?.commit?.commit?.committer?.date
+      ?? json?.commit?.commit?.author?.date
+      ?? null;
   } else {
     Object.assign(result, classifySourceIdentity({ status: 0 }));
   }
@@ -418,6 +430,310 @@ async function checkSourceIdentity(site) {
     addIssue(site, 'info', 'source-identity-unknown', `${site.name} GitHub main SHA 暫時無法分類，不視為網站故障`);
   }
   return result;
+}
+
+function deploymentEvidenceState(evidence) {
+  if (evidence === 'VERIFIED') return 'COMPLETE';
+  if (evidence === 'PARTIAL') return 'PARTIAL';
+  if (evidence === 'NO_ACCESS') return 'NO_ACCESS';
+  return 'UNKNOWN';
+}
+
+async function fetchGithubPagesProvider(site) {
+  const deployment = site.deployment ?? {};
+  const environment = deployment.environment ?? 'github-pages';
+  const url = `https://api.github.com/repos/${site.githubRepo}/deployments?environment=${encodeURIComponent(environment)}&per_page=10`;
+  const response = await fetchText(url, 'github-pages-deployments', githubHeaders());
+  if (response.layer !== 'http') {
+    return { providerApi: 'UNKNOWN', identity: null, latestAttempt: null, response };
+  }
+  if ([401, 403, 429].includes(response.status)) {
+    return { providerApi: 'NO_ACCESS', identity: null, latestAttempt: null, response };
+  }
+  if (response.status !== 200) {
+    return { providerApi: 'UNKNOWN', identity: null, latestAttempt: null, response };
+  }
+
+  let deployments;
+  try {
+    deployments = JSON.parse(response.body);
+  } catch {
+    return { providerApi: 'UNKNOWN', identity: null, latestAttempt: null, response };
+  }
+  if (!Array.isArray(deployments)) {
+    return { providerApi: 'UNKNOWN', identity: null, latestAttempt: null, response };
+  }
+
+  let latestAttempt = null;
+  let latestSuccess = null;
+  for (const item of deployments.slice(0, 5)) {
+    let statuses = [];
+    if (item?.statuses_url) {
+      const statusResponse = await fetchText(item.statuses_url, 'github-pages-deployment-status', githubHeaders());
+      if (statusResponse.layer === 'http' && statusResponse.status === 200) {
+        try {
+          const parsed = JSON.parse(statusResponse.body);
+          if (Array.isArray(parsed)) statuses = parsed;
+        } catch { /* malformed status is treated as unavailable */ }
+      }
+    }
+    const status = statuses[0] ?? null;
+    if (!latestAttempt) {
+      latestAttempt = {
+        id: item?.id ?? null,
+        sha: item?.sha ?? null,
+        state: status?.state ?? null,
+        createdAt: item?.created_at ?? null,
+      };
+    }
+    if (!latestSuccess && status?.state === 'success') {
+      latestSuccess = normalizeGithubPagesDeployment(item, status);
+    }
+  }
+
+  const identity = latestSuccess
+    ?? (deployments[0]
+      ? normalizeGithubPagesDeployment(deployments[0], null)
+      : null);
+  return {
+    providerApi: identity?.evidence === 'VERIFIED'
+      ? 'VERIFIED'
+      : identity
+        ? 'PARTIAL'
+        : 'UNKNOWN',
+    identity,
+    latestAttempt,
+    response,
+  };
+}
+
+async function fetchCloudflareProvider(site) {
+  const deployment = site.deployment ?? {};
+  const accountId = process.env[deployment.cloudflareAccountIdEnv ?? 'CLOUDFLARE_ACCOUNT_ID'];
+  const token = process.env[deployment.cloudflareApiTokenEnv ?? 'CLOUDFLARE_API_TOKEN'];
+  if (!accountId || !token) {
+    return {
+      providerApi: 'NO_ACCESS',
+      credentialSource: 'ENV_ABSENT',
+      identity: null,
+      latestAttempt: null,
+    };
+  }
+
+  const url = `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(accountId)}/pages/projects/${encodeURIComponent(deployment.projectName ?? '')}`;
+  const response = await fetchText(url, 'cloudflare-pages-project', {
+    ...githubHeaders(),
+    authorization: `Bearer ${token}`,
+  });
+  if (response.layer !== 'http' || [401, 403, 429].includes(response.status)) {
+    return {
+      providerApi: 'NO_ACCESS',
+      credentialSource: 'ENV_PRESENT',
+      identity: null,
+      latestAttempt: null,
+      response,
+    };
+  }
+  if (response.status !== 200) {
+    return {
+      providerApi: 'UNKNOWN',
+      credentialSource: 'ENV_PRESENT',
+      identity: null,
+      latestAttempt: null,
+      response,
+    };
+  }
+  let json;
+  try {
+    json = JSON.parse(response.body);
+  } catch {
+    return {
+      providerApi: 'UNKNOWN',
+      credentialSource: 'ENV_PRESENT',
+      identity: null,
+      latestAttempt: null,
+      response,
+    };
+  }
+  const identity = normalizeCloudflarePagesProject(json);
+  return {
+    providerApi: identity.evidence,
+    credentialSource: 'ENV_PRESENT',
+    identity,
+    latestAttempt: identity.deploymentId
+      ? {
+        id: identity.deploymentId,
+        sha: identity.deploymentSha,
+        state: identity.providerState,
+        createdAt: identity.deploymentCreatedAt,
+      }
+      : null,
+    response,
+  };
+}
+
+async function fetchWorkflowFallback(site) {
+  const deployment = site.deployment ?? {};
+  const workflowFile = deployment.workflowFile;
+  if (!site.githubRepo || !workflowFile) {
+    return { identity: null, latestAttempt: null, providerApi: 'UNKNOWN' };
+  }
+  const url = `https://api.github.com/repos/${site.githubRepo}/actions/workflows/${encodeURIComponent(workflowFile)}/runs?branch=${encodeURIComponent(deployment.productionBranch ?? 'main')}&per_page=10`;
+  const response = await fetchText(url, 'github-workflow-deployments', githubHeaders());
+  if (response.layer !== 'http' || [401, 403, 429].includes(response.status)) {
+    return { identity: null, latestAttempt: null, providerApi: 'NO_ACCESS', response };
+  }
+  if (response.status !== 200) {
+    return { identity: null, latestAttempt: null, providerApi: 'UNKNOWN', response };
+  }
+  let json;
+  try {
+    json = JSON.parse(response.body);
+  } catch {
+    return { identity: null, latestAttempt: null, providerApi: 'UNKNOWN', response };
+  }
+  const runs = Array.isArray(json?.workflow_runs) ? json.workflow_runs : [];
+  let latestAttempt = null;
+  for (const run of runs) {
+    const jobsUrl = `https://api.github.com/repos/${site.githubRepo}/actions/runs/${run.id}/jobs?per_page=100`;
+    const jobsResponse = await fetchText(jobsUrl, 'github-workflow-deploy-jobs', githubHeaders());
+    if (jobsResponse.layer !== 'http' || jobsResponse.status !== 200) continue;
+    let jobsJson;
+    try { jobsJson = JSON.parse(jobsResponse.body); } catch { continue; }
+    const jobs = Array.isArray(jobsJson?.jobs) ? jobsJson.jobs : [];
+    const job = jobs.find((candidate) =>
+      String(candidate?.name ?? '').toLowerCase() === String(deployment.deployJobName ?? 'deploy').toLowerCase());
+    if (!job) continue;
+    const step = deployment.deployStepName
+      ? (job.steps ?? []).find((candidate) =>
+        String(candidate?.name ?? '').toLowerCase() === String(deployment.deployStepName).toLowerCase())
+      : null;
+    const identity = normalizeWorkflowDeployment({ run, job, step });
+    if (!latestAttempt) {
+      latestAttempt = {
+        id: run.id ?? null,
+        sha: run.head_sha ?? null,
+        state: step?.conclusion ?? job.conclusion ?? run.conclusion ?? null,
+        createdAt: run.updated_at ?? run.created_at ?? null,
+      };
+    }
+    if (identity.evidence === 'PARTIAL') {
+      return {
+        identity,
+        latestAttempt,
+        providerApi: 'NO_ACCESS',
+        run,
+        job,
+        step,
+      };
+    }
+  }
+  return { identity: null, latestAttempt, providerApi: 'UNKNOWN' };
+}
+
+async function compareDeploymentToSource(site, deploymentSha, sourceSha) {
+  if (!site.githubRepo || !deploymentSha || !sourceSha) return null;
+  const url = `https://api.github.com/repos/${site.githubRepo}/compare/${deploymentSha}...${sourceSha}`;
+  const response = await fetchText(url, 'github-deployment-compare', githubHeaders());
+  if (response.layer !== 'http' || response.status !== 200) return null;
+  let json;
+  try { json = JSON.parse(response.body); } catch { return null; }
+  const files = Array.isArray(json?.files) ? json.files : [];
+  return {
+    status: json?.status ?? null,
+    totalCommits: json?.total_commits ?? null,
+    complete: files.length < 300,
+    files,
+  };
+}
+
+async function checkDeploymentIdentity(site, sourceIdentity) {
+  const deployment = site.deployment ?? {};
+  let providerResult;
+  if (deployment.provider === 'cloudflare-pages') {
+    providerResult = await fetchCloudflareProvider(site);
+  } else {
+    providerResult = await fetchGithubPagesProvider(site);
+  }
+
+  let fallbackResult = null;
+  if (providerResult.providerApi !== 'VERIFIED') {
+    fallbackResult = await fetchWorkflowFallback(site);
+  }
+  const providerIdentity = providerResult.identity;
+  const fallbackIdentity = fallbackResult?.identity;
+  const selected = providerIdentity?.evidence === 'VERIFIED'
+    ? providerIdentity
+    : fallbackIdentity?.evidence === 'PARTIAL'
+      ? fallbackIdentity
+      : providerIdentity;
+  const baseIdentity = selected ?? {
+    provider: deployment.provider ?? 'unknown',
+    evidence: providerResult.providerApi === 'NO_ACCESS' ? 'NO_ACCESS' : 'UNKNOWN',
+    deploymentId: null,
+    deploymentSha: null,
+    deploymentRef: null,
+    deploymentCreatedAt: null,
+    providerState: null,
+    environment: null,
+    environmentUrl: null,
+  };
+  const compare = baseIdentity.deploymentSha
+    && sourceIdentity.mainSha
+    && baseIdentity.deploymentSha !== sourceIdentity.mainSha
+    ? await compareDeploymentToSource(site, baseIdentity.deploymentSha, sourceIdentity.mainSha)
+    : null;
+  const freshness = evaluateDeploymentFreshness({
+    sourceSha: sourceIdentity.mainSha,
+    sourceCommittedAt: sourceIdentity.committedAt,
+    deploymentSha: baseIdentity.deploymentSha,
+    latestAttemptSha: providerResult.latestAttempt?.sha ?? fallbackResult?.latestAttempt?.sha,
+    latestAttemptState: providerResult.latestAttempt?.state ?? fallbackResult?.latestAttempt?.state,
+    sourceScope: deployment.sourceScope ?? { mode: 'all-main' },
+    compare,
+    graceMinutes: deployment.graceMinutes ?? 45,
+  });
+  const freshnessIssue = deploymentFreshnessIssue(freshness);
+  if (freshnessIssue) {
+    addIssue(site, freshnessIssue.severity, freshnessIssue.code,
+      `${site.name} deployment freshness=${freshness.state}（source=${sourceIdentity.mainSha ?? '?'}，deployment=${baseIdentity.deploymentSha ?? '?'}）`,
+      { deploymentFreshness: freshness, deploymentEvidence: baseIdentity.evidence });
+  }
+
+  return {
+    provider: deployment.provider ?? baseIdentity.provider,
+    evidence: baseIdentity.evidence,
+    deploymentId: baseIdentity.deploymentId,
+    deploymentSha: baseIdentity.deploymentSha,
+    deploymentRef: baseIdentity.deploymentRef,
+    deploymentCreatedAt: baseIdentity.deploymentCreatedAt,
+    providerState: baseIdentity.providerState,
+    environment: baseIdentity.environment,
+    environmentUrl: baseIdentity.environmentUrl,
+    providerApi: providerResult.providerApi,
+    credentialSource: providerResult.credentialSource ?? null,
+    sourceSha: sourceIdentity.mainSha,
+    sourceCommittedAt: sourceIdentity.committedAt,
+    freshness,
+    compare,
+    latestAttempt: providerResult.latestAttempt ?? fallbackResult?.latestAttempt ?? null,
+    workflowFallback: fallbackResult?.identity
+      ? {
+        evidence: fallbackResult.identity.evidence,
+        deploymentId: fallbackResult.identity.deploymentId,
+        deploymentSha: fallbackResult.identity.deploymentSha,
+        deploymentRef: fallbackResult.identity.deploymentRef,
+        providerState: fallbackResult.identity.providerState,
+        deploymentCreatedAt: fallbackResult.identity.deploymentCreatedAt,
+        workflowUrl: fallbackResult.run?.html_url ?? null,
+        job: fallbackResult.job?.name ?? null,
+        step: fallbackResult.step?.name ?? null,
+      }
+      : {
+        evidence: providerResult.providerApi === 'VERIFIED' ? 'NOT_USED' : (fallbackResult?.providerApi ?? 'UNKNOWN'),
+      },
+    observedAt: new Date().toISOString(),
+  };
 }
 
 async function checkServices(site) {
@@ -719,6 +1035,7 @@ async function checkSite(site) {
     live.samples.push(await checkSamplePage(site, url, source));
   }
   live.sourceIdentity = await checkSourceIdentity(site);
+  live.deploymentIdentity = await checkDeploymentIdentity(site, live.sourceIdentity);
   const services = await checkServices(site);
   live.services = services.items;
   const contractProbes = await checkContractProbes(site);
@@ -726,6 +1043,7 @@ async function checkSite(site) {
   live.evidence = {
     liveHttp: liveHttpEvidence(live),
     sourceIdentity: live.sourceIdentity.state,
+    deploymentIdentity: deploymentEvidenceState(live.deploymentIdentity.evidence),
     serviceHealth: services.evidence,
     contractProbes: contractProbes.evidence,
   };
@@ -783,6 +1101,9 @@ function diffWithPrevious(snapshot, dataDir) {
       }
       const sourceChange = diffSourceIdentity(prior?.sourceIdentity?.mainSha, site.sourceIdentity?.mainSha);
       if (sourceChange.changed) changes.push({ ...sourceChange, site: site.id });
+      for (const deploymentChange of diffDeploymentIdentity(prior?.deploymentIdentity, site.deploymentIdentity)) {
+        changes.push({ ...deploymentChange, site: site.id });
+      }
       const priorServices = new Map((prior?.services ?? []).map((service) => [service.id, service]));
       for (const service of site.services ?? []) {
         const old = priorServices.get(service.id);
@@ -907,7 +1228,9 @@ function writeReports(snapshot, diff) {
     for (const change of diff.changes ?? []) {
       const label = change.type === 'SOURCE_MAIN_ADVANCED'
         ? `${change.site} main SHA ${change.from} → ${change.to}`
-        : `${change.site}/${change.service} revision ${change.from} → ${change.to}`;
+        : change.type === 'SERVICE_REVISION_CHANGED'
+          ? `${change.site}/${change.service} revision ${change.from} → ${change.to}`
+          : `${change.site} deployment ${change.type} ${change.from ?? 'none'} → ${change.to ?? 'none'}`;
       longLines.push(`  - ℹ️ \`${change.type}\` ${label}`);
     }
     longLines.push('');
@@ -924,8 +1247,18 @@ function writeReports(snapshot, diff) {
     longLines.push(`- ads.txt：HTTP ${site.adsTxt.status}（expect=${site.expectations.expectAdsTxt}）${site.adsTxt.hasGoogleSeller ? ' / google seller detected' : ''}`);
     longLines.push(`- robots.txt：HTTP ${site.robots.status}，Sitemap=${site.robots.hasSitemap ? 'yes' : 'no'}`);
     longLines.push(`- sitemap：${site.sitemap.url}｜HTTP ${site.sitemap.status}｜index=${site.sitemap.isIndex ? 'yes' : 'no'}｜URLs=${site.sitemap.urlCount}`);
-    longLines.push(`- Source main：${site.sourceIdentity?.mainSha ?? '?'}（${site.sourceIdentity?.state ?? 'UNKNOWN'}）`);
-    longLines.push(`- Evidence：liveHttp=${site.evidence?.liveHttp ?? 'UNKNOWN'}｜sourceIdentity=${site.evidence?.sourceIdentity ?? 'UNKNOWN'}｜serviceHealth=${site.evidence?.serviceHealth ?? 'NOT_APPLICABLE'}｜contractProbes=${site.evidence?.contractProbes ?? 'NOT_APPLICABLE'}`);
+    longLines.push(`- Source main：${site.sourceIdentity?.mainSha ?? '?'}（${site.sourceIdentity?.state ?? 'UNKNOWN'}）｜committedAt=${site.sourceIdentity?.committedAt ?? '?'}`);
+    longLines.push(`- Deployment provider：${site.deploymentIdentity?.provider ?? '?'}｜Evidence=${site.deploymentIdentity?.evidence ?? 'UNKNOWN'}｜Source SHA=${site.deploymentIdentity?.sourceSha ?? '?'}｜Deployment SHA=${site.deploymentIdentity?.deploymentSha ?? '?'}｜Freshness=${site.deploymentIdentity?.freshness?.state ?? 'UNKNOWN'}｜Provider state=${site.deploymentIdentity?.providerState ?? '?'}｜Deployment time=${site.deploymentIdentity?.deploymentCreatedAt ?? '?'}`);
+    if (site.deploymentIdentity?.provider === 'cloudflare-pages' && site.deploymentIdentity?.providerApi !== 'VERIFIED') {
+      longLines.push(`- Cloudflare provider API：${site.deploymentIdentity?.providerApi ?? 'UNKNOWN'}｜workflow deploy evidence=${site.deploymentIdentity?.workflowFallback?.evidence ?? 'UNKNOWN'}`);
+    }
+    if (site.deploymentIdentity?.provider === 'github-pages' && site.deploymentIdentity?.providerApi !== 'VERIFIED' && site.deploymentIdentity?.workflowFallback?.evidence === 'PARTIAL') {
+      longLines.push(`- GitHub Pages provider API：${site.deploymentIdentity?.providerApi ?? 'UNKNOWN'}｜workflow fallback=PARTIAL`);
+    }
+    if (site.deploymentIdentity?.freshness?.state === 'CURRENT_FOR_SCOPE') {
+      longLines.push('- WorthCalc repo main較新，但 deployment scope內沒有需要重新部署的變更。');
+    }
+    longLines.push(`- Evidence：liveHttp=${site.evidence?.liveHttp ?? 'UNKNOWN'}｜sourceIdentity=${site.evidence?.sourceIdentity ?? 'UNKNOWN'}｜deploymentIdentity=${site.evidence?.deploymentIdentity ?? 'UNKNOWN'}｜serviceHealth=${site.evidence?.serviceHealth ?? 'NOT_APPLICABLE'}｜contractProbes=${site.evidence?.contractProbes ?? 'NOT_APPLICABLE'}`);
     for (const service of site.services ?? []) {
       longLines.push(`- Service ${service.id}：HTTP ${service.status}｜ok=${service.jsonOk ?? 'unknown'}｜version=${service.version ?? '?'}｜revision=${service.revision ?? '?'}`);
     }
@@ -1071,7 +1404,7 @@ async function main() {
   const adsense = checkAdsense();
 
   const snapshot = {
-    schemaVersion: 3,
+    schemaVersion: 4,
     date,
     generatedAt: new Date().toISOString(),
     issues,
