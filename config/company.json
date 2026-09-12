@@ -19,6 +19,16 @@
       "baseUrl": "https://funnytools.win",
       "githubRepo": "btcson66-rgb/funnytools-win",
       "localRepo": "D:/funnytools",
+      "deployment": {
+        "provider": "github-pages",
+        "environment": "github-pages",
+        "workflowFile": "deploy.yml",
+        "deployJobName": "deploy",
+        "sourceScope": {
+          "mode": "all-main"
+        },
+        "graceMinutes": 45
+      },
       "primaryPath": "/",
       "sitemapPath": "/sitemap.xml",
       "samplePageCount": 6,
@@ -55,6 +65,20 @@
       "name": "RoomFeng",
       "baseUrl": "https://roomfeng.win",
       "githubRepo": "btcson66-rgb/room-layout-fengshui-planner",
+      "deployment": {
+        "provider": "cloudflare-pages",
+        "projectName": "roomfeng-win",
+        "productionBranch": "main",
+        "workflowFile": "deploy-cloudflare-pages.yml",
+        "deployJobName": "deploy",
+        "deployStepName": "Deploy to Cloudflare Pages",
+        "sourceScope": {
+          "mode": "all-main"
+        },
+        "graceMinutes": 45,
+        "cloudflareAccountIdEnv": "CLOUDFLARE_ACCOUNT_ID",
+        "cloudflareApiTokenEnv": "CLOUDFLARE_API_TOKEN"
+      },
       "primaryPath": "/",
       "sitemapPath": "/sitemap-index.xml",
       "samplePageCount": 6,
@@ -72,6 +96,23 @@
       "name": "WorthCalc",
       "baseUrl": "https://worthcalc.win",
       "githubRepo": "btcson66-rgb/worthcalc",
+      "deployment": {
+        "provider": "github-pages",
+        "environment": "github-pages",
+        "workflowFile": "deploy-worthcalc.yml",
+        "deployJobName": "deploy",
+        "sourceScope": {
+          "mode": "paths",
+          "basis": "workflow-path-filter",
+          "pathPrefixes": [
+            "sites/worth-it-tools/"
+          ],
+          "exactPaths": [
+            ".github/workflows/deploy-worthcalc.yml"
+          ]
+        },
+        "graceMinutes": 45
+      },
       "primaryPath": "/en/",
       "sitemapPath": "/sitemap-index.xml",
       "samplePageCount": 6,
@@ -89,6 +130,16 @@
       "name": "FamilyBoard",
       "baseUrl": "https://familyboard.win",
       "githubRepo": "btcson66-rgb/familyboard",
+      "deployment": {
+        "provider": "github-pages",
+        "environment": "github-pages",
+        "workflowFile": "deploy.yml",
+        "deployJobName": "deploy",
+        "sourceScope": {
+          "mode": "all-main"
+        },
+        "graceMinutes": 45
+      },
       "primaryPath": "/",
       "sitemapPath": "/sitemap-index.xml",
       "samplePageCount": 6,
