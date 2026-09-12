@@ -355,6 +355,18 @@ function httpError(site, response, severity, code, message) {
 
 function checkLocalRepo() {
   const site = sites.find((item) => item.localRepo) ?? sites[0];
+  if (process.env.FABLE_HEALTH_SKIP_LOCAL_REPO === '1') {
+    return {
+      site: site.id,
+      repo: null,
+      skipped: true,
+      reason: 'FABLE_HEALTH_SKIP_LOCAL_REPO',
+      branch: null,
+      lastCommit: null,
+      uncommittedFiles: 0,
+      version: null,
+    };
+  }
   const repo = site.localRepo ?? rootDir;
   const result = { site: site.id, repo };
   const run = (command) => execSync(command, {
@@ -1198,8 +1210,12 @@ function writeReports(snapshot, diff) {
     '',
     `- 狀態：${icon} ${status}（🔴 ${critical.length}／🟡 ${warning.length}／ℹ️ ${info.length}）`,
     `- 網站：${snapshot.sites.map((site) => site.baseUrl).join('、')}`,
-    `- 本機版本（${snapshot.local.site}）：v${snapshot.local.version ?? '?'}｜branch: ${snapshot.local.branch ?? '?'}｜未 commit 檔案：${snapshot.local.uncommittedFiles ?? '?'}`,
-    `- 最後 commit：${snapshot.local.lastCommit ?? '?'}`,
+    ...(snapshot.local?.skipped
+      ? ['- 本機 repo：SKIPPED（cloud monitoring context）']
+      : [
+        `- 本機版本（${snapshot.local.site}）：v${snapshot.local.version ?? '?'}｜branch: ${snapshot.local.branch ?? '?'}｜未 commit 檔案：${snapshot.local.uncommittedFiles ?? '?'}`,
+        `- 最後 commit：${snapshot.local.lastCommit ?? '?'}`,
+      ]),
     '',
     '## 問題總覽',
     '',

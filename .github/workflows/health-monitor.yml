@@ -1,0 +1,43 @@
+name: Fable Four-Site Health Monitor
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fable-four-site-health-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Run four-site health monitor
+        env:
+          FABLE_HEALTH_VAULT_DIR: ${{ runner.temp }}/fable-health/vault
+          FABLE_HEALTH_DATA_DIR: ${{ runner.temp }}/fable-health/data
+          FABLE_HEALTH_SKIP_LOCAL_REPO: '1'
+        run: node scripts/run-health-monitor.mjs
+
+      - name: Upload health evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fable-health-${{ github.run_id }}
+          path: ${{ runner.temp }}/fable-health
+          if-no-files-found: warn
+          retention-days: 14
