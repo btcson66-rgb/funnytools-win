@@ -1,0 +1,5 @@
+locale_group,total,google_known,crawled,indexed,crawled_not_indexed,discovered_not_indexed,canonical_problem,blocked_error,unknown,acceptance_rate,median_last_crawl_age_days,mean_last_crawl_age_days
+zh,308,108,108,1,107,0,0,0,200,0.0032,0,9.652597402597403
+en,190,106,106,1,104,0,0,1,84,0.0053,22,16.126315789473683
+es,139,64,64,1,63,0,0,0,75,0.0072,0,12.237410071942445
+fr,75,35,35,1,34,0,0,0,40,0.0133,0,12.24
