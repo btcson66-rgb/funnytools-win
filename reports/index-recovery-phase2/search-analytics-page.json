@@ -1,0 +1,2126 @@
+{
+  "observed_at": "2026-09-13T08:50:22.844Z",
+  "property": "sc-domain:funnytools.win",
+  "note": "Search Analytics is supporting evidence only; an absent page row does not prove that the URL is not indexed.",
+  "windows": [
+    {
+      "days": 28,
+      "startDate": "2026-08-14",
+      "endDate": "2026-09-10",
+      "endpoint": "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Afunnytools.win/searchAnalytics/query",
+      "apiStatus": 200,
+      "apiError": "",
+      "paginationComplete": true,
+      "rows": [
+        {
+          "keys": [
+            "https://funnytools.win/"
+          ],
+          "clicks": 33,
+          "impressions": 59,
+          "ctr": 0.559322033898305,
+          "position": 10.033898305084746
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/"
+          ],
+          "clicks": 1,
+          "impressions": 20,
+          "ctr": 0.05,
+          "position": 8.95
+        },
+        {
+          "keys": [
+            "http://funnytools.win/for/teachers/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "keys": [
+            "http://funnytools.win/tools/inflation/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 7.333333333333333
+        },
+        {
+          "keys": [
+            "https://funnytools.win/about/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/images-to-pdf-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 5.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/category/pdf/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "keys": [
+            "https://funnytools.win/contact/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 1.6666666666666665
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/education-statistics/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 62
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/for/teachers/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 90
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/classroom-random-group-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 59
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/classroom-timer-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 96
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/spss-levene-test-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 77
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/t-score-calculator-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 12,
+          "ctr": 0,
+          "position": 84.75
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/t-test-apa-format-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 27,
+          "ctr": 0,
+          "position": 85.48148148148148
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/teacher-exam-weighted-score-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 74
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/z-score-calculator-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 79
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/cad-2d/"
+          ],
+          "clicks": 0,
+          "impressions": 59,
+          "ctr": 0,
+          "position": 71.35593220338983
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/class-rank-percentile-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 9
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/compound-interest/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/cronbach-alpha-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 77
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/flowchart/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 74
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/grade-average/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 3
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/group-generator/"
+          ],
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 86.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/net-salary/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/normalized-score-converter/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 87
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/percentage-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/percentile-rank-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/random-wheel/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 63
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/sketchpad/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 75.33333333333333
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/t-score-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 50.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/teacher-exam-score-converter/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 50.333333333333336
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/weighted-average-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/what-to-eat/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 75
+        },
+        {
+          "keys": [
+            "https://funnytools.win/es/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 6.8
+        },
+        {
+          "keys": [
+            "https://funnytools.win/es/herramientas/tirar-dados-online/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 62
+        },
+        {
+          "keys": [
+            "https://funnytools.win/for/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "keys": [
+            "https://funnytools.win/fr/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 3
+        },
+        {
+          "keys": [
+            "https://funnytools.win/fr/fonctionnement-outils/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "keys": [
+            "https://funnytools.win/support/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/bar-chart-maker/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 93
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/base64/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 100
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/countdown-timer/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 86
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/cronbach-alpha-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 76
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/seating-chart/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 64
+        }
+      ]
+    },
+    {
+      "days": 90,
+      "startDate": "2026-06-13",
+      "endDate": "2026-09-10",
+      "endpoint": "https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Afunnytools.win/searchAnalytics/query",
+      "apiStatus": 200,
+      "apiError": "",
+      "paginationComplete": true,
+      "rows": [
+        {
+          "keys": [
+            "https://funnytools.win/"
+          ],
+          "clicks": 44,
+          "impressions": 139,
+          "ctr": 0.31654676258992803,
+          "position": 8.820143884892087
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/t-score-calculator/"
+          ],
+          "clicks": 17,
+          "impressions": 151,
+          "ctr": 0.11258278145695365,
+          "position": 8.251655629139073
+        },
+        {
+          "keys": [
+            "https://funnytools.win/about/"
+          ],
+          "clicks": 7,
+          "impressions": 66,
+          "ctr": 0.10606060606060606,
+          "position": 4.196969696969697
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/"
+          ],
+          "clicks": 3,
+          "impressions": 97,
+          "ctr": 0.030927835051546393,
+          "position": 8.092783505154639
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/class-rank-percentile-calculator/"
+          ],
+          "clicks": 3,
+          "impressions": 37,
+          "ctr": 0.08108108108108109,
+          "position": 10.594594594594595
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/random-name-picker/"
+          ],
+          "clicks": 2,
+          "impressions": 55,
+          "ctr": 0.03636363636363636,
+          "position": 7.254545454545455
+        },
+        {
+          "keys": [
+            "http://funnytools.win/tools/weighted-average-calculator/"
+          ],
+          "clicks": 1,
+          "impressions": 19,
+          "ctr": 0.05263157894736842,
+          "position": 14.947368421052632
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/this-or-that/"
+          ],
+          "clicks": 1,
+          "impressions": 32,
+          "ctr": 0.03125,
+          "position": 16.34375
+        },
+        {
+          "keys": [
+            "https://funnytools.win/guides/teacher-exam-weighted-score-guide/"
+          ],
+          "clicks": 1,
+          "impressions": 8,
+          "ctr": 0.125,
+          "position": 9.625
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/business-days/"
+          ],
+          "clicks": 1,
+          "impressions": 8,
+          "ctr": 0.125,
+          "position": 4.25
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/grade-average/"
+          ],
+          "clicks": 1,
+          "impressions": 152,
+          "ctr": 0.006578947368421052,
+          "position": 7.8618421052631575
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/teacher-exam-score-converter/"
+          ],
+          "clicks": 1,
+          "impressions": 18,
+          "ctr": 0.05555555555555555,
+          "position": 4.555555555555555
+        },
+        {
+          "keys": [
+            "http://funnytools.win/blog/pdf-split-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 7.666666666666667
+        },
+        {
+          "keys": [
+            "http://funnytools.win/category/image/"
+          ],
+          "clicks": 0,
+          "impressions": 19,
+          "ctr": 0,
+          "position": 7.157894736842105
+        },
+        {
+          "keys": [
+            "http://funnytools.win/education-statistics/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "keys": [
+            "http://funnytools.win/en/category/draw/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "keys": [
+            "http://funnytools.win/en/education-statistics/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 9
+        },
+        {
+          "keys": [
+            "http://funnytools.win/en/tools/cronbach-alpha-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 5.5
+        },
+        {
+          "keys": [
+            "http://funnytools.win/en/tools/json-to-csv/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "keys": [
+            "http://funnytools.win/en/tools/normalized-score-converter/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 3.5
+        },
+        {
+          "keys": [
+            "http://funnytools.win/en/tools/rotate-pdf/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "keys": [
+            "http://funnytools.win/en/tools/uuid-generator/"
+          ],
+          "clicks": 0,
+          "impressions": 10,
+          "ctr": 0,
+          "position": 5.2
+        },
+        {
+          "keys": [
+            "http://funnytools.win/for/teachers/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 6
+        },
+        {
+          "keys": [
+            "http://funnytools.win/support/"
+          ],
+          "clicks": 0,
+          "impressions": 29,
+          "ctr": 0,
+          "position": 4.862068965517242
+        },
+        {
+          "keys": [
+            "http://funnytools.win/tools/cad-2d/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "keys": [
+            "http://funnytools.win/tools/image-to-base64/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 17.5
+        },
+        {
+          "keys": [
+            "http://funnytools.win/tools/independent-samples-t-test-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 13,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "keys": [
+            "http://funnytools.win/tools/inflation/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 7.333333333333333
+        },
+        {
+          "keys": [
+            "http://funnytools.win/tools/z-score-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 10,
+          "ctr": 0,
+          "position": 6.2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/about-tools/"
+          ],
+          "clicks": 0,
+          "impressions": 20,
+          "ctr": 0,
+          "position": 6.2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/"
+          ],
+          "clicks": 0,
+          "impressions": 27,
+          "ctr": 0,
+          "position": 4.777777777777778
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/compound-interest-explained/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 14.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/image-compression-quality-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 35,
+          "ctr": 0,
+          "position": 6.514285714285714
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/images-to-pdf-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 12,
+          "ctr": 0,
+          "position": 21.583333333333332
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/mortgage-payment-explained/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/pdf-merge-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 4.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/qr-code-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 4.875
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/random-grouping-classroom/"
+          ],
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/semester-grade-calculator-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/standard-deviation-classroom-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/what-to-eat-decision-methods/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 9.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/blog/word-counter-use-cases/"
+          ],
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 7.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/category/draw/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 4.333333333333334
+        },
+        {
+          "keys": [
+            "https://funnytools.win/category/money/"
+          ],
+          "clicks": 0,
+          "impressions": 15,
+          "ctr": 0,
+          "position": 7.2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/category/pdf/"
+          ],
+          "clicks": 0,
+          "impressions": 16,
+          "ctr": 0,
+          "position": 6.625
+        },
+        {
+          "keys": [
+            "https://funnytools.win/category/statistics/"
+          ],
+          "clicks": 0,
+          "impressions": 22,
+          "ctr": 0,
+          "position": 6
+        },
+        {
+          "keys": [
+            "https://funnytools.win/category/text/"
+          ],
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": 0,
+          "position": 6.636363636363637
+        },
+        {
+          "keys": [
+            "https://funnytools.win/contact/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 1.6666666666666665
+        },
+        {
+          "keys": [
+            "https://funnytools.win/disclaimer/"
+          ],
+          "clicks": 0,
+          "impressions": 24,
+          "ctr": 0,
+          "position": 6.916666666666667
+        },
+        {
+          "keys": [
+            "https://funnytools.win/education-statistics/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/about-tools/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/about/"
+          ],
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": 0,
+          "position": 2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/category/draw/"
+          ],
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": 0,
+          "position": 19.142857142857142
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/category/image/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/category/pdf/"
+          ],
+          "clicks": 0,
+          "impressions": 10,
+          "ctr": 0,
+          "position": 3.7
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/category/random/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/category/statistics/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 3.75
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/category/study/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 3
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/category/text/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/category/time/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/contact/"
+          ],
+          "clicks": 0,
+          "impressions": 17,
+          "ctr": 0,
+          "position": 3.8823529411764706
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/disclaimer/"
+          ],
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 6.333333333333333
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/education-statistics/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 62
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/for/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/for/creators/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 4.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/for/developers/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/for/office-workers/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 6
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/for/students/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/for/teachers/"
+          ],
+          "clicks": 0,
+          "impressions": 27,
+          "ctr": 0,
+          "position": 51.666666666666664
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 6
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/classroom-random-group-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 44
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/classroom-timer-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 53.6
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/spss-levene-test-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 57.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/t-score-calculator-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 19,
+          "ctr": 0,
+          "position": 76.42105263157895
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/t-test-apa-format-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 32,
+          "ctr": 0,
+          "position": 77.625
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/teacher-exam-weighted-score-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 39
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/guides/z-score-calculator-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 79
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/privacy/"
+          ],
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 4.25
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/support/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 5.4
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/terms/"
+          ],
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": 0,
+          "position": 3
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/"
+          ],
+          "clicks": 0,
+          "impressions": 17,
+          "ctr": 0,
+          "position": 4.117647058823529
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/break-reminder/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 19.25
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/business-days/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/cad-2d/"
+          ],
+          "clicks": 0,
+          "impressions": 330,
+          "ctr": 0,
+          "position": 59.448484848484846
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/case-converter/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 5.6
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/character-counter/"
+          ],
+          "clicks": 0,
+          "impressions": 20,
+          "ctr": 0,
+          "position": 45.1
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/class-rank-percentile-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 6.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/color-generator/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 6.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/compound-interest/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/countdown-timer/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 2.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/cronbach-alpha-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 41
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/date-difference/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 9
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/delete-pdf-pages/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/dice-roller/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 6.2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/extract-pdf-pages/"
+          ],
+          "clicks": 0,
+          "impressions": 9,
+          "ctr": 0,
+          "position": 29.333333333333332
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/flowchart/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 74
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/gpa-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 6.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/grade-average/"
+          ],
+          "clicks": 0,
+          "impressions": 25,
+          "ctr": 0,
+          "position": 44.04
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/group-generator/"
+          ],
+          "clicks": 0,
+          "impressions": 17,
+          "ctr": 0,
+          "position": 43.35294117647059
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/image-crop/"
+          ],
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/image-rotate-flip/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 5.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/image-to-base64/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/jpg-to-png/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/jpg-to-webp/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 1.8
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/json-to-csv/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/markdown-previewer/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 12.8
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/net-salary/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/normalized-score-converter/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 33.333333333333336
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/overtime-pay/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 6
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/password-generator/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 6.2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/pdf-compressor/"
+          ],
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": 0,
+          "position": 6.714285714285714
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/pdf-page-reorder/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 9.333333333333334
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/percentage-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 2.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/percentile-rank-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 5.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/png-to-jpg/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/random-name-picker/"
+          ],
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 3.8333333333333335
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/random-number-picker/"
+          ],
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": 0,
+          "position": 11.714285714285714
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/random-wheel/"
+          ],
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 12.125
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/remove-duplicate-lines/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/remove-empty-lines/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/savings-goal/"
+          ],
+          "clicks": 0,
+          "impressions": 15,
+          "ctr": 0,
+          "position": 49.733333333333334
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/sketchpad/"
+          ],
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 39.375
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/sort-lines/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 6.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/t-score-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 30.75
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/teacher-exam-score-converter/"
+          ],
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 22.75
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/url-encoder/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/webp-to-jpg/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/weighted-average-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/what-to-eat/"
+          ],
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 18.833333333333332
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/word-counter/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 14.75
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/tools/z-score-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 6
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/workflows/creator-social-toolkit/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 6
+        },
+        {
+          "keys": [
+            "https://funnytools.win/en/workflows/office-document-toolkit/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "keys": [
+            "https://funnytools.win/es/"
+          ],
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": 0,
+          "position": 5.857142857142857
+        },
+        {
+          "keys": [
+            "https://funnytools.win/es/categorias/estadistica/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/es/condiciones-de-uso/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "keys": [
+            "https://funnytools.win/es/guias/calcular-nota-oposicion-docente/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 79
+        },
+        {
+          "keys": [
+            "https://funnytools.win/es/guias/temporizador-clase/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 1
+        },
+        {
+          "keys": [
+            "https://funnytools.win/es/herramientas/calculadora-percentil-ranking-clase/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 3
+        },
+        {
+          "keys": [
+            "https://funnytools.win/es/herramientas/tirar-dados-online/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 57.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/for/"
+          ],
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": 0,
+          "position": 3.4285714285714284
+        },
+        {
+          "keys": [
+            "https://funnytools.win/fr/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 4
+        },
+        {
+          "keys": [
+            "https://funnytools.win/fr/fonctionnement-outils/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/guides/"
+          ],
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": 0,
+          "position": 4.142857142857142
+        },
+        {
+          "keys": [
+            "https://funnytools.win/guides/classroom-random-group-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 6
+        },
+        {
+          "keys": [
+            "https://funnytools.win/guides/classroom-timer-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 4.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/guides/spss-levene-test-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 24.4
+        },
+        {
+          "keys": [
+            "https://funnytools.win/guides/t-score-calculator-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 41,
+          "ctr": 0,
+          "position": 8.26829268292683
+        },
+        {
+          "keys": [
+            "https://funnytools.win/guides/t-test-apa-format-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 22.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/guides/z-score-calculator-guide/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 15
+        },
+        {
+          "keys": [
+            "https://funnytools.win/privacy/"
+          ],
+          "clicks": 0,
+          "impressions": 33,
+          "ctr": 0,
+          "position": 4.484848484848484
+        },
+        {
+          "keys": [
+            "https://funnytools.win/support/"
+          ],
+          "clicks": 0,
+          "impressions": 22,
+          "ctr": 0,
+          "position": 3.909090909090909
+        },
+        {
+          "keys": [
+            "https://funnytools.win/terms/"
+          ],
+          "clicks": 0,
+          "impressions": 40,
+          "ctr": 0,
+          "position": 5.55
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/apa-7-report-generator/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 10
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/bar-chart-maker/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 90
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/base64/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 37.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/break-reminder/"
+          ],
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 7.125
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/case-converter/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 8.8
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/color-generator/"
+          ],
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 5.375
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/countdown-timer/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 86
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/cronbach-alpha-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 82
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/date-difference/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 7.2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/dice-roller/"
+          ],
+          "clicks": 0,
+          "impressions": 20,
+          "ctr": 0,
+          "position": 5.6
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/extract-pdf-pages/"
+          ],
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 3.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/flowchart/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 6.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/gpa-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 9,
+          "ctr": 0,
+          "position": 13.333333333333334
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/image-rotate-flip/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 51.2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/inflation/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 13.666666666666666
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/markdown-previewer/"
+          ],
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 21.333333333333332
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/overtime-pay/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 9.333333333333334
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/pdf-page-reorder/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 2.6
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/percentage-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 10,
+          "ctr": 0,
+          "position": 8.2
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/percentile-rank-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 17
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/pie-chart-maker/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 89.4
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/qr-code-generator/"
+          ],
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 91.33333333333333
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/random-number-picker/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 85.25
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/random-student-picker/"
+          ],
+          "clicks": 0,
+          "impressions": 13,
+          "ctr": 0,
+          "position": 4.846153846153847
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/random-wheel/"
+          ],
+          "clicks": 0,
+          "impressions": 16,
+          "ctr": 0,
+          "position": 23.75
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/seating-chart/"
+          ],
+          "clicks": 0,
+          "impressions": 4,
+          "ctr": 0,
+          "position": 55.75
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/sketchpad/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 7.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/standard-deviation/"
+          ],
+          "clicks": 0,
+          "impressions": 22,
+          "ctr": 0,
+          "position": 9.136363636363637
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/this-or-that/"
+          ],
+          "clicks": 0,
+          "impressions": 6,
+          "ctr": 0,
+          "position": 3.6666666666666665
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/timestamp-converter/"
+          ],
+          "clicks": 0,
+          "impressions": 10,
+          "ctr": 0,
+          "position": 27.3
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/url-encoder/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 9.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/tools/z-score-calculator/"
+          ],
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 1.5
+        },
+        {
+          "keys": [
+            "https://funnytools.win/workflows/"
+          ],
+          "clicks": 0,
+          "impressions": 5,
+          "ctr": 0,
+          "position": 4.4
+        }
+      ]
+    }
+  ]
+}

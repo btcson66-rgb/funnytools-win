@@ -1,0 +1,30 @@
+{
+  "task": "FUNNYTOOLS_INDEX_RECOVERY_PHASE2A",
+  "checked_at": "2026-09-13T08:50:22.844Z",
+  "endpoint": "https://www.googleapis.com/webmasters/v3/sites",
+  "http_status": 200,
+  "required_property": "sc-domain:funnytools.win",
+  "properties": [
+    {
+      "siteUrl": "sc-domain:roomfeng.win",
+      "permissionLevel": "siteOwner"
+    },
+    {
+      "siteUrl": "https://btcson66-rgb.github.io/freelance-tools/",
+      "permissionLevel": "siteUnverifiedUser"
+    },
+    {
+      "siteUrl": "sc-domain:funnytools.win",
+      "permissionLevel": "siteOwner"
+    },
+    {
+      "siteUrl": "sc-domain:familyboard.win",
+      "permissionLevel": "siteOwner"
+    },
+    {
+      "siteUrl": "sc-domain:worthcalc.win",
+      "permissionLevel": "siteOwner"
+    }
+  ],
+  "required_property_present": true
+}

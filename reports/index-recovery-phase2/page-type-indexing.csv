@@ -1,0 +1,12 @@
+page_type,total,google_known,crawled,indexed,crawled_not_indexed,discovered_not_indexed,canonical_problem,blocked_error,unknown,acceptance_rate,median_last_crawl_age_days,mean_last_crawl_age_days
+home,4,4,4,4,0,0,0,0,0,1,1,5
+hub,14,9,9,0,9,0,0,0,5,0,24,16.714285714285715
+tool,316,203,203,0,202,0,0,1,113,0,22,17.838607594936708
+guide,268,21,21,0,21,0,0,0,247,0,0,2.167910447761194
+workflow,25,13,13,0,13,0,0,0,12,0,8,12.72
+category,27,24,24,0,24,0,0,0,3,0,27,27.962962962962962
+audience,18,15,15,0,15,0,0,0,3,0,23,20.88888888888889
+methodology,9,0,0,0,0,0,0,0,9,0,0,0
+other,5,4,4,0,4,0,0,0,1,0,24,24.2
+legal,20,17,17,0,17,0,0,0,3,0,26.5,25.95
+support,6,3,3,0,3,0,0,0,3,0,12,15.833333333333334
