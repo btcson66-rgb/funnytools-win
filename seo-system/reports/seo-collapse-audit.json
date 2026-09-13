@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-10T11:23:47.676Z",
-  "mode": "local",
+  "generatedAt": "2026-09-13T06:43:21.152Z",
+  "mode": "local+live",
   "local": {
     "buildPages": 1171,
     "indexablePages": 712,
@@ -23,7 +23,452 @@
       "/support/"
     ]
   },
-  "live": null,
+  "live": {
+    "sitemapUrls": 712,
+    "pagesChecked": 712,
+    "core": [
+      {
+        "path": "/",
+        "https": {
+          "url": "https://funnytools.win/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/",
+              "status": 301,
+              "location": "https://funnytools.win/"
+            },
+            {
+              "url": "https://funnytools.win/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/",
+          "finalStatus": 200
+        }
+      },
+      {
+        "path": "/tools/t-score-calculator/",
+        "https": {
+          "url": "https://funnytools.win/tools/t-score-calculator/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/tools/t-score-calculator/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/t-score-calculator/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/tools/t-score-calculator/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/tools/t-score-calculator/",
+              "status": 301,
+              "location": "https://funnytools.win/tools/t-score-calculator/"
+            },
+            {
+              "url": "https://funnytools.win/tools/t-score-calculator/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/t-score-calculator/",
+          "finalStatus": 200
+        }
+      },
+      {
+        "path": "/tools/grade-average/",
+        "https": {
+          "url": "https://funnytools.win/tools/grade-average/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/tools/grade-average/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/grade-average/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/tools/grade-average/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/tools/grade-average/",
+              "status": 301,
+              "location": "https://funnytools.win/tools/grade-average/"
+            },
+            {
+              "url": "https://funnytools.win/tools/grade-average/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/grade-average/",
+          "finalStatus": 200
+        }
+      },
+      {
+        "path": "/tools/teacher-exam-score-converter/",
+        "https": {
+          "url": "https://funnytools.win/tools/teacher-exam-score-converter/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/tools/teacher-exam-score-converter/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/teacher-exam-score-converter/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/tools/teacher-exam-score-converter/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/tools/teacher-exam-score-converter/",
+              "status": 301,
+              "location": "https://funnytools.win/tools/teacher-exam-score-converter/"
+            },
+            {
+              "url": "https://funnytools.win/tools/teacher-exam-score-converter/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/teacher-exam-score-converter/",
+          "finalStatus": 200
+        }
+      },
+      {
+        "path": "/tools/random-name-picker/",
+        "https": {
+          "url": "https://funnytools.win/tools/random-name-picker/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/tools/random-name-picker/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/random-name-picker/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/tools/random-name-picker/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/tools/random-name-picker/",
+              "status": 301,
+              "location": "https://funnytools.win/tools/random-name-picker/"
+            },
+            {
+              "url": "https://funnytools.win/tools/random-name-picker/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/random-name-picker/",
+          "finalStatus": 200
+        }
+      },
+      {
+        "path": "/tools/z-score-calculator/",
+        "https": {
+          "url": "https://funnytools.win/tools/z-score-calculator/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/tools/z-score-calculator/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/z-score-calculator/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/tools/z-score-calculator/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/tools/z-score-calculator/",
+              "status": 301,
+              "location": "https://funnytools.win/tools/z-score-calculator/"
+            },
+            {
+              "url": "https://funnytools.win/tools/z-score-calculator/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/z-score-calculator/",
+          "finalStatus": 200
+        }
+      },
+      {
+        "path": "/tools/merge-pdf/",
+        "https": {
+          "url": "https://funnytools.win/tools/merge-pdf/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/tools/merge-pdf/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/merge-pdf/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/tools/merge-pdf/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/tools/merge-pdf/",
+              "status": 301,
+              "location": "https://funnytools.win/tools/merge-pdf/"
+            },
+            {
+              "url": "https://funnytools.win/tools/merge-pdf/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/merge-pdf/",
+          "finalStatus": 200
+        }
+      },
+      {
+        "path": "/tools/image-compressor/",
+        "https": {
+          "url": "https://funnytools.win/tools/image-compressor/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/tools/image-compressor/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/image-compressor/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/tools/image-compressor/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/tools/image-compressor/",
+              "status": 301,
+              "location": "https://funnytools.win/tools/image-compressor/"
+            },
+            {
+              "url": "https://funnytools.win/tools/image-compressor/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/tools/image-compressor/",
+          "finalStatus": 200
+        }
+      },
+      {
+        "path": "/en/tools/this-or-that/",
+        "https": {
+          "url": "https://funnytools.win/en/tools/this-or-that/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/en/tools/this-or-that/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/en/tools/this-or-that/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/en/tools/this-or-that/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/en/tools/this-or-that/",
+              "status": 301,
+              "location": "https://funnytools.win/en/tools/this-or-that/"
+            },
+            {
+              "url": "https://funnytools.win/en/tools/this-or-that/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/en/tools/this-or-that/",
+          "finalStatus": 200
+        }
+      },
+      {
+        "path": "/guides/t-score-calculator-guide/",
+        "https": {
+          "url": "https://funnytools.win/guides/t-score-calculator-guide/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/guides/t-score-calculator-guide/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/guides/t-score-calculator-guide/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/guides/t-score-calculator-guide/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/guides/t-score-calculator-guide/",
+              "status": 301,
+              "location": "https://funnytools.win/guides/t-score-calculator-guide/"
+            },
+            {
+              "url": "https://funnytools.win/guides/t-score-calculator-guide/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/guides/t-score-calculator-guide/",
+          "finalStatus": 200
+        }
+      },
+      {
+        "path": "/blog/image-compression-quality-guide/",
+        "https": {
+          "url": "https://funnytools.win/blog/image-compression-quality-guide/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/blog/image-compression-quality-guide/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/blog/image-compression-quality-guide/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/blog/image-compression-quality-guide/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/blog/image-compression-quality-guide/",
+              "status": 301,
+              "location": "https://funnytools.win/blog/image-compression-quality-guide/"
+            },
+            {
+              "url": "https://funnytools.win/blog/image-compression-quality-guide/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/blog/image-compression-quality-guide/",
+          "finalStatus": 200
+        }
+      },
+      {
+        "path": "/category/statistics/",
+        "https": {
+          "url": "https://funnytools.win/category/statistics/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/category/statistics/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/category/statistics/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/category/statistics/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/category/statistics/",
+              "status": 301,
+              "location": "https://funnytools.win/category/statistics/"
+            },
+            {
+              "url": "https://funnytools.win/category/statistics/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/category/statistics/",
+          "finalStatus": 200
+        }
+      },
+      {
+        "path": "/support/",
+        "https": {
+          "url": "https://funnytools.win/support/",
+          "hops": [
+            {
+              "url": "https://funnytools.win/support/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/support/",
+          "finalStatus": 200
+        },
+        "http": {
+          "url": "http://funnytools.win/support/",
+          "hops": [
+            {
+              "url": "http://funnytools.win/support/",
+              "status": 301,
+              "location": "https://funnytools.win/support/"
+            },
+            {
+              "url": "https://funnytools.win/support/",
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://funnytools.win/support/",
+          "finalStatus": 200
+        }
+      }
+    ],
+    "wwwHttp": {
+      "url": "http://www.funnytools.win/",
+      "hops": [
+        {
+          "url": "http://www.funnytools.win/",
+          "status": 301,
+          "location": "https://www.funnytools.win/"
+        },
+        {
+          "url": "https://www.funnytools.win/",
+          "status": 301,
+          "location": "https://funnytools.win/"
+        },
+        {
+          "url": "https://funnytools.win/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "finalUrl": "https://funnytools.win/",
+      "finalStatus": 200
+    }
+  },
   "failures": [],
-  "warnings": []
+  "warnings": [
+    "www HTTP uses 2 redirects; consolidate to one Cloudflare 301."
+  ]
 }
