@@ -38,6 +38,7 @@
     "seo:check": "node scripts/seo-crawlability-check.mjs",
     "audit:seo-collapse": "node scripts/seo-collapse-audit.mjs",
     "audit:seo-collapse:live": "node scripts/seo-collapse-audit.mjs --live",
+    "audit:index-recovery": "node scripts/index-recovery-audit.mjs",
     "seo:sitemap": "npm run seo:sitemap:refresh",
     "seo:sitemap:refresh": "node scripts/generate-sitemaps.mjs",
     "seo:validate": "node scripts/validate-indexable-urls.mjs",
