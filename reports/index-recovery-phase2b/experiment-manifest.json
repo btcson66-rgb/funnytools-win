@@ -2,8 +2,20 @@
   "schema_version": 1,
   "experiment": "FUNNYTOOLS_INDEX_RECOVERY_PHASE2B",
   "experiment_start_date": "2026-09-13",
-  "deployment_commit": "NOT_DEPLOYED_PR_ONLY",
-  "deployment_status": "NOT_DEPLOYED — awaiting authorized stacked-PR merge and release governance",
+  "deployment_commit": "PENDING_RELEASE",
+  "deployment_status": "PENDING_PRODUCTION_RELEASE",
+  "pre_release_snapshot": {
+    "captured_at": "2026-09-13T11:15:56.6224011Z",
+    "main_commit": "ea5cd4ca5d7daa4ed7383ae5f083382d98d8a4ae",
+    "phase2b_commit": "b0b5368ff3dc0e340a0efbb284c02fb5f2983dc2",
+    "phase2b_merge_commit": "ea5cd4ca5d7daa4ed7383ae5f083382d98d8a4ae",
+    "t0_snapshots_immutable": true,
+    "treatment_urls": 20,
+    "control_urls": 20,
+    "sitemap_lastmod_policy": "unchanged for both cohorts",
+    "request_indexing": "not used",
+    "sitemap_ping": "not used"
+  },
   "branch": "codex/funnytools-index-recovery-phase2b-20260913",
   "base_pr": "https://github.com/btcson66-rgb/funnytools-win/pull/42",
   "treatment_urls": [
