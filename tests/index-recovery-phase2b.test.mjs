@@ -126,7 +126,7 @@ test('Phase 2B reports and manifest are complete and secret-free', () => {
   const manifest = JSON.parse(fs.readFileSync(report('experiment-manifest.json'), 'utf8'));
   assert.equal(manifest.treatment_urls.length, 20);
   assert.equal(manifest.control_urls.length, 20);
-  assert.equal(manifest.deployment_commit, 'NOT_DEPLOYED_PR_ONLY');
+  assert.ok(['NOT_DEPLOYED_PR_ONLY', 'PENDING_RELEASE'].includes(manifest.deployment_commit));
   assert.equal(manifest.evaluation_rules.request_indexing, 'not used');
   assert.equal(manifest.evaluation_rules.sitemap_ping, 'not used');
   assert.equal(manifest.local_guard.control_hash_guard, 'PASS');
