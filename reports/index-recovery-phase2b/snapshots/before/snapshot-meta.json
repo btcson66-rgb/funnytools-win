@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "task": "FUNNYTOOLS_INDEX_RECOVERY_PHASE2B",
+  "label": "before",
+  "stage": "before",
+  "property": "not queried for local snapshot",
+  "urls": 40,
+  "cache_policy": "Within a label, successful URL Inspection responses are reused; use --refresh-errors only to retry non-success records.",
+  "background_execution": "none; this command runs only when explicitly invoked."
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "experiment": "FUNNYTOOLS_INDEX_RECOVERY_PHASE2B",
+  "experiment_start_date": "2026-09-13",
+  "deployment_commit": "NOT_DEPLOYED_PR_ONLY",
+  "deployment_status": "NOT_DEPLOYED — awaiting authorized stacked-PR merge and release governance",
+  "branch": "codex/funnytools-index-recovery-phase2b-20260913",
+  "base_pr": "https://github.com/btcson66-rgb/funnytools-win/pull/42",
+  "treatment_urls": [
+    "https://funnytools.win/en/tools/cad-2d/",
+    "https://funnytools.win/en/tools/class-rank-percentile-calculator/",
+    "https://funnytools.win/en/tools/compound-interest/",
+    "https://funnytools.win/en/tools/cronbach-alpha-calculator/",
+    "https://funnytools.win/en/tools/percentage-calculator/",
+    "https://funnytools.win/es/herramientas/tirar-dados-online/",
+    "https://funnytools.win/es/herramientas/calculadora-alfa-cronbach/",
+    "https://funnytools.win/es/herramientas/calculadora-desviacion-estandar/",
+    "https://funnytools.win/es/herramientas/calculadora-dias-laborables/",
+    "https://funnytools.win/es/herramientas/calculadora-hipoteca/",
+    "https://funnytools.win/fr/outils/calcul-moyenne-notes/",
+    "https://funnytools.win/fr/outils/calculateur-inflation-pouvoir-achat/",
+    "https://funnytools.win/fr/outils/calculateur-jours-ouvres/",
+    "https://funnytools.win/fr/outils/calculateur-moyenne-ponderee/",
+    "https://funnytools.win/fr/outils/calculer-difference-entre-dates/",
+    "https://funnytools.win/tools/bar-chart-maker/",
+    "https://funnytools.win/tools/base64/",
+    "https://funnytools.win/tools/cronbach-alpha-calculator/",
+    "https://funnytools.win/tools/seating-chart/",
+    "https://funnytools.win/tools/countdown-timer/"
+  ],
+  "control_urls": [
+    "https://funnytools.win/en/tools/flowchart/",
+    "https://funnytools.win/en/tools/normalized-score-converter/",
+    "https://funnytools.win/en/tools/net-salary/",
+    "https://funnytools.win/en/tools/grade-average/",
+    "https://funnytools.win/en/tools/percentile-rank-calculator/",
+    "https://funnytools.win/es/herramientas/decidir-entre-dos-opciones/",
+    "https://funnytools.win/es/herramientas/calculadora-media-ponderada/",
+    "https://funnytools.win/es/herramientas/calculadora-nota-oposicion-docente/",
+    "https://funnytools.win/es/herramientas/calcular-diferencia-entre-fechas/",
+    "https://funnytools.win/es/herramientas/calculadora-inflacion/",
+    "https://funnytools.win/fr/outils/calculateur-ecart-type/",
+    "https://funnytools.win/fr/outils/calculateur-mensualite-pret-immobilier/",
+    "https://funnytools.win/fr/outils/rappel-pause-ecran/",
+    "https://funnytools.win/fr/outils/calculateur-score-t/",
+    "https://funnytools.win/fr/outils/convertir-timestamp-unix/",
+    "https://funnytools.win/tools/cad-2d/",
+    "https://funnytools.win/tools/case-converter/",
+    "https://funnytools.win/tools/class-rank-percentile-calculator/",
+    "https://funnytools.win/tools/gpa-calculator/",
+    "https://funnytools.win/tools/break-reminder/"
+  ],
+  "before_inspection_timestamp": "2026-09-13T08:42:25.350Z",
+  "local_before_snapshot": "reports/index-recovery-phase2b/snapshots/before/snapshot.csv",
+  "local_after_snapshot": "reports/index-recovery-phase2b/snapshots/after-edit/snapshot.csv",
+  "metrics": {
+    "primary": "Crawled Not Indexed to Indexed in URL Inspection",
+    "secondary": [
+      "recrawl timing",
+      "lastCrawlTime",
+      "Search Analytics impressions",
+      "Search Analytics clicks",
+      "canonical selection",
+      "coverage state"
+    ],
+    "excluded_primary": [
+      "ranking position",
+      "traffic attribution",
+      "conversion",
+      "revenue"
+    ]
+  },
+  "evaluation_rules": {
+    "day_7": "snapshot only; inspect recrawl and technical regressions",
+    "day_14": "compare treatment and control indexed-status transitions; descriptive experiment evidence only",
+    "day_21": "repeat comparison and assess persistence; no causal or site-wide recovery claim",
+    "success_definition": "A treatment URL changes from Crawled Not Indexed to Indexed while controls are evaluated in the same observation window.",
+    "request_indexing": "not used",
+    "sitemap_ping": "not used",
+    "lastmod_policy": "unchanged for both cohorts to isolate content value"
+  },
+  "locale_counts": {
+    "zh-TW": 5,
+    "en": 5,
+    "es": 5,
+    "fr": 5
+  },
+  "pairing_rules": {
+    "same_locale": true,
+    "same_page_type": "tool",
+    "same_cluster": true,
+    "minimum_match_score": 80,
+    "selected_minimum_match_score": 90
+  },
+  "local_guard": {
+    "treatment_changed": 20,
+    "control_changed": 0,
+    "unique_treatment_fingerprints": 20,
+    "control_hash_guard": "PASS",
+    "block_level_duplicate_guard": "PASS"
+  },
+  "unique_content_stats": [
+    {
+      "metric": "task-specific explanation",
+      "pages": 20,
+      "total": 20,
+      "evidence": "two localized content sections per treatment"
+    },
+    {
+      "metric": "input/context guidance",
+      "pages": 20,
+      "total": 20,
+      "evidence": "first added section explains the tool-specific inputs or setup"
+    },
+    {
+      "metric": "verifiable real example",
+      "pages": 20,
+      "total": 20,
+      "evidence": "two tool-specific examples per treatment"
+    },
+    {
+      "metric": "output interpretation",
+      "pages": 20,
+      "total": 20,
+      "evidence": "second added section explains how to read the result"
+    },
+    {
+      "metric": "edge cases and limitations",
+      "pages": 20,
+      "total": 20,
+      "evidence": "tool-specific limits and boundary cases are included"
+    },
+    {
+      "metric": "added paragraph blocks",
+      "pages": 20,
+      "total": 80,
+      "evidence": "block-level gate: 80 normalized blocks, 80 unique exact blocks, max Jaccard overlap 0.2830 (<0.80)"
+    },
+    {
+      "metric": "unique treatment diff fingerprints",
+      "pages": 20,
+      "total": 20,
+      "evidence": "rendered before/after fingerprint comparison"
+    }
+  ],
+  "observation_commands": [
+    "npm.cmd run index:experiment:snapshot -- --stage day7 --label day7",
+    "npm.cmd run index:experiment:snapshot -- --stage day14 --label day14",
+    "npm.cmd run index:experiment:snapshot -- --stage day21 --label day21"
+  ]
+}

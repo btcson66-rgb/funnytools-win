@@ -4,6 +4,7 @@ import ExpansionLayout from './ExpansionLayout.astro';
 import { absoluteUrl } from '../lib/url';
 import { expansionRoutesReviewedAt } from '../i18n/expansionRoutes';
 import type { ToolContent } from '../i18n/tools/_types';
+import { mergePhase2BContent, phase2bExpansionContent } from '../i18n/tools/phase2b-treatment-content';
 
 interface ReviewContent {
   heading: string;
@@ -33,13 +34,14 @@ interface Props {
 const {
   routeKey,
   canonicalPath,
-  content,
   categoryLabel,
   review,
   relatedTool,
   localOnly = true,
   locale = 'es',
+  content: baseContent,
 } = Astro.props;
+const content = mergePhase2BContent(baseContent, phase2bExpansionContent[locale]?.[routeKey]);
 const copy = {
   es: {
     howTo: 'Cómo usar',
