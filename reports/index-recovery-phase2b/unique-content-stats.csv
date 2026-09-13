@@ -1,0 +1,8 @@
+metric,pages,total,evidence
+task-specific explanation,20,20,two localized content sections per treatment
+input/context guidance,20,20,first added section explains the tool-specific inputs or setup
+verifiable real example,20,20,two tool-specific examples per treatment
+output interpretation,20,20,second added section explains how to read the result
+edge cases and limitations,20,20,tool-specific limits and boundary cases are included
+added paragraph blocks,20,80,"block-level gate: 80 normalized blocks, 80 unique exact blocks, max Jaccard overlap 0.2830 (<0.80)"
+unique treatment diff fingerprints,20,20,rendered before/after fingerprint comparison

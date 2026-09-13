@@ -1,6 +1,7 @@
 import type { Locale } from '../config/site';
 import type { LocalizedToolContent, ToolContent } from '../i18n/tools/_types';
 import { toolContentEnhancements } from '../i18n/tools/content-enhancements';
+import { mergePhase2BContent, phase2bToolContent } from '../i18n/tools/phase2b-treatment-content';
 import ageCalculatorContent from '../i18n/tools/age-calculator';
 import base64Content from '../i18n/tools/base64';
 import barcodeGeneratorContent from '../i18n/tools/barcode-generator';
@@ -170,8 +171,9 @@ export function getToolContent(slug: string, lang: Locale): ToolContent | undefi
   const content = contentBySlug[slug as ToolContentSlug]?.[lang];
   if (!content) return undefined;
 
-  return {
+  const enhancedContent = {
     ...content,
     ...toolContentEnhancements[slug]?.[lang],
   };
+  return mergePhase2BContent(enhancedContent, phase2bToolContent[lang][slug]);
 }
