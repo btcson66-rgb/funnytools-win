@@ -11,6 +11,15 @@ import { editorialPages } from '../data/editorialPages';
 import { absoluteUrl, localePath } from './url';
 
 const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
+const paidOwnedPages: SitemapPage[] = [
+  {
+    segments: ['wedding-seating-conflict-solver'],
+    lastmod: '2026-09-14',
+    changefreq: 'monthly',
+    priority: '0.7',
+    alternates: true,
+  },
+];
 // Fallback lastmod: the newest real content date on the site. Using the build
 // date here would stamp every build as "modified today", which teaches
 // crawlers to ignore lastmod entirely.
@@ -100,6 +109,7 @@ function basePages(): SitemapPage[] {
     { segments: ['education-statistics'], changefreq: 'weekly', priority: '0.8', alternates: true },
     { segments: ['support'], changefreq: 'monthly', priority: '0.3', alternates: true },
     { segments: ['shop'], changefreq: 'weekly', priority: '0.5', alternates: true },
+    ...paidOwnedPages,
     ...legalPages.map((page) => ({
       segments: [page],
       changefreq: 'yearly' as const,

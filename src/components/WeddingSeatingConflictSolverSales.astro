@@ -1,0 +1,163 @@
+---
+import { decisionProducts } from '../data/decision-products';
+import { withUtm } from '../data/shop-products';
+
+interface Props {
+  lang: 'zh' | 'en';
+}
+
+const { lang } = Astro.props;
+const product = decisionProducts.find((item) => item.id === 'PRODUCT-004')!;
+const copy = lang === 'zh'
+  ? {
+      eyebrow: '付費婚禮決策系統',
+      title: 'Wedding Seating Conflict Solver',
+      intro: '免費 Seating Chart 工具適合快速畫出座位表；這個獨立下載系統則把婚禮賓客關係、不能同桌、必須同桌與桌數容量放進同一個衝突求解流程。',
+      priceLabel: '一次買斷',
+      primary: '前往 Payhip checkout',
+      freeTitle: '免費 Seating Chart 仍然免費',
+      freeText: '你只需要拖曳座位、建立一般座位表或匯出基本配置時，請直接使用 FunnyTools 的免費 Seating Chart 工具。本產品不是把免費工具加上 paywall。',
+      featureTitle: '這個付費系統處理什麼',
+      features: [
+        '以賓客關係與 seating constraints 建立衝突模型。',
+        '檢查不能同桌、偏好與桌容量是否同時可行。',
+        '輸出可檢查的婚禮規劃結果；不會假裝保證人際關係一定順利。',
+        '離線瀏覽器 app，輸入資料留在你的裝置，不需要帳號或伺服器。',
+      ],
+      previewTitle: '真實 app preview',
+      previewAlt: 'Wedding Seating Conflict Solver real app preview',
+      faqTitle: 'FAQ',
+      faq: [
+        ['它和免費 Seating Chart 有什麼不同？', '免費工具負責一般排座與匯出；本系統針對婚禮情境提供關係衝突與限制檢查。'],
+        ['它會自動替每位賓客決定最佳座位嗎？', '不會。它搜尋符合輸入限制的可行方案；賓客關係、活動禮儀與最後決定仍由你負責。'],
+        ['資料會上傳嗎？', '產品是離線瀏覽器 app；除非你自行分享匯出的檔案，輸入資料不會送到 FunnyTools 伺服器。'],
+        ['退款與付款由誰處理？', '付款、收據、檔案交付與退款規則依 Payhip 頁面處理；FunnyTools 不另外代收款。'],
+      ],
+      disclosure: 'Payhip 是目前回查到的 LIVE purchase provider。Gumroad listing 目前未發布，因此本頁不提供未上線的 Gumroad checkout。',
+    }
+  : {
+      eyebrow: 'PAID WEDDING DECISION SYSTEM',
+      title: 'Wedding Seating Conflict Solver',
+      intro: 'The free Seating Chart tool is for quickly drawing a seating plan. This separate downloadable system models wedding guest relationships, must-not-seat-together constraints, required pairings, and table capacity in one conflict-solving workflow.',
+      priceLabel: 'One-time purchase',
+      primary: 'Continue to Payhip checkout',
+      freeTitle: 'The free Seating Chart stays free',
+      freeText: 'If you only need to drag seats, make a general seating plan, or export a basic arrangement, use FunnyTools’ free Seating Chart tool. This product does not put the free tool behind a paywall.',
+      featureTitle: 'What the paid system covers',
+      features: [
+        'Model guest relationships and wedding seating constraints.',
+        'Check whether must-not-seat-together, preferences, and table capacity can coexist.',
+        'Produce inspectable planning outcomes without pretending to guarantee a social outcome.',
+        'Offline browser app: your inputs stay on your device with no account or server.',
+      ],
+      previewTitle: 'Real app preview',
+      previewAlt: 'Wedding Seating Conflict Solver real app preview',
+      faqTitle: 'FAQ',
+      faq: [
+        ['How is it different from the free Seating Chart?', 'The free tool handles general placement and export; this system adds wedding-specific relationship and constraint checks.'],
+        ['Does it decide the perfect seat for every guest?', 'No. It searches for arrangements that satisfy the constraints you enter; you remain responsible for relationships, etiquette, and the final decision.'],
+        ['Does guest data leave my device?', 'The product is an offline browser app. Inputs are not sent to FunnyTools servers unless you choose to share an exported file.'],
+        ['Who handles payment and refunds?', 'Payment, receipts, delivery, and refunds follow the Payhip page; FunnyTools does not process a separate payment.'],
+      ],
+      disclosure: 'Payhip is the LIVE purchase provider confirmed in the current readback. The Gumroad listing is unpublished, so this page does not expose an unavailable Gumroad checkout.',
+    };
+const checkout = withUtm(product.providers.payhip!, 'PRODUCT-004_owned_sales_payhip');
+const siteName = 'funnytools';
+---
+
+<div class="paid-product-page" data-product-cta-block data-product-id={product.id} data-product-name={product.name[lang]} data-placement="product_owned_hero" data-site-name={siteName} data-locale={lang}>
+  <section class="paid-product-hero">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h1>{copy.title}</h1>
+    <p class="lead">{copy.intro}</p>
+    <div class="paid-product-buybox">
+      <strong>{product.price}</strong>
+      <span>{copy.priceLabel}</span>
+      <a class="btn go" href={checkout} target="_blank" rel="noopener" data-product-checkout-link data-product-id={product.id} data-product-name={product.name[lang]} data-placement="product_owned_hero" data-provider="payhip" data-site-name={siteName} data-locale={lang}>{copy.primary}</a>
+    </div>
+  </section>
+
+  <section class="paid-product-section free-boundary" aria-labelledby="free-boundary-title">
+    <h2 id="free-boundary-title">{copy.freeTitle}</h2>
+    <p>{copy.freeText}</p>
+    <a class="btn ghost" href={lang === 'zh' ? '/tools/seating-chart/' : '/en/tools/seating-chart/'} data-product-cta-link data-product-id={product.id} data-product-name={product.name[lang]} data-placement="product_owned_free_boundary" data-site-name={siteName} data-locale={lang}>{lang === 'zh' ? '開啟免費 Seating Chart' : 'Open the free Seating Chart'}</a>
+  </section>
+
+  <section class="paid-product-section" aria-labelledby="feature-title">
+    <h2 id="feature-title">{copy.featureTitle}</h2>
+    <ul class="feature-list">{copy.features.map((feature) => <li>{feature}</li>)}</ul>
+  </section>
+
+  <section class="paid-product-section" aria-labelledby="preview-title">
+    <h2 id="preview-title">{copy.previewTitle}</h2>
+    <div class="preview-grid">
+      <figure><img src="/products/product-004/cover-real-app.png" alt={copy.previewAlt} loading="lazy" /><figcaption>{lang === 'zh' ? '實際產品畫面：核心排座流程。' : 'Actual product screen: core seating workflow.'}</figcaption></figure>
+      <figure><img src="/products/product-004/relationships-real-app.png" alt={lang === 'zh' ? 'Wedding Seating Conflict Solver 關係限制 app 預覽' : 'Wedding Seating Conflict Solver relationship constraints app preview'} loading="lazy" /><figcaption>{lang === 'zh' ? '實際產品畫面：關係限制與衝突檢查。' : 'Actual product screen: relationship constraints and conflict checks.'}</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="paid-product-section" aria-labelledby="faq-title">
+    <h2 id="faq-title">{copy.faqTitle}</h2>
+    <div class="faq-list">{copy.faq.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}</div>
+  </section>
+
+  <section class="paid-product-section product-disclosure" aria-labelledby="disclosure-title">
+    <h2 id="disclosure-title">{lang === 'zh' ? '付款、退款與資料處理' : 'Payment, refunds, and data handling'}</h2>
+    <p>{copy.disclosure}</p>
+    <p>{lang === 'zh' ? '本產品不提供帳號、訂閱或遠端同步。產品說明與限制應以購買前頁面及 Payhip listing 為準；一般規劃建議不是禮儀、法律或專業活動服務。' : 'This product has no account, subscription, or remote sync. Review the product scope and limitations before purchase; general planning suggestions are not etiquette, legal, or professional event services.'}</p>
+  </section>
+</div>
+
+<script>
+  const sendPaidEvent = (eventName, element, provider = 'owned') => {
+    if (!(element instanceof HTMLElement)) return;
+    window.__ft_track?.(eventName, {
+      product_id: element.dataset.productId || 'unknown',
+      product_name: element.dataset.productName || 'unknown',
+      site_name: element.dataset.siteName || 'funnytools',
+      placement: element.dataset.placement || 'product_owned_hero',
+      provider,
+      locale: element.dataset.locale || document.documentElement.lang || 'en',
+    });
+  };
+  const block = document.querySelector('[data-product-cta-block]');
+  if (block instanceof HTMLElement) {
+    const emitView = () => {
+      if (block.dataset.productCtaViewed === 'true') return;
+      block.dataset.productCtaViewed = 'true';
+      sendPaidEvent('product_cta_view', block);
+    };
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) { emitView(); observer.disconnect(); }
+      }, { threshold: 0.25 });
+      observer.observe(block);
+    } else emitView();
+  }
+  document.querySelectorAll('[data-product-cta-link]').forEach((link) => link.addEventListener('click', () => sendPaidEvent('product_cta_click', link)));
+  document.querySelectorAll('[data-product-checkout-link]').forEach((link) => link.addEventListener('click', () => sendPaidEvent('product_checkout_click', link, link.getAttribute('data-provider') || 'unknown')));
+</script>
+
+<style>
+  .paid-product-page { width: min(100% - 32px, 960px); margin: 20px auto 56px; }
+  .paid-product-hero, .paid-product-section { padding: 28px 24px; border: 1px solid var(--line); border-radius: 20px; background: var(--card); box-shadow: var(--shadow-soft); }
+  .paid-product-hero { background: linear-gradient(135deg, rgba(15,143,140,.12), rgba(62,99,221,.08)), var(--card); }
+  .paid-product-hero h1 { max-width: 800px; }
+  .paid-product-section { margin-top: 18px; }
+  .paid-product-section h2 { margin-top: 0; }
+  .paid-product-buybox { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-top: 22px; }
+  .paid-product-buybox strong { font-size: 1.35rem; }
+  .paid-product-buybox span { color: var(--muted); }
+  .feature-list { display: grid; gap: 10px; padding-left: 1.25rem; line-height: 1.65; }
+  .free-boundary { border-color: rgba(15,143,140,.35); }
+  .preview-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+  .preview-grid figure { margin: 0; }
+  .preview-grid img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 12px; }
+  figcaption { margin-top: 8px; color: var(--muted); font-size: .86rem; }
+  .faq-list { display: grid; gap: 10px; }
+  .faq-list details { padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; }
+  .faq-list summary { cursor: pointer; font-weight: 800; }
+  .faq-list p { margin-bottom: 0; color: var(--muted); line-height: 1.6; }
+  .product-disclosure { background: var(--soft); box-shadow: none; }
+  @media (max-width: 700px) { .preview-grid { grid-template-columns: 1fr; } .paid-product-buybox .btn { width: 100%; text-align: center; } }
+</style>

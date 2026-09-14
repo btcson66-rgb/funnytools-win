@@ -1,5 +1,6 @@
 ---
 import ToolLayout from '../../../layouts/ToolLayout.astro';
+import WeddingSeatingContextCta from '../../../components/WeddingSeatingContextCta.astro';
 import { SITE, type Locale } from '../../../config/site';
 import { getCategoryById } from '../../../data/categories';
 import { liveTools, type ToolMeta } from '../../../data/tools';
@@ -53,6 +54,7 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
 
 <ToolLayout lang={lang} tool={tool} category={category} content={content} jsonLd={jsonLd}>
   <Widget labels={content.labels} slug={tool.slug} />
+  {tool.slug === 'seating-chart' && <WeddingSeatingContextCta lang={lang} placement="free_seating_chart_tool" />}
   <script>
     import { recordRecentlyUsedTool } from '../../../lib/userTools.client';
 

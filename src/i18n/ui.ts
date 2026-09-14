@@ -31,7 +31,7 @@ const ui = {
     toolsFaq: [
       { q: '這些工具需要註冊嗎？', a: '不需要，大部分工具打開網頁即可使用。' },
       { q: '我輸入的資料會被上傳嗎？', a: '多數工具在瀏覽器本機處理；若有例外，會在工具頁明確標示。' },
-      { q: '這些工具可以免費使用嗎？', a: '可以，目前全部免費使用。' },
+      { q: '這些工具可以免費使用嗎？', a: '可以，FunnyTools 的瀏覽器工具目前都可免費使用；另外也有獨立的付費下載產品與決策系統，兩者不是同一個產品層。' },
       { q: '手機可以使用嗎？', a: '可以，網站支援手機與桌面瀏覽器。' },
       { q: '計算結果可以當作正式依據嗎？', a: '僅供參考，財務、薪資、稅務或法律相關結果仍需以官方資料或專業意見為準。' },
     ],
@@ -234,7 +234,7 @@ const ui = {
     toolsFaq: [
       { q: 'Do I need to sign up?', a: 'No, most tools work as soon as you open the page.' },
       { q: 'Is my data uploaded?', a: 'Most tools process data locally in your browser. Exceptions are clearly marked on the tool page.' },
-      { q: 'Are these tools free?', a: 'Yes, all tools are currently free to use.' },
+      { q: 'Are these tools free?', a: 'Yes. FunnyTools browser tools are currently free to use; optional paid downloadable products and decision systems are offered separately in the store.' },
       { q: 'Do they work on mobile?', a: 'Yes, the site is designed for both mobile and desktop browsers.' },
       { q: 'Can I use the results as official figures?', a: 'Results are for reference only. For financial, salary, tax, or legal matters, consult official sources or a qualified professional.' },
     ],

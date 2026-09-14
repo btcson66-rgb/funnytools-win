@@ -1,5 +1,6 @@
 ---
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import WeddingSeatingContextCta from '../../../components/WeddingSeatingContextCta.astro';
 import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
@@ -341,6 +342,7 @@ const jsonLd = [
   )}
 
   <div class="wrap">
+    <WeddingSeatingContextCta lang={lang} placement="education_statistics_hub" />
     <Faq lang={lang} items={faqItems} emitJsonLd={false} />
   </div>
 </BaseLayout>

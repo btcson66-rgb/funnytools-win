@@ -1,5 +1,6 @@
 ---
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import WeddingSeatingContextCta from '../../../components/WeddingSeatingContextCta.astro';
 import ContentValueReview from '../../../components/ContentValueReview.astro';
 import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
@@ -169,6 +170,10 @@ const pageLd = webPageJsonLd(lang, workflow.metaTitle, workflow.metaDescription,
 
     <Faq lang={lang} items={faqItems} emitJsonLd={false} />
     </>)}
+
+    {sourceWorkflow.recommendedToolIds.includes('seating-chart') && (
+      <WeddingSeatingContextCta lang={lang} placement="classroom_workflow_seating_adjacent" />
+    )}
   </article>
 
   <script>
