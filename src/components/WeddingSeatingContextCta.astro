@@ -1,0 +1,62 @@
+---
+interface Props {
+  lang: 'zh' | 'en';
+  placement: string;
+}
+
+const { lang, placement } = Astro.props;
+const copy = lang === 'zh'
+  ? {
+      label: '免費工具之上的婚禮工作流程',
+      title: '需要處理賓客關係衝突？',
+      text: '免費 Seating Chart 仍可直接排座與匯出；Wedding Seating Conflict Solver 是另外購買的婚禮專用離線系統，用來檢查限制是否能同時成立。',
+      link: '查看付費系統',
+    }
+  : {
+      label: 'A paid workflow beyond the free tool',
+      title: 'Need to resolve guest relationship conflicts?',
+      text: 'The free Seating Chart still handles general placement and export. Wedding Seating Conflict Solver is a separate offline system for checking whether wedding constraints can coexist.',
+      link: 'View the paid system',
+    };
+---
+
+<aside class="wedding-context-cta" data-product-cta-block data-product-id="PRODUCT-004" data-product-name="Wedding Seating Conflict Solver" data-placement={placement} data-site-name="funnytools" data-locale={lang}>
+  <p class="wedding-context-cta__label">{copy.label}</p>
+  <h2>{copy.title}</h2>
+  <p>{copy.text}</p>
+  <a class="btn go" href={lang === 'zh' ? '/wedding-seating-conflict-solver/' : '/en/wedding-seating-conflict-solver/'} data-product-cta-link data-product-id="PRODUCT-004" data-product-name="Wedding Seating Conflict Solver" data-placement={placement} data-site-name="funnytools" data-locale={lang}>{copy.link}</a>
+</aside>
+
+<script>
+  const cta = document.currentScript?.previousElementSibling;
+  if (cta instanceof HTMLElement) {
+    const params = (provider = 'owned') => ({
+      product_id: cta.dataset.productId || 'PRODUCT-004',
+      product_name: cta.dataset.productName || 'Wedding Seating Conflict Solver',
+      site_name: cta.dataset.siteName || 'funnytools',
+      placement: cta.dataset.placement || 'contextual_wedding_surface',
+      provider,
+      locale: cta.dataset.locale || document.documentElement.lang || 'en',
+    });
+    const emitView = () => {
+      if (cta.dataset.productCtaViewed === 'true') return;
+      cta.dataset.productCtaViewed = 'true';
+      window.__ft_track?.('product_cta_view', params());
+    };
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) { emitView(); observer.disconnect(); }
+      }, { threshold: 0.25 });
+      observer.observe(cta);
+    } else emitView();
+    cta.querySelector('[data-product-cta-link]')?.addEventListener('click', () => window.__ft_track?.('product_cta_click', params()));
+  }
+</script>
+
+<style>
+  .wedding-context-cta { display: grid; gap: 10px; margin-top: 28px; padding: 22px; border: 1px solid rgba(15,143,140,.32); border-radius: 16px; background: linear-gradient(135deg, rgba(15,143,140,.08), var(--card)); box-shadow: var(--shadow-soft); }
+  .wedding-context-cta h2, .wedding-context-cta p { margin: 0; }
+  .wedding-context-cta h2 { font-size: 1.25rem; }
+  .wedding-context-cta p { color: var(--muted); line-height: 1.65; }
+  .wedding-context-cta__label { color: var(--brand-2) !important; font-size: .78rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+</style>

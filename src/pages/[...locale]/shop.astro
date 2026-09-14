@@ -1,6 +1,7 @@
 ---
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import DecisionToolsSection from '../../components/DecisionToolsSection.astro';
 import { localePath, localeUrlPair } from '../../lib/url';
 import { breadcrumbJsonLd, collectionPageJsonLd } from '../../lib/seo';
 import {
@@ -132,6 +133,8 @@ const jsonLd = [
         ))}
       </div>
     </section>
+
+    <DecisionToolsSection lang={lang} />
 
     <section class="content-section" aria-labelledby="stem-heading">
       <div class="section-head">

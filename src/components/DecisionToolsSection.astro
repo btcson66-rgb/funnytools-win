@@ -1,0 +1,213 @@
+---
+import { decisionProducts } from '../data/decision-products';
+import { withUtm } from '../data/shop-products';
+import { localePath } from '../lib/url';
+
+interface Props {
+  lang: 'zh' | 'en';
+}
+
+const { lang } = Astro.props;
+const copy = lang === 'zh'
+  ? {
+      heading: '決策與規劃工具',
+      intro: 'FunnyTools 的瀏覽器工具維持免費；以下是可另外購買的自有工作流程與決策系統。先看產品頁，再選已上線的 Payhip 或 Gumroad checkout。',
+      learn: '查看自有產品頁',
+      payhip: '在 Payhip 購買',
+      gumroad: '在 Gumroad 購買',
+      unavailable: 'Gumroad 目前未發布',
+    }
+  : {
+      heading: 'Decision & Planning Tools',
+      intro: 'FunnyTools browser tools remain free to use. These optional downloadable workflows and decision systems are sold separately; review the owned product page before choosing a live Payhip or Gumroad checkout.',
+      learn: 'View owned product page',
+      payhip: 'Buy on Payhip',
+      gumroad: 'Buy on Gumroad',
+      unavailable: 'Gumroad is not published',
+    };
+const siteName = 'funnytools';
+const locale = lang;
+---
+
+<section class="content-section decision-tools-section" aria-labelledby="decision-tools-heading">
+  <div class="section-head">
+    <p class="shop-kicker">FREE TOOL → PAID WORKFLOW</p>
+    <h2 id="decision-tools-heading">{copy.heading}</h2>
+    <p>{copy.intro}</p>
+  </div>
+  <div class="decision-tools-grid">
+    {decisionProducts.map((product) => (
+      <article class="decision-tool-card" data-product-cta-block data-product-id={product.id} data-product-name={product.name[lang]} data-placement="shop_decision_tools_card" data-site-name={siteName} data-locale={locale}>
+        <div class="decision-tool-card__heading">
+          <span class="decision-tool-card__id">{product.id}</span>
+          <span class="decision-tool-card__price">{product.price}</span>
+        </div>
+        <h3>{product.name[lang]}</h3>
+        <p>{product.value[lang]}</p>
+        <p class="decision-tool-card__site">Primary owned surface: {product.primarySite}</p>
+        <div class="decision-tool-card__actions">
+          <a
+            class="btn go"
+            href={product.ownedLanding[lang]}
+            data-product-cta-link
+            data-product-id={product.id}
+            data-product-name={product.name[lang]}
+            data-placement="shop_decision_tools_card"
+            data-site-name={siteName}
+            data-locale={locale}
+          >{copy.learn}</a>
+          {product.providers.payhip && (
+            <a
+              class="btn ghost"
+              href={withUtm(product.providers.payhip, `${product.id}_shop_payhip`)}
+              target="_blank"
+              rel="noopener"
+              data-product-checkout-link
+              data-product-id={product.id}
+              data-product-name={product.name[lang]}
+              data-placement="shop_decision_tools_card"
+              data-provider="payhip"
+              data-site-name={siteName}
+              data-locale={locale}
+            >{copy.payhip}</a>
+          )}
+          {product.providers.gumroad && (
+            <a
+              class="btn ghost"
+              href={withUtm(product.providers.gumroad, `${product.id}_shop_gumroad`)}
+              target="_blank"
+              rel="noopener"
+              data-product-checkout-link
+              data-product-id={product.id}
+              data-product-name={product.name[lang]}
+              data-placement="shop_decision_tools_card"
+              data-provider="gumroad"
+              data-site-name={siteName}
+              data-locale={locale}
+            >{copy.gumroad}</a>
+          )}
+          {product.id === 'PRODUCT-004' && <span class="decision-tool-card__note">{copy.unavailable}</span>}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<script>
+  const sendPaidEvent = (eventName, element, provider = 'owned') => {
+    if (!(element instanceof HTMLElement)) return;
+    window.__ft_track?.(eventName, {
+      product_id: element.dataset.productId || 'unknown',
+      product_name: element.dataset.productName || 'unknown',
+      site_name: element.dataset.siteName || 'funnytools',
+      placement: element.dataset.placement || 'shop_decision_tools_card',
+      provider,
+      locale: element.dataset.locale || document.documentElement.lang || 'en',
+    });
+  };
+
+  document.querySelectorAll('[data-product-cta-block]').forEach((block) => {
+    if (!(block instanceof HTMLElement)) return;
+    const emitView = () => {
+      if (block.dataset.productCtaViewed === 'true') return;
+      block.dataset.productCtaViewed = 'true';
+      sendPaidEvent('product_cta_view', block);
+    };
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          emitView();
+          observer.disconnect();
+        }
+      }, { threshold: 0.25 });
+      observer.observe(block);
+    } else {
+      emitView();
+    }
+  });
+
+  document.querySelectorAll('[data-product-cta-link]').forEach((link) => {
+    link.addEventListener('click', () => sendPaidEvent('product_cta_click', link));
+  });
+  document.querySelectorAll('[data-product-checkout-link]').forEach((link) => {
+    link.addEventListener('click', () => sendPaidEvent('product_checkout_click', link, link.getAttribute('data-provider') || 'unknown'));
+  });
+</script>
+
+<style>
+  .decision-tools-section {
+    margin-top: 12px;
+  }
+
+  .decision-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .decision-tool-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 20px;
+    border: 1px solid rgba(15, 143, 140, 0.28);
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(15, 143, 140, 0.06), var(--card));
+    box-shadow: var(--shadow-soft);
+  }
+
+  .decision-tool-card h3,
+  .decision-tool-card p {
+    margin: 0;
+  }
+
+  .decision-tool-card h3 {
+    font-size: 1.08rem;
+  }
+
+  .decision-tool-card p {
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .decision-tool-card__heading,
+  .decision-tool-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .decision-tool-card__heading {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .decision-tool-card__id,
+  .decision-tool-card__site,
+  .decision-tool-card__note {
+    font-size: 0.78rem;
+  }
+
+  .decision-tool-card__id,
+  .decision-tool-card__price {
+    color: var(--brand-2);
+    font-weight: 900;
+  }
+
+  .decision-tool-card__site,
+  .decision-tool-card__note {
+    color: var(--muted);
+  }
+
+  .decision-tool-card__actions {
+    margin-top: 6px;
+  }
+
+  @media (max-width: 700px) {
+    .decision-tools-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

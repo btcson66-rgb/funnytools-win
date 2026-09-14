@@ -1,0 +1,48 @@
+---
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import WeddingSeatingConflictSolverSales from '../../components/WeddingSeatingConflictSolverSales.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { decisionProducts } from '../../data/decision-products';
+import { absoluteUrl, localePath, localeUrlPair } from '../../lib/url';
+import { breadcrumbJsonLd, webPageJsonLd } from '../../lib/seo';
+
+export function getStaticPaths() {
+  return [{ params: { locale: 'en' }, props: { lang: 'en' as const } }];
+}
+
+const lang = 'en' as const;
+const product = decisionProducts.find((item) => item.id === 'PRODUCT-004')!;
+const path = localePath(lang, 'wedding-seating-conflict-solver');
+const title = 'Wedding Seating Conflict Solver';
+const description = 'An offline wedding seating decision system for guest relationships, table capacity, and must-not-seat-together constraints. The free Seating Chart tool remains free.';
+const breadcrumbs = [
+  { name: 'Home', href: localePath(lang) },
+  { name: 'Store', href: localePath(lang, 'shop') },
+  { name: title, href: path },
+];
+const softwareApp = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: title,
+  description,
+  url: absoluteUrl(path),
+  applicationCategory: 'ProductivityApplication',
+  operatingSystem: 'Any modern browser',
+  offers: { '@type': 'Offer', price: '19.00', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: product.providers.payhip },
+};
+const faq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    ['How is it different from the free Seating Chart?', 'The free tool handles general placement and export; this system adds wedding-specific relationship and constraint checks.'],
+    ['Does it decide the perfect seat for every guest?', 'No. It searches for arrangements that satisfy the constraints you enter; you remain responsible for relationships, etiquette, and the final decision.'],
+    ['Does guest data leave my device?', 'The product is an offline browser app. Inputs are not sent to FunnyTools servers unless you choose to share an exported file.'],
+  ].map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
+};
+const jsonLd = [softwareApp, faq, webPageJsonLd(lang, title, description, path), breadcrumbJsonLd(breadcrumbs)];
+---
+
+<BaseLayout lang={lang} title={title} description={description} alternateSegments={['wedding-seating-conflict-solver']} altLang={localeUrlPair('wedding-seating-conflict-solver')} robots="index, follow" jsonLd={jsonLd}>
+  <Breadcrumb items={breadcrumbs.map((item) => ({ label: item.name, href: item.href }))} />
+  <WeddingSeatingConflictSolverSales lang={lang} />
+</BaseLayout>
