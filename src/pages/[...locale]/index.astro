@@ -5,7 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../config/site';
 import { categories } from '../../data/categories';
 import { getSeoGuide, isSeoGuideAvailableInLocale, viewSeoGuide } from '../../data/seoGuides';
-import { getNewTools, getToolBySlug, getToolsByCategory, liveTools, type ToolMeta } from '../../data/tools';
+import { getLiveToolsForLocale, getNewTools, getToolBySlug, getToolsByCategory, type ToolMeta } from '../../data/tools';
 import { isWorkflowAvailableInLocale, viewWorkflow, workflows } from '../../data/workflows';
 import { home, homeFaq, homePrivacy, homeSeoIntro, homeUseCases } from '../../i18n/pages';
 import { t } from '../../i18n/ui';
@@ -21,14 +21,15 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.props as { lang: Locale };
+const liveTools = getLiveToolsForLocale(lang);
 const ui = t(lang);
 const homeCopy = {
   zh: {
     seoTitle: 'FunnyTools 免費線上工具箱｜PDF、圖片、文字、QR Code 與教育統計工具',
     seoDescription: 'FunnyTools 提供免費、免註冊、可在瀏覽器本機處理的 PDF、圖片、文字、QR Code、隨機、時間、金錢、教學與統計工具，適合日常工作、學習、備課與報告整理。',
     eyebrow: '免費、免註冊、重視本機處理',
-    title: 'FunnyTools 免費線上工具箱',
-    intro: '從 PDF、圖片壓縮、QR Code、文字整理，到教師甄試與教育統計工具，多數任務可直接在瀏覽器完成；不必安裝 App，也不需要建立帳號。',
+    title: '免費教育與實用工具｜教師、學生、成績與日常任務',
+    intro: '從期末成績規劃、試題分析、教師甄試與教育統計，到 PDF、圖片、QR Code 與文字整理，多數任務可直接在瀏覽器完成；不必安裝 App，也不需要建立帳號。',
     primaryCta: '瀏覽所有工具',
     secondaryCta: '查看熱門工具',
     searchHeading: '先搜尋你要完成的任務',
@@ -36,8 +37,8 @@ const homeCopy = {
     searchPlaceholder: '搜尋 PDF、圖片壓縮、QR Code、T 分數、PR、隨機分組...',
     heroBullets: ['多數工具在瀏覽器本機處理', '免費使用，不需註冊登入', '手機與電腦都能開啟', 'PDF、圖片、文字、教育統計一次整理'],
     popularHeading: '常用工具',
-    educationHeading: '教師甄試、成績換算與教育統計工具',
-    educationIntro: '整理 T 分數、Z 分數、PR、加權成績、標準差、APA 7 與 SPSS 解讀，適合台灣教師、研究生、考生與教學現場快速查核。',
+    educationHeading: '成績規劃、試題分析與教育統計工具',
+    educationIntro: '整理期末要考幾分、試題難度與鑑別度、KR-20、T 分數、Z 分數、PR、加權成績、APA 7 與 SPSS 解讀，適合學生、教師、研究生與考生逐步查核。',
     educationCta: '進入教育統計中心',
     pdfImageHeading: 'PDF、圖片壓縮、轉檔與 QR Code',
     pdfImageIntro: '合併、拆分、壓縮 PDF，或裁切、調整尺寸、壓縮圖片與產生 QR Code。檔案型工具優先採用瀏覽器本機處理。',
@@ -109,9 +110,9 @@ const popularSlugs = [
   'random-name-picker',
   'json-formatter',
 ];
-const isLiveTool = (tool: ToolMeta | undefined): tool is ToolMeta => tool?.status === 'live';
+const isLiveTool = (tool: ToolMeta | undefined): tool is ToolMeta => tool?.status === 'live' && (!tool.locales || tool.locales.includes(lang));
 const popularTools = popularSlugs.map(getToolBySlug).filter(isLiveTool);
-const newest = getNewTools().filter((tool) => !popularSlugs.includes(tool.slug)).slice(0, 6);
+const newest = getNewTools(lang).filter((tool) => !popularSlugs.includes(tool.slug)).slice(0, 6);
 const searchAliases: Record<string, string[]> = {
   'merge-pdf': ['合併 PDF', 'PDF 合併', 'merge pdf', 'combine pdf', '文件合併'],
   'split-pdf': ['拆分 PDF', '分割 PDF', 'split pdf', 'extract pages'],
@@ -131,6 +132,9 @@ const searchAliases: Record<string, string[]> = {
   'standard-deviation': ['標準差', 'standard deviation', '平均數', '變異數'],
   'apa-7-report-generator': ['APA 7', '統計報告', 'APA 報告'],
   'spss-result-interpreter': ['SPSS', 'Levene', 'ANOVA', 't 檢定'],
+  'final-grade-needed-calculator': ['期末要考幾分', '期末成績', '需要幾分', 'final grade'],
+  'item-analysis-calculator': ['試題分析', '試題難度', '鑑別度', 'item analysis'],
+  'kr20-reliability-calculator': ['KR-20', '信度', '二分題', 'reliability'],
 };
 const searchTools = liveTools.map((tool) => {
   const category = categories.find((item) => item.id === tool.category);
@@ -169,7 +173,7 @@ const allToolsJson = JSON.stringify(allToolsData).replace(/</g, '\\u003c');
 const categorySummaries = categories
   .map((category) => ({
     category,
-    tools: getToolsByCategory(category.id).filter((t) => t.status === 'live'),
+    tools: getToolsByCategory(category.id, lang),
   }))
   .filter(({ tools }) => tools.length > 0);
 const designCategoryOrder = ['pdf', 'image', 'text', 'random', 'time', 'money', 'draw', 'study', 'statistics'];
@@ -190,6 +194,9 @@ const useCases = localUseCases.map((item) => ({
   tools: item.tools.map(getToolBySlug).filter(isLiveTool),
 }));
 const teacherExamTools = [
+  'final-grade-needed-calculator',
+  'item-analysis-calculator',
+  'kr20-reliability-calculator',
   'teacher-exam-score-converter',
   't-score-calculator',
   'z-score-calculator',
@@ -428,6 +435,32 @@ const popularItemListJsonLd = {
     </div>
   </section>
 
+  <section class="wrap content-section priority-cluster-section education-first-section" aria-labelledby="education-first-title">
+    <div class="section-head">
+      <h2 id="education-first-title">{homeCopy.educationHeading}</h2>
+      <p>{homeCopy.educationIntro}</p>
+      <a class="btn go" href={localePath(lang, 'education-statistics')}>{homeCopy.educationCta}</a>
+    </div>
+    <div class="use-case-tools priority-tool-row">
+      {teacherExamTools.map((tool) => (
+        <a href={toolUrl(lang, tool.slug)}>
+          <span aria-hidden="true">{tool.icon}</span>
+          {tool.name[lang]}
+        </a>
+      ))}
+    </div>
+    {lang === 'en' && (
+      <div class="use-case-tools priority-tool-row">
+        {teacherExamArticleLinks.map((article) => (
+          <a href={localePath('en', article.segment, article.slug)}>
+            <span aria-hidden="true">Guide</span>
+            {article.label}
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+
   <section id="popular-tools" class="wrap content-section hero-tools-section anchor-section" aria-labelledby="hero-tools-title">
     <h2 id="hero-tools-title">{homeCopy.popularHeading}</h2>
     <div class="hero-tools-grid">
@@ -554,32 +587,6 @@ const popularItemListJsonLd = {
         ))
       }
     </div>
-  </section>
-
-  <section class="wrap content-section priority-cluster-section" aria-labelledby="teacher-exam-cluster-title">
-    <div class="section-head">
-      <h2 id="teacher-exam-cluster-title">{homeCopy.educationHeading}</h2>
-      <p>{homeCopy.educationIntro}</p>
-      <a class="btn go" href={localePath(lang, 'education-statistics')}>{homeCopy.educationCta}</a>
-    </div>
-    <div class="use-case-tools priority-tool-row">
-      {teacherExamTools.map((tool) => (
-        <a href={toolUrl(lang, tool.slug)}>
-          <span aria-hidden="true">{tool.icon}</span>
-          {tool.name[lang]}
-        </a>
-      ))}
-    </div>
-    {lang === 'en' && (
-      <div class="use-case-tools priority-tool-row">
-        {teacherExamArticleLinks.map((article) => (
-          <a href={localePath('en', article.segment, article.slug)}>
-            <span aria-hidden="true">Guide</span>
-            {article.label}
-          </a>
-        ))}
-      </div>
-    )}
   </section>
 
   <section class="wrap content-section priority-cluster-section" aria-labelledby="pdf-image-cluster-title">

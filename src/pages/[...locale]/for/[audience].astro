@@ -7,7 +7,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
 import { audiences, isAudienceAvailableInLocale, viewAudience, type Audience } from '../../../data/audiences';
 import { categories, getCategoryById } from '../../../data/categories';
-import { getToolBySlug, type ToolMeta } from '../../../data/tools';
+import { getToolBySlug, isToolAvailableInLocale, type ToolMeta } from '../../../data/tools';
 import { getWorkflow, isWorkflowAvailableInLocale, viewWorkflow } from '../../../data/workflows';
 import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide } from '../../../data/seoGuides';
 import { absoluteUrl, categoryUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/url';
@@ -70,7 +70,7 @@ const audienceIndexPath = localePath(lang, 'for');
 const audiencePath = localePath(lang, 'for', audience.slug);
 const liveTool = (slug: string): ToolMeta | undefined => {
   const tool = getToolBySlug(slug);
-  return tool?.status === 'live' ? tool : undefined;
+  return tool?.status === 'live' && isToolAvailableInLocale(tool, lang) ? tool : undefined;
 };
 const recommendedTools = audience.recommendedToolIds.map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool));
 const valueReview = buildAudienceValueReview(lang, audience.title, audience.slug, audience, recommendedTools.map((tool) => tool.name[lang]));

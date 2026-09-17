@@ -21,6 +21,8 @@ export interface ToolMeta {
   featured?: boolean;
   isNew?: boolean;
   updated?: string;
+  /** Omit for tools available in every configured locale. */
+  locales?: Locale[];
   name: Record<Locale, string>;
   short: Record<Locale, string>;
 }
@@ -977,6 +979,21 @@ export const tools: ToolMeta[] = [
     short: { zh: '計算成績總分、簡單平均與加權平均。', en: 'Calculate simple and weighted averages from grade entries.' },
   },
   {
+    slug: 'final-grade-needed-calculator', category: 'statistics', icon: '🎯', status: 'live', locales: ['zh'], privacyLevel: 'local-only',
+    relatedTools: ['grade-average', 'weighted-average-calculator', 'teacher-exam-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-09-17',
+    name: { zh: '期末要考幾分計算器', en: 'Final Grade Needed Calculator' }, short: { zh: '依目前加權得分與剩餘配分，估算期末至少需要幾分。', en: 'Estimate the score needed on a final assessment from the remaining weight.' },
+  },
+  {
+    slug: 'item-analysis-calculator', category: 'statistics', icon: '🧪', status: 'live', locales: ['zh'], privacyLevel: 'local-only',
+    relatedTools: ['standard-deviation', 'cronbach-alpha-calculator', 'grade-average'], assetType: 'calculator', searchIntent: 'medium', shareIntent: 'medium', embedPotential: 'low', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-09-17',
+    name: { zh: '試題難度與鑑別度計算器', en: 'Item Analysis Calculator' }, short: { zh: '用答對率與高低分組比較，快速檢查試題難度與鑑別度。', en: 'Estimate item difficulty and discrimination from correct-response rates.' },
+  },
+  {
+    slug: 'kr20-reliability-calculator', category: 'statistics', icon: 'κ', status: 'live', locales: ['zh'], privacyLevel: 'local-only',
+    relatedTools: ['cronbach-alpha-calculator', 'item-analysis-calculator', 'standard-deviation'], assetType: 'calculator', searchIntent: 'medium', shareIntent: 'medium', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-09-17',
+    name: { zh: 'KR-20 信度計算器', en: 'KR-20 Reliability Calculator' }, short: { zh: '以 0/1 二分作答矩陣估算 KR-20 內部一致性。', en: 'Estimate internal consistency from a binary response matrix.' },
+  },
+  {
     slug: 'percentile-rank-calculator', category: 'statistics', icon: 'PR', status: 'live', privacyLevel: 'local-only',
     relatedTools: ['z-score-calculator', 't-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-25',
     name: { zh: 'PR 百分等級計算器', en: 'Percentile Rank Calculator' }, short: { zh: '依低於與同分人數計算百分等級（PR）。', en: 'Calculate percentile rank from counts below and equal to a score.' },
@@ -1171,39 +1188,50 @@ export const liveTools = tools.filter((tool) => tool.status === 'live');
 export const TOOL_COUNT = liveTools.length;
 // Keep the legacy export for callers that have not migrated yet.
 export const liveToolCount = TOOL_COUNT;
+export const educationRecoverySlugs = new Set(['final-grade-needed-calculator', 'item-analysis-calculator', 'kr20-reliability-calculator']);
 
-export function getEmbeddableTools(): ToolMeta[] {
-  return liveTools.filter((tool) => tool.embedPotential !== 'low');
+export function isToolAvailableInLocale(tool: ToolMeta, lang: Locale): boolean {
+  return !tool.locales || tool.locales.includes(lang);
+}
+
+export function getLiveToolsForLocale(lang: Locale): ToolMeta[] {
+  return liveTools.filter((tool) => isToolAvailableInLocale(tool, lang));
+}
+
+export function getEmbeddableTools(lang: Locale = 'zh'): ToolMeta[] {
+  return getLiveToolsForLocale(lang).filter((tool) => tool.embedPotential !== 'low');
 }
 
 export function getToolBySlug(slug: string): ToolMeta | undefined {
   return tools.find((tool) => tool.slug === slug);
 }
 
-export function getToolsByCategory(category: string): ToolMeta[] {
-  return tools.filter((tool) => tool.category === category);
+export function getToolsByCategory(category: string, lang: Locale = 'zh'): ToolMeta[] {
+  return getLiveToolsForLocale(lang).filter((tool) => tool.category === category);
 }
 
-export function hasLiveTools(category: string): boolean {
-  return liveTools.some((tool) => tool.category === category);
+export function hasLiveTools(category: string, lang: Locale = 'zh'): boolean {
+  return getLiveToolsForLocale(lang).some((tool) => tool.category === category);
 }
 
-export function getFeaturedTools(): ToolMeta[] {
-  return liveTools.filter((tool) => tool.featured);
+export function getFeaturedTools(lang: Locale = 'zh'): ToolMeta[] {
+  return getLiveToolsForLocale(lang).filter((tool) => tool.featured);
 }
 
-export function getNewTools(): ToolMeta[] {
-  return liveTools.filter((tool) => tool.isNew);
+export function getNewTools(lang: Locale = 'zh'): ToolMeta[] {
+  return getLiveToolsForLocale(lang).filter((tool) => tool.isNew);
 }
 
-export function getRelatedTools(slug: string, limit = 3): ToolMeta[] {
+export function getRelatedTools(slug: string, limit = 3, lang: Locale = 'zh'): ToolMeta[] {
   const current = getToolBySlug(slug);
   if (!current) return [];
+  const localeTools = getLiveToolsForLocale(lang);
+  const isRecoveryTool = (tool: ToolMeta) => educationRecoverySlugs.has(tool.slug);
   const manual = (current.relatedTools ?? [])
-    .map((s) => liveTools.find((t) => t.slug === s))
+    .map((s) => localeTools.find((t) => t.slug === s))
     .filter((t): t is ToolMeta => t != null && t.slug !== slug);
-  const sameCategory = liveTools.filter(
-    (t) => t.slug !== slug && t.category === current.category && !manual.some((m) => m.slug === t.slug),
+  const sameCategory = localeTools.filter(
+    (t) => t.slug !== slug && t.category === current.category && (!isRecoveryTool(t) || isRecoveryTool(current)) && !manual.some((m) => m.slug === t.slug),
   );
   return [...manual, ...sameCategory].slice(0, limit);
 }

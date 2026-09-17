@@ -2,7 +2,7 @@
 import ToolCard from './ToolCard.astro';
 import type { Locale } from '../config/site';
 import type { ToolMeta } from '../data/tools';
-import { liveTools } from '../data/tools';
+import { educationRecoverySlugs, getLiveToolsForLocale } from '../data/tools';
 import { t } from '../i18n/ui';
 
 interface Props {
@@ -13,6 +13,8 @@ interface Props {
 
 const { lang, current, limit = 6 } = Astro.props;
 const ui = t(lang);
+const liveTools = getLiveToolsForLocale(lang);
+const isRecoveryTool = (tool: ToolMeta) => educationRecoverySlugs.has(tool.slug);
 
 const manual = (current.relatedTools ?? [])
   .map((slug) => liveTools.find((t) => t.slug === slug))
@@ -21,13 +23,15 @@ const manual = (current.relatedTools ?? [])
 const sameCategory = liveTools.filter(
   (tool) => tool.slug !== current.slug
     && tool.category === current.category
+    && (!isRecoveryTool(tool) || isRecoveryTool(current))
     && !manual.some((m) => m.slug === tool.slug),
 );
 
 const fallback = liveTools.filter(
   (tool) => tool.slug !== current.slug
     && !manual.some((m) => m.slug === tool.slug)
-    && !sameCategory.some((s) => s.slug === tool.slug),
+    && !sameCategory.some((s) => s.slug === tool.slug)
+    && (!isRecoveryTool(tool) || isRecoveryTool(current)),
 );
 
 const related = [...manual, ...sameCategory, ...fallback].slice(0, limit);

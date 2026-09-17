@@ -1,6 +1,6 @@
 import type { Locale } from '../config/site';
 import { allBlogPosts } from '../data/allBlogPosts';
-import { liveTools, type ToolMeta } from '../data/tools';
+import { educationRecoverySlugs, getLiveToolsForLocale, type ToolMeta } from '../data/tools';
 import { getGuidesForTool } from '../data/seoGuides';
 import { getWorkflowsForTool } from '../data/workflows';
 import { isPostAvailableInLocale, viewBlogPost } from '../data/blogPosts';
@@ -14,18 +14,22 @@ export interface RelatedContentSet {
 }
 
 export function getRelatedContentForTool(tool: ToolMeta, lang: Locale, limit = 6): RelatedContentSet {
+  const liveTools = getLiveToolsForLocale(lang);
+  const isRecoveryTool = (candidate: ToolMeta) => educationRecoverySlugs.has(candidate.slug);
   const manualTools = (tool.relatedTools ?? [])
     .map((slug) => liveTools.find((candidate) => candidate.slug === slug))
     .filter((candidate): candidate is ToolMeta => candidate !== undefined && candidate.slug !== tool.slug);
   const categoryTools = liveTools.filter((candidate) =>
     candidate.slug !== tool.slug
     && candidate.category === tool.category
+    && (!isRecoveryTool(candidate) || isRecoveryTool(tool))
     && !manualTools.some((manual) => manual.slug === candidate.slug),
   );
   const fallbackTools = liveTools.filter((candidate) =>
     candidate.slug !== tool.slug
     && !manualTools.some((manual) => manual.slug === candidate.slug)
-    && !categoryTools.some((sameCategory) => sameCategory.slug === candidate.slug),
+    && !categoryTools.some((sameCategory) => sameCategory.slug === candidate.slug)
+    && (!isRecoveryTool(candidate) || isRecoveryTool(tool)),
   );
 
   const articles = allBlogPosts

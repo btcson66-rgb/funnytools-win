@@ -1,0 +1,114 @@
+---
+interface Props { labels: Record<string, string>; slug: string; }
+const { labels, slug } = Astro.props as Props;
+const finalGrade = slug === 'final-grade-needed-calculator';
+const itemAnalysis = slug === 'item-analysis-calculator';
+---
+
+<section class="tool-widget card recovery-tool" data-recovery-tool data-slug={slug} data-labels={JSON.stringify(labels)}>
+  {finalGrade && (
+    <div class="form-grid recovery-grid">
+      <label><span>{labels.target}</span><input data-field="target" type="number" min="0" max="100" step="any" value="60" /></label>
+      <label><span>{labels.earned}</span><input data-field="earned" type="number" min="0" max="100" step="any" value="42" /></label>
+      <label><span>{labels.remaining}</span><input data-field="remaining" type="number" min="0" max="100" step="any" value="40" /></label>
+      <label><span>{labels.mode}</span><select data-field="mode"><option value="percent">{labels.percent}</option><option value="fraction">{labels.fraction}</option></select></label>
+    </div>
+  )}
+
+  {itemAnalysis && (
+    <>
+      <div class="recovery-tabs" role="tablist">
+        <button class="btn ghost" type="button" data-mode="simple" aria-selected="true">{labels.simple}</button>
+        <button class="btn ghost" type="button" data-mode="bulk" aria-selected="false">{labels.bulk}</button>
+      </div>
+      <div data-panel="simple" class="form-grid recovery-grid">
+        <label><span>{labels.p}</span><input data-field="p" type="number" min="0" max="1" step="any" value="0.65" /></label>
+        <label><span>{labels.pHigh}</span><input data-field="pHigh" type="number" min="0" max="1" step="any" value="0.8" /></label>
+        <label><span>{labels.pLow}</span><input data-field="pLow" type="number" min="0" max="1" step="any" value="0.4" /></label>
+        <label><span>{labels.n}</span><input data-field="n" type="number" min="2" step="1" value="40" /></label>
+      </div>
+      <div data-panel="bulk" hidden>
+        <label class="textarea-label"><span>{labels.matrix}</span><textarea data-field="matrix" rows="8">1,1,0,1
+1,0,1,1
+1,1,1,1
+0,0,1,0
+0,1,0,0
+0,0,0,1</textarea></label>
+        <p class="hint">{labels.bulkHint}</p>
+      </div>
+    </>
+  )}
+
+  {!finalGrade && !itemAnalysis && (
+    <label class="textarea-label"><span>{labels.matrix}</span><textarea data-field="matrix" rows="9">1,1,0,1,1
+1,0,1,1,0
+1,1,1,1,1
+0,0,1,0,0
+0,1,0,0,1
+0,0,0,1,0</textarea></label>
+  )}
+
+  <div class="actions recovery-actions"><button class="btn" type="button" data-calculate>{labels.calculate}</button></div>
+  <p class="form-error" data-error role="alert" hidden></p>
+  <div class="resultbox recovery-results" data-results aria-live="polite" hidden></div>
+</section>
+
+<style>
+  .recovery-grid { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+  .recovery-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .recovery-tabs [aria-selected="true"] { background: var(--ink); color: var(--paper); }
+  .recovery-actions { margin-top: 18px; }
+  .recovery-results { display: grid; gap: 10px; }
+  .recovery-result { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding: 8px 0; }
+  .recovery-result span { color: var(--muted); }
+  .recovery-result strong { color: var(--ink); text-align: right; }
+  .hint { color: var(--muted); font-size: .92rem; }
+</style>
+
+<script>
+  import { analyzeBulkItems, analyzeItem, calculateKr20, calculateRequiredFinalGrade, parseNumericRows } from '../../lib/education-recovery';
+
+  document.querySelectorAll('[data-recovery-tool]').forEach((root) => {
+    if (!(root instanceof HTMLElement)) return;
+    const slug = root.dataset.slug || '';
+    const labels = JSON.parse(root.dataset.labels || '{}');
+    const error = root.querySelector('[data-error]');
+    const results = root.querySelector('[data-results]');
+    const field = (key) => root.querySelector(`[data-field="${key}"]`);
+    const number = (key) => Number((field(key)?.value || '').trim());
+    const showError = () => { if (error instanceof HTMLElement) { error.textContent = labels.invalid; error.hidden = false; } if (results instanceof HTMLElement) results.hidden = true; };
+    const show = (items) => { if (!(results instanceof HTMLElement)) return; results.innerHTML = items.map(([key, value]) => `<div class="recovery-result"><span>${labels[key] || key}</span><strong>${value}</strong></div>`).join(''); results.hidden = false; if (error instanceof HTMLElement) error.hidden = true; };
+    const format = (value, digits = 3) => Number.isFinite(value) ? value.toFixed(digits).replace(/\.0+$|(?<=\.\d*[1-9])0+$/g, '') : labels.notAvailable;
+
+    root.querySelectorAll('[data-mode]').forEach((button) => button.addEventListener('click', () => {
+      root.querySelectorAll('[data-mode]').forEach((candidate) => candidate.setAttribute('aria-selected', String(candidate === button)));
+      root.querySelectorAll('[data-panel]').forEach((panel) => { if (panel instanceof HTMLElement) panel.hidden = panel.dataset.panel !== button.dataset.mode; });
+    }));
+
+    root.querySelector('[data-calculate]')?.addEventListener('click', () => {
+      if (slug === 'final-grade-needed-calculator') {
+        const result = calculateRequiredFinalGrade({ target: number('target'), earnedWeightedPoints: number('earned'), remainingWeight: number('remaining'), mode: field('mode')?.value || 'percent' });
+        if (result.status === 'invalid') return showError();
+        return show([['required', `${format(result.required, 2)}${field('mode')?.value === 'fraction' ? '' : '%'}`], ['status', labels[result.status] || result.status], ['formulaResult', labels.formulaResult]]);
+      }
+      if (slug === 'item-analysis-calculator') {
+        const bulkPanel = root.querySelector('[data-panel="bulk"]');
+        if (bulkPanel instanceof HTMLElement && !bulkPanel.hidden) {
+          const items = analyzeBulkItems(parseNumericRows(field('matrix')?.value || ''));
+          if (!items.length) return showError();
+          return show([['items', String(items.length)], ['difficulty', items.map((item, index) => `${index + 1}: ${format(item.p, 2)}`).join(' · ')], ['discrimination', items.map((item, index) => `${index + 1}: ${format(item.discrimination, 2)}`).join(' · ')] ]);
+        }
+        const p = number('p');
+        const pHigh = number('pHigh');
+        const pLow = number('pLow');
+        const n = number('n');
+        const result = analyzeItem(p, pHigh, pLow, n);
+        if (![p, pHigh, pLow, n, result.discrimination].every(Number.isFinite) || !Number.isInteger(n) || n < 2 || [p, pHigh, pLow].some((value) => value < 0 || value > 1)) return showError();
+        return show([['difficulty', `${labels[result.difficulty] || result.difficulty} (${format(result.p, 2)})`], ['discrimination', format(result.discrimination, 2)], ['groups', `${result.upperSize} / ${result.lowerSize}`]]);
+      }
+      const result = calculateKr20(parseNumericRows(field('matrix')?.value || ''));
+      if (result.status !== 'ok') return showError();
+      return show([['kr20', format(result.value, 3)], ['respondents', String(result.respondents)], ['items', String(result.items)], ['variance', format(result.variance, 3)], ['sumPQ', format(result.sumPQ, 3)] ]);
+    });
+  });
+</script>

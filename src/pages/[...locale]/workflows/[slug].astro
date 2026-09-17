@@ -6,7 +6,7 @@ import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { type Locale } from '../../../config/site';
-import { getToolBySlug, type ToolMeta } from '../../../data/tools';
+import { getToolBySlug, isToolAvailableInLocale, type ToolMeta } from '../../../data/tools';
 import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide, type SeoGuide, type SeoGuideView } from '../../../data/seoGuides';
 import { workflows, isWorkflowAvailableInLocale, viewWorkflow, type Workflow } from '../../../data/workflows';
 import { localePath, localeUrlPair, toolUrl } from '../../../lib/url';
@@ -68,7 +68,7 @@ const workflowIndexPath = localePath(lang, 'workflows');
 const workflowPath = localePath(lang, 'workflows', workflow.slug);
 const liveTool = (slug: string): ToolMeta | undefined => {
   const tool = getToolBySlug(slug);
-  return tool?.status === 'live' ? tool : undefined;
+  return tool?.status === 'live' && isToolAvailableInLocale(tool, lang) ? tool : undefined;
 };
 const recommendedTools = workflow.recommendedToolIds.map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool));
 const valueReview = buildWorkflowValueReview(lang, workflow.slug, workflow, recommendedTools.map((tool) => tool.name[lang]));

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-17T16:12:20.332Z",
+  "status": "PASS",
+  "protected": {
+    "count": 94,
+    "failures": 0
+  },
+  "phase2b": {
+    "count": 40,
+    "failures": 0,
+    "confounded_by_sitewide_architecture": true
+  },
+  "editorial_leakage": {
+    "routes": 0,
+    "findings": []
+  },
+  "new_indexed_tools": {
+    "expected": [
+      "final-grade-needed-calculator",
+      "item-analysis-calculator",
+      "kr20-reliability-calculator"
+    ],
+    "added_routes": [
+      "/tools/final-grade-needed-calculator/",
+      "/tools/item-analysis-calculator/",
+      "/tools/kr20-reliability-calculator/"
+    ],
+    "unexpected_routes": []
+  },
+  "locale_gate": {
+    "zh_only_tools_present": true,
+    "english_clones_present": []
+  },
+  "lastmod": {
+    "changed_routes": [
+      "/",
+      "/category/statistics/",
+      "/education-statistics/",
+      "/tools/"
+    ],
+    "unexpected_routes": []
+  },
+  "sitemap": {
+    "urls": 717
+  },
+  "failures": [],
+  "warnings": []
+}

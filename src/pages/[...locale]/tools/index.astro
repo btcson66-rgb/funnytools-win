@@ -23,20 +23,19 @@ const ui = t(lang);
 const title = ui.toolsPageTitle;
 const description = ui.toolsPageDescription;
 
-const featured = getFeaturedTools().slice(0, 6);
+const featured = getFeaturedTools(lang).slice(0, 6);
 
 const categorySummaries = categories
   .map((category) => ({
     category,
-    count: getToolsByCategory(category.id).filter((t) => t.status === 'live').length,
+    count: getToolsByCategory(category.id, lang).length,
   }))
   .filter(({ count }) => count > 0);
 
 const groupedCategories = categories
   .map((category) => ({
     category,
-    tools: getToolsByCategory(category.id)
-      .filter((tool) => tool.status === 'live')
+    tools: getToolsByCategory(category.id, lang)
       .map((tool) => ({
         tool,
         search: [

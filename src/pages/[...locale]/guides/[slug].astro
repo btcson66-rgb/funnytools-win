@@ -6,7 +6,7 @@ import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
-import { getToolBySlug, type ToolMeta } from '../../../data/tools';
+import { getToolBySlug, isToolAvailableInLocale, type ToolMeta } from '../../../data/tools';
 import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide, type SeoGuide, type SeoGuideView } from '../../../data/seoGuides';
 import { workflows, isWorkflowAvailableInLocale, viewWorkflow } from '../../../data/workflows';
 import { absoluteUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/url';
@@ -90,7 +90,7 @@ const guidePath = localePath(lang, 'guides', guide.slug);
 const guideUrl = absoluteUrl(guidePath);
 const liveTool = (slug: string): ToolMeta | undefined => {
   const tool = getToolBySlug(slug);
-  return tool?.status === 'live' ? tool : undefined;
+  return tool?.status === 'live' && isToolAvailableInLocale(tool, lang) ? tool : undefined;
 };
 const relatedTools = guide.relatedToolIds.map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool));
 const relatedGuides: SeoGuideView[] = guide.relatedGuideIds

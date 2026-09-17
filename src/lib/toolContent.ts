@@ -78,6 +78,7 @@ import {
   pdfToWordContent,
   serverPdfCompressorContent,
 } from '../i18n/tools/conversion-api-tools';
+import { finalGradeNeededContent, itemAnalysisContent, kr20Content } from '../i18n/tools/education-recovery';
 
 export const contentBySlug = {
   'random-number-picker': randomNumberContent,
@@ -114,6 +115,9 @@ export const contentBySlug = {
   'teacher-exam-score-converter': teacherExamContent,
   'cronbach-alpha-calculator': cronbachAlphaContent,
   'independent-samples-t-test-calculator': independentTTestContent,
+  'final-grade-needed-calculator': finalGradeNeededContent,
+  'item-analysis-calculator': itemAnalysisContent,
+  'kr20-reliability-calculator': kr20Content,
   'gpa-calculator': gpaCalculatorContent,
   'random-wheel': randomWheelContent,
   'what-to-eat': whatToEatContent,

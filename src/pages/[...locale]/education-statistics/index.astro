@@ -5,7 +5,7 @@ import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
-import { getToolBySlug, type ToolMeta } from '../../../data/tools';
+import { getToolBySlug, isToolAvailableInLocale, type ToolMeta } from '../../../data/tools';
 import { seoGuides, viewSeoGuide, isSeoGuideAvailableInLocale } from '../../../data/seoGuides';
 import { workflows, viewWorkflow, isWorkflowAvailableInLocale } from '../../../data/workflows';
 import { t } from '../../../i18n/ui';
@@ -26,9 +26,9 @@ const hubPath = localePath(lang, 'education-statistics');
 const copy = {
   zh: {
     title: '教育與統計工具中心',
-    seoTitle: '教育與統計工具中心 | 教師考試、研究與 APA 統計報告工具',
-    description: '免費教育與統計工具中心，整理標準差、百分比、T 分數、Z 分數、教師考試加權分數、APA 7 統計報告與 SPSS 結果解讀工具。',
-    subtitle: '免費工具，適合學生、教師、研究者與教育考試準備，協助處理分數換算、基礎統計、APA 統計報告與 SPSS 結果判讀。',
+    seoTitle: '教育與統計工具中心 | 成績、試題分析與研究工具',
+    description: '免費教育與統計工具中心，整理成績目標、試題難度與鑑別度、KR-20、T 分數、Z 分數、APA 7 與 SPSS 工具。',
+    subtitle: '免費工具，適合學生、教師、研究者與教育考試準備，從成績規劃、試題檢查到統計報告逐步整理。',
     breadcrumb: '教育與統計',
   },
   en: {
@@ -44,7 +44,7 @@ const pageSeoTitle = lang === 'zh'
   ? '教育與統計工具中心 | 教師考試與研究統計工具'
   : 'Education Statistics Tools';
 const pageDescription = lang === 'zh'
-  ? '免費教育與統計工具中心，整理標準差、百分比、T 分數、Z 分數、教師甄試加權成績、APA 7 報告與 SPSS 結果解讀流程，方便學生、教師與研究者逐步檢查。'
+  ? '免費教育與統計工具中心，整理成績規劃、試題難度與鑑別度、KR-20、標準差、T 分數、Z 分數、APA 7 報告與 SPSS 結果解讀流程。'
   : copy.description;
 
 const groupCopy = {
@@ -83,6 +83,7 @@ const groupCopy = {
         '這一組工具聚焦教師甄試、班級排名、常模分數與加權總分等教育現場常見分數問題。',
         '考生可以先估算筆試、口試與試教加權後的總分，教師也可以用來說明排名百分位或標準化分數。',
         '若同時需要 PR、T 分數與 Z 分數，建議先確認原始分數、平均數與標準差來源是否一致。',
+        '若要估算期末需要幾分，請先把課程配分確認清楚，再使用期末要考幾分計算器；工具不會替你猜測學校的及格或四捨五入規則。',
       ],
     },
     {
@@ -92,6 +93,7 @@ const groupCopy = {
         '這一組整理適合教學活動、特教課程安排與小型教學研究的現有工具。',
         '可用於隨機抽學生、分組、排座位、計算成績平均與整理 GPA，協助教師在課堂前快速完成準備。',
         '工具只連到目前站內已上線的功能，不列出尚未建立的表單、量表或評分規準工具。',
+        '試題難度、鑑別度與 KR-20 適合做初步檢查，仍需搭配測驗目的、樣本與研究設計解讀。',
       ],
     },
   ],
@@ -146,15 +148,15 @@ const groupCopy = {
 
 const groupSlugs = [
   ['standard-deviation', 'percentage-calculator', 'weighted-average-calculator', 'z-score-calculator', 't-score-calculator', 'percentile-rank-calculator'],
-  ['apa-7-report-generator', 'independent-samples-t-test-calculator'],
+  ['apa-7-report-generator', 'independent-samples-t-test-calculator', 'item-analysis-calculator', 'kr20-reliability-calculator'],
   ['spss-result-interpreter'],
-  ['teacher-exam-score-converter', 'class-rank-percentile-calculator', 'normalized-score-converter', 'percentile-rank-calculator'],
+  ['teacher-exam-score-converter', 'class-rank-percentile-calculator', 'normalized-score-converter', 'percentile-rank-calculator', 'final-grade-needed-calculator'],
   ['random-student-picker', 'seating-chart', 'group-generator', 'random-group-generator', 'grade-average', 'gpa-calculator'],
 ];
 
 const liveTool = (slug: string): ToolMeta | undefined => {
   const tool = getToolBySlug(slug);
-  return tool?.status === 'live' ? tool : undefined;
+  return tool?.status === 'live' && isToolAvailableInLocale(tool, lang) ? tool : undefined;
 };
 
 const groups = groupCopy.map((group, index) => ({
