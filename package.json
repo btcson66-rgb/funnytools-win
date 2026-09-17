@@ -43,6 +43,8 @@
     "gsc:inspect-index": "node scripts/gsc-inspect-index.mjs",
     "audit:index-recovery:phase2b": "node scripts/index-recovery-phase2b.mjs",
     "audit:education-recovery": "node scripts/education-recovery-audit.mjs",
+    "audit:recovery-closeout": "node scripts/recovery-closeout-audit.mjs",
+    "audit:recovery-closeout:deps": "node scripts/capture-npm-audit-triage.mjs",
     "index:experiment:snapshot": "node scripts/index-experiment-snapshot.mjs",
     "seo:sitemap": "npm run seo:sitemap:refresh",
     "seo:sitemap:refresh": "node scripts/generate-sitemaps.mjs",

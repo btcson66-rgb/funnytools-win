@@ -1,0 +1,52 @@
+{
+  "generatedAt": "2026-09-17T18:16:17.270Z",
+  "status": "PASS",
+  "urlSurface": {
+    "current": 717,
+    "baseline": 717,
+    "unchanged": true
+  },
+  "builtHtml": 1182,
+  "indexable": 717,
+  "protected": 94,
+  "phase2b": 40,
+  "educationTools": [
+    "/tools/final-grade-needed-calculator/",
+    "/tools/item-analysis-calculator/",
+    "/tools/kr20-reliability-calculator/"
+  ],
+  "editorialLeakage": [],
+  "staleGuideStatements": 0,
+  "finalGrade": {
+    "required": 77.74999999999999,
+    "status": "ok"
+  },
+  "itemAnalysis": {
+    "p": 0.65,
+    "pHigh": 0.8181818181818182,
+    "pLow": 0.45454545454545453,
+    "discrimination": 0.3636363636363637
+  },
+  "kr20": {
+    "value": 0.6770833333333335,
+    "sumPQ": 1.2222222222222223,
+    "variance": 2.666666666666667
+  },
+  "indexingDryRun": {
+    "indexNow": {
+      "attempted": 20,
+      "success": 20,
+      "failed": 0,
+      "skipped": 1,
+      "dryRun": true
+    },
+    "bing": {
+      "attempted": 20,
+      "success": 20,
+      "failed": 0,
+      "skipped": 1,
+      "dryRun": true
+    }
+  },
+  "failures": []
+}

@@ -7,21 +7,71 @@ const itemAnalysis = slug === 'item-analysis-calculator';
 
 <section class="tool-widget card recovery-tool" data-recovery-tool data-slug={slug} data-labels={JSON.stringify(labels)}>
   {finalGrade && (
-    <div class="form-grid recovery-grid">
-      <label><span>{labels.target}</span><input data-field="target" type="number" min="0" max="100" step="any" value="60" /></label>
-      <label><span>{labels.earned}</span><input data-field="earned" type="number" min="0" max="100" step="any" value="42" /></label>
-      <label><span>{labels.remaining}</span><input data-field="remaining" type="number" min="0" max="100" step="any" value="40" /></label>
-      <label><span>{labels.mode}</span><select data-field="mode"><option value="percent">{labels.percent}</option><option value="fraction">{labels.fraction}</option></select></label>
-    </div>
+    <>
+      <div class="recovery-tabs" role="tablist" aria-label={labels.finalModes}>
+        <button class="btn ghost" type="button" data-final-mode="simple" aria-selected="true">{labels.simpleMode}</button>
+        <button class="btn ghost" type="button" data-final-mode="advanced" aria-selected="false">{labels.advancedMode}</button>
+      </div>
+      <div data-final-panel="simple">
+        <div class="form-grid recovery-grid">
+          <label><span>{labels.target}</span><input data-field="target" type="number" min="0" max="100" step="any" value="80" /></label>
+        </div>
+        <div class="recovery-table-wrap">
+          <table class="recovery-table">
+            <caption>{labels.completedAssessments}</caption>
+            <thead><tr><th scope="col">{labels.assessmentName}</th><th scope="col">{labels.rawScore}</th><th scope="col">{labels.maxScore}</th><th scope="col">{labels.weight}</th><th scope="col"><span class="sr-only">{labels.removeRow}</span></th></tr></thead>
+            <tbody data-assessment-rows>
+              <tr data-assessment-row>
+                <td><label><span class="sr-only">{labels.assessmentName}</span><input data-row-field="name" type="text" value="作業" /></label></td>
+                <td><label><span class="sr-only">{labels.rawScore}</span><input data-row-field="raw" type="number" min="0" step="any" value="85" /></label></td>
+                <td><label><span class="sr-only">{labels.maxScore}</span><input data-row-field="max" type="number" min="0" step="any" value="100" /></label></td>
+                <td><label><span class="sr-only">{labels.weight}</span><input data-row-field="weight" type="number" min="0" max="100" step="any" value="30" /></label></td>
+                <td><button class="btn ghost row-remove" type="button" data-remove-row>{labels.removeRow}</button></td>
+              </tr>
+              <tr data-assessment-row>
+                <td><label><span class="sr-only">{labels.assessmentName}</span><input data-row-field="name" type="text" value="期中" /></label></td>
+                <td><label><span class="sr-only">{labels.rawScore}</span><input data-row-field="raw" type="number" min="0" step="any" value="78" /></label></td>
+                <td><label><span class="sr-only">{labels.maxScore}</span><input data-row-field="max" type="number" min="0" step="any" value="100" /></label></td>
+                <td><label><span class="sr-only">{labels.weight}</span><input data-row-field="weight" type="number" min="0" max="100" step="any" value="30" /></label></td>
+                <td><button class="btn ghost row-remove" type="button" data-remove-row>{labels.removeRow}</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn ghost" type="button" data-add-row>{labels.addRow}</button>
+        <div class="form-grid recovery-grid recovery-final-row">
+          <label><span>{labels.remainingName}</span><input data-field="remainingName" type="text" value={labels.defaultFinalName} /></label>
+          <label><span>{labels.remainingWeight}</span><input data-field="remainingWeight" type="number" min="0" max="100" step="any" value="40" /></label>
+          <label><span>{labels.remainingMaxScore}</span><input data-field="remainingMaxScore" type="number" min="0" step="any" value="100" /></label>
+        </div>
+      </div>
+      <div data-final-panel="advanced" hidden>
+        <div class="form-grid recovery-grid">
+          <label><span>{labels.target}</span><input data-field="target" type="number" min="0" max="100" step="any" value="60" /></label>
+          <label><span>{labels.earned}</span><input data-field="earned" type="number" min="0" max="100" step="any" value="42" /></label>
+          <label><span>{labels.remaining}</span><input data-field="remaining" type="number" min="0" max="100" step="any" value="40" /></label>
+          <label><span>{labels.mode}</span><select data-field="mode"><option value="percent">{labels.percent}</option><option value="fraction">{labels.fraction}</option></select></label>
+        </div>
+      </div>
+    </>
   )}
 
   {itemAnalysis && (
     <>
-      <div class="recovery-tabs" role="tablist">
+      <div class="recovery-tabs" role="tablist" aria-label={labels.itemModes}>
         <button class="btn ghost" type="button" data-mode="simple" aria-selected="true">{labels.simple}</button>
+        <button class="btn ghost" type="button" data-mode="advanced" aria-selected="false">{labels.advancedProportion}</button>
         <button class="btn ghost" type="button" data-mode="bulk" aria-selected="false">{labels.bulk}</button>
       </div>
       <div data-panel="simple" class="form-grid recovery-grid">
+        <label><span>{labels.totalCorrect}</span><input data-field="totalCorrect" type="number" min="0" step="1" value="26" /></label>
+        <label><span>{labels.totalN}</span><input data-field="totalN" type="number" min="1" step="1" value="40" /></label>
+        <label><span>{labels.highCorrect}</span><input data-field="highCorrect" type="number" min="0" step="1" value="9" /></label>
+        <label><span>{labels.highN}</span><input data-field="highN" type="number" min="1" step="1" value="11" /></label>
+        <label><span>{labels.lowCorrect}</span><input data-field="lowCorrect" type="number" min="0" step="1" value="5" /></label>
+        <label><span>{labels.lowN}</span><input data-field="lowN" type="number" min="1" step="1" value="11" /></label>
+      </div>
+      <div data-panel="advanced" class="form-grid recovery-grid" hidden>
         <label><span>{labels.p}</span><input data-field="p" type="number" min="0" max="1" step="any" value="0.65" /></label>
         <label><span>{labels.pHigh}</span><input data-field="pHigh" type="number" min="0" max="1" step="any" value="0.8" /></label>
         <label><span>{labels.pLow}</span><input data-field="pLow" type="number" min="0" max="1" step="any" value="0.4" /></label>
@@ -50,35 +100,76 @@ const itemAnalysis = slug === 'item-analysis-calculator';
 
   <div class="actions recovery-actions"><button class="btn" type="button" data-calculate>{labels.calculate}</button></div>
   <p class="form-error" data-error role="alert" hidden></p>
+  <p class="form-warning" data-warning role="status" hidden></p>
   <div class="resultbox recovery-results" data-results aria-live="polite" hidden></div>
 </section>
 
 <style>
   .recovery-grid { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
-  .recovery-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .recovery-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
   .recovery-tabs [aria-selected="true"] { background: var(--ink); color: var(--paper); }
   .recovery-actions { margin-top: 18px; }
   .recovery-results { display: grid; gap: 10px; }
   .recovery-result { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding: 8px 0; }
   .recovery-result span { color: var(--muted); }
   .recovery-result strong { color: var(--ink); text-align: right; }
-  .hint { color: var(--muted); font-size: .92rem; }
+  .recovery-table-wrap { overflow-x: auto; margin: 16px 0 10px; }
+  .recovery-table { width: 100%; min-width: 620px; border-collapse: collapse; }
+  .recovery-table th, .recovery-table td { padding: 7px; border-bottom: 1px solid var(--line); text-align: left; }
+  .recovery-table input { width: 100%; min-width: 90px; }
+  .recovery-final-row { margin-top: 16px; }
+  .row-remove { white-space: nowrap; }
+  .hint, .form-warning { color: var(--muted); font-size: .92rem; line-height: 1.6; }
+  .form-warning { padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 </style>
 
 <script>
-  import { analyzeBulkItems, analyzeItem, calculateKr20, calculateRequiredFinalGrade, parseNumericRows } from '../../lib/education-recovery';
+  import { analyzeBulkItems, analyzeItem, analyzeItemFromCounts, calculateKr20, calculateRequiredFinalGrade, parseNumericRows, parseRequiredNumber } from '../../lib/education-recovery';
 
   document.querySelectorAll('[data-recovery-tool]').forEach((root) => {
     if (!(root instanceof HTMLElement)) return;
     const slug = root.dataset.slug || '';
     const labels = JSON.parse(root.dataset.labels || '{}');
     const error = root.querySelector('[data-error]');
+    const warning = root.querySelector('[data-warning]');
     const results = root.querySelector('[data-results]');
-    const field = (key) => root.querySelector(`[data-field="${key}"]`);
-    const number = (key) => Number((field(key)?.value || '').trim());
-    const showError = () => { if (error instanceof HTMLElement) { error.textContent = labels.invalid; error.hidden = false; } if (results instanceof HTMLElement) results.hidden = true; };
-    const show = (items) => { if (!(results instanceof HTMLElement)) return; results.innerHTML = items.map(([key, value]) => `<div class="recovery-result"><span>${labels[key] || key}</span><strong>${value}</strong></div>`).join(''); results.hidden = false; if (error instanceof HTMLElement) error.hidden = true; };
+    const field = (key, scope = root) => scope.querySelector(`[data-field="${key}"]`);
+    const number = (key, scope = root) => parseRequiredNumber(field(key, scope)?.value);
+    const showError = () => {
+      if (error instanceof HTMLElement) { error.textContent = labels.invalid; error.hidden = false; }
+      if (warning instanceof HTMLElement) warning.hidden = true;
+      if (results instanceof HTMLElement) results.hidden = true;
+    };
+    const show = (items, message = '') => {
+      if (!(results instanceof HTMLElement)) return;
+      results.innerHTML = items.map(([key, value]) => `<div class="recovery-result"><span>${labels[key] || key}</span><strong>${value}</strong></div>`).join('');
+      results.hidden = false;
+      if (error instanceof HTMLElement) error.hidden = true;
+      if (warning instanceof HTMLElement) { warning.textContent = message; warning.hidden = !message; }
+    };
     const format = (value, digits = 3) => Number.isFinite(value) ? value.toFixed(digits).replace(/\.0+$|(?<=\.\d*[1-9])0+$/g, '') : labels.notAvailable;
+    const rowNumber = (row, key) => parseRequiredNumber(row.querySelector(`[data-row-field="${key}"]`)?.value);
+
+    root.querySelectorAll('[data-final-mode]').forEach((button) => button.addEventListener('click', () => {
+      root.querySelectorAll('[data-final-mode]').forEach((candidate) => candidate.setAttribute('aria-selected', String(candidate === button)));
+      root.querySelectorAll('[data-final-panel]').forEach((panel) => { if (panel instanceof HTMLElement) panel.hidden = panel.dataset.finalPanel !== button.dataset.finalMode; });
+    }));
+
+    root.querySelector('[data-add-row]')?.addEventListener('click', () => {
+      const rows = root.querySelector('[data-assessment-rows]');
+      if (!(rows instanceof HTMLElement)) return;
+      const row = document.createElement('tr');
+      row.dataset.assessmentRow = '';
+      row.innerHTML = `<td><label><span class="sr-only">${labels.assessmentName}</span><input data-row-field="name" type="text" value="" /></label></td><td><label><span class="sr-only">${labels.rawScore}</span><input data-row-field="raw" type="number" min="0" step="any" /></label></td><td><label><span class="sr-only">${labels.maxScore}</span><input data-row-field="max" type="number" min="0" step="any" value="100" /></label></td><td><label><span class="sr-only">${labels.weight}</span><input data-row-field="weight" type="number" min="0" max="100" step="any" /></label></td><td><button class="btn ghost row-remove" type="button" data-remove-row>${labels.removeRow}</button></td>`;
+      rows.appendChild(row);
+    });
+    root.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement) || !target.matches('[data-remove-row]')) return;
+      const row = target.closest('[data-assessment-row]');
+      if (row) row.remove();
+    });
 
     root.querySelectorAll('[data-mode]').forEach((button) => button.addEventListener('click', () => {
       root.querySelectorAll('[data-mode]').forEach((candidate) => candidate.setAttribute('aria-selected', String(candidate === button)));
@@ -87,24 +178,66 @@ const itemAnalysis = slug === 'item-analysis-calculator';
 
     root.querySelector('[data-calculate]')?.addEventListener('click', () => {
       if (slug === 'final-grade-needed-calculator') {
-        const result = calculateRequiredFinalGrade({ target: number('target'), earnedWeightedPoints: number('earned'), remainingWeight: number('remaining'), mode: field('mode')?.value || 'percent' });
+        const activePanel = root.querySelector('[data-final-panel]:not([hidden])');
+        if (!(activePanel instanceof HTMLElement)) return showError();
+        if (activePanel.dataset.finalPanel === 'simple') {
+          const rawRows = [...root.querySelectorAll('[data-assessment-row]')].map((row) => ({
+            name: row.querySelector('[data-row-field="name"]')?.value.trim(),
+            rawScore: rowNumber(row, 'raw'),
+            maxScore: rowNumber(row, 'max'),
+            weight: rowNumber(row, 'weight'),
+          }));
+          const target = number('target', activePanel);
+          const remainingWeight = number('remainingWeight', activePanel);
+          const remainingMaxScore = number('remainingMaxScore', activePanel);
+          if (target === null || remainingWeight === null || remainingMaxScore === null || rawRows.some((row) => row.rawScore === null || row.maxScore === null || row.weight === null)) return showError();
+          const rows = rawRows.map((row) => ({ ...row, rawScore: row.rawScore as number, maxScore: row.maxScore as number, weight: row.weight as number }));
+          const result = calculateRequiredFinalGrade({ target, completedRows: rows, remainingWeight, remainingMaxScore });
+          if (result.status === 'invalid') return showError();
+          return show([
+            ['earnedPoints', `${format(result.earnedWeightedPoints, 2)} / 100`],
+            ['completedWeight', `${format(result.completedWeight, 2)}%`],
+            ['remainingWeight', `${format(result.remainingWeight, 2)}%`],
+            ['targetValue', `${format(result.target, 2)}`],
+            ['requiredRaw', `${format(result.required, 2)} / ${format(remainingMaxScore, 2)}`],
+            ['status', labels[result.status] || result.status],
+          ], result.warning || '');
+        }
+        const target = number('target', activePanel);
+        const earned = number('earned', activePanel);
+        const remaining = number('remaining', activePanel);
+        if (target === null || earned === null || remaining === null) return showError();
+        const result = calculateRequiredFinalGrade({ target, earnedWeightedPoints: earned, remainingWeight: remaining, mode: field('mode', activePanel)?.value || 'percent' });
         if (result.status === 'invalid') return showError();
-        return show([['required', `${format(result.required, 2)}${field('mode')?.value === 'fraction' ? '' : '%'}`], ['status', labels[result.status] || result.status], ['formulaResult', labels.formulaResult]]);
+        return show([['required', `${format(result.required, 2)}${field('mode', activePanel)?.value === 'fraction' ? '' : '%'}`], ['status', labels[result.status] || result.status], ['formulaResult', labels.formulaResult]]);
       }
       if (slug === 'item-analysis-calculator') {
-        const bulkPanel = root.querySelector('[data-panel="bulk"]');
-        if (bulkPanel instanceof HTMLElement && !bulkPanel.hidden) {
-          const items = analyzeBulkItems(parseNumericRows(field('matrix')?.value || ''));
+        const activePanel = root.querySelector('[data-panel]:not([hidden])');
+        if (!(activePanel instanceof HTMLElement)) return showError();
+        if (activePanel.dataset.panel === 'bulk') {
+          const items = analyzeBulkItems(parseNumericRows(field('matrix', activePanel)?.value || ''));
           if (!items.length) return showError();
-          return show([['items', String(items.length)], ['difficulty', items.map((item, index) => `${index + 1}: ${format(item.p, 2)}`).join(' · ')], ['discrimination', items.map((item, index) => `${index + 1}: ${format(item.discrimination, 2)}`).join(' · ')] ]);
+          return show([['items', String(items.length)], ['difficulty', items.map((item, index) => `${index + 1}: p=${format(item.p, 2)}`).join(' · ')], ['discrimination', items.map((item, index) => `${index + 1}: D=${format(item.discrimination, 2)}`).join(' · ')], ['groups', items.map((item, index) => `${index + 1}: ${item.upperCount}/${item.upperSize} · ${item.lowerCount}/${item.lowerSize}`).join(' · ')], ['bulkNote', labels.bulkGroupingNote], ['heuristicNote', labels.heuristicNote]]);
         }
-        const p = number('p');
-        const pHigh = number('pHigh');
-        const pLow = number('pLow');
-        const n = number('n');
+        if (activePanel.dataset.panel === 'simple') {
+          const totalCorrect = number('totalCorrect', activePanel);
+          const totalN = number('totalN', activePanel);
+          const highCorrect = number('highCorrect', activePanel);
+          const highN = number('highN', activePanel);
+          const lowCorrect = number('lowCorrect', activePanel);
+          const lowN = number('lowN', activePanel);
+          if ([totalCorrect, totalN, highCorrect, highN, lowCorrect, lowN].some((value) => value === null)) return showError();
+          const result = analyzeItemFromCounts({ totalCorrect: totalCorrect as number, totalN: totalN as number, highCorrect: highCorrect as number, highN: highN as number, lowCorrect: lowCorrect as number, lowN: lowN as number });
+          if (!result) return showError();
+          return show([['difficulty', `${labels[result.difficulty] || result.difficulty} (p=${format(result.p, 2)})`], ['upperP', format(result.pHigh, 3)], ['lowerP', format(result.pLow, 3)], ['discrimination', format(result.discrimination, 3)], ['groups', `${result.upperCount}/${result.upperSize} · ${result.lowerCount}/${result.lowerSize}`], ['interpretation', labels.interpretation], ['heuristicNote', labels.heuristicNote]]);
+        }
+        const p = number('p', activePanel);
+        const pHigh = number('pHigh', activePanel);
+        const pLow = number('pLow', activePanel);
+        const n = number('n', activePanel);
+        if (p === null || pHigh === null || pLow === null || n === null || !Number.isInteger(n) || n < 2 || [p, pHigh, pLow].some((value) => value < 0 || value > 1)) return showError();
         const result = analyzeItem(p, pHigh, pLow, n);
-        if (![p, pHigh, pLow, n, result.discrimination].every(Number.isFinite) || !Number.isInteger(n) || n < 2 || [p, pHigh, pLow].some((value) => value < 0 || value > 1)) return showError();
-        return show([['difficulty', `${labels[result.difficulty] || result.difficulty} (${format(result.p, 2)})`], ['discrimination', format(result.discrimination, 2)], ['groups', `${result.upperSize} / ${result.lowerSize}`]]);
+        return show([['difficulty', `${labels[result.difficulty] || result.difficulty} (${format(result.p, 2)})`], ['upperP', format(result.pHigh, 3)], ['lowerP', format(result.pLow, 3)], ['discrimination', format(result.discrimination, 3)], ['groups', `${result.upperSize} / ${result.lowerSize}`], ['interpretation', labels.interpretation], ['heuristicNote', labels.heuristicNote]]);
       }
       const result = calculateKr20(parseNumericRows(field('matrix')?.value || ''));
       if (result.status !== 'ok') return showError();

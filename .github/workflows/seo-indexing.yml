@@ -48,6 +48,15 @@ jobs:
       - name: Validate sitemap URLs
         run: node scripts/validate-indexable-urls.mjs
 
+      - name: Create validated indexing submission manifest
+        run: node scripts/create-indexing-submission-manifest.mjs
+
+      - name: Upload indexing submission manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: indexing-submission-manifest
+          path: reports/indexing-submission-manifest.json
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
@@ -78,6 +87,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Download validated indexing submission manifest
+        uses: actions/download-artifact@v4
+        with:
+          name: indexing-submission-manifest
+          path: reports
+
       - name: Submit IndexNow URLs
         run: node scripts/submit-indexnow.mjs
         env:
@@ -105,6 +120,20 @@ jobs:
         with:
           name: seo-indexing-reports
           path: reports/
+
+      - name: Summarize deployment and indexing signal state
+        if: always()
+        run: |
+          {
+            echo '## SEO indexing automation';
+            echo;
+            echo '- Deployment job: PASS (this submit job only runs after build/deploy succeeds).';
+            if [ -f reports/gsc-sitemap-submit-report.json ]; then
+              node -e "const r=require('./reports/gsc-sitemap-submit-report.json'); console.log('- Indexing signal: '+(r.status||'UNKNOWN')+' — '+(r.message||''));";
+            else
+              echo '- Indexing signal: NOT_AVAILABLE';
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
 
   weekly-inspection:
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
