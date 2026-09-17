@@ -3,7 +3,6 @@ import {
   changedUrlsPath,
   currentState,
   filterSubmitCandidates,
-  previousState,
   priorityUrlsPath,
   readCurrentSitemapEntries,
   readJson,
@@ -16,16 +15,18 @@ import {
 } from './seo-indexing-utils.mjs';
 
 const apiKey = process.env.BING_API_KEY?.trim();
+const dryRun = process.argv.includes('--dry-run');
 const sitemapEntries = readCurrentSitemapEntries();
-const previous = previousState();
 const changed = readJson(changedUrlsPath, null);
-const addedFromState = sitemapEntries.filter((entry) => !previous.urls?.[entry.loc]).map((entry) => entry.loc);
 const desired = [
   ...(changed?.changed ?? []),
   ...readPriorityUrls(priorityUrlsPath),
-  ...addedFromState,
 ];
-const { submitted: candidateUrls, skipped } = filterSubmitCandidates(desired);
+const manifest = readJson(join(reportsDir, 'indexing-submission-manifest.json'), null);
+const candidates = Array.isArray(manifest?.urls)
+  ? { submitted: manifest.urls, skipped: manifest.skipped ?? [] }
+  : filterSubmitCandidates(desired);
+const { submitted: candidateUrls, skipped } = candidates;
 
 const report = {
   generatedAt: new Date().toISOString(),
@@ -36,9 +37,11 @@ const report = {
   failed: [],
   skipped,
   quota: null,
+  dryRun,
+  candidateSource: manifest ? 'validated-indexing-submission-manifest' : 'local-filter-fallback',
 };
 
-if (!apiKey) {
+if (!apiKey && !dryRun) {
   // 2026-07-25 CEO 審查（gsc-secrets 稽核修正）：同 gsc-submit-sitemaps.mjs 的問題——
   // 缺金鑰不該假裝成功退出，紅線第 6 條要求響亮失敗。
   report.skipped.push({ url: '*', reason: 'missing-BING_API_KEY' });
@@ -48,6 +51,16 @@ if (!apiKey) {
   console.error(report.error);
   console.log(JSON.stringify(report, null, 2));
   process.exit(1);
+}
+
+if (dryRun) {
+  report.attempted = candidateUrls.length;
+  report.success = candidateUrls;
+  report.quota = { mode: 'dry-run', limit: candidateUrls.length };
+  writeJson(join(reportsDir, 'bing-submission-report.json'), report);
+  writeText(join(reportsDir, 'bing-submission-report.md'), `# Bing Submission Report\n\nDry-run only. Would submit ${report.attempted} validated URL(s).\n`);
+  console.log(JSON.stringify({ attempted: report.attempted, success: report.success.length, failed: 0, skipped: report.skipped.length, dryRun: true }, null, 2));
+  process.exit(0);
 }
 
 async function getQuota() {

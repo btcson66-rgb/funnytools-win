@@ -19,12 +19,17 @@ import {
 } from './seo-indexing-utils.mjs';
 
 const key = process.env.INDEXNOW_KEY?.trim();
+const dryRun = process.argv.includes('--dry-run');
 const sitemapEntries = readCurrentSitemapEntries();
 const changed = readJson(changedUrlsPath, null);
 const diffUrls = changed?.changed ?? [];
 const priorityUrls = readPriorityUrls(priorityUrlsPath);
 const desired = [...new Set([...diffUrls, ...priorityUrls])];
-const { submitted: urls, skipped } = filterSubmitCandidates(desired);
+const manifest = readJson(join(reportsDir, 'indexing-submission-manifest.json'), null);
+const candidates = Array.isArray(manifest?.urls)
+  ? { submitted: manifest.urls, skipped: manifest.skipped ?? [] }
+  : filterSubmitCandidates(desired);
+const { submitted: urls, skipped } = candidates;
 
 const report = {
   generatedAt: new Date().toISOString(),
@@ -33,9 +38,11 @@ const report = {
   success: [],
   failed: [],
   skipped,
+  dryRun,
+  candidateSource: manifest ? 'validated-indexing-submission-manifest' : 'local-filter-fallback',
 };
 
-if (!key) {
+if (!key && !dryRun) {
   // 2026-07-25 CEO 審查（gsc-secrets 稽核修正）：缺金鑰不是「正常沒事做」，是設定
   // 缺口，紅線第 6 條要求响亮失敗，不得靜默 exit(0) 假裝成功。
   report.skipped.push({ url: '*', reason: 'missing-INDEXNOW_KEY' });
@@ -44,6 +51,14 @@ if (!key) {
   console.error(report.error);
   console.log(JSON.stringify(report, null, 2));
   process.exit(1);
+}
+
+if (dryRun) {
+  report.attempted = urls.length;
+  report.success = urls;
+  writeJson(join(reportsDir, 'indexnow-submission-report.json'), report);
+  console.log(JSON.stringify({ attempted: report.attempted, success: report.success.length, failed: 0, skipped: report.skipped.length, dryRun: true }, null, 2));
+  process.exit(0);
 }
 
 const keyFile = `${key}.txt`;

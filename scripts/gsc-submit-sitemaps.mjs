@@ -16,7 +16,13 @@ import { resolveSitemapOutcome } from './gsc-sitemap-outcome.mjs';
 const DAY_MS = 24 * 60 * 60 * 1000;
 const STUCK_DAYS = 14;
 const forceSubmit = process.argv.includes('--force');
-const sitemapUrls = [
+const sitemapArgIndex = process.argv.findIndex((arg) => arg === '--sitemap-url');
+const requestedSitemap = process.argv.find((arg) => arg.startsWith('--sitemap-url='))?.slice('--sitemap-url='.length)
+  ?? (sitemapArgIndex >= 0 ? process.argv[sitemapArgIndex + 1] : null);
+if (requestedSitemap && requestedSitemap !== sitemapIndexUrl) {
+  throw new Error(`Controlled sitemap selection only permits the root sitemap: ${sitemapIndexUrl}`);
+}
+const sitemapUrls = requestedSitemap ? [sitemapIndexUrl] : [
   sitemapIndexUrl,
   ...expectedSitemapFiles.map((file) => new URL(file, siteUrl).href),
 ];
