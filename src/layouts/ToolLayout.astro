@@ -33,11 +33,13 @@ interface Props {
   category: Category;
   content: ToolContent;
   jsonLd: Record<string, unknown>[];
+  reviewedAt?: string;
 }
 
-const { lang, tool, category, content, jsonLd } = Astro.props;
+const { lang, tool, category, content, jsonLd, reviewedAt } = Astro.props;
 const ui = t(lang);
 const currentUrl = absoluteUrl(toolUrl(lang, tool.slug));
+const hasToolAlternates = !tool.locales || tool.locales.length > 1;
 const seoTitle = toolSeoTitle(lang, content);
 const isDownloadGated = isCanonicalDownloadGatedTool(tool.slug);
 const isStrictlyLocal = tool.privacyLevel === 'local-only' && !isDownloadGated;
@@ -72,7 +74,8 @@ const downloadGateConfig = SITE.features.downloadGate
   keywords={content.keywords}
   type="article"
   alternateSegments={['tools', tool.slug]}
-  altLang={localeUrlPair('tools', tool.slug)}
+  altLang={hasToolAlternates ? localeUrlPair('tools', tool.slug) : undefined}
+  hasAlternates={hasToolAlternates}
   jsonLd={jsonLd}
   ogImage={categoryOgImage(lang, category.id)}
   ogImageAlt={`${content.name} · ${category.name[lang]}`}
@@ -299,7 +302,7 @@ const downloadGateConfig = SITE.features.downloadGate
     )}
 
     <p class="updated">
-      {ui.lastUpdated}: <time datetime={CONTENT_REVIEWED_AT}>{CONTENT_REVIEWED_AT}</time>
+      {ui.lastUpdated}: <time datetime={reviewedAt ?? CONTENT_REVIEWED_AT}>{reviewedAt ?? CONTENT_REVIEWED_AT}</time>
     </p>
 
     {tool.embedPotential !== 'low' && <EmbedCode lang={lang} tool={tool} />}

@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { lang, current } = Astro.props;
-const tools = getRelatedTools(current.slug, 4);
+const tools = getRelatedTools(current.slug, 4, lang);
 const copy = {
   zh: {
     heading: '完成後可以接著做',

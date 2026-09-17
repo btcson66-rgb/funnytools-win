@@ -18,12 +18,8 @@ import { buildCategoryValueReview } from '../../../lib/contentValue';
 export function getStaticPaths() {
   // Only generate pages for categories that actually have live tools,
   // so we never publish empty/thin category pages.
-  const liveCategories = categories.filter((category) =>
-    getToolsByCategory(category.id).some((tool) => tool.status === 'live'),
-  );
-
   return SITE.locales.flatMap((lang) =>
-    liveCategories.map((categoryData) => ({
+    categories.filter((category) => getToolsByCategory(category.id, lang).length > 0).map((categoryData) => ({
       params: { locale: lang === SITE.defaultLocale ? undefined : lang, category: categoryData.id },
       props: { lang, categoryData },
     })),
@@ -33,7 +29,7 @@ export function getStaticPaths() {
 const { lang, categoryData } = Astro.props as { lang: Locale; categoryData: Category };
 const ui = t(lang);
 const content = getCategoryContent(categoryData.id) as CategoryContent | undefined;
-const categoryTools = getToolsByCategory(categoryData.id).filter((tool) => tool.status === 'live');
+const categoryTools = getToolsByCategory(categoryData.id, lang);
 
 const h1 = content ? content.h1[lang] : `${categoryData.icon} ${categoryData.name[lang]}`;
 const pageTitle = content
@@ -130,7 +126,7 @@ const valueReview = buildCategoryValueReview(
 const relatedCategories = (content?.relatedCategories ?? [])
   .map((id) => getCategoryById(id))
   .filter((cat): cat is Category => cat != null)
-  .filter((cat) => getToolsByCategory(cat.id).some((tool) => tool.status === 'live'));
+  .filter((cat) => getToolsByCategory(cat.id, lang).length > 0);
 
 const breadcrumbItems = [
   { name: ui.breadcrumbHome, href: localePath(lang) },

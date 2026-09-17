@@ -1,7 +1,7 @@
 import { SITE, type Locale } from '../config/site';
 import indexingConfig from '../config/indexing.json';
 import { categories } from '../data/categories';
-import { hasLiveTools, liveTools } from '../data/tools';
+import { getLiveToolsForLocale, hasLiveTools, liveTools } from '../data/tools';
 import { allBlogPosts } from '../data/allBlogPosts';
 import { audiences } from '../data/audiences';
 import { isPostAvailableInLocale } from '../data/blogPosts';
@@ -11,6 +11,8 @@ import { editorialPages } from '../data/editorialPages';
 import { absoluteUrl, localePath } from './url';
 
 const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
+const changedAt = '2026-09-17';
+const recoveryOnlyToolSlugs = new Set(['final-grade-needed-calculator', 'item-analysis-calculator', 'kr20-reliability-calculator']);
 const paidOwnedPages: SitemapPage[] = [
   {
     segments: ['wedding-seating-conflict-solver'],
@@ -24,7 +26,7 @@ const paidOwnedPages: SitemapPage[] = [
 // date here would stamp every build as "modified today", which teaches
 // crawlers to ignore lastmod entirely.
 const latestContentDate = [
-  ...liveTools.map((tool) => tool.updated),
+  ...liveTools.filter((tool) => !recoveryOnlyToolSlugs.has(tool.slug)).map((tool) => tool.updated),
   ...allBlogPosts.map((post) => post.updated),
   ...seoGuides.map((guide) => guideUpdatedAt(guide)),
   ...workflows.map((workflow) => workflow.updatedAt),
@@ -104,9 +106,9 @@ export function sitemapUrlSet(entries: SitemapEntry[]): string {
 
 function basePages(): SitemapPage[] {
   return [
-    { segments: [], changefreq: 'daily', priority: '1.0', alternates: true },
-    { segments: ['tools'], changefreq: 'weekly', priority: '0.9', alternates: true },
-    { segments: ['education-statistics'], changefreq: 'weekly', priority: '0.8', alternates: true },
+    { segments: [], lastmod: changedAt, changefreq: 'daily', priority: '1.0', alternates: true },
+    { segments: ['tools'], lastmod: changedAt, changefreq: 'weekly', priority: '0.9', alternates: true },
+    { segments: ['education-statistics'], lastmod: changedAt, changefreq: 'weekly', priority: '0.8', alternates: true },
     { segments: ['support'], changefreq: 'monthly', priority: '0.3', alternates: true },
     { segments: ['shop'], changefreq: 'weekly', priority: '0.5', alternates: true },
     ...paidOwnedPages,
@@ -122,19 +124,20 @@ function basePages(): SitemapPage[] {
 function categoryPages(): SitemapPage[] {
   return categories.filter((category) => hasLiveTools(category.id)).map((category) => ({
     segments: ['category', category.id],
+    lastmod: category.id === 'statistics' ? changedAt : undefined,
     changefreq: 'weekly' as const,
     priority: '0.7',
     alternates: true,
   }));
 }
 
-function toolPages(): SitemapPage[] {
-  return liveTools.map((tool) => ({
+function toolPages(lang: Locale = 'zh'): SitemapPage[] {
+  return getLiveToolsForLocale(lang).map((tool) => ({
     segments: ['tools', tool.slug],
     lastmod: tool.updated,
     changefreq: 'monthly' as const,
     priority: mainToolSlugs.has(tool.slug) ? '0.8' : '0.6',
-    alternates: true,
+    alternates: !tool.locales || tool.locales.length === SITE.locales.length,
   }));
 }
 
@@ -245,7 +248,7 @@ export function englishEntries(): SitemapEntry[] {
   return [
     ...basePages(),
     ...categoryPages(),
-    ...toolPages(),
+    ...toolPages('en'),
     ...blogPages().filter((page) => page.segments.length === 1 || isPostAvailableInLocale(allBlogPosts.find((post) => post.slug === page.segments[1])!, 'en')),
     ...guidePages().filter((page) => page.segments.length === 1 || seoGuides.find((guide) => guide.slug === page.segments[1])?.locales.includes('en')),
     ...workflowPages().filter((page) => page.segments.length === 1 || workflows.find((workflow) => workflow.slug === page.segments[1])?.locales.includes('en')),

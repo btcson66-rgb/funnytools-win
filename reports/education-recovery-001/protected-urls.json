@@ -1,0 +1,925 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-17T15:40:34.230Z",
+  "evidence_file": "reports/index-recovery-phase2/index-evidence-master.csv",
+  "evidence_snapshot": "2026-09-13 URL-level inspection plus historical Search Analytics fields",
+  "count": 94,
+  "urls": [
+    {
+      "url": "https://funnytools.win/",
+      "route": "/",
+      "reasons": [
+        "F",
+        "u",
+        "n",
+        "y",
+        "T",
+        "o",
+        "l",
+        "s",
+        " ",
+        "h",
+        "m",
+        "e",
+        "p",
+        "a",
+        "g",
+        "historical clicks=44",
+        "impressions=139, position=8.820143884892087"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/about-tools/",
+      "route": "/about-tools/",
+      "reasons": [
+        "impressions=20, position=6.2"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/about/",
+      "route": "/about/",
+      "reasons": [
+        "historical clicks=7",
+        "impressions=66, position=4.196969696969697"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/category/money/",
+      "route": "/category/money/",
+      "reasons": [
+        "impressions=15, position=7.2"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/category/pdf/",
+      "route": "/category/pdf/",
+      "reasons": [
+        "impressions=16, position=6.625"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/category/statistics/",
+      "route": "/category/statistics/",
+      "reasons": [
+        "impressions=22, position=6"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/category/text/",
+      "route": "/category/text/",
+      "reasons": [
+        "impressions=11, position=6.636363636363637"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/disclaimer/",
+      "route": "/disclaimer/",
+      "reasons": [
+        "impressions=24, position=6.916666666666667"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/education-statistics/",
+      "route": "/education-statistics/",
+      "reasons": [
+        "e",
+        "d",
+        "u",
+        "c",
+        "a",
+        "t",
+        "i",
+        "o",
+        "n",
+        " ",
+        "p",
+        "l",
+        "r"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/",
+      "route": "/en/",
+      "reasons": [
+        "historical clicks=3",
+        "impressions=97, position=8.092783505154639"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/about/",
+      "route": "/en/about/",
+      "reasons": [
+        "impressions=11, position=2"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/category/draw/",
+      "route": "/en/category/draw/",
+      "reasons": [
+        "impressions=7, position=19.142857142857142"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/category/pdf/",
+      "route": "/en/category/pdf/",
+      "reasons": [
+        "impressions=10, position=3.7"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/contact/",
+      "route": "/en/contact/",
+      "reasons": [
+        "impressions=17, position=3.8823529411764706"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/disclaimer/",
+      "route": "/en/disclaimer/",
+      "reasons": [
+        "impressions=6, position=6.333333333333333"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/privacy/",
+      "route": "/en/privacy/",
+      "reasons": [
+        "impressions=8, position=4.25"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/support/",
+      "route": "/en/support/",
+      "reasons": [
+        "impressions=5, position=5.4"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/terms/",
+      "route": "/en/terms/",
+      "reasons": [
+        "impressions=7, position=3"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/",
+      "route": "/en/tools/",
+      "reasons": [
+        "impressions=17, position=4.117647058823529"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/cad-2d/",
+      "route": "/en/tools/cad-2d/",
+      "reasons": [
+        "Phase 2B treatment P2B-01"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/case-converter/",
+      "route": "/en/tools/case-converter/",
+      "reasons": [
+        "impressions=5, position=5.6"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/class-rank-percentile-calculator/",
+      "route": "/en/tools/class-rank-percentile-calculator/",
+      "reasons": [
+        "Phase 2B treatment P2B-02"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/compound-interest/",
+      "route": "/en/tools/compound-interest/",
+      "reasons": [
+        "Phase 2B treatment P2B-03"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/cronbach-alpha-calculator/",
+      "route": "/en/tools/cronbach-alpha-calculator/",
+      "reasons": [
+        "Phase 2B treatment P2B-04"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/dice-roller/",
+      "route": "/en/tools/dice-roller/",
+      "reasons": [
+        "impressions=5, position=6.2"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/flowchart/",
+      "route": "/en/tools/flowchart/",
+      "reasons": [
+        "Phase 2B control P2B-01"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/grade-average/",
+      "route": "/en/tools/grade-average/",
+      "reasons": [
+        "Phase 2B control P2B-04"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/image-crop/",
+      "route": "/en/tools/image-crop/",
+      "reasons": [
+        "impressions=11, position=5"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/jpg-to-webp/",
+      "route": "/en/tools/jpg-to-webp/",
+      "reasons": [
+        "impressions=5, position=1.8"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/markdown-previewer/",
+      "route": "/en/tools/markdown-previewer/",
+      "reasons": [
+        "impressions=5, position=12.8"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/net-salary/",
+      "route": "/en/tools/net-salary/",
+      "reasons": [
+        "Phase 2B control P2B-03"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/normalized-score-converter/",
+      "route": "/en/tools/normalized-score-converter/",
+      "reasons": [
+        "Phase 2B control P2B-02"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/password-generator/",
+      "route": "/en/tools/password-generator/",
+      "reasons": [
+        "impressions=5, position=6.2"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/pdf-compressor/",
+      "route": "/en/tools/pdf-compressor/",
+      "reasons": [
+        "impressions=7, position=6.714285714285714"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/percentage-calculator/",
+      "route": "/en/tools/percentage-calculator/",
+      "reasons": [
+        "Phase 2B treatment P2B-05"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/percentile-rank-calculator/",
+      "route": "/en/tools/percentile-rank-calculator/",
+      "reasons": [
+        "Phase 2B control P2B-05"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/random-name-picker/",
+      "route": "/en/tools/random-name-picker/",
+      "reasons": [
+        "impressions=6, position=3.8333333333333335"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/random-number-picker/",
+      "route": "/en/tools/random-number-picker/",
+      "reasons": [
+        "impressions=7, position=11.714285714285714"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/random-wheel/",
+      "route": "/en/tools/random-wheel/",
+      "reasons": [
+        "impressions=8, position=12.125"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/this-or-that/",
+      "route": "/en/tools/this-or-that/",
+      "reasons": [
+        "historical clicks=1",
+        "impressions=32, position=16.34375"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/en/tools/what-to-eat/",
+      "route": "/en/tools/what-to-eat/",
+      "reasons": [
+        "impressions=6, position=18.833333333333332"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/es/",
+      "route": "/es/",
+      "reasons": [
+        "impressions=7, position=5.857142857142857"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-alfa-cronbach/",
+      "route": "/es/herramientas/calculadora-alfa-cronbach/",
+      "reasons": [
+        "Phase 2B treatment P2B-07"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-desviacion-estandar/",
+      "route": "/es/herramientas/calculadora-desviacion-estandar/",
+      "reasons": [
+        "Phase 2B treatment P2B-08"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-dias-laborables/",
+      "route": "/es/herramientas/calculadora-dias-laborables/",
+      "reasons": [
+        "Phase 2B treatment P2B-09"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-hipoteca/",
+      "route": "/es/herramientas/calculadora-hipoteca/",
+      "reasons": [
+        "Phase 2B treatment P2B-10"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-inflacion/",
+      "route": "/es/herramientas/calculadora-inflacion/",
+      "reasons": [
+        "Phase 2B control P2B-10"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-media-ponderada/",
+      "route": "/es/herramientas/calculadora-media-ponderada/",
+      "reasons": [
+        "Phase 2B control P2B-07"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-nota-oposicion-docente/",
+      "route": "/es/herramientas/calculadora-nota-oposicion-docente/",
+      "reasons": [
+        "Phase 2B control P2B-08"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calcular-diferencia-entre-fechas/",
+      "route": "/es/herramientas/calcular-diferencia-entre-fechas/",
+      "reasons": [
+        "Phase 2B control P2B-09"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/decidir-entre-dos-opciones/",
+      "route": "/es/herramientas/decidir-entre-dos-opciones/",
+      "reasons": [
+        "Phase 2B control P2B-06"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/tirar-dados-online/",
+      "route": "/es/herramientas/tirar-dados-online/",
+      "reasons": [
+        "Phase 2B treatment P2B-06"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/for/",
+      "route": "/for/",
+      "reasons": [
+        "impressions=7, position=3.4285714285714284"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calcul-moyenne-notes/",
+      "route": "/fr/outils/calcul-moyenne-notes/",
+      "reasons": [
+        "Phase 2B treatment P2B-11"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculateur-ecart-type/",
+      "route": "/fr/outils/calculateur-ecart-type/",
+      "reasons": [
+        "Phase 2B control P2B-11"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculateur-inflation-pouvoir-achat/",
+      "route": "/fr/outils/calculateur-inflation-pouvoir-achat/",
+      "reasons": [
+        "Phase 2B treatment P2B-12"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculateur-jours-ouvres/",
+      "route": "/fr/outils/calculateur-jours-ouvres/",
+      "reasons": [
+        "Phase 2B treatment P2B-13"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculateur-mensualite-pret-immobilier/",
+      "route": "/fr/outils/calculateur-mensualite-pret-immobilier/",
+      "reasons": [
+        "Phase 2B control P2B-12"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculateur-moyenne-ponderee/",
+      "route": "/fr/outils/calculateur-moyenne-ponderee/",
+      "reasons": [
+        "Phase 2B treatment P2B-14"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculateur-score-t/",
+      "route": "/fr/outils/calculateur-score-t/",
+      "reasons": [
+        "Phase 2B control P2B-14"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculer-difference-entre-dates/",
+      "route": "/fr/outils/calculer-difference-entre-dates/",
+      "reasons": [
+        "Phase 2B treatment P2B-15"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/convertir-timestamp-unix/",
+      "route": "/fr/outils/convertir-timestamp-unix/",
+      "reasons": [
+        "Phase 2B control P2B-15"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/rappel-pause-ecran/",
+      "route": "/fr/outils/rappel-pause-ecran/",
+      "reasons": [
+        "Phase 2B control P2B-13"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/guides/",
+      "route": "/guides/",
+      "reasons": [
+        "impressions=7, position=4.142857142857142"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/guides/t-score-calculator-guide/",
+      "route": "/guides/t-score-calculator-guide/",
+      "reasons": [
+        "e",
+        "x",
+        "p",
+        "l",
+        "i",
+        "c",
+        "t",
+        " ",
+        "r",
+        "o",
+        "d",
+        "g",
+        "u",
+        "impressions=41, position=8.26829268292683"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/guides/teacher-exam-weighted-score-guide/",
+      "route": "/guides/teacher-exam-weighted-score-guide/",
+      "reasons": [
+        "e",
+        "x",
+        "p",
+        "l",
+        "i",
+        "c",
+        "t",
+        " ",
+        "r",
+        "o",
+        "d",
+        "g",
+        "u",
+        "historical clicks=1",
+        "impressions=8, position=9.625"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/privacy/",
+      "route": "/privacy/",
+      "reasons": [
+        "impressions=33, position=4.484848484848484"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/support/",
+      "route": "/support/",
+      "reasons": [
+        "impressions=22, position=3.909090909090909"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/terms/",
+      "route": "/terms/",
+      "reasons": [
+        "impressions=40, position=5.55"
+      ],
+      "source": "hard gate"
+    },
+    {
+      "url": "https://funnytools.win/tools/bar-chart-maker/",
+      "route": "/tools/bar-chart-maker/",
+      "reasons": [
+        "Phase 2B treatment P2B-16"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/base64/",
+      "route": "/tools/base64/",
+      "reasons": [
+        "Phase 2B treatment P2B-17"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/break-reminder/",
+      "route": "/tools/break-reminder/",
+      "reasons": [
+        "impressions=8, position=7.125",
+        "Phase 2B control P2B-20"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/business-days/",
+      "route": "/tools/business-days/",
+      "reasons": [
+        "historical clicks=1",
+        "impressions=8, position=4.25"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/cad-2d/",
+      "route": "/tools/cad-2d/",
+      "reasons": [
+        "Phase 2B control P2B-16"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/case-converter/",
+      "route": "/tools/case-converter/",
+      "reasons": [
+        "impressions=5, position=8.8",
+        "Phase 2B control P2B-17"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/class-rank-percentile-calculator/",
+      "route": "/tools/class-rank-percentile-calculator/",
+      "reasons": [
+        "e",
+        "x",
+        "p",
+        "l",
+        "i",
+        "c",
+        "t",
+        " ",
+        "o",
+        "r",
+        "d",
+        "u",
+        "a",
+        "n",
+        "historical clicks=3",
+        "impressions=37, position=10.594594594594595",
+        "Phase 2B control P2B-18"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/color-generator/",
+      "route": "/tools/color-generator/",
+      "reasons": [
+        "impressions=8, position=5.375"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/countdown-timer/",
+      "route": "/tools/countdown-timer/",
+      "reasons": [
+        "Phase 2B treatment P2B-20"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/cronbach-alpha-calculator/",
+      "route": "/tools/cronbach-alpha-calculator/",
+      "reasons": [
+        "Phase 2B treatment P2B-18"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/date-difference/",
+      "route": "/tools/date-difference/",
+      "reasons": [
+        "impressions=5, position=7.2"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/dice-roller/",
+      "route": "/tools/dice-roller/",
+      "reasons": [
+        "impressions=20, position=5.6"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/extract-pdf-pages/",
+      "route": "/tools/extract-pdf-pages/",
+      "reasons": [
+        "impressions=8, position=3.5"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/gpa-calculator/",
+      "route": "/tools/gpa-calculator/",
+      "reasons": [
+        "impressions=9, position=13.333333333333334",
+        "Phase 2B control P2B-19"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/grade-average/",
+      "route": "/tools/grade-average/",
+      "reasons": [
+        "e",
+        "x",
+        "p",
+        "l",
+        "i",
+        "c",
+        "t",
+        " ",
+        "o",
+        "r",
+        "d",
+        "u",
+        "a",
+        "n",
+        "historical clicks=1",
+        "impressions=152, position=7.8618421052631575"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/pdf-page-reorder/",
+      "route": "/tools/pdf-page-reorder/",
+      "reasons": [
+        "impressions=5, position=2.6"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/percentage-calculator/",
+      "route": "/tools/percentage-calculator/",
+      "reasons": [
+        "impressions=10, position=8.2"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/random-name-picker/",
+      "route": "/tools/random-name-picker/",
+      "reasons": [
+        "e",
+        "x",
+        "p",
+        "l",
+        "i",
+        "c",
+        "t",
+        " ",
+        "r",
+        "o",
+        "d",
+        "w",
+        "n",
+        "historical clicks=2",
+        "impressions=55, position=7.254545454545455"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/random-student-picker/",
+      "route": "/tools/random-student-picker/",
+      "reasons": [
+        "e",
+        "x",
+        "p",
+        "l",
+        "i",
+        "c",
+        "t",
+        " ",
+        "a",
+        "s",
+        "r",
+        "o",
+        "m",
+        "impressions=13, position=4.846153846153847"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/seating-chart/",
+      "route": "/tools/seating-chart/",
+      "reasons": [
+        "Phase 2B treatment P2B-19"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/standard-deviation/",
+      "route": "/tools/standard-deviation/",
+      "reasons": [
+        "e",
+        "x",
+        "p",
+        "l",
+        "i",
+        "c",
+        "t",
+        " ",
+        "o",
+        "r",
+        "d",
+        "u",
+        "a",
+        "n",
+        "impressions=22, position=9.136363636363637"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/t-score-calculator/",
+      "route": "/tools/t-score-calculator/",
+      "reasons": [
+        "e",
+        "x",
+        "p",
+        "l",
+        "i",
+        "c",
+        "t",
+        " ",
+        "o",
+        "r",
+        "d",
+        "u",
+        "a",
+        "n",
+        "historical clicks=17",
+        "impressions=151, position=8.251655629139073"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/teacher-exam-score-converter/",
+      "route": "/tools/teacher-exam-score-converter/",
+      "reasons": [
+        "e",
+        "x",
+        "p",
+        "l",
+        "i",
+        "c",
+        "t",
+        " ",
+        "o",
+        "r",
+        "d",
+        "u",
+        "a",
+        "n",
+        "historical clicks=1",
+        "impressions=18, position=4.555555555555555"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/tools/this-or-that/",
+      "route": "/tools/this-or-that/",
+      "reasons": [
+        "impressions=6, position=3.6666666666666665"
+      ],
+      "source": "GSC/core/experiment evidence"
+    },
+    {
+      "url": "https://funnytools.win/workflows/",
+      "route": "/workflows/",
+      "reasons": [
+        "impressions=5, position=4.4"
+      ],
+      "source": "hard gate"
+    }
+  ]
+}

@@ -20,6 +20,7 @@ import FlowchartMaker from '../components/tools/FlowchartMaker.astro';
 import GpaCalculator from '../components/tools/GpaCalculator.astro';
 import GradeAverage from '../components/tools/GradeAverage.astro';
 import EducationStatisticsCalculator from '../components/tools/EducationStatisticsCalculator.astro';
+import EducationRecoveryTools from '../components/tools/EducationRecoveryTools.astro';
 import ImageCompressor from '../components/tools/ImageCompressor.astro';
 import ImageCrop from '../components/tools/ImageCrop.astro';
 import ImageRotateFlip from '../components/tools/ImageRotateFlip.astro';
@@ -102,6 +103,9 @@ export const widgetBySlug = {
   'teacher-exam-score-converter': EducationStatisticsCalculator,
   'cronbach-alpha-calculator': EducationStatisticsCalculator,
   'independent-samples-t-test-calculator': EducationStatisticsCalculator,
+  'final-grade-needed-calculator': EducationRecoveryTools,
+  'item-analysis-calculator': EducationRecoveryTools,
+  'kr20-reliability-calculator': EducationRecoveryTools,
   'gpa-calculator': GpaCalculator,
   'random-wheel': RandomWheel,
   'what-to-eat': WhatToEat,

@@ -5,7 +5,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../config/site';
 import { categories } from '../../data/categories';
 import { finderContentHtml } from '../../data/finderContent';
-import { liveTools } from '../../data/tools';
+import { getLiveToolsForLocale } from '../../data/tools';
 import { categoryUrl, localePath, toolUrl } from '../../lib/url';
 import { breadcrumbJsonLd } from '../../lib/seo';
 import { t } from '../../i18n/ui';
@@ -15,6 +15,7 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.props as { lang: Locale };
+const liveTools = getLiveToolsForLocale(lang);
 const ui = t(lang);
 const title = '不知道工具名稱？依任務找 FunnyTools';
 const description = '不確定工具叫什麼？依照 PDF、圖片、文字、日期、成績、隨機或開發者任務，從 FunnyTools 現有工具中找到下一步，並直接前往合適的免費工具。';

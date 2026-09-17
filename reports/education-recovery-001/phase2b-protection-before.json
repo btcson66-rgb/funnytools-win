@@ -1,0 +1,366 @@
+{
+  "captured_at": "2026-09-17T15:40:34.235Z",
+  "source_commit": "0d1dd45231c8de32fd87e61dc9ea18c8a9ae9209",
+  "urls": [
+    {
+      "url": "https://funnytools.win/en/tools/cad-2d/",
+      "route": "/en/tools/cad-2d/",
+      "exists": true,
+      "main_content_hash": "cc15caf0d65342fcd83437dc775b42ad864d650c64066f8ac5391fd37e8379b2",
+      "canonical": "https://funnytools.win/en/tools/cad-2d/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/en/tools/flowchart/",
+      "route": "/en/tools/flowchart/",
+      "exists": true,
+      "main_content_hash": "172844c2e2235057cc9329c0b16d13f297a9a249cda9aefdf8b943c25049d853",
+      "canonical": "https://funnytools.win/en/tools/flowchart/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/en/tools/class-rank-percentile-calculator/",
+      "route": "/en/tools/class-rank-percentile-calculator/",
+      "exists": true,
+      "main_content_hash": "92308f292fa0f2c143b9d7fcc715a5b245aeee99378be8862fd5b8c4d8d8f8e1",
+      "canonical": "https://funnytools.win/en/tools/class-rank-percentile-calculator/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/en/tools/normalized-score-converter/",
+      "route": "/en/tools/normalized-score-converter/",
+      "exists": true,
+      "main_content_hash": "98653fad8481403b7515ada7c6b4ef038fd78292ffe9fe23df05cdd932cf9777",
+      "canonical": "https://funnytools.win/en/tools/normalized-score-converter/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/en/tools/compound-interest/",
+      "route": "/en/tools/compound-interest/",
+      "exists": true,
+      "main_content_hash": "c4ae18c62f901b76b7d2afb1d193d08c312aa4f521d3a837371966f301b8f84a",
+      "canonical": "https://funnytools.win/en/tools/compound-interest/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/en/tools/net-salary/",
+      "route": "/en/tools/net-salary/",
+      "exists": true,
+      "main_content_hash": "e160899d33d60b2e98861117cd4619e3c70955e6bdcfb3ac646f81c89974b79c",
+      "canonical": "https://funnytools.win/en/tools/net-salary/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/en/tools/cronbach-alpha-calculator/",
+      "route": "/en/tools/cronbach-alpha-calculator/",
+      "exists": true,
+      "main_content_hash": "906ae3e5e1be56132ff98e04b6b6de4e51a6f0a13cce411888a6572d946fb5a7",
+      "canonical": "https://funnytools.win/en/tools/cronbach-alpha-calculator/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/en/tools/grade-average/",
+      "route": "/en/tools/grade-average/",
+      "exists": true,
+      "main_content_hash": "6541db9b26af797c342e80fb5efd04e6c0d4cc3f54bd98b32db0b01eacddddbe",
+      "canonical": "https://funnytools.win/en/tools/grade-average/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/en/tools/percentage-calculator/",
+      "route": "/en/tools/percentage-calculator/",
+      "exists": true,
+      "main_content_hash": "a83f619110b9959b1eebb509210bfc8804e351337c2eb9150eb70ec43dc45dac",
+      "canonical": "https://funnytools.win/en/tools/percentage-calculator/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/en/tools/percentile-rank-calculator/",
+      "route": "/en/tools/percentile-rank-calculator/",
+      "exists": true,
+      "main_content_hash": "cb54984dd71e09e07030da7a109d96ca2002c38b8ce3ff6d805ec7c0a7ed0ace",
+      "canonical": "https://funnytools.win/en/tools/percentile-rank-calculator/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/tirar-dados-online/",
+      "route": "/es/herramientas/tirar-dados-online/",
+      "exists": true,
+      "main_content_hash": "8520b2e31cd616dd3978faf99b48fefd674afca6b777fb4c442f0168642b7e05",
+      "canonical": "https://funnytools.win/es/herramientas/tirar-dados-online/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/decidir-entre-dos-opciones/",
+      "route": "/es/herramientas/decidir-entre-dos-opciones/",
+      "exists": true,
+      "main_content_hash": "70eb28155b1b52336f962edea5a90af64a0e26189c78dadad50b20843d188fc9",
+      "canonical": "https://funnytools.win/es/herramientas/decidir-entre-dos-opciones/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-alfa-cronbach/",
+      "route": "/es/herramientas/calculadora-alfa-cronbach/",
+      "exists": true,
+      "main_content_hash": "af8d28a711969ce9d4b7846fa1f43033e9b247e79c4114d54eef2385858103b7",
+      "canonical": "https://funnytools.win/es/herramientas/calculadora-alfa-cronbach/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-media-ponderada/",
+      "route": "/es/herramientas/calculadora-media-ponderada/",
+      "exists": true,
+      "main_content_hash": "1074174482ab58c2b9d47cfd9798fbf843d2b57b5f208da1284a5f091091a78e",
+      "canonical": "https://funnytools.win/es/herramientas/calculadora-media-ponderada/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-desviacion-estandar/",
+      "route": "/es/herramientas/calculadora-desviacion-estandar/",
+      "exists": true,
+      "main_content_hash": "84c5c88c781fb165bf0764922c44c8df7d3cb225e815fc239fe29299cc052791",
+      "canonical": "https://funnytools.win/es/herramientas/calculadora-desviacion-estandar/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-nota-oposicion-docente/",
+      "route": "/es/herramientas/calculadora-nota-oposicion-docente/",
+      "exists": true,
+      "main_content_hash": "770dc3a9e9de92217023a796a720e3c61ed315a7297b436237e10c61b63ef9f6",
+      "canonical": "https://funnytools.win/es/herramientas/calculadora-nota-oposicion-docente/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-dias-laborables/",
+      "route": "/es/herramientas/calculadora-dias-laborables/",
+      "exists": true,
+      "main_content_hash": "79f39f357622b6507056dcafd52efd2ef0668e3c81c94e2c35d2980bb594b1ac",
+      "canonical": "https://funnytools.win/es/herramientas/calculadora-dias-laborables/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calcular-diferencia-entre-fechas/",
+      "route": "/es/herramientas/calcular-diferencia-entre-fechas/",
+      "exists": true,
+      "main_content_hash": "be262b2adcfdd5d8197ce8228c7ba143b199390934800fee4c2a75ca088c6117",
+      "canonical": "https://funnytools.win/es/herramientas/calcular-diferencia-entre-fechas/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-hipoteca/",
+      "route": "/es/herramientas/calculadora-hipoteca/",
+      "exists": true,
+      "main_content_hash": "387a801783540db68f40ae384e6e563c31c5acd3000fa312905e8430d7bd27cb",
+      "canonical": "https://funnytools.win/es/herramientas/calculadora-hipoteca/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/es/herramientas/calculadora-inflacion/",
+      "route": "/es/herramientas/calculadora-inflacion/",
+      "exists": true,
+      "main_content_hash": "32c1e17da570fec080608e808174710fd550a6cd374c297dac22e11e56bdbe95",
+      "canonical": "https://funnytools.win/es/herramientas/calculadora-inflacion/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calcul-moyenne-notes/",
+      "route": "/fr/outils/calcul-moyenne-notes/",
+      "exists": true,
+      "main_content_hash": "239dfd4140ba251856aa7f71d31d5b47c980732baab1baa091d94ff5d9b0b2a8",
+      "canonical": "https://funnytools.win/fr/outils/calcul-moyenne-notes/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculateur-ecart-type/",
+      "route": "/fr/outils/calculateur-ecart-type/",
+      "exists": true,
+      "main_content_hash": "369293663d119d094405a3cfefeef689c844996472e18f9174061c1d91c84fba",
+      "canonical": "https://funnytools.win/fr/outils/calculateur-ecart-type/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculateur-inflation-pouvoir-achat/",
+      "route": "/fr/outils/calculateur-inflation-pouvoir-achat/",
+      "exists": true,
+      "main_content_hash": "41867de849791a44997a17b85ffdf82da9b3f242098e66af01518869d2bfeb9a",
+      "canonical": "https://funnytools.win/fr/outils/calculateur-inflation-pouvoir-achat/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculateur-mensualite-pret-immobilier/",
+      "route": "/fr/outils/calculateur-mensualite-pret-immobilier/",
+      "exists": true,
+      "main_content_hash": "93dca21c94b571759e70f9aab16d3a8026082442eedcb10fa295a7a9201611eb",
+      "canonical": "https://funnytools.win/fr/outils/calculateur-mensualite-pret-immobilier/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculateur-jours-ouvres/",
+      "route": "/fr/outils/calculateur-jours-ouvres/",
+      "exists": true,
+      "main_content_hash": "751d469a6e3b20a463ea24bfc11984bf306caf5e550cd006bb4d60c1f2291928",
+      "canonical": "https://funnytools.win/fr/outils/calculateur-jours-ouvres/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/rappel-pause-ecran/",
+      "route": "/fr/outils/rappel-pause-ecran/",
+      "exists": true,
+      "main_content_hash": "dff2712075efcdbe1231c36b55431342bafb68fc626cb13faed4f28848cd7dbd",
+      "canonical": "https://funnytools.win/fr/outils/rappel-pause-ecran/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculateur-moyenne-ponderee/",
+      "route": "/fr/outils/calculateur-moyenne-ponderee/",
+      "exists": true,
+      "main_content_hash": "4bdb03d94485a91c5380175b9f74813abb9f61dc91524971a0fe0eae0e34e4a7",
+      "canonical": "https://funnytools.win/fr/outils/calculateur-moyenne-ponderee/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculateur-score-t/",
+      "route": "/fr/outils/calculateur-score-t/",
+      "exists": true,
+      "main_content_hash": "1331744285e4d785608fd971e58355ed63e51752ae7b92be870d9bafd273e282",
+      "canonical": "https://funnytools.win/fr/outils/calculateur-score-t/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/calculer-difference-entre-dates/",
+      "route": "/fr/outils/calculer-difference-entre-dates/",
+      "exists": true,
+      "main_content_hash": "91cd4b38851bf53ac09f19a9d916bdc7d1f37a5aa74a4b9913c3055f999e7ec5",
+      "canonical": "https://funnytools.win/fr/outils/calculer-difference-entre-dates/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/fr/outils/convertir-timestamp-unix/",
+      "route": "/fr/outils/convertir-timestamp-unix/",
+      "exists": true,
+      "main_content_hash": "f8f5e988ecc86e46519681f46d92741f7e04f606e550a3da51f53a3455523226",
+      "canonical": "https://funnytools.win/fr/outils/convertir-timestamp-unix/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/tools/bar-chart-maker/",
+      "route": "/tools/bar-chart-maker/",
+      "exists": true,
+      "main_content_hash": "aca51f6dc893a589a0ff6304c661830d3be5487fb9287e7409b06e29c4e4fd1f",
+      "canonical": "https://funnytools.win/tools/bar-chart-maker/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/tools/cad-2d/",
+      "route": "/tools/cad-2d/",
+      "exists": true,
+      "main_content_hash": "65f042c25e8d157f7207803b1fac4ee49ed02bf3e5f121044bef9ff2b6c2d09e",
+      "canonical": "https://funnytools.win/tools/cad-2d/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/tools/base64/",
+      "route": "/tools/base64/",
+      "exists": true,
+      "main_content_hash": "4121bcabf023ee7b5ce5e6a9edf2c75559b630e123574f6ca243e486065fab30",
+      "canonical": "https://funnytools.win/tools/base64/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/tools/case-converter/",
+      "route": "/tools/case-converter/",
+      "exists": true,
+      "main_content_hash": "dfd91d9d4ae273d20d301fe886d756624964c4895cce4c170716e097d85cc7b1",
+      "canonical": "https://funnytools.win/tools/case-converter/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/tools/cronbach-alpha-calculator/",
+      "route": "/tools/cronbach-alpha-calculator/",
+      "exists": true,
+      "main_content_hash": "7b2c3af968b1b06324f9ba530e9974043c162632f08b18a7b6ab26bbec885360",
+      "canonical": "https://funnytools.win/tools/cronbach-alpha-calculator/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/tools/class-rank-percentile-calculator/",
+      "route": "/tools/class-rank-percentile-calculator/",
+      "exists": true,
+      "main_content_hash": "3bb77dafc001705d442a95f40812ab388efeb11af8e3eaab61f710e680379ab2",
+      "canonical": "https://funnytools.win/tools/class-rank-percentile-calculator/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/tools/seating-chart/",
+      "route": "/tools/seating-chart/",
+      "exists": true,
+      "main_content_hash": "76d37acccccdc5d1f2c43512b639737c22354486bb53cfbe621fae63b6a7590c",
+      "canonical": "https://funnytools.win/tools/seating-chart/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/tools/gpa-calculator/",
+      "route": "/tools/gpa-calculator/",
+      "exists": true,
+      "main_content_hash": "40fd716cbc17b3527dc35f5a8b5576110e690eb98678c4608d4d610a2dff2502",
+      "canonical": "https://funnytools.win/tools/gpa-calculator/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/tools/countdown-timer/",
+      "route": "/tools/countdown-timer/",
+      "exists": true,
+      "main_content_hash": "09f5bb15fd0eeff829b38a21e8f341389a2691966235b8c3a3bedb22c8c0713a",
+      "canonical": "https://funnytools.win/tools/countdown-timer/",
+      "robots": "",
+      "noindex": false
+    },
+    {
+      "url": "https://funnytools.win/tools/break-reminder/",
+      "route": "/tools/break-reminder/",
+      "exists": true,
+      "main_content_hash": "e56f14c73eef7c412c4fa1cc17c82ac8cacfef53dbaf7443170968ecb656c01a",
+      "canonical": "https://funnytools.win/tools/break-reminder/",
+      "robots": "",
+      "noindex": false
+    }
+  ]
+}
