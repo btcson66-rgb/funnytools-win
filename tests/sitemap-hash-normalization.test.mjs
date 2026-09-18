@@ -2,9 +2,41 @@ import assert from 'node:assert/strict';
 import { join } from 'node:path';
 import test from 'node:test';
 
-import { contentHashForPage } from '../scripts/seo-indexing-utils.mjs';
+import { contentHashForPage, lastmodForPage } from '../scripts/seo-indexing-utils.mjs';
 
 const fixtureFile = join(process.cwd(), 'package.json');
+
+test('sitemap hash migration preserves an evidence-backed lastmod date', () => {
+  const result = lastmodForPage(
+    { route: '/workflows/example/', file: fixtureFile, html: '<main><h1>Stable content</h1></main>' },
+    { hash: 'old-hash', hashVersion: 8, lastmod: '2026-09-04' },
+    '2026-09-18',
+    'update',
+  );
+  assert.equal(result.lastmod, '2026-09-04');
+  assert.equal(result.hashVersion, 9);
+});
+
+test('a URL recovered from the live sitemap preserves its remote date during migration', () => {
+  const result = lastmodForPage(
+    { route: '/tools/recovered-tool/', file: fixtureFile, html: '<main><h1>Recovered content</h1></main>' },
+    { lastmod: '2026-09-03' },
+    '2026-09-18',
+    'update',
+  );
+  assert.equal(result.lastmod, '2026-09-03');
+  assert.equal(result.hashVersion, 9);
+});
+
+test('a scheduled first-seen education URL uses its planned publication date', () => {
+  const result = lastmodForPage(
+    { route: '/tools/standard-error-of-measurement-calculator/', file: fixtureFile, html: '<main><h1>SEM</h1></main>' },
+    undefined,
+    '2026-09-18',
+    'update',
+  );
+  assert.equal(result.lastmod, '2026-09-25');
+});
 
 test('sitewide Affiliate GA4 bootstrap does not change sitemap content hash', () => {
   const page = '<main><h1>Reader-facing content</h1></main>';

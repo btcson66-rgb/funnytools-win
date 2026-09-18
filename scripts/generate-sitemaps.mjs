@@ -1,4 +1,4 @@
-import { existsSync, copyFileSync } from 'node:fs';
+import { existsSync, copyFileSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   builtPages,
@@ -53,6 +53,28 @@ async function fetchRemoteSitemapEntries() {
   }
 }
 
+function readTrackedSitemapEntries() {
+  const indexFile = join(publicDir, 'sitemap.xml');
+  if (!existsSync(indexFile)) return [];
+  try {
+    const indexXml = readFileSync(indexFile, 'utf8');
+    const childLocs = [...indexXml.matchAll(/<sitemap>([\s\S]*?)<\/sitemap>/g)]
+      .map((match) => parseTags(match[1], 'loc')[0])
+      .filter(Boolean);
+    const files = childLocs.map((loc) => join(publicDir, new URL(loc).pathname.replace(/^\//, '')));
+    return files.flatMap((file) => {
+      if (!existsSync(file)) return [];
+      const xml = readFileSync(file, 'utf8');
+      return [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((match) => ({
+        loc: parseTags(match[1], 'loc')[0] ?? '',
+        lastmod: parseTags(match[1], 'lastmod')[0] ?? '',
+      })).filter((entry) => entry.loc);
+    });
+  } catch {
+    return [];
+  }
+}
+
 function resolveLastmodMode() {
   const explicitMode = process.env.SITEMAP_LASTMOD_MODE?.trim().toLowerCase();
   const mode = explicitMode || (process.env.CI !== undefined ? 'preserve' : 'update');
@@ -82,6 +104,10 @@ const storedLastmods = readJson(sitemapLastmodPath, {}) ?? {};
 const nextLastmods = {};
 const today = new Date().toISOString().slice(0, 10);
 const lastmodMode = resolveLastmodMode();
+const trackedEntries = readTrackedSitemapEntries();
+const trackedLastmodsByUrl = new Map(trackedEntries.map((entry) => [entry.loc, entry.lastmod]));
+const remoteEntries = await fetchRemoteSitemapEntries();
+const remoteLastmodsByUrl = new Map(remoteEntries.map((entry) => [entry.loc, entry.lastmod]));
 const hashDriftUrls = [];
 const hashMigrationUrls = [];
 
@@ -106,7 +132,11 @@ for (const page of builtPages()) {
   const type = classifyUrl(page.loc);
   const storedLastmod = Object.hasOwn(storedLastmods, page.loc)
     ? storedLastmods[page.loc]
-    : undefined;
+    : trackedLastmodsByUrl.has(page.loc)
+      ? { lastmod: trackedLastmodsByUrl.get(page.loc) }
+    : remoteLastmodsByUrl.has(page.loc)
+      ? { lastmod: remoteLastmodsByUrl.get(page.loc) }
+      : undefined;
   const resolvedLastmod = lastmodForPage(page, storedLastmod, today, lastmodMode.mode);
   if (storedLastmod !== undefined && storedLastmod?.hash !== resolvedLastmod.hash) {
     if (storedLastmod?.hashVersion !== sitemapContentHashVersion) hashMigrationUrls.push(page.loc);
@@ -166,9 +196,20 @@ if (key) {
   writeText(join(distDir, keyFile), key);
 }
 
-const remoteEntries = await fetchRemoteSitemapEntries();
-const previousForDiff = remoteEntries.length
-  ? { urls: Object.fromEntries(remoteEntries.map((entry) => [entry.loc, { lastmod: entry.lastmod }])) }
+// Use the checked-in sitemap/map evidence first. A remote sitemap may carry a
+// later date from an external rebuild; that is not proof that this checkout
+// changed the page and must not manufacture an indexing submission. Remote
+// entries still fill gaps for URLs that are absent from both local sources.
+const diffBaseline = new Map();
+for (const entry of trackedEntries) diffBaseline.set(entry.loc, entry.lastmod);
+for (const [loc, entry] of Object.entries(storedLastmods)) {
+  if (entry?.lastmod) diffBaseline.set(loc, entry.lastmod);
+}
+for (const entry of remoteEntries) {
+  if (!diffBaseline.has(entry.loc)) diffBaseline.set(entry.loc, entry.lastmod);
+}
+const previousForDiff = diffBaseline.size
+  ? { urls: Object.fromEntries([...diffBaseline].map(([loc, lastmod]) => [loc, { lastmod }])) }
   : previousState();
 const diff = diffEntries(allEntries, previousForDiff);
 const snapshot = currentState(allEntries);
@@ -200,7 +241,7 @@ const summary = {
     added: diff.added.length,
     modified: diff.modified.length,
   },
-  diffBaseline: remoteEntries.length ? 'live-sitemap' : 'local-state',
+  diffBaseline: diffBaseline.size ? 'local-evidence-with-live-gap-fill' : 'local-state',
   excludedCount: excluded.length,
   excludedSample: excluded.slice(0, 20),
   indexNowKeyFile: key ? 'created-from-INDEXNOW_KEY' : 'not-created-missing-INDEXNOW_KEY',

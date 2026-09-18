@@ -25,6 +25,7 @@ export const priorityUrlsPath = join(scriptsDir, 'bing-priority-urls.txt');
 export const gscPriorityUrlsPath = join(scriptsDir, 'gsc-priority-urls.txt');
 export const indexingConfigPath = join(rootDir, 'src', 'config', 'indexing.json');
 export const sitemapLastmodPath = join(rootDir, 'data', 'sitemap-lastmod.json');
+export const eduGrowthReleasePath = join(rootDir, 'src', 'config', 'edu-growth-release.json');
 // Bumped to 4 on 2026-08-16 when the shared footer's contact address joined the volatile set.
 // Bumped to 3 the same day when the analytics bootstrap joined it.
 // lastmodForPage treats a version change as a map migration: stored dates carry
@@ -37,7 +38,11 @@ export const sitemapLastmodPath = join(rootDir, 'data', 'sitemap-lastmod.json');
 // Bump when the normalization contract changes. A version bump migrates the
 // stored hashes while preserving their evidence-backed lastmod dates; it is
 // reported separately from a real same-version content drift.
-export const sitemapContentHashVersion = 8;
+// Version 9 migrates the pre-recovery map while preserving its evidence-backed
+// dates. The migration also lets the generator recover dates for URLs that were
+// present in the live sitemap but absent from the stale local map.
+export const sitemapContentHashVersion = 9;
+export const eduGrowthRelease = readJson(eduGrowthReleasePath, { candidates: [] }) ?? { candidates: [] };
 export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
 export const enNoindex = indexingConfig.EN_NOINDEX === true;
 export const expansionRouteRegistry = readJson(
@@ -642,6 +647,13 @@ export function lastmodForPage(
     return { hash, lastmod: stored.lastmod, hashVersion: sitemapContentHashVersion };
   }
   if (stored) return { hash, lastmod: today, hashVersion: sitemapContentHashVersion };
+
+  const scheduledPublishDate = eduGrowthRelease.candidates?.find((candidate) =>
+    candidate.url === page.route && /^\d{4}-\d{2}-\d{2}$/.test(candidate.publishAt ?? ''),
+  )?.publishAt;
+  if (scheduledPublishDate) {
+    return { hash, lastmod: scheduledPublishDate, hashVersion: sitemapContentHashVersion };
+  }
 
   // For a first-seen URL, prefer evidence tied to that route (a direct source
   // file or the blamed data line containing its path/slug). Shared review dates
