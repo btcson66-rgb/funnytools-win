@@ -1,0 +1,100 @@
+name: Education SEO growth release
+
+on:
+  schedule:
+    - cron: '10 16 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: education-seo-growth-pages
+  cancel-in-progress: false
+
+jobs:
+  decide:
+    runs-on: ubuntu-latest
+    outputs:
+      due: ${{ steps.state.outputs.due }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Evaluate scheduled candidates
+        run: npm run edu-growth:check
+      - name: Expose release decision
+        id: state
+        shell: bash
+        run: |
+          status=$(node -e "const r=require('./reports/edu-growth-001/release-state.json'); console.log(r.status)")
+          if [ "$status" = "READY" ]; then echo "due=true" >> "$GITHUB_OUTPUT"; else echo "due=false" >> "$GITHUB_OUTPUT"; fi
+          echo "Education growth scheduler: $status" >> "$GITHUB_STEP_SUMMARY"
+
+  release:
+    needs: decide
+    if: needs.decide.outputs.due == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build scheduled public pages
+        run: npm run build
+      - name: Generate sitemaps without synthetic freshness
+        run: node scripts/generate-sitemaps.mjs
+        env:
+          SITEMAP_LASTMOD_MODE: preserve
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+      - name: Check release manifest and sitemap
+        run: |
+          npm run edu-growth:check
+          npm run seo:check
+          npm run lint
+          npm run typecheck
+          node --experimental-strip-types --test tests/education-growth-tools.test.mjs tests/sitemap-hash-normalization.test.mjs tests/tool-registry-contract-split05.test.mjs
+          node scripts/validate-indexable-urls.mjs
+      - name: Create changed-URL indexing manifest
+        run: node scripts/create-indexing-submission-manifest.mjs
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Submit changed URLs to IndexNow
+        if: ${{ secrets.INDEXNOW_KEY != '' }}
+        run: node scripts/submit-indexnow.mjs
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+      - name: Submit changed URLs to Bing
+        if: ${{ secrets.BING_API_KEY != '' }}
+        run: node scripts/submit-bing-urls.mjs
+        env:
+          BING_API_KEY: ${{ secrets.BING_API_KEY }}
+      - name: Upload growth reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: education-seo-growth-release
+          path: reports/edu-growth-001/

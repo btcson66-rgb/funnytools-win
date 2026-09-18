@@ -5,7 +5,7 @@ import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
-import { getToolBySlug, isToolAvailableInLocale, type ToolMeta } from '../../../data/tools';
+import { getLiveToolsForLocale, type ToolMeta } from '../../../data/tools';
 import { seoGuides, viewSeoGuide, isSeoGuideAvailableInLocale } from '../../../data/seoGuides';
 import { workflows, viewWorkflow, isWorkflowAvailableInLocale } from '../../../data/workflows';
 import { t } from '../../../i18n/ui';
@@ -145,7 +145,7 @@ const groupCopy = {
 }[lang];
 
 const groupSlugs = [
-  ['standard-deviation', 'percentage-calculator', 'weighted-average-calculator', 'z-score-calculator', 't-score-calculator', 'percentile-rank-calculator'],
+  ['standard-deviation', 'percentage-calculator', 'weighted-average-calculator', 'z-score-calculator', 't-score-calculator', 'percentile-rank-calculator', 'standard-error-of-measurement-calculator', 'spearman-brown-calculator', 'learning-gain-calculator', 'weighted-rubric-score-calculator', 'cohen-kappa-calculator'],
   ['apa-7-report-generator', 'independent-samples-t-test-calculator', 'item-analysis-calculator', 'kr20-reliability-calculator'],
   ['spss-result-interpreter'],
   ['teacher-exam-score-converter', 'class-rank-percentile-calculator', 'normalized-score-converter', 'percentile-rank-calculator', 'final-grade-needed-calculator'],
@@ -153,8 +153,7 @@ const groupSlugs = [
 ];
 
 const liveTool = (slug: string): ToolMeta | undefined => {
-  const tool = getToolBySlug(slug);
-  return tool?.status === 'live' && isToolAvailableInLocale(tool, lang) ? tool : undefined;
+  return getLiveToolsForLocale(lang).find((tool) => tool.slug === slug);
 };
 
 const groups = groupCopy.map((group, index) => ({

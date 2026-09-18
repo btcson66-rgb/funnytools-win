@@ -79,6 +79,10 @@ import {
   serverPdfCompressorContent,
 } from '../i18n/tools/conversion-api-tools';
 import { finalGradeNeededContent, itemAnalysisContent, kr20Content } from '../i18n/tools/education-recovery';
+import {
+  cohenKappaContent, learningGainContent, spearmanBrownContent,
+  standardErrorOfMeasurementContent, weightedRubricScoreContent,
+} from '../i18n/tools/education-growth';
 
 export const contentBySlug = {
   'random-number-picker': randomNumberContent,
@@ -118,6 +122,11 @@ export const contentBySlug = {
   'final-grade-needed-calculator': finalGradeNeededContent,
   'item-analysis-calculator': itemAnalysisContent,
   'kr20-reliability-calculator': kr20Content,
+  'standard-error-of-measurement-calculator': standardErrorOfMeasurementContent,
+  'spearman-brown-calculator': spearmanBrownContent,
+  'learning-gain-calculator': learningGainContent,
+  'weighted-rubric-score-calculator': weightedRubricScoreContent,
+  'cohen-kappa-calculator': cohenKappaContent,
   'gpa-calculator': gpaCalculatorContent,
   'random-wheel': randomWheelContent,
   'what-to-eat': whatToEatContent,

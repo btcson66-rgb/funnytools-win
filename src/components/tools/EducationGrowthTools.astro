@@ -1,0 +1,156 @@
+---
+interface Props { labels: Record<string, string>; slug: string; }
+const { labels, slug } = Astro.props as Props;
+const sem = slug === 'standard-error-of-measurement-calculator';
+const spearman = slug === 'spearman-brown-calculator';
+const gain = slug === 'learning-gain-calculator';
+const rubric = slug === 'weighted-rubric-score-calculator';
+const kappa = slug === 'cohen-kappa-calculator';
+---
+
+<section class="tool-widget card growth-tool" data-growth-tool data-slug={slug} data-labels={JSON.stringify(labels)}>
+  {sem && <div class="form-grid growth-grid">
+    <label><span>{labels.sd}</span><input data-field="sd" type="number" min="0" step="any" value="10" /></label>
+    <label><span>{labels.reliability}</span><input data-field="reliability" type="number" min="0" max="1" step="any" value="0.84" /></label>
+    <label><span>{labels.z}</span><input data-field="z" type="number" min="0" step="any" value="1.96" /></label>
+  </div>}
+
+  {spearman && <>
+    <div class="form-grid growth-grid">
+      <label><span>{labels.reliability}</span><input data-field="reliability" type="number" min="0" max="1" step="any" value="0.7" /></label>
+      <label><span>{labels.mode}</span><select data-field="mode"><option value="forward">{labels.forward}</option><option value="inverse">{labels.inverse}</option></select></label>
+      <label data-input="multiplier"><span>{labels.multiplier}</span><input data-field="multiplier" type="number" min="0" step="any" value="2" /></label>
+      <label data-input="target" hidden><span>{labels.target}</span><input data-field="target" type="number" min="0" max="1" step="any" value="0.8" /></label>
+    </div>
+  </>}
+
+  {gain && <div class="form-grid growth-grid">
+    <label><span>{labels.pre}</span><input data-field="pre" type="number" min="0" step="any" value="40" /></label>
+    <label><span>{labels.post}</span><input data-field="post" type="number" min="0" step="any" value="70" /></label>
+    <label><span>{labels.max}</span><input data-field="max" type="number" min="0" step="any" value="100" /></label>
+  </div>}
+
+  {rubric && <div class="growth-table-wrap">
+    <table class="growth-table"><caption>{labels.criterion}</caption><thead><tr><th scope="col">{labels.criterion}</th><th scope="col">{labels.score}</th><th scope="col">{labels.max}</th><th scope="col">{labels.weight}</th><th scope="col"><span class="sr-only">{labels.remove}</span></th></tr></thead>
+      <tbody data-rubric-rows>
+        <tr data-rubric-row><td><label><span class="sr-only">{labels.criterion}</span><input data-row-field="name" value="內容" /></label></td><td><label><span class="sr-only">{labels.score}</span><input data-row-field="score" type="number" min="0" step="any" value="4" /></label></td><td><label><span class="sr-only">{labels.max}</span><input data-row-field="max" type="number" min="0" step="any" value="5" /></label></td><td><label><span class="sr-only">{labels.weight}</span><input data-row-field="weight" type="number" min="0" step="any" value="40" /></label></td><td><button class="btn ghost row-remove" type="button" data-remove-row>{labels.remove}</button></td></tr>
+        <tr data-rubric-row><td><label><span class="sr-only">{labels.criterion}</span><input data-row-field="name" value="表達" /></label></td><td><label><span class="sr-only">{labels.score}</span><input data-row-field="score" type="number" min="0" step="any" value="3" /></label></td><td><label><span class="sr-only">{labels.max}</span><input data-row-field="max" type="number" min="0" step="any" value="4" /></label></td><td><label><span class="sr-only">{labels.weight}</span><input data-row-field="weight" type="number" min="0" step="any" value="60" /></label></td><td><button class="btn ghost row-remove" type="button" data-remove-row>{labels.remove}</button></td></tr>
+      </tbody>
+    </table>
+    <button class="btn ghost" type="button" data-add-row>{labels.add}</button>
+  </div>}
+
+  {kappa && <div class="form-grid growth-grid">
+    <label><span>{labels.a}</span><input data-field="a" type="number" min="0" step="1" value="35" /></label>
+    <label><span>{labels.b}</span><input data-field="b" type="number" min="0" step="1" value="5" /></label>
+    <label><span>{labels.c}</span><input data-field="c" type="number" min="0" step="1" value="4" /></label>
+    <label><span>{labels.d}</span><input data-field="d" type="number" min="0" step="1" value="56" /></label>
+  </div>}
+
+  <div class="actions growth-actions"><button class="btn" type="button" data-calculate>{labels.calculate}</button></div>
+  <p class="form-error" data-error role="alert" hidden></p>
+  <p class="form-warning" data-warning role="status" hidden></p>
+  <div class="resultbox growth-results" data-results aria-live="polite" hidden></div>
+</section>
+
+<style>
+  .growth-grid { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+  .growth-actions { margin-top: 18px; }
+  .growth-results { display: grid; gap: 10px; }
+  .growth-result { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding: 8px 0; }
+  .growth-result span { color: var(--muted); }
+  .growth-result strong { color: var(--ink); text-align: right; }
+  .growth-table-wrap { overflow-x: auto; margin-bottom: 12px; }
+  .growth-table { width: 100%; min-width: 620px; border-collapse: collapse; }
+  .growth-table th, .growth-table td { padding: 7px; border-bottom: 1px solid var(--line); text-align: left; }
+  .growth-table input { width: 100%; min-width: 90px; }
+  .row-remove { white-space: nowrap; }
+  .form-warning { color: var(--muted); font-size: .92rem; line-height: 1.6; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+</style>
+
+<script>
+  import { calculateCohenKappa, calculateLearningGain, calculateSem, calculateSpearmanBrown, calculateWeightedRubric } from '../../lib/education-growth';
+
+  document.querySelectorAll('[data-growth-tool]').forEach((root) => {
+    if (!(root instanceof HTMLElement)) return;
+    const slug = root.dataset.slug || '';
+    const labels = JSON.parse(root.dataset.labels || '{}');
+    const error = root.querySelector('[data-error]');
+    const warning = root.querySelector('[data-warning]');
+    const results = root.querySelector('[data-results]');
+    const field = (key, scope = root) => scope.querySelector(`[data-field="${key}"]`);
+    const number = (key, scope = root) => {
+      const value = Number(field(key, scope)?.value);
+      return Number.isFinite(value) ? value : null;
+    };
+    const format = (value, digits = 3) => value === null || !Number.isFinite(value) ? labels.notAvailable : value.toFixed(digits).replace(/\.0+$|(?<=\.\d*[1-9])0+$/g, '');
+    const showError = (message = labels.invalid) => {
+      if (error instanceof HTMLElement) { error.textContent = message; error.hidden = false; }
+      if (warning instanceof HTMLElement) warning.hidden = true;
+      if (results instanceof HTMLElement) results.hidden = true;
+    };
+    const show = (items, message = '') => {
+      if (!(results instanceof HTMLElement)) return;
+      results.innerHTML = items.map(([key, value]) => `<div class="growth-result"><span>${labels[key] || key}</span><strong>${value}</strong></div>`).join('');
+      results.hidden = false;
+      if (error instanceof HTMLElement) error.hidden = true;
+      if (warning instanceof HTMLElement) { warning.textContent = message; warning.hidden = !message; }
+    };
+
+    root.querySelector('[data-field="mode"]')?.addEventListener('change', (event) => {
+      const mode = event.target?.value;
+      const multiplier = root.querySelector('[data-input="multiplier]');
+      const target = root.querySelector('[data-input="target"]');
+      if (multiplier instanceof HTMLElement) multiplier.hidden = mode !== 'forward';
+      if (target instanceof HTMLElement) target.hidden = mode !== 'inverse';
+    });
+    root.querySelector('[data-add-row]')?.addEventListener('click', () => {
+      const rows = root.querySelector('[data-rubric-rows]');
+      if (!(rows instanceof HTMLElement)) return;
+      const row = document.createElement('tr');
+      row.dataset.rubricRow = '';
+      row.innerHTML = `<td><label><span class="sr-only">${labels.criterion}</span><input data-row-field="name" /></label></td><td><label><span class="sr-only">${labels.score}</span><input data-row-field="score" type="number" min="0" step="any" /></label></td><td><label><span class="sr-only">${labels.max}</span><input data-row-field="max" type="number" min="0" step="any" value="4" /></label></td><td><label><span class="sr-only">${labels.weight}</span><input data-row-field="weight" type="number" min="0" step="any" /></label></td><td><button class="btn ghost row-remove" type="button" data-remove-row>${labels.remove}</button></td>`;
+      rows.appendChild(row);
+    });
+    root.addEventListener('click', (event) => {
+      const target = event.target;
+      if (target instanceof HTMLElement && target.matches('[data-remove-row]')) target.closest('[data-rubric-row]')?.remove();
+    });
+
+    root.querySelector('[data-calculate]')?.addEventListener('click', () => {
+      if (slug === 'standard-error-of-measurement-calculator') {
+        const sd = number('sd'); const reliability = number('reliability'); const z = number('z');
+        if (sd === null || reliability === null || z === null) return showError();
+        const result = calculateSem({ sd, reliability, z });
+        if (result.status === 'invalid') return showError();
+        return show([['sem', format(result.sem)], ['halfWidth', format(result.halfWidth)] ]);
+      }
+      if (slug === 'spearman-brown-calculator') {
+        const reliability = number('reliability'); const mode = field('mode')?.value;
+        if (reliability === null) return showError();
+        const result = mode === 'inverse' ? calculateSpearmanBrown({ reliability, target: number('target') ?? undefined }) : calculateSpearmanBrown({ reliability, multiplier: number('multiplier') ?? undefined });
+        if (result.status === 'invalid') return showError();
+        return result.status === 'forward' ? show([['predicted', format(result.predicted)]]) : show([['required', format(result.requiredMultiplier)] ]);
+      }
+      if (slug === 'learning-gain-calculator') {
+        const pre = number('pre'); const post = number('post'); const max = number('max');
+        if (pre === null || post === null || max === null) return showError();
+        const result = calculateLearningGain({ pre, post, max });
+        if (result.status === 'invalid') return showError();
+        return show([['raw', format(result.raw)], ['percent', format(result.percent === null ? null : result.percent * 100) + (result.percent === null ? '' : '%')], ['normalized', format(result.normalized)]], result.warning);
+      }
+      if (slug === 'weighted-rubric-score-calculator') {
+        const rows = [...root.querySelectorAll('[data-rubric-row]')].map((row) => ({ score: Number(row.querySelector('[data-row-field="score"]')?.value), max: Number(row.querySelector('[data-row-field="max"]')?.value), weight: Number(row.querySelector('[data-row-field="weight"]')?.value) }));
+        const result = calculateWeightedRubric(rows);
+        if (result.status === 'invalid') return showError();
+        return show([['percentage', `${format(result.percentage * 100)}%`], ['weightTotal', format(result.weightTotal)] ]);
+      }
+      const a = number('a'); const b = number('b'); const c = number('c'); const d = number('d');
+      if ([a, b, c, d].some((value) => value === null)) return showError();
+      const result = calculateCohenKappa({ a: a as number, b: b as number, c: c as number, d: d as number });
+      if (result.status === 'invalid') return showError();
+      return show([['total', String(result.total)], ['observed', format(result.observed * 100) + '%'], ['expected', format(result.expected * 100) + '%'], ['kappa', format(result.kappa)]], labels.warning);
+    });
+  });
+</script>

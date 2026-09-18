@@ -1,4 +1,5 @@
 import type { Locale } from '../config/site';
+import { isEducationGrowthToolDue, isEducationGrowthToolPublic } from '../lib/edu-growth-release';
 
 export type AssetType = 'tool' | 'calculator' | 'generator' | 'template' | 'database' | 'game' | 'widget' | 'guide';
 export type IntentLevel = 'high' | 'medium' | 'low';
@@ -994,6 +995,31 @@ export const tools: ToolMeta[] = [
     name: { zh: 'KR-20 信度計算器', en: 'KR-20 Reliability Calculator' }, short: { zh: '以 0/1 二分作答矩陣估算 KR-20 內部一致性。', en: 'Estimate internal consistency from a binary response matrix.' },
   },
   {
+    slug: 'standard-error-of-measurement-calculator', category: 'statistics', icon: 'SEM', status: 'live', locales: ['zh', 'en'], privacyLevel: 'local-only',
+    relatedTools: ['standard-deviation', 'cronbach-alpha-calculator', 'confidence-interval-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-09-25',
+    name: { zh: '測量標準誤計算器', en: 'Standard Error of Measurement Calculator' }, short: { zh: '用標準差與信度估算測量標準誤，並可查看分數區間半寬。', en: 'Estimate the standard error of measurement from SD and reliability.' },
+  },
+  {
+    slug: 'spearman-brown-calculator', category: 'statistics', icon: 'r′', status: 'live', locales: ['zh', 'en'], privacyLevel: 'local-only',
+    relatedTools: ['cronbach-alpha-calculator', 'standard-error-of-measurement-calculator', 'weighted-average-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-09-26',
+    name: { zh: 'Spearman–Brown 預測計算器', en: 'Spearman–Brown Prophecy Calculator' }, short: { zh: '估算延長測驗後的信度，或反推達到目標信度所需的測驗長度倍數。', en: 'Estimate reliability after lengthening a test or solve for a target length multiplier.' },
+  },
+  {
+    slug: 'learning-gain-calculator', category: 'statistics', icon: 'Δ', status: 'live', locales: ['zh', 'en'], privacyLevel: 'local-only',
+    relatedTools: ['percentage-calculator', 'normalized-score-converter', 'independent-samples-t-test-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-09-27',
+    name: { zh: '學習增益計算器', en: 'Learning Gain Calculator' }, short: { zh: '比較前測與後測分數，查看原始增益、百分比變化與規準化增益。', en: 'Compare pre- and post-test scores with raw, percentage, and normalized gain.' },
+  },
+  {
+    slug: 'weighted-rubric-score-calculator', category: 'statistics', icon: '☷', status: 'live', locales: ['zh', 'en'], privacyLevel: 'local-only',
+    relatedTools: ['weighted-average-calculator', 'grade-average', 'teacher-exam-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-09-28',
+    name: { zh: '加權規準評分計算器', en: 'Weighted Rubric Score Calculator' }, short: { zh: '輸入各評分規準的得分、滿分與權重，計算加權總分與百分比。', en: 'Calculate a weighted rubric score from criterion scores, maximums, and weights.' },
+  },
+  {
+    slug: 'cohen-kappa-calculator', category: 'statistics', icon: 'κ', status: 'live', locales: ['zh', 'en'], privacyLevel: 'local-only',
+    relatedTools: ['kr20-reliability-calculator', 'cronbach-alpha-calculator', 'item-analysis-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-09-29',
+    name: { zh: 'Cohen κ 評分者一致性計算器', en: "Cohen's Kappa Inter-rater Agreement Calculator" }, short: { zh: '以兩位評分者的 2×2 混淆矩陣估算觀察一致率、期望一致率與 Cohen κ。', en: "Estimate observed agreement, expected agreement, and Cohen's kappa from a 2×2 table." },
+  },
+  {
     slug: 'percentile-rank-calculator', category: 'statistics', icon: 'PR', status: 'live', privacyLevel: 'local-only',
     relatedTools: ['z-score-calculator', 't-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-25',
     name: { zh: 'PR 百分等級計算器', en: 'Percentile Rank Calculator' }, short: { zh: '依低於與同分人數計算百分等級（PR）。', en: 'Calculate percentile rank from counts below and equal to a score.' },
@@ -1183,7 +1209,7 @@ export const tools: ToolMeta[] = [
   },
 ];
 
-export const liveTools = tools.filter((tool) => tool.status === 'live');
+export const liveTools = tools.filter((tool) => tool.status === 'live' && isEducationGrowthToolDue(tool.slug));
 /** Canonical public count shared by the homepage and trust pages. */
 export const TOOL_COUNT = liveTools.length;
 // Keep the legacy export for callers that have not migrated yet.
@@ -1195,7 +1221,7 @@ export function isToolAvailableInLocale(tool: ToolMeta, lang: Locale): boolean {
 }
 
 export function getLiveToolsForLocale(lang: Locale): ToolMeta[] {
-  return liveTools.filter((tool) => isToolAvailableInLocale(tool, lang));
+  return liveTools.filter((tool) => isToolAvailableInLocale(tool, lang) && isEducationGrowthToolPublic(tool.slug, lang));
 }
 
 export function getEmbeddableTools(lang: Locale = 'zh'): ToolMeta[] {

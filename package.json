@@ -36,6 +36,7 @@
     "content:audit": "node scripts/content-quality-audit.mjs",
     "seo:audit": "node scripts/seo-system-audit.mjs",
     "seo:check": "node scripts/seo-crawlability-check.mjs",
+    "edu-growth:check": "node scripts/edu-growth-release.mjs --check",
     "audit:seo-collapse": "node scripts/seo-collapse-audit.mjs",
     "audit:seo-collapse:live": "node scripts/seo-collapse-audit.mjs --live",
     "audit:index-recovery": "node scripts/index-recovery-audit.mjs",

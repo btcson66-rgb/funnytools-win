@@ -21,6 +21,7 @@ import GpaCalculator from '../components/tools/GpaCalculator.astro';
 import GradeAverage from '../components/tools/GradeAverage.astro';
 import EducationStatisticsCalculator from '../components/tools/EducationStatisticsCalculator.astro';
 import EducationRecoveryTools from '../components/tools/EducationRecoveryTools.astro';
+import EducationGrowthTools from '../components/tools/EducationGrowthTools.astro';
 import ImageCompressor from '../components/tools/ImageCompressor.astro';
 import ImageCrop from '../components/tools/ImageCrop.astro';
 import ImageRotateFlip from '../components/tools/ImageRotateFlip.astro';
@@ -106,6 +107,11 @@ export const widgetBySlug = {
   'final-grade-needed-calculator': EducationRecoveryTools,
   'item-analysis-calculator': EducationRecoveryTools,
   'kr20-reliability-calculator': EducationRecoveryTools,
+  'standard-error-of-measurement-calculator': EducationGrowthTools,
+  'spearman-brown-calculator': EducationGrowthTools,
+  'learning-gain-calculator': EducationGrowthTools,
+  'weighted-rubric-score-calculator': EducationGrowthTools,
+  'cohen-kappa-calculator': EducationGrowthTools,
   'gpa-calculator': GpaCalculator,
   'random-wheel': RandomWheel,
   'what-to-eat': WhatToEat,
