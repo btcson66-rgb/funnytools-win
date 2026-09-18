@@ -83,12 +83,12 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
       - name: Submit changed URLs to IndexNow
-        if: ${{ secrets.INDEXNOW_KEY != '' }}
+        if: ${{ env.INDEXNOW_KEY != '' }}
         run: node scripts/submit-indexnow.mjs
         env:
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
       - name: Submit changed URLs to Bing
-        if: ${{ secrets.BING_API_KEY != '' }}
+        if: ${{ env.BING_API_KEY != '' }}
         run: node scripts/submit-bing-urls.mjs
         env:
           BING_API_KEY: ${{ secrets.BING_API_KEY }}
