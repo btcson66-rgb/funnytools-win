@@ -2,7 +2,7 @@
   "generated": "2026-09-18",
   "sites": {
     "funnytools.win": {
-      "pageviews": 17003,
+      "pageviews": 17009,
       "users": 6249,
       "asOf": "2026-09-18",
       "composition": {
@@ -14,7 +14,7 @@
           "note": "舊資源最後實測值；資源隨 btcson66 鎖死無法再查。2026-08-06~08-15 未計入，故本站累積為低估。"
         },
         "current": {
-          "pageviews": 9261,
+          "pageviews": 9267,
           "users": 3397,
           "property": "550070457"
         },
@@ -22,14 +22,14 @@
       }
     },
     "roomfeng.win": {
-      "pageviews": 5792,
-      "users": 707,
+      "pageviews": 5794,
+      "users": 709,
       "asOf": "2026-09-18",
       "property": "543532668"
     },
     "worthcalc.win": {
-      "pageviews": 524,
-      "users": 340,
+      "pageviews": 527,
+      "users": 342,
       "asOf": "2026-09-18",
       "property": "544103362"
     }
