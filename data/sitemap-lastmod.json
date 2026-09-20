@@ -75,9 +75,9 @@
     "lastmod": "2026-06-17"
   },
   "https://funnytools.win/education-statistics/": {
-    "hash": "0961471f65770082789dbd7605d758b5b87bf5fcb40c04367c427988d1fc1800",
+    "hash": "0bbf3acb51b927a78b78d42bef55e21f971551fad719f572fa5d5581ccac101b",
     "hashVersion": 9,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-09-20"
   },
   "https://funnytools.win/en/": {
     "hash": "0a0f0564639e06efbcd79ad1126f939d52da981783795142f351d07d213f0ce8",
@@ -150,9 +150,9 @@
     "lastmod": "2026-06-17"
   },
   "https://funnytools.win/en/education-statistics/": {
-    "hash": "9866a9dc3866fb0b160b5a6cc441b257eb07b7babd56593abd50c3cc8a09b55b",
+    "hash": "eeb2e1eba2df82a53fd3fd4f21757061dff16b50dd46043092f0405b7740da4d",
     "hashVersion": 9,
-    "lastmod": "2026-07-02"
+    "lastmod": "2026-09-20"
   },
   "https://funnytools.win/en/for/": {
     "hash": "9531ad6c3c1bbba5d72d94b7a75f2085e433acc47cfd45b8cc8f7dabdc918940",
@@ -549,6 +549,11 @@
     "hashVersion": 9,
     "lastmod": "2026-06-25"
   },
+  "https://funnytools.win/en/iep-progress-ledger/": {
+    "hash": "738443d99549e9b27295c893c7ae1ce2ffe5f10fa1f61e0e93f44d97d22ed635",
+    "hashVersion": 9,
+    "lastmod": "2026-09-20"
+  },
   "https://funnytools.win/en/privacy/": {
     "hash": "a47d3e676eba547c7ea8f8d8a4dff278ddfeb3703033636c841b12469fefa5d1",
     "hashVersion": 9,
@@ -698,6 +703,11 @@
     "hash": "846df62a1807473398fdb359518ed7808519b487675f118194465ce178f7f1ae",
     "hashVersion": 9,
     "lastmod": "2026-09-03"
+  },
+  "https://funnytools.win/en/tools/iep-progress-graph-generator/": {
+    "hash": "fe462cf13397512bab0423d7ca1235db2ddd33b76d6f627857410fb323aa9d2e",
+    "hashVersion": 9,
+    "lastmod": "2026-09-20"
   },
   "https://funnytools.win/en/tools/image-compressor/": {
     "hash": "f027fa29778cee124f755d66f3b605f3e611eac32a77fce7fbcde3eaaef785f2",

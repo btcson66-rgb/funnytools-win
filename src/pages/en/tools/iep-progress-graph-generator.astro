@@ -1,0 +1,258 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import Faq from '../../../components/Faq.astro';
+import { absoluteUrl, assetPath, localePath } from '../../../lib/url';
+
+const toolPath = '/en/tools/iep-progress-graph-generator/';
+const productPath = localePath('en', 'iep-progress-ledger');
+const payhipUrl = 'https://payhip.com/b/lPhQf';
+const gumroadUrl = 'https://btcsonlab01.gumroad.com/l/iep-progress-ledger';
+const faqItems = [
+  { q: 'How many data points can I enter?', a: 'Enter between 3 and 20 data points. Same-day points are accepted; dates must not move backward.' },
+  { q: 'Does this tool upload my data?', a: 'No. The graph is generated in your browser. Do not enter real student names or other identifying information.' },
+  { q: 'What does the aimline mean?', a: 'When the baseline and target are different, the tool draws a straight reference line between them. It is a planning reference, not a prediction or an official IEP decision.' },
+];
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'IEP Progress Graph Generator',
+    url: absoluteUrl(toolPath),
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    description: 'A free browser-local IEP progress graph generator for baseline, target, aimline, trend, latest value, and change from baseline.',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })),
+  },
+];
+---
+
+<BaseLayout
+  lang="en"
+  title="IEP Progress Graph Generator | Free IEP Chart"
+  description="Create a free IEP progress monitoring graph in your browser. Enter a baseline, target, and 3–20 data points to review trend, aimline, latest value, and change."
+  keywords={['IEP progress monitoring graph', 'IEP progress graph generator', 'special education progress monitoring', 'IEP data graph', 'progress monitoring chart', 'IEP goal data tracking']}
+  type="article"
+  canonicalPath={toolPath}
+  hasAlternates={false}
+  jsonLd={jsonLd}
+  ogImage={absoluteUrl('/og/en-study.png')}
+  ogImageAlt="IEP Progress Graph Generator"
+  automaticAffiliate={false}
+>
+  <article class="wrap graph-tool-page" data-tool-slug="iep-progress-graph-generator">
+    <Breadcrumb items={[{ label: 'Home', href: localePath('en') }, { label: 'IEP Progress Graph Generator' }]} />
+    <header class="tool-hero">
+      <div><p class="eyebrow">FREE · BROWSER-LOCAL · NO UPLOAD</p><h1>IEP Progress Graph Generator</h1><p class="lead">Visualize one goal's progress with a baseline, target, data points, aimline where valid, simple trend, latest value, and change from baseline.</p></div>
+      <div class="privacy-callout"><strong>Privacy first</strong><span>Use a student code or leave identity blank. Do not enter a full name, student ID, DOB, school, diagnosis, or notes.</span></div>
+    </header>
+
+    <section class="tool-interaction" aria-labelledby="inputs-title">
+      <div class="section-heading"><p class="eyebrow">ENTER YOUR OWN EXAMPLE</p><h2 id="inputs-title">Set the goal and data points</h2></div>
+      <form id="graph-form" novalidate>
+        <div class="form-grid">
+          <label>Goal label <input id="goal-label" type="text" value="Reading accuracy" maxlength="80" /></label>
+          <label>Measurement label <input id="measurement-label" type="text" value="Percentage" maxlength="50" /></label>
+          <label>Optional student code <input id="student-code" type="text" maxlength="24" placeholder="Optional, such as S-01" /></label>
+          <label>Direction <select id="direction"><option value="increase">Increase</option><option value="decrease">Decrease</option></select></label>
+          <label>Baseline <input id="baseline" type="number" step="any" value="42" /></label>
+          <label>Target <input id="target" type="number" step="any" value="80" /></label>
+        </div>
+        <div class="points-head"><h3>Data points <span>(3–20)</span></h3><button class="btn ghost" type="button" id="add-point">ADD DATA POINT</button></div>
+        <div id="points" class="points-grid" aria-live="polite"></div>
+        <p id="form-error" class="form-error" role="alert" hidden></p>
+        <div class="form-actions"><button class="btn go" type="submit">GENERATE PROGRESS GRAPH</button><button class="btn ghost" type="button" id="reset-tool">RESET EXAMPLE</button></div>
+      </form>
+    </section>
+
+    <section id="results" class="results-section" data-results hidden aria-labelledby="results-title">
+      <div class="section-heading"><p class="eyebrow">YOUR LOCAL RESULT</p><h2 id="results-title">Progress graph</h2></div>
+      <div class="result-summary" id="result-summary"></div>
+      <div class="graph-card"><svg id="progress-svg" viewBox="0 0 900 440" role="img" aria-label="IEP progress graph"></svg></div>
+      <div class="result-actions"><button class="btn ghost" type="button" id="print-result">PRINT RESULT</button><a class="btn go" data-product-event="product_007_free_to_paid_click" data-placement="free_tool_result" data-destination="payhip" href={`${payhipUrl}?utm_source=funnytools&utm_medium=owned&utm_campaign=product007_launch&utm_content=free_tool`}>MANAGE YOUR WHOLE CASELOAD — $29</a><a class="btn ghost" data-product-event="product_007_marketplace_click" data-placement="free_tool" data-destination="gumroad" href={`${gumroadUrl}?utm_source=funnytools&utm_medium=owned&utm_campaign=product007_launch&utm_content=free_tool`}>VIEW ON GUMROAD</a></div>
+      <div class="bridge-box"><strong>Managing more than one goal?</strong><span>IEP Progress Ledger adds full caseload management, Today's Data Queue, multiple measurement types, mastery rules, reporting periods, task analysis, backup, and export.</span><a href={productPath}>See IEP Progress Ledger</a></div>
+    </section>
+
+    <section class="content-section tool-notes">
+      <h2>What this graph shows</h2><ul><li>Baseline and target are shown as reference values.</li><li>The aimline appears when baseline and target differ.</li><li>Trend is a simple deterministic description of the entered values.</li><li>Change from baseline is calculated from the first value to the latest value.</li></ul><p>This free graph tool helps visualize user-entered progress data. It does not make IEP decisions or legal/compliance determinations.</p>
+    </section>
+
+    <section class="content-section tool-notes" aria-labelledby="workflow-title">
+      <h2 id="workflow-title">Use the graph as a quick review aid</h2>
+      <p>Start with one goal and one measurement that you can describe consistently. Enter the baseline and target as reference points, then add observations in the order they were collected. The tool accepts same-day observations, which can be useful when a session produces more than one data point, but it rejects dates that move backward so the visual sequence remains understandable.</p>
+      <p>Read the latest value together with the full line, not by itself. An increasing or decreasing label is a simple endpoint comparison; it is not a statistical analysis, a forecast, or a mastery decision. The aimline is a planning reference between baseline and target. If the baseline and target are equal, no aimline is drawn because there is no change to reference.</p>
+      <p>Use a short student code only when you need a local label, and leave it blank when you do not. Do not enter a full name, student ID, date of birth, school, diagnosis, or notes. The graph is generated in the browser and is not a substitute for your school or district's approved recordkeeping, privacy, or IEP reporting process.</p>
+    </section>
+
+    <section class="content-section tool-notes" aria-labelledby="data-entry-title">
+      <h2 id="data-entry-title">Choose data that can be compared</h2>
+      <p>Before entering points, decide what one value represents. For example, a percentage correct, number of independently completed steps, words read correctly, or minutes engaged can each be useful when the same definition is used from one observation to the next. Avoid mixing different measures in a single line. If the measurement rule changes, record that change in your approved documentation and consider starting a separate graph.</p>
+      <p>Use the date that matches the observation or session. The tool keeps entries in the order you provide them and permits multiple observations on the same date. A same-day sequence can show separate trials, but it should not be mistaken for a longer-term trend. Keep the number of points manageable: three points are enough to begin a visual check, while more points can make a recurring pattern easier to see.</p>
+      <p>Baseline and target are reference values rather than extra observations. Baseline describes the starting point you want to compare against, and target describes the intended reference level. The entered data line may be above, below, or between those values. If your local plan uses a different definition of baseline or target, follow that plan and use this page only as a visual aid.</p>
+    </section>
+
+    <section class="content-section tool-notes" aria-labelledby="review-title">
+      <h2 id="review-title">Review the result responsibly</h2>
+      <p>Look for the shape of the line, the spread of the points, and the dates behind the points. One unusually high or low value can change the endpoint comparison without describing the whole pattern. Recheck the date, number, and measurement label before sharing a result. If a value was entered incorrectly, reset the form or correct the row and generate the graph again.</p>
+      <p>The result can support a conversation with a teacher, specialist, caregiver, or team, but it does not replace their professional judgment. It does not calculate a regression, confidence interval, rate of improvement, trendline, mastery percentage, or progress-monitoring decision. It also does not determine eligibility, services, accommodations, legal compliance, or whether a goal should be changed. Those decisions belong in the records and processes required by the responsible school or district.</p>
+      <p>This page is intentionally local-first. Values are used to draw the result in the current browser session, and the page does not ask for an account or require a server upload. Browser history, screenshots, shared devices, extensions, backups, and copied files can still expose information outside this page. For that reason, use fictional examples or a short non-identifying code whenever possible, and follow your organization's privacy policy before saving or sharing a graph.</p>
+    </section>
+
+    <div class="faq-wrap"><Faq lang="en" items={faqItems} emitJsonLd={false} /></div>
+  </article>
+
+  <script is:inline>
+    const initialRows = [
+      { date: '2026-08-22', value: '52' },
+      { date: '2026-08-29', value: '61' },
+      { date: '2026-09-05', value: '72' },
+    ];
+    const pointsElement = document.querySelector('#points');
+    const form = document.querySelector('#graph-form');
+    const errorElement = document.querySelector('#form-error');
+    const resultsElement = document.querySelector('#results');
+    const summaryElement = document.querySelector('#result-summary');
+    const svgElement = document.querySelector('#progress-svg');
+    const track = (name, params) => window.__ft_track?.(name, params);
+    const sendAnalyticsEvent = (name, params = {}) => track(name, params);
+    const sendCustomToolEvent = (name, params = {}) => track(name, params);
+    const requiredAnalyticsEvents = ['tool_view', 'tool_started', 'tool_use_started', 'tool_action', 'tool_completed', 'tool_use_completed', 'result_action', 'file_download', 'tool_error'];
+    let toolStarted = false;
+
+    function markToolStarted(controlType) {
+      if (toolStarted) return;
+      toolStarted = true;
+      sendAnalyticsEvent('tool_started', { control_type: controlType });
+      sendCustomToolEvent('tool_use_started', { control_type: controlType });
+    }
+
+    function esc(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+    }
+
+    function renderRows(rows) {
+      pointsElement.innerHTML = rows.map((row, index) => `<div class="point-row" data-index="${index}"><label>Point ${index + 1} date<input class="point-date" type="date" value="${esc(row.date)}" required /></label><label>Value<input class="point-value" type="number" step="any" value="${esc(row.value)}" required /></label>${rows.length > 3 ? `<button class="remove-point" type="button" aria-label="Remove point ${index + 1}">Remove</button>` : ''}</div>`).join('');
+      pointsElement.querySelectorAll('.remove-point').forEach((button) => button.addEventListener('click', () => {
+        const nextRows = collectRows();
+        const index = Number(button.closest('.point-row').dataset.index);
+        nextRows.splice(index, 1);
+        renderRows(nextRows);
+      }));
+    }
+
+    function collectRows() {
+      return [...pointsElement.querySelectorAll('.point-row')].map((row) => ({ date: row.querySelector('.point-date').value, value: row.querySelector('.point-value').value }));
+    }
+
+    function error(message) {
+      errorElement.textContent = message;
+      errorElement.hidden = false;
+      sendAnalyticsEvent('tool_error', { error_type: 'validation_or_processing' });
+      return null;
+    }
+
+    function readForm() {
+      errorElement.hidden = true;
+      const baseline = Number(document.querySelector('#baseline').value);
+      const target = Number(document.querySelector('#target').value);
+      const rows = collectRows();
+      if (!document.querySelector('#goal-label').value.trim()) return error('Enter a goal label.');
+      if (!Number.isFinite(baseline) || !Number.isFinite(target)) return error('Baseline and target must be valid numbers.');
+      if (rows.length < 3 || rows.length > 20) return error('Enter between 3 and 20 data points.');
+      if (rows.some((row) => !row.date || row.value.trim() === '' || !Number.isFinite(Number(row.value)))) return error('Every data point needs a date and a valid number.');
+      for (let i = 1; i < rows.length; i += 1) if (rows[i].date < rows[i - 1].date) return error('Dates must not move backward. Same-day data points are allowed.');
+      return { goal: document.querySelector('#goal-label').value.trim(), measurement: document.querySelector('#measurement-label').value.trim() || 'Value', code: document.querySelector('#student-code').value.trim(), direction: document.querySelector('#direction').value, baseline, target, rows: rows.map((row) => ({ date: row.date, value: Number(row.value) })) };
+    }
+
+    function trend(values) {
+      const slope = values.length > 1 ? (values.at(-1) - values[0]) / (values.length - 1) : 0;
+      if (Math.abs(slope) < 0.000001) return { label: 'Stable', slope };
+      return { label: slope > 0 ? 'Increasing' : 'Decreasing', slope };
+    }
+
+    function drawGraph(data) {
+      const values = data.rows.map((row) => row.value);
+      const allValues = [data.baseline, data.target, ...values];
+      const min = Math.min(...allValues);
+      const max = Math.max(...allValues);
+      const pad = Math.max((max - min) * .16, 1);
+      const low = min - pad;
+      const high = max + pad;
+      const left = 72; const right = 860; const top = 34; const bottom = 368;
+      const x = (index) => left + (data.rows.length === 1 ? 0 : index * ((right - left) / (data.rows.length - 1)));
+      const y = (value) => bottom - ((value - low) / (high - low)) * (bottom - top);
+      const line = (yValue, color, dash, label) => `<line x1="${left}" y1="${y(yValue)}" x2="${right}" y2="${yValue}" stroke="${color}" stroke-width="2" stroke-dasharray="${dash}" /><text x="${left + 10}" y="${y(yValue) - 8}" fill="${color}" font-size="15" font-weight="700">${label} ${yValue}</text>`;
+      const points = values.map((value, index) => `${x(index)},${y(value)}`).join(' ');
+      const pointMarks = values.map((value, index) => `<circle cx="${x(index)}" cy="${y(value)}" r="7" fill="#ffffff" stroke="#1d7c83" stroke-width="4" /><text x="${x(index)}" y="${y(value) - 14}" text-anchor="middle" fill="#102b3b" font-size="14" font-weight="700">${value}</text>`).join('');
+      const aimline = data.baseline === data.target ? '' : `<line x1="${x(0)}" y1="${y(data.baseline)}" x2="${x(values.length - 1)}" y2="${y(data.target)}" stroke="#d89724" stroke-width="3" stroke-dasharray="7 6" /><text x="${right - 2}" y="${y(data.target) - 8}" text-anchor="end" fill="#d89724" font-size="15" font-weight="700">Aimline</text>`;
+      const labels = data.rows.map((row, index) => `<text x="${x(index)}" y="${bottom + 32}" text-anchor="middle" fill="#617786" font-size="13">${row.date}</text>`).join('');
+      svgElement.innerHTML = `<rect x="0" y="0" width="900" height="440" rx="16" fill="#fbfdfc" /><line x1="${left}" y1="${top}" x2="${left}" y2="${bottom}" stroke="#9ab0b7" stroke-width="2" /><line x1="${left}" y1="${bottom}" x2="${right}" y2="${bottom}" stroke="#9ab0b7" stroke-width="2" />${line(data.baseline, '#1d7c83', '4 5', 'Baseline')}${line(data.target, '#d89724', '4 5', 'Target')}${aimline}<polyline points="${points}" fill="none" stroke="#1d7c83" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />${pointMarks}${labels}`;
+    }
+
+    function renderResult(data) {
+      const values = data.rows.map((row) => row.value);
+      const latest = values.at(-1);
+      const change = latest - data.baseline;
+      const changeText = `${change > 0 ? '+' : ''}${change}`;
+      const directionText = trend(values).label;
+      const codeText = data.code ? ` · ${esc(data.code)}` : '';
+      summaryElement.innerHTML = `<div><small>Goal</small><strong>${esc(data.goal)}</strong><span>${esc(data.measurement)}${codeText}</span></div><div><small>Data points</small><strong>${values.length}</strong><span>${esc(data.rows[0].date)} → ${esc(data.rows.at(-1).date)}</span></div><div><small>Latest</small><strong>${latest}</strong><span>${esc(directionText)} trend</span></div><div><small>Change from baseline</small><strong>${changeText}</strong><span>Baseline ${data.baseline} · Target ${data.target}</span></div>`;
+      drawGraph(data);
+      resultsElement.hidden = false;
+      resultsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      sendAnalyticsEvent('tool_completed');
+      sendCustomToolEvent('tool_use_completed');
+      track('product_007_free_tool_complete', { product_id: 'PRODUCT-007', tool_id: 'iep-progress-graph-generator' });
+    }
+
+    renderRows(initialRows);
+    sendAnalyticsEvent('tool_view');
+    document.addEventListener('DOMContentLoaded', () => track('product_007_free_tool_view', { product_id: 'PRODUCT-007', tool_id: 'iep-progress-graph-generator' }));
+    form.addEventListener('input', () => markToolStarted('input'));
+    document.querySelector('#add-point').addEventListener('click', () => { markToolStarted('button'); const rows = collectRows(); if (rows.length < 20) renderRows([...rows, { date: rows.at(-1)?.date || '2026-09-12', value: rows.at(-1)?.value || '' }]); });
+    form.addEventListener('submit', (event) => { event.preventDefault(); markToolStarted('submit'); sendAnalyticsEvent('tool_action', { action_name: 'generate_progress_graph' }); const data = readForm(); if (data) renderResult(data); });
+    document.querySelector('#reset-tool').addEventListener('click', () => { form.reset(); document.querySelector('#goal-label').value = 'Reading accuracy'; document.querySelector('#measurement-label').value = 'Percentage'; document.querySelector('#baseline').value = '42'; document.querySelector('#target').value = '80'; renderRows(initialRows); resultsElement.hidden = true; errorElement.hidden = true; });
+    document.querySelector('#print-result').addEventListener('click', () => { sendAnalyticsEvent('result_action', { result_action: 'print' }); sendAnalyticsEvent('file_download', { download_action: 'print_result' }); window.print(); });
+    document.querySelectorAll('[data-product-event]').forEach((link) => link.addEventListener('click', () => track(link.dataset.productEvent, { product_id: 'PRODUCT-007', tool_id: 'iep-progress-graph-generator', placement: link.dataset.placement, destination: link.dataset.destination })));
+  </script>
+</BaseLayout>
+
+<style>
+  .graph-tool-page { --p-ink: #102b3b; --p-teal: #1d7c83; --p-mint: #dcefe9; --p-gold: #d89724; --p-muted: #5d7380; }
+  .tool-hero { display:grid; grid-template-columns:minmax(0, 1fr) minmax(240px, .45fr); gap:20px; align-items:end; margin: 24px 0 30px; }
+  .tool-hero h1 { font-size: clamp(2.2rem, 5vw, 4.3rem); letter-spacing:-.055em; line-height:.98; margin: 12px 0 18px; }
+  .tool-hero .lead { max-width:760px; color:var(--p-muted); font-size:1.14rem; line-height:1.65; }
+  .eyebrow { color:var(--p-teal); font-size:.79rem; font-weight:850; letter-spacing:.13em; }
+  .privacy-callout { display:grid; gap:8px; padding:18px; border-left:5px solid var(--p-teal); border-radius:10px; background:var(--p-mint); color:var(--p-muted); line-height:1.5; }
+  .privacy-callout strong { color:var(--p-ink); }
+  .tool-interaction, .results-section { padding:28px; border:1px solid var(--line); border-radius:16px; background:var(--card); box-shadow:var(--shadow-soft); }
+  .section-heading h2 { margin: 8px 0 20px; color:var(--p-ink); }
+  .form-grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px; }
+  label { display:grid; gap:7px; color:var(--p-ink); font-weight:700; font-size:.92rem; }
+  input, select { width:100%; min-height:44px; padding:10px 12px; border:1px solid #b5c8cc; border-radius:8px; background:#fff; color:var(--p-ink); font:inherit; }
+  input:focus, select:focus { outline:3px solid rgba(29,124,131,.22); border-color:var(--p-teal); }
+  .points-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:26px; }
+  .points-head h3 { margin:0; color:var(--p-ink); } .points-head h3 span { color:var(--p-muted); font-size:.9rem; font-weight:500; }
+  .points-grid { display:grid; gap:10px; margin-top:12px; }
+  .point-row { display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) auto; gap:10px; align-items:end; padding:12px; border:1px solid var(--line); border-radius:10px; background:#f8fbfa; }
+  .remove-point { min-height:44px; padding:10px 12px; border:1px solid #b5c8cc; border-radius:8px; background:#fff; color:var(--p-teal); font-weight:700; cursor:pointer; }
+  .form-actions, .result-actions { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:20px; }
+  .form-error { margin:16px 0 0; color:#a33a29; font-weight:700; }
+  .results-section { margin-top:24px; }
+  .result-summary { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .result-summary > div { display:grid; gap:6px; padding:16px; border:1px solid #cde3dc; border-radius:10px; background:#f4fbf8; }
+  .result-summary small { color:var(--p-muted); } .result-summary strong { color:var(--p-ink); font-size:1.45rem; overflow-wrap:anywhere; } .result-summary span { color:var(--p-muted); font-size:.85rem; line-height:1.4; }
+  .graph-card { margin-top:14px; padding:14px; overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:#fff; }
+  #progress-svg { display:block; width:100%; min-width:680px; height:auto; }
+  .bridge-box { display:grid; gap:7px; margin-top:20px; padding:20px; border-radius:12px; background:linear-gradient(135deg,var(--p-mint),#fff); color:var(--p-muted); line-height:1.5; }
+  .bridge-box strong { color:var(--p-ink); font-size:1.1rem; } .bridge-box a { color:var(--p-teal); font-weight:800; }
+  .tool-notes { color:var(--p-muted); line-height:1.6; } .tool-notes h2 { color:var(--p-ink); } .tool-notes li { margin: 7px 0; }
+  @media (max-width: 800px) { .tool-hero, .form-grid { grid-template-columns:1fr; } .result-summary { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width: 520px) { .tool-interaction, .results-section { padding:18px; } .point-row { grid-template-columns:1fr; } .point-row .remove-point { width:max-content; } .result-summary { grid-template-columns:1fr; } .form-actions .btn, .result-actions .btn { width:100%; text-align:center; } #progress-svg { min-width:600px; } }
+  @media print { body * { visibility:hidden; } #results, #results * { visibility:visible; } #results { position:absolute; left:0; top:0; width:100%; box-shadow:none; border:0; } .result-actions, .bridge-box { display:none; } }
+</style>

@@ -116,7 +116,7 @@
   </url>
   <url>
     <loc>https://funnytools.win/en/education-statistics/</loc>
-    <lastmod>2026-07-02</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/education-statistics/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/education-statistics/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/estadisticas-educativas/" />
@@ -705,6 +705,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/guides/z-score-calculator-guide/" />
   </url>
   <url>
+    <loc>https://funnytools.win/en/iep-progress-ledger/</loc>
+    <lastmod>2026-09-20</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/en/privacy/</loc>
     <lastmod>2026-09-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/privacy/" />
@@ -964,6 +968,10 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/crear-grupos-clase/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/generateur-groupes-classe/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/group-generator/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/tools/iep-progress-graph-generator/</loc>
+    <lastmod>2026-09-20</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/image-compressor/</loc>
