@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Faq from '../../../components/Faq.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { assetPath, absoluteUrl, localePath } from '../../../lib/url';
+
+const productPath = '/en/iep-progress-ledger/';
+const freeToolPath = localePath('en', 'tools', 'iep-progress-graph-generator');
+const PAYHIP_URL = 'https://payhip.com/b/lPhQf';
+const GUMROAD_URL = 'https://btcsonlab01.gumroad.com/l/iep-progress-ledger';
+const imageNames = [
+  '01-gumroad-hero.png',
+  '04-feature-data-queue.png',
+  '05-feature-measurement-types.png',
+  '06-feature-progress-graph.png',
+  '07-feature-mastery.png',
+  '08-feature-reporting-period.png',
+  '09-feature-local-first.png',
+  '10-feature-task-analysis.png',
+];
+const imageUrls = imageNames.map((name) => absoluteUrl(assetPath('product-007', name)));
+const faqItems = [
+  {
+    q: 'Does IEP Progress Ledger require a subscription?',
+    a: 'No. It is a one-time purchase with a US$29 launch price and US$49 regular price. There is no monthly subscription.',
+  },
+  {
+    q: 'Does it require an account or cloud service?',
+    a: 'No account and no cloud service are required. The buyer app is local-first and includes JSON and CSV export options for your own backups and workflows.',
+  },
+  {
+    q: 'Which measurement types can I track?',
+    a: 'The app supports percentage, trials, frequency, duration, rate, latency, rubric, task analysis, prompt level, count, and yes/no goals. Choose the measurement that fits the goal you set.',
+  },
+  {
+    q: 'Does the app make official IEP decisions?',
+    a: 'No. It is an organizational and progress-monitoring support tool. It does not provide legal advice, compliance determinations, diagnosis, medical advice, official IEP decisions, or district authorization.',
+  },
+  {
+    q: 'Can I try a graph before buying?',
+    a: 'Yes. The free IEP Progress Graph Generator lets you enter a goal, baseline, target, and 3–20 data points in your browser. It is a useful single-goal visualization, not a locked teaser.',
+  },
+];
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'IEP Progress Ledger',
+    description: 'A local-first IEP progress monitoring tool for collecting goal data, graphing progress, and reviewing reporting periods.',
+    image: imageUrls,
+    brand: { '@type': 'Brand', name: 'FunnyTools' },
+    offers: {
+      '@type': 'Offer',
+      price: '29',
+      priceCurrency: 'USD',
+      url: PAYHIP_URL,
+      availability: 'https://schema.org/InStock',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  },
+];
+const payhipUrl = (placement: string) => `${PAYHIP_URL}?utm_source=funnytools&utm_medium=owned&utm_campaign=product007_launch&utm_content=${placement}`;
+const gumroadUrl = (placement: string) => `${GUMROAD_URL}?utm_source=funnytools&utm_medium=owned&utm_campaign=product007_launch&utm_content=${placement}`;
+---
+
+<BaseLayout
+  lang="en"
+  title="IEP Progress Ledger | IEP Progress Monitoring Tool"
+  description="Collect IEP goal data, see which goals need attention, graph progress, and review reporting periods with a local-first tool — without another subscription."
+  keywords={['IEP progress monitoring tool', 'IEP goal tracker', 'special education data collection tool', 'IEP progress tracker', 'IEP goal progress graph', 'local IEP tracker']}
+  type="website"
+  canonicalPath={productPath}
+  hasAlternates={false}
+  jsonLd={jsonLd}
+  ogImage={absoluteUrl('/og/en-study.png')}
+  ogImageAlt="IEP Progress Ledger — Collect the data. See the progress."
+  automaticAffiliate={false}
+>
+  <article class="product-page" data-product-page="product-007">
+    <section class="product-hero wrap" aria-labelledby="product-title">
+      <Breadcrumb items={[{ label: 'Home', href: localePath('en') }, { label: 'IEP Progress Ledger' }]} />
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">ONE-TIME PURCHASE · LOCAL-FIRST · US$29 LAUNCH PRICE</p>
+          <h1 id="product-title">IEP Progress Ledger</h1>
+          <p class="hero-message">Collect the data.<br />See the progress.<br />Be ready when reports are due.</p>
+          <p class="lead">Track IEP goals, organize data collection, graph progress, and review reporting periods — without another subscription.</p>
+          <div class="cta-row">
+            <a class="btn go" data-product-event="product_007_marketplace_click" data-destination="payhip" data-placement="hero" href={payhipUrl('hero')}>GET IEP PROGRESS LEDGER — $29</a>
+            <a class="btn ghost" data-product-event="product_007_cta_click" data-destination="free_tool" data-placement="hero" href={freeToolPath}>TRY THE FREE PROGRESS GRAPH TOOL</a>
+          </div>
+          <p class="secondary-marketplace">Prefer Gumroad? <a data-product-event="product_007_marketplace_click" data-destination="gumroad" data-placement="hero" href={gumroadUrl('hero')}>View the secondary listing</a>.</p>
+          <p class="privacy-line">No account required. No cloud required. Use student codes or initials unless authorized otherwise.</p>
+        </div>
+        <div class="hero-art">
+          <img src={assetPath('product-007', '01-gumroad-hero.png')} alt="IEP Progress Ledger commercial preview showing the Today’s Data Queue and progress graph" width="1600" height="1000" loading="eager" decoding="async" />
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap proof-strip" aria-label="Product promise">
+      <div><strong>Today's Data Queue</strong><span>See which configured goals need data.</span></div>
+      <div><strong>Progress Graphs</strong><span>Turn entered data into a clear story.</span></div>
+      <div><strong>Reporting Periods</strong><span>Review baseline, latest, trend, and rule status.</span></div>
+      <div><strong>Local-first</strong><span>Your records stay on your device unless exported.</span></div>
+    </section>
+
+    <section class="wrap content-section problem-section" aria-labelledby="problem-title">
+      <div class="section-head narrow">
+        <p class="eyebrow">THE PROBLEM</p>
+        <h2 id="problem-title">IEP data should not live in five different places.</h2>
+        <p>Paper forms, spreadsheets, notebooks, graphs, and separate files can make a reporting period feel like a scavenger hunt. IEP Progress Ledger brings collection, graphing, and review into one focused local workspace.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card"><span>01</span><h3>Collect</h3><p>Open Today’s Data Queue and log the data you actually configured.</p></div>
+        <div class="problem-card"><span>02</span><h3>Graph</h3><p>See baseline, target, data points, aimline, and trend context together.</p></div>
+        <div class="problem-card"><span>03</span><h3>Report</h3><p>Review a reporting-period snapshot without rewriting the same summary.</p></div>
+      </div>
+    </section>
+
+    <section class="wrap content-section feature-section" aria-labelledby="queue-title">
+      <div class="feature-copy"><p class="eyebrow">TODAY'S DATA QUEUE</p><h2 id="queue-title">Know which goals need data today.</h2><p>See due, recent, and stale data at a glance using the schedules you configure. The queue is an organization aid, not a legal, compliance, or district deadline.</p></div>
+      <img src={assetPath('product-007', '04-feature-data-queue.png')} alt="Real IEP Progress Ledger Today’s Data Queue screen" width="1000" height="1000" loading="lazy" decoding="async" />
+    </section>
+
+    <section class="wrap content-section feature-section reverse" aria-labelledby="measurement-title">
+      <div class="feature-copy"><p class="eyebrow">MULTIPLE MEASUREMENT TYPES</p><h2 id="measurement-title">Not every goal is just a percentage.</h2><p>Track percentage, trials, frequency, duration, rate, latency, rubric, task analysis, prompt level, count, and yes/no goals. Choose the measurement that fits the goal you set.</p></div>
+      <img src={assetPath('product-007', '05-feature-measurement-types.png')} alt="Real IEP Progress Ledger measurement entry screen with supported measurement examples" width="1000" height="1000" loading="lazy" decoding="async" />
+    </section>
+
+    <section class="wrap content-section gallery-section" aria-labelledby="screenshots-title">
+      <div class="section-head"><p class="eyebrow">REAL RC1 SCREENS</p><h2 id="screenshots-title">A clear workspace for the work between meetings.</h2><p>These are verified screenshots from the frozen IEP Progress Ledger RC1 buyer build using its fictional demo workspace.</p></div>
+      <div class="gallery-grid">
+        {imageNames.slice(2).map((name, index) => (
+          <figure><img src={assetPath('product-007', name)} alt={`IEP Progress Ledger feature: ${name.replace(/\.png$/, '').replace(/^\d+-/, '').replaceAll('-', ' ')}`} width="1000" height="1000" loading="lazy" decoding="async" /><figcaption>{['Progress graphs', 'Mastery criteria', 'Reporting periods', 'Local-first privacy', 'Task analysis'][index]}</figcaption></figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="wrap content-section audience-grid" aria-labelledby="audience-title">
+      <div><p class="eyebrow">WHO IT'S FOR</p><h2 id="audience-title">Built for educators who track progress-monitoring data.</h2><ul class="check-list"><li>Special education teachers</li><li>Case managers</li><li>Resource teachers</li><li>Intervention specialists</li><li>SLPs, OTs, and PTs</li><li>Education professionals tracking IEP goals</li></ul></div>
+      <div class="not-for"><p class="eyebrow">WHO IT'S NOT FOR</p><h2>Keep the boundary clear.</h2><p>It is not an IEP writer, a legal or compliance service, a diagnosis tool, a medical system, or a replacement for your school or district procedures.</p><p>It is a local organizational and progress-monitoring support tool.</p></div>
+    </section>
+
+    <section class="wrap content-section how-section" aria-labelledby="how-title">
+      <div class="section-head narrow"><p class="eyebrow">HOW IT WORKS</p><h2 id="how-title">A short path from entry to review.</h2></div>
+      <ol class="steps"><li><strong>Use a student code or initials.</strong><span>Keep the local workspace purposeful and minimize unnecessary identifiers.</span></li><li><strong>Set a goal and measurement.</strong><span>Choose direction, schedule, target, and any user-configured mastery rule.</span></li><li><strong>Log data when it is due.</strong><span>Open the queue, enter the observation, and return to your workflow.</span></li><li><strong>Review and export.</strong><span>Read the graph and reporting snapshot, then export JSON or CSV backups as needed.</span></li></ol>
+    </section>
+
+    <section class="wrap content-section bridge-section" aria-labelledby="bridge-title">
+      <div><p class="eyebrow">FREE SINGLE-GOAL TOOL</p><h2 id="bridge-title">Want to see a graph first?</h2><p>Try the free IEP Progress Graph Generator. Enter a baseline, target, and 3–20 data points locally in your browser, then review the graph, aimline where valid, trend, latest value, and change from baseline.</p></div>
+      <a class="btn ghost" data-product-event="product_007_cta_click" data-destination="free_tool" data-placement="product_bridge" href={freeToolPath}>TRY THE FREE GRAPH GENERATOR</a>
+    </section>
+
+    <section class="wrap content-section privacy-section" aria-labelledby="privacy-title">
+      <p class="eyebrow">LOCAL-FIRST PRIVACY</p><h2 id="privacy-title">Your records stay on your device unless you export them.</h2><p>IEP Progress Ledger is designed as a local-first organizational tool. Use student codes or initials unless your school or district authorizes identifiable student information. Users remain responsible for their school's or district's privacy and data-handling policies.</p><div class="privacy-badges"><span>NO SUBSCRIPTION</span><span>NO ACCOUNT</span><span>NO CLOUD REQUIRED</span><span>BACKUP + EXPORT</span></div>
+    </section>
+
+    <div class="wrap"><Faq lang="en" items={faqItems} emitJsonLd={false} /></div>
+
+    <section class="wrap content-section disclaimer-section" aria-labelledby="disclaimer-title">
+      <p class="eyebrow">DISCLAIMER</p><h2 id="disclaimer-title">Use it as an organizational support tool.</h2><p>IEP Progress Ledger does not provide legal advice, special-education compliance determinations, diagnosis, medical advice, official IEP decisions, or district authorization.</p><a href={localePath('en', 'education-statistics')}>Explore FunnyTools education and statistics tools</a>
+    </section>
+
+    <section class="wrap final-cta" aria-labelledby="final-cta-title">
+      <p class="eyebrow">COLLECT. GRAPH. REPORT.</p><h2 id="final-cta-title">Make the next reporting period easier to review.</h2><div class="cta-row"><a class="btn go" data-product-event="product_007_marketplace_click" data-destination="payhip" data-placement="final_cta" href={payhipUrl('final_cta')}>GET IEP PROGRESS LEDGER — $29</a><a class="btn ghost" data-product-event="product_007_marketplace_click" data-destination="gumroad" data-placement="final_cta" href={gumroadUrl('final_cta')}>VIEW ON GUMROAD</a><a class="btn ghost" data-product-event="product_007_cta_click" data-destination="free_tool" data-placement="final_cta" href={freeToolPath}>TRY THE FREE GRAPH TOOL</a></div><p>One-time purchase · US$29 launch price · US$49 regular price</p>
+    </section>
+  </article>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.__ft_track?.('product_007_view', { product_id: 'PRODUCT-007', placement: 'product_page' });
+      document.querySelectorAll('[data-product-event]').forEach((link) => {
+        link.addEventListener('click', () => {
+          const eventName = link.dataset.productEvent;
+          const destination = link.dataset.destination;
+          const placement = link.dataset.placement;
+          if (eventName) window.__ft_track?.(eventName, { product_id: 'PRODUCT-007', placement, destination });
+        });
+      });
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .product-page { --p-ink: #102b3b; --p-teal: #1d7c83; --p-mint: #dcefe9; --p-gold: #d89724; --p-muted: #5d7380; }
+  .product-hero { padding-top: 24px; }
+  .hero-grid { display:grid; grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr); gap: 30px; align-items:center; margin-top: 28px; }
+  .hero-copy { padding: 32px 0 40px; }
+  .eyebrow { color: var(--p-teal); font-size: .79rem; font-weight: 850; letter-spacing: .13em; line-height: 1.35; }
+  h1, h2, h3 { color: var(--p-ink); }
+  .hero-copy h1 { font-size: clamp(2.5rem, 6vw, 5.25rem); margin: 14px 0 20px; letter-spacing: -.055em; line-height: .96; }
+  .hero-message { color: var(--p-ink); font-size: clamp(1.65rem, 3.3vw, 3rem); line-height: 1.02; letter-spacing: -.045em; font-weight: 820; margin: 0 0 22px; }
+  .hero-copy .lead { max-width: 620px; font-size: 1.18rem; line-height: 1.65; color: var(--p-muted); }
+  .hero-art img { width:100%; height:auto; display:block; border-radius: 18px; box-shadow: 0 18px 50px rgba(16,43,59,.18); }
+  .cta-row { display:flex; flex-wrap:wrap; gap: 10px; align-items:center; margin-top: 22px; }
+  .cta-row .btn { text-align:center; }
+  .privacy-line { color: var(--p-muted); font-size: .9rem; line-height: 1.55; margin-top: 18px; }
+  .proof-strip { display:grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow:hidden; margin-top: 20px; }
+  .proof-strip div { display:grid; gap:5px; padding: 18px; background: var(--card); }
+  .proof-strip strong { color: var(--p-ink); }
+  .proof-strip span { color: var(--p-muted); font-size: .9rem; line-height:1.4; }
+  .narrow { max-width: 760px; }
+  .problem-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:16px; margin-top:24px; }
+  .problem-card { padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); box-shadow: var(--shadow-soft); }
+  .problem-card span { color: var(--p-gold); font-weight:850; }
+  .problem-card h3 { margin: 16px 0 8px; }
+  .problem-card p, .feature-copy p, .audience-grid p, .bridge-section p, .privacy-section p, .disclaimer-section p { color: var(--p-muted); line-height:1.65; }
+  .feature-section { display:grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 32px; align-items:center; }
+  .feature-section.reverse { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
+  .feature-section.reverse .feature-copy { order:2; }
+  .feature-section img { width:100%; max-width: 520px; justify-self:center; border-radius: 18px; box-shadow: 0 16px 38px rgba(16,43,59,.14); }
+  .gallery-grid { display:grid; grid-template-columns: repeat(5,1fr); gap:12px; }
+  .gallery-grid figure { margin:0; display:grid; gap:8px; }
+  .gallery-grid img { width:100%; border:1px solid var(--line); border-radius:12px; box-shadow: var(--shadow-soft); }
+  .gallery-grid figcaption { color: var(--p-muted); font-size:.85rem; }
+  .audience-grid { display:grid; grid-template-columns: repeat(2,1fr); gap:20px; }
+  .audience-grid > div { padding: 25px; border:1px solid var(--line); border-radius:14px; background:var(--card); }
+  .check-list { display:grid; gap:10px; padding-left: 1.25rem; color: var(--p-muted); line-height:1.5; }
+  .not-for { background: linear-gradient(135deg, var(--p-mint), var(--card)) !important; }
+  .steps { display:grid; grid-template-columns: repeat(4,1fr); gap:12px; padding:0; list-style:none; counter-reset: step; }
+  .steps li { counter-increment: step; display:grid; gap:8px; padding:20px; border-top:4px solid var(--p-teal); border-radius:10px; background:var(--card); box-shadow:var(--shadow-soft); }
+  .steps li::before { content: '0' counter(step); color: var(--p-gold); font-weight:850; }
+  .steps span { color:var(--p-muted); line-height:1.5; font-size:.93rem; }
+  .bridge-section, .final-cta { display:flex; align-items:center; justify-content:space-between; gap:24px; padding: 28px; border:1px solid var(--line); border-radius:16px; background:linear-gradient(135deg,var(--p-mint),var(--card)); }
+  .bridge-section h2, .final-cta h2 { margin: 8px 0; }
+  .privacy-section { border-left:5px solid var(--p-teal); padding-left:24px; }
+  .privacy-badges { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+  .privacy-badges span { padding:8px 11px; border-radius:999px; background:var(--p-mint); color:var(--p-ink); font-size:.78rem; font-weight:850; letter-spacing:.04em; }
+  .disclaimer-section { padding-bottom: 26px; }
+  .disclaimer-section a { color:var(--p-teal); font-weight:750; }
+  .final-cta { display:block; text-align:center; margin-bottom: 44px; }
+  .final-cta .cta-row { justify-content:center; }
+  .final-cta > p:last-child { color:var(--p-muted); margin: 16px 0 0; }
+  @media (max-width: 900px) { .hero-grid, .feature-section, .feature-section.reverse { grid-template-columns:1fr; } .feature-section.reverse .feature-copy { order:0; } .feature-section img { max-width: 460px; } .gallery-grid { grid-template-columns: repeat(3,1fr); } .steps { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 680px) { .hero-copy { padding-top: 18px; } .proof-strip, .problem-grid, .audience-grid { grid-template-columns:1fr; } .gallery-grid { grid-template-columns: repeat(2,1fr); } .bridge-section { display:block; } .bridge-section .btn { margin-top: 12px; } .final-cta .cta-row .btn { width:100%; } }
+</style>

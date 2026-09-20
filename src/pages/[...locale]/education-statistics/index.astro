@@ -275,6 +275,7 @@ const jsonLd = [
       <a class="btn go" href={localePath(lang, 'tools', 'teacher-exam-score-converter')}>{lang === 'zh' ? '使用教師甄試工具' : 'Use teacher exam tools'}</a>
       <a class="btn ghost" href={localePath(lang, 'tools', 't-score-calculator')}>{lang === 'zh' ? '換算 T / Z / PR' : 'Convert T / Z / PR'}</a>
       <a class="btn ghost" href={localePath(lang, 'tools', 'apa-7-report-generator')}>{lang === 'zh' ? '產生 APA 7 報告句' : 'Generate APA 7 wording'}</a>
+      {lang === 'en' && <a class="btn ghost" href={localePath('en', 'tools', 'iep-progress-graph-generator')}>Try the IEP progress graph generator</a>}
     </div>
   </section>
 
