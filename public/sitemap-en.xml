@@ -27,6 +27,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/about/" />
   </url>
   <url>
+    <loc>https://funnytools.win/en/behavior-observation-ledger/</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/en/category/draw/</loc>
     <lastmod>2026-09-02</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/category/draw/" />
@@ -749,6 +753,10 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/tools/abc-behavior-pattern-summary/</loc>
+    <lastmod>2026-09-21</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/age-calculator/</loc>

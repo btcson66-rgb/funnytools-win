@@ -94,6 +94,11 @@
     "hashVersion": 9,
     "lastmod": "2026-09-02"
   },
+  "https://funnytools.win/en/behavior-observation-ledger/": {
+    "hash": "254f3d0d892314327bbfea040536b43de447c2a8a788bec8502c357176952d7b",
+    "hashVersion": 9,
+    "lastmod": "2026-09-21"
+  },
   "https://funnytools.win/en/category/draw/": {
     "hash": "c0ebbd3443420142641a003b45d44612efe6240502ffaf346f1962ba241f152f",
     "hashVersion": 9,
@@ -578,6 +583,11 @@
     "hash": "06c9301d4caffc9a00f3c8454af8e68a02367232b4760a75cd7b8976919ae1e5",
     "hashVersion": 9,
     "lastmod": "2026-09-02"
+  },
+  "https://funnytools.win/en/tools/abc-behavior-pattern-summary/": {
+    "hash": "6af7cfea915f4524c58c5039f9d51de1a1a28ec533a42e36ff97dafe3bbcb78a",
+    "hashVersion": 9,
+    "lastmod": "2026-09-21"
   },
   "https://funnytools.win/en/tools/age-calculator/": {
     "hash": "9791d169b3928eca39052e6e5bd84e4502c5c5703663a56dc13e4bc4a5dd4079",
