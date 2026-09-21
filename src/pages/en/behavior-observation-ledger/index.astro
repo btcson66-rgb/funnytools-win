@@ -6,10 +6,11 @@ import { assetPath, absoluteUrl, localePath } from '../../../lib/url';
 
 const productPath = '/en/behavior-observation-ledger/';
 const freeToolPath = `${localePath('en', 'tools', 'abc-behavior-pattern-summary')}?utm_source=funnytools&utm_medium=owned&utm_campaign=product008_launch&utm_content=product_bridge`;
-const PAYHIP_URL = import.meta.env.PUBLIC_PRODUCT_008_PAYHIP_URL || '';
+const PAYHIP_URL = 'https://payhip.com/b/IDFg4';
 const GUMROAD_URL = import.meta.env.PUBLIC_PRODUCT_008_GUMROAD_URL || '';
 const marketplacePending = !PAYHIP_URL;
 const marketplaceUrl = (base: string, placement: string) => base ? `${base}${base.includes('?') ? '&' : '?'}utm_source=funnytools&utm_medium=owned&utm_campaign=product008_launch&utm_content=${placement}` : '#marketplace-pending';
+const productAssetPath = (name: string) => assetPath('assets', 'product-008', name);
 const imageNames = [
   '01-gumroad-hero.png',
   '04-feature-live-observation.png',
@@ -20,7 +21,7 @@ const imageNames = [
   '09-feature-session-comparison.png',
   '10-feature-local-first.png',
 ];
-const imageUrls = imageNames.map((name) => absoluteUrl(assetPath('product-008', name)));
+const imageUrls = imageNames.map((name) => absoluteUrl(productAssetPath(name)));
 const faqItems = [
   { q: 'Does Behavior Observation Ledger require a subscription?', a: 'No. It is a one-time purchase with a US$29 launch price and US$49 regular price. The buyer app has no required account or cloud database.' },
   { q: 'Which observation methods are supported?', a: 'The v1 app supports ABC event, frequency, rate, duration, latency, partial interval, whole interval, momentary time sampling, and count.' },
@@ -39,14 +40,14 @@ const jsonLd = [
 
 <BaseLayout
   lang="en"
-  title="Behavior Observation Ledger | Local-First Behavior Data Collection Tool"
+  title="Behavior Observation Ledger | Local-First ABC Tool"
   description="Collect ABC events, frequency, duration, latency, interval data, and descriptive patterns in one local-first behavior observation tool."
   keywords={['behavior data collection tool', 'ABC behavior data tracker', 'special education behavior tracker', 'frequency duration latency tracker', 'behavior observation software', 'interval recording tool', 'behavior scatterplot']}
   type="website"
   canonicalPath={productPath}
   hasAlternates={false}
   jsonLd={jsonLd}
-  ogImage={absoluteUrl(assetPath('product-008', '01-gumroad-hero.png'))}
+  ogImage={absoluteUrl('/og/en-study.png')}
   ogImageAlt="Behavior Observation Ledger — Turn observations into organized evidence"
   automaticAffiliate={false}
 >
@@ -63,10 +64,10 @@ const jsonLd = [
             <a class:list={['btn', 'go', { 'is-pending': marketplacePending }]} data-product-event="product_008_marketplace_click" data-destination="payhip" data-placement="hero" data-marketplace-pending={marketplacePending ? 'true' : undefined} href={marketplaceUrl(PAYHIP_URL, 'hero')} aria-disabled={marketplacePending ? 'true' : undefined}>{marketplacePending ? 'PAYHIP CHECKOUT PENDING' : 'GET BEHAVIOR OBSERVATION LEDGER — $29'}</a>
             <a class="btn ghost" data-product-event="product_008_cta_click" data-destination="free_tool" data-placement="hero" href={freeToolPath}>TRY THE FREE ABC PATTERN TOOL</a>
           </div>
-          <p class="secondary-marketplace">{GUMROAD_URL ? <a data-product-event="product_008_marketplace_click" data-destination="gumroad" data-placement="hero" href={marketplaceUrl(GUMROAD_URL, 'hero')}>Prefer Gumroad? View the secondary listing.</a> : 'Secondary marketplace link will be added after the listing is publicly available.'}</p>
+          {GUMROAD_URL && <p class="secondary-marketplace"><a data-product-event="product_008_marketplace_click" data-destination="gumroad" data-placement="hero" href={marketplaceUrl(GUMROAD_URL, 'hero')}>Prefer Gumroad? View the secondary listing.</a></p>}
           <p class="privacy-line">No subscription. No account required. No cloud database required for the core buyer app. Use student codes or initials unless authorized otherwise.</p>
         </div>
-        <div class="hero-art"><img src={assetPath('product-008', '01-gumroad-hero.png')} alt="Real Behavior Observation Ledger RC1 interface showing descriptive pattern review" width="1600" height="1000" loading="eager" decoding="async" /></div>
+        <div class="hero-art"><img src={productAssetPath('01-gumroad-hero.png')} alt="Real Behavior Observation Ledger RC1 interface showing descriptive pattern review" width="1600" height="1000" loading="eager" decoding="async" /></div>
       </div>
     </section>
 
@@ -74,11 +75,11 @@ const jsonLd = [
 
     <section class="wrap content-section problem-section" aria-labelledby="problem-title"><div class="section-head narrow"><p class="eyebrow">THE PROBLEM</p><h2 id="problem-title">Behavior data should not live across five clipboards.</h2><p>Paper notes, timers, spreadsheets, and separate graphs can make an observation review harder than it needs to be. The Ledger keeps the session, method, context, and descriptive review connected.</p></div><div class="problem-grid"><div class="problem-card"><span>01</span><h3>Capture</h3><p>Use touch-friendly controls while the observation is happening.</p></div><div class="problem-card"><span>02</span><h3>Organize</h3><p>Keep method-specific records separate so count, rate, duration, latency, and interval data stay clear.</p></div><div class="problem-card"><span>03</span><h3>Review</h3><p>Compare recorded patterns without turning them into an automatic conclusion.</p></div></div></section>
 
-    <section class="wrap content-section feature-section"><div class="feature-copy"><p class="eyebrow">FAST OBSERVATION ENTRY</p><h2>Log it while it is happening.</h2><p>Start with a student code, target behavior, method, setting, and phase. Use the one-tap counter, event fields, timers, or interval buttons that match the observation plan.</p></div><img src={assetPath('product-008', '04-feature-live-observation.png')} alt="Real RC1 live observation interface with method controls" width="1000" height="1000" loading="lazy" decoding="async" /></section>
-    <section class="wrap content-section feature-section reverse"><div class="feature-copy"><p class="eyebrow">ABC OBSERVATION</p><h2>Keep the context with the event.</h2><p>Record what came before, the behavior as recorded, what came after, context, optional duration, intensity, staff response, and notes. Categories remain descriptive.</p></div><img src={assetPath('product-008', '05-feature-abc.png')} alt="Real RC1 ABC observation entry interface" width="1000" height="1000" loading="lazy" decoding="async" /></section>
-    <section class="wrap content-section feature-section"><div class="feature-copy"><p class="eyebrow">MULTIPLE RECORDING METHODS</p><h2>One tool. Multiple methods.</h2><p>ABC, frequency, rate, duration, latency, partial interval, whole interval, momentary time sampling, and count — each with its own data rules.</p></div><img src={assetPath('product-008', '06-feature-recording-methods.png')} alt="Real RC1 interface showing supported recording methods" width="1000" height="1000" loading="lazy" decoding="async" /></section>
-    <section class="wrap content-section feature-section reverse"><div class="feature-copy"><p class="eyebrow">PATTERN REVIEW</p><h2>See what keeps showing up.</h2><p>Review recorded antecedent, consequence, context, weekday, time block, phase, and session groupings. A text-filled scatterplot keeps the counts available without relying only on color.</p></div><img src={assetPath('product-008', '07-feature-pattern-review.png')} alt="Real RC1 Pattern Review screen with descriptive category summaries" width="1000" height="1000" loading="lazy" decoding="async" /></section>
-    <section class="wrap content-section gallery-section" aria-labelledby="screenshots-title"><div class="section-head"><p class="eyebrow">REAL RC1 SCREENS</p><h2 id="screenshots-title">A calm workspace for the work between observations.</h2><p>These are verified screenshots from the frozen Behavior Observation Ledger RC1 buyer build using fictional demo records.</p></div><div class="gallery-grid">{imageNames.slice(5).map((name, index) => <figure><img src={assetPath('product-008', name)} alt={`Behavior Observation Ledger feature: ${name.replace(/\.png$/, '').replace(/^\d+-/, '').replaceAll('-', ' ')}`} width="1000" height="1000" loading="lazy" decoding="async" /><figcaption>{['Time scatterplot', 'Session comparison', 'Local-first backup'][index]}</figcaption></figure>)}</div></section>
+    <section class="wrap content-section feature-section"><div class="feature-copy"><p class="eyebrow">FAST OBSERVATION ENTRY</p><h2>Log it while it is happening.</h2><p>Start with a student code, target behavior, method, setting, and phase. Use the one-tap counter, event fields, timers, or interval buttons that match the observation plan.</p></div><img src={productAssetPath('04-feature-live-observation.png')} alt="Real RC1 live observation interface with method controls" width="1000" height="1000" loading="lazy" decoding="async" /></section>
+    <section class="wrap content-section feature-section reverse"><div class="feature-copy"><p class="eyebrow">ABC OBSERVATION</p><h2>Keep the context with the event.</h2><p>Record what came before, the behavior as recorded, what came after, context, optional duration, intensity, staff response, and notes. Categories remain descriptive.</p></div><img src={productAssetPath('05-feature-abc.png')} alt="Real RC1 ABC observation entry interface" width="1000" height="1000" loading="lazy" decoding="async" /></section>
+    <section class="wrap content-section feature-section"><div class="feature-copy"><p class="eyebrow">MULTIPLE RECORDING METHODS</p><h2>One tool. Multiple methods.</h2><p>ABC, frequency, rate, duration, latency, partial interval, whole interval, momentary time sampling, and count — each with its own data rules.</p></div><img src={productAssetPath('06-feature-recording-methods.png')} alt="Real RC1 interface showing supported recording methods" width="1000" height="1000" loading="lazy" decoding="async" /></section>
+    <section class="wrap content-section feature-section reverse"><div class="feature-copy"><p class="eyebrow">PATTERN REVIEW</p><h2>See what keeps showing up.</h2><p>Review recorded antecedent, consequence, context, weekday, time block, phase, and session groupings. A text-filled scatterplot keeps the counts available without relying only on color.</p></div><img src={productAssetPath('07-feature-pattern-review.png')} alt="Real RC1 Pattern Review screen with descriptive category summaries" width="1000" height="1000" loading="lazy" decoding="async" /></section>
+    <section class="wrap content-section gallery-section" aria-labelledby="screenshots-title"><div class="section-head"><p class="eyebrow">REAL RC1 SCREENS</p><h2 id="screenshots-title">A calm workspace for the work between observations.</h2><p>These are verified screenshots from the frozen Behavior Observation Ledger RC1 buyer build using fictional demo records.</p></div><div class="gallery-grid">{imageNames.slice(5).map((name, index) => <figure><img src={productAssetPath(name)} alt={`Behavior Observation Ledger feature: ${name.replace(/\.png$/, '').replace(/^\d+-/, '').replaceAll('-', ' ')}`} width="1000" height="1000" loading="lazy" decoding="async" /><figcaption>{['Time scatterplot', 'Session comparison', 'Local-first backup'][index]}</figcaption></figure>)}</div></section>
     <section class="wrap content-section audience-grid"><div><p class="eyebrow">WHO IT'S FOR</p><h2>Built for professionals who collect behavior observations.</h2><ul class="check-list"><li>Special education teachers</li><li>Behavior specialists</li><li>School psychologists</li><li>Case managers and intervention specialists</li><li>Behavior-support professionals</li><li>BCBAs / RBTs where appropriate for individual use</li></ul></div><div class="not-for"><p class="eyebrow">KEEP THE BOUNDARY CLEAR</p><h2>Descriptive data, professional interpretation.</h2><p>The Ledger does not provide automated functional assessment, diagnostic conclusions, medical advice, legal advice, behavior intervention recommendations, or district authorization.</p><p>It is a local organizational and visualization support tool.</p></div></section>
     <section class="wrap content-section bridge-section"><div><p class="eyebrow">FREE ABC SUMMARY TOOL</p><h2>Need a quick pattern summary first?</h2><p>Enter multiple ABC observations locally in your browser and review event count, antecedent categories, consequence categories, context counts, and time blocks.</p></div><a class="btn ghost" data-product-event="product_008_cta_click" data-destination="free_tool" data-placement="product_bridge" href={freeToolPath}>TRY THE FREE ABC PATTERN TOOL</a></section>
     <section class="wrap content-section privacy-section"><p class="eyebrow">LOCAL-FIRST PRIVACY</p><h2>Your records. Your device.</h2><p>The buyer app has no required account, cloud database, runtime CDN, remote font, AI, or buyer-app analytics. Export your own JSON backup or CSV tables when needed. Use student codes or initials unless your organization authorizes identifiable information in this tool.</p><div class="privacy-badges"><span>NO SUBSCRIPTION</span><span>NO ACCOUNT</span><span>NO CLOUD REQUIRED</span><span>JSON + CSV EXPORT</span></div></section>
