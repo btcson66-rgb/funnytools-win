@@ -1,11 +1,11 @@
 # SEO Collapse Audit
 
-Generated: 2026-09-20T15:58:11.202Z
+Generated: 2026-09-21T03:45:03.718Z
 Mode: local
 
-- Build pages: 1184
-- Indexable pages: 719
-- Local sitemap URLs: 719
+- Build pages: 1186
+- Indexable pages: 721
+- Local sitemap URLs: 721
 - Internal HTTP links: 0
 - Live sitemap URLs: not checked
 
