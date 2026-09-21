@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Faq from '../../../components/Faq.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { assetPath, absoluteUrl, localePath } from '../../../lib/url';
+
+const productPath = '/en/behavior-observation-ledger/';
+const freeToolPath = `${localePath('en', 'tools', 'abc-behavior-pattern-summary')}?utm_source=funnytools&utm_medium=owned&utm_campaign=product008_launch&utm_content=product_bridge`;
+const PAYHIP_URL = import.meta.env.PUBLIC_PRODUCT_008_PAYHIP_URL || '';
+const GUMROAD_URL = import.meta.env.PUBLIC_PRODUCT_008_GUMROAD_URL || '';
+const marketplacePending = !PAYHIP_URL;
+const marketplaceUrl = (base: string, placement: string) => base ? `${base}${base.includes('?') ? '&' : '?'}utm_source=funnytools&utm_medium=owned&utm_campaign=product008_launch&utm_content=${placement}` : '#marketplace-pending';
+const imageNames = [
+  '01-gumroad-hero.png',
+  '04-feature-live-observation.png',
+  '05-feature-abc.png',
+  '06-feature-recording-methods.png',
+  '07-feature-pattern-review.png',
+  '08-feature-scatterplot.png',
+  '09-feature-session-comparison.png',
+  '10-feature-local-first.png',
+];
+const imageUrls = imageNames.map((name) => absoluteUrl(assetPath('product-008', name)));
+const faqItems = [
+  { q: 'Does Behavior Observation Ledger require a subscription?', a: 'No. It is a one-time purchase with a US$29 launch price and US$49 regular price. The buyer app has no required account or cloud database.' },
+  { q: 'Which observation methods are supported?', a: 'The v1 app supports ABC event, frequency, rate, duration, latency, partial interval, whole interval, momentary time sampling, and count.' },
+  { q: 'Does it determine behavioral function?', a: 'No. It organizes entered observations and displays descriptive summaries. It does not determine behavioral function or replace professional functional assessment.' },
+  { q: 'Can I use the app with student names?', a: 'Use student codes or initials unless your school, district, or organization authorizes identifiable information in this tool.' },
+  { q: 'Can I try an ABC summary first?', a: 'Yes. The free ABC Behavior Pattern Summary runs locally in your browser and does not send entered ABC information to analytics.' },
+];
+const jsonLd = [
+  {
+    '@context': 'https://schema.org', '@type': 'Product', name: 'Behavior Observation Ledger', description: 'A local-first behavior observation data collection and descriptive pattern review tool.', image: imageUrls,
+    brand: { '@type': 'Brand', name: 'FunnyTools' }, ...(PAYHIP_URL ? { offers: { '@type': 'Offer', price: '29', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: PAYHIP_URL } } : {}),
+  },
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqItems.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })) },
+];
+---
+
+<BaseLayout
+  lang="en"
+  title="Behavior Observation Ledger | Local-First Behavior Data Collection Tool"
+  description="Collect ABC events, frequency, duration, latency, interval data, and descriptive patterns in one local-first behavior observation tool."
+  keywords={['behavior data collection tool', 'ABC behavior data tracker', 'special education behavior tracker', 'frequency duration latency tracker', 'behavior observation software', 'interval recording tool', 'behavior scatterplot']}
+  type="website"
+  canonicalPath={productPath}
+  hasAlternates={false}
+  jsonLd={jsonLd}
+  ogImage={absoluteUrl(assetPath('product-008', '01-gumroad-hero.png'))}
+  ogImageAlt="Behavior Observation Ledger — Turn observations into organized evidence"
+  automaticAffiliate={false}
+>
+  <article class="product-page product-008-page" data-product-page="product-008">
+    <section class="product-hero wrap" aria-labelledby="product-title">
+      <Breadcrumb items={[{ label: 'Home', href: localePath('en') }, { label: 'Behavior Observation Ledger' }]} />
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">ONE-TIME PURCHASE · LOCAL-FIRST · US$29 LAUNCH PRICE</p>
+          <h1 id="product-title">Behavior Observation Ledger</h1>
+          <p class="hero-message">Observe.<br />Record.<br />Review the pattern.</p>
+          <p class="lead">Collect ABC events, frequency, duration, latency, interval data, and descriptive behavior patterns in one local-first tool.</p>
+          <div class="cta-row">
+            <a class:list={['btn', 'go', { 'is-pending': marketplacePending }]} data-product-event="product_008_marketplace_click" data-destination="payhip" data-placement="hero" data-marketplace-pending={marketplacePending ? 'true' : undefined} href={marketplaceUrl(PAYHIP_URL, 'hero')} aria-disabled={marketplacePending ? 'true' : undefined}>{marketplacePending ? 'PAYHIP CHECKOUT PENDING' : 'GET BEHAVIOR OBSERVATION LEDGER — $29'}</a>
+            <a class="btn ghost" data-product-event="product_008_cta_click" data-destination="free_tool" data-placement="hero" href={freeToolPath}>TRY THE FREE ABC PATTERN TOOL</a>
+          </div>
+          <p class="secondary-marketplace">{GUMROAD_URL ? <a data-product-event="product_008_marketplace_click" data-destination="gumroad" data-placement="hero" href={marketplaceUrl(GUMROAD_URL, 'hero')}>Prefer Gumroad? View the secondary listing.</a> : 'Secondary marketplace link will be added after the listing is publicly available.'}</p>
+          <p class="privacy-line">No subscription. No account required. No cloud database required for the core buyer app. Use student codes or initials unless authorized otherwise.</p>
+        </div>
+        <div class="hero-art"><img src={assetPath('product-008', '01-gumroad-hero.png')} alt="Real Behavior Observation Ledger RC1 interface showing descriptive pattern review" width="1600" height="1000" loading="eager" decoding="async" /></div>
+      </div>
+    </section>
+
+    <section class="wrap proof-strip" aria-label="Product promise"><div><strong>ABC events</strong><span>Keep antecedent, recorded behavior, consequence, and context together.</span></div><div><strong>Multiple methods</strong><span>Frequency, rate, duration, latency, and interval workflows in one place.</span></div><div><strong>Pattern review</strong><span>See recorded categories, time blocks, sessions, and phases.</span></div><div><strong>Local-first</strong><span>Your records stay on your device unless exported.</span></div></section>
+
+    <section class="wrap content-section problem-section" aria-labelledby="problem-title"><div class="section-head narrow"><p class="eyebrow">THE PROBLEM</p><h2 id="problem-title">Behavior data should not live across five clipboards.</h2><p>Paper notes, timers, spreadsheets, and separate graphs can make an observation review harder than it needs to be. The Ledger keeps the session, method, context, and descriptive review connected.</p></div><div class="problem-grid"><div class="problem-card"><span>01</span><h3>Capture</h3><p>Use touch-friendly controls while the observation is happening.</p></div><div class="problem-card"><span>02</span><h3>Organize</h3><p>Keep method-specific records separate so count, rate, duration, latency, and interval data stay clear.</p></div><div class="problem-card"><span>03</span><h3>Review</h3><p>Compare recorded patterns without turning them into an automatic conclusion.</p></div></div></section>
+
+    <section class="wrap content-section feature-section"><div class="feature-copy"><p class="eyebrow">FAST OBSERVATION ENTRY</p><h2>Log it while it is happening.</h2><p>Start with a student code, target behavior, method, setting, and phase. Use the one-tap counter, event fields, timers, or interval buttons that match the observation plan.</p></div><img src={assetPath('product-008', '04-feature-live-observation.png')} alt="Real RC1 live observation interface with method controls" width="1000" height="1000" loading="lazy" decoding="async" /></section>
+    <section class="wrap content-section feature-section reverse"><div class="feature-copy"><p class="eyebrow">ABC OBSERVATION</p><h2>Keep the context with the event.</h2><p>Record what came before, the behavior as recorded, what came after, context, optional duration, intensity, staff response, and notes. Categories remain descriptive.</p></div><img src={assetPath('product-008', '05-feature-abc.png')} alt="Real RC1 ABC observation entry interface" width="1000" height="1000" loading="lazy" decoding="async" /></section>
+    <section class="wrap content-section feature-section"><div class="feature-copy"><p class="eyebrow">MULTIPLE RECORDING METHODS</p><h2>One tool. Multiple methods.</h2><p>ABC, frequency, rate, duration, latency, partial interval, whole interval, momentary time sampling, and count — each with its own data rules.</p></div><img src={assetPath('product-008', '06-feature-recording-methods.png')} alt="Real RC1 interface showing supported recording methods" width="1000" height="1000" loading="lazy" decoding="async" /></section>
+    <section class="wrap content-section feature-section reverse"><div class="feature-copy"><p class="eyebrow">PATTERN REVIEW</p><h2>See what keeps showing up.</h2><p>Review recorded antecedent, consequence, context, weekday, time block, phase, and session groupings. A text-filled scatterplot keeps the counts available without relying only on color.</p></div><img src={assetPath('product-008', '07-feature-pattern-review.png')} alt="Real RC1 Pattern Review screen with descriptive category summaries" width="1000" height="1000" loading="lazy" decoding="async" /></section>
+    <section class="wrap content-section gallery-section" aria-labelledby="screenshots-title"><div class="section-head"><p class="eyebrow">REAL RC1 SCREENS</p><h2 id="screenshots-title">A calm workspace for the work between observations.</h2><p>These are verified screenshots from the frozen Behavior Observation Ledger RC1 buyer build using fictional demo records.</p></div><div class="gallery-grid">{imageNames.slice(5).map((name, index) => <figure><img src={assetPath('product-008', name)} alt={`Behavior Observation Ledger feature: ${name.replace(/\.png$/, '').replace(/^\d+-/, '').replaceAll('-', ' ')}`} width="1000" height="1000" loading="lazy" decoding="async" /><figcaption>{['Time scatterplot', 'Session comparison', 'Local-first backup'][index]}</figcaption></figure>)}</div></section>
+    <section class="wrap content-section audience-grid"><div><p class="eyebrow">WHO IT'S FOR</p><h2>Built for professionals who collect behavior observations.</h2><ul class="check-list"><li>Special education teachers</li><li>Behavior specialists</li><li>School psychologists</li><li>Case managers and intervention specialists</li><li>Behavior-support professionals</li><li>BCBAs / RBTs where appropriate for individual use</li></ul></div><div class="not-for"><p class="eyebrow">KEEP THE BOUNDARY CLEAR</p><h2>Descriptive data, professional interpretation.</h2><p>The Ledger does not provide automated functional assessment, diagnostic conclusions, medical advice, legal advice, behavior intervention recommendations, or district authorization.</p><p>It is a local organizational and visualization support tool.</p></div></section>
+    <section class="wrap content-section bridge-section"><div><p class="eyebrow">FREE ABC SUMMARY TOOL</p><h2>Need a quick pattern summary first?</h2><p>Enter multiple ABC observations locally in your browser and review event count, antecedent categories, consequence categories, context counts, and time blocks.</p></div><a class="btn ghost" data-product-event="product_008_cta_click" data-destination="free_tool" data-placement="product_bridge" href={freeToolPath}>TRY THE FREE ABC PATTERN TOOL</a></section>
+    <section class="wrap content-section privacy-section"><p class="eyebrow">LOCAL-FIRST PRIVACY</p><h2>Your records. Your device.</h2><p>The buyer app has no required account, cloud database, runtime CDN, remote font, AI, or buyer-app analytics. Export your own JSON backup or CSV tables when needed. Use student codes or initials unless your organization authorizes identifiable information in this tool.</p><div class="privacy-badges"><span>NO SUBSCRIPTION</span><span>NO ACCOUNT</span><span>NO CLOUD REQUIRED</span><span>JSON + CSV EXPORT</span></div></section>
+    <div class="wrap"><Faq lang="en" items={faqItems} emitJsonLd={false} /></div>
+    <section class="wrap content-section disclaimer-section"><p class="eyebrow">DISCLAIMER</p><h2>Review patterns; keep professional judgment with the professional.</h2><p>These summaries describe patterns in the observations entered into this tool. They do not determine behavioral function or replace professional functional assessment.</p><a href={localePath('en', 'education-statistics')}>Explore more FunnyTools education and statistics tools</a></section>
+    <section id="marketplace-pending" class="wrap final-cta"><p class="eyebrow">OBSERVE. RECORD. REVIEW THE PATTERN.</p><h2>Track the full picture without another subscription.</h2><div class="cta-row"><a class:list={['btn', 'go', { 'is-pending': marketplacePending }]} data-product-event="product_008_marketplace_click" data-destination="payhip" data-placement="final_cta" data-marketplace-pending={marketplacePending ? 'true' : undefined} href={marketplaceUrl(PAYHIP_URL, 'final_cta')} aria-disabled={marketplacePending ? 'true' : undefined}>{marketplacePending ? 'PAYHIP CHECKOUT PENDING' : 'GET BEHAVIOR OBSERVATION LEDGER — $29'}</a>{GUMROAD_URL && <a class="btn ghost" data-product-event="product_008_marketplace_click" data-destination="gumroad" data-placement="final_cta" href={marketplaceUrl(GUMROAD_URL, 'final_cta')}>VIEW ON GUMROAD</a>}<a class="btn ghost" data-product-event="product_008_free_to_paid_click" data-destination="free_tool" data-placement="final_cta" href={freeToolPath}>TRY THE FREE ABC TOOL</a></div><p>One-time purchase · US$29 launch price · US$49 regular price</p></section>
+  </article>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.__ft_track?.('product_008_view', { product_id: 'PRODUCT-008', placement: 'product_page' });
+      document.querySelectorAll('[data-product-event]').forEach((link) => link.addEventListener('click', (event) => {
+        if (link.dataset.marketplacePending === 'true') { event.preventDefault(); document.querySelector('#marketplace-pending')?.scrollIntoView({ behavior: 'smooth' }); return; }
+        window.__ft_track?.(link.dataset.productEvent, { product_id: 'PRODUCT-008', placement: link.dataset.placement, destination: link.dataset.destination });
+      }));
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .product-008-page { --p-ink:#102b3b; --p-teal:#1d7c83; --p-mint:#dcefe9; --p-gold:#d89724; --p-muted:#5d7380; }
+  .product-008-page .hero-copy,.product-008-page .hero-art,.product-008-page .feature-copy,.product-008-page .feature-section>img,.product-008-page .audience-grid>div{min-width:0}
+  .product-008-page .product-hero { padding-top:24px; } .product-008-page .hero-grid { display:grid; grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr); gap:30px; align-items:center; margin-top:28px; } .product-008-page .hero-copy{padding:32px 0 40px}.product-008-page .hero-copy h1{font-size:clamp(2.5rem,6vw,5.25rem);margin:14px 0 20px;letter-spacing:-.055em;line-height:.96}.product-008-page .hero-message{color:var(--p-ink);font-size:clamp(1.65rem,3.3vw,3rem);line-height:1.02;letter-spacing:-.045em;font-weight:820;margin:0 0 22px}.product-008-page .hero-copy .lead{max-width:620px;font-size:1.18rem;line-height:1.65;color:var(--p-muted)}.product-008-page .hero-art img{width:100%;display:block;border-radius:18px;box-shadow:0 18px 50px rgba(16,43,59,.18)}.product-008-page .eyebrow{color:var(--p-teal);font-size:.79rem;font-weight:850;letter-spacing:.13em;line-height:1.35}.product-008-page .proof-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:20px}.product-008-page .proof-strip div{display:grid;gap:5px;padding:18px;background:var(--card)}.product-008-page .proof-strip span,.product-008-page .problem-card p,.product-008-page .feature-copy p,.product-008-page .audience-grid p,.product-008-page .bridge-section p,.product-008-page .privacy-section p,.product-008-page .disclaimer-section p{color:var(--p-muted);line-height:1.65}.product-008-page .problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.product-008-page .problem-card{padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow-soft)}.product-008-page .problem-card span{color:var(--p-gold);font-weight:850}.product-008-page .problem-card h3{margin:16px 0 8px}.product-008-page .feature-section{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:32px;align-items:center}.product-008-page .feature-section.reverse{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}.product-008-page .feature-section.reverse .feature-copy{order:2}.product-008-page .feature-section img{width:100%;max-width:520px;justify-self:center;border-radius:18px;box-shadow:0 16px 38px rgba(16,43,59,.14)}.product-008-page .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.product-008-page .gallery-grid figure{margin:0;display:grid;gap:8px}.product-008-page .gallery-grid img{width:100%;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-soft)}.product-008-page .gallery-grid figcaption{color:var(--p-muted);font-size:.85rem}.product-008-page .audience-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}.product-008-page .audience-grid>div{padding:25px;border:1px solid var(--line);border-radius:14px;background:var(--card)}.product-008-page .not-for{background:linear-gradient(135deg,var(--p-mint),var(--card))!important}.product-008-page .check-list{display:grid;gap:10px;padding-left:1.25rem;color:var(--p-muted);line-height:1.5}.product-008-page .bridge-section,.product-008-page .final-cta{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,var(--p-mint),var(--card))}.product-008-page .bridge-section h2,.product-008-page .final-cta h2{margin:8px 0}.product-008-page .privacy-section{border-left:5px solid var(--p-teal);padding-left:24px}.product-008-page .privacy-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.product-008-page .privacy-badges span{padding:8px 11px;border-radius:999px;background:var(--p-mint);color:var(--p-ink);font-size:.78rem;font-weight:850;letter-spacing:.04em}.product-008-page .final-cta{display:block;text-align:center;margin-bottom:44px}.product-008-page .final-cta .cta-row{justify-content:center}.product-008-page .final-cta>p:last-child{color:var(--p-muted);margin:16px 0 0}.product-008-page .is-pending{opacity:.74;cursor:not-allowed}
+  @media(max-width:900px){.product-008-page .hero-grid,.product-008-page .feature-section,.product-008-page .feature-section.reverse{grid-template-columns:1fr}.product-008-page .feature-section.reverse .feature-copy{order:0}.product-008-page .feature-section img{max-width:460px}.product-008-page .proof-strip,.product-008-page .problem-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:680px){.product-008-page .proof-strip,.product-008-page .problem-grid,.product-008-page .audience-grid{grid-template-columns:1fr}.product-008-page .gallery-grid{grid-template-columns:repeat(2,1fr)}.product-008-page .bridge-section{display:block}.product-008-page .bridge-section .btn{margin-top:12px}.product-008-page .final-cta .cta-row .btn{width:100%}}
+</style>
