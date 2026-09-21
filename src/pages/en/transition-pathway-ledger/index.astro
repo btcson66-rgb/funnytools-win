@@ -6,7 +6,7 @@ import { assetPath, absoluteUrl, localePath } from '../../../lib/url';
 
 const productPath = '/en/transition-pathway-ledger/';
 const freeToolPath = `${localePath('en', 'tools', 'postsecondary-transition-action-planner')}?utm_source=funnytools&utm_medium=owned&utm_campaign=product009_launch&utm_content=product_bridge`;
-const PAYHIP_URL = import.meta.env.PUBLIC_PRODUCT_009_PAYHIP_URL || '';
+const PAYHIP_URL = import.meta.env.PUBLIC_PRODUCT_009_PAYHIP_URL || 'https://payhip.com/b/mkO4V';
 const GUMROAD_URL = import.meta.env.PUBLIC_PRODUCT_009_GUMROAD_URL || '';
 const marketplacePending = !PAYHIP_URL;
 const marketplaceUrl = (base: string, placement: string) => base ? `${base}${base.includes('?') ? '&' : '?'}utm_source=funnytools&utm_medium=owned&utm_campaign=product009_launch&utm_content=${placement}` : '#marketplace-pending';
