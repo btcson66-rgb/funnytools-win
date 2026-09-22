@@ -84,6 +84,11 @@
     "hashVersion": 9,
     "lastmod": "2026-09-10"
   },
+  "https://funnytools.win/en/aac-implementation-ledger/": {
+    "hash": "ee7412a88056d2ad12a8355629e42ea9fc6ac44bb916228834bdd7c69c82fd3b",
+    "hashVersion": 9,
+    "lastmod": "2026-09-22"
+  },
   "https://funnytools.win/en/about-tools/": {
     "hash": "1e1184db30de60d0d5e5a902875bd90d5e403d79e99cd4fdbcf5ef9dc760aa6a",
     "hashVersion": 9,
@@ -583,6 +588,11 @@
     "hash": "06c9301d4caffc9a00f3c8454af8e68a02367232b4760a75cd7b8976919ae1e5",
     "hashVersion": 9,
     "lastmod": "2026-09-02"
+  },
+  "https://funnytools.win/en/tools/aac-generalization-matrix/": {
+    "hash": "96ae7cfcaa59b4d898c29cd3cb3756f7a8dd970526f6d93c947e17f5c42e7fcb",
+    "hashVersion": 9,
+    "lastmod": "2026-09-22"
   },
   "https://funnytools.win/en/tools/abc-behavior-pattern-summary/": {
     "hash": "6af7cfea915f4524c58c5039f9d51de1a1a28ec533a42e36ff97dafe3bbcb78a",
