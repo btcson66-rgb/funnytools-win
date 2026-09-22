@@ -22,6 +22,10 @@ const paidOwnedPages: SitemapPage[] = [
     alternates: true,
   },
 ];
+const product010OwnedPages: SitemapPage[] = [
+  { segments: ['aac-implementation-ledger'], lastmod: '2026-09-22', changefreq: 'monthly', priority: '0.8', alternates: false },
+  { segments: ['tools', 'aac-generalization-matrix'], lastmod: '2026-09-22', changefreq: 'monthly', priority: '0.8', alternates: false },
+];
 // Fallback lastmod: the newest real content date on the site. Using the build
 // date here would stamp every build as "modified today", which teaches
 // crawlers to ignore lastmod entirely.
@@ -247,6 +251,7 @@ export function englishEntries(): SitemapEntry[] {
 
   return [
     ...basePages(),
+    ...product010OwnedPages,
     ...categoryPages(),
     ...toolPages('en'),
     ...blogPages().filter((page) => page.segments.length === 1 || isPostAvailableInLocale(allBlogPosts.find((post) => post.slug === page.segments[1])!, 'en')),

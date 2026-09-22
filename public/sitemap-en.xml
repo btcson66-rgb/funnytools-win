@@ -10,6 +10,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/" />
   </url>
   <url>
+    <loc>https://funnytools.win/en/aac-implementation-ledger/</loc>
+    <lastmod>2026-09-22</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/en/about-tools/</loc>
     <lastmod>2026-06-17</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/about-tools/" />
@@ -753,6 +757,10 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/herramientas/" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://funnytools.win/fr/outils/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/tools/aac-generalization-matrix/</loc>
+    <lastmod>2026-09-22</lastmod>
   </url>
   <url>
     <loc>https://funnytools.win/en/tools/abc-behavior-pattern-summary/</loc>
