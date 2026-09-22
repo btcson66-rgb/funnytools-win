@@ -1068,6 +1068,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/tools/inflation/" />
   </url>
   <url>
+    <loc>https://funnytools.win/en/tools/job-task-analysis-tracker/</loc>
+    <lastmod>2026-09-22</lastmod>
+  </url>
+  <url>
     <loc>https://funnytools.win/en/tools/jpg-to-png/</loc>
     <lastmod>2026-09-03</lastmod>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://funnytools.win/tools/jpg-to-png/" />
@@ -1579,5 +1583,9 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://funnytools.win/en/workflows/teacher-exam-score-toolkit/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://funnytools.win/es/flujos/calcular-nota-oposicion-docente/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://funnytools.win/en/workflows/teacher-exam-score-toolkit/" />
+  </url>
+  <url>
+    <loc>https://funnytools.win/en/worksite-skills-ledger/</loc>
+    <lastmod>2026-09-22</lastmod>
   </url>
 </urlset>
