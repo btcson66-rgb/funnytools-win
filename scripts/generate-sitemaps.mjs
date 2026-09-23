@@ -171,7 +171,7 @@ for (const [type, entries] of groups) {
   const entriesWithSitemap = entries.map((entry) => ({ ...entry, sitemap: file }));
   allEntries.push(...entriesWithSitemap);
   const latest = entries.map((entry) => entry.lastmod).filter(Boolean).sort().at(-1) ?? '';
-  if (!(type === 'en' && enNoindex)) {
+  if (entries.length > 0) {
     children.push({ file, lastmod: latest });
   }
   const xml = urlSetXml(entries, allIndexableUrls);

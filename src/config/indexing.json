@@ -1,3 +1,4 @@
 {
-  "EN_NOINDEX": false
+  "EN_NOINDEX": true,
+  "INDEX_CONVERGENCE": true
 }

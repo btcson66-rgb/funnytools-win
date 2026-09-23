@@ -1,17 +1,11 @@
 ---
-import ToolCard from '../../components/ToolCard.astro';
-import CategoryIcon from '../../components/CategoryIcon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ToolCard from '../../components/ToolCard.astro';
 import { SITE, type Locale } from '../../config/site';
-import { categories } from '../../data/categories';
-import { getSeoGuide, isSeoGuideAvailableInLocale, viewSeoGuide } from '../../data/seoGuides';
-import { getLiveToolsForLocale, getNewTools, getToolBySlug, getToolsByCategory, type ToolMeta } from '../../data/tools';
-import { isWorkflowAvailableInLocale, viewWorkflow, workflows } from '../../data/workflows';
-import { home, homeFaq, homePrivacy, homeSeoIntro, homeUseCases } from '../../i18n/pages';
-import { t } from '../../i18n/ui';
-import { absoluteUrl, categoryUrl, localePath, localeUrlPair, toolUrl } from '../../lib/url';
+import { getToolBySlug, type ToolMeta } from '../../data/tools';
+import { INDEXABLE_TOOL_SLUGS } from '../../lib/indexPolicy';
+import { absoluteUrl } from '../../lib/url';
 import { organizationJsonLd, websiteJsonLd } from '../../lib/seo';
-import { getToolContent } from '../../lib/toolContent';
 
 export function getStaticPaths() {
   return SITE.locales.map((lang) => ({
@@ -21,776 +15,77 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.props as { lang: Locale };
-const liveTools = getLiveToolsForLocale(lang);
-const ui = t(lang);
-const homeCopy = {
-  zh: {
-    seoTitle: 'FunnyTools 免費線上工具箱｜PDF、圖片、文字、QR Code 與教育統計工具',
-    seoDescription: 'FunnyTools 提供免費、免註冊、可在瀏覽器本機處理的 PDF、圖片、文字、QR Code、隨機、時間、金錢、教學與統計工具，適合日常工作、學習、備課與報告整理。',
-    eyebrow: '免費、免註冊、重視本機處理',
-    title: '免費教育與實用工具｜教師、學生、成績與日常任務',
-    intro: '從期末成績規劃、試題分析、教師甄試與教育統計，到 PDF、圖片、QR Code 與文字整理，多數任務可直接在瀏覽器完成；不必安裝 App，也不需要建立帳號。',
-    primaryCta: '瀏覽所有工具',
-    secondaryCta: '查看熱門工具',
-    searchHeading: '先搜尋你要完成的任務',
-    searchIntro: '輸入用途、格式或工具名稱，例如「合併 PDF」、「壓縮圖片」、「QR Code」、「T 分數」、「PR」。',
-    searchPlaceholder: '搜尋 PDF、圖片壓縮、QR Code、T 分數、PR、隨機分組...',
-    heroBullets: ['多數工具在瀏覽器本機處理', '免費使用，不需註冊登入', '手機與電腦都能開啟', 'PDF、圖片、文字、教育統計一次整理'],
-    popularHeading: '常用工具',
-    educationHeading: '成績規劃、試題分析與教育統計工具',
-    educationIntro: '整理期末要考幾分、試題難度與鑑別度、KR-20、T 分數、Z 分數、PR、加權成績、APA 7 與 SPSS 解讀，適合學生、教師、研究生與考生逐步查核。',
-    educationCta: '進入教育統計中心',
-    pdfImageHeading: 'PDF、圖片壓縮、轉檔與 QR Code',
-    pdfImageIntro: '合併、拆分、壓縮 PDF，或裁切、調整尺寸、壓縮圖片與產生 QR Code。檔案型工具優先採用瀏覽器本機處理。',
-  },
-  en: {
-    ...home.en,
-    searchHeading: 'Search by task first',
-    searchIntro: 'Type a use case, file format, or tool name.',
-    searchPlaceholder: 'Search PDF merge, image compression, QR code, T score, PR, random groups...',
-    heroBullets: ['Browser-local processing where possible', 'Free to use, no sign-up', 'Works on mobile and desktop', 'PDF, image, text, and education statistics tools'],
-    popularHeading: 'Commonly Used Tools',
-    educationHeading: 'Teacher Exam, Score Conversion, and Education Statistics',
-    educationIntro: 'Use T scores, Z scores, percentile rank, weighted scores, standard deviation, APA 7, and SPSS helpers for education workflows.',
-    educationCta: 'Open Education Statistics Center',
-    pdfImageHeading: 'PDF, Image Compression, Conversion, and QR Code Tools',
-    pdfImageIntro: 'Merge, split, and compress PDFs, or crop, resize, compress images and create QR codes for submissions, reports, handouts, and office documents.',
-  },
-}[lang];
-const seoIntro = {
-  zh: {
-    heading: '為什麼 FunnyTools 適合日常工作與學習',
-    paragraphs: [
-      'FunnyTools 把一次性但常見的小任務集中在同一個網站：合併 PDF、壓縮圖片、整理文字、產生 QR Code、抽籤分組、計算日期與金錢，或處理教育統計與教師甄試分數。首頁先提供搜尋與常用工具，讓你用任務名稱就能快速進入功能。',
-      '本站以繁體中文使用者為優先，工具頁會標示資料處理方式與使用限制。可在瀏覽器本機完成的文字、圖片、PDF 與計算任務，通常不需要上傳到 FunnyTools 伺服器；需要正式用途的成績、財務或研究結果，仍應依官方規則與原始資料再次確認。',
-    ],
-  },
-  en: homeSeoIntro.en,
-}[lang];
-const aboutIntroLink = {
-  zh: {
-    prefix: '想了解本站維護方式、工具原則與資料處理界線，可閱讀 ',
-    label: '關於 FunnyTools 免費線上工具箱',
-    suffix: '。',
-  },
-  en: {
-    prefix: 'To understand how the site is maintained, how tools are selected, and how inputs are handled, read ',
-    label: 'About FunnyTools',
-    suffix: '.',
-  },
-}[lang];
-const privacy = {
-  zh: {
-    heading: '隱私與本機處理',
-    text: 'FunnyTools 優先提供可直接在瀏覽器執行的工具。文字、名單、數字、圖片與 PDF 通常在目前裝置中讀取與處理，不需要上傳到本站伺服器；各工具頁會補充必要限制。',
-    linkText: '閱讀隱私權政策',
-  },
-  en: homePrivacy.en,
-}[lang];
-const faqItems = {
-  zh: [
-    { q: 'FunnyTools 需要註冊或付費嗎？', a: '不需要。現有工具可免費開啟使用，沒有登入、會員或付費訂閱流程。' },
-    { q: 'PDF 與圖片會上傳到伺服器嗎？', a: '多數 PDF、圖片與文字工具會在瀏覽器本機讀取與處理，不會主動上傳到 FunnyTools 伺服器。請仍避免處理高度敏感檔案，並以各工具頁說明為準。' },
-    { q: '可以用用途來搜尋工具嗎？', a: '可以。首頁搜尋會比對工具名稱、分類、關鍵字、使用情境與中英文 alias，例如合併 PDF、壓縮圖片、T 分數、PR、隨機分組。' },
-    { q: '教育統計工具能作為正式結果嗎？', a: '工具可用於教學、作業、研究報告草稿與自我檢查，但正式考試、研究與行政文件仍需依官方規則、原始資料與專業判斷確認。' },
-  ],
-  en: homeFaq.en,
-}[lang];
-const popularSlugs = [
-  'merge-pdf',
-  'image-compressor',
-  'qr-code-generator',
-  'word-counter',
-  'random-group-generator',
-  'pomodoro-timer',
-  'split-pdf',
-  'mortgage-payment',
-  'compound-interest',
-  'what-to-eat',
-  'random-name-picker',
-  'json-formatter',
-];
-const isLiveTool = (tool: ToolMeta | undefined): tool is ToolMeta => tool?.status === 'live' && (!tool.locales || tool.locales.includes(lang));
-const popularTools = popularSlugs.map(getToolBySlug).filter(isLiveTool);
-const newest = getNewTools(lang).filter((tool) => !popularSlugs.includes(tool.slug)).slice(0, 6);
-const searchAliases: Record<string, string[]> = {
-  'merge-pdf': ['合併 PDF', 'PDF 合併', 'merge pdf', 'combine pdf', '文件合併'],
-  'split-pdf': ['拆分 PDF', '分割 PDF', 'split pdf', 'extract pages'],
-  'pdf-compressor': ['壓縮 PDF', 'PDF 壓縮', 'compress pdf', '檔案變小'],
-  'image-compressor': ['壓縮圖片', '圖片壓縮', 'image compressor', '照片變小', '縮小圖片'],
-  'image-resizer': ['調整圖片尺寸', 'resize image', '圖片縮放'],
-  'image-crop': ['裁切圖片', 'image crop', '圖片裁剪'],
-  'qr-code-generator': ['QR Code', 'QRCode', '產生 QR Code', '網址 QR', 'qr generator'],
-  'barcode-generator': ['條碼', '一維條碼', 'barcode', 'Code 128', 'EAN-13', 'UPC-A', 'Code 39'],
-  't-score-calculator': ['T 分數', 'T score', 'T 分數換算器', '教師甄試', '標準分數'],
-  'z-score-calculator': ['Z 分數', 'Z score', '標準化分數'],
-  'percentile-rank-calculator': ['PR', '百分等級', 'percentile rank', 'PR 值'],
-  'teacher-exam-score-converter': ['教師甄試', '教甄成績', '加權成績', 'teacher exam'],
-  'random-group-generator': ['隨機分組', '分組工具', 'random groups', '小組分配'],
-  'random-name-picker': ['抽籤', '抽名字', 'name picker'],
-  'random-student-picker': ['抽學生', '課堂點名', 'student picker'],
-  'standard-deviation': ['標準差', 'standard deviation', '平均數', '變異數'],
-  'apa-7-report-generator': ['APA 7', '統計報告', 'APA 報告'],
-  'spss-result-interpreter': ['SPSS', 'Levene', 'ANOVA', 't 檢定'],
-  'final-grade-needed-calculator': ['期末要考幾分', '期末成績', '需要幾分', 'final grade'],
-  'item-analysis-calculator': ['試題分析', '試題難度', '鑑別度', 'item analysis'],
-  'kr20-reliability-calculator': ['KR-20', '信度', '二分題', 'reliability'],
-};
-const searchTools = liveTools.map((tool) => {
-  const category = categories.find((item) => item.id === tool.category);
-  const content = getToolContent(tool.slug, lang);
-  // Keep the search corpus compact (name/short/keywords/aliases); long
-  // instructions and examples added ~100KB of hidden HTML with little recall.
-  return {
-    tool,
-    search: [
-      tool.name[lang],
-      tool.name.en,
-      tool.short[lang],
-      tool.short.en,
-      tool.slug,
-      category?.name[lang],
-      category?.name.en,
-      content?.keywords?.join(' '),
-      searchAliases[tool.slug]?.join(' '),
-    ].filter(Boolean).join(' ').toLowerCase(),
-    isDefault: popularSlugs.includes(tool.slug),
-  };
-});
-const allToolsData = liveTools.map((tool) => ({
-  slug: tool.slug,
-  name: tool.name[lang],
-  short: tool.short[lang],
-  category: tool.category,
-  icon: tool.icon,
-  url: toolUrl(lang, tool.slug),
-  assetType: ui.assetTypes[tool.assetType ?? 'tool'],
-  isLocalOnly: tool.privacyLevel === 'local-only',
-  isNew: Boolean(tool.isNew),
-  isFeatured: popularSlugs.includes(tool.slug) || Boolean(tool.featured),
-}));
-const allToolsJson = JSON.stringify(allToolsData).replace(/</g, '\\u003c');
-const categorySummaries = categories
-  .map((category) => ({
-    category,
-    tools: getToolsByCategory(category.id, lang),
-  }))
-  .filter(({ tools }) => tools.length > 0);
-const designCategoryOrder = ['pdf', 'image', 'text', 'random', 'time', 'money', 'draw', 'study', 'statistics'];
-const designCategories = [...categorySummaries].sort(
-  (a, b) => designCategoryOrder.indexOf(a.category.id) - designCategoryOrder.indexOf(b.category.id),
-);
-const localUseCases = {
-  zh: [
-    { title: '整理文件與 PDF', description: '合併、拆分、壓縮、旋轉或擷取 PDF，適合申請資料、教材、掃描檔與報告整理。', tools: ['merge-pdf', 'split-pdf', 'pdf-compressor', 'pdf-page-reorder'] },
-    { title: '處理圖片與 QR Code', description: '壓縮、裁切、調整尺寸、轉檔圖片，並產生可下載的 QR Code。', tools: ['image-compressor', 'image-resizer', 'image-crop', 'qr-code-generator'] },
-    { title: '教學與班級活動', description: '抽學生、隨機分組、排座位、計算成績平均，支援老師備課與課堂活動。', tools: ['random-student-picker', 'random-group-generator', 'seating-chart', 'grade-average'] },
-    { title: '成績換算與研究報告', description: '計算 T 分數、Z 分數、PR、標準差，或整理 APA 7 與 SPSS 結果。', tools: ['t-score-calculator', 'z-score-calculator', 'percentile-rank-calculator', 'apa-7-report-generator'] },
-  ],
-  en: homeUseCases.en,
-}[lang];
-const useCases = localUseCases.map((item) => ({
-  ...item,
-  tools: item.tools.map(getToolBySlug).filter(isLiveTool),
-}));
-const teacherExamTools = [
-  'final-grade-needed-calculator',
-  'item-analysis-calculator',
-  'kr20-reliability-calculator',
-  'teacher-exam-score-converter',
-  't-score-calculator',
-  'z-score-calculator',
-  'percentile-rank-calculator',
-  'weighted-average-calculator',
-  'standard-deviation',
-].map(getToolBySlug).filter(isLiveTool);
-const pdfImageTools = [
-  'merge-pdf',
-  'split-pdf',
-  'rotate-pdf',
-  'pdf-compressor',
-  'pdf-page-reorder',
-  'image-compressor',
-  'image-resizer',
-  'image-crop',
-  'qr-code-generator',
-].map(getToolBySlug).filter(isLiveTool);
-const teacherExamArticleLinks = [
-  { segment: 'guides', slug: 'teacher-exam-weighted-score-guide', label: 'Teacher exam score guide' },
-  { segment: 'guides', slug: 't-score-calculator-guide', label: 'T score, Z score, and PR guide' },
-  { segment: 'guides', slug: 't-test-apa-format-guide', label: 'How to report a t test in APA 7' },
-  { segment: 'guides', slug: 'spss-levene-test-guide', label: 'SPSS Levene test guide' },
-  { segment: 'guides', slug: 'classroom-random-picker-guide', label: 'Teacher classroom tools guide' },
-];
-const pdfImageArticleLinks = [
-  { segment: 'workflows', slug: 'office-document-toolkit', label: 'PDF workflow guide' },
-  { segment: 'tools', slug: 'image-compressor', label: 'Image compression tool' },
-];
-const toolkitCopy = {
-  zh: {
-    heading: '工作流程工具包',
-    intro: '從任務情境開始，串起常用工具、教學指南與可檢查的操作步驟。',
-    open: '開啟流程',
-    tools: '推薦工具',
-    guides: '相關指南',
-    all: '查看全部工作流程',
-  },
-  en: {
-    heading: 'Workflow toolkits',
-    intro: 'Start from a real task, then connect the tools, guides, and checkable steps that belong together.',
-    open: 'Open workflow',
-    tools: 'Recommended tools',
-    guides: 'Related guides',
-    all: 'View all workflows',
-  },
-}[lang];
-const workflowToolkits = workflows
-  .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
-  .map((workflow) => {
-    const view = viewWorkflow(workflow, lang);
-    return {
-      ...view,
-      tools: view.recommendedToolIds.map(getToolBySlug).filter(isLiveTool).slice(0, 5),
-      guides: view.relatedGuideIds
-        .map(getSeoGuide)
-        .filter((guide) => guide && isSeoGuideAvailableInLocale(guide, lang))
-        .map((guide) => viewSeoGuide(guide, lang))
-        .slice(0, 3),
-    };
-  })
-  .filter((workflow) => workflow.tools.length > 0);
-const taskEntryCopy = {
-  zh: {
-    heading: '我想要...',
-    intro: '從任務開始，直接進到最常用的工具組。',
-    aria: '常見任務入口',
-    audienceLabel: '依身份找工具',
-  },
-  en: {
-    heading: 'I want to...',
-    intro: 'Start from the task and jump to the right FunnyTools page.',
-    aria: 'Common task entry points',
-    audienceLabel: 'Find tools by role',
-  },
-}[lang];
-const taskEntries = {
-  zh: [
-    { label: '處理 PDF', href: categoryUrl(lang, 'pdf'), destination: 'category:pdf' },
-    { label: '壓縮圖片', href: toolUrl(lang, 'image-compressor'), destination: 'tool:image-compressor' },
-    { label: '找教室工具', href: localePath(lang, 'for', 'teachers'), destination: 'audience:teachers' },
-    { label: '準備學生報告', href: localePath(lang, 'for', 'students'), destination: 'audience:students' },
-    { label: '整理文字內容', href: categoryUrl(lang, 'text'), destination: 'category:text' },
-    { label: '隨機抽籤或分組', href: toolUrl(lang, 'random-group-generator'), destination: 'tool:random-group-generator' },
-    { label: '計算日期', href: toolUrl(lang, 'date-difference'), destination: 'tool:date-difference' },
-    { label: '產生 QR Code', href: toolUrl(lang, 'qr-code-generator'), destination: 'tool:qr-code-generator' },
-    { label: '找日常小工具', href: categoryUrl(lang, 'random'), destination: 'category:random' },
-  ],
-  en: [
-    { label: 'I want to work with PDFs', href: categoryUrl(lang, 'pdf'), destination: 'category:pdf' },
-    { label: 'I want to compress images', href: toolUrl(lang, 'image-compressor'), destination: 'tool:image-compressor' },
-    { label: 'I need classroom tools', href: localePath(lang, 'for', 'teachers'), destination: 'audience:teachers' },
-    { label: 'I need report tools', href: localePath(lang, 'for', 'students'), destination: 'audience:students' },
-    { label: 'I want to clean up text', href: categoryUrl(lang, 'text'), destination: 'category:text' },
-    { label: 'I want to pick or group randomly', href: toolUrl(lang, 'random-group-generator'), destination: 'tool:random-group-generator' },
-    { label: 'I want to calculate dates', href: toolUrl(lang, 'date-difference'), destination: 'tool:date-difference' },
-    { label: 'I want to create a QR code', href: toolUrl(lang, 'qr-code-generator'), destination: 'tool:qr-code-generator' },
-    { label: 'I want everyday tools', href: categoryUrl(lang, 'random'), destination: 'category:random' },
-  ],
-}[lang];
-const audienceTaskEntries = {
-  zh: [
-    { label: '教師工具', href: localePath(lang, 'for', 'teachers'), destination: 'audience:teachers' },
-    { label: '學生報告工具', href: localePath(lang, 'for', 'students'), destination: 'audience:students' },
-    { label: '上班族文件工具', href: localePath(lang, 'for', 'office-workers'), destination: 'audience:office-workers' },
-    { label: '創作者工具', href: localePath(lang, 'for', 'creators'), destination: 'audience:creators' },
-    { label: '設計師工具', href: localePath(lang, 'for', 'designers'), destination: 'audience:designers' },
-    { label: '開發者工具', href: localePath(lang, 'for', 'developers'), destination: 'audience:developers' },
-  ],
-  en: [
-    { label: 'Teacher tools', href: localePath(lang, 'for', 'teachers'), destination: 'audience:teachers' },
-    { label: 'Student report tools', href: localePath(lang, 'for', 'students'), destination: 'audience:students' },
-    { label: 'Office worker tools', href: localePath(lang, 'for', 'office-workers'), destination: 'audience:office-workers' },
-    { label: 'Creator tools', href: localePath(lang, 'for', 'creators'), destination: 'audience:creators' },
-    { label: 'Designer tools', href: localePath(lang, 'for', 'designers'), destination: 'audience:designers' },
-    { label: 'Developer tools', href: localePath(lang, 'for', 'developers'), destination: 'audience:developers' },
-  ],
-}[lang];
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqItems.map((item) => ({
-    '@type': 'Question',
-    name: item.q,
-    acceptedAnswer: { '@type': 'Answer', text: item.a },
-  })),
-};
-const webSiteLd = {
-  ...websiteJsonLd(lang),
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: `${absoluteUrl(localePath(lang, 'tools'))}?q={search_term_string}`,
-    'query-input': 'required name=search_term_string',
-  },
-};
-const popularItemListJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: lang === 'zh' ? `${SITE.name.zh}熱門工具` : `${SITE.name.en} popular tools`,
-  itemListElement: popularTools.map((tool, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    name: tool.name[lang],
-    url: absoluteUrl(toolUrl(lang, tool.slug)),
-  })),
-};
+const tools = INDEXABLE_TOOL_SLUGS
+  .map(getToolBySlug)
+  .filter((tool): tool is ToolMeta => Boolean(tool && tool.status === 'live'));
+const zh = lang === 'zh';
+const title = zh
+  ? 'FunnyTools 教育統計工具｜T 分數、PR、標準差與成績計算'
+  : 'FunnyTools education statistics and classroom calculators';
+const description = zh
+  ? '免費使用 T 分數、Z 分數、百分等級、標準差、加權平均、班級排名、獨立樣本 t 檢定與教師甄試換算工具；另提供課堂隨機抽籤。免註冊、直接在瀏覽器使用，並附公式與解讀提醒。'
+  : 'Free education statistics, classroom score, and random name tools. No sign-up required.';
+const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang)];
 ---
 
 <BaseLayout
   lang={lang}
-  title={homeCopy.seoTitle}
-  description={homeCopy.seoDescription}
+  title={title}
+  description={description}
   alternateSegments={[]}
-  altLang={localeUrlPair()}
-  jsonLd={[webSiteLd, organizationJsonLd(lang), popularItemListJsonLd, faqJsonLd]}
+  canonicalPath={lang === 'zh' ? '/' : `/${lang}/`}
+  jsonLd={jsonLd}
 >
-  <div class="home-page">
-  <section class="hero wrap">
-    <p class="eyebrow">{homeCopy.eyebrow}</p>
-    <h1>{homeCopy.title}</h1>
-    <p class="lead">{homeCopy.intro}</p>
-    <ul class="hero-value-list">
-      {homeCopy.heroBullets.map((item) => <li>{item}</li>)}
-    </ul>
-    <div class="hero-actions">
-      <a class="btn go" href={localePath(lang, 'tools')}>{homeCopy.primaryCta}</a>
-      <a class="btn ghost" href="#popular-tools">{homeCopy.secondaryCta}</a>
-      {lang === 'zh' && <a class="btn ghost" href={localePath(lang, 'find-tools')}>不知道工具名稱？依任務找工具</a>}
-    </div>
-    <div class="hero-stats" aria-label={ui.categories}>
-      <span class="stat-chip">
-        <strong>{liveTools.length}</strong>
-        <span>{ui.heroStats.toolsLabel}</span>
-      </span>
-      <span class="stat-chip">
-        <strong>{categorySummaries.length}</strong>
-        <span>{ui.heroStats.categoriesLabel}</span>
-      </span>
-      <span class="stat-chip text-only">{ui.heroStats.noSignup}</span>
-    </div>
-  </section>
-
-  <section class="wrap content-section task-entry-section" aria-labelledby="task-entry-title">
-    <div class="section-head">
-      <h2 id="task-entry-title">{taskEntryCopy.heading}</h2>
-      <p>{taskEntryCopy.intro}</p>
-    </div>
-    <nav class="task-entry-grid" aria-label={taskEntryCopy.aria}>
-      {taskEntries.map((entry) => (
-        <a class="task-entry-card" href={entry.href} data-task-entry data-task-label={entry.label} data-task-destination={entry.destination}>
-          <span>{entry.label}</span>
-        </a>
-      ))}
-    </nav>
-    <div class="task-entry-audience">
-      <span>{taskEntryCopy.audienceLabel}</span>
-      <div class="task-entry-audience__links">
-        {audienceTaskEntries.map((entry) => (
-          <a href={entry.href} data-task-entry data-task-label={entry.label} data-task-destination={entry.destination}>{entry.label}</a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section id="home-search" class="wrap content-section home-search-section" data-home-search-section data-empty-text={lang === 'zh' ? '目前沒有符合的工具，請換一個用途或關鍵字試試。' : ui.homeSearchEmpty}>
-    <div class="section-head">
-      <h2>{homeCopy.searchHeading}</h2>
-      <p>{homeCopy.searchIntro}</p>
-    </div>
-    <label class="home-search-box">
-      <span>{ui.toolsSearch.label}</span>
-      <input
-        type="search"
-        placeholder={homeCopy.searchPlaceholder}
-        aria-label={ui.toolsSearch.label}
-        autocomplete="off"
-        data-home-search
-      />
-    </label>
-    <div class="home-search-results" data-home-search-results>
-      {
-        searchTools.map(({ tool, search, isDefault }) => (
-          <a
-            class="search-result-chip"
-            href={toolUrl(lang, tool.slug)}
-            data-home-search-item
-            data-search={search}
-            data-default={isDefault ? 'true' : 'false'}
-          >
-            <span aria-hidden="true">{tool.icon}</span>
-            <strong>{tool.name[lang]}</strong>
-            {isDefault && <em>{ui.homePopularLabel}</em>}
-          </a>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="wrap content-section priority-cluster-section education-first-section" aria-labelledby="education-first-title">
-    <div class="section-head">
-      <h2 id="education-first-title">{homeCopy.educationHeading}</h2>
-      <p>{homeCopy.educationIntro}</p>
-      <a class="btn go" href={localePath(lang, 'education-statistics')}>{homeCopy.educationCta}</a>
-    </div>
-    <div class="use-case-tools priority-tool-row">
-      {teacherExamTools.map((tool) => (
-        <a href={toolUrl(lang, tool.slug)}>
-          <span aria-hidden="true">{tool.icon}</span>
-          {tool.name[lang]}
-        </a>
-      ))}
-    </div>
-    {lang === 'en' && (
-      <div class="use-case-tools priority-tool-row">
-        {teacherExamArticleLinks.map((article) => (
-          <a href={localePath('en', article.segment, article.slug)}>
-            <span aria-hidden="true">Guide</span>
-            {article.label}
-          </a>
-        ))}
-      </div>
-    )}
-  </section>
-
-  <section id="popular-tools" class="wrap content-section hero-tools-section anchor-section" aria-labelledby="hero-tools-title">
-    <h2 id="hero-tools-title">{homeCopy.popularHeading}</h2>
-    <div class="hero-tools-grid">
-      {popularTools.slice(0, 5).map((tool) => (
-        <a class="hero-tool-card" href={toolUrl(lang, tool.slug)} data-tool-id={tool.slug} data-tool-name={tool.name[lang]} data-tool-category={tool.category}>
-          <span class="hero-tool-card__icon" aria-hidden="true">{tool.icon}</span>
-          <strong class="hero-tool-card__name">{tool.name[lang]}</strong>
-          <span class="hero-tool-card__desc">{tool.short[lang]}</span>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <script type="application/json" id="freetools-all-tools" set:html={allToolsJson}></script>
-
-  <section
-    class="wrap content-section personalized-tools-section"
-    aria-labelledby="favorite-tools-title"
-    hidden
-    data-personalized-tools
-    data-empty-text={ui.favoriteToolsEmpty}
-    data-browse-label={ui.favoriteToolsBrowse}
-    data-browse-href={localePath(lang, 'tools')}
-    data-favorite-add={ui.favoriteAdd}
-    data-favorite-remove={ui.favoriteRemove}
-    data-tool-cta={ui.toolCardCta}
-    data-privacy-badge={ui.privacyBadge}
-    data-newest={ui.newest}
-  >
-    <div class="section-head">
-      <h2 id="favorite-tools-title">{ui.favoriteToolsHeading}</h2>
-    </div>
-    <div class="grid home-personalized-grid" data-favorite-tools aria-live="polite"></div>
-    <div class="empty-state personalized-empty" data-favorite-empty hidden>
-      <p>{ui.favoriteToolsEmpty}</p>
-      <a class="btn ghost" href={localePath(lang, 'tools')}>{ui.favoriteToolsBrowse}</a>
-    </div>
-  </section>
-
-  <section class="wrap content-section personalized-tools-section" aria-labelledby="recent-tools-title" hidden data-recent-section>
-    <div class="section-head">
-      <h2 id="recent-tools-title">{ui.recentToolsHeading}</h2>
-    </div>
-    <div class="grid home-personalized-grid" data-recent-tools aria-live="polite"></div>
-  </section>
-
-  <section id="categories" class="wrap design-category-section" aria-labelledby="design-categories-title">
-    <h2 id="design-categories-title">{ui.categories}</h2>
-    <nav class="category-card-grid" aria-label={ui.categories}>
-      {
-        designCategories.map(({ category, tools }) => (
-          <a class="category-card" href={categoryUrl(lang, category.id)} data-category={category.id}>
-            <span class="category-card__icon"><CategoryIcon category={category.id} /></span>
-            <span class="category-card__name">{category.name[lang]}</span>
-            <span class="category-card__count">{tools.length}{ui.toolsCountSuffix}</span>
-          </a>
-        ))
-      }
-    </nav>
-  </section>
-
-  {workflowToolkits.length > 0 && (
-    <section id="workflow-toolkits" class="wrap content-section workflow-toolkit-section" aria-labelledby="workflow-toolkits-title">
-      <div class="section-head">
-        <h2 id="workflow-toolkits-title">{toolkitCopy.heading}</h2>
-        <p>{toolkitCopy.intro}</p>
-      </div>
-      <div class="workflow-toolkit-grid">
-        {workflowToolkits.map((workflow) => (
-          <article class="workflow-toolkit-card">
-            <h3><a href={localePath(lang, 'workflows', workflow.slug)}>{workflow.title}</a></h3>
-            <p>{workflow.purpose}</p>
-            <div class="tool-chip-group" aria-label={toolkitCopy.tools}>
-              {workflow.tools.map((tool) => (
-                <a class="tool-chip" href={toolUrl(lang, tool.slug)}>
-                  <span aria-hidden="true">{tool.icon}</span>
-                  {tool.name[lang]}
-                </a>
-              ))}
-            </div>
-            {workflow.guides.length > 0 && (
-              <div class="tool-chip-group related-guide-chips" aria-label={toolkitCopy.guides}>
-                {workflow.guides.map((guide) => (
-                  <a class="tool-chip tool-chip--guide" href={localePath(lang, 'guides', guide.slug)}>{guide.title}</a>
-                ))}
-              </div>
-            )}
-            <a class="workflow-toolkit-cta" href={localePath(lang, 'workflows', workflow.slug)}>{toolkitCopy.open}</a>
-          </article>
-        ))}
-      </div>
-      <a class="inline-link workflow-toolkit-all" href={localePath(lang, 'workflows')}>{toolkitCopy.all}</a>
-    </section>
-  )}
-
-  <section class="wrap content-section home-seo-content" aria-labelledby="home-intro-heading">
-    <div class="section-head">
-      <h2 id="home-intro-heading">{seoIntro.heading}</h2>
-    </div>
-    {seoIntro.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-    <p>{aboutIntroLink.prefix}<a class="inline-link" href={localePath(lang, 'about')}>{aboutIntroLink.label}</a>{aboutIntroLink.suffix}</p>
-  </section>
-
-  <section class="wrap content-section use-case-section">
-    <div class="section-head">
-      <h2>{lang === 'zh' ? '依使用情境找工具' : ui.homeUseCasesHeading}</h2>
-      <p>{lang === 'zh' ? '從常見任務出發，快速開啟通常會一起使用的工具。' : 'Start with a common task and open the tools typically used for it.'}</p>
-    </div>
-    <div class="use-case-grid">
-      {
-        useCases.map((item) => (
-          <article class="use-case-card">
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-            <div class="use-case-tools">
-              {item.tools.map((tool) => (
-                <a href={toolUrl(lang, tool.slug)}>
-                  <span aria-hidden="true">{tool.icon}</span>
-                  {tool.name[lang]}
-                </a>
-              ))}
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="wrap content-section priority-cluster-section" aria-labelledby="pdf-image-cluster-title">
-    <div class="section-head">
-      <h2 id="pdf-image-cluster-title">{homeCopy.pdfImageHeading}</h2>
-      <p>{homeCopy.pdfImageIntro}</p>
-    </div>
-    <div class="use-case-tools priority-tool-row">
-      {pdfImageTools.map((tool) => (
-        <a href={toolUrl(lang, tool.slug)}>
-          <span aria-hidden="true">{tool.icon}</span>
-          {tool.name[lang]}
-        </a>
-      ))}
-    </div>
-    {lang === 'en' && (
-      <div class="use-case-tools priority-tool-row">
-        {pdfImageArticleLinks.map((article) => (
-          <a href={localePath('en', article.segment, article.slug)}>
-            <span aria-hidden="true">Guide</span>
-            {article.label}
-          </a>
-        ))}
-      </div>
-    )}
-  </section>
-
-  <section class="wrap content-section why">
-    <h2>{ui.whyUseThisSite}</h2>
-    <ul class="check-list">
-      {ui.homeWhy.map((item) => <li>{item}</li>)}
-    </ul>
-  </section>
-
-  {newest.length > 0 && (
-    <section class="wrap content-section newest-tools-section">
-      <div class="section-head">
-        <h2>{ui.newest}</h2>
-        <p>{lang === 'zh' ? '查看近期新增或更新的工具，功能與限制會在各工具頁說明。' : 'See recently added or updated tools, with usage notes on each page.'}</p>
-      </div>
-      <div class="grid">
-        {newest.map((tool) => <ToolCard lang={lang} tool={tool} />)}
+  <main class="wrap">
+    <section class="hero home-hero">
+      <p class="eyebrow">{zh ? '聚焦教育統計與課堂任務' : 'Focused education statistics tools'}</p>
+      <h1>{zh ? '教育統計、成績換算與課堂抽籤工具' : 'Education statistics and classroom tools'}</h1>
+      <p class="lead">
+        {zh
+          ? 'FunnyTools 將索引資源集中在有實際搜尋需求的教育統計工具。所有計算工具可免註冊直接使用，並提供公式、例題與使用限制。'
+          : 'FunnyTools now concentrates its searchable collection on education statistics and classroom utilities.'}
+      </p>
+      <div class="hero-actions">
+        <a class="btn go" href="/education-statistics/">{zh ? '進入教育統計中心' : 'Education statistics hub'}</a>
+        <a class="btn ghost" href="/guides/t-score-calculator-guide/">{zh ? '閱讀 T 分數教學' : 'Read the T-score guide'}</a>
       </div>
     </section>
-  )}
 
-  <section class="wrap content-section privacy-panel">
-    <h2>{privacy.heading}</h2>
-    <p>{privacy.text}</p>
-    <a class="inline-link" href={localePath(lang, 'privacy')}>{privacy.linkText}</a>
-  </section>
+    <section class="content-section" aria-labelledby="focused-tools">
+      <div class="section-heading-row">
+        <div>
+          <p class="eyebrow">{zh ? '保留索引工具' : 'Focused tools'}</p>
+          <h2 id="focused-tools">{zh ? '教育統計與課堂工具' : 'Education and classroom calculators'}</h2>
+        </div>
+        <a class="inline-link" href="/category/statistics/">{zh ? '查看統計分類' : 'Statistics category'}</a>
+      </div>
+      <div class="grid compact">
+        {tools.map((tool) => <ToolCard lang="zh" tool={tool} />)}
+      </div>
+    </section>
 
-  <section class="wrap content-section faq">
-    <h2>{ui.faq}</h2>
-    <dl>
-      {
-        homeFaq[lang].map((item) => (
-          <>
-            <dt>{item.q}</dt>
-            <dd>{item.a}</dd>
-          </>
-        ))
-      }
-    </dl>
-  </section>
+    <section class="content-section">
+      <h2>{zh ? '如何選擇工具' : 'Choose the right tool'}</h2>
+      <div class="info-grid">
+        <article>
+          <h3>{zh ? '標準化與相對位置' : 'Standardization and rank'}</h3>
+          <p>{zh ? '用 T 分數、Z 分數、百分等級與班級排名工具比較不同分布中的相對位置。' : 'Use T scores, Z scores, percentiles, and class rank.'}</p>
+        </article>
+        <article>
+          <h3>{zh ? '描述統計與加權成績' : 'Descriptive statistics'}</h3>
+          <p>{zh ? '用標準差、加權平均與成績平均工具檢查集中趨勢、離散程度及配分。' : 'Check spread, averages, and weighted scores.'}</p>
+        </article>
+        <article>
+          <h3>{zh ? '推論統計' : 'Inference'}</h3>
+          <p>{zh ? '用獨立樣本 t 檢定工具比較兩組平均數，並回到原始假設與資料條件解讀。' : 'Compare two group means with an independent-samples t test.'}</p>
+        </article>
+      </div>
+    </section>
 
-  </div>
-
-  <script is:inline>
-    document.querySelectorAll('[data-task-entry]').forEach((link) => {
-      link.addEventListener('click', () => {
-        window.__ft_track?.('task_entry_click', {
-          label: link.getAttribute('data-task-label') || '',
-          destination: link.getAttribute('data-task-destination') || ''
-        });
-      });
-    });
-  </script>
-
-  <style is:global>
-    /* This route-local sheet must reach the shared nav/footer, so every global
-       selector is gated by the homepage marker and light/dark stay separate. */
-    html:not([data-theme="dark"]):has(.home-page) .home-page .btn.go {
-      border-color: var(--color-primary-700);
-      background: var(--color-primary-700);
-      color: #fff;
-    }
-
-    html:not([data-theme="dark"]):has(.home-page) .home-page .inline-link {
-      color: var(--color-primary-700);
-    }
-
-    html:not([data-theme="dark"]):has(.home-page) .site-nav .brand {
-      color: var(--color-primary-700);
-    }
-
-    html:has(.home-page) .home-page .hero-tool-card__desc,
-    html:has(.home-page) .home-page .category-card__count {
-      color: var(--color-slate-500);
-    }
-
-    html:has(.home-page) .site-footer .footer-brand strong {
-      color: var(--color-primary-700);
-    }
-
-    html:has(.home-page) .site-footer .footer-links span,
-    html:has(.home-page) .site-footer .footer-bottom p {
-      color: var(--color-slate-500);
-    }
-  </style>
-  <script src="/home-search.js" is:inline defer></script>
-  <script>
-    import { getFavoriteTools, getRecentlyUsedTools } from '../../lib/userTools.client';
-
-    const dataElement = document.getElementById('freetools-all-tools');
-    const personalizedRoot = document.querySelector('[data-personalized-tools]');
-    const favoriteContainer = document.querySelector('[data-favorite-tools]');
-    const favoriteEmpty = document.querySelector('[data-favorite-empty]');
-    const recentContainer = document.querySelector('[data-recent-tools]');
-    const allTools = (() => {
-      try {
-        return dataElement?.textContent ? JSON.parse(dataElement.textContent) : [];
-      } catch {
-        return [];
-      }
-    })();
-    const toolMap = new Map(allTools.map((tool) => [tool.slug, tool]));
-
-    function createToolChip(tool, options = {}) {
-      const chip = document.createElement('a');
-      chip.className = 'tool-chip';
-      chip.href = tool.url;
-      chip.dataset.toolId = tool.slug;
-      chip.dataset.toolName = tool.name;
-      chip.dataset.toolCategory = tool.category;
-
-      const icon = document.createElement('span');
-      icon.setAttribute('aria-hidden', 'true');
-      icon.textContent = tool.icon;
-      const label = document.createElement('strong');
-      label.textContent = tool.name;
-      chip.append(icon, label);
-
-      chip.addEventListener('click', function() {
-        if (window.__ft_track) {
-          window.__ft_track('tool_card_click', {
-            tool_id: tool.slug,
-            tool_name: tool.name,
-            category: tool.category,
-            source: options.source || 'personalized_tool_chips'
-          });
-        }
-      });
-      return chip;
-    }
-
-    function renderToolChips(container, tools, options = {}) {
-      if (!(container instanceof HTMLElement)) return;
-      container.replaceChildren(...tools.map((tool) => createToolChip(tool, options)));
-    }
-
-    function renderToolList(container, tools, options = {}) {
-      if (!(container instanceof HTMLElement)) return;
-      renderToolChips(container, tools, options);
-      document.dispatchEvent(new CustomEvent('freetools:rendered-tools'));
-    }
-
-    function renderFavorites() {
-      const favoriteTools = getFavoriteTools().map((slug) => toolMap.get(slug)).filter(Boolean);
-      renderToolList(favoriteContainer, favoriteTools, { source: 'favorite_tools' });
-      // First-time visitors have no favorites; hide the whole section instead
-      // of showing an empty shell.
-      if (personalizedRoot instanceof HTMLElement) {
-        personalizedRoot.hidden = favoriteTools.length === 0;
-      }
-      if (favoriteEmpty instanceof HTMLElement) {
-        favoriteEmpty.hidden = true;
-      }
-    }
-
-    function renderRecent() {
-      const recentTools = getRecentlyUsedTools().map((slug) => toolMap.get(slug)).filter(Boolean);
-      renderToolList(recentContainer, recentTools, { source: 'recent_tools' });
-      const recentSection = document.querySelector('[data-recent-section]');
-      if (recentSection instanceof HTMLElement) {
-        recentSection.hidden = recentTools.length === 0;
-      }
-    }
-
-    renderFavorites();
-    renderRecent();
-    document.addEventListener('freetools:favorites-changed', renderFavorites);
-
-    document.querySelectorAll('.hero-tool-card[data-tool-id]').forEach(function(card) {
-      card.addEventListener('click', function() {
-        if (window.__ft_track) {
-          window.__ft_track('tool_card_click', {
-            tool_id: card.getAttribute('data-tool-id'),
-            tool_name: card.getAttribute('data-tool-name'),
-            category: card.getAttribute('data-tool-category'),
-            source: 'hero_quick_access'
-          });
-        }
-      });
-    });
-  </script>
+    <section class="content-section">
+      <h2>{zh ? '資料與責任界線' : 'Data and limitations'}</h2>
+      <p>{zh ? '工具結果適合教學、自我檢查與報告草稿；正式考試、研究與行政文件仍應依原始資料、官方規則與專業判斷確認。' : 'Results support learning and checking, but formal decisions still require source data and professional review.'}</p>
+      <p><a class="inline-link" href="/about/">{zh ? '了解 FunnyTools' : 'About FunnyTools'}</a> · <a class="inline-link" href="/privacy/">{zh ? '隱私權政策' : 'Privacy'}</a> · <a class="inline-link" href="/support/">{zh ? '支持本站' : 'Support'}</a></p>
+    </section>
+  </main>
 </BaseLayout>

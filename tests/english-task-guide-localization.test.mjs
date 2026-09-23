@@ -10,12 +10,12 @@ const slugs = [
   'percentage-grade-to-gpa-conversion-guide',
 ];
 
-test('new English task guides are indexable and self-consistent', async () => {
+test('English task guides remain available but are noindex under the T2 convergence policy', async () => {
   for (const slug of slugs) {
     const html = await readFile(join(root, 'dist', 'en', 'guides', slug, 'index.html'), 'utf8');
-    assert.doesNotMatch(html, /<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i, `${slug} must be indexable`);
+    assert.match(html, /<meta[^>]+name="robots"[^>]+content="noindex,follow"/i, `${slug} must be noindex,follow`);
     assert.match(html, new RegExp(`<link rel="canonical" href="https://funnytools\\.win/en/guides/${slug}/"`));
-    assert.match(html, new RegExp(`hreflang="zh-TW" href="https://funnytools\\.win/guides/${slug}/"`));
+    assert.doesNotMatch(html, /rel="alternate" hreflang=/i);
     assert.match(html, new RegExp(`<h1[^>]*>[^<]+</h1>`));
     assert.doesNotMatch(html, /SEO strategy|target keyword|task package|internal brief|Codex|Claude/i);
   }

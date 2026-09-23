@@ -1,53 +1,6 @@
-import { SITE, type Locale } from '../config/site';
-import indexingConfig from '../config/indexing.json';
-import { categories } from '../data/categories';
-import { getLiveToolsForLocale, hasLiveTools, liveTools } from '../data/tools';
-import { allBlogPosts } from '../data/allBlogPosts';
-import { audiences } from '../data/audiences';
-import { isPostAvailableInLocale } from '../data/blogPosts';
-import { guideUpdatedAt, seoGuides } from '../data/seoGuides';
-import { workflows } from '../data/workflows';
-import { editorialPages } from '../data/editorialPages';
-import { absoluteUrl, localePath } from './url';
-
-const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
-const changedAt = '2026-09-17';
-const recoveryOnlyToolSlugs = new Set(['final-grade-needed-calculator', 'item-analysis-calculator', 'kr20-reliability-calculator']);
-const paidOwnedPages: SitemapPage[] = [
-  {
-    segments: ['wedding-seating-conflict-solver'],
-    lastmod: '2026-09-14',
-    changefreq: 'monthly',
-    priority: '0.7',
-    alternates: true,
-  },
-];
-const product010OwnedPages: SitemapPage[] = [
-  { segments: ['aac-implementation-ledger'], lastmod: '2026-09-22', changefreq: 'monthly', priority: '0.8', alternates: false },
-  { segments: ['tools', 'aac-generalization-matrix'], lastmod: '2026-09-22', changefreq: 'monthly', priority: '0.8', alternates: false },
-];
-const product011OwnedPages: SitemapPage[] = [
-  { segments: ['worksite-skills-ledger'], lastmod: '2026-09-22', changefreq: 'monthly', priority: '0.8', alternates: false },
-  { segments: ['tools', 'job-task-analysis-tracker'], lastmod: '2026-09-22', changefreq: 'monthly', priority: '0.8', alternates: false },
-];
-// Fallback lastmod: the newest real content date on the site. Using the build
-// date here would stamp every build as "modified today", which teaches
-// crawlers to ignore lastmod entirely.
-const latestContentDate = [
-  ...liveTools.filter((tool) => !recoveryOnlyToolSlugs.has(tool.slug)).map((tool) => tool.updated),
-  ...allBlogPosts.map((post) => post.updated),
-  ...seoGuides.map((guide) => guideUpdatedAt(guide)),
-  ...workflows.map((workflow) => workflow.updatedAt),
-]
-  .filter((value): value is string => Boolean(value))
-  .sort()
-  .at(-1) ?? new Date().toISOString().slice(0, 10);
-const mainToolSlugs = new Set(
-  liveTools
-    .filter((tool) => tool.featured)
-    .slice(0, 6)
-    .map((tool) => tool.slug),
-);
+import type { Locale } from '../config/site';
+import { INDEXABLE_PATHS } from './indexPolicy';
+import { absoluteUrl } from './url';
 
 export interface SitemapPage {
   segments: string[];
@@ -62,42 +15,38 @@ export interface SitemapEntry {
   page: SitemapPage;
 }
 
+const changedAt = '2026-09-22';
+
 export function escapeXml(value: string): string {
-  return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
+  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 }
 
 export function sitemapLastmod(page?: SitemapPage): string {
-  return page?.lastmod ?? latestContentDate;
+  return page?.lastmod ?? changedAt;
 }
 
-function alternateLinks(segments: string[]): string {
-  const localeLinks = SITE.locales
-    .map((locale) => {
-      const href = absoluteUrl(localePath(locale, ...segments));
-      return `<xhtml:link rel="alternate" hreflang="${SITE.hreflang[locale]}" href="${escapeXml(href)}" />`;
-    })
-    .join('');
-  // x-default → en: global searchers outside zh-TW should get the English page.
-  const xDefault = absoluteUrl(localePath('en', ...segments));
-
-  return `${localeLinks}<xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(xDefault)}" />`;
+function entryForPath(path: string): SitemapEntry {
+  const segments = path === '/' ? [] : path.split('/').filter(Boolean);
+  return {
+    lang: 'zh',
+    page: {
+      segments,
+      lastmod: changedAt,
+      changefreq: path === '/' ? 'daily' : path.startsWith('/tools/') ? 'monthly' : 'weekly',
+      priority: path === '/' ? '1.0' : path.startsWith('/tools/') ? '0.8' : '0.7',
+      alternates: false,
+    },
+  };
 }
 
-export function urlEntry({ lang, page }: SitemapEntry): string {
-  const loc = absoluteUrl(localePath(lang, ...page.segments));
-  const alternates = page.alternates ? `\n    ${alternateLinks(page.segments)}` : '';
-
+export function urlEntry({ page }: SitemapEntry): string {
+  const path = page.segments.length ? `/${page.segments.join('/')}/` : '/';
   return [
     '  <url>',
-    `    <loc>${escapeXml(loc)}</loc>`,
+    `    <loc>${escapeXml(absoluteUrl(path))}</loc>`,
     `    <lastmod>${sitemapLastmod(page)}</lastmod>`,
     `    <changefreq>${page.changefreq}</changefreq>`,
-    `    <priority>${page.priority}</priority>${alternates}`,
+    `    <priority>${page.priority}</priority>`,
     '  </url>',
   ].join('\n');
 }
@@ -105,164 +54,23 @@ export function urlEntry({ lang, page }: SitemapEntry): string {
 export function sitemapUrlSet(entries: SitemapEntry[]): string {
   return [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     entries.map(urlEntry).join('\n'),
     '</urlset>',
     '',
   ].join('\n');
 }
 
-function basePages(): SitemapPage[] {
-  return [
-    { segments: [], lastmod: changedAt, changefreq: 'daily', priority: '1.0', alternates: true },
-    { segments: ['tools'], lastmod: changedAt, changefreq: 'weekly', priority: '0.9', alternates: true },
-    { segments: ['education-statistics'], lastmod: changedAt, changefreq: 'weekly', priority: '0.8', alternates: true },
-    { segments: ['support'], changefreq: 'monthly', priority: '0.3', alternates: true },
-    { segments: ['shop'], changefreq: 'weekly', priority: '0.5', alternates: true },
-    ...paidOwnedPages,
-    ...legalPages.map((page) => ({
-      segments: [page],
-      changefreq: 'yearly' as const,
-      priority: '0.3',
-      alternates: true,
-    })),
-  ];
-}
+const entries = INDEXABLE_PATHS.map(entryForPath);
 
-function categoryPages(): SitemapPage[] {
-  return categories.filter((category) => hasLiveTools(category.id)).map((category) => ({
-    segments: ['category', category.id],
-    lastmod: category.id === 'statistics' ? changedAt : undefined,
-    changefreq: 'weekly' as const,
-    priority: '0.7',
-    alternates: true,
-  }));
-}
-
-function toolPages(lang: Locale = 'zh'): SitemapPage[] {
-  return getLiveToolsForLocale(lang).map((tool) => ({
-    segments: ['tools', tool.slug],
-    lastmod: tool.updated,
-    changefreq: 'monthly' as const,
-    priority: mainToolSlugs.has(tool.slug) ? '0.8' : '0.6',
-    alternates: !tool.locales || tool.locales.length === SITE.locales.length,
-  }));
-}
-
-function blogPages(): SitemapPage[] {
-  // The /blog hub and every article are noindexed pending a content-quality
-  // rewrite (see src/data/usefulBlogPosts.ts), so nothing is listed here.
-  return [];
-}
-
-function guideArticlePages(): SitemapPage[] {
-  const specialPostSlugs = new Set(
-    allBlogPosts
-      .filter((post) => ['example', 'template', 'faq'].includes(post.categorySlug ?? '') || post.categoryLabel?.zh?.includes('FAQ'))
-      .map((post) => post.slug),
-  );
-
-  return blogPages().filter((page) => page.segments.length === 1 || !specialPostSlugs.has(page.segments[1]));
-}
-
-export function guidePages(): SitemapPage[] {
-  return [
-    { segments: ['guides'], lastmod: seoGuides[0] ? guideUpdatedAt(seoGuides[0]) : undefined, changefreq: 'weekly', priority: '0.7', alternates: true },
-    ...seoGuides.map((guide) => ({
-      segments: ['guides', guide.slug],
-      lastmod: guideUpdatedAt(guide),
-      changefreq: 'monthly' as const,
-      priority: guide.priority <= 2 ? '0.7' : '0.6',
-      alternates: guide.locales.includes('en'),
-    })),
-  ];
-}
-
-export function workflowPages(): SitemapPage[] {
-  return [
-    { segments: ['workflows'], lastmod: workflows[0]?.updatedAt, changefreq: 'weekly', priority: '0.7', alternates: true },
-    ...workflows.map((workflow) => ({
-      segments: ['workflows', workflow.slug],
-      lastmod: workflow.updatedAt,
-      changefreq: 'monthly' as const,
-      priority: '0.6',
-      alternates: workflow.locales.includes('en'),
-    })),
-  ];
-}
-
-export function methodologyPages(): SitemapPage[] {
-  return editorialPages.map((page) => ({
-    segments: page.slug === 'index' ? ['methodology'] : ['methodology', page.slug],
-    lastmod: page.updatedAt,
-    changefreq: page.slug === 'index' ? 'weekly' as const : 'monthly' as const,
-    priority: page.slug === 'index' ? '0.7' : '0.5',
-    alternates: false,
-  }));
-}
-
-export function audiencePages(): SitemapPage[] {
-  return [
-    { segments: ['for'], changefreq: 'weekly', priority: '0.7', alternates: true },
-    ...audiences.map((audience) => ({
-      segments: ['for', audience.slug],
-      changefreq: 'monthly' as const,
-      priority: '0.6',
-      alternates: audience.locales.includes('en'),
-    })),
-  ];
-}
-
-export function defaultPageEntries(): SitemapEntry[] {
-  return [
-    ...basePages(),
-    ...categoryPages(),
-    ...guidePages(),
-    ...workflowPages(),
-    ...methodologyPages(),
-    ...audiencePages(),
-  ].map((page) => ({ lang: 'zh', page }));
-}
-
-export function defaultToolEntries(): SitemapEntry[] {
-  return toolPages().map((page) => ({ lang: 'zh', page }));
-}
-
-export function defaultCategoryEntries(): SitemapEntry[] {
-  return categoryPages().map((page) => ({ lang: 'zh', page }));
-}
-
-export function defaultBlogEntries(): SitemapEntry[] {
-  return blogPages().map((page) => ({ lang: 'zh', page }));
-}
-
-export function defaultGuideEntries(): SitemapEntry[] {
-  return [
-    ...basePages(),
-    ...categoryPages(),
-    ...audiencePages(),
-    ...guideArticlePages(),
-    ...guidePages(),
-  ].map((page) => ({ lang: 'zh', page }));
-}
-
-export function defaultWorkflowEntries(): SitemapEntry[] {
-  return workflowPages().map((page) => ({ lang: 'zh', page }));
-}
-
-export function englishEntries(): SitemapEntry[] {
-  if (indexingConfig.EN_NOINDEX) return [];
-
-  return [
-    ...basePages(),
-    ...product010OwnedPages,
-    ...product011OwnedPages,
-    ...categoryPages(),
-    ...toolPages('en'),
-    ...blogPages().filter((page) => page.segments.length === 1 || isPostAvailableInLocale(allBlogPosts.find((post) => post.slug === page.segments[1])!, 'en')),
-    ...guidePages().filter((page) => page.segments.length === 1 || seoGuides.find((guide) => guide.slug === page.segments[1])?.locales.includes('en')),
-    ...workflowPages().filter((page) => page.segments.length === 1 || workflows.find((workflow) => workflow.slug === page.segments[1])?.locales.includes('en')),
-    ...audiencePages().filter((page) => page.segments.length === 1 || audiences.find((audience) => audience.slug === page.segments[1])?.locales.includes('en')),
-  ].map((page) => ({ lang: 'en' as const, page }));
-}
-
+export const defaultPageEntries = (): SitemapEntry[] => entries.filter(({ page }) => page.segments[0] !== 'tools' && page.segments[0] !== 'guides' && page.segments[0] !== 'category');
+export const defaultToolEntries = (): SitemapEntry[] => entries.filter(({ page }) => page.segments[0] === 'tools');
+export const defaultGuideEntries = (): SitemapEntry[] => entries.filter(({ page }) => page.segments[0] !== 'tools');
+export const defaultWorkflowEntries = (): SitemapEntry[] => [];
+export const defaultCategoryEntries = (): SitemapEntry[] => entries.filter(({ page }) => page.segments[0] === 'category');
+export const defaultBlogEntries = (): SitemapEntry[] => [];
+export const englishEntries = (): SitemapEntry[] => [];
+export const guidePages = (): SitemapPage[] => defaultGuideEntries().map(({ page }) => page);
+export const workflowPages = (): SitemapPage[] => [];
+export const methodologyPages = (): SitemapPage[] => [];
+export const audiencePages = (): SitemapPage[] => [];

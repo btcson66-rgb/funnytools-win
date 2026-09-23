@@ -4,8 +4,8 @@ import Footer from '../components/Footer.astro';
 import Nav from '../components/Nav.astro';
 import AffiliateProductShelf from '../components/AffiliateProductShelf.astro';
 import { SITE, type Locale } from '../config/site';
-import indexingConfig from '../config/indexing.json';
 import { absoluteUrl, assetPath, localePath } from '../lib/url';
+import { isIndexablePath, normalizeIndexPath } from '../lib/indexPolicy';
 import { contextualOgImage } from '../lib/seo';
 import { t } from '../i18n/ui';
 import { routeAlternates } from '../i18n/expansionRoutes';
@@ -55,6 +55,7 @@ const {
 } = Astro.props;
 
 const canonical = absoluteUrl(canonicalPath ?? localePath(lang, ...alternateSegments));
+const canonicalPathname = new URL(canonical).pathname;
 const registryHreflangs = routeAlternates(new URL(canonical).pathname).map((link) => ({
   ...link,
   href: absoluteUrl(link.href),
@@ -68,7 +69,8 @@ const defaultHreflangs = altLang
       { hreflang: 'x-default', href: absoluteUrl(altLang.en) },
     ]
   : [];
-const hreflangs = registryHreflangs.length ? registryHreflangs : defaultHreflangs;
+const hreflangs = (registryHreflangs.length ? registryHreflangs : defaultHreflangs)
+  .filter((link) => isIndexablePath(new URL(link.href).pathname));
 const jsonLdItems = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
 const ogLocale = ogLocaleOverride ?? (lang === 'zh' ? 'zh_TW' : 'en_US');
 const ogImage = customOgImage ?? contextualOgImage(lang, canonical);
@@ -79,9 +81,12 @@ const ogAlt = ogImageAlt ?? title;
 const brandedTitle = title.includes('FunnyTools') ? title : `${title} - FunnyTools`;
 const brandedDescription = description;
 const ui = t(lang);
-const enNoindex = indexingConfig.EN_NOINDEX === true && lang === 'en';
-const shouldNoindex = noindex || enNoindex;
-const robotsContent = enNoindex ? 'noindex, follow' : (robots ?? 'noindex, follow');
+// T2 uses one authoritative allowlist. Legacy page-level noindex flags may
+// remain on retained URLs from earlier experiments, but must not override the
+// current explicit keep decision.
+const isCanonicalRoute = normalizeIndexPath(Astro.url.pathname) === normalizeIndexPath(canonicalPathname);
+const shouldNoindex = !isIndexablePath(canonicalPathname) || (noindex && !isCanonicalRoute);
+const robotsContent = 'noindex,follow';
 const affiliateContext = canonical.includes('/tools/') ? 'tool_result' : canonical.includes('/blog/') || canonical.includes('/guides/') ? 'article' : 'support_page';
 const showAutomaticAffiliate = automaticAffiliate && lang === 'en' && !shouldNoindex;
 const envAdsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? import.meta.env.PUBLIC_ADSENSE_ID;
@@ -89,7 +94,7 @@ const adsenseClient = envAdsenseClient ?? SITE.adsenseClient;
 // Google ads must never load on noindex/error/retired pages. Keeping the gate
 // here makes every current and future noindex route safe by default.
 const adsenseEnabled = !shouldNoindex && Boolean(adsenseClient) && (SITE.adsenseEnabled || SITE.features.adsense);
-const hasAlternates = explicitHasAlternates ?? Boolean(altLang || registryHreflangs.length);
+const hasAlternates = !shouldNoindex && hreflangs.length > 1 && (explicitHasAlternates ?? true);
 const ga4Enabled = !!SITE.ga4MeasurementId;
 // newsletter + download-gate both post to the shared Pages Functions on roomfeng.win
 const emailEndpointsEnabled = SITE.features.newsletter || SITE.features.downloadGate;

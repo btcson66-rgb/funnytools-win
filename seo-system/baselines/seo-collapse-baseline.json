@@ -1,7 +1,7 @@
 {
-  "recordedAt": "2026-07-21",
-  "buildPages": 718,
-  "indexablePages": 264,
-  "sitemapUrls": 264,
-  "notes": "Post-investigation minimum baseline. Alert if any count falls more than 10 percent."
+  "recordedAt": "2026-09-23",
+  "buildPages": 1192,
+  "indexablePages": 20,
+  "sitemapUrls": 20,
+  "notes": "T2 search-convergence baseline: exactly 20 retained indexable URLs. Alert if the build, indexable set, or sitemap unexpectedly falls more than 10 percent."
 }

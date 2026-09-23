@@ -14,10 +14,6 @@ const expectedRobots = readFileSync(join(root, 'public', 'robots.txt'), 'utf8');
 const expectedChildSitemaps = [
   'https://funnytools.win/sitemap-tools.xml',
   'https://funnytools.win/sitemap-guides.xml',
-  'https://funnytools.win/sitemap-workflows.xml',
-  ...(!enNoindex ? ['https://funnytools.win/sitemap-en.xml'] : []),
-  'https://funnytools.win/sitemap-es.xml',
-  'https://funnytools.win/sitemap-fr.xml',
 ];
 const disallowedUrlPatterns = [
   { pattern: /http:\/\//i, label: 'http://' },
@@ -190,7 +186,7 @@ function validateSitemap() {
         .find((tag) => attr(tag, 'name').toLowerCase() === 'robots');
       const robotsContent = robots ? attr(robots, 'content') : '';
       if (!/\bnoindex\b/i.test(robotsContent) || !/\bfollow\b/i.test(robotsContent)) {
-        fail(`${route} must emit <meta name="robots" content="noindex, follow"> while EN_NOINDEX is enabled.`);
+        fail(`${route} must emit <meta name="robots" content="noindex,follow"> while EN_NOINDEX is enabled.`);
       }
     }
   }

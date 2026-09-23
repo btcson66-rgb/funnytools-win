@@ -34,7 +34,7 @@ function sitemapHas(file, route) {
   return xml.includes(`https://funnytools.win${route}`);
 }
 
-test('restored workflows build as WebPage routes with self canonicals and sitemap entries', () => {
+test('restored workflows stay available but are excluded from the T2 index set', () => {
   for (const route of [
     '/workflows/qr-barcode-publishing-toolkit/',
     '/workflows/grade-gpa-check-toolkit/',
@@ -46,7 +46,8 @@ test('restored workflows build as WebPage routes with self canonicals and sitema
     assert.ok(types.includes('WebPage'), `${route} missing WebPage schema`);
     assert.ok(types.includes('BreadcrumbList'), `${route} missing BreadcrumbList schema`);
     assert.ok(!types.includes('Article'), `${route} must not be emitted as Article`);
-    assert.ok(sitemapHas('sitemap-workflows.xml', route), `${route} missing from workflow sitemap`);
+    assert.match(html, /<meta name="robots" content="noindex,follow">/);
+    assert.equal(sitemapHas('sitemap-workflows.xml', route), false, `${route} must not be in workflow sitemap`);
   }
 });
 
@@ -80,7 +81,7 @@ test('released expansion guides emit Article schema when their source omits page
   }
 });
 
-test('guide visible date, Article dateModified, and sitemap lastmod share the page source', () => {
+test('retained guide keeps source date in sitemap while excluded guides remain outside it', () => {
   const cases = [
     ['/guides/t-score-calculator-guide/', '2026-06-25'],
     ['/guides/qr-code-not-scanning-print-guide/', '2026-08-27'],
@@ -92,7 +93,11 @@ test('guide visible date, Article dateModified, and sitemap lastmod share the pa
     const entry = sitemap.match(new RegExp(`<loc>https://funnytools\\.win${route.replaceAll('/', '\\/')}</loc>[\\s\\S]*?<lastmod>([^<]+)</lastmod>`));
     assert.equal(visibleDate(html), expectedDate);
     assert.equal(article?.dateModified, expectedDate);
-    assert.equal(entry?.[1], expectedDate);
+    if (route === '/guides/t-score-calculator-guide/') assert.equal(entry?.[1], expectedDate);
+    else {
+      assert.equal(entry, null);
+      assert.match(html, /<meta name="robots" content="noindex,follow">/);
+    }
   }
 });
 
@@ -116,7 +121,7 @@ test('new workflows have detected inbound internal links', () => {
   for (const [route, found] of targets) assert.equal(found, true, `${route} is orphaned`);
 });
 
-test('locale registry records missing English guides without fake English alternates', () => {
+test('locale registry remains descriptive while noindex locale pages emit no hreflang', () => {
   const registry = JSON.parse(readFileSync(join(root, 'src/i18n/expansion-routes.json'), 'utf8'));
   const cases = [
     ['/guides/file-size-units-guide/', '/es/guias/kb-mb-gb-tb-conversion/'],
@@ -130,9 +135,8 @@ test('locale registry records missing English guides without fake English altern
     for (const pageRoute of [zhRoute, esRoute]) {
       const html = readRoute(pageRoute);
       assert.doesNotMatch(html, /<link rel="alternate" hreflang="en"/);
-      assert.match(html, /<link rel="alternate" hreflang="zh-TW"/);
-      assert.match(html, /<link rel="alternate" hreflang="es"/);
-      assert.match(html, /<link rel="alternate" hreflang="x-default"/);
+      assert.doesNotMatch(html, /<link rel="alternate" hreflang=/);
+      assert.match(html, /<meta name="robots" content="noindex,follow">/);
     }
   }
 });

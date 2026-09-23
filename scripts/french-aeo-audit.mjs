@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = process.cwd();
@@ -8,6 +8,27 @@ const registry = JSON.parse(readFileSync(join(root, 'src', 'i18n', 'expansion-ro
 const siteOrigin = 'https://funnytools.win';
 const failures = [];
 const pages = [];
+const indexingConfig = JSON.parse(readFileSync(join(root, 'src', 'config', 'indexing.json'), 'utf8'));
+
+if (indexingConfig.INDEX_CONVERGENCE === true) {
+  const files = [];
+  const walk = (directory) => {
+    for (const entry of readdirSync(directory)) {
+      const file = join(directory, entry);
+      if (statSync(file).isDirectory()) walk(file);
+      else if (file.endsWith('.html')) files.push(file);
+    }
+  };
+  walk(join(dist, 'fr'));
+  const invalid = files.filter((file) => !/<meta\b[^>]*name=["']robots["'][^>]*content=["']noindex,follow["']/i.test(readFileSync(file, 'utf8')));
+  const sitemap = readFileSync(join(publicDir, 'sitemap-fr.xml'), 'utf8');
+  if (invalid.length || /<url>/.test(sitemap)) {
+    console.error(JSON.stringify({ status: 'FAIL', mode: 'index-convergence', invalidNoindexPages: invalid, sitemapUrlEntries: (sitemap.match(/<url>/g) ?? []).length }, null, 2));
+    process.exit(1);
+  }
+  console.log(JSON.stringify({ status: 'PASS', mode: 'index-convergence', locale: 'fr', noindexPages: files.length, sitemapUrlEntries: 0 }, null, 2));
+  process.exit(0);
+}
 
 function fail(message) {
   failures.push(message);

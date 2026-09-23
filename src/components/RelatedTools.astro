@@ -4,6 +4,8 @@ import type { Locale } from '../config/site';
 import type { ToolMeta } from '../data/tools';
 import { educationRecoverySlugs, getLiveToolsForLocale } from '../data/tools';
 import { t } from '../i18n/ui';
+import { isIndexablePath } from '../lib/indexPolicy';
+import { toolUrl } from '../lib/url';
 
 interface Props {
   lang: Locale;
@@ -13,7 +15,7 @@ interface Props {
 
 const { lang, current, limit = 6 } = Astro.props;
 const ui = t(lang);
-const liveTools = getLiveToolsForLocale(lang);
+const liveTools = getLiveToolsForLocale(lang).filter((tool) => isIndexablePath(toolUrl(lang, tool.slug)));
 const isRecoveryTool = (tool: ToolMeta) => educationRecoverySlugs.has(tool.slug);
 
 const manual = (current.relatedTools ?? [])

@@ -26,6 +26,7 @@ import { absoluteUrl, categoryUrl, localePath, localeUrlPair, toolUrl } from '..
 import { buildToolValueReview, CONTENT_REVIEWED_AT } from '../lib/contentValue';
 import { isCanonicalDownloadGatedTool } from '../lib/toolDataFlow';
 import { getDownloadGateDisclosure } from '../i18n/download-gate-disclosure';
+import { isIndexablePath } from '../lib/indexPolicy';
 
 interface Props {
   lang: Locale;
@@ -47,14 +48,17 @@ const gateDisclosure = isDownloadGated ? getDownloadGateDisclosure(lang, tool.sl
 const seoDescription = toolSeoDescription(lang, content, isStrictlyLocal);
 const isAnonymousApi = tool.privacyLevel === 'anonymous-api';
 const breadcrumbItems = [
-  { label: ui.breadcrumbHome, href: localePath(lang) },
-  { label: ui.allTools, href: localePath(lang, 'tools') },
-  { label: category.name[lang], href: categoryUrl(lang, category.id) },
+  { label: ui.breadcrumbHome, href: '/' },
+  ...(category.id === 'statistics' ? [{ label: category.name[lang], href: '/category/statistics/' }] : []),
   { label: content.name },
 ];
-const relatedGuides = getGuidesForTool(tool.slug, lang).slice(0, 4);
+const relatedGuides = getGuidesForTool(tool.slug, lang)
+  .filter((guide) => isIndexablePath(localePath(lang, 'guides', guide.slug)))
+  .slice(0, 4);
 const relatedGuidesHeading = lang === 'zh' ? '延伸閱讀：使用教學' : 'Related guides';
-const relatedWorkflows = getWorkflowsForTool(tool.slug, lang).slice(0, 2);
+const relatedWorkflows = getWorkflowsForTool(tool.slug, lang)
+  .filter((workflow) => isIndexablePath(localePath(lang, 'workflows', workflow.slug)))
+  .slice(0, 2);
 const relatedWorkflowsHeading = lang === 'zh' ? '相關工具包' : 'Related toolkits';
 const valueReview = buildToolValueReview(lang, content.name, tool.slug, category, content);
 const privacyHighlightText = gateDisclosure?.description ?? ui.privacy.localOnly;
@@ -189,7 +193,7 @@ const downloadGateConfig = SITE.features.downloadGate
       </section>
     )}
 
-    <AdSlot />
+    {isIndexablePath(currentUrl) && <AdSlot />}
     <SponsorBlock lang={lang} />
 
     <section class="content-section">
@@ -308,7 +312,7 @@ const downloadGateConfig = SITE.features.downloadGate
     {tool.embedPotential !== 'low' && <EmbedCode lang={lang} tool={tool} />}
     <NewsletterSignup lang={lang} />
     <RelatedResources lang={lang} />
-    <AdSlot />
+    {isIndexablePath(currentUrl) && <AdSlot />}
   </article>
 
   <script>
