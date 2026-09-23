@@ -1,7 +1,9 @@
 # Phase 2B supersedence boundary
 
-Status: `SUPERSEDED_PENDING_DEPLOY`  
-Decision date: 2026-09-23  
+Status: `SUPERSEDED_PENDING_DEPLOY`
+
+Decision date: 2026-09-23
+
 Superseding change: FunnyTools T2 index convergence (Draft PR #57)
 
 The Phase 2B treatment/control experiment remains active on production while
