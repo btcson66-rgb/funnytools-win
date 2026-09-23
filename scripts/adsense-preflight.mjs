@@ -178,7 +178,10 @@ for (const file of htmlFilesUnder(dist)) {
   const html = read(file);
   const isNoindex = /<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(html)
     || /<meta\b[^>]*content=["'][^"']*noindex[^"']*["'][^>]*name=["']robots["']/i.test(html);
-  const loadsAdsense = /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js|\badsbygoogle\b|data-ad-slot=/i.test(html);
+  // Component CSS may contain the `.adsbygoogle` selector even when Astro did
+  // not render an ad unit. Treat only the loader, a rendered <ins>, or a slot
+  // attribute as an actual ad load surface.
+  const loadsAdsense = /pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js|<ins\b[^>]*class=["'][^"']*\badsbygoogle\b|data-ad-slot=/i.test(html);
   if (isNoindex && loadsAdsense) {
     errors.push(`noindex 頁仍載入 AdSense：${file.slice(dist.length).replaceAll('\\', '/')}`);
   }

@@ -52,10 +52,6 @@ export const expansionRouteRegistry = readJson(
 export const expectedSitemapFiles = [
   'sitemap-tools.xml',
   'sitemap-guides.xml',
-  'sitemap-workflows.xml',
-  ...(!enNoindex ? ['sitemap-en.xml'] : []),
-  'sitemap-es.xml',
-  'sitemap-fr.xml',
 ];
 
 export function ensureDir(dir) {

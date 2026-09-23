@@ -64,16 +64,12 @@ const darkTheme = {
   subtle: colorValue(dark, 'color-bg-subtle'),
 };
 
-test('homepage contrast overrides are route-scoped and theme-aware', () => {
-  assert.match(homepage, /<style is:global>/);
-  assert.match(homepage, /html:not\(\[data-theme="dark"\]\):has\(\.home-page\) \.home-page \.btn\.go\s*\{[^}]*background:\s*var\(--color-primary-700\)/s);
-  assert.match(homepage, /html:not\(\[data-theme="dark"\]\):has\(\.home-page\) \.home-page \.inline-link\s*\{[^}]*color:\s*var\(--color-primary-700\)/s);
-  assert.match(homepage, /html:not\(\[data-theme="dark"\]\):has\(\.home-page\) \.site-nav \.brand\s*\{[^}]*color:\s*var\(--color-primary-700\)/s);
-  assert.match(homepage, /html:has\(\.home-page\) \.home-page \.hero-tool-card__desc,[^}]*html:has\(\.home-page\) \.home-page \.category-card__count\s*\{[^}]*color:\s*var\(--color-slate-500\)/s);
-  assert.match(homepage, /html:has\(\.home-page\) \.site-footer \.footer-brand strong\s*\{[^}]*color:\s*var\(--color-primary-700\)/s);
-  assert.match(homepage, /html:has\(\.home-page\) \.site-footer \.footer-links span,[^}]*html:has\(\.home-page\) \.site-footer \.footer-bottom p\s*\{[^}]*color:\s*var\(--color-slate-500\)/s);
-  assert.doesNotMatch(homepage, /\.lang-switch,\s*\.home-page \.inline-link\s*\{\s*color:\s*#0f766e/s);
-  assert.doesNotMatch(homepage, /(?<!:has\(\.home-page\) )\.home-page \.btn\.go\s*\{[^}]*background:\s*#0f766e/s);
+test('focused homepage uses shared theme-aware components without route-local color overrides', () => {
+  assert.match(homepage, /class="hero home-hero"/);
+  assert.match(homepage, /class="btn go"/);
+  assert.match(homepage, /class="inline-link"/);
+  assert.doesNotMatch(homepage, /<style is:global>/);
+  assert.doesNotMatch(homepage, /#[0-9a-f]{3,8}/i);
   assert.doesNotMatch(css, /Homepage-only contrast guard/);
 });
 

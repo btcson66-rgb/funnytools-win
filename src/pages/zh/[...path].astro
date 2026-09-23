@@ -18,14 +18,9 @@ export function getStaticPaths() {
 const { path } = Astro.params;
 const newPath = path ? `/${path}/` : '/';
 const fullUrl = `${SITE.url}${newPath}`;
-// The target /embed/* pages are themselves intentionally noindex (embeds are
-// not meant to rank on their own — see CLAUDE.md red line on noindex
-// classification). Keep noindex on their legacy /zh/embed/* stub too, or the
-// SEO-collapse-audit orphan-indexable check would flag a canonical pointing
-// at a page that is deliberately excluded from the sitemap. Every other
-// /zh/* stub (tools, categories, legal pages, home) targets a real indexable
-// page, so those drop noindex to let signals consolidate onto the new URL.
-const targetIsNoindex = path?.startsWith('embed/') ?? false;
+// T2 removes the legacy /zh/* aliases from the index set. They stay available
+// as compatibility stubs, but must not create a second indexable URL for the
+// retained canonical destination.
 ---
 <!--
   2026-07-25 SEO 稽核（CEO 派工）：拿掉大部分 /zh/* stub 的 noindex，只留 canonical +
@@ -42,7 +37,7 @@ const targetIsNoindex = path?.startsWith('embed/') ?? false;
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="canonical" href={fullUrl} />
   <meta http-equiv="refresh" content={`0; url=${newPath}`} />
-  {targetIsNoindex && <meta name="robots" content="noindex, follow" />}
+  <meta name="robots" content="noindex,follow" />
   <title>Redirecting...</title>
 </head>
 <body>

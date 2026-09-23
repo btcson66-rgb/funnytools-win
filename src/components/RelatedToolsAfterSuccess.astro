@@ -2,6 +2,7 @@
 import type { Locale } from '../config/site';
 import { getRelatedTools, type ToolMeta } from '../data/tools';
 import { toolUrl } from '../lib/url';
+import { isIndexablePath } from '../lib/indexPolicy';
 
 interface Props {
   lang: Locale;
@@ -9,7 +10,9 @@ interface Props {
 }
 
 const { lang, current } = Astro.props;
-const tools = getRelatedTools(current.slug, 4, lang);
+const tools = getRelatedTools(current.slug, 12, lang)
+  .filter((tool) => isIndexablePath(toolUrl(lang, tool.slug)))
+  .slice(0, 4);
 const copy = {
   zh: {
     heading: '完成後可以接著做',

@@ -14,6 +14,7 @@ import { t } from '../../../i18n/ui';
 import { categoryUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/url';
 import { breadcrumbJsonLd, collectionPageJsonLd } from '../../../lib/seo';
 import { buildCategoryValueReview } from '../../../lib/contentValue';
+import { isIndexablePath } from '../../../lib/indexPolicy';
 
 export function getStaticPaths() {
   // Only generate pages for categories that actually have live tools,
@@ -29,7 +30,8 @@ export function getStaticPaths() {
 const { lang, categoryData } = Astro.props as { lang: Locale; categoryData: Category };
 const ui = t(lang);
 const content = getCategoryContent(categoryData.id) as CategoryContent | undefined;
-const categoryTools = getToolsByCategory(categoryData.id, lang);
+const categoryTools = getToolsByCategory(categoryData.id, lang)
+  .filter((tool) => isIndexablePath(toolUrl(lang, tool.slug)));
 
 const h1 = content ? content.h1[lang] : `${categoryData.icon} ${categoryData.name[lang]}`;
 const pageTitle = content
@@ -50,7 +52,7 @@ const classroomCategoryPages = ['random', 'study'];
 // Surface the data-driven education-statistics guides and workflow toolkits on the statistics category page.
 const statisticsGuideSources = categoryData.id === 'statistics'
   ? seoGuides
-      .filter((guide) => isSeoGuideAvailableInLocale(guide, lang))
+      .filter((guide) => guide.slug === 't-score-calculator-guide' && isSeoGuideAvailableInLocale(guide, lang))
       .filter((guide) => guide.priority < 10 && guide.category[lang] !== classroomCategoryLabel[lang])
       .sort((a, b) => a.priority - b.priority)
       .slice(0, 6)
@@ -59,12 +61,7 @@ const statisticsGuideIds = new Set(statisticsGuideSources.map((guide) => guide.s
 const statisticsGuides = categoryData.id === 'statistics'
   ? statisticsGuideSources.map((guide) => viewSeoGuide(guide, lang))
   : [];
-const statisticsWorkflows = categoryData.id === 'statistics'
-  ? workflows
-      .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
-      .filter((workflow) => workflow.relatedGuideIds.some((guideId) => statisticsGuideIds.has(guideId)))
-      .map((workflow) => viewWorkflow(workflow, lang))
-  : [];
+const statisticsWorkflows = [];
 const classroomGuideSources = classroomCategoryPages.includes(categoryData.id)
   ? seoGuides
       .filter((guide) => isSeoGuideAvailableInLocale(guide, lang))
@@ -105,11 +102,13 @@ const categoryToolSlugs = new Set(categoryTools.map((tool) => tool.slug));
 const relatedAudienceViews = audiences
   .filter((audience) => isAudienceAvailableInLocale(audience, lang))
   .filter((audience) => audience.relatedCategoryIds.includes(categoryData.id))
-  .map((audience) => viewAudience(audience, lang));
+  .map((audience) => viewAudience(audience, lang))
+  .filter(() => categoryData.id !== 'statistics');
 const relatedWorkflowViews = workflows
   .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
   .filter((workflow) => workflow.recommendedToolIds.some((toolSlug) => categoryToolSlugs.has(toolSlug)))
-  .map((workflow) => viewWorkflow(workflow, lang));
+  .map((workflow) => viewWorkflow(workflow, lang))
+  .filter(() => categoryData.id !== 'statistics');
 const categoryRelatedCopy = lang === 'zh'
   ? { audiences: '依使用情境延伸', workflows: '相關工作流' }
   : { audiences: 'Related audience toolkits', workflows: 'Related workflows' };
@@ -126,11 +125,10 @@ const valueReview = buildCategoryValueReview(
 const relatedCategories = (content?.relatedCategories ?? [])
   .map((id) => getCategoryById(id))
   .filter((cat): cat is Category => cat != null)
-  .filter((cat) => getToolsByCategory(cat.id, lang).length > 0);
+  .filter((cat) => categoryData.id !== 'statistics' && getToolsByCategory(cat.id, lang).length > 0);
 
 const breadcrumbItems = [
-  { name: ui.breadcrumbHome, href: localePath(lang) },
-  { name: ui.allTools, href: localePath(lang, 'tools') },
+  { name: ui.breadcrumbHome, href: '/' },
   { name: categoryData.name[lang], href: categoryUrl(lang, categoryData.id) },
 ];
 
@@ -162,8 +160,7 @@ if (faqItems.length > 0) {
   <section class="wrap page-head category-page-head" data-category={categoryData.id}>
     <Breadcrumb
       items={[
-        { label: ui.breadcrumbHome, href: localePath(lang) },
-        { label: ui.allTools, href: localePath(lang, 'tools') },
+        { label: ui.breadcrumbHome, href: '/' },
         { label: categoryData.name[lang], href: categoryUrl(lang, categoryData.id) },
       ]}
     />
@@ -182,6 +179,17 @@ if (faqItems.length > 0) {
           {lang === 'zh' ? '。' : '.'}
         </p>
       )}
+    </section>
+  )}
+
+  {categoryData.id === 'statistics' && lang === 'zh' && (
+    <section class="wrap content-section">
+      <h2>從問題到解讀：教育統計工具的使用順序</h2>
+      <p>先決定你真正要回答的問題，再選計算器。若目標是描述一組成績的分散程度，先整理樣本數、平均數與標準差；若目標是比較不同測驗或不同班級中的相對位置，才使用 Z 分數、T 分數、百分等級或班級排名。標準化之後的數字不能脫離常模來源解讀，同一個原始分數換到不同群體，結果可能不同。</p>
+      <p>輸入資料前，確認缺漏值、異常值與分數方向。高分是否一定代表表現較好？權重是否合計為百分之百？標準差使用母體公式或樣本公式？這些設定往往比按下計算按鈕更重要。若資料來自正式考試、甄選或研究，應保留原始表格與規則版本，讓其他人可以追溯每個數字。</p>
+      <p>完成計算後，不要只複製單一結果。報告 T 分數或百分等級時，應同時交代原始分數與參照群體；報告平均數時，應搭配標準差與樣本數；進行獨立樣本 t 檢定時，還要檢查兩組資料的獨立性、分布與變異數條件。統計顯著不等於差異重要，也不代表研究設計沒有偏誤。</p>
+      <p>本站保留的工具形成一條可核對的路徑：先用成績平均、加權平均與標準差整理資料，再用 Z 分數、T 分數、百分等級或班級排名說明相對位置；需要比較兩組平均數時，再進入獨立樣本 t 檢定。教師甄試換算則應以當年度簡章的配分、加權與四捨五入規則為準。</p>
+      <p>每次得到結果後，建議用一筆容易心算的測試資料重算一次，並記下公式、輸入值、單位與小數位。若計算結果要進入論文、成績單、甄選文件或行政決策，仍須由熟悉該規則的人員覆核。FunnyTools 提供的是計算與理解輔助，不取代官方公告、研究方法審查或專業判斷。</p>
     </section>
   )}
 

@@ -2,7 +2,6 @@
 import LangSwitch from './LangSwitch.astro';
 import { SITE, type Locale } from '../config/site';
 import { t } from '../i18n/ui';
-import { localePath } from '../lib/url';
 
 interface Props {
   lang: Locale;
@@ -16,14 +15,13 @@ const ui = t(lang);
 
 <header class="site-nav" data-site-header>
   <div class="nav-inner">
-    <a class="brand" href={localePath(lang)} aria-label={SITE.name[lang]}>{lang === 'zh' ? 'FunnyTools' : SITE.name.en}</a>
+    <a class="brand" href="/" aria-label={SITE.name[lang]}>{lang === 'zh' ? 'FunnyTools' : SITE.name.en}</a>
     <nav class="nav-links" aria-label={ui.ariaPrimaryNav}>
-      <a href={localePath(lang)}>{ui.nav.home}</a>
-      <a href={localePath(lang, 'tools')}>{ui.nav.tools}</a>
-      <a href={localePath(lang, 'guides')}>{lang === 'zh' ? '教學文章' : 'Guides'}</a>
-      <a href={`${localePath(lang)}#categories`}>{ui.nav.categories}</a>
-      <a href={localePath(lang, 'education-statistics')}>{lang === 'zh' ? '教育統計' : 'Education & Statistics'}</a>
-      <a href={localePath(lang, 'support')} data-support-link data-support-source="nav">{lang === 'zh' ? '支持我們' : 'Support'}</a>
+      <a href="/">{ui.nav.home}</a>
+      <a href="/education-statistics/">{lang === 'zh' ? '教育統計工具' : 'Education statistics'}</a>
+      <a href="/category/statistics/">{lang === 'zh' ? '統計計算' : 'Statistics'}</a>
+      <a href="/guides/t-score-calculator-guide/">{lang === 'zh' ? 'T 分數教學' : 'T-score guide'}</a>
+      <a href="/support/" data-support-link data-support-source="nav">{lang === 'zh' ? '支持我們' : 'Support'}</a>
     </nav>
     {showLangSwitch && <LangSwitch lang={lang} segments={segments} />}
     <button class="theme-toggle" type="button" aria-label={lang === 'zh' ? '切換深色模式' : 'Toggle dark mode'} aria-pressed="false" data-theme-toggle>
@@ -41,12 +39,11 @@ const ui = t(lang);
       data-mobile-nav
       hidden
     >
-      <a href={localePath(lang)}>{ui.nav.home}</a>
-      <a href={localePath(lang, 'tools')}>{ui.nav.tools}</a>
-      <a href={localePath(lang, 'guides')}>{lang === 'zh' ? '教學文章' : 'Guides'}</a>
-      <a href={`${localePath(lang)}#categories`}>{ui.nav.categories}</a>
-      <a href={localePath(lang, 'education-statistics')}>{lang === 'zh' ? '教育統計' : 'Education & Statistics'}</a>
-      <a href={localePath(lang, 'support')} data-support-link data-support-source="mobile_nav">{lang === 'zh' ? '支持我們' : 'Support'}</a>
+      <a href="/">{ui.nav.home}</a>
+      <a href="/education-statistics/">{lang === 'zh' ? '教育統計工具' : 'Education statistics'}</a>
+      <a href="/category/statistics/">{lang === 'zh' ? '統計計算' : 'Statistics'}</a>
+      <a href="/guides/t-score-calculator-guide/">{lang === 'zh' ? 'T 分數教學' : 'T-score guide'}</a>
+      <a href="/support/" data-support-link data-support-source="mobile_nav">{lang === 'zh' ? '支持我們' : 'Support'}</a>
     </nav>
   </div>
 </header>

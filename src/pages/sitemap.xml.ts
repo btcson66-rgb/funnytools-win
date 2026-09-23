@@ -1,16 +1,10 @@
 import type { APIRoute } from 'astro';
-import indexingConfig from '../config/indexing.json';
 import { absoluteUrl } from '../lib/url';
 import { escapeXml, sitemapLastmod } from '../lib/sitemap';
 
 const childSitemaps = [
-  { path: '/sitemap-pages.xml' },
   { path: '/sitemap-tools.xml' },
   { path: '/sitemap-guides.xml' },
-  { path: '/sitemap-workflows.xml' },
-  ...(!indexingConfig.EN_NOINDEX ? [{ path: '/sitemap-en.xml' }] : []),
-  { path: '/sitemap-es.xml' },
-  { path: '/sitemap-fr.xml' },
 ];
 
 export const GET: APIRoute = () => {

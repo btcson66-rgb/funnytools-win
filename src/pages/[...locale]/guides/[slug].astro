@@ -16,6 +16,7 @@ import { buildGuideValueReview } from '../../../lib/contentValue';
 import { expansionRouteByPath } from '../../../i18n/expansionRoutes';
 import { getGuideAffiliateConfig, splitGuideContentHtml } from '../../../data/guideAffiliate';
 import { resolveGuideHub } from '../../../data/guideNavigation';
+import { isIndexablePath } from '../../../lib/indexPolicy';
 
 export function getStaticPaths() {
   return seoGuides.flatMap((guide) => {
@@ -41,7 +42,7 @@ const { lang, guide: sourceGuide } = Astro.props as { lang: Locale; guide: SeoGu
 const ui = t(lang);
 const guide = viewSeoGuide(sourceGuide, lang);
 const guideHub = sourceGuide.pageKind === 'guideHub' ? null : resolveGuideHub(sourceGuide, lang);
-const hubCta = guideHub ?? { id: 'guides', label: lang === 'zh' ? '指南' : 'Guides', href: localePath(lang, 'guides') };
+const hubCta = { id: 'education-statistics', label: lang === 'zh' ? '教育統計中心' : 'Education statistics', href: '/education-statistics/' };
 const articleAffiliateConfig = getGuideAffiliateConfig(guide.slug);
 const articleContentSplit = articleAffiliateConfig.affiliateEnabled && guide.contentHtml
   ? splitGuideContentHtml(guide.contentHtml)
@@ -85,21 +86,23 @@ const copy = {
   },
 }[lang];
 
-const guidesPath = localePath(lang, 'guides');
+const guidesPath = '/education-statistics/';
 const guidePath = localePath(lang, 'guides', guide.slug);
 const guideUrl = absoluteUrl(guidePath);
 const liveTool = (slug: string): ToolMeta | undefined => {
   const tool = getToolBySlug(slug);
   return tool?.status === 'live' && isToolAvailableInLocale(tool, lang) ? tool : undefined;
 };
-const relatedTools = guide.relatedToolIds.map(liveTool).filter((tool): tool is ToolMeta => Boolean(tool));
+const relatedTools = guide.relatedToolIds
+  .map(liveTool)
+  .filter((tool): tool is ToolMeta => Boolean(tool && isIndexablePath(toolUrl(lang, tool.slug))));
 const relatedGuides: SeoGuideView[] = guide.relatedGuideIds
   .map((slug) => seoGuides.find((candidate) => candidate.slug === slug))
-  .filter((candidate): candidate is SeoGuide => candidate != null && isSeoGuideAvailableInLocale(candidate, lang))
+  .filter((candidate): candidate is SeoGuide => candidate != null && isSeoGuideAvailableInLocale(candidate, lang) && isIndexablePath(localePath(lang, 'guides', candidate.slug)))
   .map((candidate) => viewSeoGuide(candidate, lang));
 const relatedWorkflowViews = guide.relatedWorkflowIds
   .map((slug) => workflows.find((candidate) => candidate.slug === slug))
-  .filter((candidate) => candidate != null && isWorkflowAvailableInLocale(candidate, lang))
+  .filter((candidate) => candidate != null && isWorkflowAvailableInLocale(candidate, lang) && isIndexablePath(localePath(lang, 'workflows', candidate.slug)))
   .map((candidate) => viewWorkflow(candidate, lang));
 const hasSourceAlternates = sourceGuide.locales.includes('zh') && sourceGuide.locales.includes('en');
 const hasAlternates = hasSourceAlternates || Boolean(expansionRouteByPath(guidePath));
@@ -107,9 +110,8 @@ const faqItems = guide.faq.map((item) => ({ q: item.question, a: item.answer }))
 const valueReview = buildGuideValueReview(lang, guide.slug, guide);
 const effectiveUpdatedAt = guide.updatedAt;
 const breadcrumbItems = [
-  { label: ui.breadcrumbHome, href: localePath(lang) },
-  { label: copy.breadcrumb, href: guidesPath },
-  ...(guideHub && guideHub.href !== guidesPath ? [{ label: guideHub.label, href: guideHub.href }] : []),
+  { label: ui.breadcrumbHome, href: '/' },
+  { label: lang === 'zh' ? '教育統計中心' : 'Education statistics', href: guidesPath },
   { label: guide.title },
 ];
 const articleLd = {
