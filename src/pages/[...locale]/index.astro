@@ -4,7 +4,7 @@ import ToolCard from '../../components/ToolCard.astro';
 import { SITE, type Locale } from '../../config/site';
 import { getToolBySlug, type ToolMeta } from '../../data/tools';
 import { INDEXABLE_TOOL_SLUGS } from '../../lib/indexPolicy';
-import { absoluteUrl } from '../../lib/url';
+import { localePath } from '../../lib/url';
 import { organizationJsonLd, websiteJsonLd } from '../../lib/seo';
 
 export function getStaticPaths() {
@@ -46,8 +46,8 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang)];
           : 'FunnyTools now concentrates its searchable collection on education statistics and classroom utilities.'}
       </p>
       <div class="hero-actions">
-        <a class="btn go" href="/education-statistics/">{zh ? '進入教育統計中心' : 'Education statistics hub'}</a>
-        <a class="btn ghost" href="/guides/t-score-calculator-guide/">{zh ? '閱讀 T 分數教學' : 'Read the T-score guide'}</a>
+        <a class="btn go" href={localePath(lang, 'education-statistics')}>{zh ? '進入教育統計中心' : 'Education statistics hub'}</a>
+        <a class="btn ghost" href={localePath(lang, 'guides', 't-score-calculator-guide')}>{zh ? '閱讀 T 分數教學' : 'Read the T-score guide'}</a>
       </div>
     </section>
 
@@ -57,10 +57,10 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang)];
           <p class="eyebrow">{zh ? '保留索引工具' : 'Focused tools'}</p>
           <h2 id="focused-tools">{zh ? '教育統計與課堂工具' : 'Education and classroom calculators'}</h2>
         </div>
-        <a class="inline-link" href="/category/statistics/">{zh ? '查看統計分類' : 'Statistics category'}</a>
+        <a class="inline-link" href={localePath(lang, 'category', 'statistics')}>{zh ? '查看統計分類' : 'Statistics category'}</a>
       </div>
       <div class="grid compact">
-        {tools.map((tool) => <ToolCard lang="zh" tool={tool} />)}
+        {tools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
       </div>
     </section>
 
@@ -85,7 +85,7 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang)];
     <section class="content-section">
       <h2>{zh ? '資料與責任界線' : 'Data and limitations'}</h2>
       <p>{zh ? '工具結果適合教學、自我檢查與報告草稿；正式考試、研究與行政文件仍應依原始資料、官方規則與專業判斷確認。' : 'Results support learning and checking, but formal decisions still require source data and professional review.'}</p>
-      <p><a class="inline-link" href="/about/">{zh ? '了解 FunnyTools' : 'About FunnyTools'}</a> · <a class="inline-link" href="/privacy/">{zh ? '隱私權政策' : 'Privacy'}</a> · <a class="inline-link" href="/support/">{zh ? '支持本站' : 'Support'}</a></p>
+      <p><a class="inline-link" href={localePath(lang, 'about')}>{zh ? '了解 FunnyTools' : 'About FunnyTools'}</a> · <a class="inline-link" href={localePath(lang, 'privacy')}>{zh ? '隱私權政策' : 'Privacy'}</a> · <a class="inline-link" href={localePath(lang, 'support')}>{zh ? '支持本站' : 'Support'}</a></p>
     </section>
   </main>
 </BaseLayout>

@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 import {
   evaluateHealthPolicy,
   summarizeHealthPolicy,
+  validateHealthSnapshot,
 } from './health-policy.mjs';
 
 const rootDir = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -96,7 +97,21 @@ function infrastructureResult({ dataDir, generatedAt, snapshotPath, siteCount = 
 function run() {
   const dataDir = process.env.FABLE_HEALTH_DATA_DIR;
   const vaultDir = process.env.FABLE_HEALTH_VAULT_DIR;
+  const fixturePath = process.env.FABLE_HEALTH_RUNNER_SNAPSHOT_FIXTURE;
   const generatedAt = new Date().toISOString();
+
+  if (fixturePath && process.env.NODE_ENV !== 'test') {
+    const result = infrastructureResult({
+      dataDir,
+      generatedAt,
+      snapshotPath: dataDir ? join(dataDir, 'health', 'latest-status.json') : null,
+      reason: 'fixture-forbidden-outside-test',
+    });
+    if (dataDir) writeResult(dataDir, result);
+    console.error('[health-monitor] INFRA_FAILURE: fixture-forbidden-outside-test');
+    process.exitCode = 3;
+    return;
+  }
 
   if (!dataDir || !vaultDir) {
     console.error('[health-monitor] INFRA_FAILURE: FABLE_HEALTH_DATA_DIR and FABLE_HEALTH_VAULT_DIR are required');
@@ -105,59 +120,93 @@ function run() {
   }
 
   const snapshotPath = join(dataDir, 'health', 'latest-status.json');
-  const child = spawnSync(process.execPath, [join(rootDir, 'health-check.mjs')], {
-    cwd: rootDir,
-    env: { ...process.env },
-    stdio: 'inherit',
-    timeout: 15 * 60 * 1000,
-  });
-
-  if (child.error || child.status !== 0) {
-    const result = infrastructureResult({
-      dataDir,
-      generatedAt,
-      snapshotPath,
-      reason: child.error?.message ?? `health-check-exit:${child.status ?? 'signal'}`,
-      healthCheckExitCode: child.status,
-    });
-    writeResult(dataDir, result);
-    writeStepSummary({ sites: [] }, result);
-    console.error(`[health-monitor] INFRA_FAILURE: ${result.validationErrors.join('; ')}`);
-    process.exitCode = 3;
-    return;
-  }
-
-  if (!existsSync(snapshotPath)) {
-    const result = infrastructureResult({
-      dataDir,
-      generatedAt,
-      snapshotPath,
-      reason: 'snapshot-missing',
-      healthCheckExitCode: child.status,
-    });
-    writeResult(dataDir, result);
-    writeStepSummary({ sites: [] }, result);
-    console.error('[health-monitor] INFRA_FAILURE: snapshot-missing');
-    process.exitCode = 3;
-    return;
-  }
-
   let snapshot;
-  try {
-    snapshot = JSON.parse(readFileSync(snapshotPath, 'utf8'));
-  } catch (error) {
-    const result = infrastructureResult({
-      dataDir,
-      generatedAt,
-      snapshotPath,
-      reason: `snapshot-invalid-json:${error.message}`,
-      healthCheckExitCode: child.status,
+  let healthCheckExitCode = null;
+  if (fixturePath) {
+    try {
+      snapshot = JSON.parse(readFileSync(fixturePath, 'utf8'));
+    } catch (error) {
+      const result = infrastructureResult({
+        dataDir,
+        generatedAt,
+        snapshotPath,
+        reason: `fixture-invalid-json:${error.message}`,
+      });
+      writeResult(dataDir, result);
+      console.error(`[health-monitor] INFRA_FAILURE: ${result.validationErrors.join('; ')}`);
+      process.exitCode = 3;
+      return;
+    }
+    const validationErrors = validateHealthSnapshot(snapshot);
+    const siteIds = Array.isArray(snapshot?.sites) ? snapshot.sites.map((site) => site?.id).sort() : null;
+    if (JSON.stringify(siteIds) !== JSON.stringify(['familyboard', 'funnytools', 'roomfeng', 'worthcalc'])) {
+      validationErrors.push('fixture-sites-must-be-exactly-four');
+    }
+    if (snapshot?.local?.skipped !== true) validationErrors.push('fixture-local-must-be-skipped');
+    if (validationErrors.length) {
+      const result = infrastructureResult({ dataDir, generatedAt, snapshotPath, validationErrors });
+      writeResult(dataDir, result);
+      console.error(`[health-monitor] INFRA_FAILURE: ${result.validationErrors.join('; ')}`);
+      process.exitCode = 3;
+      return;
+    }
+    ensureDir(dirname(snapshotPath));
+    writeFileSync(snapshotPath, `${JSON.stringify(snapshot, null, 2)}\n`, 'utf8');
+  } else {
+    const child = spawnSync(process.execPath, [join(rootDir, 'health-check.mjs')], {
+      cwd: rootDir,
+      env: { ...process.env },
+      stdio: 'inherit',
+      timeout: 15 * 60 * 1000,
     });
-    writeResult(dataDir, result);
-    writeStepSummary({ sites: [] }, result);
-    console.error(`[health-monitor] INFRA_FAILURE: ${result.validationErrors.join('; ')}`);
-    process.exitCode = 3;
-    return;
+    healthCheckExitCode = child.status ?? null;
+
+    if (child.error || child.status !== 0) {
+      const result = infrastructureResult({
+        dataDir,
+        generatedAt,
+        snapshotPath,
+        reason: child.error?.message ?? `health-check-exit:${child.status ?? 'signal'}`,
+        healthCheckExitCode,
+      });
+      writeResult(dataDir, result);
+      writeStepSummary({ sites: [] }, result);
+      console.error(`[health-monitor] INFRA_FAILURE: ${result.validationErrors.join('; ')}`);
+      process.exitCode = 3;
+      return;
+    }
+
+    if (!existsSync(snapshotPath)) {
+      const result = infrastructureResult({
+        dataDir,
+        generatedAt,
+        snapshotPath,
+        reason: 'snapshot-missing',
+        healthCheckExitCode,
+      });
+      writeResult(dataDir, result);
+      writeStepSummary({ sites: [] }, result);
+      console.error('[health-monitor] INFRA_FAILURE: snapshot-missing');
+      process.exitCode = 3;
+      return;
+    }
+
+    try {
+      snapshot = JSON.parse(readFileSync(snapshotPath, 'utf8'));
+    } catch (error) {
+      const result = infrastructureResult({
+        dataDir,
+        generatedAt,
+        snapshotPath,
+        reason: `snapshot-invalid-json:${error.message}`,
+        healthCheckExitCode,
+      });
+      writeResult(dataDir, result);
+      writeStepSummary({ sites: [] }, result);
+      console.error(`[health-monitor] INFRA_FAILURE: ${result.validationErrors.join('; ')}`);
+      process.exitCode = 3;
+      return;
+    }
   }
 
   let policy;
@@ -170,7 +219,7 @@ function run() {
       snapshotPath,
       siteCount: Array.isArray(snapshot?.sites) ? snapshot.sites.length : 0,
       reason: `policy-evaluator-crash:${error.message}`,
-      healthCheckExitCode: child.status,
+      healthCheckExitCode,
     });
     writeResult(dataDir, result);
     writeStepSummary(snapshot, result);

@@ -31,7 +31,7 @@ const { lang, categoryData } = Astro.props as { lang: Locale; categoryData: Cate
 const ui = t(lang);
 const content = getCategoryContent(categoryData.id) as CategoryContent | undefined;
 const categoryTools = getToolsByCategory(categoryData.id, lang)
-  .filter((tool) => isIndexablePath(toolUrl(lang, tool.slug)));
+  .filter((tool) => lang !== 'zh' || isIndexablePath(toolUrl(lang, tool.slug)));
 
 const h1 = content ? content.h1[lang] : `${categoryData.icon} ${categoryData.name[lang]}`;
 const pageTitle = content
@@ -128,7 +128,7 @@ const relatedCategories = (content?.relatedCategories ?? [])
   .filter((cat) => categoryData.id !== 'statistics' && getToolsByCategory(cat.id, lang).length > 0);
 
 const breadcrumbItems = [
-  { name: ui.breadcrumbHome, href: '/' },
+  { name: ui.breadcrumbHome, href: localePath(lang) },
   { name: categoryData.name[lang], href: categoryUrl(lang, categoryData.id) },
 ];
 
@@ -160,7 +160,7 @@ if (faqItems.length > 0) {
   <section class="wrap page-head category-page-head" data-category={categoryData.id}>
     <Breadcrumb
       items={[
-        { label: ui.breadcrumbHome, href: '/' },
+        { label: ui.breadcrumbHome, href: localePath(lang) },
         { label: categoryData.name[lang], href: categoryUrl(lang, categoryData.id) },
       ]}
     />

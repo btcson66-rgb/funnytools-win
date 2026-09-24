@@ -1,6 +1,7 @@
 ---
 import { SITE, SITE_VERSION, type Locale } from '../config/site';
 import { t } from '../i18n/ui';
+import { localePath } from '../lib/url';
 import siteStats from '../data/site-stats.json';
 
 interface Props { lang: Locale; }
@@ -33,21 +34,21 @@ const statsLine = stats
     <nav class="footer-links" aria-label={ui.ariaFooterNav}>
       <div>
         <span>{lang === 'zh' ? '工具入口' : 'Tool hubs'}</span>
-        <a href="/education-statistics/">{lang === 'zh' ? '教育統計工具' : 'Education statistics'}</a>
-        <a href="/category/statistics/">{lang === 'zh' ? '統計計算' : 'Statistics'}</a>
-        <a href="/guides/t-score-calculator-guide/">{lang === 'zh' ? 'T 分數教學' : 'T-score guide'}</a>
+        <a href={localePath(lang, 'education-statistics')}>{lang === 'zh' ? '教育統計工具' : 'Education statistics'}</a>
+        <a href={localePath(lang, 'category', 'statistics')}>{lang === 'zh' ? '統計計算' : 'Statistics'}</a>
+        <a href={localePath(lang, 'guides', 't-score-calculator-guide')}>{lang === 'zh' ? 'T 分數教學' : 'T-score guide'}</a>
       </div>
       <div>
         <span>{lang === 'zh' ? '關於本站' : 'About'}</span>
-        <a href="/about/">{ui.footer.about}</a>
-        <a href="/contact/">{ui.footer.contact}</a>
-        <a href="/support/">{lang === 'zh' ? '支持我們' : 'Support'}</a>
+        <a href={localePath(lang, 'about')}>{ui.footer.about}</a>
+        <a href={localePath(lang, 'contact')}>{ui.footer.contact}</a>
+        <a href={localePath(lang, 'support')}>{lang === 'zh' ? '支持我們' : 'Support'}</a>
       </div>
       <div>
         <span>{lang === 'zh' ? '政策' : 'Policies'}</span>
-        <a href="/privacy/">{ui.footer.privacy}</a>
-        <a href="/terms/">{ui.footer.terms}</a>
-        <a href="/disclaimer/">{ui.footer.disclaimer}</a>
+        <a href={localePath(lang, 'privacy')}>{ui.footer.privacy}</a>
+        <a href={localePath(lang, 'terms')}>{ui.footer.terms}</a>
+        <a href={localePath(lang, 'disclaimer')}>{ui.footer.disclaimer}</a>
       </div>
       <div>
         <span>{lang === 'zh' ? '姊妹站' : 'Our other sites'}</span>

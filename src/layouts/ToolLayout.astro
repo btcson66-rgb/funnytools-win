@@ -48,8 +48,8 @@ const gateDisclosure = isDownloadGated ? getDownloadGateDisclosure(lang, tool.sl
 const seoDescription = toolSeoDescription(lang, content, isStrictlyLocal);
 const isAnonymousApi = tool.privacyLevel === 'anonymous-api';
 const breadcrumbItems = [
-  { label: ui.breadcrumbHome, href: '/' },
-  ...(category.id === 'statistics' ? [{ label: category.name[lang], href: '/category/statistics/' }] : []),
+  { label: ui.breadcrumbHome, href: localePath(lang) },
+  ...(category.id === 'statistics' ? [{ label: category.name[lang], href: categoryUrl(lang, 'statistics') }] : []),
   { label: content.name },
 ];
 const relatedGuides = getGuidesForTool(tool.slug, lang)
