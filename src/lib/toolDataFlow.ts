@@ -1,6 +1,7 @@
 import type { Locale } from '../config/site';
 
 export type ToolSurface = 'canonical' | 'expansion' | 'embed';
+export type CanonicalToolDataFlow = 'LOCAL_ONLY' | 'LOCAL_PROCESSING_GATED_OUTPUT' | 'CONVERSION_API';
 export type ToolDataFlowClass =
   | 'LOCAL_ONLY'
   | 'BACKEND_INPUT_UPLOAD'
@@ -33,6 +34,13 @@ export function isCanonicalConversionApiTool(slug: string): boolean {
 
 export function isCanonicalDownloadGatedTool(slug: string): boolean {
   return DOWNLOAD_GATED_TOOLS.includes(slug as (typeof DOWNLOAD_GATED_TOOLS)[number]);
+}
+
+/** The public canonical-tool contract; expansion and embed surfaces are classified separately. */
+export function classifyCanonicalToolDataFlow(slug: string): CanonicalToolDataFlow {
+  if (isCanonicalConversionApiTool(slug)) return 'CONVERSION_API';
+  if (isCanonicalDownloadGatedTool(slug)) return 'LOCAL_PROCESSING_GATED_OUTPUT';
+  return 'LOCAL_ONLY';
 }
 
 export function classifyToolDataFlow(

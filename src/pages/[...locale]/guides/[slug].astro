@@ -42,7 +42,7 @@ const { lang, guide: sourceGuide } = Astro.props as { lang: Locale; guide: SeoGu
 const ui = t(lang);
 const guide = viewSeoGuide(sourceGuide, lang);
 const guideHub = sourceGuide.pageKind === 'guideHub' ? null : resolveGuideHub(sourceGuide, lang);
-const hubCta = { id: 'education-statistics', label: lang === 'zh' ? '教育統計中心' : 'Education statistics', href: '/education-statistics/' };
+const hubCta = { id: 'education-statistics', label: lang === 'zh' ? '教育統計中心' : 'Education statistics', href: localePath(lang, 'education-statistics') };
 const articleAffiliateConfig = getGuideAffiliateConfig(guide.slug);
 const articleContentSplit = articleAffiliateConfig.affiliateEnabled && guide.contentHtml
   ? splitGuideContentHtml(guide.contentHtml)
@@ -86,7 +86,7 @@ const copy = {
   },
 }[lang];
 
-const guidesPath = '/education-statistics/';
+const guidesPath = localePath(lang, 'education-statistics');
 const guidePath = localePath(lang, 'guides', guide.slug);
 const guideUrl = absoluteUrl(guidePath);
 const liveTool = (slug: string): ToolMeta | undefined => {
@@ -110,7 +110,7 @@ const faqItems = guide.faq.map((item) => ({ q: item.question, a: item.answer }))
 const valueReview = buildGuideValueReview(lang, guide.slug, guide);
 const effectiveUpdatedAt = guide.updatedAt;
 const breadcrumbItems = [
-  { label: ui.breadcrumbHome, href: '/' },
+  { label: ui.breadcrumbHome, href: localePath(lang) },
   { label: lang === 'zh' ? '教育統計中心' : 'Education statistics', href: guidesPath },
   { label: guide.title },
 ];

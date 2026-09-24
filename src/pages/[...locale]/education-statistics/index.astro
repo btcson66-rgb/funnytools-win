@@ -267,7 +267,7 @@ const jsonLd = [
     <div class="education-cta-row" aria-label={lang === 'zh' ? '教育統計常用入口' : 'Education statistics shortcuts'}>
       <a class="btn go" href={localePath(lang, 'tools', 'teacher-exam-score-converter')}>{lang === 'zh' ? '使用教師甄試工具' : 'Use teacher exam tools'}</a>
       <a class="btn ghost" href={localePath(lang, 'tools', 't-score-calculator')}>{lang === 'zh' ? '換算 T / Z / PR' : 'Convert T / Z / PR'}</a>
-      <a class="btn ghost" href="/guides/t-score-calculator-guide/">{lang === 'zh' ? '閱讀 T 分數教學' : 'Read the T-score guide'}</a>
+      <a class="btn ghost" href={localePath(lang, 'guides', 't-score-calculator-guide')}>{lang === 'zh' ? '閱讀 T 分數教學' : 'Read the T-score guide'}</a>
       {lang === 'en' && <a class="btn ghost" href={localePath('en', 'tools', 'iep-progress-graph-generator')}>Try the IEP progress graph generator</a>}
     </div>
   </section>
@@ -300,7 +300,7 @@ const jsonLd = [
             </a>
           ))}
         </div>
-        <a class="btn" href="/guides/t-score-calculator-guide/">{resourceCopy.viewAllGuides}</a>
+        <a class="btn" href={localePath(lang, 'guides', 't-score-calculator-guide')}>{resourceCopy.viewAllGuides}</a>
       </section>
       <section class="resource-panel" aria-labelledby="education-workflows-title">
         <h3 id="education-workflows-title">{resourceCopy.workflows}</h3>
@@ -312,7 +312,7 @@ const jsonLd = [
             </a>
           ))}
         </div>
-        <a class="btn" href="/education-statistics/">{resourceCopy.viewAllWorkflows}</a>
+        <a class="btn" href={localePath(lang, 'education-statistics')}>{resourceCopy.viewAllWorkflows}</a>
       </section>
     </div>
   </section>

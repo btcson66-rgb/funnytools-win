@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit --project tsconfig.typecheck.json",
     "test": "npm run build && node --experimental-strip-types --test tests/*.test.mjs",
     "test:api": "node tests/conversion-api-integration.api.mjs",
+    "test:e2e:full": "node scripts/full-e2e-002.mjs",
     "preview": "astro preview",
     "audit:adsense": "node scripts/adsense-preflight.mjs",
     "adsense-status": "node scripts/adsense-status.mjs",
@@ -23,7 +24,8 @@
     "generate:og": "node scripts/generate-og-images.mjs",
     "audit:verification": "node scripts/verification-preflight.mjs",
     "audit:task012": "node scripts/task012-audit.mjs",
-    "audit:locale-quality": "node scripts/locale-quality-audit.mjs",
+    "audit:locale-quality": "node scripts/locale-quality-audit.mjs && node scripts/locale-link-audit.mjs",
+    "audit:locale-links": "node scripts/locale-link-audit.mjs",
     "audit:indexation": "node scripts/indexation-release-gate.mjs",
     "audit:performance": "node scripts/performance-release-gate.mjs",
     "report:search-performance": "node scripts/search-performance-lifecycle.mjs",
@@ -31,7 +33,7 @@
     "audit:content-value": "node scripts/content-value-audit.mjs",
     "audit:multilingual-aeo": "node scripts/multilingual-aeo-audit.mjs",
     "audit:french-aeo": "node scripts/french-aeo-audit.mjs",
-    "audit:lang-switch": "node scripts/lang-switch-audit.mjs",
+    "audit:lang-switch": "node scripts/lang-switch-audit.mjs && node scripts/locale-link-audit.mjs",
     "audit:ui-dark": "node scripts/ui-dark-audit.mjs",
     "content:audit": "node scripts/content-quality-audit.mjs",
     "seo:audit": "node scripts/seo-system-audit.mjs",
@@ -80,6 +82,7 @@
     "@types/qrcode": "^1.5.5",
     "@typescript-eslint/parser": "^8.68.0",
     "eslint": "^10.9.1",
+    "playwright": "^1.62.1",
     "typescript": "^6.0.3"
   }
 }

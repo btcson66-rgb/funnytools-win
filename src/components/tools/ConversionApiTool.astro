@@ -94,7 +94,7 @@ const isPdf = slug === 'pdf-compressor';
     <button class="btn go" type="button" data-action={isTable ? 'preview' : 'convert'} disabled>{isTable ? labels.preview : (isBulk ? labels.compress : isPdf ? labels.compress : isDxf ? labels.convert : labels.convert)}</button>
     {isTable && <button class="btn go" type="button" data-action="export" disabled>{labels.export}</button>}
     <button class="btn" type="button" data-action="cancel" hidden>{labels.cancel}</button>
-    <button class="btn" type="button" data-action="download" disabled>{isBulk ? labels.download : isWord ? labels.download : isDxf ? labels.download : isPdf ? labels.download : labels.export}</button>
+    <button class="btn" type="button" data-action="download" disabled>{labels.download}</button>
     <button class="btn ghost" type="button" data-action="clear">{labels.clear}</button>
   </div>
 </section>
@@ -170,9 +170,10 @@ const isPdf = slug === 'pdf-compressor';
     const pdfModes = new Set(['pdf-to-word', 'pdf-table-to-excel', 'pdf-compressor']);
     const requiresPdf = pdfModes.has(mode);
     const isPdfFile = (file) => Boolean(file && (file.type === 'application/pdf' || /\.pdf$/i.test(file.name || '')));
+    const isImageFile = (file) => Boolean(file && ['image/jpeg', 'image/png'].includes(file.type));
     const hasValidSingleFile = () => {
       const file = fileInput?.files?.[0];
-      return Boolean(file) && (!requiresPdf || isPdfFile(file));
+      return Boolean(file) && (!requiresPdf || isPdfFile(file)) && (mode !== 'image-to-dxf' || isImageFile(file));
     };
 
     const setError = (message = '') => { error.textContent = message; error.hidden = !message; };
@@ -319,7 +320,7 @@ const isPdf = slug === 'pdf-compressor';
       controller = null;
       clearOutput();
       const file = fileInput.files?.[0];
-      if (requiresPdf && file && !isPdfFile(file)) {
+      if (file && ((requiresPdf && !isPdfFile(file)) || (mode === 'image-to-dxf' && !isImageFile(file)))) {
         fileInput.value = '';
         setError(labels.invalidFile || labels.noFile);
         setStatus(labels.waiting);

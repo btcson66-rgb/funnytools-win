@@ -1,0 +1,6058 @@
+{
+  "summary": {
+    "fetch_base": "http://127.0.0.1:8121",
+    "sitemap_index": "https://funnytools.win/sitemap.xml",
+    "sitemap_children": [
+      {
+        "url": "https://funnytools.win/sitemap-tools.xml",
+        "status": 200
+      },
+      {
+        "url": "https://funnytools.win/sitemap-guides.xml",
+        "status": 200
+      }
+    ],
+    "sitemap_url_count": 20,
+    "sitemap_urls": [
+      "https://funnytools.win/tools/class-rank-percentile-calculator/",
+      "https://funnytools.win/tools/grade-average/",
+      "https://funnytools.win/tools/independent-samples-t-test-calculator/",
+      "https://funnytools.win/tools/percentile-rank-calculator/",
+      "https://funnytools.win/tools/random-name-picker/",
+      "https://funnytools.win/tools/standard-deviation/",
+      "https://funnytools.win/tools/t-score-calculator/",
+      "https://funnytools.win/tools/teacher-exam-score-converter/",
+      "https://funnytools.win/tools/weighted-average-calculator/",
+      "https://funnytools.win/tools/z-score-calculator/",
+      "https://funnytools.win/",
+      "https://funnytools.win/about/",
+      "https://funnytools.win/category/statistics/",
+      "https://funnytools.win/contact/",
+      "https://funnytools.win/disclaimer/",
+      "https://funnytools.win/education-statistics/",
+      "https://funnytools.win/guides/t-score-calculator-guide/",
+      "https://funnytools.win/privacy/",
+      "https://funnytools.win/support/",
+      "https://funnytools.win/terms/"
+    ],
+    "built_route_count": 1192,
+    "built_route_locales": {
+      "zh": 714,
+      "en": 264,
+      "es": 139,
+      "fr": 75
+    },
+    "built_noindex_count": 1172,
+    "built_redirect_count": 338,
+    "built_routes_not_in_sitemap": [
+      "/404/",
+      "/about-tools/",
+      "/affiliate-disclosure/",
+      "/blog/",
+      "/blog/ad-block-safe-layout-guide/",
+      "/blog/after-midterm-final-score-needed/",
+      "/blog/application-pdf-package-guide/",
+      "/blog/base64-guide/",
+      "/blog/browser-local-tool-privacy-guide/",
+      "/blog/calculate-t-score-from-z-score/",
+      "/blog/can-pr-and-t-score-convert/",
+      "/blog/can-z-score-be-greater-than-3/",
+      "/blog/can-z-score-compare-different-exams/",
+      "/blog/case-converter-writing-guide/",
+      "/blog/class-rank-to-percentile-rank/",
+      "/blog/classroom-game-tools-guide/",
+      "/blog/classroom-icebreaker-random-guide/",
+      "/blog/classroom-list-cleaning-guide/",
+      "/blog/classroom-privacy-tools-guide/",
+      "/blog/classroom-random-tools-guide/",
+      "/blog/compound-interest-explained/",
+      "/blog/compound-interest-reading-guide/",
+      "/blog/compress-large-images/",
+      "/blog/countdown-timer-classroom-guide/",
+      "/blog/countdown-timer-productivity-guide/",
+      "/blog/csv-cleanup-guide/",
+      "/blog/current-score-58-final-exam-save-plan/",
+      "/blog/cutoff-score-analysis-guide/",
+      "/blog/date-calculator-guide/",
+      "/blog/decision-fatigue-guide/",
+      "/blog/exam-score-normalization-mistakes/",
+      "/blog/failing-grade-calculator-final-needed/",
+      "/blog/fair-lottery-guide/",
+      "/blog/file-upload-safety-guide/",
+      "/blog/free-qr-code-guide/",
+      "/blog/ga4-basic-traffic-guide/",
+      "/blog/grade-average-weighted-gpa-guide/",
+      "/blog/group-role-assignment-guide/",
+      "/blog/gsc-indexing-guide/",
+      "/blog/image-compress-resize-format-guide/",
+      "/blog/image-compression-quality-guide/",
+      "/blog/image-for-homework-guide/",
+      "/blog/image-metadata-privacy-guide/",
+      "/blog/image-upload-limit-guide/",
+      "/blog/images-to-pdf-document-guide/",
+      "/blog/images-to-pdf-guide/",
+      "/blog/internal-linking-guide/",
+      "/blog/jpg-png-webp-difference-guide/",
+      "/blog/json-formatter-beginner-guide/",
+      "/blog/line-break-cleanup-guide/",
+      "/blog/logo-image-format-guide/",
+      "/blog/lucky-draw-event-guide/",
+      "/blog/markdown-to-html-guide/",
+      "/blog/mobile-pdf-guide/",
+      "/blog/mobile-pdf-merge/",
+      "/blog/mortgage-calculation-guide/",
+      "/blog/mortgage-payment-explained/",
+      "/blog/password-generator-guide/",
+      "/blog/pdf-blank-page-removal-guide/",
+      "/blog/pdf-file-naming-guide/",
+      "/blog/pdf-for-teachers-guide/",
+      "/blog/pdf-merge-guide/",
+      "/blog/pdf-merge-split-compress-workflow/",
+      "/blog/pdf-offline-browser-safety/",
+      "/blog/pdf-page-order-checklist/",
+      "/blog/pdf-privacy-checklist/",
+      "/blog/pdf-signature-workflow/",
+      "/blog/pdf-split-extract-delete-guide/",
+      "/blog/pdf-split-guide/",
+      "/blog/pdf-too-large-upload-guide/",
+      "/blog/pdf-too-large/",
+      "/blog/pdf-troubleshooting-guide/",
+      "/blog/percentage-calculator-guide/",
+      "/blog/percentile-rank-formula-with-ties/",
+      "/blog/percentile-rank-guide/",
+      "/blog/percentile-rank-vs-rank-percentage/",
+      "/blog/percentile-rank-with-many-ties/",
+      "/blog/photo-before-after-compress-guide/",
+      "/blog/pr-84-meaning-example/",
+      "/blog/pr-common-error-as-correct-rate/",
+      "/blog/pr-percentile-10/",
+      "/blog/pr-percentile-2/",
+      "/blog/pr-percentile-3/",
+      "/blog/pr-percentile-4/",
+      "/blog/pr-percentile-5/",
+      "/blog/pr-percentile-6/",
+      "/blog/pr-percentile-7/",
+      "/blog/pr-percentile-8/",
+      "/blog/pr-percentile-9/",
+      "/blog/pr-percentile-rank-guide/",
+      "/blog/pr-percentile/",
+      "/blog/pr-z-t-score-comparison/",
+      "/blog/profile-photo-resize-guide/",
+      "/blog/qr-code-best-practices/",
+      "/blog/qr-code-generator-guide/",
+      "/blog/qr-code-guide/",
+      "/blog/qr-code-poster-guide/",
+      "/blog/random-group-classroom-guide/",
+      "/blog/random-grouping-classroom-guide/",
+      "/blog/random-grouping-classroom/",
+      "/blog/random-number-lottery-guide/",
+      "/blog/random-student-picker-guide/",
+      "/blog/random-wheel-decision-guide/",
+      "/blog/ranking-percentile-class-guide/",
+      "/blog/raw-score-to-z-score-class-example/",
+      "/blog/resume-pdf-preparation-guide/",
+      "/blog/rubric-score-guide/",
+      "/blog/scan-to-pdf-quality-guide/",
+      "/blog/score-appeal-record-guide/",
+      "/blog/screenshot-cleanup-guide/",
+      "/blog/seating-chart-practical-guide/",
+      "/blog/semester-grade-calculator-guide/",
+      "/blog/seo-title-description-guide/",
+      "/blog/sitemap-checklist-guide/",
+      "/blog/slug-generator-seo-guide/",
+      "/blog/small-sample-statistics-guide/",
+      "/blog/social-media-image-size-guide/",
+      "/blog/standard-deviation-classroom-guide/",
+      "/blog/student-presentation-order-guide/",
+      "/blog/student-toolkit-guide/",
+      "/blog/t-score-40-50-60-70-meaning/",
+      "/blog/t-score-and-percentile-rank/",
+      "/blog/t-score-calculator-guide/",
+      "/blog/t-score-common-errors-norm-direction/",
+      "/blog/t-score-complete-guide/",
+      "/blog/t-score-high-does-not-guarantee-admission/",
+      "/blog/t-score-in-psychological-educational-tests/",
+      "/blog/t-score-is-not-percentage/",
+      "/blog/t-score-pr-guide/",
+      "/blog/t-score-teacher-exam-10/",
+      "/blog/t-score-teacher-exam-2/",
+      "/blog/t-score-teacher-exam-3/",
+      "/blog/t-score-teacher-exam-4/",
+      "/blog/t-score-teacher-exam-5/",
+      "/blog/t-score-teacher-exam-6/",
+      "/blog/t-score-teacher-exam-7/",
+      "/blog/t-score-teacher-exam-8/",
+      "/blog/t-score-teacher-exam-9/",
+      "/blog/t-score-teacher-exam/",
+      "/blog/t-score-vs-z-score/",
+      "/blog/teacher-activity-flow-guide/",
+      "/blog/teacher-admin-toolkit-guide/",
+      "/blog/teacher-exam-score-calculation-written-demo-interview/",
+      "/blog/teacher-exam-score-checklist/",
+      "/blog/teacher-exam-t-score-fairness/",
+      "/blog/teacher-exam-weight-written-teaching-interview/",
+      "/blog/teacher-exam-weighted-score-guide/",
+      "/blog/teacher-random-grouping/",
+      "/blog/teacher-score-spreadsheet-check/",
+      "/blog/thin-content-cleanup-guide/",
+      "/blog/this-or-that-decision-guide/",
+      "/blog/time-zone-meeting-guide/",
+      "/blog/timestamp-converter-guide/",
+      "/blog/tool-page-content-guide/",
+      "/blog/transparent-background-guide/",
+      "/blog/unit-conversion-guide/",
+      "/blog/url-encode-decode-guide/",
+      "/blog/utm-link-guide/",
+      "/blog/uuid-guide/",
+      "/blog/webp-compatibility-guide/",
+      "/blog/weighted-average-common-cases/",
+      "/blog/what-is-percentile-rank-not-percentage/",
+      "/blog/what-is-t-score-mean-50-sd-10/",
+      "/blog/what-is-z-score-standard-deviation/",
+      "/blog/what-to-eat-decision-guide/",
+      "/blog/what-to-eat-decision-methods/",
+      "/blog/word-count-social-media-guide/",
+      "/blog/word-counter-use-cases/",
+      "/blog/yes-no-decision-guide/",
+      "/blog/z-score-0-1-minus-1-meaning/",
+      "/blog/z-score-and-standard-deviation-relationship/",
+      "/blog/z-score-formula-example-calculator/",
+      "/blog/z-score-in-research-outlier-standardization/",
+      "/blog/z-score-standardization-guide/",
+      "/blog/z-score-t-score-standard-score-guide/",
+      "/blog/z-score-to-t-score-formula-errors/",
+      "/category/draw/",
+      "/category/image/",
+      "/category/money/",
+      "/category/pdf/",
+      "/category/random/",
+      "/category/study/",
+      "/category/text/",
+      "/category/time/",
+      "/embed/age-calculator/",
+      "/embed/apa-7-report-generator/",
+      "/embed/bar-chart-maker/",
+      "/embed/barcode-generator/",
+      "/embed/break-reminder/",
+      "/embed/business-days/",
+      "/embed/cad-2d/",
+      "/embed/character-counter/",
+      "/embed/class-rank-percentile-calculator/",
+      "/embed/color-generator/",
+      "/embed/compound-interest/",
+      "/embed/countdown-timer/",
+      "/embed/date-difference/",
+      "/embed/dice-roller/",
+      "/embed/final-grade-needed-calculator/",
+      "/embed/flowchart/",
+      "/embed/gpa-calculator/",
+      "/embed/grade-average/",
+      "/embed/group-generator/",
+      "/embed/image-compressor/",
+      "/embed/image-crop/",
+      "/embed/image-resizer/",
+      "/embed/image-rotate-flip/",
+      "/embed/inflation/",
+      "/embed/jpg-to-png/",
+      "/embed/jpg-to-webp/",
+      "/embed/markdown-previewer/",
+      "/embed/mortgage-payment/",
+      "/embed/net-salary/",
+      "/embed/normalized-score-converter/",
+      "/embed/overtime-pay/",
+      "/embed/password-generator/",
+      "/embed/percentage-calculator/",
+      "/embed/percentile-rank-calculator/",
+      "/embed/pie-chart-maker/",
+      "/embed/png-to-jpg/",
+      "/embed/pomodoro-timer/",
+      "/embed/qr-code-generator/",
+      "/embed/random-group-generator/",
+      "/embed/random-name-picker/",
+      "/embed/random-number-picker/",
+      "/embed/random-student-picker/",
+      "/embed/random-wheel/",
+      "/embed/remove-duplicate-lines/",
+      "/embed/remove-empty-lines/",
+      "/embed/savings-goal/",
+      "/embed/seating-chart/",
+      "/embed/sketchpad/",
+      "/embed/sort-lines/",
+      "/embed/spss-result-interpreter/",
+      "/embed/standard-deviation/",
+      "/embed/stopwatch/",
+      "/embed/t-score-calculator/",
+      "/embed/teacher-exam-score-converter/",
+      "/embed/this-or-that/",
+      "/embed/timestamp-converter/",
+      "/embed/uuid-generator/",
+      "/embed/webp-to-jpg/",
+      "/embed/weighted-average-calculator/",
+      "/embed/what-to-eat/",
+      "/embed/word-counter/",
+      "/embed/z-score-calculator/",
+      "/en/",
+      "/en/aac-implementation-ledger/",
+      "/en/about-tools/",
+      "/en/about/",
+      "/en/behavior-observation-ledger/",
+      "/en/blog/",
+      "/en/category/draw/",
+      "/en/category/image/",
+      "/en/category/money/",
+      "/en/category/pdf/",
+      "/en/category/random/",
+      "/en/category/statistics/",
+      "/en/category/study/",
+      "/en/category/text/",
+      "/en/category/time/",
+      "/en/contact/",
+      "/en/disclaimer/",
+      "/en/education-statistics/",
+      "/en/embed/age-calculator/",
+      "/en/embed/apa-7-report-generator/",
+      "/en/embed/bar-chart-maker/",
+      "/en/embed/barcode-generator/",
+      "/en/embed/break-reminder/",
+      "/en/embed/business-days/",
+      "/en/embed/cad-2d/",
+      "/en/embed/character-counter/",
+      "/en/embed/class-rank-percentile-calculator/",
+      "/en/embed/color-generator/",
+      "/en/embed/compound-interest/",
+      "/en/embed/countdown-timer/",
+      "/en/embed/date-difference/",
+      "/en/embed/dice-roller/",
+      "/en/embed/final-grade-needed-calculator/",
+      "/en/embed/flowchart/",
+      "/en/embed/gpa-calculator/",
+      "/en/embed/grade-average/",
+      "/en/embed/group-generator/",
+      "/en/embed/image-compressor/",
+      "/en/embed/image-crop/",
+      "/en/embed/image-resizer/",
+      "/en/embed/image-rotate-flip/",
+      "/en/embed/inflation/",
+      "/en/embed/jpg-to-png/",
+      "/en/embed/jpg-to-webp/",
+      "/en/embed/markdown-previewer/",
+      "/en/embed/mortgage-payment/",
+      "/en/embed/net-salary/",
+      "/en/embed/normalized-score-converter/",
+      "/en/embed/overtime-pay/",
+      "/en/embed/password-generator/",
+      "/en/embed/percentage-calculator/",
+      "/en/embed/percentile-rank-calculator/",
+      "/en/embed/pie-chart-maker/",
+      "/en/embed/png-to-jpg/",
+      "/en/embed/pomodoro-timer/",
+      "/en/embed/qr-code-generator/",
+      "/en/embed/random-group-generator/",
+      "/en/embed/random-name-picker/",
+      "/en/embed/random-number-picker/",
+      "/en/embed/random-student-picker/",
+      "/en/embed/random-wheel/",
+      "/en/embed/remove-duplicate-lines/",
+      "/en/embed/remove-empty-lines/",
+      "/en/embed/savings-goal/",
+      "/en/embed/seating-chart/",
+      "/en/embed/sketchpad/",
+      "/en/embed/sort-lines/",
+      "/en/embed/spss-result-interpreter/",
+      "/en/embed/standard-deviation/",
+      "/en/embed/stopwatch/",
+      "/en/embed/t-score-calculator/",
+      "/en/embed/teacher-exam-score-converter/",
+      "/en/embed/this-or-that/",
+      "/en/embed/timestamp-converter/",
+      "/en/embed/uuid-generator/",
+      "/en/embed/webp-to-jpg/",
+      "/en/embed/weighted-average-calculator/",
+      "/en/embed/what-to-eat/",
+      "/en/embed/word-counter/",
+      "/en/embed/z-score-calculator/",
+      "/en/for/",
+      "/en/for/creators/",
+      "/en/for/designers/",
+      "/en/for/developers/",
+      "/en/for/office-workers/",
+      "/en/for/students/",
+      "/en/for/teachers/",
+      "/en/guides/",
+      "/en/guides/2d-cad-drawing-board-workflow-guide/",
+      "/en/guides/a4-vs-us-letter-printing-guide/",
+      "/en/guides/anova-apa-format-guide/",
+      "/en/guides/bar-chart-school-report-guide/",
+      "/en/guides/classroom-group-roles-rotation-guide/",
+      "/en/guides/classroom-lottery-tool-guide/",
+      "/en/guides/classroom-random-group-absent-student-repair-guide/",
+      "/en/guides/classroom-random-group-guide/",
+      "/en/guides/classroom-random-group-materials-handoff-guide/",
+      "/en/guides/classroom-random-group-no-repeat-guide/",
+      "/en/guides/classroom-random-group-seat-transition-guide/",
+      "/en/guides/classroom-random-group-shareable-result-guide/",
+      "/en/guides/classroom-random-group-size-balance-guide/",
+      "/en/guides/classroom-random-picker-guide/",
+      "/en/guides/classroom-timer-guide/",
+      "/en/guides/csv-to-json-header-duplicate-column-guide/",
+      "/en/guides/fair-student-grouping-guide/",
+      "/en/guides/image-color-profile-web-print-guide/",
+      "/en/guides/image-compression-email-guide/",
+      "/en/guides/image-compression-quality-size-guide/",
+      "/en/guides/image-compressor-metadata-privacy-guide/",
+      "/en/guides/image-resampling-quality-guide/",
+      "/en/guides/image-resize-aspect-ratio-guide/",
+      "/en/guides/image-resolution-print-web-guide/",
+      "/en/guides/json-formatter-trailing-comma-error-guide/",
+      "/en/guides/merge-pdf-bookmarks-navigation-guide/",
+      "/en/guides/merge-pdf-page-size-orientation-guide/",
+      "/en/guides/merge-pdf-private-guide/",
+      "/en/guides/merge-pdf-reading-order-checklist-guide/",
+      "/en/guides/pdf-accessibility-reading-order-check-guide/",
+      "/en/guides/pdf-compressor-email-attachment-guide/",
+      "/en/guides/pdf-compressor-form-fields-links-guide/",
+      "/en/guides/pdf-page-reorder-appendix-merge-check-guide/",
+      "/en/guides/pdf-split-vs-extract-vs-delete/",
+      "/en/guides/pdf-table-to-excel-header-check-guide/",
+      "/en/guides/pdf-to-image-background-contrast-guide/",
+      "/en/guides/pdf-to-image-multipage-download-guide/",
+      "/en/guides/pdf-to-image-print-crop-marks-guide/",
+      "/en/guides/pdf-to-image-raster-text-search-guide/",
+      "/en/guides/pdf-to-image-resolution-guide/",
+      "/en/guides/pdf-to-word-form-field-editing-guide/",
+      "/en/guides/pdf-to-word-layout-fidelity-guide/",
+      "/en/guides/pdf-to-word-ocr-language-check-guide/",
+      "/en/guides/pdf-to-word-review-track-changes-guide/",
+      "/en/guides/pdf-upload-failed-troubleshooting/",
+      "/en/guides/percentage-grade-to-gpa-conversion-guide/",
+      "/en/guides/percentage-shortcuts-guide/",
+      "/en/guides/percentile-rank-guide/",
+      "/en/guides/photos-to-pdf-phone-guide/",
+      "/en/guides/qr-code-accessible-fallback-guide/",
+      "/en/guides/qr-code-before-print-testing-guide/",
+      "/en/guides/qr-code-classroom-guide/",
+      "/en/guides/qr-code-destination-change-log-guide/",
+      "/en/guides/qr-code-event-page-expiry-guide/",
+      "/en/guides/qr-code-mobile-landing-page-guide/",
+      "/en/guides/qr-code-multi-placement-consistency-guide/",
+      "/en/guides/qr-code-multilingual-switch-testing-guide/",
+      "/en/guides/qr-code-payload-length-guide/",
+      "/en/guides/qr-code-scan-failure-field-troubleshooting-guide/",
+      "/en/guides/qr-code-utm-campaign-link-guide/",
+      "/en/guides/seating-chart-changeover-routine-guide/",
+      "/en/guides/seating-chart-student-needs-intake-guide/",
+      "/en/guides/split-pdf-output-naming-batch-delivery-guide/",
+      "/en/guides/split-pdf-page-range-planning-guide/",
+      "/en/guides/spss-levene-test-guide/",
+      "/en/guides/t-score-calculator-guide/",
+      "/en/guides/t-test-apa-format-guide/",
+      "/en/guides/teacher-exam-weighted-score-guide/",
+      "/en/guides/two-way-anova-interaction-guide/",
+      "/en/guides/word-count-essay-limits-guide/",
+      "/en/guides/z-score-calculator-guide/",
+      "/en/iep-progress-ledger/",
+      "/en/privacy/",
+      "/en/shop/",
+      "/en/support/",
+      "/en/terms/",
+      "/en/tools/",
+      "/en/tools/aac-generalization-matrix/",
+      "/en/tools/abc-behavior-pattern-summary/",
+      "/en/tools/age-calculator/",
+      "/en/tools/apa-7-report-generator/",
+      "/en/tools/bar-chart-maker/",
+      "/en/tools/barcode-generator/",
+      "/en/tools/base64/",
+      "/en/tools/break-reminder/",
+      "/en/tools/bulk-image-compressor/",
+      "/en/tools/business-days/",
+      "/en/tools/cad-2d/",
+      "/en/tools/case-converter/",
+      "/en/tools/character-counter/",
+      "/en/tools/class-rank-percentile-calculator/",
+      "/en/tools/color-generator/",
+      "/en/tools/compound-interest/",
+      "/en/tools/countdown-timer/",
+      "/en/tools/cronbach-alpha-calculator/",
+      "/en/tools/csv-to-json/",
+      "/en/tools/date-difference/",
+      "/en/tools/delete-pdf-pages/",
+      "/en/tools/dice-roller/",
+      "/en/tools/extract-pdf-pages/",
+      "/en/tools/flowchart/",
+      "/en/tools/gpa-calculator/",
+      "/en/tools/grade-average/",
+      "/en/tools/group-generator/",
+      "/en/tools/iep-progress-graph-generator/",
+      "/en/tools/image-compressor/",
+      "/en/tools/image-crop/",
+      "/en/tools/image-resizer/",
+      "/en/tools/image-rotate-flip/",
+      "/en/tools/image-to-base64/",
+      "/en/tools/image-to-dxf/",
+      "/en/tools/images-to-pdf/",
+      "/en/tools/independent-samples-t-test-calculator/",
+      "/en/tools/inflation/",
+      "/en/tools/job-task-analysis-tracker/",
+      "/en/tools/jpg-to-png/",
+      "/en/tools/jpg-to-webp/",
+      "/en/tools/json-formatter/",
+      "/en/tools/json-to-csv/",
+      "/en/tools/markdown-previewer/",
+      "/en/tools/merge-pdf/",
+      "/en/tools/mortgage-payment/",
+      "/en/tools/net-salary/",
+      "/en/tools/normalized-score-converter/",
+      "/en/tools/overtime-pay/",
+      "/en/tools/password-generator/",
+      "/en/tools/pdf-compressor/",
+      "/en/tools/pdf-page-reorder/",
+      "/en/tools/pdf-table-to-excel/",
+      "/en/tools/pdf-to-image/",
+      "/en/tools/pdf-to-word/",
+      "/en/tools/percentage-calculator/",
+      "/en/tools/percentile-rank-calculator/",
+      "/en/tools/pie-chart-maker/",
+      "/en/tools/png-to-jpg/",
+      "/en/tools/pomodoro-timer/",
+      "/en/tools/postsecondary-transition-action-planner/",
+      "/en/tools/qr-code-generator/",
+      "/en/tools/random-group-generator/",
+      "/en/tools/random-name-picker/",
+      "/en/tools/random-number-picker/",
+      "/en/tools/random-student-picker/",
+      "/en/tools/random-wheel/",
+      "/en/tools/remove-duplicate-lines/",
+      "/en/tools/remove-empty-lines/",
+      "/en/tools/rotate-pdf/",
+      "/en/tools/savings-goal/",
+      "/en/tools/seating-chart/",
+      "/en/tools/sketchpad/",
+      "/en/tools/sort-lines/",
+      "/en/tools/split-pdf/",
+      "/en/tools/spss-result-interpreter/",
+      "/en/tools/standard-deviation/",
+      "/en/tools/stopwatch/",
+      "/en/tools/t-score-calculator/",
+      "/en/tools/teacher-exam-score-converter/",
+      "/en/tools/this-or-that/",
+      "/en/tools/timestamp-converter/",
+      "/en/tools/url-encoder/",
+      "/en/tools/uuid-generator/",
+      "/en/tools/webp-to-jpg/",
+      "/en/tools/weighted-average-calculator/",
+      "/en/tools/what-to-eat/",
+      "/en/tools/word-counter/",
+      "/en/tools/z-score-calculator/",
+      "/en/transition-pathway-ledger/",
+      "/en/wedding-seating-conflict-solver/",
+      "/en/workflows/",
+      "/en/workflows/creator-social-toolkit/",
+      "/en/workflows/daily-decision-toolkit/",
+      "/en/workflows/graduate-statistics-report-toolkit/",
+      "/en/workflows/office-document-toolkit/",
+      "/en/workflows/student-report-toolkit/",
+      "/en/workflows/teacher-classroom-random-toolkit/",
+      "/en/workflows/teacher-exam-score-toolkit/",
+      "/en/worksite-skills-ledger/",
+      "/es/",
+      "/es/apoyar-funnytools/",
+      "/es/aviso-legal/",
+      "/es/categorias/azar/",
+      "/es/categorias/dibujo/",
+      "/es/categorias/dinero/",
+      "/es/categorias/estadistica/",
+      "/es/categorias/estudio/",
+      "/es/categorias/imagen/",
+      "/es/categorias/pdf/",
+      "/es/categorias/texto/",
+      "/es/categorias/tiempo/",
+      "/es/como-funcionan-las-herramientas/",
+      "/es/condiciones-de-uso/",
+      "/es/contacto/",
+      "/es/estadisticas-educativas/",
+      "/es/flujos/",
+      "/es/flujos/actividades-aleatorias-aula/",
+      "/es/flujos/calcular-nota-oposicion-docente/",
+      "/es/flujos/contenido-redes-sociales/",
+      "/es/flujos/decisiones-cotidianas/",
+      "/es/flujos/documentos-oficina/",
+      "/es/flujos/entrega-informe-estudiantil/",
+      "/es/flujos/informe-estadistico-investigacion/",
+      "/es/guias/",
+      "/es/guias/a4-o-letter-para-imprimir/",
+      "/es/guias/agrupamientos-equitativos-aula/",
+      "/es/guias/anova-formato-apa-7/",
+      "/es/guias/calcular-nota-oposicion-docente/",
+      "/es/guias/calcular-porcentajes-rapido/",
+      "/es/guias/codigos-qr-en-el-aula/",
+      "/es/guias/comprimir-fotos-para-email/",
+      "/es/guias/contrasena-segura-fuerte/",
+      "/es/guias/fluidez-tablas-multiplicar/",
+      "/es/guias/fotos-a-pdf-desde-movil/",
+      "/es/guias/grafico-barras-trabajo-escolar/",
+      "/es/guias/grupos-aleatorios-clase/",
+      "/es/guias/interaccion-anova-dos-factores/",
+      "/es/guias/kb-mb-gb-tb-conversion/",
+      "/es/guias/limite-palabras-ensayos-examenes/",
+      "/es/guias/prueba-levene-spss/",
+      "/es/guias/prueba-t-formato-apa-7/",
+      "/es/guias/puntuacion-t-interpretacion/",
+      "/es/guias/puntuacion-z-interpretacion/",
+      "/es/guias/rango-percentil-interpretacion/",
+      "/es/guias/ruleta-sorteos-clase/",
+      "/es/guias/selector-aleatorio-alumnos/",
+      "/es/guias/temporizador-clase/",
+      "/es/guias/unir-pdf-sin-subir-archivos/",
+      "/es/herramientas/",
+      "/es/herramientas/cad-2d-online/",
+      "/es/herramientas/calculadora-alfa-cronbach/",
+      "/es/herramientas/calculadora-de-edad/",
+      "/es/herramientas/calculadora-desviacion-estandar/",
+      "/es/herramientas/calculadora-dias-laborables/",
+      "/es/herramientas/calculadora-gpa/",
+      "/es/herramientas/calculadora-hipoteca/",
+      "/es/herramientas/calculadora-horas-extra/",
+      "/es/herramientas/calculadora-inflacion/",
+      "/es/herramientas/calculadora-interes-compuesto/",
+      "/es/herramientas/calculadora-media-ponderada/",
+      "/es/herramientas/calculadora-meta-ahorro/",
+      "/es/herramientas/calculadora-nota-oposicion-docente/",
+      "/es/herramientas/calculadora-percentil-ranking-clase/",
+      "/es/herramientas/calculadora-porcentajes/",
+      "/es/herramientas/calculadora-promedio-notas/",
+      "/es/herramientas/calculadora-puntuacion-t/",
+      "/es/herramientas/calculadora-puntuacion-z/",
+      "/es/herramientas/calculadora-rango-percentil/",
+      "/es/herramientas/calculadora-sueldo-neto/",
+      "/es/herramientas/calculadora-t-muestras-independientes/",
+      "/es/herramientas/calcular-diferencia-entre-fechas/",
+      "/es/herramientas/codificar-decodificar-base64/",
+      "/es/herramientas/codificar-decodificar-url/",
+      "/es/herramientas/comprimir-imagenes/",
+      "/es/herramientas/comprimir-pdf/",
+      "/es/herramientas/contador-caracteres/",
+      "/es/herramientas/contador-palabras/",
+      "/es/herramientas/conversor-puntuaciones-estandarizadas/",
+      "/es/herramientas/convertir-csv-a-json/",
+      "/es/herramientas/convertir-imagen-base64/",
+      "/es/herramientas/convertir-imagenes-a-pdf/",
+      "/es/herramientas/convertir-jpg-a-png/",
+      "/es/herramientas/convertir-jpg-a-webp/",
+      "/es/herramientas/convertir-json-a-csv/",
+      "/es/herramientas/convertir-mayusculas-minusculas/",
+      "/es/herramientas/convertir-pdf-a-imagen/",
+      "/es/herramientas/convertir-png-a-jpg/",
+      "/es/herramientas/convertir-timestamp-unix/",
+      "/es/herramientas/convertir-webp-a-jpg/",
+      "/es/herramientas/crear-diagrama-flujo/",
+      "/es/herramientas/crear-grafico-barras/",
+      "/es/herramientas/crear-grafico-circular/",
+      "/es/herramientas/crear-grupos-clase/",
+      "/es/herramientas/crear-plano-asientos-aula/",
+      "/es/herramientas/cronometro-online/",
+      "/es/herramientas/decidir-entre-dos-opciones/",
+      "/es/herramientas/dividir-pdf/",
+      "/es/herramientas/editor-markdown-online/",
+      "/es/herramientas/eliminar-lineas-duplicadas/",
+      "/es/herramientas/eliminar-lineas-vacias/",
+      "/es/herramientas/eliminar-paginas-pdf/",
+      "/es/herramientas/extraer-paginas-pdf/",
+      "/es/herramientas/formatear-validar-json/",
+      "/es/herramientas/generador-codigo-barras/",
+      "/es/herramientas/generador-codigo-qr/",
+      "/es/herramientas/generador-colores-hex-rgb-hsl/",
+      "/es/herramientas/generador-contrasenas-seguras/",
+      "/es/herramientas/generador-grupos-aleatorios/",
+      "/es/herramientas/generador-informe-apa-7/",
+      "/es/herramientas/generador-numeros-aleatorios/",
+      "/es/herramientas/generador-uuid-v4/",
+      "/es/herramientas/interpretar-resultados-spss/",
+      "/es/herramientas/ordenar-lineas-texto/",
+      "/es/herramientas/ordenar-paginas-pdf/",
+      "/es/herramientas/pizarra-dibujo-online/",
+      "/es/herramientas/que-comer-hoy/",
+      "/es/herramientas/recordatorio-descansos/",
+      "/es/herramientas/recortar-imagen/",
+      "/es/herramientas/redimensionar-imagen/",
+      "/es/herramientas/rotar-pdf/",
+      "/es/herramientas/rotar-voltear-imagen/",
+      "/es/herramientas/ruleta-aleatoria/",
+      "/es/herramientas/selector-aleatorio-alumnos/",
+      "/es/herramientas/sorteo-nombres-aleatorio/",
+      "/es/herramientas/temporizador-online/",
+      "/es/herramientas/temporizador-pomodoro/",
+      "/es/herramientas/tirar-dados-online/",
+      "/es/herramientas/unir-pdf/",
+      "/es/para/",
+      "/es/para/creadores/",
+      "/es/para/desarrolladores/",
+      "/es/para/disenadores/",
+      "/es/para/docentes/",
+      "/es/para/estudiantes/",
+      "/es/para/oficina/",
+      "/es/privacidad/",
+      "/es/sobre-funnytools/",
+      "/es/tienda/",
+      "/find-tools/",
+      "/for/",
+      "/for/creators/",
+      "/for/designers/",
+      "/for/developers/",
+      "/for/office-workers/",
+      "/for/students/",
+      "/for/teachers/",
+      "/fr/",
+      "/fr/confidentialite/",
+      "/fr/fonctionnement-outils/",
+      "/fr/outils/",
+      "/fr/outils/calcul-moyenne-notes/",
+      "/fr/outils/calculateur-age/",
+      "/fr/outils/calculateur-ecart-type/",
+      "/fr/outils/calculateur-heures-supplementaires/",
+      "/fr/outils/calculateur-inflation-pouvoir-achat/",
+      "/fr/outils/calculateur-interets-composes/",
+      "/fr/outils/calculateur-jours-ouvres/",
+      "/fr/outils/calculateur-mensualite-pret-immobilier/",
+      "/fr/outils/calculateur-moyenne-ponderee/",
+      "/fr/outils/calculateur-objectif-epargne/",
+      "/fr/outils/calculateur-pourcentage/",
+      "/fr/outils/calculateur-rang-percentile/",
+      "/fr/outils/calculateur-salaire-net/",
+      "/fr/outils/calculateur-score-t/",
+      "/fr/outils/calculateur-score-z/",
+      "/fr/outils/calculer-difference-entre-dates/",
+      "/fr/outils/cao-2d-en-ligne/",
+      "/fr/outils/choisir-entre-deux-options/",
+      "/fr/outils/chronometre-en-ligne/",
+      "/fr/outils/compresser-image/",
+      "/fr/outils/compresser-pdf/",
+      "/fr/outils/compteur-caracteres/",
+      "/fr/outils/compteur-mots/",
+      "/fr/outils/convertir-csv-en-json/",
+      "/fr/outils/convertir-image-en-base64/",
+      "/fr/outils/convertir-images-en-pdf/",
+      "/fr/outils/convertir-jpg-en-png/",
+      "/fr/outils/convertir-jpg-en-webp/",
+      "/fr/outils/convertir-json-en-csv/",
+      "/fr/outils/convertir-majuscules-minuscules/",
+      "/fr/outils/convertir-pdf-en-image/",
+      "/fr/outils/convertir-png-en-jpg/",
+      "/fr/outils/convertir-timestamp-unix/",
+      "/fr/outils/convertir-webp-en-jpg/",
+      "/fr/outils/creer-diagramme-circulaire/",
+      "/fr/outils/creer-diagramme-flux/",
+      "/fr/outils/creer-graphique-barres/",
+      "/fr/outils/diviser-pdf/",
+      "/fr/outils/editeur-markdown-en-ligne/",
+      "/fr/outils/encoder-decoder-base64/",
+      "/fr/outils/encoder-decoder-url/",
+      "/fr/outils/extraire-pages-pdf/",
+      "/fr/outils/faire-pivoter-image/",
+      "/fr/outils/faire-pivoter-pdf/",
+      "/fr/outils/formater-valider-json/",
+      "/fr/outils/fusionner-pdf/",
+      "/fr/outils/generateur-code-barres/",
+      "/fr/outils/generateur-code-qr/",
+      "/fr/outils/generateur-couleurs-hex-rgb-hsl/",
+      "/fr/outils/generateur-groupes-aleatoires/",
+      "/fr/outils/generateur-groupes-classe/",
+      "/fr/outils/generateur-mot-de-passe-securise/",
+      "/fr/outils/generateur-nombres-aleatoires/",
+      "/fr/outils/generateur-uuid-v4/",
+      "/fr/outils/lancer-des-en-ligne/",
+      "/fr/outils/minuteur-en-ligne/",
+      "/fr/outils/minuteur-pomodoro/",
+      "/fr/outils/plan-de-classe-en-ligne/",
+      "/fr/outils/quoi-manger-ce-soir/",
+      "/fr/outils/rappel-pause-ecran/",
+      "/fr/outils/recadrer-image/",
+      "/fr/outils/redimensionner-image/",
+      "/fr/outils/reorganiser-pages-pdf/",
+      "/fr/outils/roue-aleatoire/",
+      "/fr/outils/supprimer-lignes-doublons/",
+      "/fr/outils/supprimer-lignes-vides/",
+      "/fr/outils/supprimer-pages-pdf/",
+      "/fr/outils/tableau-blanc-dessin-en-ligne/",
+      "/fr/outils/tirage-au-sort-eleves/",
+      "/fr/outils/tirage-au-sort-noms/",
+      "/fr/outils/trier-lignes-texte/",
+      "/guides/",
+      "/guides/2d-cad-drawing-board-workflow-guide/",
+      "/guides/a4-vs-us-letter-printing-guide/",
+      "/guides/age-calculator-school-cutoff-guide/",
+      "/guides/anova-apa-format-guide/",
+      "/guides/anova-post-hoc-tukey-bonferroni/",
+      "/guides/bar-chart-school-report-guide/",
+      "/guides/barcode-printing-quiet-zone-svg-guide/",
+      "/guides/base64-utf8-unicode-guide/",
+      "/guides/break-reminder-work-interval-guide/",
+      "/guides/business-days-calendar-days-guide/",
+      "/guides/cad-grid-snap-orthogonal-guide/",
+      "/guides/camelcase-snake-case-kebab-case-guide/",
+      "/guides/chart-flowchart-alt-text-accessibility/",
+      "/guides/chart-or-flowchart-selection-guide/",
+      "/guides/chinese-english-mixed-word-count-guide/",
+      "/guides/classroom-group-roles-rotation-guide/",
+      "/guides/classroom-lottery-tool-guide/",
+      "/guides/classroom-random-group-absent-student-repair-guide/",
+      "/guides/classroom-random-group-guide/",
+      "/guides/classroom-random-group-materials-handoff-guide/",
+      "/guides/classroom-random-group-no-repeat-guide/",
+      "/guides/classroom-random-group-seat-transition-guide/",
+      "/guides/classroom-random-group-shareable-result-guide/",
+      "/guides/classroom-random-group-size-balance-guide/",
+      "/guides/classroom-random-picker-guide/",
+      "/guides/classroom-timer-guide/",
+      "/guides/clean-copied-text-from-pdf-web-guide/",
+      "/guides/code128-vs-code39-guide/",
+      "/guides/compress-image-to-upload-limit/",
+      "/guides/compress-pdf-to-upload-limit/",
+      "/guides/confidence-interval-95-guide/",
+      "/guides/countdown-stopwatch-pomodoro-comparison/",
+      "/guides/cronbach-alpha-interpretation/",
+      "/guides/crop-vs-resize-vs-compress-image/",
+      "/guides/csv-to-json-conversion-guide/",
+      "/guides/csv-to-json-header-duplicate-column-guide/",
+      "/guides/csv-utf8-bom-excel-garbled-text/",
+      "/guides/cvc-word-families-guide/",
+      "/guides/date-arithmetic-end-of-month-dst-guide/",
+      "/guides/date-difference-inclusive-exclusive-guide/",
+      "/guides/decision-tree-vs-flowchart-guide/",
+      "/guides/delete-blank-pages-from-pdf/",
+      "/guides/dice-probability-random-streaks-guide/",
+      "/guides/ean13-upca-check-digit-gs1-guide/",
+      "/guides/effect-size-guide/",
+      "/guides/emoji-character-count-grapheme-guide/",
+      "/guides/extra-credit-over-100-grade-guide/",
+      "/guides/extract-specific-pages-from-pdf/",
+      "/guides/fair-random-draw-audit-guide/",
+      "/guides/fair-student-grouping-guide/",
+      "/guides/file-size-units-guide/",
+      "/guides/final-exam-score-needed-guide/",
+      "/guides/flowchart-design-checklist/",
+      "/guides/flowchart-symbols-guide/",
+      "/guides/gpa-4-0-vs-4-3-guide/",
+      "/guides/gpa-credit-weighted-formula-guide/",
+      "/guides/grade-rounding-cutoff-guide/",
+      "/guides/grades-gpa/",
+      "/guides/household-physics-demos-guide/",
+      "/guides/image-base64-data-uri-guide/",
+      "/guides/image-color-profile-web-print-guide/",
+      "/guides/image-compression-email-guide/",
+      "/guides/image-compression-quality-size-guide/",
+      "/guides/image-compressor-metadata-privacy-guide/",
+      "/guides/image-resampling-quality-guide/",
+      "/guides/image-resize-aspect-ratio-guide/",
+      "/guides/image-resolution-print-web-guide/",
+      "/guides/image-upload-failed-troubleshooting/",
+      "/guides/independent-vs-paired-t-test/",
+      "/guides/invisible-spaces-nbsp-zero-width-guide/",
+      "/guides/iso-8601-utc-offset-guide/",
+      "/guides/jpg-png-webp-which-to-use/",
+      "/guides/json-error-fix-guide/",
+      "/guides/json-formatter-trailing-comma-error-guide/",
+      "/guides/json-to-csv-excel-guide/",
+      "/guides/line-breaks-lf-crlf-guide/",
+      "/guides/markdown-syntax-preview-guide/",
+      "/guides/mean-median-mode-when-to-use/",
+      "/guides/merge-pdf-bookmarks-navigation-guide/",
+      "/guides/merge-pdf-page-size-orientation-guide/",
+      "/guides/merge-pdf-private-guide/",
+      "/guides/merge-pdf-reading-order-checklist-guide/",
+      "/guides/misleading-chart-common-errors/",
+      "/guides/missing-assignment-zero-exempt-guide/",
+      "/guides/multiplication-fact-fluency-guide/",
+      "/guides/optimize-images-for-website/",
+      "/guides/outlier-detection-iqr-z-score-boxplot/",
+      "/guides/p-value-interpretation/",
+      "/guides/password-manager-mfa-passkey-guide/",
+      "/guides/password-strength-basics-guide/",
+      "/guides/pdf-accessibility-reading-order-check-guide/",
+      "/guides/pdf-compressor-email-attachment-guide/",
+      "/guides/pdf-compressor-form-fields-links-guide/",
+      "/guides/pdf-page-reorder-appendix-merge-check-guide/",
+      "/guides/pdf-split-vs-extract-vs-delete/",
+      "/guides/pdf-table-to-excel-header-check-guide/",
+      "/guides/pdf-to-image-background-contrast-guide/",
+      "/guides/pdf-to-image-multipage-download-guide/",
+      "/guides/pdf-to-image-print-crop-marks-guide/",
+      "/guides/pdf-to-image-raster-text-search-guide/",
+      "/guides/pdf-to-image-resolution-guide/",
+      "/guides/pdf-to-jpg-vs-png/",
+      "/guides/pdf-to-word-form-field-editing-guide/",
+      "/guides/pdf-to-word-layout-fidelity-guide/",
+      "/guides/pdf-to-word-ocr-language-check-guide/",
+      "/guides/pdf-to-word-review-track-changes-guide/",
+      "/guides/pdf-upload-failed-troubleshooting/",
+      "/guides/pearson-vs-spearman-correlation/",
+      "/guides/percentage-grade-to-gpa-conversion-guide/",
+      "/guides/percentage-shortcuts-guide/",
+      "/guides/percentile-rank-guide/",
+      "/guides/photos-to-pdf-phone-guide/",
+      "/guides/pie-chart-percentage-guide/",
+      "/guides/png-to-jpg-transparency-background/",
+      "/guides/pomodoro-25-5-focus-interval-guide/",
+      "/guides/qr-barcode/",
+      "/guides/qr-code-accessible-fallback-guide/",
+      "/guides/qr-code-before-print-testing-guide/",
+      "/guides/qr-code-classroom-guide/",
+      "/guides/qr-code-destination-change-log-guide/",
+      "/guides/qr-code-event-page-expiry-guide/",
+      "/guides/qr-code-mobile-landing-page-guide/",
+      "/guides/qr-code-multi-placement-consistency-guide/",
+      "/guides/qr-code-multilingual-switch-testing-guide/",
+      "/guides/qr-code-not-scanning-print-guide/",
+      "/guides/qr-code-payload-length-guide/",
+      "/guides/qr-code-phishing-security-guide/",
+      "/guides/qr-code-scan-failure-field-troubleshooting-guide/",
+      "/guides/qr-code-utm-campaign-link-guide/",
+      "/guides/qr-code-vs-barcode-guide/",
+      "/guides/qr-error-correction-logo-guide/",
+      "/guides/r-squared-adjusted-r-squared/",
+      "/guides/random-password-length-security-guide/",
+      "/guides/random-sampling-with-without-replacement/",
+      "/guides/reading-time-estimate-guide/",
+      "/guides/rejection-sampling-modulo-bias-guide/",
+      "/guides/remove-duplicate-lines-guide/",
+      "/guides/reorder-rotate-pdf-pages/",
+      "/guides/resize-image-without-distortion/",
+      "/guides/scanned-pdf-searchable-ocr-guide/",
+      "/guides/seating-chart-changeover-routine-guide/",
+      "/guides/seating-chart-student-needs-intake-guide/",
+      "/guides/secure-random-vs-math-random-guide/",
+      "/guides/semester-vs-cumulative-gpa-guide/",
+      "/guides/shapiro-wilk-normality-test/",
+      "/guides/split-pdf-output-naming-batch-delivery-guide/",
+      "/guides/split-pdf-page-range-planning-guide/",
+      "/guides/spss-levene-test-guide/",
+      "/guides/standard-deviation-vs-standard-error/",
+      "/guides/static-vs-dynamic-qr-code-guide/",
+      "/guides/statistical-test-selection/",
+      "/guides/statistical-vs-practical-significance/",
+      "/guides/svg-vs-png-diagram-export/",
+      "/guides/t-test-apa-format-guide/",
+      "/guides/teacher-exam-weighted-score-guide/",
+      "/guides/text-sort-alphabetical-numeric-length-guide/",
+      "/guides/text-writing/",
+      "/guides/title-case-vs-sentence-case-guide/",
+      "/guides/two-way-anova-interaction-guide/",
+      "/guides/unit-price-comparison-guide/",
+      "/guides/unix-timestamp-seconds-milliseconds-guide/",
+      "/guides/url-encoding-percent-encoding-guide/",
+      "/guides/utf8-bytes-vs-characters-guide/",
+      "/guides/uuid-v4-collision-probability-guide/",
+      "/guides/uuid-v4-vs-v7-guide/",
+      "/guides/visual-schedule-slots-guide/",
+      "/guides/weighted-grade-weights-not-100-guide/",
+      "/guides/wifi-qr-code-format-security-guide/",
+      "/guides/word-count-essay-limits-guide/",
+      "/guides/word-count-vs-character-count-guide/",
+      "/guides/work-deadline-business-day-planning/",
+      "/guides/z-score-calculator-guide/",
+      "/methodology/",
+      "/methodology/accessibility-compatibility/",
+      "/methodology/ai-assisted-content/",
+      "/methodology/browser-local-processing/",
+      "/methodology/calculator-formula-verification/",
+      "/methodology/content-sourcing-corrections/",
+      "/methodology/file-tool-verification/",
+      "/methodology/public-test-cases/",
+      "/methodology/randomness-security/",
+      "/methodology/tool-verification/",
+      "/shop/",
+      "/support-us/",
+      "/tools/",
+      "/tools/age-calculator/",
+      "/tools/apa-7-report-generator/",
+      "/tools/bar-chart-maker/",
+      "/tools/barcode-generator/",
+      "/tools/base64/",
+      "/tools/break-reminder/",
+      "/tools/bulk-image-compressor/",
+      "/tools/business-days/",
+      "/tools/cad-2d/",
+      "/tools/case-converter/",
+      "/tools/character-counter/",
+      "/tools/color-generator/",
+      "/tools/compound-interest/",
+      "/tools/countdown-timer/",
+      "/tools/cronbach-alpha-calculator/",
+      "/tools/csv-to-json/",
+      "/tools/date-difference/",
+      "/tools/delete-pdf-pages/",
+      "/tools/dice-roller/",
+      "/tools/extract-pdf-pages/",
+      "/tools/final-grade-needed-calculator/",
+      "/tools/flowchart/",
+      "/tools/gpa-calculator/",
+      "/tools/group-generator/",
+      "/tools/image-compressor/",
+      "/tools/image-crop/",
+      "/tools/image-resizer/",
+      "/tools/image-rotate-flip/",
+      "/tools/image-to-base64/",
+      "/tools/image-to-dxf/",
+      "/tools/images-to-pdf/",
+      "/tools/inflation/",
+      "/tools/item-analysis-calculator/",
+      "/tools/jpg-to-png/",
+      "/tools/jpg-to-webp/",
+      "/tools/json-formatter/",
+      "/tools/json-to-csv/",
+      "/tools/kr20-reliability-calculator/",
+      "/tools/markdown-previewer/",
+      "/tools/merge-pdf/",
+      "/tools/mortgage-payment/",
+      "/tools/net-salary/",
+      "/tools/normalized-score-converter/",
+      "/tools/overtime-pay/",
+      "/tools/password-generator/",
+      "/tools/pdf-compressor/",
+      "/tools/pdf-page-reorder/",
+      "/tools/pdf-table-to-excel/",
+      "/tools/pdf-to-image/",
+      "/tools/pdf-to-word/",
+      "/tools/percentage-calculator/",
+      "/tools/pie-chart-maker/",
+      "/tools/png-to-jpg/",
+      "/tools/pomodoro-timer/",
+      "/tools/qr-code-generator/",
+      "/tools/random-group-generator/",
+      "/tools/random-number-picker/",
+      "/tools/random-student-picker/",
+      "/tools/random-wheel/",
+      "/tools/remove-duplicate-lines/",
+      "/tools/remove-empty-lines/",
+      "/tools/rotate-pdf/",
+      "/tools/savings-goal/",
+      "/tools/seating-chart/",
+      "/tools/sketchpad/",
+      "/tools/sort-lines/",
+      "/tools/split-pdf/",
+      "/tools/spss-result-interpreter/",
+      "/tools/stopwatch/",
+      "/tools/this-or-that/",
+      "/tools/timestamp-converter/",
+      "/tools/url-encoder/",
+      "/tools/uuid-generator/",
+      "/tools/webp-to-jpg/",
+      "/tools/what-to-eat/",
+      "/tools/word-counter/",
+      "/wedding-seating-conflict-solver/",
+      "/workflows/",
+      "/workflows/creator-social-toolkit/",
+      "/workflows/daily-decision-toolkit/",
+      "/workflows/grade-gpa-check-toolkit/",
+      "/workflows/graduate-statistics-report-toolkit/",
+      "/workflows/office-document-toolkit/",
+      "/workflows/qr-barcode-publishing-toolkit/",
+      "/workflows/student-report-toolkit/",
+      "/workflows/teacher-classroom-random-toolkit/",
+      "/workflows/teacher-exam-score-toolkit/",
+      "/workflows/text-cleanup-publishing-toolkit/",
+      "/workflows/verify-tool-result/",
+      "/zh/",
+      "/zh/about-tools/",
+      "/zh/about/",
+      "/zh/category/draw/",
+      "/zh/category/image/",
+      "/zh/category/money/",
+      "/zh/category/pdf/",
+      "/zh/category/random/",
+      "/zh/category/statistics/",
+      "/zh/category/study/",
+      "/zh/category/text/",
+      "/zh/category/time/",
+      "/zh/contact/",
+      "/zh/disclaimer/",
+      "/zh/embed/age-calculator/",
+      "/zh/embed/apa-7-report-generator/",
+      "/zh/embed/bar-chart-maker/",
+      "/zh/embed/barcode-generator/",
+      "/zh/embed/break-reminder/",
+      "/zh/embed/business-days/",
+      "/zh/embed/cad-2d/",
+      "/zh/embed/character-counter/",
+      "/zh/embed/class-rank-percentile-calculator/",
+      "/zh/embed/color-generator/",
+      "/zh/embed/compound-interest/",
+      "/zh/embed/countdown-timer/",
+      "/zh/embed/date-difference/",
+      "/zh/embed/dice-roller/",
+      "/zh/embed/final-grade-needed-calculator/",
+      "/zh/embed/flowchart/",
+      "/zh/embed/gpa-calculator/",
+      "/zh/embed/grade-average/",
+      "/zh/embed/group-generator/",
+      "/zh/embed/image-compressor/",
+      "/zh/embed/image-crop/",
+      "/zh/embed/image-resizer/",
+      "/zh/embed/image-rotate-flip/",
+      "/zh/embed/inflation/",
+      "/zh/embed/jpg-to-png/",
+      "/zh/embed/jpg-to-webp/",
+      "/zh/embed/markdown-previewer/",
+      "/zh/embed/mortgage-payment/",
+      "/zh/embed/net-salary/",
+      "/zh/embed/normalized-score-converter/",
+      "/zh/embed/overtime-pay/",
+      "/zh/embed/password-generator/",
+      "/zh/embed/percentage-calculator/",
+      "/zh/embed/percentile-rank-calculator/",
+      "/zh/embed/pie-chart-maker/",
+      "/zh/embed/png-to-jpg/",
+      "/zh/embed/pomodoro-timer/",
+      "/zh/embed/qr-code-generator/",
+      "/zh/embed/random-group-generator/",
+      "/zh/embed/random-name-picker/",
+      "/zh/embed/random-number-picker/",
+      "/zh/embed/random-student-picker/",
+      "/zh/embed/random-wheel/",
+      "/zh/embed/remove-duplicate-lines/",
+      "/zh/embed/remove-empty-lines/",
+      "/zh/embed/savings-goal/",
+      "/zh/embed/seating-chart/",
+      "/zh/embed/sketchpad/",
+      "/zh/embed/sort-lines/",
+      "/zh/embed/spss-result-interpreter/",
+      "/zh/embed/standard-deviation/",
+      "/zh/embed/stopwatch/",
+      "/zh/embed/t-score-calculator/",
+      "/zh/embed/teacher-exam-score-converter/",
+      "/zh/embed/this-or-that/",
+      "/zh/embed/timestamp-converter/",
+      "/zh/embed/uuid-generator/",
+      "/zh/embed/webp-to-jpg/",
+      "/zh/embed/weighted-average-calculator/",
+      "/zh/embed/what-to-eat/",
+      "/zh/embed/word-counter/",
+      "/zh/embed/z-score-calculator/",
+      "/zh/privacy/",
+      "/zh/terms/",
+      "/zh/tools/",
+      "/zh/tools/age-calculator/",
+      "/zh/tools/apa-7-report-generator/",
+      "/zh/tools/bar-chart-maker/",
+      "/zh/tools/barcode-generator/",
+      "/zh/tools/base64/",
+      "/zh/tools/break-reminder/",
+      "/zh/tools/bulk-image-compressor/",
+      "/zh/tools/business-days/",
+      "/zh/tools/cad-2d/",
+      "/zh/tools/case-converter/",
+      "/zh/tools/character-counter/",
+      "/zh/tools/class-rank-percentile-calculator/",
+      "/zh/tools/color-generator/",
+      "/zh/tools/compound-interest/",
+      "/zh/tools/countdown-timer/",
+      "/zh/tools/cronbach-alpha-calculator/",
+      "/zh/tools/csv-to-json/",
+      "/zh/tools/date-difference/",
+      "/zh/tools/delete-pdf-pages/",
+      "/zh/tools/dice-roller/",
+      "/zh/tools/extract-pdf-pages/",
+      "/zh/tools/final-grade-needed-calculator/",
+      "/zh/tools/flowchart/",
+      "/zh/tools/gpa-calculator/",
+      "/zh/tools/grade-average/",
+      "/zh/tools/group-generator/",
+      "/zh/tools/image-compressor/",
+      "/zh/tools/image-crop/",
+      "/zh/tools/image-resizer/",
+      "/zh/tools/image-rotate-flip/",
+      "/zh/tools/image-to-base64/",
+      "/zh/tools/image-to-dxf/",
+      "/zh/tools/images-to-pdf/",
+      "/zh/tools/independent-samples-t-test-calculator/",
+      "/zh/tools/inflation/",
+      "/zh/tools/item-analysis-calculator/",
+      "/zh/tools/jpg-to-png/",
+      "/zh/tools/jpg-to-webp/",
+      "/zh/tools/json-formatter/",
+      "/zh/tools/json-to-csv/",
+      "/zh/tools/kr20-reliability-calculator/",
+      "/zh/tools/markdown-previewer/",
+      "/zh/tools/merge-pdf/",
+      "/zh/tools/mortgage-payment/",
+      "/zh/tools/net-salary/",
+      "/zh/tools/normalized-score-converter/",
+      "/zh/tools/overtime-pay/",
+      "/zh/tools/password-generator/",
+      "/zh/tools/pdf-compressor/",
+      "/zh/tools/pdf-page-reorder/",
+      "/zh/tools/pdf-table-to-excel/",
+      "/zh/tools/pdf-to-image/",
+      "/zh/tools/pdf-to-word/",
+      "/zh/tools/percentage-calculator/",
+      "/zh/tools/percentile-rank-calculator/",
+      "/zh/tools/pie-chart-maker/",
+      "/zh/tools/png-to-jpg/",
+      "/zh/tools/pomodoro-timer/",
+      "/zh/tools/qr-code-generator/",
+      "/zh/tools/random-group-generator/",
+      "/zh/tools/random-name-picker/",
+      "/zh/tools/random-number-picker/",
+      "/zh/tools/random-student-picker/",
+      "/zh/tools/random-wheel/",
+      "/zh/tools/remove-duplicate-lines/",
+      "/zh/tools/remove-empty-lines/",
+      "/zh/tools/rotate-pdf/",
+      "/zh/tools/savings-goal/",
+      "/zh/tools/seating-chart/",
+      "/zh/tools/sketchpad/",
+      "/zh/tools/sort-lines/",
+      "/zh/tools/split-pdf/",
+      "/zh/tools/spss-result-interpreter/",
+      "/zh/tools/standard-deviation/",
+      "/zh/tools/stopwatch/",
+      "/zh/tools/t-score-calculator/",
+      "/zh/tools/teacher-exam-score-converter/",
+      "/zh/tools/this-or-that/",
+      "/zh/tools/timestamp-converter/",
+      "/zh/tools/url-encoder/",
+      "/zh/tools/uuid-generator/",
+      "/zh/tools/webp-to-jpg/",
+      "/zh/tools/weighted-average-calculator/",
+      "/zh/tools/what-to-eat/",
+      "/zh/tools/word-counter/",
+      "/zh/tools/z-score-calculator/"
+    ],
+    "sitemap_routes_not_built": [],
+    "statuses": {
+      "200": 20
+    },
+    "broken_link_count": 0,
+    "cross_locale_link_count": 0,
+    "visible_language_mismatch_count": 0,
+    "duplicate_title_count": 0,
+    "duplicate_canonical_count": 0,
+    "versions": {
+      "v5.147.1": 20
+    },
+    "link_targets": {
+      "/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/"
+      },
+      "/about/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/about/"
+      },
+      "/affiliate-disclosure/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/affiliate-disclosure/"
+      },
+      "/category/statistics/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/category/statistics/"
+      },
+      "/contact/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/contact/"
+      },
+      "/disclaimer/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/disclaimer/"
+      },
+      "/education-statistics/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/education-statistics/"
+      },
+      "/guides/t-score-calculator-guide/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/guides/t-score-calculator-guide/"
+      },
+      "/methodology/browser-local-processing/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/methodology/browser-local-processing/"
+      },
+      "/methodology/public-test-cases/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/methodology/public-test-cases/"
+      },
+      "/methodology/tool-verification/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/methodology/tool-verification/"
+      },
+      "/privacy/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/privacy/"
+      },
+      "/support/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/support/"
+      },
+      "/terms/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/terms/"
+      },
+      "/tools/apa-7-report-generator/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/tools/apa-7-report-generator/"
+      },
+      "/tools/class-rank-percentile-calculator/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/tools/class-rank-percentile-calculator/"
+      },
+      "/tools/grade-average/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/tools/grade-average/"
+      },
+      "/tools/independent-samples-t-test-calculator/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/tools/independent-samples-t-test-calculator/"
+      },
+      "/tools/percentage-calculator/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/tools/percentage-calculator/"
+      },
+      "/tools/percentile-rank-calculator/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/tools/percentile-rank-calculator/"
+      },
+      "/tools/random-name-picker/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/tools/random-name-picker/"
+      },
+      "/tools/standard-deviation/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/tools/standard-deviation/"
+      },
+      "/tools/t-score-calculator/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/tools/t-score-calculator/"
+      },
+      "/tools/teacher-exam-score-converter/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/tools/teacher-exam-score-converter/"
+      },
+      "/tools/weighted-average-calculator/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/tools/weighted-average-calculator/"
+      },
+      "/tools/z-score-calculator/": {
+        "status": 200,
+        "final_url": "http://127.0.0.1:8121/tools/z-score-calculator/"
+      }
+    }
+  },
+  "rows": [
+    {
+      "url": "https://funnytools.win/tools/class-rank-percentile-calculator/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/tools/class-rank-percentile-calculator/",
+      "redirect": false,
+      "title": "班級排名百分比計算器｜名次轉 PR - FunnyTools",
+      "description": "依班級名次和總人數估算百分等級與前百分比，附公式與教育應用說明。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+      "h1": [
+        "排名百分比計算器"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/tools/class-rank-percentile-calculator/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/tools/class-rank-percentile-calculator/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "教育與統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/affiliate-disclosure/",
+          "target_locale": "zh",
+          "text": "完整說明",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "查看全部支持商品 →",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "σ 標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "🧮 成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "📝 教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "標準差計算器檢查班級分數的集中與分散程度",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/tool-verification/",
+          "target_locale": "zh",
+          "text": "查看工具驗證方法",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/public-test-cases/",
+          "target_locale": "zh",
+          "text": "查看公開測試案例",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/browser-local-processing/",
+          "target_locale": "zh",
+          "text": "了解瀏覽器本機處理",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數計算完整指南 T 分數把 Z 分數放到平均 50、標準差 10 的量尺上，讓教育測驗與教師甄試成績更容易比較。",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 40,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/tools/grade-average/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/tools/grade-average/",
+      "redirect": false,
+      "title": "成績平均計算器｜算成績平均、加權總分，附試算範例 - FunnyTools",
+      "description": "免費成績平均計算器，貼上多筆考試、作業或小考分數與權重，立即算出總分、簡單平均與加權平均，教師甄試、學期成績試算都好用。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+      "h1": [
+        "成績平均計算器"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/tools/grade-average/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/tools/grade-average/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "教育與統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/affiliate-disclosure/",
+          "target_locale": "zh",
+          "text": "完整說明",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "查看全部支持商品 →",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "📝 教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "Σ 加權平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "🏅 排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "教師甄試成績轉換模擬器檢查筆試、試教與口試權重",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/tool-verification/",
+          "target_locale": "zh",
+          "text": "查看工具驗證方法",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/public-test-cases/",
+          "target_locale": "zh",
+          "text": "查看公開測試案例",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/browser-local-processing/",
+          "target_locale": "zh",
+          "text": "了解瀏覽器本機處理",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "加權平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 39,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/tools/independent-samples-t-test-calculator/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/tools/independent-samples-t-test-calculator/",
+      "redirect": false,
+      "title": "獨立樣本 t 檢定計算器｜Welch t test - FunnyTools",
+      "description": "輸入兩組 N、平均數與標準差，計算 Welch 獨立樣本 t 檢定、自由度與雙尾 p 值。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+      "h1": [
+        "獨立樣本 t 檢定簡易計算器"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/tools/independent-samples-t-test-calculator/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/tools/independent-samples-t-test-calculator/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/tools/independent-samples-t-test-calculator/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "教育與統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/apa-7-report-generator/",
+          "target_locale": "zh",
+          "text": "下一步：整理 APA 7 報告",
+          "language_switch": false
+        },
+        {
+          "target": "/affiliate-disclosure/",
+          "target_locale": "zh",
+          "text": "完整說明",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "查看全部支持商品 →",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "🧮 成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/tool-verification/",
+          "target_locale": "zh",
+          "text": "查看工具驗證方法",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/public-test-cases/",
+          "target_locale": "zh",
+          "text": "查看公開測試案例",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/browser-local-processing/",
+          "target_locale": "zh",
+          "text": "了解瀏覽器本機處理",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "加權平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 39,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/tools/percentile-rank-calculator/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/tools/percentile-rank-calculator/",
+      "redirect": false,
+      "title": "PR 百分等級計算器｜Percentile Rank 線上估算 - FunnyTools",
+      "description": "輸入低於、同分與總人數，使用中點法計算 PR 百分等級，附公式、教育應用與研究報告提示。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+      "h1": [
+        "PR 百分等級計算器"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/tools/percentile-rank-calculator/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/tools/percentile-rank-calculator/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "教育與統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/affiliate-disclosure/",
+          "target_locale": "zh",
+          "text": "完整說明",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "查看全部支持商品 →",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "σ 標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "🏅 排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/tool-verification/",
+          "target_locale": "zh",
+          "text": "查看工具驗證方法",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/public-test-cases/",
+          "target_locale": "zh",
+          "text": "查看公開測試案例",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/browser-local-processing/",
+          "target_locale": "zh",
+          "text": "了解瀏覽器本機處理",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "加權平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 38,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/tools/random-name-picker/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/tools/random-name-picker/",
+      "redirect": false,
+      "title": "姓名抽籤｜免費隨機姓名抽選器線上工具 - FunnyTools",
+      "description": "免費姓名抽籤工具，一行輸入一個名字，可抽一位或多位並自動移除，適合課堂點名、活動抽獎與團隊分工。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+      "h1": [
+        "隨機姓名抽選器"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/tools/random-name-picker/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/tools/random-name-picker/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/tools/random-name-picker/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/affiliate-disclosure/",
+          "target_locale": "zh",
+          "text": "完整說明",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "查看全部支持商品 →",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/tool-verification/",
+          "target_locale": "zh",
+          "text": "查看工具驗證方法",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/public-test-cases/",
+          "target_locale": "zh",
+          "text": "查看公開測試案例",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/browser-local-processing/",
+          "target_locale": "zh",
+          "text": "了解瀏覽器本機處理",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "加權平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 33,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/tools/standard-deviation/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/tools/standard-deviation/",
+      "redirect": false,
+      "title": "標準差計算器｜平均數變異數與樣本標準差 - FunnyTools",
+      "description": "輸入一組數字，計算平均、中位數、全距、母體與樣本變異數和標準差，適合班級成績與研究資料檢查。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+      "h1": [
+        "標準差計算器"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/tools/standard-deviation/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/tools/standard-deviation/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "教育與統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/affiliate-disclosure/",
+          "target_locale": "zh",
+          "text": "完整說明",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "查看全部支持商品 →",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "🏅 排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "🧮 成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/tool-verification/",
+          "target_locale": "zh",
+          "text": "查看工具驗證方法",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/public-test-cases/",
+          "target_locale": "zh",
+          "text": "查看公開測試案例",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/browser-local-processing/",
+          "target_locale": "zh",
+          "text": "了解瀏覽器本機處理",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "加權平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數計算完整指南 T 分數把 Z 分數放到平均 50、標準差 10 的量尺上，讓教育測驗與教師甄試成績更容易比較。",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 39,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/tools/t-score-calculator/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/tools/t-score-calculator/",
+      "redirect": false,
+      "title": "T分數換算器｜Z分數轉T分數公式與範例 - FunnyTools",
+      "description": "T分數換算器：輸入Z分數，用 T = 50 + 10z 立即算出T分數，附教育測驗、班級成績與教師甄試換算範例。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+      "h1": [
+        "T 分數計算器"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/tools/t-score-calculator/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/tools/t-score-calculator/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "教育與統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/affiliate-disclosure/",
+          "target_locale": "zh",
+          "text": "完整說明",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "查看全部支持商品 →",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "σ 標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "🏅 排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "📝 教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "標準差計算器核對母體與樣本標準差",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數計算完整指南",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/tool-verification/",
+          "target_locale": "zh",
+          "text": "查看工具驗證方法",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/public-test-cases/",
+          "target_locale": "zh",
+          "text": "查看公開測試案例",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/browser-local-processing/",
+          "target_locale": "zh",
+          "text": "了解瀏覽器本機處理",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數計算完整指南 T 分數把 Z 分數放到平均 50、標準差 10 的量尺上，讓教育測驗與教師甄試成績更容易比較。",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 41,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/tools/teacher-exam-score-converter/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/tools/teacher-exam-score-converter/",
+      "redirect": false,
+      "title": "教甄成績計算器｜免費試算筆試口試試教加權分數 - FunnyTools",
+      "description": "免費教師甄試成績計算器，輸入筆試、口試、試教分數與權重，立即算出加權總成績，方便考生整理備考紀錄。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+      "h1": [
+        "教師甄試成績轉換模擬器"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/tools/teacher-exam-score-converter/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/tools/teacher-exam-score-converter/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "教育與統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/affiliate-disclosure/",
+          "target_locale": "zh",
+          "text": "完整說明",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "查看全部支持商品 →",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "🏅 排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "Σ 加權平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "成績平均計算器整理多筆評量與權重",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器並核對常模來源",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/tool-verification/",
+          "target_locale": "zh",
+          "text": "查看工具驗證方法",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/public-test-cases/",
+          "target_locale": "zh",
+          "text": "查看公開測試案例",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/browser-local-processing/",
+          "target_locale": "zh",
+          "text": "了解瀏覽器本機處理",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "加權平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數計算完整指南 T 分數把 Z 分數放到平均 50、標準差 10 的量尺上，讓教育測驗與教師甄試成績更容易比較。",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 41,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/tools/weighted-average-calculator/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/tools/weighted-average-calculator/",
+      "redirect": false,
+      "title": "加權平均計算器｜分數權重與平均公式 - FunnyTools",
+      "description": "輸入多筆分數與權重，計算加權平均，適合成績、評分表、教師甄試與專題配分範例。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+      "h1": [
+        "加權平均計算器"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/tools/weighted-average-calculator/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/tools/weighted-average-calculator/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "教育與統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/affiliate-disclosure/",
+          "target_locale": "zh",
+          "text": "完整說明",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "查看全部支持商品 →",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "🧮 成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "📝 教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/tool-verification/",
+          "target_locale": "zh",
+          "text": "查看工具驗證方法",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/public-test-cases/",
+          "target_locale": "zh",
+          "text": "查看公開測試案例",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/browser-local-processing/",
+          "target_locale": "zh",
+          "text": "了解瀏覽器本機處理",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 38,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/tools/z-score-calculator/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/tools/z-score-calculator/",
+      "redirect": false,
+      "title": "Z 分數計算器｜標準分數公式與班級成績解讀 - FunnyTools",
+      "description": "輸入原始分數、平均數與標準差，計算 Z 分數並理解分數距離平均幾個標準差。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+      "h1": [
+        "Z 分數計算器"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/tools/z-score-calculator/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/tools/z-score-calculator/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "教育與統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/affiliate-disclosure/",
+          "target_locale": "zh",
+          "text": "完整說明",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "查看全部支持商品 →",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "σ 標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "🧮 成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/tool-verification/",
+          "target_locale": "zh",
+          "text": "查看工具驗證方法",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/public-test-cases/",
+          "target_locale": "zh",
+          "text": "查看公開測試案例",
+          "language_switch": false
+        },
+        {
+          "target": "/methodology/browser-local-processing/",
+          "target_locale": "zh",
+          "text": "了解瀏覽器本機處理",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "加權平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 38,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/",
+      "redirect": false,
+      "title": "FunnyTools 教育統計工具｜T 分數、PR、標準差與成績計算",
+      "description": "免費使用 T 分數、Z 分數、百分等級、標準差、加權平均、班級排名、獨立樣本 t 檢定與教師甄試換算工具；另提供課堂隨機抽籤。免註冊、直接在瀏覽器使用，並附公式與解讀提醒。",
+      "h1": [
+        "教育統計、成績換算與課堂抽籤工具"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "進入教育統計中心",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "閱讀 T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "查看統計分類",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "加權平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/independent-samples-t-test-calculator/",
+          "target_locale": "zh",
+          "text": "獨立樣本 t 檢定簡易計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/random-name-picker/",
+          "target_locale": "zh",
+          "text": "隨機姓名抽籤",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "了解 FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權政策",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持本站",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 37,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/about/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/about/",
+      "redirect": false,
+      "title": "關於我們｜免費線上工具箱簡介 - FunnyTools",
+      "description": "了解 FunnyTools 免費線上工具箱的網站定位、工具原則、資料處理方式與目前涵蓋的工具分類。本站工具可免費使用且不需註冊，並優先採用瀏覽器本機處理，協助你安全完成日常工作、學習與檔案任務。",
+      "h1": [
+        "關於 FunnyTools 免費線上工具箱"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/about/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/about/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 22,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/category/statistics/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/category/statistics/",
+      "redirect": false,
+      "title": "教育與統計免費工具｜標準差、百分比、平均計算 - FunnyTools",
+      "description": "免費統計與教育計算工具：標準差、變異數、平均、中位數與百分比計算。瀏覽器本機運算、完全免註冊，適合學生自主學習、作業、教學研究與基礎資料分析。",
+      "h1": [
+        "📊 教育與統計免費工具"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/category/statistics/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/category/statistics/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育與統計工具中心",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數計算完整指南 T 分數把 Z 分數放到平均 50、標準差 10 的量尺上，讓教育測驗與教師甄試成績更容易比較。",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "前往工具：成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "前往工具：PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "前往工具：Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "前往工具：T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "前往工具：加權平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "前往工具：排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "前往工具：教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/independent-samples-t-test-calculator/",
+          "target_locale": "zh",
+          "text": "前往工具：獨立樣本 t 檢定簡易計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "前往工具：標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "想算平均、變異數與標準差，用標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentage-calculator/",
+          "target_locale": "zh",
+          "text": "想算百分比、占比或增減變化，用百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "想算成績的加權平均，用成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 36,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/contact/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/contact/",
+      "redirect": false,
+      "title": "聯絡我們｜問題回報與工具建議 - FunnyTools",
+      "description": "提供 FunnyTools 免費線上工具箱的聯絡方式與回饋管道。你可以回報工具錯誤、提出新工具建議或反映網站內容問題；來信時若附上頁面網址、操作步驟、裝置與瀏覽器資訊，將更容易確認問題。",
+      "h1": [
+        "聯絡我們"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/contact/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/contact/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 22,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/disclaimer/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/disclaimer/",
+      "redirect": false,
+      "title": "免責聲明｜工具結果僅供參考 - FunnyTools",
+      "description": "了解 FunnyTools 免費線上工具箱的結果限制與使用者責任。薪資、貸款、統計、隨機及其他工具僅供一般參考，不構成法律、醫療、投資、稅務或會計建議，正式決策請查證官方資料。",
+      "h1": [
+        "免責聲明"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/disclaimer/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/disclaimer/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 22,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/education-statistics/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/education-statistics/",
+      "redirect": false,
+      "title": "教育與統計工具中心 | 成績、試題分析與研究工具 - FunnyTools",
+      "description": "免費教育與統計工具中心，整理成績規劃、試題難度與鑑別度、KR-20、標準差、T 分數、Z 分數、APA 7 報告與 SPSS 結果解讀流程。",
+      "h1": [
+        "教育與統計工具中心"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/education-statistics/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/education-statistics/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "使用教師甄試工具",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "換算 T / Z / PR",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "閱讀 T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/weighted-average-calculator/",
+          "target_locale": "zh",
+          "text": "加權平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/z-score-calculator/",
+          "target_locale": "zh",
+          "text": "Z 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/independent-samples-t-test-calculator/",
+          "target_locale": "zh",
+          "text": "獨立樣本 t 檢定簡易計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/percentile-rank-calculator/",
+          "target_locale": "zh",
+          "text": "PR 百分等級計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/grade-average/",
+          "target_locale": "zh",
+          "text": "成績平均計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數計算完整指南 T 分數把 Z 分數放到平均 50、標準差 10 的量尺上，讓教育測驗與教師甄試成績更容易比較。",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "查看全部指南",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "查看全部流程",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 38,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/guides/t-score-calculator-guide/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/guides/t-score-calculator-guide/",
+      "redirect": false,
+      "title": "T分數換算怎麼算？公式、Z分數轉換與教師甄試解讀 - FunnyTools",
+      "description": "T 分數教學說明平均數、標準差、Z 分數轉換與常見判讀方式，適合教師考試、教育測驗與研究報告前先檢查公式、保存範例並確認解讀脈絡。 本頁補充工具連結、操作步驟、常見錯誤與檢查方向，方便正式使用前快速核對。",
+      "h1": [
+        "T 分數怎麼算？教師甄試與教育測驗的完整指南"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/guides/t-score-calculator-guide/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/guides/t-score-calculator-guide/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計中心",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "開啟工具: T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/standard-deviation/",
+          "target_locale": "zh",
+          "text": "開啟工具: 標準差計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/class-rank-percentile-calculator/",
+          "target_locale": "zh",
+          "text": "開啟工具: 排名百分比計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/teacher-exam-score-converter/",
+          "target_locale": "zh",
+          "text": "開啟工具: 教師甄試成績轉換模擬器",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "回到指南列表",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計中心",
+          "language_switch": false
+        },
+        {
+          "target": "/tools/t-score-calculator/",
+          "target_locale": "zh",
+          "text": "開啟工具: T 分數計算器",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 34,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/privacy/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/privacy/",
+      "redirect": false,
+      "title": "隱私權政策｜資料處理與 Cookie 說明 - FunnyTools",
+      "description": "說明 FunnyTools 免費線上工具箱如何處理使用者輸入、瀏覽器本機計算、localStorage、第三方連結與未來可能使用的廣告 Cookie，並整理資料安全提醒、使用者權利及聯絡方式。",
+      "h1": [
+        "隱私權政策"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/privacy/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/privacy/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 22,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/support/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/support/",
+      "redirect": false,
+      "title": "支持 FunnyTools｜免費工具網站營運支持",
+      "description": "FunnyTools 提供免費線上工具，無需安裝也不需註冊。你可以透過分享網站、回報問題、建議新工具，或使用推薦資源連結，支持本站持續營運與更新。",
+      "h1": [
+        "支持 FunnyTools 持續提供免費工具"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/support/",
+      "canonical_self": true,
+      "robots": "index, follow",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/support/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "前往聯絡頁",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "查看實用資源",
+          "language_switch": false
+        },
+        {
+          "target": "/affiliate-disclosure/",
+          "target_locale": "zh",
+          "text": "查看完整分潤說明",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 25,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    },
+    {
+      "url": "https://funnytools.win/terms/",
+      "source_locale": "zh",
+      "http_status": 200,
+      "final_url": "http://127.0.0.1:8121/terms/",
+      "redirect": false,
+      "title": "使用條款｜服務範圍與責任限制 - FunnyTools",
+      "description": "閱讀 FunnyTools 免費線上工具箱的使用條款與基本使用規則，包含服務範圍、使用者責任、可接受使用方式、智慧財產權、第三方服務與責任限制，使用網站前請先確認相關內容。",
+      "h1": [
+        "使用條款"
+      ],
+      "h1_count": 1,
+      "canonical": "https://funnytools.win/terms/",
+      "canonical_self": true,
+      "robots": "",
+      "hreflang": [
+        {
+          "lang": "zh-TW",
+          "href": "https://funnytools.win/terms/"
+        }
+      ],
+      "lang": "zh-Hant",
+      "internal_links": [
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "跳到主要內容",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "FunnyTools",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/",
+          "target_locale": "zh",
+          "text": "首頁",
+          "language_switch": false
+        },
+        {
+          "target": "/education-statistics/",
+          "target_locale": "zh",
+          "text": "教育統計工具",
+          "language_switch": false
+        },
+        {
+          "target": "/category/statistics/",
+          "target_locale": "zh",
+          "text": "統計計算",
+          "language_switch": false
+        },
+        {
+          "target": "/guides/t-score-calculator-guide/",
+          "target_locale": "zh",
+          "text": "T 分數教學",
+          "language_switch": false
+        },
+        {
+          "target": "/about/",
+          "target_locale": "zh",
+          "text": "關於",
+          "language_switch": false
+        },
+        {
+          "target": "/contact/",
+          "target_locale": "zh",
+          "text": "聯絡",
+          "language_switch": false
+        },
+        {
+          "target": "/support/",
+          "target_locale": "zh",
+          "text": "支持我們",
+          "language_switch": false
+        },
+        {
+          "target": "/privacy/",
+          "target_locale": "zh",
+          "text": "隱私權",
+          "language_switch": false
+        },
+        {
+          "target": "/terms/",
+          "target_locale": "zh",
+          "text": "使用條款",
+          "language_switch": false
+        },
+        {
+          "target": "/disclaimer/",
+          "target_locale": "zh",
+          "text": "免責聲明",
+          "language_switch": false
+        }
+      ],
+      "internal_link_count": 22,
+      "cross_locale_links": [],
+      "visible_language_mismatch": false,
+      "placeholder_or_editorial_leak": false,
+      "versions": [
+        "v5.147.1"
+      ],
+      "error": "",
+      "broken_links": [],
+      "duplicate_title": false,
+      "duplicate_canonical": false
+    }
+  ]
+}
