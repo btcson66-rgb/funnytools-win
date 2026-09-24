@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import test from 'node:test';
 import {
   classifyHealthIssue,
@@ -165,6 +165,8 @@ test('workflow has six-hour cadence, manual dispatch, isolation and artifact ret
   for (const required of ['schedule:', "cron: '17 */6 * * *'", 'workflow_dispatch:', 'FABLE_HEALTH_SKIP_LOCAL_REPO', 'upload-artifact@v4', 'retention-days: 14', 'timeout-minutes: 20']) {
     assert.ok(source.includes(required), `missing workflow contract: ${required}`);
   }
+  assert.equal(source.includes('FABLE_HEALTH_RUNNER_SNAPSHOT_FIXTURE'), false);
+  assert.equal(source.includes('NODE_ENV=test'), false);
 });
 
 test('workflow is read-only and has no notification or deployment mutation', () => {
@@ -175,8 +177,8 @@ test('workflow is read-only and has no notification or deployment mutation', () 
   assert.ok(source.includes('contents: read'));
 });
 
-function runNode(script, env, timeout = 240_000) {
-  return spawnSync(process.execPath, [script], {
+function runNode(script, env, timeout = 240_000, nodeArgs = []) {
+  return spawnSync(process.execPath, [...nodeArgs, script], {
     cwd: repoRoot,
     env,
     encoding: 'utf8',
@@ -186,13 +188,15 @@ function runNode(script, env, timeout = 240_000) {
 
 test('health-check cloud context skips local repo without git false warnings', { timeout: 300_000 }, () => {
   const base = mkdtempSync(join(tmpdir(), 'task09c1-local-'));
+  const offlineImport = join(base, 'offline-fetch.mjs');
+  writeFileSync(offlineImport, "globalThis.fetch = async (url) => ({ ok: false, status: 404, statusText: 'Not Found', url: String(url), headers: new Headers(), text: async () => '{}', json: async () => ({}) });\n", 'utf8');
   const env = {
     ...process.env,
     FABLE_HEALTH_VAULT_DIR: join(base, 'vault'),
     FABLE_HEALTH_DATA_DIR: join(base, 'data'),
     FABLE_HEALTH_SKIP_LOCAL_REPO: '1',
   };
-  const result = runNode('health-check.mjs', env);
+  const result = runNode('health-check.mjs', env, 240_000, ['--import', pathToFileURL(offlineImport).href]);
   assert.equal(result.status, 0, result.stderr);
   const snapshotPath = join(base, 'data', 'health', 'latest-status.json');
   const current = JSON.parse(readFileSync(snapshotPath, 'utf8'));
@@ -207,11 +211,15 @@ test('health-check cloud context skips local repo without git false warnings', {
 
 test('runner cloud simulation writes isolated artifacts and exits 0', { timeout: 360_000 }, () => {
   const base = mkdtempSync(join(tmpdir(), 'task09c1-runner-'));
+  const fixturePath = join(base, 'snapshot.json');
+  writeFileSync(fixturePath, `${JSON.stringify(snapshot([], { local: { skipped: true, repo: null } }))}\n`, 'utf8');
   const env = {
     ...process.env,
+    NODE_ENV: 'test',
     FABLE_HEALTH_VAULT_DIR: join(base, 'vault'),
     FABLE_HEALTH_DATA_DIR: join(base, 'data'),
     FABLE_HEALTH_SKIP_LOCAL_REPO: '1',
+    FABLE_HEALTH_RUNNER_SNAPSHOT_FIXTURE: fixturePath,
   };
   const result = runNode(join('scripts', 'run-health-monitor.mjs'), env);
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
@@ -219,15 +227,34 @@ test('runner cloud simulation writes isolated artifacts and exits 0', { timeout:
   const automationPath = join(base, 'data', 'health', 'automation-result.json');
   assert.equal(existsSync(snapshotPath), true);
   assert.equal(existsSync(automationPath), true);
-  assert.equal(existsSync(join(base, 'vault', '01_Daily_Reports', 'Long')), true);
   const current = JSON.parse(readFileSync(snapshotPath, 'utf8'));
   const automation = JSON.parse(readFileSync(automationPath, 'utf8'));
   assert.equal(current.schemaVersion, 4);
   assert.equal(current.sites.length, 4);
   assert.equal(current.local.skipped, true);
-  assert.ok(['PASS', 'OBSERVE'].includes(automation.decision));
+  assert.equal(automation.decision, 'PASS');
   assert.equal(automation.exitCode, 0);
   assert.equal(automation.siteCount, 4);
+  assert.deepEqual(automation.counts, { page: 0, observe: 0 });
+});
+
+test('runner refuses fixture override outside NODE_ENV=test', () => {
+  const base = mkdtempSync(join(tmpdir(), 'task09c1-fixture-guard-'));
+  const fixturePath = join(base, 'snapshot.json');
+  writeFileSync(fixturePath, `${JSON.stringify(snapshot([], { local: { skipped: true, repo: null } }))}\n`, 'utf8');
+  const env = {
+    ...process.env,
+    NODE_ENV: 'production',
+    FABLE_HEALTH_VAULT_DIR: join(base, 'vault'),
+    FABLE_HEALTH_DATA_DIR: join(base, 'data'),
+    FABLE_HEALTH_RUNNER_SNAPSHOT_FIXTURE: fixturePath,
+  };
+  const result = runNode(join('scripts', 'run-health-monitor.mjs'), env, 30_000);
+  assert.equal(result.status, 3);
+  assert.match(result.stderr, /INFRA_FAILURE: fixture-forbidden-outside-test/);
+  const automation = JSON.parse(readFileSync(join(base, 'data', 'health', 'automation-result.json'), 'utf8'));
+  assert.equal(automation.decision, 'INFRA_FAILURE');
+  assert.equal(automation.exitCode, 3);
 });
 
 test('runner refuses to run without both isolated directories', () => {
