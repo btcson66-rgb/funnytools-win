@@ -6,7 +6,7 @@ RESULT：**PARTIAL**（候選修復與指定本機驗收通過；尚未 merge／
 ## 身分與範圍
 
 - Baseline main / production SHA：`c5b7bb0592994fab3547577409d7cff940b4b9aa`；最近成功 Pages deploy 使用同 SHA。
-- Final SHA：以本修復 Draft PR 最新 head 為準；尚非 production SHA。
+- Final code SHA：`4a74cd3957f71d33ffe04078058ae37c1eaf2d2c`（本機候選分支）；尚未建立 PR，亦非 production SHA。
 - 保持 T2 index policy 不變：sitemap 20 URL、build 1,192 route、indexable 20、noindex 1,172（含 redirect stubs）、redirect stubs 338。
 - 未新增 SEO 頁、未改 GA4／affiliate ID、未送 Request Indexing、未 merge／deploy。
 
