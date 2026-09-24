@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -255,6 +255,42 @@ test('runner refuses fixture override outside NODE_ENV=test', () => {
   const automation = JSON.parse(readFileSync(join(base, 'data', 'health', 'automation-result.json'), 'utf8'));
   assert.equal(automation.decision, 'INFRA_FAILURE');
   assert.equal(automation.exitCode, 3);
+});
+
+test('runner policy exception produces INFRA_FAILURE without an out-of-scope child reference', () => {
+  const base = mkdtempSync(join(tmpdir(), 'task09c1-policy-exception-'));
+  try {
+    const scriptDir = join(base, 'scripts');
+    mkdirSync(scriptDir);
+    const runnerPath = join(scriptDir, 'run-health-monitor.mjs');
+    writeFileSync(runnerPath, readFileSync(join(repoRoot, 'scripts', 'run-health-monitor.mjs')));
+    writeFileSync(join(scriptDir, 'health-policy.mjs'), [
+      'export const validateHealthSnapshot = () => [];',
+      'export const evaluateHealthPolicy = () => { throw new Error("forced policy failure"); };',
+      'export const summarizeHealthPolicy = () => { throw new Error("unreachable summary"); };',
+      '',
+    ].join('\n'));
+    const fixturePath = join(base, 'snapshot.json');
+    writeFileSync(fixturePath, `${JSON.stringify(snapshot([], { local: { skipped: true, repo: null } }))}\n`);
+    const env = {
+      ...process.env,
+      NODE_ENV: 'test',
+      FABLE_HEALTH_VAULT_DIR: join(base, 'vault'),
+      FABLE_HEALTH_DATA_DIR: join(base, 'data'),
+      FABLE_HEALTH_RUNNER_SNAPSHOT_FIXTURE: fixturePath,
+    };
+    const result = runNode(runnerPath, env, 30_000);
+    assert.equal(result.status, 3, `${result.stdout}\n${result.stderr}`);
+    assert.match(result.stderr, /INFRA_FAILURE: policy-evaluator-crash:forced policy failure/);
+    assert.doesNotMatch(result.stderr, /ReferenceError/);
+    const automation = JSON.parse(readFileSync(join(base, 'data', 'health', 'automation-result.json'), 'utf8'));
+    assert.equal(automation.decision, 'INFRA_FAILURE');
+    assert.equal(automation.exitCode, 3);
+    assert.equal(automation.siteCount, 4);
+    assert.equal(automation.healthCheckExitCode, null);
+  } finally {
+    rmSync(base, { recursive: true, force: true });
+  }
 });
 
 test('runner refuses to run without both isolated directories', () => {

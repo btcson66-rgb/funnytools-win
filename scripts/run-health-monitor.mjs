@@ -121,6 +121,7 @@ function run() {
 
   const snapshotPath = join(dataDir, 'health', 'latest-status.json');
   let snapshot;
+  let healthCheckExitCode = null;
   if (fixturePath) {
     try {
       snapshot = JSON.parse(readFileSync(fixturePath, 'utf8'));
@@ -158,6 +159,7 @@ function run() {
       stdio: 'inherit',
       timeout: 15 * 60 * 1000,
     });
+    healthCheckExitCode = child.status ?? null;
 
     if (child.error || child.status !== 0) {
       const result = infrastructureResult({
@@ -165,7 +167,7 @@ function run() {
         generatedAt,
         snapshotPath,
         reason: child.error?.message ?? `health-check-exit:${child.status ?? 'signal'}`,
-        healthCheckExitCode: child.status,
+        healthCheckExitCode,
       });
       writeResult(dataDir, result);
       writeStepSummary({ sites: [] }, result);
@@ -180,7 +182,7 @@ function run() {
         generatedAt,
         snapshotPath,
         reason: 'snapshot-missing',
-        healthCheckExitCode: child.status,
+        healthCheckExitCode,
       });
       writeResult(dataDir, result);
       writeStepSummary({ sites: [] }, result);
@@ -197,7 +199,7 @@ function run() {
         generatedAt,
         snapshotPath,
         reason: `snapshot-invalid-json:${error.message}`,
-        healthCheckExitCode: child.status,
+        healthCheckExitCode,
       });
       writeResult(dataDir, result);
       writeStepSummary({ sites: [] }, result);
@@ -217,7 +219,7 @@ function run() {
       snapshotPath,
       siteCount: Array.isArray(snapshot?.sites) ? snapshot.sites.length : 0,
       reason: `policy-evaluator-crash:${error.message}`,
-      healthCheckExitCode: child.status,
+      healthCheckExitCode,
     });
     writeResult(dataDir, result);
     writeStepSummary(snapshot, result);
