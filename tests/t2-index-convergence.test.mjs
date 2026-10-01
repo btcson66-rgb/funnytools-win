@@ -27,10 +27,11 @@ function sitemapUrls() {
   });
 }
 
-test('T2 sitemap contains exactly the 20 retained URLs and no language trees', () => {
+test('sitemap retains the 20 T2 URLs plus the approved Chinese PDF merge owner', () => {
   const urls = sitemapUrls();
-  assert.equal(urls.length, 20);
-  assert.equal(new Set(urls).size, 20);
+  assert.equal(urls.length, 21);
+  assert.equal(new Set(urls).size, 21);
+  assert.ok(urls.includes(`${origin}/tools/merge-pdf/`));
   assert.deepEqual(new Set(urls), new Set(INDEXABLE_PATHS.map((path) => `${origin}${path}`)));
   assert.equal(urls.some((url) => /\/(?:en|es|fr)\//.test(new URL(url).pathname)), false);
 });
@@ -53,6 +54,7 @@ test('representative excluded pages stay available with exact noindex,follow and
     '/en/',
     '/es/',
     '/fr/',
+    '/en/tools/merge-pdf/',
   ];
   for (const pathname of excluded) {
     const html = htmlForPath(pathname);

@@ -1,7 +1,7 @@
 {
-  "checkedPages": 1191,
-  "checkedLinks": 41485,
-  "crossLocaleLinks": 2235,
+  "checkedPages": 1221,
+  "checkedLinks": 41862,
+  "crossLocaleLinks": 2240,
   "violations": [],
   "review": [],
   "rows": [
@@ -1002,6 +1002,18 @@
       "reason": "intent:disclosure-only-zh"
     },
     {
+      "source_url": "https://funnytools.win/en/tools/cohen-kappa-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/affiliate-disclosure/",
+      "target_locale": "zh",
+      "link_text": "Full disclosure (Traditional Chinese)",
+      "context": "content",
+      "indexable": false,
+      "allowed": true,
+      "enforced": false,
+      "reason": "intent:disclosure-only-zh"
+    },
+    {
       "source_url": "https://funnytools.win/en/tools/color-generator/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
@@ -1303,6 +1315,18 @@
     },
     {
       "source_url": "https://funnytools.win/en/tools/json-to-csv/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/affiliate-disclosure/",
+      "target_locale": "zh",
+      "link_text": "Full disclosure (Traditional Chinese)",
+      "context": "content",
+      "indexable": false,
+      "allowed": true,
+      "enforced": false,
+      "reason": "intent:disclosure-only-zh"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/learning-gain-calculator/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
       "target_locale": "zh",
@@ -1674,6 +1698,18 @@
       "reason": "intent:disclosure-only-zh"
     },
     {
+      "source_url": "https://funnytools.win/en/tools/spearman-brown-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/affiliate-disclosure/",
+      "target_locale": "zh",
+      "link_text": "Full disclosure (Traditional Chinese)",
+      "context": "content",
+      "indexable": false,
+      "allowed": true,
+      "enforced": false,
+      "reason": "intent:disclosure-only-zh"
+    },
+    {
       "source_url": "https://funnytools.win/en/tools/split-pdf/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
@@ -1699,6 +1735,18 @@
     },
     {
       "source_url": "https://funnytools.win/en/tools/standard-deviation/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/affiliate-disclosure/",
+      "target_locale": "zh",
+      "link_text": "Full disclosure (Traditional Chinese)",
+      "context": "content",
+      "indexable": false,
+      "allowed": true,
+      "enforced": false,
+      "reason": "intent:disclosure-only-zh"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/standard-error-of-measurement-calculator/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
       "target_locale": "zh",
@@ -1807,6 +1855,18 @@
     },
     {
       "source_url": "https://funnytools.win/en/tools/weighted-average-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/affiliate-disclosure/",
+      "target_locale": "zh",
+      "link_text": "Full disclosure (Traditional Chinese)",
+      "context": "content",
+      "indexable": false,
+      "allowed": true,
+      "enforced": false,
+      "reason": "intent:disclosure-only-zh"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/weighted-rubric-score-calculator/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
       "target_locale": "zh",

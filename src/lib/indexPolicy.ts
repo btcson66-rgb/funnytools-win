@@ -13,6 +13,7 @@ export const INDEXABLE_PATHS = [
   '/tools/teacher-exam-score-converter/',
   '/tools/independent-samples-t-test-calculator/',
   '/tools/random-name-picker/',
+  '/tools/merge-pdf/',
   '/about/',
   '/contact/',
   '/privacy/',

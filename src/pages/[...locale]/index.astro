@@ -15,7 +15,7 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.props as { lang: Locale };
-const tools = INDEXABLE_TOOL_SLUGS
+const tools = INDEXABLE_TOOL_SLUGS.filter((slug) => slug !== 'merge-pdf')
   .map(getToolBySlug)
   .filter((tool): tool is ToolMeta => Boolean(tool && tool.status === 'live'));
 const zh = lang === 'zh';
@@ -63,6 +63,11 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang)];
         {tools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
       </div>
     </section>
+
+    {zh && <section class="content-section" aria-labelledby="pdf-document-task">
+      <h2 id="pdf-document-task">整理申請資料、講義與 PDF 附件</h2>
+      <p>需要把多份文件合成一份？<a class="inline-link" href="/tools/merge-pdf/">使用 PDF 合併工具</a>，選取檔案、讀取頁數並調整順序後產生新檔。原始 PDF 在瀏覽器本機合併；下載的寄送流程、檔案限制與錯誤處理請先閱讀工具頁說明。</p>
+    </section>}
 
     <section class="content-section">
       <h2>{zh ? '如何選擇工具' : 'Choose the right tool'}</h2>
