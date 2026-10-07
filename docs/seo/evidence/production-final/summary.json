@@ -1,0 +1,250 @@
+{
+  "origin": "https://funnytools.win/",
+  "canonical_origin": "https://funnytools.win/",
+  "captured_at": "2026-10-07T05:36:56.257930+00:00",
+  "max_pages": 0,
+  "pages": 317,
+  "homepage_anchor_reachable": 317,
+  "sitemap_unique_urls": 21,
+  "sitemaps": [
+    {
+      "url": "https://funnytools.win/sitemap.xml",
+      "status": 200,
+      "content_type": "application/xml",
+      "error": null,
+      "kind": "sitemapindex",
+      "references": 2,
+      "unique_references": 2
+    },
+    {
+      "url": "https://funnytools.win/sitemap-tools.xml",
+      "status": 200,
+      "content_type": "application/xml",
+      "error": null,
+      "kind": "urlset",
+      "references": 11,
+      "unique_references": 11
+    },
+    {
+      "url": "https://funnytools.win/sitemap-guides.xml",
+      "status": 200,
+      "content_type": "application/xml",
+      "error": null,
+      "kind": "urlset",
+      "references": 10,
+      "unique_references": 10
+    }
+  ],
+  "robots_status": 200,
+  "robots_available": true,
+  "status_counts": {
+    "200": 317
+  },
+  "indexable": 21,
+  "noindex": 296,
+  "fetch_errors": 0,
+  "sitemap_errors": [],
+  "invalid_sitemap_members": [],
+  "broken_internal_links": [],
+  "redirect_internal_links": [],
+  "unverified_internal_links": [],
+  "robots_blocked_not_fetched": [],
+  "redirect_chains": [],
+  "edge_runtime_links": [
+    {
+      "source": "https://funnytools.win/guides/json-to-csv-excel-guide/",
+      "target": "https://funnytools.win/cdn-cgi/l/email-protection",
+      "reason": "Cloudflare email-obfuscation runtime endpoint; source mailto review required"
+    },
+    {
+      "source": "https://funnytools.win/guides/remove-duplicate-lines-guide/",
+      "target": "https://funnytools.win/cdn-cgi/l/email-protection",
+      "reason": "Cloudflare email-obfuscation runtime endpoint; source mailto review required"
+    },
+    {
+      "source": "https://funnytools.win/guides/remove-duplicate-lines-guide/",
+      "target": "https://funnytools.win/cdn-cgi/l/email-protection",
+      "reason": "Cloudflare email-obfuscation runtime endpoint; source mailto review required"
+    },
+    {
+      "source": "https://funnytools.win/guides/remove-duplicate-lines-guide/",
+      "target": "https://funnytools.win/cdn-cgi/l/email-protection",
+      "reason": "Cloudflare email-obfuscation runtime endpoint; source mailto review required"
+    },
+    {
+      "source": "https://funnytools.win/guides/remove-duplicate-lines-guide/",
+      "target": "https://funnytools.win/cdn-cgi/l/email-protection",
+      "reason": "Cloudflare email-obfuscation runtime endpoint; source mailto review required"
+    },
+    {
+      "source": "https://funnytools.win/guides/remove-duplicate-lines-guide/",
+      "target": "https://funnytools.win/cdn-cgi/l/email-protection",
+      "reason": "Cloudflare email-obfuscation runtime endpoint; source mailto review required"
+    },
+    {
+      "source": "https://funnytools.win/guides/remove-duplicate-lines-guide/",
+      "target": "https://funnytools.win/cdn-cgi/l/email-protection",
+      "reason": "Cloudflare email-obfuscation runtime endpoint; source mailto review required"
+    }
+  ],
+  "hreflang_issues": [],
+  "metadata_qa": [
+    {
+      "url": "https://funnytools.win/",
+      "title_length": 34,
+      "description_length": 86,
+      "signals": []
+    },
+    {
+      "url": "https://funnytools.win/about/",
+      "title_length": 27,
+      "description_length": 97,
+      "signals": []
+    },
+    {
+      "url": "https://funnytools.win/category/statistics/",
+      "title_length": 35,
+      "description_length": 71,
+      "signals": []
+    },
+    {
+      "url": "https://funnytools.win/contact/",
+      "title_length": 27,
+      "description_length": 93,
+      "signals": []
+    },
+    {
+      "url": "https://funnytools.win/disclaimer/",
+      "title_length": 26,
+      "description_length": 88,
+      "signals": []
+    },
+    {
+      "url": "https://funnytools.win/education-statistics/",
+      "title_length": 37,
+      "description_length": 70,
+      "signals": []
+    },
+    {
+      "url": "https://funnytools.win/guides/t-score-calculator-guide/",
+      "title_length": 37,
+      "description_length": 102,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://funnytools.win/privacy/",
+      "title_length": 34,
+      "description_length": 96,
+      "signals": []
+    },
+    {
+      "url": "https://funnytools.win/support/",
+      "title_length": 24,
+      "description_length": 73,
+      "signals": []
+    },
+    {
+      "url": "https://funnytools.win/terms/",
+      "title_length": 27,
+      "description_length": 86,
+      "signals": []
+    },
+    {
+      "url": "https://funnytools.win/tools/class-rank-percentile-calculator/",
+      "title_length": 30,
+      "description_length": 95,
+      "signals": []
+    },
+    {
+      "url": "https://funnytools.win/tools/grade-average/",
+      "title_length": 37,
+      "description_length": 123,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://funnytools.win/tools/independent-samples-t-test-calculator/",
+      "title_length": 38,
+      "description_length": 108,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://funnytools.win/tools/merge-pdf/",
+      "title_length": 36,
+      "description_length": 113,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://funnytools.win/tools/percentile-rank-calculator/",
+      "title_length": 44,
+      "description_length": 107,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://funnytools.win/tools/random-name-picker/",
+      "title_length": 31,
+      "description_length": 111,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://funnytools.win/tools/standard-deviation/",
+      "title_length": 32,
+      "description_length": 109,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://funnytools.win/tools/t-score-calculator/",
+      "title_length": 32,
+      "description_length": 119,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://funnytools.win/tools/teacher-exam-score-converter/",
+      "title_length": 35,
+      "description_length": 112,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://funnytools.win/tools/weighted-average-calculator/",
+      "title_length": 30,
+      "description_length": 101,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "https://funnytools.win/tools/z-score-calculator/",
+      "title_length": 34,
+      "description_length": 100,
+      "signals": []
+    }
+  ],
+  "metadata_signal_counts": {
+    "long_description_signal": 10
+  },
+  "limitations": [
+    "Static HTML anchors only; JS-generated routes not discovered.",
+    "Incoming links count distinct source URLs, including navigation; contextual relevance needs review.",
+    "Bing/Ahrefs page-level status unavailable unless supplied separately.",
+    "Length is an advisory signal, never a standalone failure.",
+    "Files and query/state links recorded as unverified, not counted as broken.",
+    "No search indexing or traffic guarantee."
+  ]
+}

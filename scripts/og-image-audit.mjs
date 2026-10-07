@@ -9,6 +9,7 @@ const distDir = `${root}/dist`;
 const sitemapFiles = ['sitemap-en.xml', 'sitemap-es.xml', 'sitemap-fr.xml', 'sitemap-guides.xml', 'sitemap-tools.xml', 'sitemap-workflows.xml', 'sitemap.xml'];
 const routes = new Set();
 for (const file of sitemapFiles) {
+  if (!existsSync(`${publicDir}/${file}`)) continue;
   const xml = await readFile(`${publicDir}/${file}`, 'utf8');
   for (const match of xml.matchAll(/<loc>https:\/\/funnytools\.win([^<]+)<\/loc>/g)) {
     const path = match[1];

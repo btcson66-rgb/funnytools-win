@@ -30,6 +30,7 @@ function visibleDate(html) {
 }
 
 function sitemapHas(file, route) {
+  if (!existsSync(join(dist, file))) return false;
   const xml = readFileSync(join(dist, file), 'utf8');
   return xml.includes(`https://funnytools.win${route}`);
 }

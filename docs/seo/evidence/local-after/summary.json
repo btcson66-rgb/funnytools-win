@@ -1,0 +1,214 @@
+{
+  "origin": "http://127.0.0.1:4371/",
+  "canonical_origin": "https://funnytools.win/",
+  "captured_at": "2026-10-07T05:35:06.309144+00:00",
+  "max_pages": 0,
+  "pages": 317,
+  "homepage_anchor_reachable": 317,
+  "sitemap_unique_urls": 21,
+  "sitemaps": [
+    {
+      "url": "http://127.0.0.1:4371/sitemap.xml",
+      "status": 200,
+      "content_type": "text/xml",
+      "error": null,
+      "kind": "sitemapindex",
+      "references": 2,
+      "unique_references": 2
+    },
+    {
+      "url": "http://127.0.0.1:4371/sitemap-tools.xml",
+      "status": 200,
+      "content_type": "text/xml",
+      "error": null,
+      "kind": "urlset",
+      "references": 11,
+      "unique_references": 11
+    },
+    {
+      "url": "http://127.0.0.1:4371/sitemap-guides.xml",
+      "status": 200,
+      "content_type": "text/xml",
+      "error": null,
+      "kind": "urlset",
+      "references": 10,
+      "unique_references": 10
+    }
+  ],
+  "robots_status": 200,
+  "robots_available": true,
+  "status_counts": {
+    "200": 317
+  },
+  "indexable": 21,
+  "noindex": 296,
+  "fetch_errors": 0,
+  "sitemap_errors": [],
+  "invalid_sitemap_members": [],
+  "broken_internal_links": [],
+  "redirect_internal_links": [],
+  "unverified_internal_links": [],
+  "robots_blocked_not_fetched": [],
+  "redirect_chains": [],
+  "edge_runtime_links": [],
+  "hreflang_issues": [],
+  "metadata_qa": [
+    {
+      "url": "http://127.0.0.1:4371/",
+      "title_length": 34,
+      "description_length": 86,
+      "signals": []
+    },
+    {
+      "url": "http://127.0.0.1:4371/about/",
+      "title_length": 27,
+      "description_length": 97,
+      "signals": []
+    },
+    {
+      "url": "http://127.0.0.1:4371/category/statistics/",
+      "title_length": 35,
+      "description_length": 71,
+      "signals": []
+    },
+    {
+      "url": "http://127.0.0.1:4371/contact/",
+      "title_length": 27,
+      "description_length": 93,
+      "signals": []
+    },
+    {
+      "url": "http://127.0.0.1:4371/disclaimer/",
+      "title_length": 26,
+      "description_length": 88,
+      "signals": []
+    },
+    {
+      "url": "http://127.0.0.1:4371/education-statistics/",
+      "title_length": 37,
+      "description_length": 70,
+      "signals": []
+    },
+    {
+      "url": "http://127.0.0.1:4371/guides/t-score-calculator-guide/",
+      "title_length": 37,
+      "description_length": 102,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:4371/privacy/",
+      "title_length": 34,
+      "description_length": 96,
+      "signals": []
+    },
+    {
+      "url": "http://127.0.0.1:4371/support/",
+      "title_length": 24,
+      "description_length": 73,
+      "signals": []
+    },
+    {
+      "url": "http://127.0.0.1:4371/terms/",
+      "title_length": 27,
+      "description_length": 86,
+      "signals": []
+    },
+    {
+      "url": "http://127.0.0.1:4371/tools/class-rank-percentile-calculator/",
+      "title_length": 30,
+      "description_length": 95,
+      "signals": []
+    },
+    {
+      "url": "http://127.0.0.1:4371/tools/grade-average/",
+      "title_length": 37,
+      "description_length": 123,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:4371/tools/independent-samples-t-test-calculator/",
+      "title_length": 38,
+      "description_length": 108,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:4371/tools/merge-pdf/",
+      "title_length": 36,
+      "description_length": 113,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:4371/tools/percentile-rank-calculator/",
+      "title_length": 44,
+      "description_length": 107,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:4371/tools/random-name-picker/",
+      "title_length": 31,
+      "description_length": 111,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:4371/tools/standard-deviation/",
+      "title_length": 32,
+      "description_length": 109,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:4371/tools/t-score-calculator/",
+      "title_length": 32,
+      "description_length": 119,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:4371/tools/teacher-exam-score-converter/",
+      "title_length": 35,
+      "description_length": 112,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:4371/tools/weighted-average-calculator/",
+      "title_length": 30,
+      "description_length": 101,
+      "signals": [
+        "long_description_signal"
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:4371/tools/z-score-calculator/",
+      "title_length": 34,
+      "description_length": 100,
+      "signals": []
+    }
+  ],
+  "metadata_signal_counts": {
+    "long_description_signal": 10
+  },
+  "limitations": [
+    "Static HTML anchors only; JS-generated routes not discovered.",
+    "Incoming links count distinct source URLs, including navigation; contextual relevance needs review.",
+    "Bing/Ahrefs page-level status unavailable unless supplied separately.",
+    "Length is an advisory signal, never a standalone failure.",
+    "Files and query/state links recorded as unverified, not counted as broken.",
+    "No search indexing or traffic guarantee."
+  ]
+}

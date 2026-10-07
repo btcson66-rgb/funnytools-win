@@ -21,7 +21,8 @@ if (indexingConfig.INDEX_CONVERGENCE === true) {
   };
   walk(join(dist, 'es'));
   const invalid = files.filter((file) => !/<meta\b[^>]*name=["']robots["'][^>]*content=["']noindex,follow["']/i.test(readFileSync(file, 'utf8')));
-  const sitemap = readFileSync(join(publicDir, 'sitemap-es.xml'), 'utf8');
+  const sitemapPath = join(publicDir, 'sitemap-es.xml');
+  const sitemap = existsSync(sitemapPath) ? readFileSync(sitemapPath, 'utf8') : '';
   if (invalid.length || /<url>/.test(sitemap)) {
     console.error(JSON.stringify({ status: 'FAIL', mode: 'index-convergence', invalidNoindexPages: invalid, sitemapUrlEntries: (sitemap.match(/<url>/g) ?? []).length }, null, 2));
     process.exit(1);

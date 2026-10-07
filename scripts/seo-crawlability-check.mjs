@@ -336,6 +336,12 @@ if (fixturePath) {
   if (failures.length) process.exitCode = 1;
 } else {
   validateRobots();
+  for (const file of readdirSync(distDir).filter((name) => /^sitemap.*\.xml$/.test(name))) {
+    const xml = readFileSync(join(distDir, file), 'utf8');
+    if (/<urlset\b/i.test(xml) && !/<url\b/i.test(xml)) {
+      fail(`${file} is an empty published sitemap; omit it until canonical indexable URLs exist.`);
+    }
+  }
   const sitemapSummary = validateSitemap() ?? {
     urls: 0,
     uniqueUrls: 0,

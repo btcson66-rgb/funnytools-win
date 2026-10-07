@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "before_pages": 318,
+  "after_pages": 317,
+  "allowed_paths": [
+    "/cdn-cgi/l/email-protection"
+  ],
+  "errors": [],
+  "editorial_changes": [],
+  "scope": "Static production/local crawl comparison; does not establish deployment or search indexing."
+}

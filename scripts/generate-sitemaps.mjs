@@ -1,4 +1,4 @@
-import { existsSync, copyFileSync, readFileSync } from 'node:fs';
+import { existsSync, copyFileSync, readFileSync, unlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   builtPages,
@@ -173,10 +173,28 @@ for (const [type, entries] of groups) {
   const latest = entries.map((entry) => entry.lastmod).filter(Boolean).sort().at(-1) ?? '';
   if (entries.length > 0) {
     children.push({ file, lastmod: latest });
+    const xml = urlSetXml(entries, allIndexableUrls);
+    writeText(join(publicDir, file), xml);
+    writeText(join(distDir, file), xml);
+  } else {
+    // Keep group generation available when policy allows content again, but do
+    // not publish an empty feed for a deliberately excluded locale/workflow.
+    for (const directory of [publicDir, distDir]) {
+      const target = join(directory, file);
+      if (existsSync(target)) unlinkSync(target);
+    }
   }
-  const xml = urlSetXml(entries, allIndexableUrls);
-  writeText(join(publicDir, file), xml);
-  writeText(join(distDir, file), xml);
+}
+
+// Astro also builds compatibility sitemap routes outside the grouped generator.
+// Retire only genuinely empty URL sets; never remove a populated feed here.
+for (const file of ['sitemap-blog.xml', 'sitemap-pages.xml']) {
+  for (const directory of [publicDir, distDir]) {
+    const target = join(directory, file);
+    if (!existsSync(target)) continue;
+    const xml = readFileSync(target, 'utf8');
+    if (/<urlset\b/i.test(xml) && !/<url\b/i.test(xml)) unlinkSync(target);
+  }
 }
 
 const indexXml = sitemapIndexXml(children);

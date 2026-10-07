@@ -1,0 +1,797 @@
+[
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Homepage",
+    "title": "FunnyTools 教育統計工具｜T 分數、PR、標準差與成績計算",
+    "description": "免費使用 T 分數、Z 分數、百分等級、標準差、加權平均、班級排名、獨立樣本 t 檢定與教師甄試換算工具；另提供課堂隨機抽籤。免註冊、直接在瀏覽器使用，並附公式與解讀提醒。",
+    "h1": [
+      "教育統計、成績換算與課堂抽籤工具"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.515,
+    "is_html": true,
+    "incoming_links": 317,
+    "crawl_depth": 0,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/about/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/about/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Content",
+    "title": "關於我們｜免費線上工具箱簡介 - FunnyTools",
+    "description": "了解 FunnyTools 免費線上工具箱的網站定位、工具原則、資料處理方式與目前涵蓋的工具分類。本站工具可免費使用且不需註冊，並優先採用瀏覽器本機處理，協助你安全完成日常工作、學習與檔案任務。",
+    "h1": [
+      "關於 FunnyTools 免費線上工具箱"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/about/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.688,
+    "is_html": true,
+    "incoming_links": 317,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/category/statistics/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/category/statistics/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Category",
+    "title": "教育與統計免費工具｜標準差、百分比、平均計算 - FunnyTools",
+    "description": "免費統計與教育計算工具：標準差、變異數、平均、中位數與百分比計算。瀏覽器本機運算、完全免註冊，適合學生自主學習、作業、教學研究與基礎資料分析。",
+    "h1": [
+      "📊 教育與統計免費工具"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/category/statistics/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.813,
+    "is_html": true,
+    "incoming_links": 317,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/contact/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/contact/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Content",
+    "title": "聯絡我們｜問題回報與工具建議 - FunnyTools",
+    "description": "提供 FunnyTools 免費線上工具箱的聯絡方式與回饋管道。你可以回報工具錯誤、提出新工具建議或反映網站內容問題；來信時若附上頁面網址、操作步驟、裝置與瀏覽器資訊，將更容易確認問題。",
+    "h1": [
+      "聯絡我們"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/contact/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.672,
+    "is_html": true,
+    "incoming_links": 317,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/disclaimer/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/disclaimer/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Content",
+    "title": "免責聲明｜工具結果僅供參考 - FunnyTools",
+    "description": "了解 FunnyTools 免費線上工具箱的結果限制與使用者責任。薪資、貸款、統計、隨機及其他工具僅供一般參考，不構成法律、醫療、投資、稅務或會計建議，正式決策請查證官方資料。",
+    "h1": [
+      "免責聲明"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/disclaimer/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.812,
+    "is_html": true,
+    "incoming_links": 317,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/education-statistics/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/education-statistics/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Content",
+    "title": "教育與統計工具中心 | 成績、試題分析與研究工具 - FunnyTools",
+    "description": "免費教育與統計工具中心，整理成績規劃、試題難度與鑑別度、KR-20、標準差、T 分數、Z 分數、APA 7 報告與 SPSS 結果解讀流程。",
+    "h1": [
+      "教育與統計工具中心"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/education-statistics/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.781,
+    "is_html": true,
+    "incoming_links": 317,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/guides/t-score-calculator-guide/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/guides/t-score-calculator-guide/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Guide",
+    "title": "T分數換算怎麼算？公式、Z分數轉換與教師甄試解讀 - FunnyTools",
+    "description": "T 分數教學說明平均數、標準差、Z 分數轉換與常見判讀方式，適合教師考試、教育測驗與研究報告前先檢查公式、保存範例並確認解讀脈絡。 本頁補充工具連結、操作步驟、常見錯誤與檢查方向，方便正式使用前快速核對。",
+    "h1": [
+      "T 分數怎麼算？教師甄試與教育測驗的完整指南"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/guides/t-score-calculator-guide/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.813,
+    "is_html": true,
+    "incoming_links": 317,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/privacy/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/privacy/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Content",
+    "title": "隱私權政策｜資料處理與 Cookie 說明 - FunnyTools",
+    "description": "說明 FunnyTools 免費線上工具箱如何處理使用者輸入、瀏覽器本機計算、localStorage、第三方連結與未來可能使用的廣告 Cookie，並整理資料安全提醒、使用者權利及聯絡方式。",
+    "h1": [
+      "隱私權政策"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/privacy/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.672,
+    "is_html": true,
+    "incoming_links": 317,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/support/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "index, follow",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/support/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Content",
+    "title": "支持 FunnyTools｜免費工具網站營運支持",
+    "description": "FunnyTools 提供免費線上工具，無需安裝也不需註冊。你可以透過分享網站、回報問題、建議新工具，或使用推薦資源連結，支持本站持續營運與更新。",
+    "h1": [
+      "支持 FunnyTools 持續提供免費工具"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/support/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.781,
+    "is_html": true,
+    "incoming_links": 317,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/terms/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/terms/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Content",
+    "title": "使用條款｜服務範圍與責任限制 - FunnyTools",
+    "description": "閱讀 FunnyTools 免費線上工具箱的使用條款與基本使用規則，包含服務範圍、使用者責任、可接受使用方式、智慧財產權、第三方服務與責任限制，使用網站前請先確認相關內容。",
+    "h1": [
+      "使用條款"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/terms/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.937,
+    "is_html": true,
+    "incoming_links": 317,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/tools/class-rank-percentile-calculator/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/tools/class-rank-percentile-calculator/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Tool",
+    "title": "班級排名百分比計算器｜名次轉 PR - FunnyTools",
+    "description": "依班級名次和總人數估算百分等級與前百分比，附公式與教育應用說明。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+    "h1": [
+      "排名百分比計算器"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/tools/class-rank-percentile-calculator/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 1.031,
+    "is_html": true,
+    "incoming_links": 18,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/tools/grade-average/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/tools/grade-average/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Tool",
+    "title": "成績平均計算器｜算成績平均、加權總分，附試算範例 - FunnyTools",
+    "description": "免費成績平均計算器，貼上多筆考試、作業或小考分數與權重，立即算出總分、簡單平均與加權平均，教師甄試、學期成績試算都好用。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+    "h1": [
+      "成績平均計算器"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/tools/grade-average/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.875,
+    "is_html": true,
+    "incoming_links": 105,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/tools/independent-samples-t-test-calculator/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/tools/independent-samples-t-test-calculator/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Tool",
+    "title": "獨立樣本 t 檢定計算器｜Welch t test - FunnyTools",
+    "description": "輸入兩組 N、平均數與標準差，計算 Welch 獨立樣本 t 檢定、自由度與雙尾 p 值。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+    "h1": [
+      "獨立樣本 t 檢定簡易計算器"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/tools/independent-samples-t-test-calculator/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 1.047,
+    "is_html": true,
+    "incoming_links": 15,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/tools/merge-pdf/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/tools/merge-pdf/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Tool",
+    "title": "PDF 合併工具｜本機合併、調整順序與檔案限制 - FunnyTools",
+    "description": "將兩份以上 PDF 在瀏覽器本機合併，可讀取頁數與調整順序；一次最多 50 檔、總量 100 MiB。附操作案例、錯誤處理與寄送下載說明。 本工具可免費使用且不需註冊；若操作需要網路傳輸，頁面會清楚說明資料處理方式與使用限制。",
+    "h1": [
+      "PDF 合併"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/tools/merge-pdf/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.718,
+    "is_html": true,
+    "incoming_links": 86,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/tools/percentile-rank-calculator/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/tools/percentile-rank-calculator/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Tool",
+    "title": "PR 百分等級計算器｜Percentile Rank 線上估算 - FunnyTools",
+    "description": "輸入低於、同分與總人數，使用中點法計算 PR 百分等級，附公式、教育應用與研究報告提示。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+    "h1": [
+      "PR 百分等級計算器"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/tools/percentile-rank-calculator/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.75,
+    "is_html": true,
+    "incoming_links": 98,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/tools/random-name-picker/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/tools/random-name-picker/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Tool",
+    "title": "姓名抽籤｜免費隨機姓名抽選器線上工具 - FunnyTools",
+    "description": "免費姓名抽籤工具，一行輸入一個名字，可抽一位或多位並自動移除，適合課堂點名、活動抽獎與團隊分工。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+    "h1": [
+      "隨機姓名抽選器"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/tools/random-name-picker/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.781,
+    "is_html": true,
+    "incoming_links": 80,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/tools/standard-deviation/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/tools/standard-deviation/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Tool",
+    "title": "標準差計算器｜平均數變異數與樣本標準差 - FunnyTools",
+    "description": "輸入一組數字，計算平均、中位數、全距、母體與樣本變異數和標準差，適合班級成績與研究資料檢查。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+    "h1": [
+      "標準差計算器"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/tools/standard-deviation/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.89,
+    "is_html": true,
+    "incoming_links": 25,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/tools/t-score-calculator/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/tools/t-score-calculator/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Tool",
+    "title": "T分數換算器｜Z分數轉T分數公式與範例 - FunnyTools",
+    "description": "T分數換算器：輸入Z分數，用 T = 50 + 10z 立即算出T分數，附教育測驗、班級成績與教師甄試換算範例。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+    "h1": [
+      "T 分數計算器"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/tools/t-score-calculator/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.813,
+    "is_html": true,
+    "incoming_links": 100,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/tools/teacher-exam-score-converter/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/tools/teacher-exam-score-converter/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Tool",
+    "title": "教甄成績計算器｜免費試算筆試口試試教加權分數 - FunnyTools",
+    "description": "免費教師甄試成績計算器，輸入筆試、口試、試教分數與權重，立即算出加權總成績，方便考生整理備考紀錄。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+    "h1": [
+      "教師甄試成績轉換模擬器"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/tools/teacher-exam-score-converter/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.766,
+    "is_html": true,
+    "incoming_links": 15,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/tools/weighted-average-calculator/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/tools/weighted-average-calculator/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Tool",
+    "title": "加權平均計算器｜分數權重與平均公式 - FunnyTools",
+    "description": "輸入多筆分數與權重，計算加權平均，適合成績、評分表、教師甄試與專題配分範例。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+    "h1": [
+      "加權平均計算器"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/tools/weighted-average-calculator/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.922,
+    "is_html": true,
+    "incoming_links": 36,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/tools/z-score-calculator/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": true,
+    "robots_allowed": true,
+    "meta_robots": "",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/tools/z-score-calculator/",
+    "in_sitemap": true,
+    "language": "zh-Hant",
+    "page_type": "Tool",
+    "title": "Z 分數計算器｜標準分數公式與班級成績解讀 - FunnyTools",
+    "description": "輸入原始分數、平均數與標準差，計算 Z 分數並理解分數距離平均幾個標準差。 本工具可免費使用且不需註冊，輸入內容與檔案均在瀏覽器本機處理，不會主動上傳至 FunnyTools 免費線上工具箱 伺服器。",
+    "h1": [
+      "Z 分數計算器"
+    ],
+    "hreflang": [
+      {
+        "language": "zh-TW",
+        "url": "https://funnytools.win/tools/z-score-calculator/"
+      }
+    ],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 2.203,
+    "is_html": true,
+    "incoming_links": 99,
+    "crawl_depth": 1,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "KEEP_INDEXABLE",
+    "reason": "current HTTP/robots eligibility; quality and search indexing separate"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/category/pdf/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": false,
+    "robots_allowed": true,
+    "meta_robots": "noindex,follow",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/category/pdf/",
+    "in_sitemap": false,
+    "language": "zh-Hant",
+    "page_type": "Category",
+    "title": "PDF 免費工具｜合併、拆分、旋轉、壓縮 PDF - FunnyTools",
+    "description": "免費 PDF 工具：合併、拆分、旋轉、刪除與擷取頁面、重新排序、轉圖片與壓縮。多數整理功能在瀏覽器本機處理；PDF 轉 Word、表格轉 Excel 與壓縮 API 會暫時接收檔案。",
+    "h1": [
+      "📄 PDF 免費工具"
+    ],
+    "hreflang": [],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.625,
+    "is_html": true,
+    "incoming_links": 13,
+    "crawl_depth": 4,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "NOINDEX",
+    "reason": "source policy classification required; do not bulk remove"
+  },
+  {
+    "site": "funnytools.win",
+    "url": "https://funnytools.win/guides/merge-pdf-page-size-orientation-guide/",
+    "http_status": 200,
+    "fetch_error": null,
+    "indexable": false,
+    "robots_allowed": true,
+    "meta_robots": "noindex,follow",
+    "x_robots": "",
+    "canonical": "https://funnytools.win/guides/merge-pdf-page-size-orientation-guide/",
+    "in_sitemap": false,
+    "language": "zh-Hant",
+    "page_type": "Guide",
+    "title": "合併 PDF 後大小不一、方向混亂怎麼辦？A4、Letter 與橫直頁整理教學 - FunnyTools",
+    "description": "合併 PDF 後出現 A4、Letter、橫向與直向混在一起，不代表檔案損壞。本指南教你先盤點頁面尺寸、決定是否需要統一、避免不必要縮放，並在列印與分享前逐頁驗證。",
+    "h1": [
+      "合併 PDF 後頁面大小不一怎麼整理？先判斷再縮放"
+    ],
+    "hreflang": [],
+    "location": "",
+    "refresh": "",
+    "content_type": "text/html; charset=utf-8",
+    "response_seconds": 0.781,
+    "is_html": true,
+    "incoming_links": 2,
+    "crawl_depth": 6,
+    "bing_status": "UNKNOWN (supplied aggregate only)",
+    "recommended_state": "NOINDEX",
+    "reason": "source policy classification required; do not bulk remove"
+  }
+]
