@@ -5,7 +5,7 @@
   "timezone": "Asia/Taipei",
   "defaultPagesPerDay": 2,
   "maximumPagesPerDay": 3,
-  "pause": false,
+  "pause": true,
   "candidates": [
     {
       "id": "sem-tool-zh",

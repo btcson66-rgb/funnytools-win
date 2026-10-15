@@ -1,5 +1,6 @@
 ---
 import AdSlot from '../components/AdSlot.astro';
+import AuthorByline from '../components/AuthorByline.astro';
 import CategoryIcon from '../components/CategoryIcon.astro';
 import ContentValueReview from '../components/ContentValueReview.astro';
 import AffiliateProductShelf from '../components/AffiliateProductShelf.astro';
@@ -19,14 +20,13 @@ import type { Category } from '../data/categories';
 import type { ToolMeta } from '../data/tools';
 import type { ToolContent } from '../i18n/tools/_types';
 import { getGuidesForTool } from '../data/seoGuides';
-import { getWorkflowsForTool } from '../data/workflows';
 import { t } from '../i18n/ui';
 import { categoryOgImage, toolSeoDescription, toolSeoTitle } from '../lib/seo';
 import { absoluteUrl, categoryUrl, localePath, localeUrlPair, toolUrl } from '../lib/url';
 import { buildToolValueReview, CONTENT_REVIEWED_AT } from '../lib/contentValue';
 import { isCanonicalDownloadGatedTool } from '../lib/toolDataFlow';
 import { getDownloadGateDisclosure } from '../i18n/download-gate-disclosure';
-import { isIndexablePath } from '../lib/indexPolicy';
+import { isAuthoredToolSlug, isIndexablePath } from '../lib/indexPolicy';
 
 interface Props {
   lang: Locale;
@@ -42,6 +42,7 @@ const ui = t(lang);
 const currentUrl = absoluteUrl(toolUrl(lang, tool.slug));
 const hasToolAlternates = !tool.locales || tool.locales.length > 1;
 const seoTitle = toolSeoTitle(lang, content);
+const authored = isAuthoredToolSlug(tool.slug);
 const isDownloadGated = isCanonicalDownloadGatedTool(tool.slug);
 const isStrictlyLocal = tool.privacyLevel === 'local-only' && !isDownloadGated;
 const gateDisclosure = isDownloadGated ? getDownloadGateDisclosure(lang, tool.slug) : null;
@@ -56,10 +57,6 @@ const relatedGuides = getGuidesForTool(tool.slug, lang)
   .filter((guide) => isIndexablePath(localePath(lang, 'guides', guide.slug)))
   .slice(0, 4);
 const relatedGuidesHeading = lang === 'zh' ? '延伸閱讀：使用教學' : 'Related guides';
-const relatedWorkflows = getWorkflowsForTool(tool.slug, lang)
-  .filter((workflow) => isIndexablePath(localePath(lang, 'workflows', workflow.slug)))
-  .slice(0, 2);
-const relatedWorkflowsHeading = lang === 'zh' ? '相關工具包' : 'Related toolkits';
 const valueReview = buildToolValueReview(lang, content.name, tool.slug, category, content);
 const privacyHighlightText = gateDisclosure?.description ?? ui.privacy.localOnly;
 const downloadGateLabels = gateDisclosure
@@ -114,6 +111,7 @@ const downloadGateConfig = SITE.features.downloadGate
       </div>
       <p class="tool-purpose">{content.short}</p>
       <p class="lead">{content.long}</p>
+      {authored && <AuthorByline lang={lang} reviewedAt={reviewedAt ?? CONTENT_REVIEWED_AT} />}
     </header>
 
     <section class="content-section tool-interaction" aria-labelledby="tool-interaction-title">
@@ -270,21 +268,6 @@ const downloadGateConfig = SITE.features.downloadGate
       )
     }
 
-    {
-      relatedWorkflows.length > 0 && (
-        <section class="content-section related-guides" aria-labelledby="related-workflows-title">
-          <h2 id="related-workflows-title">{relatedWorkflowsHeading}</h2>
-          <div class="related-guide-list">
-            {relatedWorkflows.map((workflow) => (
-              <a href={localePath(lang, 'workflows', workflow.slug)}>
-                <strong>{workflow.title}</strong>
-                <span>{workflow.purpose}</span>
-              </a>
-            ))}
-          </div>
-        </section>
-      )
-    }
 
     <section class="content-section privacy-note">
       <h2>{isAnonymousApi ? ui.privacy.anonymousApiHeading : ui.privacy.heading}</h2>

@@ -276,7 +276,6 @@ Task011建議公開簡化版：
 
 ## 延伸閱讀
 
-- [圖表與流程圖ALT](/guides/chart-flowchart-alt-text-accessibility/)
 - [工具驗證方法](/methodology/tool-verification/)
 - [檔案工具驗證](/methodology/file-tool-verification/)
 - [工具結果複核Workflow](/methodology/tool-verification/)

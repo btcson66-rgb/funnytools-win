@@ -1,16 +1,19 @@
 ---
 import Breadcrumb from '../../../components/Breadcrumb.astro';
-import CategoryIcon from '../../../components/CategoryIcon.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
 import { categories } from '../../../data/categories';
-import { getFeaturedTools, getToolsByCategory } from '../../../data/tools';
+import { getToolsByCategory } from '../../../data/tools';
 import { t } from '../../../i18n/ui';
-import { categoryUrl, localePath, localeUrlPair, absoluteUrl } from '../../../lib/url';
+import { INDEXABLE_TOOL_SLUGS } from '../../../lib/indexPolicy';
+import { absoluteUrl, localePath, localeUrlPair } from '../../../lib/url';
 import { breadcrumbJsonLd } from '../../../lib/seo';
 import { getToolContent } from '../../../lib/toolContent';
 
+// P1 (2026-10-15): this is the single "other tools" page. General-purpose tools
+// (PDF, image, text, time, money ...) stay usable for existing direct visitors,
+// but the page is noindex, outside the sitemap and not in the main navigation.
 export function getStaticPaths() {
   return SITE.locales.map((lang) => ({
     params: { locale: lang === SITE.defaultLocale ? undefined : lang },
@@ -20,22 +23,23 @@ export function getStaticPaths() {
 
 const { lang } = Astro.props as { lang: Locale };
 const ui = t(lang);
-const title = ui.toolsPageTitle;
-const description = ui.toolsPageDescription;
+const zh = lang === 'zh';
+const h1 = zh ? '其他小工具' : 'Other tools';
+const title = zh ? '其他小工具｜PDF、圖片、文字、時間與金錢' : 'Other tools: PDF, image, text, time and money';
+const description = zh
+  ? '給已經在使用的訪客保留的通用小工具，包含 PDF、圖片、文字、時間、金錢與抽籤。教育統計工具請回首頁。'
+  : 'General-purpose tools kept for existing visitors: PDF, image, text, time, money and random picks. Education statistics tools are on the home page.';
+const intro = zh
+  ? '這些通用小工具原本就在本站，功能照常保留，但不是本站的主軸，也不會持續擴充。FunnyTools 目前專注於給台灣學生與老師的成績統計工具，請從首頁開始。'
+  : 'These general-purpose tools remain available, but they are not the focus of the site and will not be expanded. FunnyTools now concentrates on grade and statistics calculators for students and teachers in Taiwan; start from the home page.';
 
-const featured = getFeaturedTools(lang).slice(0, 6);
-
-const categorySummaries = categories
-  .map((category) => ({
-    category,
-    count: getToolsByCategory(category.id, lang).length,
-  }))
-  .filter(({ count }) => count > 0);
-
+// Everything except the retained education-statistics tools, which live on the home page.
+const retainedSlugs = new Set<string>(INDEXABLE_TOOL_SLUGS);
 const groupedCategories = categories
   .map((category) => ({
     category,
     tools: getToolsByCategory(category.id, lang)
+      .filter((tool) => !retainedSlugs.has(tool.slug))
       .map((tool) => ({
         tool,
         search: [
@@ -49,8 +53,6 @@ const groupedCategories = categories
   }))
   .filter(({ tools }) => tools.length > 0);
 
-const faqItems = ui.toolsFaq;
-
 const collectionJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -60,19 +62,9 @@ const collectionJsonLd = {
   inLanguage: SITE.hreflang[lang],
 };
 
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqItems.map((item) => ({
-    '@type': 'Question',
-    name: item.q,
-    acceptedAnswer: { '@type': 'Answer', text: item.a },
-  })),
-};
-
 const breadcrumbLd = breadcrumbJsonLd([
   { name: ui.breadcrumbHome, href: localePath(lang) },
-  { name: ui.toolsPageH1, href: localePath(lang, 'tools') },
+  { name: h1, href: localePath(lang, 'tools') },
 ]);
 const ga4Enabled = !!SITE.ga4MeasurementId;
 ---
@@ -83,20 +75,18 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
   description={description}
   alternateSegments={['tools']}
   altLang={localeUrlPair('tools')}
-  jsonLd={[collectionJsonLd, faqJsonLd, breadcrumbLd]}
+  jsonLd={[collectionJsonLd, breadcrumbLd]}
 >
-  <!-- Breadcrumb -->
   <section class="wrap page-head">
     <Breadcrumb
       items={[
         { label: ui.breadcrumbHome, href: localePath(lang) },
-        { label: ui.toolsPageH1 },
+        { label: h1 },
       ]}
     />
-    <h1>{ui.toolsPageH1}</h1>
-    <p class="lead">{ui.toolsPageIntro}</p>
+    <h1>{h1}</h1>
+    <p class="lead">{intro}</p>
 
-    <!-- Search bar -->
     <label class="tools-search">
       <span>{ui.toolsSearch.label}</span>
       <input
@@ -107,45 +97,16 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
         data-tools-search
       />
     </label>
-    {lang === 'zh' && <p class="tools-finder-link"><a href={localePath(lang, 'find-tools')}>不知道名稱，只知道想完成什麼？依任務找工具</a></p>}
+    <nav class="tools-jump" aria-label={zh ? '工具分類' : 'Tool groups'}>
+      {groupedCategories.map(({ category }) => <a href={`#${category.id}`}>{category.name[lang]}</a>)}
+    </nav>
   </section>
 
-  <!-- Popular tools -->
-  {featured.length > 0 && (
-    <section class="wrap content-section">
-      <h2>{ui.popularTools}</h2>
-      <div class="grid">
-        {featured.map((tool) => <ToolCard lang={lang} tool={tool} />)}
-      </div>
-    </section>
-  )}
-
-  <!-- Category index -->
-  <section id="categories" class="wrap content-section">
-    <h2>{ui.categories}</h2>
-    <div class="grid">
-      {
-        categorySummaries.map(({ category, count }) => (
-          <a class="tile category-tile" href={categoryUrl(lang, category.id)} data-category={category.id}>
-            <span class="tile-icon"><CategoryIcon category={category.id} /></span>
-            <span class="tile-body">
-              <strong>{category.name[lang]}</strong>
-              <span>{category.description[lang]}</span>
-              <span class="category-count">{count}{ui.toolsCountSuffix}</span>
-            </span>
-          </a>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- All tools by category (with search filtering) -->
   <section class="wrap tools-list">
     {
       groupedCategories.map(({ category, tools }) => (
         <section class="content-section tool-category-section" id={category.id} data-tool-section>
           <h2>{category.icon} {category.name[lang]}</h2>
-          <p>{category.description[lang]}</p>
           <div class="grid">
             {
               tools.map(({ tool, search }) => (
@@ -161,45 +122,14 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
     <p class="empty-state" data-tools-empty aria-live="polite" hidden>{ui.toolsSearch.empty}</p>
   </section>
 
-  <!-- How to use -->
-  <section class="wrap content-section">
-    <h2>{ui.toolsHowToUse.heading}</h2>
-    <ol class="check-list">
-      {ui.toolsHowToUse.steps.map((step) => <li>{step}</li>)}
-    </ol>
-  </section>
-
-  <!-- Privacy & local processing -->
   <section class="wrap content-section">
     <h2>{ui.toolsPrivacy.heading}</h2>
     <p>{ui.toolsPrivacy.text}</p>
-  </section>
-
-  <!-- FAQ -->
-  <section class="wrap content-section faq">
-    <h2>{ui.faq}</h2>
-    <dl>
-      {
-        faqItems.map((item) => (
-          <>
-            <dt>{item.q}</dt>
-            <dd>{item.a}</dd>
-          </>
-        ))
-      }
-    </dl>
-  </section>
-
-  <!-- Footer links -->
-  <section class="wrap content-section">
-    <h2>{ui.toolsFooterLinks}</h2>
-    <nav>
-      <ul>
-        <li><a href={localePath(lang, 'about')}>{ui.footer.about}</a></li>
-        <li><a href={localePath(lang, 'privacy')}>{ui.footer.privacy}</a></li>
-        <li><a href={localePath(lang, 'contact')}>{ui.footer.contact}</a></li>
-      </ul>
-    </nav>
+    <p>
+      <a href={localePath(lang)}>{zh ? '回首頁看成績統計工具' : 'Back to the statistics tools'}</a>
+      · <a href={localePath(lang, 'privacy')}>{ui.footer.privacy}</a>
+      · <a href={localePath(lang, 'contact')}>{ui.footer.contact}</a>
+    </p>
   </section>
 
   <!-- Search script -->
@@ -275,3 +205,8 @@ const ga4Enabled = !!SITE.ga4MeasurementId;
     }
   </script>
 </BaseLayout>
+
+<style>
+  .tools-jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .tools-jump a { padding: 5px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--brand-2); font-size: 0.9rem; font-weight: 800; }
+</style>

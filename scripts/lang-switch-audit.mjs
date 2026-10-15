@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { join, relative, resolve, sep } from 'node:path';
 
@@ -44,7 +45,12 @@ for (const file of files) {
   }
 }
 
-if (switches === 0) {
+// P1 (2026-10-15): the es/fr locales were the only pages that rendered a language switch.
+// With English deliberately noindex (EN_NOINDEX) the zh/en switch is hidden on purpose, so
+// finding no switch links is expected. If English is ever re-enabled, the switch must come
+// back, so the original "at least one switch link" guard applies again.
+const indexingConfig = JSON.parse(readFileSync(resolve('src/config/indexing.json'), 'utf8'));
+if (switches === 0 && indexingConfig.EN_NOINDEX !== true) {
   throw new Error('No language switch links were found in dist.');
 }
 
@@ -53,5 +59,5 @@ if (failures.length > 0) {
   for (const failure of failures) console.error(`- ${failure.page} -> ${failure.href}`);
   process.exitCode = 1;
 } else {
-  console.log(`Language switch audit passed: ${switches} links, 0 missing targets.`);
+  console.log(`Language switch audit passed: ${switches} links, 0 missing targets${switches === 0 ? ' (EN_NOINDEX: switch intentionally hidden)' : ''}.`);
 }

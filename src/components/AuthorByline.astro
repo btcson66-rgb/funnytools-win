@@ -1,0 +1,37 @@
+---
+import { SITE, type Locale } from '../config/site';
+import { localePath } from '../lib/url';
+
+interface Props {
+  lang: Locale;
+  /** ISO date (YYYY-MM-DD) of the last content review shown to readers. */
+  reviewedAt: string;
+}
+
+const { lang, reviewedAt } = Astro.props;
+// /about/ is the single canonical author page (the en locale is noindex).
+const aboutHref = lang === 'zh' ? SITE.author.aboutPath : localePath(lang, 'about');
+---
+
+<p class="author-byline" data-author-byline>
+  <span>{lang === 'zh' ? '作者：' : 'By '}<a href={aboutHref} rel="author">{SITE.author.name}</a></span>
+  <span aria-hidden="true">·</span>
+  <span>{lang === 'zh' ? '最後審核：' : 'Last reviewed: '}<time datetime={reviewedAt}>{reviewedAt}</time></span>
+</p>
+
+<style>
+  .author-byline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    margin: 10px 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+  .author-byline a {
+    color: var(--brand-2);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

@@ -6,8 +6,6 @@ export interface Phase2BTreatmentContent {
   notes?: string[];
 }
 
-export type Phase2BExpansionLocale = 'es' | 'fr';
-
 const zh = (contentSections: ToolPageSection[], examples: string[], notes: string[]): Phase2BTreatmentContent => ({ contentSections, examples, notes });
 const en = (contentSections: ToolPageSection[], examples: string[], notes: string[]): Phase2BTreatmentContent => ({ contentSections, examples, notes });
 
@@ -55,93 +53,6 @@ export const phase2bToolContent: Record<'zh' | 'en', Record<string, Phase2BTreat
       { heading: 'Choose the percentage question first', paragraphs: ['For 18% of 250, use the part-of-quantity calculation and expect 45. For 36 out of 144, use the share-of-total calculation and expect 25%. These are different questions even though both contain two numbers.','For a change from 80 to 100, use the relative-change calculation and expect a 25% increase. Write the base, unit, and time period beside the values; a correct formula cannot fix a mismatched numerator and denominator.'] },
       { heading: 'Separate relative change from percentage points', paragraphs: ['A rate moving from 20% to 25% changes by 5 percentage points, while its relative increase is 25%. Use the output that matches the question and state the base so readers do not confuse the two descriptions.','A zero total or zero starting value makes the relevant division undefined. Discounts, tax, margin, and successive changes may use different bases, so calculate each step with its stated base and apply the required rounding rule at the correct stage.'] },
     ], ['Calculate 18% of 250 and label the result as a part, not a final price.', 'Compare a change from 80 to 100 with a change from 100 to 80 to see the base effect.'], ['The tool does not decide whether a business or legal rounding rule applies.', 'A percentage above 100% can be valid; interpret it using the underlying quantity.']),
-  },
-};
-
-export const phase2bExpansionContent: Record<Phase2BExpansionLocale, Record<string, Phase2BTreatmentContent>> = {
-  es: {
-    'dice-roller': {
-      contentSections: [
-        { heading: 'Preparar una tirada reproducible', paragraphs: ['Antes de pulsar, decide cuántos dados y cuántas caras necesita la actividad. Por ejemplo, para una práctica de probabilidad puedes lanzar tres dados de seis caras y anotar cada resultado, no solo la suma final.', 'Una tirada sirve para generar un resultado aleatorio, no para demostrar que una serie corta es perfectamente uniforme. Si el resultado se usa en clase, define de antemano qué ocurre con un empate, un valor repetido o una tirada que debe repetirse.'] },
-        { heading: 'Leer la salida y sus límites', paragraphs: ['Comprueba que la salida muestra el número de dados y el rango esperado; con tres dados de seis caras, la suma debe quedar entre 3 y 18. Conserva el resultado junto con la actividad o la regla que lo utiliza.', 'El navegador genera una nueva tirada cuando se solicita, pero la página no sustituye un sorteo auditado con semilla, registro externo o autoridad independiente. Para decisiones sensibles, documenta participantes, momento y procedimiento.'] },
-      ],
-      examples: ['Generar tres resultados de seis caras para una actividad de probabilidad.', 'Usar una tirada como desempate previamente acordado en un juego de aula.'],
-      notes: ['La suma por sí sola oculta la combinación de dados; anota los valores individuales cuando importen.', 'Una tirada casual no es una prueba de aleatoriedad a largo plazo.'],
-    },
-    'cronbach-alpha-calculator': {
-      contentSections: [
-        { heading: 'Preparar una matriz de respuestas', paragraphs: ['Coloca una persona por fila y un ítem por columna. Una matriz de práctica de cinco personas y cuatro ítems debe tener 20 celdas numéricas después de quitar nombres y encabezados; recodifica los ítems invertidos antes de pegarla.', 'Confirma que todos los ítems pertenecen a la misma escala y apuntan en la misma dirección. La calculadora no imputa faltantes ni completa filas irregulares porque esas decisiones cambian el tamaño de muestra y la varianza total.'] },
-        { heading: 'Interpretar alfa con contexto', paragraphs: ['Revisa N, k, la media y la desviación de la puntuación total junto con α. Si N no coincide con tus participantes o la puntuación total no varía, detén el informe y revisa los datos de entrada.', 'Alfa resume la consistencia interna de esta muestra y versión de la escala; no demuestra validez, unidimensionalidad ni estabilidad temporal. Documenta idioma, población, recodificación y tratamiento de faltantes en cualquier informe.'] },
-      ],
-      examples: ['Comprobar una matriz 5 × 4 antes de ejecutar el análisis en un programa estadístico.', 'Comparar N, k y α con una segunda implementación que use la misma recodificación.'],
-      notes: ['Un alfa alto puede reflejar ítems redundantes.', 'No uses .70 como umbral universal sin justificar la finalidad y el modelo de medida.'],
-    },
-    'standard-deviation': {
-      contentSections: [
-        { heading: 'Elegir población o muestra antes de pegar datos', paragraphs: ['Decide qué conjunto describen los números. Las notas de los ocho alumnos de una clase son una población si solo hablas de esa clase; son una muestra si pretendes estimar un grupo más amplio.', 'Prueba con `12 14 15 15 16 18 19 20` y anota si el separador, la unidad y el número de observaciones coinciden con la fuente. Retira unidades y encabezados para que el recuento reconocido sea verificable.'] },
-        { heading: 'Leer la dispersión sin inventar una causa', paragraphs: ['La media, mediana, mínimo, máximo, rango y desviación estándar responden a preguntas distintas. Una desviación mayor indica más separación alrededor de la media, pero no prueba normalidad, calidad del proceso o una causa concreta.', 'La variante muestral usa n−1 y la poblacional usa n. Conserva la elección, la unidad y el redondeo junto al resultado; para publicar o decidir, revisa también valores extremos y la forma de la distribución.'] },
-      ],
-      examples: ['Describir las notas completas de una clase como población.', 'Estimar la variabilidad de mediciones tomadas de un proceso más amplio usando n−1.'],
-      notes: ['El punto decimal evita confundir la coma con el separador de observaciones.', 'Una desviación estándar exacta no corrige un muestreo sesgado.'],
-    },
-    'business-days': {
-      contentSections: [
-        { heading: 'Definir el intervalo y el calendario', paragraphs: ['Introduce la fecha inicial y final según la regla del encargo. Por ejemplo, de lunes 5 de enero de 2026 a viernes 9 de enero de 2026 hay cinco días laborables si solo se excluyen sábados y domingos.', 'Confirma si el contrato cuenta el día inicial, el día final o ambos, y si existe una lista de festivos aplicable. Una fecha escrita con la zona horaria o el formato equivocado puede mover el intervalo un día.'] },
-        { heading: 'Comprobar el número antes de usarlo', paragraphs: ['Revisa las fechas interpretadas y el total mostrado, y comprueba manualmente una semana corta. Si el intervalo cruza un fin de semana, enumera los días incluidos para explicar por qué el resultado no coincide con una resta simple de fechas.', 'Este cálculo no conoce automáticamente los festivos de tu país o empresa salvo que los introduzcas en el flujo correspondiente. Para nóminas, plazos legales o contratos, valida el calendario oficial y conserva la convención usada.'] },
-      ],
-      examples: ['Calcular una semana laboral de lunes a viernes sin festivos añadidos.', 'Comprobar un plazo que cruza un fin de semana antes de comunicar una fecha límite.'],
-      notes: ['Días naturales y días laborables no son intercambiables.', 'Los festivos locales requieren una fuente o lista explícita.'],
-    },
-    'mortgage-payment': {
-      contentSections: [
-        { heading: 'Separar los supuestos del préstamo', paragraphs: ['Para una comprobación aritmética puedes introducir 180 000 de principal, 3,5 % anual y 25 años, y anotar la frecuencia de pago. Usa la misma moneda y confirma si el campo espera 3,5 o 0,035.', 'El tipo, el plazo, la frecuencia y el capital deben proceder de la misma oferta. Una tasa fija no se interpreta igual que una variable, y una cuota de capital e intereses no equivale al coste total de la vivienda.'] },
-        { heading: 'Interpretar la cuota mensual', paragraphs: ['Compara la cuota con el capital total y observa que los intereses acumulados pueden superar la diferencia que se aprecia en una sola mensualidad. Guarda los supuestos junto con el resultado para que otra persona pueda reproducirlo.', 'La salida no incluye automáticamente seguros, impuestos, comisiones, gastos de cierre, cambios de tipo ni penalizaciones. No uses una cuota estimada como aprobación de crédito; verifica el cuadro de amortización y las condiciones oficiales del prestamista.'] },
-      ],
-      examples: ['Comparar dos plazos para el mismo principal y tipo nominal.', 'Usar una cuota estimada como punto de partida antes de revisar una oferta bancaria.'],
-      notes: ['El formato decimal y la moneda deben quedar documentados.', 'Una cuota más baja por ampliar el plazo puede aumentar el interés total.'],
-    },
-  },
-  fr: {
-    'grade-average': {
-      contentSections: [
-        { heading: 'Préparer les notes et les coefficients', paragraphs: ['Saisissez une note par ligne et ajoutez un coefficient lorsque la matière compte davantage. Par exemple, 14 avec coefficient 2 et 16 avec coefficient 1 donnent une moyenne pondérée de 14,67 ; vérifiez d’abord que les notes utilisent le même barème.', 'Laissez les coefficients facultatifs seulement lorsqu’une moyenne simple est réellement demandée. Une note sur 20 et une note sur 100 ne doivent pas être mélangées sans conversion documentée.'] },
-        { heading: 'Vérifier la moyenne affichée', paragraphs: ['Comparez la somme, l’effectif et la moyenne pondérée au calcul manuel : somme des notes multipliées par leur coefficient, divisée par la somme des coefficients. Contrôlez aussi la moyenne simple si les deux sorties sont disponibles.', 'Un coefficient nul, une ligne incomplète ou un barème différent peut rendre le résultat trompeur. Le calculateur ne connaît pas les règles de compensation, de rattrapage ou d’arrondi de votre établissement ; vérifiez le règlement avant de communiquer une note finale.'] },
-      ],
-      examples: ['Comparer 14 coefficient 2 et 16 coefficient 1 sur un même barème.', 'Vérifier une moyenne de bulletin avec les coefficients du règlement.'],
-      notes: ['Documentez le barème et la règle d’arrondi.', 'La moyenne calculée ne remplace pas la décision administrative de l’établissement.'],
-    },
-    inflation: {
-      contentSections: [
-        { heading: 'Définir la période et l’indice', paragraphs: ['Pour une vérification simple, comparez un indice de 100 à 106 et notez la période, le pays et la série utilisée. Une hausse de 6 % de l’indice ne signifie pas que chaque article a augmenté exactement de 6 %.', 'Utilisez des valeurs appartenant à la même série et à la même base. Si vous comparez un salaire, un loyer ou un panier, précisez s’il s’agit d’un montant nominal ou d’un montant corrigé par l’indice.'] },
-        { heading: 'Interpréter pouvoir d’achat et limites', paragraphs: ['Le résultat indique une variation arithmétique entre deux niveaux d’indice ou de prix. Il peut servir à contrôler une feuille de calcul, mais il ne choisit pas le panier, la pondération ni la période pertinente pour votre situation.', 'Les dépenses individuelles, les salaires, les taxes et les loyers peuvent évoluer autrement que l’indice général. Pour une clause contractuelle ou une décision financière, utilisez la série officielle et la méthode prévue par le document concerné.'] },
-      ],
-      examples: ['Contrôler une hausse d’indice de 100 à 106 sur une période précisée.', 'Comparer une revalorisation avec l’indice officiel prévu au contrat.'],
-      notes: ['Une variation moyenne ne décrit pas chaque prix.', 'Conservez la source, la base et les dates avec le résultat.'],
-    },
-    'business-days': {
-      contentSections: [
-        { heading: 'Fixer les règles du délai', paragraphs: ['Saisissez les dates et décidez si le premier et le dernier jour sont inclus. Du lundi 5 janvier 2026 au vendredi 9 janvier 2026, cinq jours ouvrés sont comptés si seuls les samedis et dimanches sont exclus.', 'Vérifiez le format de date et le fuseau de l’équipe. Un contrat, une administration ou une entreprise peut appliquer un calendrier de jours fériés différent du simple calendrier hebdomadaire.'] },
-        { heading: 'Contrôler le résultat avant de le communiquer', paragraphs: ['Testez un intervalle d’une semaine en listant les jours retenus. Lorsqu’un délai traverse un week-end, cette liste explique la différence entre une soustraction de dates et un décompte de jours ouvrés.', 'L’outil ne connaît pas automatiquement tous les jours fériés locaux. Pour une paie, une livraison contractuelle ou une échéance légale, comparez le résultat au calendrier officiel et notez la convention utilisée.'] },
-      ],
-      examples: ['Vérifier un délai du lundi au vendredi sans jour férié ajouté.', 'Contrôler une échéance qui traverse un week-end avant d’envoyer un avis.'],
-      notes: ['Jours calendaires et jours ouvrés répondent à des questions différentes.', 'Les jours fériés doivent venir d’une liste ou d’une source explicite.'],
-    },
-    'weighted-average-calculator': {
-      contentSections: [
-        { heading: 'Construire une moyenne pondérée claire', paragraphs: ['Saisissez une valeur et son poids sur chaque ligne. Avec 12 coefficient 2 et 16 coefficient 1, la moyenne pondérée vaut 13,33 ; le résultat donne plus d’influence à la première valeur parce que son coefficient est doublé.', 'Les valeurs doivent être comparables et les poids représenter la règle réelle. Notez si les poids sont des coefficients bruts, des crédits, des volumes ou des proportions déjà normalisées.'] },
-        { heading: 'Lire la sortie et détecter les erreurs', paragraphs: ['Vérifiez la somme des produits et la somme des poids avant de copier la moyenne. Comparez-la à la moyenne simple pour voir l’effet de la pondération, puis contrôlez qu’une ligne vide ou un coefficient nul n’a pas été interprété comme une observation valide.', 'Une moyenne pondérée ne corrige pas des unités incompatibles, des poids inversés ou une sélection biaisée. Pour une note, un prix ou un indicateur officiel, appliquez ensuite la règle d’arrondi et les exclusions prévues par la source.'] },
-      ],
-      examples: ['Comparer 12 avec poids 2 et 16 avec poids 1.', 'Vérifier une note pondérée à partir de crédits ou de coefficients documentés.'],
-      notes: ['Un poids nul ne donne pas automatiquement une information utile.', 'Conservez la somme des poids et la règle d’arrondi avec le résultat.'],
-    },
-    'date-difference': {
-      contentSections: [
-        { heading: 'Choisir l’unité et la convention', paragraphs: ['Saisissez deux dates et décidez si vous cherchez des jours écoulés, une durée de calendrier ou une différence entre années, mois et jours. Par exemple, du 15 janvier au 1er mars 2026 ne doit pas être résumé de la même manière selon que les bornes sont incluses.', 'Vérifiez l’ordre des dates et le format utilisé par votre équipe. Pour une échéance, indiquez clairement la date de départ, la date finale, le fuseau et la convention de comptage.'] },
-        { heading: 'Contrôler les cas de bord', paragraphs: ['Testez une paire de dates connue, puis regardez séparément le total de jours et la décomposition affichée. Les mois n’ont pas tous la même longueur et les années bissextiles changent certains intervalles.', 'Un résultat exact en jours ne décide pas à lui seul d’un délai juridique, d’une ancienneté ou d’une facturation. Comparez la convention du calculateur avec le document officiel et conservez l’entrée originale avec le résultat.'] },
-      ],
-      examples: ['Contrôler l’intervalle du 15 janvier au 1er mars 2026 en jours.', 'Comparer une durée de calendrier avec une échéance qui exclut le jour de départ.'],
-      notes: ['Les bornes incluses ou exclues doivent être écrites dans le compte rendu.', 'Les mois et années ne se convertissent pas toujours en un nombre fixe de jours.'],
-    },
   },
 };
 

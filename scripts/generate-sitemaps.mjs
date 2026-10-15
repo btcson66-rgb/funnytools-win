@@ -114,10 +114,7 @@ const hashMigrationUrls = [];
 const groups = new Map([
   ['tools', []],
   ['guides', []],
-  ['workflows', []],
   ['en', []],
-  ['es', []],
-  ['fr', []],
 ]);
 const excluded = [];
 

@@ -164,7 +164,7 @@ CTA：`查看公開測試案例`
 
 次要 CTA：`查看工具結果複核流程`
 
-[開啟工具結果複核 Workflow](/workflows/verify-tool-result/)
+[開啟工具驗證方法](/methodology/tool-verification/)
 
 ## 圖卡與 ALT
 

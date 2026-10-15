@@ -7,7 +7,7 @@ const PUBLIC = path.join(ROOT, 'public');
 
 const sitemapFiles = fs
   .readdirSync(PUBLIC)
-  .filter((name) => /^sitemap-(?:tools|guides|workflows|pages|en|es)\.xml$/.test(name));
+  .filter((name) => /^sitemap-(?:tools|guides|pages|en)\.xml$/.test(name));
 const sitemapXml = sitemapFiles
   .map((name) => fs.readFileSync(path.join(PUBLIC, name), 'utf8'))
   .join('\n');
@@ -15,11 +15,9 @@ const urls = [...new Set([...sitemapXml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m
 
 function routeType(url) {
   const pathname = new URL(url).pathname;
-  if (/\/(?:tools|herramientas)\/[^/]+\/$/.test(pathname)) return 'tool';
+  if (/\/tools\/[^/]+\/$/.test(pathname)) return 'tool';
   if (/\/guides\/[^/]+\/$/.test(pathname)) return 'guide';
-  if (/\/workflows\/[^/]+\/$/.test(pathname)) return 'workflow';
   if (/\/category\/[^/]+\/$/.test(pathname)) return 'category';
-  if (/\/for\/[^/]+\/$/.test(pathname)) return 'audience';
   return 'other';
 }
 
@@ -28,21 +26,18 @@ function routeType(url) {
 function routeSlug(url, type) {
   const pathname = new URL(url).pathname;
   const patterns = {
-    tool: /\/(?:tools|herramientas)\/([^/]+)\/$/,
+    tool: /\/tools\/([^/]+)\/$/,
     guide: /\/guides\/([^/]+)\/$/,
-    workflow: /\/workflows\/([^/]+)\/$/,
     category: /\/category\/([^/]+)\/$/,
-    audience: /\/for\/([^/]+)\/$/,
   };
   return patterns[type] ? (pathname.match(patterns[type])?.[1] ?? null) : null;
 }
 
 // contentValue.ts renders the "contextual verification review" block (data-content-value-review)
 // only for pages that have a hand-written override entry — see the remediation note at the top
-// of that file. `zh`/`en` tool/guide/workflow/category/audience pages are the only routes driven
-// by contentValue.ts (its `Locale` type is `'zh' | 'en'` — `es` pages use an entirely separate,
-// pre-existing hand-authored pipeline in `src/i18n/expansion/es*.ts` + `ExpansionToolLayout.astro`
-// that always renders its own review block and is out of scope here). Rather than trust the HTML
+// of that file. `zh`/`en` tool/guide/category pages are the only routes driven by contentValue.ts
+// (its `Locale` type is `'zh' | 'en'`; the workflow, audience and es/fr pipelines were removed in
+// P1, 2026-10-15). Rather than trust the HTML
 // alone, parse contentValue.ts's override tables directly so the gate can tell "no block because
 // no hand-written content exists yet" apart from "block silently failed to render" in both
 // directions, without needing contentValue.ts to expose a runtime manifest.
@@ -68,9 +63,7 @@ function extractOverrideKeys(constName) {
 const overrideKeysByType = {
   tool: extractOverrideKeys('toolValueReviewOverrides'),
   guide: extractOverrideKeys('guideValueReviewOverrides'),
-  workflow: extractOverrideKeys('workflowValueReviewOverrides'),
   category: extractOverrideKeys('categoryValueReviewOverrides'),
-  audience: extractOverrideKeys('audienceValueReviewOverrides'),
 };
 
 // `pendingHandwrittenReview` in contentValue.ts is a TEMPORARY, shrinking list (added
@@ -110,9 +103,7 @@ function extractPendingKeys(type) {
 const pendingKeysByType = {
   tool: extractPendingKeys('tool'),
   guide: extractPendingKeys('guide'),
-  workflow: extractPendingKeys('workflow'),
   category: extractPendingKeys('category'),
-  audience: extractPendingKeys('audience'),
 };
 const pendingTotal = Object.values(pendingKeysByType).reduce((sum, set) => sum + set.size, 0);
 
@@ -153,20 +144,12 @@ function tokenCount(text, lang) {
 }
 
 const minimums = {
-  zh: { tool: 1200, guide: 1200, workflow: 1200, category: 1500, audience: 1200, other: 220 },
-  en: { tool: 780, guide: 850, workflow: 700, category: 780, audience: 700, other: 220 },
-  es: { tool: 950, guide: 900, workflow: 800, category: 850, audience: 800, other: 800 },
+  zh: { tool: 1200, guide: 1200, category: 1500, other: 220 },
+  en: { tool: 780, guide: 850, category: 780, other: 220 },
 };
-const reviewedTypes = new Set(['tool', 'guide', 'workflow', 'category', 'audience']);
-// Task009-011 explicitly require the supplied Workflow source to be used
-// verbatim. These three source-bound routes therefore remain below the normal
-// editorial-length threshold until their original packs receive a later,
-// owner-approved expansion. Do not silently pad them with generated prose.
-const sourceBoundRoutes = {
-  '/workflows/qr-barcode-publishing-toolkit/': 'Task009 original workflow source is required unchanged',
-  '/workflows/grade-gpa-check-toolkit/': 'Task010 original workflow source is required unchanged',
-  '/workflows/verify-tool-result/': 'Task011 original workflow source is required unchanged',
-};
+const reviewedTypes = new Set(['tool', 'guide', 'category']);
+// The three source-bound workflow routes that used to be exempt were removed in P1 (2026-10-15).
+const sourceBoundRoutes = {};
 const failures = [];
 const pages = [];
 
@@ -179,7 +162,7 @@ for (const url of urls) {
 
   const html = fs.readFileSync(file, 'utf8');
   const pathname = new URL(url).pathname;
-  const lang = pathname.startsWith('/es/') ? 'es' : pathname.startsWith('/en/') ? 'en' : 'zh';
+  const lang = pathname.startsWith('/en/') ? 'en' : 'zh';
   const type = routeType(url);
   const mainMatch = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);
   const mainText = plainText(mainMatch?.[1] ?? html);
@@ -205,29 +188,22 @@ for (const url of urls) {
   if (canonical !== url) failures.push(`${url}: canonical mismatch (${canonical ?? 'missing'})`);
   if (noindex) failures.push(`${url}: sitemap URL contains noindex`);
   if (reviewedTypes.has(type) && !sourceBoundReason) {
-    if (lang === 'es') {
-      // The es tool pipeline (ExpansionToolLayout + i18n/expansion/es*.ts) is a separate,
-      // pre-existing, always-hand-written system outside contentValue.ts's scope — keep the
-      // original unconditional requirement for it rather than looking it up in overrideKeysByType.
-      if (!reviewed) failures.push(`${url}: missing contextual verification review`);
-    } else {
-      const slug = routeSlug(url, type);
-      const key = slug ? `${lang}:${slug}` : null;
-      const hasOverride = key ? overrideKeysByType[type]?.has(key) : false;
-      const isPending = key ? pendingKeysByType[type]?.has(key) : false;
-      const expectReviewed = hasOverride || isPending;
-      if (expectReviewed && !reviewed) {
-        const reason = hasOverride
-          ? 'hand-written override exists in contentValue.ts'
-          : 'page is listed in the temporary pendingHandwrittenReview list in contentValue.ts';
-        failures.push(`${url}: missing contextual verification review (${reason} but the block did not render)`);
-      }
-      if (!expectReviewed && reviewed) {
-        failures.push(`${url}: unexpected contextual verification review (block rendered but no hand-written override or pendingHandwrittenReview entry is registered in contentValue.ts for this page)`);
-      }
-      if (hasOverride && isPending) {
-        failures.push(`${url}: ${key} has a hand-written override in contentValue.ts AND is still listed in pendingHandwrittenReview — remove it from the pending list now that a real override exists`);
-      }
+    const slug = routeSlug(url, type);
+    const key = slug ? `${lang}:${slug}` : null;
+    const hasOverride = key ? overrideKeysByType[type]?.has(key) : false;
+    const isPending = key ? pendingKeysByType[type]?.has(key) : false;
+    const expectReviewed = hasOverride || isPending;
+    if (expectReviewed && !reviewed) {
+      const reason = hasOverride
+        ? 'hand-written override exists in contentValue.ts'
+        : 'page is listed in the temporary pendingHandwrittenReview list in contentValue.ts';
+      failures.push(`${url}: missing contextual verification review (${reason} but the block did not render)`);
+    }
+    if (!expectReviewed && reviewed) {
+      failures.push(`${url}: unexpected contextual verification review (block rendered but no hand-written override or pendingHandwrittenReview entry is registered in contentValue.ts for this page)`);
+    }
+    if (hasOverride && isPending) {
+      failures.push(`${url}: ${key} has a hand-written override in contentValue.ts AND is still listed in pendingHandwrittenReview — remove it from the pending list now that a real override exists`);
     }
   }
 
@@ -281,8 +257,8 @@ const summary = {
   reviewablePages: pages.filter((page) => reviewedTypes.has(page.type)).length,
   contextualReviews: pages.filter((page) => reviewedTypes.has(page.type) && page.reviewed).length,
   byLocaleAndType: Object.fromEntries(
-    ['zh', 'en', 'es'].flatMap((lang) =>
-      ['tool', 'guide', 'workflow', 'category', 'audience', 'other'].map((type) => {
+    ['zh', 'en'].flatMap((lang) =>
+      ['tool', 'guide', 'category', 'other'].map((type) => {
         const group = pages.filter((page) => page.lang === lang && page.type === type);
         return [
           `${lang}:${type}`,
@@ -317,6 +293,6 @@ console.log(JSON.stringify(summary, null, 2));
 // preflight run — the whole point of `pendingHandwrittenReview` being temporary depends on
 // someone actually seeing this number shrink over time.
 console.log(
-  `\n暫時清單剩餘 ${pendingTotal} 頁待手寫（tool ${pendingKeysByType.tool.size} / guide ${pendingKeysByType.guide.size} / workflow ${pendingKeysByType.workflow.size} / category ${pendingKeysByType.category.size} / audience ${pendingKeysByType.audience.size}）`,
+  `\n暫時清單剩餘 ${pendingTotal} 頁待手寫（tool ${pendingKeysByType.tool.size} / guide ${pendingKeysByType.guide.size} / category ${pendingKeysByType.category.size}）`,
 );
 if (failures.length) process.exitCode = 1;

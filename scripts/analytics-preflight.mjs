@@ -67,8 +67,22 @@ function analyticsSnippets(html) {
 }
 
 const pages = [...toolPages(), ...toolPages('en')];
+// Content pages ship their analytics wiring either inline or in the page's bundled module script
+// (Astro bundles any <script> that uses an import). P1 left a single guide, whose script is bundled,
+// so include the same-origin module scripts a content page references when looking for the events.
+function withLocalModuleScripts(html) {
+  const modules = [...html.matchAll(/<script\b[^>]*type="module"[^>]*\bsrc="(\/[^"]+)"/g)].map((match) => match[1]);
+  const bundled = modules.map((src) => {
+    try {
+      return readFileSync(join(dist, src.slice(1)), 'utf8');
+    } catch {
+      return '';
+    }
+  });
+  return [html, ...bundled].join('\n');
+}
 const contentHtml = [...contentPages(), ...contentPages('en')]
-  .map((page) => readFileSync(page, 'utf8'))
+  .map((page) => withLocalModuleScripts(readFileSync(page, 'utf8')))
   .join('\n');
 const failures = [];
 

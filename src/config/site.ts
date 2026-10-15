@@ -10,10 +10,17 @@ export const SITE = {
   basePath: '',
   locales: ['zh', 'en'] as Locale[],
   defaultLocale: 'zh' as Locale,
-  name: { zh: 'FunnyTools 免費線上工具箱', en: 'FunnyTools' },
+  // Brand is a single name everywhere (title suffix, Organization schema, manifest, 404).
+  name: { zh: 'FunnyTools', en: 'FunnyTools' },
   tagline: {
-    zh: '免費、免註冊的 PDF、圖片、文字、QR Code、隨機、時間、金錢、教學與統計工具；多數本機處理，部分轉換使用暫時處理檔案的 API。',
-    en: 'Free online tools for PDF, images, text, QR codes, random picks, time, money, teachers and more — mostly browser-based, with selected conversions handled by a temporary-processing API.',
+    zh: '給台灣學生與老師的成績統計工具：T 分數、PR 值、標準差、加權平均與 t 檢定，免註冊、在瀏覽器中計算。',
+    en: 'Grade and statistics calculators for students and teachers in Taiwan: T scores, percentile rank, standard deviation, weighted averages and t tests. No sign-up; calculated in your browser.',
+  },
+  // Named site owner. Only verifiable facts are published about this person
+  // (see /about/); do not add credentials, titles or affiliations here.
+  author: {
+    name: 'Benson Lai',
+    aboutPath: '/about/',
   },
   ga4MeasurementId: 'G-SV027MPXK4',
   // Secondary GA4 tag, added 2026-08-16. The property behind ga4MeasurementId is owned by

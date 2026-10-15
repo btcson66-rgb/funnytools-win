@@ -1,29 +1,31 @@
 ---
 import Breadcrumb from '../../../components/Breadcrumb.astro';
-import CategoryIcon from '../../../components/CategoryIcon.astro';
 import ContentValueReview from '../../../components/ContentValueReview.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
-import { audiences, isAudienceAvailableInLocale, viewAudience } from '../../../data/audiences';
-import { categories, getCategoryById, type Category } from '../../../data/categories';
+import { categories, type Category } from '../../../data/categories';
 import { getCategoryContent, type CategoryContent } from '../../../data/categoryContent';
 import { getToolsByCategory } from '../../../data/tools';
 import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide } from '../../../data/seoGuides';
-import { workflows, isWorkflowAvailableInLocale, viewWorkflow } from '../../../data/workflows';
 import { t } from '../../../i18n/ui';
 import { categoryUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/url';
 import { breadcrumbJsonLd, collectionPageJsonLd } from '../../../lib/seo';
 import { buildCategoryValueReview } from '../../../lib/contentValue';
 import { isIndexablePath } from '../../../lib/indexPolicy';
 
+// P1 (2026-10-15): only the statistics category page is published. The other
+// category listings were folded into the single "other tools" page (/tools/).
 export function getStaticPaths() {
   // Only generate pages for categories that actually have live tools,
   // so we never publish empty/thin category pages.
   return SITE.locales.flatMap((lang) =>
-    categories.filter((category) => getToolsByCategory(category.id, lang).length > 0).map((categoryData) => ({
-      params: { locale: lang === SITE.defaultLocale ? undefined : lang, category: categoryData.id },
-      props: { lang, categoryData },
-    })),
+    categories
+      .filter((category) => category.id === 'statistics')
+      .filter((category) => getToolsByCategory(category.id, lang).length > 0)
+      .map((categoryData) => ({
+        params: { locale: lang === SITE.defaultLocale ? undefined : lang, category: categoryData.id },
+        props: { lang, categoryData },
+      })),
   );
 }
 
@@ -47,71 +49,15 @@ const faqItems = content ? content.faq[lang] : [];
 const disclaimer = content?.disclaimer?.[lang];
 const educationStatisticsHubLabel = lang === 'zh' ? '教育與統計工具中心' : 'Education & Statistics Tools Center';
 const classroomCategoryLabel = { zh: '課堂教學', en: 'Classroom teaching' } satisfies Record<Locale, string>;
-const classroomCategoryPages = ['random', 'study'];
 
-// Surface the data-driven education-statistics guides and workflow toolkits on the statistics category page.
-const statisticsGuideSources = categoryData.id === 'statistics'
-  ? seoGuides
-      .filter((guide) => guide.slug === 't-score-calculator-guide' && isSeoGuideAvailableInLocale(guide, lang))
-      .filter((guide) => guide.priority < 10 && guide.category[lang] !== classroomCategoryLabel[lang])
-      .sort((a, b) => a.priority - b.priority)
-      .slice(0, 6)
-  : [];
-const statisticsGuideIds = new Set(statisticsGuideSources.map((guide) => guide.slug));
-const statisticsGuides = categoryData.id === 'statistics'
-  ? statisticsGuideSources.map((guide) => viewSeoGuide(guide, lang))
-  : [];
-const statisticsWorkflows = [];
-const classroomGuideSources = classroomCategoryPages.includes(categoryData.id)
-  ? seoGuides
-      .filter((guide) => isSeoGuideAvailableInLocale(guide, lang))
-      .filter((guide) => guide.category[lang] === classroomCategoryLabel[lang])
-      .sort((a, b) => a.priority - b.priority)
-      .slice(0, 5)
-  : [];
-const classroomGuideIds = new Set(classroomGuideSources.map((guide) => guide.slug));
-const classroomGuides = classroomGuideSources.map((guide) => viewSeoGuide(guide, lang));
-const classroomWorkflows = classroomCategoryPages.includes(categoryData.id)
-  ? workflows
-      .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
-      .filter((workflow) => workflow.relatedGuideIds.some((guideId) => classroomGuideIds.has(guideId)))
-      .slice(0, 1)
-      .map((workflow) => viewWorkflow(workflow, lang))
-  : [];
-const textWritingHub = categoryData.id === 'text'
-  ? seoGuides.find((guide) => guide.slug === 'text-writing' && isSeoGuideAvailableInLocale(guide, lang))
-  : undefined;
-const textWritingGuides = categoryData.id === 'text'
-  ? seoGuides
-      .filter((guide) => guide.category[lang] === (lang === 'zh' ? '文字與寫作' : '文字與寫作'))
-      .filter((guide) => isSeoGuideAvailableInLocale(guide, lang))
-      .sort((a, b) => a.priority - b.priority)
-      .slice(0, 12)
-      .map((guide) => viewSeoGuide(guide, lang))
-  : [];
-const textWritingWorkflow = categoryData.id === 'text'
-  ? workflows.find((workflow) => workflow.slug === 'text-cleanup-publishing-toolkit' && isWorkflowAvailableInLocale(workflow, lang))
-  : undefined;
-const guidesSectionCopy = lang === 'zh'
-  ? { guides: '教學指南', workflows: '工具包流程' }
-  : { guides: 'Guides', workflows: 'Workflow toolkits' };
-const classroomSectionCopy = lang === 'zh'
-  ? { guides: '課堂教學指南', workflows: '課堂工具包' }
-  : { guides: 'Classroom teaching guides', workflows: 'Classroom toolkits' };
-const categoryToolSlugs = new Set(categoryTools.map((tool) => tool.slug));
-const relatedAudienceViews = audiences
-  .filter((audience) => isAudienceAvailableInLocale(audience, lang))
-  .filter((audience) => audience.relatedCategoryIds.includes(categoryData.id))
-  .map((audience) => viewAudience(audience, lang))
-  .filter(() => categoryData.id !== 'statistics');
-const relatedWorkflowViews = workflows
-  .filter((workflow) => isWorkflowAvailableInLocale(workflow, lang))
-  .filter((workflow) => workflow.recommendedToolIds.some((toolSlug) => categoryToolSlugs.has(toolSlug)))
-  .map((workflow) => viewWorkflow(workflow, lang))
-  .filter(() => categoryData.id !== 'statistics');
-const categoryRelatedCopy = lang === 'zh'
-  ? { audiences: '依使用情境延伸', workflows: '相關工作流' }
-  : { audiences: 'Related audience toolkits', workflows: 'Related workflows' };
+// Surface the retained education-statistics guide on the statistics category page.
+const statisticsGuides = seoGuides
+  .filter((guide) => guide.slug === 't-score-calculator-guide' && isSeoGuideAvailableInLocale(guide, lang))
+  .filter((guide) => guide.priority < 10 && guide.category[lang] !== classroomCategoryLabel[lang])
+  .sort((a, b) => a.priority - b.priority)
+  .slice(0, 6)
+  .map((guide) => viewSeoGuide(guide, lang));
+const guidesSectionCopy = lang === 'zh' ? { guides: '教學指南' } : { guides: 'Guides' };
 
 const blurbFor = (slug: string): string =>
   content?.toolBlurbs[slug]?.[lang] ?? categoryTools.find((tool) => tool.slug === slug)?.short[lang] ?? '';
@@ -122,31 +68,17 @@ const valueReview = buildCategoryValueReview(
   categoryTools.slice(0, 3).map((tool) => ({ name: tool.name[lang], summary: blurbFor(tool.slug) })),
 );
 
-const relatedCategories = (content?.relatedCategories ?? [])
-  .map((id) => getCategoryById(id))
-  .filter((cat): cat is Category => cat != null)
-  .filter((cat) => categoryData.id !== 'statistics' && getToolsByCategory(cat.id, lang).length > 0);
-
 const breadcrumbItems = [
   { name: ui.breadcrumbHome, href: localePath(lang) },
   { name: categoryData.name[lang], href: categoryUrl(lang, categoryData.id) },
 ];
 
+// Structured data: CollectionPage + BreadcrumbList only. FAQPage is intentionally
+// not emitted (the FAQ rich result was removed by Google in 2026-06); the visible FAQ stays.
 const jsonLd: Record<string, unknown>[] = [
   collectionPageJsonLd(lang, h1, pageDescription, categoryUrl(lang, categoryData.id)),
   breadcrumbJsonLd(breadcrumbItems),
 ];
-if (faqItems.length > 0) {
-  jsonLd.push({
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqItems.map((item) => ({
-      '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: { '@type': 'Answer', text: item.a },
-    })),
-  });
-}
 ---
 
 <BaseLayout
@@ -193,74 +125,17 @@ if (faqItems.length > 0) {
     </section>
   )}
 
-  {(statisticsGuides.length > 0 || statisticsWorkflows.length > 0) && (
+  {statisticsGuides.length > 0 && (
     <section class="wrap content-section statistics-guides">
-      {statisticsGuides.length > 0 && (
-        <>
-          <h2>{guidesSectionCopy.guides}</h2>
-          <div class="related-guide-list">
-            {statisticsGuides.map((guide) => (
-              <a href={localePath(lang, 'guides', guide.slug)}>
-                <strong>{guide.title}</strong>
-                <span>{guide.summary}</span>
-              </a>
-            ))}
-          </div>
-        </>
-      )}
-      {statisticsWorkflows.length > 0 && (
-        <>
-          <h2>{guidesSectionCopy.workflows}</h2>
-          <div class="related-guide-list">
-            {statisticsWorkflows.map((workflow) => (
-              <a href={localePath(lang, 'workflows', workflow.slug)}>
-                <strong>{workflow.title}</strong>
-                <span>{workflow.purpose}</span>
-              </a>
-            ))}
-          </div>
-        </>
-      )}
-    </section>
-  )}
-
-  {(classroomGuides.length > 0 || classroomWorkflows.length > 0) && (
-    <section class="wrap content-section statistics-guides">
-      {classroomGuides.length > 0 && (
-        <>
-          <h2>{classroomSectionCopy.guides}</h2>
-          <div class="related-guide-list">
-            {classroomGuides.map((guide) => (
-              <a href={localePath(lang, 'guides', guide.slug)}>
-                <strong>{guide.title}</strong>
-                <span>{guide.summary}</span>
-              </a>
-            ))}
-          </div>
-        </>
-      )}
-      {classroomWorkflows.length > 0 && (
-        <>
-          <h2>{classroomSectionCopy.workflows}</h2>
-          <div class="related-guide-list">
-            {classroomWorkflows.map((workflow) => (
-              <a href={localePath(lang, 'workflows', workflow.slug)}>
-                <strong>{workflow.title}</strong>
-                <span>{workflow.purpose}</span>
-              </a>
-            ))}
-          </div>
-        </>
-      )}
-    </section>
-  )}
-
-  {(textWritingHub || textWritingGuides.length > 0 || textWritingWorkflow) && (
-    <section class="wrap content-section statistics-guides" aria-labelledby="text-writing-guides-title">
-      <h2 id="text-writing-guides-title">{lang === 'zh' ? '文字、字元與格式整理' : 'Text, characters, and formatting'}</h2>
-      {textWritingHub && <a class="inline-link" href={localePath(lang, 'guides', textWritingHub.slug)}>{textWritingHub.title}</a>}
-      {textWritingGuides.length > 0 && <div class="related-guide-list">{textWritingGuides.map((guide) => <a href={localePath(lang, 'guides', guide.slug)}><strong>{guide.title}</strong><span>{guide.summary}</span></a>)}</div>}
-      {textWritingWorkflow && <p><a class="inline-link" href={localePath(lang, 'workflows', textWritingWorkflow.slug)}>{textWritingWorkflow.title}</a></p>}
+      <h2>{guidesSectionCopy.guides}</h2>
+      <div class="related-guide-list">
+        {statisticsGuides.map((guide) => (
+          <a href={localePath(lang, 'guides', guide.slug)}>
+            <strong>{guide.title}</strong>
+            <span>{guide.summary}</span>
+          </a>
+        ))}
+      </div>
     </section>
   )}
 
@@ -343,55 +218,6 @@ if (faqItems.length > 0) {
     </section>
   )}
 
-  {(relatedAudienceViews.length > 0 || relatedWorkflowViews.length > 0) && (
-    <section class="wrap content-section statistics-guides">
-      {relatedAudienceViews.length > 0 && (
-        <>
-          <h2>{categoryRelatedCopy.audiences}</h2>
-          <div class="related-guide-list">
-            {relatedAudienceViews.map((audience) => (
-              <a href={localePath(lang, 'for', audience.slug)}>
-                <strong>{audience.title}</strong>
-                <span>{audience.metaDescription}</span>
-              </a>
-            ))}
-          </div>
-        </>
-      )}
-      {relatedWorkflowViews.length > 0 && (
-        <>
-          <h2>{categoryRelatedCopy.workflows}</h2>
-          <div class="related-guide-list">
-            {relatedWorkflowViews.map((workflow) => (
-              <a href={localePath(lang, 'workflows', workflow.slug)}>
-                <strong>{workflow.title}</strong>
-                <span>{workflow.purpose}</span>
-              </a>
-            ))}
-          </div>
-        </>
-      )}
-    </section>
-  )}
-
-  {relatedCategories.length > 0 && (
-    <section class="wrap content-section">
-      <h2>{ui.category.relatedHeading}</h2>
-      <div class="grid">
-        {
-          relatedCategories.map((cat) => (
-            <a class="tile category-tile" href={categoryUrl(lang, cat.id)} data-category={cat.id}>
-              <span class="tile-icon"><CategoryIcon category={cat.id} /></span>
-              <span class="tile-body">
-                <strong>{cat.name[lang]}</strong>
-                <span>{cat.description[lang]}</span>
-              </span>
-            </a>
-          ))
-        }
-      </div>
-    </section>
-  )}
 </BaseLayout>
 
 <style>

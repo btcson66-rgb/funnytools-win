@@ -3,12 +3,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { parseCsv, secretScanText } from '../scripts/index-recovery-phase2-lib.mjs';
-import { phase2bExpansionContent, phase2bToolContent } from '../src/i18n/tools/phase2b-treatment-content.ts';
+import { phase2bToolContent } from '../src/i18n/tools/phase2b-treatment-content.ts';
 
 const root = process.cwd();
 const reportDir = path.join(root, 'reports', 'index-recovery-phase2b');
 const report = (name) => path.join(reportDir, name);
 const rows = (name) => parseCsv(fs.readFileSync(report(name), 'utf8'));
+// P1 (2026-10-15) removed the es/fr locales. The experiment reports stay as a
+// historical record, but the es/fr arms can no longer be rendered or checked
+// against live pages, so only the zh-TW and en arms are verified against the build.
+const RETIRED_LOCALES = new Set(['es', 'fr']);
 
 test('Phase 2B has exactly 20 hard-matched disjoint pairs', () => {
   const pairs = rows('experiment-pairs.csv');
@@ -66,15 +70,12 @@ test('Phase 2B local render guard proves treatment-only changes', () => {
 });
 
 test('Phase 2B added copy passes the block-level duplicate gate', () => {
-  const additions = [
-    ...Object.values(phase2bToolContent),
-    ...Object.values(phase2bExpansionContent),
-  ].flatMap((localeEntries) => Object.values(localeEntries));
+  const additions = Object.values(phase2bToolContent).flatMap((localeEntries) => Object.values(localeEntries));
   const blocks = additions.flatMap((content) => content.contentSections.flatMap((section) => section.paragraphs));
   const normalize = (value) => value.toLocaleLowerCase().normalize('NFKC').replace(/\s+/gu, ' ').trim();
   const normalizedBlocks = blocks.map(normalize);
-  assert.equal(blocks.length, 80);
-  assert.equal(new Set(normalizedBlocks).size, 80);
+  assert.equal(blocks.length, 40);
+  assert.equal(new Set(normalizedBlocks).size, 40);
 
   const tokenSets = normalizedBlocks.map((block) => new Set(block.match(/[\p{L}\p{N}]+/gu) || []));
   let maximumJaccard = 0;
@@ -86,21 +87,20 @@ test('Phase 2B added copy passes the block-level duplicate gate', () => {
     }
   }
   assert.ok(maximumJaccard < 0.8, `boilerplate-like block overlap: ${maximumJaccard}`);
-  const stats = rows('unique-content-stats.csv');
-  assert.equal(stats.find((row) => row.metric === 'added paragraph blocks')?.evidence.includes('80 normalized blocks'), true);
+  // The historical stats report counted 80 blocks across four locales; 40 remain after the es/fr arms were retired.
 });
 
 test('Phase 2B content map covers treatments and no controls', () => {
   const pairs = rows('experiment-pairs.csv');
-  const treatmentKeys = new Set(pairs.map((row) => `${row.locale}|${row.treatment_tool_slug}`));
-  const controlKeys = new Set(pairs.map((row) => `${row.locale}|${row.control_tool_slug}`));
-  const mapKeys = new Set([
-    ...Object.entries(phase2bToolContent).flatMap(([locale, entries]) => Object.keys(entries).map((slug) => `${locale === 'zh' ? 'zh-TW' : locale}|${slug}`)),
-    ...Object.entries(phase2bExpansionContent).flatMap(([locale, entries]) => Object.keys(entries).map((slug) => `${locale}|${slug}`)),
-  ]);
+  const livePairs = pairs.filter((row) => !RETIRED_LOCALES.has(row.locale));
+  const treatmentKeys = new Set(livePairs.map((row) => `${row.locale}|${row.treatment_tool_slug}`));
+  const controlKeys = new Set(livePairs.map((row) => `${row.locale}|${row.control_tool_slug}`));
+  const mapKeys = new Set(
+    Object.entries(phase2bToolContent).flatMap(([locale, entries]) => Object.keys(entries).map((slug) => `${locale === 'zh' ? 'zh-TW' : locale}|${slug}`)),
+  );
   assert.deepEqual(mapKeys, treatmentKeys);
   for (const key of controlKeys) assert.equal(mapKeys.has(key), false, `control entered treatment map: ${key}`);
-  for (const entry of [...Object.values(phase2bToolContent), ...Object.values(phase2bExpansionContent)]) {
+  for (const entry of Object.values(phase2bToolContent)) {
     for (const content of Object.values(entry)) {
       assert.ok(content.contentSections.length >= 2);
       assert.ok(content.contentSections.every((section) => section.paragraphs.length >= 2));
@@ -109,10 +109,9 @@ test('Phase 2B content map covers treatments and no controls', () => {
 });
 
 test('Phase 2B treatment copy is present on each intended rendered URL', () => {
-  const pairs = rows('experiment-pairs.csv');
-  const getAddition = (locale, slug) => locale === 'zh-TW'
-    ? phase2bToolContent.zh[slug]
-    : locale === 'en' ? phase2bToolContent.en[slug] : phase2bExpansionContent[locale][slug];
+  const pairs = rows('experiment-pairs.csv').filter((row) => !RETIRED_LOCALES.has(row.locale));
+  assert.equal(pairs.length, 10);
+  const getAddition = (locale, slug) => locale === 'zh-TW' ? phase2bToolContent.zh[slug] : phase2bToolContent.en[slug];
   for (const pair of pairs) {
     const addition = getAddition(pair.locale, pair.treatment_tool_slug);
     assert.ok(addition);

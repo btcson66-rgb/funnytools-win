@@ -1,6 +1,5 @@
 import { SITE, type Locale } from '../config/site';
 import { ACTIVE_AFFILIATE_PLATFORM_NAMES } from '../data/affiliateProducts';
-import { TOOL_COUNT } from '../data/tools';
 
 const adsenseDisclosure = {
   zh: SITE.adsenseEnabled
@@ -26,197 +25,33 @@ export interface InfoPageContent {
 
 export type InfoPageKey = 'about' | 'contact' | 'privacy' | 'terms' | 'disclaimer' | 'aboutTools';
 
-export const home = {
-  zh: {
-    seoTitle: "FunnyTools 免費線上工具箱｜PDF、圖片、文字、QR Code、隨機與計算工具",
-    seoDescription: "FunnyTools 是一個免費線上工具箱，提供 PDF、圖片、文字、QR Code、隨機、時間、金錢、教學與統計工具。免安裝、免註冊，手機與電腦都能使用。",
-    eyebrow: '免費、快速、免安裝',
-    title: 'FunnyTools 免費線上工具箱',
-    intro: "免安裝、免註冊，快速使用 PDF、圖片、文字、金錢、時間與教學工具。",
-    primaryCta: '查看所有工具',
-    secondaryCta: '熱門工具',
-  },
-  en: {
-    seoTitle: "Free Online Tools - PDF, Image, Text & QR | FunnyTools",
-    seoDescription: "Free online tools for PDF, images, text, QR codes, random picks, and calculators. No signup; browser-first workflows for everyday tasks.",
-    eyebrow: 'Free, fast, no install',
-    title: 'FunnyTools - Free Online Tools for Everyday Tasks',
-    intro: "FunnyTools gathers practical tools for work, teaching, PDFs, images, writing, random picks, and everyday calculations. Open a page and use it on mobile or desktop.",
-    primaryCta: 'View all tools',
-    secondaryCta: 'Search tools',
-  },
-} satisfies Record<Locale, Record<string, string>>;
-
-export const homeSeoIntro = {
-  zh: {
-    heading: '日常工作與學習需要的免費工具箱',
-    paragraphs: [
-      'FunnyTools 是一個整理日常實用功能的免費線上工具箱，讓你不必為了一次簡單任務下載軟體或安裝 App。無論是合併與拆分 PDF、壓縮或轉換圖片、統計文字字數、整理文字格式、抽選名單、安排分組、計算日期時間，或試算薪資與貸款，都可以從首頁的搜尋、熱門工具與分類快速找到合適功能。網站保留清楚的操作流程，適合臨時需要處理文件的上班族、準備教材與課堂活動的老師、整理報告與作業的學生，以及處理圖片和文字內容的創作者使用。',
-      '站內工具免安裝、免註冊，多數功能可直接在手機或電腦的瀏覽器中執行。現有分類涵蓋 PDF 工具、圖片工具、文字工具、隨機工具、時間工具、金錢工具與教學工具；你可以依任務分類瀏覽，也能輸入關鍵字搜尋。對於可在本機完成的操作，資料通常留在目前的瀏覽器分頁中處理；實際處理方式與使用限制會在各工具頁說明。FunnyTools 的重點是縮短尋找與切換工具的時間，讓工作、學習、備課與內容製作中的小任務更快完成。',
-    ],
-  },
-  en: {
-    heading: 'Free tools for everyday work and study',
-    paragraphs: [
-      'FunnyTools is a free online toolbox for common document, image, writing, classroom, time, and calculation tasks. Use search, popular tools, or categories to find a practical option without installing an app or creating an account.',
-      'Most tools work directly in a mobile or desktop browser. The collection includes PDF, image, text, random, time, money, and teaching tools for students, teachers, office workers, and creators. Each tool page explains its workflow and any relevant data-handling limits.',
-    ],
-  },
-} satisfies Record<Locale, { heading: string; paragraphs: string[] }>;
-
-export const homeUseCases = {
-  zh: [
-    {
-      title: '文件處理',
-      description: '合併、拆分、轉換或旋轉 PDF，檔案主要留在目前的瀏覽器中處理。',
-      tools: ['merge-pdf', 'split-pdf', 'images-to-pdf', 'rotate-pdf'],
-    },
-    {
-      title: '圖片處理',
-      description: '壓縮、調整尺寸、轉換 PNG／JPG 或製作 QR Code，適合日常檔案整理。',
-      tools: ['image-compressor', 'image-resizer', 'png-to-jpg', 'qr-code-generator'],
-    },
-    {
-      title: '老師教學',
-      description: '用隨機點名、課堂分組、座位表與成績平均工具協助準備及進行課堂活動。',
-      tools: ['random-student-picker', 'random-group-generator', 'seating-chart', 'grade-average'],
-    },
-    {
-      title: '上班族與理財',
-      description: '試算薪資、加班費、房貸與複利，再用工作日工具安排時間；金額結果僅供估算。',
-      tools: ['net-salary', 'overtime-pay', 'mortgage-payment', 'compound-interest', 'business-days'],
-    },
-  ],
-  en: [
-    {
-      title: 'Document tasks',
-      description: 'Merge, split, convert, or rotate PDFs locally in your current browser.',
-      tools: ['merge-pdf', 'split-pdf', 'images-to-pdf', 'rotate-pdf'],
-    },
-    {
-      title: 'Image tasks',
-      description: 'Compress, resize, convert PNG or JPG files, and create QR codes for everyday use.',
-      tools: ['image-compressor', 'image-resizer', 'png-to-jpg', 'qr-code-generator'],
-    },
-    {
-      title: 'Teaching',
-      description: 'Pick students, split classes, arrange seats, and calculate grade averages.',
-      tools: ['random-student-picker', 'random-group-generator', 'seating-chart', 'grade-average'],
-    },
-    {
-      title: 'Work & money',
-      description: 'Estimate salary, overtime, mortgages, and compound interest, then plan with business days. Figures are estimates only.',
-      tools: ['net-salary', 'overtime-pay', 'mortgage-payment', 'compound-interest', 'business-days'],
-    },
-  ],
-} satisfies Record<Locale, { title: string; description: string; tools: string[] }[]>;
-
-export const homePrivacy = {
-  zh: {
-    heading: '隱私與本機處理說明',
-    text: 'FunnyTools 免費線上工具箱優先提供可在瀏覽器本機執行的工具。文字、名單與多數單檔圖片／PDF 工具通常不需要上傳；批次轉換、PDF 轉檔與 PDF 壓縮等需要網路服務的工具會在工具頁明確標示。',
-    linkText: '查看完整隱私權政策',
-  },
-  en: {
-    heading: 'Privacy & local processing',
-    text: 'FunnyTools prioritizes tools that run in your browser. Text, lists, numbers, and many single-file image/PDF tools usually stay local; batch conversion, PDF conversion, and PDF compression pages identify their network processing clearly.',
-    linkText: 'Read the privacy policy',
-  },
-} satisfies Record<Locale, { heading: string; text: string; linkText: string }>;
-
-export const homeFaq = {
-  zh: [
-    {
-      q: '這些工具可以免費使用嗎？',
-      a: '可以。目前 FunnyTools 站內工具皆可免費使用，不需要付費訂閱；個別工具的用途與限制會在各工具頁說明。',
-    },
-    {
-      q: '免費線上工具需要安裝嗎？',
-      a: '不需要。使用手機或電腦的瀏覽器開啟工具頁即可操作，也不必註冊帳號或登入。',
-    },
-    {
-      q: 'FunnyTools 可以在手機使用嗎？',
-      a: '可以。首頁、分類頁與工具頁均支援手機與電腦瀏覽器；較大的 PDF 或圖片檔案，處理速度仍會受到裝置效能與記憶體影響。',
-    },
-    {
-      q: 'PDF 工具會上傳檔案嗎？',
-      a: '視工具而定：合併、拆分等整理工具在瀏覽器本機處理；PDF 轉 Word、表格轉 Excel 與 PDF 壓縮會把檔案暫時送到 FunnyTools Conversion API。請以各工具頁的隱私說明為準，並避免處理高度敏感資料。',
-    },
-    {
-      q: '有哪些適合老師或學生的工具？',
-      a: '老師可使用隨機點名、課堂分組、座位表與成績平均工具；學生可使用文字統計、PDF 整理、圖片處理、番茄鐘與日期計算等工具協助作業和報告。',
-    },
-    {
-      q: '如何快速找到需要的線上工具？',
-      a: '可以在首頁搜尋工具名稱或用途，也能從 PDF、圖片、文字、隨機、時間、金錢與學生老師等分類瀏覽，或直接查看熱門工具。',
-    },
-    {
-      q: '計算器結果可以當作正式依據嗎？',
-      a: '不建議。薪資、貸款、複利等試算結果僅供參考，正式決策仍應查證官方資料、合約或專業意見。',
-    },
-    {
-      q: '圖片與文字工具的結果可以商業使用嗎？',
-      a: '一般計算或自行輸入內容產生的結果可依你的需求使用，但你仍需確認原始素材、字型、商標與第三方內容的授權，並自行驗證結果是否符合工作或法規要求。',
-    },
-  ],
-  en: [
-    {
-      q: 'Is FunnyTools free?',
-      a: 'Yes. The tools currently available on the site are free to use without an account or app download.',
-    },
-    {
-      q: 'Do I need an account?',
-      a: 'No. Current tools open directly without an account or sign-in system.',
-    },
-    {
-      q: 'Are uploaded files saved?',
-      a: 'Most PDF and image tools read and process files locally, so they are not saved on FunnyTools servers. Check each tool page and avoid highly sensitive files.',
-    },
-    {
-      q: 'Can I use it on a phone?',
-      a: 'Yes. The home page, category pages, and tool pages are designed for both mobile and desktop browsers.',
-    },
-    {
-      q: 'Can calculator results be used as official figures?',
-      a: 'No. Salary, loan, compound interest, and similar calculator results are for reference only. Check official sources, contracts, or qualified professionals for formal decisions.',
-    },
-    {
-      q: 'Can I use tool results commercially?',
-      a: 'General calculations and results based on your own inputs may be used as needed, but you remain responsible for source-material rights, third-party licenses, and result verification.',
-    },
-  ],
-} satisfies Record<Locale, { q: string; a: string }[]>;
-
 export const pages = {
   zh: {
     about: {
-      title: '關於 FunnyTools 免費線上工具箱',
-      seoTitle: '關於我們｜免費線上工具箱簡介 - FunnyTools',
-      description: '了解 FunnyTools 免費線上工具箱的網站定位、工具原則、資料處理方式與目前涵蓋的工具分類。本站工具可免費使用且不需註冊，並優先採用瀏覽器本機處理，協助你安全完成日常工作、學習與檔案任務。',
+      title: '關於 FunnyTools 與站長 Benson Lai',
+      seoTitle: '關於站長 Benson Lai｜FunnyTools 成績統計工具',
+      description: '說明 FunnyTools 的站長 Benson Lai、網站專注的成績統計主題、工具公式與範例數字的查核方式、最後審核日期的意義，以及發現錯誤時如何回報與修正。',
       body: [
-        "FunnyTools 免費線上工具箱是由一名學生獨立開發與維護的免費工具網站，把工作、學習、金錢與日常生活常用的小工具整理在乾淨、好讀、手機友善的頁面中。做這個網站的起點很單純：在課業與日常生活中常需要把好幾張圖片合成一份 PDF、幫班級抽籤分組、算加班費、或把統計成績轉換成百分等級，但網路上同類工具很多要求先註冊、被滿版廣告卡住，或是把檔案上傳到不清楚會被怎麼處理的伺服器，所以動手做了一個免安裝、免註冊、盡量在瀏覽器本機就能完成的版本。",
-        `本站目前提供 ${TOOL_COUNT} 種免費工具，依用途分成金錢、時間、隨機、文字、圖片、PDF、製圖與統計等分類，另外整理出學生與老師常用的工具組合（例如隨機點名、課堂分組、成績百分等級、Cronbach's α 信度計算），持續新增與維護中。`,
-        "我們優先設計可以在瀏覽器本機執行的工具，減少不必要的資料傳輸。站內幾乎所有工具的隱私設計都標記為「本機處理」——文字、名單、數字、圖片或 PDF 內容只在你目前的瀏覽器分頁中計算，不會主動送到本站伺服器。",
-        "少數情境會用到網路服務，而且會在該工具頁明確說明。例如你在部分工具選擇「把結果寄到信箱」，或訂閱電子報時，站方會透過第三方寄信服務（Brevo）收集你的 email 與所使用的工具名稱，這件事在隱私權政策與工具頁都會標示，不會偷偷發生。",
-        "每個工具頁會說明用途、基本操作、常見情境、資料處理方式與已知限制，多數工具頁下方也附有一段內容審閱說明，標示這個頁面的公式、範例或步驟最近一次被檢查或更新的日期，方便你判斷內容是不是新的。",
-        "涉及公開規則或常用公式的頁面，我們優先用可重現的範例與工具實測結果來說明，而不是用誇大承諾、假評價或未查證的權威背書包裝工具；如果一段說明找不到可查證的依據，我們寧可先不寫，也不放沒把握的內容上去。",
-        `如果你發現工具算錯、頁面顯示異常或說明有誤，可以寄信到 ${SITE.email}，或直接到 ${githubIssuesUrl} 開一個公開 issue，附上頁面網址與你輸入的條件。我們會依問題影響的使用者範圍安排修正順序，明顯算錯的功能會優先處理，措辭與排版類問題會排在後面。`,
-        "本站有一些明確不做的事：不提供法律、醫療、投資或稅務的個別化建議，不能取代學校、雇主、銀行或政府機關開立的正式文件，也不會用計算結果替你認證資格、名次或申請結果——這些事永遠要以官方資料或專業人士的意見為準。",
-        `本站目前由這名學生一個人維護：更新、除錯與內容修正都是同一個人處理，你寄到 ${SITE.email} 的信、或在 GitHub 開的 issue，也是由同一個人閱讀與回覆，中間沒有客服團隊或轉單流程。正因為是個人維護，本站不是政府、學校、銀行、醫療或法律機構，也不代表任何第三方服務；除了「由一名學生獨立維護」這一點之外，目前沒有可公開揭露的姓名、學校或其他個人資訊。`,
+        "FunnyTools 是給台灣學生與老師使用的成績統計工具站，提供 T 分數、Z 分數、PR 百分等級、班級排名百分比、加權平均、標準差與獨立樣本 t 檢定等計算工具。工具在你的瀏覽器中計算，輸入的成績不會上傳到本站伺服器。",
+        "站內另有少數通用小工具（PDF、圖片、文字、時間、金錢等），它們原本就在本站，保留給已經在使用的訪客。這些工具不是本站的主軸，也不會持續擴充，集中放在「其他小工具」頁。",
+        "站長是 Benson Lai，負責工具開發與內容審核。每一個成績統計工具頁與 T 分數指南都署名 Benson Lai，並標示最後審核日期。",
+        `這一頁只寫可以查證的事實：本站由 Benson Lai 開發與維護，目前沒有另外的編輯團隊或客服團隊，你寄到 ${SITE.email} 的信與在 GitHub 開的 issue 都由同一個人閱讀。本站不是政府、學校、銀行、醫療或法律機構，也不聲稱任何學歷、證照、教職或機構背書。`,
+        "公式的查核方式：每個工具使用的公式，都對照教科書或官方文件撰寫；頁面上的範例數字，會實際重新計算一次，確認工具輸出和手算結果一致。若一段說明找不到可查證的依據，寧可不寫。",
+        "涉及考試規則的內容，例如教師甄試的配分與加權，一律以當年度簡章與官方公告為準；工具只做模擬，不能取代官方公告。",
+        "工具頁與指南頁上的「最後審核」日期，是該頁內容最近一次被重新檢查的日期。內容有修改時，這個日期會跟著更新。",
+        `如果你發現工具算錯、頁面說明有誤，或公式和教科書不一致，請寄信到 ${SITE.email}，或到 ${githubIssuesUrl} 開一個公開 issue，附上頁面網址與你輸入的數字。明顯算錯的功能會優先處理，確認錯誤後會修正頁面並更新最後審核日期。`,
+        "本站有一些明確不做的事：不提供法律、醫療、投資或稅務的個別化建議，不能取代學校、雇主、銀行或政府機關開立的正式文件，也不會用計算結果替你認證資格、名次或申請結果。這些事永遠要以官方資料或專業人士的意見為準。",
         "FunnyTools 不要求建立帳號。工具完成計算或處理後，頁面可能在清楚分隔的區域顯示可選的支持本站分潤連結；這些連結與工具的計算、資料處理、輸出內容及服務可用性完全分開，使用或忽略它們都不會改變結果或工具是否可用。",
-        `${adsenseDisclosure.zh} 本站另外使用 Google Analytics（GA4）記錄匿名流量統計，協助我們了解哪些工具比較常被使用，藉此決定優先維護與新增的方向；詳細的 Cookie 與資料處理範圍請見隱私權政策。`,
-        "本站工具以日常便利、學習與初步估算為目的。涉及薪資、稅務、貸款、投資、醫療、法律或其他專業判斷時，結果僅供參考，正式決策仍應查證官方資料或諮詢專業人士，完整限制請見免責聲明與使用條款。",
-        `如果你有工具建議、錯誤回報、內容修正或網站合作問題，歡迎來信 ${SITE.email}，或到 GitHub Issues 開票。`,
-        "英文版與中文版雖然共用同一套網站架構，但不是逐句翻譯——舉例、分類說明與段落順序會依讀者情境調整。英文版是比較晚才擴充的區塊，如果你發現某個英文頁面內容明顯比對應的中文頁面單薄，歡迎直接來信告訴我們，這類回報對我們排序優化很有幫助。",
-        "多數工具頁下方會列出同分類的相關工具連結，方便你不用回到首頁重新搜尋，例如 PDF 拆分工具會連到合併與壓縮工具，百分等級計算器也會連到同樣用於統計分析的 Z 分數與 T 分數工具。",
+        `${adsenseDisclosure.zh} 本站另外使用 Google Analytics（GA4）記錄匿名流量統計，協助我們了解哪些工具比較常被使用，藉此決定優先維護的方向；詳細的 Cookie 與資料處理範圍請見隱私權政策。`,
+        "本站工具以學習、教學與初步估算為目的。正式的成績單、甄選與研究仍應以原始資料和官方規則為準，完整限制請見免責聲明與使用條款。",
       ],
     },
     contact: {
       title: '聯絡我們',
       seoTitle: '聯絡我們｜問題回報與工具建議 - FunnyTools',
-      description: '提供 FunnyTools 免費線上工具箱的聯絡方式與回饋管道。你可以回報工具錯誤、提出新工具建議或反映網站內容問題；來信時若附上頁面網址、操作步驟、裝置與瀏覽器資訊，將更容易確認問題。',
+      description: '提供 FunnyTools的聯絡方式與回饋管道。你可以回報工具錯誤、提出新工具建議或反映網站內容問題；來信時若附上頁面網址、操作步驟、裝置與瀏覽器資訊，將更容易確認問題。',
       body: [
-        `如果你想回報工具錯誤、提出新工具建議、詢問網站內容，或有其他與 FunnyTools 免費線上工具箱相關的問題，可以寄信到 ${SITE.email}；比較適合公開討論、或想讓其他使用者也看得到進度的問題，也可以直接到 ${githubIssuesUrl} 開一個 issue。`,
+        `如果你想回報工具錯誤、提出新工具建議、詢問網站內容，或有其他與 FunnyTools相關的問題，可以寄信到 ${SITE.email}；比較適合公開討論、或想讓其他使用者也看得到進度的問題，也可以直接到 ${githubIssuesUrl} 開一個 issue。`,
         "一般網站維護與內容修正來信通常會在 3 個工作天內查看；如果問題需要重現、比對官方資料或排入開發修正，實際處理時間可能拉長到數週，且因為目前是小規模維護，無法保證每一封信都能逐一回覆，但每封信都會被看過。",
         "回報工具錯誤時，請盡量附上工具頁網址、你輸入的大致條件（不需要真實個資，用假資料重現即可）、預期結果、實際看到的結果、使用裝置類型與瀏覽器版本。這些資訊愈完整，我們愈容易在自己的環境中重現同樣的狀況。",
         "舉例來說，如果你發現某個 PDF 工具在特定瀏覽器輸出空白頁，或某個統計計算器在輸入特定樣本數時顯示錯誤訊息，只要附上工具名稱、你用的瀏覽器版本與輸入條件，通常就足夠我們排查。",
@@ -238,9 +73,9 @@ export const pages = {
     privacy: {
       title: '隱私權政策',
       seoTitle: '隱私權政策｜資料處理與 Cookie 說明 - FunnyTools',
-      description: '說明 FunnyTools 免費線上工具箱如何處理使用者輸入、瀏覽器本機計算、localStorage、第三方連結與未來可能使用的廣告 Cookie，並整理資料安全提醒、使用者權利及聯絡方式。',
+      description: '說明 FunnyTools如何處理使用者輸入、瀏覽器本機計算、localStorage、第三方連結與未來可能使用的廣告 Cookie，並整理資料安全提醒、使用者權利及聯絡方式。',
       body: [
-        "生效日期：2026 年 7 月 10 日。本隱私權政策說明 FunnyTools 免費線上工具箱（funnytools.win，以下稱「本站」）如何處理你的資料，適用於本站所有頁面與工具，包括金錢、統計、圖片、PDF、文字、隨機與教育類工具。",
+        "生效日期：2026 年 7 月 10 日。本隱私權政策說明 FunnyTools（funnytools.win，以下稱「本站」）如何處理你的資料，適用於本站所有頁面與工具，包括金錢、統計、圖片、PDF、文字、隨機與教育類工具。",
         "本站是以瀏覽器本機工具為主的靜態網站。你在本機工具中輸入的文字、數字、名單與設定通常不會傳送到本站伺服器；需要網路服務的批次轉換與 PDF Conversion API 工具會在工具頁說明資料流。不要求註冊，也不建立會員帳號。",
         "本站預設不販售、出租或交換你在工具中輸入的內容，也不會把本機處理工具中的文字、名單、圖片或 PDF 內容提供給廣告商。若未來新增需要伺服器或第三方 API 的功能，會在該工具頁另外標示資料處理方式。",
         "本機處理範圍：文字處理、隨機抽選、計時、薪資與貸款估算、單檔圖片處理、PDF 整理、製圖與統計計算等工具，設計上以瀏覽器本機計算為主；批次轉換、PDF 轉檔與 PDF 壓縮會在工具頁標示 Conversion API 資料流。",
@@ -269,9 +104,9 @@ export const pages = {
     terms: {
       title: '使用條款',
       seoTitle: '使用條款｜服務範圍與責任限制 - FunnyTools',
-      description: '閱讀 FunnyTools 免費線上工具箱的使用條款與基本使用規則，包含服務範圍、使用者責任、可接受使用方式、智慧財產權、第三方服務與責任限制，使用網站前請先確認相關內容。',
+      description: '閱讀 FunnyTools的使用條款與基本使用規則，包含服務範圍、使用者責任、可接受使用方式、智慧財產權、第三方服務與責任限制，使用網站前請先確認相關內容。',
       body: [
-        "生效日期：2026 年 6 月 16 日。使用 FunnyTools 免費線上工具箱（funnytools.win）即表示你同意本使用條款；如果你不同意這些條款，請不要使用本站工具。",
+        "生效日期：2026 年 6 月 16 日。使用 FunnyTools（funnytools.win）即表示你同意本使用條款；如果你不同意這些條款，請不要使用本站工具。",
         "服務說明：本站提供免費、免安裝的線上小工具，涵蓋金錢與薪資、時間、隨機、文字、圖片、PDF、製圖與統計等分類，僅供一般資訊與日常便利之用，不構成任何形式的正式服務保證。",
         "使用者責任：你應自行確認輸入資料是否正確，並自行判斷結果是否適合你的情境。請勿在本站工具中輸入高度敏感個資、密碼、金融帳號、機密文件或未經授權處理的第三方資料。",
         "舉例來說，測試隨機分組或成績計算工具時，建議使用虛構姓名與假設分數；測試貸款或薪資工具時，可用整數示範金額，不需要輸入真實的身分證字號、銀行帳號或實際薪資單資訊。",
@@ -296,7 +131,7 @@ export const pages = {
     disclaimer: {
       title: '免責聲明',
       seoTitle: '免責聲明｜工具結果僅供參考 - FunnyTools',
-      description: '了解 FunnyTools 免費線上工具箱的結果限制與使用者責任。薪資、貸款、統計、隨機及其他工具僅供一般參考，不構成法律、醫療、投資、稅務或會計建議，正式決策請查證官方資料。',
+      description: '了解 FunnyTools的結果限制與使用者責任。薪資、貸款、統計、隨機及其他工具僅供一般參考，不構成法律、醫療、投資、稅務或會計建議，正式決策請查證官方資料。',
       body: [
         "生效日期：2026 年 6 月 20 日。本站提供的所有結果僅供一般參考，使用前請自行判斷並驗證是否符合你的實際情況；本頁適用於本站目前提供的所有工具分類，包括金錢、統計、教育、檔案處理、圖片、隨機與健康類工具。",
         "非專業建議：本站不提供法律、醫療、投資、稅務、會計或其他個別化的專業建議。任何工具產生的文字或數字說明，都不構成針對你個人情況的建議。",
@@ -320,9 +155,9 @@ export const pages = {
     aboutTools: {
       title: '本站工具如何運作',
       seoTitle: '本站工具如何運作｜瀏覽器本機處理說明 - FunnyTools',
-      description: '了解 FunnyTools 免費線上工具箱如何在瀏覽器本機處理文字、圖片、PDF 與計算資料，以及本機儲存、檔案大小、結果限制、錯誤回報與新工具建議方式，使用前可先確認各項限制。',
+      description: '了解 FunnyTools如何在瀏覽器本機處理文字、圖片、PDF 與計算資料，以及本機儲存、檔案大小、結果限制、錯誤回報與新工具建議方式，使用前可先確認各項限制。',
       body: [
-        "FunnyTools 免費線上工具箱的多數工具是直接在瀏覽器中執行的靜態網頁工具。你打開工具頁後，輸入欄位、按鈕、計算公式與結果顯示通常都在目前瀏覽器分頁內完成，不需要等待伺服器處理。",
+        "FunnyTools的多數工具是直接在瀏覽器中執行的靜態網頁工具。你打開工具頁後，輸入欄位、按鈕、計算公式與結果顯示通常都在目前瀏覽器分頁內完成，不需要等待伺服器處理。",
         "本機處理工具包含文字統計、大小寫轉換、刪除空白行、隨機抽選、計時器、薪資與貸款估算、圖片壓縮與轉檔、PDF 合併拆分、統計檢定與百分等級計算、草圖與流程圖等。這些工具的輸入資料不會主動上傳到本站伺服器。",
         "新工具是否值得做，主要看三件事：能不能完全在瀏覽器內完成、是不是很多人會重複遇到的具體任務、以及是否不需要保存使用者的機敏資料。像隨機分組、單位換算、成績百分等級這類工具符合這三個條件，會優先開發。",
         "目前不會做的類型包括：需要建立帳號登入才能使用、需要在伺服器長期保存使用者資料庫、或需要大量伺服器端運算（例如大型機器學習推論）的功能。這類需求超出目前純靜態網站的架構，也不符合本站優先本機處理的原則。",
@@ -340,25 +175,22 @@ export const pages = {
   },
   en: {
     about: {
-      title: 'About FunnyTools',
-      seoTitle: 'About Us | Free Online Toolbox - FunnyTools',
-      description: 'Learn what FunnyTools is, how its free browser tools work, how local processing protects inputs, and what practical categories the site covers.',
+      title: 'About FunnyTools and Benson Lai',
+      seoTitle: 'About the site owner Benson Lai | FunnyTools',
+      description: 'Who runs FunnyTools (Benson Lai), what the site focuses on, how its tools and content are checked, and how to report a mistake.',
       body: [
-        "FunnyTools is a free, no-install, no-sign-up toolbox built and maintained by a single student, fitted in around classes and everyday tasks. It started from a simple frustration: routine jobs — combining scanned pages into one PDF, splitting a group into random teams, checking a loan estimate, or converting a raw score into a percentile — kept leading to tools that wanted an account first, buried the page in ads, or asked for a file upload with no clear explanation of where it went. A page that opens in a browser tab, does the one thing you need, and closes again seemed like the more honest option.",
-        `The site currently offers ${TOOL_COUNT} free tools, organized into categories such as Money, Time, Random, Text, Image, PDF, Drawing, and Statistics, plus a set of tools built specifically for students and teachers (grade averages, percentile rank, Cronbach's alpha reliability, and similar classroom calculations). New tools and updates are added over time.`,
-        "The site is built around tools that run in your browser rather than on a server. Almost every tool on FunnyTools is designed for local-only processing: the text, numbers, lists, images, or PDF pages you work with stay inside your current browser tab and are not automatically sent anywhere.",
-        "There are a few deliberate exceptions, and each one is disclosed on the tool page where it applies. If you choose to have a result emailed to you, or you subscribe to the newsletter, the site collects your email address and the tool name through a third-party delivery service (Brevo). That is described in the Privacy Policy and on the relevant tool pages — it is not a hidden behavior.",
-        "Most tool pages include a short content-review note near the bottom of the page, showing when the formula, steps, or examples on that page were last checked. That date is meant to give you a quick, honest signal about how current the page is, rather than leaving you to guess.",
-        "For pages based on public formulas or common rules, the priority is reproducible examples and plain explanations of how the calculation works — not exaggerated claims, fabricated reviews, or borrowed authority. If a section can't be backed by something checkable, it is left out rather than padded with filler.",
-        `If you find a tool producing a wrong result, a broken page, or a misleading description, email ${SITE.email} or open a public issue at ${githubIssuesUrl} with the page URL and the inputs you used. Fixes are prioritized by how many people a problem likely affects — a calculation that's actually wrong is treated as more urgent than a wording or layout issue.`,
-        "There are things this site deliberately does not do. It does not give individualized legal, medical, investment, or tax advice. It cannot replace an official document from a school, employer, bank, or government agency, and a result from a calculator here is never a substitute for an official eligibility, ranking, or admission decision.",
-        `The site is currently maintained by one person — a student — end to end: updates, bug fixes, and content corrections are all handled by the same person who reads every message sent to ${SITE.email} and every GitHub issue. There's no support team or ticket queue behind it. Because of that, FunnyTools is not a government body, school, bank, medical provider, or law firm, and it does not represent any third-party service. Beyond "an independently maintained student project," there's no name, school, or other personal detail to disclose at this time.`,
+        "FunnyTools offers grade and statistics calculators for students and teachers in Taiwan: T score, Z score, percentile rank, class-rank percentage, weighted average, standard deviation and an independent-samples t test. Calculations run in your browser; the scores you enter are not uploaded to the site's servers.",
+        "A small set of general-purpose tools (PDF, image, text, time, money and similar) was already on the site and is kept for existing visitors. They are not the focus of the site and will not be expanded; they are gathered on the \"Other tools\" page.",
+        "The site owner is Benson Lai, who is responsible for tool development and content review. Every statistics tool page and the T-score guide carries the byline Benson Lai and a last-reviewed date.",
+        `This page states only facts that can be verified: the site is built and maintained by Benson Lai, there is no separate editorial or support team, and the same person reads every message sent to ${SITE.email} and every GitHub issue. FunnyTools is not a government body, school, bank, medical provider or law firm, and it does not claim any degree, certification, teaching position or institutional endorsement.`,
+        "How formulas are checked: each tool's formula is written against a textbook or an official document, and the example numbers on a page are recalculated to confirm that the tool's output matches the hand calculation. If a statement cannot be backed by something checkable, it is left out.",
+        "Content that depends on exam rules, such as teacher-exam weighting, always defers to the current year's official announcement; the tools only simulate and cannot replace it.",
+        "The \"last reviewed\" date on a tool or guide page is the date the content was last re-checked. When the content changes, the date is updated.",
+        `If a tool gives a wrong result, a description is wrong, or a formula disagrees with a textbook, email ${SITE.email} or open a public issue at ${githubIssuesUrl} with the page URL and the numbers you entered. Calculations that are actually wrong are handled first; after a mistake is confirmed the page is corrected and its last-reviewed date updated.`,
+        "There are things this site deliberately does not do. It does not give individualized legal, medical, investment or tax advice, cannot replace an official document from a school, employer, bank or government agency, and a result from a calculator here is never a substitute for an official eligibility, ranking or admission decision.",
         "No account is required to use any tool. After a tool completes a calculation or processing task, a clearly separated optional affiliate-support section may appear; it is separate from the tool's calculation, processing, output, and availability, and using or ignoring it never changes the result or whether the tool is available.",
-        `${adsenseDisclosure.en} The site also uses Google Analytics (GA4) to record anonymous traffic statistics, which helps decide which tools are worth maintaining or expanding. The full scope of cookies and data handling is in the Privacy Policy.`,
-        "Tool results on this site are meant for everyday convenience, learning, and preliminary estimates. For salary, tax, loan, investment, medical, legal, or other high-stakes decisions, treat the output as a starting point and verify it against official sources or a qualified professional — see the Disclaimer and Terms of Use for the specific limits by tool category.",
-        `For tool suggestions, bug reports, content corrections, or other site-related questions, email ${SITE.email} or open an issue on GitHub.`,
-        "The English and Chinese sections of the site are maintained on the same codebase but are not literal translations of each other — examples, category framing, and paragraph order are adapted for each audience rather than mirrored sentence by sentence. The English section was expanded more recently than the Chinese section, so if a specific English page feels thinner than you'd expect, that's a fair thing to flag through the contact page.",
-        "Most tool pages also link to a short list of related tools in the same category, meant to help you find a nearby tool without going back to search — for example, a PDF split tool links to PDF merge and PDF compression, and a percentile-rank calculator links to the z-score and t-score tools used in similar analysis.",
+        `${adsenseDisclosure.en} The site also uses Google Analytics (GA4) to record anonymous traffic statistics, which helps decide which tools are worth maintaining. The full scope of cookies and data handling is in the Privacy Policy.`,
+        "Tool results on this site are meant for learning, teaching and preliminary estimates. Official transcripts, selection decisions and research must follow the source data and official rules; see the Disclaimer and Terms of Use for the specific limits.",
       ],
     },
     contact: {

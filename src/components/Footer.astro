@@ -10,7 +10,7 @@ const { lang } = Astro.props;
 const ui = t(lang);
 const year = new Date().getFullYear();
 const version = SITE_VERSION;
-const footerBrand = lang === 'zh' ? `${SITE.name.zh} by FunnyTools.win` : SITE.name.en;
+const footerBrand = SITE.name[lang];
 
 // 累積數據為 GA4 真實快照（release 時由 scripts/site-stats.mjs 刷新）；
 // 低於門檻不顯示，避免小數字造成反效果。
@@ -37,10 +37,11 @@ const statsLine = stats
         <a href={localePath(lang, 'education-statistics')}>{lang === 'zh' ? '教育統計工具' : 'Education statistics'}</a>
         <a href={localePath(lang, 'category', 'statistics')}>{lang === 'zh' ? '統計計算' : 'Statistics'}</a>
         <a href={localePath(lang, 'guides', 't-score-calculator-guide')}>{lang === 'zh' ? 'T 分數教學' : 'T-score guide'}</a>
+        <a href={localePath(lang, 'tools')}>{lang === 'zh' ? '其他小工具' : 'Other tools'}</a>
       </div>
       <div>
         <span>{lang === 'zh' ? '關於本站' : 'About'}</span>
-        <a href={localePath(lang, 'about')}>{ui.footer.about}</a>
+        <a href={localePath(lang, 'about')}>{lang === 'zh' ? '關於站長 Benson Lai' : 'About Benson Lai'}</a>
         <a href={localePath(lang, 'contact')}>{ui.footer.contact}</a>
         <a href={localePath(lang, 'support')}>{lang === 'zh' ? '支持我們' : 'Support'}</a>
       </div>
