@@ -1,1698 +1,732 @@
 {
-  "reviewedAt": "2026-07-30",
-  "activeBatch": "es-47",
-  "activeLocale": "fr",
-  "activeLocaleBatch": "fr-25",
-  "maxBatchSize": 3,
+  "reviewedAt": "2026-10-15",
   "routes": [
     {
       "key": "home",
       "type": "home",
-      "batch": "es-01",
-      "localeBatches": {
-        "fr": "fr-01"
-      },
       "paths": {
         "zh": "/",
-        "en": "/en/",
-        "es": "/es/",
-        "fr": "/fr/"
+        "en": "/en/"
       }
     },
     {
       "key": "grade-average",
       "type": "tool",
-      "batch": "es-01",
-      "localeBatches": {
-        "fr": "fr-01"
-      },
       "paths": {
         "zh": "/tools/grade-average/",
-        "en": "/en/tools/grade-average/",
-        "es": "/es/herramientas/calculadora-promedio-notas/",
-        "fr": "/fr/outils/calcul-moyenne-notes/"
+        "en": "/en/tools/grade-average/"
       }
     },
     {
       "key": "merge-pdf",
       "type": "tool",
-      "batch": "es-01",
-      "localeBatches": {
-        "fr": "fr-01"
-      },
       "paths": {
         "zh": "/tools/merge-pdf/",
-        "en": "/en/tools/merge-pdf/",
-        "es": "/es/herramientas/unir-pdf/",
-        "fr": "/fr/outils/fusionner-pdf/"
+        "en": "/en/tools/merge-pdf/"
       }
     },
     {
       "key": "tools-index",
       "type": "page",
-      "batch": "es-02",
-      "localeBatches": {
-        "fr": "fr-02"
-      },
       "paths": {
         "zh": "/tools/",
-        "en": "/en/tools/",
-        "es": "/es/herramientas/",
-        "fr": "/fr/outils/"
+        "en": "/en/tools/"
       }
     },
     {
       "key": "privacy",
       "type": "page",
-      "batch": "es-02",
-      "localeBatches": {
-        "fr": "fr-02"
-      },
       "paths": {
         "zh": "/privacy/",
-        "en": "/en/privacy/",
-        "es": "/es/privacidad/",
-        "fr": "/fr/confidentialite/"
+        "en": "/en/privacy/"
       }
     },
     {
       "key": "about-tools",
       "type": "page",
-      "batch": "es-02",
-      "localeBatches": {
-        "fr": "fr-02"
-      },
       "paths": {
         "zh": "/about-tools/",
-        "en": "/en/about-tools/",
-        "es": "/es/como-funcionan-las-herramientas/",
-        "fr": "/fr/fonctionnement-outils/"
+        "en": "/en/about-tools/"
       }
     },
     {
       "key": "image-compressor",
       "type": "tool",
-      "batch": "es-03",
-      "localeBatches": {
-        "fr": "fr-03"
-      },
       "paths": {
         "zh": "/tools/image-compressor/",
-        "en": "/en/tools/image-compressor/",
-        "es": "/es/herramientas/comprimir-imagenes/",
-        "fr": "/fr/outils/compresser-image/"
+        "en": "/en/tools/image-compressor/"
       }
     },
     {
       "key": "qr-code-generator",
       "type": "tool",
-      "batch": "es-03",
-      "localeBatches": {
-        "fr": "fr-03"
-      },
       "paths": {
         "zh": "/tools/qr-code-generator/",
-        "en": "/en/tools/qr-code-generator/",
-        "es": "/es/herramientas/generador-codigo-qr/",
-        "fr": "/fr/outils/generateur-code-qr/"
+        "en": "/en/tools/qr-code-generator/"
       }
     },
     {
       "key": "split-pdf",
       "type": "tool",
-      "batch": "es-03",
-      "localeBatches": {
-        "fr": "fr-03"
-      },
       "paths": {
         "zh": "/tools/split-pdf/",
-        "en": "/en/tools/split-pdf/",
-        "es": "/es/herramientas/dividir-pdf/",
-        "fr": "/fr/outils/diviser-pdf/"
+        "en": "/en/tools/split-pdf/"
       }
     },
     {
       "key": "image-resizer",
       "type": "tool",
-      "batch": "es-04",
-      "localeBatches": {
-        "fr": "fr-04"
-      },
       "paths": {
         "zh": "/tools/image-resizer/",
-        "en": "/en/tools/image-resizer/",
-        "es": "/es/herramientas/redimensionar-imagen/",
-        "fr": "/fr/outils/redimensionner-image/"
+        "en": "/en/tools/image-resizer/"
       }
     },
     {
       "key": "png-to-jpg",
       "type": "tool",
-      "batch": "es-04",
-      "localeBatches": {
-        "fr": "fr-04"
-      },
       "paths": {
         "zh": "/tools/png-to-jpg/",
-        "en": "/en/tools/png-to-jpg/",
-        "es": "/es/herramientas/convertir-png-a-jpg/",
-        "fr": "/fr/outils/convertir-png-en-jpg/"
+        "en": "/en/tools/png-to-jpg/"
       }
     },
     {
       "key": "jpg-to-png",
       "type": "tool",
-      "batch": "es-04",
-      "localeBatches": {
-        "fr": "fr-04"
-      },
       "paths": {
         "zh": "/tools/jpg-to-png/",
-        "en": "/en/tools/jpg-to-png/",
-        "es": "/es/herramientas/convertir-jpg-a-png/",
-        "fr": "/fr/outils/convertir-jpg-en-png/"
+        "en": "/en/tools/jpg-to-png/"
       }
     },
     {
       "key": "image-crop",
       "type": "tool",
-      "batch": "es-05",
-      "localeBatches": {
-        "fr": "fr-05"
-      },
       "paths": {
         "zh": "/tools/image-crop/",
-        "en": "/en/tools/image-crop/",
-        "es": "/es/herramientas/recortar-imagen/",
-        "fr": "/fr/outils/recadrer-image/"
+        "en": "/en/tools/image-crop/"
       }
     },
     {
       "key": "jpg-to-webp",
       "type": "tool",
-      "batch": "es-05",
-      "localeBatches": {
-        "fr": "fr-05"
-      },
       "paths": {
         "zh": "/tools/jpg-to-webp/",
-        "en": "/en/tools/jpg-to-webp/",
-        "es": "/es/herramientas/convertir-jpg-a-webp/",
-        "fr": "/fr/outils/convertir-jpg-en-webp/"
+        "en": "/en/tools/jpg-to-webp/"
       }
     },
     {
       "key": "webp-to-jpg",
       "type": "tool",
-      "batch": "es-05",
-      "localeBatches": {
-        "fr": "fr-05"
-      },
       "paths": {
         "zh": "/tools/webp-to-jpg/",
-        "en": "/en/tools/webp-to-jpg/",
-        "es": "/es/herramientas/convertir-webp-a-jpg/",
-        "fr": "/fr/outils/convertir-webp-en-jpg/"
+        "en": "/en/tools/webp-to-jpg/"
       }
     },
     {
       "key": "image-rotate-flip",
       "type": "tool",
-      "batch": "es-06",
-      "localeBatches": {
-        "fr": "fr-06"
-      },
       "paths": {
         "zh": "/tools/image-rotate-flip/",
-        "en": "/en/tools/image-rotate-flip/",
-        "es": "/es/herramientas/rotar-voltear-imagen/",
-        "fr": "/fr/outils/faire-pivoter-image/"
+        "en": "/en/tools/image-rotate-flip/"
       }
     },
     {
       "key": "image-to-base64",
       "type": "tool",
-      "batch": "es-06",
-      "localeBatches": {
-        "fr": "fr-06"
-      },
       "paths": {
         "zh": "/tools/image-to-base64/",
-        "en": "/en/tools/image-to-base64/",
-        "es": "/es/herramientas/convertir-imagen-base64/",
-        "fr": "/fr/outils/convertir-image-en-base64/"
+        "en": "/en/tools/image-to-base64/"
       }
     },
     {
       "key": "images-to-pdf",
       "type": "tool",
-      "batch": "es-06",
-      "localeBatches": {
-        "fr": "fr-06"
-      },
       "paths": {
         "zh": "/tools/images-to-pdf/",
-        "en": "/en/tools/images-to-pdf/",
-        "es": "/es/herramientas/convertir-imagenes-a-pdf/",
-        "fr": "/fr/outils/convertir-images-en-pdf/"
+        "en": "/en/tools/images-to-pdf/"
       }
     },
     {
       "key": "rotate-pdf",
       "type": "tool",
-      "batch": "es-07",
-      "localeBatches": {
-        "fr": "fr-07"
-      },
       "paths": {
         "zh": "/tools/rotate-pdf/",
-        "en": "/en/tools/rotate-pdf/",
-        "es": "/es/herramientas/rotar-pdf/",
-        "fr": "/fr/outils/faire-pivoter-pdf/"
+        "en": "/en/tools/rotate-pdf/"
       }
     },
     {
       "key": "delete-pdf-pages",
       "type": "tool",
-      "batch": "es-07",
-      "localeBatches": {
-        "fr": "fr-07"
-      },
       "paths": {
         "zh": "/tools/delete-pdf-pages/",
-        "en": "/en/tools/delete-pdf-pages/",
-        "es": "/es/herramientas/eliminar-paginas-pdf/",
-        "fr": "/fr/outils/supprimer-pages-pdf/"
+        "en": "/en/tools/delete-pdf-pages/"
       }
     },
     {
       "key": "extract-pdf-pages",
       "type": "tool",
-      "batch": "es-07",
-      "localeBatches": {
-        "fr": "fr-07"
-      },
       "paths": {
         "zh": "/tools/extract-pdf-pages/",
-        "en": "/en/tools/extract-pdf-pages/",
-        "es": "/es/herramientas/extraer-paginas-pdf/",
-        "fr": "/fr/outils/extraire-pages-pdf/"
+        "en": "/en/tools/extract-pdf-pages/"
       }
     },
     {
       "key": "pdf-page-reorder",
       "type": "tool",
-      "batch": "es-08",
-      "localeBatches": {
-        "fr": "fr-08"
-      },
       "paths": {
         "zh": "/tools/pdf-page-reorder/",
-        "en": "/en/tools/pdf-page-reorder/",
-        "es": "/es/herramientas/ordenar-paginas-pdf/",
-        "fr": "/fr/outils/reorganiser-pages-pdf/"
+        "en": "/en/tools/pdf-page-reorder/"
       }
     },
     {
       "key": "pdf-to-image",
       "type": "tool",
-      "batch": "es-08",
-      "localeBatches": {
-        "fr": "fr-08"
-      },
       "paths": {
         "zh": "/tools/pdf-to-image/",
-        "en": "/en/tools/pdf-to-image/",
-        "es": "/es/herramientas/convertir-pdf-a-imagen/",
-        "fr": "/fr/outils/convertir-pdf-en-image/"
+        "en": "/en/tools/pdf-to-image/"
       }
     },
     {
       "key": "pdf-compressor",
       "type": "tool",
-      "batch": "es-08",
-      "localeBatches": {
-        "fr": "fr-08"
-      },
       "paths": {
         "zh": "/tools/pdf-compressor/",
-        "en": "/en/tools/pdf-compressor/",
-        "es": "/es/herramientas/comprimir-pdf/",
-        "fr": "/fr/outils/compresser-pdf/"
+        "en": "/en/tools/pdf-compressor/"
       }
     },
     {
       "key": "standard-deviation",
       "type": "tool",
-      "batch": "es-09",
-      "localeBatches": {
-        "fr": "fr-09"
-      },
       "paths": {
         "zh": "/tools/standard-deviation/",
-        "en": "/en/tools/standard-deviation/",
-        "es": "/es/herramientas/calculadora-desviacion-estandar/",
-        "fr": "/fr/outils/calculateur-ecart-type/"
+        "en": "/en/tools/standard-deviation/"
       }
     },
     {
       "key": "percentage-calculator",
       "type": "tool",
-      "batch": "es-09",
-      "localeBatches": {
-        "fr": "fr-09"
-      },
       "paths": {
         "zh": "/tools/percentage-calculator/",
-        "en": "/en/tools/percentage-calculator/",
-        "es": "/es/herramientas/calculadora-porcentajes/",
-        "fr": "/fr/outils/calculateur-pourcentage/"
+        "en": "/en/tools/percentage-calculator/"
       }
     },
     {
       "key": "bar-chart-maker",
       "type": "tool",
-      "batch": "es-09",
-      "localeBatches": {
-        "fr": "fr-09"
-      },
       "paths": {
         "zh": "/tools/bar-chart-maker/",
-        "en": "/en/tools/bar-chart-maker/",
-        "es": "/es/herramientas/crear-grafico-barras/",
-        "fr": "/fr/outils/creer-graphique-barres/"
+        "en": "/en/tools/bar-chart-maker/"
       }
     },
     {
       "key": "pie-chart-maker",
       "type": "tool",
-      "batch": "es-10",
-      "localeBatches": {
-        "fr": "fr-10"
-      },
       "paths": {
         "zh": "/tools/pie-chart-maker/",
-        "en": "/en/tools/pie-chart-maker/",
-        "es": "/es/herramientas/crear-grafico-circular/",
-        "fr": "/fr/outils/creer-diagramme-circulaire/"
+        "en": "/en/tools/pie-chart-maker/"
       }
     },
     {
       "key": "word-counter",
       "type": "tool",
-      "batch": "es-10",
-      "localeBatches": {
-        "fr": "fr-10"
-      },
       "paths": {
         "zh": "/tools/word-counter/",
-        "en": "/en/tools/word-counter/",
-        "es": "/es/herramientas/contador-palabras/",
-        "fr": "/fr/outils/compteur-mots/"
+        "en": "/en/tools/word-counter/"
       }
     },
     {
       "key": "character-counter",
       "type": "tool",
-      "batch": "es-10",
-      "localeBatches": {
-        "fr": "fr-10"
-      },
       "paths": {
         "zh": "/tools/character-counter/",
-        "en": "/en/tools/character-counter/",
-        "es": "/es/herramientas/contador-caracteres/",
-        "fr": "/fr/outils/compteur-caracteres/"
+        "en": "/en/tools/character-counter/"
       }
     },
     {
       "key": "case-converter",
       "type": "tool",
-      "batch": "es-11",
-      "localeBatches": {
-        "fr": "fr-11"
-      },
       "paths": {
         "zh": "/tools/case-converter/",
-        "en": "/en/tools/case-converter/",
-        "es": "/es/herramientas/convertir-mayusculas-minusculas/",
-        "fr": "/fr/outils/convertir-majuscules-minuscules/"
+        "en": "/en/tools/case-converter/"
       }
     },
     {
       "key": "remove-empty-lines",
       "type": "tool",
-      "batch": "es-11",
-      "localeBatches": {
-        "fr": "fr-11"
-      },
       "paths": {
         "zh": "/tools/remove-empty-lines/",
-        "en": "/en/tools/remove-empty-lines/",
-        "es": "/es/herramientas/eliminar-lineas-vacias/",
-        "fr": "/fr/outils/supprimer-lignes-vides/"
+        "en": "/en/tools/remove-empty-lines/"
       }
     },
     {
       "key": "remove-duplicate-lines",
       "type": "tool",
-      "batch": "es-11",
-      "localeBatches": {
-        "fr": "fr-11"
-      },
       "paths": {
         "zh": "/tools/remove-duplicate-lines/",
-        "en": "/en/tools/remove-duplicate-lines/",
-        "es": "/es/herramientas/eliminar-lineas-duplicadas/",
-        "fr": "/fr/outils/supprimer-lignes-doublons/"
+        "en": "/en/tools/remove-duplicate-lines/"
       }
     },
     {
       "key": "sort-lines",
       "type": "tool",
-      "batch": "es-12",
-      "localeBatches": {
-        "fr": "fr-12"
-      },
       "paths": {
         "zh": "/tools/sort-lines/",
-        "en": "/en/tools/sort-lines/",
-        "es": "/es/herramientas/ordenar-lineas-texto/",
-        "fr": "/fr/outils/trier-lignes-texte/"
+        "en": "/en/tools/sort-lines/"
       }
     },
     {
       "key": "json-formatter",
       "type": "tool",
-      "batch": "es-12",
-      "localeBatches": {
-        "fr": "fr-12"
-      },
       "paths": {
         "zh": "/tools/json-formatter/",
-        "en": "/en/tools/json-formatter/",
-        "es": "/es/herramientas/formatear-validar-json/",
-        "fr": "/fr/outils/formater-valider-json/"
+        "en": "/en/tools/json-formatter/"
       }
     },
     {
       "key": "base64",
       "type": "tool",
-      "batch": "es-12",
-      "localeBatches": {
-        "fr": "fr-12"
-      },
       "paths": {
         "zh": "/tools/base64/",
-        "en": "/en/tools/base64/",
-        "es": "/es/herramientas/codificar-decodificar-base64/",
-        "fr": "/fr/outils/encoder-decoder-base64/"
+        "en": "/en/tools/base64/"
       }
     },
     {
       "key": "url-encoder",
       "type": "tool",
-      "batch": "es-13",
-      "localeBatches": {
-        "fr": "fr-13"
-      },
       "paths": {
         "zh": "/tools/url-encoder/",
-        "en": "/en/tools/url-encoder/",
-        "es": "/es/herramientas/codificar-decodificar-url/",
-        "fr": "/fr/outils/encoder-decoder-url/"
+        "en": "/en/tools/url-encoder/"
       }
     },
     {
       "key": "timestamp-converter",
       "type": "tool",
-      "batch": "es-13",
-      "localeBatches": {
-        "fr": "fr-13"
-      },
       "paths": {
         "zh": "/tools/timestamp-converter/",
-        "en": "/en/tools/timestamp-converter/",
-        "es": "/es/herramientas/convertir-timestamp-unix/",
-        "fr": "/fr/outils/convertir-timestamp-unix/"
+        "en": "/en/tools/timestamp-converter/"
       }
     },
     {
       "key": "uuid-generator",
       "type": "tool",
-      "batch": "es-13",
-      "localeBatches": {
-        "fr": "fr-13"
-      },
       "paths": {
         "zh": "/tools/uuid-generator/",
-        "en": "/en/tools/uuid-generator/",
-        "es": "/es/herramientas/generador-uuid-v4/",
-        "fr": "/fr/outils/generateur-uuid-v4/"
+        "en": "/en/tools/uuid-generator/"
       }
     },
     {
       "key": "csv-to-json",
       "type": "tool",
-      "batch": "es-14",
-      "localeBatches": {
-        "fr": "fr-14"
-      },
       "paths": {
         "zh": "/tools/csv-to-json/",
-        "en": "/en/tools/csv-to-json/",
-        "es": "/es/herramientas/convertir-csv-a-json/",
-        "fr": "/fr/outils/convertir-csv-en-json/"
+        "en": "/en/tools/csv-to-json/"
       }
     },
     {
       "key": "json-to-csv",
       "type": "tool",
-      "batch": "es-14",
-      "localeBatches": {
-        "fr": "fr-14"
-      },
       "paths": {
         "zh": "/tools/json-to-csv/",
-        "en": "/en/tools/json-to-csv/",
-        "es": "/es/herramientas/convertir-json-a-csv/",
-        "fr": "/fr/outils/convertir-json-en-csv/"
+        "en": "/en/tools/json-to-csv/"
       }
     },
     {
       "key": "markdown-previewer",
       "type": "tool",
-      "batch": "es-14",
-      "localeBatches": {
-        "fr": "fr-14"
-      },
       "paths": {
         "zh": "/tools/markdown-previewer/",
-        "en": "/en/tools/markdown-previewer/",
-        "es": "/es/herramientas/editor-markdown-online/",
-        "fr": "/fr/outils/editeur-markdown-en-ligne/"
+        "en": "/en/tools/markdown-previewer/"
       }
     },
     {
       "key": "password-generator",
       "type": "tool",
-      "batch": "es-15",
-      "localeBatches": {
-        "fr": "fr-15"
-      },
       "paths": {
         "zh": "/tools/password-generator/",
-        "en": "/en/tools/password-generator/",
-        "es": "/es/herramientas/generador-contrasenas-seguras/",
-        "fr": "/fr/outils/generateur-mot-de-passe-securise/"
+        "en": "/en/tools/password-generator/"
       }
     },
     {
       "key": "barcode-generator",
       "type": "tool",
-      "batch": "es-15",
-      "localeBatches": {
-        "fr": "fr-15"
-      },
       "paths": {
         "zh": "/tools/barcode-generator/",
-        "en": "/en/tools/barcode-generator/",
-        "es": "/es/herramientas/generador-codigo-barras/",
-        "fr": "/fr/outils/generateur-code-barres/"
+        "en": "/en/tools/barcode-generator/"
       }
     },
     {
       "key": "color-generator",
       "type": "tool",
-      "batch": "es-15",
-      "localeBatches": {
-        "fr": "fr-15"
-      },
       "paths": {
         "zh": "/tools/color-generator/",
-        "en": "/en/tools/color-generator/",
-        "es": "/es/herramientas/generador-colores-hex-rgb-hsl/",
-        "fr": "/fr/outils/generateur-couleurs-hex-rgb-hsl/"
+        "en": "/en/tools/color-generator/"
       }
     },
     {
       "key": "random-number-picker",
       "type": "tool",
-      "batch": "es-16",
-      "localeBatches": {
-        "fr": "fr-16"
-      },
       "paths": {
         "zh": "/tools/random-number-picker/",
-        "en": "/en/tools/random-number-picker/",
-        "es": "/es/herramientas/generador-numeros-aleatorios/",
-        "fr": "/fr/outils/generateur-nombres-aleatoires/"
+        "en": "/en/tools/random-number-picker/"
       }
     },
     {
       "key": "random-name-picker",
       "type": "tool",
-      "batch": "es-16",
-      "localeBatches": {
-        "fr": "fr-16"
-      },
       "paths": {
         "zh": "/tools/random-name-picker/",
-        "en": "/en/tools/random-name-picker/",
-        "es": "/es/herramientas/sorteo-nombres-aleatorio/",
-        "fr": "/fr/outils/tirage-au-sort-noms/"
+        "en": "/en/tools/random-name-picker/"
       }
     },
     {
       "key": "random-wheel",
       "type": "tool",
-      "batch": "es-16",
-      "localeBatches": {
-        "fr": "fr-16"
-      },
       "paths": {
         "zh": "/tools/random-wheel/",
-        "en": "/en/tools/random-wheel/",
-        "es": "/es/herramientas/ruleta-aleatoria/",
-        "fr": "/fr/outils/roue-aleatoire/"
+        "en": "/en/tools/random-wheel/"
       }
     },
     {
       "key": "random-group-generator",
       "type": "tool",
-      "batch": "es-17",
-      "localeBatches": {
-        "fr": "fr-17"
-      },
       "paths": {
         "zh": "/tools/random-group-generator/",
-        "en": "/en/tools/random-group-generator/",
-        "es": "/es/herramientas/generador-grupos-aleatorios/",
-        "fr": "/fr/outils/generateur-groupes-aleatoires/"
+        "en": "/en/tools/random-group-generator/"
       }
     },
     {
       "key": "dice-roller",
       "type": "tool",
-      "batch": "es-17",
-      "localeBatches": {
-        "fr": "fr-17"
-      },
       "paths": {
         "zh": "/tools/dice-roller/",
-        "en": "/en/tools/dice-roller/",
-        "es": "/es/herramientas/tirar-dados-online/",
-        "fr": "/fr/outils/lancer-des-en-ligne/"
+        "en": "/en/tools/dice-roller/"
       }
     },
     {
       "key": "this-or-that",
       "type": "tool",
-      "batch": "es-17",
-      "localeBatches": {
-        "fr": "fr-17"
-      },
       "paths": {
         "zh": "/tools/this-or-that/",
-        "en": "/en/tools/this-or-that/",
-        "es": "/es/herramientas/decidir-entre-dos-opciones/",
-        "fr": "/fr/outils/choisir-entre-deux-options/"
+        "en": "/en/tools/this-or-that/"
       }
     },
     {
       "key": "what-to-eat",
       "type": "tool",
-      "batch": "es-18",
-      "localeBatches": {
-        "fr": "fr-18"
-      },
       "paths": {
         "zh": "/tools/what-to-eat/",
-        "en": "/en/tools/what-to-eat/",
-        "es": "/es/herramientas/que-comer-hoy/",
-        "fr": "/fr/outils/quoi-manger-ce-soir/"
+        "en": "/en/tools/what-to-eat/"
       }
     },
     {
       "key": "countdown-timer",
       "type": "tool",
-      "batch": "es-18",
-      "localeBatches": {
-        "fr": "fr-18"
-      },
       "paths": {
         "zh": "/tools/countdown-timer/",
-        "en": "/en/tools/countdown-timer/",
-        "es": "/es/herramientas/temporizador-online/",
-        "fr": "/fr/outils/minuteur-en-ligne/"
+        "en": "/en/tools/countdown-timer/"
       }
     },
     {
       "key": "stopwatch",
       "type": "tool",
-      "batch": "es-18",
-      "localeBatches": {
-        "fr": "fr-18"
-      },
       "paths": {
         "zh": "/tools/stopwatch/",
-        "en": "/en/tools/stopwatch/",
-        "es": "/es/herramientas/cronometro-online/",
-        "fr": "/fr/outils/chronometre-en-ligne/"
+        "en": "/en/tools/stopwatch/"
       }
     },
     {
       "key": "date-difference",
       "type": "tool",
-      "batch": "es-19",
-      "localeBatches": {
-        "fr": "fr-19"
-      },
       "paths": {
         "zh": "/tools/date-difference/",
-        "en": "/en/tools/date-difference/",
-        "es": "/es/herramientas/calcular-diferencia-entre-fechas/",
-        "fr": "/fr/outils/calculer-difference-entre-dates/"
+        "en": "/en/tools/date-difference/"
       }
     },
     {
       "key": "age-calculator",
       "type": "tool",
-      "batch": "es-19",
-      "localeBatches": {
-        "fr": "fr-19"
-      },
       "paths": {
         "zh": "/tools/age-calculator/",
-        "en": "/en/tools/age-calculator/",
-        "es": "/es/herramientas/calculadora-de-edad/",
-        "fr": "/fr/outils/calculateur-age/"
+        "en": "/en/tools/age-calculator/"
       }
     },
     {
       "key": "business-days",
       "type": "tool",
-      "batch": "es-19",
-      "localeBatches": {
-        "fr": "fr-19"
-      },
       "paths": {
         "zh": "/tools/business-days/",
-        "en": "/en/tools/business-days/",
-        "es": "/es/herramientas/calculadora-dias-laborables/",
-        "fr": "/fr/outils/calculateur-jours-ouvres/"
+        "en": "/en/tools/business-days/"
       }
     },
     {
       "key": "break-reminder",
       "type": "tool",
-      "batch": "es-20",
-      "localeBatches": {
-        "fr": "fr-20"
-      },
       "paths": {
         "zh": "/tools/break-reminder/",
-        "en": "/en/tools/break-reminder/",
-        "es": "/es/herramientas/recordatorio-descansos/",
-        "fr": "/fr/outils/rappel-pause-ecran/"
+        "en": "/en/tools/break-reminder/"
       }
     },
     {
       "key": "net-salary",
       "type": "tool",
-      "batch": "es-20",
-      "localeBatches": {
-        "fr": "fr-20"
-      },
       "paths": {
         "zh": "/tools/net-salary/",
-        "en": "/en/tools/net-salary/",
-        "es": "/es/herramientas/calculadora-sueldo-neto/",
-        "fr": "/fr/outils/calculateur-salaire-net/"
+        "en": "/en/tools/net-salary/"
       }
     },
     {
       "key": "overtime-pay",
       "type": "tool",
-      "batch": "es-20",
-      "localeBatches": {
-        "fr": "fr-20"
-      },
       "paths": {
         "zh": "/tools/overtime-pay/",
-        "en": "/en/tools/overtime-pay/",
-        "es": "/es/herramientas/calculadora-horas-extra/",
-        "fr": "/fr/outils/calculateur-heures-supplementaires/"
+        "en": "/en/tools/overtime-pay/"
       }
     },
     {
       "key": "mortgage-payment",
       "type": "tool",
-      "batch": "es-21",
-      "localeBatches": {
-        "fr": "fr-21"
-      },
       "paths": {
         "zh": "/tools/mortgage-payment/",
-        "en": "/en/tools/mortgage-payment/",
-        "es": "/es/herramientas/calculadora-hipoteca/",
-        "fr": "/fr/outils/calculateur-mensualite-pret-immobilier/"
+        "en": "/en/tools/mortgage-payment/"
       }
     },
     {
       "key": "compound-interest",
       "type": "tool",
-      "batch": "es-21",
-      "localeBatches": {
-        "fr": "fr-21"
-      },
       "paths": {
         "zh": "/tools/compound-interest/",
-        "en": "/en/tools/compound-interest/",
-        "es": "/es/herramientas/calculadora-interes-compuesto/",
-        "fr": "/fr/outils/calculateur-interets-composes/"
+        "en": "/en/tools/compound-interest/"
       }
     },
     {
       "key": "savings-goal",
       "type": "tool",
-      "batch": "es-21",
-      "localeBatches": {
-        "fr": "fr-21"
-      },
       "paths": {
         "zh": "/tools/savings-goal/",
-        "en": "/en/tools/savings-goal/",
-        "es": "/es/herramientas/calculadora-meta-ahorro/",
-        "fr": "/fr/outils/calculateur-objectif-epargne/"
+        "en": "/en/tools/savings-goal/"
       }
     },
     {
       "key": "pomodoro-timer",
       "type": "tool",
-      "batch": "es-22",
-      "localeBatches": {
-        "fr": "fr-22"
-      },
       "paths": {
         "zh": "/tools/pomodoro-timer/",
-        "en": "/en/tools/pomodoro-timer/",
-        "es": "/es/herramientas/temporizador-pomodoro/",
-        "fr": "/fr/outils/minuteur-pomodoro/"
+        "en": "/en/tools/pomodoro-timer/"
       }
     },
     {
       "key": "inflation",
       "type": "tool",
-      "batch": "es-22",
-      "localeBatches": {
-        "fr": "fr-22"
-      },
       "paths": {
         "zh": "/tools/inflation/",
-        "en": "/en/tools/inflation/",
-        "es": "/es/herramientas/calculadora-inflacion/",
-        "fr": "/fr/outils/calculateur-inflation-pouvoir-achat/"
+        "en": "/en/tools/inflation/"
       }
     },
     {
       "key": "cad-2d",
       "type": "tool",
-      "batch": "es-22",
-      "localeBatches": {
-        "fr": "fr-22"
-      },
       "paths": {
         "zh": "/tools/cad-2d/",
-        "en": "/en/tools/cad-2d/",
-        "es": "/es/herramientas/cad-2d-online/",
-        "fr": "/fr/outils/cao-2d-en-ligne/"
+        "en": "/en/tools/cad-2d/"
       }
     },
     {
       "key": "sketchpad",
       "type": "tool",
-      "batch": "es-23",
-      "localeBatches": {
-        "fr": "fr-23"
-      },
       "paths": {
         "zh": "/tools/sketchpad/",
-        "en": "/en/tools/sketchpad/",
-        "es": "/es/herramientas/pizarra-dibujo-online/",
-        "fr": "/fr/outils/tableau-blanc-dessin-en-ligne/"
+        "en": "/en/tools/sketchpad/"
       }
     },
     {
       "key": "flowchart",
       "type": "tool",
-      "batch": "es-23",
-      "localeBatches": {
-        "fr": "fr-23"
-      },
       "paths": {
         "zh": "/tools/flowchart/",
-        "en": "/en/tools/flowchart/",
-        "es": "/es/herramientas/crear-diagrama-flujo/",
-        "fr": "/fr/outils/creer-diagramme-flux/"
+        "en": "/en/tools/flowchart/"
       }
     },
     {
       "key": "random-student-picker",
       "type": "tool",
-      "batch": "es-23",
-      "localeBatches": {
-        "fr": "fr-23"
-      },
       "paths": {
         "zh": "/tools/random-student-picker/",
-        "en": "/en/tools/random-student-picker/",
-        "es": "/es/herramientas/selector-aleatorio-alumnos/",
-        "fr": "/fr/outils/tirage-au-sort-eleves/"
+        "en": "/en/tools/random-student-picker/"
       }
     },
     {
       "key": "seating-chart",
       "type": "tool",
-      "batch": "es-24",
-      "localeBatches": {
-        "fr": "fr-24"
-      },
       "paths": {
         "zh": "/tools/seating-chart/",
-        "en": "/en/tools/seating-chart/",
-        "es": "/es/herramientas/crear-plano-asientos-aula/",
-        "fr": "/fr/outils/plan-de-classe-en-ligne/"
+        "en": "/en/tools/seating-chart/"
       }
     },
     {
       "key": "group-generator",
       "type": "tool",
-      "batch": "es-24",
-      "localeBatches": {
-        "fr": "fr-24"
-      },
       "paths": {
         "zh": "/tools/group-generator/",
-        "en": "/en/tools/group-generator/",
-        "es": "/es/herramientas/crear-grupos-clase/",
-        "fr": "/fr/outils/generateur-groupes-classe/"
+        "en": "/en/tools/group-generator/"
       }
     },
     {
       "key": "percentile-rank-calculator",
       "type": "tool",
-      "batch": "es-24",
-      "localeBatches": {
-        "fr": "fr-24"
-      },
       "paths": {
         "zh": "/tools/percentile-rank-calculator/",
-        "en": "/en/tools/percentile-rank-calculator/",
-        "es": "/es/herramientas/calculadora-rango-percentil/",
-        "fr": "/fr/outils/calculateur-rang-percentile/"
+        "en": "/en/tools/percentile-rank-calculator/"
       }
     },
     {
       "key": "z-score-calculator",
       "type": "tool",
-      "batch": "es-25",
-      "localeBatches": {
-        "fr": "fr-25"
-      },
       "paths": {
         "zh": "/tools/z-score-calculator/",
-        "en": "/en/tools/z-score-calculator/",
-        "es": "/es/herramientas/calculadora-puntuacion-z/",
-        "fr": "/fr/outils/calculateur-score-z/"
+        "en": "/en/tools/z-score-calculator/"
       }
     },
     {
       "key": "t-score-calculator",
       "type": "tool",
-      "batch": "es-25",
-      "localeBatches": {
-        "fr": "fr-25"
-      },
       "paths": {
         "zh": "/tools/t-score-calculator/",
-        "en": "/en/tools/t-score-calculator/",
-        "es": "/es/herramientas/calculadora-puntuacion-t/",
-        "fr": "/fr/outils/calculateur-score-t/"
+        "en": "/en/tools/t-score-calculator/"
       }
     },
     {
       "key": "weighted-average-calculator",
       "type": "tool",
-      "batch": "es-25",
-      "localeBatches": {
-        "fr": "fr-25"
-      },
       "paths": {
         "zh": "/tools/weighted-average-calculator/",
-        "en": "/en/tools/weighted-average-calculator/",
-        "es": "/es/herramientas/calculadora-media-ponderada/",
-        "fr": "/fr/outils/calculateur-moyenne-ponderee/"
+        "en": "/en/tools/weighted-average-calculator/"
       }
     },
     {
       "key": "class-rank-percentile-calculator",
       "type": "tool",
-      "batch": "es-26",
       "paths": {
         "zh": "/tools/class-rank-percentile-calculator/",
-        "en": "/en/tools/class-rank-percentile-calculator/",
-        "es": "/es/herramientas/calculadora-percentil-ranking-clase/"
+        "en": "/en/tools/class-rank-percentile-calculator/"
       }
     },
     {
       "key": "normalized-score-converter",
       "type": "tool",
-      "batch": "es-26",
       "paths": {
         "zh": "/tools/normalized-score-converter/",
-        "en": "/en/tools/normalized-score-converter/",
-        "es": "/es/herramientas/conversor-puntuaciones-estandarizadas/"
+        "en": "/en/tools/normalized-score-converter/"
       }
     },
     {
       "key": "teacher-exam-score-converter",
       "type": "tool",
-      "batch": "es-26",
       "paths": {
         "zh": "/tools/teacher-exam-score-converter/",
-        "en": "/en/tools/teacher-exam-score-converter/",
-        "es": "/es/herramientas/calculadora-nota-oposicion-docente/"
+        "en": "/en/tools/teacher-exam-score-converter/"
       }
     },
     {
       "key": "cronbach-alpha-calculator",
       "type": "tool",
-      "batch": "es-27",
       "paths": {
         "zh": "/tools/cronbach-alpha-calculator/",
-        "en": "/en/tools/cronbach-alpha-calculator/",
-        "es": "/es/herramientas/calculadora-alfa-cronbach/"
+        "en": "/en/tools/cronbach-alpha-calculator/"
       }
     },
     {
       "key": "independent-samples-t-test-calculator",
       "type": "tool",
-      "batch": "es-27",
       "paths": {
         "zh": "/tools/independent-samples-t-test-calculator/",
-        "en": "/en/tools/independent-samples-t-test-calculator/",
-        "es": "/es/herramientas/calculadora-t-muestras-independientes/"
+        "en": "/en/tools/independent-samples-t-test-calculator/"
       }
     },
     {
       "key": "apa-7-report-generator",
       "type": "tool",
-      "batch": "es-27",
       "paths": {
         "zh": "/tools/apa-7-report-generator/",
-        "en": "/en/tools/apa-7-report-generator/",
-        "es": "/es/herramientas/generador-informe-apa-7/"
+        "en": "/en/tools/apa-7-report-generator/"
       }
     },
     {
       "key": "spss-result-interpreter",
       "type": "tool",
-      "batch": "es-28",
       "paths": {
         "zh": "/tools/spss-result-interpreter/",
-        "en": "/en/tools/spss-result-interpreter/",
-        "es": "/es/herramientas/interpretar-resultados-spss/"
+        "en": "/en/tools/spss-result-interpreter/"
       }
     },
     {
       "key": "gpa-calculator",
       "type": "tool",
-      "batch": "es-28",
       "paths": {
         "zh": "/tools/gpa-calculator/",
-        "en": "/en/tools/gpa-calculator/",
-        "es": "/es/herramientas/calculadora-gpa/"
-      }
-    },
-    {
-      "key": "graduate-statistics-report-toolkit",
-      "type": "workflow",
-      "batch": "es-28",
-      "paths": {
-        "zh": "/workflows/graduate-statistics-report-toolkit/",
-        "en": "/en/workflows/graduate-statistics-report-toolkit/",
-        "es": "/es/flujos/informe-estadistico-investigacion/"
-      }
-    },
-    {
-      "key": "spss-levene-test-guide",
-      "type": "guide",
-      "batch": "es-29",
-      "paths": {
-        "zh": "/guides/spss-levene-test-guide/",
-        "en": "/en/guides/spss-levene-test-guide/",
-        "es": "/es/guias/prueba-levene-spss/"
-      }
-    },
-    {
-      "key": "t-test-apa-format-guide",
-      "type": "guide",
-      "batch": "es-29",
-      "paths": {
-        "zh": "/guides/t-test-apa-format-guide/",
-        "en": "/en/guides/t-test-apa-format-guide/",
-        "es": "/es/guias/prueba-t-formato-apa-7/"
-      }
-    },
-    {
-      "key": "anova-apa-format-guide",
-      "type": "guide",
-      "batch": "es-29",
-      "paths": {
-        "zh": "/guides/anova-apa-format-guide/",
-        "en": "/en/guides/anova-apa-format-guide/",
-        "es": "/es/guias/anova-formato-apa-7/"
-      }
-    },
-    {
-      "key": "two-way-anova-interaction-guide",
-      "type": "guide",
-      "batch": "es-30",
-      "paths": {
-        "zh": "/guides/two-way-anova-interaction-guide/",
-        "en": "/en/guides/two-way-anova-interaction-guide/",
-        "es": "/es/guias/interaccion-anova-dos-factores/"
-      }
-    },
-    {
-      "key": "z-score-calculator-guide",
-      "type": "guide",
-      "batch": "es-30",
-      "paths": {
-        "zh": "/guides/z-score-calculator-guide/",
-        "en": "/en/guides/z-score-calculator-guide/",
-        "es": "/es/guias/puntuacion-z-interpretacion/"
+        "en": "/en/tools/gpa-calculator/"
       }
     },
     {
       "key": "t-score-calculator-guide",
       "type": "guide",
-      "batch": "es-30",
       "paths": {
         "zh": "/guides/t-score-calculator-guide/",
-        "en": "/en/guides/t-score-calculator-guide/",
-        "es": "/es/guias/puntuacion-t-interpretacion/"
-      }
-    },
-    {
-      "key": "percentile-rank-guide",
-      "type": "guide",
-      "batch": "es-31",
-      "paths": {
-        "zh": "/guides/percentile-rank-guide/",
-        "en": "/en/guides/percentile-rank-guide/",
-        "es": "/es/guias/rango-percentil-interpretacion/"
-      }
-    },
-    {
-      "key": "teacher-exam-weighted-score-guide",
-      "type": "guide",
-      "batch": "es-31",
-      "paths": {
-        "zh": "/guides/teacher-exam-weighted-score-guide/",
-        "en": "/en/guides/teacher-exam-weighted-score-guide/",
-        "es": "/es/guias/calcular-nota-oposicion-docente/"
-      }
-    },
-    {
-      "key": "percentage-shortcuts-guide",
-      "type": "guide",
-      "batch": "es-31",
-      "paths": {
-        "zh": "/guides/percentage-shortcuts-guide/",
-        "en": "/en/guides/percentage-shortcuts-guide/",
-        "es": "/es/guias/calcular-porcentajes-rapido/"
-      }
-    },
-    {
-      "key": "classroom-random-group-guide",
-      "type": "guide",
-      "batch": "es-32",
-      "paths": {
-        "zh": "/guides/classroom-random-group-guide/",
-        "en": "/en/guides/classroom-random-group-guide/",
-        "es": "/es/guias/grupos-aleatorios-clase/"
-      }
-    },
-    {
-      "key": "classroom-random-picker-guide",
-      "type": "guide",
-      "batch": "es-32",
-      "paths": {
-        "zh": "/guides/classroom-random-picker-guide/",
-        "en": "/en/guides/classroom-random-picker-guide/",
-        "es": "/es/guias/selector-aleatorio-alumnos/"
-      }
-    },
-    {
-      "key": "classroom-timer-guide",
-      "type": "guide",
-      "batch": "es-32",
-      "paths": {
-        "zh": "/guides/classroom-timer-guide/",
-        "en": "/en/guides/classroom-timer-guide/",
-        "es": "/es/guias/temporizador-clase/"
-      }
-    },
-    {
-      "key": "fair-student-grouping-guide",
-      "type": "guide",
-      "batch": "es-33",
-      "paths": {
-        "zh": "/guides/fair-student-grouping-guide/",
-        "en": "/en/guides/fair-student-grouping-guide/",
-        "es": "/es/guias/agrupamientos-equitativos-aula/"
-      }
-    },
-    {
-      "key": "classroom-lottery-tool-guide",
-      "type": "guide",
-      "batch": "es-33",
-      "paths": {
-        "zh": "/guides/classroom-lottery-tool-guide/",
-        "en": "/en/guides/classroom-lottery-tool-guide/",
-        "es": "/es/guias/ruleta-sorteos-clase/"
-      }
-    },
-    {
-      "key": "bar-chart-school-report-guide",
-      "type": "guide",
-      "batch": "es-33",
-      "paths": {
-        "zh": "/guides/bar-chart-school-report-guide/",
-        "en": "/en/guides/bar-chart-school-report-guide/",
-        "es": "/es/guias/grafico-barras-trabajo-escolar/"
-      }
-    },
-    {
-      "key": "qr-code-classroom-guide",
-      "type": "guide",
-      "batch": "es-34",
-      "paths": {
-        "zh": "/guides/qr-code-classroom-guide/",
-        "en": "/en/guides/qr-code-classroom-guide/",
-        "es": "/es/guias/codigos-qr-en-el-aula/"
-      }
-    },
-    {
-      "key": "photos-to-pdf-phone-guide",
-      "type": "guide",
-      "batch": "es-34",
-      "paths": {
-        "zh": "/guides/photos-to-pdf-phone-guide/",
-        "en": "/en/guides/photos-to-pdf-phone-guide/",
-        "es": "/es/guias/fotos-a-pdf-desde-movil/"
-      }
-    },
-    {
-      "key": "a4-vs-us-letter-printing-guide",
-      "type": "guide",
-      "batch": "es-34",
-      "paths": {
-        "zh": "/guides/a4-vs-us-letter-printing-guide/",
-        "en": "/en/guides/a4-vs-us-letter-printing-guide/",
-        "es": "/es/guias/a4-o-letter-para-imprimir/"
-      }
-    },
-    {
-      "key": "merge-pdf-private-guide",
-      "type": "guide",
-      "batch": "es-35",
-      "paths": {
-        "zh": "/guides/merge-pdf-private-guide/",
-        "en": "/en/guides/merge-pdf-private-guide/",
-        "es": "/es/guias/unir-pdf-sin-subir-archivos/"
-      }
-    },
-    {
-      "key": "image-compression-email-guide",
-      "type": "guide",
-      "batch": "es-35",
-      "paths": {
-        "zh": "/guides/image-compression-email-guide/",
-        "en": "/en/guides/image-compression-email-guide/",
-        "es": "/es/guias/comprimir-fotos-para-email/"
-      }
-    },
-    {
-      "key": "word-count-essay-limits-guide",
-      "type": "guide",
-      "batch": "es-35",
-      "paths": {
-        "zh": "/guides/word-count-essay-limits-guide/",
-        "en": "/en/guides/word-count-essay-limits-guide/",
-        "es": "/es/guias/limite-palabras-ensayos-examenes/"
-      }
-    },
-    {
-      "key": "category-pdf",
-      "type": "category",
-      "batch": "es-36",
-      "paths": {
-        "zh": "/category/pdf/",
-        "en": "/en/category/pdf/",
-        "es": "/es/categorias/pdf/"
-      }
-    },
-    {
-      "key": "category-image",
-      "type": "category",
-      "batch": "es-36",
-      "paths": {
-        "zh": "/category/image/",
-        "en": "/en/category/image/",
-        "es": "/es/categorias/imagen/"
-      }
-    },
-    {
-      "key": "category-text",
-      "type": "category",
-      "batch": "es-36",
-      "paths": {
-        "zh": "/category/text/",
-        "en": "/en/category/text/",
-        "es": "/es/categorias/texto/"
+        "en": "/en/guides/t-score-calculator-guide/"
       }
     },
     {
       "key": "category-statistics",
       "type": "category",
-      "batch": "es-37",
       "paths": {
         "zh": "/category/statistics/",
-        "en": "/en/category/statistics/",
-        "es": "/es/categorias/estadistica/"
-      }
-    },
-    {
-      "key": "category-study",
-      "type": "category",
-      "batch": "es-37",
-      "paths": {
-        "zh": "/category/study/",
-        "en": "/en/category/study/",
-        "es": "/es/categorias/estudio/"
-      }
-    },
-    {
-      "key": "category-random",
-      "type": "category",
-      "batch": "es-37",
-      "paths": {
-        "zh": "/category/random/",
-        "en": "/en/category/random/",
-        "es": "/es/categorias/azar/"
-      }
-    },
-    {
-      "key": "category-money",
-      "type": "category",
-      "batch": "es-38",
-      "paths": {
-        "zh": "/category/money/",
-        "en": "/en/category/money/",
-        "es": "/es/categorias/dinero/"
-      }
-    },
-    {
-      "key": "category-time",
-      "type": "category",
-      "batch": "es-38",
-      "paths": {
-        "zh": "/category/time/",
-        "en": "/en/category/time/",
-        "es": "/es/categorias/tiempo/"
-      }
-    },
-    {
-      "key": "category-draw",
-      "type": "category",
-      "batch": "es-38",
-      "paths": {
-        "zh": "/category/draw/",
-        "en": "/en/category/draw/",
-        "es": "/es/categorias/dibujo/"
+        "en": "/en/category/statistics/"
       }
     },
     {
       "key": "about",
       "type": "page",
-      "batch": "es-39",
       "paths": {
         "zh": "/about/",
-        "en": "/en/about/",
-        "es": "/es/sobre-funnytools/"
+        "en": "/en/about/"
       }
     },
     {
       "key": "contact",
       "type": "page",
-      "batch": "es-39",
       "paths": {
         "zh": "/contact/",
-        "en": "/en/contact/",
-        "es": "/es/contacto/"
+        "en": "/en/contact/"
       }
     },
     {
       "key": "disclaimer",
       "type": "page",
-      "batch": "es-39",
       "paths": {
         "zh": "/disclaimer/",
-        "en": "/en/disclaimer/",
-        "es": "/es/aviso-legal/"
+        "en": "/en/disclaimer/"
       }
     },
     {
       "key": "terms",
       "type": "page",
-      "batch": "es-40",
       "paths": {
         "zh": "/terms/",
-        "en": "/en/terms/",
-        "es": "/es/condiciones-de-uso/"
+        "en": "/en/terms/"
       }
     },
     {
       "key": "support",
       "type": "page",
-      "batch": "es-40",
       "paths": {
         "zh": "/support/",
-        "en": "/en/support/",
-        "es": "/es/apoyar-funnytools/"
-      }
-    },
-    {
-      "key": "shop",
-      "type": "page",
-      "batch": "es-40",
-      "paths": {
-        "zh": "/shop/",
-        "en": "/en/shop/",
-        "es": "/es/tienda/"
+        "en": "/en/support/"
       }
     },
     {
       "key": "education-statistics",
       "type": "page",
-      "batch": "es-41",
       "paths": {
         "zh": "/education-statistics/",
-        "en": "/en/education-statistics/",
-        "es": "/es/estadisticas-educativas/"
-      }
-    },
-    {
-      "key": "guides-index",
-      "type": "page",
-      "batch": "es-41",
-      "paths": {
-        "zh": "/guides/",
-        "en": "/en/guides/",
-        "es": "/es/guias/"
-      }
-    },
-    {
-      "key": "workflows-index",
-      "type": "page",
-      "batch": "es-41",
-      "paths": {
-        "zh": "/workflows/",
-        "en": "/en/workflows/",
-        "es": "/es/flujos/"
-      }
-    },
-    {
-      "key": "for-index",
-      "type": "page",
-      "batch": "es-42",
-      "paths": {
-        "zh": "/for/",
-        "en": "/en/for/",
-        "es": "/es/para/"
-      }
-    },
-    {
-      "key": "audience-teachers",
-      "type": "page",
-      "batch": "es-42",
-      "paths": {
-        "zh": "/for/teachers/",
-        "en": "/en/for/teachers/",
-        "es": "/es/para/docentes/"
-      }
-    },
-    {
-      "key": "audience-students",
-      "type": "page",
-      "batch": "es-42",
-      "paths": {
-        "zh": "/for/students/",
-        "en": "/en/for/students/",
-        "es": "/es/para/estudiantes/"
-      }
-    },
-    {
-      "key": "audience-office-workers",
-      "type": "page",
-      "batch": "es-43",
-      "paths": {
-        "zh": "/for/office-workers/",
-        "en": "/en/for/office-workers/",
-        "es": "/es/para/oficina/"
-      }
-    },
-    {
-      "key": "audience-creators",
-      "type": "page",
-      "batch": "es-43",
-      "paths": {
-        "zh": "/for/creators/",
-        "en": "/en/for/creators/",
-        "es": "/es/para/creadores/"
-      }
-    },
-    {
-      "key": "audience-designers",
-      "type": "page",
-      "batch": "es-43",
-      "paths": {
-        "zh": "/for/designers/",
-        "en": "/en/for/designers/",
-        "es": "/es/para/disenadores/"
-      }
-    },
-    {
-      "key": "audience-developers",
-      "type": "page",
-      "batch": "es-44",
-      "paths": {
-        "zh": "/for/developers/",
-        "en": "/en/for/developers/",
-        "es": "/es/para/desarrolladores/"
-      }
-    },
-    {
-      "key": "teacher-exam-score-toolkit",
-      "type": "page",
-      "batch": "es-44",
-      "paths": {
-        "zh": "/workflows/teacher-exam-score-toolkit/",
-        "en": "/en/workflows/teacher-exam-score-toolkit/",
-        "es": "/es/flujos/calcular-nota-oposicion-docente/"
-      }
-    },
-    {
-      "key": "teacher-classroom-random-toolkit",
-      "type": "page",
-      "batch": "es-44",
-      "paths": {
-        "zh": "/workflows/teacher-classroom-random-toolkit/",
-        "en": "/en/workflows/teacher-classroom-random-toolkit/",
-        "es": "/es/flujos/actividades-aleatorias-aula/"
-      }
-    },
-    {
-      "key": "student-report-toolkit",
-      "type": "page",
-      "batch": "es-45",
-      "paths": {
-        "zh": "/workflows/student-report-toolkit/",
-        "en": "/en/workflows/student-report-toolkit/",
-        "es": "/es/flujos/entrega-informe-estudiantil/"
-      }
-    },
-    {
-      "key": "office-document-toolkit",
-      "type": "page",
-      "batch": "es-45",
-      "paths": {
-        "zh": "/workflows/office-document-toolkit/",
-        "en": "/en/workflows/office-document-toolkit/",
-        "es": "/es/flujos/documentos-oficina/"
-      }
-    },
-    {
-      "key": "creator-social-toolkit",
-      "type": "page",
-      "batch": "es-45",
-      "paths": {
-        "zh": "/workflows/creator-social-toolkit/",
-        "en": "/en/workflows/creator-social-toolkit/",
-        "es": "/es/flujos/contenido-redes-sociales/"
-      }
-    },
-    {
-      "key": "multiplication-fact-fluency-guide",
-      "type": "guide",
-      "batch": "es-46",
-      "missingLocales": ["en"],
-      "paths": {
-        "zh": "/guides/multiplication-fact-fluency-guide/",
-        "es": "/es/guias/fluidez-tablas-multiplicar/"
-      }
-    },
-    {
-      "key": "password-strength-basics-guide",
-      "type": "guide",
-      "batch": "es-46",
-      "missingLocales": ["en"],
-      "paths": {
-        "zh": "/guides/password-strength-basics-guide/",
-        "es": "/es/guias/contrasena-segura-fuerte/"
-      }
-    },
-    {
-      "key": "file-size-units-guide",
-      "type": "guide",
-      "batch": "es-46",
-      "missingLocales": ["en"],
-      "paths": {
-        "zh": "/guides/file-size-units-guide/",
-        "es": "/es/guias/kb-mb-gb-tb-conversion/"
-      }
-    },
-    {
-      "key": "daily-decision-toolkit",
-      "type": "workflow",
-      "batch": "es-47",
-      "paths": {
-        "zh": "/workflows/daily-decision-toolkit/",
-        "en": "/en/workflows/daily-decision-toolkit/",
-        "es": "/es/flujos/decisiones-cotidianas/"
+        "en": "/en/education-statistics/"
       }
     }
   ]

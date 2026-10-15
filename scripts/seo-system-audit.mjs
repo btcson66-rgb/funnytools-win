@@ -329,9 +329,14 @@ function schemaReport(pages) {
     for (const type of ['WebSite', 'Organization']) {
       if (!home.schemaTypes.includes(type)) critical.push(`Homepage missing ${type} JSON-LD.`);
     }
-    const website = home.jsonLd.find((item) => item['@type'] === 'WebSite');
-    if (!website?.potentialAction || website.potentialAction['@type'] !== 'SearchAction') {
-      critical.push('Homepage WebSite schema missing SearchAction.');
+    // P1 (2026-10-15): the WebSite SearchAction was dropped; its target (/tools/) is now the
+    // noindex "other tools" page, not a site search for the education-statistics tools.
+  }
+
+  // Google retired the FAQ rich result (2026-06) and HowTo no longer displays; neither may be emitted.
+  for (const page of pages) {
+    for (const type of ['FAQPage', 'HowTo']) {
+      if (page.schemaTypes.includes(type)) critical.push(`${page.route}: ${type} structured data must not be emitted.`);
     }
   }
 
@@ -342,7 +347,6 @@ function schemaReport(pages) {
     if (isTool) {
       if (!page.schemaTypes.some((type) => ['WebApplication', 'SoftwareApplication'].includes(type))) warning.push(`${page.route}: tool page missing WebApplication/SoftwareApplication schema.`);
       if (!page.schemaTypes.includes('BreadcrumbList')) warning.push(`${page.route}: tool page missing BreadcrumbList.`);
-      if (page.hasVisibleFaq && !page.schemaTypes.includes('FAQPage')) warning.push(`${page.route}: visible FAQ without FAQPage schema.`);
     }
     if (isCategory) {
       if (!page.schemaTypes.includes('CollectionPage')) warning.push(`${page.route}: category page missing CollectionPage.`);
@@ -351,7 +355,6 @@ function schemaReport(pages) {
     if (isArticle) {
       if (!page.schemaTypes.some((type) => ['Article', 'BlogPosting'].includes(type))) warning.push(`${page.route}: article page missing Article/BlogPosting.`);
       if (!page.schemaTypes.includes('BreadcrumbList')) warning.push(`${page.route}: article page missing BreadcrumbList.`);
-      if (page.hasVisibleFaq && !page.schemaTypes.includes('FAQPage')) warning.push(`${page.route}: article visible FAQ without FAQPage schema.`);
     }
   }
 

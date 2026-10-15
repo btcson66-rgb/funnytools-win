@@ -4,7 +4,7 @@ import BaseLayout from './BaseLayout.astro';
 import { type Locale } from '../config/site';
 import { t } from '../i18n/ui';
 import { localePath, localeUrlPair } from '../lib/url';
-import { breadcrumbJsonLd, webPageJsonLd } from '../lib/seo';
+import { authorPersonJsonLd, breadcrumbJsonLd, webPageJsonLd } from '../lib/seo';
 
 interface PageLink {
   href: string;
@@ -28,17 +28,17 @@ const sectionHeadings: Record<string, Record<Locale, { index: number; heading: s
   about: {
     zh: [
       { index: 0, heading: '網站定位與服務範圍' },
-      { index: 2, heading: '本機處理與資料原則' },
-      { index: 4, heading: '內容維護與編輯標準' },
-      { index: 6, heading: '發現錯誤時的處理方式' },
-      { index: 10, heading: '廣告、分析與使用界線' },
+      { index: 2, heading: '站長：Benson Lai' },
+      { index: 4, heading: '內容如何查核' },
+      { index: 7, heading: '發現錯誤時如何回報' },
+      { index: 9, heading: '廣告、分析與使用界線' },
     ],
     en: [
       { index: 0, heading: 'Purpose and service scope' },
-      { index: 2, heading: 'Local processing and data principles' },
-      { index: 4, heading: 'How tools are built and checked' },
-      { index: 6, heading: 'What happens when something breaks' },
-      { index: 10, heading: 'Advertising, analytics, and where the line is' },
+      { index: 2, heading: 'Site owner: Benson Lai' },
+      { index: 4, heading: 'How content is checked' },
+      { index: 7, heading: 'How to report a mistake' },
+      { index: 9, heading: 'Advertising, analytics, and where the line is' },
     ],
   },
   contact: {
@@ -133,8 +133,11 @@ const breadcrumbItems = [
   { name: ui.breadcrumbHome, href: localePath(lang) },
   { name: title, href: localePath(lang, pageKey) },
 ];
+const pageLd = webPageJsonLd(lang, title, description, localePath(lang, pageKey));
 const jsonLd = [
-  webPageJsonLd(lang, title, description, localePath(lang, pageKey)),
+  // The about page is the canonical author page: it describes the Person that
+  // tool and guide pages name as their author.
+  pageKey === 'about' ? { ...pageLd, '@type': 'AboutPage', mainEntity: authorPersonJsonLd() } : pageLd,
   breadcrumbJsonLd(breadcrumbItems),
 ];
 ---

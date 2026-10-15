@@ -15,8 +15,6 @@ test('Split 04 data-flow classification is explicit and surface-aware', async ()
   assert.equal(classifyToolDataFlow('pdf-compressor', 'canonical'), 'BACKEND_INPUT_UPLOAD');
   assert.equal(classifyToolDataFlow('pdf-to-word', 'canonical'), 'BACKEND_INPUT_UPLOAD');
   assert.equal(classifyToolDataFlow('image-compressor', 'embed'), 'LOCAL_ONLY');
-  assert.equal(classifyToolDataFlow('image-compressor', 'expansion'), 'LOCALE_VARIANT');
-  assert.equal(classifyToolDataFlow('pdf-compressor', 'expansion'), 'LOCALE_VARIANT');
   assert.equal(classifyToolDataFlow('unknown-tool', 'canonical'), 'LOCAL_ONLY');
   assert.equal(isCanonicalDownloadGatedTool('merge-pdf'), true);
   assert.equal(isCanonicalConversionApiTool('pdf-compressor'), true);
@@ -65,7 +63,7 @@ test('frontend-owned source contracts preserve gate and Conversion API facts', (
   }
 });
 
-test('canonical and expansion HTML reflect the route-level disclosure boundary', () => {
+test('canonical HTML reflects the route-level disclosure boundary', () => {
   const gated = read('dist/tools/image-compressor/index.html');
   const gatedEn = read('dist/en/tools/merge-pdf/index.html');
   assert.match(gated, /data-download-gate-config/);
@@ -73,8 +71,17 @@ test('canonical and expansion HTML reflect the route-level disclosure boundary',
   assert.match(gated, /原圖在瀏覽器本機壓縮/);
   assert.match(gatedEn, /Brevo/);
   assert.match(gatedEn, /Source PDFs are merged locally/);
-  const expansion = read('dist/es/herramientas/comprimir-imagenes/index.html');
-  assert.doesNotMatch(expansion, /data-download-gate-config/);
+  // P1 (2026-10-15): the es/fr expansion locales were removed; make sure no such output returns.
+  // Only the registered redirect stubs (src/data/removedRedirects.ts) may remain under those prefixes.
+  for (const locale of ['es', 'fr']) {
+    const dir = path.join(repo, 'dist', locale);
+    const files = fs.existsSync(dir) ? fs.readdirSync(dir, { recursive: true }).filter((file) => String(file).endsWith('.html')) : [];
+    for (const file of files) {
+      const html = fs.readFileSync(path.join(dir, String(file)), 'utf8');
+      assert.match(html, /http-equiv="refresh"/, `${locale}/${file} must be a redirect stub`);
+      assert.doesNotMatch(html, /data-download-gate-config/);
+    }
+  }
   const compressor = read('dist/tools/pdf-compressor/index.html');
   assert.match(compressor, /FunnyTools Conversion API/);
 });

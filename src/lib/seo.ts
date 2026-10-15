@@ -98,17 +98,9 @@ export function websiteJsonLd(lang: Locale) {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE.name[lang],
-    alternateName: 'FunnyTools Online Toolbox',
     url: absoluteUrl(localePath(lang)),
-    description: lang === 'zh'
-      ? 'FunnyTools 是一個免費線上工具箱，提供 PDF、圖片、文字、QR Code、隨機、時間、金錢、教學與統計工具。免安裝、免註冊，手機與電腦都能使用。'
-      : 'FunnyTools is a free online toolbox with browser-based tools for PDF, images, text, QR codes, random picks, time, money, teachers and more.',
+    description: SITE.tagline[lang],
     inLanguage: SITE.hreflang[lang],
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${absoluteUrl(localePath(lang, 'tools'))}?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
   };
 }
 
@@ -117,9 +109,8 @@ export function organizationJsonLd(lang: Locale) {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: SITE.name[lang],
-    alternateName: 'FunnyTools Online Toolbox',
     url: absoluteUrl('/'),
-    description: 'FunnyTools is the free online toolbox published at funnytools.win.',
+    description: SITE.tagline[lang],
     logo: absoluteUrl(assetPath('apple-touch-icon.png')),
     image: defaultOgImage(),
     email: SITE.email,
@@ -161,18 +152,12 @@ export function collectionPageJsonLd(lang: Locale, name: string, description: st
   };
 }
 
-export function howToJsonLd(lang: Locale, name: string, steps: string[], path: string) {
+/** The named site owner, linked to the /about/ page. Used as `author` on authored pages. */
+export function authorPersonJsonLd() {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: lang === 'zh' ? `如何使用${name}` : `How to use ${name}`,
-    step: steps.map((text, index) => ({
-      '@type': 'HowToStep',
-      position: index + 1,
-      text,
-    })),
-    url: absoluteUrl(path),
-    inLanguage: SITE.hreflang[lang],
+    '@type': 'Person',
+    name: SITE.author.name,
+    url: absoluteUrl(SITE.author.aboutPath),
   };
 }
 
@@ -181,6 +166,7 @@ export function webApplicationJsonLd(
   tool: ToolMeta,
   content: ToolContentForSeo,
   category: Category,
+  options: { authored?: boolean; dateModified?: string } = {},
 ) {
   const applicationCategoryByCategory: Record<string, string> = {
     draw: 'DesignApplication',
@@ -213,7 +199,7 @@ export function webApplicationJsonLd(
     inLanguage: SITE.hreflang[lang],
     keywords: content.keywords.join(', '),
     softwareVersion: SITE_VERSION,
-    dateModified: CONTENT_REVIEWED_AT,
+    dateModified: options.dateModified ?? CONTENT_REVIEWED_AT,
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -222,7 +208,7 @@ export function webApplicationJsonLd(
     },
     provider: publisher,
     publisher,
-    author: publisher,
+    author: options.authored ? authorPersonJsonLd() : publisher,
   };
 }
 

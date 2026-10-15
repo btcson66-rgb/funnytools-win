@@ -1,7 +1,7 @@
 {
-  "recordedAt": "2026-09-23",
-  "buildPages": 1192,
+  "recordedAt": "2026-10-15",
+  "buildPages": 545,
   "indexablePages": 20,
   "sitemapUrls": 20,
-  "notes": "T2 search-convergence baseline: exactly 20 retained indexable URLs. Alert if the build, indexable set, or sitemap unexpectedly falls more than 10 percent."
+  "notes": "P1 rebuild baseline (2026-10-15): es/fr locales, template guides, workflows, audience pages, blog and shop were deliberately removed, so buildPages was reset from 1192 to the post-P1 count. The indexable set stays at the 20 education-statistics URLs. Alert if the build, indexable set, or sitemap unexpectedly falls more than 10 percent from this baseline."
 }

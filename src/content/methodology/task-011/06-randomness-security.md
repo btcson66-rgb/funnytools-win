@@ -228,7 +228,4 @@ CSPRNG安全性需要：
 
 ## 延伸閱讀
 
-- [安全亂數 vs Math.random](/guides/secure-random-vs-math-random-guide/)
-- [Modulo Bias](/guides/rejection-sampling-modulo-bias-guide/)
-- [公平抽籤](/guides/fair-random-draw-audit-guide/)
 - [公開測試案例](/methodology/public-test-cases/)

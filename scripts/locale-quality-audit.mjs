@@ -56,8 +56,6 @@ const indexable = pages.filter((page) => !/noindex/i.test(page.robots) && !page.
 
 function localeForRoute(route) {
   if (route === '/en/' || route.startsWith('/en/')) return 'en';
-  if (route === '/es/' || route.startsWith('/es/')) return 'es';
-  if (route === '/fr/' || route.startsWith('/fr/')) return 'fr';
   return 'zh-TW';
 }
 const locales = [...new Set(pages.map((page) => localeForRoute(page.route)))];
@@ -90,11 +88,10 @@ const visibleLanguageIssues = indexable.filter((page) => {
   const body = page.html.replace(/<script[\s\S]*?<\/script>/gi, '').replace(/<style[\s\S]*?<\/style>/gi, '');
   if (page.language === 'en') return (body.match(/[\u4e00-\u9fff]/g) ?? []).length > 80;
   if (page.language === 'zh-Hant') return (body.match(/[A-Za-z]{4,}/g) ?? []).length > 300;
-  if (page.language === 'es' || page.language === 'fr') return false;
   return false;
 }).map((page) => ({ route: page.route, htmlLanguage: page.language, issue: 'heuristic-visible-language-mix' }));
 
-write('locale-architecture.json', { status: 'measured', supportedLocales: ['zh-TW', 'en', 'es', 'fr'], runtimeLocaleSources: ['src/config/site.ts', 'src/i18n/expansion-routes.json'], pagesPerLocale, indexablePerLocale, skippedChecks: ['translation quality requires human review'] });
+write('locale-architecture.json', { status: 'measured', supportedLocales: ['zh-TW', 'en'], runtimeLocaleSources: ['src/config/site.ts', 'src/i18n/expansion-routes.json'], pagesPerLocale, indexablePerLocale, skippedChecks: ['translation quality requires human review'] });
 write('locale-variant-registry.json', { status: 'measured', pageCount: registry.length, registry, skippedChecks: ['registry is a build snapshot, not a claim that every locale is equivalent'] });
 write('hreflang-reciprocity.json', { status: reciprocityIssues.length ? 'needs-review' : 'pass', checkedRouteCount: indexable.length, issueCount: reciprocityIssues.length, issues: reciprocityIssues, skippedChecks: ['non-built locale variants'] });
 write('locale-count-consistency.json', { status: 'measured', checkedRouteCount: pages.length, issueCount: 0, pagesPerLocale, indexablePerLocale, skippedChecks: ['no historical baseline supplied'] });

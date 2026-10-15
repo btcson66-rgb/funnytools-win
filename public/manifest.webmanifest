@@ -1,7 +1,7 @@
 {
-  "name": "FunnyTools 免費線上工具箱",
+  "name": "FunnyTools",
   "short_name": "FunnyTools",
-  "description": "免費、免註冊、重視瀏覽器本機處理的 PDF、圖片、文字、QR Code、教學與統計工具。",
+  "description": "給台灣學生與老師的成績統計工具：T 分數、PR 值、標準差、加權平均與 t 檢定，免註冊。",
   "id": "/",
   "start_url": "/",
   "scope": "/",
@@ -10,7 +10,7 @@
   "theme_color": "#0d9488",
   "orientation": "any",
   "lang": "zh-TW",
-  "categories": ["productivity", "education", "utilities"],
+  "categories": ["education", "utilities"],
   "icons": [
     {
       "src": "/favicon.svg",

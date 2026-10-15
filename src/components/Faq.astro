@@ -5,25 +5,13 @@ import { t } from '../i18n/ui';
 interface Props {
   lang: Locale;
   items: { q: string; a: string }[];
-  emitJsonLd?: boolean;
 }
 
-const { lang, items, emitJsonLd = true } = Astro.props;
+const { lang, items } = Astro.props;
 const ui = t(lang);
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: items.map((item) => ({
-    '@type': 'Question',
-    name: item.q,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.a,
-    },
-  })),
-};
 ---
 
+{/* FAQPage structured data is intentionally not emitted (Google removed the FAQ rich result in 2026-06). The visible FAQ stays. */}
 <section class="faq content-section">
   <h2>{ui.faq}</h2>
   <dl>
@@ -36,5 +24,4 @@ const faqJsonLd = {
       ))
     }
   </dl>
-  {emitJsonLd && <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}
 </section>

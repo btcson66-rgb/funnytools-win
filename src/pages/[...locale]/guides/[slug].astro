@@ -1,22 +1,19 @@
 ---
 import Breadcrumb from '../../../components/Breadcrumb.astro';
-import AffiliateProductShelf from '../../../components/AffiliateProductShelf.astro';
+import AuthorByline from '../../../components/AuthorByline.astro';
 import ContentValueReview from '../../../components/ContentValueReview.astro';
 import Faq from '../../../components/Faq.astro';
 import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
 import { getToolBySlug, isToolAvailableInLocale, type ToolMeta } from '../../../data/tools';
-import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide, type SeoGuide, type SeoGuideView } from '../../../data/seoGuides';
-import { workflows, isWorkflowAvailableInLocale, viewWorkflow } from '../../../data/workflows';
+import { seoGuides, isSeoGuideAvailableInLocale, viewSeoGuide, type SeoGuide } from '../../../data/seoGuides';
 import { absoluteUrl, localePath, localeUrlPair, toolUrl } from '../../../lib/url';
-import { breadcrumbJsonLd, collectionPageJsonLd, webPageJsonLd } from '../../../lib/seo';
+import { authorPersonJsonLd, breadcrumbJsonLd, webPageJsonLd } from '../../../lib/seo';
 import { t } from '../../../i18n/ui';
 import { buildGuideValueReview } from '../../../lib/contentValue';
 import { expansionRouteByPath } from '../../../i18n/expansionRoutes';
-import { getGuideAffiliateConfig, splitGuideContentHtml } from '../../../data/guideAffiliate';
-import { resolveGuideHub } from '../../../data/guideNavigation';
-import { isIndexablePath } from '../../../lib/indexPolicy';
+import { isAuthoredGuideSlug, isIndexablePath } from '../../../lib/indexPolicy';
 
 export function getStaticPaths() {
   return seoGuides.flatMap((guide) => {
@@ -41,12 +38,8 @@ export function getStaticPaths() {
 const { lang, guide: sourceGuide } = Astro.props as { lang: Locale; guide: SeoGuide };
 const ui = t(lang);
 const guide = viewSeoGuide(sourceGuide, lang);
-const guideHub = sourceGuide.pageKind === 'guideHub' ? null : resolveGuideHub(sourceGuide, lang);
 const hubCta = { id: 'education-statistics', label: lang === 'zh' ? '教育統計中心' : 'Education statistics', href: localePath(lang, 'education-statistics') };
-const articleAffiliateConfig = getGuideAffiliateConfig(guide.slug);
-const articleContentSplit = articleAffiliateConfig.affiliateEnabled && guide.contentHtml
-  ? splitGuideContentHtml(guide.contentHtml)
-  : null;
+const authored = isAuthoredGuideSlug(guide.slug);
 const copy = {
   zh: {
     breadcrumb: '指南',
@@ -57,10 +50,8 @@ const copy = {
     example: '實際範例',
     mistakes: '常見錯誤',
     tools: '推薦工具',
-    relatedGuides: '相關指南',
-    relatedWorkflows: '相關工作流程',
     cta: '下一步',
-    back: '回到指南列表',
+    back: '回到教育統計中心',
     openTool: '開啟工具',
     favorite: '加入常用工具',
     guideSuffix: '指南',
@@ -75,10 +66,8 @@ const copy = {
     example: 'Worked example',
     mistakes: 'Common mistakes',
     tools: 'Recommended tools',
-    relatedGuides: 'Related guides',
-    relatedWorkflows: 'Related workflows',
     cta: 'Next step',
-    back: 'Back to guides',
+    back: 'Back to education statistics',
     openTool: 'Open tool',
     favorite: 'Add to favorites',
     guideSuffix: 'guide',
@@ -96,14 +85,6 @@ const liveTool = (slug: string): ToolMeta | undefined => {
 const relatedTools = guide.relatedToolIds
   .map(liveTool)
   .filter((tool): tool is ToolMeta => Boolean(tool && isIndexablePath(toolUrl(lang, tool.slug))));
-const relatedGuides: SeoGuideView[] = guide.relatedGuideIds
-  .map((slug) => seoGuides.find((candidate) => candidate.slug === slug))
-  .filter((candidate): candidate is SeoGuide => candidate != null && isSeoGuideAvailableInLocale(candidate, lang) && isIndexablePath(localePath(lang, 'guides', candidate.slug)))
-  .map((candidate) => viewSeoGuide(candidate, lang));
-const relatedWorkflowViews = guide.relatedWorkflowIds
-  .map((slug) => workflows.find((candidate) => candidate.slug === slug))
-  .filter((candidate) => candidate != null && isWorkflowAvailableInLocale(candidate, lang) && isIndexablePath(localePath(lang, 'workflows', candidate.slug)))
-  .map((candidate) => viewWorkflow(candidate, lang));
 const hasSourceAlternates = sourceGuide.locales.includes('zh') && sourceGuide.locales.includes('en');
 const hasAlternates = hasSourceAlternates || Boolean(expansionRouteByPath(guidePath));
 const faqItems = guide.faq.map((item) => ({ q: item.question, a: item.answer }));
@@ -124,22 +105,11 @@ const articleLd = {
   inLanguage: SITE.hreflang[lang],
   mainEntityOfPage: guideUrl,
   url: guideUrl,
-  author: { '@type': 'Organization', name: SITE.name[lang], url: SITE.url },
+  author: authored ? authorPersonJsonLd() : { '@type': 'Organization', name: SITE.name[lang], url: SITE.url },
   publisher: { '@type': 'Organization', name: SITE.name[lang], url: SITE.url },
 };
-const faqLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: guide.faq.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: { '@type': 'Answer', text: item.answer },
-  })),
-};
 const breadcrumbLd = breadcrumbJsonLd(breadcrumbItems.map(({ label, href }) => ({ name: label, href: href ?? guidePath })));
-const pageLd = sourceGuide.pageKind === 'guideHub'
-  ? collectionPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guidePath)
-  : webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guidePath);
+const pageLd = webPageJsonLd(lang, guide.metaTitle, guide.metaDescription, guidePath);
 ---
 
 <BaseLayout
@@ -148,11 +118,11 @@ const pageLd = sourceGuide.pageKind === 'guideHub'
   title={guide.metaTitle}
   description={guide.metaDescription}
   keywords={guide.targetKeywords}
-  type={sourceGuide.pageKind === 'guideHub' ? 'website' : 'article'}
+  type="article"
   alternateSegments={['guides', guide.slug]}
   altLang={hasSourceAlternates ? localeUrlPair('guides', guide.slug) : undefined}
   hasAlternates={hasAlternates}
-    jsonLd={[pageLd, ...(guide.pageKind === 'guide' ? [articleLd] : []), ...(guide.noFaqSchema || faqItems.length === 0 ? [] : [faqLd]), breadcrumbLd]}
+  jsonLd={[pageLd, articleLd, breadcrumbLd]}
 >
   <article class="wrap guide-article">
     <Breadcrumb items={breadcrumbItems} />
@@ -161,25 +131,13 @@ const pageLd = sourceGuide.pageKind === 'guideHub'
       <p class="eyebrow">{guide.category} {copy.guideSuffix}</p>
       <h1>{guide.h1}</h1>
       <p class="lead">{guide.summary}</p>
-      <p class="guide-date">{copy.updated}: <time datetime={effectiveUpdatedAt}>{effectiveUpdatedAt}</time></p>
+      {authored
+        ? <AuthorByline lang={lang} reviewedAt={effectiveUpdatedAt} />
+        : <p class="guide-date">{copy.updated}: <time datetime={effectiveUpdatedAt}>{effectiveUpdatedAt}</time></p>}
     </header>
 
     {guide.contentHtml ? (
-      articleContentSplit ? (<>
-        <div class="markdown-body" set:html={articleContentSplit.before} />
-        {lang === 'zh' && <AffiliateProductShelf
-          lang={lang}
-          category={articleAffiliateConfig.affiliateCategory}
-          affiliateTags={articleAffiliateConfig.affiliateTags}
-          toolSlug={guide.slug}
-          context="article"
-          heading={lang === 'zh' ? '這篇指南可能用得到的工具與用品' : 'Relevant resources for this guide'}
-          initialLimit={3}
-        />}
-        <div class="markdown-body" set:html={articleContentSplit.after} />
-      </>) : (
-        <div class="markdown-body" set:html={guide.contentHtml} />
-      )
+      <div class="markdown-body" set:html={guide.contentHtml} />
     ) : (<>
     <section class="guide-block" aria-labelledby="problem-title">
       <h2 id="problem-title">{copy.problem}</h2>
@@ -203,18 +161,6 @@ const pageLd = sourceGuide.pageKind === 'guideHub'
         {guide.steps.map((step) => <li>{step}</li>)}
       </ol>
     </section>
-
-    {lang === 'zh' && articleAffiliateConfig.affiliateEnabled && (
-      <AffiliateProductShelf
-        lang={lang}
-        category={articleAffiliateConfig.affiliateCategory}
-        affiliateTags={articleAffiliateConfig.affiliateTags}
-        toolSlug={guide.slug}
-        context="article"
-        heading={lang === 'zh' ? '這篇指南可能用得到的工具與用品' : 'Relevant resources for this guide'}
-        initialLimit={3}
-      />
-    )}
 
     <section class="guide-block" aria-labelledby="example-title">
       <h2 id="example-title">{copy.example}</h2>
@@ -247,59 +193,20 @@ const pageLd = sourceGuide.pageKind === 'guideHub'
       </section>
     )}
 
-    {relatedGuides.length > 0 && (
-      <section class="guide-block" aria-labelledby="related-guides-title">
-        <h2 id="related-guides-title">{copy.relatedGuides}</h2>
-        <div class="related-list">
-          {relatedGuides.map((related) => (
-            <a href={localePath(lang, 'guides', related.slug)} data-hub-link="guides">
-              <strong>{related.title}</strong>
-              <span>{related.summary}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-    )}
-
-    <Faq lang={lang} items={faqItems} emitJsonLd={false} />
+    <Faq lang={lang} items={faqItems} />
 
     <section class="guide-block cta-section" aria-labelledby="cta-title">
       <h2 id="cta-title">{copy.cta}</h2>
       <p>{guide.cta}</p>
       <nav class="guide-bottom">
-        <a class="btn" href={guidesPath} data-hub-link="guides">{copy.back}</a>
-        <a class="btn" href={hubCta.href} data-hub-link={hubCta.id}>{hubCta.label}</a>
+        <a class="btn" href={guidesPath} data-hub-link="education-statistics">{copy.back}</a>
         {relatedTools[0] && <a class="btn go" href={toolUrl(lang, relatedTools[0].slug)} data-article-cta="guide_primary_tool">{copy.openTool}: {relatedTools[0].name[lang]}</a>}
       </nav>
     </section>
     </>)}
 
-    {relatedWorkflowViews.length > 0 && (
-      <section class="guide-block" aria-labelledby="related-workflows-title">
-        <h2 id="related-workflows-title">{copy.relatedWorkflows}</h2>
-        <div class="related-list">
-          {relatedWorkflowViews.map((workflow) => (
-            <a href={localePath(lang, 'workflows', workflow.slug)}>
-              <strong>{workflow.title}</strong>
-              <span>{workflow.purpose}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-    )}
   </article>
 
-  {lang !== 'zh' && (
-    <AffiliateProductShelf
-      lang={lang}
-      category={articleAffiliateConfig.affiliateCategory}
-      affiliateTags={articleAffiliateConfig.affiliateTags}
-      toolSlug={guide.slug}
-      context="article"
-      heading="Relevant resources for this guide"
-      initialLimit={3}
-    />
-  )}
 
   <script>
     import { isFavoriteTool, toggleFavoriteTool } from '../../../lib/userTools.client';

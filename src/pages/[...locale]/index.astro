@@ -3,7 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { SITE, type Locale } from '../../config/site';
 import { getToolBySlug, type ToolMeta } from '../../data/tools';
-import { INDEXABLE_TOOL_SLUGS } from '../../lib/indexPolicy';
 import { localePath } from '../../lib/url';
 import { organizationJsonLd, websiteJsonLd } from '../../lib/seo';
 
@@ -15,16 +14,64 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.props as { lang: Locale };
-const tools = INDEXABLE_TOOL_SLUGS.filter((slug) => slug !== 'merge-pdf')
-  .map(getToolBySlug)
-  .filter((tool): tool is ToolMeta => Boolean(tool && tool.status === 'live'));
 const zh = lang === 'zh';
+
+// The ten retained tools, grouped by what the visitor is trying to do.
+// Slugs must stay in sync with INDEXABLE_PATHS in src/lib/indexPolicy.ts.
+const groups = [
+  {
+    id: 'compute-grades',
+    title: zh ? '算成績' : 'Work out grades',
+    body: zh
+      ? '期中、期末、平時成績各占不同比例時，用這組工具算出學期成績；準備教師甄試時，可以依筆試、口試、試教的權重模擬總分。'
+      : 'Use these when midterm, final and homework carry different weights, or to simulate a weighted teacher-exam total.',
+    slugs: ['grade-average', 'weighted-average-calculator', 'teacher-exam-score-converter'],
+  },
+  {
+    id: 'see-rank',
+    title: zh ? '看排名' : 'Check rank',
+    body: zh
+      ? '知道班上名次與總人數，想換成百分等級；或手上有全班分數，想知道某個分數贏過多少比例的同學。'
+      : 'Turn a class rank into a percentile, or find what share of a class scored below a given mark.',
+    slugs: ['class-rank-percentile-calculator', 'percentile-rank-calculator'],
+  },
+  {
+    id: 'standardize',
+    title: zh ? '標準化' : 'Standardize scores',
+    body: zh
+      ? '不同考試的平均與難度不同，不能直接比原始分數。先換成 Z 分數，再換成平均 50、標準差 10 的 T 分數。'
+      : 'Exams differ in mean and difficulty, so raw scores are not comparable. Convert to a Z score, then to a T score (mean 50, SD 10).',
+    slugs: ['z-score-calculator', 't-score-calculator'],
+  },
+  {
+    id: 'statistics',
+    title: zh ? '分布與統計檢定' : 'Spread and statistical tests',
+    body: zh
+      ? '輸入一組分數得到平均、變異數與標準差；有兩組的樣本數、平均數與標準差時，可以做獨立樣本 t 檢定。'
+      : 'Get the mean, variance and standard deviation of a set of scores, or run an independent-samples t test from two groups\' summary statistics.',
+    slugs: ['standard-deviation', 'independent-samples-t-test-calculator'],
+  },
+  {
+    id: 'classroom',
+    title: zh ? '課堂點名' : 'Classroom picks',
+    body: zh
+      ? '貼上名單，隨機抽出一個或多個名字，抽籤過程在你的瀏覽器完成。'
+      : 'Paste a list and draw one or more names at random, all in your browser.',
+    slugs: ['random-name-picker'],
+  },
+].map((group) => ({
+  ...group,
+  tools: group.slugs
+    .map(getToolBySlug)
+    .filter((tool): tool is ToolMeta => Boolean(tool && tool.status === 'live')),
+}));
+
 const title = zh
-  ? 'FunnyTools 教育統計工具｜T 分數、PR、標準差與成績計算'
-  : 'FunnyTools education statistics and classroom calculators';
+  ? 'FunnyTools 成績統計工具｜T 分數、PR 值、標準差、加權平均'
+  : 'FunnyTools grade and statistics calculators for students and teachers';
 const description = zh
-  ? '免費使用 T 分數、Z 分數、百分等級、標準差、加權平均、班級排名、獨立樣本 t 檢定與教師甄試換算工具；另提供課堂隨機抽籤。免註冊、直接在瀏覽器使用，並附公式與解讀提醒。'
-  : 'Free education statistics, classroom score, and random name tools. No sign-up required.';
+  ? '給台灣學生與老師的成績統計工具：T 分數、Z 分數、PR 百分等級、班級排名、加權平均、標準差與獨立樣本 t 檢定。免註冊，在瀏覽器中計算。'
+  : 'Grade and statistics calculators for students and teachers in Taiwan: T score, Z score, percentile rank, class rank, weighted average, standard deviation and t test. No sign-up.';
 const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang)];
 ---
 
@@ -36,61 +83,74 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang)];
   canonicalPath={lang === 'zh' ? '/' : `/${lang}/`}
   jsonLd={jsonLd}
 >
-  <main class="wrap">
+  <div class="wrap">
     <section class="hero home-hero">
-      <p class="eyebrow">{zh ? '聚焦教育統計與課堂任務' : 'Focused education statistics tools'}</p>
-      <h1>{zh ? '教育統計、成績換算與課堂抽籤工具' : 'Education statistics and classroom tools'}</h1>
+      <p class="eyebrow">{zh ? '給台灣學生與老師' : 'For students and teachers in Taiwan'}</p>
+      <h1>{zh ? '給台灣學生與老師的成績統計工具' : 'Grade and statistics tools for students and teachers'}</h1>
       <p class="lead">
         {zh
-          ? 'FunnyTools 將索引資源集中在有實際搜尋需求的教育統計工具。所有計算工具可免註冊直接使用，並提供公式、例題與使用限制。'
-          : 'FunnyTools now concentrates its searchable collection on education statistics and classroom utilities.'}
+          ? '輸入分數，算出 T 分數、PR 值、班級排名百分比、加權平均與標準差。每個工具頁都寫明計算公式與使用限制，輸入的成績只在你的瀏覽器計算，不會上傳。'
+          : 'Enter scores and get T scores, percentile ranks, class-rank percentages, weighted averages and standard deviations. Every tool page states its formula and limits, and your scores are calculated in your browser, not uploaded.'}
       </p>
       <div class="hero-actions">
-        <a class="btn go" href={localePath(lang, 'education-statistics')}>{zh ? '進入教育統計中心' : 'Education statistics hub'}</a>
-        <a class="btn ghost" href={localePath(lang, 'guides', 't-score-calculator-guide')}>{zh ? '閱讀 T 分數教學' : 'Read the T-score guide'}</a>
+        <a class="btn go" href={localePath(lang, 'tools', 't-score-calculator')}>{zh ? '算 T 分數' : 'Calculate a T score'}</a>
+        <a class="btn ghost" href={localePath(lang, 'education-statistics')}>{zh ? '全部教育統計工具' : 'All education statistics tools'}</a>
       </div>
     </section>
 
-    <section class="content-section" aria-labelledby="focused-tools">
-      <div class="section-heading-row">
-        <div>
-          <p class="eyebrow">{zh ? '保留索引工具' : 'Focused tools'}</p>
-          <h2 id="focused-tools">{zh ? '教育統計與課堂工具' : 'Education and classroom calculators'}</h2>
+    {groups.map((group) => (
+      <section class="content-section" aria-labelledby={`group-${group.id}`}>
+        <h2 id={`group-${group.id}`}>{group.title}</h2>
+        <p>{group.body}</p>
+        <div class="grid compact">
+          {group.tools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
         </div>
-        <a class="inline-link" href={localePath(lang, 'category', 'statistics')}>{zh ? '查看統計分類' : 'Statistics category'}</a>
-      </div>
-      <div class="grid compact">
-        {tools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
-      </div>
-    </section>
+      </section>
+    ))}
 
-    {zh && <section class="content-section" aria-labelledby="pdf-document-task">
-      <h2 id="pdf-document-task">整理申請資料、講義與 PDF 附件</h2>
-      <p>需要把多份文件合成一份？<a class="inline-link" href="/tools/merge-pdf/">使用 PDF 合併工具</a>，選取檔案、讀取頁數並調整順序後產生新檔。原始 PDF 在瀏覽器本機合併；下載的寄送流程、檔案限制與錯誤處理請先閱讀工具頁說明。</p>
-    </section>}
-
-    <section class="content-section">
-      <h2>{zh ? '如何選擇工具' : 'Choose the right tool'}</h2>
+    <section class="content-section" aria-labelledby="how-to-pick">
+      <h2 id="how-to-pick">{zh ? '不確定該用哪一個？' : 'Not sure which one to use?'}</h2>
       <div class="info-grid">
         <article>
-          <h3>{zh ? '標準化與相對位置' : 'Standardization and rank'}</h3>
-          <p>{zh ? '用 T 分數、Z 分數、百分等級與班級排名工具比較不同分布中的相對位置。' : 'Use T scores, Z scores, percentiles, and class rank.'}</p>
+          <h3>{zh ? '只有一個分數' : 'You have one score'}</h3>
+          <p>
+            {zh
+              ? '沒有全班的平均與標準差，就算不出可靠的 Z 或 T 分數。先確認手上有沒有同一次考試的全班資料。'
+              : 'Without the class mean and standard deviation you cannot get a reliable Z or T score. Check whether you have the whole class data for the same exam first.'}
+          </p>
         </article>
         <article>
-          <h3>{zh ? '描述統計與加權成績' : 'Descriptive statistics'}</h3>
-          <p>{zh ? '用標準差、加權平均與成績平均工具檢查集中趨勢、離散程度及配分。' : 'Check spread, averages, and weighted scores.'}</p>
+          <h3>{zh ? '想比較兩次考試' : 'You want to compare two exams'}</h3>
+          <p>
+            {zh
+              ? '兩次考試的平均與離散程度不同，先各自換成 Z 分數或 T 分數再比較。'
+              : 'Exams differ in mean and spread, so convert each to a Z or T score before comparing.'}
+          </p>
         </article>
         <article>
-          <h3>{zh ? '推論統計' : 'Inference'}</h3>
-          <p>{zh ? '用獨立樣本 t 檢定工具比較兩組平均數，並回到原始假設與資料條件解讀。' : 'Compare two group means with an independent-samples t test.'}</p>
+          <h3>{zh ? '想看 T 分數怎麼來' : 'You want to see how a T score is built'}</h3>
+          <p>
+            <a class="inline-link" href={localePath(lang, 'guides', 't-score-calculator-guide')}>
+              {zh ? '閱讀 T 分數計算指南' : 'Read the T-score guide'}
+            </a>
+            {zh ? '，從公式一步一步算過。' : ' and follow the formula step by step.'}
+          </p>
         </article>
       </div>
     </section>
 
     <section class="content-section">
       <h2>{zh ? '資料與責任界線' : 'Data and limitations'}</h2>
-      <p>{zh ? '工具結果適合教學、自我檢查與報告草稿；正式考試、研究與行政文件仍應依原始資料、官方規則與專業判斷確認。' : 'Results support learning and checking, but formal decisions still require source data and professional review.'}</p>
-      <p><a class="inline-link" href={localePath(lang, 'about')}>{zh ? '了解 FunnyTools' : 'About FunnyTools'}</a> · <a class="inline-link" href={localePath(lang, 'privacy')}>{zh ? '隱私權政策' : 'Privacy'}</a> · <a class="inline-link" href={localePath(lang, 'support')}>{zh ? '支持本站' : 'Support'}</a></p>
+      <p>
+        {zh
+          ? '工具結果適合自我檢查、教學說明與報告草稿；正式的成績單、甄選與研究仍應以原始資料和官方規則為準。'
+          : 'Results are for self-checking, teaching and report drafts; official transcripts, selection and research must follow the source data and official rules.'}
+      </p>
+      <p>
+        <a class="inline-link" href={localePath(lang, 'about')}>{zh ? '關於站長與內容審核' : 'About the site owner and review process'}</a>
+        · <a class="inline-link" href={localePath(lang, 'privacy')}>{zh ? '隱私權政策' : 'Privacy'}</a>
+        · <a class="inline-link" href={localePath(lang, 'support')}>{zh ? '支持本站' : 'Support'}</a>
+      </p>
     </section>
-  </main>
+  </div>
 </BaseLayout>

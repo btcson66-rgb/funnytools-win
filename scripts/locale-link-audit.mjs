@@ -19,7 +19,7 @@ function routeFor(file) {
 }
 
 function localeFor(path) {
-  const match = path.match(/^\/(en|es|fr)(?:\/|$)/);
+  const match = path.match(/^\/(en)(?:\/|$)/);
   return match?.[1] ?? 'zh';
 }
 

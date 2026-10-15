@@ -1,25 +1,21 @@
 import routeRegistry from './expansion-routes.json';
 
-export type ExpansionLocale = 'es' | 'fr' | 'de' | 'hi';
-export type RouteLocale = 'zh' | 'en' | ExpansionLocale;
+// P1 (2026-10-15): the es/fr locales were removed from the site, so the route
+// registry now only pairs the zh-TW and en versions of the same page. The file
+// name is kept so existing imports keep working; it is no longer an
+// "expansion" registry.
+export type RouteLocale = 'zh' | 'en';
 
-interface ExpansionRoute {
+interface RouteEntry {
   key: string;
   type: 'home' | 'tool' | 'page' | 'guide' | 'workflow' | 'category';
-  batch: string;
-  localeBatches?: Partial<Record<ExpansionLocale, string>>;
-  missingLocales?: RouteLocale[];
   paths: Partial<Record<RouteLocale, string>>;
 }
 
-const routes = routeRegistry.routes as ExpansionRoute[];
+const routes = routeRegistry.routes as RouteEntry[];
 const hreflangByLocale: Record<RouteLocale, string> = {
   zh: 'zh-TW',
   en: 'en',
-  es: 'es',
-  fr: 'fr',
-  de: 'de',
-  hi: 'hi',
 };
 
 function normalizePath(pathname: string): string {
@@ -28,11 +24,11 @@ function normalizePath(pathname: string): string {
   return path.endsWith('/') ? path : `${path}/`;
 }
 
-export function expansionRouteByKey(key: string): ExpansionRoute | undefined {
+export function expansionRouteByKey(key: string): RouteEntry | undefined {
   return routes.find((route) => route.key === key);
 }
 
-export function expansionRouteByPath(pathname: string): ExpansionRoute | undefined {
+export function expansionRouteByPath(pathname: string): RouteEntry | undefined {
   const normalized = normalizePath(pathname);
   return routes.find((route) =>
     Object.values(route.paths).some((path) => path && normalizePath(path) === normalized),
@@ -58,12 +54,6 @@ export function routeAlternates(pathname: string) {
   return defaultPath
     ? [...links, { hreflang: 'x-default', href: defaultPath }]
     : links;
-}
-
-export function publishedExpansionPaths(locale: ExpansionLocale): string[] {
-  return routes
-    .map((route) => route.paths[locale])
-    .filter((path): path is string => Boolean(path));
 }
 
 export const expansionRoutesReviewedAt = routeRegistry.reviewedAt;

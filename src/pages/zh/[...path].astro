@@ -9,7 +9,8 @@ export function getStaticPaths() {
     { params: { path: undefined } },
     { params: { path: 'tools' } },
     ...liveTools.map((tool) => ({ params: { path: `tools/${tool.slug}` } })),
-    ...categories.filter((c) => hasLiveTools(c.id)).map((c) => ({ params: { path: `category/${c.id}` } })),
+    // P1: only the statistics category page still exists.
+    ...categories.filter((c) => c.id === 'statistics' && hasLiveTools(c.id)).map((c) => ({ params: { path: `category/${c.id}` } })),
     ...getEmbeddableTools().map((tool) => ({ params: { path: `embed/${tool.slug}` } })),
     ...legalPages.map((p) => ({ params: { path: p } })),
   ];

@@ -27,11 +27,11 @@ function sitemapUrls() {
   });
 }
 
-test('sitemap retains the 20 T2 URLs plus the approved Chinese PDF merge owner', () => {
+test('sitemap contains exactly the 20 education-statistics URLs (P1: merge-pdf moved out)', () => {
   const urls = sitemapUrls();
-  assert.equal(urls.length, 21);
-  assert.equal(new Set(urls).size, 21);
-  assert.ok(urls.includes(`${origin}/tools/merge-pdf/`));
+  assert.equal(urls.length, 20);
+  assert.equal(new Set(urls).size, 20);
+  assert.equal(urls.includes(`${origin}/tools/merge-pdf/`), false);
   assert.deepEqual(new Set(urls), new Set(INDEXABLE_PATHS.map((path) => `${origin}${path}`)));
   assert.equal(urls.some((url) => /\/(?:en|es|fr)\//.test(new URL(url).pathname)), false);
 });
@@ -50,11 +50,13 @@ test('representative excluded pages stay available with exact noindex,follow and
   const sitemap = new Set(sitemapUrls());
   const excluded = [
     '/tools/word-counter/',
-    '/guides/z-score-calculator-guide/',
+    '/tools/merge-pdf/',
+    '/tools/',
     '/en/',
-    '/es/',
-    '/fr/',
+    '/en/tools/',
     '/en/tools/merge-pdf/',
+    '/en/tools/grade-average/',
+    '/en/guides/t-score-calculator-guide/',
   ];
   for (const pathname of excluded) {
     const html = htmlForPath(pathname);
@@ -64,13 +66,18 @@ test('representative excluded pages stay available with exact noindex,follow and
   }
 });
 
-test('homepage links only to retained internal pages', () => {
+// The only noindex page the homepage may link to is the single "other tools" page,
+// reachable from the footer so existing direct visitors can still find the general tools.
+const ALLOWED_NOINDEX_HOME_LINKS = new Set(['/tools/']);
+
+test('homepage links only to retained internal pages (plus the footer link to the other-tools page)', () => {
   const html = htmlForPath('/');
   const excludedLinks = [...html.matchAll(/<a\b[^>]*href=["']([^"']+)["']/gi)]
     .map((match) => match[1])
     .filter((href) => {
       const url = new URL(href, origin);
-      return url.origin === origin && !INDEXABLE_PATHS.includes(normalizeIndexPath(url.pathname));
+      const path = normalizeIndexPath(url.pathname);
+      return url.origin === origin && !INDEXABLE_PATHS.includes(path) && !ALLOWED_NOINDEX_HOME_LINKS.has(path);
     });
   assert.deepEqual(excludedLinks, []);
 });

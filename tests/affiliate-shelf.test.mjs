@@ -6,10 +6,7 @@ const catalog = JSON.parse(readFileSync('public/data/support-products.json', 'ut
 const shelf = readFileSync('src/components/AffiliateProductShelf.astro', 'utf8');
 const runtime = readFileSync('public/support-products.js', 'utf8');
 const guidePage = readFileSync('src/pages/[...locale]/guides/[slug].astro', 'utf8');
-const guideConfig = readFileSync('src/data/guideAffiliate.ts', 'utf8');
 const pages = readFileSync('src/i18n/pages.ts', 'utf8');
-const spanishAbout = readFileSync('src/i18n/expansion/es-trust-39.ts', 'utf8');
-const spanishTools = readFileSync('src/pages/es/herramientas/index.astro', 'utf8');
 const tools = readFileSync('src/data/tools.ts', 'utf8');
 const site = readFileSync('src/config/site.ts', 'utf8');
 const affiliateProducts = readFileSync('src/data/affiliateProducts.ts', 'utf8');
@@ -59,19 +56,12 @@ test('runtime records affiliate interactions and uses safe external links', () =
   assert.doesNotMatch(runtime, /affiliate_product_click|affiliate_shelf_view/);
 });
 
-test('article monetization is explicit, conservative, and context-aware', () => {
-  assert.match(guideConfig, /'merge-pdf-private-guide': \{ affiliateEnabled: true/);
-  assert.match(guideConfig, /'classroom-timer-guide': \{ affiliateEnabled: true/);
-  assert.match(guideConfig, /affiliateEnabled: false/);
-  for (const slug of ['t-score-calculator-guide', 'spss-levene-test-guide', 'anova-apa-format-guide', 'cronbach-alpha-quiz-guide']) {
-    assert.doesNotMatch(guideConfig, new RegExp(`['"]${slug}['"]`));
-  }
-  assert.match(guidePage, /context="article"/);
-  assert.match(guidePage, /initialLimit=\{3\}/);
-  assert.match(guidePage, /splitGuideContentHtml/);
-  const mergeGuideHtml = readFileSync('dist/guides/merge-pdf-private-guide/index.html', 'utf8');
+test('the retained statistics guide carries no article monetization', () => {
+  // P1 (2026-10-15): the per-guide affiliate allow-list went away with the template guides.
+  // The only guide left is the T-score guide, which must stay free of product shelves.
+  assert.doesNotMatch(guidePage, /AffiliateProductShelf/);
+  assert.doesNotMatch(guidePage, /context="article"/);
   const statisticsGuideHtml = readFileSync('dist/guides/t-score-calculator-guide/index.html', 'utf8');
-  assert.equal((mergeGuideHtml.match(/data-affiliate-context="article"/g) || []).length, 1);
   assert.equal((statisticsGuideHtml.match(/data-affiliate-context="article"/g) || []).length, 0);
 });
 
@@ -85,8 +75,6 @@ test('public disclosures describe Taiwan affiliate sources and centralized tool 
   assert.match(site, /export const SITE_VERSION = pkg\.version/);
   assert.match(affiliateProducts, /ACTIVE_AFFILIATE_PLATFORMS = \['shopee', 'coupang'\]/);
   assert.match(affiliateProducts, /Shopee and Coupang/);
-  assert.doesNotMatch(spanishAbout, /79 herramientas/);
-  assert.doesNotMatch(spanishTools, /79 herramientas/);
   const legacyAmazon = catalog.find((item) => item.id === 'amazon-home-funnytools');
   assert.equal(legacyAmazon?.status, 'inactive');
 });

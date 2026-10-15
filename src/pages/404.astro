@@ -8,7 +8,7 @@ const lang = 'zh';
 <BaseLayout
   lang={lang}
   title="找不到這個頁面"
-  description="這個頁面可能已移動或不存在。你可以回到 FunnyTools 首頁、開啟平面配置工具，或查看文章索引。"
+  description="這個頁面可能已移動或不存在。你可以回到 FunnyTools 首頁，或直接開啟 T 分數、PR 值等成績統計工具。"
   alternateSegments={[]}
   noindex={true}
   robots="noindex"
@@ -17,13 +17,13 @@ const lang = 'zh';
     <p class="eyebrow">404</p>
     <h1>找不到這個頁面</h1>
     <p class="lead">
-      這個連結可能已移動、拼錯，或暫時不存在。你可以從首頁重新搜尋工具，
-      開啟平面配置工具，或查看文章索引找到相關內容。
+      這個連結可能已移動、拼錯，或已經移除。FunnyTools 現在專注於給台灣學生與老師的成績統計工具，
+      你可以回首頁，或直接開啟下面的工具。
     </p>
     <nav class="not-found-actions" aria-label="404 recovery links">
       <a class="btn go" href={localePath('zh')}>回到首頁</a>
-      <a class="btn ghost" href={localePath('zh', 'tools', 'cad-2d')}>開啟平面配置工具</a>
-      <a class="btn ghost" href={localePath('zh', 'blog')}>查看文章索引</a>
+      <a class="btn ghost" href={localePath('zh', 'education-statistics')}>教育統計工具</a>
+      <a class="btn ghost" href={localePath('zh', 'tools', 't-score-calculator')}>T 分數計算器</a>
     </nav>
   </section>
 </BaseLayout>

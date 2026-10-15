@@ -266,7 +266,5 @@ File API / Canvas / PDF library在：
 
 ## 延伸閱讀
 
-- [PDF工具](/category/pdf/)
-- [圖片工具](/category/image/)
-- [SVG vs PNG指南](/guides/svg-vs-png-diagram-export/)
+- [其他小工具（PDF、圖片）](/tools/)
 - [工具驗證](/methodology/tool-verification/)

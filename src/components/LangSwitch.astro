@@ -2,7 +2,6 @@
 import { type Locale } from '../config/site';
 import { t } from '../i18n/ui';
 import { localePath } from '../lib/url';
-import { expansionRouteByPath } from '../i18n/expansionRoutes';
 
 interface Props {
   lang: Locale;
@@ -11,20 +10,12 @@ interface Props {
 
 const { lang, segments = [] } = Astro.props;
 const ui = t(lang);
-const expansionRoute = expansionRouteByPath(Astro.url.pathname);
 const otherLang: Locale = lang === 'zh' ? 'en' : 'zh';
-const languageLinks = expansionRoute
-  ? [
-      { code: 'zh', label: '繁中', path: expansionRoute.paths.zh },
-      { code: 'en', label: 'English', path: expansionRoute.paths.en },
-      { code: 'es', label: 'Español', path: expansionRoute.paths.es },
-      { code: 'fr', label: 'Français', path: expansionRoute.paths.fr },
-    ].filter((item) => item.path && item.code !== lang)
-  : [{
-      code: otherLang,
-      label: otherLang === 'zh' ? '繁中' : 'English',
-      path: localePath(otherLang, ...segments),
-    }];
+const languageLinks = [{
+  code: otherLang,
+  label: otherLang === 'zh' ? '繁中' : 'English',
+  path: localePath(otherLang, ...segments),
+}];
 ---
 
 <span class="language-switches">

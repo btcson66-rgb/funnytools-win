@@ -222,4 +222,3 @@ UI test：
 
 - [公開測試案例](/methodology/public-test-cases/)
 - [內容來源與修正](/methodology/content-sourcing-corrections/)
-- [成績GPA方法案例](/guides/grades-gpa/)

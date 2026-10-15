@@ -217,12 +217,9 @@ export function isIndexablePage(page) {
 export function classifyUrl(url) {
   const pathname = urlPath(url);
   const normalized = pathname.replace(/^\/en\//, '/');
-  if (pathname.startsWith('/es/')) return 'es';
-  if (pathname.startsWith('/fr/')) return 'fr';
   if (pathname.startsWith('/en/')) return 'en';
   if (/^\/tools\/[^/]+\/$/.test(normalized)) return 'tools';
   if (normalized === '/guides/' || /^\/guides\/[^/]+\/$/.test(normalized)) return 'guides';
-  if (normalized === '/workflows/' || /^\/workflows\/[^/]+\/$/.test(normalized)) return 'workflows';
   return 'guides';
 }
 
@@ -230,10 +227,7 @@ export function sitemapFileForType(type) {
   return {
     tools: 'sitemap-tools.xml',
     guides: 'sitemap-guides.xml',
-    workflows: 'sitemap-workflows.xml',
     en: 'sitemap-en.xml',
-    es: 'sitemap-es.xml',
-    fr: 'sitemap-fr.xml',
   }[type];
 }
 
@@ -328,17 +322,6 @@ function gitBlameForPath(path) {
 }
 
 export function sourceCandidatesForRoute(route) {
-  if (route.startsWith('/es/') || route.startsWith('/fr/')) {
-    const locale = route.split('/').filter(Boolean)[0];
-    return [
-      'src/i18n/expansion-routes.json',
-      `src/i18n/expansion/${locale}.ts`,
-      'src/i18n/expansionRoutes.ts',
-      'src/layouts/ExpansionLayout.astro',
-      'src/layouts/ExpansionToolLayout.astro',
-      `src/pages${route === `/${locale}/` ? `/${locale}/index.astro` : route.replace(/\/$/, '.astro')}`,
-    ];
-  }
   const clean = route.replace(/^\/en\//, '/');
   const parts = clean.split('/').filter(Boolean);
   if (parts[0] === 'tools' && parts[1]) {
@@ -361,41 +344,12 @@ export function sourceCandidatesForRoute(route) {
       'src/pages/[...locale]/category/[category].astro',
     ];
   }
-  if (parts[0] === 'blog') {
-    return [
-      'src/data/usefulBlogPosts.ts',
-      'src/data/blogRedirects.ts',
-      'src/data/allBlogPosts.ts',
-      'src/pages/[...locale]/blog/index.astro',
-      'src/pages/[...locale]/blog/[slug].astro',
-    ];
-  }
   if (parts[0] === 'guides') {
     return [
       'src/data/seoGuides.ts',
-      'src/data/workflows.ts',
       'src/lib/contentValue.ts',
       'src/components/ContentValueReview.astro',
-      'src/pages/[...locale]/guides/index.astro',
       'src/pages/[...locale]/guides/[slug].astro',
-    ];
-  }
-  if (parts[0] === 'workflows') {
-    return [
-      'src/data/workflows.ts',
-      'src/data/seoGuides.ts',
-      'src/lib/contentValue.ts',
-      'src/components/ContentValueReview.astro',
-      'src/pages/[...locale]/workflows/index.astro',
-      'src/pages/[...locale]/workflows/[slug].astro',
-    ];
-  }
-  if (parts[0] === 'for' && parts[1]) {
-    return [
-      'src/data/audiences.ts',
-      'src/lib/contentValue.ts',
-      'src/components/ContentValueReview.astro',
-      'src/pages/[...locale]/for/[audience].astro',
     ];
   }
   if (parts[0] === 'education-statistics') {
@@ -425,7 +379,7 @@ function renderedContentDates(html) {
 function routeTokens(route) {
   const pathname = new URL(route, siteOrigin).pathname;
   const parts = pathname.split('/').filter(Boolean);
-  const withoutLocale = ['en', 'es', 'fr'].includes(parts[0]) ? parts.slice(1) : parts;
+  const withoutLocale = parts[0] === 'en' ? parts.slice(1) : parts;
   const slug = withoutLocale.at(-1) ?? '';
   return [...new Set([pathname, pathname.replace(/\/$/, ''), slug].filter((token) => token.length >= 3))];
 }
@@ -438,9 +392,7 @@ function pageSpecificGitDates(page) {
     .filter((candidate) => {
       const normalized = candidate.replaceAll('\\', '/');
       const slug = tokens.at(-1);
-      return normalized.startsWith('src/pages/es/')
-        || normalized.startsWith('src/pages/fr/')
-        || (slug && normalized.includes(`/${slug}.`));
+      return Boolean(slug && normalized.includes(`/${slug}.`));
     })
     .map(gitDateForPath)
     .filter(Boolean);
@@ -682,7 +634,7 @@ function registryAlternates(loc) {
     Object.values(item.paths ?? {}).includes(pathname),
   );
   if (!route) return [];
-  const hreflang = { zh: 'zh-TW', en: 'en', es: 'es', fr: 'fr', de: 'de', hi: 'hi' };
+  const hreflang = { zh: 'zh-TW', en: 'en' };
   const links = Object.entries(route.paths ?? {})
     .filter(([, path]) => Boolean(path))
     .map(([locale, path]) => ({

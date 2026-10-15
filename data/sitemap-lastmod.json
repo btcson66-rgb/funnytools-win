@@ -1,107 +1,102 @@
 {
   "https://funnytools.win/": {
-    "hash": "b8b71ddd0aecc9ea814f0a71b5fde49704deeadc00bc2f3868b326a40752a09c",
+    "hash": "6fd5bcb9eb0b934e508d062b4b58ddca362dcc0c99f8975a0b8047198424ffbd",
     "hashVersion": 9,
-    "lastmod": "2026-10-01"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/about/": {
-    "hash": "4f6e92cc6c59100a2b06b627e6b653219b67c7539a0a14b8cae018892ad44d8b",
+    "hash": "6be42e9110731935f5afcb48375bc31472a179b35e9bfebe2c2785968c39ec41",
     "hashVersion": 9,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/category/statistics/": {
-    "hash": "9ba824462d9143cf26ff1a2e3621a8617a97ff46abd78f1cdd44d248c464a162",
+    "hash": "80ebfc660d046e7060d4aacb2d7c53c890d9e0bb25f36669369cd0c7902c4bf0",
     "hashVersion": 9,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/contact/": {
-    "hash": "eb244749f8e79210e7270a13b66e22978ea18b8fe7d6013138a6ca0a8f91d758",
+    "hash": "a321162276dfec4ee911a105b460efdae43c6a2dd1fecb9241ae3573e542090b",
     "hashVersion": 9,
-    "lastmod": "2026-07-31"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/disclaimer/": {
-    "hash": "bd31fe8fbff57e35f04eb50cbca20ea27e0558465421caecdbb4792b320ab6ac",
+    "hash": "5ca694cbc2367cf4264ca77b94fdba96020baee18a8a56b538f2a5257db894ef",
     "hashVersion": 9,
-    "lastmod": "2026-06-17"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/education-statistics/": {
-    "hash": "fcc327b267c57dea33dcf67b01ca564dd940630d3e1f5c0da317f34e7e632920",
+    "hash": "88552e4b3e400ec9aefbb88389245386d1f7f0ca556f22247ad1b2b82b7c956f",
     "hashVersion": 9,
-    "lastmod": "2026-09-20"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/guides/t-score-calculator-guide/": {
-    "hash": "0deb5e78635e0df92a733790d16397a7699c15f8d5bc5f878b24043e490782b1",
+    "hash": "46162d80e49242c59359c383a832e529a39f2e4e3e38a0de87480dc1f4978a2e",
     "hashVersion": 9,
     "lastmod": "2026-06-25"
   },
   "https://funnytools.win/privacy/": {
-    "hash": "774903e17d2edb5dc7be9ec3c9e6c16d92d925d697b5ec58f4a29bd5af16149e",
+    "hash": "b2a87e44f2fe52989ebc2f8c77e4cc63019ae075bfdf297b9592bba41e9f6784",
     "hashVersion": 9,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/support/": {
-    "hash": "b612d5de647c53f47b2cb93eff726be936882f0039b6b1f868cbe50cfde72380",
+    "hash": "a5bba785fd75baaee7fab28b35ca88b226b9d0e1a8ed2e9cf38e1b1f0a80d60c",
     "hashVersion": 9,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/terms/": {
-    "hash": "9248e8c686e7020eb01c6999e7152543bf0879909cba55e3fe246b5e2a6c364b",
+    "hash": "ad4d46313fc9bb95c0b809ba2ce13e624dcff24942fcdf078a29da00d697d70f",
     "hashVersion": 9,
-    "lastmod": "2026-07-31"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/tools/class-rank-percentile-calculator/": {
-    "hash": "81aa0ce21be247354f9299cfa563803bf07295ad91f354ed0d092949ca25318c",
+    "hash": "fac124fcaa974eea3a5667c728de8735fd0afb4383153d7d69395ca5137c57f2",
     "hashVersion": 9,
-    "lastmod": "2026-09-10"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/tools/grade-average/": {
-    "hash": "643a74c53b20f91225b0be2b3950cf5f524444d4c2bd25da3641d6372f64926e",
+    "hash": "144f0b67b422461f4f4b8292074ea777787968e748a5e15586bb1540917c1b44",
     "hashVersion": 9,
-    "lastmod": "2026-09-10"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/tools/independent-samples-t-test-calculator/": {
-    "hash": "e645e66d29d78930e99a53b74cc88c21eb08c9da39e5dfa6281ddf579c441fe6",
+    "hash": "8244c4e3fd8da402f5a84fd80b5d468e30864c6fa9960f187d391a1100e32cb9",
     "hashVersion": 9,
-    "lastmod": "2026-09-10"
-  },
-  "https://funnytools.win/tools/merge-pdf/": {
-    "hash": "8ea8cdb0bd44a20972f2bbeab7e769ce606c1a77605534c77ffeb918130bb4d7",
-    "hashVersion": 9,
-    "lastmod": "2026-10-01"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/tools/percentile-rank-calculator/": {
-    "hash": "c0bce8a380c54d8aeb6d6b516368d030a604abfe3b107401a6616ca6c7d4e4c4",
+    "hash": "3c4d89489d44c8e142dd505167e82196af93cbf07f65933e588bce5d122669e2",
     "hashVersion": 9,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/tools/random-name-picker/": {
-    "hash": "493d66b06fb71891f9237b0aa051b21d05a3475bd914bf4b8aee810a33dba923",
+    "hash": "b9038c2b9a7ef5d8db1fc6d9b032da8492568e241ecee90489da713a5df7830f",
     "hashVersion": 9,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/tools/standard-deviation/": {
-    "hash": "b4c48587c48f421c93e12b2cd6b1ee3e86593ad4021d96b34de9caaef2aac9e1",
+    "hash": "af7ec04663f3866e252ea4582ac1338b82c9985225988dd0a48bde2bf3620b1c",
     "hashVersion": 9,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/tools/t-score-calculator/": {
-    "hash": "df7f33e54a8ae3c4d7562844b22b2f46dfb3d0410fa8d2b8e8bb4226e29fb3f6",
+    "hash": "77ad097f4c1bd59491265d67bca4495f589776278e4fc96167e64fb06e89de3f",
     "hashVersion": 9,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/tools/teacher-exam-score-converter/": {
-    "hash": "fd08ec3052a70b79acface6e5181ef51a45665581740800856bf01a3619d3282",
+    "hash": "e0b4f69d9326b1ede1f658282e428e290ff3d45cb4dd722fedccb0304ce9d0da",
     "hashVersion": 9,
-    "lastmod": "2026-09-02"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/tools/weighted-average-calculator/": {
-    "hash": "55997d7ff1e647c749a4d6e69c7d1f73bccd75cc33ad5fa14bad23abb788e16c",
+    "hash": "c216758b10500521d29a29fe5c99d30f11329a7b93bdcd6e94fee20446d6f413",
     "hashVersion": 9,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-10-15"
   },
   "https://funnytools.win/tools/z-score-calculator/": {
-    "hash": "2bbbd967657dead96b450bdae0fcaaa8b5aa6a890ac19f4bb1323f2440dcf005",
+    "hash": "3155c06ed888b0e22749825ec86d1a58b9ce358ef111dd51ef9b49e84cb022e7",
     "hashVersion": 9,
-    "lastmod": "2026-09-03"
+    "lastmod": "2026-10-15"
   }
 }

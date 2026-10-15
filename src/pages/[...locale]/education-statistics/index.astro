@@ -6,7 +6,6 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
 import { getLiveToolsForLocale, type ToolMeta } from '../../../data/tools';
 import { seoGuides, viewSeoGuide, isSeoGuideAvailableInLocale } from '../../../data/seoGuides';
-import { workflows, viewWorkflow, isWorkflowAvailableInLocale } from '../../../data/workflows';
 import { t } from '../../../i18n/ui';
 import { localePath, localeUrlPair, toolUrl } from '../../../lib/url';
 import { breadcrumbJsonLd, collectionPageJsonLd } from '../../../lib/seo';
@@ -26,24 +25,22 @@ const hubPath = localePath(lang, 'education-statistics');
 const copy = {
   zh: {
     title: '教育與統計工具中心',
-    seoTitle: '教育與統計工具中心 | 成績、試題分析與研究工具',
-    description: '免費教育與統計工具中心，整理成績目標、試題難度與鑑別度、KR-20、T 分數、Z 分數、APA 7 與 SPSS 工具。',
-    subtitle: '免費工具，適合學生、教師、研究者與教育考試準備，從成績規劃、試題檢查到統計報告逐步整理。',
+    seoTitle: '教育與統計工具中心 | 成績換算與統計檢定工具',
+    description: '免費教育與統計工具中心，整理 T 分數、Z 分數、PR 百分等級、班級排名百分比、加權平均、標準差、獨立樣本 t 檢定與教師甄試成績換算，免註冊、在瀏覽器計算。',
+    subtitle: '免費工具，適合台灣的學生、教師與教育考試準備，從學期成績、排名換算到統計檢定逐步整理。',
     breadcrumb: '教育與統計',
   },
   en: {
     title: 'Education & Statistics Tools Center',
-    seoTitle: 'Education & Statistics Tools | Scores, Items & Research',
-    description: 'Free education and statistics tools for standard deviation, percentage, T scores, Z scores, teacher exam weighted scores, APA 7 reports, and SPSS interpretation.',
-    subtitle: 'Free tools for students, teachers, researchers, and education exam preparation.',
+    seoTitle: 'Education & Statistics Tools | Score conversion and t test',
+    description: 'Free education and statistics tools for T scores, Z scores, percentile rank, class rank, weighted averages, standard deviation, an independent-samples t test and teacher-exam score conversion.',
+    subtitle: 'Free tools for students and teachers in Taiwan, from semester grades and rank conversion to statistical tests.',
     breadcrumb: 'Education & Statistics',
   },
 }[lang];
 
 const pageSeoTitle = copy.seoTitle;
-const pageDescription = lang === 'zh'
-  ? '免費教育與統計工具中心，整理成績規劃、試題難度與鑑別度、KR-20、標準差、T 分數、Z 分數、APA 7 報告與 SPSS 結果解讀流程。'
-  : copy.description;
+const pageDescription = copy.description;
 
 const groupCopy = {
   zh: [
@@ -85,13 +82,12 @@ const groupCopy = {
       ],
     },
     {
-      id: 'special-education-research',
-      title: '特教、教學研究與課堂工具',
+      id: 'semester-grades',
+      title: '學期成績與課堂點名',
       body: [
-        '這一組整理適合教學活動、特教課程安排與小型教學研究的現有工具。',
-        '可用於隨機抽學生、分組、排座位、計算成績平均與整理 GPA，協助教師在課堂前快速完成準備。',
-        '工具只連到目前站內已上線的功能，不列出尚未建立的表單、量表或評分規準工具。',
-        '試題難度、鑑別度與 KR-20 適合做初步檢查，仍需搭配測驗目的、樣本與研究設計解讀。',
+        '這一組放學期成績計算與課堂點名的工具。',
+        '成績平均計算器可以算總分、簡單平均與加權平均；隨機姓名抽籤則在你的瀏覽器中從貼上的名單抽出名字，名單不會上傳。',
+        '計算學期成績前，請先確認配分與四捨五入規則，並以學校公告為準。',
       ],
     },
   ],
@@ -133,12 +129,12 @@ const groupCopy = {
       ],
     },
     {
-      id: 'special-education-research',
-      title: 'Special Education / Teaching Research',
+      id: 'semester-grades',
+      title: 'Semester grades and classroom picks',
       body: [
-        'This group collects existing tools that fit classroom activities, special education planning, and small teaching research workflows.',
-        'Use them to pick students, create groups, arrange seating, calculate grade averages, or prepare GPA summaries before class or analysis.',
-        'Only currently live tools are linked here; no unbuilt forms, scales, or rubric tools are listed.',
+        'This group holds the semester-grade and classroom name-picking tools.',
+        'The grade average calculator handles totals, simple averages and weighted averages; the random name picker draws names from a pasted list in your browser, and the list is not uploaded.',
+        'Before computing semester grades, confirm the weighting and rounding rules against your school\'s announcement.',
       ],
     },
   ],
@@ -149,7 +145,7 @@ const groupSlugs = [
   ['apa-7-report-generator', 'independent-samples-t-test-calculator', 'item-analysis-calculator', 'kr20-reliability-calculator'],
   ['spss-result-interpreter'],
   ['teacher-exam-score-converter', 'class-rank-percentile-calculator', 'normalized-score-converter', 'percentile-rank-calculator', 'final-grade-needed-calculator'],
-  ['random-student-picker', 'seating-chart', 'group-generator', 'random-group-generator', 'grade-average', 'gpa-calculator'],
+  ['grade-average', 'random-name-picker'],
 ];
 
 const liveTool = (slug: string): ToolMeta | undefined => {
@@ -161,24 +157,20 @@ const groups = groupCopy.map((group, index) => ({
   tools: groupSlugs[index]
     .map(liveTool)
     .filter((tool): tool is ToolMeta => Boolean(tool && isIndexablePath(toolUrl(lang, tool.slug)))),
-}));
+})).filter((group) => group.tools.length > 0);
 
 const resourceCopy = {
   zh: {
-    title: '教育統計指南與工作流程',
-    body: '從 T 分數、Z 分數、PR、教師甄試加權到 SPSS 與 APA 7 報告，這些指南把工具串成可檢查的學習與研究流程。',
+    title: '教育統計指南',
+    body: '從 T 分數的公式、範例到常見誤解，這篇指南把工具串成可檢查的學習流程。',
     guides: '重點指南',
-    workflows: '工作流程',
-    viewAllGuides: '查看全部指南',
-    viewAllWorkflows: '查看全部流程',
+    viewAllGuides: '閱讀 T 分數教學',
   },
   en: {
-    title: 'Education Statistics Guides and Workflows',
-    body: 'From T scores, Z scores, PR, and teacher exam weighting to SPSS and APA 7 reporting, these guides connect the tools into checkable workflows.',
-    guides: 'Featured guides',
-    workflows: 'Workflows',
-    viewAllGuides: 'View all guides',
-    viewAllWorkflows: 'View all workflows',
+    title: 'Education Statistics Guide',
+    body: 'From the T-score formula and worked examples to common misreadings, this guide ties the tools into a checkable workflow.',
+    guides: 'Featured guide',
+    viewAllGuides: 'Read the T-score guide',
   },
 }[lang];
 const featuredGuides = seoGuides
@@ -186,8 +178,6 @@ const featuredGuides = seoGuides
   .sort((a, b) => a.priority - b.priority)
   .slice(0, 6)
   .map((guide) => viewSeoGuide(guide, lang));
-const featuredWorkflows = [];
-const coreGuideLinks = [];
 const faqItems = {
   zh: [
     {
@@ -234,16 +224,7 @@ const breadcrumbItems = [
 
 const jsonLd = [
   collectionPageJsonLd(lang, copy.title, copy.description, hubPath),
-  breadcrumbJsonLd(breadcrumbItems),
-  {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqItems.map((item) => ({
-      '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: { '@type': 'Answer', text: item.a },
-    })),
-  },
+  breadcrumbJsonLd(breadcrumbItems)
 ];
 ---
 
@@ -268,7 +249,6 @@ const jsonLd = [
       <a class="btn go" href={localePath(lang, 'tools', 'teacher-exam-score-converter')}>{lang === 'zh' ? '使用教師甄試工具' : 'Use teacher exam tools'}</a>
       <a class="btn ghost" href={localePath(lang, 'tools', 't-score-calculator')}>{lang === 'zh' ? '換算 T / Z / PR' : 'Convert T / Z / PR'}</a>
       <a class="btn ghost" href={localePath(lang, 'guides', 't-score-calculator-guide')}>{lang === 'zh' ? '閱讀 T 分數教學' : 'Read the T-score guide'}</a>
-      {lang === 'en' && <a class="btn ghost" href={localePath('en', 'tools', 'iep-progress-graph-generator')}>Try the IEP progress graph generator</a>}
     </div>
   </section>
 
@@ -302,45 +282,16 @@ const jsonLd = [
         </div>
         <a class="btn" href={localePath(lang, 'guides', 't-score-calculator-guide')}>{resourceCopy.viewAllGuides}</a>
       </section>
-      <section class="resource-panel" aria-labelledby="education-workflows-title">
-        <h3 id="education-workflows-title">{resourceCopy.workflows}</h3>
-        <div class="resource-list">
-          {featuredWorkflows.map((workflow) => (
-            <a href={localePath(lang, 'workflows', workflow.slug)}>
-              <strong>{workflow.title}</strong>
-              <span>{workflow.purpose}</span>
-            </a>
-          ))}
-        </div>
-        <a class="btn" href={localePath(lang, 'education-statistics')}>{resourceCopy.viewAllWorkflows}</a>
-      </section>
     </div>
   </section>
 
-  {lang === 'zh' && coreGuideLinks.length > 0 && (
-    <section class="wrap content-section" aria-labelledby="core-statistics-guides-title">
-      <div class="section-head">
-        <h2 id="core-statistics-guides-title">研究統計核心解讀</h2>
-        <p>算出統計量只是第一步。這組指南從「該選哪個方法」開始，接著帶你看懂 p 值、效果量、95% 信賴區間與 t 檢定設計，適合研究生、教師與正在整理 SPSS 結果的使用者。</p>
-      </div>
-      <div class="resource-list core-guide-list">
-        {coreGuideLinks.map((guide) => (
-          <a href={localePath(lang, 'guides', guide.slug)}>
-            <strong>{guide.label}</strong>
-            <span>閱讀完整研究統計解讀指南</span>
-          </a>
-        ))}
-      </div>
-    </section>
-  )}
-
   <div class="wrap">
-    <Faq lang={lang} items={faqItems} emitJsonLd={false} />
+    <Faq lang={lang} items={faqItems} />
   </div>
 </BaseLayout>
 
 <style>
-  .resource-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .resource-columns { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .education-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
   .resource-panel { display: grid; align-content: start; gap: 14px; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); box-shadow: var(--shadow-soft); }
   .resource-panel h3 { margin: 0; font-size: 1.18rem; }

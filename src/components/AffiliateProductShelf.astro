@@ -3,7 +3,7 @@ import { SITE, type Locale } from '../config/site';
 import { assetPath, localePath } from '../lib/url';
 import { getAmazonProductContentSource } from '../lib/amazonProductContentSource';
 
-type AffiliateLocale = Locale | 'es' | 'fr';
+type AffiliateLocale = Locale;
 
 interface Props {
   lang: AffiliateLocale;
@@ -30,7 +30,7 @@ const {
 
 const enabled = SITE.features.affiliate;
 const isAmazon = lang !== 'zh';
-const supportPath = lang === 'en' ? '/en/support/' : lang === 'es' ? '/es/apoyar-funnytools/' : localePath('zh', 'support');
+const supportPath = lang === 'en' ? '/en/support/' : localePath('zh', 'support');
 const copy = {
   zh: {
     eyebrow: '自願支持本站',
@@ -55,30 +55,6 @@ const copy = {
     refresh: 'Refresh products',
     support: 'See all support products →',
     productsLabel: 'Optional product recommendations',
-  },
-  es: {
-    eyebrow: 'Descubrimiento opcional de productos',
-    heading: heading === '❤️ 這個工具有幫上忙嗎？' ? 'Productos recomendados' : heading,
-    intro: 'FunnyTools mantiene sus herramientas disponibles de forma gratuita.',
-    intro2: 'Si ya estás comprando, estos enlaces de Amazon pueden ayudar a mantener el sitio. Podemos recibir una comisión por compras que cumplan los requisitos, sin coste adicional para ti.',
-    disclosure: 'Enlaces de afiliado: podemos recibir una comisión por compras que cumplan los requisitos.',
-    disclosureLink: 'Información completa (en chino tradicional)',
-    more: 'Ver más productos',
-    refresh: 'Cambiar productos',
-    support: 'Ver todos los productos →',
-    productsLabel: 'Recomendaciones opcionales de productos',
-  },
-  fr: {
-    eyebrow: 'Découverte facultative de produits',
-    heading: heading === '❤️ 這個工具有幫上忙嗎？' ? 'Produits recommandés' : heading,
-    intro: 'FunnyTools garde ses outils accessibles gratuitement.',
-    intro2: 'Si vous faites déjà des achats, ces liens Amazon peuvent aider à soutenir le site. Nous pouvons recevoir une commission sur les achats admissibles, sans coût supplémentaire pour vous.',
-    disclosure: 'Liens affiliés : nous pouvons recevoir une commission sur les achats admissibles.',
-    disclosureLink: 'Informations complètes (en chinois traditionnel)',
-    more: 'Voir plus de produits',
-    refresh: 'Changer de produits',
-    support: 'Voir les produits (en chinois traditionnel) →',
-    productsLabel: 'Recommandations facultatives de produits',
   },
 }[lang];
 const productsSrc = isAmazon ? '/data/amazon-products.json' : '/data/support-products.json';
@@ -152,7 +128,6 @@ const shelfId = `affiliate-shelf-${toolSlug || context}`.replace(/[^a-z0-9_-]/gi
         <a
           class="affiliate-shelf__support-link"
           href={supportPath}
-          data-cross-locale-intent={lang === 'fr' ? 'support-only-zh' : undefined}
           data-affiliate-support-link
           hidden
         >{copy.support}</a>

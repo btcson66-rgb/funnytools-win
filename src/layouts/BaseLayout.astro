@@ -87,7 +87,7 @@ const ui = t(lang);
 const isCanonicalRoute = normalizeIndexPath(Astro.url.pathname) === normalizeIndexPath(canonicalPathname);
 const shouldNoindex = !isIndexablePath(canonicalPathname) || (noindex && !isCanonicalRoute);
 const robotsContent = 'noindex,follow';
-const affiliateContext = canonical.includes('/tools/') ? 'tool_result' : canonical.includes('/blog/') || canonical.includes('/guides/') ? 'article' : 'support_page';
+const affiliateContext = canonical.includes('/tools/') ? 'tool_result' : canonical.includes('/guides/') ? 'article' : 'support_page';
 const showAutomaticAffiliate = automaticAffiliate && lang === 'en' && !shouldNoindex;
 const envAdsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT ?? import.meta.env.PUBLIC_ADSENSE_ID;
 const adsenseClient = envAdsenseClient ?? SITE.adsenseClient;
