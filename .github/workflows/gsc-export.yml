@@ -1,0 +1,64 @@
+name: GSC data export (to fable-company)
+
+# 公開 repo 不耗 Actions 分鐘數。抓 GSC 後 push 到 private repo fable-company 的 gsc-data 分支。
+# 公開 log：只印每站 status，不印任何數字、查詢字詞、頁面；不寫 step summary。
+
+on:
+  schedule:
+    - cron: '20 22 * * *' # 台北 06:20
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gsc-export
+  cancel-in-progress: false
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout fable-company (private)
+        uses: actions/checkout@v4
+        with:
+          repository: btcson66-rgb/fable-company
+          ref: master
+          token: ${{ secrets.FABLE_COMPANY_PUSH_TOKEN }}
+          path: fable-company
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Export GSC data
+        working-directory: fable-company
+        run: |
+          set +e
+          node scripts/gsc-export.mjs --out "$RUNNER_TEMP/gsc" > /dev/null 2>&1
+          code=$?
+          set -e
+          for f in "$RUNNER_TEMP"/gsc/*.json; do
+            [ -f "$f" ] || continue
+            node -e "const r=require(process.argv[1]); console.log(r.domain+': '+r.status)" "$f"
+          done
+          exit $code
+        env:
+          FABLE_OPS_OAUTH_CLIENT_JSON: ${{ secrets.FABLE_OPS_OAUTH_CLIENT_JSON }}
+          FABLE_OPS_REFRESH_TOKEN: ${{ secrets.FABLE_OPS_REFRESH_TOKEN }}
+
+      - name: Push to fable-company gsc-data branch
+        if: always()
+        run: |
+          if [ ! -f "$RUNNER_TEMP/gsc/README.md" ]; then echo 'no export output'; exit 1; fi
+          cd "$RUNNER_TEMP/gsc"
+          git init -q -b gsc-data
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898299+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -q -m "gsc export $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -q --force "https://x-access-token:${PUSH_TOKEN}@github.com/btcson66-rgb/fable-company.git" gsc-data
+        env:
+          PUSH_TOKEN: ${{ secrets.FABLE_COMPANY_PUSH_TOKEN }}
