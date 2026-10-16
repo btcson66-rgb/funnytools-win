@@ -14,35 +14,6 @@ function content(zh: ToolContent, en: ToolContent): LocalizedToolContent {
   return { zh, en };
 }
 
-export const percentileRankContent = content(
-  {
-    name: 'PR 百分等級計算器', short: '依低於與同分人數計算百分等級（PR）。',
-    long: '輸入低於該分數的人數、同分人數與總人數，以中點法估算百分等級。PR 表示該分數在參照群體中的相對位置，不等於答對百分比。',
-    seoTitle: 'PR 百分等級計算器｜Percentile Rank 線上估算', seoDescription: '輸入低於、同分與總人數，使用中點法計算 PR 百分等級，附公式、教育應用與研究報告提示。',
-    keywords: ['PR值計算', '百分等級', 'percentile rank', '教育統計'],
-    instructions: ['輸入分數低於受測者的人數。', '輸入與受測者同分的人數（包含受測者本人）。', '輸入參照群體總人數後按下計算。'],
-    examples: ['說明學生在班級或年級中的相對位置。', '比較不同測驗分數在各自參照群體中的表現。', '協助解讀常模參照測驗結果。'],
-    formula: { expression: 'PR = 100 × (B + 0.5E) / N', explanation: 'B 為低於該分數的人數，E 為同分人數，N 為總人數。0.5E 是同分群體的中點修正。' },
-    educationApplication: 'PR 適合呈現常模參照下的相對表現，例如 PR 75 約表示表現高於參照群體中的 75%。不同常模、群體或時間點的 PR 不宜直接視為完全等值。',
-    reportTip: '可寫成：「該生在本次參照群體中的百分等級為 PR = 75.0。」同時交代參照群體、人數與 PR 的計算方式。',
-    faq: [{ q: 'PR 80 是考 80 分嗎？', a: '不是。PR 80 表示相對位置約高於 80% 的參照群體，與原始得分 80 分是不同概念。' }, { q: '同分人數要包含本人嗎？', a: '要。本工具的 E 是取得相同分數的總人數，包含正在計算的受測者。' }, { q: '可以用班級人數計算嗎？', a: '可以，但結果只代表該班級內的相對位置，不能直接當成全校或全國常模。' }],
-    labels: { below: '低於該分數的人數（B）', equal: '同分人數（E）', total: '總人數（N）', calculate: '計算 PR', result: '百分等級', invalid: '請確認人數為有效整數，且 B + E 不超過總人數。' }, disclaimer: disclaimer.zh, privacyNote: privacy.zh,
-  },
-  {
-    name: 'Percentile Rank Calculator', short: 'Calculate percentile rank from counts below and equal to a score.',
-    long: 'Enter the number of scores below, the number tied, and the reference-group size to estimate percentile rank with the midpoint method. Percentile rank describes relative standing, not percent correct.',
-    seoTitle: 'Percentile Rank Calc | Formula & Education Guide', seoDescription: 'Calculate percentile rank using counts below, tied scores, and group size, with formula and reporting guidance.',
-    keywords: ['percentile rank calculator', 'PR calculator', 'education statistics'],
-    instructions: ['Enter the number of people scoring below the target score.', 'Enter everyone tied at that score, including the target person.', 'Enter the full reference-group size and calculate.'],
-    examples: ['Describe relative standing within a class or cohort.', 'Compare scores against their respective norm groups.', 'Interpret norm-referenced assessment results.'],
-    formula: { expression: 'PR = 100 × (B + 0.5E) / N', explanation: 'B is the count below, E is the count tied, and N is the reference-group size. The 0.5E term places ties at their midpoint.' },
-    educationApplication: 'Percentile rank is useful for norm-referenced interpretation. A PR of 75 means the score is around or above 75% of the reference group. Results depend on the selected norm group.',
-    reportTip: 'Example: “The student’s percentile rank within this reference group was PR = 75.0.” Identify the reference group, sample size, and calculation method.',
-    faq: [{ q: 'Does PR 80 mean a score of 80?', a: 'No. PR 80 is a relative position; it is not the raw score or percent correct.' }, { q: 'Does the tied count include the target person?', a: 'Yes. E should include everyone with the same score, including the target person.' }, { q: 'Can I use class size as N?', a: 'Yes, but the result then describes only that class and should not be treated as a school-wide or national norm.' }],
-    labels: { below: 'Number below (B)', equal: 'Number tied (E)', total: 'Total group size (N)', calculate: 'Calculate PR', result: 'Percentile rank', invalid: 'Use valid whole-number counts and make sure B + E does not exceed N.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
-  },
-);
-
 export const zScoreContent = content(
   {
     name: 'Z 分數計算器', short: '將原始分數轉換為相對於平均數的標準分數。', long: '輸入個人原始分數、群體平均數與標準差，計算該分數距離平均數多少個標準差。正值高於平均，負值低於平均。',
@@ -59,67 +30,6 @@ export const zScoreContent = content(
     formula: { expression: 'z = (X − M) / SD', explanation: 'X is the raw score, M is the mean, and SD is the standard deviation. SD must be greater than zero.' }, educationApplication: 'Z scores place different scales in standard-deviation units, but standardization does not make a non-normal distribution normal. Check distribution shape and sample size when interpreting extremes.', reportTip: 'Example: “The student scored X = 82, corresponding to z = 1.20 in the class distribution.” Also report M and SD.',
     faq: [{ q: 'What does z = 0 mean?', a: 'The raw score equals the entered mean.' }, { q: 'Can a z score be negative?', a: 'Yes. A negative z score lies below the mean.' }, { q: 'Does this make data normally distributed?', a: 'No. Standardization changes center and scale, not distribution shape.' }],
     labels: { score: 'Raw score (X)', mean: 'Mean (M)', sd: 'Standard deviation (SD)', calculate: 'Calculate z score', result: 'Z score', invalid: 'Enter valid numbers and use a standard deviation greater than zero.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
-  },
-);
-
-export const tScoreContent = content(
-  {
-    name: 'T 分數計算器', short: '將 Z 分數轉換為平均 50、標準差 10 的 T 分數。', long: '輸入 Z 分數即可轉換為常用的 T 分數量尺。T 分數通常以 50 為平均數、10 為標準差，方便學生、老師或教甄備考者用同一參照群體比較相對位置。',
-    seoTitle: 'T分數換算器｜Z分數轉T分數公式與範例', seoDescription: 'T分數換算器：輸入Z分數，用 T = 50 + 10z 立即算出T分數，附公式、換算範例與教師甄試應用提示。', keywords: ['T分數', 'T分數換算器', 'Z分數轉換', '標準分數'],
-    contentSections: [
-      {
-        heading: 'T 分數是什麼',
-        paragraphs: [
-          'T 分數是一種由 Z 分數線性轉換而來的標準分數，常見設定是平均數 50、標準差 10。它保留「高於或低於平均多少個標準差」的資訊，但用較容易閱讀的數字呈現。',
-          '公式是 T = 50 + 10 × z；z = 0 會得到 T = 50，z = 1 會得到 T = 60，z = -1 會得到 T = 40。',
-          '在台灣，學生與老師常會在心理與教育測驗、班級成績分析、教師甄試或標準分數報表中看到 T 分數。實際採用的常模、方向與換算規則仍要以測驗手冊、原始報表或主辦單位說明為準。',
-        ],
-        items: [
-          '範例：某次測驗原始分數 82 分，參照群體平均數 70、標準差 10，先算 z = (82 − 70) / 10 = 1.2。',
-          '再代入 T = 50 + 10 × 1.2，得到 T = 62，表示比該參照群體平均高 1.2 個標準差。',
-        ],
-      },
-    ],
-    instructions: ['確認你手上的數值是 Z 分數；若只有原始分數，先用平均數與標準差算出 Z 分數。', '把 Z 分數輸入欄位，按下「轉換為 T 分數」。', '用平均 50、標準差 10 的量尺解讀結果；50 約為參照群體平均。', '正式報告或考試資料請再核對常模來源與轉換規則。'], examples: ['轉換心理與教育測驗的標準分數。', '以較直觀的正數量尺呈現相對表現。', '在使用相同常模時比較不同測驗結果。'],
-    formula: { expression: 'T = 50 + 10z', explanation: '此線性轉換使 z = 0 對應 T = 50，每增加 1 個標準差，T 分數增加 10。' }, educationApplication: 'T 分數常用於心理與教育測驗，但必須確認測驗手冊採用的 T 分數定義與常模。有些領域使用不同方向或不同轉換規則。', reportTip: '可寫成：「依平均數 50、標準差 10 的 T 分數量尺轉換後，個案得分為 T = 62.0。」並交代原始 z 值或常模來源。',
-    faq: [
-      { q: 'T 分數是什麼？', a: 'T 分數是由 Z 分數轉換而來的標準分數，常見量尺平均數為 50、標準差為 10。它用來描述某個分數在參照群體中的相對位置，而不是原始得分。' },
-      { q: 'T 分數 50 代表什麼？', a: '在 T = 50 + 10z 的量尺下，T 分數 50 代表 z = 0，也就是剛好等於參照群體平均數。高於 50 通常表示高於平均，低於 50 通常表示低於平均。' },
-      { q: 'T 分數越高越好嗎？', a: '不一定，要看測驗或指標定義。有些測驗高分代表能力或表現較高，但也有量表高分代表症狀、風險或需求較高，解讀時要看測驗說明。' },
-      { q: 'T 分數是滿分 100 或百分比嗎？', a: '不是。T 分數是標準分數量尺，不是百分制成績，也不是答對百分比。T 分數可能高於 100 或低於 0，只是一般常見資料不一定會出現這麼極端的值。' },
-      { q: '沒有 Z 分數可以算 T 分數嗎？', a: '若只有原始分數，必須先知道同一參照群體的平均數與標準差，先算 z = (X − M) / SD。沒有平均數、標準差或常模來源時，無法正確換算 T 分數。' },
-      { q: 'T 分數和 PR 百分等級可以直接換算嗎？', a: '一般不能直接換算，因為 PR 需要知道分數在參照群體中的累積位置。若假設常態分配且常模相同，可以用統計表或軟體估算近似 PR，但正式報告仍應使用原始常模或官方轉換表。' },
-    ],
-    labels: { z: 'Z 分數', calculate: '轉換為 T 分數', result: 'T 分數', invalid: '請輸入有效的 Z 分數。' }, disclaimer: disclaimer.zh, privacyNote: privacy.zh,
-  },
-  {
-    name: 'T Score Calculator', short: 'Convert a z score to a T score with mean 50 and SD 10.', long: 'Enter a z score to convert it to the commonly used T-score scale, centered at 50 with a standard deviation of 10. The scale helps students, teachers, and exam candidates read relative standing within the same reference group.',
-    seoTitle: 'T Score Calculator | Convert Z Score to T Score', seoDescription: 'Convert a z score with T = 50 + 10z and review education and reporting guidance.', keywords: ['T score calculator', 'z to T score', 'standard score'],
-    contentSections: [
-      {
-        heading: 'What a T score means',
-        paragraphs: [
-          'A T score is a standard score created by linearly transforming a z score. The common scale uses a mean of 50 and a standard deviation of 10, so it keeps the relative-position meaning of z while using easier numbers.',
-          'The formula is T = 50 + 10 × z. A z score of 0 becomes T = 50, z = 1 becomes T = 60, and z = -1 becomes T = 40.',
-          'Students and teachers may see T scores in educational tests, psychology reports, standardized score tables, and teacher-exam preparation. Always confirm the relevant norm group, direction, and conversion rule from the test manual or official notice.',
-        ],
-        items: [
-          'Example: if a raw score is 82, the reference mean is 70, and the standard deviation is 10, then z = (82 − 70) / 10 = 1.2.',
-          'Using T = 50 + 10 × 1.2 gives T = 62, meaning the score is 1.2 standard deviations above that reference-group mean.',
-        ],
-      },
-    ],
-    instructions: ['Confirm that the value you have is a z score, or calculate z first from a raw score, mean, and standard deviation.', 'Enter the z score and run the conversion.', 'Read the result on a mean-50, SD-10 scale; 50 is the reference-group mean.', 'For formal reporting, recheck the norm source and conversion rule.'], examples: ['Convert psychological or educational standard scores.', 'Present relative standing on a mostly positive scale.', 'Compare tests that use the same norming basis.'],
-    formula: { expression: 'T = 50 + 10z', explanation: 'This linear transformation maps z = 0 to T = 50; each standard deviation changes T by 10.' }, educationApplication: 'T scores are common in psychological and educational testing. Confirm the test manual’s definition and norms because some fields use different directions or conversions.', reportTip: 'Example: “On the T-score scale (M = 50, SD = 10), the score was T = 62.0.” State the original z score or norm source.',
-    faq: [
-      { q: 'What is a T score?', a: 'A T score is a standard score converted from a z score, commonly using a mean of 50 and a standard deviation of 10. It describes relative position within a reference group, not the raw score itself.' },
-      { q: 'What does T = 50 mean?', a: 'With T = 50 + 10z, T = 50 means z = 0. The score is exactly at the reference-group mean on that scale.' },
-      { q: 'Is a higher T score always better?', a: 'Not always. In some tests a higher T score means higher performance, while in other scales it can mean higher symptoms, risk, or need, so the test definition matters.' },
-      { q: 'Is a T score a percentage or a score out of 100?', a: 'No. A T score is a standard-score scale, not percent correct or a 0 to 100 grade. It can theoretically go above 100 or below 0 for extreme z scores.' },
-      { q: 'Can I calculate T without a z score?', a: 'If you only have a raw score, you first need the matching reference mean and standard deviation to calculate z = (X − M) / SD. Without the mean, SD, or norm source, the T score cannot be calculated correctly.' },
-      { q: 'Can T score and percentile rank be converted directly?', a: 'Usually not directly, because percentile rank depends on the cumulative position in a reference distribution. Under a normal-distribution assumption with the same norm group, an approximate percentile can be estimated, but formal reports should use the official norm table.' },
-    ],
-    labels: { z: 'Z score', calculate: 'Convert to T score', result: 'T score', invalid: 'Enter a valid z score.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
   },
 );
 

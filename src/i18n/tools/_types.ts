@@ -9,6 +9,15 @@ export interface ToolPageSection {
   heading: string;
   paragraphs: string[];
   items?: string[];
+  /** Optional reference table rendered after the paragraphs. */
+  table?: {
+    caption: string;
+    headers: string[];
+    rows: string[][];
+    note?: string;
+  };
+  /** Optional copy-ready snippets (for example spreadsheet formulas) rendered as a definition list. */
+  snippets?: { label: string; code: string }[];
   link?: {
     prefix: string;
     label: string;

@@ -1,0 +1,125 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import {
+  normalCdf, tScoreFrom, rawScoreForT, describeData, percentileRankMidpoint, countBelowAndEqual, parseNumbers,
+} from '../src/lib/educationStats.ts';
+
+const close = (actual, expected, eps = 1e-9) => assert.ok(Math.abs(actual - expected) < eps, `${actual} !~ ${expected}`);
+const html = (route) => readFileSync(new URL(`../dist${route}index.html`, import.meta.url), 'utf8');
+
+test('normalCdf matches published standard normal values', () => {
+  close(normalCdf(0), 0.5);
+  close(normalCdf(1), 0.8413447460685429, 1e-12);
+  close(normalCdf(1.2), 0.8849303297782918, 1e-12);
+  close(normalCdf(2), 0.9772498680518208, 1e-12);
+  close(normalCdf(-1), 0.15865525393145707, 1e-12);
+  close(normalCdf(3), 0.9986501019683699, 1e-12);
+});
+
+test('T score worked examples on the page are reproduced by the calculator function', () => {
+  const ex1 = tScoreFrom({ score: 82, mean: 70, sd: 10 });
+  close(ex1.z, 1.2); close(ex1.t, 62); close(ex1.normalPr, 88.4930329778, 1e-9);
+  const math = tScoreFrom({ score: 68, mean: 52, sd: 16 });
+  close(math.z, 1); close(math.t, 60); close(math.normalPr, 84.1344746069, 1e-9);
+  const english = tScoreFrom({ score: 85, mean: 80, sd: 10 });
+  close(english.z, 0.5); close(english.t, 55);
+  const science = tScoreFrom({ score: 55, mean: 62, sd: 8 });
+  close(science.z, -0.875); close(science.t, 41.25);
+  close(rawScoreForT(60, 70, 10), 80);
+  assert.equal(tScoreFrom({ score: 80, mean: 70, sd: 0 }), null);
+  assert.equal(tScoreFrom({ score: 80, mean: 70, sd: -1 }), null);
+  assert.equal(tScoreFrom({ z: 1.2 }).t, 62);
+});
+
+test('Excel example: STDEV.P versus STDEV.S changes T for 80 points', () => {
+  const stats = describeData([52, 58, 61, 65, 68, 70, 72, 75, 80, 89]);
+  close(stats.mean, 69);
+  close(stats.sdPopulation, 10.285912696499, 1e-9);
+  close(stats.sdSample, 10.842303978194, 1e-9);
+  close(tScoreFrom({ score: 80, mean: stats.mean, sd: stats.sdPopulation }).t, 60.6942381533, 1e-9);
+  close(tScoreFrom({ score: 80, mean: stats.mean, sd: stats.sdSample }).t, 60.1454451214, 1e-9);
+});
+
+test('T score page: byline, review date, schema and PR table are rendered', () => {
+  const page = html('/tools/t-score-calculator/');
+  const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
+  assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-16">2026-10-16<\/time>/);
+  assert.match(page, /"dateModified":"2026-10-16"/);
+  assert.match(page, /"@type":"WebApplication"/);
+  assert.match(page, /"@type":"BreadcrumbList"/);
+  assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/);
+  for (const [t, pr] of [[30, '2.28'], [40, '15.87'], [60, '84.13'], [70, '97.72'], [80, '99.87']]) {
+    assert.match(flat, new RegExp(`<th scope="row">T = ${t}</th><td>[^<]*</td><td>${pr.replace('.', '\\.')}</td>`));
+  }
+  for (const href of ['/tools/z-score-calculator/', '/tools/percentile-rank-calculator/', '/tools/standard-deviation/']) {
+    assert.ok(page.includes(`href="${href}"`), href);
+  }
+});
+
+test('percentile rank worked examples are reproduced by the calculator function', () => {
+  close(percentileRankMidpoint(24, 1, 40), 61.25);
+  const quiz = [95, 90, 90, 85, 80, 80, 80, 70, 65, 50];
+  const pr = (score) => { const c = countBelowAndEqual(quiz, score); return percentileRankMidpoint(c.below, c.equal, c.total); };
+  assert.deepEqual(countBelowAndEqual(quiz, 80), { below: 3, equal: 3, total: 10 });
+  close(pr(80), 45); close(pr(90), 80); close(pr(85), 65); close(pr(95), 95); close(pr(50), 5);
+  close(percentileRankMidpoint(270, 1, 300), 90.1666666667, 1e-9);
+  close(percentileRankMidpoint(39, 1, 40), 98.75); close(percentileRankMidpoint(0, 1, 40), 1.25);
+  close(percentileRankMidpoint(999, 1, 1000), 99.95);
+  assert.equal(percentileRankMidpoint(30, 11, 40), null);
+  assert.equal(percentileRankMidpoint(5, 0, 40), null);
+  assert.equal(percentileRankMidpoint(5.5, 1, 40), null);
+});
+
+test('percentile rank page: byline, schema and sources are rendered', () => {
+  const page = html('/tools/percentile-rank-calculator/');
+  const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
+  assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-16">2026-10-16<\/time>/);
+  assert.match(page, /"@type":"WebApplication"/);
+  assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/);
+  assert.match(page, /低於的百分比/);
+  for (const href of ['/tools/class-rank-percentile-calculator/', '/tools/t-score-calculator/']) {
+    assert.ok(page.includes(`href="${href}"`), href);
+  }
+  assert.doesNotMatch(page, /會考/);
+});
+
+test('standard deviation worked examples are reproduced by the calculator function', () => {
+  const ex1 = describeData(parseNumbers('62, 68, 70, 75, 85'));
+  assert.equal(ex1.n, 5); close(ex1.mean, 72); close(ex1.sumSquares, 298);
+  close(ex1.varPopulation, 59.6); close(ex1.sdPopulation, 7.7201036262, 1e-9);
+  close(ex1.varSample, 74.5); close(ex1.sdSample, 8.6313382508, 1e-9);
+  const a = describeData([60, 60, 80, 80]); const b = describeData([68, 70, 70, 72]);
+  close(a.mean, 70); close(b.mean, 70); close(a.sdPopulation, 10); close(b.varPopulation, 2); close(b.sdPopulation, 1.4142135624, 1e-9);
+  const ten = describeData([52, 58, 61, 65, 68, 70, 72, 75, 80, 89]);
+  assert.equal(ten.sdPopulation.toFixed(4), '10.2859'); assert.equal(ten.sdSample.toFixed(4), '10.8423');
+  const one = describeData([50]);
+  assert.equal(one.sdPopulation, 0); assert.ok(Number.isNaN(one.sdSample));
+  assert.deepEqual(parseNumbers('3,5 abc 7'), [3, 5, 7]);
+  assert.equal(describeData([]), null);
+});
+
+test('standard deviation matches published Casio and Microsoft examples', () => {
+  const casio = describeData([55, 54, 51, 55, 53, 53, 54, 52]);
+  close(casio.mean, 53.375); close(casio.sdPopulation, 1.316956719, 1e-9); close(casio.sdSample, 1.407885953, 1e-9);
+  const strength = describeData([1345, 1301, 1368, 1322, 1310, 1370, 1318, 1350, 1303, 1299]);
+  close(strength.sdSample, 27.46391572, 1e-8); close(strength.sdPopulation, 26.05455814, 1e-8);
+  close(strength.varPopulation, 678.84, 1e-9); close(strength.varSample, 754.27, 5e-3);
+});
+
+test('standard deviation page: default input, byline, schema, sources and links are rendered', () => {
+  const page = html('/tools/standard-deviation/');
+  const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
+  assert.match(flat, /<textarea[^>]*data-input[^>]*>62, 68, 70, 75, 85<\/textarea>/);
+  assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-16">2026-10-16<\/time>/);
+  assert.match(page, /"@type":"WebApplication"/);
+  assert.match(page, /"@type":"BreadcrumbList"/);
+  assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/);
+  for (const href of ['/tools/z-score-calculator/', '/tools/t-score-calculator/']) {
+    assert.ok(page.includes(`href="${href}"`), href);
+  }
+  assert.ok(page.includes('support.casio.com'));
+});

@@ -45,13 +45,13 @@ const breadcrumbItems = [
   { name: content.name, href: toolUrl(lang, tool.slug) },
 ];
 const jsonLd = [
-  webApplicationJsonLd(lang, tool, content, category, { authored: isAuthoredToolSlug(tool.slug) }),
+  webApplicationJsonLd(lang, tool, content, category, { authored: isAuthoredToolSlug(tool.slug), dateModified: tool.reviewedAt }),
   breadcrumbJsonLd(breadcrumbItems),
 ];
 const ga4Enabled = !!SITE.ga4MeasurementId;
 ---
 
-<ToolLayout lang={lang} tool={tool} category={category} content={content} jsonLd={jsonLd} reviewedAt={tool.locales?.length === 1 ? tool.updated : undefined}>
+<ToolLayout lang={lang} tool={tool} category={category} content={content} jsonLd={jsonLd} reviewedAt={tool.reviewedAt ?? (tool.locales?.length === 1 ? tool.updated : undefined)}>
   <Widget labels={content.labels} slug={tool.slug} />
   <script>
     import { recordRecentlyUsedTool } from '../../../lib/userTools.client';

@@ -22,6 +22,8 @@ export interface ToolMeta {
   featured?: boolean;
   isNew?: boolean;
   updated?: string;
+  /** ISO date of the last hand review shown in the byline and WebApplication dateModified. */
+  reviewedAt?: string;
   /** Omit for tools available in every configured locale. */
   locales?: Locale[];
   name: Record<Locale, string>;
@@ -1021,7 +1023,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'percentile-rank-calculator', category: 'statistics', icon: 'PR', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['z-score-calculator', 't-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-25',
+    relatedTools: ['z-score-calculator', 't-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-16', reviewedAt: '2026-10-16',
     name: { zh: 'PR 百分等級計算器', en: 'Percentile Rank Calculator' }, short: { zh: '依低於與同分人數計算百分等級（PR）。', en: 'Calculate percentile rank from counts below and equal to a score.' },
   },
   {
@@ -1031,7 +1033,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 't-score-calculator', category: 'statistics', icon: 'T', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['z-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'teacher-exam-score-converter', 'percentile-rank-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-25',
+    relatedTools: ['z-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'teacher-exam-score-converter', 'percentile-rank-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-16', reviewedAt: '2026-10-16',
     name: { zh: 'T 分數計算器', en: 'T Score Calculator' }, short: { zh: '將 Z 分數轉換為平均 50、標準差 10 的 T 分數。', en: 'Convert a z score to a T score with mean 50 and SD 10.' },
   },
   {
@@ -1147,7 +1149,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'standard-deviation', category: 'statistics', icon: 'σ', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['t-score-calculator', 'class-rank-percentile-calculator', 'z-score-calculator', 'grade-average', 'percentile-rank-calculator', 'cronbach-alpha-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'low', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-19',
+    relatedTools: ['t-score-calculator', 'class-rank-percentile-calculator', 'z-score-calculator', 'grade-average', 'percentile-rank-calculator', 'cronbach-alpha-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'low', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-16', reviewedAt: '2026-10-16',
     name: { zh: '標準差計算器', en: 'Standard Deviation Calculator' },
     short: { zh: '輸入一組數字，計算平均、中位數、變異數與標準差。', en: 'Compute mean, median, variance, and standard deviation from a set of numbers.' },
   },

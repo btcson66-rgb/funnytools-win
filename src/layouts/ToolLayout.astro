@@ -141,6 +141,32 @@ const downloadGateConfig = SITE.features.downloadGate
         <section class="content-section">
           <h2>{section.heading}</h2>
           {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          {section.table && (
+            <div class="section-table-wrap">
+              <table class="section-table">
+                <caption>{section.table.caption}</caption>
+                <thead>
+                  <tr>{section.table.headers.map((header) => <th scope="col">{header}</th>)}</tr>
+                </thead>
+                <tbody>
+                  {section.table.rows.map((row) => (
+                    <tr>{row.map((cell, index) => (index === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>))}</tr>
+                  ))}
+                </tbody>
+              </table>
+              {section.table.note && <p class="section-table-note">{section.table.note}</p>}
+            </div>
+          )}
+          {section.snippets && section.snippets.length > 0 && (
+            <dl class="section-snippets">
+              {section.snippets.map((snippet) => (
+                <>
+                  <dt>{snippet.label}</dt>
+                  <dd><code>{snippet.code}</code></dd>
+                </>
+              ))}
+            </dl>
+          )}
           {section.link && (
             <p>
               {section.link.prefix}<a href={section.link.href}>{section.link.label}</a>{section.link.suffix}
@@ -404,6 +430,16 @@ const downloadGateConfig = SITE.features.downloadGate
 </BaseLayout>
 
 <style>
+  .section-table-wrap { overflow-x: auto; margin: 12px 0; }
+  .section-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .section-table caption { text-align: left; font-weight: 800; color: var(--ink); padding: 0 0 8px; }
+  .section-table th, .section-table td { padding: 8px 12px; border: 1px solid var(--line); text-align: left; }
+  .section-table thead th { background: var(--card); }
+  .section-table-note { margin: 8px 0 0; color: var(--muted); font-size: .92rem; }
+  .section-snippets { display: grid; gap: 4px 12px; margin: 12px 0; }
+  .section-snippets dt { font-weight: 800; color: var(--ink); margin-top: 8px; }
+  .section-snippets dd { margin: 0; }
+  .section-snippets code { display: block; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); overflow-wrap: anywhere; }
   .related-guide-list { display: grid; gap: 10px; }
   .related-guide-list a { display: grid; gap: 5px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
   .related-guide-list a:hover { border-color: var(--brand); }
