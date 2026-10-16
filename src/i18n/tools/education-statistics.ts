@@ -14,35 +14,6 @@ function content(zh: ToolContent, en: ToolContent): LocalizedToolContent {
   return { zh, en };
 }
 
-export const percentileRankContent = content(
-  {
-    name: 'PR 百分等級計算器', short: '依低於與同分人數計算百分等級（PR）。',
-    long: '輸入低於該分數的人數、同分人數與總人數，以中點法估算百分等級。PR 表示該分數在參照群體中的相對位置，不等於答對百分比。',
-    seoTitle: 'PR 百分等級計算器｜Percentile Rank 線上估算', seoDescription: '輸入低於、同分與總人數，使用中點法計算 PR 百分等級，附公式、教育應用與研究報告提示。',
-    keywords: ['PR值計算', '百分等級', 'percentile rank', '教育統計'],
-    instructions: ['輸入分數低於受測者的人數。', '輸入與受測者同分的人數（包含受測者本人）。', '輸入參照群體總人數後按下計算。'],
-    examples: ['說明學生在班級或年級中的相對位置。', '比較不同測驗分數在各自參照群體中的表現。', '協助解讀常模參照測驗結果。'],
-    formula: { expression: 'PR = 100 × (B + 0.5E) / N', explanation: 'B 為低於該分數的人數，E 為同分人數，N 為總人數。0.5E 是同分群體的中點修正。' },
-    educationApplication: 'PR 適合呈現常模參照下的相對表現，例如 PR 75 約表示表現高於參照群體中的 75%。不同常模、群體或時間點的 PR 不宜直接視為完全等值。',
-    reportTip: '可寫成：「該生在本次參照群體中的百分等級為 PR = 75.0。」同時交代參照群體、人數與 PR 的計算方式。',
-    faq: [{ q: 'PR 80 是考 80 分嗎？', a: '不是。PR 80 表示相對位置約高於 80% 的參照群體，與原始得分 80 分是不同概念。' }, { q: '同分人數要包含本人嗎？', a: '要。本工具的 E 是取得相同分數的總人數，包含正在計算的受測者。' }, { q: '可以用班級人數計算嗎？', a: '可以，但結果只代表該班級內的相對位置，不能直接當成全校或全國常模。' }],
-    labels: { below: '低於該分數的人數（B）', equal: '同分人數（E）', total: '總人數（N）', calculate: '計算 PR', result: '百分等級', invalid: '請確認人數為有效整數，且 B + E 不超過總人數。' }, disclaimer: disclaimer.zh, privacyNote: privacy.zh,
-  },
-  {
-    name: 'Percentile Rank Calculator', short: 'Calculate percentile rank from counts below and equal to a score.',
-    long: 'Enter the number of scores below, the number tied, and the reference-group size to estimate percentile rank with the midpoint method. Percentile rank describes relative standing, not percent correct.',
-    seoTitle: 'Percentile Rank Calc | Formula & Education Guide', seoDescription: 'Calculate percentile rank using counts below, tied scores, and group size, with formula and reporting guidance.',
-    keywords: ['percentile rank calculator', 'PR calculator', 'education statistics'],
-    instructions: ['Enter the number of people scoring below the target score.', 'Enter everyone tied at that score, including the target person.', 'Enter the full reference-group size and calculate.'],
-    examples: ['Describe relative standing within a class or cohort.', 'Compare scores against their respective norm groups.', 'Interpret norm-referenced assessment results.'],
-    formula: { expression: 'PR = 100 × (B + 0.5E) / N', explanation: 'B is the count below, E is the count tied, and N is the reference-group size. The 0.5E term places ties at their midpoint.' },
-    educationApplication: 'Percentile rank is useful for norm-referenced interpretation. A PR of 75 means the score is around or above 75% of the reference group. Results depend on the selected norm group.',
-    reportTip: 'Example: “The student’s percentile rank within this reference group was PR = 75.0.” Identify the reference group, sample size, and calculation method.',
-    faq: [{ q: 'Does PR 80 mean a score of 80?', a: 'No. PR 80 is a relative position; it is not the raw score or percent correct.' }, { q: 'Does the tied count include the target person?', a: 'Yes. E should include everyone with the same score, including the target person.' }, { q: 'Can I use class size as N?', a: 'Yes, but the result then describes only that class and should not be treated as a school-wide or national norm.' }],
-    labels: { below: 'Number below (B)', equal: 'Number tied (E)', total: 'Total group size (N)', calculate: 'Calculate PR', result: 'Percentile rank', invalid: 'Use valid whole-number counts and make sure B + E does not exceed N.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
-  },
-);
-
 export const zScoreContent = content(
   {
     name: 'Z 分數計算器', short: '將原始分數轉換為相對於平均數的標準分數。', long: '輸入個人原始分數、群體平均數與標準差，計算該分數距離平均數多少個標準差。正值高於平均，負值低於平均。',

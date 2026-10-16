@@ -113,7 +113,7 @@ const fields = simpleFields[slug] ?? [];
 </style>
 
 <script>
-  import { tScoreFrom } from '../../lib/educationStats';
+  import { percentileRankMidpoint, tScoreFrom } from '../../lib/educationStats';
 
   document.querySelectorAll('[data-stat-tool]').forEach((root) => {
     if (!(root instanceof HTMLElement)) return;
@@ -227,8 +227,9 @@ const fields = simpleFields[slug] ?? [];
     const calculate = () => {
       if (slug === 'percentile-rank-calculator') {
         const below = number('below'), equal = number('equal'), total = number('total');
-        if (!finite(below, equal, total) || ![below, equal, total].every(Number.isInteger) || below < 0 || equal < 1 || total < 1 || below + equal > total) return showError();
-        const items = [[labels.result, format(100 * (below + 0.5 * equal) / total, 2)]];
+        const pr = percentileRankMidpoint(below, equal, total);
+        if (pr === null) return showError();
+        const items = [[labels.result, format(pr, 2)]];
         if (labels.belowPercent) items.push([labels.belowPercent, `${format(100 * below / total, 2)}%`]);
         if (labels.tiedPercent) items.push([labels.tiedPercent, `${format(100 * equal / total, 2)}%`]);
         if (labels.abovePercent) items.push([labels.abovePercent, `${format(100 * (total - below - equal) / total, 2)}%`]);

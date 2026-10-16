@@ -81,7 +81,7 @@ export default {
       {
         heading: 'Excel 怎麼算 T 分數',
         paragraphs: [
-          '假設全班分數放在 A2:A41，要換算的那一位在 A2，平均數放在 D1、標準差放在 D2。下面的公式已用試算表實際執行，結果與本頁工具一致。',
+          '假設全班分數放在 A2:A41，要換算的那一位在 A2，平均數放在 D1、標準差放在 D2。下面的公式已用 LibreOffice Calc 實際執行驗算（函數名稱與 Excel 相同），結果與本頁工具一致。',
         ],
         snippets: [
           { label: '平均數（填入 D1）', code: '=AVERAGE(A2:A41)' },

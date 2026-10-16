@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
-  normalCdf, tScoreFrom, rawScoreForT, describeData,
+  normalCdf, tScoreFrom, rawScoreForT, describeData, percentileRankMidpoint, countBelowAndEqual,
 } from '../src/lib/educationStats.ts';
 
 const close = (actual, expected, eps = 1e-9) => assert.ok(Math.abs(actual - expected) < eps, `${actual} !~ ${expected}`);
@@ -56,4 +56,32 @@ test('T score page: byline, review date, schema and PR table are rendered', () =
   for (const href of ['/tools/z-score-calculator/', '/tools/percentile-rank-calculator/', '/tools/standard-deviation/']) {
     assert.ok(page.includes(`href="${href}"`), href);
   }
+});
+
+test('percentile rank worked examples are reproduced by the calculator function', () => {
+  close(percentileRankMidpoint(24, 1, 40), 61.25);
+  const quiz = [95, 90, 90, 85, 80, 80, 80, 70, 65, 50];
+  const pr = (score) => { const c = countBelowAndEqual(quiz, score); return percentileRankMidpoint(c.below, c.equal, c.total); };
+  assert.deepEqual(countBelowAndEqual(quiz, 80), { below: 3, equal: 3, total: 10 });
+  close(pr(80), 45); close(pr(90), 80); close(pr(85), 65); close(pr(95), 95); close(pr(50), 5);
+  close(percentileRankMidpoint(270, 1, 300), 90.1666666667, 1e-9);
+  close(percentileRankMidpoint(39, 1, 40), 98.75); close(percentileRankMidpoint(0, 1, 40), 1.25);
+  close(percentileRankMidpoint(999, 1, 1000), 99.95);
+  assert.equal(percentileRankMidpoint(30, 11, 40), null);
+  assert.equal(percentileRankMidpoint(5, 0, 40), null);
+  assert.equal(percentileRankMidpoint(5.5, 1, 40), null);
+});
+
+test('percentile rank page: byline, schema and sources are rendered', () => {
+  const page = html('/tools/percentile-rank-calculator/');
+  const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
+  assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-16">2026-10-16<\/time>/);
+  assert.match(page, /"@type":"WebApplication"/);
+  assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/);
+  assert.match(page, /低於的百分比/);
+  for (const href of ['/tools/class-rank-percentile-calculator/', '/tools/t-score-calculator/']) {
+    assert.ok(page.includes(`href="${href}"`), href);
+  }
+  assert.doesNotMatch(page, /會考/);
 });

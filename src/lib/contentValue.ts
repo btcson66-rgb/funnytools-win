@@ -746,6 +746,7 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
       '「同分人數」欄位沒有被忽略或誤填為 0，除非你確定真的沒有同分的人。',
       '沒有把這個工具的輸入資料（低於人數、同分人數）跟「排名百分比計算器」的輸入資料（名次、總人數）搞混。',
     ],
+    reviewedAt: '2026-10-16',
   },
   'zh:bar-chart-maker': {
     intro: '這一段只針對「長條圖製作工具」本身：預設已有四列種子資料，圖表在你輸入時即時重繪，沒有另外的「產生」按鈕。',

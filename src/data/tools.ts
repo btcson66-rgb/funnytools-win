@@ -1023,7 +1023,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'percentile-rank-calculator', category: 'statistics', icon: 'PR', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['z-score-calculator', 't-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-25',
+    relatedTools: ['z-score-calculator', 't-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-16', reviewedAt: '2026-10-16',
     name: { zh: 'PR 百分等級計算器', en: 'Percentile Rank Calculator' }, short: { zh: '依低於與同分人數計算百分等級（PR）。', en: 'Calculate percentile rank from counts below and equal to a score.' },
   },
   {

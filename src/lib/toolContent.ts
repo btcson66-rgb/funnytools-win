@@ -25,8 +25,9 @@ import gpaCalculatorContent from '../i18n/tools/gpa-calculator';
 import gradeAverageContent from '../i18n/tools/grade-average';
 import {
   classRankContent, cronbachAlphaContent, independentTTestContent, normalizedScoreContent,
-  percentileRankContent, teacherExamContent, weightedAverageContent, zScoreContent,
+  teacherExamContent, weightedAverageContent, zScoreContent,
 } from '../i18n/tools/education-statistics';
+import percentileRankContent from '../i18n/tools/percentile-rank-calculator';
 import tScoreContent from '../i18n/tools/t-score-calculator';
 import imageCompressorContent from '../i18n/tools/image-compressor';
 import imageCropContent from '../i18n/tools/image-crop';
