@@ -12,7 +12,9 @@ const simpleFields: Record<string, { key: string; value: string; step?: string }
   'z-score-calculator': [
     { key: 'score', value: '82' }, { key: 'mean', value: '70' }, { key: 'sd', value: '10' },
   ],
-  't-score-calculator': [{ key: 'z', value: '1.2' }],
+  't-score-calculator': [
+    { key: 'score', value: '82' }, { key: 'mean', value: '70' }, { key: 'sd', value: '10' }, { key: 'z', value: '' },
+  ],
   'class-rank-percentile-calculator': [
     { key: 'rank', value: '6', step: '1' }, { key: 'total', value: '40', step: '1' },
   ],
@@ -111,6 +113,8 @@ const fields = simpleFields[slug] ?? [];
 </style>
 
 <script>
+  import { tScoreFrom } from '../../lib/educationStats';
+
   document.querySelectorAll('[data-stat-tool]').forEach((root) => {
     if (!(root instanceof HTMLElement)) return;
     const slug = root.dataset.slug || '';
@@ -243,12 +247,15 @@ const fields = simpleFields[slug] ?? [];
         return show(items);
       }
       if (slug === 't-score-calculator') {
-        const z = number('z');
-        if (!finite(z)) return showError();
-        const items = [[labels.result, format(50 + 10 * z, 2)]];
-        if (labels.zEquivalent) items.push([labels.zEquivalent, format(z, 3)]);
+        const zRaw = field('z')?.value.trim() ?? '';
+        const result = zRaw !== ''
+          ? tScoreFrom({ z: number('z') })
+          : tScoreFrom({ score: number('score'), mean: number('mean'), sd: number('sd') });
+        if (!result) return showError();
+        const items = [[labels.zEquivalent, format(result.z, 3)], [labels.result, format(result.t, 2)]];
+        if (labels.approxPr) items.push([labels.approxPr, format(result.normalPr, 2)]);
         if (labels.relativePosition) {
-          const position = z > 0 ? labels.aboveMean : z < 0 ? labels.belowMean : labels.atMean;
+          const position = result.z > 0 ? labels.aboveMean : result.z < 0 ? labels.belowMean : labels.atMean;
           if (position) items.push([labels.relativePosition, position]);
         }
         return show(items);
