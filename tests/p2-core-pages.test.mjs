@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
-  normalCdf, tScoreFrom, rawScoreForT, describeData, percentileRankMidpoint, countBelowAndEqual,
+  normalCdf, tScoreFrom, rawScoreForT, describeData, percentileRankMidpoint, countBelowAndEqual, parseNumbers,
 } from '../src/lib/educationStats.ts';
 
 const close = (actual, expected, eps = 1e-9) => assert.ok(Math.abs(actual - expected) < eps, `${actual} !~ ${expected}`);
@@ -84,4 +84,42 @@ test('percentile rank page: byline, schema and sources are rendered', () => {
     assert.ok(page.includes(`href="${href}"`), href);
   }
   assert.doesNotMatch(page, /會考/);
+});
+
+test('standard deviation worked examples are reproduced by the calculator function', () => {
+  const ex1 = describeData(parseNumbers('62, 68, 70, 75, 85'));
+  assert.equal(ex1.n, 5); close(ex1.mean, 72); close(ex1.sumSquares, 298);
+  close(ex1.varPopulation, 59.6); close(ex1.sdPopulation, 7.7201036262, 1e-9);
+  close(ex1.varSample, 74.5); close(ex1.sdSample, 8.6313382508, 1e-9);
+  const a = describeData([60, 60, 80, 80]); const b = describeData([68, 70, 70, 72]);
+  close(a.mean, 70); close(b.mean, 70); close(a.sdPopulation, 10); close(b.varPopulation, 2); close(b.sdPopulation, 1.4142135624, 1e-9);
+  const ten = describeData([52, 58, 61, 65, 68, 70, 72, 75, 80, 89]);
+  assert.equal(ten.sdPopulation.toFixed(4), '10.2859'); assert.equal(ten.sdSample.toFixed(4), '10.8423');
+  const one = describeData([50]);
+  assert.equal(one.sdPopulation, 0); assert.ok(Number.isNaN(one.sdSample));
+  assert.deepEqual(parseNumbers('3,5 abc 7'), [3, 5, 7]);
+  assert.equal(describeData([]), null);
+});
+
+test('standard deviation matches published Casio and Microsoft examples', () => {
+  const casio = describeData([55, 54, 51, 55, 53, 53, 54, 52]);
+  close(casio.mean, 53.375); close(casio.sdPopulation, 1.316956719, 1e-9); close(casio.sdSample, 1.407885953, 1e-9);
+  const strength = describeData([1345, 1301, 1368, 1322, 1310, 1370, 1318, 1350, 1303, 1299]);
+  close(strength.sdSample, 27.46391572, 1e-8); close(strength.sdPopulation, 26.05455814, 1e-8);
+  close(strength.varPopulation, 678.84, 1e-9); close(strength.varSample, 754.27, 5e-3);
+});
+
+test('standard deviation page: default input, byline, schema, sources and links are rendered', () => {
+  const page = html('/tools/standard-deviation/');
+  const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
+  assert.match(flat, /<textarea[^>]*data-input[^>]*>62, 68, 70, 75, 85<\/textarea>/);
+  assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-16">2026-10-16<\/time>/);
+  assert.match(page, /"@type":"WebApplication"/);
+  assert.match(page, /"@type":"BreadcrumbList"/);
+  assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/);
+  for (const href of ['/tools/z-score-calculator/', '/tools/t-score-calculator/']) {
+    assert.ok(page.includes(`href="${href}"`), href);
+  }
+  assert.ok(page.includes('support.casio.com'));
 });

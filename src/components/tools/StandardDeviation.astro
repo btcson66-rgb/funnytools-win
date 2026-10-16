@@ -10,7 +10,7 @@ const { labels } = Astro.props;
   <label class="stdev-input">
     <span>{labels.inputLabel}</span>
     <small>{labels.hint}</small>
-    <textarea data-input rows="4" placeholder={labels.placeholder}></textarea>
+    <textarea data-input rows="4" placeholder={labels.placeholder}>{labels.defaultInput}</textarea>
   </label>
 
   <div class="stats-grid stdev-stats" aria-live="polite">
@@ -58,6 +58,8 @@ const { labels } = Astro.props;
 </style>
 
 <script>
+  import { describeData, parseNumbers } from '../../lib/educationStats';
+
   document.querySelectorAll('[data-stdev-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
     const input = root.querySelector('[data-input]');
@@ -84,49 +86,19 @@ const { labels } = Astro.props;
       return Number(n.toFixed(4)).toString();
     }
 
-    function parseNumbers(text) {
-      return text
-        .split(/[\s,]+/)
-        .filter((token) => token.trim() !== '')
-        .map(Number)
-        .filter((n) => Number.isFinite(n));
-    }
-
-    function computeMode(values) {
-      const counts = new Map();
-      let best = 0;
-      values.forEach((v) => {
-        const c = (counts.get(v) || 0) + 1;
-        counts.set(v, c);
-        if (c > best) best = c;
-      });
-      if (best <= 1) return null;
-      const modes = [...counts.entries()].filter(([, c]) => c === best).map(([v]) => v).sort((a, b) => a - b);
-      return modes;
-    }
-
     function calculate() {
       const values = parseNumbers(input.value || '');
-      const n = values.length;
-      if (n === 0) {
+      const stats = describeData(values);
+      if (!stats) {
         Object.values(out).forEach((el) => { el.textContent = '--'; });
         out.count.textContent = '0';
         note.textContent = labels.empty;
         latest = '';
         return;
       }
-
-      const sum = values.reduce((a, b) => a + b, 0);
-      const mean = sum / n;
-      const sorted = [...values].sort((a, b) => a - b);
-      const median = n % 2 ? sorted[(n - 1) / 2] : (sorted[n / 2 - 1] + sorted[n / 2]) / 2;
-      const min = sorted[0];
-      const max = sorted[n - 1];
-      const sqDiff = values.reduce((a, b) => a + (b - mean) ** 2, 0);
-      const varp = sqDiff / n;
-      const vars = n > 1 ? sqDiff / (n - 1) : NaN;
-      const modes = computeMode(values);
+      const { n, sum, mean, median, modes, min, max, range, varPopulation: varp, sdPopulation: sdp, varSample: vars, sdSample: sds } = stats;
       const modeText = modes ? modes.map(fmt).join(', ') : labels.modeNone;
+      const sampleOk = Number.isFinite(vars);
 
       out.count.textContent = String(n);
       out.sum.textContent = fmt(sum);
@@ -135,11 +107,11 @@ const { labels } = Astro.props;
       out.mode.textContent = modeText;
       out.min.textContent = fmt(min);
       out.max.textContent = fmt(max);
-      out.range.textContent = fmt(max - min);
+      out.range.textContent = fmt(range);
       out.varp.textContent = fmt(varp);
-      out.sdp.textContent = fmt(Math.sqrt(varp));
-      out.vars.textContent = Number.isFinite(vars) ? fmt(vars) : '--';
-      out.sds.textContent = Number.isFinite(vars) ? fmt(Math.sqrt(vars)) : '--';
+      out.sdp.textContent = fmt(sdp);
+      out.vars.textContent = sampleOk ? fmt(vars) : '--';
+      out.sds.textContent = sampleOk ? fmt(sds) : '--';
       note.textContent = '';
 
       latest = [
@@ -150,11 +122,11 @@ const { labels } = Astro.props;
         `${labels.mode}: ${modeText}`,
         `${labels.min}: ${fmt(min)}`,
         `${labels.max}: ${fmt(max)}`,
-        `${labels.range}: ${fmt(max - min)}`,
+        `${labels.range}: ${fmt(range)}`,
         `${labels.variancePopulation}: ${fmt(varp)}`,
-        `${labels.stdevPopulation}: ${fmt(Math.sqrt(varp))}`,
-        `${labels.varianceSample}: ${Number.isFinite(vars) ? fmt(vars) : '--'}`,
-        `${labels.stdevSample}: ${Number.isFinite(vars) ? fmt(Math.sqrt(vars)) : '--'}`,
+        `${labels.stdevPopulation}: ${fmt(sdp)}`,
+        `${labels.varianceSample}: ${sampleOk ? fmt(vars) : '--'}`,
+        `${labels.stdevSample}: ${sampleOk ? fmt(sds) : '--'}`,
       ].join('\n');
     }
 
@@ -170,7 +142,7 @@ const { labels } = Astro.props;
       }
     });
 
-    input.value = '12, 15, 20, 22, 30';
+    if (!input.value.trim() && labels.defaultInput) input.value = labels.defaultInput;
     calculate();
   });
 </script>

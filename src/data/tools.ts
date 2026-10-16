@@ -1149,7 +1149,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'standard-deviation', category: 'statistics', icon: 'σ', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['t-score-calculator', 'class-rank-percentile-calculator', 'z-score-calculator', 'grade-average', 'percentile-rank-calculator', 'cronbach-alpha-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'low', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-19',
+    relatedTools: ['t-score-calculator', 'class-rank-percentile-calculator', 'z-score-calculator', 'grade-average', 'percentile-rank-calculator', 'cronbach-alpha-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'low', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-16', reviewedAt: '2026-10-16',
     name: { zh: '標準差計算器', en: 'Standard Deviation Calculator' },
     short: { zh: '輸入一組數字，計算平均、中位數、變異數與標準差。', en: 'Compute mean, median, variance, and standard deviation from a set of numbers.' },
   },
