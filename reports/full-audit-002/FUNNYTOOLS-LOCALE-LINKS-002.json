@@ -1,9 +1,94 @@
 {
   "checkedPages": 514,
-  "checkedLinks": 6382,
-  "crossLocaleLinks": 83,
+  "checkedLinks": 6394,
+  "crossLocaleLinks": 90,
   "violations": [],
-  "review": [],
+  "review": [
+    {
+      "source_url": "https://funnytools.win/en/tools/percentile-rank-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/class-rank-percentile-calculator/",
+      "target_locale": "zh",
+      "link_text": "class rank percentile calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/percentile-rank-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/t-score-calculator/",
+      "target_locale": "zh",
+      "link_text": "T score calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/standard-deviation/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/z-score-calculator/",
+      "target_locale": "zh",
+      "link_text": "Z score calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/standard-deviation/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/t-score-calculator/",
+      "target_locale": "zh",
+      "link_text": "T score calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/t-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/z-score-calculator/",
+      "target_locale": "zh",
+      "link_text": "Z score calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/t-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/percentile-rank-calculator/",
+      "target_locale": "zh",
+      "link_text": "percentile rank calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/t-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/standard-deviation/",
+      "target_locale": "zh",
+      "link_text": "standard deviation calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    }
+  ],
   "rows": [
     {
       "source_url": "https://funnytools.win/en/tools/age-calculator/",
@@ -630,6 +715,30 @@
       "reason": "intent:disclosure-only-zh"
     },
     {
+      "source_url": "https://funnytools.win/en/tools/percentile-rank-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/class-rank-percentile-calculator/",
+      "target_locale": "zh",
+      "link_text": "class rank percentile calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/percentile-rank-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/t-score-calculator/",
+      "target_locale": "zh",
+      "link_text": "T score calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
       "source_url": "https://funnytools.win/en/tools/pie-chart-maker/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
@@ -858,6 +967,30 @@
       "reason": "intent:disclosure-only-zh"
     },
     {
+      "source_url": "https://funnytools.win/en/tools/standard-deviation/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/z-score-calculator/",
+      "target_locale": "zh",
+      "link_text": "Z score calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/standard-deviation/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/t-score-calculator/",
+      "target_locale": "zh",
+      "link_text": "T score calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
       "source_url": "https://funnytools.win/en/tools/stopwatch/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
@@ -880,6 +1013,42 @@
       "allowed": true,
       "enforced": false,
       "reason": "intent:disclosure-only-zh"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/t-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/z-score-calculator/",
+      "target_locale": "zh",
+      "link_text": "Z score calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/t-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/percentile-rank-calculator/",
+      "target_locale": "zh",
+      "link_text": "percentile rank calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/t-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/standard-deviation/",
+      "target_locale": "zh",
+      "link_text": "standard deviation calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
     },
     {
       "source_url": "https://funnytools.win/en/tools/teacher-exam-score-converter/",
