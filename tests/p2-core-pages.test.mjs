@@ -181,3 +181,49 @@ test('Z score page: default input, byline, schema, Z table, sources and links ar
   for (const host of ['pedia.cloud.edu.tw', 'itl.nist.gov', 'support.microsoft.com']) assert.ok(page.includes(host), host);
   for (const h2 of ['Z 分數是什麼', 'Z 分數怎麼算', 'Z 分數怎麼看', 'Z 分數查表', 'Z 分數與 T 分數', '常態分配', 'Excel', '常見錯誤']) assert.ok(flat.includes(h2), h2);
 });
+
+// ---------------------------------------------------------------- P2 batch 2: weighted average
+const hsCourses = [[78, 4], [85, 4], [72, 4], [90, 3], [95, 2]].map(([value, weight]) => ({ value, weight }));
+
+test('roundHalfUp strips binary noise and rounds half away from zero', () => {
+  assert.equal(roundHalfUp(82.35, 1), 82.4); assert.equal(roundHalfUp(82.5, 0), 83); assert.equal(roundHalfUp(1.005, 2), 1.01);
+  assert.equal(roundHalfUp(-2.5, 0), -3); assert.equal(roundHalfUp(82.3529411764706, 1), 82.4); assert.ok(Number.isNaN(roundHalfUp(Number.NaN, 1)));
+});
+
+test('weighted average worked examples on the page are reproduced by the calculator function', () => {
+  const ex1 = weightedMean(hsCourses);
+  assert.equal(ex1.weightTotal, 17); assert.equal(ex1.weightedSum, 1400);
+  close(ex1.mean, 1400 / 17); assert.equal(ex1.mean.toFixed(4), '82.3529'); assert.equal(roundHalfUp(ex1.mean, 1), 82.4); assert.equal(ex1.simpleMean, 84);
+  assert.deepEqual(hsCourses.map(({ value, weight }) => value * weight), [312, 340, 288, 270, 190]);
+  const classes = weightedMean([{ value: 70, weight: 40 }, { value: 85, weight: 20 }, { value: 76, weight: 30 }]);
+  assert.equal(classes.weightedSum, 6780); assert.equal(classes.weightTotal, 90); assert.equal(classes.mean.toFixed(2), '75.33'); assert.equal(classes.simpleMean, 77);
+  // example 3: add a 2-credit course, target 84 -> 98; target 85 -> 107.5 (impossible)
+  close((1400 + 2 * 98) / 19, 84); close((85 * 19 - 1400) / 2, 107.5);
+  // FAQ example and weights that are not 100
+  close(weightedMean([{ value: 78, weight: 4 }, { value: 85, weight: 4 }]).mean, 81.5);
+  close(weightedMean([{ value: 80, weight: 1 }, { value: 90, weight: 3 }]).mean, 87.5);
+  // equal weights == simple mean
+  close(weightedMean([{ value: 60, weight: 2 }, { value: 80, weight: 2 }]).mean, 70);
+  // invalid input is rejected instead of skipped
+  assert.equal(weightedMean([]), null);
+  assert.equal(weightedMean([{ value: 80, weight: 0 }]), null);
+  assert.equal(weightedMean([{ value: 80, weight: -1 }, { value: 90, weight: 1 }]), null);
+  assert.equal(weightedMean([{ value: Number.NaN, weight: 1 }]), null);
+});
+
+test('weighted average page: widget defaults, byline, schema, sources and links are rendered', () => {
+  const widgetSource = readFileSync(new URL('../src/components/tools/EducationStatisticsCalculator.astro', import.meta.url), 'utf8');
+  assert.ok(widgetSource.includes("[['78', '4'], ['85', '4'], ['72', '4'], ['90', '3'], ['95', '2']]"), 'widget defaults must equal worked example 1');
+  const page = html('/tools/weighted-average-calculator/');
+  const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
+  assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-17">2026-10-17<\/time>/);
+  assert.match(page, /"dateModified":"2026-10-17"/);
+  assert.match(page, /"@type":"WebApplication"/); assert.match(page, /"@type":"BreadcrumbList"/);
+  assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/);
+  assert.match(flat, /=SUMPRODUCT\(B2:B6,C2:C6\)\/SUM\(C2:C6\)/);
+  for (const href of ['/tools/grade-average/', '/tools/standard-deviation/']) assert.ok(page.includes(`href="${href}"`), href);
+  for (const host of ['law.moj.gov.tw', 'itl.nist.gov', 'support.microsoft.com']) assert.ok(page.includes(host), host);
+  for (const h2 of ['加權平均是什麼', '加權平均怎麼算', '高中學期總平均', '加權平均怎麼看', 'Excel', '常見錯誤']) assert.ok(flat.includes(h2), h2);
+  assert.doesNotMatch(page, /加權平均資金成本|流通在外/);
+});

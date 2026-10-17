@@ -1038,8 +1038,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'weighted-average-calculator', category: 'statistics', icon: 'Σ', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['grade-average', 't-score-calculator', 'teacher-exam-score-converter', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
-    name: { zh: '加權平均計算器', en: 'Weighted Average Calculator' }, short: { zh: '依各項數值與權重計算加權平均。', en: 'Calculate a weighted mean from values and weights.' },
+    relatedTools: ['grade-average', 'standard-deviation', 'teacher-exam-score-converter', 't-score-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
+    name: { zh: '加權平均計算器', en: 'Weighted Average Calculator' }, short: { zh: '輸入分數與權重（學分或比例）算出加權平均，附學分加權算例與 Excel SUMPRODUCT。', en: 'Weighted average from scores and weights (credits or percentages), with a credit example and Excel SUMPRODUCT.' },
   },
   {
     slug: 'class-rank-percentile-calculator', category: 'statistics', icon: '🏅', status: 'live', privacyLevel: 'local-only',
