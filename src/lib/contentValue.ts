@@ -125,27 +125,28 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'zh:class-rank-percentile-calculator': {
-    intro: '這一段用頁面預設的名次與班級人數示範計算方式，並說明工具沒有處理「並列名次」的地方。',
+    intro: '這一段針對班排百分比計算器目前的欄位：名次、總人數與並列人數；結果有 PR、前百分比、前面人數與後面人數。',
     panels: [
       {
-        title: '先用頁面預設值核對公式',
-        text: '頁面載入時預設名次 6、總人數 40：百分等級＝100×(40−6+0.5)÷40＝86.25，前百分比＝100×6÷40＝15%，你前面還有 5 人、後面還有 34 人。這組數字可以直接用計算機核對，公式用的是名次區間中點（+0.5），不是單純用名次除以總人數。',
+        title: '先用預設值核對公式',
+        text: '預設名次 6、總人數 40、並列 1：PR＝100×(40−6+0.5)÷40＝86.25，前百分比＝6÷40＝15%，前面 5 人、後面 34 人。把總人數改成 45、名次改成 4，前百分比 8.89%、PR 92.22；名次改成 5，前百分比 11.11%、PR 剛好 90.00，可以看出「PR 90」不等於「前 10%」。',
       },
       {
-        title: '測試名次最好與最差兩種邊界',
-        text: '把名次改成 1（全班最好）：百分等級變成 98.75%，前百分比 2.5%。再把名次改成等於總人數 40（全班最後）：百分等級只剩 1.25%，前百分比變成 100%。名次或總人數輸入非整數、名次大於總人數，或任一個小於 1，都會被擋下顯示錯誤。',
+        title: '並列人數會改變 PR，不會改變前百分比',
+        text: '名次 6、總人數 40、並列人數 3：後面人數＝40−(6+3−1)＝32，PR＝100×(32+1.5)÷40＝83.75，前百分比仍是 15%。名次加並列人數超過總人數（例如名次 39、並列 3、總人數 40）會顯示錯誤。學校實際怎麼處理並列，要以學校或受理單位的規則為準。',
       },
       {
-        title: '並列名次要自己先決定怎麼代入',
-        text: '這個工具只接受一個整數名次，沒有「並列」選項。如果班上有兩人並列第 6 名，你必須自己決定要用「6」還是依學校規則調整後的數字代入，工具不會提醒你，也不會自動處理並列。不同代入方式會得到不同百分等級，正式使用前要對照學校教務系統實際採用的排名規則。',
+        title: '最好與最差的邊界',
+        text: '名次 1、總人數 40：PR 98.75、前 2.5%，不是 100；名次 40：PR 1.25、前 100%。名次或人數不是整數、小於 1、名次大於總人數，工具都會顯示錯誤，不會硬算。',
       },
     ],
     checklist: [
-      '名次與總人數都是正整數，且名次不大於總人數。',
-      '已用「名次區間中點」公式（100×(總人數−名次+0.5)÷總人數）手動核對過一次結果。',
-      '班上如有並列名次，已依學校實際規則決定代入哪個數字，而不是直接照抄名次冊。',
-      '「你前面還有幾人、後面還有幾人」的數字已和名次冊人工核對過。',
+      '名次、總人數與並列人數都是正整數，且名次加上並列人數不大於總人數。',
+      '用 PR＝100×(人數−名次+0.5)÷人數 手動核對過一次，前百分比＝名次÷人數也核對過。',
+      '要拿來比「前 10%」的門檻時，已用名次對照表或反推欄位確認名次，沒有直接用 PR 90 代替。',
+      '申請或報告用的數字，已對照學校或簡章指定的算法與進位方式。',
     ],
+    reviewedAt: '2026-10-17',
   },
   'zh:standard-deviation': {
     intro: '這一段用頁面預設的五個分數示範母體與樣本兩種標準差的差異，並示範資料只有一筆、輸入含非數字時會發生什麼事。',
@@ -729,7 +730,7 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'zh:percentile-rank-calculator': {
-    intro: '這一段用頁面預設的「低於／同分／總人數」示範 PR 值公式，並說明它跟「排名百分比計算器」使用完全不同的輸入資料，不能互相替代。',
+    intro: '這一段用頁面預設的「低於／同分／總人數」示範 PR 值公式，並說明它跟「班排百分比計算器」使用完全不同的輸入資料，不能互相替代。',
     panels: [
       {
         title: '先用頁面預設值核對公式',
@@ -740,15 +741,15 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
         text: '把「同分人數」改成 0、其他不變：PR 值變成 100×24÷40＝60，跟同分 1 人時的 61.25 有明顯差距，代表忽略同分人數會讓 PR 值偏低估計。三個欄位都必須是整數，且「低於人數＋同分人數」不能超過「總人數」，否則會被擋下顯示錯誤。',
       },
       {
-        title: '跟「排名百分比計算器」的輸入資料完全不同',
-        text: '這個公式（低於人數 + 0.5×同分人數）是 PR 值的標準定義之一，但跟本站「排名百分比計算器」用的「總人數-名次+0.5」公式輸入資料完全不同——PR 計算器要的是「有多少人分數比你低」，排名百分比計算器要的是「你的名次是第幾名」，兩者不能把數字互相套用，混用會得到看似合理但意義錯誤的結果。',
+        title: '跟「班排百分比計算器」的輸入資料完全不同',
+        text: '這個公式（低於人數 + 0.5×同分人數）是 PR 值的標準定義之一，但跟本站「班排百分比計算器」用的「總人數-名次+0.5」公式輸入資料完全不同——PR 計算器要的是「有多少人分數比你低」，排名百分比計算器要的是「你的名次是第幾名」，兩者不能把數字互相套用，混用會得到看似合理但意義錯誤的結果。',
       },
     ],
     checklist: [
       '「低於人數」「同分人數」「總人數」都已確認是整數，且低於人數加同分人數沒有超過總人數。',
       '已用 100×(低於人數+0.5×同分人數)÷總人數 手動核對過頁面顯示的 PR 值。',
       '「同分人數」欄位沒有被忽略或誤填為 0，除非你確定真的沒有同分的人。',
-      '沒有把這個工具的輸入資料（低於人數、同分人數）跟「排名百分比計算器」的輸入資料（名次、總人數）搞混。',
+      '沒有把這個工具的輸入資料（低於人數、同分人數）跟「班排百分比計算器」的輸入資料（名次、總人數）搞混。',
     ],
     reviewedAt: '2026-10-16',
   },
@@ -1121,27 +1122,28 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'en:class-rank-percentile-calculator': {
-    intro: 'This section covers what Class Rank Percentile Calculator’s rank-to-percentile formula rewards and penalizes, using the page’s own default numbers, since the formula is a midpoint estimate, not a lookup into an actual score distribution.',
+    intro: 'This section covers the current fields of the Class Rank Percentile Calculator: rank, group size and tied students, with PR, top percent, students ahead and students behind as results.',
     panels: [
       {
-        title: 'Check the default rank against the formula by hand',
-        text: 'The page loads with Rank 6 and Class size 40. Percentile rank = 100 × (40 − 6 + 0.5) ÷ 40 = 86.25, and the “approximate top percentage” field shows 100 × 6 ÷ 40 = 15%. Both numbers come from rank and class size alone — the tool has no idea what the actual test scores were, so two students with rank 6 in two very differently-scored classes get the identical 86.25 result.',
+        title: 'Check the defaults against the formulas',
+        text: 'Rank 6, size 40, tied 1: PR = 100 × (40 − 6 + 0.5) ÷ 40 = 86.25, top percent = 6 ÷ 40 = 15%, 5 students ahead and 34 behind. Change the size to 45 and the rank to 4 for 8.89% and PR 92.22; rank 5 gives 11.11% and a PR of exactly 90.00, which shows that PR 90 is not the same as the top 10%.',
       },
       {
-        title: 'Rank 1 is never exactly the 100th percentile',
-        text: 'Change Rank to 1 with class size still 40: the result is 98.75, not 100 — the +0.5 term places every rank at the midpoint of the interval it represents, so even first place in a finite class falls a bit short of a perfect percentile. At the other end, Rank 40 (last place) in a 40-person class gives 1.25, not 0, for the same reason. Neither of those is a bug — it is the defined behavior of the midpoint method the tool uses.',
+        title: 'Tied students change PR but not the top percent',
+        text: 'Rank 6, size 40, tied 3: students behind = 40 − (6 + 3 − 1) = 32 and PR = 100 × (32 + 1.5) ÷ 40 = 83.75, while the top percent stays 15%. A rank plus tied count above the size (for example rank 39, tied 3, size 40) shows an error. How a school actually treats ties is set by the school or receiving organisation.',
       },
       {
-        title: 'Tied ranks are not modeled — you decide what number to enter',
-        text: 'This calculator accepts a single integer rank with no option for ties, and rank must be a whole number no greater than class size or the calculation is blocked with an error. If two students are tied for 6th place, the tool will not detect or flag that; you have to decide in advance — based on your school’s or program’s actual tie-breaking rule — which number to type in, since different choices produce different percentile results.',
+        title: 'Best and worst rank',
+        text: 'Rank 1 of 40 gives PR 98.75 and the top 2.5%, not 100; rank 40 gives PR 1.25 and 100%. Non-integer inputs, values below 1 or a rank above the size produce an error instead of a number.',
       },
     ],
     checklist: [
-      'Rank and class size are both positive whole numbers, and rank does not exceed class size — otherwise Calculate is blocked.',
-      'The result has been checked against 100 × (class size − rank + 0.5) ÷ class size by hand at least once.',
-      'Rank 1 is expected to show a percentile just under 100 (98.75 in the default 40-person case), not exactly 100.',
-      'Any tied rank in the source data has been resolved into a single number using your institution’s actual rule before it goes into this tool.',
+      'Rank, size and tied count are positive whole numbers, and rank plus tied count does not exceed the size.',
+      'PR = 100 × (size − rank + 0.5) ÷ size and top percent = rank ÷ size have been checked by hand once.',
+      'For a top-10% threshold, the rank was read from the rank table or the reverse box, not from PR 90.',
+      'Numbers used for an application or report follow the method and rounding the receiving organisation specifies.',
     ],
+    reviewedAt: '2026-10-17',
   },
   'en:color-generator': {
     intro: 'This section covers what Color Generator actually returns for each random color, the keyboard shortcut, and one built-in feature that never appears on the page despite existing in the code.',

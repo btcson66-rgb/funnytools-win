@@ -24,9 +24,10 @@ import groupGeneratorContent from '../i18n/tools/group-generator';
 import gpaCalculatorContent from '../i18n/tools/gpa-calculator';
 import gradeAverageContent from '../i18n/tools/grade-average';
 import {
-  classRankContent, cronbachAlphaContent, independentTTestContent, normalizedScoreContent,
+  cronbachAlphaContent, independentTTestContent, normalizedScoreContent,
   teacherExamContent,
 } from '../i18n/tools/education-statistics';
+import classRankContent from '../i18n/tools/class-rank-percentile-calculator';
 import percentileRankContent from '../i18n/tools/percentile-rank-calculator';
 import tScoreContent from '../i18n/tools/t-score-calculator';
 import zScoreContent from '../i18n/tools/z-score-calculator';

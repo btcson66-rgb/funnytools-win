@@ -189,3 +189,177 @@ export function gradeSummary(rows: { score: number | null; weight: number | null
     : null;
   return { count, sum, average: count ? sum / count : null, weighted };
 }
+
+// ---------------------------------------------------------------------------
+// Class rank -> percentile helpers (class-rank-percentile-calculator)
+// ---------------------------------------------------------------------------
+
+export interface RankPercentileResult {
+  /** Percentile rank by the midpoint method, PR = 100 * (below + 0.5 * tied) / N. */
+  pr: number;
+  /** 100 * rank / N: the "top x%" figure. */
+  topPercent: number;
+  /** People ranked strictly better than the tied group. */
+  ahead: number;
+  /** People ranked strictly worse than the tied group. */
+  behind: number;
+}
+
+/**
+ * `rank` is the shared (competition) rank, e.g. three people tied for 6th all have rank 6 and the next
+ * person is 9th. `tied` is how many people share that rank (1 = no tie). Null when the counts are invalid.
+ */
+export function rankPercentile(rank: number, total: number, tied = 1): RankPercentileResult | null {
+  if (![rank, total, tied].every(Number.isInteger)) return null;
+  if (rank < 1 || total < 1 || tied < 1 || rank + tied - 1 > total) return null;
+  const behind = total - (rank + tied - 1);
+  const pr = percentileRankMidpoint(behind, tied, total);
+  if (pr === null) return null;
+  return { pr, topPercent: (100 * rank) / total, ahead: rank - 1, behind };
+}
+
+/** Largest rank r with 100 * r / N <= topPercent (0 when the percentage is smaller than one rank). Null on invalid input. */
+export function maxRankForTopPercent(total: number, topPercent: number): number | null {
+  if (!Number.isInteger(total) || total < 1 || !Number.isFinite(topPercent) || topPercent <= 0 || topPercent > 100) return null;
+  // toPrecision strips binary noise such as 0.07 * 100 = 7.000000000000001 before flooring.
+  return Math.floor(Number(((total * topPercent) / 100).toPrecision(12)));
+}
+
+// ---------------------------------------------------------------------------
+// Independent-samples t test from summary statistics (independent-samples-t-test-calculator)
+// ---------------------------------------------------------------------------
+
+function logGamma(z: number): number {
+  const coefficients = [676.5203681218851, -1259.1392167224028, 771.3234287776531, -176.6150291621406, 12.507343278686905, -0.13857109526572012, 9.984369578019572e-6, 1.5056327351493116e-7];
+  if (z < 0.5) return Math.log(Math.PI) - Math.log(Math.sin(Math.PI * z)) - logGamma(1 - z);
+  const zz = z - 1;
+  let x = 0.9999999999998099;
+  coefficients.forEach((coefficient, index) => { x += coefficient / (zz + index + 1); });
+  const t = zz + coefficients.length - 0.5;
+  return 0.5 * Math.log(2 * Math.PI) + (zz + 0.5) * Math.log(t) - t + Math.log(x);
+}
+
+function betaFraction(a: number, b: number, x: number): number {
+  const maxIterations = 200;
+  const epsilon = 3e-12;
+  const floor = 1e-30;
+  const qab = a + b;
+  const qap = a + 1;
+  const qam = a - 1;
+  let c = 1;
+  let d = 1 - (qab * x) / qap;
+  if (Math.abs(d) < floor) d = floor;
+  d = 1 / d;
+  let h = d;
+  for (let m = 1; m <= maxIterations; m += 1) {
+    const m2 = 2 * m;
+    let aa = (m * (b - m) * x) / ((qam + m2) * (a + m2));
+    d = 1 + aa * d; if (Math.abs(d) < floor) d = floor;
+    c = 1 + aa / c; if (Math.abs(c) < floor) c = floor;
+    d = 1 / d; h *= d * c;
+    aa = (-(a + m) * (qab + m) * x) / ((a + m2) * (qap + m2));
+    d = 1 + aa * d; if (Math.abs(d) < floor) d = floor;
+    c = 1 + aa / c; if (Math.abs(c) < floor) c = floor;
+    d = 1 / d;
+    const delta = d * c;
+    h *= delta;
+    if (Math.abs(delta - 1) < epsilon) break;
+  }
+  return h;
+}
+
+/** Regularized incomplete beta function I_x(a, b). */
+export function regularizedBeta(x: number, a: number, b: number): number {
+  if (x <= 0) return 0;
+  if (x >= 1) return 1;
+  const front = Math.exp(logGamma(a + b) - logGamma(a) - logGamma(b) + a * Math.log(x) + b * Math.log(1 - x));
+  return x < (a + 1) / (a + b + 2)
+    ? (front * betaFraction(a, b, x)) / a
+    : 1 - (front * betaFraction(b, a, 1 - x)) / b;
+}
+
+/** Two-tailed p value of Student's t distribution with `df` degrees of freedom (df may be fractional). */
+export function tTwoTailedP(t: number, df: number): number {
+  if (!Number.isFinite(t) || !Number.isFinite(df) || df <= 0) return Number.NaN;
+  return regularizedBeta(df / (df + t * t), df / 2, 0.5);
+}
+
+/** Two-tailed critical value: the t >= 0 with P(|T| > t) = alpha. */
+export function tCritical(df: number, alpha = 0.05): number {
+  let lower = 0;
+  let upper = 200;
+  for (let iteration = 0; iteration < 100; iteration += 1) {
+    const middle = (lower + upper) / 2;
+    if (tTwoTailedP(middle, df) > alpha) lower = middle;
+    else upper = middle;
+  }
+  return (lower + upper) / 2;
+}
+
+export type TTestMethod = 'welch' | 'student';
+
+export interface TTestInput {
+  n1: number; mean1: number; sd1: number;
+  n2: number; mean2: number; sd2: number;
+}
+
+export interface TTestResult {
+  method: TTestMethod;
+  difference: number;
+  standardError: number;
+  t: number;
+  df: number;
+  /** Two-tailed p value. */
+  p: number;
+  /** 95% confidence interval of the mean difference (M1 - M2). */
+  ciLower: number;
+  ciUpper: number;
+  pooledSd: number;
+  /** Cohen's d with the pooled SD. */
+  cohenD: number;
+  /** Hedges' g = d * (1 - 3 / (4 * (n1 + n2 - 2) - 1)). */
+  hedgesG: number;
+}
+
+/**
+ * Welch (default) or Student pooled-variance t test from n, mean and SAMPLE standard deviation of each group.
+ * Null when n is not an integer above 1, an SD is not above 0, or any input is not finite.
+ */
+export function independentTTest(input: TTestInput, method: TTestMethod = 'welch'): TTestResult | null {
+  const { n1, mean1, sd1, n2, mean2, sd2 } = input;
+  if (![n1, mean1, sd1, n2, mean2, sd2].every(Number.isFinite)) return null;
+  if (!Number.isInteger(n1) || !Number.isInteger(n2) || n1 <= 1 || n2 <= 1 || sd1 <= 0 || sd2 <= 0) return null;
+  const difference = mean1 - mean2;
+  const pooledDf = n1 + n2 - 2;
+  const pooledSd = Math.sqrt(((n1 - 1) * sd1 ** 2 + (n2 - 1) * sd2 ** 2) / pooledDf);
+  let standardError: number;
+  let df: number;
+  if (method === 'student') {
+    standardError = pooledSd * Math.sqrt(1 / n1 + 1 / n2);
+    df = pooledDf;
+  } else {
+    const v1 = sd1 ** 2 / n1;
+    const v2 = sd2 ** 2 / n2;
+    standardError = Math.sqrt(v1 + v2);
+    df = (v1 + v2) ** 2 / (v1 ** 2 / (n1 - 1) + v2 ** 2 / (n2 - 1));
+  }
+  const t = difference / standardError;
+  const p = tTwoTailedP(t, df);
+  const critical = tCritical(df, 0.05);
+  const cohenD = difference / pooledSd;
+  return {
+    method, difference, standardError, t, df, p,
+    ciLower: difference - critical * standardError,
+    ciUpper: difference + critical * standardError,
+    pooledSd, cohenD,
+    hedgesG: cohenD * (1 - 3 / (4 * pooledDf - 1)),
+  };
+}
+
+/** APA-style p value text: "p = .022", "p < .001"; no leading zero because p cannot exceed 1. */
+export function formatApaP(p: number): string {
+  if (!Number.isFinite(p)) return '';
+  if (p < 0.001) return 'p < .001';
+  if (p >= 0.9995) return 'p > .999';
+  return `p = ${p.toFixed(3).replace(/^0/, '')}`;
+}

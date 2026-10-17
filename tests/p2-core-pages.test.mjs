@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import {
   normalCdf, tScoreFrom, rawScoreForT, rawScoreForZ, roundHalfUp, describeData, percentileRankMidpoint, countBelowAndEqual, parseNumbers,
   weightedMean, gradeSummary,
+  rankPercentile, maxRankForTopPercent, independentTTest, formatApaP, tTwoTailedP, tCritical,
 } from '../src/lib/educationStats.ts';
 
 const close = (actual, expected, eps = 1e-9) => assert.ok(Math.abs(actual - expected) < eps, `${actual} !~ ${expected}`);
@@ -275,5 +276,63 @@ test('semester grade page: widget defaults, byline, schema, regulation tables an
   assert.match(flat, /國中小：《國民小學及國民中學學生學習評量辦法》全文沒有「四捨五入」或「進位」的規定/);
   assert.match(flat, /依各校規定（未逐校查證）/);
   const en = html('/en/tools/grade-average/');
+  assert.match(en, /"dateModified":"2026-10-17"/);
+});
+
+// ---------------------------------------------------------------- P2 batch 3: class rank percentage (班排)
+test('class rank worked examples on the page are reproduced by the calculator function', () => {
+  const ex1 = rankPercentile(6, 40);
+  close(ex1.pr, 86.25); close(ex1.topPercent, 15); assert.equal(ex1.ahead, 5); assert.equal(ex1.behind, 34);
+  // example 2: top 10% of 45 students
+  assert.equal(maxRankForTopPercent(45, 10), 4);
+  assert.equal((100 * 4 / 45).toFixed(2), '8.89'); assert.equal((100 * 5 / 45).toFixed(2), '11.11');
+  assert.equal(rankPercentile(4, 45).pr.toFixed(2), '92.22'); assert.equal(rankPercentile(5, 45).pr.toFixed(2), '90.00');
+  assert.equal(rankPercentile(5, 45).topPercent.toFixed(2), '11.11');
+  // example 3: whole school
+  const school = rankPercentile(90, 480);
+  close(school.topPercent, 18.75); assert.equal(school.pr.toFixed(2), '81.35'); assert.equal(rankPercentile(6, 480).topPercent, 1.25);
+  // ties: three students share 6th place of 40
+  const tie = rankPercentile(6, 40, 3);
+  assert.equal(tie.behind, 32); close(tie.pr, 83.75); close(tie.topPercent, 15); assert.equal(rankPercentile(39, 40, 3), null);
+  // boundaries and invalid input
+  close(rankPercentile(1, 40).pr, 98.75); close(rankPercentile(1, 40).topPercent, 2.5);
+  close(rankPercentile(40, 40).pr, 1.25); close(rankPercentile(40, 40).topPercent, 100);
+  for (const bad of [[0, 40], [41, 40], [6.5, 40], [6, 0], [6, 40, 0], [6, 40, 1.5], [-1, 40]]) assert.equal(rankPercentile(...bad), null, bad.join(','));
+  // PR = 100 - top% + 50/N for every rank when nobody ties
+  for (const n of [30, 40, 45, 480]) for (let r = 1; r <= n; r += 1) close(rankPercentile(r, n).pr, 100 - 100 * r / n + 50 / n, 1e-9);
+  // agrees with the percentile-rank function when counts are given directly (the Excel example)
+  const quiz = [95, 90, 90, 85, 80, 80, 80, 70, 65, 50];
+  const c = countBelowAndEqual(quiz, 80);
+  close(percentileRankMidpoint(c.below, c.equal, c.total), 45); close(rankPercentile(5, 10, 3).pr, 45); close(rankPercentile(1, 10).pr, 95);
+  close((10 - 5 + 0.5) / 10 * 100, 55); // the no-tie Excel formula is wrong for the tied student
+});
+
+test('maxRankForTopPercent floors exactly and ignores binary noise', () => {
+  assert.equal(maxRankForTopPercent(30, 10), 3); assert.equal(maxRankForTopPercent(40, 10), 4); assert.equal(maxRankForTopPercent(35, 10), 3);
+  assert.equal(maxRankForTopPercent(100, 0.07), 0); assert.equal(maxRankForTopPercent(100, 0.07 * 100), 7);
+  assert.equal(maxRankForTopPercent(700, 0.57), 3); assert.equal(maxRankForTopPercent(1000, 0.29), 2); assert.equal(maxRankForTopPercent(300, 1.1), 3);
+  assert.equal(maxRankForTopPercent(40, 100), 40);
+  for (const bad of [[0, 10], [40.5, 10], [40, 0], [40, -5], [40, 100.1], [40, Number.NaN]]) assert.equal(maxRankForTopPercent(...bad), null);
+});
+
+test('class rank page: defaults, byline, schema, rank table, official quotes and sources are rendered', () => {
+  const page = html('/tools/class-rank-percentile-calculator/');
+  const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
+  assert.match(flat, /<h1[^>]*>班排百分比計算器<\/h1>/);
+  assert.match(flat, /data-field="rank"[^>]*value="6"/); assert.match(flat, /data-field="total"[^>]*value="40"/); assert.match(flat, /data-field="tied"[^>]*value="1"/);
+  assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-17">2026-10-17<\/time>/);
+  assert.match(page, /"dateModified":"2026-10-17"/);
+  assert.match(page, /"@type":"WebApplication"/); assert.match(page, /"@type":"BreadcrumbList"/);
+  assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/); assert.doesNotMatch(page, /noindex/);
+  assert.match(flat, /<th scope="row">45 人<\/th><td>第 2 名<\/td><td>第 4 名<\/td><td>第 9 名<\/td><td>第 13 名<\/td><td>第 22 名<\/td>/);
+  for (const href of ['/tools/percentile-rank-calculator/', '/tools/t-score-calculator/', '/tools/standard-deviation/']) assert.ok(page.includes(`href="${href}"`), href);
+  for (const host of ['cac.edu.tw/star115/appform_1.php', 'cac.edu.tw/apply115/appform_1.php', 'pedia.cloud.edu.tw', 'support.microsoft.com']) assert.ok(page.includes(host), host);
+  for (const h2 of ['班排是什麼意思', '班排百分比怎麼算', '名次對照表', '班排、校排、PR 差在哪', '申請入學脈絡', '同名次', 'Excel', '常見錯誤']) assert.ok(flat.includes(h2), h2);
+  // official wording quoted from the 115 star-recommendation rules
+  for (const quote of ['全校排名百分比符合大學規定', '大學得就前百分之 20、前百分之 30、前百分之 40、前百分之 50，擇一訂定全校統一標準', '由百分比小者優先分發']) assert.ok(flat.includes(quote), quote);
+  assert.ok(flat.includes('查核日期 2026-10-17'));
+  assert.ok(flat.includes('=(COUNTIF($A$2:$A$11,&quot;&lt;&quot;&amp;A6)+COUNTIF($A$2:$A$11,A6)/2)/COUNT($A$2:$A$11)*100'));
+  const en = html('/en/tools/class-rank-percentile-calculator/');
   assert.match(en, /"dateModified":"2026-10-17"/);
 });

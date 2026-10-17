@@ -14,69 +14,6 @@ function content(zh: ToolContent, en: ToolContent): LocalizedToolContent {
   return { zh, en };
 }
 
-export const classRankContent = content(
-  {
-    name: '排名百分比計算器', short: '依班級名次與總人數估算排名百分等級。', long: '輸入名次（第 1 名為最佳）與班級總人數，以名次區間中點估算百分等級，並顯示大約位於前百分之多少。',
-    seoTitle: '班級排名百分比計算器｜名次轉 PR', seoDescription: '依班級名次和總人數估算百分等級與前百分比，附公式與教育應用說明。', keywords: ['排名百分比', '班級名次', 'class rank percentile'],
-    contentSections: [
-      {
-        heading: '速答：班級名次怎麼換成百分等級',
-        paragraphs: [
-          '排名百分比可用 PR = 100 × (N − r + 0.5) / N 估算；例如 40 人班第 6 名，PR = 86.25，約位於前 15%，表示這個名次高於班內多數參照群體。',
-        ],
-      },
-      {
-        heading: '程式算法、顯示精度與邊界條件',
-        paragraphs: [
-          '程式只接受正整數名次 r 與總人數 N，第 1 名代表最高，且 r 不得大於 N。百分等級用單一名次所占百分區間的中點估算：PR = 100×(N−r+0.5)/N；「約位於前百分比」則另外用 100×r/N 計算。兩個結果都先用完整數值精度運算，最後顯示到小數點後最多 2 位並去除尾端 0。',
-          '40 人班第 6 名的 PR 是 100×(40−6+0.5)/40=86.25，前百分比是 100×6/40=15%。第 1 名不會顯示 PR 100，而是 98.75，因為中點法把第一名放在最上方 2.5% 區間的中央。',
-        ],
-      },
-      {
-        heading: '同名次與向家長說明的限制',
-        paragraphs: [
-          '這個簡易工具沒有「同分人數」欄位，因此把每個名次視為只占一個位置。若三位學生並列第 6、學校採競賽名次、密集名次或另定同分比序，直接輸入 6 不會反映三人共同占用的排名區間。正式成績單、升學申請與獎項門檻必須使用學校或受理單位指定算法。',
-          '向家長說明時可說「在這 40 人班內，第 6 名依本頁中點法約為 PR 86.25」，不要說成「考了 86.25 分」或「能力超過全國 86.25%」。參照群體只有這個班級，換到不同班級、年級或不同次考試就不是同一常模。',
-        ],
-      },
-      {
-        heading: '有完整分數時應改看分布',
-        paragraphs: [
-          '只有名次與總人數時，本頁能提供有限群體的粗略位置；若手上有全班原始分數，應先檢查平均、標準差與同分情況，再判斷是否需要換算標準分數。',
-        ],
-        link: {
-          prefix: '先用',
-          label: '標準差計算器檢查班級分數的集中與分散程度',
-          href: '/tools/standard-deviation/',
-          suffix: '，需要同量尺比較時再搭配 T 分數計算器。',
-        },
-      },
-    ],
-    instructions: ['輸入班級名次，第 1 名代表最高。', '輸入班級或參照群體總人數。', '計算百分等級與前百分比。'], examples: ['將班級名次轉為較容易跨班理解的相對位置。', '初步說明升學資料中的班排比例。', '追蹤同一參照群體內的相對變化。'],
-    formula: { expression: 'PR = 100 × (N − r + 0.5) / N；前百分比 = 100 × r / N', explanation: 'r 為名次（1 最佳），N 為總人數；0.5 是將單一名次放在其百分區間中點的修正。程式不接收同分人數，也不套用任何學校的同分比序。' }, educationApplication: '排名百分比屬於常模參照：它描述在特定群體內的位置，不能回答是否達到課程精熟或及格標準。班級規模、群體組成與同名次規則都會改變結果；申請或正式認證若有指定算法，應以該單位規則為準。', reportTip: '可寫成：「該生在 40 人班級中排名第 6，依單一名次中點法估算 PR = 86.25，約位於前 15%。」並註明參照群體為該班，未處理同名次。',
-    notes: ['本工具只接受整數名次與總人數，且第 1 名代表最高。', '同名次、跨班比較、轉學生與缺考者是否列入分母，都必須依資料提供者的規則處理。', 'PR 與前百分比是相關但不同的呈現；正式門檻應使用規定中的欄位與四捨五入方式。'],
-    sources: [{ label: 'ETS Standards for Quality and Fairness：Percentile Rank 與 Norm Group', href: 'https://www.ets.org/pdfs/about/standards-quality-fairness.pdf', note: 'ETS 將百分等級定義為相對於指定群體的位置，並指出有些定義會把同分者的一半納入；本頁使用單一名次的區間中點估算，未處理同分群組。' }],
-    faq: [{ q: '第 1 名為什麼不是 PR 100？', a: '中點法將每個名次放在所代表區間的中點，因此有限群體的最高名次會略低於 100。' }, { q: '同名次怎麼處理？', a: '本簡易工具未納入同名次人數；正式用途請依學校或申請單位規則。' }, { q: '前 10% 和 PR 90 一樣嗎？', a: '概念接近但算法與四捨五入可能不同，正式門檻應以規定為準。' }],
-    labels: { rank: '目前名次（r）', total: '總人數（N）', calculate: '計算排名百分比', result: '百分等級（PR）', top: '約位於前百分比', invalid: '名次與總人數必須是正整數，且名次不可超過總人數。' }, disclaimer: disclaimer.zh, privacyNote: privacy.zh,
-  },
-  {
-    name: 'Class Rank Percentile Calculator', short: 'Estimate class-rank percentile from rank and class size.', long: 'Enter rank (1 is best) and class size to estimate percentile rank using a rank-interval midpoint, plus a rough top-percent figure.',
-    seoTitle: 'Class Rank Calculator | Rank to Percentile', seoDescription: 'Convert class rank and class size to an estimated percentile rank and top percentage.', keywords: ['class rank percentile calculator', 'rank percentage', 'education statistics'],
-    contentSections: [
-      {
-        heading: 'Quick answer: convert class rank to percentile',
-        paragraphs: [
-          'Class-rank percentile can be estimated with PR = 100 × (N − r + 0.5) / N; for example, rank 6 in a class of 40 gives PR = 86.3 and an approximate top 15% position.',
-        ],
-      },
-    ],
-    instructions: ['Enter the rank, with 1 as the highest.', 'Enter the class or reference-group size.', 'Calculate percentile rank and top percentage.'], examples: ['Express class rank as a relative position.', 'Interpret rank information in application records.', 'Track relative change within the same cohort.'],
-    formula: { expression: 'PR = 100 × (N − r + 0.5) / N', explanation: 'r is rank (1 is best), N is group size, and 0.5 places each rank at the midpoint of its percentile interval. Top percent is approximated by 100 × r / N.' }, educationApplication: 'Class-rank percentages depend on cohort size and composition. For admissions or certification, follow the official method, especially its treatment of tied ranks.', reportTip: 'Example: “The student ranked 6th in a class of 40, corresponding to an estimated PR = 86.3 using the midpoint method.”',
-    faq: [{ q: 'Why is first place not PR 100?', a: 'The midpoint method locates each rank at the center of its interval, so the top rank in a finite group falls just below 100.' }, { q: 'How are tied ranks handled?', a: 'This simple tool does not model ties. Follow the school or receiving organization’s rule for formal use.' }, { q: 'Is top 10% exactly the same as PR 90?', a: 'They are related, but formulas and rounding can differ. Use the stated official threshold.' }],
-    labels: { rank: 'Rank (r)', total: 'Class size (N)', calculate: 'Calculate rank percentile', result: 'Percentile rank (PR)', top: 'Approximate top percentage', invalid: 'Rank and class size must be positive whole numbers, and rank cannot exceed class size.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
-  },
-);
-
 export const normalizedScoreContent = content(
   {
     name: '常態化分數轉換工具', short: '將原始分數線性轉換到指定平均數與標準差。', long: '先將原始分數換算成 Z 分數，再映射到你指定的目標平均數與標準差。這是線性標準化，不會把偏態資料「變成常態分配」。',

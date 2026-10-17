@@ -1044,8 +1044,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'class-rank-percentile-calculator', category: 'statistics', icon: '🏅', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['t-score-calculator', 'standard-deviation', 'grade-average', 'teacher-exam-score-converter', 'percentile-rank-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
-    name: { zh: '排名百分比計算器', en: 'Class Rank Percentile Calculator' }, short: { zh: '依班級名次與總人數估算排名百分等級。', en: 'Estimate class-rank percentile from rank and class size.' },
+    relatedTools: ['percentile-rank-calculator', 't-score-calculator', 'standard-deviation', 'grade-average', 'teacher-exam-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
+    name: { zh: '班排百分比計算器', en: 'Class Rank Percentile Calculator' }, short: { zh: '輸入班排名次與人數，算出前百分之幾與 PR 百分等級，附班排前 10% 名次對照表。', en: 'Convert class rank to the top-percent figure and percentile rank, with a rank table for the top 10%.' },
   },
   {
     slug: 'normalized-score-converter', category: 'statistics', icon: '↔', status: 'live', privacyLevel: 'local-only',
