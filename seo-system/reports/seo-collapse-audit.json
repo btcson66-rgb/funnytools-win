@@ -1,17 +1,15 @@
 {
-  "generatedAt": "2026-10-17T06:03:14.156Z",
+  "generatedAt": "2026-10-17T09:51:28.210Z",
   "mode": "local",
   "local": {
-    "buildPages": 515,
-    "indexablePages": 20,
-    "sitemapUrls": 20,
+    "buildPages": 513,
+    "indexablePages": 18,
+    "sitemapUrls": 18,
     "internalHttpLinks": 0,
     "orphanIndexable": [],
     "corePaths": [
       "/",
       "/education-statistics/",
-      "/category/statistics/",
-      "/guides/t-score-calculator-guide/",
       "/tools/t-score-calculator/",
       "/tools/grade-average/",
       "/tools/class-rank-percentile-calculator/",
