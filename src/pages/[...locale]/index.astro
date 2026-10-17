@@ -16,47 +16,45 @@ export function getStaticPaths() {
 const { lang } = Astro.props as { lang: Locale };
 const zh = lang === 'zh';
 
-// The ten retained tools, grouped by what the visitor is trying to do.
-// Slugs must stay in sync with INDEXABLE_PATHS in src/lib/indexPolicy.ts.
+// The ten retained tools, grouped by the question the visitor arrives with. The four groups and their ids are
+// the same as the sections of the hub (/education-statistics/#position ...), where each tool also gets a
+// "which question does it answer" sentence and a longer note. The home page only routes: one sentence per
+// group, then the tools. Slugs must stay in sync with INDEXABLE_PATHS in src/lib/indexPolicy.ts.
 const groups = [
   {
-    id: 'compute-grades',
-    title: zh ? '算成績' : 'Work out grades',
+    id: 'position',
+    start: zh ? '我的分數在班上算哪裡' : 'Where does my score sit in the class',
+    title: zh ? '我的分數在這群人裡站哪裡' : 'Where does my score sit in the group',
     body: zh
-      ? '期中、期末、平時成績各占不同比例時，用這組工具算出學期成績；準備教師甄試時，可以依筆試、口試、試教的權重模擬總分。'
-      : 'Use these when midterm, final and homework carry different weights, or to simulate a weighted teacher-exam total.',
+      ? '有同一次考試的全班平均與標準差，用 Z 分數與 T 分數；只有名次與人數，用班排百分比；想知道有多少比例的人分數比你低，用 PR 值。'
+      : 'With the class mean and standard deviation of the same exam, use Z and T scores; with only a rank and a head count, use the class-rank percentage; to see what share of people scored below you, use PR.',
+    slugs: ['t-score-calculator', 'percentile-rank-calculator', 'class-rank-percentile-calculator', 'z-score-calculator'],
+  },
+  {
+    id: 'combine',
+    start: zh ? '幾項成績合成一個數字' : 'Combine several scores into one',
+    title: zh ? '幾項成績怎麼合成一個數字' : 'How do several scores combine into one number',
+    body: zh
+      ? '平時、段考、期末的占分不同，或各科學分不同，就不能用簡單平均，要乘上占分比例或學分。'
+      : 'When coursework, midterm and final carry different weights, or subjects carry different credits, a simple average is wrong; multiply by the weights or credits.',
     slugs: ['grade-average', 'weighted-average-calculator', 'teacher-exam-score-converter'],
   },
   {
-    id: 'see-rank',
-    title: zh ? '看排名' : 'Check rank',
+    id: 'describe',
+    start: zh ? '分數多分散、兩組有沒有差' : 'How spread out, do two groups differ',
+    title: zh ? '這批資料有多分散、兩組有沒有差異' : 'How spread out is the data, and do two groups differ',
     body: zh
-      ? '知道班上名次與總人數，想換成百分等級；或手上有全班分數，想知道某個分數贏過多少比例的同學。'
-      : 'Turn a class rank into a percentile, or find what share of a class scored below a given mark.',
-    slugs: ['class-rank-percentile-calculator', 'percentile-rank-calculator'],
-  },
-  {
-    id: 'standardize',
-    title: zh ? '標準化' : 'Standardize scores',
-    body: zh
-      ? '不同考試的平均與難度不同，不能直接比原始分數。先換成 Z 分數，再換成平均 50、標準差 10 的 T 分數。'
-      : 'Exams differ in mean and difficulty, so raw scores are not comparable. Convert to a Z score, then to a T score (mean 50, SD 10).',
-    slugs: ['z-score-calculator', 't-score-calculator'],
-  },
-  {
-    id: 'statistics',
-    title: zh ? '分布與統計檢定' : 'Spread and statistical tests',
-    body: zh
-      ? '輸入一組分數得到平均、變異數與標準差；有兩組的樣本數、平均數與標準差時，可以做獨立樣本 t 檢定。'
-      : 'Get the mean, variance and standard deviation of a set of scores, or run an independent-samples t test from two groups\' summary statistics.',
+      ? '一組分數用標準差看分散程度；兩個班或兩種教法要比平均，把兩組的人數、平均與標準差放進 t 檢定。'
+      : 'Use the standard deviation for one set of scores; to compare two classes or two methods, put each group’s n, mean and SD into the t test.',
     slugs: ['standard-deviation', 'independent-samples-t-test-calculator'],
   },
   {
     id: 'classroom',
-    title: zh ? '課堂點名' : 'Classroom picks',
+    start: zh ? '課堂抽人、分組、交換禮物' : 'Class picks, groups, gift exchange',
+    title: zh ? '課堂上抽人、分組、排順序、交換禮物' : 'Picking, grouping, ordering and gift exchange in class',
     body: zh
-      ? '貼上名單，隨機抽出一個或多個名字，抽籤過程在你的瀏覽器完成。'
-      : 'Paste a list and draw one or more names at random, all in your browser.',
+      ? '貼上名單，用亂數抽人（可不重複）、分組、排順序，或做交換禮物配對（保證沒有人抽到自己）；全程在你的瀏覽器完成。'
+      : 'Paste a list to draw names (no repeats if you like), split into groups, shuffle an order, or match a gift exchange where nobody draws themselves; all in your browser.',
     slugs: ['random-name-picker'],
   },
 ].map((group) => ({
@@ -89,55 +87,38 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang)];
       <h1>{zh ? '給台灣學生與老師的成績統計工具' : 'Grade and statistics tools for students and teachers'}</h1>
       <p class="lead">
         {zh
-          ? '輸入分數，算出 T 分數、PR 值、班級排名百分比、加權平均與標準差。每個工具頁都寫明計算公式與使用限制，輸入的成績只在你的瀏覽器計算，不會上傳。'
-          : 'Enter scores and get T scores, percentile ranks, class-rank percentages, weighted averages and standard deviations. Every tool page states its formula and limits, and your scores are calculated in your browser, not uploaded.'}
+          ? 'FunnyTools 是成績計算器：把分數換成 T 分數、PR 值或班排百分比，把平時、段考、期末合成學期成績或教甄總分，算標準差與 t 檢定；另有課堂抽籤與分組。輸入的資料只在你的瀏覽器計算，不會上傳。'
+          : 'FunnyTools is a set of grade calculators: turn a score into a T score, PR or class-rank percentage, combine coursework, midterm and final into a semester grade or teacher-exam total, compute standard deviations and t tests, or draw and group names in class. What you type is calculated in your browser and not uploaded.'}
       </p>
-      <div class="hero-actions">
-        <a class="btn go" href={localePath(lang, 'tools', 't-score-calculator')}>{zh ? '算 T 分數' : 'Calculate a T score'}</a>
-        <a class="btn ghost" href={localePath(lang, 'education-statistics')}>{zh ? '全部教育統計工具' : 'All education statistics tools'}</a>
+      <p class="home-start-label">{zh ? '從你手上的問題開始：' : 'Start from your question:'}</p>
+      <div class="hero-actions" role="group" aria-label={zh ? '依問題找工具' : 'Find a tool by question'}>
+        {groups.map((group, index) => (
+          index === 0
+            ? <a class="btn go" href={`#${group.id}`}>{group.start}</a>
+            : <a class="btn ghost" href={`#${group.id}`}>{group.start}</a>
+        ))}
       </div>
+      <p class="home-more">
+        <a class="inline-link" href={localePath(lang, 'education-statistics')}>
+          {zh ? '每個工具能回答哪些問題，見成績統計工具總覽' : 'What each tool answers: the score and statistics tools overview'}
+        </a>
+      </p>
     </section>
 
     {groups.map((group) => (
-      <section class="content-section" aria-labelledby={`group-${group.id}`}>
+      <section class="content-section" id={group.id} aria-labelledby={`group-${group.id}`}>
         <h2 id={`group-${group.id}`}>{group.title}</h2>
         <p>{group.body}</p>
         <div class="grid compact">
           {group.tools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
         </div>
+        <p class="home-group-more">
+          <a class="inline-link" href={`${localePath(lang, 'education-statistics')}#${group.id}`}>
+            {zh ? '這一組的工具怎麼選' : 'How to choose within this group'}
+          </a>
+        </p>
       </section>
     ))}
-
-    <section class="content-section" aria-labelledby="how-to-pick">
-      <h2 id="how-to-pick">{zh ? '不確定該用哪一個？' : 'Not sure which one to use?'}</h2>
-      <div class="info-grid">
-        <article>
-          <h3>{zh ? '只有一個分數' : 'You have one score'}</h3>
-          <p>
-            {zh
-              ? '沒有全班的平均與標準差，就算不出可靠的 Z 或 T 分數。先確認手上有沒有同一次考試的全班資料。'
-              : 'Without the class mean and standard deviation you cannot get a reliable Z or T score. Check whether you have the whole class data for the same exam first.'}
-          </p>
-        </article>
-        <article>
-          <h3>{zh ? '想比較兩次考試' : 'You want to compare two exams'}</h3>
-          <p>
-            {zh
-              ? '兩次考試的平均與離散程度不同，先各自換成 Z 分數或 T 分數再比較。'
-              : 'Exams differ in mean and spread, so convert each to a Z or T score before comparing.'}
-          </p>
-        </article>
-        <article>
-          <h3>{zh ? '想看 T 分數怎麼來' : 'You want to see how a T score is built'}</h3>
-          <p>
-            <a class="inline-link" href={localePath(lang, 'tools', 't-score-calculator')}>
-              {zh ? '用 T 分數計算器' : 'Use the T-score calculator'}
-            </a>
-            {zh ? '，算例、對照表與 Excel 公式都在同一頁。' : ', with worked examples, a lookup table and Excel formulas on the same page.'}
-          </p>
-        </article>
-      </div>
-    </section>
 
     <section class="content-section">
       <h2>{zh ? '資料與責任界線' : 'Data and limitations'}</h2>
@@ -154,3 +135,8 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang)];
     </section>
   </div>
 </BaseLayout>
+
+<style>
+  .home-start-label { margin: 18px 0 8px; font-weight: 700; }
+  .home-more, .home-group-more { margin: 12px 0 0; }
+</style>

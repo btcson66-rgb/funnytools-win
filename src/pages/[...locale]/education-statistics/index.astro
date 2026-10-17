@@ -90,13 +90,13 @@ const groups: Group[] = [
   },
   {
     id: 'classroom',
-    title: { zh: '課堂上抽人、分組、排順序', en: 'Picking, grouping and ordering in class' },
+    title: { zh: '課堂上抽人、分組、排順序、交換禮物', en: 'Picking, grouping, ordering and gift exchange in class' },
     intro: {
-      zh: '這個工具不算成績，只負責用亂數決定「輪到誰」：抽人（可不重複）、依組數或每組人數分組、把報告順序打亂。',
-      en: 'This tool does not compute grades; it only decides whose turn it is: draw names without repeats, split into groups by number or size, or shuffle a presentation order.',
+      zh: '這個工具不算成績，只負責用亂數決定「輪到誰」：抽人（可不重複）、依組數或每組人數分組、把報告順序打亂，或做交換禮物配對（保證沒有人抽到自己）。',
+      en: 'This tool does not compute grades; it only decides whose turn it is: draw names without repeats, split into groups by number or size, shuffle a presentation order, or match a gift exchange where nobody draws themselves.',
     },
     items: [
-      { slug: 'random-name-picker', asks: { zh: '30 人抽 3 位且不重複怎麼抽？38 人每組 4 人怎麼分？電腦抽籤的亂數怎麼來？', en: 'How do I draw 3 of 30 without repeats, split 38 people into groups of 4, and where does the randomness come from?' } },
+      { slug: 'random-name-picker', asks: { zh: '30 人抽 3 位且不重複怎麼抽？38 人每組 4 人怎麼分？交換禮物怎麼配對才不會抽到自己？電腦抽籤的亂數怎麼來？', en: 'How do I draw 3 of 30 without repeats, split 38 people into groups of 4, match a gift exchange so nobody draws themselves, and where does the randomness come from?' } },
     ],
   },
 ];
