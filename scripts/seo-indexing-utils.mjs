@@ -41,7 +41,9 @@ export const eduGrowthReleasePath = join(rootDir, 'src', 'config', 'edu-growth-r
 // Version 9 migrates the pre-recovery map while preserving its evidence-backed
 // dates. The migration also lets the generator recover dates for URLs that were
 // present in the live sitemap but absent from the stale local map.
-export const sitemapContentHashVersion = 9;
+// Version 10 (2026-10-17) drops inline <style> blocks from the hash; see stableRenderedHtml. Existing dates carry
+// forward through the migration path, so the bump itself changes no lastmod.
+export const sitemapContentHashVersion = 10;
 export const eduGrowthRelease = readJson(eduGrowthReleasePath, { candidates: [] }) ?? { candidates: [] };
 export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
 export const enNoindex = indexingConfig.EN_NOINDEX === true;
@@ -562,6 +564,14 @@ export function stableRenderedHtml(page) {
     /\.affiliate-shelf\[data-astro-cid-[^}]+\{[\s\S]*?@keyframes affiliate-shelf-in\{[\s\S]*?\}\}\}/gi,
     '',
   );
+
+  // Root cause of the 2026-10 lastmod drift (P2 batch 6): Astro inlines ONE stylesheet into every page, and that
+  // stylesheet is the concatenation of every component's scoped CSS, including components the page never renders.
+  // Editing the CSS of one tool therefore rewrote the inline <style> of all ten tool pages, so unchanged pages got
+  // a new hash and a new lastmod. Measured: v5.153.0 -> v5.154.0 changed only random-name-picker and the home page,
+  // yet all 10 tool hashes moved, and the only difference outside the version string was this <style> block.
+  // Inline CSS is presentation chrome, not content a searcher reads, so it is excluded from the hash.
+  html = html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '<style data-sitemap-volatile="inline-css"></style>');
 
   // Optional shared slots can leave a different number of separator spaces
   // before the main closing tag. This boundary whitespace is layout chrome,
