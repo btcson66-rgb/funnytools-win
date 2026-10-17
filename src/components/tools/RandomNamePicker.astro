@@ -13,6 +13,7 @@ const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).pa
     <label class="check"><input type="radio" name="random-picker-mode" value="pick" data-mode checked /><span>{labels.modePick}</span></label>
     <label class="check"><input type="radio" name="random-picker-mode" value="group" data-mode /><span>{labels.modeGroup}</span></label>
     <label class="check"><input type="radio" name="random-picker-mode" value="order" data-mode /><span>{labels.modeOrder}</span></label>
+    <label class="check"><input type="radio" name="random-picker-mode" value="gift" data-mode /><span>{labels.modeGift}</span></label>
   </div>
 
   <label class="textarea-label">
@@ -58,6 +59,14 @@ const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).pa
     </label>
   </div>
 
+  <div class="form-grid compact-controls" data-panel="gift" hidden>
+    <label class="check gift-hide">
+      <input type="checkbox" data-gift-hide checked />
+      <span>{labels.giftHideLabel}</span>
+    </label>
+  </div>
+  <p class="gift-note" data-panel="gift" hidden>{labels.giftNote}</p>
+
   <p class="status-line" data-status aria-live="polite"></p>
   <p class="form-warning" data-warning role="note" hidden></p>
 
@@ -86,10 +95,18 @@ const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).pa
   .random-output ol { margin: 0; padding-left: 1.6em; }
   .random-output .group-block { margin: 0 0 8px; }
   .random-output .group-block strong { display: block; }
+  .gift-hide { grid-column: 1 / -1; }
+  .gift-note { margin: 8px 0 0; color: var(--muted); font-size: 0.92rem; }
+  .gift-note[hidden] { display: none; }
+  .random-output .gift-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 0 0 6px; }
+  .random-output .gift-row .gift-from { min-width: 6em; }
+  .random-output .gift-row .gift-arrow { color: var(--muted); }
+  .random-output .gift-row .gift-to { font-weight: 600; }
+  .random-output .gift-row button { padding: 2px 10px; font-size: 0.9rem; }
 </style>
 
 <script>
-  import { draw, findDuplicates, groupCountForSize, parseEntries, secureRandomInt, shuffle, splitIntoGroups } from '../../lib/randomPicker';
+  import { draw, drawDerangement, findDuplicates, groupCountForSize, parseEntries, secureRandomInt, shuffle, splitIntoGroups } from '../../lib/randomPicker';
 
   document.querySelectorAll('[data-random-name-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
@@ -108,6 +125,9 @@ const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).pa
     const toast = root.querySelector('.toast');
     const panels = root.querySelectorAll('[data-panel]');
     const modeInputs = root.querySelectorAll('[data-mode]');
+    const giftHide = root.querySelector('[data-gift-hide]');
+    // latest gift-exchange assignment: names and, for each giver position, the receiver position
+    let latestGift = null;
     // positions (indexes into the current list) already drawn without replacement
     const used = new Set();
     let latestResult = '';
@@ -123,6 +143,7 @@ const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).pa
 
     function showEmpty() {
       latestResult = '';
+      latestGift = null;
       output.textContent = labels.emptyResult;
     }
 
@@ -136,7 +157,8 @@ const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).pa
       const duplicates = findDuplicates(list);
       if (duplicates.length) {
         const shown = duplicates.slice(0, 5).map((item) => `${item.name} ×${item.count}`).join('、');
-        warning.textContent = fill(labels.duplicateWarning, { names: shown + (duplicates.length > 5 ? '…' : '') });
+        const template = mode() === 'gift' ? labels.giftDuplicateWarning : labels.duplicateWarning;
+        warning.textContent = fill(template, { names: shown + (duplicates.length > 5 ? '…' : '') });
         warning.hidden = false;
       } else {
         warning.textContent = '';
@@ -147,7 +169,7 @@ const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).pa
     function refreshMode() {
       const current = mode();
       panels.forEach((panel) => { panel.hidden = panel.getAttribute('data-panel') !== current; });
-      runButton.textContent = { pick: labels.runPick, group: labels.runGroup, order: labels.runOrder }[current];
+      runButton.textContent = { pick: labels.runPick, group: labels.runGroup, order: labels.runOrder, gift: labels.runGift }[current];
       groupNumberLabel.textContent = groupBySelect.value === 'size' ? labels.groupNumberSize : labels.groupNumberCount;
       refreshStatus();
     }
@@ -162,8 +184,49 @@ const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).pa
       return ol;
     }
 
+    // One row per giver: "giver -> receiver". With the hide option on, each receiver stays masked until its own button is pressed.
+    function renderGift() {
+      if (!latestGift) return;
+      const { names, receivers } = latestGift;
+      const hidden = giftHide.checked;
+      const rows = document.createDocumentFragment();
+      names.forEach((giver, index) => {
+        const row = document.createElement('div');
+        row.className = 'gift-row';
+        const from = document.createElement('span');
+        from.className = 'gift-from';
+        from.textContent = giver;
+        const arrow = document.createElement('span');
+        arrow.className = 'gift-arrow';
+        arrow.setAttribute('aria-hidden', 'true');
+        arrow.textContent = '→';
+        const to = document.createElement('span');
+        to.className = 'gift-to';
+        to.textContent = names[receivers[index]];
+        row.append(from, arrow, to);
+        if (hidden) {
+          to.hidden = true;
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'btn ghost';
+          button.setAttribute('aria-expanded', 'false');
+          button.textContent = fill(labels.giftReveal, { name: giver });
+          button.addEventListener('click', () => {
+            const show = to.hidden;
+            to.hidden = !show;
+            button.setAttribute('aria-expanded', String(show));
+            button.textContent = fill(show ? labels.giftConceal : labels.giftReveal, { name: giver });
+          });
+          row.appendChild(button);
+        }
+        rows.appendChild(row);
+      });
+      output.replaceChildren(rows);
+    }
+
     function run() {
       setError('');
+      latestGift = null;
       const list = entries();
       try {
         if (mode() === 'pick') {
@@ -218,6 +281,16 @@ const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).pa
           });
           latestResult = lines.join('\n');
           output.replaceChildren(blocks);
+        } else if (mode() === 'gift') {
+          const result = drawDerangement(list.length, secureRandomInt);
+          if (!result.ok) {
+            setError(result.error === 'too-few' ? labels.giftTooFewError : labels.giftGaveUpError);
+            showEmpty();
+            return;
+          }
+          latestGift = { names: list, receivers: result.receivers };
+          latestResult = list.map((giver, index) => `${giver} → ${list[result.receivers[index]]}`).join('\n');
+          renderGift();
         } else {
           if (!list.length) {
             setError(labels.emptyListError);
@@ -241,6 +314,7 @@ const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).pa
     }
 
     modeInputs.forEach((input) => input.addEventListener('change', () => { setError(''); refreshMode(); }));
+    giftHide.addEventListener('change', renderGift);
     runButton.addEventListener('click', run);
     textarea.addEventListener('input', () => { resetDrawn(); });
     separatorSelect.addEventListener('change', () => { resetDrawn(); });
@@ -259,6 +333,7 @@ const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).pa
       repeatSelect.value = 'no';
       groupBySelect.value = 'count';
       groupNumberInput.value = '6';
+      giftHide.checked = true;
       used.clear();
       setError('');
       showEmpty();
