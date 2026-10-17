@@ -7,7 +7,9 @@
 //   - a statistics tool page / the education-statistics hub lacks the Benson Lai byline or Person author;
 //   - any page emits FAQPage or HowTo structured data;
 //   - a removed section (es/fr, blog, workflows, for, shop, ...) is built, other than the
-//     registered redirect stubs in src/data/removedRedirects.ts (max 30);
+//     registered redirect stubs in src/data/removedRedirects.ts (max 60);
+//   - any redirect stub (registered or the /zh/* aliases) points at another stub or at a page that
+//     was not built (no chains, no 404 targets);
 //   - an es/fr/de/hi hreflang alternate is emitted anywhere;
 //   - the old multi-topic brand strings come back.
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
@@ -80,7 +82,7 @@ const authoredRoutes = [...toolSlugs.map((slug) => `/tools/${slug}/`), '/educati
 
 const stubSource = readFileSync(join(root, 'src/data/removedRedirects.ts'), 'utf8');
 const stubs = [...stubSource.matchAll(/\{\s*from:\s*'([^']+)',\s*to:\s*'([^']+)'\s*\}/g)].map((m) => ({ from: m[1], to: m[2] }));
-const maxStubs = Number(stubSource.match(/MAX_REMOVED_REDIRECTS\s*=\s*(\d+)/)?.[1] ?? 30);
+const maxStubs = Number(stubSource.match(/MAX_REMOVED_REDIRECTS\s*=\s*(\d+)/)?.[1] ?? 60);
 const stubFromSet = new Set(stubs.map((s) => s.from));
 
 // ---- 1. sitemap == INDEXABLE_PATHS ----
@@ -195,6 +197,18 @@ for (const { from, to } of stubs) {
   if (!html.includes(`http-equiv="refresh" content="0; url=${to}"`)) fail(`Stub ${from} must meta-refresh to ${to}.`);
 }
 
+// ---- 5b. every redirect stub in dist (registered stubs and the /zh/* aliases): one hop, to a built page ----
+// P2 batch 5: a stub may not point at another stub (a chain) and may not point at a page that was not built (404).
+const redirectTargets = new Map();
+for (const file of htmlFiles) {
+  const target = readFileSync(file, 'utf8').match(/http-equiv="refresh" content="0; url=([^"]+)"/)?.[1];
+  if (target) redirectTargets.set(routeOf(file), target);
+}
+for (const [from, to] of redirectTargets) {
+  if (redirectTargets.has(to)) fail(`Stub ${from} points at another stub (${to} -> ${redirectTargets.get(to)}); point it at the final page.`);
+  else if (!existsSync(fileOf(to))) fail(`Stub ${from} points at ${to}, which was not built (404).`);
+}
+
 // ---- 6. main navigation and home must not push the general tools ----
 {
   const home = readFileSync(fileOf('/'), 'utf8');
@@ -215,6 +229,7 @@ const summary = {
   sitemapUrls: sitemapUrls.length,
   redirectStubs: stubCount,
   redirectStubBudget: maxStubs,
+  redirectPagesInDist: redirectTargets.size,
   authoredPagesChecked: authoredRoutes.length,
   failures,
 };

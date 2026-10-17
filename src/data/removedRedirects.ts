@@ -7,15 +7,18 @@
  * so it keeps a small redirect stub (noindex + canonical to the target + meta
  * refresh), the same mechanism as the legacy /zh/* stubs.
  *
- * Budget: at most 30 stubs. Every `to` must be in INDEXABLE_PATHS (checked by
- * scripts/removed-pages-audit.mjs). Do not add a stub for an unrelated page.
+ * Budget: at most 60 stubs (raised from 30 on 2026-10-17 with the owner's approval; 30 were in use).
+ * Every `to` must be in INDEXABLE_PATHS (checked by scripts/p1-site-contract-audit.mjs). A stub must
+ * point straight at the final page: its target may not be another stub (no chains) and may not be a
+ * 404. The same rule covers the /zh/* alias stubs, which resolve through this map
+ * (src/pages/zh/[...path].astro). Do not add a stub for an unrelated page.
  */
 export interface RemovedRedirect {
   from: string;
   to: string;
 }
 
-export const MAX_REMOVED_REDIRECTS = 30;
+export const MAX_REMOVED_REDIRECTS = 60;
 
 export const removedRedirects: RemovedRedirect[] = [
   // es/fr home pages (the only es/fr URLs Google had indexed)
