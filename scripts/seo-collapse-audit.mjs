@@ -17,8 +17,6 @@ const warnings = [];
 const corePaths = [
   '/',
   '/education-statistics/',
-  '/category/statistics/',
-  '/guides/t-score-calculator-guide/',
   '/tools/t-score-calculator/',
   '/tools/grade-average/',
   '/tools/class-rank-percentile-calculator/',

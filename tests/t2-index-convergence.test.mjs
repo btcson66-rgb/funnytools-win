@@ -27,10 +27,10 @@ function sitemapUrls() {
   });
 }
 
-test('sitemap contains exactly the 20 education-statistics URLs (P1: merge-pdf moved out)', () => {
+test('sitemap contains exactly the 18 education-statistics URLs (P1: merge-pdf moved out)', () => {
   const urls = sitemapUrls();
-  assert.equal(urls.length, 20);
-  assert.equal(new Set(urls).size, 20);
+  assert.equal(urls.length, 18);
+  assert.equal(new Set(urls).size, 18);
   assert.equal(urls.includes(`${origin}/tools/merge-pdf/`), false);
   assert.deepEqual(new Set(urls), new Set(INDEXABLE_PATHS.map((path) => `${origin}${path}`)));
   assert.equal(urls.some((url) => /\/(?:en|es|fr)\//.test(new URL(url).pathname)), false);
@@ -56,7 +56,7 @@ test('representative excluded pages stay available with exact noindex,follow and
     '/en/tools/',
     '/en/tools/merge-pdf/',
     '/en/tools/grade-average/',
-    '/en/guides/t-score-calculator-guide/',
+    '/en/education-statistics/',
   ];
   for (const pathname of excluded) {
     const html = htmlForPath(pathname);

@@ -167,7 +167,6 @@ function protectedSeedRoutes() {
     ['/tools/random-name-picker/', 'explicit protected winner'],
     ['/tools/standard-deviation/', 'explicit core education tool'],
     ['/tools/random-student-picker/', 'explicit classroom tool'],
-    ['/guides/t-score-calculator-guide/', 'explicit protected guide'],
     ['/guides/teacher-exam-weighted-score-guide/', 'explicit protected guide'],
   ]);
 }

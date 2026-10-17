@@ -42,6 +42,8 @@ export function embedUrl(lang: Locale, slug: string): string {
 }
 
 export function categoryUrl(lang: Locale, category: string): string {
+  // The statistics category listing was merged into the education-statistics hub (P2 batch 4).
+  if (category === 'statistics') return localePath(lang, 'education-statistics');
   return localePath(lang, 'category', category);
 }
 

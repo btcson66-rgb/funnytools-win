@@ -47,8 +47,8 @@ test('T score page: byline, review date, schema and PR table are rendered', () =
   const page = html('/tools/t-score-calculator/');
   const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
   assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
-  assert.match(flat, /最後審核：<time datetime="2026-10-16">2026-10-16<\/time>/);
-  assert.match(page, /"dateModified":"2026-10-16"/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-17">2026-10-17<\/time>/);
+  assert.match(page, /"dateModified":"2026-10-17"/);
   assert.match(page, /"@type":"WebApplication"/);
   assert.match(page, /"@type":"BreadcrumbList"/);
   assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/);

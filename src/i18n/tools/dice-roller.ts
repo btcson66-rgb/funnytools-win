@@ -65,7 +65,7 @@ export default {
         ],
         link: {
           prefix: "改用",
-          label: "隨機姓名抽選器處理班級名單與不重複抽選",
+          label: "線上抽籤點名工具處理班級名單與不重複抽選",
           href: "/tools/random-name-picker/",
           suffix: "，並在抽選前確認缺席、同名與重複列。",
         },

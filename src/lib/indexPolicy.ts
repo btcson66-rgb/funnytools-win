@@ -1,8 +1,6 @@
 export const INDEXABLE_PATHS = [
   '/',
   '/education-statistics/',
-  '/category/statistics/',
-  '/guides/t-score-calculator-guide/',
   '/tools/t-score-calculator/',
   '/tools/grade-average/',
   '/tools/class-rank-percentile-calculator/',
@@ -21,6 +19,8 @@ export const INDEXABLE_PATHS = [
   '/support/',
 ] as const;
 
+// P2 batch 4 (2026-10-17): /guides/t-score-calculator-guide/ was merged into /tools/t-score-calculator/ and
+// /category/statistics/ into /education-statistics/; both URLs are now redirect stubs (removedRedirects.ts).
 // P1 (2026-10-15): the indexable set is the education-statistics core only.
 // General-purpose tools (PDF, image, text, time, money ...) stay available but
 // are noindex and outside the sitemap. Do not add paths here without a CEO decision.
@@ -53,7 +53,7 @@ export function isAuthoredToolSlug(slug: string): boolean {
 }
 
 /** Guide slugs that carry the named-author byline and Person schema. */
-const AUTHORED_GUIDE_SLUGS = new Set<string>(['t-score-calculator-guide']);
+const AUTHORED_GUIDE_SLUGS = new Set<string>();
 export function isAuthoredGuideSlug(slug: string): boolean {
   return AUTHORED_GUIDE_SLUGS.has(slug);
 }

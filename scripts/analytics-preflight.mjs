@@ -81,8 +81,11 @@ function withLocalModuleScripts(html) {
   });
   return [html, ...bundled].join('\n');
 }
+// Redirect stubs (meta refresh) under /guides/ are not content pages.
 const contentHtml = [...contentPages(), ...contentPages('en')]
-  .map((page) => withLocalModuleScripts(readFileSync(page, 'utf8')))
+  .map((page) => readFileSync(page, 'utf8'))
+  .filter((html) => !/http-equiv="refresh"/i.test(html))
+  .map((html) => withLocalModuleScripts(html))
   .join('\n');
 const failures = [];
 
@@ -117,11 +120,16 @@ for (const eventName of ['affiliate_module_view', 'affiliate_item_view', 'affili
   if (!supportScript.includes(eventName)) failures.push(`support-products.js: ${eventName} missing`);
 }
 
-if (!contentHtml.includes('article_cta_click')) {
-  failures.push('content pages: article_cta_click missing');
-}
-if (!contentHtml.includes('hub_click')) {
-  failures.push('content pages: hub_click missing');
+// P2 batch 4 (2026-10-17): the last guide page was merged into its tool page, so there may be no content
+// page left to inspect. The events live in the guide template (guides/[slug].astro); they are required
+// whenever a content page is built.
+if (contentHtml.length > 0) {
+  if (!contentHtml.includes('article_cta_click')) {
+    failures.push('content pages: article_cta_click missing');
+  }
+  if (!contentHtml.includes('hub_click')) {
+    failures.push('content pages: hub_click missing');
+  }
 }
 
 if (failures.length) {

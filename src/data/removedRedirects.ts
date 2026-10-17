@@ -23,8 +23,8 @@ export const removedRedirects: RemovedRedirect[] = [
   { from: '/fr/', to: '/' },
   // es hubs and guide that map onto retained hubs
   { from: '/es/estadisticas-educativas/', to: '/education-statistics/' },
-  { from: '/es/categorias/estadistica/', to: '/category/statistics/' },
-  { from: '/es/guias/puntuacion-t-interpretacion/', to: '/guides/t-score-calculator-guide/' },
+  { from: '/es/categorias/estadistica/', to: '/education-statistics/' },
+  { from: '/es/guias/puntuacion-t-interpretacion/', to: '/tools/t-score-calculator/' },
   // es guides whose subject is a retained tool
   { from: '/es/guias/puntuacion-z-interpretacion/', to: '/tools/z-score-calculator/' },
   { from: '/es/guias/rango-percentil-interpretacion/', to: '/tools/percentile-rank-calculator/' },
@@ -52,4 +52,7 @@ export const removedRedirects: RemovedRedirect[] = [
   { from: '/guides/z-score-calculator-guide/', to: '/tools/z-score-calculator/' },
   { from: '/guides/percentile-rank-guide/', to: '/tools/percentile-rank-calculator/' },
   { from: '/guides/teacher-exam-weighted-score-guide/', to: '/tools/teacher-exam-score-converter/' },
+  // P2 batch 4 (2026-10-17): duplicate-intent pages merged into the page that answers the same query
+  { from: '/guides/t-score-calculator-guide/', to: '/tools/t-score-calculator/' },
+  { from: '/category/statistics/', to: '/education-statistics/' },
 ];

@@ -49,9 +49,11 @@ export const expansionRouteRegistry = readJson(
   join(rootDir, 'src', 'i18n', 'expansion-routes.json'),
   { routes: [] },
 ) ?? { routes: [] };
+// P2 batch 4 (2026-10-17): sitemap-pages.xml holds the home page, hub and legal pages; sitemap-guides.xml
+// is only published while a guide exists (none do now), so it is not an expected file.
 export const expectedSitemapFiles = [
   'sitemap-tools.xml',
-  'sitemap-guides.xml',
+  'sitemap-pages.xml',
 ];
 
 export function ensureDir(dir) {
@@ -220,12 +222,14 @@ export function classifyUrl(url) {
   if (pathname.startsWith('/en/')) return 'en';
   if (/^\/tools\/[^/]+\/$/.test(normalized)) return 'tools';
   if (normalized === '/guides/' || /^\/guides\/[^/]+\/$/.test(normalized)) return 'guides';
-  return 'guides';
+  if (/^\/category\/[^/]+\/$/.test(normalized)) return 'guides';
+  return 'pages';
 }
 
 export function sitemapFileForType(type) {
   return {
     tools: 'sitemap-tools.xml',
+    pages: 'sitemap-pages.xml',
     guides: 'sitemap-guides.xml',
     en: 'sitemap-en.xml',
   }[type];

@@ -111,9 +111,10 @@ export const tools: ToolMeta[] = [
     maintenanceRisk: 'low',
     monetizationTags: ['adsense'],
     featured: true,
-    updated: '2026-06-16',
-    name: { zh: '隨機姓名抽籤', en: 'Random Name Picker' },
-    short: { zh: '從名單中公平抽出一個或多個名字。', en: 'Pick names fairly from a pasted list.' },
+    updated: '2026-10-17',
+    reviewedAt: '2026-10-17',
+    name: { zh: '線上抽籤點名工具', en: 'Random Name Picker' },
+    short: { zh: '貼上名單抽人、隨機分組、排順序，可選不重複或可重複。', en: 'Draw names, make random groups or shuffle the order from a pasted list.' },
   },
   {
     slug: 'random-group-generator',
@@ -1034,7 +1035,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 't-score-calculator', category: 'statistics', icon: 'T', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['z-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'teacher-exam-score-converter', 'percentile-rank-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-16', reviewedAt: '2026-10-16',
+    relatedTools: ['z-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'teacher-exam-score-converter', 'percentile-rank-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
     name: { zh: 'T 分數計算器', en: 'T Score Calculator' }, short: { zh: '將 Z 分數轉換為平均 50、標準差 10 的 T 分數。', en: 'Convert a z score to a T score with mean 50 and SD 10.' },
   },
   {

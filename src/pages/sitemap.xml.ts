@@ -1,11 +1,13 @@
 import type { APIRoute } from 'astro';
 import { absoluteUrl } from '../lib/url';
-import { escapeXml, sitemapLastmod } from '../lib/sitemap';
+import { defaultGuideEntries, defaultPageEntries, defaultToolEntries, escapeXml, sitemapLastmod } from '../lib/sitemap';
 
+// A child sitemap is listed only while it has URLs (an empty urlset is never published).
 const childSitemaps = [
-  { path: '/sitemap-tools.xml' },
-  { path: '/sitemap-guides.xml' },
-];
+  { path: '/sitemap-tools.xml', count: defaultToolEntries().length },
+  { path: '/sitemap-pages.xml', count: defaultPageEntries().length },
+  { path: '/sitemap-guides.xml', count: defaultGuideEntries().length },
+].filter((item) => item.count > 0);
 
 export const GET: APIRoute = () => {
   const entries = childSitemaps

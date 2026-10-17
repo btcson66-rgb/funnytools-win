@@ -4,163 +4,272 @@ interface Props {
 }
 
 const { labels } = Astro.props;
+// Default list = 30 seat numbers, so the page's worked examples (30 people, 3 picks, 6 groups) can be reproduced as-is.
+const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).padStart(2, '0')).join('\n');
 ---
 
-<section class="tool-widget card" data-random-name-tool data-labels={JSON.stringify(labels)}>
+<section class="tool-widget card" data-random-name-tool data-labels={JSON.stringify({ ...labels, sampleList })}>
+  <div class="mode-row" role="radiogroup" aria-label={labels.modeLabel}>
+    <label class="check"><input type="radio" name="random-picker-mode" value="pick" data-mode checked /><span>{labels.modePick}</span></label>
+    <label class="check"><input type="radio" name="random-picker-mode" value="group" data-mode /><span>{labels.modeGroup}</span></label>
+    <label class="check"><input type="radio" name="random-picker-mode" value="order" data-mode /><span>{labels.modeOrder}</span></label>
+  </div>
+
   <label class="textarea-label">
     <span>{labels.input}</span>
-    <textarea data-names rows="10" placeholder={labels.placeholder}></textarea>
+    <textarea data-names rows="10" placeholder={labels.placeholder}>{sampleList}</textarea>
   </label>
+
   <div class="form-grid compact-controls">
     <label>
+      <span>{labels.separatorLabel}</span>
+      <select data-separator>
+        <option value="line" selected>{labels.separatorLine}</option>
+        <option value="comma">{labels.separatorComma}</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="form-grid compact-controls" data-panel="pick">
+    <label>
       <span>{labels.countLabel}</span>
-      <input data-count type="number" inputmode="numeric" value="2" min="1" step="1" />
+      <input data-count type="number" inputmode="numeric" value="3" min="1" step="1" />
+    </label>
+    <label>
+      <span>{labels.repeatLabel}</span>
+      <select data-repeat>
+        <option value="no" selected>{labels.repeatNo}</option>
+        <option value="yes">{labels.repeatYes}</option>
+      </select>
     </label>
   </div>
-  <div class="option-row">
-    <label class="check">
-      <input data-remove type="checkbox" checked />
-      <span>{labels.removePicked}</span>
+
+  <div class="form-grid compact-controls" data-panel="group" hidden>
+    <label>
+      <span>{labels.groupByLabel}</span>
+      <select data-group-by>
+        <option value="count" selected>{labels.groupByCount}</option>
+        <option value="size">{labels.groupBySize}</option>
+      </select>
+    </label>
+    <label>
+      <span data-group-number-label>{labels.groupNumberCount}</span>
+      <input data-group-number type="number" inputmode="numeric" value="6" min="1" step="1" />
     </label>
   </div>
+
+  <p class="status-line" data-status aria-live="polite"></p>
+  <p class="form-warning" data-warning role="note" hidden></p>
+
   <div class="actions">
-    <button class="btn go" type="button" data-pick-one>{labels.pickOne}</button>
-    <button class="btn" type="button" data-pick-many>{labels.pickMany}</button>
-    <button class="btn ghost" type="button" data-reset>{labels.reset}</button>
+    <button class="btn go" type="button" data-run>{labels.runPick}</button>
+    <button class="btn" type="button" data-restart>{labels.restart}</button>
     <button class="btn ghost" type="button" data-copy>{labels.copy}</button>
+    <button class="btn ghost" type="button" data-sample>{labels.loadSample}</button>
+    <button class="btn ghost" type="button" data-clear>{labels.clear}</button>
   </div>
   <p class="form-error" data-error role="alert" hidden></p>
   <div class="bigresult random-name-result" aria-live="polite">
     <span class="result-label">{labels.result}</span>
-    <output data-output>{labels.emptyResult}</output>
+    <div class="random-output" data-output>{labels.emptyResult}</div>
   </div>
   <span class="toast" role="status" aria-live="polite" hidden>{labels.copied}</span>
 </section>
 
 <style>
-  .compact-controls {
-    grid-template-columns: minmax(160px, 220px);
-  }
-
-  .random-name-result output.spinning {
-    color: var(--brand);
-  }
+  .mode-row { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 12px; }
+  .compact-controls { grid-template-columns: repeat(auto-fit, minmax(160px, 220px)); margin-top: 10px; }
+  .compact-controls[hidden] { display: none; }
+  .status-line { margin: 10px 0 12px; color: var(--muted); font-size: 0.95rem; }
+  .form-warning { margin: 6px 0 0; color: var(--ink); font-size: 0.92rem; }
+  .random-output { margin: 4px 0 0; font-size: 1.05rem; line-height: 1.7; word-break: break-word; }
+  .random-output ol { margin: 0; padding-left: 1.6em; }
+  .random-output .group-block { margin: 0 0 8px; }
+  .random-output .group-block strong { display: block; }
 </style>
 
 <script>
+  import { draw, findDuplicates, groupCountForSize, parseEntries, secureRandomInt, shuffle, splitIntoGroups } from '../../lib/randomPicker';
+
   document.querySelectorAll('[data-random-name-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
     const textarea = root.querySelector('[data-names]');
+    const separatorSelect = root.querySelector('[data-separator]');
     const countInput = root.querySelector('[data-count]');
-    const removeInput = root.querySelector('[data-remove]');
+    const repeatSelect = root.querySelector('[data-repeat]');
+    const groupBySelect = root.querySelector('[data-group-by]');
+    const groupNumberInput = root.querySelector('[data-group-number]');
+    const groupNumberLabel = root.querySelector('[data-group-number-label]');
+    const runButton = root.querySelector('[data-run]');
     const output = root.querySelector('[data-output]');
+    const status = root.querySelector('[data-status]');
+    const warning = root.querySelector('[data-warning]');
     const error = root.querySelector('[data-error]');
     const toast = root.querySelector('.toast');
+    const panels = root.querySelectorAll('[data-panel]');
+    const modeInputs = root.querySelectorAll('[data-mode]');
+    // positions (indexes into the current list) already drawn without replacement
+    const used = new Set();
     let latestResult = '';
-    let spinTimer = null;
 
-    function entries() {
-      return textarea.value
-        .split(/\r\n|\r|\n/)
-        .map((item) => item.trim())
-        .filter(Boolean);
-    }
+    const fill = (template, values) => template.replace(/\{(\w+)\}/g, (_, key) => String(values[key] ?? ''));
+    const mode = () => Array.from(modeInputs).find((input) => input.checked)?.value || 'pick';
+    const entries = () => parseEntries(textarea.value, separatorSelect.value);
 
     function setError(message) {
       error.textContent = message;
       error.hidden = !message;
     }
 
-    function randomIndex(max) {
-      if (!window.crypto?.getRandomValues) {
-        throw new Error(labels.cryptoError || 'Secure random generation is not available in this browser.');
-      }
-      const value = new Uint32Array(1);
-      const limit = Math.floor(0x100000000 / max) * max;
-      do {
-        window.crypto.getRandomValues(value);
-      } while (value[0] >= limit);
-      return value[0] % max;
-    }
-
-    function shuffle(items) {
-      const copy = [...items];
-      for (let index = copy.length - 1; index > 0; index -= 1) {
-        const swapIndex = randomIndex(index + 1);
-        [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
-      }
-      return copy;
-    }
-
-    function removePicked(allItems, pickedItems) {
-      const remaining = [...allItems];
-      pickedItems.forEach((picked) => {
-        const index = remaining.indexOf(picked);
-        if (index >= 0) remaining.splice(index, 1);
-      });
-      textarea.value = remaining.join('\n');
-    }
-
-    function animateThenShow(pool, picked) {
-      output.classList.add('spinning');
-      output.textContent = labels.spinning;
-      let cycles = 0;
-      window.clearInterval(spinTimer);
-      spinTimer = window.setInterval(() => {
-        cycles += 1;
-        output.textContent = pool[randomIndex(pool.length)] || labels.spinning;
-        if (cycles >= 8) {
-          window.clearInterval(spinTimer);
-          spinTimer = null;
-          output.classList.remove('spinning');
-          latestResult = picked.join('\n');
-          output.textContent = picked.join(', ');
-        }
-      }, 75);
-    }
-
-    function pick(count) {
-      try {
-        const pool = entries();
-        if (!pool.length) {
-          setError(labels.emptyListError);
-          return;
-        }
-        if (!Number.isInteger(count) || count < 1) {
-          setError(labels.invalidCountError);
-          return;
-        }
-        if (count > pool.length) {
-          setError(labels.tooManyError);
-          return;
-        }
-        setError('');
-        latestResult = '';
-        const picked = shuffle(pool).slice(0, count);
-        if (removeInput.checked) {
-          removePicked(pool, picked);
-        }
-        animateThenShow(pool, picked);
-      } catch (caught) {
-        latestResult = '';
-        output.classList.remove('spinning');
-        output.textContent = labels.emptyResult;
-        setError(caught instanceof Error ? caught.message : String(caught));
-      }
-    }
-
-    root.querySelector('[data-pick-one]')?.addEventListener('click', () => pick(1));
-    root.querySelector('[data-pick-many]')?.addEventListener('click', () => pick(Number(countInput.value)));
-    root.querySelector('[data-reset]')?.addEventListener('click', () => {
-      window.clearInterval(spinTimer);
-      spinTimer = null;
-      textarea.value = '';
-      countInput.value = '2';
-      removeInput.checked = true;
+    function showEmpty() {
       latestResult = '';
       output.textContent = labels.emptyResult;
-      output.classList.remove('spinning');
+    }
+
+    function refreshStatus() {
+      const list = entries();
+      const parts = [fill(labels.statusList, { n: list.length })];
+      if (mode() === 'pick' && repeatSelect.value === 'no') {
+        parts.push(fill(labels.statusUsed, { used: used.size, left: Math.max(list.length - used.size, 0) }));
+      }
+      status.textContent = parts.join('；');
+      const duplicates = findDuplicates(list);
+      if (duplicates.length) {
+        const shown = duplicates.slice(0, 5).map((item) => `${item.name} ×${item.count}`).join('、');
+        warning.textContent = fill(labels.duplicateWarning, { names: shown + (duplicates.length > 5 ? '…' : '') });
+        warning.hidden = false;
+      } else {
+        warning.textContent = '';
+        warning.hidden = true;
+      }
+    }
+
+    function refreshMode() {
+      const current = mode();
+      panels.forEach((panel) => { panel.hidden = panel.getAttribute('data-panel') !== current; });
+      runButton.textContent = { pick: labels.runPick, group: labels.runGroup, order: labels.runOrder }[current];
+      groupNumberLabel.textContent = groupBySelect.value === 'size' ? labels.groupNumberSize : labels.groupNumberCount;
+      refreshStatus();
+    }
+
+    function listOf(names) {
+      const ol = document.createElement('ol');
+      names.forEach((name) => {
+        const li = document.createElement('li');
+        li.textContent = name;
+        ol.appendChild(li);
+      });
+      return ol;
+    }
+
+    function run() {
       setError('');
+      const list = entries();
+      try {
+        if (mode() === 'pick') {
+          const withReplacement = repeatSelect.value === 'yes';
+          const result = draw({ size: list.length, count: Number(countInput.value), withReplacement, used }, secureRandomInt);
+          if (!result.ok) {
+            setError({
+              empty: used.size > 0 && list.length > 0 ? labels.allDrawnError : labels.emptyListError,
+              'invalid-count': labels.invalidCountError,
+              'not-enough': fill(labels.notEnoughError, { left: result.available }),
+            }[result.error]);
+            showEmpty();
+            return;
+          }
+          if (!withReplacement) result.picks.forEach((position) => used.add(position));
+          const names = result.picks.map((position) => list[position]);
+          latestResult = names.map((name, index) => `${index + 1}. ${name}`).join('\n');
+          output.replaceChildren(listOf(names));
+          if (withReplacement && new Set(result.picks).size < result.picks.length) {
+            const note = document.createElement('p');
+            note.textContent = labels.repeatNote;
+            output.appendChild(note);
+          }
+        } else if (mode() === 'group') {
+          const number = Number(groupNumberInput.value);
+          if (!Number.isInteger(number) || number < 1) {
+            setError(labels.invalidNumberError);
+            showEmpty();
+            return;
+          }
+          const groupCount = groupBySelect.value === 'size' ? groupCountForSize(list.length, number) : number;
+          const result = splitIntoGroups(list.length, groupCount, secureRandomInt);
+          if (!result.ok) {
+            setError({ empty: labels.emptyListError, 'invalid-number': labels.invalidNumberError, 'too-many-groups': fill(labels.tooManyGroupsError, { n: list.length }) }[result.error]);
+            showEmpty();
+            return;
+          }
+          const lines = [];
+          const blocks = document.createDocumentFragment();
+          result.groups.forEach((members, index) => {
+            const names = members.map((position) => list[position]);
+            const title = fill(labels.groupTitle, { n: index + 1, size: names.length });
+            lines.push(`${title}：${names.join('、')}`);
+            const block = document.createElement('div');
+            block.className = 'group-block';
+            const strong = document.createElement('strong');
+            strong.textContent = title;
+            const body = document.createElement('span');
+            body.textContent = names.join('、');
+            block.append(strong, body);
+            blocks.appendChild(block);
+          });
+          latestResult = lines.join('\n');
+          output.replaceChildren(blocks);
+        } else {
+          if (!list.length) {
+            setError(labels.emptyListError);
+            showEmpty();
+            return;
+          }
+          const names = shuffle(list, secureRandomInt);
+          latestResult = names.map((name, index) => `${index + 1}. ${name}`).join('\n');
+          output.replaceChildren(listOf(names));
+        }
+      } catch (caught) {
+        showEmpty();
+        setError(caught instanceof Error && caught.message === 'secure-random-unavailable' ? labels.cryptoError : String(caught));
+      }
+      refreshStatus();
+    }
+
+    function resetDrawn() {
+      used.clear();
+      refreshStatus();
+    }
+
+    modeInputs.forEach((input) => input.addEventListener('change', () => { setError(''); refreshMode(); }));
+    runButton.addEventListener('click', run);
+    textarea.addEventListener('input', () => { resetDrawn(); });
+    separatorSelect.addEventListener('change', () => { resetDrawn(); });
+    repeatSelect.addEventListener('change', () => { refreshStatus(); });
+    groupBySelect.addEventListener('change', refreshMode);
+    root.querySelector('[data-restart]')?.addEventListener('click', () => {
+      used.clear();
+      setError('');
+      showEmpty();
+      refreshStatus();
+    });
+    root.querySelector('[data-sample]')?.addEventListener('click', () => {
+      textarea.value = labels.sampleList;
+      separatorSelect.value = 'line';
+      countInput.value = '3';
+      repeatSelect.value = 'no';
+      groupBySelect.value = 'count';
+      groupNumberInput.value = '6';
+      used.clear();
+      setError('');
+      showEmpty();
+      refreshMode();
+    });
+    root.querySelector('[data-clear]')?.addEventListener('click', () => {
+      textarea.value = '';
+      used.clear();
+      setError('');
+      showEmpty();
+      refreshStatus();
       textarea.focus();
     });
     root.querySelector('[data-copy]')?.addEventListener('click', async () => {
@@ -168,12 +277,12 @@ const { labels } = Astro.props;
       try {
         await navigator.clipboard.writeText(latestResult);
         toast.hidden = false;
-        window.setTimeout(() => {
-          toast.hidden = true;
-        }, 1500);
+        window.setTimeout(() => { toast.hidden = true; }, 1500);
       } catch {
         window.prompt(labels.copy, latestResult);
       }
     });
+
+    refreshMode();
   });
 </script>

@@ -113,6 +113,7 @@ const hashMigrationUrls = [];
 
 const groups = new Map([
   ['tools', []],
+  ['pages', []],
   ['guides', []],
   ['en', []],
 ]);
@@ -185,7 +186,7 @@ for (const [type, entries] of groups) {
 
 // Astro also builds compatibility sitemap routes outside the grouped generator.
 // Retire only genuinely empty URL sets; never remove a populated feed here.
-for (const file of ['sitemap-blog.xml', 'sitemap-pages.xml']) {
+for (const file of ['sitemap-blog.xml']) {
   for (const directory of [publicDir, distDir]) {
     const target = join(directory, file);
     if (!existsSync(target)) continue;

@@ -101,28 +101,29 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     reviewedAt: '2026-10-17',
   },
   'zh:random-name-picker': {
-    heading: '隨機姓名抽選器的抽籤規則與重複姓名風險',
-    intro: '這一段針對「抽出後移除」這個預設勾選的選項，說明抽完一輪與名單有重複姓名時實際會發生什麼事。',
+    intro: '這一段針對抽籤工具目前的設定：名單文字框、三個模式（抽人、隨機分組、排順序）、「抽過的人」選單與「重新開始」按鈕。預設是座號 01 到 30。',
     panels: [
       {
-        title: '先用小名單測試「抽出後移除」',
-        text: '貼上 5 個姓名，保持預設勾選的「抽出後移除」，連續按「抽一位」兩次：名單應該依序剩下 4 筆、3 筆，且不會抽到已經抽過的人。這是可以直接數筆數驗證的行為，不需要看程式碼也能核對。',
+        title: '先用預設值核對「不重複」',
+        text: '不改任何設定，連按三次「抽出」（預設抽 3 位、不重複）：狀態列會依序顯示「已抽出 3 位，剩 27 位」「已抽出 6 位，剩 24 位」「已抽出 9 位，剩 21 位」，而且九個座號都不會重複。按「重新開始」後回到「已抽出 0 位」，名單不變。',
       },
       {
-        title: '把名單抽完一輪後會發生什麼',
-        text: '持續抽到名單完全清空，再按一次「抽一位」，會顯示「名單是空的」錯誤，不會自動重置或允許重抽；同樣地，若「抽多位」設定的數量超過剩餘名單筆數，會顯示筆數不足的錯誤，不會自動改成抽出剩餘全部人數。',
+        title: '切到「可重複」確認同一人可以再被抽到',
+        text: '把「抽過的人」改成「可重複」，抽數改成 10，多按幾次：10 位裡有人出現兩次以上的機率約 81.54%，所以大多數時候下方會出現「同一位候選人出現了不只一次」的提示，狀態列不再顯示剩餘人數。',
       },
       {
-        title: '重複姓名是已知的風險點，不是本頁保證會處理好',
-        text: '此工具用姓名文字比對來移除已抽出的人，不是用清單中的位置。如果名單裡有兩個完全相同的名字（例如兩位「王小明」），移除時只會刪掉第一個相符的項目，不保證刪掉的正是畫面上抽到的那一位。正式抽籤前建議先手動檢查並排除重複姓名，或改用支援重複姓名檢查的「課堂分組工具」。',
+        title: '分組與排順序的核對',
+        text: '切到「隨機分組」按「分組」：預設 6 組，每組標題都是「（5 人）」，全部加起來 30 人。把名單改成 31 行再分，第 1 組會是 6 人、其餘 5 人。切到「排順序」，結果是同一份名單的 30 個號碼各出現一次。',
       },
     ],
     checklist: [
-      '名單已檢查過沒有完全重複的姓名，或已知道重複姓名時的移除行為與限制。',
-      '「抽出後移除」是否勾選，已依實際需求確認（需要可重複抽取時要取消勾選）。',
-      '抽完整份名單後會出現「名單是空的」錯誤，這是預期行為，不是故障。',
-      '抽多位時輸入的數量沒有超過目前剩餘名單筆數。',
+      '名單沒有重複的名字；有的話頁面會在名單下方警告，並已加上座號區分。',
+      '缺席者已先從名單刪除；刪除或修改名單會讓「已抽出」歸零。',
+      '用「不重複」時，知道重新整理頁面會歸零，連續多堂課要自己記錄。',
+      '分組人數除不盡時，已接受各組最多差 1 人，且人數較多的組排在最前面。',
+      '需要公證或有金額的抽獎時，已另外準備公告規則與錄影；本工具不保存紀錄。',
     ],
+    reviewedAt: '2026-10-17',
   },
   'zh:class-rank-percentile-calculator': {
     intro: '這一段針對班排百分比計算器目前的欄位：名次、總人數與並列人數；結果有 PR、前百分比、前面人數與後面人數。',
@@ -1708,52 +1709,6 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
  * no review block, or the old generated block if it is in `pendingHandwrittenReview` below.
  */
 const guideValueReviewOverrides: Partial<Record<string, ContentValueReviewOverride>> = {
-  'zh:t-score-calculator-guide': {
-    intro: '這一段用指南本身的例題（原始分數 82、平均 70、標準差 8）重做一次計算，並檢查指南提到的「不是百分制分數」這個常見誤解在計算上會怎麼被抓出來。',
-    panels: [
-      {
-        title: '先獨立重算指南的例題，確認 65 分怎麼來的',
-        text: '指南例題是原始分數 82、平均 70、標準差 8：先算 Z＝(82−70)÷8＝1.5，再套用 T＝50+10×1.5＝65。自己動手用計算機分兩步驗算，尤其要確認除法在算 Z、乘法與加法在算 T 分成兩個獨立步驟，不要把 82、70、8、65 這四個數字混在同一條算式裡心算，容易漏乘或漏加 10 的倍數。',
-      },
-      {
-        title: '換一組不同平均與標準差的資料，測試公式是否還記得對',
-        text: '指南同時提到「不同科目、不同年度的平均與標準差可能不同」，可以自己另外設一組資料驗證這句話：例如某科平均 60、標準差 12、原始分數 78，Z＝(78−60)÷12＝1.5——跟例題的 Z 值剛好相同，但因為平均與標準差不同，這不代表兩科的原始分數可以直接比較或相加，只有轉成同一套 T 分數量尺後才有共同的比較基礎。這一步用來確認自己不是背下 82/70/8/65 這四個數字，而是真的理解公式在不同輸入下如何運作。',
-      },
-      {
-        title: '用指南列出的常見錯誤逐條檢查自己的理解',
-        text: '指南列出的常見錯誤包括「把 T 分數當成百分比或滿分 100」與「混用不同年度或群體的平均標準差」。用例題的 T=65 自我測試：如果把它讀成「考了 65 分」或「贏過 65% 的人」都是指南明確指出的誤讀；另外要確認自己知道 T 分數計算器只做 T=50+10Z 這一步轉換，不會知道你的原始分數是用哪一年度、哪一群體的平均與標準差算出來的，這件事要由你自己在套用公式前先確認資料來源一致。',
-      },
-    ],
-    checklist: [
-      '已獨立用計算機重算過指南例題（Z=1.5、T=65），過程分成算 Z 與算 T 兩個步驟。',
-      '已用另一組不同平均與標準差的資料，確認自己不是背答案而是理解公式。',
-      '能說出「T=65」不是百分制分數、也不是贏過 65% 的人，這兩個是指南明確列出的常見誤讀。',
-      '使用前已確認原始分數、平均數與標準差確實來自同一批資料，而不是混用不同年度或不同群體的統計量。',
-    ],
-  },
-  'en:t-score-calculator-guide': {
-    intro: 'This section reworks the guide’s own worked example (raw score 82, mean 70, SD 8, T = 65) and adds the one confusion that is specific to English statistical vocabulary: a "T score" and a "t value" are not the same thing, despite sharing a letter.',
-    panels: [
-      {
-        title: 'Reproduce the worked example in two separate steps',
-        text: 'The example is raw score 82, mean 70, SD 8: Z = (82 − 70) / 8 = 1.50, then T = 50 + 10 × 1.50 = 65. Compute this in two separate steps rather than combining them mentally — divide first to get Z = 1.50, then multiply and add to get T = 65. Keeping the steps separate is what catches an error like forgetting to multiply by 10, which would leave you at T = 51.5, an easy slip if both operations happen in your head at once.',
-      },
-      {
-        title: 'Recompute with a different mean and SD to confirm you are not just recalling 65',
-        text: 'Set up your own case with a different mean and SD: raw score 78, mean 60, SD 12. Z = (78 − 60) / 12 = 1.50 — the same Z as the worked example, purely by coincidence of these particular numbers — but this does not mean the two raw scores are comparable. T = 50 + 10 × 1.50 = 65 as well, which is exactly the point: two different subjects with different means and SDs can land on the same T score, and that shared T score is what makes them comparable, not their raw scores or Z scores.',
-      },
-      {
-        title: 'Separate "T score" from "t value" — a confusion unique to the English terminology',
-        text: 'In English statistical writing, "T score" (this page’s mean-50, SD-10 standardized score) and "t value" or "t statistic" (the test statistic reported by a t test, unrelated to any fixed mean or scale) share the same letter but describe completely different things. Self-test: if a search result or textbook mentions "the t value was 2.48," that is not a T score and cannot be plugged into T = 50 + 10Z — it comes from a t test comparing two groups, a different calculation covered in the SPSS Levene test and t test APA format guides, not this one.',
-      },
-    ],
-    checklist: [
-      'Reproduced the worked example (Z=1.50, T=65) as two separate steps and can identify where a forgotten ×10 would show up (T=51.5 instead of 65).',
-      'Recomputed with a different mean and SD (60 and 12) and confirmed a shared T score of 65 does not mean the two raw scores are directly comparable.',
-      'Can distinguish a "T score" (mean 50, SD 10) from a "t value" from a t test, and would not confuse the two despite the shared letter.',
-      'Confirmed the raw score, mean, and SD used all came from the same tested group before trusting the T score.',
-    ],
-  },
 };
 const categoryValueReviewOverrides: Partial<Record<string, ContentValueReviewOverride>> = {
 };

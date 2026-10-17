@@ -1,15 +1,17 @@
 ---
+import AuthorByline from '../../../components/AuthorByline.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
-import Faq from '../../../components/Faq.astro';
-import ToolCard from '../../../components/ToolCard.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { SITE, type Locale } from '../../../config/site';
-import { getLiveToolsForLocale, type ToolMeta } from '../../../data/tools';
-import { seoGuides, viewSeoGuide, isSeoGuideAvailableInLocale } from '../../../data/seoGuides';
+import { getLiveToolsForLocale } from '../../../data/tools';
 import { t } from '../../../i18n/ui';
 import { localePath, localeUrlPair, toolUrl } from '../../../lib/url';
-import { breadcrumbJsonLd, collectionPageJsonLd } from '../../../lib/seo';
+import { authorPersonJsonLd, breadcrumbJsonLd, collectionPageJsonLd } from '../../../lib/seo';
 import { isIndexablePath } from '../../../lib/indexPolicy';
+
+// P2 batch 4 (2026-10-17): this hub absorbed /category/statistics/ (now a redirect stub). It is the entry page
+// of the site: situations first, then one sentence per tool saying which question it answers.
+const REVIEWED_AT = '2026-10-17';
 
 export function getStaticPaths() {
   return SITE.locales.map((lang) => ({
@@ -24,198 +26,90 @@ const hubPath = localePath(lang, 'education-statistics');
 
 const copy = {
   zh: {
-    title: '教育與統計工具中心',
-    seoTitle: '教育與統計工具中心 | 成績換算與統計檢定工具',
-    description: '免費教育與統計工具中心，整理 T 分數、Z 分數、PR 百分等級、班級排名百分比、加權平均、標準差、獨立樣本 t 檢定與教師甄試成績換算，免註冊、在瀏覽器計算。',
-    subtitle: '免費工具，適合台灣的學生、教師與教育考試準備，從學期成績、排名換算到統計檢定逐步整理。',
-    breadcrumb: '教育與統計',
+    title: '成績統計工具：依你的問題找計算器',
+    seoTitle: '成績統計工具總覽：T分數、PR、標準差、加權平均怎麼選',
+    description: '台灣學生與老師的成績統計工具入口：分數在班上算哪裡、學期成績怎麼合成、兩組平均有沒有差、教甄總分怎麼算，依問題找到對應的計算器，每個工具附算例與來源。',
+    lead: '先想你手上的問題是什麼，再選工具：想知道分數在一群人裡的位置，用 Z、T、PR 或班排；想把幾項成績合成一個數字，用學期成績、加權平均或教甄成績；想描述或比較資料，用標準差與 t 檢定。每個工具頁都附算例、來源與最後審核日期。',
+    breadcrumb: '成績統計工具',
+    toolWord: '開啟',
+    footer: '所有計算都在你的瀏覽器裡完成，輸入的分數不會上傳。正式成績、簡章與測驗報表以學校或主辦單位公告為準；工具只幫你照規則算、並把算法寫清楚。',
   },
   en: {
-    title: 'Education & Statistics Tools Center',
-    seoTitle: 'Education & Statistics Tools | Score conversion and t test',
-    description: 'Free education and statistics tools for T scores, Z scores, percentile rank, class rank, weighted averages, standard deviation, an independent-samples t test and teacher-exam score conversion.',
-    subtitle: 'Free tools for students and teachers in Taiwan, from semester grades and rank conversion to statistical tests.',
-    breadcrumb: 'Education & Statistics',
+    title: 'Score and statistics tools: find the calculator for your question',
+    seoTitle: 'Score and statistics tools | T score, PR, SD, weighted average',
+    description: 'Entry page for the score and statistics tools: where a score sits in a group, how semester grades combine, whether two means differ, how a teacher-exam total is built.',
+    lead: 'Start from the question, then pick the tool: where a score sits in a group (Z, T, PR, class rank), how several scores combine into one number (semester grade, weighted average, teacher exam), or how to describe and compare data (standard deviation, t test). Each tool page has worked examples, sources and a last-reviewed date.',
+    breadcrumb: 'Score and statistics tools',
+    toolWord: 'Open',
+    footer: 'Everything is calculated in your browser and nothing you type is uploaded. Official grade reports and notices from your school or exam body take precedence.',
   },
 }[lang];
 
-const pageSeoTitle = copy.seoTitle;
-const pageDescription = copy.description;
+interface Item { slug: string; asks: Record<Locale, string> }
+interface Group { id: string; title: Record<Locale, string>; intro: Record<Locale, string>; items: Item[] }
 
-const groupCopy = {
-  zh: [
-    {
-      id: 'basic-statistics',
-      title: '基礎統計',
-      body: [
-        '這一組工具適合先整理資料的中心趨勢、離散程度、百分比、標準分數與百分等級。',
-        '學生可以用來檢查作業或報告，教師可以用來快速檢視班級分數分布，研究者也能在正式分析前做初步確認。',
-        '常見情境包括計算一組測驗分數的標準差、把原始分數轉成 Z 分數或 T 分數，以及估算某個分數約落在第幾百分位。',
-      ],
+const groups: Group[] = [
+  {
+    id: 'position',
+    title: { zh: '我的分數在這群人裡站哪裡', en: 'Where does my score sit in the group' },
+    intro: {
+      zh: 'Z 分數與 T 分數需要這個團體的平均數與標準差；PR 與班排看的是「幾個人比你低、幾個人同分」或名次，不需要平均與標準差。四個都在回答位置，但輸入不同，換算不能混用：T＝50＋10z，T 不是百分制，也不等於 PR。',
+      en: 'Z and T scores need the group mean and standard deviation; PR and class rank use counts or rank and do not. All four describe position, but they take different inputs and cannot be swapped: T = 50 + 10z, T is not a percentage and is not PR.',
     },
-    {
-      id: 'research-apa',
-      title: '研究與 APA 報告',
-      body: [
-        '這一組工具協助把統計結果轉成較容易檢查的研究報告文字，特別適合論文、課堂研究與小型研究專案。',
-        '目前可產生 APA 7 統計結果句，並支援獨立樣本 t 檢定的摘要統計計算。',
-        '說明文字也涵蓋 ANOVA、相關、迴歸與效果量的 APA 寫法，適合在完成正式統計分析後整理報告段落。',
-      ],
+    items: [
+      { slug: 'z-score-calculator', asks: { zh: '這個分數高於平均幾個標準差？在常態假設下大約勝過多少比例的人？', en: 'How many standard deviations above the mean is this score, and about what share of people does it beat if the scores are roughly normal?' } },
+      { slug: 't-score-calculator', asks: { zh: '把分數放到平均 50、標準差 10 的尺度上是多少？T 分數怎麼看、換成 PR 大約是多少？', en: 'What is the score on the mean-50, SD-10 scale, how do I read it, and roughly what PR is it?' } },
+      { slug: 'percentile-rank-calculator', asks: { zh: '40 人裡有幾人比我低、幾人同分，我的 PR 是多少？為什麼最高只到 99？', en: 'With this many people below me and tied with me, what is my PR, and why does it top out at 99?' } },
+      { slug: 'class-rank-percentile-calculator', asks: { zh: '班排第 6 名、全班 40 人，是前百分之幾？PR 是多少？有並列怎麼辦？', en: 'Rank 6 in a class of 40 is the top how many percent, and what PR is that, with ties?' } },
+    ],
+  },
+  {
+    id: 'combine',
+    title: { zh: '幾項成績怎麼合成一個數字', en: 'How do several scores combine into one number' },
+    intro: {
+      zh: '平時、段考、期末的占分不同時，簡單平均會算錯；要用占分比例或學分當權重。權重怎麼訂、小數怎麼進位，都以學校評量辦法或簡章為準，工具只照你輸入的規則算。',
+      en: 'When coursework, midterms and finals carry different weights, a simple average is wrong; use the weights or credits. How weights are set and how decimals are rounded is up to your school or the exam notice; the tools only apply the rule you enter.',
     },
-    {
-      id: 'spss-interpretation',
-      title: 'SPSS 結果解讀',
-      body: [
-        '這一組工具適合已經從 SPSS 取得表格，但不確定該看哪一列、如何判斷顯著性或如何寫成結果段落的人。',
-        '它會協助整理 t 檢定與 ANOVA 常見輸出，並提醒 Levene 同質性檢定、單純主要效果與事後比較在解讀時的角色。',
-        '使用時仍應回到研究設計與課程要求確認最終寫法。',
-      ],
+    items: [
+      { slug: 'grade-average', asks: { zh: '平時 30%、段考各 30% 與 40% 時學期成績是多少？期末至少要考幾分？', en: 'What is the semester grade with the given weights, and how many points do I need on the final?' } },
+      { slug: 'weighted-average-calculator', asks: { zh: '科目學分不同時，加權平均是多少？和簡單平均差多少？', en: 'With different credits per subject, what is the weighted average and how far is it from the simple one?' } },
+      { slug: 'teacher-exam-score-converter', asks: { zh: '筆試、試教、口試依配分加權後，教甄總成績是多少？', en: 'What is the weighted teacher-exam total from written, teaching-demo and interview scores?' } },
+    ],
+  },
+  {
+    id: 'describe',
+    title: { zh: '這批資料有多分散、兩組有沒有差異', en: 'How spread out is the data, and do two groups differ' },
+    intro: {
+      zh: '先用標準差看一組分數的分散程度，要比較兩個班或兩種教法時，再把兩組的人數、平均與標準差放進 t 檢定。標準差有母體與樣本兩種，選哪一種取決於你手上的資料是整個群體還是抽樣。',
+      en: 'Use the standard deviation to see how spread out one set of scores is; to compare two classes or two methods, put each group’s n, mean and SD into the t test. The SD comes in population and sample versions, depending on whether you hold the whole group or a sample.',
     },
-    {
-      id: 'teacher-score',
-      title: '教師考試與教育分數',
-      body: [
-        '這一組工具聚焦教師甄試、班級排名、常模分數與加權總分等教育現場常見分數問題。',
-        '考生可以先估算筆試、口試與試教加權後的總分，教師也可以用來說明排名百分位或標準化分數。',
-        '若同時需要 PR、T 分數與 Z 分數，建議先確認原始分數、平均數與標準差來源是否一致。',
-        '若要估算期末需要幾分，請先把課程配分確認清楚，再使用期末要考幾分計算器；工具不會替你猜測學校的及格或四捨五入規則。',
-      ],
+    items: [
+      { slug: 'standard-deviation', asks: { zh: '一串分數的母體與樣本標準差各是多少？Excel 該用 STDEV.P 還是 STDEV.S？', en: 'What are the population and sample SD of a list of scores, and should Excel use STDEV.P or STDEV.S?' } },
+      { slug: 'independent-samples-t-test-calculator', asks: { zh: '兩個班的平均差 5 分是真的有差，還是抽樣誤差？Welch 與 Student 差在哪？', en: 'Is a 5-point gap between two class means real or sampling noise, and how do Welch and Student differ?' } },
+    ],
+  },
+  {
+    id: 'classroom',
+    title: { zh: '課堂上抽人、分組、排順序', en: 'Picking, grouping and ordering in class' },
+    intro: {
+      zh: '這個工具不算成績，只負責用亂數決定「輪到誰」：抽人（可不重複）、依組數或每組人數分組、把報告順序打亂。',
+      en: 'This tool does not compute grades; it only decides whose turn it is: draw names without repeats, split into groups by number or size, or shuffle a presentation order.',
     },
-    {
-      id: 'semester-grades',
-      title: '學期成績與課堂點名',
-      body: [
-        '這一組放學期成績計算與課堂點名的工具。',
-        '學期成績計算器可以算總分、簡單平均與加權平均（學期成績）；隨機姓名抽籤則在你的瀏覽器中從貼上的名單抽出名字，名單不會上傳。',
-        '計算學期成績前，請先確認配分與四捨五入規則，並以學校公告為準。',
-      ],
-    },
-  ],
-  en: [
-    {
-      id: 'basic-statistics',
-      title: 'Basic Statistics',
-      body: [
-        'Use these tools to understand spread, percentages, standardized scores, and percentile rank before writing up results.',
-        'Students can check homework, teachers can review class score distributions, and researchers can do a quick sanity check before formal analysis.',
-        'Example situations include calculating standard deviation for exam scores, converting raw scores to Z or T scores, and estimating where a score sits in a group.',
-      ],
-    },
-    {
-      id: 'research-apa',
-      title: 'Research & APA Reporting',
-      body: [
-        'This group helps turn statistical results into clearer report wording for papers, class projects, and small research studies.',
-        'It includes APA 7 result sentence generation and an independent-samples t-test calculator based on summary statistics.',
-        'The guidance also mentions APA write-ups for ANOVA, correlation, regression, and effect size, so it is useful after your formal analysis is complete.',
-      ],
-    },
-    {
-      id: 'spss-interpretation',
-      title: 'SPSS Result Interpretation',
-      body: [
-        'Use this group when you already have SPSS output but need help deciding which row to read and how to explain the result.',
-        'The interpreter focuses on common t-test and ANOVA outputs, including Levene\'s test, simple main effects, and post hoc comparisons.',
-        'Always check the final wording against your research design, assignment requirements, or supervisor guidance.',
-      ],
-    },
-    {
-      id: 'teacher-score',
-      title: 'Teacher Exam / Education Score',
-      body: [
-        'These tools focus on teacher exam scoring, class rank, norm-referenced scores, and weighted totals used in education settings.',
-        'Candidates can estimate written, interview, and teaching-demo weighted totals, while teachers can explain rank percentiles and standardized scores.',
-        'When using PR, T score, and Z score tools together, make sure the raw score, mean, and standard deviation come from the same reference group.',
-      ],
-    },
-    {
-      id: 'semester-grades',
-      title: 'Semester grades and classroom picks',
-      body: [
-        'This group holds the semester-grade and classroom name-picking tools.',
-        'The grade average calculator handles totals, simple averages and weighted averages; the random name picker draws names from a pasted list in your browser, and the list is not uploaded.',
-        'Before computing semester grades, confirm the weighting and rounding rules against your school\'s announcement.',
-      ],
-    },
-  ],
-}[lang];
-
-const groupSlugs = [
-  ['standard-deviation', 'percentage-calculator', 'weighted-average-calculator', 'z-score-calculator', 't-score-calculator', 'percentile-rank-calculator', 'standard-error-of-measurement-calculator', 'spearman-brown-calculator', 'learning-gain-calculator', 'weighted-rubric-score-calculator', 'cohen-kappa-calculator'],
-  ['apa-7-report-generator', 'independent-samples-t-test-calculator', 'item-analysis-calculator', 'kr20-reliability-calculator'],
-  ['spss-result-interpreter'],
-  ['teacher-exam-score-converter', 'class-rank-percentile-calculator', 'normalized-score-converter', 'percentile-rank-calculator', 'final-grade-needed-calculator'],
-  ['grade-average', 'random-name-picker'],
+    items: [
+      { slug: 'random-name-picker', asks: { zh: '30 人抽 3 位且不重複怎麼抽？38 人每組 4 人怎麼分？電腦抽籤的亂數怎麼來？', en: 'How do I draw 3 of 30 without repeats, split 38 people into groups of 4, and where does the randomness come from?' } },
+    ],
+  },
 ];
 
-const liveTool = (slug: string): ToolMeta | undefined => {
-  return getLiveToolsForLocale(lang).find((tool) => tool.slug === slug);
-};
-
-const groups = groupCopy.map((group, index) => ({
-  ...group,
-  tools: groupSlugs[index]
-    .map(liveTool)
-    .filter((tool): tool is ToolMeta => Boolean(tool && isIndexablePath(toolUrl(lang, tool.slug)))),
-})).filter((group) => group.tools.length > 0);
-
-const resourceCopy = {
-  zh: {
-    title: '教育統計指南',
-    body: '從 T 分數的公式、範例到常見誤解，這篇指南把工具串成可檢查的學習流程。',
-    guides: '重點指南',
-    viewAllGuides: '閱讀 T 分數教學',
-  },
-  en: {
-    title: 'Education Statistics Guide',
-    body: 'From the T-score formula and worked examples to common misreadings, this guide ties the tools into a checkable workflow.',
-    guides: 'Featured guide',
-    viewAllGuides: 'Read the T-score guide',
-  },
-}[lang];
-const featuredGuides = seoGuides
-  .filter((guide) => guide.slug === 't-score-calculator-guide' && isSeoGuideAvailableInLocale(guide, lang))
-  .sort((a, b) => a.priority - b.priority)
-  .slice(0, 6)
-  .map((guide) => viewSeoGuide(guide, lang));
-const faqItems = {
-  zh: [
-    {
-      q: 'T 分數和 Z 分數有什麼差別？',
-      a: 'Z 分數表示某個分數距離平均數幾個標準差，平均數通常是 0、標準差是 1。T 分數通常把 Z 分數轉成平均數 50、標準差 10 的尺度，較常用於測驗與教育分數報告。',
-    },
-    {
-      q: '什麼時候應該使用 APA 7 統計報告格式？',
-      a: '當你在論文、研究報告、課堂作業或投稿稿件中呈現 t 檢定、ANOVA、相關、迴歸或效果量時，可以使用 APA 7 格式整理統計量、自由度、p 值與效果量。',
-    },
-    {
-      q: 'SPSS 的 Levene 檢定要怎麼解讀？',
-      a: 'Levene 檢定用來檢查變異數同質性。若結果顯著，通常表示兩組變異數可能不相等，解讀 t 檢定時應考慮使用不假設變異數相等的列，並依課程或研究規範確認寫法。',
-    },
-    {
-      q: '為什麼教師考試會使用加權分數？',
-      a: '教師考試常把筆試、口試、試教或其他項目設定不同權重，因為每一項評量重點不同。加權分數能把多個項目依規定比例合成總分，但最後仍應以官方簡章和公告為準。',
-    },
-  ],
-  en: [
-    {
-      q: 'What is the difference between T-score and Z-score?',
-      a: 'A Z-score tells you how many standard deviations a value is from the mean. A T-score is a transformed standard score, commonly using mean 50 and standard deviation 10, which is often easier to read in education and testing contexts.',
-    },
-    {
-      q: 'When should I use APA 7 statistical reporting format?',
-      a: 'Use APA 7 reporting when presenting statistical results in papers, research reports, class assignments, or manuscripts, especially for tests such as t tests, ANOVA, correlations, regressions, and effect sizes.',
-    },
-    {
-      q: 'How do I interpret Levene\'s test in SPSS?',
-      a: 'Levene\'s test checks whether group variances can be treated as equal. If it is significant, you usually review the row or method that does not assume equal variances, then match the final wording to your research design or assignment rules.',
-    },
-    {
-      q: 'Why are weighted scores used in teacher exams?',
-      a: 'Teacher exams often combine written tests, interviews, teaching demonstrations, and other components with different weights. Weighted scores reflect those official proportions, but final decisions should always follow the published exam rules.',
-    },
-  ],
-}[lang];
+const live = getLiveToolsForLocale(lang);
+const resolved = groups
+  .map((group) => ({
+    ...group,
+    items: group.items
+      .map((item) => ({ ...item, tool: live.find((tool) => tool.slug === item.slug) }))
+      .filter((item) => item.tool && isIndexablePath(toolUrl('zh', item.slug))),
+  }))
+  .filter((group) => group.items.length > 0);
 
 const breadcrumbItems = [
   { name: ui.breadcrumbHome, href: localePath(lang) },
@@ -223,15 +117,19 @@ const breadcrumbItems = [
 ];
 
 const jsonLd = [
-  collectionPageJsonLd(lang, copy.title, copy.description, hubPath),
-  breadcrumbJsonLd(breadcrumbItems)
+  {
+    ...collectionPageJsonLd(lang, copy.title, copy.description, hubPath),
+    author: authorPersonJsonLd(),
+    dateModified: REVIEWED_AT,
+  },
+  breadcrumbJsonLd(breadcrumbItems),
 ];
 ---
 
 <BaseLayout
   lang={lang}
-  title={pageSeoTitle}
-  description={pageDescription}
+  title={copy.seoTitle}
+  description={copy.description}
   alternateSegments={['education-statistics']}
   altLang={localeUrlPair('education-statistics')}
   jsonLd={jsonLd}
@@ -244,74 +142,37 @@ const jsonLd = [
       ]}
     />
     <h1>{copy.title}</h1>
-    <p class="lead">{copy.subtitle}</p>
-    <div class="education-cta-row" aria-label={lang === 'zh' ? '教育統計常用入口' : 'Education statistics shortcuts'}>
-      <a class="btn go" href={localePath(lang, 'tools', 'teacher-exam-score-converter')}>{lang === 'zh' ? '使用教師甄試工具' : 'Use teacher exam tools'}</a>
-      <a class="btn ghost" href={localePath(lang, 'tools', 't-score-calculator')}>{lang === 'zh' ? '換算 T / Z / PR' : 'Convert T / Z / PR'}</a>
-      <a class="btn ghost" href={localePath(lang, 'guides', 't-score-calculator-guide')}>{lang === 'zh' ? '閱讀 T 分數教學' : 'Read the T-score guide'}</a>
-    </div>
+    <p class="lead">{copy.lead}</p>
+    <AuthorByline lang={lang} reviewedAt={REVIEWED_AT} />
   </section>
 
-  {groups.map((group) => (
-    <section class="wrap content-section" id={group.id}>
+  {resolved.map((group) => (
+    <section class="wrap content-section hub-group" id={group.id}>
       <div class="section-head">
-        <h2>{group.title}</h2>
-        {group.body.map((paragraph) => <p>{paragraph}</p>)}
+        <h2>{group.title[lang]}</h2>
+        <p>{group.intro[lang]}</p>
       </div>
-      <div class="grid">
-        {group.tools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
-      </div>
+      <ul class="hub-tools">
+        {group.items.map((item) => (
+          <li>
+            <a class="hub-tool-name" href={toolUrl(lang, item.slug)}>{item.tool?.name[lang]}</a>
+            <span class="hub-tool-asks">{item.asks[lang]}</span>
+          </li>
+        ))}
+      </ul>
     </section>
   ))}
 
-  <section class="wrap content-section" aria-labelledby="education-resources-title">
-    <div class="section-head">
-      <h2 id="education-resources-title">{resourceCopy.title}</h2>
-      <p>{resourceCopy.body}</p>
-    </div>
-    <div class="resource-columns">
-      <section class="resource-panel" aria-labelledby="education-guides-title">
-        <h3 id="education-guides-title">{resourceCopy.guides}</h3>
-        <div class="resource-list">
-          {featuredGuides.map((guide) => (
-            <a href={localePath(lang, 'guides', guide.slug)}>
-              <strong>{guide.title}</strong>
-              <span>{guide.summary}</span>
-            </a>
-          ))}
-        </div>
-        <a class="btn" href={localePath(lang, 'guides', 't-score-calculator-guide')}>{resourceCopy.viewAllGuides}</a>
-      </section>
-    </div>
+  <section class="wrap content-section">
+    <p class="hub-footer">{copy.footer}</p>
   </section>
-
-  <div class="wrap">
-    <Faq lang={lang} items={faqItems} />
-  </div>
 </BaseLayout>
 
 <style>
-  .resource-columns { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
-  .education-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-  .resource-panel { display: grid; align-content: start; gap: 14px; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); box-shadow: var(--shadow-soft); }
-  .resource-panel h3 { margin: 0; font-size: 1.18rem; }
-  .resource-list { display: grid; gap: 10px; }
-  .resource-list a { display: grid; gap: 5px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
-  .resource-list a:hover strong { color: var(--brand); }
-  .resource-list span { color: var(--muted); line-height: 1.6; }
-  .resource-panel .btn { justify-self: start; }
-  .education-topic-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-  .education-topic-list span { padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--brand-2); font-size: 0.84rem; font-weight: 800; }
-  .education-article-sections { display: grid; gap: 22px; margin-bottom: 16px; }
-  .education-article-group { display: grid; gap: 12px; }
-  .education-article-group-head { display: grid; gap: 5px; }
-  .education-article-group-head h3 { margin: 0; font-size: 1.12rem; }
-  .education-article-group-head p { margin: 0; color: var(--muted); line-height: 1.6; }
-  .education-article-group-head span { justify-self: start; padding: 4px 8px; border: 1px solid var(--line); border-radius: 999px; color: var(--brand-2); font-size: 0.8rem; font-weight: 800; }
-  .education-article-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
-  .education-article-grid a { display: grid; gap: 6px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
-  .education-article-grid a:hover { border-color: var(--brand); }
-  .education-article-grid span { color: var(--muted); line-height: 1.6; }
-  @media (max-width: 760px) { .resource-columns { grid-template-columns: 1fr; } .resource-panel { padding: 18px; } }
-  @media (max-width: 760px) { .education-article-grid { grid-template-columns: 1fr; } }
+  .hub-tools { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  .hub-tools li { display: grid; gap: 4px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+  .hub-tool-name { font-weight: 800; font-size: 1.05rem; color: var(--brand-2, var(--brand)); }
+  .hub-tool-name:hover { color: var(--brand); }
+  .hub-tool-asks { color: var(--muted); line-height: 1.7; }
+  .hub-footer { color: var(--muted); line-height: 1.7; }
 </style>

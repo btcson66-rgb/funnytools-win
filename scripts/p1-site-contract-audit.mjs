@@ -4,7 +4,7 @@
 // keeps that shape from drifting back. It reads the built dist/ only and fails when:
 //   - the sitemap is not exactly the INDEXABLE_PATHS set (src/lib/indexPolicy.ts);
 //   - an indexable page is not self-canonical, is noindex, or lacks the FunnyTools brand;
-//   - a statistics tool page / the retained guide lacks the Benson Lai byline or Person author;
+//   - a statistics tool page / the education-statistics hub lacks the Benson Lai byline or Person author;
 //   - any page emits FAQPage or HowTo structured data;
 //   - a removed section (es/fr, blog, workflows, for, shop, ...) is built, other than the
 //     registered redirect stubs in src/data/removedRedirects.ts (max 30);
@@ -76,7 +76,7 @@ if (indexable.length === 0) fail('Could not read INDEXABLE_PATHS from src/lib/in
 const indexableSet = new Set(indexable);
 if (indexableSet.has('/tools/merge-pdf/')) fail('INDEXABLE_PATHS must not contain /tools/merge-pdf/ (general tools stay noindex).');
 const toolSlugs = indexable.filter((p) => p.startsWith('/tools/')).map((p) => p.split('/')[2]);
-const authoredRoutes = [...toolSlugs.map((slug) => `/tools/${slug}/`), '/guides/t-score-calculator-guide/'];
+const authoredRoutes = [...toolSlugs.map((slug) => `/tools/${slug}/`), '/education-statistics/'];
 
 const stubSource = readFileSync(join(root, 'src/data/removedRedirects.ts'), 'utf8');
 const stubs = [...stubSource.matchAll(/\{\s*from:\s*'([^']+)',\s*to:\s*'([^']+)'\s*\}/g)].map((m) => ({ from: m[1], to: m[2] }));
@@ -99,6 +99,21 @@ for (const m of sitemapIndex.matchAll(/<loc>([^<]+)<\/loc>/g)) {
 }
 const expectedUrls = new Set(indexable.map((p) => `${origin}${p}`));
 if (new Set(sitemapUrls).size !== sitemapUrls.length) fail('Sitemap contains duplicate URLs.');
+// P2 batch 4: every sitemap file that is built must be listed in the index (no stray feeds that overlap
+// with the listed ones), and no URL may sit in more than one file.
+{
+  const listed = new Set([...sitemapIndex.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname.slice(1)));
+  const owner = new Map();
+  for (const name of readdirSync(dist).filter((file) => /^sitemap-[^/]+\.xml$/.test(file))) {
+    if (!listed.has(name)) fail(`${name} is built but not listed in sitemap.xml.`);
+    const xml = readFileSync(join(dist, name), 'utf8');
+    for (const u of xml.matchAll(/<url>[\s\S]*?<loc>([^<]+)<\/loc>[\s\S]*?<\/url>/g)) {
+      if (owner.has(u[1])) fail(`${u[1]} appears in both ${owner.get(u[1])} and ${name}.`);
+      else owner.set(u[1], name);
+    }
+  }
+  for (const { from } of stubs) if (owner.has(`${origin}${from}`)) fail(`Redirect stub ${from} must not be in a sitemap.`);
+}
 for (const url of expectedUrls) if (!sitemapUrls.includes(url)) fail(`Sitemap is missing indexable URL: ${url}`);
 for (const url of sitemapUrls) if (!expectedUrls.has(url)) fail(`Sitemap contains a URL outside INDEXABLE_PATHS: ${url}`);
 
@@ -158,9 +173,10 @@ for (const file of htmlFiles) {
   if (removedTopLevel.includes(section ?? '')) fail(`${route}: belongs to a removed section.`);
   if ((section === 'es' || section === 'fr') && parts[0] !== 'en' && !isRegisteredStub) fail(`${route}: es/fr page is not a registered redirect stub.`);
   if (parts[0] === 'guides' && parts.length >= 2 && !indexableSet.has(route) && !isRegisteredStub) fail(`${route}: removed guide page is still built.`);
-  if (parts[0] === 'en' && parts[1] === 'guides' && route !== '/en/guides/t-score-calculator-guide/') fail(`${route}: removed guide page is still built.`);
-  if (parts[0] === 'category' && route !== '/category/statistics/') fail(`${route}: removed category page is still built.`);
-  if (parts[0] === 'en' && parts[1] === 'category' && route !== '/en/category/statistics/') fail(`${route}: removed category page is still built.`);
+  // P2 batch 4: the guide and the statistics category were merged away; only their redirect stubs may be built.
+  if (parts[0] === 'en' && parts[1] === 'guides') fail(`${route}: removed guide page is still built.`);
+  if (parts[0] === 'category' && !isRegisteredStub) fail(`${route}: removed category page is still built.`);
+  if (parts[0] === 'en' && parts[1] === 'category') fail(`${route}: removed category page is still built.`);
 }
 
 // ---- 5. redirect stubs ----

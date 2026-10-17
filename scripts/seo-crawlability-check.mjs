@@ -13,7 +13,7 @@ const enNoindex = indexingConfig.EN_NOINDEX === true;
 const expectedRobots = readFileSync(join(root, 'public', 'robots.txt'), 'utf8');
 const expectedChildSitemaps = [
   'https://funnytools.win/sitemap-tools.xml',
-  'https://funnytools.win/sitemap-guides.xml',
+  'https://funnytools.win/sitemap-pages.xml',
 ];
 const disallowedUrlPatterns = [
   { pattern: /http:\/\//i, label: 'http://' },

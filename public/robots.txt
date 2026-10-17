@@ -31,4 +31,4 @@ Allow: /
 
 Sitemap: https://funnytools.win/sitemap.xml
 Sitemap: https://funnytools.win/sitemap-tools.xml
-Sitemap: https://funnytools.win/sitemap-guides.xml
+Sitemap: https://funnytools.win/sitemap-pages.xml

@@ -27,8 +27,8 @@ function bylineDate(html) {
 }
 
 // P1 (2026-10-15): the template guide catalogue, workflows and the QR/PDF/random guide
-// hubs were removed. Only t-score-calculator-guide remains, and the removed URLs are
-// 404 unless they are one of the registered redirect stubs.
+// hubs were removed, and P2 batch 4 (2026-10-17) merged the last guide (t-score-calculator-guide)
+// into its tool page. Removed URLs are 404 unless they are one of the registered redirect stubs.
 test('removed guide and workflow routes are not built (except registered redirect stubs)', () => {
   const stubSources = readFileSync(join(root, 'src/data/removedRedirects.ts'), 'utf8');
   for (const route of [
@@ -42,6 +42,8 @@ test('removed guide and workflow routes are not built (except registered redirec
     '/guides/qr-code-before-print-testing-guide/',
     '/en/guides/qr-code-before-print-testing-guide/',
     '/en/guides/z-score-calculator-guide/',
+    '/en/guides/t-score-calculator-guide/',
+    '/en/category/statistics/',
     '/guides/',
     '/workflows/',
     '/for/teachers/',
@@ -55,28 +57,15 @@ test('removed guide and workflow routes are not built (except registered redirec
   }
 });
 
-test('the retained guide is the only guide and emits Article schema with the named author', () => {
-  const route = '/guides/t-score-calculator-guide/';
-  const html = readRoute(route);
-  const items = jsonLd(html);
-  const types = items.map((item) => item['@type']);
-  assert.match(html, /<p class="eyebrow"[^>]*>[^<]*教育統計/);
-  assert.ok(types.includes('Article'));
-  assert.ok(types.includes('BreadcrumbList'));
-  assert.ok(!types.includes('FAQPage'));
-  const article = items.find((item) => item['@type'] === 'Article');
-  assert.equal(article.author['@type'], 'Person');
-  assert.equal(article.author.name, 'Benson Lai');
-  assert.equal(article.author.url, 'https://funnytools.win/about/');
-  assert.equal(bylineDate(html), '2026-06-25');
-  assert.equal(article.dateModified, '2026-06-25');
-});
-
-test('retained guide keeps its source date in the sitemap', () => {
-  const route = '/guides/t-score-calculator-guide/';
-  const sitemap = readFileSync(join(dist, 'sitemap-guides.xml'), 'utf8');
-  const entry = sitemap.match(new RegExp(`<loc>https://funnytools\\.win${route.replaceAll('/', '\\/')}</loc>[\\s\\S]*?<lastmod>([^<]+)</lastmod>`));
-  assert.equal(entry?.[1], '2026-06-25');
+test('the former T-score guide and statistics category are redirect stubs to the page that answers the same query', () => {
+  const stubSources = readFileSync(join(root, 'src/data/removedRedirects.ts'), 'utf8');
+  for (const [from, to] of [['/guides/t-score-calculator-guide/', '/tools/t-score-calculator/'], ['/category/statistics/', '/education-statistics/']]) {
+    assert.ok(stubSources.includes(`{ from: '${from}', to: '${to}' }`), `${from} is a registered stub`);
+    const html = readRoute(from);
+    assert.match(html, /<meta name="robots" content="noindex,follow"/);
+    assert.ok(html.includes(`<link rel="canonical" href="https://funnytools.win${to}"`));
+    assert.ok(html.includes(`http-equiv="refresh" content="0; url=${to}"`));
+  }
 });
 
 test('route registry only pairs pages that are actually built in zh and en', () => {
