@@ -452,3 +452,64 @@ test('independent t test page: defaults, method menu, byline, schema, sources an
   const en = html('/en/tools/independent-samples-t-test-calculator/');
   assert.match(en, /"dateModified":"2026-10-17"/);
 });
+
+// ---------------------------------------------------------------- P2 batch 3: teacher exam score calculator
+const examTotal = (rows) => weightedMean(rows.map(([value, weight]) => ({ value, weight }))).mean;
+
+test('teacher exam worked examples on the page are reproduced by the calculator function', () => {
+  // example 1: Chinese subject 40/30/30 (written 78, teaching 85, oral 82)
+  close(examTotal([[78, 40], [85, 30], [82, 30]]), 81.3, 1e-9);
+  assert.deepEqual([78 * 0.4, 85 * 0.3, 82 * 0.3].map((v) => v.toFixed(1)), ['31.2', '25.5', '24.6']);
+  // example 2: geography 40/20/40 with the same scores
+  close(examTotal([[78, 40], [85, 40], [82, 20]]), 81.6, 1e-9);
+  assert.deepEqual([85 * 0.4, 82 * 0.2].map((v) => v.toFixed(1)), ['34.0', '16.4']); close(81.6 - 81.3, 0.3, 1e-9);
+  // converting an item that is not out of 100
+  close(42 / 50 * 100, 84, 1e-12);
+  // example 3: Taipei structure, written weight 0; two demos 30% each equal one 60% item at their average
+  close((78 * 0 + 84.5 * 60 + 81 * 40) / (0 + 60 + 40), 83.1, 1e-9); // the widget's own formula accepts weight 0
+  close(examTotal([[84.5, 60], [81, 40]]), 83.1, 1e-9); close((85 * 30 + 84 * 30 + 81 * 40) / 100, 83.1, 1e-9);
+  assert.deepEqual([85 * 0.3, 84 * 0.3, 81 * 0.4].map((v) => v.toFixed(1)), ['25.5', '25.2', '32.4']);
+  // example 4: rounding to two decimals
+  const ex4 = examTotal([[79.35, 40], [84.25, 30], [81.5, 30]]);
+  close(ex4, 81.465, 1e-9); assert.equal(roundHalfUp(ex4, 2), 81.47); assert.equal(79.35 * 40 + 84.25 * 30 + 81.5 * 30, 8146.5);
+  // example 5: reverse the needed teaching score
+  close((85 - 78 * 0.4 - 82 * 0.3) / 0.3, 97.3333333333, 1e-9); close((90 - 78 * 0.4 - 82 * 0.3) / 0.3, 114, 1e-9);
+  assert.equal(((85 - (78 * 40 + 82 * 30) / 100) / 30 * 100).toFixed(2), '97.33');
+  // weights that do not total 100 use the real total as the divisor; 40/30/30 equals 0.4/0.3/0.3
+  close(examTotal([[78, 50], [85, 50], [82, 50]]), 81.6666666667, 1e-9); close(examTotal([[78, 0.4], [85, 0.3], [82, 0.3]]), 81.3, 1e-9);
+  // T score illustration: demo mean 80 SD 5, oral mean 85 SD 10, weights 60/40
+  const T = (score, mean, sd) => tScoreFrom({ score, mean, sd }).t;
+  const a = [T(90, 80, 5), T(80, 85, 10)]; const b = [T(84, 80, 5), T(92, 85, 10)];
+  assert.deepEqual(a, [70, 45]); assert.deepEqual(b.map((v) => Number(v.toFixed(6))), [58, 57]);
+  close(0.6 * 90 + 0.4 * 80, 86); close(0.6 * 84 + 0.4 * 92, 87.2, 1e-9); close(0.6 * a[0] + 0.4 * a[1], 60, 1e-9); close(0.6 * b[0] + 0.4 * b[1], 57.6, 1e-9);
+  assert.ok(0.6 * 90 + 0.4 * 80 < 0.6 * 84 + 0.4 * 92 && 0.6 * a[0] + 0.4 * a[1] > 0.6 * b[0] + 0.4 * b[1], 'standardising flips the order');
+  close(tScoreFrom({ score: 90, mean: 80, sd: 5 }).z, 2); close(tScoreFrom({ score: 92, mean: 85, sd: 10 }).z, 0.7);
+});
+
+test('teacher exam page: defaults, presets, byline, schema, official excerpts and sources are rendered', () => {
+  const page = html('/tools/teacher-exam-score-converter/');
+  const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
+  assert.match(flat, /<h1[^>]*>教師甄試成績計算器<\/h1>/);
+  for (const [key, value] of [['written', '78'], ['writtenWeight', '40'], ['teaching', '85'], ['teachingWeight', '30'], ['interview', '82'], ['interviewWeight', '30']]) assert.match(flat, new RegExp(`data-field="${key}"[^>]*value="${value}"`), key);
+  assert.match(flat, /data-preset="hs"[^>]*>套用高中國文科配分 40\/30\/30</); assert.match(flat, /data-preset="tp"[^>]*>套用臺北市複試 60\/40（筆試權重 0）</);
+  assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-17">2026-10-17<\/time>/);
+  assert.match(page, /"dateModified":"2026-10-17"/);
+  assert.match(page, /"@type":"WebApplication"/); assert.match(page, /"@type":"BreadcrumbList"/);
+  assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/); assert.doesNotMatch(page, /noindex/);
+  for (const h2 of ['教甄成績怎麼算', '各縣市與各科別的配分不一樣', '初試不算進總成績', 'T 分數', '工具沒有處理的規則', '四捨五入', '目標分', 'Excel', '常見錯誤']) assert.ok(flat.includes(h2), h2);
+  // every county rule is delegated to the notice of the year, and quoted wording comes from the notices
+  assert.ok(flat.includes('一律以你報考那一年的簡章為準')); assert.ok(flat.includes('以當年度簡章為準'));
+  for (const quote of ['並以四捨五入法取至小數點後 2 位數', '成績以原始分數加2%計算', '初試成績僅作為初試通過門檻，不併入複試成績', '教學演示 60%（兩場教學演示各 30%）、口試 40%', '成績以原始分數轉換成常態化標準分數（T 分數）計算', '試教佔總分 60%、口試佔總分 40%']) assert.ok(flat.includes(quote), quote);
+  assert.match(flat, /<th scope="row">教育部受託辦理 115 學年度公立高級中等學校教師甄選簡章（國文科，附件 B）<\/th><td>初試筆試 40%；複試口試 30%、試教 30%<\/td>/);
+  assert.match(flat, /=SUMPRODUCT\(B2:B4,C2:C4\)\/SUM\(C2:C4\)/); assert.match(flat, /=ROUND\(SUMPRODUCT\(B2:B4,C2:C4\)\/SUM\(C2:C4\),2\)/);
+  for (const href of ['/tools/t-score-calculator/', '/tools/weighted-average-calculator/']) assert.ok(page.includes(`href="${href}"`), href);
+  for (const host of ['tecs.otecs.ntnu.edu.tw', 'primary.tp.edu.tw', 'www-ws.gov.taipei', 'pedia.cloud.edu.tw', 'itl.nist.gov', 'support.microsoft.com']) assert.ok(page.includes(host), host);
+  assert.ok(flat.includes('查核日期 2026-10-17'));
+  // the old generated review block mentioned image tools; it must be gone
+  assert.doesNotMatch(flat, /圖片檔案|4000 萬像素|旋轉 90 度/);
+  const widgetSource = readFileSync(new URL('../src/components/tools/EducationStatisticsCalculator.astro', import.meta.url), 'utf8');
+  assert.ok(widgetSource.includes('roundHalfUp(total, 2).toFixed(2)'));
+  const en = html('/en/tools/teacher-exam-score-converter/');
+  assert.match(en, /"dateModified":"2026-10-17"/);
+});

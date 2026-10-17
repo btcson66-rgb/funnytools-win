@@ -43,9 +43,9 @@ const fields = simpleFields[slug] ?? [];
   {slug === 'teacher-exam-score-converter' && (
     <div class="exam-grid">
       {[
-        ['written', 'writtenWeight', '80', '40'],
-        ['teaching', 'teachingWeight', '85', '40'],
-        ['interview', 'interviewWeight', '82', '20'],
+        ['written', 'writtenWeight', '78', '40'],
+        ['teaching', 'teachingWeight', '85', '30'],
+        ['interview', 'interviewWeight', '82', '30'],
       ].map(([score, weight, scoreValue, weightValue]) => (
         <fieldset>
           <legend>{labels[score]}</legend>
@@ -92,7 +92,8 @@ const fields = simpleFields[slug] ?? [];
 
   <div class="actions stat-actions">
     {slug === 'weighted-average-calculator' && <button class="btn ghost" type="button" data-add>{labels.add}</button>}
-    {slug === 'teacher-exam-score-converter' && <button class="btn ghost" type="button" data-preset>{labels.preset403030}</button>}
+    {slug === 'teacher-exam-score-converter' && <button class="btn ghost" type="button" data-preset="hs">{labels.presetHs}</button>}
+    {slug === 'teacher-exam-score-converter' && <button class="btn ghost" type="button" data-preset="tp">{labels.presetTaipei}</button>}
     <button class="btn" type="button" data-calculate>{labels.calculate}</button>
     {slug === 'teacher-exam-score-converter' && <button class="btn ghost" type="button" data-normalize>{labels.autoNormalize}</button>}
     {slug === 'teacher-exam-score-converter' && <button class="btn ghost" type="button" data-copy>{labels.copyResult}</button>}
@@ -293,7 +294,9 @@ const fields = simpleFields[slug] ?? [];
           warning.hidden = Math.abs(weightTotal - 100) <= 0.0001;
         }
         const weightedParts = scoreKeys.map((key, index) => `${labels[key]} ${format(values[index].score, 2)} × ${format(values[index].weight, 2)}%`).join(' + ');
-        return showTeacher([[labels.weightTotal, `${format(weightTotal, 2)}%`], [labels.result, format(total, 3)]], `${weightedParts} ÷ ${format(weightTotal, 2)}`);
+        const teacherItems = [[labels.weightTotal, `${format(weightTotal, 2)}%`], [labels.result, format(total, 3)]];
+        if (labels.rounded2) teacherItems.push([labels.rounded2, roundHalfUp(total, 2).toFixed(2)]);
+        return showTeacher(teacherItems, `${weightedParts} ÷ ${format(weightTotal, 2)}`);
       }
       if (slug === 'cronbach-alpha-calculator') {
         const raw = field('data')?.value.trim() || '';
@@ -346,14 +349,20 @@ const fields = simpleFields[slug] ?? [];
       addWeightedRow();
       invalidate();
     });
-    root.querySelector('[data-preset]')?.addEventListener('click', () => {
-      const presets = { writtenWeight: '40', teachingWeight: '30', interviewWeight: '30' };
-      Object.entries(presets).forEach(([key, value]) => {
+    root.querySelectorAll('[data-preset]').forEach((button) => button.addEventListener('click', () => {
+      // hs = Ministry-commissioned senior-high Chinese (written 40 / demo 30 / oral 30); tp = Taipei second stage (demo 60 / oral 40, written not counted)
+      const presets = {
+        hs: { writtenWeight: '40', teachingWeight: '30', interviewWeight: '30' },
+        tp: { writtenWeight: '0', teachingWeight: '60', interviewWeight: '40' },
+      };
+      const chosen = presets[button instanceof HTMLElement ? button.dataset.preset || '' : ''];
+      if (!chosen) return;
+      Object.entries(chosen).forEach(([key, value]) => {
         const input = field(key);
         if (input) input.value = value;
       });
       calculate();
-    });
+    }));
     root.querySelector('[data-normalize]')?.addEventListener('click', () => {
       const weightKeys = ['writtenWeight', 'teachingWeight', 'interviewWeight'];
       const weights = weightKeys.map((key) => number(key));

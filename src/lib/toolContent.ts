@@ -23,12 +23,10 @@ import flowchartContent from '../i18n/tools/flowchart';
 import groupGeneratorContent from '../i18n/tools/group-generator';
 import gpaCalculatorContent from '../i18n/tools/gpa-calculator';
 import gradeAverageContent from '../i18n/tools/grade-average';
-import {
-  cronbachAlphaContent, normalizedScoreContent,
-  teacherExamContent,
-} from '../i18n/tools/education-statistics';
+import { cronbachAlphaContent, normalizedScoreContent } from '../i18n/tools/education-statistics';
 import classRankContent from '../i18n/tools/class-rank-percentile-calculator';
 import independentTTestContent from '../i18n/tools/independent-samples-t-test-calculator';
+import teacherExamContent from '../i18n/tools/teacher-exam-score-converter';
 import percentileRankContent from '../i18n/tools/percentile-rank-calculator';
 import tScoreContent from '../i18n/tools/t-score-calculator';
 import zScoreContent from '../i18n/tools/z-score-calculator';

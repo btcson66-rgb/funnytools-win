@@ -1054,8 +1054,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'teacher-exam-score-converter', category: 'statistics', icon: '📝', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['apa-7-report-generator', 'normalized-score-converter', 'class-rank-percentile-calculator', 'weighted-average-calculator', 't-score-calculator', 'z-score-calculator', 'percentile-rank-calculator', 'grade-average'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'high', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-25',
-    name: { zh: '教師甄試成績轉換模擬器', en: 'Teacher Exam Score Converter' }, short: { zh: '依筆試、口試與試教權重模擬加權總成績。', en: 'Simulate a weighted teacher-exam total from written, interview, and teaching scores.' },
+    relatedTools: ['t-score-calculator', 'weighted-average-calculator', 'normalized-score-converter', 'class-rank-percentile-calculator', 'z-score-calculator', 'percentile-rank-calculator', 'grade-average', 'apa-7-report-generator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'high', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
+    name: { zh: '教師甄試成績計算器', en: 'Teacher Exam Score Calculator' }, short: { zh: '輸入筆試、試教、口試分數與配分算加權總成績，附 115 學年度簡章原文與 T 分數算例，各縣市以當年度簡章為準。', en: 'Weighted total from written, teaching-demo and interview scores, with 2026 notice excerpts and a T score example.' },
   },
   {
     slug: 'cronbach-alpha-calculator', category: 'statistics', icon: 'α', status: 'live', privacyLevel: 'local-only',
