@@ -1,10 +1,12 @@
 import { defineConfig } from 'astro/config';
+import pruneScopedCss from './scripts/prune-scoped-css.mjs';
 
 export default defineConfig({
   site: 'https://funnytools.win',
   base: '/',
   output: 'static',
   trailingSlash: 'always',
+  integrations: [pruneScopedCss()],
   // Note: Astro's built-in prefetch is intentionally not enabled because it
   // injects its script into every page, including the script-free legacy
   // redirect pages. BaseLayout ships a lightweight hover-prefetch instead.
