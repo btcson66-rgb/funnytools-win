@@ -227,3 +227,53 @@ test('weighted average page: widget defaults, byline, schema, sources and links 
   for (const h2 of ['加權平均是什麼', '加權平均怎麼算', '高中學期總平均', '加權平均怎麼看', 'Excel', '常見錯誤']) assert.ok(flat.includes(h2), h2);
   assert.doesNotMatch(page, /加權平均資金成本|流通在外/);
 });
+
+// ---------------------------------------------------------------- P2 batch 2: semester grade (grade-average)
+test('semester grade worked examples on the page are reproduced by the calculator function', () => {
+  const ex1 = gradeSummary([{ score: 88, weight: 30 }, { score: 76, weight: 30 }, { score: 84, weight: 40 }]);
+  assert.equal(ex1.count, 3); assert.equal(ex1.sum, 248);
+  close(ex1.weighted, 82.8); assert.equal(ex1.average.toFixed(2), '82.67'); assert.equal(roundHalfUp(ex1.weighted, 0), 83);
+  assert.equal((ex1.weighted - ex1.average).toFixed(2), '0.13');
+  assert.deepEqual([88 * 0.3, 76 * 0.3, 84 * 0.4].map((v) => v.toFixed(1)), ['26.4', '22.8', '33.6']);
+  // example 2: points-based scheme, both ways
+  assert.equal(24 + 27 + 34, 85);
+  close(gradeSummary([{ score: 80, weight: 30 }, { score: 90, weight: 30 }, { score: 85, weight: 40 }]).weighted, 85);
+  // example 3: score needed on the final (40%)
+  close((60 - 88 * 0.3 - 76 * 0.3) / 0.4, 27); close((80 - 88 * 0.3 - 76 * 0.3) / 0.4, 77);
+  // same expression as the "plan remaining grade" box: current 82 over 60% completed, target 80
+  assert.equal(((80 - 82 * 60 / 100) / (40 / 100)).toFixed(2), '77.00');
+  // weight blank or 0: kept in the simple average, dropped from the weighted average
+  for (const weight of [null, 0]) {
+    const s = gradeSummary([{ score: 88, weight: 30 }, { score: 76, weight: 30 }, { score: 84, weight: 40 }, { score: 70, weight }]);
+    assert.equal(s.count, 4); assert.equal(s.sum, 318); assert.equal(s.average, 79.5); close(s.weighted, 82.8);
+  }
+  // rows without a score are ignored; no weights -> no weighted average
+  const blank = gradeSummary([{ score: null, weight: 30 }, { score: 90, weight: null }]);
+  assert.equal(blank.count, 1); assert.equal(blank.weighted, null); assert.equal(gradeSummary([]).average, null);
+  // rounding rule shown for senior-high subject scores
+  assert.equal(roundHalfUp(82.4, 0), 82); assert.equal(roundHalfUp(82.5, 0), 83);
+});
+
+test('semester grade page: widget defaults, byline, schema, regulation tables and sources are rendered', () => {
+  const widgetSource = readFileSync(new URL('../src/components/tools/GradeAverage.astro', import.meta.url), 'utf8');
+  assert.ok(/createRow\('88', '30'\);\s*createRow\('76', '30'\);\s*createRow\('84', '40'\);/.test(widgetSource), 'widget defaults must equal worked example 1');
+  const page = html('/tools/grade-average/');
+  const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
+  assert.match(flat, /<h1[^>]*>學期成績計算器<\/h1>/);
+  assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-17">2026-10-17<\/time>/);
+  assert.match(page, /"dateModified":"2026-10-17"/);
+  assert.match(page, /"@type":"WebApplication"/); assert.match(page, /"@type":"BreadcrumbList"/);
+  assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/);
+  assert.match(flat, /data-current-grade[^>]*value="82"/); assert.match(flat, /data-completed-weight[^>]*value="60"/); assert.match(flat, /data-target-grade[^>]*value="80"/);
+  assert.match(flat, /<th scope="row">乙<\/th><td>七十分以上未滿八十分<\/td>/);
+  assert.match(flat, /=ROUND\(SUMPRODUCT\(B2:B4,C2:C4\),0\)/);
+  for (const href of ['/tools/weighted-average-calculator/']) assert.ok(page.includes(`href="${href}"`), href);
+  for (const host of ['law.moj.gov.tw/LawClass/LawAll.aspx?pcode=H0070019', 'law.moj.gov.tw/LawClass/LawAll.aspx?pcode=H0060060', 'support.microsoft.com']) assert.ok(page.includes(host), host);
+  for (const h2 of ['學期成績怎麼算', '配分實例', '學期成績會四捨五入嗎', '各學制規定一覽', 'Excel', '常見錯誤']) assert.ok(flat.includes(h2), h2);
+  // no invented unified rounding rule: the page must say the rule depends on school level
+  assert.match(flat, /國中小：《國民小學及國民中學學生學習評量辦法》全文沒有「四捨五入」或「進位」的規定/);
+  assert.match(flat, /依各校規定（未逐校查證）/);
+  const en = html('/en/tools/grade-average/');
+  assert.match(en, /"dateModified":"2026-10-17"/);
+});

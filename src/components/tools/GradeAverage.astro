@@ -18,6 +18,7 @@ const { labels } = Astro.props;
     <div><span>{labels.sum}</span><strong data-sum>0.00</strong></div>
     <div><span>{labels.average}</span><strong data-average>--</strong></div>
     <div><span>{labels.weightedAverage}</span><strong data-weighted>--</strong></div>
+    <div><span>{labels.roundedInt}</span><strong data-rounded>--</strong></div>
   </div>
   <p class="note" data-note>{labels.noValidRows}</p>
   <span class="toast" role="status" aria-live="polite" hidden>{labels.copied}</span>
@@ -30,15 +31,26 @@ const { labels } = Astro.props;
     margin-bottom: 14px;
   }
 
-  .grade-row {
+  /* Rows are created by the script, so scoped selectors need :global(). */
+  .grade-rows :global(.grade-row) {
     display: grid;
     grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) auto;
     gap: 10px;
     align-items: end;
   }
 
-  .grade-row .btn {
+  .grade-rows :global(.grade-row .btn) {
     min-height: 48px;
+  }
+
+  /* Field captions only on the first row (still available to screen readers). */
+  .grade-rows :global(.grade-row:not(:first-child) label > span) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
 
   .grade-stats {
@@ -46,13 +58,19 @@ const { labels } = Astro.props;
   }
 
   @media (max-width: 760px) {
-    .grade-row {
-      grid-template-columns: 1fr;
+    .grade-rows :global(.grade-row) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .grade-rows :global(.grade-row .btn) {
+      grid-column: 1 / -1;
     }
   }
 </style>
 
 <script>
+  import { gradeSummary, roundHalfUp } from '../../lib/educationStats';
+
   document.querySelectorAll('[data-grade-average-tool]').forEach((root) => {
     const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
     const rows = root.querySelector('[data-rows]');
@@ -61,6 +79,7 @@ const { labels } = Astro.props;
       sum: root.querySelector('[data-sum]'),
       average: root.querySelector('[data-average]'),
       weighted: root.querySelector('[data-weighted]'),
+      rounded: root.querySelector('[data-rounded]'),
     };
     const note = root.querySelector('[data-note]');
     const toast = root.querySelector('.toast');
@@ -124,21 +143,21 @@ const { labels } = Astro.props;
     }
 
     function calculate() {
-      const valid = validRows();
-      const count = valid.length;
-      const sum = valid.reduce((total, row) => total + row.score, 0);
-      const weightedRows = valid.filter((row) => row.weight !== null && row.weight > 0);
-      const weightTotal = weightedRows.reduce((total, row) => total + row.weight, 0);
-      const average = count ? sum / count : null;
-      const weighted = weightTotal ? weightedRows.reduce((total, row) => total + row.score * row.weight, 0) / weightTotal : null;
+      const rowsData = Array.from(rows.querySelectorAll('.grade-row')).map((row) => ({
+        score: numberOrNull(row.querySelector('[data-score]').value),
+        weight: numberOrNull(row.querySelector('[data-weight]').value),
+      }));
+      const { count, sum, average, weighted } = gradeSummary(rowsData);
+      const roundedWeighted = weighted === null ? null : roundHalfUp(weighted, 0);
 
       outputs.items.textContent = String(count);
       outputs.sum.textContent = format(sum);
       outputs.average.textContent = average === null ? '--' : format(average);
       outputs.weighted.textContent = weighted === null ? '--' : format(weighted);
+      outputs.rounded.textContent = roundedWeighted === null ? '--' : String(roundedWeighted);
       note.textContent = count ? (weighted === null ? labels.noWeights : `${labels.weightedAverage}: ${format(weighted)}`) : labels.noValidRows;
       latest = count
-        ? `${labels.totalItems}: ${count}\n${labels.sum}: ${format(sum)}\n${labels.average}: ${format(average)}\n${labels.weightedAverage}: ${weighted === null ? labels.noWeights : format(weighted)}`
+        ? `${labels.totalItems}: ${count}\n${labels.sum}: ${format(sum)}\n${labels.average}: ${format(average)}\n${labels.weightedAverage}: ${weighted === null ? labels.noWeights : format(weighted)}${roundedWeighted === null ? '' : `\n${labels.roundedInt}: ${roundedWeighted}`}`
         : '';
     }
 
@@ -169,9 +188,10 @@ const { labels } = Astro.props;
       downloadCsv('grade-average.csv', rows);
     });
 
-    createRow('90', '1');
-    createRow('85', '1');
-    createRow('', '');
+    // Defaults are worked example 1 on the page: coursework 88 (30%), exam 1 76 (30%), exam 2 84 (40%).
+    createRow('88', '30');
+    createRow('76', '30');
+    createRow('84', '40');
     calculate();
   });
 </script>

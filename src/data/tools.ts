@@ -977,9 +977,10 @@ export const tools: ToolMeta[] = [
     monetizationTags: ['adsense', 'sponsor'],
     featured: true,
     isNew: true,
-    updated: '2026-06-18',
-    name: { zh: '成績平均計算器', en: 'Grade Average Calculator' },
-    short: { zh: '計算成績總分、簡單平均與加權平均。', en: 'Calculate simple and weighted averages from grade entries.' },
+    updated: '2026-10-17',
+    reviewedAt: '2026-10-17',
+    name: { zh: '學期成績計算器', en: 'Grade Average Calculator' },
+    short: { zh: '輸入平時、段考分數與占分比例算出學期成績，附四捨五入規定與期末要考幾分。', en: 'Calculate a semester grade from weighted scores, with rounding rules and the final exam score needed.' },
   },
   {
     slug: 'final-grade-needed-calculator', category: 'statistics', icon: '🎯', status: 'live', locales: ['zh'], privacyLevel: 'local-only',

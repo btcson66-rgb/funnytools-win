@@ -1061,7 +1061,7 @@ const prioritySpecs: PrioritySpec[] = [
         ],
         link: {
           prefix: '改用',
-          label: '成績平均計算器整理多筆評量與權重',
+          label: '學期成績計算器整理多筆評量與權重',
           href: '/tools/grade-average/',
           suffix: '；正式教甄試算則應把本頁每個欄位逐一對照當年度簡章。',
         },
