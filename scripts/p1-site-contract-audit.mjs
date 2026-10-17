@@ -99,6 +99,21 @@ for (const m of sitemapIndex.matchAll(/<loc>([^<]+)<\/loc>/g)) {
 }
 const expectedUrls = new Set(indexable.map((p) => `${origin}${p}`));
 if (new Set(sitemapUrls).size !== sitemapUrls.length) fail('Sitemap contains duplicate URLs.');
+// P2 batch 4: every sitemap file that is built must be listed in the index (no stray feeds that overlap
+// with the listed ones), and no URL may sit in more than one file.
+{
+  const listed = new Set([...sitemapIndex.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname.slice(1)));
+  const owner = new Map();
+  for (const name of readdirSync(dist).filter((file) => /^sitemap-[^/]+\.xml$/.test(file))) {
+    if (!listed.has(name)) fail(`${name} is built but not listed in sitemap.xml.`);
+    const xml = readFileSync(join(dist, name), 'utf8');
+    for (const u of xml.matchAll(/<url>[\s\S]*?<loc>([^<]+)<\/loc>[\s\S]*?<\/url>/g)) {
+      if (owner.has(u[1])) fail(`${u[1]} appears in both ${owner.get(u[1])} and ${name}.`);
+      else owner.set(u[1], name);
+    }
+  }
+  for (const { from } of stubs) if (owner.has(`${origin}${from}`)) fail(`Redirect stub ${from} must not be in a sitemap.`);
+}
 for (const url of expectedUrls) if (!sitemapUrls.includes(url)) fail(`Sitemap is missing indexable URL: ${url}`);
 for (const url of sitemapUrls) if (!expectedUrls.has(url)) fail(`Sitemap contains a URL outside INDEXABLE_PATHS: ${url}`);
 

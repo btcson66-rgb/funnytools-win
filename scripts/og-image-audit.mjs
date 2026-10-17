@@ -6,7 +6,7 @@ import { join } from 'node:path';
 const root = process.cwd();
 const publicDir = `${root}/public`;
 const distDir = `${root}/dist`;
-const sitemapFiles = ['sitemap-guides.xml', 'sitemap-tools.xml', 'sitemap.xml'];
+const sitemapFiles = ['sitemap-guides.xml', 'sitemap-pages.xml', 'sitemap-tools.xml', 'sitemap.xml'];
 const routes = new Set();
 for (const file of sitemapFiles) {
   if (!existsSync(`${publicDir}/${file}`)) continue;

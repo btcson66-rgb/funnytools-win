@@ -63,8 +63,12 @@ export function sitemapUrlSet(entries: SitemapEntry[]): string {
 
 const entries = INDEXABLE_PATHS.map(entryForPath);
 
-export const defaultPageEntries = (): SitemapEntry[] => entries.filter(({ page }) => page.segments[0] !== 'tools' && page.segments[0] !== 'guides' && page.segments[0] !== 'category');
-export const defaultToolEntries = (): SitemapEntry[] => entries.filter(({ page }) => page.segments[0] === 'tools');
-export const defaultGuideEntries = (): SitemapEntry[] => entries.filter(({ page }) => page.segments[0] !== 'tools');
-export const defaultCategoryEntries = (): SitemapEntry[] => entries.filter(({ page }) => page.segments[0] === 'category');
+// P2 batch 4 (2026-10-17): every URL belongs to exactly one of these three sets. Before, the guides set was
+// "everything that is not a tool", so the home page, /about/ and the hub were listed in both sitemap-pages.xml
+// and sitemap-guides.xml.
+const isToolPath = (segments: string[]) => segments[0] === 'tools';
+const isGuidePath = (segments: string[]) => segments[0] === 'guides' || segments[0] === 'category';
+export const defaultPageEntries = (): SitemapEntry[] => entries.filter(({ page }) => !isToolPath(page.segments) && !isGuidePath(page.segments));
+export const defaultToolEntries = (): SitemapEntry[] => entries.filter(({ page }) => isToolPath(page.segments));
+export const defaultGuideEntries = (): SitemapEntry[] => entries.filter(({ page }) => isGuidePath(page.segments));
 export const guidePages = (): SitemapPage[] => defaultGuideEntries().map(({ page }) => page);
