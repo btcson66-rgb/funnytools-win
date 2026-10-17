@@ -2,22 +2,31 @@
 import { SITE } from '../../config/site';
 import { liveTools, getEmbeddableTools, hasLiveTools } from '../../data/tools';
 import { categories } from '../../data/categories';
+import { removedRedirects } from '../../data/removedRedirects';
 
 export function getStaticPaths() {
+  // A /zh/* alias must land on the final page in one hop. When the page it would normally point
+  // at has itself been merged away (a registered stub in removedRedirects.ts), use that stub's
+  // target instead, so a stub never points at another stub.
+  const finalTarget = (path: string | undefined) => {
+    const direct = path ? `/${path}/` : '/';
+    return removedRedirects.find((r) => r.from === direct)?.to ?? direct;
+  };
   const legalPages = ['about', 'about-tools', 'contact', 'privacy', 'terms', 'disclaimer'];
-  return [
-    { params: { path: undefined } },
-    { params: { path: 'tools' } },
-    ...liveTools.map((tool) => ({ params: { path: `tools/${tool.slug}` } })),
-    // P1: only the statistics category page still exists.
-    ...categories.filter((c) => c.id === 'statistics' && hasLiveTools(c.id)).map((c) => ({ params: { path: `category/${c.id}` } })),
-    ...getEmbeddableTools().map((tool) => ({ params: { path: `embed/${tool.slug}` } })),
-    ...legalPages.map((p) => ({ params: { path: p } })),
+  const paths: Array<string | undefined> = [
+    undefined,
+    'tools',
+    ...liveTools.map((tool) => `tools/${tool.slug}`),
+    // P1: only the statistics category page still existed; since P2 batch 4 it is itself a stub,
+    // so /zh/category/statistics/ goes straight to its final page (see finalTarget).
+    ...categories.filter((c) => c.id === 'statistics' && hasLiveTools(c.id)).map((c) => `category/${c.id}`),
+    ...getEmbeddableTools().map((tool) => `embed/${tool.slug}`),
+    ...legalPages,
   ];
+  return paths.map((path) => ({ params: { path }, props: { newPath: finalTarget(path) } }));
 }
 
-const { path } = Astro.params;
-const newPath = path ? `/${path}/` : '/';
+const { newPath } = Astro.props as { newPath: string };
 const fullUrl = `${SITE.url}${newPath}`;
 // T2 removes the legacy /zh/* aliases from the index set. They stay available
 // as compatibility stubs, but must not create a second indexable URL for the

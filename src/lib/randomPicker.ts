@@ -146,3 +146,50 @@ export const chance = {
     return 1 - allDifferent;
   },
 };
+
+// ---- Gift exchange: nobody draws themselves (derangement) ----
+
+/** True when no position maps to itself, i.e. nobody is assigned to themselves. */
+export function isDerangement(receivers: readonly number[]): boolean {
+  return receivers.every((receiver, giver) => receiver !== giver);
+}
+
+/** D(n): how many ways n people can each give to exactly one other person, everyone receiving once. D(n) = (n-1)(D(n-1)+D(n-2)). */
+export function derangementCount(size: number): bigint {
+  if (!Number.isInteger(size) || size < 0) throw new RangeError('size must be a non-negative integer');
+  let previous = 1n; // D(0)
+  let current = 0n; // D(1)
+  if (size === 0) return previous;
+  for (let n = 2; n <= size; n += 1) {
+    [previous, current] = [current, BigInt(n - 1) * (current + previous)];
+  }
+  return current;
+}
+
+export function factorial(size: number): bigint {
+  let product = 1n;
+  for (let n = 2; n <= size; n += 1) product *= BigInt(n);
+  return product;
+}
+
+export type DerangementResult =
+  | { ok: true; receivers: number[]; attempts: number }
+  | { ok: false; error: 'too-few' | 'gave-up' };
+
+/**
+ * receivers[i] = the position person i gives to. Rejection sampling: Fisher-Yates makes every one of the
+ * n! assignments equally likely, and a draw in which anybody gets themselves is thrown away and redone.
+ * The assignments that survive are exactly the derangements, and each of them is equally likely
+ * (every survivor had the same 1/n! chance in each round). About n!/D(n) = 2.7 rounds are needed on
+ * average whatever the list size, so `maxAttempts` is only a safety net (the chance of using up 1000
+ * rounds is below (2/3)^1000 for 3 or more people, and 2^-1000 for 2 people).
+ */
+export function drawDerangement(size: number, randomInt: RandomInt, maxAttempts = 1000): DerangementResult {
+  if (!Number.isInteger(size) || size < 2) return { ok: false, error: 'too-few' };
+  const identity = Array.from({ length: size }, (_, index) => index);
+  for (let attempts = 1; attempts <= maxAttempts; attempts += 1) {
+    const receivers = shuffle(identity, randomInt);
+    if (isDerangement(receivers)) return { ok: true, receivers, attempts };
+  }
+  return { ok: false, error: 'gave-up' };
+}

@@ -1,21 +1,22 @@
 import type { ToolContent } from './_types';
 
-// Numbers on this page come from src/lib/randomPicker.ts (groupSizes, groupCountForSize, chance.*);
-// tests/p4-random-name-picker.test.mjs re-derives every one of them. The Excel formulas were recalculated
+// Numbers on this page come from src/lib/randomPicker.ts (groupSizes, groupCountForSize, chance.*,
+// derangementCount); tests/p4-random-name-picker.test.mjs and tests/p5-gift-exchange.test.mjs re-derive every one of them. The Excel formulas were recalculated
 // three times in LibreOffice Calc 24.2 and checked for their invariants (see the Excel section).
 
 export default {
   zh: {
     name: '線上抽籤點名工具',
-    short: '貼上名單就能抽人、分組、排順序。抽人可選「不重複」或「可重複」，分組可指定組數或每組人數，名單只在你的瀏覽器裡處理。',
+    short: '貼上名單就能抽人、分組、排順序，也能做交換禮物配對（保證不抽到自己）。抽人可選「不重複」或「可重複」，分組可指定組數或每組人數，名單只在你的瀏覽器裡處理。',
     long: '預設值是 30 個座號（01 到 30）：抽 3 位、不重複，每個人被抽中的機率是 3÷30＝10%；切到「隨機分組」預設分成 6 組，每組 5 人。名單、模式與人數都可以自己改。',
-    seoTitle: '線上抽籤點名：不重複抽人、隨機分組、排順序',
-    seoDescription: '貼上名單就能抽籤點名、隨機分組、排報告順序，可選不重複或可重複，說明亂數怎麼來、機率怎麼算、Excel 怎麼做。',
-    keywords: ['抽籤', '抽籤不重複', '隨機點名', '隨機分組', '抽籤程式', '隨機排序', 'Excel 抽籤'],
+    seoTitle: '線上抽籤點名：不重複抽人、隨機分組、交換禮物配對',
+    seoDescription: '貼上名單就能抽籤點名、隨機分組、排順序，還能做交換禮物配對、保證不抽到自己；說明亂數怎麼來、機率怎麼算、Excel 怎麼做。',
+    keywords: ['抽籤', '抽籤不重複', '隨機點名', '隨機分組', '抽籤程式', '隨機排序', 'Excel 抽籤', '交換禮物 抽籤', '交換禮物 不抽到自己', '交換禮物 配對'],
     capabilities: [
       '抽人：從名單抽出 1 位或多位，可選「不重複」（抽過的人不會再被抽到）或「可重複」（每次都從整份名單抽）。',
       '隨機分組：指定要分成幾組，或指定每組幾人，人數除不盡時各組最多相差 1 人。',
-      '排順序：把整份名單隨機打亂，適合排報告順序、上台順序。',
+      '排順序：把整份名單隨機打亂，適合排報告順序、上台順序，也能決定交換禮物時誰先挑。',
+      '交換禮物（不抽到自己）：每個人送出一份、收到一份，保證沒有人抽到自己；結果可先遮住，一人一人輪流看。',
     ],
     contentSections: [
       {
@@ -98,6 +99,35 @@ export default {
         },
       },
       {
+        heading: '交換禮物抽籤：怎麼配對才不會抽到自己',
+        paragraphs: [
+          '交換禮物有兩種抽法，查詢時常混在一起。第一種是事先指定「誰送給誰」（小天使、秘密聖誕老人那一類）：用本頁的「交換禮物（不抽到自己）」模式。第二種是大家把禮物放在一起，現場抽號碼決定誰先挑：用「排順序」，把名單打亂，從上到下就是挑禮物的順序。',
+          '用法：貼上參加者名單（同名的人請加座號或代號），選「交換禮物（不抽到自己）」，按「配對」。預設會先遮住收禮者，每個人按自己那一列的按鈕看抽到誰，看完按「隱藏」再把畫面交給下一位；取消勾選則全部直接顯示。至少要 2 個人。',
+          '「每個人都送給別人、每個人都剛好收到一份、沒有人抽到自己」的配法，數學上叫錯排（derangement）。本頁的做法是：把整份名單洗牌成一種「誰送給誰」，只要有人抽到自己，這一整次就丟掉重洗。每種洗牌結果出現的機會原本相同，所以留下來的每一種「沒有人抽到自己」的配法，出現的機會也相同。',
+        ],
+        table: {
+          caption: '不抽到自己的配法有幾種（D(n)＝(n−1)×(D(n−1)＋D(n−2))，D(1)＝0、D(2)＝1）',
+          headers: ['人數', '不抽到自己的配法', '全部配法（n！）', '洗一次牌就合格的機率'],
+          rows: [
+            ['2', '1', '2', '50.00%'],
+            ['3', '2', '6', '33.33%'],
+            ['4', '9', '24', '37.50%'],
+            ['5', '44', '120', '36.67%'],
+            ['6', '265', '720', '36.81%'],
+            ['10', '1,334,961', '3,628,800', '36.79%'],
+          ],
+          note: '人數再多，合格機率都約 36.79%（1÷e），所以不管幾個人，平均洗約 2.7 次就會有合格的配法。3 人 2 種、4 人 9 種、5 人 44 種的數字，與 OEIS A000166 的數列（1, 0, 1, 2, 9, 44, 265, 1854, 14833, 133496, 1334961）一致；Wikipedia 的 Derangement 條目也用 4 位學生互相改考卷的例子說明 24 種裡有 9 種。專案的自動測試把程式的每一步亂數選擇全部列舉：3 人的 2 種與 4 人的 9 種各自出現的機會完全相同。',
+        },
+        items: [
+          '為什麼不用「輪流抽，抽到自己就放回重抽」？這個直覺做法對各種配法並不公平。以 A、B、C 三人為例（每人依序從剩下的籤抽，抽到自己就放回；最後一個人若只剩自己的籤，整輪重來）：A→B、B→C、C→A 的機率是 1/3，A→C、C→B、B→A 的機率是 2/3，兩種合格配法差一倍。4 人時，9 種合格配法的機率從 2/31（6.45%）到 6/31（19.35%），均勻的話每種應是 1/9（11.11%）。本頁的洗牌後檢查沒有這個問題。',
+          '只保證沒有人抽到自己，不保證 A 與 B 不會互相抽到對方：4 人的 9 種配法裡有 3 種是兩對互換（A↔B 且 C↔D 之類），也就是 1/3 的機會；5 人的 44 種裡有 20 種（約 45.45%）有一對互換。2 人只能互換。',
+          '沒有「夫妻不要抽到彼此」「同部門不要抽到同部門」這類排除條件；有條件時，建議抽完後自行對調並告知當事人。',
+          '同名的兩行是兩位參加者，工具只保證「同一行」不會抽到自己，兩位同名者可能抽到對方；請先加座號或代號。',
+          '操作這個頁面的人看得到全部配對，遮住結果只是讓旁人與其他參加者不會看到別人的結果。要連主辦人都不知道，這個工具做不到，請各人自己操作並只看自己的那一列。',
+          '名單與結果只在瀏覽器裡處理，不上傳；關閉或重新整理頁面就消失，按「複製結果」會複製完整的配對清單（含所有收禮者），請只傳給主辦人。',
+        ],
+      },
+      {
         heading: '這個頁面的亂數怎麼來，以及它不能保證什麼',
         paragraphs: [
           '程式沒有使用 Math.random()，而是用瀏覽器提供的 crypto.getRandomValues 取得 32 位元亂數。要從 n 個位置選一個時，先把大於等於 ⌊2³²÷n⌋×n 的亂數丟掉重抽，再取餘數；這樣做是為了避免「直接取餘數」讓小的餘數略多一點機會（Wikipedia 的 Fisher–Yates shuffle 條目把這個問題稱為 modulo bias）。排列則用 Fisher–Yates 洗牌：n 個人的 n！種排列，在亂數來源均勻的前提下，每一種出現的機率相同。',
@@ -141,7 +171,7 @@ export default {
           '名單沒有先清理：缺席的人、重複的人、不符合資格的人還在裡面，抽出來才發現要重抽。',
           '以為「不重複」會跨頁面、跨天保存。重新整理頁面就歸零；要連續幾堂課輪完全班，請自己記錄抽過的人。',
           '把它當成點名系統：本工具只負責「抽到誰」，不記錄出席、缺席或遲到。',
-          '交換禮物配對需要「不能抽到自己」的規則，這個工具沒有這項功能，直接用抽人模式會抽到自己。',
+          '交換禮物配對用「抽人」模式一個一個抽：會抽到自己，後面的人還可能只剩自己的名字。請改用「交換禮物（不抽到自己）」模式。',
           '用逗號分隔卻含有逗號的名字，被拆成兩個候選人。',
           '抽到缺席者就重抽：這等於把缺席者從名單拿掉，其他人的機會仍然相同，但最好事前跟大家說好規則。',
         ],
@@ -151,15 +181,17 @@ export default {
       '老師貼上 30 個座號，抽 3 位同學回答問題，抽過的不再出現，下一題接著抽。',
       '把全班分成 6 組做小組討論，再用「排順序」決定各組上台順序。',
       '預設的 30 個座號直接按「抽 3 位」，確認機率是 3÷30＝10% 之後再貼自己的名單。',
+      '8 位同事交換禮物：貼上 8 個名字，切到「交換禮物（不抽到自己）」按「配對」，每人按自己那一列的按鈕看抽到誰；沒有人會抽到自己。',
     ],
     notes: [
       '名單只在你的瀏覽器裡處理，不會上傳；重新整理或關閉頁面後，名單與結果都會消失。',
       '本頁不是公證抽獎。獎金、法律效力或爭議情境，請搭配公告規則、錄影與第三方見證。',
       '公開投影時建議用座號或代碼，避免把完整姓名秀在螢幕上。',
+      '交換禮物模式不保證 A、B 不會互相抽到對方，也沒有排除條件；操作的人看得到全部配對。',
     ],
     formula: {
-      expression: '分組人數：每組 ⌊n÷g⌋ 或 ⌊n÷g⌋＋1 人，前 (n mod g) 組多 1 人；每組 k 人時 g＝⌈n÷k⌉',
-      explanation: 'n 是名單人數，g 是組數。抽人與洗牌都用 crypto.getRandomValues 取得 32 位元亂數，丟掉 ⌊2³²÷m⌋×m 以上的值後取餘數，得到 0 到 m−1 的均勻整數（m 是當下可選的位置數）。',
+      expression: '分組人數：每組 ⌊n÷g⌋ 或 ⌊n÷g⌋＋1 人，前 (n mod g) 組多 1 人；每組 k 人時 g＝⌈n÷k⌉。交換禮物：不抽到自己的配法數 D(n)＝(n−1)(D(n−1)＋D(n−2))',
+      explanation: 'n 是名單人數，g 是組數。交換禮物是洗牌後檢查有沒有人抽到自己，有就整次重洗。抽人與洗牌都用 crypto.getRandomValues 取得 32 位元亂數，丟掉 ⌊2³²÷m⌋×m 以上的值後取餘數，得到 0 到 m−1 的均勻整數（m 是當下可選的位置數）。',
     },
     sources: [
       {
@@ -176,6 +208,16 @@ export default {
         label: 'Wikipedia：Fisher–Yates shuffle',
         href: 'https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle',
         note: '洗牌演算法與 modulo bias 的說明；亂數來源無偏時，每種排列出現的機率相同。查核日期 2026-10-17。',
+      },
+      {
+        label: 'Wikipedia：Derangement',
+        href: 'https://en.wikipedia.org/wiki/Derangement',
+        note: '錯排的定義（沒有任何元素在原本位置的排列）、D(n)＝(n−1)(D(n−1)＋D(n−2))、隨機排列是錯排的機率趨近 1÷e≈0.367879，以及 4 位學生互相改考卷「24 種裡有 9 種」的例子。查核日期 2026-10-17。',
+      },
+      {
+        label: 'OEIS：A000166（Subfactorial / derangements）',
+        href: 'https://oeis.org/A000166',
+        note: '錯排數數列 1, 0, 1, 2, 9, 44, 265, 1854, 14833, 133496, 1334961, …，並列出兩條遞迴式。查核日期 2026-10-17。',
       },
       {
         label: 'Microsoft：RAND 函數',
@@ -221,13 +263,17 @@ export default {
         a: '程式本身沒有偏心：用瀏覽器的 crypto.getRandomValues、丟掉會造成偏差的值、再用 Fisher–Yates 洗牌。但瀏覽器的亂數是偽亂數，本頁沒有做獨立的統計檢定，也不是公證流程；名單是否完整、規則是否事先公布，影響公平的程度比亂數更大。',
       },
       {
+        q: '交換禮物怎麼抽才不會抽到自己？',
+        a: '切到「交換禮物（不抽到自己）」模式：工具把名單洗牌成一種「誰送給誰」，有人抽到自己就整次重洗，所以結果一定沒有人抽到自己，而且每一種合格配法的機會相同。3 人有 2 種、4 人有 9 種。它不保證 A、B 不會互相抽到對方。',
+      },
+      {
         q: '可以用來抽尾牙獎品或公開抽獎嗎？',
         a: '日常小活動可以。有金額或法律效力的抽獎，請另外公告規則、保留錄影與名單，並由第三方見證；本工具不保存任何紀錄。',
       },
     ],
     instructions: [
       '把名單貼進文字框，一行一位候選人；預設是座號 01 到 30，可按「清空名單」換成自己的。',
-      '選模式：「抽人」「隨機分組」或「排順序」。抽人要設定人數，以及「不重複」或「可重複」；分組要設定組數或每組人數。',
+      '選模式：「抽人」「隨機分組」「排順序」或「交換禮物（不抽到自己）」。抽人要設定人數，以及「不重複」或「可重複」；分組要設定組數或每組人數；交換禮物只需要名單（至少 2 人）。',
       '按下按鈕產生結果。結果出現當下就已決定，沒有重抽；需要保留請按「複製結果」。',
       '要從頭再抽一輪，按「重新開始」；名單不變，只清掉已抽出的紀錄。',
     ],
@@ -238,6 +284,7 @@ export default {
       modePick: '抽人',
       modeGroup: '隨機分組',
       modeOrder: '排順序',
+      modeGift: '交換禮物（不抽到自己）',
       input: '名單（一行一位候選人）',
       placeholder: '座號或姓名，一行一位',
       separatorLabel: '名單分隔',
@@ -255,6 +302,14 @@ export default {
       runPick: '抽出',
       runGroup: '分組',
       runOrder: '排出順序',
+      runGift: '配對',
+      giftHideLabel: '先遮住收禮者，每人按自己的按鈕才顯示',
+      giftNote: '每個人送出一份、收到一份，而且不會抽到自己；名單至少要 2 人。操作這個頁面的人看得到全部配對，遮住結果是讓其他人看不到別人的。',
+      giftReveal: '看 {name} 抽到誰',
+      giftConceal: '隱藏',
+      giftTooFewError: '交換禮物至少要 2 位參加者。',
+      giftGaveUpError: '多次嘗試仍沒有找到合格的配對，請再按一次「配對」。',
+      giftDuplicateWarning: '名單有重複的名字：{names}。工具只保證「同一行」不會抽到自己，同名的兩位可能抽到對方，請先加上座號區分。',
       restart: '重新開始',
       loadSample: '載入範例名單',
       clear: '清空名單',
@@ -278,15 +333,16 @@ export default {
   },
   en: {
     name: 'Random Name Picker',
-    short: 'Paste a list to draw names, split it into random groups, or shuffle the order. Draws can be no-repeat or with replacement, and the list stays in your browser.',
+    short: 'Paste a list to draw names, split it into random groups, shuffle the order, or make a gift-exchange draw where nobody gets themselves. Draws can be no-repeat or with replacement, and the list stays in your browser.',
     long: 'The defaults are 30 seat numbers (01 to 30): pick 3, no repeats, so each person has a 3/30 = 10% chance. Switch to group mode for 6 groups of 5. The list, mode and counts are all editable.',
-    seoTitle: 'Random Name Picker | No-repeat draws, groups, order',
-    seoDescription: 'Paste a list to draw names, make random groups or shuffle the order, with no-repeat or with-replacement draws and how the randomness works.',
-    keywords: ['random name picker', 'random group generator', 'random order', 'no repeat random pick', 'classroom picker'],
+    seoTitle: 'Random Name Picker | No-repeat draws, groups, gift exchange',
+    seoDescription: 'Paste a list to draw names, make random groups, shuffle the order, or draw a gift exchange where nobody gets themselves, and see how the randomness works.',
+    keywords: ['random name picker', 'random group generator', 'random order', 'no repeat random pick', 'classroom picker', 'gift exchange draw', 'secret santa generator'],
     capabilities: [
       'Pick one or more names, either without repeats (nobody is drawn twice) or with replacement (every draw uses the whole list).',
       'Split the list into a number of groups, or into groups of a given size; group sizes differ by at most one person.',
       'Shuffle the whole list into a random order, for example a presentation order.',
+      'Gift exchange: everyone gives one gift and receives one, nobody draws themselves, and results can stay hidden until each person presses their own button.',
     ],
     contentSections: [
       {
@@ -308,6 +364,13 @@ export default {
         ],
       },
       {
+        heading: 'Gift exchange: drawing so nobody gets themselves',
+        paragraphs: [
+          'Choose “Gift exchange (nobody draws themselves)”, paste the participants (at least 2, one per line) and press the button. By default each recipient is hidden until the giver presses their own button. An assignment where nobody gets themselves and everybody receives exactly one gift is a derangement. The page shuffles the whole list into a giver-to-receiver assignment and throws the shuffle away if anybody got themselves; every shuffle is equally likely, so every valid assignment is equally likely. 3 people have 2 valid assignments, 4 people have 9 (24 in total), 5 have 44, 6 have 265, and about 36.79% (1/e) of shuffles are valid for large lists, so roughly 2.7 shuffles are needed on average. The tests enumerate every random choice the code can make for 3 and 4 people and confirm each valid assignment has exactly the same probability.',
+          'Drawing in turn and putting your own slip back does not give equal chances: with 3 people (restarting if the last person is left with only their own slip), A→B→C→A has probability 1/3 and A→C→B→A has 2/3. Limits: the tool does not stop A and B from drawing each other (3 of the 9 four-person assignments are two swapped pairs), has no exclusion rules, treats two identical names as two people who may draw each other, and shows every pairing to whoever operates the page. Sources: Wikipedia “Derangement” and OEIS A000166, checked 2026-10-17. For a draw where people take turns choosing a wrapped gift, use “Shuffle order”.',
+        ],
+      },
+      {
         heading: 'Where the randomness comes from, and its limits',
         paragraphs: [
           'The page uses crypto.getRandomValues, not Math.random(). Values that would favour small remainders are discarded before taking the remainder (the modulo bias described in the Wikipedia article on the Fisher–Yates shuffle), and the order is shuffled with Fisher–Yates, which makes every ordering equally likely if the random source is uniform. MDN states that browsers implement getRandomValues with a pseudo-random generator seeded with enough entropy, and the specification mandates no minimum entropy; the page has not been statistically tested against any browser. The result is decided at the moment you press the button, nothing is stored, and this is not a notarised draw.',
@@ -317,9 +380,11 @@ export default {
     examples: [
       'Pick 3 of 30 seat numbers to answer a question, with no repeats.',
       'Split a class into 6 groups, then shuffle the presentation order.',
+      'Eight colleagues swap gifts: paste eight names, choose the gift-exchange mode, and each person presses their own button to see who they drew.',
     ],
     notes: [
       'The list is processed in your browser and is lost when you reload the page.',
+      'Gift-exchange mode does not stop two people drawing each other, and whoever operates the page can see every pairing.',
       'Not suitable for prizes with legal or monetary weight.',
     ],
     sources: [
@@ -338,16 +403,27 @@ export default {
         href: 'https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle',
         note: 'Shuffle algorithm and modulo bias. Checked 2026-10-17.',
       },
+      {
+        label: 'Wikipedia: Derangement',
+        href: 'https://en.wikipedia.org/wiki/Derangement',
+        note: 'Definition, recurrence D(n) = (n-1)(D(n-1)+D(n-2)), limit 1/e, and the 9-of-24 example. Checked 2026-10-17.',
+      },
+      {
+        label: 'OEIS A000166: Subfactorial / derangements',
+        href: 'https://oeis.org/A000166',
+        note: 'The sequence 1, 0, 1, 2, 9, 44, 265, 1854, 14833, 133496, 1334961. Checked 2026-10-17.',
+      },
     ],
     faq: [
       { q: 'How do I avoid repeats?', a: 'Keep “no repeats” selected (the default). Anyone already drawn stays out until you press Restart, edit the list or reload.' },
+      { q: 'How do I run a gift exchange where nobody draws themselves?', a: 'Use the gift-exchange mode: the list is shuffled into a giver-to-receiver assignment and redone if anybody drew themselves. 3 people have 2 valid assignments, 4 people 9, and each is equally likely. It does not stop two people drawing each other.' },
       { q: 'Is the list uploaded?', a: 'No. It is processed in your browser and is gone after a reload.' },
       { q: 'What if the groups do not divide evenly?', a: 'Group sizes differ by at most one person: 31 people in 6 groups is 6, 5, 5, 5, 5, 5.' },
       { q: 'Is a computer draw fair?', a: 'The code adds no bias, but browser randomness is pseudo-random and this page is not a certified or notarised draw.' },
     ],
     instructions: [
       'Paste the list, one candidate per line (the default is seat numbers 01 to 30).',
-      'Choose pick, group or order and set the numbers.',
+      'Choose pick, group, order or gift exchange and set the numbers (gift exchange needs only the list, at least 2 people).',
       'Press the button; the result is final and can be copied.',
       'Press Restart to clear the drawn record while keeping the list.',
     ],
@@ -358,6 +434,7 @@ export default {
       modePick: 'Pick names',
       modeGroup: 'Random groups',
       modeOrder: 'Shuffle order',
+      modeGift: 'Gift exchange (nobody draws themselves)',
       input: 'List (one candidate per line)',
       placeholder: 'Seat numbers or names, one per line',
       separatorLabel: 'Separator',
@@ -375,6 +452,14 @@ export default {
       runPick: 'Pick',
       runGroup: 'Make groups',
       runOrder: 'Shuffle order',
+      runGift: 'Match',
+      giftHideLabel: 'Hide recipients until each person presses their own button',
+      giftNote: 'Everyone gives one gift and receives one, and nobody draws themselves; at least 2 people are needed. Whoever operates the page can see every pairing; hiding only keeps the others from seeing them.',
+      giftReveal: 'Show who {name} drew',
+      giftConceal: 'Hide',
+      giftTooFewError: 'A gift exchange needs at least 2 participants.',
+      giftGaveUpError: 'No valid assignment was found after many tries. Press Match again.',
+      giftDuplicateWarning: 'Repeated names on the list: {names}. Only the same line is prevented from drawing itself, so two people with the same name may draw each other; add a seat number to tell them apart.',
       restart: 'Restart',
       loadSample: 'Load sample list',
       clear: 'Clear list',

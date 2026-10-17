@@ -114,7 +114,7 @@ export const tools: ToolMeta[] = [
     updated: '2026-10-17',
     reviewedAt: '2026-10-17',
     name: { zh: '線上抽籤點名工具', en: 'Random Name Picker' },
-    short: { zh: '貼上名單抽人、隨機分組、排順序，可選不重複或可重複。', en: 'Draw names, make random groups or shuffle the order from a pasted list.' },
+    short: { zh: '貼上名單抽人、隨機分組、排順序、交換禮物配對（不抽到自己），可選不重複或可重複。', en: 'Draw names, make random groups, shuffle the order or match a gift exchange (nobody draws themselves) from a pasted list.' },
   },
   {
     slug: 'random-group-generator',
