@@ -1,9 +1,21 @@
 {
   "checkedPages": 514,
-  "checkedLinks": 6394,
-  "crossLocaleLinks": 90,
+  "checkedLinks": 6405,
+  "crossLocaleLinks": 96,
   "violations": [],
   "review": [
+    {
+      "source_url": "https://funnytools.win/en/tools/grade-average/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/weighted-average-calculator/",
+      "target_locale": "zh",
+      "link_text": "weighted average calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
     {
       "source_url": "https://funnytools.win/en/tools/percentile-rank-calculator/",
       "source_locale": "en",
@@ -82,6 +94,66 @@
       "target_url": "https://funnytools.win/tools/standard-deviation/",
       "target_locale": "zh",
       "link_text": "standard deviation calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/weighted-average-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/grade-average/",
+      "target_locale": "zh",
+      "link_text": "semester grade calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/weighted-average-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/standard-deviation/",
+      "target_locale": "zh",
+      "link_text": "standard deviation calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/z-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/standard-deviation/",
+      "target_locale": "zh",
+      "link_text": "standard deviation calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/z-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/percentile-rank-calculator/",
+      "target_locale": "zh",
+      "link_text": "percentile rank calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/z-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/t-score-calculator/",
+      "target_locale": "zh",
+      "link_text": "T score calculator",
       "context": "content",
       "indexable": false,
       "allowed": false,
@@ -377,6 +449,18 @@
       "allowed": true,
       "enforced": false,
       "reason": "intent:disclosure-only-zh"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/grade-average/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/weighted-average-calculator/",
+      "target_locale": "zh",
+      "link_text": "weighted average calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
     },
     {
       "source_url": "https://funnytools.win/en/tools/group-generator/",
@@ -1135,6 +1219,30 @@
       "reason": "intent:disclosure-only-zh"
     },
     {
+      "source_url": "https://funnytools.win/en/tools/weighted-average-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/grade-average/",
+      "target_locale": "zh",
+      "link_text": "semester grade calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/weighted-average-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/standard-deviation/",
+      "target_locale": "zh",
+      "link_text": "standard deviation calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
       "source_url": "https://funnytools.win/en/tools/what-to-eat/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
@@ -1169,6 +1277,42 @@
       "allowed": true,
       "enforced": false,
       "reason": "intent:disclosure-only-zh"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/z-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/standard-deviation/",
+      "target_locale": "zh",
+      "link_text": "standard deviation calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/z-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/percentile-rank-calculator/",
+      "target_locale": "zh",
+      "link_text": "percentile rank calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/z-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/t-score-calculator/",
+      "target_locale": "zh",
+      "link_text": "T score calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
     }
   ]
 }
