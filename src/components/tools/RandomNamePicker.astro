@@ -210,12 +210,16 @@ const sampleList = Array.from({ length: 30 }, (_, index) => String(index + 1).pa
           button.type = 'button';
           button.className = 'btn ghost';
           button.setAttribute('aria-expanded', 'false');
-          button.textContent = fill(labels.giftReveal, { name: giver });
+          // Visible text stays short ("顯示"); the giver's name is already in the same row (.gift-from) and goes into the
+          // accessible name, which still starts with the visible word so voice-control users can say what they see.
+          button.textContent = labels.giftReveal;
+          button.setAttribute('aria-label', fill(labels.giftRevealAria, { name: giver }));
           button.addEventListener('click', () => {
             const show = to.hidden;
             to.hidden = !show;
             button.setAttribute('aria-expanded', String(show));
-            button.textContent = fill(show ? labels.giftConceal : labels.giftReveal, { name: giver });
+            button.textContent = show ? labels.giftConceal : labels.giftReveal;
+            button.setAttribute('aria-label', fill(show ? labels.giftConcealAria : labels.giftRevealAria, { name: giver }));
           });
           row.appendChild(button);
         }
