@@ -10,6 +10,6 @@ test('P1 site contract audit passes on the built site', () => {
   assert.equal(result.status, 0, result.stdout + result.stderr);
   const summary = JSON.parse(result.stdout);
   assert.equal(summary.status, 'PASS');
-  assert.equal(summary.sitemapUrls, 20);
+  assert.equal(summary.sitemapUrls, 18);
   assert.ok(summary.redirectStubs <= summary.redirectStubBudget);
 });

@@ -1035,7 +1035,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 't-score-calculator', category: 'statistics', icon: 'T', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['z-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'teacher-exam-score-converter', 'percentile-rank-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-16', reviewedAt: '2026-10-16',
+    relatedTools: ['z-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'teacher-exam-score-converter', 'percentile-rank-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
     name: { zh: 'T 分數計算器', en: 'T Score Calculator' }, short: { zh: '將 Z 分數轉換為平均 50、標準差 10 的 T 分數。', en: 'Convert a z score to a T score with mean 50 and SD 10.' },
   },
   {

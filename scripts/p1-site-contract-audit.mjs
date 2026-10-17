@@ -4,7 +4,7 @@
 // keeps that shape from drifting back. It reads the built dist/ only and fails when:
 //   - the sitemap is not exactly the INDEXABLE_PATHS set (src/lib/indexPolicy.ts);
 //   - an indexable page is not self-canonical, is noindex, or lacks the FunnyTools brand;
-//   - a statistics tool page / the retained guide lacks the Benson Lai byline or Person author;
+//   - a statistics tool page / the education-statistics hub lacks the Benson Lai byline or Person author;
 //   - any page emits FAQPage or HowTo structured data;
 //   - a removed section (es/fr, blog, workflows, for, shop, ...) is built, other than the
 //     registered redirect stubs in src/data/removedRedirects.ts (max 30);
@@ -76,7 +76,7 @@ if (indexable.length === 0) fail('Could not read INDEXABLE_PATHS from src/lib/in
 const indexableSet = new Set(indexable);
 if (indexableSet.has('/tools/merge-pdf/')) fail('INDEXABLE_PATHS must not contain /tools/merge-pdf/ (general tools stay noindex).');
 const toolSlugs = indexable.filter((p) => p.startsWith('/tools/')).map((p) => p.split('/')[2]);
-const authoredRoutes = [...toolSlugs.map((slug) => `/tools/${slug}/`), '/guides/t-score-calculator-guide/'];
+const authoredRoutes = [...toolSlugs.map((slug) => `/tools/${slug}/`), '/education-statistics/'];
 
 const stubSource = readFileSync(join(root, 'src/data/removedRedirects.ts'), 'utf8');
 const stubs = [...stubSource.matchAll(/\{\s*from:\s*'([^']+)',\s*to:\s*'([^']+)'\s*\}/g)].map((m) => ({ from: m[1], to: m[2] }));
@@ -158,9 +158,10 @@ for (const file of htmlFiles) {
   if (removedTopLevel.includes(section ?? '')) fail(`${route}: belongs to a removed section.`);
   if ((section === 'es' || section === 'fr') && parts[0] !== 'en' && !isRegisteredStub) fail(`${route}: es/fr page is not a registered redirect stub.`);
   if (parts[0] === 'guides' && parts.length >= 2 && !indexableSet.has(route) && !isRegisteredStub) fail(`${route}: removed guide page is still built.`);
-  if (parts[0] === 'en' && parts[1] === 'guides' && route !== '/en/guides/t-score-calculator-guide/') fail(`${route}: removed guide page is still built.`);
-  if (parts[0] === 'category' && route !== '/category/statistics/') fail(`${route}: removed category page is still built.`);
-  if (parts[0] === 'en' && parts[1] === 'category' && route !== '/en/category/statistics/') fail(`${route}: removed category page is still built.`);
+  // P2 batch 4: the guide and the statistics category were merged away; only their redirect stubs may be built.
+  if (parts[0] === 'en' && parts[1] === 'guides') fail(`${route}: removed guide page is still built.`);
+  if (parts[0] === 'category' && !isRegisteredStub) fail(`${route}: removed category page is still built.`);
+  if (parts[0] === 'en' && parts[1] === 'category') fail(`${route}: removed category page is still built.`);
 }
 
 // ---- 5. redirect stubs ----

@@ -666,22 +666,6 @@
       }
     },
     {
-      "key": "t-score-calculator-guide",
-      "type": "guide",
-      "paths": {
-        "zh": "/guides/t-score-calculator-guide/",
-        "en": "/en/guides/t-score-calculator-guide/"
-      }
-    },
-    {
-      "key": "category-statistics",
-      "type": "category",
-      "paths": {
-        "zh": "/category/statistics/",
-        "en": "/en/category/statistics/"
-      }
-    },
-    {
       "key": "about",
       "type": "page",
       "paths": {

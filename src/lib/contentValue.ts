@@ -1709,52 +1709,6 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
  * no review block, or the old generated block if it is in `pendingHandwrittenReview` below.
  */
 const guideValueReviewOverrides: Partial<Record<string, ContentValueReviewOverride>> = {
-  'zh:t-score-calculator-guide': {
-    intro: '這一段用指南本身的例題（原始分數 82、平均 70、標準差 8）重做一次計算，並檢查指南提到的「不是百分制分數」這個常見誤解在計算上會怎麼被抓出來。',
-    panels: [
-      {
-        title: '先獨立重算指南的例題，確認 65 分怎麼來的',
-        text: '指南例題是原始分數 82、平均 70、標準差 8：先算 Z＝(82−70)÷8＝1.5，再套用 T＝50+10×1.5＝65。自己動手用計算機分兩步驗算，尤其要確認除法在算 Z、乘法與加法在算 T 分成兩個獨立步驟，不要把 82、70、8、65 這四個數字混在同一條算式裡心算，容易漏乘或漏加 10 的倍數。',
-      },
-      {
-        title: '換一組不同平均與標準差的資料，測試公式是否還記得對',
-        text: '指南同時提到「不同科目、不同年度的平均與標準差可能不同」，可以自己另外設一組資料驗證這句話：例如某科平均 60、標準差 12、原始分數 78，Z＝(78−60)÷12＝1.5——跟例題的 Z 值剛好相同，但因為平均與標準差不同，這不代表兩科的原始分數可以直接比較或相加，只有轉成同一套 T 分數量尺後才有共同的比較基礎。這一步用來確認自己不是背下 82/70/8/65 這四個數字，而是真的理解公式在不同輸入下如何運作。',
-      },
-      {
-        title: '用指南列出的常見錯誤逐條檢查自己的理解',
-        text: '指南列出的常見錯誤包括「把 T 分數當成百分比或滿分 100」與「混用不同年度或群體的平均標準差」。用例題的 T=65 自我測試：如果把它讀成「考了 65 分」或「贏過 65% 的人」都是指南明確指出的誤讀；另外要確認自己知道 T 分數計算器只做 T=50+10Z 這一步轉換，不會知道你的原始分數是用哪一年度、哪一群體的平均與標準差算出來的，這件事要由你自己在套用公式前先確認資料來源一致。',
-      },
-    ],
-    checklist: [
-      '已獨立用計算機重算過指南例題（Z=1.5、T=65），過程分成算 Z 與算 T 兩個步驟。',
-      '已用另一組不同平均與標準差的資料，確認自己不是背答案而是理解公式。',
-      '能說出「T=65」不是百分制分數、也不是贏過 65% 的人，這兩個是指南明確列出的常見誤讀。',
-      '使用前已確認原始分數、平均數與標準差確實來自同一批資料，而不是混用不同年度或不同群體的統計量。',
-    ],
-  },
-  'en:t-score-calculator-guide': {
-    intro: 'This section reworks the guide’s own worked example (raw score 82, mean 70, SD 8, T = 65) and adds the one confusion that is specific to English statistical vocabulary: a "T score" and a "t value" are not the same thing, despite sharing a letter.',
-    panels: [
-      {
-        title: 'Reproduce the worked example in two separate steps',
-        text: 'The example is raw score 82, mean 70, SD 8: Z = (82 − 70) / 8 = 1.50, then T = 50 + 10 × 1.50 = 65. Compute this in two separate steps rather than combining them mentally — divide first to get Z = 1.50, then multiply and add to get T = 65. Keeping the steps separate is what catches an error like forgetting to multiply by 10, which would leave you at T = 51.5, an easy slip if both operations happen in your head at once.',
-      },
-      {
-        title: 'Recompute with a different mean and SD to confirm you are not just recalling 65',
-        text: 'Set up your own case with a different mean and SD: raw score 78, mean 60, SD 12. Z = (78 − 60) / 12 = 1.50 — the same Z as the worked example, purely by coincidence of these particular numbers — but this does not mean the two raw scores are comparable. T = 50 + 10 × 1.50 = 65 as well, which is exactly the point: two different subjects with different means and SDs can land on the same T score, and that shared T score is what makes them comparable, not their raw scores or Z scores.',
-      },
-      {
-        title: 'Separate "T score" from "t value" — a confusion unique to the English terminology',
-        text: 'In English statistical writing, "T score" (this page’s mean-50, SD-10 standardized score) and "t value" or "t statistic" (the test statistic reported by a t test, unrelated to any fixed mean or scale) share the same letter but describe completely different things. Self-test: if a search result or textbook mentions "the t value was 2.48," that is not a T score and cannot be plugged into T = 50 + 10Z — it comes from a t test comparing two groups, a different calculation covered in the SPSS Levene test and t test APA format guides, not this one.',
-      },
-    ],
-    checklist: [
-      'Reproduced the worked example (Z=1.50, T=65) as two separate steps and can identify where a forgotten ×10 would show up (T=51.5 instead of 65).',
-      'Recomputed with a different mean and SD (60 and 12) and confirmed a shared T score of 65 does not mean the two raw scores are directly comparable.',
-      'Can distinguish a "T score" (mean 50, SD 10) from a "t value" from a t test, and would not confuse the two despite the shared letter.',
-      'Confirmed the raw score, mean, and SD used all came from the same tested group before trusting the T score.',
-    ],
-  },
 };
 const categoryValueReviewOverrides: Partial<Record<string, ContentValueReviewOverride>> = {
 };

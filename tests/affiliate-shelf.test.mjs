@@ -56,13 +56,14 @@ test('runtime records affiliate interactions and uses safe external links', () =
   assert.doesNotMatch(runtime, /affiliate_product_click|affiliate_shelf_view/);
 });
 
-test('the retained statistics guide carries no article monetization', () => {
+test('the guide template and the education-statistics hub carry no article monetization', () => {
   // P1 (2026-10-15): the per-guide affiliate allow-list went away with the template guides.
-  // The only guide left is the T-score guide, which must stay free of product shelves.
+  // P2 batch 4 (2026-10-17): the last guide (T score) was merged into its tool page; the guide template
+  // stays free of product shelves and so does the hub that replaced the statistics category page.
   assert.doesNotMatch(guidePage, /AffiliateProductShelf/);
   assert.doesNotMatch(guidePage, /context="article"/);
-  const statisticsGuideHtml = readFileSync('dist/guides/t-score-calculator-guide/index.html', 'utf8');
-  assert.equal((statisticsGuideHtml.match(/data-affiliate-context="article"/g) || []).length, 0);
+  const hubHtml = readFileSync('dist/education-statistics/index.html', 'utf8');
+  assert.equal((hubHtml.match(/data-affiliate-context="article"/g) || []).length, 0);
 });
 
 test('public disclosures describe Taiwan affiliate sources and centralized tool count', () => {
