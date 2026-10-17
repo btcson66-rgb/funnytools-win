@@ -134,3 +134,58 @@ export function describeData(values: number[]): DescribeResult | null {
     varSample, sdSample: Math.sqrt(varSample),
   };
 }
+
+/** Raw score that corresponds to a given z: X = M + z * SD. */
+export function rawScoreForZ(z: number, mean: number, sd: number): number {
+  return mean + z * sd;
+}
+
+/** Round half away from zero to `digits` decimals; strips binary noise first (82.35 -> 82.4, not 82.3). */
+export function roundHalfUp(value: number, digits = 0): number {
+  if (!Number.isFinite(value)) return Number.NaN;
+  const factor = 10 ** digits;
+  const scaled = Number((Math.abs(value) * factor).toPrecision(12));
+  return (Math.sign(value) * Math.round(scaled)) / factor;
+}
+
+export interface WeightedMeanResult {
+  count: number;
+  weightTotal: number;
+  /** Sum of value * weight. */
+  weightedSum: number;
+  /** Weighted mean = weightedSum / weightTotal. */
+  mean: number;
+  /** Unweighted mean of the same values, for comparison. */
+  simpleMean: number;
+}
+
+/** Weighted mean of value/weight pairs. Null when empty or any value is not finite or any weight is not a finite number > 0. */
+export function weightedMean(items: { value: number; weight: number }[]): WeightedMeanResult | null {
+  if (items.length === 0) return null;
+  if (items.some(({ value, weight }) => !Number.isFinite(value) || !Number.isFinite(weight) || weight <= 0)) return null;
+  const weightTotal = items.reduce((sum, { weight }) => sum + weight, 0);
+  const weightedSum = items.reduce((sum, { value, weight }) => sum + value * weight, 0);
+  const simpleMean = items.reduce((sum, { value }) => sum + value, 0) / items.length;
+  return { count: items.length, weightTotal, weightedSum, mean: weightedSum / weightTotal, simpleMean };
+}
+
+export interface GradeSummary {
+  count: number;
+  sum: number;
+  average: number | null;
+  /** Uses only rows that have a valid score AND a weight > 0; null when there is none. */
+  weighted: number | null;
+}
+
+/** Row rules of the grade-average widget: rows without a valid score are ignored. */
+export function gradeSummary(rows: { score: number | null; weight: number | null }[]): GradeSummary {
+  const valid = rows.filter((row): row is { score: number; weight: number | null } => row.score !== null && Number.isFinite(row.score));
+  const count = valid.length;
+  const sum = valid.reduce((total, row) => total + row.score, 0);
+  const weightedRows = valid.filter((row) => row.weight !== null && Number.isFinite(row.weight) && row.weight > 0);
+  const weightTotal = weightedRows.reduce((total, row) => total + (row.weight as number), 0);
+  const weighted = weightTotal
+    ? weightedRows.reduce((total, row) => total + row.score * (row.weight as number), 0) / weightTotal
+    : null;
+  return { count, sum, average: count ? sum / count : null, weighted };
+}

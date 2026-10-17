@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import {
-  normalCdf, tScoreFrom, rawScoreForT, describeData, percentileRankMidpoint, countBelowAndEqual, parseNumbers,
+  normalCdf, tScoreFrom, rawScoreForT, rawScoreForZ, roundHalfUp, describeData, percentileRankMidpoint, countBelowAndEqual, parseNumbers,
+  weightedMean, gradeSummary,
 } from '../src/lib/educationStats.ts';
 
 const close = (actual, expected, eps = 1e-9) => assert.ok(Math.abs(actual - expected) < eps, `${actual} !~ ${expected}`);
@@ -122,4 +123,61 @@ test('standard deviation page: default input, byline, schema, sources and links 
     assert.ok(page.includes(`href="${href}"`), href);
   }
   assert.ok(page.includes('support.casio.com'));
+});
+
+// ---------------------------------------------------------------- P2 batch 2: Z score
+test('normalCdf agrees with all 410 entries of the NIST/SEMATECH standard normal table', () => {
+  const { rows } = JSON.parse(readFileSync(new URL('./fixtures/nist-normal-table.json', import.meta.url), 'utf8'));
+  let checked = 0;
+  for (const [row, values] of Object.entries(rows)) {
+    values.forEach((published, i) => {
+      // NIST prints 5 decimals (area from 0 to z); allow one unit in the last printed digit.
+      close(normalCdf(Number(row) + i / 100) - 0.5, published, 1e-5 + 1e-9);
+      checked += 1;
+    });
+  }
+  assert.equal(checked, 410);
+  // NIST worked examples
+  close(normalCdf(1.53), 0.93699, 1e-5); close(normalCdf(-1.53), 0.06301, 1e-5);
+  close(normalCdf(0.5) - normalCdf(-1), 0.5328, 1e-4);
+  // NIST critical values
+  for (const [p, z] of [[0.9, 1.282], [0.95, 1.645], [0.975, 1.96], [0.99, 2.326], [0.995, 2.576]]) close(normalCdf(z), p, 5e-4);
+});
+
+test('Z score worked examples on the page are reproduced by the calculator function', () => {
+  const ex1 = tScoreFrom({ score: 82, mean: 70, sd: 10 });
+  close(ex1.z, 1.2); close(ex1.t, 62); assert.equal(ex1.normalPr.toFixed(2), '88.49'); assert.equal((100 * normalCdf(-ex1.z)).toFixed(2), '11.51');
+  const math = tScoreFrom({ score: 85, mean: 70, sd: 15 });
+  close(math.z, 1); close(math.t, 60); assert.equal(math.normalPr.toFixed(2), '84.13');
+  const english = tScoreFrom({ score: 91, mean: 82, sd: 6 });
+  close(english.z, 1.5); close(english.t, 65); assert.equal(english.normalPr.toFixed(2), '93.32');
+  const social = tScoreFrom({ score: 55, mean: 68, sd: 10 });
+  close(social.z, -1.3); close(social.t, 37); assert.equal(social.normalPr.toFixed(2), '9.68');
+  close(rawScoreForZ(2, 64, 12), 88);
+  assert.equal(normalCdf(1.23).toFixed(4), '0.8907'); assert.equal(normalCdf(1.3).toFixed(4), '0.9032');
+  close(1 - 0.9032, 0.0968, 1e-12);
+  // Microsoft documentation examples for STANDARDIZE and NORM.S.DIST
+  close(tScoreFrom({ score: 42, mean: 40, sd: 1.5 }).z, 1.33333333, 1e-8);
+  close(normalCdf(1.333333), 0.908788726, 1e-9);
+  // +-z ranges used in the page table
+  for (const [z, pct] of [[1, '68.27'], [1.645, '90.00'], [1.96, '95.00'], [2, '95.45'], [2.576, '99.00'], [3, '99.73']]) {
+    assert.equal((100 * (2 * normalCdf(z) - 1)).toFixed(2), pct);
+  }
+  assert.equal(tScoreFrom({ score: 80, mean: 70, sd: 0 }), null);
+});
+
+test('Z score page: default input, byline, schema, Z table, sources and links are rendered', () => {
+  const page = html('/tools/z-score-calculator/');
+  const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
+  assert.match(flat, /data-field="score"[^>]*value="82"/); assert.match(flat, /data-field="mean"[^>]*value="70"/); assert.match(flat, /data-field="sd"[^>]*value="10"/);
+  assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-17">2026-10-17<\/time>/);
+  assert.match(page, /"dateModified":"2026-10-17"/);
+  assert.match(page, /"@type":"WebApplication"/); assert.match(page, /"@type":"BreadcrumbList"/);
+  assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/);
+  assert.match(flat, /<th scope="row">1\.2<\/th><td>0\.8849<\/td><td>0\.8869<\/td><td>0\.8888<\/td><td>0\.8907<\/td>/);
+  assert.match(flat, /<th scope="row">z = 1\.96<\/th><td>0\.9750<\/td><td>95\.00%<\/td>/);
+  for (const href of ['/tools/t-score-calculator/', '/tools/percentile-rank-calculator/', '/tools/standard-deviation/']) assert.ok(page.includes(`href="${href}"`), href);
+  for (const host of ['pedia.cloud.edu.tw', 'itl.nist.gov', 'support.microsoft.com']) assert.ok(page.includes(host), host);
+  for (const h2 of ['Z 分數是什麼', 'Z 分數怎麼算', 'Z 分數怎麼看', 'Z 分數查表', 'Z 分數與 T 分數', '常態分配', 'Excel', '常見錯誤']) assert.ok(flat.includes(h2), h2);
 });

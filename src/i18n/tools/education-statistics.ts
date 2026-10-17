@@ -14,25 +14,6 @@ function content(zh: ToolContent, en: ToolContent): LocalizedToolContent {
   return { zh, en };
 }
 
-export const zScoreContent = content(
-  {
-    name: 'Z 分數計算器', short: '將原始分數轉換為相對於平均數的標準分數。', long: '輸入個人原始分數、群體平均數與標準差，計算該分數距離平均數多少個標準差。正值高於平均，負值低於平均。',
-    seoTitle: 'Z 分數計算器｜標準分數公式與解讀', seoDescription: '輸入原始分數、平均數與標準差，線上計算 Z 分數並取得教育應用與 APA 報告提示。', keywords: ['Z分數', '標準分數', 'z score calculator', '教育統計'],
-    instructions: ['輸入欲轉換的原始分數 X。', '輸入參照群體平均數與標準差。', '按下計算並依正負號與絕對值解讀相對位置。'], examples: ['比較不同科目或量尺的相對表現。', '檢視某分數距離班級平均數多遠。', '作為 T 分數或其他標準分數轉換的中間值。'],
-    formula: { expression: 'z = (X − M) / SD', explanation: 'X 為原始分數，M 為平均數，SD 為標準差；SD 必須大於 0。' }, educationApplication: 'Z 分數將不同量尺轉成共同的標準差單位，但不會自動使資料符合常態分配。解讀極端分數時仍需檢查分配形狀與樣本大小。', reportTip: '可寫成：「該生原始分數為 X = 82，在班級分布中為 z = 1.20。」建議同時報告平均數 M 與標準差 SD。',
-    faq: [{ q: 'Z 分數為 0 代表什麼？', a: '代表原始分數剛好等於所輸入的平均數。' }, { q: 'Z 分數可以是負數嗎？', a: '可以。負值表示原始分數低於平均數。' }, { q: '這會把資料變成常態分配嗎？', a: '不會。標準化只改變中心與尺度，不改變原始分配形狀。' }],
-    labels: { score: '原始分數（X）', mean: '平均數（M）', sd: '標準差（SD）', calculate: '計算 Z 分數', result: 'Z 分數', invalid: '請輸入有效數字，且標準差必須大於 0。' }, disclaimer: disclaimer.zh, privacyNote: privacy.zh,
-  },
-  {
-    name: 'Z Score Calculator', short: 'Convert a raw score into standard deviations from the mean.', long: 'Enter a raw score, reference mean, and standard deviation to calculate how many standard deviations the score lies above or below the mean.',
-    seoTitle: 'Z Score Calculator | Formula and Interpretation', seoDescription: 'Calculate a z score from a raw score, mean, and standard deviation, with education and APA reporting guidance.', keywords: ['z score calculator', 'standard score', 'education statistics'],
-    instructions: ['Enter the raw score X.', 'Enter the reference-group mean and standard deviation.', 'Calculate and interpret the sign and magnitude.'], examples: ['Compare relative performance across different scales.', 'Describe distance from a class mean.', 'Prepare a value for T-score or other standard-score conversion.'],
-    formula: { expression: 'z = (X − M) / SD', explanation: 'X is the raw score, M is the mean, and SD is the standard deviation. SD must be greater than zero.' }, educationApplication: 'Z scores place different scales in standard-deviation units, but standardization does not make a non-normal distribution normal. Check distribution shape and sample size when interpreting extremes.', reportTip: 'Example: “The student scored X = 82, corresponding to z = 1.20 in the class distribution.” Also report M and SD.',
-    faq: [{ q: 'What does z = 0 mean?', a: 'The raw score equals the entered mean.' }, { q: 'Can a z score be negative?', a: 'Yes. A negative z score lies below the mean.' }, { q: 'Does this make data normally distributed?', a: 'No. Standardization changes center and scale, not distribution shape.' }],
-    labels: { score: 'Raw score (X)', mean: 'Mean (M)', sd: 'Standard deviation (SD)', calculate: 'Calculate z score', result: 'Z score', invalid: 'Enter valid numbers and use a standard deviation greater than zero.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
-  },
-);
-
 export const weightedAverageContent = content(
   {
     name: '加權平均計算器', short: '依各項數值與權重計算加權平均。', long: '逐列輸入數值與正數權重，工具會計算權重總和、加權總和與加權平均。權重可使用比例、百分比或學分，只要各列單位一致即可。',

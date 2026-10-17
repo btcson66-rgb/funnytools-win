@@ -1028,8 +1028,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'z-score-calculator', category: 'statistics', icon: 'Z', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['t-score-calculator', 'percentile-rank-calculator', 'standard-deviation', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-25',
-    name: { zh: 'Z 分數計算器', en: 'Z Score Calculator' }, short: { zh: '將原始分數轉換為相對於平均數的標準分數。', en: 'Convert a raw score into standard deviations from the mean.' },
+    relatedTools: ['t-score-calculator', 'percentile-rank-calculator', 'standard-deviation', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
+    name: { zh: 'Z 分數計算器', en: 'Z Score Calculator' }, short: { zh: '輸入原始分數、平均與標準差算出 Z 分數，附 Z 表查表、與 T 分數的換算。', en: 'Convert a raw score to a z score, with a z table and the z to T score link.' },
   },
   {
     slug: 't-score-calculator', category: 'statistics', icon: 'T', status: 'live', privacyLevel: 'local-only',

@@ -25,10 +25,11 @@ import gpaCalculatorContent from '../i18n/tools/gpa-calculator';
 import gradeAverageContent from '../i18n/tools/grade-average';
 import {
   classRankContent, cronbachAlphaContent, independentTTestContent, normalizedScoreContent,
-  teacherExamContent, weightedAverageContent, zScoreContent,
+  teacherExamContent, weightedAverageContent,
 } from '../i18n/tools/education-statistics';
 import percentileRankContent from '../i18n/tools/percentile-rank-calculator';
 import tScoreContent from '../i18n/tools/t-score-calculator';
+import zScoreContent from '../i18n/tools/z-score-calculator';
 import imageCompressorContent from '../i18n/tools/image-compressor';
 import imageCropContent from '../i18n/tools/image-crop';
 import imageRotateFlipContent from '../i18n/tools/image-rotate-flip';
