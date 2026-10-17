@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { join } from 'node:path';
 import test from 'node:test';
 
-import { contentHashForPage, lastmodForPage } from '../scripts/seo-indexing-utils.mjs';
+import { contentHashForPage, lastmodForPage, sitemapContentHashVersion } from '../scripts/seo-indexing-utils.mjs';
 
 const fixtureFile = join(process.cwd(), 'package.json');
 
@@ -14,7 +14,7 @@ test('sitemap hash migration preserves an evidence-backed lastmod date', () => {
     'update',
   );
   assert.equal(result.lastmod, '2026-09-04');
-  assert.equal(result.hashVersion, 9);
+  assert.equal(result.hashVersion, sitemapContentHashVersion);
 });
 
 test('a URL recovered from the live sitemap preserves its remote date during migration', () => {
@@ -25,7 +25,7 @@ test('a URL recovered from the live sitemap preserves its remote date during mig
     'update',
   );
   assert.equal(result.lastmod, '2026-09-03');
-  assert.equal(result.hashVersion, 9);
+  assert.equal(result.hashVersion, sitemapContentHashVersion);
 });
 
 test('a scheduled first-seen education URL uses its planned publication date', () => {
@@ -137,5 +137,44 @@ test('affiliate shelf shell, runtime, and component CSS do not change sitemap co
   assert.equal(
     contentHashForPage({ file: fixtureFile, html: affiliatePage }),
     contentHashForPage({ file: fixtureFile, html: page }),
+  );
+});
+
+test('CSS of a component the page does not render (shared inline stylesheet) does not change sitemap content hash', () => {
+  // Astro inlines one stylesheet containing every component's scoped CSS into every page. P2 batch 6: adding
+  // .gift-* rules for the random-name-picker moved the hash of all ten tool pages.
+  const page = '<main><h1>Reader-facing content</h1></main>';
+  const before = `<style>.a[data-astro-cid-aaaa]{color:red}</style>${page}`;
+  const after = `<style>.a[data-astro-cid-aaaa]{color:red}.gift-note[data-astro-cid-ere64hzr]{margin:8px 0 0}</style>${page}`;
+
+  assert.equal(
+    contentHashForPage({ file: fixtureFile, html: after }),
+    contentHashForPage({ file: fixtureFile, html: before }),
+  );
+});
+
+test('a real edit to reader-facing text still changes the sitemap content hash', () => {
+  const style = '<style>.a{color:red}</style>';
+  assert.notEqual(
+    contentHashForPage({ file: fixtureFile, html: `${style}<main><h1>Reader-facing content</h1></main>` }),
+    contentHashForPage({ file: fixtureFile, html: `${style}<main><h1>Reader-facing content, edited</h1></main>` }),
+  );
+});
+
+test('two pages built from different checkouts hash the same when only unrelated CSS and the release version differ', () => {
+  const body = '<main><h1>Z 分數</h1><p>z=(X−M)÷SD</p></main>';
+  const oldBuild = `<style>.x{a:b}</style><script type="application/ld+json">{"softwareVersion":"5.153.0"}</script>${body}<p class="fineprint">&copy; 2026 FunnyTools · v5.153.0</p>`;
+  const newBuild = `<style>.x{a:b}.gift-hide{grid-column:1 / -1}</style><script type="application/ld+json">{"softwareVersion":"5.154.0"}</script>${body}<p class="fineprint">&copy; 2026 FunnyTools · v5.154.0</p>`;
+  assert.equal(
+    contentHashForPage({ file: fixtureFile, html: newBuild }),
+    contentHashForPage({ file: fixtureFile, html: oldBuild }),
+  );
+});
+
+test('the date-derived "newest tool" badge does not change sitemap content hash', () => {
+  const card = '<div class="tool-card"><a href="/tools/x/">X</a>';
+  assert.equal(
+    contentHashForPage({ file: fixtureFile, html: `${card}<span class="badge" data-new-badge data-astro-cid-abc>最新工具</span></div>` }),
+    contentHashForPage({ file: fixtureFile, html: `${card}</div>` }),
   );
 });

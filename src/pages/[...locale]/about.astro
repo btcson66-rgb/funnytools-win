@@ -2,6 +2,7 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import { SITE, type Locale } from '../../config/site';
 import { pages } from '../../i18n/pages';
+import { localePath } from '../../lib/url';
 
 export function getStaticPaths() {
   return SITE.locales.map((lang) => ({
@@ -12,6 +13,16 @@ export function getStaticPaths() {
 
 const { lang } = Astro.props as { lang: Locale };
 const page = pages[lang].about;
+// Corrections go through the contact page, which already says what to attach to a report.
+const extraLinks = [
+  {
+    href: localePath(lang, 'contact'),
+    label: lang === 'zh' ? '回報頁面錯誤' : 'Report a mistake on a page',
+    note: lang === 'zh'
+      ? '工具算錯、說明有誤或規定已更新？到聯絡頁說明頁面網址與你輸入的數字。'
+      : 'A wrong result, a wrong description or an outdated rule? Send the page URL and the numbers you entered from the contact page.',
+  },
+];
 ---
 
-<PageLayout lang={lang} pageKey="about" title={page.title} seoTitle={page.seoTitle} description={page.description} body={page.body} />
+<PageLayout lang={lang} pageKey="about" title={page.title} seoTitle={page.seoTitle} description={page.description} body={page.body} extraLinks={extraLinks} />
