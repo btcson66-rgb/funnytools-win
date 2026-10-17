@@ -4,6 +4,7 @@ import CategoryIcon from './CategoryIcon.astro';
 import type { ToolMeta } from '../data/tools';
 import { t } from '../i18n/ui';
 import { toolUrl } from '../lib/url';
+import { isNewTool } from '../lib/newTool';
 
 interface Props {
   lang: Locale;
@@ -46,7 +47,7 @@ const assetType = tool.assetType ?? 'tool';
         {tool.privacyLevel === 'local-only' && <span class="privacy-badge badge badge--privacy">{ui.privacyBadge}</span>}
         <span class="tool-card__cta">{ui.toolCardCta}</span>
       </span>
-      {tool.isNew && <span class="badge">{ui.newest}</span>}
+      {isNewTool(tool.addedAt) && <span class="badge" data-new-badge>{ui.newest}</span>}
     </div>
   ) : (
     <article class="tile tool-tile tool-card planned" aria-disabled="true" data-category={tool.category}>

@@ -170,3 +170,11 @@ test('two pages built from different checkouts hash the same when only unrelated
     contentHashForPage({ file: fixtureFile, html: oldBuild }),
   );
 });
+
+test('the date-derived "newest tool" badge does not change sitemap content hash', () => {
+  const card = '<div class="tool-card"><a href="/tools/x/">X</a>';
+  assert.equal(
+    contentHashForPage({ file: fixtureFile, html: `${card}<span class="badge" data-new-badge data-astro-cid-abc>最新工具</span></div>` }),
+    contentHashForPage({ file: fixtureFile, html: `${card}</div>` }),
+  );
+});

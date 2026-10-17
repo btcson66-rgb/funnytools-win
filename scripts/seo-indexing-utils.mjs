@@ -41,9 +41,10 @@ export const eduGrowthReleasePath = join(rootDir, 'src', 'config', 'edu-growth-r
 // Version 9 migrates the pre-recovery map while preserving its evidence-backed
 // dates. The migration also lets the generator recover dates for URLs that were
 // present in the live sitemap but absent from the stale local map.
-// Version 10 (2026-10-17) drops inline <style> blocks from the hash; see stableRenderedHtml. Existing dates carry
-// forward through the migration path, so the bump itself changes no lastmod.
-export const sitemapContentHashVersion = 10;
+// Version 10 (2026-10-17) drops inline <style> blocks from the hash; version 11 also drops the date-derived
+// "newest tool" badge. See stableRenderedHtml. Existing dates carry forward through the migration path, so a
+// bump itself changes no lastmod.
+export const sitemapContentHashVersion = 11;
 export const eduGrowthRelease = readJson(eduGrowthReleasePath, { candidates: [] }) ?? { candidates: [] };
 export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
 export const enNoindex = indexingConfig.EN_NOINDEX === true;
@@ -572,6 +573,10 @@ export function stableRenderedHtml(page) {
   // yet all 10 tool hashes moved, and the only difference outside the version string was this <style> block.
   // Inline CSS is presentation chrome, not content a searcher reads, so it is excluded from the hash.
   html = html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '<style data-sitemap-volatile="inline-css"></style>');
+
+  // The "newest tool" badge is derived from the build date (a tool is new for 30 days after addedAt). It appears or
+  // disappears with the calendar, not with an edit, so it must not move a page's lastmod.
+  html = html.replace(/<span\b[^>]*\bdata-new-badge\b[^>]*>[\s\S]*?<\/span>/gi, '');
 
   // Optional shared slots can leave a different number of separator spaces
   // before the main closing tag. This boundary whitespace is layout chrome,
