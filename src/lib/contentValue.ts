@@ -125,27 +125,28 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'zh:class-rank-percentile-calculator': {
-    intro: '這一段用頁面預設的名次與班級人數示範計算方式，並說明工具沒有處理「並列名次」的地方。',
+    intro: '這一段針對班排百分比計算器目前的欄位：名次、總人數與並列人數；結果有 PR、前百分比、前面人數與後面人數。',
     panels: [
       {
-        title: '先用頁面預設值核對公式',
-        text: '頁面載入時預設名次 6、總人數 40：百分等級＝100×(40−6+0.5)÷40＝86.25，前百分比＝100×6÷40＝15%，你前面還有 5 人、後面還有 34 人。這組數字可以直接用計算機核對，公式用的是名次區間中點（+0.5），不是單純用名次除以總人數。',
+        title: '先用預設值核對公式',
+        text: '預設名次 6、總人數 40、並列 1：PR＝100×(40−6+0.5)÷40＝86.25，前百分比＝6÷40＝15%，前面 5 人、後面 34 人。把總人數改成 45、名次改成 4，前百分比 8.89%、PR 92.22；名次改成 5，前百分比 11.11%、PR 剛好 90.00，可以看出「PR 90」不等於「前 10%」。',
       },
       {
-        title: '測試名次最好與最差兩種邊界',
-        text: '把名次改成 1（全班最好）：百分等級變成 98.75%，前百分比 2.5%。再把名次改成等於總人數 40（全班最後）：百分等級只剩 1.25%，前百分比變成 100%。名次或總人數輸入非整數、名次大於總人數，或任一個小於 1，都會被擋下顯示錯誤。',
+        title: '並列人數會改變 PR，不會改變前百分比',
+        text: '名次 6、總人數 40、並列人數 3：後面人數＝40−(6+3−1)＝32，PR＝100×(32+1.5)÷40＝83.75，前百分比仍是 15%。名次加並列人數超過總人數（例如名次 39、並列 3、總人數 40）會顯示錯誤。學校實際怎麼處理並列，要以學校或受理單位的規則為準。',
       },
       {
-        title: '並列名次要自己先決定怎麼代入',
-        text: '這個工具只接受一個整數名次，沒有「並列」選項。如果班上有兩人並列第 6 名，你必須自己決定要用「6」還是依學校規則調整後的數字代入，工具不會提醒你，也不會自動處理並列。不同代入方式會得到不同百分等級，正式使用前要對照學校教務系統實際採用的排名規則。',
+        title: '最好與最差的邊界',
+        text: '名次 1、總人數 40：PR 98.75、前 2.5%，不是 100；名次 40：PR 1.25、前 100%。名次或人數不是整數、小於 1、名次大於總人數，工具都會顯示錯誤，不會硬算。',
       },
     ],
     checklist: [
-      '名次與總人數都是正整數，且名次不大於總人數。',
-      '已用「名次區間中點」公式（100×(總人數−名次+0.5)÷總人數）手動核對過一次結果。',
-      '班上如有並列名次，已依學校實際規則決定代入哪個數字，而不是直接照抄名次冊。',
-      '「你前面還有幾人、後面還有幾人」的數字已和名次冊人工核對過。',
+      '名次、總人數與並列人數都是正整數，且名次加上並列人數不大於總人數。',
+      '用 PR＝100×(人數−名次+0.5)÷人數 手動核對過一次，前百分比＝名次÷人數也核對過。',
+      '要拿來比「前 10%」的門檻時，已用名次對照表或反推欄位確認名次，沒有直接用 PR 90 代替。',
+      '申請或報告用的數字，已對照學校或簡章指定的算法與進位方式。',
     ],
+    reviewedAt: '2026-10-17',
   },
   'zh:standard-deviation': {
     intro: '這一段用頁面預設的五個分數示範母體與樣本兩種標準差的差異，並示範資料只有一筆、輸入含非數字時會發生什麼事。',
@@ -195,28 +196,29 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'zh:teacher-exam-score-converter': {
-    heading: '教師甄試成績轉換模擬器的權重規則與試算陷阱',
-    intro: '這一段針對權重不等於 100% 時的實際行為，以及「40/30/30 預設」按鈕跟頁面預設值不同這兩個容易誤會的地方。',
+    heading: '教師甄試成績計算器的權重規則與試算陷阱',
+    intro: '這一段針對權重不等於 100%、權重填 0 的用法，以及兩個配分按鈕與頁面預設值的差別；結果區除了加權總成績，還有取到小數 2 位的一格與計算明細。',
     panels: [
       {
-        title: '先用頁面預設值核對加權公式',
-        text: '頁面載入時預設筆試 80 分（權重 40%）、試教 85 分（權重 40%）、口試 82 分（權重 20%），權重合計剛好 100%，加權總分＝80×0.4+85×0.4+82×0.2＝32+34+16.4＝82.4。畫面下方的「計算式」欄位會列出同樣的算式，可以直接對照。',
+        title: '先用預設值核對加權公式',
+        text: '預設筆試 78（權重 40%）、試教 85（30%）、口試 82（30%），權重合計 100%：加權總成績＝78×0.4＋85×0.3＋82×0.3＝31.2＋25.5＋24.6＝81.3，「取到小數 2 位」也是 81.30。畫面下方的「計算明細」會列出同樣的算式，可以直接對照。',
       },
       {
-        title: '權重加起來不是 100% 時，工具不會擋下計算',
-        text: '把三個權重都改成 50（合計 150%）再按計算：頁面只會多顯示一行黃色提示「權重合計 150.00%，非 100%」，但仍然會算出一個加權總分，分母用的是實際權重總和（150），不是強制當作 100。也就是說看到警告文字不代表數字是錯的或被擋下，而是提醒你檢查權重設定是否符合甄試簡章。',
+        title: '權重填 0 與權重不是 100% 的差別',
+        text: '按「套用臺北市複試 60/40（筆試權重 0）」會把筆試權重設為 0、試教 60、口試 40：筆試成績仍留在欄位，但乘積是 0，不影響總分；把分數改成試教 84.5、口試 81 得 83.1。把三個權重都改成 50（合計 150%）再按計算：頁面只多顯示一行黃色提示，仍會算出加權總分，分母用的是實際權重總和 150，不是強制當作 100；「自動正規化」會把權重按比例縮成合計 100 再重算。',
       },
       {
-        title: '「40/30/30 預設」按鈕不等於頁面原本的預設值',
-        text: '頁面一開始的權重是 40/40/20，但按下「40/30/30 預設」按鈕會把三個權重改成 40/30/30，這是兩組不同的數字，別把「頁面預設」和「按鈕預設」搞混。另外「自動正規化」按鈕會把目前輸入的權重依比例縮放到合計正好 100 再重新計算，適合用來修正合計不是 100% 的情況。',
+        title: '兩個配分按鈕只改權重，不改成績',
+        text: '「套用高中國文科配分 40/30/30」把權重設為筆試 40、試教 30、口試 30，和頁面預設相同；「套用臺北市複試 60/40」設為筆試 0、試教 60、口試 40。兩個按鈕都不會動你填的成績，也不代表你報考縣市的規定，請對照當年度簡章。',
       },
     ],
     checklist: [
-      '三科成績與權重都已對照正式甄試簡章公告的實際規則輸入，而不是沿用頁面預設值。',
-      '看到「權重合計非 100%」的黃色提示時，已確認這只是提醒、不是計算錯誤或被擋下。',
-      '分清楚「頁面載入的預設權重（40/40/20）」與「按鈕帶入的預設權重（40/30/30）」是兩組不同數字。',
-      '正式用途前已用「複製結果」把文字摘要與算式貼到試算表，再核對一次總分。',
+      '三項成績與權重都已對照當年度簡章公告的實際規則輸入，不是沿用頁面預設值。',
+      '簡章寫初試只作門檻、不併入複試成績時，筆試權重已填 0。',
+      '已確認簡章有沒有單項門檻、加分、標準化（T 分數）與不同的四捨五入順序；這些工具都沒有處理。',
+      '兩位考生只差 0.001 分時，沒有用工具顯示的位數判定名次。',
     ],
+    reviewedAt: '2026-10-17',
   },
   'zh:z-score-calculator': {
     intro: '這一段針對 Z 分數計算器目前的欄位：原始分數、平均數、標準差，以及選填的 Z 值欄；結果除了 Z 分數，還有常態假設下的累積比例與對應的 T 分數。',
@@ -729,7 +731,7 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'zh:percentile-rank-calculator': {
-    intro: '這一段用頁面預設的「低於／同分／總人數」示範 PR 值公式，並說明它跟「排名百分比計算器」使用完全不同的輸入資料，不能互相替代。',
+    intro: '這一段用頁面預設的「低於／同分／總人數」示範 PR 值公式，並說明它跟「班排百分比計算器」使用完全不同的輸入資料，不能互相替代。',
     panels: [
       {
         title: '先用頁面預設值核對公式',
@@ -740,15 +742,15 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
         text: '把「同分人數」改成 0、其他不變：PR 值變成 100×24÷40＝60，跟同分 1 人時的 61.25 有明顯差距，代表忽略同分人數會讓 PR 值偏低估計。三個欄位都必須是整數，且「低於人數＋同分人數」不能超過「總人數」，否則會被擋下顯示錯誤。',
       },
       {
-        title: '跟「排名百分比計算器」的輸入資料完全不同',
-        text: '這個公式（低於人數 + 0.5×同分人數）是 PR 值的標準定義之一，但跟本站「排名百分比計算器」用的「總人數-名次+0.5」公式輸入資料完全不同——PR 計算器要的是「有多少人分數比你低」，排名百分比計算器要的是「你的名次是第幾名」，兩者不能把數字互相套用，混用會得到看似合理但意義錯誤的結果。',
+        title: '跟「班排百分比計算器」的輸入資料完全不同',
+        text: '這個公式（低於人數 + 0.5×同分人數）是 PR 值的標準定義之一，但跟本站「班排百分比計算器」用的「總人數-名次+0.5」公式輸入資料完全不同——PR 計算器要的是「有多少人分數比你低」，排名百分比計算器要的是「你的名次是第幾名」，兩者不能把數字互相套用，混用會得到看似合理但意義錯誤的結果。',
       },
     ],
     checklist: [
       '「低於人數」「同分人數」「總人數」都已確認是整數，且低於人數加同分人數沒有超過總人數。',
       '已用 100×(低於人數+0.5×同分人數)÷總人數 手動核對過頁面顯示的 PR 值。',
       '「同分人數」欄位沒有被忽略或誤填為 0，除非你確定真的沒有同分的人。',
-      '沒有把這個工具的輸入資料（低於人數、同分人數）跟「排名百分比計算器」的輸入資料（名次、總人數）搞混。',
+      '沒有把這個工具的輸入資料（低於人數、同分人數）跟「班排百分比計算器」的輸入資料（名次、總人數）搞混。',
     ],
     reviewedAt: '2026-10-16',
   },
@@ -914,27 +916,28 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'zh:independent-samples-t-test-calculator': {
-    intro: '這一段用頁面預設的兩組資料示範 Welch t 檢定的計算，並核對頁面實際顯示的全部 7 個數字：平均差、t 值、自由度、雙尾 p 值、標準誤、95% 信賴區間與 Hedges’ g 效果量。',
+    intro: '這一段針對獨立樣本 t 檢定計算器目前的欄位：兩組的 N、平均數、標準差，以及「檢定方法」選單（Welch 或 Student）；結果區共有平均差、t、自由度、雙尾 p、標準誤、95% 信賴區間、Hedges’ g 與一行 APA 統計式。',
     panels: [
       {
-        title: '先用頁面預設值核對平均差、t 值與自由度',
-        text: '頁面預設第一組 N=30、平均 78.4、標準差 8.2，第二組 N=32、平均 73.1、標準差 9.5：平均差＝78.4−73.1＝5.3，Welch t 值約為 2.356，自由度（Welch–Satterthwaite 近似）約為 59.61，雙尾 p 值約為 .022。這四個數字都會直接顯示在結果區，可以用計算機核對平均差，t 值與自由度需要搭配標準誤公式才能重算。',
+        title: '先用預設值核對（Welch）',
+        text: '預設第一組 N＝30、平均 78.4、標準差 8.2，第二組 N＝32、平均 73.1、標準差 9.5：平均差 5.3、標準誤 2.250、t＝2.356、df＝59.61、雙尾 p＝.022、95% 信賴區間 [0.799, 9.801]、Hedges’ g＝0.588，APA 統計式為 Welch t(59.61) = 2.36, p = .022, 95% CI [0.80, 9.80], g = 0.59。',
       },
       {
-        title: '頁面同時顯示標準誤、95% 信賴區間與 Hedges’ g 效果量',
-        text: '程式內部除了平均差、t 值、自由度與雙尾 p 值以外，也會計算標準誤、95% 信賴區間與 Hedges’ g 效果量，這三項數字會接著顯示在結果區（例如預設資料的標準誤約為 2.250、信賴區間約為 [0.799, 9.801]、Hedges’ g 約 0.588）。信賴區間使用 Welch–Satterthwaite 自由度對應的臨界值，Hedges’ g 則改用兩組合併標準差（pooled SD）並乘上小樣本校正係數計算——這跟 Welch t 值本身不假設變異數相等的做法不同，但這是效果量報告的標準慣例，不是計算矛盾。',
+        title: '把方法改成 Student，再換成人數差很多的資料',
+        text: '預設資料改選 Student：標準誤 2.261、t＝2.344、df＝60、p＝.022。再把兩組改成 N＝12、平均 75、標準差 15 與 N＝48、平均 68、標準差 6：Welch 是 t(11.89)＝1.585、p＝.139，Student 是 t(58)＝2.559、p＝.013，兩種方法的結論相反，這就是選擇方法要說明清楚的原因。',
       },
       {
-        title: '兩組平均相同、或樣本數最小為 2 時的邊界行為',
-        text: '把兩組平均數都改成相同數字（其他不變）：t 值會變成 0、雙尾 p 值會顯示 1，代表兩組完全沒有差異，這是正常結果不是錯誤。把兩組樣本數都改成最小值 2（樣本數必須是大於 1 的整數）：程式仍會算出結果，但自由度會很小（等於 2），t 分配在小自由度下尾部較厚，同樣的 t 值在小樣本會對應到較大的 p 值，這時候的顯著性判斷要更保守。',
+        title: '邊界：平均相同、標準差為 0 或人數不足',
+        text: '兩組平均數改成相同：t＝0，p 顯示「> .999」，APA 統計式也會寫 p > .999，這是正常結果。標準差填 0 或負數、人數不是大於 1 的整數，工具會顯示錯誤，不會算出數字。',
       },
     ],
     checklist: [
-      '兩組樣本數都是大於 1 的整數，標準差都大於 0，否則會顯示錯誤，不會算出數字。',
-      '已用平均差公式（M1−M2）手動核對過頁面顯示的「平均差」是否正確。',
-      '已核對頁面顯示的標準誤、95% 信賴區間與 Hedges’ g 效果量，理解信賴區間用 Welch 自由度、Hedges’ g 用合併標準差計算，兩者假設不同但都是標準統計慣例。',
-      '兩組平均相同時 t=0、p=1 是正常結果；樣本數很小時得到的 p 值判斷要更保守，不要直接套用大樣本的顯著性直覺。',
+      '兩組是互相獨立的群體，不是同一批人的前後測。',
+      '填的是每組的樣本標準差（除以 n−1），不是母體標準差、標準誤或變異數。',
+      '預設值用 Welch 重現過 t(59.61)＝2.36、p＝.022；若要用 Student，已在報告寫明。',
+      '複製 APA 統計式後，已把 t、p、M、SD 等符號改成斜體，並依老師或期刊決定是否保留信賴區間與效果量。',
     ],
+    reviewedAt: '2026-10-17',
   },
   'zh:normalized-score-converter': {
     intro: '這一段用頁面預設值示範常態化分數轉換，並核對頁面顯示的全部 5 個數字：對應 Z 分數、轉換後分數、原始差距、目標差距與縮放比例。',
@@ -1121,27 +1124,28 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'en:class-rank-percentile-calculator': {
-    intro: 'This section covers what Class Rank Percentile Calculator’s rank-to-percentile formula rewards and penalizes, using the page’s own default numbers, since the formula is a midpoint estimate, not a lookup into an actual score distribution.',
+    intro: 'This section covers the current fields of the Class Rank Percentile Calculator: rank, group size and tied students, with PR, top percent, students ahead and students behind as results.',
     panels: [
       {
-        title: 'Check the default rank against the formula by hand',
-        text: 'The page loads with Rank 6 and Class size 40. Percentile rank = 100 × (40 − 6 + 0.5) ÷ 40 = 86.25, and the “approximate top percentage” field shows 100 × 6 ÷ 40 = 15%. Both numbers come from rank and class size alone — the tool has no idea what the actual test scores were, so two students with rank 6 in two very differently-scored classes get the identical 86.25 result.',
+        title: 'Check the defaults against the formulas',
+        text: 'Rank 6, size 40, tied 1: PR = 100 × (40 − 6 + 0.5) ÷ 40 = 86.25, top percent = 6 ÷ 40 = 15%, 5 students ahead and 34 behind. Change the size to 45 and the rank to 4 for 8.89% and PR 92.22; rank 5 gives 11.11% and a PR of exactly 90.00, which shows that PR 90 is not the same as the top 10%.',
       },
       {
-        title: 'Rank 1 is never exactly the 100th percentile',
-        text: 'Change Rank to 1 with class size still 40: the result is 98.75, not 100 — the +0.5 term places every rank at the midpoint of the interval it represents, so even first place in a finite class falls a bit short of a perfect percentile. At the other end, Rank 40 (last place) in a 40-person class gives 1.25, not 0, for the same reason. Neither of those is a bug — it is the defined behavior of the midpoint method the tool uses.',
+        title: 'Tied students change PR but not the top percent',
+        text: 'Rank 6, size 40, tied 3: students behind = 40 − (6 + 3 − 1) = 32 and PR = 100 × (32 + 1.5) ÷ 40 = 83.75, while the top percent stays 15%. A rank plus tied count above the size (for example rank 39, tied 3, size 40) shows an error. How a school actually treats ties is set by the school or receiving organisation.',
       },
       {
-        title: 'Tied ranks are not modeled — you decide what number to enter',
-        text: 'This calculator accepts a single integer rank with no option for ties, and rank must be a whole number no greater than class size or the calculation is blocked with an error. If two students are tied for 6th place, the tool will not detect or flag that; you have to decide in advance — based on your school’s or program’s actual tie-breaking rule — which number to type in, since different choices produce different percentile results.',
+        title: 'Best and worst rank',
+        text: 'Rank 1 of 40 gives PR 98.75 and the top 2.5%, not 100; rank 40 gives PR 1.25 and 100%. Non-integer inputs, values below 1 or a rank above the size produce an error instead of a number.',
       },
     ],
     checklist: [
-      'Rank and class size are both positive whole numbers, and rank does not exceed class size — otherwise Calculate is blocked.',
-      'The result has been checked against 100 × (class size − rank + 0.5) ÷ class size by hand at least once.',
-      'Rank 1 is expected to show a percentile just under 100 (98.75 in the default 40-person case), not exactly 100.',
-      'Any tied rank in the source data has been resolved into a single number using your institution’s actual rule before it goes into this tool.',
+      'Rank, size and tied count are positive whole numbers, and rank plus tied count does not exceed the size.',
+      'PR = 100 × (size − rank + 0.5) ÷ size and top percent = rank ÷ size have been checked by hand once.',
+      'For a top-10% threshold, the rank was read from the rank table or the reverse box, not from PR 90.',
+      'Numbers used for an application or report follow the method and rounding the receiving organisation specifies.',
     ],
+    reviewedAt: '2026-10-17',
   },
   'en:color-generator': {
     intro: 'This section covers what Color Generator actually returns for each random color, the keyboard shortcut, and one built-in feature that never appears on the page despite existing in the code.',
@@ -1236,27 +1240,28 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'en:independent-samples-t-test-calculator': {
-    intro: 'This section covers the Welch t-test math behind the page’s default two groups, and confirms all seven numbers the page actually displays: mean difference, t, df, two-tailed p, standard error, the 95% confidence interval, and Hedges’ g.',
+    intro: 'This section covers the current fields of the Independent Samples t-test Calculator: N, mean and SD for two groups and a method menu (Welch or Student). Results are the mean difference, t, degrees of freedom, two-tailed p, standard error, 95% CI, Hedges’ g and an APA statistics line.',
     panels: [
       {
-        title: 'Check the mean difference, t, df, and p against the default groups',
-        text: 'The page loads with Group 1: N = 30, mean = 78.4, SD = 8.2, and Group 2: N = 32, mean = 73.1, SD = 9.5. Mean difference = 78.4 − 73.1 = 5.3. The Welch t value comes out to about 2.356, the Welch–Satterthwaite degrees of freedom to about 59.61, and the two-tailed p value to about .022 — these four numbers appear first in the results.',
+        title: 'Check the defaults (Welch)',
+        text: 'Group 1 N = 30, M = 78.4, SD = 8.2; group 2 N = 32, M = 73.1, SD = 9.5 give a mean difference of 5.3, SE 2.250, t = 2.356, df = 59.61, p = .022, 95% CI [0.799, 9.801] and Hedges’ g = 0.588. The APA line reads Welch t(59.61) = 2.36, p = .022, 95% CI [0.80, 9.80], g = 0.59.',
       },
       {
-        title: 'The standard error, confidence interval, and Hedges’ g are also shown',
-        text: 'Beyond the mean difference, t, df, and p, the script also computes a standard error, a 95% confidence interval (about [0.80, 9.80] for the default numbers), and a Hedges’ g effect size (about 0.588), and all three render right after the first four values. The confidence interval uses a critical value from the Welch–Satterthwaite degrees of freedom, while Hedges’ g switches to the pooled standard deviation with a small-sample correction — a different variance assumption from Welch’s t itself, which is the standard convention for reporting an effect size alongside a Welch test, not an inconsistency.',
+        title: 'Switch to Student, then to very unequal groups',
+        text: 'With Student the defaults give SE 2.261, t = 2.344, df = 60, p = .022. For N = 12, M = 75, SD = 15 against N = 48, M = 68, SD = 6, Welch gives t(11.89) = 1.585, p = .139 while Student gives t(58) = 2.559, p = .013, opposite conclusions, which is why the method must be stated.',
       },
       {
-        title: 'Equal means and very small samples are still accepted, with results that need extra care',
-        text: 'Set both group means to the same number and Calculate still runs, returning t = 0 and p = 1 — a valid “no difference detected” result, not an error. Reduce both sample sizes to the minimum accepted value of 2 (each group requires an integer greater than 1) and the tool still produces a t, df, and p, but the degrees of freedom collapse to a very small number, and a t value that would look significant with large samples can correspond to a much larger, non-significant p value at df = 2 — small-sample results here need more caution before quoting them.',
+        title: 'Edge cases',
+        text: 'Equal means give t = 0 and p shown as > .999, which is a normal result. An SD of 0 or below, or a sample size that is not a whole number above 1, shows an error instead of a number.',
       },
     ],
     checklist: [
-      'Both sample sizes are whole numbers greater than 1, and both standard deviations are entered as sample SDs greater than 0.',
-      'The mean difference shown has been hand-checked as Group 1 mean minus Group 2 mean.',
-      'The standard error, 95% confidence interval, and Hedges’ g shown on the page have been checked; the confidence interval uses the Welch degrees of freedom while Hedges’ g uses the pooled SD — different assumptions, both standard practice.',
-      'A t = 0, p = 1 result from equal group means, or a very small df from tiny samples, is read as a real (if underpowered) result, not a broken calculation.',
+      'The two groups are independent, not the same people measured twice.',
+      'You entered sample SDs (n − 1 denominator), not population SDs, standard errors or variances.',
+      'The defaults reproduce Welch t(59.61) = 2.36, p = .022; if Student is used, the report says so.',
+      'After copying the APA line, symbols are italicised and the CI and effect size follow your instructor’s or journal’s rules.',
     ],
+    reviewedAt: '2026-10-17',
   },
   'en:inflation': {
     intro: 'This section covers Inflation Calculator’s three modes and what each one actually multiplies or divides, using round numbers you can check with a basic calculator.',

@@ -1044,8 +1044,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'class-rank-percentile-calculator', category: 'statistics', icon: '🏅', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['t-score-calculator', 'standard-deviation', 'grade-average', 'teacher-exam-score-converter', 'percentile-rank-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
-    name: { zh: '排名百分比計算器', en: 'Class Rank Percentile Calculator' }, short: { zh: '依班級名次與總人數估算排名百分等級。', en: 'Estimate class-rank percentile from rank and class size.' },
+    relatedTools: ['percentile-rank-calculator', 't-score-calculator', 'standard-deviation', 'grade-average', 'teacher-exam-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
+    name: { zh: '班排百分比計算器', en: 'Class Rank Percentile Calculator' }, short: { zh: '輸入班排名次與人數，算出前百分之幾與 PR 百分等級，附班排前 10% 名次對照表。', en: 'Convert class rank to the top-percent figure and percentile rank, with a rank table for the top 10%.' },
   },
   {
     slug: 'normalized-score-converter', category: 'statistics', icon: '↔', status: 'live', privacyLevel: 'local-only',
@@ -1054,8 +1054,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'teacher-exam-score-converter', category: 'statistics', icon: '📝', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['apa-7-report-generator', 'normalized-score-converter', 'class-rank-percentile-calculator', 'weighted-average-calculator', 't-score-calculator', 'z-score-calculator', 'percentile-rank-calculator', 'grade-average'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'high', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-25',
-    name: { zh: '教師甄試成績轉換模擬器', en: 'Teacher Exam Score Converter' }, short: { zh: '依筆試、口試與試教權重模擬加權總成績。', en: 'Simulate a weighted teacher-exam total from written, interview, and teaching scores.' },
+    relatedTools: ['t-score-calculator', 'weighted-average-calculator', 'normalized-score-converter', 'class-rank-percentile-calculator', 'z-score-calculator', 'percentile-rank-calculator', 'grade-average', 'apa-7-report-generator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'high', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
+    name: { zh: '教師甄試成績計算器', en: 'Teacher Exam Score Calculator' }, short: { zh: '輸入筆試、試教、口試分數與配分算加權總成績，附 115 學年度簡章原文與 T 分數算例，各縣市以當年度簡章為準。', en: 'Weighted total from written, teaching-demo and interview scores, with 2026 notice excerpts and a T score example.' },
   },
   {
     slug: 'cronbach-alpha-calculator', category: 'statistics', icon: 'α', status: 'live', privacyLevel: 'local-only',
@@ -1064,8 +1064,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'independent-samples-t-test-calculator', category: 'statistics', icon: 't', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['cronbach-alpha-calculator', 'z-score-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
-    name: { zh: '獨立樣本 t 檢定簡易計算器', en: 'Independent Samples t-test Calculator' }, short: { zh: '用兩組樣本數、平均數與標準差執行 Welch t 檢定。', en: 'Run a Welch independent-samples t test from summary statistics.' },
+    relatedTools: ['apa-7-report-generator', 'standard-deviation', 'spss-result-interpreter', 'cronbach-alpha-calculator', 'z-score-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
+    name: { zh: '獨立樣本 t 檢定計算器', en: 'Independent Samples t-test Calculator' }, short: { zh: '輸入兩組人數、平均與標準差，算出 t、自由度、p 值，可選 Welch 或 Student，附 APA 寫法與 Excel T.TEST。', en: 'Independent-samples t test from n, mean and SD, with Welch or Student, APA reporting and Excel T.TEST.' },
   },
   {
     slug: 'apa-7-report-generator', category: 'statistics', icon: 'APA', status: 'live', privacyLevel: 'local-only',

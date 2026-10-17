@@ -14,69 +14,6 @@ function content(zh: ToolContent, en: ToolContent): LocalizedToolContent {
   return { zh, en };
 }
 
-export const classRankContent = content(
-  {
-    name: '排名百分比計算器', short: '依班級名次與總人數估算排名百分等級。', long: '輸入名次（第 1 名為最佳）與班級總人數，以名次區間中點估算百分等級，並顯示大約位於前百分之多少。',
-    seoTitle: '班級排名百分比計算器｜名次轉 PR', seoDescription: '依班級名次和總人數估算百分等級與前百分比，附公式與教育應用說明。', keywords: ['排名百分比', '班級名次', 'class rank percentile'],
-    contentSections: [
-      {
-        heading: '速答：班級名次怎麼換成百分等級',
-        paragraphs: [
-          '排名百分比可用 PR = 100 × (N − r + 0.5) / N 估算；例如 40 人班第 6 名，PR = 86.25，約位於前 15%，表示這個名次高於班內多數參照群體。',
-        ],
-      },
-      {
-        heading: '程式算法、顯示精度與邊界條件',
-        paragraphs: [
-          '程式只接受正整數名次 r 與總人數 N，第 1 名代表最高，且 r 不得大於 N。百分等級用單一名次所占百分區間的中點估算：PR = 100×(N−r+0.5)/N；「約位於前百分比」則另外用 100×r/N 計算。兩個結果都先用完整數值精度運算，最後顯示到小數點後最多 2 位並去除尾端 0。',
-          '40 人班第 6 名的 PR 是 100×(40−6+0.5)/40=86.25，前百分比是 100×6/40=15%。第 1 名不會顯示 PR 100，而是 98.75，因為中點法把第一名放在最上方 2.5% 區間的中央。',
-        ],
-      },
-      {
-        heading: '同名次與向家長說明的限制',
-        paragraphs: [
-          '這個簡易工具沒有「同分人數」欄位，因此把每個名次視為只占一個位置。若三位學生並列第 6、學校採競賽名次、密集名次或另定同分比序，直接輸入 6 不會反映三人共同占用的排名區間。正式成績單、升學申請與獎項門檻必須使用學校或受理單位指定算法。',
-          '向家長說明時可說「在這 40 人班內，第 6 名依本頁中點法約為 PR 86.25」，不要說成「考了 86.25 分」或「能力超過全國 86.25%」。參照群體只有這個班級，換到不同班級、年級或不同次考試就不是同一常模。',
-        ],
-      },
-      {
-        heading: '有完整分數時應改看分布',
-        paragraphs: [
-          '只有名次與總人數時，本頁能提供有限群體的粗略位置；若手上有全班原始分數，應先檢查平均、標準差與同分情況，再判斷是否需要換算標準分數。',
-        ],
-        link: {
-          prefix: '先用',
-          label: '標準差計算器檢查班級分數的集中與分散程度',
-          href: '/tools/standard-deviation/',
-          suffix: '，需要同量尺比較時再搭配 T 分數計算器。',
-        },
-      },
-    ],
-    instructions: ['輸入班級名次，第 1 名代表最高。', '輸入班級或參照群體總人數。', '計算百分等級與前百分比。'], examples: ['將班級名次轉為較容易跨班理解的相對位置。', '初步說明升學資料中的班排比例。', '追蹤同一參照群體內的相對變化。'],
-    formula: { expression: 'PR = 100 × (N − r + 0.5) / N；前百分比 = 100 × r / N', explanation: 'r 為名次（1 最佳），N 為總人數；0.5 是將單一名次放在其百分區間中點的修正。程式不接收同分人數，也不套用任何學校的同分比序。' }, educationApplication: '排名百分比屬於常模參照：它描述在特定群體內的位置，不能回答是否達到課程精熟或及格標準。班級規模、群體組成與同名次規則都會改變結果；申請或正式認證若有指定算法，應以該單位規則為準。', reportTip: '可寫成：「該生在 40 人班級中排名第 6，依單一名次中點法估算 PR = 86.25，約位於前 15%。」並註明參照群體為該班，未處理同名次。',
-    notes: ['本工具只接受整數名次與總人數，且第 1 名代表最高。', '同名次、跨班比較、轉學生與缺考者是否列入分母，都必須依資料提供者的規則處理。', 'PR 與前百分比是相關但不同的呈現；正式門檻應使用規定中的欄位與四捨五入方式。'],
-    sources: [{ label: 'ETS Standards for Quality and Fairness：Percentile Rank 與 Norm Group', href: 'https://www.ets.org/pdfs/about/standards-quality-fairness.pdf', note: 'ETS 將百分等級定義為相對於指定群體的位置，並指出有些定義會把同分者的一半納入；本頁使用單一名次的區間中點估算，未處理同分群組。' }],
-    faq: [{ q: '第 1 名為什麼不是 PR 100？', a: '中點法將每個名次放在所代表區間的中點，因此有限群體的最高名次會略低於 100。' }, { q: '同名次怎麼處理？', a: '本簡易工具未納入同名次人數；正式用途請依學校或申請單位規則。' }, { q: '前 10% 和 PR 90 一樣嗎？', a: '概念接近但算法與四捨五入可能不同，正式門檻應以規定為準。' }],
-    labels: { rank: '目前名次（r）', total: '總人數（N）', calculate: '計算排名百分比', result: '百分等級（PR）', top: '約位於前百分比', invalid: '名次與總人數必須是正整數，且名次不可超過總人數。' }, disclaimer: disclaimer.zh, privacyNote: privacy.zh,
-  },
-  {
-    name: 'Class Rank Percentile Calculator', short: 'Estimate class-rank percentile from rank and class size.', long: 'Enter rank (1 is best) and class size to estimate percentile rank using a rank-interval midpoint, plus a rough top-percent figure.',
-    seoTitle: 'Class Rank Calculator | Rank to Percentile', seoDescription: 'Convert class rank and class size to an estimated percentile rank and top percentage.', keywords: ['class rank percentile calculator', 'rank percentage', 'education statistics'],
-    contentSections: [
-      {
-        heading: 'Quick answer: convert class rank to percentile',
-        paragraphs: [
-          'Class-rank percentile can be estimated with PR = 100 × (N − r + 0.5) / N; for example, rank 6 in a class of 40 gives PR = 86.3 and an approximate top 15% position.',
-        ],
-      },
-    ],
-    instructions: ['Enter the rank, with 1 as the highest.', 'Enter the class or reference-group size.', 'Calculate percentile rank and top percentage.'], examples: ['Express class rank as a relative position.', 'Interpret rank information in application records.', 'Track relative change within the same cohort.'],
-    formula: { expression: 'PR = 100 × (N − r + 0.5) / N', explanation: 'r is rank (1 is best), N is group size, and 0.5 places each rank at the midpoint of its percentile interval. Top percent is approximated by 100 × r / N.' }, educationApplication: 'Class-rank percentages depend on cohort size and composition. For admissions or certification, follow the official method, especially its treatment of tied ranks.', reportTip: 'Example: “The student ranked 6th in a class of 40, corresponding to an estimated PR = 86.3 using the midpoint method.”',
-    faq: [{ q: 'Why is first place not PR 100?', a: 'The midpoint method locates each rank at the center of its interval, so the top rank in a finite group falls just below 100.' }, { q: 'How are tied ranks handled?', a: 'This simple tool does not model ties. Follow the school or receiving organization’s rule for formal use.' }, { q: 'Is top 10% exactly the same as PR 90?', a: 'They are related, but formulas and rounding can differ. Use the stated official threshold.' }],
-    labels: { rank: 'Rank (r)', total: 'Class size (N)', calculate: 'Calculate rank percentile', result: 'Percentile rank (PR)', top: 'Approximate top percentage', invalid: 'Rank and class size must be positive whole numbers, and rank cannot exceed class size.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
-  },
-);
-
 export const normalizedScoreContent = content(
   {
     name: '常態化分數轉換工具', short: '將原始分數線性轉換到指定平均數與標準差。', long: '先將原始分數換算成 Z 分數，再映射到你指定的目標平均數與標準差。這是線性標準化，不會把偏態資料「變成常態分配」。',
@@ -96,24 +33,6 @@ export const normalizedScoreContent = content(
   },
 );
 
-export const teacherExamContent = content(
-  {
-    name: '教師甄試成績轉換模擬器', short: '依筆試、口試與試教權重模擬加權總成績。', long: '輸入筆試、口試與試教成績及各自權重，模擬加權總分。各縣市、學校與年度規則可能不同，請以主辦單位公告為準。',
-    seoTitle: '教甄成績計算器｜免費試算筆試口試試教加權分數', seoDescription: '免費教師甄試成績計算器，輸入筆試、口試、試教分數與權重，立即算出加權總成績與名次參考。', keywords: ['教師甄試成績', '教甄分數計算', '教師甄試加權'],
-    instructions: ['輸入筆試、口試與試教分數。', '依當年度主辦單位公告填入各項權重。', '確認權重總和後計算模擬總成績。'], examples: ['比較不同複試表現對總成績的影響。', '依公告權重設定準備目標。', '進行情境模擬，不作為正式錄取判定。'],
-    formula: { expression: '總成績 = Σ(各項成績 × 各項權重) / Σ權重', explanation: '本工具使用一般加權平均。若簡章另有門檻、倍率、原始分數轉換、加分或四捨五入規則，必須另外套用。' }, educationApplication: '可用於備考情境分析，例如估算筆試固定時試教提升 5 分對總成績的影響。正式結果仍須依主辦單位簡章、最低門檻及同分比序規則。', reportTip: '若用於備考紀錄，可寫成：「依筆試 40%、試教 40%、口試 20% 模擬，加權總成績為 82.4。」這不是正式 APA 統計結果，應註明為情境估算。',
-    faq: [{ q: '權重一定要照預設值嗎？', a: '不用。請依你報考年度與主辦單位公告修改。' }, { q: '有處理加分或最低門檻嗎？', a: '沒有。本工具只做一般加權平均，特殊規則需另行判斷。' }, { q: '可以拿來預測錄取嗎？', a: '不建議。缺額、競爭者分布、門檻與比序都會影響結果。' }],
-    labels: { written: '筆試成績', writtenWeight: '筆試權重', interview: '口試成績', interviewWeight: '口試權重', teaching: '試教成績', teachingWeight: '試教權重', calculate: '模擬加權總成績', result: '模擬總成績', weightTotal: '權重總和', breakdown: '計算明細', preset403030: '套用 40/30/30 範例', autoNormalize: '自動正規化權重', copyResult: '複製結果', copied: '已複製', weightWarning: '權重總和不是 100%。請修正權重，或使用自動正規化。', invalid: '請輸入有效成績與非負權重，且至少一項權重大於 0。' }, disclaimer: disclaimer.zh, privacyNote: privacy.zh,
-  },
-  {
-    name: 'Teacher Exam Score Converter', short: 'Simulate a weighted teacher-exam total from written, interview, and teaching scores.', long: 'Enter component scores and weights to simulate a weighted teacher-recruitment exam result. Official rules vary by authority and year; always follow the current announcement.',
-    seoTitle: 'Free Teacher Exam Score Calculator | Weighted Total', seoDescription: 'Calculate your weighted teacher exam total for free. Enter written, interview, and teaching-demo scores and weights instantly.', keywords: ['teacher exam score converter', 'teacher recruitment score', 'weighted exam score'],
-    instructions: ['Enter the written, interview, and teaching scores.', 'Set weights from the official current rules.', 'Check the weight total and calculate the simulation.'], examples: ['Compare how component scores affect the total.', 'Set preparation targets from announced weights.', 'Run scenarios without treating them as admission predictions.'],
-    formula: { expression: 'Total = Σ(component score × component weight) / Σweights', explanation: 'This is a general weighted mean. Apply official cutoffs, multipliers, score transformations, bonus points, and rounding separately.' }, educationApplication: 'Useful for scenario analysis, such as estimating how a five-point teaching-demonstration increase affects the total. Official outcomes depend on current rules, thresholds, and tie-breaking.', reportTip: 'For a preparation record: “Using weights of 40% written, 40% teaching, and 20% interview, the simulated total was 82.4.” Label it as a scenario estimate, not an APA inferential result.',
-    faq: [{ q: 'Must I use the default weights?', a: 'No. Replace them with the official weights for your authority and year.' }, { q: 'Does this include bonus points or cutoffs?', a: 'No. It performs only a general weighted average.' }, { q: 'Can it predict selection?', a: 'No. Vacancies, competitor scores, cutoffs, and tie-breaking also matter.' }],
-    labels: { written: 'Written score', writtenWeight: 'Written weight', interview: 'Interview score', interviewWeight: 'Interview weight', teaching: 'Teaching demo score', teachingWeight: 'Teaching weight', calculate: 'Simulate weighted total', result: 'Simulated total', weightTotal: 'Weight total', breakdown: 'Calculation breakdown', preset403030: 'Use 40/30/30 example', autoNormalize: 'Auto-normalize weights', copyResult: 'Copy result', copied: 'Copied', weightWarning: 'Weights do not total 100%. Adjust them or use auto-normalize.', invalid: 'Enter valid scores and nonnegative weights, with at least one positive weight.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
-  },
-);
 
 export const cronbachAlphaContent = content(
   {
@@ -131,24 +50,5 @@ export const cronbachAlphaContent = content(
     formula: { expression: 'α = k/(k − 1) × [1 − ΣVar(Xᵢ)/Var(ΣXᵢ)]', explanation: 'k is item count, Var(Xᵢ) is each item’s sample variance, and Var(ΣXᵢ) is the sample variance of respondent totals. At least two items and two respondents are required.' }, educationApplication: 'Alpha describes internal consistency for a particular sample and item set. It is not proof of unidimensionality or validity, and depends on item count, covariance, and sample heterogeneity.', reportTip: 'Example: “The scale showed internal consistency of Cronbach’s α = .82 (k = 8, N = 120).” Use formal software to verify missing-data handling, reverse scoring, and item diagnostics.',
     faq: [{ q: 'Can the first row contain headers?', a: 'No. Paste numeric data only, without headers or names.' }, { q: 'Are reverse-keyed items handled automatically?', a: 'No. Reverse-score them according to the response scale first.' }, { q: 'Is higher alpha always better?', a: 'No. Very high alpha may indicate redundant items, and alpha does not establish a single construct.' }],
     labels: { data: 'Responses (one person per row, one item per column)', calculate: 'Calculate Cronbach’s α', result: 'Cronbach’s α', respondents: 'Valid respondents (N)', items: 'Items (k)', sample: 'Example data', invalid: 'Enter complete numeric data with at least 2 rows and 2 columns, consistent column counts, and nonzero total-score variance.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
-  },
-);
-
-export const independentTTestContent = content(
-  {
-    name: '獨立樣本 t 檢定簡易計算器', short: '用兩組樣本數、平均數與標準差執行 Welch t 檢定。', long: '輸入兩組獨立樣本的 N、平均數與樣本標準差，計算平均差、Welch t 值、近似自由度與雙尾 p 值。Welch 方法不假設兩組變異數相等。',
-    seoTitle: '獨立樣本 t 檢定計算器｜Welch t test', seoDescription: '輸入兩組 N、平均數與標準差，計算 Welch 獨立樣本 t 檢定、自由度與雙尾 p 值。', keywords: ['獨立樣本t檢定', 'Welch t test', 't檢定計算器'],
-    instructions: ['輸入第一組與第二組的樣本數、平均數、樣本標準差。', '確認兩組為彼此獨立的觀察值。', '計算並同時解讀平均差、t、df 與雙尾 p。'], examples: ['比較兩種教學法的平均成績。', '比較實驗組與對照組的量表平均數。', '用摘要統計量核對正式軟體輸出。'],
-    formula: { expression: 't = (M₁ − M₂) / √(s₁²/n₁ + s₂²/n₂)', explanation: '自由度使用 Welch–Satterthwaite 近似；p 值由 t 分配計算。輸入的 s₁、s₂ 應為樣本標準差。' }, educationApplication: '適合兩個互相獨立群體的平均數比較。應檢查觀察值獨立性、離群值與分配情況；小樣本或嚴重偏態時尤其需謹慎。統計顯著不等於教育上的實質重要。', reportTip: 'APA 範例：「A 組（M = 78.4, SD = 8.2）高於 B 組（M = 73.1, SD = 9.5），Welch’s t(59.6) = 2.36, p = .022。」正式報告宜另附信賴區間與效果量。',
-    faq: [{ q: '為什麼使用 Welch t 檢定？', a: 'Welch 方法不要求兩組變異數相等，通常比傳統等變異數版本更穩健。' }, { q: '可以輸入母體標準差嗎？', a: '此工具預期輸入各組的樣本標準差。' }, { q: 'p < .05 就代表效果很大嗎？', a: '不代表。p 值與樣本數有關，還需查看平均差、信賴區間與效果量。' }],
-    labels: { group1: '第一組', group2: '第二組', n: '樣本數（N）', mean: '平均數（M）', sd: '樣本標準差（SD）', calculate: '執行 Welch t 檢定', difference: '平均差（M₁ − M₂）', result: 't 值', df: '自由度（df）', p: '雙尾 p 值', standardError: '標準誤（SE）', confidenceInterval: '95% 信賴區間', hedgesG: 'Hedges’ g（效果量）', invalid: '兩組樣本數須為大於 1 的整數，標準差須大於 0，其他欄位須為有效數字。' }, disclaimer: disclaimer.zh, privacyNote: privacy.zh,
-  },
-  {
-    name: 'Independent Samples t-test Calculator', short: 'Run a Welch independent-samples t test from summary statistics.', long: 'Enter N, mean, and sample SD for two independent groups to calculate the mean difference, Welch t, approximate degrees of freedom, and two-tailed p value.',
-    seoTitle: 'Independent Samples t-test Calculator | Welch t Test', seoDescription: 'Calculate a Welch independent-samples t test from two groups’ sample sizes, means, and standard deviations.', keywords: ['independent samples t test calculator', 'Welch t test', 'two sample t test'],
-    instructions: ['Enter sample size, mean, and sample SD for both groups.', 'Confirm observations are independent between groups.', 'Interpret the difference, t, df, and two-tailed p together.'], examples: ['Compare mean scores under two teaching methods.', 'Compare treatment and control group means.', 'Check formal software output from summary statistics.'],
-    formula: { expression: 't = (M₁ − M₂) / √(s₁²/n₁ + s₂²/n₂)', explanation: 'Degrees of freedom use the Welch–Satterthwaite approximation; p is calculated from the t distribution. s₁ and s₂ are sample SDs.' }, educationApplication: 'Use for means from two independent groups. Check independence, outliers, and distribution shape, especially with small or heavily skewed samples. Statistical significance is not the same as educational importance.', reportTip: 'APA example: “Group A (M = 78.4, SD = 8.2) scored higher than Group B (M = 73.1, SD = 9.5), Welch’s t(59.6) = 2.36, p = .022.” Formal reports should add a confidence interval and effect size.',
-    faq: [{ q: 'Why use Welch’s t test?', a: 'It does not require equal group variances and is generally more robust than the pooled-variance version.' }, { q: 'Can I enter population SDs?', a: 'This calculator expects sample standard deviations.' }, { q: 'Does p < .05 mean a large effect?', a: 'No. p also depends on sample size; inspect the difference, confidence interval, and effect size.' }],
-    labels: { group1: 'Group 1', group2: 'Group 2', n: 'Sample size (N)', mean: 'Mean (M)', sd: 'Sample SD', calculate: 'Run Welch t test', difference: 'Mean difference (M₁ − M₂)', result: 't statistic', df: 'Degrees of freedom', p: 'Two-tailed p value', standardError: 'Standard error (SE)', confidenceInterval: '95% confidence interval', hedgesG: 'Hedges’ g (effect size)', invalid: 'Both sample sizes must be whole numbers above 1, SDs must be positive, and all fields must be valid numbers.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
   },
 );

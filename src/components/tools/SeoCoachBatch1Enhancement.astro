@@ -15,7 +15,7 @@ const copy = {
     gradeHeading: '規劃剩餘成績', currentGrade: '目前已完成部分的平均', completedWeight: '已完成權重（%）', targetGrade: '目標總成績',
     gradeButton: '計算剩餘所需成績', requiredScore: '剩餘部分所需平均', remainingWeight: '剩餘權重',
     gradeInvalid: '請輸入有效數字，且已完成權重必須大於 0 並小於 100。', aboveMaximum: '若滿分為 100，這個目標目前無法達成。', alreadySecured: '即使剩餘部分得到 0 分，目前也已達成目標。',
-    copyResult: '複製 Welch 結果', copied: '已複製', apaLink: '下一步：整理 APA 7 報告', apaHref: '/tools/apa-7-report-generator/', noResult: '請先執行 Welch t 檢定。',
+    copyResult: '複製結果', copied: '已複製', apaLink: '下一步：整理 APA 7 報告', apaHref: '/tools/apa-7-report-generator/', noResult: '請先執行 t 檢定。',
   },
   en: {
     rankHeading: 'Work backward from a target', rankTop: 'Target top percentage', rankButton: 'Find highest qualifying rank', rankResult: 'Highest qualifying rank',
@@ -23,7 +23,7 @@ const copy = {
     gradeHeading: 'Plan the remaining grade', currentGrade: 'Average on completed work', completedWeight: 'Completed weight (%)', targetGrade: 'Target overall grade',
     gradeButton: 'Calculate required score', requiredScore: 'Required average on remaining work', remainingWeight: 'Remaining weight',
     gradeInvalid: 'Enter valid numbers and a completed weight above 0 and below 100.', aboveMaximum: 'If the maximum score is 100, this target is currently out of reach.', alreadySecured: 'The target is already secured even if the remaining score is zero.',
-    copyResult: 'Copy Welch results', copied: 'Copied', apaLink: 'Next: draft an APA 7 report', apaHref: '/en/tools/apa-7-report-generator/', noResult: 'Run the Welch t test first.',
+    copyResult: 'Copy results', copied: 'Copied', apaLink: 'Next: draft an APA 7 report', apaHref: '/en/tools/apa-7-report-generator/', noResult: 'Run the t test first.',
   },
   es: {
     rankHeading: 'Calcular desde un objetivo', rankTop: 'Porcentaje superior objetivo', rankButton: 'Hallar el último puesto que cumple', rankResult: 'Último puesto que cumple',
@@ -100,7 +100,8 @@ const copy = {
       const total = totalInput instanceof HTMLInputElement ? Number(totalInput.value) : Number.NaN;
       const target = read('[data-target-top]');
       if (!Number.isInteger(total) || total < 1 || !Number.isFinite(target) || target <= 0 || target > 100) return show(copy.rankInvalid);
-      const rank = Math.floor(total * target / 100);
+      // toPrecision strips binary noise such as 0.07 * 100 = 7.000000000000001 (same rule as maxRankForTopPercent in educationStats.ts)
+      const rank = Math.floor(Number((total * target / 100).toPrecision(12)));
       show(rank < 1 ? copy.rankSmall : `${copy.rankResult}: ${rank}`);
     });
     root.querySelector('[data-grade-plan]')?.addEventListener('click', () => {

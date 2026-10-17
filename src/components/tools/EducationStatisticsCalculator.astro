@@ -16,7 +16,7 @@ const simpleFields: Record<string, { key: string; value: string; step?: string }
     { key: 'score', value: '82' }, { key: 'mean', value: '70' }, { key: 'sd', value: '10' }, { key: 'z', value: '' },
   ],
   'class-rank-percentile-calculator': [
-    { key: 'rank', value: '6', step: '1' }, { key: 'total', value: '40', step: '1' },
+    { key: 'rank', value: '6', step: '1' }, { key: 'total', value: '40', step: '1' }, { key: 'tied', value: '1', step: '1' },
   ],
   'normalized-score-converter': [
     { key: 'score', value: '82' }, { key: 'mean', value: '70' }, { key: 'sd', value: '10' },
@@ -43,9 +43,9 @@ const fields = simpleFields[slug] ?? [];
   {slug === 'teacher-exam-score-converter' && (
     <div class="exam-grid">
       {[
-        ['written', 'writtenWeight', '80', '40'],
-        ['teaching', 'teachingWeight', '85', '40'],
-        ['interview', 'interviewWeight', '82', '20'],
+        ['written', 'writtenWeight', '78', '40'],
+        ['teaching', 'teachingWeight', '85', '30'],
+        ['interview', 'interviewWeight', '82', '30'],
       ].map(([score, weight, scoreValue, weightValue]) => (
         <fieldset>
           <legend>{labels[score]}</legend>
@@ -67,6 +67,16 @@ const fields = simpleFields[slug] ?? [];
     </label>
   )}
 
+  {slug === 'independent-samples-t-test-calculator' && labels.method && (
+    <label class="ttest-method">
+      <span>{labels.method}</span>
+      <select data-field="method">
+        <option value="welch" selected>{labels.methodWelch}</option>
+        <option value="student">{labels.methodStudent}</option>
+      </select>
+    </label>
+  )}
+
   {slug === 'independent-samples-t-test-calculator' && (
     <div class="ttest-grid">
       {['1', '2'].map((group, index) => (
@@ -82,7 +92,8 @@ const fields = simpleFields[slug] ?? [];
 
   <div class="actions stat-actions">
     {slug === 'weighted-average-calculator' && <button class="btn ghost" type="button" data-add>{labels.add}</button>}
-    {slug === 'teacher-exam-score-converter' && <button class="btn ghost" type="button" data-preset>{labels.preset403030}</button>}
+    {slug === 'teacher-exam-score-converter' && <button class="btn ghost" type="button" data-preset="hs">{labels.presetHs}</button>}
+    {slug === 'teacher-exam-score-converter' && <button class="btn ghost" type="button" data-preset="tp">{labels.presetTaipei}</button>}
     <button class="btn" type="button" data-calculate>{labels.calculate}</button>
     {slug === 'teacher-exam-score-converter' && <button class="btn ghost" type="button" data-normalize>{labels.autoNormalize}</button>}
     {slug === 'teacher-exam-score-converter' && <button class="btn ghost" type="button" data-copy>{labels.copyResult}</button>}
@@ -110,6 +121,10 @@ const fields = simpleFields[slug] ?? [];
   .stat-result-item { display: grid; gap: 6px; }
   .stat-result-item span { color: var(--muted); font-size: .9rem; font-weight: 800; }
   .stat-result-item strong { color: var(--ink); font-size: 1.35rem; font-variant-numeric: tabular-nums; }
+  .stat-result-item.stat-wide { grid-column: 1 / -1; }
+  .stat-result-item.stat-wide strong { font-size: 1.05rem; font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }
+  .ttest-method { display: grid; gap: 6px; margin-bottom: 14px; max-width: 420px; }
+  .ttest-method select { min-height: 44px; }
   @media (max-width: 760px) {
     .exam-grid, .ttest-grid { grid-template-columns: 1fr; }
     .stat-rows :global(.stat-row) { grid-template-columns: 1fr 1fr; }
@@ -118,7 +133,7 @@ const fields = simpleFields[slug] ?? [];
 </style>
 
 <script>
-  import { normalCdf, percentileRankMidpoint, roundHalfUp, tScoreFrom, weightedMean } from '../../lib/educationStats';
+  import { formatApaP, independentTTest, normalCdf, percentileRankMidpoint, rankPercentile, roundHalfUp, tScoreFrom, weightedMean } from '../../lib/educationStats';
 
   document.querySelectorAll('[data-stat-tool]').forEach((root) => {
     if (!(root instanceof HTMLElement)) return;
@@ -133,7 +148,7 @@ const fields = simpleFields[slug] ?? [];
 
     const field = (key) => {
       const input = root.querySelector(`[data-field="${key}"]`);
-      return input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement ? input : null;
+      return input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement || input instanceof HTMLSelectElement ? input : null;
     };
     const number = (key) => {
       const raw = field(key)?.value.trim() ?? '';
@@ -158,7 +173,7 @@ const fields = simpleFields[slug] ?? [];
     };
     const show = (items) => {
       if (!(results instanceof HTMLElement)) return;
-      results.innerHTML = items.map(([label, value]) => `<div class="stat-result-item"><span>${label}</span><strong>${value}</strong></div>`).join('');
+      results.innerHTML = items.map(([label, value, wide]) => `<div class="stat-result-item${wide ? ' stat-wide' : ''}"><span>${label}</span><strong>${value}</strong></div>`).join('');
       results.hidden = false;
       if (error instanceof HTMLElement) error.hidden = true;
       latestText = items.map(([label, value]) => `${label}: ${value}`).join('\n');
@@ -182,52 +197,6 @@ const fields = simpleFields[slug] ?? [];
       });
       rows.append(row);
     };
-
-    function logGamma(z) {
-      const coefficients = [676.5203681218851, -1259.1392167224028, 771.3234287776531, -176.6150291621406, 12.507343278686905, -0.13857109526572012, 9.984369578019572e-6, 1.5056327351493116e-7];
-      if (z < 0.5) return Math.log(Math.PI) - Math.log(Math.sin(Math.PI * z)) - logGamma(1 - z);
-      z -= 1;
-      let x = 0.9999999999998099;
-      coefficients.forEach((coefficient, index) => { x += coefficient / (z + index + 1); });
-      const t = z + coefficients.length - 0.5;
-      return 0.5 * Math.log(2 * Math.PI) + (z + 0.5) * Math.log(t) - t + Math.log(x);
-    }
-    function betaFraction(a, b, x) {
-      const maxIterations = 200;
-      const epsilon = 3e-12;
-      const floor = 1e-30;
-      const qab = a + b;
-      const qap = a + 1;
-      const qam = a - 1;
-      let c = 1;
-      let d = 1 - qab * x / qap;
-      if (Math.abs(d) < floor) d = floor;
-      d = 1 / d;
-      let h = d;
-      for (let m = 1; m <= maxIterations; m += 1) {
-        const m2 = 2 * m;
-        let aa = m * (b - m) * x / ((qam + m2) * (a + m2));
-        d = 1 + aa * d; if (Math.abs(d) < floor) d = floor;
-        c = 1 + aa / c; if (Math.abs(c) < floor) c = floor;
-        d = 1 / d; h *= d * c;
-        aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
-        d = 1 + aa * d; if (Math.abs(d) < floor) d = floor;
-        c = 1 + aa / c; if (Math.abs(c) < floor) c = floor;
-        d = 1 / d;
-        const delta = d * c;
-        h *= delta;
-        if (Math.abs(delta - 1) < epsilon) break;
-      }
-      return h;
-    }
-    function regularizedBeta(x, a, b) {
-      if (x <= 0) return 0;
-      if (x >= 1) return 1;
-      const front = Math.exp(logGamma(a + b) - logGamma(a) - logGamma(b) + a * Math.log(x) + b * Math.log(1 - x));
-      return x < (a + 1) / (a + b + 2)
-        ? front * betaFraction(a, b, x) / a
-        : 1 - front * betaFraction(b, a, 1 - x) / b;
-    }
 
     const calculate = () => {
       if (slug === 'percentile-rank-calculator') {
@@ -273,10 +242,13 @@ const fields = simpleFields[slug] ?? [];
       }
       if (slug === 'class-rank-percentile-calculator') {
         const rank = number('rank'), total = number('total');
-        if (!finite(rank, total) || !Number.isInteger(rank) || !Number.isInteger(total) || rank < 1 || total < 1 || rank > total) return showError();
-        const items = [[labels.result, format(100 * (total - rank + 0.5) / total, 2)], [labels.top, `${format(100 * rank / total, 2)}%`]];
-        if (labels.peopleAhead) items.push([labels.peopleAhead, String(rank - 1)]);
-        if (labels.peopleBehind) items.push([labels.peopleBehind, String(total - rank)]);
+        const tiedRaw = field('tied')?.value.trim() ?? '';
+        const tied = tiedRaw === '' ? 1 : Number(tiedRaw);
+        const result = rankPercentile(rank, total, tied);
+        if (!result) return showError();
+        const items = [[labels.result, format(result.pr, 2)], [labels.top, `${format(result.topPercent, 2)}%`]];
+        if (labels.peopleAhead) items.push([labels.peopleAhead, String(result.ahead)]);
+        if (labels.peopleBehind) items.push([labels.peopleBehind, String(result.behind)]);
         return show(items);
       }
       if (slug === 'normalized-score-converter') {
@@ -322,7 +294,9 @@ const fields = simpleFields[slug] ?? [];
           warning.hidden = Math.abs(weightTotal - 100) <= 0.0001;
         }
         const weightedParts = scoreKeys.map((key, index) => `${labels[key]} ${format(values[index].score, 2)} × ${format(values[index].weight, 2)}%`).join(' + ');
-        return showTeacher([[labels.weightTotal, `${format(weightTotal, 2)}%`], [labels.result, format(total, 3)]], `${weightedParts} ÷ ${format(weightTotal, 2)}`);
+        const teacherItems = [[labels.weightTotal, `${format(weightTotal, 2)}%`], [labels.result, format(total, 3)]];
+        if (labels.rounded2) teacherItems.push([labels.rounded2, roundHalfUp(total, 2).toFixed(2)]);
+        return showTeacher(teacherItems, `${weightedParts} ÷ ${format(weightTotal, 2)}`);
       }
       if (slug === 'cronbach-alpha-calculator') {
         const raw = field('data')?.value.trim() || '';
@@ -352,33 +326,19 @@ const fields = simpleFields[slug] ?? [];
       }
       if (slug === 'independent-samples-t-test-calculator') {
         const n1 = number('n1'), n2 = number('n2'), mean1 = number('mean1'), mean2 = number('mean2'), sd1 = number('sd1'), sd2 = number('sd2');
-        if (!finite(n1, n2, mean1, mean2, sd1, sd2) || !Number.isInteger(n1) || !Number.isInteger(n2) || n1 <= 1 || n2 <= 1 || sd1 <= 0 || sd2 <= 0) return showError();
-        const v1 = sd1 ** 2 / n1, v2 = sd2 ** 2 / n2;
-        const difference = mean1 - mean2;
-        const standardError = Math.sqrt(v1 + v2);
-        const t = difference / standardError;
-        const df = (v1 + v2) ** 2 / (v1 ** 2 / (n1 - 1) + v2 ** 2 / (n2 - 1));
-        const p = regularizedBeta(df / (df + t ** 2), df / 2, 0.5);
-        const pText = p < 0.001 ? '< .001' : format(p, 3).replace(/^0/, '');
-        const criticalT = (() => {
-          let lower = 0;
-          let upper = 20;
-          for (let iteration = 0; iteration < 80; iteration += 1) {
-            const middle = (lower + upper) / 2;
-            const twoTailedP = regularizedBeta(df / (df + middle ** 2), df / 2, 0.5);
-            if (twoTailedP > 0.05) lower = middle;
-            else upper = middle;
-          }
-          return (lower + upper) / 2;
-        })();
-        const pooledDf = n1 + n2 - 2;
-        const pooledSd = Math.sqrt(((n1 - 1) * sd1 ** 2 + (n2 - 1) * sd2 ** 2) / pooledDf);
-        const hedgesCorrection = 1 - 3 / (4 * pooledDf - 1);
-        const hedgesG = pooledSd > 0 ? difference / pooledSd * hedgesCorrection : Number.NaN;
-        const items = [[labels.difference, format(difference, 3)], [labels.result, format(t, 3)], [labels.df, format(df, 2)], [labels.p, pText]];
-        if (labels.standardError) items.push([labels.standardError, format(standardError, 3)]);
-        if (labels.confidenceInterval) items.push([labels.confidenceInterval, `[${format(difference - criticalT * standardError, 3)}, ${format(difference + criticalT * standardError, 3)}]`]);
-        if (labels.hedgesG && Number.isFinite(hedgesG)) items.push([labels.hedgesG, format(hedgesG, 3)]);
+        const method = field('method')?.value === 'student' ? 'student' : 'welch';
+        const r = independentTTest({ n1, mean1, sd1, n2, mean2, sd2 }, method);
+        if (!r) return showError();
+        const pText = r.p < 0.001 ? '< .001' : r.p >= 0.9995 ? '> .999' : format(r.p, 3).replace(/^0/, '');
+        const items = [[labels.difference, format(r.difference, 3)], [labels.result, format(r.t, 3)], [labels.df, format(r.df, 2)], [labels.p, pText]];
+        if (labels.standardError) items.push([labels.standardError, format(r.standardError, 3)]);
+        if (labels.confidenceInterval) items.push([labels.confidenceInterval, `[${format(r.ciLower, 3)}, ${format(r.ciUpper, 3)}]`]);
+        if (labels.hedgesG && Number.isFinite(r.hedgesG)) items.push([labels.hedgesG, format(r.hedgesG, 3)]);
+        if (labels.apaLine) {
+          const prefix = method === 'welch' ? 'Welch t' : 't';
+          const df = Number.isInteger(r.df) ? String(r.df) : r.df.toFixed(2);
+          items.push([labels.apaLine, `${prefix}(${df}) = ${r.t.toFixed(2)}, ${formatApaP(r.p)}, 95% CI [${r.ciLower.toFixed(2)}, ${r.ciUpper.toFixed(2)}], g = ${r.hedgesG.toFixed(2)}`, true]);
+        }
         return show(items);
       }
     };
@@ -389,14 +349,20 @@ const fields = simpleFields[slug] ?? [];
       addWeightedRow();
       invalidate();
     });
-    root.querySelector('[data-preset]')?.addEventListener('click', () => {
-      const presets = { writtenWeight: '40', teachingWeight: '30', interviewWeight: '30' };
-      Object.entries(presets).forEach(([key, value]) => {
+    root.querySelectorAll('[data-preset]').forEach((button) => button.addEventListener('click', () => {
+      // hs = Ministry-commissioned senior-high Chinese (written 40 / demo 30 / oral 30); tp = Taipei second stage (demo 60 / oral 40, written not counted)
+      const presets = {
+        hs: { writtenWeight: '40', teachingWeight: '30', interviewWeight: '30' },
+        tp: { writtenWeight: '0', teachingWeight: '60', interviewWeight: '40' },
+      };
+      const chosen = presets[button instanceof HTMLElement ? button.dataset.preset || '' : ''];
+      if (!chosen) return;
+      Object.entries(chosen).forEach(([key, value]) => {
         const input = field(key);
         if (input) input.value = value;
       });
       calculate();
-    });
+    }));
     root.querySelector('[data-normalize]')?.addEventListener('click', () => {
       const weightKeys = ['writtenWeight', 'teachingWeight', 'interviewWeight'];
       const weights = weightKeys.map((key) => number(key));
