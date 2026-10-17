@@ -977,9 +977,10 @@ export const tools: ToolMeta[] = [
     monetizationTags: ['adsense', 'sponsor'],
     featured: true,
     isNew: true,
-    updated: '2026-06-18',
-    name: { zh: '成績平均計算器', en: 'Grade Average Calculator' },
-    short: { zh: '計算成績總分、簡單平均與加權平均。', en: 'Calculate simple and weighted averages from grade entries.' },
+    updated: '2026-10-17',
+    reviewedAt: '2026-10-17',
+    name: { zh: '學期成績計算器', en: 'Grade Average Calculator' },
+    short: { zh: '輸入平時、段考分數與占分比例算出學期成績，附四捨五入規定與期末要考幾分。', en: 'Calculate a semester grade from weighted scores, with rounding rules and the final exam score needed.' },
   },
   {
     slug: 'final-grade-needed-calculator', category: 'statistics', icon: '🎯', status: 'live', locales: ['zh'], privacyLevel: 'local-only',
@@ -1028,8 +1029,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'z-score-calculator', category: 'statistics', icon: 'Z', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['t-score-calculator', 'percentile-rank-calculator', 'standard-deviation', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-25',
-    name: { zh: 'Z 分數計算器', en: 'Z Score Calculator' }, short: { zh: '將原始分數轉換為相對於平均數的標準分數。', en: 'Convert a raw score into standard deviations from the mean.' },
+    relatedTools: ['t-score-calculator', 'percentile-rank-calculator', 'standard-deviation', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
+    name: { zh: 'Z 分數計算器', en: 'Z Score Calculator' }, short: { zh: '輸入原始分數、平均與標準差算出 Z 分數，附 Z 表查表、與 T 分數的換算。', en: 'Convert a raw score to a z score, with a z table and the z to T score link.' },
   },
   {
     slug: 't-score-calculator', category: 'statistics', icon: 'T', status: 'live', privacyLevel: 'local-only',
@@ -1038,8 +1039,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'weighted-average-calculator', category: 'statistics', icon: 'Σ', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['grade-average', 't-score-calculator', 'teacher-exam-score-converter', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
-    name: { zh: '加權平均計算器', en: 'Weighted Average Calculator' }, short: { zh: '依各項數值與權重計算加權平均。', en: 'Calculate a weighted mean from values and weights.' },
+    relatedTools: ['grade-average', 'standard-deviation', 'teacher-exam-score-converter', 't-score-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
+    name: { zh: '加權平均計算器', en: 'Weighted Average Calculator' }, short: { zh: '輸入分數與權重（學分或比例）算出加權平均，附學分加權算例與 Excel SUMPRODUCT。', en: 'Weighted average from scores and weights (credits or percentages), with a credit example and Excel SUMPRODUCT.' },
   },
   {
     slug: 'class-rank-percentile-calculator', category: 'statistics', icon: '🏅', status: 'live', privacyLevel: 'local-only',

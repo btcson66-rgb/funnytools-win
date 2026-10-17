@@ -81,7 +81,7 @@ export const categoryContent: Record<string, CategoryContent> = {
       zh: [
         { tip: '想算平均、變異數與標準差，用標準差計算器', toolSlug: 'standard-deviation' },
         { tip: '想算百分比、占比或增減變化，用百分比計算器', toolSlug: 'percentage-calculator' },
-        { tip: '想算成績的加權平均，用成績平均計算器', toolSlug: 'grade-average' },
+        { tip: '想算學期成績（平時與段考的加權平均），用學期成績計算器', toolSlug: 'grade-average' },
       ],
       en: [
         { tip: 'For mean, variance, and standard deviation, use the Standard Deviation Calculator', toolSlug: 'standard-deviation' },

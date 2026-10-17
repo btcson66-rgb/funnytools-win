@@ -14,44 +14,6 @@ function content(zh: ToolContent, en: ToolContent): LocalizedToolContent {
   return { zh, en };
 }
 
-export const zScoreContent = content(
-  {
-    name: 'Z 分數計算器', short: '將原始分數轉換為相對於平均數的標準分數。', long: '輸入個人原始分數、群體平均數與標準差，計算該分數距離平均數多少個標準差。正值高於平均，負值低於平均。',
-    seoTitle: 'Z 分數計算器｜標準分數公式與解讀', seoDescription: '輸入原始分數、平均數與標準差，線上計算 Z 分數並取得教育應用與 APA 報告提示。', keywords: ['Z分數', '標準分數', 'z score calculator', '教育統計'],
-    instructions: ['輸入欲轉換的原始分數 X。', '輸入參照群體平均數與標準差。', '按下計算並依正負號與絕對值解讀相對位置。'], examples: ['比較不同科目或量尺的相對表現。', '檢視某分數距離班級平均數多遠。', '作為 T 分數或其他標準分數轉換的中間值。'],
-    formula: { expression: 'z = (X − M) / SD', explanation: 'X 為原始分數，M 為平均數，SD 為標準差；SD 必須大於 0。' }, educationApplication: 'Z 分數將不同量尺轉成共同的標準差單位，但不會自動使資料符合常態分配。解讀極端分數時仍需檢查分配形狀與樣本大小。', reportTip: '可寫成：「該生原始分數為 X = 82，在班級分布中為 z = 1.20。」建議同時報告平均數 M 與標準差 SD。',
-    faq: [{ q: 'Z 分數為 0 代表什麼？', a: '代表原始分數剛好等於所輸入的平均數。' }, { q: 'Z 分數可以是負數嗎？', a: '可以。負值表示原始分數低於平均數。' }, { q: '這會把資料變成常態分配嗎？', a: '不會。標準化只改變中心與尺度，不改變原始分配形狀。' }],
-    labels: { score: '原始分數（X）', mean: '平均數（M）', sd: '標準差（SD）', calculate: '計算 Z 分數', result: 'Z 分數', invalid: '請輸入有效數字，且標準差必須大於 0。' }, disclaimer: disclaimer.zh, privacyNote: privacy.zh,
-  },
-  {
-    name: 'Z Score Calculator', short: 'Convert a raw score into standard deviations from the mean.', long: 'Enter a raw score, reference mean, and standard deviation to calculate how many standard deviations the score lies above or below the mean.',
-    seoTitle: 'Z Score Calculator | Formula and Interpretation', seoDescription: 'Calculate a z score from a raw score, mean, and standard deviation, with education and APA reporting guidance.', keywords: ['z score calculator', 'standard score', 'education statistics'],
-    instructions: ['Enter the raw score X.', 'Enter the reference-group mean and standard deviation.', 'Calculate and interpret the sign and magnitude.'], examples: ['Compare relative performance across different scales.', 'Describe distance from a class mean.', 'Prepare a value for T-score or other standard-score conversion.'],
-    formula: { expression: 'z = (X − M) / SD', explanation: 'X is the raw score, M is the mean, and SD is the standard deviation. SD must be greater than zero.' }, educationApplication: 'Z scores place different scales in standard-deviation units, but standardization does not make a non-normal distribution normal. Check distribution shape and sample size when interpreting extremes.', reportTip: 'Example: “The student scored X = 82, corresponding to z = 1.20 in the class distribution.” Also report M and SD.',
-    faq: [{ q: 'What does z = 0 mean?', a: 'The raw score equals the entered mean.' }, { q: 'Can a z score be negative?', a: 'Yes. A negative z score lies below the mean.' }, { q: 'Does this make data normally distributed?', a: 'No. Standardization changes center and scale, not distribution shape.' }],
-    labels: { score: 'Raw score (X)', mean: 'Mean (M)', sd: 'Standard deviation (SD)', calculate: 'Calculate z score', result: 'Z score', invalid: 'Enter valid numbers and use a standard deviation greater than zero.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
-  },
-);
-
-export const weightedAverageContent = content(
-  {
-    name: '加權平均計算器', short: '依各項數值與權重計算加權平均。', long: '逐列輸入數值與正數權重，工具會計算權重總和、加權總和與加權平均。權重可使用比例、百分比或學分，只要各列單位一致即可。',
-    seoTitle: '加權平均計算器｜分數、權重與公式', seoDescription: '免費計算數值與權重的加權平均，支援多列輸入並附教育應用與報告提示。', keywords: ['加權平均', '權重計算', 'weighted average calculator'],
-    instructions: ['每列輸入一個數值與對應權重。', '需要時新增或移除列。', '按下計算取得權重總和與加權平均。'], examples: ['依作業、期中與期末比例估算總成績。', '依學分計算課程平均。', '整合多位評分者或多項指標。'],
-    formula: { expression: 'x̄w = Σ(wᵢxᵢ) / Σwᵢ', explanation: 'xᵢ 是第 i 個數值，wᵢ 是其正數權重。權重不必加總為 1 或 100，但必須使用一致單位。' }, educationApplication: '加權平均適合各評量項目比重不同的情境。設定權重前應先確認評分規準，並避免把缺漏成績在未說明下當作 0。', reportTip: '可寫成：「總成績依作業 30%、期中 30% 與期末 40% 加權計算，加權平均為 84.6 分。」清楚列出各權重。',
-    faq: [{ q: '權重一定要加總為 100 嗎？', a: '不用。只要權重皆為正數且單位一致，公式會除以權重總和。' }, { q: '可以使用學分當權重嗎？', a: '可以，例如以各科學分作為權重計算學期平均。' }, { q: '空白列如何處理？', a: '空白或無效列會被忽略；權重為 0 或負數的列不會納入。' }],
-    labels: { value: '數值', weight: '權重', add: '新增一列', remove: '移除', calculate: '計算加權平均', result: '加權平均', weightTotal: '權重總和', weightedSum: '加權總和', invalid: '請至少輸入一列有效數值與大於 0 的權重。' }, disclaimer: disclaimer.zh, privacyNote: privacy.zh,
-  },
-  {
-    name: 'Weighted Average Calculator', short: 'Calculate a weighted mean from values and weights.', long: 'Enter values and positive weights to calculate the weight total, weighted sum, and weighted average. Weights may be proportions, percentages, or credits as long as units are consistent.',
-    seoTitle: 'Weighted Avg Calculator | Values, Weights & Formula', seoDescription: 'Calculate a weighted average from multiple values and weights with education and reporting guidance.', keywords: ['weighted average calculator', 'weighted mean', 'grade weights'],
-    instructions: ['Enter one value and its weight per row.', 'Add or remove rows as needed.', 'Calculate the weight total and weighted mean.'], examples: ['Combine assignments, midterms, and finals.', 'Calculate a credit-weighted course average.', 'Combine ratings or indicators with different importance.'],
-    formula: { expression: 'x̄w = Σ(wᵢxᵢ) / Σwᵢ', explanation: 'xᵢ is each value and wᵢ is its positive weight. Weights need not total 1 or 100, but units must be consistent.' }, educationApplication: 'Use weighted means when assessment components have different importance. Define weights from an explicit grading policy and do not silently treat missing work as zero.', reportTip: 'Example: “The final score was weighted as assignments 30%, midterm 30%, and final exam 40%, yielding a weighted mean of 84.6.”',
-    faq: [{ q: 'Must weights total 100?', a: 'No. The formula divides by the weight total; just use consistent positive units.' }, { q: 'Can credits be weights?', a: 'Yes. Course credits can weight a semester average.' }, { q: 'What happens to blank rows?', a: 'Blank or invalid rows are ignored, as are rows with zero or negative weights.' }],
-    labels: { value: 'Value', weight: 'Weight', add: 'Add row', remove: 'Remove', calculate: 'Calculate weighted average', result: 'Weighted average', weightTotal: 'Weight total', weightedSum: 'Weighted sum', invalid: 'Enter at least one valid value with a weight greater than zero.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
-  },
-);
-
 export const classRankContent = content(
   {
     name: '排名百分比計算器', short: '依班級名次與總人數估算排名百分等級。', long: '輸入名次（第 1 名為最佳）與班級總人數，以名次區間中點估算百分等級，並顯示大約位於前百分之多少。',

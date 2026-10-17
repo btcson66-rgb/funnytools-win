@@ -10,7 +10,7 @@ const simpleFields: Record<string, { key: string; value: string; step?: string }
     { key: 'below', value: '24', step: '1' }, { key: 'equal', value: '1', step: '1' }, { key: 'total', value: '40', step: '1' },
   ],
   'z-score-calculator': [
-    { key: 'score', value: '82' }, { key: 'mean', value: '70' }, { key: 'sd', value: '10' },
+    { key: 'score', value: '82' }, { key: 'mean', value: '70' }, { key: 'sd', value: '10' }, { key: 'z', value: '' },
   ],
   't-score-calculator': [
     { key: 'score', value: '82' }, { key: 'mean', value: '70' }, { key: 'sd', value: '10' }, { key: 'z', value: '' },
@@ -98,7 +98,10 @@ const fields = simpleFields[slug] ?? [];
   .stat-form-grid { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
   .stat-actions { margin-top: 18px; }
   .stat-rows { display: grid; gap: 10px; }
-  .stat-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+  /* Rows are created by the script, so the scoped selector needs :global(). */
+  .stat-rows :global(.stat-row) { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+  /* Keep the field captions only on the first row (still available to screen readers) so a 5-row default fits above the fold. */
+  .stat-rows :global(.stat-row:not(:first-child) label > span) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .exam-grid, .ttest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .ttest-grid { grid-template-columns: repeat(2, 1fr); }
   fieldset { display: grid; gap: 12px; margin: 0; padding: 16px; border: 1px solid var(--line); border-radius: 14px; }
@@ -108,12 +111,14 @@ const fields = simpleFields[slug] ?? [];
   .stat-result-item span { color: var(--muted); font-size: .9rem; font-weight: 800; }
   .stat-result-item strong { color: var(--ink); font-size: 1.35rem; font-variant-numeric: tabular-nums; }
   @media (max-width: 760px) {
-    .stat-row, .exam-grid, .ttest-grid { grid-template-columns: 1fr; }
+    .exam-grid, .ttest-grid { grid-template-columns: 1fr; }
+    .stat-rows :global(.stat-row) { grid-template-columns: 1fr 1fr; }
+    .stat-rows :global(.stat-row .btn) { grid-column: 1 / -1; }
   }
 </style>
 
 <script>
-  import { percentileRankMidpoint, tScoreFrom } from '../../lib/educationStats';
+  import { normalCdf, percentileRankMidpoint, roundHalfUp, tScoreFrom, weightedMean } from '../../lib/educationStats';
 
   document.querySelectorAll('[data-stat-tool]').forEach((root) => {
     if (!(root instanceof HTMLElement)) return;
@@ -236,15 +241,20 @@ const fields = simpleFields[slug] ?? [];
         return show(items);
       }
       if (slug === 'z-score-calculator') {
-        const score = number('score'), mean = number('mean'), sd = number('sd');
-        if (!finite(score, mean, sd) || sd <= 0) return showError();
-        const z = (score - mean) / sd;
-        const items = [[labels.result, format(z, 3)]];
-        if (labels.distanceFromMean) items.push([labels.distanceFromMean, `${format(Math.abs(z), 3)} ${labels.sdUnit || ''}`.trim()]);
+        const zRaw = field('z')?.value.trim() ?? '';
+        const result = zRaw !== ''
+          ? tScoreFrom({ z: number('z') })
+          : tScoreFrom({ score: number('score'), mean: number('mean'), sd: number('sd') });
+        if (!result) return showError();
+        const items = [[labels.result, format(result.z, 3)]];
+        if (labels.distanceFromMean) items.push([labels.distanceFromMean, `${format(Math.abs(result.z), 3)} ${labels.sdUnit || ''}`.trim()]);
         if (labels.relativePosition) {
-          const position = z > 0 ? labels.aboveMean : z < 0 ? labels.belowMean : labels.atMean;
+          const position = result.z > 0 ? labels.aboveMean : result.z < 0 ? labels.belowMean : labels.atMean;
           if (position) items.push([labels.relativePosition, position]);
         }
+        if (labels.cumulative) items.push([labels.cumulative, `${format(result.normalPr, 2)}%`]);
+        if (labels.upperTail) items.push([labels.upperTail, `${format(100 * normalCdf(-result.z), 2)}%`]);
+        if (labels.tEquivalent) items.push([labels.tEquivalent, format(result.t, 2)]);
         return show(items);
       }
       if (slug === 't-score-calculator') {
@@ -294,9 +304,12 @@ const fields = simpleFields[slug] ?? [];
         if (parsed.some((row) => row?.invalid)) return showError();
         const valid = parsed.filter((row) => row !== null);
         if (!valid.length) return showError();
-        const weightTotal = valid.reduce((sum, row) => sum + row.weight, 0);
-        const weightedSum = valid.reduce((sum, row) => sum + row.value * row.weight, 0);
-        return show([[labels.weightTotal, format(weightTotal, 3)], [labels.weightedSum, format(weightedSum, 3)], [labels.result, format(weightedSum / weightTotal, 3)]]);
+        const summary = weightedMean(valid.map((row) => ({ value: row.value, weight: row.weight })));
+        if (!summary) return showError();
+        const items = [[labels.weightTotal, format(summary.weightTotal, 3)], [labels.weightedSum, format(summary.weightedSum, 3)], [labels.result, format(summary.mean, 3)]];
+        if (labels.rounded1) items.push([labels.rounded1, roundHalfUp(summary.mean, 1).toFixed(1)]);
+        if (labels.simpleMean) items.push([labels.simpleMean, format(summary.simpleMean, 3)]);
+        return show(items);
       }
       if (slug === 'teacher-exam-score-converter') {
         const scoreKeys = ['written', 'teaching', 'interview'];
@@ -408,7 +421,8 @@ const fields = simpleFields[slug] ?? [];
       }
     });
     if (slug === 'weighted-average-calculator') {
-      addWeightedRow('80', '30'); addWeightedRow('90', '70');
+      // Defaults are worked example 1 on the page: 5 senior-high courses (score, credits).
+      [['78', '4'], ['85', '4'], ['72', '4'], ['90', '3'], ['95', '2']].forEach(([value, weight]) => addWeightedRow(value, weight));
     }
     calculate();
   });
