@@ -1064,8 +1064,8 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'independent-samples-t-test-calculator', category: 'statistics', icon: 't', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['cronbach-alpha-calculator', 'z-score-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-06-18',
-    name: { zh: '獨立樣本 t 檢定簡易計算器', en: 'Independent Samples t-test Calculator' }, short: { zh: '用兩組樣本數、平均數與標準差執行 Welch t 檢定。', en: 'Run a Welch independent-samples t test from summary statistics.' },
+    relatedTools: ['apa-7-report-generator', 'standard-deviation', 'spss-result-interpreter', 'cronbach-alpha-calculator', 'z-score-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense'], featured: true, isNew: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
+    name: { zh: '獨立樣本 t 檢定計算器', en: 'Independent Samples t-test Calculator' }, short: { zh: '輸入兩組人數、平均與標準差，算出 t、自由度、p 值，可選 Welch 或 Student，附 APA 寫法與 Excel T.TEST。', en: 'Independent-samples t test from n, mean and SD, with Welch or Student, APA reporting and Excel T.TEST.' },
   },
   {
     slug: 'apa-7-report-generator', category: 'statistics', icon: 'APA', status: 'live', privacyLevel: 'local-only',

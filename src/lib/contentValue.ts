@@ -915,27 +915,28 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'zh:independent-samples-t-test-calculator': {
-    intro: '這一段用頁面預設的兩組資料示範 Welch t 檢定的計算，並核對頁面實際顯示的全部 7 個數字：平均差、t 值、自由度、雙尾 p 值、標準誤、95% 信賴區間與 Hedges’ g 效果量。',
+    intro: '這一段針對獨立樣本 t 檢定計算器目前的欄位：兩組的 N、平均數、標準差，以及「檢定方法」選單（Welch 或 Student）；結果區共有平均差、t、自由度、雙尾 p、標準誤、95% 信賴區間、Hedges’ g 與一行 APA 統計式。',
     panels: [
       {
-        title: '先用頁面預設值核對平均差、t 值與自由度',
-        text: '頁面預設第一組 N=30、平均 78.4、標準差 8.2，第二組 N=32、平均 73.1、標準差 9.5：平均差＝78.4−73.1＝5.3，Welch t 值約為 2.356，自由度（Welch–Satterthwaite 近似）約為 59.61，雙尾 p 值約為 .022。這四個數字都會直接顯示在結果區，可以用計算機核對平均差，t 值與自由度需要搭配標準誤公式才能重算。',
+        title: '先用預設值核對（Welch）',
+        text: '預設第一組 N＝30、平均 78.4、標準差 8.2，第二組 N＝32、平均 73.1、標準差 9.5：平均差 5.3、標準誤 2.250、t＝2.356、df＝59.61、雙尾 p＝.022、95% 信賴區間 [0.799, 9.801]、Hedges’ g＝0.588，APA 統計式為 Welch t(59.61) = 2.36, p = .022, 95% CI [0.80, 9.80], g = 0.59。',
       },
       {
-        title: '頁面同時顯示標準誤、95% 信賴區間與 Hedges’ g 效果量',
-        text: '程式內部除了平均差、t 值、自由度與雙尾 p 值以外，也會計算標準誤、95% 信賴區間與 Hedges’ g 效果量，這三項數字會接著顯示在結果區（例如預設資料的標準誤約為 2.250、信賴區間約為 [0.799, 9.801]、Hedges’ g 約 0.588）。信賴區間使用 Welch–Satterthwaite 自由度對應的臨界值，Hedges’ g 則改用兩組合併標準差（pooled SD）並乘上小樣本校正係數計算——這跟 Welch t 值本身不假設變異數相等的做法不同，但這是效果量報告的標準慣例，不是計算矛盾。',
+        title: '把方法改成 Student，再換成人數差很多的資料',
+        text: '預設資料改選 Student：標準誤 2.261、t＝2.344、df＝60、p＝.022。再把兩組改成 N＝12、平均 75、標準差 15 與 N＝48、平均 68、標準差 6：Welch 是 t(11.89)＝1.585、p＝.139，Student 是 t(58)＝2.559、p＝.013，兩種方法的結論相反，這就是選擇方法要說明清楚的原因。',
       },
       {
-        title: '兩組平均相同、或樣本數最小為 2 時的邊界行為',
-        text: '把兩組平均數都改成相同數字（其他不變）：t 值會變成 0、雙尾 p 值會顯示 1，代表兩組完全沒有差異，這是正常結果不是錯誤。把兩組樣本數都改成最小值 2（樣本數必須是大於 1 的整數）：程式仍會算出結果，但自由度會很小（等於 2），t 分配在小自由度下尾部較厚，同樣的 t 值在小樣本會對應到較大的 p 值，這時候的顯著性判斷要更保守。',
+        title: '邊界：平均相同、標準差為 0 或人數不足',
+        text: '兩組平均數改成相同：t＝0，p 顯示「> .999」，APA 統計式也會寫 p > .999，這是正常結果。標準差填 0 或負數、人數不是大於 1 的整數，工具會顯示錯誤，不會算出數字。',
       },
     ],
     checklist: [
-      '兩組樣本數都是大於 1 的整數，標準差都大於 0，否則會顯示錯誤，不會算出數字。',
-      '已用平均差公式（M1−M2）手動核對過頁面顯示的「平均差」是否正確。',
-      '已核對頁面顯示的標準誤、95% 信賴區間與 Hedges’ g 效果量，理解信賴區間用 Welch 自由度、Hedges’ g 用合併標準差計算，兩者假設不同但都是標準統計慣例。',
-      '兩組平均相同時 t=0、p=1 是正常結果；樣本數很小時得到的 p 值判斷要更保守，不要直接套用大樣本的顯著性直覺。',
+      '兩組是互相獨立的群體，不是同一批人的前後測。',
+      '填的是每組的樣本標準差（除以 n−1），不是母體標準差、標準誤或變異數。',
+      '預設值用 Welch 重現過 t(59.61)＝2.36、p＝.022；若要用 Student，已在報告寫明。',
+      '複製 APA 統計式後，已把 t、p、M、SD 等符號改成斜體，並依老師或期刊決定是否保留信賴區間與效果量。',
     ],
+    reviewedAt: '2026-10-17',
   },
   'zh:normalized-score-converter': {
     intro: '這一段用頁面預設值示範常態化分數轉換，並核對頁面顯示的全部 5 個數字：對應 Z 分數、轉換後分數、原始差距、目標差距與縮放比例。',
@@ -1238,27 +1239,28 @@ const toolValueReviewOverrides: Partial<Record<string, ContentValueReviewOverrid
     ],
   },
   'en:independent-samples-t-test-calculator': {
-    intro: 'This section covers the Welch t-test math behind the page’s default two groups, and confirms all seven numbers the page actually displays: mean difference, t, df, two-tailed p, standard error, the 95% confidence interval, and Hedges’ g.',
+    intro: 'This section covers the current fields of the Independent Samples t-test Calculator: N, mean and SD for two groups and a method menu (Welch or Student). Results are the mean difference, t, degrees of freedom, two-tailed p, standard error, 95% CI, Hedges’ g and an APA statistics line.',
     panels: [
       {
-        title: 'Check the mean difference, t, df, and p against the default groups',
-        text: 'The page loads with Group 1: N = 30, mean = 78.4, SD = 8.2, and Group 2: N = 32, mean = 73.1, SD = 9.5. Mean difference = 78.4 − 73.1 = 5.3. The Welch t value comes out to about 2.356, the Welch–Satterthwaite degrees of freedom to about 59.61, and the two-tailed p value to about .022 — these four numbers appear first in the results.',
+        title: 'Check the defaults (Welch)',
+        text: 'Group 1 N = 30, M = 78.4, SD = 8.2; group 2 N = 32, M = 73.1, SD = 9.5 give a mean difference of 5.3, SE 2.250, t = 2.356, df = 59.61, p = .022, 95% CI [0.799, 9.801] and Hedges’ g = 0.588. The APA line reads Welch t(59.61) = 2.36, p = .022, 95% CI [0.80, 9.80], g = 0.59.',
       },
       {
-        title: 'The standard error, confidence interval, and Hedges’ g are also shown',
-        text: 'Beyond the mean difference, t, df, and p, the script also computes a standard error, a 95% confidence interval (about [0.80, 9.80] for the default numbers), and a Hedges’ g effect size (about 0.588), and all three render right after the first four values. The confidence interval uses a critical value from the Welch–Satterthwaite degrees of freedom, while Hedges’ g switches to the pooled standard deviation with a small-sample correction — a different variance assumption from Welch’s t itself, which is the standard convention for reporting an effect size alongside a Welch test, not an inconsistency.',
+        title: 'Switch to Student, then to very unequal groups',
+        text: 'With Student the defaults give SE 2.261, t = 2.344, df = 60, p = .022. For N = 12, M = 75, SD = 15 against N = 48, M = 68, SD = 6, Welch gives t(11.89) = 1.585, p = .139 while Student gives t(58) = 2.559, p = .013, opposite conclusions, which is why the method must be stated.',
       },
       {
-        title: 'Equal means and very small samples are still accepted, with results that need extra care',
-        text: 'Set both group means to the same number and Calculate still runs, returning t = 0 and p = 1 — a valid “no difference detected” result, not an error. Reduce both sample sizes to the minimum accepted value of 2 (each group requires an integer greater than 1) and the tool still produces a t, df, and p, but the degrees of freedom collapse to a very small number, and a t value that would look significant with large samples can correspond to a much larger, non-significant p value at df = 2 — small-sample results here need more caution before quoting them.',
+        title: 'Edge cases',
+        text: 'Equal means give t = 0 and p shown as > .999, which is a normal result. An SD of 0 or below, or a sample size that is not a whole number above 1, shows an error instead of a number.',
       },
     ],
     checklist: [
-      'Both sample sizes are whole numbers greater than 1, and both standard deviations are entered as sample SDs greater than 0.',
-      'The mean difference shown has been hand-checked as Group 1 mean minus Group 2 mean.',
-      'The standard error, 95% confidence interval, and Hedges’ g shown on the page have been checked; the confidence interval uses the Welch degrees of freedom while Hedges’ g uses the pooled SD — different assumptions, both standard practice.',
-      'A t = 0, p = 1 result from equal group means, or a very small df from tiny samples, is read as a real (if underpowered) result, not a broken calculation.',
+      'The two groups are independent, not the same people measured twice.',
+      'You entered sample SDs (n − 1 denominator), not population SDs, standard errors or variances.',
+      'The defaults reproduce Welch t(59.61) = 2.36, p = .022; if Student is used, the report says so.',
+      'After copying the APA line, symbols are italicised and the CI and effect size follow your instructor’s or journal’s rules.',
     ],
+    reviewedAt: '2026-10-17',
   },
   'en:inflation': {
     intro: 'This section covers Inflation Calculator’s three modes and what each one actually multiplies or divides, using round numbers you can check with a basic calculator.',

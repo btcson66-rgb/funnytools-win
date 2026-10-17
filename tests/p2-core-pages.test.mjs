@@ -336,3 +336,119 @@ test('class rank page: defaults, byline, schema, rank table, official quotes and
   const en = html('/en/tools/class-rank-percentile-calculator/');
   assert.match(en, /"dateModified":"2026-10-17"/);
 });
+
+// ---------------------------------------------------------------- P2 batch 3: independent-samples t test
+const tCase = (n1, mean1, sd1, n2, mean2, sd2) => ({ n1, mean1, sd1, n2, mean2, sd2 });
+const sleepA = [0.7, -1.6, -0.2, -1.2, -0.1, 3.4, 3.7, 0.8, 0.0, 2.0]; // R datasets::sleep, group 1
+const sleepB = [1.9, 0.8, 1.1, 0.1, -0.1, 4.4, 5.5, 1.6, 4.6, 3.4]; // R datasets::sleep, group 2
+const fromRaw = (a, b) => { const x = describeData(a); const y = describeData(b); return tCase(a.length, x.mean, x.sdSample, b.length, y.mean, y.sdSample); };
+
+test('independentTTest agrees with SciPy (ttest_ind_from_stats) for Welch and Student', () => {
+  // reference values computed with SciPy 1.x: stats.ttest_ind_from_stats(..., equal_var=...) and stats.t.ppf(0.975, df)
+  const refs = [
+    ['default welch', tCase(30, 78.4, 8.2, 32, 73.1, 9.5), 'welch', { t: 2.355754300413088, df: 59.607972070298864, p: 0.021792916703421525, lo: 0.7991007673064612, hi: 9.800899232693562 }],
+    ['default student', tCase(30, 78.4, 8.2, 32, 73.1, 9.5), 'student', { t: 2.344494265529541, df: 60, p: 0.02238066684152906, lo: 0.778095804051353, hi: 9.821904195948669 }],
+    ['unequal welch', tCase(12, 75, 15, 48, 68, 6), 'welch', { t: 1.585187847802434, df: 11.89314639624311, p: 0.1391387436292515, lo: -2.6309730154995083, hi: 16.630973015499507 }],
+    ['unequal student', tCase(12, 75, 15, 48, 68, 6), 'student', { t: 2.5587974137206806, df: 58, p: 0.013135520268257197, lo: 1.523981338310744, hi: 12.476018661689256 }],
+    ['nist student', tCase(249, 20.14458, 6.41470, 79, 30.48101, 6.10771), 'student', { t: -12.620585000444759, df: 326, p: 5.273218316047391e-30, lo: -11.947648737831484, hi: -8.725211262168516 }],
+    ['nist welch', tCase(249, 20.14458, 6.41470, 79, 30.48101, 6.10771), 'welch', { t: -12.946267565658848, df: 136.8749900936937, p: 1.5709046154648375e-25, lo: -11.915243780872187, hi: -8.757616219127813 }],
+  ];
+  for (const [name, input, method, ref] of refs) {
+    const r = independentTTest(input, method);
+    close(r.t, ref.t, 1e-9); close(r.df, ref.df, 1e-9); close(r.ciLower, ref.lo, 1e-8); close(r.ciUpper, ref.hi, 1e-8);
+    assert.ok(Math.abs(r.p - ref.p) <= Math.max(1e-12, ref.p * 1e-7), `${name}: p ${r.p} !~ ${ref.p}`);
+  }
+});
+
+test('independent t test reproduces NIST AUTO83B and the published R output for the sleep data', () => {
+  // NIST/SEMATECH e-Handbook 1.3.5.3 (equal variances): T = -12.62059, sp = 6.34260, df = 326, critical value 1.9673
+  const nist = independentTTest(tCase(249, 20.14458, 6.41470, 79, 30.48101, 6.10771), 'student');
+  close(nist.t, -12.62059, 5e-5); close(nist.pooledSd, 6.34260, 5e-5); assert.equal(nist.df, 326); close(tCritical(326, 0.05), 1.9673, 5e-5);
+  assert.ok(Math.abs(nist.t) > 1.9673);
+  // R: t.test(extra ~ group, sleep) -> t = -1.8608, df = 17.776, p-value = 0.07939, CI -3.3654832 0.2054832, means 0.75 / 2.33
+  const raw = fromRaw(sleepA, sleepB);
+  close(raw.mean1, 0.75, 1e-12); close(raw.mean2, 2.33, 1e-12);
+  const welch = independentTTest(raw);
+  close(welch.t, -1.8608, 5e-5); close(welch.df, 17.776, 5e-4); close(welch.p, 0.07939, 5e-6); close(welch.ciLower, -3.3654832, 5e-7); close(welch.ciUpper, 0.2054832, 5e-7);
+  const student = independentTTest(raw, 'student');
+  assert.equal(student.df, 18); close(student.p, 0.07919, 5e-6); close(student.t, welch.t, 1e-12);
+  // the page quotes SDs rounded to 3 decimals: 1.789 and 2.002
+  const rounded = independentTTest(tCase(10, 0.75, 1.789, 10, 2.33, 2.002));
+  assert.equal(rounded.t.toFixed(3), '-1.861'); assert.equal(rounded.df.toFixed(2), '17.78'); assert.equal(rounded.p.toFixed(4), '0.0794');
+});
+
+test('independent t test worked examples on the page are reproduced by the calculator function', () => {
+  const ex1 = independentTTest(tCase(30, 78.4, 8.2, 32, 73.1, 9.5));
+  close(ex1.difference, 5.3, 1e-9);
+  assert.equal((8.2 ** 2 / 30).toFixed(4), '2.2413'); assert.equal((9.5 ** 2 / 32).toFixed(4), '2.8203'); assert.equal((8.2 ** 2 / 30 + 9.5 ** 2 / 32).toFixed(4), '5.0616');
+  assert.equal(ex1.standardError.toFixed(4), '2.2498'); assert.equal(ex1.t.toFixed(3), '2.356'); assert.equal(ex1.df.toFixed(2), '59.61'); assert.equal(ex1.p.toFixed(4), '0.0218');
+  assert.equal(ex1.ciLower.toFixed(2), '0.80'); assert.equal(ex1.ciUpper.toFixed(2), '9.80'); assert.equal(ex1.hedgesG.toFixed(2), '0.59');
+  assert.equal(formatApaP(ex1.p), 'p = .022');
+  assert.equal((5.0616 ** 2 / ((2.2413 ** 2) / 29 + (2.8203 ** 2) / 31)).toFixed(1), '59.6');
+  const ex1s = independentTTest(tCase(30, 78.4, 8.2, 32, 73.1, 9.5), 'student');
+  assert.equal(ex1s.pooledSd.toFixed(3), '8.895'); assert.equal(ex1s.standardError.toFixed(4), '2.2606'); assert.equal(ex1s.t.toFixed(3), '2.344'); assert.equal(ex1s.df, 60); assert.equal(ex1s.p.toFixed(4), '0.0224');
+  // example 2: very different n and SD -> opposite conclusions
+  const ex2 = independentTTest(tCase(12, 75, 15, 48, 68, 6));
+  assert.equal(ex2.standardError.toFixed(3), '4.416'); assert.equal(ex2.t.toFixed(3), '1.585'); assert.equal(ex2.df.toFixed(2), '11.89'); assert.equal(ex2.p.toFixed(3), '0.139');
+  assert.equal(ex2.ciLower.toFixed(2), '-2.63'); assert.equal(ex2.ciUpper.toFixed(2), '16.63');
+  assert.equal((4167 / 58).toFixed(2), '71.84');
+  const ex2s = independentTTest(tCase(12, 75, 15, 48, 68, 6), 'student');
+  assert.equal(ex2s.standardError.toFixed(3), '2.736'); assert.equal(ex2s.t.toFixed(3), '2.559'); assert.equal(ex2s.df, 58); assert.equal(ex2s.p.toFixed(3), '0.013');
+  assert.equal(ex2s.ciLower.toFixed(2), '1.52'); assert.equal(ex2s.ciUpper.toFixed(2), '12.48');
+  assert.ok(ex2.p > 0.05 && ex2s.p < 0.05);
+  // CI excludes 0 exactly when p < .05
+  for (const r of [ex1, ex1s, ex2, ex2s]) assert.equal(r.ciLower > 0 || r.ciUpper < 0, r.p < 0.05);
+});
+
+test('Excel example (T.TEST types 2 and 3) matches the values run in LibreOffice Calc', () => {
+  const A = [72, 75, 80, 68, 77, 83, 79, 74]; const B = [65, 70, 72, 68, 74, 66, 71, 69, 73];
+  const input = fromRaw(A, B);
+  assert.equal(input.mean1.toFixed(2), '76.00'); assert.equal(input.sd1.toFixed(2), '4.78'); assert.equal(input.mean2.toFixed(2), '69.78'); assert.equal(input.sd2.toFixed(2), '3.07');
+  const welch = independentTTest(input); const student = independentTTest(input, 'student');
+  // values returned by =T.TEST(A2:A9,B2:B10,2,3) / (...,2,2) and the manual formulas in LibreOffice Calc (also equal to SciPy ttest_ind)
+  close(welch.p, 0.008641638708928, 1e-9); close(student.p, 0.00559279122044389, 1e-9);
+  close(welch.difference, 6.22222222222223, 1e-9); close(welch.standardError, 1.9764932514917, 1e-9); close(welch.t, 3.14811205023148, 1e-9); close(welch.df, 11.7046909530479, 1e-9);
+  close(student.t, 3.231366802073849, 1e-9); assert.equal(student.df, 15);
+  close(welch.pooledSd, 3.96278988891711, 1e-9); close(welch.cohenD, 1.57016203145773, 1e-9); close(welch.hedgesG, 1.49032328409547, 1e-9);
+  // T.DIST.2T truncates the fractional df (LibreOffice: .0093) while the exact Welch p is .0086
+  close(tTwoTailedP(welch.t, 11), 0.00927333486982205, 1e-9); assert.equal(welch.p.toFixed(4), '0.0086');
+  assert.equal(student.p.toFixed(4), '0.0056');
+});
+
+test('Welch df lies between min(n-1) and n1+n2-2; edge cases and APA p formatting', () => {
+  let seed = 12345; const rnd = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+  for (let i = 0; i < 300; i += 1) {
+    const n1 = 2 + Math.floor(rnd() * 60); const n2 = 2 + Math.floor(rnd() * 60);
+    const r = independentTTest(tCase(n1, 50 + rnd() * 30, 0.5 + rnd() * 20, n2, 50 + rnd() * 30, 0.5 + rnd() * 20));
+    assert.ok(r.df >= Math.min(n1 - 1, n2 - 1) - 1e-9 && r.df <= n1 + n2 - 2 + 1e-9, `${n1},${n2},${r.df}`);
+    if (Math.abs(r.p - 0.05) > 1e-6) assert.equal(r.ciLower > 0 || r.ciUpper < 0, r.p < 0.05);
+  }
+  const same = independentTTest(tCase(30, 70, 8, 32, 70, 9));
+  assert.equal(same.t, 0); close(same.p, 1, 1e-12); assert.equal(formatApaP(same.p), 'p > .999');
+  assert.equal(formatApaP(0.0004), 'p < .001'); assert.equal(formatApaP(0.0216), 'p = .022'); assert.equal(formatApaP(0.05), 'p = .050'); assert.equal(formatApaP(Number.NaN), '');
+  for (const bad of [tCase(1, 70, 8, 32, 70, 9), tCase(30, 70, 0, 32, 70, 9), tCase(30, 70, -1, 32, 70, 9), tCase(30.5, 70, 8, 32, 70, 9), tCase(30, Number.NaN, 8, 32, 70, 9)]) assert.equal(independentTTest(bad), null);
+  assert.ok(Number.isNaN(tTwoTailedP(1, 0)));
+});
+
+test('independent t test page: defaults, method menu, byline, schema, sources and links are rendered', () => {
+  const page = html('/tools/independent-samples-t-test-calculator/');
+  const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
+  assert.match(flat, /<h1[^>]*>獨立樣本 t 檢定計算器<\/h1>/);
+  for (const [key, value] of [['n1', '30'], ['mean1', '78.4'], ['sd1', '8.2'], ['n2', '32'], ['mean2', '73.1'], ['sd2', '9.5']]) assert.match(flat, new RegExp(`data-field="${key}"[^>]*value="${value.replace('.', '\\.')}"`), key);
+  assert.match(flat, /<select data-field="method">\s*<option value="welch" selected>[^<]*Welch[^<]*<\/option>\s*<option value="student">/);
+  assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-17">2026-10-17<\/time>/);
+  assert.match(page, /"dateModified":"2026-10-17"/);
+  assert.match(page, /"@type":"WebApplication"/); assert.match(page, /"@type":"BreadcrumbList"/);
+  assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/); assert.doesNotMatch(page, /noindex/);
+  assert.match(flat, /=T\.TEST\(A2:A9,B2:B10,2,3\)/); assert.match(flat, /=T\.TEST\(A2:A9,B2:B10,2,2\)/);
+  for (const href of ['/tools/standard-deviation/', '/tools/apa-7-report-generator/', '/tools/spss-result-interpreter/']) assert.ok(page.includes(`href="${href}"`), href);
+  for (const host of ['itl.nist.gov/div898/handbook/eda/section3/eda353.htm', 'rips-irsp.com', 'apastyle.apa.org', 'support.microsoft.com', 'stat.ethz.ch', 'bioconductor.org']) assert.ok(page.includes(host), host);
+  for (const h2 of ['獨立樣本 t 檢定是什麼', '怎麼算', 'Student 與 Welch 差在哪', '自由度與 p 值', 'APA 寫法', 'T.TEST', '用公開資料核對', '常見錯誤']) assert.ok(flat.includes(h2), h2);
+  assert.ok(flat.includes('查核日期 2026-10-17'));
+  const widgetSource = readFileSync(new URL('../src/components/tools/EducationStatisticsCalculator.astro', import.meta.url), 'utf8');
+  assert.ok(widgetSource.includes("import { formatApaP, independentTTest,"), 'widget must use the shared independentTTest()');
+  assert.doesNotMatch(widgetSource, /function logGamma|function regularizedBeta/);
+  const en = html('/en/tools/independent-samples-t-test-calculator/');
+  assert.match(en, /"dateModified":"2026-10-17"/);
+});

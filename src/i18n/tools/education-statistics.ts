@@ -70,22 +70,3 @@ export const cronbachAlphaContent = content(
     labels: { data: 'Responses (one person per row, one item per column)', calculate: 'Calculate Cronbach’s α', result: 'Cronbach’s α', respondents: 'Valid respondents (N)', items: 'Items (k)', sample: 'Example data', invalid: 'Enter complete numeric data with at least 2 rows and 2 columns, consistent column counts, and nonzero total-score variance.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
   },
 );
-
-export const independentTTestContent = content(
-  {
-    name: '獨立樣本 t 檢定簡易計算器', short: '用兩組樣本數、平均數與標準差執行 Welch t 檢定。', long: '輸入兩組獨立樣本的 N、平均數與樣本標準差，計算平均差、Welch t 值、近似自由度與雙尾 p 值。Welch 方法不假設兩組變異數相等。',
-    seoTitle: '獨立樣本 t 檢定計算器｜Welch t test', seoDescription: '輸入兩組 N、平均數與標準差，計算 Welch 獨立樣本 t 檢定、自由度與雙尾 p 值。', keywords: ['獨立樣本t檢定', 'Welch t test', 't檢定計算器'],
-    instructions: ['輸入第一組與第二組的樣本數、平均數、樣本標準差。', '確認兩組為彼此獨立的觀察值。', '計算並同時解讀平均差、t、df 與雙尾 p。'], examples: ['比較兩種教學法的平均成績。', '比較實驗組與對照組的量表平均數。', '用摘要統計量核對正式軟體輸出。'],
-    formula: { expression: 't = (M₁ − M₂) / √(s₁²/n₁ + s₂²/n₂)', explanation: '自由度使用 Welch–Satterthwaite 近似；p 值由 t 分配計算。輸入的 s₁、s₂ 應為樣本標準差。' }, educationApplication: '適合兩個互相獨立群體的平均數比較。應檢查觀察值獨立性、離群值與分配情況；小樣本或嚴重偏態時尤其需謹慎。統計顯著不等於教育上的實質重要。', reportTip: 'APA 範例：「A 組（M = 78.4, SD = 8.2）高於 B 組（M = 73.1, SD = 9.5），Welch’s t(59.6) = 2.36, p = .022。」正式報告宜另附信賴區間與效果量。',
-    faq: [{ q: '為什麼使用 Welch t 檢定？', a: 'Welch 方法不要求兩組變異數相等，通常比傳統等變異數版本更穩健。' }, { q: '可以輸入母體標準差嗎？', a: '此工具預期輸入各組的樣本標準差。' }, { q: 'p < .05 就代表效果很大嗎？', a: '不代表。p 值與樣本數有關，還需查看平均差、信賴區間與效果量。' }],
-    labels: { group1: '第一組', group2: '第二組', n: '樣本數（N）', mean: '平均數（M）', sd: '樣本標準差（SD）', calculate: '執行 Welch t 檢定', difference: '平均差（M₁ − M₂）', result: 't 值', df: '自由度（df）', p: '雙尾 p 值', standardError: '標準誤（SE）', confidenceInterval: '95% 信賴區間', hedgesG: 'Hedges’ g（效果量）', invalid: '兩組樣本數須為大於 1 的整數，標準差須大於 0，其他欄位須為有效數字。' }, disclaimer: disclaimer.zh, privacyNote: privacy.zh,
-  },
-  {
-    name: 'Independent Samples t-test Calculator', short: 'Run a Welch independent-samples t test from summary statistics.', long: 'Enter N, mean, and sample SD for two independent groups to calculate the mean difference, Welch t, approximate degrees of freedom, and two-tailed p value.',
-    seoTitle: 'Independent Samples t-test Calculator | Welch t Test', seoDescription: 'Calculate a Welch independent-samples t test from two groups’ sample sizes, means, and standard deviations.', keywords: ['independent samples t test calculator', 'Welch t test', 'two sample t test'],
-    instructions: ['Enter sample size, mean, and sample SD for both groups.', 'Confirm observations are independent between groups.', 'Interpret the difference, t, df, and two-tailed p together.'], examples: ['Compare mean scores under two teaching methods.', 'Compare treatment and control group means.', 'Check formal software output from summary statistics.'],
-    formula: { expression: 't = (M₁ − M₂) / √(s₁²/n₁ + s₂²/n₂)', explanation: 'Degrees of freedom use the Welch–Satterthwaite approximation; p is calculated from the t distribution. s₁ and s₂ are sample SDs.' }, educationApplication: 'Use for means from two independent groups. Check independence, outliers, and distribution shape, especially with small or heavily skewed samples. Statistical significance is not the same as educational importance.', reportTip: 'APA example: “Group A (M = 78.4, SD = 8.2) scored higher than Group B (M = 73.1, SD = 9.5), Welch’s t(59.6) = 2.36, p = .022.” Formal reports should add a confidence interval and effect size.',
-    faq: [{ q: 'Why use Welch’s t test?', a: 'It does not require equal group variances and is generally more robust than the pooled-variance version.' }, { q: 'Can I enter population SDs?', a: 'This calculator expects sample standard deviations.' }, { q: 'Does p < .05 mean a large effect?', a: 'No. p also depends on sample size; inspect the difference, confidence interval, and effect size.' }],
-    labels: { group1: 'Group 1', group2: 'Group 2', n: 'Sample size (N)', mean: 'Mean (M)', sd: 'Sample SD', calculate: 'Run Welch t test', difference: 'Mean difference (M₁ − M₂)', result: 't statistic', df: 'Degrees of freedom', p: 'Two-tailed p value', standardError: 'Standard error (SE)', confidenceInterval: '95% confidence interval', hedgesG: 'Hedges’ g (effect size)', invalid: 'Both sample sizes must be whole numbers above 1, SDs must be positive, and all fields must be valid numbers.' }, disclaimer: disclaimer.en, privacyNote: privacy.en,
-  },
-);
