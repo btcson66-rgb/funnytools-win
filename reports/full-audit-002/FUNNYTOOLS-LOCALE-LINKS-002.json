@@ -1,15 +1,39 @@
 {
   "checkedPages": 514,
-  "checkedLinks": 6405,
-  "crossLocaleLinks": 96,
+  "checkedLinks": 6411,
+  "crossLocaleLinks": 99,
   "violations": [],
   "review": [
+    {
+      "source_url": "https://funnytools.win/en/tools/class-rank-percentile-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/percentile-rank-calculator/",
+      "target_locale": "zh",
+      "link_text": "percentile rank calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
     {
       "source_url": "https://funnytools.win/en/tools/grade-average/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/tools/weighted-average-calculator/",
       "target_locale": "zh",
       "link_text": "weighted average calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/independent-samples-t-test-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/standard-deviation/",
+      "target_locale": "zh",
+      "link_text": "standard deviation calculator",
       "context": "content",
       "indexable": false,
       "allowed": false,
@@ -94,6 +118,18 @@
       "target_url": "https://funnytools.win/tools/standard-deviation/",
       "target_locale": "zh",
       "link_text": "standard deviation calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/teacher-exam-score-converter/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/t-score-calculator/",
+      "target_locale": "zh",
+      "link_text": "T score calculator",
       "context": "content",
       "indexable": false,
       "allowed": false,
@@ -305,6 +341,18 @@
       "allowed": true,
       "enforced": false,
       "reason": "intent:disclosure-only-zh"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/class-rank-percentile-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/percentile-rank-calculator/",
+      "target_locale": "zh",
+      "link_text": "percentile rank calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
     },
     {
       "source_url": "https://funnytools.win/en/tools/color-generator/",
@@ -569,6 +617,18 @@
       "allowed": true,
       "enforced": false,
       "reason": "intent:disclosure-only-zh"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/independent-samples-t-test-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/standard-deviation/",
+      "target_locale": "zh",
+      "link_text": "standard deviation calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
     },
     {
       "source_url": "https://funnytools.win/en/tools/inflation/",
@@ -1145,6 +1205,18 @@
       "allowed": true,
       "enforced": false,
       "reason": "intent:disclosure-only-zh"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/teacher-exam-score-converter/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/tools/t-score-calculator/",
+      "target_locale": "zh",
+      "link_text": "T score calculator",
+      "context": "content",
+      "indexable": false,
+      "allowed": false,
+      "enforced": false,
+      "reason": "noindex-content-review"
     },
     {
       "source_url": "https://funnytools.win/en/tools/this-or-that/",
