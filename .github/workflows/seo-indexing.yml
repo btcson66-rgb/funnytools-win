@@ -1,29 +1,30 @@
+# Push-triggered deploy + indexing submission now live in deploy.yml (deploy -> submit-indexing),
+# so one push produces one workflow run. This workflow is only for:
+#   - workflow_dispatch: manually re-send indexing signals for the checked-out main (build only,
+#     NO Pages deploy) and run the weekly URL inspection;
+#   - schedule: weekly GSC URL inspection (unchanged).
+# It deliberately does not use the `pages` concurrency group: it never deploys, and sharing the
+# group would let a manual/scheduled run occupy the pending slot and cancel a real deploy.
 name: SEO indexing automation
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
   schedule:
     - cron: '24 18 * * 0'
 
+# No Pages deploy happens here, so no pages/id-token scopes are needed.
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: seo-indexing
   cancel-in-progress: false
 
 jobs:
-  build_deploy:
-    if: github.event_name != 'schedule'
+  build-manifest:
+    name: Build validated indexing submission manifest (no deploy)
+    if: github.event_name != 'schedule' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -57,22 +58,10 @@ jobs:
           name: indexing-submission-manifest
           path: reports/indexing-submission-manifest.json
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
-
   submit-indexing:
     name: Submit indexing signals
-    if: github.event_name != 'schedule' && needs.build_deploy.result == 'success'
-    needs: build_deploy
+    if: github.event_name != 'schedule' && needs.build-manifest.result == 'success'
+    needs: build-manifest
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -127,7 +116,7 @@ jobs:
           {
             echo '## SEO indexing automation';
             echo;
-            echo '- Deployment job: PASS (this submit job only runs after build/deploy succeeds).';
+            echo '- Manual resubmission: no Pages deploy was performed by this run; manifest built from the checked-out main.';
             if [ -f reports/gsc-sitemap-submit-report.json ]; then
               node -e "const r=require('./reports/gsc-sitemap-submit-report.json'); console.log('- Indexing signal: '+(r.status||'UNKNOWN')+' — '+(r.message||''));";
             else

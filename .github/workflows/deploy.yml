@@ -67,6 +67,20 @@ jobs:
       - name: Validate sitemap URLs
         run: node scripts/validate-indexable-urls.mjs
 
+      # The manifest is created from the same build that is uploaded to Pages below, so the
+      # URLs submitted after deploy are exactly the ones that were validated and deployed.
+      # Scheduled (6-hourly) redeploys do not submit indexing signals, so skip it there.
+      - name: Create validated indexing submission manifest
+        if: github.event_name != 'schedule'
+        run: node scripts/create-indexing-submission-manifest.mjs
+
+      - name: Upload indexing submission manifest
+        if: github.event_name != 'schedule'
+        uses: actions/upload-artifact@v4
+        with:
+          name: indexing-submission-manifest
+          path: reports/indexing-submission-manifest.json
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
@@ -85,6 +99,75 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # Runs in this workflow (not a separate push-triggered one) so a single push produces a single
+  # run and indexing signals can never be cancelled by the shared `pages` concurrency group.
+  # Depends on `deploy` only: a flaky backend smoke must not suppress indexing submissions.
+  submit-indexing:
+    name: Submit indexing signals
+    needs: deploy
+    if: github.event_name != 'schedule' && needs.deploy.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download validated indexing submission manifest
+        uses: actions/download-artifact@v4
+        with:
+          name: indexing-submission-manifest
+          path: reports
+
+      - name: Submit IndexNow URLs
+        run: node scripts/submit-indexnow.mjs
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+
+      - name: Submit Bing URLs
+        if: always()
+        run: node scripts/submit-bing-urls.mjs
+        env:
+          BING_API_KEY: ${{ secrets.BING_API_KEY }}
+
+      - name: Submit sitemap to Google Search Console
+        if: always()
+        run: node scripts/gsc-submit-sitemaps.mjs
+        env:
+          FABLE_OPS_OAUTH_CLIENT_JSON: ${{ secrets.FABLE_OPS_OAUTH_CLIENT_JSON }}
+          FABLE_OPS_REFRESH_TOKEN: ${{ secrets.FABLE_OPS_REFRESH_TOKEN }}
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          GSC_CLIENT_EMAIL: ${{ secrets.GSC_CLIENT_EMAIL }}
+          GSC_PRIVATE_KEY: ${{ secrets.GSC_PRIVATE_KEY }}
+
+      - name: Upload SEO reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-indexing-reports
+          path: reports/
+
+      - name: Summarize deployment and indexing signal state
+        if: always()
+        run: |
+          {
+            echo '## SEO indexing automation';
+            echo;
+            echo '- Deployment job: PASS (this submit job only runs after build/deploy succeeds).';
+            if [ -f reports/gsc-sitemap-submit-report.json ]; then
+              node -e "const r=require('./reports/gsc-sitemap-submit-report.json'); console.log('- Indexing signal: '+(r.status||'UNKNOWN')+' — '+(r.message||''));";
+            else
+              echo '- Indexing signal: NOT_AVAILABLE';
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
 
   production-smoke:
     name: Post-deploy production API smoke
