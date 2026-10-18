@@ -113,11 +113,11 @@
         },
         "graceMinutes": 45
       },
-      "primaryPath": "/en/",
+      "primaryPath": "/",
       "sitemapPath": "/sitemap-index.xml",
       "samplePageCount": 6,
       "sampleUrls": [
-        "/en/"
+        "/"
       ],
       "expectations": {
         "expectAdsense": false,
