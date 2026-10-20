@@ -30,8 +30,9 @@
 //   - 訊號沒有消失：alert 照樣印在 stderr，status 仍是 registered_never_fetched，
 //     `stuck: true` 保留在回傳值裡讓呼叫端可以判斷。
 //   - 告警沒有消失：由每 6 小時跑一次的 Fable Four-Site Health Monitor 負責。
-//   - 修復路徑是新增的：gsc-submit-sitemaps.mjs 現在會每 7 天重送一次從未被擷取
-//     的項目，而不是只要 GSC 回報已註冊就永遠跳過 PUT。
+//   - 不自動重送 PUT：對已註冊但尚無 lastDownloaded 的 sitemap 重複送 PUT 只會洗掉
+//     lastSubmitted 並讓狀態永遠停在剛提交的 isPending: true；除非人工明確帶 --force，
+//     已註冊項目一律只讀回狀態（already_registered）。
 //
 // ## 措辭：是「Search Console 沒有回報下載」
 //
@@ -42,6 +43,7 @@ export function resolveSitemapOutcome({
   failureCount = 0,
   submittedCount = 0,
   registeredCount = 0,
+  deletedCount = 0,
   alertCount = 0,
 } = {}) {
   // 提交本身失敗 = 管線真的壞了。這一條是紅線，永遠 exit 1。
@@ -54,17 +56,21 @@ export function resolveSitemapOutcome({
     };
   }
 
+  const deletedNote = deletedCount > 0
+    ? ` Removed ${deletedCount} retired sitemap path(s).`
+    : '';
+
   const neverFetchedNote = alertCount > 0
     ? ` Search Console has never reported a download for ${alertCount} path(s)`
-      + " (its web UI shows them as 無法擷取 / Couldn't fetch); those are re-submitted on a"
-      + ' 7-day cadence and the standing alert belongs to the daily four-site health monitor,'
+      + " (its web UI shows them as 無法擷取 / Couldn't fetch); no automatic repeat PUT was sent"
+      + ' and the standing alert belongs to the daily four-site health monitor,'
       + ' not to this step.'
     : '';
 
   if (submittedCount > 0) {
     return {
       status: 'submitted',
-      message: `Submitted ${submittedCount} sitemap path(s); read back ${registeredCount} existing path(s).${neverFetchedNote}`,
+      message: `Submitted ${submittedCount} sitemap path(s); read back ${registeredCount} existing path(s).${deletedNote}${neverFetchedNote}`,
       stuck: alertCount > 0,
       exitCode: 0,
     };
@@ -73,7 +79,7 @@ export function resolveSitemapOutcome({
   if (alertCount > 0) {
     return {
       status: 'registered_never_fetched',
-      message: `Read back ${registeredCount} registered sitemap path(s).${neverFetchedNote}`,
+      message: `Read back ${registeredCount} registered sitemap path(s).${deletedNote}${neverFetchedNote}`,
       stuck: true,
       exitCode: 0,
     };
@@ -81,7 +87,7 @@ export function resolveSitemapOutcome({
 
   return {
     status: 'already_registered',
-    message: `Read back ${registeredCount} registered sitemap path(s); no repeat PUT was needed.`,
+    message: `Read back ${registeredCount} registered sitemap path(s); no repeat PUT was needed.${deletedNote}`,
     stuck: false,
     exitCode: 0,
   };

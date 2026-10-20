@@ -4,11 +4,12 @@ import { spawnSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, relative, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { MAX_REMOVED_REDIRECTS, removedRedirects } from '../src/data/removedRedirects.ts';
 
 // P2 batch 5 (2026-10-17): the stub budget is 60, and no redirect stub may chain into another stub
 // or point at a page that was not built.
-const root = new URL('../', import.meta.url).pathname;
+const root = fileURLToPath(new URL('../', import.meta.url));
 const dist = join(root, 'dist');
 
 function htmlFiles(dir, out = []) {

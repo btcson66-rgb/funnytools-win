@@ -18,9 +18,9 @@ export default {
     name: 'T 分數計算器',
     short: '輸入原始分數、平均數與標準差，算出 Z 分數、T 分數（T＝50＋10z）與常態假設下的近似 PR。',
     long: '預設值就是下方第一個算例：段考 82 分、全班平均 70、標準差 10，按下計算會得到 z＝1.2、T＝62。已經有 Z 分數的話，直接填在最後一格即可。',
-    seoTitle: 'T分數怎麼算？T=50+10z 計算機與 T分數換PR對照表',
+    seoTitle: 'T分數計算機｜T分數怎麼算？T=50+10z 公式與換PR對照表',
     seoDescription: 'T分數計算機：輸入原始分數、平均與標準差，用 T=50+10z 算出 T分數，附怎麼看、T分數換PR對照表與 Excel 公式。',
-    keywords: ['T分數', 'T分數怎麼算', 'T分數計算', 'T分數 PR 換算', 'T分數 excel', '原始分數換算 T分數'],
+    keywords: ['T分數計算機', 'T分數', 'T分數怎麼算', 'T分數計算', 'T分數 PR 換算', 'T分數 excel', '原始分數換算 T分數'],
     contentSections: [
       {
         heading: 'T 分數是什麼',

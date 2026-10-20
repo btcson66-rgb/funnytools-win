@@ -6,6 +6,7 @@ import {
   missingGscCredentialVars,
   reportsDir,
   resolveGscSiteUrl,
+  retiredSitemapFiles,
   sitemapIndexUrl,
   siteUrl,
   writeJson,
@@ -20,16 +21,6 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 // 所以 `lastDownloaded == null` 同時涵蓋「還沒輪到」與「Google 抓了但失敗」，
 // 只能靠距離上次提交多久來區分。兩天寬限是為了不誤報剛送出去的那一筆。
 const NEVER_FETCHED_AFTER_DAYS = 2;
-// 一筆已註冊但從未被成功下載的 sitemap，每隔這麼多天重送一次 PUT。
-//
-// 在此之前這支腳本只要 GSC 回報已註冊就直接跳過 PUT，於是 funnytools 的 7 筆
-// sitemap 自 2026-09-03（sitemap.xml 為 09-17）之後再也沒有送出過任何一次提交，
-// 狀態就這樣凍在無法擷取。重新提交是 Google 對 Couldn't fetch 的官方處理方式，
-// 而這支腳本把它變成只有人工 --force 才做得到。
-//
-// 為什麼要有間隔：每次 push 都 PUT 一樣是錯的，那會讓 lastSubmitted 永遠是
-// 「剛剛」，抹掉「已註冊」與「剛提交」的區別，也讓 never-fetched 判定永遠不成立。
-const RESUBMIT_AFTER_DAYS = 7;
 const forceSubmit = process.argv.includes('--force');
 const sitemapArgIndex = process.argv.findIndex((arg) => arg === '--sitemap-url');
 const requestedSitemap = process.argv.find((arg) => arg.startsWith('--sitemap-url='))?.slice('--sitemap-url='.length)
@@ -41,6 +32,7 @@ const sitemapUrls = requestedSitemap ? [sitemapIndexUrl] : [
   sitemapIndexUrl,
   ...expectedSitemapFiles.map((file) => new URL(file, siteUrl).href),
 ];
+const retiredSitemapUrls = requestedSitemap ? [] : retiredSitemapFiles.map((file) => new URL(file, siteUrl).href);
 
 const report = {
   generatedAt: new Date().toISOString(),
@@ -82,14 +74,6 @@ function isStuck(entry, now = new Date()) {
     && submittedBefore(entry, NEVER_FETCHED_AFTER_DAYS, now);
 }
 
-/**
- * 該不該重送一次 PUT，讓 Google 重試。
- * 已經成功下載過的項目永遠不重送；沒有可解析的送出時間也不重送，避免無限 PUT。
- */
-function needsResubmission(entry, now = new Date()) {
-  return !entry.lastDownloaded && submittedBefore(entry, RESUBMIT_AFTER_DAYS, now);
-}
-
 function endpointFor(gscSiteUrl, sitemapPath) {
   return `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(gscSiteUrl)}/sitemaps/${encodeURIComponent(sitemapPath)}`;
 }
@@ -107,6 +91,7 @@ try {
   const now = new Date();
   let submittedCount = 0;
   let registeredCount = 0;
+  let deletedCount = 0;
   let failureCount = 0;
 
   for (const sitemapPath of sitemapUrls) {
@@ -129,11 +114,10 @@ try {
       report.alerts.push(`NEVER FETCHED: Search Console has never reported a download for ${before.path} (submitted ${before.lastSubmitted}); its web UI shows this as 無法擷取 / Couldn't fetch.`);
     }
 
-    // A registered sitemap does not need another PUT on every deployment. Repeated PUTs
-    // do not make Google download a pending sitemap and they erase the useful distinction
-    // between "registered" and "newly submitted". --force remains an explicit operator action.
-    const resubmitting = getResponse.ok && needsResubmission(before, now);
-    if (getResponse.ok && !forceSubmit && !resubmitting) {
+    // A registered sitemap does not need another PUT on deployment. Repeated PUTs do not make
+    // Google download a pending sitemap; they reset lastSubmitted and keep the sitemap in a
+    // newly-submitted pending state. --force remains an explicit operator action.
+    if (getResponse.ok && !forceSubmit) {
       registeredCount += 1;
       report.entries.push({
         ...before,
@@ -180,9 +164,44 @@ try {
       action: 'submitted',
       message: forceSubmit
         ? 'Submitted because --force was explicitly requested.'
-        : resubmitting
-          ? `Re-submitted because Search Console has never reported a download (previous submission ${before.lastSubmitted}).`
-          : 'Submitted because the sitemap was not registered.',
+        : 'Submitted because the sitemap was not registered.',
+    });
+  }
+
+  for (const retiredPath of retiredSitemapUrls) {
+    const endpoint = endpointFor(gscSiteUrl, retiredPath);
+    const { response: getResponse, json: current } = await fetchJson(endpoint, { headers: authHeaders });
+    if (getResponse.status === 404) {
+      continue;
+    }
+    if (!getResponse.ok) {
+      failureCount += 1;
+      report.entries.push({
+        ...apiSnapshot(retiredPath),
+        action: 'get_failed',
+        message: `GET failed for retired sitemap: ${getResponse.status}`,
+      });
+      process.exitCode = 1;
+      continue;
+    }
+    const before = apiSnapshot(retiredPath, current);
+    const deleteResponse = await fetch(endpoint, { method: 'DELETE', headers: authHeaders });
+    const deleteBody = await deleteResponse.text();
+    if (!deleteResponse.ok && deleteResponse.status !== 404) {
+      failureCount += 1;
+      report.entries.push({
+        ...before,
+        action: 'delete_failed',
+        message: `DELETE failed for retired sitemap: ${deleteResponse.status} ${deleteBody.slice(0, 500)}`.trim(),
+      });
+      process.exitCode = 1;
+      continue;
+    }
+    deletedCount += 1;
+    report.entries.push({
+      ...before,
+      action: 'deleted_retired',
+      message: 'Removed retired child sitemap from Search Console.',
     });
   }
 
@@ -191,6 +210,7 @@ try {
     failureCount,
     submittedCount,
     registeredCount,
+    deletedCount,
     alertCount: report.alerts.length,
   });
   report.status = outcome.status;
@@ -200,8 +220,8 @@ try {
   for (const alert of report.alerts) console.error(alert);
   if (outcome.stuck) {
     console.error(
-      'NOTE: never-fetched sitemaps do not fail this step. They are re-submitted on a '
-      + `${RESUBMIT_AFTER_DAYS}-day cadence, and the standing alert belongs to the daily four-site health monitor.`,
+      'NOTE: never-fetched sitemaps do not fail this step. No automatic repeat PUT is sent; '
+      + 'the standing alert belongs to the daily four-site health monitor.',
     );
   }
   if (outcome.exitCode !== 0) process.exitCode = outcome.exitCode;

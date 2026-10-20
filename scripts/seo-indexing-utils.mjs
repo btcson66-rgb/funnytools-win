@@ -58,6 +58,10 @@ export const expectedSitemapFiles = [
   'sitemap-tools.xml',
   'sitemap-pages.xml',
 ];
+export const retiredSitemapFiles = [
+  'sitemap-guides.xml',
+  'sitemap-en.xml',
+].filter((file) => !expectedSitemapFiles.includes(file));
 
 export function ensureDir(dir) {
   mkdirSync(dir, { recursive: true });

@@ -68,15 +68,18 @@ test('提交腳本確實使用這個純函式，而不是自己再寫一組分�
   assert.doesNotMatch(script, /report\.status = 'registered_pending';/);
 });
 
-// 這一條守的是 2026-09-21 修掉的凍結狀態：只要 GSC 回報「已註冊」就永遠不再 PUT，
-// funnytools 自 2026-09-03 之後就再也沒有送出過任何一次提交，狀態永遠停在無法擷取。
-test('從未被擷取的項目會改走 PUT，而不是直接 continue', async () => {
+// 已註冊的項目預設不再自動重送 PUT（避免洗掉 lastSubmitted、讓狀態永遠停在剛送出的 isPending: true）；
+// 同時會清理已退役但仍殘留在 Search Console 的子 sitemap（例如 sitemap-guides.xml）。
+test('已註冊項目預設只讀回狀態不自動重送 PUT，並清理已退役的子 sitemap', async () => {
   const script = await readFile(new URL('scripts/gsc-submit-sitemaps.mjs', root), 'utf8');
-  assert.match(script, /const RESUBMIT_AFTER_DAYS = \d+;/);
-  assert.match(script, /function needsResubmission\(/);
-  assert.match(script, /!forceSubmit && !resubmitting/);
-  // 已經下載過的項目永遠不重送，否則每次部署都會 PUT。
-  assert.match(script, /return !entry\.lastDownloaded && submittedBefore\(/);
+  const utils = await readFile(new URL('scripts/seo-indexing-utils.mjs', root), 'utf8');
+  assert.doesNotMatch(script, /RESUBMIT_AFTER_DAYS/);
+  assert.doesNotMatch(script, /function needsResubmission\(/);
+  assert.match(script, /if \(getResponse\.ok && !forceSubmit\)/);
+  assert.match(script, /action: 'already_registered'/);
+  assert.match(utils, /export const retiredSitemapFiles = \[\s*'sitemap-guides\.xml',\s*'sitemap-en\.xml'/);
+  assert.match(script, /method: 'DELETE'/);
+  assert.match(script, /action: 'deleted_retired'/);
 });
 
 test('告警仍然有出口：印到 stderr，不是只留在 JSON 裡', async () => {

@@ -2,9 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { INDEXABLE_PATHS } from '../src/lib/indexPolicy.ts';
 
-const dist = new URL('../dist/', import.meta.url).pathname;
+const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const origin = 'https://funnytools.win';
 const locs = (xml, tag) => [...xml.matchAll(new RegExp(`<${tag}>[\\s\\S]*?<loc>([^<]+)</loc>[\\s\\S]*?</${tag}>`, 'g'))].map((m) => m[1]);
 const stubSource = readFileSync(new URL('../src/data/removedRedirects.ts', import.meta.url), 'utf8');

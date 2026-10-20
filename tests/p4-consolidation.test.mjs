@@ -2,10 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { tScoreFrom } from '../src/lib/educationStats.ts';
 import { INDEXABLE_PATHS } from '../src/lib/indexPolicy.ts';
 
-const dist = new URL('../dist/', import.meta.url).pathname;
+const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const html = (route) => readFileSync(join(dist, route.replace(/^\//, ''), 'index.html'), 'utf8');
 const flatten = (page) => page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
 const close = (actual, expected, eps = 1e-9) => assert.ok(Math.abs(actual - expected) < eps, `${actual} !~ ${expected}`);
@@ -53,9 +54,10 @@ test('the former guide and statistics category are stubs, outside INDEXABLE_PATH
   // no built page except the stubs themselves may link to the merged-away URLs
   for (const file of walk(dist)) {
     const page = readFileSync(file, 'utf8');
-    if (file.endsWith('/guides/t-score-calculator-guide/index.html') || file.endsWith('/category/statistics/index.html')) continue;
+    const norm = file.replaceAll('\\', '/');
+    if (norm.endsWith('/guides/t-score-calculator-guide/index.html') || norm.endsWith('/category/statistics/index.html')) continue;
     const refs = [...page.matchAll(/href="(\/(?:guides\/t-score-calculator-guide|category\/statistics)\/)"/g)].map((m) => m[1]);
-    const stubSource = file.includes('/es/') || file.includes('/fr/');
+    const stubSource = norm.includes('/es/') || norm.includes('/fr/');
     assert.deepEqual(stubSource ? [] : refs, [], file);
   }
 });
