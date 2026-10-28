@@ -44,7 +44,7 @@ export const eduGrowthReleasePath = join(rootDir, 'src', 'config', 'edu-growth-r
 // Version 10 (2026-10-17) drops inline <style> blocks from the hash; version 11 also drops the date-derived
 // "newest tool" badge. See stableRenderedHtml. Existing dates carry forward through the migration path, so a
 // bump itself changes no lastmod.
-export const sitemapContentHashVersion = 11;
+export const sitemapContentHashVersion = 12;
 export const eduGrowthRelease = readJson(eduGrowthReleasePath, { candidates: [] }) ?? { candidates: [] };
 export const indexingConfig = readJson(indexingConfigPath, { EN_NOINDEX: false }) ?? { EN_NOINDEX: false };
 export const enNoindex = indexingConfig.EN_NOINDEX === true;
@@ -577,6 +577,13 @@ export function stableRenderedHtml(page) {
   // yet all 10 tool hashes moved, and the only difference outside the version string was this <style> block.
   // Inline CSS is presentation chrome, not content a searcher reads, so it is excluded from the hash.
   html = html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '<style data-sitemap-volatile="inline-css"></style>');
+
+  // Site chrome is restyled site-wide (2026-10 portfolio redesign): the header, the theme-color hints and the
+  // consent widget's inline markup are identical on every page, so a visual edit to them would otherwise re-date
+  // every URL at once. Navigation and consent UI are not content a searcher reads; normalize them out of the hash.
+  html = html.replace(/<header\b[^>]*\bdata-site-header\b[^>]*>[\s\S]*?<\/header>/gi, '<header data-sitemap-volatile="site-header"></header>');
+  html = html.replace(/<meta\b[^>]*\bname=["']theme-color["'][^>]*>/gi, '');
+  html = html.replace(/<script\b(?![^>]*\bsrc=)[^>]*>(?:(?!<\/script>)[\s\S])*?data-consent-widget(?:(?!<\/script>)[\s\S])*<\/script>/gi, '<script data-sitemap-volatile="consent"></script>');
 
   // The "newest tool" badge is derived from the build date (a tool is new for 30 days after addedAt). It appears or
   // disappears with the calendar, not with an edit, so it must not move a page's lastmod.
