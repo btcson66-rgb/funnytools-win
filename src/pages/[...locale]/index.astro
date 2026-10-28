@@ -66,6 +66,43 @@ const groups = [
 
 const retainedTools = groups.flatMap((group) => group.tools);
 
+// Server-rendered first frame of the hero demo; the client script in this file redraws it with the same math.
+const DEMO_W = 320;
+const DEMO_BASE = 112;
+const DEMO_H = 96;
+const demoPdf = (z: number) => Math.exp(-0.5 * z * z);
+const demoX = (z: number) => ((z + 3.5) / 7) * DEMO_W;
+const demoY = (z: number) => DEMO_BASE - demoPdf(z) * DEMO_H;
+const demoCdf = (z: number) => {
+  const t = 1 / (1 + 0.3275911 * Math.abs(z) / Math.SQRT2);
+  const erf = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-(z * z) / 2);
+  return z >= 0 ? (1 + erf) / 2 : (1 - erf) / 2;
+};
+const demoPath = (from: number, to: number) => {
+  const points: string[] = [];
+  for (let z = from; z <= to + 1e-9; z += 0.05) points.push(`${demoX(z).toFixed(1)},${demoY(z).toFixed(1)}`);
+  return points;
+};
+const demo = (() => {
+  const score = 82;
+  const mean = 70;
+  const sd = 10;
+  const z = (score - mean) / sd;
+  const zc = Math.max(-3.5, Math.min(3.5, z));
+  return {
+    score,
+    mean,
+    sd,
+    z: z.toFixed(2),
+    t: (50 + 10 * z).toFixed(1),
+    pr: Math.min(99.9, Math.max(0.1, demoCdf(z) * 100)).toFixed(1),
+    curve: `M${demoPath(-3.5, 3.5).join(' L')}`,
+    area: `M${demoX(-3.5).toFixed(1)},${DEMO_BASE} L${demoPath(-3.5, zc).join(' L')} L${demoX(zc).toFixed(1)},${DEMO_BASE} Z`,
+    marker: { x: demoX(zc).toFixed(1), y: demoY(zc).toFixed(1) },
+    ticks: [-2, -1, 0, 1, 2].map((k) => ({ x: demoX(k).toFixed(1), label: String(mean + k * sd) })),
+  };
+})();
+
 const quickReferenceRows = [
   {
     slug: 't-score-calculator',
@@ -164,40 +201,87 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang), itemListJsonLd];
 >
   <div class="wrap">
     <section class="hero home-hero">
-      <p class="eyebrow">{zh ? '給台灣學生與老師' : 'For students and teachers in Taiwan'}</p>
-      <h1>{zh ? '給台灣學生與老師的成績統計工具' : 'Grade and statistics tools for students and teachers'}</h1>
-      <p class="lead">
-        {zh
-          ? 'FunnyTools 是成績計算器：把分數換成 T 分數、PR 值或班排百分比，把平時、段考、期末合成學期成績或教甄總分，算標準差與 t 檢定；另有課堂抽籤與分組。輸入的資料只在你的瀏覽器計算，不會上傳。'
-          : 'FunnyTools is a set of grade calculators: turn a score into a T score, PR or class-rank percentage, combine coursework, midterm and final into a semester grade or teacher-exam total, compute standard deviations and t tests, or draw and group names in class. What you type is calculated in your browser and not uploaded.'}
-      </p>
-      <p class="home-start-label">{zh ? '從你手上的問題開始：' : 'Start from your question:'}</p>
-      <div class="hero-actions" role="group" aria-label={zh ? '依問題找工具' : 'Find a tool by question'}>
-        {groups.map((group, index) => (
-          index === 0
-            ? <a class="btn go" href={`#${group.id}`}>{group.start}</a>
-            : <a class="btn ghost" href={`#${group.id}`}>{group.start}</a>
-        ))}
+      <div class="lab-hero__copy">
+        <p class="eyebrow">{zh ? '給台灣學生與老師' : 'For students and teachers in Taiwan'}</p>
+        <h1>{zh ? '給台灣學生與老師的成績統計工具' : 'Grade and statistics tools for students and teachers'}</h1>
+        <p class="lead">
+          {zh
+            ? 'FunnyTools 是成績計算器：把分數換成 T 分數、PR 值或班排百分比，把平時、段考、期末合成學期成績或教甄總分，算標準差與 t 檢定；另有課堂抽籤與分組。輸入的資料只在你的瀏覽器計算，不會上傳。'
+            : 'FunnyTools is a set of grade calculators: turn a score into a T score, PR or class-rank percentage, combine coursework, midterm and final into a semester grade or teacher-exam total, compute standard deviations and t tests, or draw and group names in class. What you type is calculated in your browser and not uploaded.'}
+        </p>
+        <p class="home-start-label">{zh ? '從你手上的問題開始：' : 'Start from your question:'}</p>
+        <div class="hero-actions lab-questions" role="group" aria-label={zh ? '依問題找工具' : 'Find a tool by question'}>
+          {groups.map((group, index) => (
+            index === 0
+              ? <a class="btn go" href={`#${group.id}`}>{group.start}</a>
+              : <a class="btn ghost" href={`#${group.id}`}>{group.start}</a>
+          ))}
+        </div>
+        <p class="home-more">
+          <a class="inline-link" href={localePath(lang, 'education-statistics')}>
+            {zh ? '每個工具能回答哪些問題，見成績統計工具總覽' : 'What each tool answers: the score and statistics tools overview'}
+          </a>
+        </p>
       </div>
-      <p class="home-more">
-        <a class="inline-link" href={localePath(lang, 'education-statistics')}>
-          {zh ? '每個工具能回答哪些問題，見成績統計工具總覽' : 'What each tool answers: the score and statistics tools overview'}
-        </a>
-      </p>
+
+      <figure class="lab-demo" data-lab-demo aria-labelledby="lab-demo-title">
+        <div class="lab-demo__bar" aria-hidden="true">
+          <span class="lab-demo__dots"><i></i><i></i><i></i></span>
+          <span>{zh ? 'T-SCORE · 即時試算' : 'T-SCORE · LIVE'}</span>
+        </div>
+        <div class="lab-demo__body">
+          <p class="lab-demo__title" id="lab-demo-title">{zh ? '拖曳看看：你的分數落在哪裡' : 'Drag to see where a score lands'}</p>
+          <p class="lab-demo__hint">{zh ? '以全班平均與標準差，換算 Z、T 與常態假設下的近似 PR。' : 'From the class mean and SD to Z, T and an approximate PR under a normal curve.'}</p>
+          <svg class="lab-curve" viewBox="0 0 320 132" role="img" aria-label={zh ? '常態分布曲線，標出目前分數的位置' : 'Normal curve marking the current score'} data-lab-curve>
+            <path class="area" d={demo.area} data-lab-area />
+            {demo.ticks.map((tick) => <line class="sd-line" x1={tick.x} x2={tick.x} y1="12" y2="112" />)}
+            <path class="curve" d={demo.curve} />
+            <line class="axis" x1="0" x2="320" y1="112" y2="112" />
+            {demo.ticks.map((tick) => <text class="tick" x={tick.x} y="127" text-anchor="middle" data-lab-tick>{tick.label}</text>)}
+            <line class="marker" x1={demo.marker.x} x2={demo.marker.x} y1={demo.marker.y} y2="112" data-lab-marker />
+            <circle class="marker-dot" cx={demo.marker.x} cy={demo.marker.y} r="5" data-lab-dot />
+          </svg>
+          <input class="lab-slider" type="range" min="0" max="100" step="1" value={demo.score} aria-label={zh ? '原始分數' : 'Raw score'} data-lab-slider />
+          <div class="lab-demo__inputs">
+            <label>{zh ? '分數 X' : 'Score X'}<input type="number" inputmode="decimal" step="any" value={demo.score} data-lab-field="score" /></label>
+            <label>{zh ? '平均 M' : 'Mean M'}<input type="number" inputmode="decimal" step="any" value={demo.mean} data-lab-field="mean" /></label>
+            <label>{zh ? '標準差 SD' : 'SD'}<input type="number" inputmode="decimal" step="any" min="0" value={demo.sd} data-lab-field="sd" /></label>
+          </div>
+          <dl class="lab-readout" aria-live="polite">
+            <div><dt>Z</dt><dd data-lab-out="z">{demo.z}</dd></div>
+            <div><dt>T</dt><dd data-lab-out="t">{demo.t}</dd></div>
+            <div><dt>≈ PR</dt><dd data-lab-out="pr">{demo.pr}</dd></div>
+          </dl>
+        </div>
+        <figcaption class="lab-demo__foot">
+          <small>{zh ? '示意用，常態假設；資料不離開瀏覽器' : 'Illustrative, normal assumption; nothing leaves your browser'}</small>
+          <a href={toolUrl(lang, 't-score-calculator')}>{zh ? '完整 T 分數計算器' : 'Full T-score calculator'}</a>
+        </figcaption>
+      </figure>
     </section>
 
-    {groups.map((group) => (
-      <section class="content-section" id={group.id} aria-labelledby={`group-${group.id}`}>
-        <h2 id={`group-${group.id}`}>{group.title}</h2>
-        <p>{group.body}</p>
+    <dl class="lab-specs">
+      <div><dt>{zh ? '工具' : 'Tools'}</dt><dd>{zh ? `${retainedTools.length} 個成績與課堂工具` : `${retainedTools.length} grade & class tools`}</dd></div>
+      <div><dt>{zh ? '運算' : 'Compute'}</dt><dd>{zh ? '全部在瀏覽器本機' : 'In your browser'}</dd></div>
+      <div><dt>{zh ? '帳號' : 'Account'}</dt><dd>{zh ? '免註冊、免登入' : 'No sign-up'}</dd></div>
+      <div><dt>{zh ? '公式' : 'Formulas'}</dt><dd>{zh ? '每個結果都附公式' : 'Shown with every result'}</dd></div>
+    </dl>
+
+    {groups.map((group, index) => (
+      <section class="content-section lab-chapter" id={group.id} aria-labelledby={`group-${group.id}`}>
+        <div class="lab-chapter__head">
+          <span class="lab-chapter__no" aria-hidden="true">{String(index + 1).padStart(2, '0')} / {String(groups.length).padStart(2, '0')}</span>
+          <h2 id={`group-${group.id}`}>{group.title}</h2>
+          <p>{group.body}</p>
+          <p class="home-group-more">
+            <a class="inline-link" href={`${localePath(lang, 'education-statistics')}#${group.id}`}>
+              {zh ? '這一組的工具怎麼選' : 'How to choose within this group'}
+            </a>
+          </p>
+        </div>
         <div class="grid compact">
           {group.tools.map((tool) => <ToolCard lang={lang} tool={tool} />)}
         </div>
-        <p class="home-group-more">
-          <a class="inline-link" href={`${localePath(lang, 'education-statistics')}#${group.id}`}>
-            {zh ? '這一組的工具怎麼選' : 'How to choose within this group'}
-          </a>
-        </p>
       </section>
     ))}
 
@@ -257,9 +341,366 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang), itemListJsonLd];
   </div>
 </BaseLayout>
 
+<script>
+  // Hero demo: redraws the server-rendered curve with the same math as the frontmatter.
+  const W = 320;
+  const BASE = 112;
+  const H = 96;
+  const x = (z: number) => ((z + 3.5) / 7) * W;
+  const y = (z: number) => BASE - Math.exp(-0.5 * z * z) * H;
+  const cdf = (z: number) => {
+    const t = 1 / (1 + 0.3275911 * Math.abs(z) / Math.SQRT2);
+    const erf = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-(z * z) / 2);
+    return z >= 0 ? (1 + erf) / 2 : (1 - erf) / 2;
+  };
+  const path = (to: number) => {
+    const points: string[] = [];
+    for (let z = -3.5; z <= to + 1e-9; z += 0.05) points.push(`${x(z).toFixed(1)},${y(z).toFixed(1)}`);
+    return points.join(' L');
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-lab-demo]').forEach((root) => {
+    const field = (name: string) => root.querySelector<HTMLInputElement>(`[data-lab-field="${name}"]`);
+    const out = (name: string) => root.querySelector<HTMLElement>(`[data-lab-out="${name}"]`);
+    const slider = root.querySelector<HTMLInputElement>('[data-lab-slider]');
+    const area = root.querySelector<SVGPathElement>('[data-lab-area]');
+    const marker = root.querySelector<SVGLineElement>('[data-lab-marker]');
+    const dot = root.querySelector<SVGCircleElement>('[data-lab-dot]');
+    const ticks = [...root.querySelectorAll<SVGTextElement>('[data-lab-tick]')];
+    const score = field('score');
+    const mean = field('mean');
+    const sd = field('sd');
+    if (!score || !mean || !sd || !slider || !area || !marker || !dot) return;
+
+    const render = () => {
+      const s = Number(score.value);
+      const m = Number(mean.value);
+      const d = Number(sd.value);
+      if (![s, m, d].every(Number.isFinite) || d <= 0) {
+        ['z', 't', 'pr'].forEach((name) => { const el = out(name); if (el) el.textContent = '—'; });
+        return;
+      }
+      const z = (s - m) / d;
+      const zc = Math.max(-3.5, Math.min(3.5, z));
+      out('z')!.textContent = z.toFixed(2);
+      out('t')!.textContent = (50 + 10 * z).toFixed(1);
+      // A percentile never reaches 0 or 100; clamp so extreme z values do not read as certainty.
+      out('pr')!.textContent = Math.min(99.9, Math.max(0.1, cdf(z) * 100)).toFixed(1);
+      area.setAttribute('d', `M${x(-3.5).toFixed(1)},${BASE} L${path(zc)} L${x(zc).toFixed(1)},${BASE} Z`);
+      marker.setAttribute('x1', x(zc).toFixed(1));
+      marker.setAttribute('x2', x(zc).toFixed(1));
+      marker.setAttribute('y1', y(zc).toFixed(1));
+      dot.setAttribute('cx', x(zc).toFixed(1));
+      dot.setAttribute('cy', y(zc).toFixed(1));
+      ticks.forEach((tick, index) => { tick.textContent = String(Math.round((m + (index - 2) * d) * 10) / 10); });
+      slider.min = String(Math.floor(m - 3.5 * d));
+      slider.max = String(Math.ceil(m + 3.5 * d));
+      slider.step = d >= 5 ? '1' : 'any';
+    };
+
+    slider.addEventListener('input', () => { score.value = slider.value; render(); });
+    [score, mean, sd].forEach((input) => input.addEventListener('input', () => {
+      if (input === score) slider.value = score.value;
+      render();
+    }));
+    render();
+    slider.value = score.value;
+  });
+</script>
+
 <style>
-  .home-start-label { margin: 18px 0 8px; font-weight: 700; }
-  .home-more, .home-group-more { margin: 12px 0 0; }
+  /* Home-only Score Lab layout; shared tokens and components live in src/styles/lab.css. */
+
+.hero.home-hero {
+  position: relative;
+  isolation: isolate;
+  text-align: left;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+  padding: clamp(40px, 7vw, 88px) 0 clamp(32px, 5vw, 56px);
+}
+
+.hero.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 50%;
+  z-index: -1;
+  width: 100vw;
+  height: auto;
+  border-radius: 0;
+  background-color: transparent;
+  transform: translateX(-50%);
+  background-image:
+    linear-gradient(var(--lab-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--lab-grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: linear-gradient(180deg, black 55%, transparent);
+  mask-image: linear-gradient(180deg, black 55%, transparent);
+}
+
+.home-hero h1 {
+  margin: 14px 0 18px;
+  font-size: clamp(2.1rem, 4.6vw, 3.35rem);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.home-hero h1 mark {
+  padding: 0 0.08em;
+  background: linear-gradient(transparent 58%, var(--lab-hl) 58%, var(--lab-hl) 92%, transparent 92%);
+  color: inherit;
+}
+
+.home-hero .lead {
+  max-width: 34em;
+  margin: 0;
+  color: var(--lab-ink-2);
+  font-size: 1.02rem;
+  text-align: left;
+}
+
+.hero-actions.lab-questions {
+  display: grid;
+  gap: 0;
+  justify-content: stretch;
+  margin: 0;
+  border-top: 1px solid var(--lab-ink);
+  counter-reset: lab-q;
+}
+
+.lab-questions .btn,
+.lab-questions .btn.go,
+.lab-questions .btn.ghost {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 10px 4px;
+  border: 0;
+  border-bottom: 1px solid var(--lab-rule);
+  border-radius: 0;
+  background: transparent;
+  color: var(--lab-ink);
+  font-size: 0.98rem;
+  font-weight: 700;
+  text-align: left;
+  box-shadow: none;
+  counter-increment: lab-q;
+  transition: background 0.15s ease, padding 0.15s ease;
+}
+
+.lab-questions .btn::before {
+  content: counter(lab-q, decimal-leading-zero);
+  color: var(--lab-red);
+  font-family: var(--lab-mono);
+  font-size: 12px;
+}
+
+.lab-questions .btn::after { content: "↓"; color: var(--lab-muted); font-family: var(--lab-mono); }
+
+.lab-questions .btn:hover {
+  padding-left: 10px;
+  background: var(--lab-sheet);
+  box-shadow: none;
+  transform: none;
+}
+
+.lab-questions .btn:hover::after { color: var(--lab-red); }
+.lab-questions .btn.go { background: var(--lab-sheet); }
+
+.hero.home-hero .home-start-label {
+  margin: 26px 0 0;
+  color: var(--lab-muted);
+  font-family: var(--lab-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.hero.home-hero .lab-questions { margin-top: 10px; }
+
+.home-hero .home-more { margin: 16px 0 0; font-size: 0.95rem; }
+
+/* live demo figure */
+
+.lab-demo {
+  margin: 0;
+  border: 1px solid var(--lab-ink);
+  border-radius: 8px;
+  background: var(--lab-sheet);
+  box-shadow: 8px 8px 0 var(--lab-ink);
+  overflow: hidden;
+}
+
+.lab-demo__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--lab-rule);
+  color: var(--lab-muted);
+  font-family: var(--lab-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+}
+
+.lab-demo__dots { display: inline-flex; gap: 5px; }
+.lab-demo__dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--lab-rule); }
+.lab-demo__dots i:first-child { background: var(--lab-red); }
+
+.lab-demo__body { padding: 16px 16px 14px; }
+
+.lab-demo__title { margin: 0 0 2px; color: var(--lab-ink); font-size: 0.98rem; font-weight: 800; }
+.lab-demo__hint { margin: 0; color: var(--lab-muted); font-size: 0.82rem; line-height: 1.5; }
+
+.lab-curve { display: block; width: 100%; height: auto; margin: 10px 0 4px; overflow: visible; }
+.lab-curve .axis { stroke: var(--lab-ink-2); stroke-width: 1; }
+.lab-curve .tick { fill: var(--lab-muted); font-family: var(--lab-mono); font-size: 10px; }
+.lab-curve .curve { fill: none; stroke: var(--lab-ink); stroke-width: 2; }
+.lab-curve .area { fill: var(--lab-red); opacity: 0.16; }
+.lab-curve .marker { stroke: var(--lab-red); stroke-width: 2; }
+.lab-curve .marker-dot { fill: var(--lab-red); stroke: var(--lab-sheet); stroke-width: 2; }
+.lab-curve .sd-line { stroke: var(--lab-rule); stroke-dasharray: 3 3; }
+
+.lab-slider {
+  width: 100%;
+  min-height: 0;
+  margin: 2px 0 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  accent-color: var(--lab-red);
+}
+
+.lab-demo__inputs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.lab-demo__inputs label { gap: 4px; color: var(--lab-muted); font-size: 11.5px; font-weight: 700; }
+.lab-demo__inputs input { min-height: 38px; padding: 6px 8px; font-size: 0.95rem; }
+
+.lab-readout {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 12px 0 0;
+  border-top: 1px solid var(--lab-ink);
+}
+
+.lab-readout div { padding: 10px 0 2px; }
+.lab-readout div + div { padding-left: 12px; border-left: 1px solid var(--lab-rule); }
+.lab-readout dt { color: var(--lab-muted); font-family: var(--lab-mono); font-size: 11px; letter-spacing: 0.06em; }
+.lab-readout dd {
+  margin: 2px 0 0;
+  color: var(--lab-ink);
+  font-family: var(--lab-mono);
+  font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.lab-readout div:nth-child(2) dd { color: var(--lab-red); }
+
+.lab-demo__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--lab-rule);
+  background: var(--lab-paper);
+  font-size: 0.82rem;
+}
+
+.lab-demo__foot small { color: var(--lab-muted); }
+.lab-demo__foot a { color: var(--lab-ink); font-weight: 800; }
+.lab-demo__foot a::after { content: " →"; color: var(--lab-red); }
+
+/* spec strip */
+
+.lab-specs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0 0 clamp(28px, 4vw, 44px);
+  border-top: 1px solid var(--lab-ink);
+  border-bottom: 1px solid var(--lab-ink);
+}
+
+.lab-specs div { padding: 14px 16px 14px 0; }
+.lab-specs div + div { padding-left: 16px; border-left: 1px solid var(--lab-rule); }
+.lab-specs dt { color: var(--lab-muted); font-family: var(--lab-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+.lab-specs dd { margin: 4px 0 0; color: var(--lab-ink); font-size: 1rem; font-weight: 800; }
+
+/* question chapters */
+
+.lab-chapter {
+  display: grid;
+  grid-template-columns: minmax(0, 0.38fr) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 48px);
+  margin-top: 0;
+  padding: clamp(28px, 4vw, 40px) 0;
+  border: 0;
+  border-top: 1px solid var(--lab-rule);
+  border-radius: 0;
+  background: transparent;
+  scroll-margin-top: 80px;
+}
+
+:global([data-theme="dark"]) .lab-chapter { background: transparent; }
+
+.lab-chapter__head { position: sticky; top: 84px; align-self: start; }
+.lab-chapter__no { display: block; color: var(--lab-red); font-family: var(--lab-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; }
+.lab-chapter h2 { margin: 8px 0 10px; font-size: clamp(1.25rem, 2.4vw, 1.55rem); line-height: 1.35; }
+.lab-chapter h2::before { display: none !important; }
+.lab-chapter__head p { margin: 0; color: var(--lab-ink-2); font-size: 0.93rem; }
+.lab-chapter .home-group-more { margin: 14px 0 0; font-size: 0.9rem; }
+.lab-chapter .grid.compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.lab-section-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin: clamp(32px, 5vw, 56px) 0 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--lab-ink);
+}
+
+.lab-section-title h2 { margin: 0; font-size: clamp(1.35rem, 2.6vw, 1.75rem); }
+.lab-section-title span { color: var(--lab-muted); font-family: var(--lab-mono); font-size: 12px; letter-spacing: 0.08em; }
+
+:global([data-theme="dark"]) .lab-questions .btn {
+  background: transparent !important;
+  color: var(--lab-ink) !important;
+}
+
+:global([data-theme="dark"]) .lab-questions .btn:hover { background: var(--lab-sheet) !important; }
+
+@media (max-width: 900px) {
+  .hero.home-hero { grid-template-columns: minmax(0, 1fr); }
+  .lab-demo { box-shadow: 5px 5px 0 var(--lab-ink); }
+  .lab-chapter { grid-template-columns: 1fr; }
+  .lab-chapter__head { position: static; }
+}
+
+@media (max-width: 640px) {
+  .lab-specs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lab-specs div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .lab-specs div:nth-child(n + 3) { border-top: 1px solid var(--lab-rule); }
+  .lab-chapter .grid.compact { grid-template-columns: 1fr; }
+  .lab-readout dd { font-size: 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-questions .btn { transition: none; }
+}
   .home-table-wrap { overflow-x: auto; margin-top: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
   .home-ref-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; line-height: 1.6; }
   .home-ref-table caption { padding: 10px 14px; text-align: left; font-weight: 700; color: var(--muted); border-bottom: 1px solid var(--line); }
