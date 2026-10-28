@@ -437,8 +437,8 @@ test('independent t test page: defaults, method menu, byline, schema, sources an
   for (const [key, value] of [['n1', '30'], ['mean1', '78.4'], ['sd1', '8.2'], ['n2', '32'], ['mean2', '73.1'], ['sd2', '9.5']]) assert.match(flat, new RegExp(`data-field="${key}"[^>]*value="${value.replace('.', '\\.')}"`), key);
   assert.match(flat, /<select data-field="method">\s*<option value="welch" selected>[^<]*Welch[^<]*<\/option>\s*<option value="student">/);
   assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
-  assert.match(flat, /最後審核：<time datetime="2026-10-17">2026-10-17<\/time>/);
-  assert.match(page, /"dateModified":"2026-10-17"/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-28">2026-10-28<\/time>/);
+  assert.match(page, /"dateModified":"2026-10-28"/);
   assert.match(page, /"@type":"WebApplication"/); assert.match(page, /"@type":"BreadcrumbList"/);
   assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/); assert.doesNotMatch(page, /noindex/);
   assert.match(flat, /=T\.TEST\(A2:A9,B2:B10,2,3\)/); assert.match(flat, /=T\.TEST\(A2:A9,B2:B10,2,2\)/);
@@ -450,7 +450,7 @@ test('independent t test page: defaults, method menu, byline, schema, sources an
   assert.ok(widgetSource.includes("import { formatApaP, independentTTest,"), 'widget must use the shared independentTTest()');
   assert.doesNotMatch(widgetSource, /function logGamma|function regularizedBeta/);
   const en = html('/en/tools/independent-samples-t-test-calculator/');
-  assert.match(en, /"dateModified":"2026-10-17"/);
+  assert.match(en, /"dateModified":"2026-10-28"/);
 });
 
 // ---------------------------------------------------------------- P2 batch 3: teacher exam score calculator

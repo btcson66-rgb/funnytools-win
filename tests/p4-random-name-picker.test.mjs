@@ -178,8 +178,8 @@ test('random-name-picker page: tool first, defaults reproduce the examples, sche
   assert.match(flat, /<option value="no" selected>不重複/);
   assert.match(flat, /data-group-number[^>]*value="6"/);
   assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
-  assert.match(flat, /最後審核：<time datetime="2026-10-17">2026-10-17<\/time>/);
-  assert.match(page, /"dateModified":"2026-10-17"/);
+  assert.match(flat, /最後審核：<time datetime="2026-10-28">2026-10-28<\/time>/);
+  assert.match(page, /"dateModified":"2026-10-28"/);
   assert.match(page, /"@type":"WebApplication"/); assert.match(page, /"@type":"BreadcrumbList"/);
   assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/); assert.doesNotMatch(page, /noindex/);
   assert.match(page, /<link rel="canonical" href="https:\/\/funnytools\.win\/tools\/random-name-picker\/"/);

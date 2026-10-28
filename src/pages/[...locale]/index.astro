@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { SITE, type Locale } from '../../config/site';
 import { getToolBySlug, type ToolMeta } from '../../data/tools';
-import { localePath } from '../../lib/url';
+import { absoluteUrl, localePath, toolUrl } from '../../lib/url';
 import { organizationJsonLd, websiteJsonLd } from '../../lib/seo';
 
 export function getStaticPaths() {
@@ -64,13 +64,94 @@ const groups = [
     .filter((tool): tool is ToolMeta => Boolean(tool && tool.status === 'live')),
 }));
 
+const retainedTools = groups.flatMap((group) => group.tools);
+
+const quickReferenceRows = [
+  {
+    slug: 't-score-calculator',
+    question: zh ? '不同考卷或跨科分數放在同一尺度比較' : 'Compare scores across exams on a 50/10 scale',
+    formula: zh ? 'T ＝ 50 ＋ 10 × (X − M) ÷ SD' : 'T = 50 + 10 × (X − M) / SD',
+    inputs: zh ? '原始分數 X、同群體平均 M、標準差 SD' : 'Raw score X, group mean M, SD',
+  },
+  {
+    slug: 'z-score-calculator',
+    question: zh ? '看單一分數距離全班平均幾個標準差' : 'Check how many SDs a score sits from the mean',
+    formula: zh ? 'Z ＝ (X − M) ÷ SD' : 'Z = (X − M) / SD',
+    inputs: zh ? '原始分數 X、同群體平均 M、標準差 SD' : 'Raw score X, group mean M, SD',
+  },
+  {
+    slug: 'percentile-rank-calculator',
+    question: zh ? '算自己在全體考生裡贏過多少百分比的人' : 'Find the share of test-takers scored below you',
+    formula: zh ? 'PR ＝ ⌊((B ＋ 0.5 × E) ÷ N) × 100⌋（最高 99）' : 'PR = floor(((B + 0.5 × E) / N) × 100), max 99',
+    inputs: zh ? '低於自己人數 B、同分人數 E、總人數 N' : 'Count below B, tied count E, total N',
+  },
+  {
+    slug: 'class-rank-percentile-calculator',
+    question: zh ? '只有名次與全班人數，換算前幾 % 與 PR' : 'Convert rank and headcount into top % and PR',
+    formula: zh ? '前 % ＝ (R ÷ N) × 100%；含同分則取平均名次' : 'Top % = (R / N) × 100%; average rank for ties',
+    inputs: zh ? '名次 R、總人數 N（選填同分人數）' : 'Rank R, total N (optional tied count)',
+  },
+  {
+    slug: 'grade-average',
+    question: zh ? '平時、段考、期末按占比算學期總成績或反推期末目標分' : 'Combine coursework, midterms and final or solve target final score',
+    formula: zh ? '學期成績 ＝ Σ(單項得分 × 占比) ÷ Σ占比' : 'Semester grade = Σ(score × weight) / Σweight',
+    inputs: zh ? '各次成績與占分百分比（及目標總分）' : 'Component scores, weights (and target grade)',
+  },
+  {
+    slug: 'weighted-average-calculator',
+    question: zh ? '依各科學分數或權重計算學期加權平均' : 'Calculate credit-weighted or ratio-weighted mean',
+    formula: zh ? '加權平均 ＝ Σ(xᵢ × wᵢ) ÷ Σwᵢ' : 'Weighted mean = Σ(xᵢ × wᵢ) / Σwᵢ',
+    inputs: zh ? '各科分數 xᵢ 與對應學分或權重 wᵢ' : 'Scores xᵢ and credits or weights wᵢ',
+  },
+  {
+    slug: 'teacher-exam-score-converter',
+    question: zh ? '教師甄試筆試、試教、口試依簡章配分合成總成績' : 'Combine written, demo and interview scores for teacher exams',
+    formula: zh ? '教甄總分 ＝ Σ(各科轉換後分數 × 簡章配分比例)' : 'Total = Σ(converted component score × notice weight)',
+    inputs: zh ? '筆試、試教、口試分數與當年度簡章配分' : 'Written, demo, interview scores and notice weights',
+  },
+  {
+    slug: 'standard-deviation',
+    question: zh ? '衡量一組分數的離散程度（母體 σ 或樣本 s）' : 'Measure score spread (population σ or sample s)',
+    formula: zh ? 'σ ＝ √[Σ(xᵢ−μ)²÷N]；s ＝ √[Σ(xᵢ−x̄)²÷(n−1)]' : 'σ = √[Σ(xᵢ−μ)²/N]; s = √[Σ(xᵢ−x̄)²/(n−1)]',
+    inputs: zh ? '一串原始分數（依全班母體或抽樣選 N 或 n−1）' : 'List of scores (choose N or n−1)',
+  },
+  {
+    slug: 'independent-samples-t-test-calculator',
+    question: zh ? '檢定兩個獨立班級或兩組平均數差異是否達統計顯著' : 'Test whether two independent group means differ significantly',
+    formula: zh ? 'Welch t ＝ (M₁−M₂) ÷ √(s₁²÷n₁ ＋ s₂²÷n₂)' : 'Welch t = (M₁−M₂) / √(s₁²/n₁ + s₂²/n₂)',
+    inputs: zh ? '兩組各自的人數 n、平均數 M、樣本標準差 SD' : 'Each group’s sample size n, mean M, sample SD',
+  },
+  {
+    slug: 'random-name-picker',
+    question: zh ? '課堂不重複抽人、平均分組、排報告順序與交換禮物錯排配對' : 'No-repeat class draw, balanced groups, order shuffle & derangement gift exchange',
+    formula: zh ? 'Fisher–Yates 洗牌；錯排數 D(n) ＝ (n−1)(D(n−1)＋D(n−2))' : 'Fisher–Yates shuffle; derangements D(n) = (n−1)(D(n−1)+D(n−2))',
+    inputs: zh ? '候選名單（每行一位）、抽取人數或組數設定' : 'Candidate list (one per line), count or group setting',
+  },
+].map((row) => ({
+  ...row,
+  tool: getToolBySlug(row.slug),
+}));
+
 const title = zh
   ? 'FunnyTools 成績統計工具｜T 分數、PR 值、標準差、加權平均'
   : 'FunnyTools grade and statistics calculators for students and teachers';
 const description = zh
   ? '給台灣學生與老師的成績統計工具：T 分數、Z 分數、PR 百分等級、班級排名、加權平均、標準差與獨立樣本 t 檢定。免註冊，在瀏覽器中計算。'
   : 'Grade and statistics calculators for students and teachers in Taiwan: T score, Z score, percentile rank, class rank, weighted average, standard deviation and t test. No sign-up.';
-const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang)];
+const itemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: zh ? '台灣學生與老師的成績統計工具清單' : 'Grade and statistics calculators for students and teachers',
+  numberOfItems: retainedTools.length,
+  itemListElement: retainedTools.map((tool, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: tool.name[lang],
+    url: absoluteUrl(toolUrl(lang, tool.slug)),
+    description: tool.short[lang],
+  })),
+};
+const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang), itemListJsonLd];
 ---
 
 <BaseLayout
@@ -120,6 +201,46 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang)];
       </section>
     ))}
 
+    <section class="content-section" id="formula-reference" aria-labelledby="home-formula-reference">
+      <h2 id="home-formula-reference">
+        {zh ? '台灣常見成績計算公式與工具速查表' : 'Quick Formula & Calculator Reference'}
+      </h2>
+      <p>
+        {zh
+          ? '不確定該帶入哪一條公式時，先對照手上的輸入值與計算目的：位置指標（T、Z、PR、班排）不能直接當成加權總分，比較兩組平均則需看標準差與樣本數。'
+          : 'Match your available inputs to the right formula before calculating: relative position metrics (T, Z, PR, class rank) cannot replace weighted totals, and comparing two group means requires both sample size and SD.'}
+      </p>
+      <div class="home-table-wrap">
+        <table class="home-ref-table">
+          <caption>
+            {zh ? '10 個成績統計與課堂工具的核心公式、輸入欄位與適用情境對照' : 'Core formulas, required inputs, and calculators for all 10 tools'}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{zh ? '計算問題' : 'Question'}</th>
+              <th scope="col">{zh ? '核心公式與判準' : 'Core formula & rule'}</th>
+              <th scope="col">{zh ? '需要的輸入值' : 'Required inputs'}</th>
+              <th scope="col">{zh ? '對應工具' : 'Calculator'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {quickReferenceRows.map((row) => row.tool && (
+              <tr>
+                <td>{row.question}</td>
+                <td><code>{row.formula}</code></td>
+                <td>{row.inputs}</td>
+                <td>
+                  <a class="inline-link" href={toolUrl(lang, row.slug)}>
+                    {row.tool.name[lang]}
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <section class="content-section">
       <h2>{zh ? '資料與責任界線' : 'Data and limitations'}</h2>
       <p>
@@ -139,4 +260,10 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang)];
 <style>
   .home-start-label { margin: 18px 0 8px; font-weight: 700; }
   .home-more, .home-group-more { margin: 12px 0 0; }
+  .home-table-wrap { overflow-x: auto; margin-top: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+  .home-ref-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; line-height: 1.6; }
+  .home-ref-table caption { padding: 10px 14px; text-align: left; font-weight: 700; color: var(--muted); border-bottom: 1px solid var(--line); }
+  .home-ref-table th, .home-ref-table td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+  .home-ref-table th { font-weight: 700; color: var(--ink); }
+  .home-ref-table tbody tr:last-child td { border-bottom: none; }
 </style>

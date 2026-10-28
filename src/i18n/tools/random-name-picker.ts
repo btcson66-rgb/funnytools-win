@@ -35,6 +35,9 @@ export default {
             ['有人缺席', '先把缺席者的那一行刪掉再抽', '刪除或修改名單會讓「已抽出」的紀錄歸零，因為名單已經不是同一份'],
           ],
         },
+        items: [
+          '四種模式速查：課堂點名或抽獎用「抽人（預設不重複）」；小組討論用「隨機分組（任兩組最多差 1 人）」；上台報告或現場輪流挑禮物用「排順序」；秘密聖誕老人（指定誰送誰且不抽到自己）用「交換禮物（不抽到自己）」。',
+        ],
       },
       {
         heading: '抽籤不重複與可重複，差在哪裡',
@@ -351,6 +354,9 @@ export default {
         heading: 'How the list is read',
         paragraphs: [
           'One line is one candidate. Leading and trailing spaces (including full-width spaces) are removed, blank lines are skipped, and a name that appears twice counts as two candidates, with a warning under the list. A Tab between two pasted spreadsheet columns becomes one space. Choose the comma option to paste names separated by commas.',
+        ],
+        items: [
+          'Quick mode guide: Use “Pick names (no repeats)” for classroom call-outs or raffles; “Random groups” for balanced teams (group sizes differ by at most 1); “Shuffle order” for presentation queues or White Elephant turn order; and “Gift exchange (nobody draws themselves)” for Secret Santa derangement matching.',
         ],
       },
       {

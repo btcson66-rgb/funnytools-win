@@ -22,6 +22,10 @@ export default {
           '獨立樣本 t 檢定比較兩個互相獨立群體的平均數有沒有差異，例如兩個班用不同教法的期末成績。虛無假設是兩個母體平均數相等（H0：μ1＝μ2），雙尾檢定的對立假設是不相等。NIST《工程統計手冊》的 Two-Sample t-Test for Equal Means 就是這個檢定。',
           '它只需要每組的人數 n、平均數 M 和樣本標準差 SD（除以 n−1 的那一個）。同一批人的前後測、配對的兩組資料不是獨立樣本，要用配對 t 檢定；R 的說明文件就特別註明內建的 sleep 資料其實是配對資料。',
         ],
+        items: [
+          '快速選法（Welch vs. Student）：實務與心理教育統計文獻（Delacre et al., 2017）建議預設使用 Welch t 檢定（不假設兩組變異數相等，Excel T.TEST 的 type＝3）；僅在教科書題目或期刊明確指定合併變異數時改選 Student t 檢定（df＝n1＋n2−2，Excel T.TEST 的 type＝2）。',
+          '顯著性與 APA 7 報告判準：雙尾 p < .05（等價於平均差的 95% 信賴區間不包含 0）代表兩組平均差異達 5% 統計顯著；APA 7 格式應同時列出兩組 M、SD 與 n，並寫明檢定法與自由度，如 Welch t(59.61) ＝ 2.36，p ＝ .022，95% CI [0.80, 9.80]，g ＝ 0.59。',
+        ],
       },
       {
         heading: '獨立樣本 t 檢定怎麼算：兩個完整算例',
@@ -251,6 +255,10 @@ export default {
       {
         heading: 'What an independent-samples t test does',
         paragraphs: ['It compares the means of two independent groups, for example the final scores of two classes taught differently. H0: μ1 = μ2; the two-tailed alternative is that they differ. Paired data (the same people measured twice) need a paired t test; R’s documentation notes that its sleep data set is actually paired.'],
+        items: [
+          'Quick decision rule (Welch vs. Student): Use Welch’s t-test by default (no equal-variance assumption, Excel T.TEST type = 3; Delacre et al., 2017). Switch to Student’s pooled-variance t-test (df = n1 + n2 − 2, Excel T.TEST type = 2) only when required by a textbook or journal.',
+          'Significance & APA 7 rule: A two-tailed p < .05 (equivalently, a 95% CI for M1 − M2 that excludes 0) indicates a statistically significant difference at α = .05. Report both group means, SDs, sample sizes, and the exact test: e.g., Welch t(59.61) = 2.36, p = .022, 95% CI [0.80, 9.80], g = 0.59.',
+        ],
       },
       {
         heading: 'Worked examples',

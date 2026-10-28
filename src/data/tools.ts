@@ -110,8 +110,8 @@ export const tools: ToolMeta[] = [
     maintenanceRisk: 'low',
     monetizationTags: ['adsense'],
     featured: true,
-    updated: '2026-10-17',
-    reviewedAt: '2026-10-17',
+    updated: '2026-10-28',
+    reviewedAt: '2026-10-28',
     name: { zh: '線上抽籤點名工具', en: 'Random Name Picker' },
     short: { zh: '貼上名單抽人、隨機分組、排順序、交換禮物配對（不抽到自己），可選不重複或可重複。', en: 'Draw names, make random groups, shuffle the order or match a gift exchange (nobody draws themselves) from a pasted list.' },
   },
@@ -1035,7 +1035,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'independent-samples-t-test-calculator', category: 'statistics', icon: 't', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['apa-7-report-generator', 'standard-deviation', 'spss-result-interpreter', 'cronbach-alpha-calculator', 'z-score-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense'], featured: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
+    relatedTools: ['apa-7-report-generator', 'standard-deviation', 'spss-result-interpreter', 'cronbach-alpha-calculator', 'z-score-calculator'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'low', maintenanceRisk: 'medium', monetizationTags: ['adsense'], featured: true, updated: '2026-10-28', reviewedAt: '2026-10-28',
     name: { zh: '獨立樣本 t 檢定計算器', en: 'Independent Samples t-test Calculator' }, short: { zh: '輸入兩組人數、平均與標準差，算出 t、自由度、p 值，可選 Welch 或 Student，附 APA 寫法與 Excel T.TEST。', en: 'Independent-samples t test from n, mean and SD, with Welch or Student, APA reporting and Excel T.TEST.' },
   },
   {
