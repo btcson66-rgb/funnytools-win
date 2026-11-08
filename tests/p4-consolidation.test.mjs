@@ -67,7 +67,7 @@ test('education-statistics hub: situations first, one sentence per tool, every r
   const flat = flatten(page);
   assert.match(flat, /<h1[^>]*>成績統計工具：依你的問題找計算器<\/h1>/);
   assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
-  assert.match(flat, /最後審核：<time datetime="2026-10-17">2026-10-17<\/time>/);
+  assert.match(flat, /最後審核：<time datetime="2026-11-08">2026-11-08<\/time>/);
   for (const h2 of ['我的分數在這群人裡站哪裡', '幾項成績怎麼合成一個數字', '這批資料有多分散、兩組有沒有差異', '課堂上抽人、分組、排順序、交換禮物']) assert.ok(flat.includes(`<h2>${h2}</h2>`), h2);
   const toolPaths = INDEXABLE_PATHS.filter((path) => path.startsWith('/tools/'));
   assert.equal(toolPaths.length, 10);
@@ -78,7 +78,7 @@ test('education-statistics hub: situations first, one sentence per tool, every r
   assert.equal((flat.match(/class="hub-tool-asks"/g) ?? []).length, 10);
   const jsonLd = [...page.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap((m) => JSON.parse(m[1]));
   const collection = jsonLd.find((item) => item['@type'] === 'CollectionPage');
-  assert.equal(collection.author['@type'], 'Person'); assert.equal(collection.author.name, 'Benson Lai'); assert.equal(collection.dateModified, '2026-10-17');
+  assert.equal(collection.author['@type'], 'Person'); assert.equal(collection.author.name, 'Benson Lai'); assert.equal(collection.dateModified, '2026-11-08');
   assert.ok(jsonLd.some((item) => item['@type'] === 'BreadcrumbList'));
   assert.ok(!jsonLd.some((item) => ['FAQPage', 'HowTo'].includes(item['@type'])));
   assert.doesNotMatch(page, /noindex/);

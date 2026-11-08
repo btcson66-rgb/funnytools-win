@@ -6,12 +6,14 @@ import { SITE, type Locale } from '../../../config/site';
 import { getLiveToolsForLocale } from '../../../data/tools';
 import { t } from '../../../i18n/ui';
 import { localePath, localeUrlPair, toolUrl } from '../../../lib/url';
-import { authorPersonJsonLd, breadcrumbJsonLd, collectionPageJsonLd } from '../../../lib/seo';
+import { authorPersonJsonLd, breadcrumbJsonLd, collectionPageJsonLd, techArticleJsonLd } from '../../../lib/seo';
+import { FIRST_PUBLISHED } from '../../../lib/articleDates';
 import { isIndexablePath } from '../../../lib/indexPolicy';
 
 // P2 batch 4 (2026-10-17): this hub absorbed /category/statistics/ (now a redirect stub). It is the entry page
 // of the site: situations first, then one sentence per tool saying which question it answers.
-const REVIEWED_AT = '2026-10-17';
+// 2026-11-08: added the formula comparison table, three verified worked examples, common mix-ups and sources.
+const REVIEWED_AT = '2026-11-08';
 
 export function getStaticPaths() {
   return SITE.locales.map((lang) => ({
@@ -101,6 +103,295 @@ const groups: Group[] = [
   },
 ];
 
+interface FormulaRow {
+  id: string;
+  name: Record<Locale, string>;
+  formula: string;
+  when: Record<Locale, string>;
+  sheet: string;
+  tools: { slug: string; label: Record<Locale, string> }[];
+}
+
+// Every formula and spreadsheet function below is the one the linked tool page uses and documents with a
+// checked example; the worked examples further down were computed with src/lib/educationStats.ts.
+const formulaRows: FormulaRow[] = [
+  {
+    id: 'z',
+    name: { zh: 'Z 分數', en: 'Z score' },
+    formula: 'Z = (X − M) ÷ SD',
+    when: {
+      zh: '想知道一個分數高於或低於平均幾個標準差，或要把不同科目放到同一把尺上比。需要「同一個團體」的平均 M 與標準差 SD。',
+      en: 'To see how many SDs a score is above or below the mean, or to compare different subjects on one scale. Needs the mean M and SD of the same group.',
+    },
+    sheet: '=STANDARDIZE(X, 平均, 標準差)',
+    tools: [{ slug: 'z-score-calculator', label: { zh: 'Z分數計算機（標準分數與常態位置）', en: 'Z score calculator' } }],
+  },
+  {
+    id: 't',
+    name: { zh: 'T 分數', en: 'T score' },
+    formula: 'T = 50 + 10 × Z',
+    when: {
+      zh: '要把分數放到「平均 50、標準差 10」的尺度，讓成績單、簡章或報告更好讀。T 不是百分制，也不等於 PR。',
+      en: 'To put a score on the mean-50, SD-10 scale for reports and notices. T is not a percentage and is not PR.',
+    },
+    sheet: '=50+10*STANDARDIZE(X, 平均, 標準差)',
+    tools: [{ slug: 't-score-calculator', label: { zh: 'T分數計算機（標準分數換算）', en: 'T score calculator' } }],
+  },
+  {
+    id: 'pr',
+    name: { zh: 'PR 值（百分等級）', en: 'Percentile rank (PR)' },
+    formula: 'PR = 100 × (B + 0.5 × E) ÷ N',
+    when: {
+      zh: '想知道「大約有幾成的人分數比我低」。B 是低於你的人數，E 是同分人數（含你），N 是總人數；只有名次時改用班排換算。',
+      en: 'To see roughly what share of people scored below you. B = number below, E = tied (including you), N = total; with only a rank, use the class-rank converter.',
+    },
+    sheet: '=(COUNTIF(範圍,"<"&X)+0.5*COUNTIF(範圍,X))/COUNT(範圍)*100',
+    tools: [
+      { slug: 'percentile-rank-calculator', label: { zh: 'PR值計算機（百分等級換算）', en: 'Percentile rank calculator' } },
+      { slug: 'class-rank-percentile-calculator', label: { zh: '班級排名PR值計算機（名次換前幾％）', en: 'Class rank percentile calculator' } },
+    ],
+  },
+  {
+    id: 'sd',
+    name: { zh: '標準差', en: 'Standard deviation' },
+    formula: 'σ = √[Σ(x − μ)² ÷ N]　s = √[Σ(x − x̄)² ÷ (n − 1)]',
+    when: {
+      zh: '描述一組分數有多分散，也是 Z、T 分數的分母。手上是整個群體（全班就是全部）用 σ，把資料當成抽樣用 s。',
+      en: 'To describe how spread out scores are; it is also the denominator of Z and T. Use σ when you hold the whole group, s when the data is a sample.',
+    },
+    sheet: '=STDEV.P(範圍) 或 =STDEV.S(範圍)',
+    tools: [{ slug: 'standard-deviation', label: { zh: '標準差計算機（母體與樣本）', en: 'Standard deviation calculator' } }],
+  },
+  {
+    id: 'wm',
+    name: { zh: '加權平均', en: 'Weighted average' },
+    formula: 'x̄w = Σ(wᵢ × xᵢ) ÷ Σwᵢ',
+    when: {
+      zh: '各項的重要程度不同時：科目學分不同、平時與段考占分不同、合併人數不同的班級。權重不必加總為 100。',
+      en: 'When items carry different weight: credits per subject, coursework vs exam shares, classes of different size. Weights need not sum to 100.',
+    },
+    sheet: '=SUMPRODUCT(分數範圍, 權重範圍)/SUM(權重範圍)',
+    tools: [
+      { slug: 'weighted-average-calculator', label: { zh: '加權平均計算機（學分與配分）', en: 'Weighted average calculator' } },
+      { slug: 'grade-average', label: { zh: '學期成績計算機（平時段考期末加權）', en: 'Semester grade calculator' } },
+    ],
+  },
+  {
+    id: 'teacher',
+    name: { zh: '教甄分數換算', en: 'Teacher-exam score conversion' },
+    formula: '總成績 = Σ(各項成績 × 簡章配分) ÷ Σ配分',
+    when: {
+      zh: '筆試、試教、口試依簡章配分合成總成績，再依簡章規定的位數四捨五入。配分與是否標準化（T 分數）以當年度簡章為準。',
+      en: 'To combine written, teaching-demo and interview scores by the notice’s weights, rounded as the notice says. Weights and any T-score step follow the notice for that year.',
+    },
+    sheet: '=ROUND(SUMPRODUCT(成績範圍, 配分範圍)/SUM(配分範圍), 2)',
+    tools: [{ slug: 'teacher-exam-score-converter', label: { zh: '教甄分數換算計算機（筆試試教口試）', en: 'Teacher exam score converter' } }],
+  },
+  {
+    id: 'ttest',
+    name: { zh: '獨立樣本 t 檢定', en: 'Independent-samples t test' },
+    formula: 't = (M₁ − M₂) ÷ √(s₁²÷n₁ + s₂²÷n₂)（Welch）',
+    when: {
+      zh: '比較兩個互不相干的班級或兩種教法的平均，看差距是真的有差還是抽樣誤差。需要兩組各自的人數、平均與樣本標準差。',
+      en: 'To compare the means of two unrelated classes or methods and judge whether the gap is real or sampling noise. Needs each group’s n, mean and sample SD.',
+    },
+    sheet: '=T.TEST(組1範圍, 組2範圍, 2, 3)（Welch 雙尾 p 值）',
+    tools: [{ slug: 'independent-samples-t-test-calculator', label: { zh: '獨立樣本t檢定計算機（Welch與Student）', en: 'Independent-samples t test calculator' } }],
+  },
+];
+
+interface Example {
+  id: string;
+  title: Record<Locale, string>;
+  setup: Record<Locale, string>;
+  steps: Record<Locale, string[]>;
+  takeaway: Record<Locale, string>;
+  tool: string;
+}
+
+// Numbers below were computed with the same functions the tools use (tScoreFrom, describeData, independentTTest
+// in src/lib/educationStats.ts). The class data are made-up inputs chosen to show the calculation.
+const examples: Example[] = [
+  {
+    id: 'ex-z-t-pr',
+    title: { zh: '驗算一：數學與英文，誰的位置比較前面', en: 'Check 1: maths vs English, which sits higher' },
+    setup: {
+      zh: '小安數學考 82 分（全班平均 70、標準差 10），英文考 76 分（全班平均 64、標準差 8）。數字是為示範設定的假設值，兩科都假設近似常態分配。',
+      en: 'An invented student scores 82 in maths (class mean 70, SD 10) and 76 in English (class mean 64, SD 8); both subjects are assumed roughly normal.',
+    },
+    steps: {
+      zh: [
+        '數學：Z＝(82−70)÷10＝1.20；T＝50＋10×1.20＝62；常態假設下 PR 約 88.5（Φ(1.20)＝0.8849）。',
+        '英文：Z＝(76−64)÷8＝1.50；T＝50＋10×1.50＝65；常態假設下 PR 約 93.3（Φ(1.50)＝0.9332）。',
+      ],
+      en: [
+        'Maths: Z = (82 − 70) ÷ 10 = 1.20; T = 50 + 10 × 1.20 = 62; under normality PR ≈ 88.5 (Φ(1.20) = 0.8849).',
+        'English: Z = (76 − 64) ÷ 8 = 1.50; T = 50 + 10 × 1.50 = 65; under normality PR ≈ 93.3 (Φ(1.50) = 0.9332).',
+      ],
+    },
+    takeaway: {
+      zh: '英文原始分數比數學低 6 分，但 T 分數高 3 分，相對位置更前面，因為英文全班的平均與標準差都較低。這個 PR 只在常態假設下成立；用實際人數算的 PR 要改用中點法公式。',
+      en: 'English has the lower raw score but a T score 3 points higher, because the class mean and SD are lower. This PR holds only under normality; for a PR from real head counts use the midpoint formula.',
+    },
+    tool: 't-score-calculator',
+  },
+  {
+    id: 'ex-sd',
+    title: { zh: '驗算二：同一組分數，母體與樣本標準差差多少', en: 'Check 2: population vs sample SD on the same scores' },
+    setup: {
+      zh: '五位學生的小考成績：72、85、68、90、75（假設數字）。',
+      en: 'Five quiz scores: 72, 85, 68, 90, 75 (invented).',
+    },
+    steps: {
+      zh: [
+        '平均＝(72＋85＋68＋90＋75)÷5＝78；離均差分別是 −6、＋7、−10、＋12、−3，平方和＝36＋49＋100＋144＋9＝338。',
+        '母體標準差 σ＝√(338÷5)＝√67.6＝8.22；樣本標準差 s＝√(338÷4)＝√84.5＝9.19。',
+        '在試算表中，=STDEV.P(A2:A6) 得 8.22，=STDEV.S(A2:A6) 得 9.19。',
+      ],
+      en: [
+        'Mean = (72 + 85 + 68 + 90 + 75) ÷ 5 = 78; deviations are −6, +7, −10, +12, −3 and the sum of squares is 36 + 49 + 100 + 144 + 9 = 338.',
+        'Population SD σ = √(338 ÷ 5) = √67.6 = 8.22; sample SD s = √(338 ÷ 4) = √84.5 = 9.19.',
+        'In a spreadsheet, =STDEV.P(A2:A6) gives 8.22 and =STDEV.S(A2:A6) gives 9.19.',
+      ],
+    },
+    takeaway: {
+      zh: '同一批資料，除以 n−1 的樣本標準差比較大。全班成績要拿來算全班自己的 Z、T 分數時，這個班就是完整群體，用 σ；想用這 5 人推論更大的群體時才用 s。',
+      en: 'The n − 1 version is larger on the same data. Use σ when the class is the whole group for its own Z and T scores; use s only when you are inferring about a larger group.',
+    },
+    tool: 'standard-deviation',
+  },
+  {
+    id: 'ex-ttest',
+    title: { zh: '驗算三：兩班平均差 5 分，算不算真的有差', en: 'Check 3: a 5-point gap between two classes' },
+    setup: {
+      zh: '甲班 30 人，平均 75，樣本標準差 10；乙班 28 人，平均 70，樣本標準差 12（假設數字）。用 Welch t 檢定，雙尾，α＝.05。',
+      en: 'Class A: n = 30, mean 75, sample SD 10. Class B: n = 28, mean 70, sample SD 12 (invented). Welch t test, two-tailed, α = .05.',
+    },
+    steps: {
+      zh: [
+        '標準誤＝√(10²÷30＋12²÷28)＝√(3.3333＋5.1429)＝√8.4762＝2.911。',
+        't＝(75−70)÷2.911＝1.717；Welch 自由度 df＝52.72；雙尾 p＝.092；平均差的 95% 信賴區間為 −0.84 到 10.84。',
+        '對照：若改用假設兩班變異相同的 Student t，t＝1.728、df＝56、p＝.089，結論相同。',
+      ],
+      en: [
+        'Standard error = √(10² ÷ 30 + 12² ÷ 28) = √(3.3333 + 5.1429) = √8.4762 = 2.911.',
+        't = (75 − 70) ÷ 2.911 = 1.717; Welch df = 52.72; two-tailed p = .092; 95% CI of the difference is −0.84 to 10.84.',
+        'For comparison, Student’s t (equal variances) gives t = 1.728, df = 56, p = .089; same conclusion.',
+      ],
+    },
+    takeaway: {
+      zh: 'p＞.05 且信賴區間包含 0，所以在這個樣本大小下，5 分的差距還不能排除抽樣誤差；這不等於「兩班沒有差」，只是證據不足。要報告時寫明人數、平均、標準差與 p 值。',
+      en: 'p > .05 and the interval contains 0, so with these sample sizes a 5-point gap cannot be separated from sampling noise. That is not proof of no difference, only insufficient evidence; report n, means, SDs and p.',
+    },
+    tool: 'independent-samples-t-test-calculator',
+  },
+];
+
+const mixups: Record<Locale, string[]> = {
+  zh: [
+    'T 分數不是百分制：T＝62 不是「62 分」，也不是「勝過 62% 的人」，它只是平均 50、標準差 10 的尺度上的位置。',
+    'PR 不是答對率：PR 80 的意思是約八成的人分數比你低，與你考幾分無關；PR 也只在同一個參照團體內才能比較。',
+    'Z、T 分數需要同一個團體的平均與標準差：拿全班的平均去換算全年級的分數，結果沒有意義。',
+    '母體與樣本標準差不能混用：Excel 的 STDEV.P 與 STDEV.S 差在分母是 n 還是 n−1，資料量越少差距越大。',
+    '加權平均的權重單位要一致：同一份表格裡不要一格寫 30、一格寫 0.4；也不要把各班平均直接再平均。',
+    '教甄與升學的正式成績，配分、標準化與進位方式以當年度簡章和主辦單位公告為準；本站工具只照你輸入的規則算。',
+  ],
+  en: [
+    'A T score is not a percentage: T = 62 is neither “62 points” nor “beats 62% of people”; it is a position on a mean-50, SD-10 scale.',
+    'PR is not a percent correct: PR 80 means about 80% of the group scored below you, whatever your raw score, and only compares within one reference group.',
+    'Z and T need the mean and SD of the same group; converting a grade-level score with a class mean is meaningless.',
+    'Do not mix population and sample SD: STDEV.P divides by n and STDEV.S by n − 1, and the gap grows as the data gets smaller.',
+    'Keep weight units consistent: do not write 30 in one cell and 0.4 in another, and do not average class means directly.',
+    'For official teacher-exam or admission scores, weights, standardisation and rounding follow that year’s notice; the tools only apply the rule you enter.',
+  ],
+};
+
+const sources: { label: string; href: string; note: Record<Locale, string> }[] = [
+  {
+    label: '國家教育研究院《教育大辭書》：標準差',
+    href: 'https://pedia.cloud.edu.tw/Entry/Detail/?title=%E6%A8%99%E6%BA%96%E5%B7%AE',
+    note: { zh: '標準差的定義與母體、樣本的差別。', en: 'Definition of the standard deviation.' },
+  },
+  {
+    label: '國家教育研究院《教育大辭書》：T分數',
+    href: 'https://pedia.cloud.edu.tw/Entry/Detail/?title=T%E5%88%86%E6%95%B8',
+    note: { zh: 'T 分數以平均 50、標準差 10 表示相對地位。', en: 'T scores express relative standing on a mean-50, SD-10 scale.' },
+  },
+  {
+    label: '國家教育研究院辭書：百分等級',
+    href: 'https://pedia.cloud.edu.tw/Entry/Detail/?title=%E7%99%BE%E5%88%86%E7%AD%89%E7%B4%9A',
+    note: { zh: '百分等級的定義。', en: 'Definition of percentile rank.' },
+  },
+  {
+    label: 'NIST Dataplot Reference Manual：WEIGHTED MEAN',
+    href: 'https://www.itl.nist.gov/div898/software/dataplot/refman2/ch2/weigmean.pdf',
+    note: { zh: '加權平均 Σwᵢxᵢ÷Σwᵢ。', en: 'Weighted mean = Σwᵢxᵢ ÷ Σwᵢ.' },
+  },
+  {
+    label: 'NIST/SEMATECH e-Handbook 1.3.5.3：Two-Sample t-Test for Equal Means',
+    href: 'https://itl.nist.gov/div898/handbook/eda/section3/eda353.htm',
+    note: { zh: '兩獨立樣本平均數 t 檢定的公式。', en: 'Formulas for the two-sample t test.' },
+  },
+  {
+    label: 'Microsoft 支援：STDEV.S 函數',
+    href: 'https://support.microsoft.com/zh-tw/office/stdev-s-%E5%87%BD%E6%95%B8-7d69cf97-0c1f-4acf-be27-f3e83904cc23',
+    note: { zh: '樣本標準差函數；STDEV.P 為母體版本。', en: 'Sample SD function; STDEV.P is the population version.' },
+  },
+  {
+    label: 'Microsoft 支援：T.TEST 函數',
+    href: 'https://support.microsoft.com/zh-tw/office/t-test-%E5%87%BD%E6%95%B8-d4e08ec3-c545-485f-962e-276f7cbed055',
+    note: { zh: 'type 參數 3 為兩樣本異質變異（Welch）。', en: 'type 3 is the two-sample unequal-variance (Welch) test.' },
+  },
+];
+
+const chooser: Record<Locale, { heading: string; intro: string; steps: string[] }> = {
+  zh: {
+    heading: '四個步驟選對工具',
+    intro: '不確定從哪裡開始時，照下面的順序問自己，通常第二步就能決定要用哪一個計算器。',
+    steps: [
+      '先看手上有什麼資料：只有自己的分數加上全班平均與標準差，用 Z 或 T 分數；有全班每個人的分數，可以算 PR 與標準差；只有名次與全班人數，用班級排名換算。',
+      '再看要回答什麼問題：「我站在哪裡」用 Z、T、PR；「幾項成績怎麼合成一個數字」用加權平均、學期成績或教甄換算；「兩組有沒有差」先用標準差看分散，再用 t 檢定。',
+      '確認規則的出處：學校的評量辦法、教師甄試簡章或主辦單位公告優先，工具只是照你輸入的權重與進位規則計算。',
+      '用試算表對一次：把上面對照表的函數貼進 Excel 或 Google 試算表，與計算機的結果比對，兩邊一致再放進報告或與家長溝通。',
+    ],
+  },
+  en: {
+    heading: 'Four steps to the right tool',
+    intro: 'If you are unsure where to start, ask yourself these in order; step two usually settles which calculator to use.',
+    steps: [
+      'Look at what data you hold: your score plus the class mean and SD means Z or T; every student’s score lets you compute PR and SD; only a rank and a head count means the class-rank converter.',
+      'Decide the question: “where do I stand” is Z, T or PR; “how do several scores combine” is weighted average, semester grade or teacher-exam conversion; “do two groups differ” is SD first, then the t test.',
+      'Confirm where the rule comes from: your school’s grading rules or the exam notice come first; the tools only apply the weights and rounding you enter.',
+      'Cross-check in a spreadsheet: paste the functions from the table above into Excel or Google Sheets and compare with the calculator before you quote the result.',
+    ],
+  },
+}[lang];
+
+const sectionCopy = {
+  zh: {
+    tableHeading: '公式、用途與試算表函數對照表',
+    tableIntro: '下表把七個最常被問到的指標放在一起：公式、什麼時候該用、在 Excel 與 Google 試算表怎麼算，以及本站對應的計算機。公式與函數都與各工具頁使用並驗算過的一致；括號裡的 X 是原始分數，範圍指放分數的儲存格。',
+    tableCaption: '成績統計指標的公式、適用情境、試算表函數與對應工具',
+    cols: ['指標', '公式', '什麼時候用', 'Excel／Google 試算表', '對應工具'],
+    examplesHeading: '三個可重現的驗算範例',
+    examplesIntro: '下面的班級與分數是為了示範算法而設定的假設數字，不是真實學生的資料。每個數字都用與工具相同的公式算過，你可以在對應的計算機輸入同樣的數字重現。',
+    exampleTool: '用計算機重現',
+    mixupHeading: '最常見的六個混淆',
+    sourcesHeading: '公式與函數的資料來源',
+  },
+  en: {
+    tableHeading: 'Formulas, use cases and spreadsheet functions',
+    tableIntro: 'The seven most-asked measures side by side: formula, when to use it, how to compute it in Excel or Google Sheets, and the matching calculator. X is a raw score and a range is the cells holding the scores.',
+    tableCaption: 'Formulas, use cases, spreadsheet functions and tools for score statistics',
+    cols: ['Measure', 'Formula', 'When to use it', 'Excel / Google Sheets', 'Tool'],
+    examplesHeading: 'Three reproducible worked checks',
+    examplesIntro: 'The classes and scores below are invented to show the calculation. Each number was computed with the same formula the tools use; enter the same values in the linked calculator to reproduce it.',
+    exampleTool: 'Reproduce with the calculator',
+    mixupHeading: 'Six common mix-ups',
+    sourcesHeading: 'Sources for the formulas and functions',
+  },
+}[lang];
+
 const live = getLiveToolsForLocale(lang);
 const resolved = groups
   .map((group) => ({
@@ -123,7 +414,17 @@ const jsonLd = [
     dateModified: REVIEWED_AT,
   },
   breadcrumbJsonLd(breadcrumbItems),
+  techArticleJsonLd(lang, {
+    headline: copy.seoTitle,
+    description: copy.description,
+    path: hubPath,
+    datePublished: FIRST_PUBLISHED['/education-statistics/'],
+    dateModified: REVIEWED_AT,
+    authored: true,
+    about: copy.title,
+  }),
 ];
+const toolName = (slug: string) => live.find((tool) => tool.slug === slug)?.name[lang] ?? slug;
 ---
 
 <BaseLayout
@@ -163,6 +464,86 @@ const jsonLd = [
     </section>
   ))}
 
+  <section class="wrap content-section" id="choose">
+    <div class="section-head">
+      <h2>{chooser.heading}</h2>
+      <p>{chooser.intro}</p>
+    </div>
+    <ol class="hub-steps">
+      {chooser.steps.map((step) => <li>{step}</li>)}
+    </ol>
+  </section>
+
+  <section class="wrap content-section hub-formulas" id="formula-table">
+    <div class="section-head">
+      <h2>{sectionCopy.tableHeading}</h2>
+      <p>{sectionCopy.tableIntro}</p>
+    </div>
+    <div class="hub-table-wrap">
+      <table class="hub-table">
+        <caption>{sectionCopy.tableCaption}</caption>
+        <thead>
+          <tr>{sectionCopy.cols.map((col) => <th scope="col">{col}</th>)}</tr>
+        </thead>
+        <tbody>
+          {formulaRows.map((row) => (
+            <tr id={`row-${row.id}`}>
+              <th scope="row">{row.name[lang]}</th>
+              <td><code>{row.formula}</code></td>
+              <td>{row.when[lang]}</td>
+              <td><code>{row.sheet}</code></td>
+              <td>
+                <ul class="hub-table-links">
+                  {row.tools
+                    .filter((tool) => isIndexablePath(toolUrl('zh', tool.slug)))
+                    .map((tool) => <li><a href={toolUrl(lang, tool.slug)}>{tool.label[lang]}</a></li>)}
+                </ul>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wrap content-section hub-examples" id="worked-examples">
+    <div class="section-head">
+      <h2>{sectionCopy.examplesHeading}</h2>
+      <p>{sectionCopy.examplesIntro}</p>
+    </div>
+    {examples.map((example) => (
+      <article class="hub-example" id={example.id}>
+        <h3>{example.title[lang]}</h3>
+        <p>{example.setup[lang]}</p>
+        <ol>
+          {example.steps[lang].map((step) => <li>{step}</li>)}
+        </ol>
+        <p class="hub-example-take">{example.takeaway[lang]}</p>
+        <p class="hub-example-link"><a href={toolUrl(lang, example.tool)}>{sectionCopy.exampleTool}：{toolName(example.tool)}</a></p>
+      </article>
+    ))}
+  </section>
+
+  <section class="wrap content-section" id="common-mixups">
+    <div class="section-head">
+      <h2>{sectionCopy.mixupHeading}</h2>
+    </div>
+    <ul class="hub-mixups">
+      {mixups[lang].map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+
+  <section class="wrap content-section" id="sources">
+    <div class="section-head">
+      <h2>{sectionCopy.sourcesHeading}</h2>
+    </div>
+    <ul class="hub-sources">
+      {sources.map((source) => (
+        <li><a href={source.href} target="_blank" rel="noopener noreferrer">{source.label}</a>：{source.note[lang]}</li>
+      ))}
+    </ul>
+  </section>
+
   <section class="wrap content-section">
     <p class="hub-footer">{copy.footer}</p>
   </section>
@@ -175,4 +556,23 @@ const jsonLd = [
   .hub-tool-name:hover { color: var(--brand); }
   .hub-tool-asks { color: var(--muted); line-height: 1.7; }
   .hub-footer { color: var(--muted); line-height: 1.7; }
+  .hub-table-wrap { overflow-x: auto; margin-top: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+  .hub-table { width: 100%; min-width: 860px; border-collapse: collapse; font-size: 0.95rem; line-height: 1.65; }
+  .hub-table caption { padding: 10px 14px; text-align: left; font-weight: 700; color: var(--muted); border-bottom: 1px solid var(--line); }
+  .hub-table th, .hub-table td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+  .hub-table thead th { color: var(--ink); font-weight: 700; white-space: nowrap; }
+  .hub-table tbody th { font-weight: 800; white-space: nowrap; }
+  .hub-table tbody tr:last-child > * { border-bottom: none; }
+  .hub-table code { font-size: 0.88rem; overflow-wrap: anywhere; }
+  .hub-table-links { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+  .hub-table-links a { font-weight: 700; color: var(--brand-2, var(--brand)); }
+  .hub-example { margin-top: 14px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+  .hub-example h3 { margin: 0 0 8px; font-size: 1.08rem; }
+  .hub-example p, .hub-example li { line-height: 1.75; }
+  .hub-example ol { margin: 8px 0; padding-left: 1.4em; }
+  .hub-example-take { color: var(--muted); }
+  .hub-example-link { margin: 8px 0 0; font-weight: 700; }
+  .hub-steps { margin: 0; padding-left: 1.4em; display: grid; gap: 8px; line-height: 1.75; }
+  .hub-mixups, .hub-sources { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; line-height: 1.75; }
+  .hub-sources { color: var(--muted); }
 </style>

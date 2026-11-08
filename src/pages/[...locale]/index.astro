@@ -1,10 +1,12 @@
 ---
+import AuthorByline from '../../components/AuthorByline.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { SITE, type Locale } from '../../config/site';
 import { getToolBySlug, type ToolMeta } from '../../data/tools';
 import { absoluteUrl, localePath, toolUrl } from '../../lib/url';
-import { organizationJsonLd, websiteJsonLd } from '../../lib/seo';
+import { organizationJsonLd, techArticleJsonLd, websiteJsonLd } from '../../lib/seo';
+import { FIRST_PUBLISHED } from '../../lib/articleDates';
 
 export function getStaticPaths() {
   return SITE.locales.map((lang) => ({
@@ -15,6 +17,8 @@ export function getStaticPaths() {
 
 const { lang } = Astro.props as { lang: Locale };
 const zh = lang === 'zh';
+// Last time the visible content of this page changed (shown in the byline and in the TechArticle node).
+const UPDATED_AT = '2026-11-08';
 
 // The ten retained tools, grouped by the question the visitor arrives with. The four groups and their ids are
 // the same as the sections of the hub (/education-statistics/#position ...), where each tool also gets a
@@ -169,6 +173,82 @@ const quickReferenceRows = [
   tool: getToolBySlug(row.slug),
 }));
 
+
+// First-screen lookup table. Anchor text names the exact tool; every target is in INDEXABLE_PATHS, which
+// scripts/p1-site-contract-audit.mjs enforces for the homepage main area.
+const lookupRows = [
+  {
+    slug: 'education-statistics',
+    hub: true,
+    use: zh ? '不確定該用哪個計算器' : 'Not sure which calculator to use',
+    scenario: zh ? '依「我的分數站哪裡、幾項成績怎麼合成、資料多分散」找工具，並對照公式與試算表函數' : 'Pick by question and compare formulas and spreadsheet functions',
+    label: zh ? '成績統計工具總覽（公式對照表）' : 'Score and statistics tools overview',
+  },
+  {
+    slug: 't-score-calculator',
+    use: zh ? '標準分數換算' : 'Standardised score',
+    scenario: zh ? '段考後把原始分數換成平均 50、標準差 10 的 T 分數，跨科比較' : 'Turn a raw score into a mean-50, SD-10 T score to compare subjects',
+    label: zh ? 'T分數計算機（標準分數換算）' : 'T score calculator',
+  },
+  {
+    slug: 'z-score-calculator',
+    use: zh ? '離平均幾個標準差' : 'Distance from the mean',
+    scenario: zh ? '看一個分數高於或低於全班平均幾個標準差' : 'See how many SDs a score is above or below the class mean',
+    label: zh ? 'Z分數計算機（標準分數與常態位置）' : 'Z score calculator',
+  },
+  {
+    slug: 'percentile-rank-calculator',
+    use: zh ? '百分等級' : 'Percentile rank',
+    scenario: zh ? '知道低於自己與同分的人數，算 PR 值（約有幾成的人比你低）' : 'Know how many scored below and tied with you; get your PR',
+    label: zh ? 'PR值計算機（百分等級換算）' : 'Percentile rank calculator',
+  },
+  {
+    slug: 'class-rank-percentile-calculator',
+    use: zh ? '名次換前幾 %' : 'Rank to top %',
+    scenario: zh ? '只有班排與全班人數，換算前百分之幾與 PR，含並列名次' : 'Only a class rank and head count; convert to top % and PR, ties included',
+    label: zh ? '班級排名PR值計算機（名次換前幾％）' : 'Class rank percentile calculator',
+  },
+  {
+    slug: 'grade-average',
+    use: zh ? '學期成績' : 'Semester grade',
+    scenario: zh ? '平時、段考、期末依占比合成學期成績，或反推期末至少要考幾分' : 'Combine coursework, midterms and final by weight, or solve the final score needed',
+    label: zh ? '學期成績計算機（平時段考期末加權）' : 'Semester grade calculator',
+  },
+  {
+    slug: 'weighted-average-calculator',
+    use: zh ? '加權平均' : 'Weighted average',
+    scenario: zh ? '各科學分不同時算學期總平均，或合併人數不同的班級平均' : 'Credit-weighted semester average, or merging classes of different size',
+    label: zh ? '加權平均計算機（學分與配分）' : 'Weighted average calculator',
+  },
+  {
+    slug: 'teacher-exam-score-converter',
+    use: zh ? '教甄分數換算' : 'Teacher-exam total',
+    scenario: zh ? '筆試、試教、口試依簡章配分合成教師甄試總成績' : 'Combine written, teaching-demo and interview scores by the notice’s weights',
+    label: zh ? '教甄分數換算計算機（筆試試教口試）' : 'Teacher exam score converter',
+  },
+  {
+    slug: 'standard-deviation',
+    use: zh ? '分數有多分散' : 'Spread of scores',
+    scenario: zh ? '算一串分數的母體與樣本標準差（對應 STDEV.P 與 STDEV.S）' : 'Population and sample SD of a list of scores (STDEV.P and STDEV.S)',
+    label: zh ? '標準差計算機（母體與樣本）' : 'Standard deviation calculator',
+  },
+  {
+    slug: 'independent-samples-t-test-calculator',
+    use: zh ? '兩組平均比較' : 'Compare two means',
+    scenario: zh ? '比較兩個班或兩種教法的平均，看差距是真的有差還是抽樣誤差' : 'Compare two classes or methods: real difference or sampling noise',
+    label: zh ? '獨立樣本t檢定計算機（Welch與Student）' : 'Independent-samples t test calculator',
+  },
+  {
+    slug: 'random-name-picker',
+    use: zh ? '課堂抽籤與分組' : 'Class draws and groups',
+    scenario: zh ? '不重複抽人、依組數分組、排報告順序、交換禮物配對，全程在瀏覽器完成' : 'No-repeat draws, groups, shuffled order, gift exchange, all in your browser',
+    label: zh ? '課堂隨機抽籤與分組工具' : 'Random name picker and grouping',
+  },
+].map((row) => ({
+  ...row,
+  href: row.hub ? localePath(lang, 'education-statistics') : toolUrl(lang, row.slug),
+}));
+
 const title = zh
   ? 'FunnyTools 成績統計工具｜T 分數、PR 值、標準差、加權平均'
   : 'FunnyTools grade and statistics calculators for students and teachers';
@@ -188,7 +268,16 @@ const itemListJsonLd = {
     description: tool.short[lang],
   })),
 };
-const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang), itemListJsonLd];
+const homeArticleJsonLd = techArticleJsonLd(lang, {
+  headline: title,
+  description,
+  path: localePath(lang),
+  datePublished: FIRST_PUBLISHED['/'],
+  dateModified: UPDATED_AT,
+  authored: true,
+  about: zh ? '台灣教育統計與免上傳工具速查表' : 'Quick reference table for score statistics and no-upload tools',
+});
+const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang), itemListJsonLd, homeArticleJsonLd];
 ---
 
 <BaseLayout
@@ -222,6 +311,7 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang), itemListJsonLd];
             {zh ? '每個工具能回答哪些問題，見成績統計工具總覽' : 'What each tool answers: the score and statistics tools overview'}
           </a>
         </p>
+        <AuthorByline lang={lang} reviewedAt={UPDATED_AT} />
       </div>
 
       <figure class="lab-demo" data-lab-demo aria-labelledby="lab-demo-title">
@@ -260,6 +350,35 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang), itemListJsonLd];
       </figure>
     </section>
 
+    <section class="home-lookup" id="quick-lookup" aria-labelledby="home-lookup-title">
+      <h2 id="home-lookup-title">{zh ? '台灣教育統計與免上傳工具速查表' : 'Quick table: score statistics and no-upload tools'}</h2>
+      <div class="home-table-wrap" tabindex="0" role="region" aria-labelledby="home-lookup-title">
+        <table class="home-ref-table home-lookup-table">
+          <caption>
+            {zh
+              ? '依用途與典型情境挑選計算機；點工具名稱直接開啟，輸入的資料只在瀏覽器計算，不會上傳。'
+              : 'Pick a calculator by purpose and typical situation; inputs are calculated in your browser and not uploaded.'}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{zh ? '用途' : 'Purpose'}</th>
+              <th scope="col">{zh ? '典型情境' : 'Typical situation'}</th>
+              <th scope="col">{zh ? '工具' : 'Tool'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {lookupRows.map((row) => (
+              <tr>
+                <th scope="row">{row.use}</th>
+                <td>{row.scenario}</td>
+                <td><a class="inline-link" href={row.href}>{row.label}</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <dl class="lab-specs">
       <div><dt>{zh ? '工具' : 'Tools'}</dt><dd>{zh ? `${retainedTools.length} 個成績與課堂工具` : `${retainedTools.length} grade & class tools`}</dd></div>
       <div><dt>{zh ? '運算' : 'Compute'}</dt><dd>{zh ? '全部在瀏覽器本機' : 'In your browser'}</dd></div>
@@ -287,7 +406,7 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang), itemListJsonLd];
 
     <section class="content-section" id="formula-reference" aria-labelledby="home-formula-reference">
       <h2 id="home-formula-reference">
-        {zh ? '台灣常見成績計算公式與工具速查表' : 'Quick Formula & Calculator Reference'}
+        {zh ? '成績計算公式與輸入欄位對照' : 'Formulas and required inputs'}
       </h2>
       <p>
         {zh
@@ -336,6 +455,11 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang), itemListJsonLd];
         <a class="inline-link" href={localePath(lang, 'about')}>{zh ? '關於站長與內容審核' : 'About the site owner and review process'}</a>
         · <a class="inline-link" href={localePath(lang, 'privacy')}>{zh ? '隱私權政策' : 'Privacy'}</a>
         · <a class="inline-link" href={localePath(lang, 'support')}>{zh ? '支持本站' : 'Support'}</a>
+      </p>
+      <p>
+        {zh ? '公式出處：' : 'Formula references: '}
+        <a class="inline-link" href="https://pedia.cloud.edu.tw/Entry/Detail/?title=T%E5%88%86%E6%95%B8" target="_blank" rel="noopener noreferrer">{zh ? '國家教育研究院《教育大辭書》T分數' : 'NAER Educational Encyclopedia: T score'}</a>
+        · <a class="inline-link" href="https://itl.nist.gov/div898/handbook/eda/section3/eda353.htm" target="_blank" rel="noopener noreferrer">{zh ? 'NIST 兩樣本 t 檢定' : 'NIST two-sample t test'}</a>
       </p>
     </section>
   </div>
@@ -707,4 +831,11 @@ const jsonLd = [organizationJsonLd(lang), websiteJsonLd(lang), itemListJsonLd];
   .home-ref-table th, .home-ref-table td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
   .home-ref-table th { font-weight: 700; color: var(--ink); }
   .home-ref-table tbody tr:last-child td { border-bottom: none; }
+  .home-lookup { margin: 0 0 28px; }
+  .home-lookup h2 { margin: 0 0 4px; }
+  .home-lookup-table { min-width: 560px; }
+  .home-lookup-table th[scope='row'] { white-space: nowrap; font-weight: 800; }
+  .home-lookup-table tbody tr:last-child > * { border-bottom: none; }
+  .home-lookup-table td a { font-weight: 700; }
+  .home-lookup .home-table-wrap:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
 </style>

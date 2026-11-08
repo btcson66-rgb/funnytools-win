@@ -723,7 +723,7 @@ export const tools: ToolMeta[] = [
     maintenanceRisk: 'low',
     monetizationTags: ['adsense', 'affiliate'],
     featured: true,
-    updated: '2026-07-13',
+    updated: '2026-11-08',
     name: { zh: 'PDF 合併', en: 'Merge PDF' },
     short: { zh: '選取多個 PDF、調整順序，並在瀏覽器本機合併成一份檔案。', en: 'Combine multiple PDFs in your chosen order locally in the browser.' },
   },
@@ -995,7 +995,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'percentile-rank-calculator', category: 'statistics', icon: 'PR', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['z-score-calculator', 't-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, updated: '2026-10-16', reviewedAt: '2026-10-16',
+    relatedTools: ['z-score-calculator', 't-score-calculator', 'standard-deviation', 'class-rank-percentile-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'medium', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, updated: '2026-11-08', reviewedAt: '2026-11-08',
     name: { zh: 'PR 百分等級計算器', en: 'Percentile Rank Calculator' }, short: { zh: '依低於與同分人數計算百分等級（PR）。', en: 'Calculate percentile rank from counts below and equal to a score.' },
   },
   {
@@ -1010,7 +1010,7 @@ export const tools: ToolMeta[] = [
   },
   {
     slug: 'weighted-average-calculator', category: 'statistics', icon: 'Σ', status: 'live', privacyLevel: 'local-only',
-    relatedTools: ['grade-average', 'standard-deviation', 'teacher-exam-score-converter', 't-score-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, updated: '2026-10-17', reviewedAt: '2026-10-17',
+    relatedTools: ['grade-average', 'standard-deviation', 'teacher-exam-score-converter', 't-score-calculator', 'normalized-score-converter'], assetType: 'calculator', searchIntent: 'high', shareIntent: 'medium', embedPotential: 'high', maintenanceRisk: 'low', monetizationTags: ['adsense'], featured: true, updated: '2026-11-08', reviewedAt: '2026-11-08',
     name: { zh: '加權平均計算器', en: 'Weighted Average Calculator' }, short: { zh: '輸入分數與權重（學分或比例）算出加權平均，附學分加權算例與 Excel SUMPRODUCT。', en: 'Weighted average from scores and weights (credits or percentages), with a credit example and Excel SUMPRODUCT.' },
   },
   {

@@ -78,7 +78,7 @@ test('percentile rank page: byline, schema and sources are rendered', () => {
   const page = html('/tools/percentile-rank-calculator/');
   const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
   assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
-  assert.match(flat, /最後審核：<time datetime="2026-10-16">2026-10-16<\/time>/);
+  assert.match(flat, /最後審核：<time datetime="2026-11-08">2026-11-08<\/time>/);
   assert.match(page, /"@type":"WebApplication"/);
   assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/);
   assert.match(page, /低於的百分比/);
@@ -218,8 +218,8 @@ test('weighted average page: widget defaults, byline, schema, sources and links 
   const page = html('/tools/weighted-average-calculator/');
   const flat = page.replace(/ data-astro-cid-[a-z0-9]+/g, '');
   assert.match(flat, /作者：<a href="\/about\/" rel="author">Benson Lai<\/a>/);
-  assert.match(flat, /最後審核：<time datetime="2026-10-17">2026-10-17<\/time>/);
-  assert.match(page, /"dateModified":"2026-10-17"/);
+  assert.match(flat, /最後審核：<time datetime="2026-11-08">2026-11-08<\/time>/);
+  assert.match(page, /"dateModified":"2026-11-08"/);
   assert.match(page, /"@type":"WebApplication"/); assert.match(page, /"@type":"BreadcrumbList"/);
   assert.doesNotMatch(page, /"@type":"(FAQPage|HowTo)"/);
   assert.match(flat, /=SUMPRODUCT\(B2:B6,C2:C6\)\/SUM\(C2:C6\)/);
