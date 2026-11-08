@@ -161,6 +161,45 @@ export function authorPersonJsonLd() {
   };
 }
 
+/**
+ * TechArticle node for pages whose main content is an explanation (formula, worked examples, sources).
+ * `author` is the named site owner (Person) for authored pages and the site organization otherwise;
+ * both are existing site bylines, never a new identity.
+ */
+export function techArticleJsonLd(
+  lang: Locale,
+  options: {
+    headline: string;
+    description: string;
+    path: string;
+    datePublished: string;
+    dateModified: string;
+    authored: boolean;
+    about?: string;
+  },
+) {
+  const publisher = {
+    '@type': 'Organization',
+    name: SITE.name[lang],
+    url: absoluteUrl(localePath(lang)),
+  };
+  const url = absoluteUrl(options.path);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: truncateText(options.headline, 110, lang),
+    description: options.description,
+    url,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    inLanguage: SITE.hreflang[lang],
+    datePublished: options.datePublished,
+    dateModified: options.dateModified,
+    author: options.authored ? authorPersonJsonLd() : publisher,
+    publisher,
+    ...(options.about ? { about: options.about } : {}),
+  };
+}
+
 export function webApplicationJsonLd(
   lang: Locale,
   tool: ToolMeta,

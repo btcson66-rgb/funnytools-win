@@ -21,7 +21,8 @@ import type { ToolMeta } from '../data/tools';
 import type { ToolContent } from '../i18n/tools/_types';
 import { getGuidesForTool } from '../data/seoGuides';
 import { t } from '../i18n/ui';
-import { categoryOgImage, toolSeoDescription, toolSeoTitle } from '../lib/seo';
+import { categoryOgImage, techArticleJsonLd, toolSeoDescription, toolSeoTitle } from '../lib/seo';
+import { FIRST_PUBLISHED, hasToolTechArticle } from '../lib/articleDates';
 import { absoluteUrl, categoryUrl, localePath, localeUrlPair, toolUrl } from '../lib/url';
 import { buildToolValueReview, CONTENT_REVIEWED_AT } from '../lib/contentValue';
 import { isCanonicalDownloadGatedTool } from '../lib/toolDataFlow';
@@ -48,6 +49,20 @@ const isStrictlyLocal = tool.privacyLevel === 'local-only' && !isDownloadGated;
 const gateDisclosure = isDownloadGated ? getDownloadGateDisclosure(lang, tool.slug) : null;
 const seoDescription = toolSeoDescription(lang, content, isStrictlyLocal);
 const isAnonymousApi = tool.privacyLevel === 'anonymous-api';
+// TechArticle node beside the page's WebApplication node: the indexable statistics tools (named-author byline)
+// and /tools/merge-pdf/ (site organization as author). Dates come from src/lib/articleDates.ts and the tool entry.
+const techArticle = hasToolTechArticle(tool.slug)
+  ? techArticleJsonLd(lang, {
+      headline: (content.seoTitle || content.name).replace(/\s+\|\s+/g, '｜'),
+      description: seoDescription,
+      path: toolUrl(lang, tool.slug),
+      datePublished: FIRST_PUBLISHED[tool.slug],
+      dateModified: reviewedAt ?? tool.reviewedAt ?? tool.updated ?? CONTENT_REVIEWED_AT,
+      authored,
+      about: content.name,
+    })
+  : null;
+const pageJsonLd = techArticle ? [...jsonLd, techArticle] : jsonLd;
 const breadcrumbItems = [
   { label: ui.breadcrumbHome, href: localePath(lang) },
   ...(category.id === 'statistics' ? [{ label: category.name[lang], href: categoryUrl(lang, 'statistics') }] : []),
@@ -77,7 +92,7 @@ const downloadGateConfig = SITE.features.downloadGate
   alternateSegments={['tools', tool.slug]}
   altLang={hasToolAlternates ? localeUrlPair('tools', tool.slug) : undefined}
   hasAlternates={hasToolAlternates}
-  jsonLd={jsonLd}
+  jsonLd={pageJsonLd}
   ogImage={categoryOgImage(lang, category.id)}
   ogImageAlt={`${content.name} · ${category.name[lang]}`}
 >

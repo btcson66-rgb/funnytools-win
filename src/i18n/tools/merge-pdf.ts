@@ -6,7 +6,12 @@ interface ToolContent {
   seoDescription: string;
   keywords: string[];
   capabilities?: string[];
-  contentSections?: { heading: string; paragraphs: string[]; items?: string[] }[];
+  contentSections?: {
+    heading: string;
+    paragraphs: string[];
+    items?: string[];
+    table?: { caption: string; headers: string[]; rows: string[][]; note?: string };
+  }[];
   instructions: string[];
   examples: string[];
   audience?: string[];
@@ -103,6 +108,26 @@ export default {
           '提交寄送面板時，電子郵件與不超過 5 MiB 的產生檔可能送到 FunnyTools 的 Brevo 寄送流程。輸出檔過大、寄送失敗或網路不可用時，流程會改成本機下載；這不代表寄送過程完全不使用網路。電子郵件可能保留在此瀏覽器供下次使用，詳見頁面的隱私說明。',
           '首次載入網站與 PDF 程式仍需要網路。頁面和合併程式已載入後，可在本機處理文件；離線時不能寄信，寄送失敗會啟用本機下載備援。重新整理或首次離線開啟是否可用取決於快取，不能保證所有裝置都能完全離線使用。'
         ]
+      },
+      {
+        heading: '本機瀏覽器合併與上傳雲端合併服務：怎麼選',
+        paragraphs: [
+          '合併 PDF 的做法大致分兩類：像本頁在你的瀏覽器裡讀檔、合併、產生新檔；或把檔案上傳到某個線上服務，由對方的伺服器合併後再讓你下載。兩者沒有絕對的好壞，下表只列結構上的差異，不含任何速度或成功率的測試數字，因為實際表現取決於你的檔案、裝置、網路與所選服務。',
+        ],
+        table: {
+          caption: '本機瀏覽器合併與上傳雲端合併服務的比較',
+          headers: ['比較項目', '本機瀏覽器合併（本頁）', '上傳到雲端合併服務'],
+          rows: [
+            ['原始檔去向', '讀取與合併在瀏覽器內完成，原始 PDF 不會為了合併而送到轉檔 API', '必須先把檔案傳到服務商的伺服器，由對方處理'],
+            ['隱私考量', '合約、證件、成績單等私人文件不離開你的裝置；例外是下載前的寄送面板，會把電子郵件與不超過 5 MiB 的合併檔送到 FunnyTools 的寄送流程', '檔案是否保存、保存多久、能否刪除，依該服務的隱私政策與服務條款；使用前要自己確認'],
+            ['檔案大小與數量', '本工具規定一次 2 至 50 個檔、總量不超過 100 MiB；實際能否處理也受裝置記憶體與瀏覽器影響', '上限依服務商與方案而定，有的服務對免費使用設有檔案數、大小或次數限制，請看該服務的說明'],
+            ['速度的決定因素', '主要看你裝置的 CPU 與記憶體，以及檔案頁數與掃描解析度；不需要上傳，也不需要等下載', '要先上傳、等伺服器處理、再下載，花費時間包含網路頻寬與服務端的排隊狀況'],
+            ['網路需求', '首次載入網站與 PDF 程式需要網路；載入後合併本身在本機執行', '整個流程都需要穩定的網路連線'],
+            ['功能範圍', '只做合併與調整檔案順序；不能刪頁、解除密碼保護，也不保證保留表單、數位簽章與書籤', '依服務商而定，有些另外提供壓縮、OCR 或雲端儲存，也可能需要註冊帳號'],
+            ['適合的情況', '文件含個資或機密、不想上傳、檔案量不大的一次性合併', '需要該服務的其他功能，且檔案不涉及隱私或機密時'],
+          ],
+          note: '「雲端合併服務」欄是對這類服務共通結構的說明，不是對任何特定業者的評價；各服務的實際規定請以其官方說明為準。',
+        },
       },
       {
         heading: '讀取失敗、合併失敗或沒有下載時怎麼辦',
@@ -239,6 +264,26 @@ export default {
           "3. Select Merge PDF to create one combined file.",
           "4. Download the merged PDF or reset the list for another batch."
         ]
+      },
+      {
+        heading: "Local browser merge vs uploading to a cloud merge service",
+        paragraphs: [
+          "PDF merging works in one of two ways: the browser reads, merges and creates a new file on your device, as on this page, or you upload the files to an online service whose servers merge them and give you a download. Neither is always better. The table lists structural differences only, with no speed or success-rate benchmarks, because real results depend on your files, device, network and the service you pick."
+        ],
+        table: {
+          caption: "Local browser merge vs uploading to a cloud merge service",
+          headers: ["Aspect", "Local browser merge (this page)", "Upload to a cloud merge service"],
+          rows: [
+            ["Where the original files go", "Reading and merging happen in the browser; the original PDFs are not sent to a conversion API for merging", "Files must first be uploaded to the provider's servers for processing"],
+            ["Privacy", "Private documents stay on your device; the exception is the delivery panel before download, which can send your email address and a merged file of up to 5 MiB through FunnyTools' delivery flow", "Whether files are kept, for how long and whether you can delete them depends on that service's privacy policy and terms; check before using it"],
+            ["File size and count", "This tool accepts 2 to 50 files and up to 100 MiB in total; real limits also depend on device memory and the browser", "Limits depend on the provider and plan; some services cap file count, size or daily use for free users"],
+            ["What decides speed", "Mostly your device's CPU and memory, page count and scan resolution; no upload or download wait", "Upload time, server processing and download time, so network bandwidth and the service's queue matter"],
+            ["Network", "Needed to load the site and PDF code the first time; merging itself runs locally afterwards", "Needed for the whole process"],
+            ["Features", "Merging and reordering only; no page deletion, no password removal, and forms, digital signatures and bookmarks may not survive", "Varies by provider; some add compression, OCR or cloud storage, and some require an account"],
+            ["Good fit", "Documents with personal or confidential data, small one-off batches, no wish to upload", "When you need another feature of that service and the files are not private"],
+          ],
+          note: "The right-hand column describes what such services have in common, not any specific vendor; check each service's own documentation for its actual rules."
+        }
       },
       {
         heading: "Tips and best practices",
