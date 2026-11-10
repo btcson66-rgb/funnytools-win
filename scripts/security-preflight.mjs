@@ -64,6 +64,16 @@ for (const file of htmlFiles) {
   for (const directive of ["object-src 'none'", "base-uri 'self'", "form-action 'self'"]) {
     if (!match[1].includes(directive)) failures.push(`${relative(distDir, file)}: CSP missing ${directive}`);
   }
+  // Pages that load the AdSense loader also get Google Funding Choices (EEA/UK/CH consent
+  // messages), which needs script-src, frame-src and connect-src on its own origin.
+  if (html.includes('pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')) {
+    for (const directive of ['script-src', 'frame-src', 'connect-src']) {
+      const value = match[1].split(';').map((part) => part.trim()).find((part) => part.startsWith(`${directive} `)) ?? '';
+      if (!value.split(/\s+/).includes('https://fundingchoicesmessages.google.com')) {
+        failures.push(`${relative(distDir, file)}: AdSense page CSP ${directive} missing https://fundingchoicesmessages.google.com`);
+      }
+    }
+  }
   if (match[1].includes("'unsafe-eval'")) failures.push(`${relative(distDir, file)}: CSP allows unsafe-eval`);
 }
 

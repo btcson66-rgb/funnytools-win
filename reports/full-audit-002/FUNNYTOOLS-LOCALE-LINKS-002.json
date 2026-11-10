@@ -333,18 +333,6 @@
     {
       "source_url": "https://funnytools.win/en/tools/class-rank-percentile-calculator/",
       "source_locale": "en",
-      "target_url": "https://funnytools.win/affiliate-disclosure/",
-      "target_locale": "zh",
-      "link_text": "Full disclosure (Traditional Chinese)",
-      "context": "content",
-      "indexable": false,
-      "allowed": true,
-      "enforced": false,
-      "reason": "intent:disclosure-only-zh"
-    },
-    {
-      "source_url": "https://funnytools.win/en/tools/class-rank-percentile-calculator/",
-      "source_locale": "en",
       "target_url": "https://funnytools.win/tools/percentile-rank-calculator/",
       "target_locale": "zh",
       "link_text": "percentile rank calculator",
@@ -353,6 +341,18 @@
       "allowed": false,
       "enforced": false,
       "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/class-rank-percentile-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/affiliate-disclosure/",
+      "target_locale": "zh",
+      "link_text": "Full disclosure (Traditional Chinese)",
+      "context": "content",
+      "indexable": false,
+      "allowed": true,
+      "enforced": false,
+      "reason": "intent:disclosure-only-zh"
     },
     {
       "source_url": "https://funnytools.win/en/tools/color-generator/",
@@ -489,18 +489,6 @@
     {
       "source_url": "https://funnytools.win/en/tools/grade-average/",
       "source_locale": "en",
-      "target_url": "https://funnytools.win/affiliate-disclosure/",
-      "target_locale": "zh",
-      "link_text": "Full disclosure (Traditional Chinese)",
-      "context": "content",
-      "indexable": false,
-      "allowed": true,
-      "enforced": false,
-      "reason": "intent:disclosure-only-zh"
-    },
-    {
-      "source_url": "https://funnytools.win/en/tools/grade-average/",
-      "source_locale": "en",
       "target_url": "https://funnytools.win/tools/weighted-average-calculator/",
       "target_locale": "zh",
       "link_text": "weighted average calculator",
@@ -509,6 +497,18 @@
       "allowed": false,
       "enforced": false,
       "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/grade-average/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/affiliate-disclosure/",
+      "target_locale": "zh",
+      "link_text": "Full disclosure (Traditional Chinese)",
+      "context": "content",
+      "indexable": false,
+      "allowed": true,
+      "enforced": false,
+      "reason": "intent:disclosure-only-zh"
     },
     {
       "source_url": "https://funnytools.win/en/tools/group-generator/",
@@ -609,18 +609,6 @@
     {
       "source_url": "https://funnytools.win/en/tools/independent-samples-t-test-calculator/",
       "source_locale": "en",
-      "target_url": "https://funnytools.win/affiliate-disclosure/",
-      "target_locale": "zh",
-      "link_text": "Full disclosure (Traditional Chinese)",
-      "context": "content",
-      "indexable": false,
-      "allowed": true,
-      "enforced": false,
-      "reason": "intent:disclosure-only-zh"
-    },
-    {
-      "source_url": "https://funnytools.win/en/tools/independent-samples-t-test-calculator/",
-      "source_locale": "en",
       "target_url": "https://funnytools.win/tools/standard-deviation/",
       "target_locale": "zh",
       "link_text": "standard deviation calculator",
@@ -629,6 +617,18 @@
       "allowed": false,
       "enforced": false,
       "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/independent-samples-t-test-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/affiliate-disclosure/",
+      "target_locale": "zh",
+      "link_text": "Full disclosure (Traditional Chinese)",
+      "context": "content",
+      "indexable": false,
+      "allowed": true,
+      "enforced": false,
+      "reason": "intent:disclosure-only-zh"
     },
     {
       "source_url": "https://funnytools.win/en/tools/inflation/",
@@ -849,18 +849,6 @@
     {
       "source_url": "https://funnytools.win/en/tools/percentile-rank-calculator/",
       "source_locale": "en",
-      "target_url": "https://funnytools.win/affiliate-disclosure/",
-      "target_locale": "zh",
-      "link_text": "Full disclosure (Traditional Chinese)",
-      "context": "content",
-      "indexable": false,
-      "allowed": true,
-      "enforced": false,
-      "reason": "intent:disclosure-only-zh"
-    },
-    {
-      "source_url": "https://funnytools.win/en/tools/percentile-rank-calculator/",
-      "source_locale": "en",
       "target_url": "https://funnytools.win/tools/class-rank-percentile-calculator/",
       "target_locale": "zh",
       "link_text": "class rank percentile calculator",
@@ -881,6 +869,18 @@
       "allowed": false,
       "enforced": false,
       "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/percentile-rank-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/affiliate-disclosure/",
+      "target_locale": "zh",
+      "link_text": "Full disclosure (Traditional Chinese)",
+      "context": "content",
+      "indexable": false,
+      "allowed": true,
+      "enforced": false,
+      "reason": "intent:disclosure-only-zh"
     },
     {
       "source_url": "https://funnytools.win/en/tools/pie-chart-maker/",
@@ -1101,18 +1101,6 @@
     {
       "source_url": "https://funnytools.win/en/tools/standard-deviation/",
       "source_locale": "en",
-      "target_url": "https://funnytools.win/affiliate-disclosure/",
-      "target_locale": "zh",
-      "link_text": "Full disclosure (Traditional Chinese)",
-      "context": "content",
-      "indexable": false,
-      "allowed": true,
-      "enforced": false,
-      "reason": "intent:disclosure-only-zh"
-    },
-    {
-      "source_url": "https://funnytools.win/en/tools/standard-deviation/",
-      "source_locale": "en",
       "target_url": "https://funnytools.win/tools/z-score-calculator/",
       "target_locale": "zh",
       "link_text": "Z score calculator",
@@ -1135,7 +1123,7 @@
       "reason": "noindex-content-review"
     },
     {
-      "source_url": "https://funnytools.win/en/tools/stopwatch/",
+      "source_url": "https://funnytools.win/en/tools/standard-deviation/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
       "target_locale": "zh",
@@ -1147,7 +1135,7 @@
       "reason": "intent:disclosure-only-zh"
     },
     {
-      "source_url": "https://funnytools.win/en/tools/t-score-calculator/",
+      "source_url": "https://funnytools.win/en/tools/stopwatch/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
       "target_locale": "zh",
@@ -1195,7 +1183,7 @@
       "reason": "noindex-content-review"
     },
     {
-      "source_url": "https://funnytools.win/en/tools/teacher-exam-score-converter/",
+      "source_url": "https://funnytools.win/en/tools/t-score-calculator/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
       "target_locale": "zh",
@@ -1217,6 +1205,18 @@
       "allowed": false,
       "enforced": false,
       "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/teacher-exam-score-converter/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/affiliate-disclosure/",
+      "target_locale": "zh",
+      "link_text": "Full disclosure (Traditional Chinese)",
+      "context": "content",
+      "indexable": false,
+      "allowed": true,
+      "enforced": false,
+      "reason": "intent:disclosure-only-zh"
     },
     {
       "source_url": "https://funnytools.win/en/tools/this-or-that/",
@@ -1281,18 +1281,6 @@
     {
       "source_url": "https://funnytools.win/en/tools/weighted-average-calculator/",
       "source_locale": "en",
-      "target_url": "https://funnytools.win/affiliate-disclosure/",
-      "target_locale": "zh",
-      "link_text": "Full disclosure (Traditional Chinese)",
-      "context": "content",
-      "indexable": false,
-      "allowed": true,
-      "enforced": false,
-      "reason": "intent:disclosure-only-zh"
-    },
-    {
-      "source_url": "https://funnytools.win/en/tools/weighted-average-calculator/",
-      "source_locale": "en",
       "target_url": "https://funnytools.win/tools/grade-average/",
       "target_locale": "zh",
       "link_text": "semester grade calculator",
@@ -1315,6 +1303,18 @@
       "reason": "noindex-content-review"
     },
     {
+      "source_url": "https://funnytools.win/en/tools/weighted-average-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/affiliate-disclosure/",
+      "target_locale": "zh",
+      "link_text": "Full disclosure (Traditional Chinese)",
+      "context": "content",
+      "indexable": false,
+      "allowed": true,
+      "enforced": false,
+      "reason": "intent:disclosure-only-zh"
+    },
+    {
       "source_url": "https://funnytools.win/en/tools/what-to-eat/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
@@ -1328,18 +1328,6 @@
     },
     {
       "source_url": "https://funnytools.win/en/tools/word-counter/",
-      "source_locale": "en",
-      "target_url": "https://funnytools.win/affiliate-disclosure/",
-      "target_locale": "zh",
-      "link_text": "Full disclosure (Traditional Chinese)",
-      "context": "content",
-      "indexable": false,
-      "allowed": true,
-      "enforced": false,
-      "reason": "intent:disclosure-only-zh"
-    },
-    {
-      "source_url": "https://funnytools.win/en/tools/z-score-calculator/",
       "source_locale": "en",
       "target_url": "https://funnytools.win/affiliate-disclosure/",
       "target_locale": "zh",
@@ -1385,6 +1373,18 @@
       "allowed": false,
       "enforced": false,
       "reason": "noindex-content-review"
+    },
+    {
+      "source_url": "https://funnytools.win/en/tools/z-score-calculator/",
+      "source_locale": "en",
+      "target_url": "https://funnytools.win/affiliate-disclosure/",
+      "target_locale": "zh",
+      "link_text": "Full disclosure (Traditional Chinese)",
+      "context": "content",
+      "indexable": false,
+      "allowed": true,
+      "enforced": false,
+      "reason": "intent:disclosure-only-zh"
     }
   ]
 }
