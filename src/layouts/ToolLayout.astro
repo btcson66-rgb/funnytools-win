@@ -134,8 +134,6 @@ const downloadGateConfig = SITE.features.downloadGate
       <slot />
     </section>
 
-    <AffiliateProductShelf lang={lang} category={category.id} toolSlug={tool.slug} />
-
     <ShareButtons lang={lang} url={currentUrl} title={content.name} />
 
     <RelatedToolsAfterSuccess lang={lang} current={tool} />
@@ -336,6 +334,9 @@ const downloadGateConfig = SITE.features.downloadGate
     {tool.embedPotential !== 'low' && <EmbedCode lang={lang} tool={tool} />}
     <NewsletterSignup lang={lang} />
     <RelatedResources lang={lang} />
+
+    {/* Support shelf sits after all explanatory content, FAQ and sources (owner decision 2026-11-10). */}
+    <AffiliateProductShelf lang={lang} category={category.id} toolSlug={tool.slug} />
     {isIndexablePath(currentUrl) && <AdSlot />}
   </article>
 
